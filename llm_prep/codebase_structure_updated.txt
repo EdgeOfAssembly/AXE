@@ -1,0 +1,40 @@
+.
+├── API_PROVIDERS.md
+├── IMPLEMENTATION_COMPLETE.md
+├── IMPROVEMENTS_FINAL.md
+├── IMPROVEMENTS_README.md
+├── LICENSE
+├── MODELS_FINAL.md
+├── QUICK_REFERENCE.md
+├── README.md
+├── REFACTORING_NOTES.md
+├── axe.py
+├── axe.yaml
+├── database
+│   ├── __init__.py
+│   ├── agent_db.py
+│   └── schema.py
+├── demo_improvements.py
+├── llm_prep
+│   ├── codebase_overview.md
+│   ├── codebase_stats.txt
+│   ├── codebase_structure.txt
+│   ├── codebase_structure_updated.txt
+│   ├── dot_graphs_pyreverse
+│   ├── llm_system_prompt.md
+│   ├── project_guidance.md
+│   └── tags
+├── progression
+│   ├── __init__.py
+│   ├── levels.py
+│   └── xp_system.py
+├── requirements.txt
+├── safety
+│   ├── __init__.py
+│   └── rules.py
+├── test_axe_improvements.py
+└── utils
+    ├── __init__.py
+    └── formatting.py
+
+7 directories, 31 files
