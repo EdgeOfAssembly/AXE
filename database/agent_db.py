@@ -394,6 +394,8 @@ class AgentDatabase:
                         total_errors = sum(d.get('errors', 0) for d in diffs)
                         return (total_errors / len(diffs)) * 100
                 except (json.JSONDecodeError, TypeError):
+                    # If the stored JSON is malformed or not the expected structure,
+                    # treat it as having no recent diffs and fall back to 0.0 below.
                     pass
         
         return 0.0

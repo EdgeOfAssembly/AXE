@@ -95,7 +95,7 @@ COLLAB_PASS_MULTIPLIER = 2     # Times agents can pass before session ends
 COLLAB_SHARED_NOTES_LIMIT = 500  # Max chars of shared notes to show
 
 # Experience and level constants (now imported from progression module)
-XP_PER_LEVEL_LINEAR = 100       # XP per level for levels 1-10
+# XP_PER_LEVEL_LINEAR = 100       # Imported from progression.xp_system
 # LEVEL_SENIOR_WORKER = 10        # Imported from progression.levels
 # LEVEL_TEAM_LEADER = 20          # Imported from progression.levels
 # LEVEL_DEPUTY_SUPERVISOR = 30    # Imported from progression.levels
