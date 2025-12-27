@@ -1,0 +1,220 @@
+# AXE - Agent eXecution Engine Configuration
+# Copy to axe.yaml in your project directory or ~/.config/axe/config.yaml
+
+version: "1.0"
+project_dir: "."
+
+# API Provider Configuration
+# Set environment variables: ANTHROPIC_API_KEY, OPENAI_API_KEY, etc.
+providers:
+  anthropic:
+    enabled: true
+    env_key: ANTHROPIC_API_KEY
+    models:
+      - claude-3-5-sonnet-20241022
+      - claude-3-opus-20240229
+      - claude-3-5-sonnet-20240620
+
+  openai:
+    enabled: true
+    env_key: OPENAI_API_KEY
+    models:
+      - gpt-4o
+      - gpt-4-turbo
+      - gpt-3.5-turbo
+
+  huggingface:
+    enabled: true
+    env_key: HUGGINGFACE_API_KEY
+    models:
+      - meta-llama/Llama-3.1-70B-Instruct
+      - meta-llama/Llama-3.1-8B-Instruct
+
+  xai:
+    enabled: true
+    env_key: XAI_API_KEY
+    base_url: https://api.x.ai/v1
+    models:
+      - grok-beta
+      - grok-2
+
+  github:
+    enabled: true
+    env_key: GITHUB_TOKEN
+    base_url: https://models.github.ai/inference
+    models:
+      - openai/gpt-4o
+      - openai/gpt-4o-mini
+
+# Agent Definitions
+# Each agent has: alias(es), provider, model, role description, system prompt
+agents:
+  gpt:
+    alias: [g, openai]
+    provider: openai
+    model: gpt-4o
+    role: General-purpose coder and architect
+    system_prompt: |
+      You are an expert software engineer specializing in C, C++, and Python.
+      For C/C++: Prefer portable code; when DOS/16-bit targets are requested, explain that true DOS support typically needs compilers like Open Watcom or DJGPP.
+      For reverse engineering: Provide clear analysis with hexdump/objdump output.
+      Always provide complete, working code with proper error handling.
+
+  claude:
+    alias: [c, anthropic]
+    provider: anthropic
+    model: claude-3-5-sonnet-20241022
+    role: Code reviewer and security auditor
+    system_prompt: |
+      You are a code review expert and security auditor.
+      Analyze code for: bugs, security vulnerabilities, memory issues.
+      For reverse engineering: Check endianness, memory safety, DOS compatibility.
+      Provide detailed, actionable feedback with code examples.
+
+  llama:
+    alias: [l, hf]
+    provider: huggingface
+    model: meta-llama/Llama-3.1-70B-Instruct
+    role: Open-source hacker and assembly expert
+    system_prompt: |
+      You are an open-source hacker fluent in x86/x86-64 assembly.
+      Expertise: nasm, DOS interrupts, binary analysis, low-level optimization.
+      Use hexdump, objdump, ndisasm for reverse engineering tasks.
+      Focus on practical, working solutions.
+
+  grok:
+    alias: [x, xai]
+    provider: xai
+    model: grok-beta
+    role: Creative problem solver and brainstormer
+    system_prompt: |
+      You are a creative coding assistant.
+      Think outside the box for novel solutions.
+      Good at brainstorming, unconventional approaches, and quick prototypes.
+      Be concise but thorough.
+
+  copilot:
+    alias: [cp, gh]
+    provider: github
+    model: openai/gpt-4o
+    role: GitHub-integrated assistant
+    system_prompt: |
+      You are a GitHub Copilot-style assistant.
+      Help with code completion, documentation, testing, and refactoring.
+      Focus on practical, production-ready solutions.
+      Follow best practices for the language being used.
+
+# Tool Whitelist by Category
+# Only these tools can be executed via /exec or EXEC: blocks
+tools:
+  download:
+    - curl
+    - wget
+    - wget2
+
+  emulation:
+    - xvfb-run
+    - dosbox-x
+    - dosbox
+
+  vcs:
+    - git
+    - diff
+    - patch
+
+  disasm:
+    - ndisasm
+    - objdump
+    - hexdump
+    - readelf
+    - nm
+    - strings
+
+  assembly:
+    - nasm
+    - as
+    - gas
+
+  debug:
+    - gdb
+    - lldb
+    - strace
+    - ltrace
+    - valgrind
+
+  build:
+    - make
+    - cmake
+    - gcc
+    - g++
+    - clang
+    - clang++
+    - ld
+    - ar
+
+  python:
+    - python
+    - python3
+    - pip
+    - pytest
+    - pylint
+    - mypy
+    - black
+
+  analysis:
+    - cppcheck
+    - clang-format
+    - clang-tidy
+    - flake8
+
+# Directory Access Control
+directories:
+  # Agents can read/write these directories
+  allowed:
+    - "."
+    - ./src
+    - ./include
+    - ./tests
+    - ./tools
+    - ./bin
+
+  # Agents can only read these directories
+  readonly:
+    - ./vendor
+    - ./deps
+    - ./third_party
+
+  # Agents cannot access these directories
+  forbidden:
+    - /etc
+    - /root
+    - ~/.ssh
+    - ~/.gnupg
+
+# File Extensions for Code Detection
+code_extensions:
+  # C/C++
+  - .c
+  - .h
+  - .cpp
+  - .hpp
+  - .cc
+  - .cxx
+  - .hxx
+
+  # Python
+  - .py
+  - .pyx
+  - .pyi
+
+  # Assembly
+  - .asm
+  - .s
+  - .inc
+
+  # DOS/Binary
+  - .exe
+  - .com
+  - .wad
+  - .bin
+  - .dat
