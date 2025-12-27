@@ -52,6 +52,10 @@ AXE (Agent eXecution Engine) is a powerful terminal-based multiagent system desi
 
 ## Features
 
+### Note on Whistleblower Feature
+
+The "whistleblower" mechanism – which allows worker agents to send GPG-encrypted reports or files to a local mailbox directory accessible only by other worker agents and the human user (not supervisor agents) – is currently an unfinished stub. It's planned for enhanced privacy and secure agent-to-human communication in multi-agent setups, but not yet implemented or functional yet.
+
 ### Multi-Provider AI Support
 
 | Provider | Models | Status |
