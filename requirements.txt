@@ -1,0 +1,5 @@
+openai
+anthropic
+huggingface_hub
+requests
+pyyaml
