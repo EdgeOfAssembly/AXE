@@ -721,16 +721,6 @@ multiagent/
 
 ---
 
-## Related Projects
-
-This tool was built to help with reverse engineering projects in this repository:
-
-- **doom/wadextract** - WAD file extractor for DOOM, Heretic, Hexen
-- **dos/** - DOS-era game analysis tools
-- **GoldBox/** - SSI GoldBox game reverse engineering
-
----
-
 ## Contributing
 
 Contributions welcome! Please:
