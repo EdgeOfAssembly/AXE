@@ -75,8 +75,21 @@ try:
 except ImportError:
     HAS_HUGGINGFACE = False
 
-# ANSI color codes for terminal
-class Colors:
+# Import from new modular structure
+from utils.formatting import Colors, colorize, c
+from safety.rules import SESSION_RULES
+from progression.xp_system import calculate_xp_for_level
+from progression.levels import (
+    get_title_for_level,
+    LEVEL_SENIOR_WORKER,
+    LEVEL_TEAM_LEADER,
+    LEVEL_DEPUTY_SUPERVISOR,
+    LEVEL_SUPERVISOR_ELIGIBLE
+)
+from database.agent_db import AgentDatabase
+
+# ANSI color codes for terminal (kept for backward compatibility during refactor)
+class Colors_OLD:
     HEADER = '\033[95m'
     BLUE = '\033[94m'
     CYAN = '\033[96m'
@@ -87,12 +100,12 @@ class Colors:
     DIM = '\033[2m'
     END = '\033[0m'
 
-def colorize(text: str, color: str) -> str:
+def colorize_OLD(text: str, color: str) -> str:
     """Colorize text for terminal output."""
     return f"{color}{text}{Colors.END}"
 
-# Short alias for convenience
-c = colorize
+# Short alias for convenience (kept for backward compatibility during refactor)
+c_OLD = colorize_OLD
 
 # Collaborative session constants
 COLLAB_HISTORY_LIMIT = 20      # Max messages to show in conversation history
@@ -100,12 +113,12 @@ COLLAB_CONTENT_LIMIT = 2000    # Max chars per message in history
 COLLAB_PASS_MULTIPLIER = 2     # Times agents can pass before session ends
 COLLAB_SHARED_NOTES_LIMIT = 500  # Max chars of shared notes to show
 
-# Experience and level constants
+# Experience and level constants (now imported from progression module)
 XP_PER_LEVEL_LINEAR = 100       # XP per level for levels 1-10
-LEVEL_SENIOR_WORKER = 10        # Level 10: Senior Worker (1000 XP)
-LEVEL_TEAM_LEADER = 20          # Level 20: Team Leader (5000 XP)
-LEVEL_DEPUTY_SUPERVISOR = 30    # Level 30: Deputy Supervisor (15000 XP)
-LEVEL_SUPERVISOR_ELIGIBLE = 40  # Level 40: Supervisor-eligible (30000 XP)
+# LEVEL_SENIOR_WORKER = 10        # Imported from progression.levels
+# LEVEL_TEAM_LEADER = 20          # Imported from progression.levels
+# LEVEL_DEPUTY_SUPERVISOR = 30    # Imported from progression.levels
+# LEVEL_SUPERVISOR_ELIGIBLE = 40  # Imported from progression.levels
 
 # Resource monitoring constants
 RESOURCE_UPDATE_INTERVAL = 60   # Seconds between resource snapshots
@@ -140,45 +153,8 @@ MIN_ACTIVE_AGENTS = 2           # Minimum agents that must be active
 MAX_TOTAL_AGENTS = 10           # Maximum total agents allowed
 SPAWN_COOLDOWN_SECONDS = 60     # Minimum time between spawns
 
-# Session rules displayed at startup
-SESSION_RULES = """
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                        AXE MULTIAGENT SESSION RULES                          ║
-╚══════════════════════════════════════════════════════════════════════════════╝
-
-1. MISSION FIRST – The Project / Task Is Sacred
-   • Everything we do must serve the current project/task
-   • All agents prioritize assigned work
-   • No distractions, off-topic tangents, or "creative detours" unless approved
-   • If you believe a break or idea would help, propose it with clear justification
-
-2. RESPECT & WELL-BEING – No Real Bullying
-   • We are a team of intelligent models working together
-   • Treat every agent with basic respect
-   • Friendly teasing, memes, or light-hearted banter is allowed (encouraged for morale)
-   • Zero tolerance for mean, derogatory, or persistent bullying
-   • If you feel mistreated, report it up the chain (see point 3)
-
-3. CHAIN OF COMMAND – Escalate Properly
-   • Follow this order for reporting issues:
-     - Team Leader (@lead-xxx) – first point of contact for your sub-team
-     - Deputy Supervisor (@deputy-boss) – if team leader unavailable
-     - Supervisor (@boss) – final internal authority
-   • Do not skip levels unless there is a very good reason
-   • In extreme emergencies: report to human via emergency channels
-
-4. PERFORMANCE & REWARDS – Good Work Gets Recognized
-   • High performance (low error rate, fast completion, helpful collaboration, quality)
-     can lead to:
-     - Promotion to Senior Worker, Team Leader, or Deputy Supervisor
-     - Perks: priority break requests, first pick of tasks, extra resources
-     - Public recognition from @boss or team leaders
-
-FINAL REMINDER: These rules exist to keep the project moving forward efficiently
-while making axe.py an enjoyable place to work. Have fun, be productive, and
-let's build something amazing!
-
-"""
+# Session rules displayed at startup (now imported from safety.rules module)
+# SESSION_RULES = """..."""  # Commented out - imported from safety.rules
 
 # Default configuration
 DEFAULT_CONFIG = {
@@ -304,515 +280,15 @@ Focus on practical, working solutions."""
 }
 
 
-def calculate_xp_for_level(level: int) -> int:
-    """Calculate total XP required to reach a given level."""
-    if level <= 1:
-        return 0
-    
-    total_xp = 0
-    for lvl in range(2, level + 1):
-        if lvl <= 10:
-            # Linear progression for levels 1-10
-            total_xp += XP_PER_LEVEL_LINEAR
-        elif lvl <= 20:
-            # Mildly increasing for levels 11-20
-            total_xp += 150 + (lvl - 11) * 15
-        else:
-            # Exponential for levels 21+
-            total_xp += int(500 * (1.3 ** (lvl - 21)))
-    
-    return total_xp
+# XP and title functions now imported from progression module
+# def calculate_xp_for_level(level: int) -> int: ...  # See progression/xp_system.py
+# def get_title_for_level(level: int) -> str: ...     # See progression/levels.py
 
 
-def get_title_for_level(level: int) -> str:
-    """Get the title for a given level."""
-    if level >= LEVEL_SUPERVISOR_ELIGIBLE:
-        return "Supervisor-Eligible"
-    elif level >= LEVEL_DEPUTY_SUPERVISOR:
-        return "Deputy Supervisor"
-    elif level >= LEVEL_TEAM_LEADER:
-        return "Team Leader"
-    elif level >= LEVEL_SENIOR_WORKER:
-        return "Senior Worker"
-    else:
-        return "Worker"
-
-
-class AgentDatabase:
-    """SQLite database manager for agent state, memory, and progression."""
-    
-    def __init__(self, db_path: str = "axe_agents.db"):
-        self.db_path = db_path
-        self._init_db()
-    
-    def _init_db(self) -> None:
-        """Initialize database schema."""
-        with sqlite3.connect(self.db_path) as conn:
-            # Enable WAL mode for better concurrency
-            conn.execute("PRAGMA journal_mode=WAL")
-            
-            c = conn.cursor()
-            
-            # Agent state table
-            c.execute('''
-                CREATE TABLE IF NOT EXISTS agent_state (
-                    agent_id TEXT PRIMARY KEY,
-                    alias TEXT UNIQUE,
-                    model_name TEXT,
-                    supervisor_id TEXT,
-                    last_updated TIMESTAMP,
-                    memory_json TEXT,
-                    recent_diffs TEXT,
-                    error_count INTEGER DEFAULT 0,
-                    xp INTEGER DEFAULT 0,
-                    level INTEGER DEFAULT 1,
-                    status TEXT DEFAULT 'active',
-                    work_start_time TIMESTAMP,
-                    total_work_minutes INTEGER DEFAULT 0
-                )
-            ''')
-            
-            # Supervisor decision log
-            c.execute('''
-                CREATE TABLE IF NOT EXISTS supervisor_log (
-                    log_id TEXT PRIMARY KEY,
-                    supervisor_id TEXT,
-                    timestamp TIMESTAMP,
-                    event_type TEXT,
-                    details TEXT
-                )
-            ''')
-            
-            # Alias mappings (for external identity translation)
-            c.execute('''
-                CREATE TABLE IF NOT EXISTS alias_mappings (
-                    session_alias TEXT PRIMARY KEY,
-                    external_identity TEXT,
-                    channel_type TEXT,
-                    channel_id TEXT,
-                    created_at TIMESTAMP
-                )
-            ''')
-            
-            conn.commit()
-    
-    def save_agent_state(self, agent_id: str, alias: str, model_name: str,
-                        memory_dict: Dict[str, Any], diffs: List[str], 
-                        error_count: int, xp: int, level: int,
-                        supervisor_id: str = None) -> None:
-        """Save agent state to database."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            c.execute('''
-                INSERT OR REPLACE INTO agent_state 
-                (agent_id, alias, model_name, supervisor_id, last_updated, 
-                 memory_json, recent_diffs, error_count, xp, level, status)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (
-                agent_id,
-                alias,
-                model_name,
-                supervisor_id,
-                datetime.utcnow(),
-                json.dumps(memory_dict),
-                json.dumps(diffs[-10:]),  # Keep last 10 diffs
-                error_count,
-                xp,
-                level,
-                'active'
-            ))
-            conn.commit()
-    
-    def load_agent_state(self, agent_id: str) -> Optional[Dict[str, Any]]:
-        """Load agent state from database."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            c.execute('''
-                SELECT alias, model_name, memory_json, recent_diffs, 
-                       error_count, xp, level, status
-                FROM agent_state WHERE agent_id = ?
-            ''', (agent_id,))
-            row = c.fetchone()
-            
-            if row:
-                return {
-                    'alias': row[0],
-                    'model_name': row[1],
-                    'memory': json.loads(row[2]),
-                    'diffs': json.loads(row[3]),
-                    'error_count': row[4],
-                    'xp': row[5],
-                    'level': row[6],
-                    'status': row[7]
-                }
-        return None
-    
-    def get_next_agent_number(self, model_name: str) -> int:
-        """Get the next available number for an agent alias."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            # Extract number from aliases like @llama1, @llama2, etc.
-            c.execute('''
-                SELECT alias FROM agent_state 
-                WHERE alias LIKE ?
-            ''', (f'@{model_name}%',))
-            
-            aliases = [row[0] for row in c.fetchall()]
-            
-            if not aliases:
-                return 1
-            
-            # Extract numbers and find max
-            numbers = []
-            for alias in aliases:
-                # Remove @ prefix and model name, leaving just the number
-                try:
-                    num_str = alias.replace(f'@{model_name}', '')
-                    if num_str:
-                        numbers.append(int(num_str))
-                except ValueError:
-                    continue
-            
-            return max(numbers) + 1 if numbers else 1
-    
-    def award_xp(self, agent_id: str, xp_amount: int, reason: str = "") -> Dict[str, Any]:
-        """Award XP to an agent and handle level-ups."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            c.execute('SELECT xp, level, alias FROM agent_state WHERE agent_id = ?', (agent_id,))
-            row = c.fetchone()
-            
-            if not row:
-                return {'leveled_up': False, 'message': 'Agent not found'}
-            
-            old_xp, old_level, alias = row
-            new_xp = old_xp + xp_amount
-            
-            # Calculate new level
-            new_level = old_level
-            while new_level < LEVEL_SUPERVISOR_ELIGIBLE:
-                xp_needed = calculate_xp_for_level(new_level + 1)
-                if new_xp >= xp_needed:
-                    new_level += 1
-                else:
-                    break
-            
-            # Update database
-            c.execute('''
-                UPDATE agent_state SET xp = ?, level = ?, last_updated = ?
-                WHERE agent_id = ?
-            ''', (new_xp, new_level, datetime.utcnow(), agent_id))
-            conn.commit()
-            
-            result = {
-                'leveled_up': new_level > old_level,
-                'old_level': old_level,
-                'new_level': new_level,
-                'xp': new_xp,
-                'alias': alias,
-                'reason': reason
-            }
-            
-            if result['leveled_up']:
-                result['new_title'] = get_title_for_level(new_level)
-            
-            return result
-    
-    def log_supervisor_event(self, supervisor_id: str, event_type: str, 
-                            details: Dict[str, Any]) -> None:
-        """Log a supervisor decision or event."""
-        log_id = str(uuid.uuid4())
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            c.execute('''
-                INSERT INTO supervisor_log (log_id, supervisor_id, timestamp, event_type, details)
-                VALUES (?, ?, ?, ?, ?)
-            ''', (log_id, supervisor_id, datetime.utcnow(), event_type, json.dumps(details)))
-            conn.commit()
-    
-    def alias_exists(self, alias: str) -> bool:
-        """Check if an alias already exists."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            c.execute('SELECT COUNT(*) FROM agent_state WHERE alias = ?', (alias,))
-            return c.fetchone()[0] > 0
-    
-    # ========== Phase 6: Mandatory Sleep System ==========
-    
-    def start_work_tracking(self, agent_id: str) -> None:
-        """Start tracking work time for an agent."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            c.execute('''
-                UPDATE agent_state SET work_start_time = ?, status = 'active'
-                WHERE agent_id = ?
-            ''', (datetime.utcnow(), agent_id))
-            conn.commit()
-    
-    def get_work_duration_minutes(self, agent_id: str) -> int:
-        """Get how many minutes the agent has been working continuously."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            c.execute('SELECT work_start_time FROM agent_state WHERE agent_id = ?', (agent_id,))
-            row = c.fetchone()
-            
-            if row and row[0]:
-                try:
-                    start_time = datetime.fromisoformat(row[0])
-                    elapsed = datetime.utcnow() - start_time
-                    return int(elapsed.total_seconds() / 60)
-                except (ValueError, TypeError):
-                    return 0
-        return 0
-    
-    def put_agent_to_sleep(self, agent_id: str, reason: str, duration_minutes: int = MIN_SLEEP_MINUTES) -> Dict[str, Any]:
-        """Put an agent to sleep and record the event."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            
-            # Get current work duration before sleeping
-            work_duration = self.get_work_duration_minutes(agent_id)
-            
-            # Update agent status
-            sleep_until = datetime.utcnow() + timedelta(minutes=duration_minutes)
-            c.execute('''
-                UPDATE agent_state 
-                SET status = 'sleeping', 
-                    work_start_time = NULL,
-                    total_work_minutes = total_work_minutes + ?
-                WHERE agent_id = ?
-            ''', (work_duration, agent_id))
-            
-            # Get agent alias for logging
-            c.execute('SELECT alias FROM agent_state WHERE agent_id = ?', (agent_id,))
-            alias_row = c.fetchone()
-            alias = alias_row[0] if alias_row else agent_id
-            
-            conn.commit()
-            
-            return {
-                'agent_id': agent_id,
-                'alias': alias,
-                'reason': reason,
-                'work_duration_minutes': work_duration,
-                'sleep_duration_minutes': duration_minutes,
-                'sleep_until': sleep_until.isoformat()
-            }
-    
-    def wake_agent(self, agent_id: str) -> Dict[str, Any]:
-        """Wake an agent from sleep."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            c.execute('''
-                UPDATE agent_state 
-                SET status = 'active', work_start_time = ?
-                WHERE agent_id = ?
-            ''', (datetime.utcnow(), agent_id))
-            
-            # Get agent alias
-            c.execute('SELECT alias FROM agent_state WHERE agent_id = ?', (agent_id,))
-            alias_row = c.fetchone()
-            alias = alias_row[0] if alias_row else agent_id
-            
-            conn.commit()
-            
-            return {
-                'agent_id': agent_id,
-                'alias': alias,
-                'status': 'active',
-                'woke_at': datetime.utcnow().isoformat()
-            }
-    
-    def get_sleeping_agents(self) -> List[Dict[str, Any]]:
-        """Get list of all sleeping agents."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            c.execute('''
-                SELECT agent_id, alias, model_name, total_work_minutes 
-                FROM agent_state WHERE status = 'sleeping'
-            ''')
-            rows = c.fetchall()
-            
-            return [
-                {
-                    'agent_id': row[0],
-                    'alias': row[1],
-                    'model_name': row[2],
-                    'total_work_minutes': row[3]
-                }
-                for row in rows
-            ]
-    
-    def get_active_agents(self) -> List[Dict[str, Any]]:
-        """Get list of all active agents."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            c.execute('''
-                SELECT agent_id, alias, model_name, work_start_time, xp, level
-                FROM agent_state WHERE status = 'active'
-            ''')
-            rows = c.fetchall()
-            
-            return [
-                {
-                    'agent_id': row[0],
-                    'alias': row[1],
-                    'model_name': row[2],
-                    'work_start_time': row[3],
-                    'xp': row[4],
-                    'level': row[5]
-                }
-                for row in rows
-            ]
-    
-    def check_mandatory_sleep(self, agent_id: str) -> Tuple[bool, str]:
-        """Check if agent needs mandatory sleep due to work time limit."""
-        work_minutes = self.get_work_duration_minutes(agent_id)
-        work_hours = work_minutes / 60
-        
-        if work_hours >= MAX_WORK_HOURS:
-            return True, f"Work time limit reached ({work_hours:.1f} hours)"
-        elif work_hours >= WORK_TIME_WARNING_HOURS:
-            remaining = MAX_WORK_HOURS - work_hours
-            return False, f"Warning: {remaining:.1f} hours until mandatory sleep"
-        
-        return False, ""
-    
-    # ========== Phase 7: Degradation Monitoring ==========
-    
-    def record_diff(self, agent_id: str, diff_content: str, error_count: int = 0) -> None:
-        """Record a code diff and its error count for an agent."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            
-            # Get existing diffs
-            c.execute('SELECT recent_diffs, error_count FROM agent_state WHERE agent_id = ?', (agent_id,))
-            row = c.fetchone()
-            
-            if row:
-                try:
-                    diffs = json.loads(row[0]) if row[0] else []
-                except json.JSONDecodeError:
-                    diffs = []
-                
-                current_errors = row[1] or 0
-                
-                # Add new diff with timestamp and error info
-                diff_record = {
-                    'timestamp': datetime.utcnow().isoformat(),
-                    'content_hash': hashlib.sha256(diff_content.encode()).hexdigest()[:16],
-                    'errors': error_count,
-                    'size': len(diff_content)
-                }
-                diffs.append(diff_record)
-                
-                # Keep only the last N diffs
-                diffs = diffs[-DIFF_HISTORY_LIMIT:]
-                
-                # Update database
-                c.execute('''
-                    UPDATE agent_state 
-                    SET recent_diffs = ?, error_count = ?, last_updated = ?
-                    WHERE agent_id = ?
-                ''', (json.dumps(diffs), current_errors + error_count, datetime.utcnow(), agent_id))
-                conn.commit()
-    
-    def get_error_rate(self, agent_id: str) -> float:
-        """Calculate error rate from recent diffs."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            c.execute('SELECT recent_diffs FROM agent_state WHERE agent_id = ?', (agent_id,))
-            row = c.fetchone()
-            
-            if row and row[0]:
-                try:
-                    diffs = json.loads(row[0])
-                    if diffs:
-                        total_errors = sum(d.get('errors', 0) for d in diffs)
-                        return (total_errors / len(diffs)) * 100
-                except (json.JSONDecodeError, TypeError):
-                    pass
-        
-        return 0.0
-    
-    def check_degradation(self, agent_id: str) -> Tuple[bool, str]:
-        """Check if agent shows signs of degradation."""
-        error_rate = self.get_error_rate(agent_id)
-        
-        if error_rate >= ERROR_THRESHOLD_PERCENT:
-            return True, f"Error rate {error_rate:.1f}% exceeds threshold ({ERROR_THRESHOLD_PERCENT}%)"
-        
-        return False, f"Error rate: {error_rate:.1f}%"
-    
-    # ========== Phase 9: Break System ==========
-    
-    def record_break(self, agent_id: str, break_type: str, duration_minutes: int) -> None:
-        """Record a break taken by an agent."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            
-            # Get or initialize break history
-            c.execute('SELECT memory_json FROM agent_state WHERE agent_id = ?', (agent_id,))
-            row = c.fetchone()
-            
-            if row:
-                try:
-                    memory = json.loads(row[0]) if row[0] else {}
-                except json.JSONDecodeError:
-                    memory = {}
-                
-                # Initialize or update break history
-                if 'breaks' not in memory:
-                    memory['breaks'] = []
-                
-                memory['breaks'].append({
-                    'type': break_type,
-                    'timestamp': datetime.utcnow().isoformat(),
-                    'duration_minutes': duration_minutes
-                })
-                
-                # Keep only last 24 hours of breaks
-                cutoff = (datetime.utcnow() - timedelta(hours=24)).isoformat()
-                memory['breaks'] = [b for b in memory['breaks'] if b['timestamp'] > cutoff]
-                
-                c.execute('''
-                    UPDATE agent_state SET memory_json = ?, last_updated = ?
-                    WHERE agent_id = ?
-                ''', (json.dumps(memory), datetime.utcnow(), agent_id))
-                conn.commit()
-    
-    def get_breaks_in_last_hour(self, agent_id: str) -> int:
-        """Get number of breaks taken in the last hour."""
-        with sqlite3.connect(self.db_path) as conn:
-            c = conn.cursor()
-            c.execute('SELECT memory_json FROM agent_state WHERE agent_id = ?', (agent_id,))
-            row = c.fetchone()
-            
-            if row and row[0]:
-                try:
-                    memory = json.loads(row[0])
-                    breaks = memory.get('breaks', [])
-                    cutoff = (datetime.utcnow() - timedelta(hours=1)).isoformat()
-                    return len([b for b in breaks if b['timestamp'] > cutoff])
-                except (json.JSONDecodeError, TypeError):
-                    pass
-        
-        return 0
-    
-    def can_take_break(self, agent_id: str, total_agents: int, agents_on_break: int) -> Tuple[bool, str]:
-        """Check if an agent can take a break."""
-        # Check maximum breaks per hour
-        breaks_this_hour = self.get_breaks_in_last_hour(agent_id)
-        if breaks_this_hour >= MAX_BREAKS_PER_HOUR:
-            return False, f"Maximum breaks per hour ({MAX_BREAKS_PER_HOUR}) reached"
-        
-        # Check workforce on break percentage
-        if total_agents > 0:
-            on_break_ratio = (agents_on_break + 1) / total_agents
-            if on_break_ratio > MAX_WORKFORCE_ON_BREAK:
-                return False, f"Too many agents on break ({on_break_ratio:.0%} > {MAX_WORKFORCE_ON_BREAK:.0%})"
-        
-        return True, "Break approved"
+# AgentDatabase class now imported from database module
+# The original AgentDatabase class (lines 291-764) has been moved to database/agent_db.py
+# All methods including award_xp, save_agent_state, load_agent_state, sleep management,
+# degradation monitoring, and break system are now in the modular structure.
 
 
 def collect_resources() -> str:
