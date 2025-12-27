@@ -88,25 +88,6 @@ from progression.levels import (
 )
 from database.agent_db import AgentDatabase
 
-# ANSI color codes for terminal (kept for backward compatibility during refactor)
-class Colors_OLD:
-    HEADER = '\033[95m'
-    BLUE = '\033[94m'
-    CYAN = '\033[96m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
-    BOLD = '\033[1m'
-    DIM = '\033[2m'
-    END = '\033[0m'
-
-def colorize_OLD(text: str, color: str) -> str:
-    """Colorize text for terminal output."""
-    return f"{color}{text}{Colors.END}"
-
-# Short alias for convenience (kept for backward compatibility during refactor)
-c_OLD = colorize_OLD
-
 # Collaborative session constants
 COLLAB_HISTORY_LIMIT = 20      # Max messages to show in conversation history
 COLLAB_CONTENT_LIMIT = 2000    # Max chars per message in history
