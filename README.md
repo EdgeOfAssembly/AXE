@@ -762,7 +762,10 @@ Email: haxbox2000@gmail.com
 
 ## Author
 
+---
+
 **EdgeOfAssemblly** - haxbox2000@gmail.com
+
 ---
 
 ## Quick Reference Card
