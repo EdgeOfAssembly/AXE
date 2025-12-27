@@ -708,7 +708,7 @@ curl -X POST "https://models.github.ai/inference/chat/completions" \
 ## Project Structure
 
 ```
-multiagent/
+AXE/
 ├── axe.py              # Main program
 ├── axe.yaml            # Default configuration
 ├── API_PROVIDERS.md    # Detailed API documentation
