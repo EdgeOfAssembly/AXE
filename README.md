@@ -713,8 +713,6 @@ multiagent/
 ├── axe.yaml            # Default configuration
 ├── API_PROVIDERS.md    # Detailed API documentation
 ├── README.md           # This file
-├── models.txt          # Model notes and API keys reference
-├── multi_agent_fixer.py # Legacy version
 └── llm_prep/           # LLM context preparation files
     ├── codebase_overview.md
     ├── llm_system_prompt.md
@@ -744,8 +742,27 @@ Contributions welcome! Please:
 
 ## License
 
-Part of the RetroCodeMess project. See repository root for license.
+Copyright (c) 2025 EdgeOfAssembly
 
+This project is dual-licensed:
+
+### Open Source License (Default)
+
+This software is licensed under the **GNU General Public License v3.0 (GPLv3)**.
+
+See the [LICENSE](LICENSE) file for the full license text.
+
+### Commercial License
+
+For commercial use or if you need a license other than GPLv3, please contact the author:
+
+**EdgeOfAssembly**  
+Email: haxbox2000@gmail.com
+
+
+## Author
+
+**EdgeOfAssemblly** - haxbox2000@gmail.com
 ---
 
 ## Quick Reference Card
