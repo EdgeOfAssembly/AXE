@@ -11,11 +11,10 @@ Architecture:
 - MultiAgentCoordinator: Orchestrates all agent processes
 """
 
-import multiprocessing as mp
+import logging
 from multiprocessing import Process, Queue, Manager, Event
-from typing import Dict, List, Optional, Any, Tuple
+from typing import Dict, List, Optional, Any
 import time
-import json
 from datetime import datetime, timezone
 from queue import Empty
 
@@ -135,6 +134,23 @@ class SharedContext:
     def should_shutdown(self) -> bool:
         """Check if shutdown has been requested."""
         return self.shutdown_flag.is_set()
+    
+    def cleanup(self) -> None:
+        """Clean up Manager resources."""
+        try:
+            self.manager.shutdown()
+        except Exception:
+            # Manager may already be shut down
+            pass
+    
+    def __enter__(self):
+        """Context manager entry."""
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Context manager exit with cleanup."""
+        self.cleanup()
+        return False
 
 
 class AgentWorkerProcess:
@@ -168,8 +184,8 @@ class AgentWorkerProcess:
         self.shared_context = shared_context
         self.running = False
         
-        # Background thinking state
-        self.current_thoughts = []
+        # Background thinking state - use Queue for thread-safe operations
+        self.thoughts_queue = Queue()
         self.prepared_response = None
     
     def run(self) -> None:
@@ -196,7 +212,7 @@ class AgentWorkerProcess:
             except KeyboardInterrupt:
                 break
             except Exception as e:
-                print(f"Worker {self.agent_name} error: {e}")
+                logging.error(f"Worker {self.agent_name} error: {e}", exc_info=True)
                 time.sleep(1)
         
         self.shared_context.update_agent_status(self.agent_id, 'stopped')
@@ -238,11 +254,19 @@ class AgentWorkerProcess:
         """
         self.shared_context.update_agent_status(self.agent_id, 'responding')
         
+        # Collect all thoughts from the queue
+        thoughts = []
+        while not self.thoughts_queue.empty():
+            try:
+                thoughts.append(self.thoughts_queue.get_nowait())
+            except Empty:
+                break
+        
         # Send prepared thoughts and response
         response = {
             'type': 'response',
             'agent_id': self.agent_id,
-            'thoughts': self.current_thoughts.copy(),
+            'thoughts': thoughts,
             'prepared_response': self.prepared_response,
             'timestamp': datetime.now(timezone.utc).isoformat()
         }
@@ -250,7 +274,6 @@ class AgentWorkerProcess:
         self.output_queue.put(response)
         
         # Clear prepared state
-        self.current_thoughts = []
         self.prepared_response = None
         
         self.shared_context.update_agent_status(self.agent_id, 'idle')
@@ -265,7 +288,7 @@ class AgentWorkerProcess:
         # In a real implementation, this would trigger analysis
         # For now, just note that we received it
         update_type = command.get('update_type', 'unknown')
-        self.current_thoughts.append(f"Noted: {update_type} update")
+        self.thoughts_queue.put(f"Noted: {update_type} update")
     
     def background_think(self) -> None:
         """

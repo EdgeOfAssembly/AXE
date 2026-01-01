@@ -2487,7 +2487,13 @@ _global_db = None
 
 def restore_agents_on_startup(db_path: str = "axe_agents.db") -> None:
     """
-    Restore agents from database on startup.
+    Display agents from database on startup (informational only).
+    
+    Note: This function displays agent information from previous sessions
+    but does not automatically recreate them in the current session.
+    Agents must be explicitly spawned via collaborative sessions or
+    other mechanisms. This is informational to show what agents
+    existed in previous sessions.
     
     Args:
         db_path: Path to SQLite database
@@ -2498,7 +2504,8 @@ def restore_agents_on_startup(db_path: str = "axe_agents.db") -> None:
     agents = _global_db.restore_all_agents()
     
     if agents:
-        print(c(f"\n✓ Restored {len(agents)} agent(s) from previous session:", Colors.GREEN))
+        print(c(f"\n✓ Found {len(agents)} agent(s) from previous session:", Colors.GREEN))
+        print(c("   (Informational only - agents not automatically restored)", Colors.DIM))
         for agent in agents[:5]:  # Show first 5
             status_color = Colors.GREEN if agent['status'] == 'active' else Colors.YELLOW
             print(f"  • {agent['alias']} ({agent['model_name']}) - "

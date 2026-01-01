@@ -3,7 +3,7 @@ Model metadata for AXE - specifications for different LLM models.
 Includes context window size, max output tokens, and supported modes.
 """
 
-from typing import Dict, Optional, List
+from typing import Dict, List
 
 # Model metadata structure:
 # - context_tokens: Maximum input context window size in tokens

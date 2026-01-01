@@ -22,6 +22,12 @@ CREATE TABLE IF NOT EXISTS agent_state (
 )
 """
 
+# Migration statements for updating existing agent_state tables
+AGENT_STATE_MIGRATIONS = [
+    "ALTER TABLE agent_state ADD COLUMN tokens_used INTEGER DEFAULT 0",
+    "ALTER TABLE agent_state ADD COLUMN context_summary TEXT",
+]
+
 SUPERVISOR_LOG_TABLE = """
 CREATE TABLE IF NOT EXISTS supervisor_log (
     log_id TEXT PRIMARY KEY,

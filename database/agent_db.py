@@ -13,6 +13,7 @@ from typing import Optional, Dict, List, Tuple, Any
 # Import from local modules
 from .schema import (
     AGENT_STATE_TABLE,
+    AGENT_STATE_MIGRATIONS,
     SUPERVISOR_LOG_TABLE,
     ALIAS_MAPPINGS_TABLE,
     WAL_MODE_PRAGMA
@@ -27,7 +28,7 @@ class AgentDatabase:
         self._init_db()
     
     def _init_db(self) -> None:
-        """Initialize database schema."""
+        """Initialize database schema with migrations."""
         with sqlite3.connect(self.db_path) as conn:
             # Enable WAL mode for better concurrency
             conn.execute(WAL_MODE_PRAGMA)
@@ -39,7 +40,30 @@ class AgentDatabase:
             c.execute(SUPERVISOR_LOG_TABLE)
             c.execute(ALIAS_MAPPINGS_TABLE)
             
+            # Apply migrations for existing databases
+            self._apply_migrations(conn)
+            
             conn.commit()
+    
+    def _apply_migrations(self, conn: sqlite3.Connection) -> None:
+        """Apply schema migrations to existing tables."""
+        c = conn.cursor()
+        
+        # Check which columns exist in agent_state
+        c.execute("PRAGMA table_info(agent_state)")
+        existing_columns = {row[1] for row in c.fetchall()}
+        
+        # Apply migrations for missing columns
+        for migration in AGENT_STATE_MIGRATIONS:
+            # Extract column name from ALTER TABLE statement
+            if "ADD COLUMN" in migration:
+                column_name = migration.split("ADD COLUMN")[1].split()[0]
+                if column_name not in existing_columns:
+                    try:
+                        c.execute(migration)
+                    except sqlite3.OperationalError:
+                        # Column might already exist, skip
+                        pass
     
     def save_agent_state(self, agent_id: str, alias: str, model_name: str,
                         memory_dict: Dict[str, Any], diffs: List[str], 
