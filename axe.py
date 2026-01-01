@@ -1210,6 +1210,146 @@ class ToolRunner:
                 pass  # Last resort: ignore all errors in logging
 
 
+class ResponseProcessor:
+    """Processes agent responses and executes code blocks (READ, EXEC, WRITE)."""
+    
+    def __init__(self, config: Config, project_dir: str, tool_runner: 'ToolRunner'):
+        self.config = config
+        self.project_dir = os.path.abspath(project_dir)
+        self.tool_runner = tool_runner
+    
+    def process_response(self, response: str, agent_name: str = "") -> str:
+        """
+        Process agent response and execute any code blocks.
+        Returns the response with execution results appended.
+        """
+        import re
+        
+        # Pattern to match code blocks: ```TYPE [args]\ncontent\n```
+        # Matches READ, EXEC, WRITE blocks
+        pattern = r'```(READ|EXEC|WRITE)\s*([^\n]*)\n(.*?)```'
+        
+        matches = list(re.finditer(pattern, response, re.DOTALL))
+        
+        if not matches:
+            return response
+        
+        # Process each block
+        results = []
+        for match in matches:
+            block_type = match.group(1)
+            args = match.group(2).strip()
+            content = match.group(3).rstrip('\n')
+            
+            if block_type == 'READ':
+                result = self._handle_read(args or content)
+                results.append(f"\n[READ {args or content}]\n{result}")
+            
+            elif block_type == 'EXEC':
+                command = args or content
+                result = self._handle_exec(command)
+                results.append(f"\n[EXEC: {command}]\n{result}")
+            
+            elif block_type == 'WRITE':
+                # args contains the filename, content contains the file content
+                filename = args
+                if not filename:
+                    results.append(f"\n[WRITE ERROR: No filename specified]")
+                    continue
+                result = self._handle_write(filename, content)
+                results.append(f"\n[WRITE {filename}]\n{result}")
+        
+        # Append all results to the original response
+        if results:
+            return response + "\n\n--- Execution Results ---" + "".join(results)
+        
+        return response
+    
+    def _handle_read(self, filename: str) -> str:
+        """Handle READ block - read and return file content."""
+        filepath = os.path.join(self.project_dir, filename)
+        
+        # Check if path is allowed
+        allowed_dirs = self.config.get('directories', 'allowed', default=[])
+        readonly_dirs = self.config.get('directories', 'readonly', default=[])
+        forbidden_dirs = self.config.get('directories', 'forbidden', default=[])
+        
+        # Simple directory access check
+        if not self._check_file_access(filepath, allowed_dirs + readonly_dirs, forbidden_dirs):
+            return f"ERROR: Access denied to {filename}"
+        
+        try:
+            if not os.path.exists(filepath):
+                return f"ERROR: File not found: {filename}"
+            
+            with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
+                content = f.read(10000)  # Limit to 10KB
+                if len(content) >= 10000:
+                    content += "\n[... truncated at 10KB ...]"
+                return content
+        except Exception as e:
+            return f"ERROR reading file: {e}"
+    
+    def _handle_exec(self, command: str) -> str:
+        """Handle EXEC block - execute command via ToolRunner."""
+        success, output = self.tool_runner.run(command)
+        if success:
+            return output if output else "[Command executed successfully]"
+        else:
+            return f"ERROR: {output}"
+    
+    def _handle_write(self, filename: str, content: str) -> str:
+        """Handle WRITE block - write content to file."""
+        filepath = os.path.join(self.project_dir, filename)
+        
+        # Check if path is allowed for writing
+        allowed_dirs = self.config.get('directories', 'allowed', default=[])
+        forbidden_dirs = self.config.get('directories', 'forbidden', default=[])
+        
+        if not self._check_file_access(filepath, allowed_dirs, forbidden_dirs):
+            return f"ERROR: Write access denied to {filename}"
+        
+        try:
+            # Create directory if it doesn't exist
+            os.makedirs(os.path.dirname(filepath), exist_ok=True)
+            
+            # Write the file
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(content)
+            
+            return f"✓ File written successfully ({len(content)} bytes)"
+        except Exception as e:
+            return f"ERROR writing file: {e}"
+    
+    def _check_file_access(self, filepath: str, allowed: list, forbidden: list) -> bool:
+        """Check if file access is allowed based on directory rules."""
+        # Normalize the file path
+        filepath = os.path.abspath(filepath)
+        
+        # Check forbidden directories first
+        for forbidden_dir in forbidden:
+            forbidden_path = os.path.abspath(os.path.expanduser(forbidden_dir))
+            if not os.path.isabs(forbidden_path):
+                forbidden_path = os.path.join(self.project_dir, forbidden_path)
+            forbidden_path = os.path.abspath(forbidden_path)
+            
+            if filepath.startswith(forbidden_path):
+                return False
+        
+        # Check if in allowed directories
+        for allowed_dir in allowed:
+            allowed_path = os.path.expanduser(allowed_dir)
+            if not os.path.isabs(allowed_path):
+                allowed_path = os.path.join(self.project_dir, allowed_path)
+            allowed_path = os.path.abspath(allowed_path)
+            
+            if filepath.startswith(allowed_path):
+                return True
+        
+        # If no specific allowed directory matches, check if it's in project dir
+        return filepath.startswith(self.project_dir)
+
+
 class ProjectContext:
     """Manages project context for agents."""
     
@@ -1458,6 +1598,8 @@ class CollaborativeSession:
         self.agent_mgr = AgentManager(config)
         self.workspace = SharedWorkspace(workspace_dir)
         self.project_ctx = ProjectContext(workspace_dir, config)
+        self.tool_runner = ToolRunner(config, workspace_dir)
+        self.response_processor = ResponseProcessor(config, workspace_dir, self.tool_runner)
         self.db = AgentDatabase(db_path)
         
         # Initialize Phase 6-10 systems
@@ -1872,19 +2014,22 @@ It's YOUR TURN. What would you like to contribute? Remember:
                 except Exception as e:
                     response = f"[API Error: {e}]"
                 
+                # Process response for code blocks (READ, EXEC, WRITE)
+                processed_response = self.response_processor.process_response(response, current_agent)
+                
                 # Print response with alias
                 print(c(f"\n[{alias}]:", Colors.CYAN + Colors.BOLD))
-                print(response)
+                print(processed_response)
                 
                 # Record in history
                 self.conversation_history.append({
                     'role': current_agent,
-                    'content': response,
+                    'content': processed_response,
                     'timestamp': datetime.now().strftime("%H:%M:%S")
                 })
                 
                 # ===== Process special commands from response =====
-                response_upper = response.upper() if response else ""
+                response_upper = processed_response.upper() if processed_response else ""
                 
                 # Phase 9: Break request
                 if 'BREAK REQUEST:' in response_upper:
@@ -1903,10 +2048,10 @@ It's YOUR TURN. What would you like to contribute? Remember:
                     self._print_status()
                 
                 # Award XP for meaningful contribution (not for PASS)
-                non_empty_lines = [line.strip().upper() for line in response.splitlines() if line.strip()]
+                non_empty_lines = [line.strip().upper() for line in processed_response.splitlines() if line.strip()]
                 is_pass = bool(non_empty_lines) and non_empty_lines[0] == 'PASS'
                 
-                if not is_pass and response and not response.startswith("[API Error"):
+                if not is_pass and processed_response and not processed_response.startswith("[API Error"):
                     # Award XP for contribution
                     if agent_id:
                         xp_award = 50  # Base XP for participation
@@ -2196,6 +2341,7 @@ class ChatSession:
         self.agent_mgr = AgentManager(config)
         self.tool_runner = ToolRunner(config, project_dir)
         self.project_ctx = ProjectContext(project_dir, config)
+        self.response_processor = ResponseProcessor(config, project_dir, self.tool_runner)
         self.history: List[dict] = []
         self.default_agent = 'claude'
     
@@ -2468,12 +2614,15 @@ Examples:
         print(c(f"\n[{agent_name}] Processing...", Colors.DIM))
         response = self.agent_mgr.call_agent(agent_name, prompt, context)
         
+        # Process response for code blocks (READ, EXEC, WRITE)
+        processed_response = self.response_processor.process_response(response, agent_name)
+        
         # Record response
-        self.history.append({'role': agent_name, 'content': response})
+        self.history.append({'role': agent_name, 'content': processed_response})
         
         # Print response
         print(c(f"\n[{agent_name}]:", Colors.CYAN + Colors.BOLD))
-        print(response)
+        print(processed_response)
         print()
     
     def run(self) -> None:
