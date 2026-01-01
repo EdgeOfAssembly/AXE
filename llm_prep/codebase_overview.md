@@ -1,4 +1,4 @@
-# LLM-Ready Codebase Overview — 2025-12-27
+# LLM-Ready Codebase Overview — 2026-01-01
 
 **Project:** AXE
 
@@ -6,12 +6,41 @@
 
 ```text
 .
+├── core
+│   ├── __init__.py
+│   └── multiprocess.py
+├── database
+│   ├── agent_db.py
+│   ├── __init__.py
+│   └── schema.py
 ├── llm_prep
 │   ├── dot_graphs_doxygen
 │   ├── dot_graphs_pyreverse
-│   └── codebase_structure.txt
+│   │   └── classes.dot
+│   ├── codebase_overview.md
+│   ├── codebase_stats.txt
+│   ├── codebase_structure.txt
+│   ├── codebase_structure_updated.txt
+│   ├── llm_system_prompt.md
+│   ├── project_guidance.md
+│   └── tags
+├── models
+│   ├── __init__.py
+│   └── metadata.py
+├── progression
+│   ├── __init__.py
+│   ├── levels.py
+│   └── xp_system.py
+├── safety
+│   ├── __init__.py
+│   └── rules.py
+├── utils
+│   ├── formatting.py
+│   ├── __init__.py
+│   └── token_tracker.py
 ├── API_PROVIDERS.md
 ├── axe.py
+├── _axe.yaml_
 ├── axe.yaml
 ├── demo_improvements.py
 ├── IMPLEMENTATION_COMPLETE.md
@@ -21,24 +50,26 @@
 ├── MODELS_FINAL.md
 ├── QUICK_REFERENCE.md
 ├── README.md
+├── REFACTORING_NOTES.md
+├── requirements.txt
 └── test_axe_improvements.py
 
-4 directories, 13 files
+10 directories, 38 files
 ```
 
 ## Code Statistics
 
 ```text
-github.com/AlDanial/cloc v 2.00  T=0.04 s (274.5 files/s, 168539.0 lines/s)
+github.com/AlDanial/cloc v 2.00  T=0.05 s (655.0 files/s, 180948.3 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Python                           3            754            753           2766
-Markdown                         7            680              0           2175
-YAML                             1             27             17            176
-Text                             1              1              0             18
+Python                          18            999           1262           3338
+Markdown                        11            750              0           2408
+YAML                             1             32             17            215
+Text                             3              2              0             93
 -------------------------------------------------------------------------------
-SUM:                            12           1462            770           5135
+SUM:                            33           1783           1279           6054
 -------------------------------------------------------------------------------
 ```
 

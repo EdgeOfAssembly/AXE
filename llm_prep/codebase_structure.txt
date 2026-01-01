@@ -1,10 +1,39 @@
 .
+├── core
+│   ├── __init__.py
+│   └── multiprocess.py
+├── database
+│   ├── agent_db.py
+│   ├── __init__.py
+│   └── schema.py
 ├── llm_prep
 │   ├── dot_graphs_doxygen
 │   ├── dot_graphs_pyreverse
-│   └── codebase_structure.txt
+│   │   └── classes.dot
+│   ├── codebase_overview.md
+│   ├── codebase_stats.txt
+│   ├── codebase_structure.txt
+│   ├── codebase_structure_updated.txt
+│   ├── llm_system_prompt.md
+│   ├── project_guidance.md
+│   └── tags
+├── models
+│   ├── __init__.py
+│   └── metadata.py
+├── progression
+│   ├── __init__.py
+│   ├── levels.py
+│   └── xp_system.py
+├── safety
+│   ├── __init__.py
+│   └── rules.py
+├── utils
+│   ├── formatting.py
+│   ├── __init__.py
+│   └── token_tracker.py
 ├── API_PROVIDERS.md
 ├── axe.py
+├── _axe.yaml_
 ├── axe.yaml
 ├── demo_improvements.py
 ├── IMPLEMENTATION_COMPLETE.md
@@ -14,6 +43,8 @@
 ├── MODELS_FINAL.md
 ├── QUICK_REFERENCE.md
 ├── README.md
+├── REFACTORING_NOTES.md
+├── requirements.txt
 └── test_axe_improvements.py
 
-4 directories, 13 files
+10 directories, 38 files

@@ -59,6 +59,9 @@
 3. Chain of Command – Escalate Properly	IMPROVEMENTS_FINAL.md	/^#### 3. Chain of Command – Escalate Properly$/;"	t	subsection:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules""Display at session start (pinned message):
 3. Test with Live Models	IMPLEMENTATION_COMPLETE.md	/^### 3. Test with Live Models$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""How to Use
 4. Performance & Rewards – Good Work Gets Recognized	IMPROVEMENTS_FINAL.md	/^#### 4. Performance & Rewards – Good Work Gets Recognized$/;"	t	subsection:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules""Display at session start (pinned message):
+AGENT_STATE_MIGRATIONS	database/schema.py	/^AGENT_STATE_MIGRATIONS = [$/;"	v
+AGENT_STATE_TABLE	database/schema.py	/^AGENT_STATE_TABLE = """$/;"	v
+ALIAS_MAPPINGS_TABLE	database/schema.py	/^ALIAS_MAPPINGS_TABLE = """$/;"	v
 API Endpoints Summary	API_PROVIDERS.md	/^### API Endpoints Summary$/;"	S	section:AXE API Provider Documentation""Quick Reference
 API Keys Setup	README.md	/^### API Keys Setup$/;"	S	section:AXE - Agent eXecution Engine""Configuration
 API Provider Limits	IMPROVEMENTS_FINAL.md	/^### API Provider Limits$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Dynamic Spawning
@@ -70,14 +73,17 @@ AXE Multi-Agent System - Model Configuration Reference	MODELS_FINAL.md	/^# AXE M
 AXE Multiagent - Quick Reference Card	QUICK_REFERENCE.md	/^# AXE Multiagent - Quick Reference Card$/;"	c
 AXE Multiagent AI Safety Implementation - COMPLETE	IMPLEMENTATION_COMPLETE.md	/^# AXE Multiagent AI Safety Implementation - COMPLETE$/;"	c
 AXE Multiagent Improvements - Implementation Summary	IMPROVEMENTS_README.md	/^# AXE Multiagent Improvements - Implementation Summary$/;"	c
+AXE.PY Refactoring Notes	REFACTORING_NOTES.md	/^# AXE.PY Refactoring Notes$/;"	c
 Advanced Usage	README.md	/^## Advanced Usage$/;"	s	chapter:AXE - Agent eXecution Engine
+After	REFACTORING_NOTES.md	/^### After$/;"	S	section:AXE.PY Refactoring Notes""Refactoring Summary
 Agent Aliases	IMPROVEMENTS_FINAL.md	/^## Agent Aliases$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Agent Lifecycle	IMPROVEMENTS_README.md	/^### Agent Lifecycle$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Architecture Notes
 Agent Ranks & Levels	QUICK_REFERENCE.md	/^## Agent Ranks & Levels$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Agent Reference	README.md	/^## Agent Reference$/;"	s	chapter:AXE - Agent eXecution Engine
 Agent Session Commands	IMPROVEMENTS_FINAL.md	/^### Agent Session Commands$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Quick Reference Commands
-AgentDatabase	axe.py	/^class AgentDatabase:$/;"	c
+AgentDatabase	database/agent_db.py	/^class AgentDatabase:$/;"	c
 AgentManager	axe.py	/^class AgentManager:$/;"	c
+AgentWorkerProcess	core/multiprocess.py	/^class AgentWorkerProcess:$/;"	c
 Aliases	QUICK_REFERENCE.md	/^## Aliases$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Analysis	README.md	/^### Analysis$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Anthropic (Claude)	API_PROVIDERS.md	/^## Anthropic (Claude)$/;"	s	chapter:AXE API Provider Documentation
@@ -91,11 +97,14 @@ Automated Tests ✅	IMPLEMENTATION_COMPLETE.md	/^### Automated Tests ✅$/;"	S	s
 Autonomous Collaborative Sessions (NEW!)	README.md	/^### Autonomous Collaborative Sessions (NEW!)$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Available Agents	README.md	/^### Available Agents$/;"	S	section:AXE - Agent eXecution Engine""Agent Reference
 Available Models	MODELS_FINAL.md	/^### Available Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""GitHub Models
-BLUE	axe.py	/^    BLUE = '\\033[94m'$/;"	v	class:Colors
-BOLD	axe.py	/^    BOLD = '\\033[1m'$/;"	v	class:Colors
+BLUE	utils/formatting.py	/^    BLUE = '\\033[94m'$/;"	v	class:Colors
+BOLD	utils/formatting.py	/^    BOLD = '\\033[1m'$/;"	v	class:Colors
 Background Monitor Thread	IMPROVEMENTS_FINAL.md	/^### Background Monitor Thread$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Resource Monitoring
+Backward Compatibility	REFACTORING_NOTES.md	/^### Backward Compatibility$/;"	S	section:AXE.PY Refactoring Notes""Design Decisions
 Basic Agent Conversations	README.md	/^### Basic Agent Conversations$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Batch Processing	README.md	/^### Batch Processing$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
+Before	REFACTORING_NOTES.md	/^### Before$/;"	S	section:AXE.PY Refactoring Notes""Refactoring Summary
+Benefits	REFACTORING_NOTES.md	/^## Benefits$/;"	s	chapter:AXE.PY Refactoring Notes
 Best Practices	IMPROVEMENTS_FINAL.md	/^### Best Practices$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Persistent Storage
 Break Activities	IMPROVEMENTS_FINAL.md	/^### Break Activities$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Break System
 Break System	IMPROVEMENTS_FINAL.md	/^## Break System$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
@@ -106,7 +115,7 @@ COLLAB_CONTENT_LIMIT	axe.py	/^COLLAB_CONTENT_LIMIT = 2000    # Max chars per mes
 COLLAB_HISTORY_LIMIT	axe.py	/^COLLAB_HISTORY_LIMIT = 20      # Max messages to show in conversation history$/;"	v
 COLLAB_PASS_MULTIPLIER	axe.py	/^COLLAB_PASS_MULTIPLIER = 2     # Times agents can pass before session ends$/;"	v
 COLLAB_SHARED_NOTES_LIMIT	axe.py	/^COLLAB_SHARED_NOTES_LIMIT = 500  # Max chars of shared notes to show$/;"	v
-CYAN	axe.py	/^    CYAN = '\\033[96m'$/;"	v	class:Colors
+CYAN	utils/formatting.py	/^    CYAN = '\\033[96m'$/;"	v	class:Colors
 Chain of Thought	README.md	/^### Chain of Thought$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Chat Commands	QUICK_REFERENCE.md	/^### Chat Commands$/;"	S	section:AXE Multiagent - Quick Reference Card""Commands
 Chat Commands Reference	README.md	/^## Chat Commands Reference$/;"	s	chapter:AXE - Agent eXecution Engine
@@ -115,9 +124,10 @@ ChatSession	axe.py	/^class ChatSession:$/;"	c
 Checking Resource Usage	IMPROVEMENTS_README.md	/^### Checking Resource Usage$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Usage Examples
 Clone and Setup	README.md	/^### Clone and Setup$/;"	S	section:AXE - Agent eXecution Engine""Installation
 Code Quality ✅	IMPLEMENTATION_COMPLETE.md	/^### Code Quality ✅$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Testing Results
+Code Statistics	llm_prep/codebase_overview.md	/^## Code Statistics$/;"	s	chapter:LLM-Ready Codebase Overview — 2025-12-27
 Collaborative Problem Solving	README.md	/^### Collaborative Problem Solving$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 CollaborativeSession	axe.py	/^class CollaborativeSession:$/;"	c
-Colors	axe.py	/^class Colors:$/;"	c
+Colors	utils/formatting.py	/^class Colors:$/;"	c
 Commands	QUICK_REFERENCE.md	/^## Commands$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Commercial License	README.md	/^### Commercial License$/;"	S	section:AXE - Agent eXecution Engine""License
 Common Issues	API_PROVIDERS.md	/^### Common Issues$/;"	S	section:AXE API Provider Documentation""Troubleshooting
@@ -139,16 +149,19 @@ Credits	IMPROVEMENTS_README.md	/^## Credits$/;"	s	chapter:AXE Multiagent Improve
 Custom Project Directory	README.md	/^### Custom Project Directory$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
 Custom System Prompts	README.md	/^### Custom System Prompts$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
 DEFAULT_CONFIG	axe.py	/^DEFAULT_CONFIG = {$/;"	v
+DEFAULT_METADATA	models/metadata.py	/^DEFAULT_METADATA = {$/;"	v
 DEGRADATION_CHECK_INTERVAL	axe.py	/^DEGRADATION_CHECK_INTERVAL = 5  # Check degradation every N turns$/;"	v
 DIFF_HISTORY_LIMIT	axe.py	/^DIFF_HISTORY_LIMIT = 20         # Number of recent diffs to track for error analysis$/;"	v
-DIM	axe.py	/^    DIM = '\\033[2m'$/;"	v	class:Colors
+DIM	utils/formatting.py	/^    DIM = '\\033[2m'$/;"	v	class:Colors
 Database	QUICK_REFERENCE.md	/^## Database$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Database Inspection	IMPROVEMENTS_README.md	/^## Database Inspection$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Debugging	README.md	/^### Debugging$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Degradation Monitoring	IMPROVEMENTS_FINAL.md	/^## Degradation Monitoring$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Demo Tests ✅	IMPLEMENTATION_COMPLETE.md	/^### Demo Tests ✅$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Testing Results
+Design Decisions	REFACTORING_NOTES.md	/^## Design Decisions$/;"	s	chapter:AXE.PY Refactoring Notes
 Design Principles	IMPROVEMENTS_README.md	/^## Design Principles$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Diff-Based Error Detection Metrics	IMPROVEMENTS_FINAL.md	/^### Diff-Based Error Detection Metrics$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Degradation Monitoring
+Directory Structure	llm_prep/codebase_overview.md	/^## Directory Structure$/;"	s	chapter:LLM-Ready Codebase Overview — 2025-12-27
 Disassembly & Analysis	README.md	/^### Disassembly & Analysis$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Display at session start (pinned message):	IMPROVEMENTS_FINAL.md	/^### Display at session start (pinned message):$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
@@ -161,7 +174,7 @@ During Session	QUICK_REFERENCE.md	/^### During Session$/;"	S	section:AXE Multiag
 Dynamic Spawning	IMPROVEMENTS_FINAL.md	/^## Dynamic Spawning$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 DynamicSpawner	axe.py	/^class DynamicSpawner:$/;"	c
 EMERGENCY_MAILBOX_DIR	axe.py	/^EMERGENCY_MAILBOX_DIR = "\/tmp\/axe_emergency_mailbox"$/;"	v
-END	axe.py	/^    END = '\\033[0m'$/;"	v	class:Colors
+END	utils/formatting.py	/^    END = '\\033[0m'$/;"	v	class:Colors
 ERROR_THRESHOLD_PERCENT	axe.py	/^ERROR_THRESHOLD_PERCENT = 20    # Force sleep if error rate exceeds this$/;"	v
 Emergency Mailbox	IMPROVEMENTS_FINAL.md	/^## Emergency Mailbox$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 EmergencyMailbox	axe.py	/^class EmergencyMailbox:$/;"	c
@@ -184,11 +197,16 @@ Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Document
 Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
 Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Documentation""xAI (Grok)
 Features	README.md	/^## Features$/;"	s	chapter:AXE - Agent eXecution Engine
+File Size	REFACTORING_NOTES.md	/^### File Size$/;"	S	section:AXE.PY Refactoring Notes""Metrics
 Files Added/Modified	IMPLEMENTATION_COMPLETE.md	/^## Files Added\/Modified$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
+For Existing Code	REFACTORING_NOTES.md	/^### For Existing Code$/;"	S	section:AXE.PY Refactoring Notes""Migration Guide
+For New Code	REFACTORING_NOTES.md	/^### For New Code$/;"	S	section:AXE.PY Refactoring Notes""Migration Guide
 Format	IMPROVEMENTS_FINAL.md	/^### Format$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Agent Aliases
 Future Features (Not Yet Implemented)	QUICK_REFERENCE.md	/^## Future Features (Not Yet Implemented)$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+Future Refactoring (PRs #2 & #3)	REFACTORING_NOTES.md	/^## Future Refactoring (PRs #2 & #3)$/;"	s	chapter:AXE.PY Refactoring Notes
 GPG_PUBLIC_KEY_FILE	axe.py	/^GPG_PUBLIC_KEY_FILE = "\/tmp\/axe_emergency_mailbox\/human_public.key"$/;"	v
-GREEN	axe.py	/^    GREEN = '\\033[92m'$/;"	v	class:Colors
+GREEN	utils/formatting.py	/^    GREEN = '\\033[92m'$/;"	v	class:Colors
+General Guidelines	llm_prep/project_guidance.md	/^## General Guidelines$/;"	s	chapter:Project Guidance for AXE
 GitHub Models	API_PROVIDERS.md	/^## GitHub Models$/;"	s	chapter:AXE API Provider Documentation
 GitHub Models	MODELS_FINAL.md	/^## GitHub Models$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 GitHub Models - Free with Copilot	README.md	/^### GitHub Models - Free with Copilot$/;"	S	section:AXE - Agent eXecution Engine""API Providers
@@ -202,13 +220,15 @@ HAS_OPENAI	axe.py	/^    HAS_OPENAI = False$/;"	v
 HAS_OPENAI	axe.py	/^    HAS_OPENAI = True$/;"	v
 HAS_YAML	axe.py	/^    HAS_YAML = False$/;"	v
 HAS_YAML	axe.py	/^    HAS_YAML = True$/;"	v
-HEADER	axe.py	/^    HEADER = '\\033[95m'$/;"	v	class:Colors
+HEADER	utils/formatting.py	/^    HEADER = '\\033[95m'$/;"	v	class:Colors
 How to Use	IMPLEMENTATION_COMPLETE.md	/^## How to Use$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
+How to Use	llm_prep/codebase_overview.md	/^## How to Use$/;"	s	chapter:LLM-Ready Codebase Overview — 2025-12-27
 HuggingFace (Llama)	API_PROVIDERS.md	/^## HuggingFace (Llama)$/;"	s	chapter:AXE API Provider Documentation
 HuggingFace (Llama)	MODELS_FINAL.md	/^## HuggingFace (Llama)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 HuggingFace (Llama) - Free Tier Available!	README.md	/^### HuggingFace (Llama) - Free Tier Available!$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 Implementation	IMPROVEMENTS_FINAL.md	/^### Implementation$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Degradation Monitoring
 Implementation	IMPROVEMENTS_FINAL.md	/^### Implementation$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Mandatory Sleep System
+Implementation Approach	REFACTORING_NOTES.md	/^## Implementation Approach$/;"	s	chapter:AXE.PY Refactoring Notes
 Implementation Priority	IMPROVEMENTS_FINAL.md	/^## Implementation Priority$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Implemented Features (Phases 1-5)	IMPROVEMENTS_README.md	/^## Implemented Features (Phases 1-5)$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Implemented Features (Phases 6-10)	IMPROVEMENTS_README.md	/^## Implemented Features (Phases 6-10)$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
@@ -216,17 +236,22 @@ Install Dependencies	README.md	/^### Install Dependencies$/;"	S	section:AXE - Ag
 Installation	README.md	/^## Installation$/;"	s	chapter:AXE - Agent eXecution Engine
 Integrated Tools	README.md	/^### Integrated Tools$/;"	S	section:AXE - Agent eXecution Engine""Features
 Interactive Mode	README.md	/^### Interactive Mode$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
-LEVEL_DEPUTY_SUPERVISOR	axe.py	/^LEVEL_DEPUTY_SUPERVISOR = 30    # Level 30: Deputy Supervisor (15000 XP)$/;"	v
-LEVEL_SENIOR_WORKER	axe.py	/^LEVEL_SENIOR_WORKER = 10        # Level 10: Senior Worker (1000 XP)$/;"	v
-LEVEL_SUPERVISOR_ELIGIBLE	axe.py	/^LEVEL_SUPERVISOR_ELIGIBLE = 40  # Level 40: Supervisor-eligible (30000 XP)$/;"	v
-LEVEL_TEAM_LEADER	axe.py	/^LEVEL_TEAM_LEADER = 20          # Level 20: Team Leader (5000 XP)$/;"	v
+LEVEL_DEPUTY_SUPERVISOR	progression/levels.py	/^LEVEL_DEPUTY_SUPERVISOR = 30    # Level 30: Deputy Supervisor (15000 XP)$/;"	v
+LEVEL_MILESTONES	progression/levels.py	/^LEVEL_MILESTONES = {$/;"	v
+LEVEL_SENIOR_WORKER	progression/levels.py	/^LEVEL_SENIOR_WORKER = 10        # Level 10: Senior Worker (1000 XP)$/;"	v
+LEVEL_SUPERVISOR_ELIGIBLE	progression/levels.py	/^LEVEL_SUPERVISOR_ELIGIBLE = 40  # Level 40: Supervisor-eligible (30000 XP)$/;"	v
+LEVEL_TEAM_LEADER	progression/levels.py	/^LEVEL_TEAM_LEADER = 20          # Level 20: Team Leader (5000 XP)$/;"	v
+LLM Context Files	llm_prep/codebase_overview.md	/^## LLM Context Files$/;"	s	chapter:LLM-Ready Codebase Overview — 2025-12-27
+LLM-Ready Codebase Overview — 2025-12-27	llm_prep/codebase_overview.md	/^# LLM-Ready Codebase Overview — 2025-12-27$/;"	c
 Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Anthropic (Claude)
 Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""HuggingFace (Llama)
 Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""OpenAI (GPT)
 Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""xAI (Grok)
+Lessons Learned	REFACTORING_NOTES.md	/^## Lessons Learned$/;"	s	chapter:AXE.PY Refactoring Notes
 Level 40+ Handling	IMPROVEMENTS_FINAL.md	/^### Level 40+ Handling$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""XP & Level System
 License	README.md	/^## License$/;"	s	chapter:AXE - Agent eXecution Engine
 Limits	IMPROVEMENTS_FINAL.md	/^### Limits$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Break System
+Line Count	REFACTORING_NOTES.md	/^### Line Count$/;"	S	section:AXE.PY Refactoring Notes""Metrics
 MAX_BREAKS_PER_HOUR	axe.py	/^MAX_BREAKS_PER_HOUR = 2         # Maximum breaks per hour$/;"	v
 MAX_BREAK_MINUTES	axe.py	/^MAX_BREAK_MINUTES = 15          # Maximum break duration$/;"	v
 MAX_TOTAL_AGENTS	axe.py	/^MAX_TOTAL_AGENTS = 10           # Maximum total agents allowed$/;"	v
@@ -235,18 +260,27 @@ MAX_WORK_HOURS	axe.py	/^MAX_WORK_HOURS = 6              # Maximum continuous wor
 MIN_ACTIVE_AGENTS	axe.py	/^MIN_ACTIVE_AGENTS = 2           # Minimum agents that must be active$/;"	v
 MIN_SLEEP_MINUTES	axe.py	/^MIN_SLEEP_MINUTES = 30          # Minimum sleep duration in minutes$/;"	v
 MIN_WORKLOAD_FOR_BREAK	axe.py	/^MIN_WORKLOAD_FOR_BREAK = 0.3    # Break only allowed if workload < 30%$/;"	v
+MODEL_METADATA	models/metadata.py	/^MODEL_METADATA = {$/;"	v
 Mandatory Sleep System	IMPROVEMENTS_FINAL.md	/^## Mandatory Sleep System$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Message Format	IMPROVEMENTS_FINAL.md	/^### Message Format$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
+Metrics	REFACTORING_NOTES.md	/^## Metrics$/;"	s	chapter:AXE.PY Refactoring Notes
+Migration Guide	REFACTORING_NOTES.md	/^## Migration Guide$/;"	s	chapter:AXE.PY Refactoring Notes
 Model Capabilities Matrix	MODELS_FINAL.md	/^## Model Capabilities Matrix$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Model Communication Example	MODELS_FINAL.md	/^### Model Communication Example$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Usage Examples
 Model Selection Guide	API_PROVIDERS.md	/^### Model Selection Guide$/;"	S	section:AXE API Provider Documentation""Quick Reference
 Modified	IMPLEMENTATION_COMPLETE.md	/^### Modified$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Files Added/Modified
+Module Breakdown	REFACTORING_NOTES.md	/^### Module Breakdown$/;"	S	section:AXE.PY Refactoring Notes""Metrics
+Module Independence	REFACTORING_NOTES.md	/^### Module Independence$/;"	S	section:AXE.PY Refactoring Notes""Design Decisions
+Motivation	REFACTORING_NOTES.md	/^## Motivation$/;"	s	chapter:AXE.PY Refactoring Notes
 Multi-Agent Collaboration	MODELS_FINAL.md	/^### Multi-Agent Collaboration$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Usage Examples
 Multi-Agent Collaboration	README.md	/^## Multi-Agent Collaboration$/;"	s	chapter:AXE - Agent eXecution Engine
 Multi-Provider AI Support	README.md	/^### Multi-Provider AI Support$/;"	S	section:AXE - Agent eXecution Engine""Features
+MultiAgentCoordinator	core/multiprocess.py	/^class MultiAgentCoordinator:$/;"	c
 New Agent Commands (During Sessions)	IMPROVEMENTS_README.md	/^## New Agent Commands (During Sessions)$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
+New Module Structure	REFACTORING_NOTES.md	/^## New Module Structure$/;"	s	chapter:AXE.PY Refactoring Notes
 Next Steps (Future PRs)	IMPLEMENTATION_COMPLETE.md	/^## Next Steps (Future PRs)$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
 No Credits Error	MODELS_FINAL.md	/^### No Credits Error$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Troubleshooting
+Note on Whistleblower Feature	README.md	/^### Note on Whistleblower Feature$/;"	S	section:AXE - Agent eXecution Engine""Features
 Notes	MODELS_FINAL.md	/^### Notes$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Anthropic (Claude)
 Notes	MODELS_FINAL.md	/^### Notes$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""GitHub Models
 Notes	MODELS_FINAL.md	/^### Notes$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""HuggingFace (Llama)
@@ -257,16 +291,24 @@ OpenAI (GPT)	API_PROVIDERS.md	/^## OpenAI (GPT)$/;"	s	chapter:AXE API Provider D
 OpenAI (GPT)	MODELS_FINAL.md	/^## OpenAI (GPT)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 OpenAI (GPT)	README.md	/^### OpenAI (GPT)$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 Overview	README.md	/^## Overview$/;"	s	chapter:AXE - Agent eXecution Engine
+Overview	REFACTORING_NOTES.md	/^## Overview$/;"	s	chapter:AXE.PY Refactoring Notes
+PR #2: Extract Large Classes	REFACTORING_NOTES.md	/^### PR #2: Extract Large Classes$/;"	S	section:AXE.PY Refactoring Notes""Future Refactoring (PRs #2 & #3)
+PR #3: Extract Session Management	REFACTORING_NOTES.md	/^### PR #3: Extract Session Management$/;"	S	section:AXE.PY Refactoring Notes""Future Refactoring (PRs #2 & #3)
 Per-Agent Workspace	IMPROVEMENTS_FINAL.md	/^### Per-Agent Workspace$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Resource Monitoring
 Permission-Based Sleep System	IMPROVEMENTS_FINAL.md	/^### Permission-Based Sleep System$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Core Safety Features
 Persistence Strategy	IMPROVEMENTS_README.md	/^### Persistence Strategy$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Architecture Notes
 Persistent Storage	IMPROVEMENTS_FINAL.md	/^## Persistent Storage$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Phase 10: Dynamic Spawning	IMPLEMENTATION_COMPLETE.md	/^### Phase 10: Dynamic Spawning$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Next Steps (Future PRs)
 Phase 10: Dynamic Spawning ✅	IMPROVEMENTS_README.md	/^### Phase 10: Dynamic Spawning ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 6-10)
+Phase 1: Create Directory Structure ✅	REFACTORING_NOTES.md	/^### Phase 1: Create Directory Structure ✅$/;"	S	section:AXE.PY Refactoring Notes""Implementation Approach
 Phase 1: Session Rules & Guidelines ✅	IMPROVEMENTS_README.md	/^### Phase 1: Session Rules & Guidelines ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 1-5)
 Phase 2: Agent Aliasing System ✅	IMPROVEMENTS_README.md	/^### Phase 2: Agent Aliasing System ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 1-5)
+Phase 2: Extract Functions ✅	REFACTORING_NOTES.md	/^### Phase 2: Extract Functions ✅$/;"	S	section:AXE.PY Refactoring Notes""Implementation Approach
 Phase 3: Experience & Level System ✅	IMPROVEMENTS_README.md	/^### Phase 3: Experience & Level System ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 1-5)
+Phase 3: Update Imports ✅	REFACTORING_NOTES.md	/^### Phase 3: Update Imports ✅$/;"	S	section:AXE.PY Refactoring Notes""Implementation Approach
 Phase 4: Persistent SQLite Storage ✅	IMPROVEMENTS_README.md	/^### Phase 4: Persistent SQLite Storage ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 1-5)
+Phase 4: Testing ✅	REFACTORING_NOTES.md	/^### Phase 4: Testing ✅$/;"	S	section:AXE.PY Refactoring Notes""Implementation Approach
+Phase 5: Cleanup ✅	REFACTORING_NOTES.md	/^### Phase 5: Cleanup ✅$/;"	S	section:AXE.PY Refactoring Notes""Implementation Approach
 Phase 5: Resource Tracking ✅	IMPROVEMENTS_README.md	/^### Phase 5: Resource Tracking ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 1-5)
 Phase 6: Mandatory Sleep System	IMPLEMENTATION_COMPLETE.md	/^### Phase 6: Mandatory Sleep System$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Next Steps (Future PRs)
 Phase 6: Mandatory Sleep System ✅	IMPROVEMENTS_README.md	/^### Phase 6: Mandatory Sleep System ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 6-10)
@@ -278,10 +320,13 @@ Phase 9: Break System	IMPLEMENTATION_COMPLETE.md	/^### Phase 9: Break System$/;"
 Phase 9: Break System ✅	IMPROVEMENTS_README.md	/^### Phase 9: Break System ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 6-10)
 Prerequisites	README.md	/^### Prerequisites$/;"	S	section:AXE - Agent eXecution Engine""Installation
 Progression Curve (Hybrid Linear/Exponential)	IMPROVEMENTS_FINAL.md	/^### Progression Curve (Hybrid Linear\/Exponential)$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""XP & Level System
+Project Guidance for AXE	llm_prep/project_guidance.md	/^# Project Guidance for AXE$/;"	c
 Project Structure	README.md	/^## Project Structure$/;"	s	chapter:AXE - Agent eXecution Engine
 ProjectContext	axe.py	/^class ProjectContext:$/;"	c
 Purpose	IMPROVEMENTS_FINAL.md	/^### Purpose$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
 Python	README.md	/^### Python$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
+Python Best Practices	llm_prep/project_guidance.md	/^## Python Best Practices$/;"	s	chapter:Project Guidance for AXE
+Python Class Diagrams (pyreverse)	llm_prep/codebase_overview.md	/^## Python Class Diagrams (pyreverse)$/;"	s	chapter:LLM-Ready Codebase Overview — 2025-12-27
 Python Example	API_PROVIDERS.md	/^### Python Example$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
 Python Example	API_PROVIDERS.md	/^### Python Example$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
 Python Example	API_PROVIDERS.md	/^### Python Example$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
@@ -293,13 +338,15 @@ Quick Reference Commands	IMPROVEMENTS_FINAL.md	/^## Quick Reference Commands$/;"
 Quick Start	MODELS_FINAL.md	/^## Quick Start$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Quick Start	README.md	/^## Quick Start$/;"	s	chapter:AXE - Agent eXecution Engine
 Quick Start Command	IMPLEMENTATION_COMPLETE.md	/^## Quick Start Command$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
-RED	axe.py	/^    RED = '\\033[91m'$/;"	v	class:Colors
+RED	utils/formatting.py	/^    RED = '\\033[91m'$/;"	v	class:Colors
 RESOURCE_FILE	axe.py	/^RESOURCE_FILE = "\/tmp\/axe_resources.txt"$/;"	v
 RESOURCE_UPDATE_INTERVAL	axe.py	/^RESOURCE_UPDATE_INTERVAL = 60   # Seconds between resource snapshots$/;"	v
 Rate Limiting	MODELS_FINAL.md	/^### Rate Limiting$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Troubleshooting
 Real-World Example: Reverse Engineering a WAD File	README.md	/^### Real-World Example: Reverse Engineering a WAD File$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Recommended Weights	IMPROVEMENTS_FINAL.md	/^### Recommended Weights$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Degradation Monitoring
 Recommended Work Duration Limits	IMPROVEMENTS_FINAL.md	/^### Recommended Work Duration Limits$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Mandatory Sleep System
+Refactoring Summary	REFACTORING_NOTES.md	/^## Refactoring Summary$/;"	s	chapter:AXE.PY Refactoring Notes
+References	REFACTORING_NOTES.md	/^## References$/;"	s	chapter:AXE.PY Refactoring Notes
 Request Protocol	IMPROVEMENTS_FINAL.md	/^### Request Protocol$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Break System
 Requirements	API_PROVIDERS.md	/^### Requirements$/;"	S	section:AXE API Provider Documentation""GitHub Models
 Requirements	API_PROVIDERS.md	/^### Requirements$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
@@ -309,17 +356,19 @@ Round-Robin Analysis	README.md	/^### Round-Robin Analysis$/;"	S	section:AXE - Ag
 Rules	IMPROVEMENTS_FINAL.md	/^### Rules$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Agent Aliases
 Run automated tests	QUICK_REFERENCE.md	/^### Run automated tests$/;"	S	section:AXE Multiagent - Quick Reference Card""Testing
 Run interactive demo	QUICK_REFERENCE.md	/^### Run interactive demo$/;"	S	section:AXE Multiagent - Quick Reference Card""Testing
-SESSION_RULES	axe.py	/^SESSION_RULES = """$/;"	v
+SESSION_RULES	safety/rules.py	/^SESSION_RULES = """$/;"	v
 SLEEP_REASON_BREAK	axe.py	/^SLEEP_REASON_BREAK = "break_request"$/;"	v
 SLEEP_REASON_DEGRADATION	axe.py	/^SLEEP_REASON_DEGRADATION = "error_threshold"$/;"	v
 SLEEP_REASON_MANUAL	axe.py	/^SLEEP_REASON_MANUAL = "manual_request"$/;"	v
 SLEEP_REASON_TIMEOUT	axe.py	/^SLEEP_REASON_TIMEOUT = "work_time_limit"$/;"	v
 SPAWN_COOLDOWN_SECONDS	axe.py	/^SPAWN_COOLDOWN_SECONDS = 60     # Minimum time between spawns$/;"	v
 SQLite Schema	IMPROVEMENTS_FINAL.md	/^### SQLite Schema$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Persistent Storage
+SUPERVISOR_LOG_TABLE	database/schema.py	/^SUPERVISOR_LOG_TABLE = """$/;"	v
 Safe Commands for Agents	IMPROVEMENTS_FINAL.md	/^### Safe Commands for Agents$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Resource Monitoring
 Safety & Well-Being	IMPLEMENTATION_COMPLETE.md	/^## Safety & Well-Being$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
 Session Rules (The 4 Principles)	QUICK_REFERENCE.md	/^## Session Rules (The 4 Principles)$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Setup Commands	IMPROVEMENTS_FINAL.md	/^### Setup Commands$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
+SharedContext	core/multiprocess.py	/^class SharedContext:$/;"	c
 SharedWorkspace	axe.py	/^class SharedWorkspace:$/;"	c
 Single Command Mode	README.md	/^### Single Command Mode$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Sleep Quality Tiers	IMPROVEMENTS_FINAL.md	/^### Sleep Quality Tiers$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Core Safety Features
@@ -333,6 +382,10 @@ Starting a Session	QUICK_REFERENCE.md	/^### Starting a Session$/;"	S	section:AXE
 Summary of All Implemented Features	IMPROVEMENTS_README.md	/^### Summary of All Implemented Features$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Credits
 Supervisor Role	IMPROVEMENTS_README.md	/^### Supervisor Role$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Architecture Notes
 Supervisor Role Assignment	MODELS_FINAL.md	/^### Supervisor Role Assignment$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Usage Examples
+Symbol Index	llm_prep/codebase_overview.md	/^## Symbol Index$/;"	s	chapter:LLM-Ready Codebase Overview — 2025-12-27
+TOKEN_CRITICAL_THRESHOLD	utils/token_tracker.py	/^TOKEN_CRITICAL_THRESHOLD = 0.95  # Critical action at 95% usage$/;"	v
+TOKEN_REPLACEMENT_ENABLED	utils/token_tracker.py	/^TOKEN_REPLACEMENT_ENABLED = True$/;"	v
+TOKEN_WARNING_THRESHOLD	utils/token_tracker.py	/^TOKEN_WARNING_THRESHOLD = 0.80  # Warn at 80% usage$/;"	v
 Table of Contents	API_PROVIDERS.md	/^## Table of Contents$/;"	s	chapter:AXE API Provider Documentation
 Table of Contents	IMPROVEMENTS_FINAL.md	/^## Table of Contents$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Table of Contents	MODELS_FINAL.md	/^## Table of Contents$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
@@ -342,10 +395,12 @@ Test Connection	MODELS_FINAL.md	/^### Test Connection$/;"	S	section:AXE Multi-Ag
 Test Projects for Multi-Agent Work	MODELS_FINAL.md	/^### Test Projects for Multi-Agent Work$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Usage Examples
 Testing	IMPROVEMENTS_README.md	/^## Testing$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Testing	QUICK_REFERENCE.md	/^## Testing$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+Testing	REFACTORING_NOTES.md	/^## Testing$/;"	s	chapter:AXE.PY Refactoring Notes
 Testing API Connections	README.md	/^### Testing API Connections$/;"	S	section:AXE - Agent eXecution Engine""Troubleshooting
 Testing API Keys	API_PROVIDERS.md	/^### Testing API Keys$/;"	S	section:AXE API Provider Documentation""Troubleshooting
 Testing Results	IMPLEMENTATION_COMPLETE.md	/^## Testing Results$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
 Tips for Humans	QUICK_REFERENCE.md	/^## Tips for Humans$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+TokenTracker	utils/token_tracker.py	/^class TokenTracker:$/;"	c
 Tool Whitelist	README.md	/^## Tool Whitelist$/;"	s	chapter:AXE - Agent eXecution Engine
 ToolRunner	axe.py	/^class ToolRunner:$/;"	c
 Top Models	API_PROVIDERS.md	/^### Top Models$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
@@ -369,6 +424,7 @@ Usage Examples	README.md	/^## Usage Examples$/;"	s	chapter:AXE - Agent eXecution
 Version Control	README.md	/^### Version Control$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Viewing Session Rules	IMPROVEMENTS_README.md	/^### Viewing Session Rules$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Usage Examples
 Vision Example (Images)	API_PROVIDERS.md	/^### Vision Example (Images)$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
+WAL_MODE_PRAGMA	database/schema.py	/^WAL_MODE_PRAGMA = "PRAGMA journal_mode=WAL"$/;"	v
 WORK_TIME_WARNING_HOURS	axe.py	/^WORK_TIME_WARNING_HOURS = 5     # Warn when agent approaches work limit$/;"	v
 Wake-up Triggers	IMPROVEMENTS_FINAL.md	/^### Wake-up Triggers$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Core Safety Features
 What Agents See	QUICK_REFERENCE.md	/^## What Agents See$/;"	s	chapter:AXE Multiagent - Quick Reference Card
@@ -377,13 +433,22 @@ What's Ready for You	IMPLEMENTATION_COMPLETE.md	/^## What's Ready for You$/;"	s	
 When to Use Each Agent	README.md	/^### When to Use Each Agent$/;"	S	section:AXE - Agent eXecution Engine""Agent Reference
 Why AXE?	README.md	/^### Why AXE?$/;"	S	section:AXE - Agent eXecution Engine""Overview
 Why These Limits?	IMPROVEMENTS_FINAL.md	/^### Why These Limits?$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Mandatory Sleep System
+Why These Modules First?	REFACTORING_NOTES.md	/^### Why These Modules First?$/;"	S	section:AXE.PY Refactoring Notes""Design Decisions
 Working with Files	README.md	/^### Working with Files$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Workplace Rules	IMPROVEMENTS_FINAL.md	/^## Workplace Rules$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 XP & Level System	IMPROVEMENTS_FINAL.md	/^## XP & Level System$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 XP Awards	QUICK_REFERENCE.md	/^## XP Awards$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 XP Sources	IMPROVEMENTS_FINAL.md	/^### XP Sources$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""XP & Level System
-XP_PER_LEVEL_LINEAR	axe.py	/^XP_PER_LEVEL_LINEAR = 100       # XP per level for levels 1-10$/;"	v
-YELLOW	axe.py	/^    YELLOW = '\\033[93m'$/;"	v	class:Colors
+XP_PER_LEVEL_LINEAR	progression/xp_system.py	/^XP_PER_LEVEL_LINEAR = 100  # XP per level for levels 1-10$/;"	v
+YELLOW	utils/formatting.py	/^    YELLOW = '\\033[93m'$/;"	v	class:Colors
+__all__	core/__init__.py	/^__all__ = ['AgentWorkerProcess', 'MultiAgentCoordinator', 'SharedContext']$/;"	v
+__all__	database/__init__.py	/^__all__ = ['AgentDatabase', 'AGENT_STATE_TABLE', 'SUPERVISOR_LOG_TABLE', 'ALIAS_MAPPINGS_TABLE']$/;"	v
+__all__	models/__init__.py	/^__all__ = ['MODEL_METADATA', 'get_model_info']$/;"	v
+__all__	progression/__init__.py	/^__all__ = [$/;"	v
+__all__	safety/__init__.py	/^__all__ = ['SESSION_RULES']$/;"	v
+__all__	utils/__init__.py	/^__all__ = ['colorize', 'Colors', 'c']$/;"	v
+__enter__	core/multiprocess.py	/^    def __enter__(self):$/;"	m	class:SharedContext
+__exit__	core/multiprocess.py	/^    def __exit__(self, exc_type, exc_val, exc_tb):$/;"	m	class:SharedContext
 __init__	axe.py	/^    def __init__(self, config: Config):$/;"	m	class:AgentManager
 __init__	axe.py	/^    def __init__(self, config: Config, agents: List[str], workspace_dir: str, $/;"	m	class:CollaborativeSession
 __init__	axe.py	/^    def __init__(self, config: Config, project_dir: str):$/;"	m	class:ChatSession
@@ -392,21 +457,27 @@ __init__	axe.py	/^    def __init__(self, config_path: Optional[str] = None):$/;"
 __init__	axe.py	/^    def __init__(self, db: AgentDatabase):$/;"	m	class:BreakSystem
 __init__	axe.py	/^    def __init__(self, db: AgentDatabase):$/;"	m	class:SleepManager
 __init__	axe.py	/^    def __init__(self, db: AgentDatabase, config: 'Config'):$/;"	m	class:DynamicSpawner
-__init__	axe.py	/^    def __init__(self, db_path: str = "axe_agents.db"):$/;"	m	class:AgentDatabase
 __init__	axe.py	/^    def __init__(self, mailbox_dir: str = EMERGENCY_MAILBOX_DIR):$/;"	m	class:EmergencyMailbox
 __init__	axe.py	/^    def __init__(self, project_dir: str, config: Config):$/;"	m	class:ProjectContext
 __init__	axe.py	/^    def __init__(self, workspace_dir: str):$/;"	m	class:SharedWorkspace
+__init__	core/multiprocess.py	/^    def __init__(self):$/;"	m	class:SharedContext
+__init__	core/multiprocess.py	/^    def __init__(self, agent_configs: List[Dict[str, str]]):$/;"	m	class:MultiAgentCoordinator
+__init__	core/multiprocess.py	/^    def __init__(self, agent_id: str, agent_name: str, $/;"	m	class:AgentWorkerProcess
+__init__	database/agent_db.py	/^    def __init__(self, db_path: str = "axe_agents.db"):$/;"	m	class:AgentDatabase
+__init__	utils/token_tracker.py	/^    def __init__(self):$/;"	m	class:TokenTracker
+_apply_migrations	database/agent_db.py	/^    def _apply_migrations(self, conn: sqlite3.Connection) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
 _deep_merge	axe.py	/^    def _deep_merge(self, base: dict, update: dict) -> None:$/;"	m	class:Config	typeref:typename:None
 _encrypt_message	axe.py	/^    def _encrypt_message(self, message: str) -> str:$/;"	m	class:EmergencyMailbox	typeref:typename:str
 _end_session	axe.py	/^    def _end_session(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _format_conversation_for_agent	axe.py	/^    def _format_conversation_for_agent(self, agent_name: str) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
 _format_time	axe.py	/^    def _format_time(self, seconds: int) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
 _get_system_prompt_for_collab	axe.py	/^    def _get_system_prompt_for_collab(self, agent_name: str) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
+_global_db	axe.py	/^_global_db = None$/;"	v
 _handle_break_request	axe.py	/^    def _handle_break_request(self, agent_name: str, response: str) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _handle_emergency_message	axe.py	/^    def _handle_emergency_message(self, agent_name: str, response: str) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _handle_spawn_request	axe.py	/^    def _handle_spawn_request(self, agent_name: str, response: str) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _init_clients	axe.py	/^    def _init_clients(self) -> None:$/;"	m	class:AgentManager	typeref:typename:None
-_init_db	axe.py	/^    def _init_db(self) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
+_init_db	database/agent_db.py	/^    def _init_db(self) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
 _init_mailbox	axe.py	/^    def _init_mailbox(self) -> None:$/;"	m	class:EmergencyMailbox	typeref:typename:None
 _is_path_safe	axe.py	/^    def _is_path_safe(self, filepath: str) -> bool:$/;"	m	class:SharedWorkspace	typeref:typename:bool
 _log	axe.py	/^    def _log(self, message: str) -> None:$/;"	m	class:ToolRunner	typeref:typename:None
@@ -415,29 +486,41 @@ _run_collaboration_loop	axe.py	/^    def _run_collaboration_loop(self) -> None:$
 _show_break_requests	axe.py	/^    def _show_break_requests(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _show_emergency_mailbox	axe.py	/^    def _show_emergency_mailbox(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _time_remaining	axe.py	/^    def _time_remaining(self) -> int:$/;"	m	class:CollaborativeSession	typeref:typename:int
-alias_exists	axe.py	/^    def alias_exists(self, alias: str) -> bool:$/;"	m	class:AgentDatabase	typeref:typename:bool
+`database/` (542 lines)	REFACTORING_NOTES.md	/^### `database\/` (542 lines)$/;"	S	section:AXE.PY Refactoring Notes""New Module Structure
+`progression/` (67 lines)	REFACTORING_NOTES.md	/^### `progression\/` (67 lines)$/;"	S	section:AXE.PY Refactoring Notes""New Module Structure
+`safety/` (50 lines)	REFACTORING_NOTES.md	/^### `safety\/` (50 lines)$/;"	S	section:AXE.PY Refactoring Notes""New Module Structure
+`utils/` (33 lines)	REFACTORING_NOTES.md	/^### `utils\/` (33 lines)$/;"	S	section:AXE.PY Refactoring Notes""New Module Structure
+add_message	core/multiprocess.py	/^    def add_message(self, message: Dict[str, Any]) -> None:$/;"	m	class:SharedContext	typeref:typename:None
+add_shared_note	core/multiprocess.py	/^    def add_shared_note(self, key: str, note: str) -> None:$/;"	m	class:SharedContext	typeref:typename:None
+add_tokens	utils/token_tracker.py	/^    def add_tokens(self, agent_id: str, text: str) -> int:$/;"	m	class:TokenTracker	typeref:typename:int
+alias_exists	database/agent_db.py	/^    def alias_exists(self, alias: str) -> bool:$/;"	m	class:AgentDatabase	typeref:typename:bool
 append_to_shared	axe.py	/^    def append_to_shared(self, agent_name: str, content: str) -> None:$/;"	m	class:SharedWorkspace	typeref:typename:None
 approve_break	axe.py	/^    def approve_break(self, request_id: str, duration_minutes: int = 10,$/;"	m	class:BreakSystem	typeref:typename:Dict[str,Any]
-award_xp	axe.py	/^    def award_xp(self, agent_id: str, xp_amount: int, reason: str = "") -> Dict[str, Any]:$/;"	m	class:AgentDatabase	typeref:typename:Dict[str,Any]
+award_xp	database/agent_db.py	/^    def award_xp(self, agent_id: str, xp_amount: int, reason: str = "") -> Dict[str, Any]:$/;"	m	class:AgentDatabase	typeref:typename:Dict[str,Any]
+background_think	core/multiprocess.py	/^    def background_think(self) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
 backup_file	axe.py	/^    def backup_file(self, filepath: str) -> str:$/;"	m	class:SharedWorkspace	typeref:typename:str
-c	axe.py	/^c = colorize$/;"	v
+broadcast_context_update	core/multiprocess.py	/^    def broadcast_context_update(self, update_type: str, data: Any = None) -> None:$/;"	m	class:MultiAgentCoordinator	typeref:typename:None
 c	demo_improvements.py	/^c = colorize$/;"	v
+c	utils/formatting.py	/^c = colorize$/;"	v
 cURL Example	API_PROVIDERS.md	/^### cURL Example$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
 cURL Example	API_PROVIDERS.md	/^### cURL Example$/;"	S	section:AXE API Provider Documentation""GitHub Models
 cURL Example	API_PROVIDERS.md	/^### cURL Example$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
 cURL Example	API_PROVIDERS.md	/^### cURL Example$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
 cURL Example	API_PROVIDERS.md	/^### cURL Example$/;"	S	section:AXE API Provider Documentation""xAI (Grok)
-calculate_xp_for_level	axe.py	/^def calculate_xp_for_level(level: int) -> int:$/;"	f	typeref:typename:int
+calculate_xp_for_level	progression/xp_system.py	/^def calculate_xp_for_level(level: int) -> int:$/;"	f	typeref:typename:int
 call_agent	axe.py	/^    def call_agent(self, agent_name: str, prompt: str, context: str = "") -> str:$/;"	m	class:AgentManager	typeref:typename:str
 can_spawn	axe.py	/^    def can_spawn(self) -> Tuple[bool, str]:$/;"	m	class:DynamicSpawner	typeref:typename:Tuple[bool,str]
-can_take_break	axe.py	/^    def can_take_break(self, agent_id: str, total_agents: int, agents_on_break: int) -> Tuple[bo/;"	m	class:AgentDatabase	typeref:typename:Tuple[bool,str]
+can_take_break	database/agent_db.py	/^    def can_take_break(self, agent_id: str, total_agents: int, agents_on_break: int,$/;"	m	class:AgentDatabase	typeref:typename:Tuple[bool,str]
 check_all_agents	axe.py	/^    def check_all_agents(self) -> List[Dict[str, Any]]:$/;"	m	class:SleepManager	typeref:typename:List[Dict[str,Any]]
 check_and_wake_agents	axe.py	/^    def check_and_wake_agents(self) -> List[Dict[str, Any]]:$/;"	m	class:SleepManager	typeref:typename:List[Dict[str,Any]]
 check_break_endings	axe.py	/^    def check_break_endings(self) -> List[Dict[str, Any]]:$/;"	m	class:BreakSystem	typeref:typename:List[Dict[str,Any]]
-check_degradation	axe.py	/^    def check_degradation(self, agent_id: str) -> Tuple[bool, str]:$/;"	m	class:AgentDatabase	typeref:typename:Tuple[bool,str]
-check_mandatory_sleep	axe.py	/^    def check_mandatory_sleep(self, agent_id: str) -> Tuple[bool, str]:$/;"	m	class:AgentDatabase	typeref:typename:Tuple[bool,str]
+check_degradation	database/agent_db.py	/^    def check_degradation(self, agent_id: str, error_threshold: int = 20) -> Tuple[bool, str]:$/;"	m	class:AgentDatabase	typeref:typename:Tuple[bool,str]
+check_mandatory_sleep	database/agent_db.py	/^    def check_mandatory_sleep(self, agent_id: str, max_work_hours: int = 6, $/;"	m	class:AgentDatabase	typeref:typename:Tuple[bool,str]
+check_threshold	utils/token_tracker.py	/^    def check_threshold(self, agent_id: str) -> Tuple[str, Optional[str]]:$/;"	m	class:TokenTracker	typeref:typename:Tuple[str,Optional[str]]
+cleanup	core/multiprocess.py	/^    def cleanup(self) -> None:$/;"	m	class:SharedContext	typeref:typename:None
 collect_resources	axe.py	/^def collect_resources() -> str:$/;"	f	typeref:typename:str
-colorize	axe.py	/^def colorize(text: str, color: str) -> str:$/;"	f	typeref:typename:str
+colorize	utils/formatting.py	/^def colorize(text: str, color: str) -> str:$/;"	f	typeref:typename:str
+count_tokens	utils/token_tracker.py	/^    def count_tokens(self, text: str) -> int:$/;"	m	class:TokenTracker	typeref:typename:int
 decrypt_report	axe.py	/^    def decrypt_report(self, filename: str, private_key: str = None) -> Optional[str]:$/;"	m	class:EmergencyMailbox	typeref:typename:Optional[str]
 demo_aliasing	demo_improvements.py	/^def demo_aliasing():$/;"	f
 demo_break_system	demo_improvements.py	/^def demo_break_system():$/;"	f
@@ -450,23 +533,42 @@ demo_session_rules	demo_improvements.py	/^def demo_session_rules():$/;"	f
 demo_sleep_system	demo_improvements.py	/^def demo_sleep_system():$/;"	f
 demo_xp_progression	demo_improvements.py	/^def demo_xp_progression():$/;"	f
 deny_break	axe.py	/^    def deny_break(self, request_id: str, reason: str) -> Dict[str, Any]:$/;"	m	class:BreakSystem	typeref:typename:Dict[str,Any]
+export_stats	utils/token_tracker.py	/^    def export_stats(self) -> str:$/;"	m	class:TokenTracker	typeref:typename:str
 force_sleep	axe.py	/^    def force_sleep(self, agent_id: str, reason: str, $/;"	m	class:SleepManager	typeref:typename:Dict[str,Any]
+format_input_modes	models/metadata.py	/^def format_input_modes(modes: List[str]) -> str:$/;"	f	typeref:typename:str
+format_output_modes	models/metadata.py	/^def format_output_modes(modes: List[str]) -> str:$/;"	f	typeref:typename:str
+format_token_count	models/metadata.py	/^def format_token_count(tokens: int) -> str:$/;"	f	typeref:typename:str
 generate_sample_config	axe.py	/^def generate_sample_config(path: str = 'axe.yaml') -> None:$/;"	f	typeref:typename:None
+generate_summary_prompt	utils/token_tracker.py	/^    def generate_summary_prompt(self, agent_id: str, context: str) -> str:$/;"	m	class:TokenTracker	typeref:typename:str
 get	axe.py	/^    def get(self, *keys, default=None):$/;"	m	class:Config
-get_active_agents	axe.py	/^    def get_active_agents(self) -> List[Dict[str, Any]]:$/;"	m	class:AgentDatabase	typeref:typename:List[Dict[str,Any]]
-get_breaks_in_last_hour	axe.py	/^    def get_breaks_in_last_hour(self, agent_id: str) -> int:$/;"	m	class:AgentDatabase	typeref:typename:int
+get_active_agents	database/agent_db.py	/^    def get_active_agents(self) -> List[Dict[str, Any]]:$/;"	m	class:AgentDatabase	typeref:typename:List[Dict[str,Any]]
+get_agent_context_history	database/agent_db.py	/^    def get_agent_context_history(self, agent_id: str, limit: int = 20) -> List[Dict[str, Any]]:$/;"	m	class:AgentDatabase	typeref:typename:List[Dict[str,Any]]
+get_agent_status	core/multiprocess.py	/^    def get_agent_status(self) -> Dict[str, Dict[str, Any]]:$/;"	m	class:MultiAgentCoordinator	typeref:typename:Dict[str,Dict[str,Any]]
+get_agent_status	core/multiprocess.py	/^    def get_agent_status(self, agent_id: str) -> Optional[Dict[str, Any]]:$/;"	m	class:SharedContext	typeref:typename:Optional[Dict[str,Any]]
+get_all_usage	utils/token_tracker.py	/^    def get_all_usage(self) -> Dict[str, Dict]:$/;"	m	class:TokenTracker	typeref:typename:Dict[str,Dict]
+get_breaks_in_last_hour	database/agent_db.py	/^    def get_breaks_in_last_hour(self, agent_id: str) -> int:$/;"	m	class:AgentDatabase	typeref:typename:int
 get_context_summary	axe.py	/^    def get_context_summary(self) -> str:$/;"	m	class:ProjectContext	typeref:typename:str
-get_error_rate	axe.py	/^    def get_error_rate(self, agent_id: str) -> float:$/;"	m	class:AgentDatabase	typeref:typename:float
+get_context_summary	database/agent_db.py	/^    def get_context_summary(self, agent_id: str) -> Optional[str]:$/;"	m	class:AgentDatabase	typeref:typename:Optional[str]
+get_error_rate	database/agent_db.py	/^    def get_error_rate(self, agent_id: str) -> float:$/;"	m	class:AgentDatabase	typeref:typename:float
 get_file_content	axe.py	/^    def get_file_content(self, filepath: str, max_bytes: int = 4096) -> str:$/;"	m	class:ProjectContext	typeref:typename:str
-get_next_agent_number	axe.py	/^    def get_next_agent_number(self, model_name: str) -> int:$/;"	m	class:AgentDatabase	typeref:typename:int
+get_model_info	models/metadata.py	/^def get_model_info(model_name: str) -> Dict:$/;"	f	typeref:typename:Dict
+get_next_agent_number	database/agent_db.py	/^    def get_next_agent_number(self, model_name: str) -> int:$/;"	m	class:AgentDatabase	typeref:typename:int
 get_pending_requests	axe.py	/^    def get_pending_requests(self) -> List[Dict[str, Any]]:$/;"	m	class:BreakSystem	typeref:typename:List[Dict[str,Any]]
-get_sleeping_agents	axe.py	/^    def get_sleeping_agents(self) -> List[Dict[str, Any]]:$/;"	m	class:AgentDatabase	typeref:typename:List[Dict[str,Any]]
+get_recent_messages	core/multiprocess.py	/^    def get_recent_messages(self, limit: int = 20) -> List[Dict[str, Any]]:$/;"	m	class:SharedContext	typeref:typename:List[Dict[str,Any]]
+get_shared_notes	core/multiprocess.py	/^    def get_shared_notes(self) -> Dict[str, Dict[str, Any]]:$/;"	m	class:SharedContext	typeref:typename:Dict[str,Dict[str,Any]]
+get_sleeping_agents	database/agent_db.py	/^    def get_sleeping_agents(self) -> List[Dict[str, Any]]:$/;"	m	class:AgentDatabase	typeref:typename:List[Dict[str,Any]]
 get_spawn_history	axe.py	/^    def get_spawn_history(self) -> List[Dict[str, Any]]:$/;"	m	class:DynamicSpawner	typeref:typename:List[Dict[str,Any]]
 get_status	axe.py	/^    def get_status(self) -> Dict[str, Any]:$/;"	m	class:BreakSystem	typeref:typename:Dict[str,Any]
 get_status_summary	axe.py	/^    def get_status_summary(self) -> Dict[str, Any]:$/;"	m	class:SleepManager	typeref:typename:Dict[str,Any]
-get_title_for_level	axe.py	/^def get_title_for_level(level: int) -> str:$/;"	f	typeref:typename:str
+get_title_for_level	progression/levels.py	/^def get_title_for_level(level: int) -> str:$/;"	f	typeref:typename:str
+get_token_usage	database/agent_db.py	/^    def get_token_usage(self, agent_id: str) -> int:$/;"	m	class:AgentDatabase	typeref:typename:int
 get_tool_whitelist	axe.py	/^    def get_tool_whitelist(self) -> set:$/;"	m	class:Config	typeref:typename:set
-get_work_duration_minutes	axe.py	/^    def get_work_duration_minutes(self, agent_id: str) -> int:$/;"	m	class:AgentDatabase	typeref:typename:int
+get_usage	utils/token_tracker.py	/^    def get_usage(self, agent_id: str) -> Tuple[int, int, float]:$/;"	m	class:TokenTracker	typeref:typename:Tuple[int,int,float]
+get_work_duration_minutes	database/agent_db.py	/^    def get_work_duration_minutes(self, agent_id: str) -> int:$/;"	m	class:AgentDatabase	typeref:typename:int
+get_workspace_state	core/multiprocess.py	/^    def get_workspace_state(self) -> Dict[str, Any]:$/;"	m	class:SharedContext	typeref:typename:Dict[str,Any]
+handle_command	core/multiprocess.py	/^    def handle_command(self, command: Dict[str, Any]) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
+handle_context_update	core/multiprocess.py	/^    def handle_context_update(self, command: Dict[str, Any]) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
+handle_turn	core/multiprocess.py	/^    def handle_turn(self, command: Dict[str, Any]) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
 is_tool_allowed	axe.py	/^    def is_tool_allowed(self, cmd: str) -> Tuple[bool, str]:$/;"	m	class:ToolRunner	typeref:typename:Tuple[bool,str]
 list_agents	axe.py	/^    def list_agents(self) -> List[dict]:$/;"	m	class:AgentManager	typeref:typename:List[dict]
 list_agents	axe.py	/^    def list_agents(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
@@ -476,8 +578,8 @@ list_files	axe.py	/^    def list_files(self) -> List[str]:$/;"	m	class:SharedWor
 list_reports	axe.py	/^    def list_reports(self) -> List[Dict[str, Any]]:$/;"	m	class:EmergencyMailbox	typeref:typename:List[Dict[str,Any]]
 list_tools	axe.py	/^    def list_tools(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 load	axe.py	/^    def load(self, path: str) -> None:$/;"	m	class:Config	typeref:typename:None
-load_agent_state	axe.py	/^    def load_agent_state(self, agent_id: str) -> Optional[Dict[str, Any]]:$/;"	m	class:AgentDatabase	typeref:typename:Optional[Dict[str,Any]]
-log_supervisor_event	axe.py	/^    def log_supervisor_event(self, supervisor_id: str, event_type: str, $/;"	m	class:AgentDatabase	typeref:typename:None
+load_agent_state	database/agent_db.py	/^    def load_agent_state(self, agent_id: str) -> Optional[Dict[str, Any]]:$/;"	m	class:AgentDatabase	typeref:typename:Optional[Dict[str,Any]]
+log_supervisor_event	database/agent_db.py	/^    def log_supervisor_event(self, supervisor_id: str, event_type: str, $/;"	m	class:AgentDatabase	typeref:typename:None
 main	axe.py	/^def main():$/;"	f
 main	demo_improvements.py	/^def main():$/;"	f
 main	test_axe_improvements.py	/^def main():$/;"	f
@@ -487,25 +589,39 @@ print_help	axe.py	/^    def print_help(self) -> None:$/;"	m	class:ChatSession	ty
 print_section	demo_improvements.py	/^def print_section(title):$/;"	f
 process_agent_message	axe.py	/^    def process_agent_message(self, message: str) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 process_command	axe.py	/^    def process_command(self, cmd: str) -> bool:$/;"	m	class:ChatSession	typeref:typename:bool
-put_agent_to_sleep	axe.py	/^    def put_agent_to_sleep(self, agent_id: str, reason: str, duration_minutes: int = MIN_SLEEP_M/;"	m	class:AgentDatabase	typeref:typename:Dict[str,Any]
+put_agent_to_sleep	database/agent_db.py	/^    def put_agent_to_sleep(self, agent_id: str, reason: str, duration_minutes: int = 30) -> Dict/;"	m	class:AgentDatabase	typeref:typename:Dict[str,Any]
 read_file	axe.py	/^    def read_file(self, filename: str, max_bytes: int = 8192) -> str:$/;"	m	class:SharedWorkspace	typeref:typename:str
 read_shared_notes	axe.py	/^    def read_shared_notes(self) -> str:$/;"	m	class:SharedWorkspace	typeref:typename:str
-record_break	axe.py	/^    def record_break(self, agent_id: str, break_type: str, duration_minutes: int) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
-record_diff	axe.py	/^    def record_diff(self, agent_id: str, diff_content: str, error_count: int = 0) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
+record_break	database/agent_db.py	/^    def record_break(self, agent_id: str, break_type: str, duration_minutes: int) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
+record_diff	database/agent_db.py	/^    def record_diff(self, agent_id: str, diff_content: str, error_count: int = 0,$/;"	m	class:AgentDatabase	typeref:typename:None
 request_break	axe.py	/^    def request_break(self, agent_id: str, alias: str, $/;"	m	class:BreakSystem	typeref:typename:Dict[str,Any]
+request_shutdown	core/multiprocess.py	/^    def request_shutdown(self) -> None:$/;"	m	class:SharedContext	typeref:typename:None
+reset_agent	utils/token_tracker.py	/^    def reset_agent(self, agent_id: str) -> None:$/;"	m	class:TokenTracker	typeref:typename:None
 resolve_agent	axe.py	/^    def resolve_agent(self, name: str) -> Optional[dict]:$/;"	m	class:AgentManager	typeref:typename:Optional[dict]
 resource_monitor_thread	axe.py	/^def resource_monitor_thread():$/;"	f
+restore_agents_on_startup	axe.py	/^def restore_agents_on_startup(db_path: str = "axe_agents.db") -> None:$/;"	f	typeref:typename:None
+restore_all_agents	database/agent_db.py	/^    def restore_all_agents(self) -> List[Dict[str, Any]]:$/;"	m	class:AgentDatabase	typeref:typename:List[Dict[str,Any]]
 run	axe.py	/^    def run(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 run	axe.py	/^    def run(self, cmd: str, auto_approve: Optional[bool] = None, dry_run: Optional[bool] = None)/;"	m	class:ToolRunner	typeref:typename:Tuple[bool,str]
+run	core/multiprocess.py	/^    def run(self) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
 save	axe.py	/^    def save(self, path: Optional[str] = None) -> None:$/;"	m	class:Config	typeref:typename:None
-save_agent_state	axe.py	/^    def save_agent_state(self, agent_id: str, alias: str, model_name: str,$/;"	m	class:AgentDatabase	typeref:typename:None
+save_agent_state	database/agent_db.py	/^    def save_agent_state(self, agent_id: str, alias: str, model_name: str,$/;"	m	class:AgentDatabase	typeref:typename:None
+save_context_summary	database/agent_db.py	/^    def save_context_summary(self, agent_id: str, summary: str) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
 send_report	axe.py	/^    def send_report(self, agent_alias: str, report_type: str, $/;"	m	class:EmergencyMailbox	typeref:typename:Tuple[bool,str]
+set_agent_limit	utils/token_tracker.py	/^    def set_agent_limit(self, agent_id: str, max_tokens: int) -> None:$/;"	m	class:TokenTracker	typeref:typename:None
 set_human_public_key	axe.py	/^    def set_human_public_key(self, public_key: str) -> bool:$/;"	m	class:EmergencyMailbox	typeref:typename:bool
 should_auto_spawn	axe.py	/^    def should_auto_spawn(self, task_complexity: float = 0.5) -> Tuple[bool, str]:$/;"	m	class:DynamicSpawner	typeref:typename:Tuple[bool,str]
+should_shutdown	core/multiprocess.py	/^    def should_shutdown(self) -> bool:$/;"	m	class:SharedContext	typeref:typename:bool
+should_sleep_agent	utils/token_tracker.py	/^    def should_sleep_agent(self, agent_id: str) -> Tuple[bool, Optional[str]]:$/;"	m	class:TokenTracker	typeref:typename:Tuple[bool,Optional[str]]
+shutdown	core/multiprocess.py	/^    def shutdown(self) -> None:$/;"	m	class:MultiAgentCoordinator	typeref:typename:None
+signal_turn	core/multiprocess.py	/^    def signal_turn(self, agent_id: str, prompt: str, context: str = "") -> Optional[Dict[str, A/;"	m	class:MultiAgentCoordinator	typeref:typename:Optional[Dict[str,Any]]
 spawn_agent	axe.py	/^    def spawn_agent(self, model_name: str, provider: str,$/;"	m	class:DynamicSpawner	typeref:typename:Dict[str,Any]
+start	core/multiprocess.py	/^    def start(self) -> None:$/;"	m	class:MultiAgentCoordinator	typeref:typename:None
 start_resource_monitor	axe.py	/^def start_resource_monitor():$/;"	f
 start_session	axe.py	/^    def start_session(self, task: str) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
-start_work_tracking	axe.py	/^    def start_work_tracking(self, agent_id: str) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
+start_work_tracking	database/agent_db.py	/^    def start_work_tracking(self, agent_id: str) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
+sync_agents_on_shutdown	axe.py	/^def sync_agents_on_shutdown() -> None:$/;"	f	typeref:typename:None
+sync_conversation	database/agent_db.py	/^    def sync_conversation(self, agent_id: str, message_snippet: str, $/;"	m	class:AgentDatabase	typeref:typename:None
 test_break_system	test_axe_improvements.py	/^def test_break_system():$/;"	f
 test_database	test_axe_improvements.py	/^def test_database():$/;"	f
 test_degradation_monitoring	test_axe_improvements.py	/^def test_degradation_monitoring():$/;"	f
@@ -515,7 +631,10 @@ test_session_rules	test_axe_improvements.py	/^def test_session_rules():$/;"	f
 test_sleep_system	test_axe_improvements.py	/^def test_sleep_system():$/;"	f
 test_titles	test_axe_improvements.py	/^def test_titles():$/;"	f
 test_xp_calculation	test_axe_improvements.py	/^def test_xp_calculation():$/;"	f
-wake_agent	axe.py	/^    def wake_agent(self, agent_id: str) -> Dict[str, Any]:$/;"	m	class:AgentDatabase	typeref:typename:Dict[str,Any]
+update_agent_status	core/multiprocess.py	/^    def update_agent_status(self, agent_id: str, status: str) -> None:$/;"	m	class:SharedContext	typeref:typename:None
+update_token_usage	database/agent_db.py	/^    def update_token_usage(self, agent_id: str, tokens_used: int) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
+update_workspace	core/multiprocess.py	/^    def update_workspace(self, key: str, value: Any) -> None:$/;"	m	class:SharedContext	typeref:typename:None
+wake_agent	database/agent_db.py	/^    def wake_agent(self, agent_id: str) -> Dict[str, Any]:$/;"	m	class:AgentDatabase	typeref:typename:Dict[str,Any]
 write_file	axe.py	/^    def write_file(self, filename: str, content: str) -> bool:$/;"	m	class:SharedWorkspace	typeref:typename:bool
 xAI (Grok)	API_PROVIDERS.md	/^## xAI (Grok)$/;"	s	chapter:AXE API Provider Documentation
 xAI (Grok)	MODELS_FINAL.md	/^## xAI (Grok)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
