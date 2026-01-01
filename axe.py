@@ -31,7 +31,7 @@ import threading
 import base64
 import hashlib
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import List, Optional, Tuple, Dict, Any
 import time
 import shutil
@@ -274,7 +274,7 @@ Focus on practical, working solutions."""
 
 def collect_resources() -> str:
     """Collect system resource information."""
-    timestamp = datetime.utcnow().isoformat()
+    timestamp = datetime.now(timezone.utc).isoformat()
     output = [f"--- Resource Snapshot @ {timestamp} ---"]
     
     try:
@@ -378,7 +378,7 @@ class EmergencyMailbox:
         """
         # DEMO ONLY: base64 + simple obfuscation
         # Production should use proper GPG encryption
-        timestamp = datetime.utcnow().isoformat()
+        timestamp = datetime.now(timezone.utc).isoformat()
         full_message = f"TIMESTAMP: {timestamp}\n\n{message}"
         
         # Simple encryption: base64 + XOR with timestamp-based key
@@ -402,7 +402,7 @@ class EmergencyMailbox:
         Returns:
             Tuple of (success, message/filename)
         """
-        timestamp = datetime.utcnow()
+        timestamp = datetime.now(timezone.utc)
         filename = f"emergency_{timestamp.strftime('%Y%m%d_%H%M%S_%f')}_{agent_alias.replace('@', '')}.gpg"
         filepath = os.path.join(self.mailbox_dir, filename)
         
@@ -542,7 +542,7 @@ class SleepManager:
             })
         
         # Track wake time
-        wake_time = datetime.utcnow() + timedelta(minutes=result['sleep_duration_minutes'])
+        wake_time = datetime.now(timezone.utc) + timedelta(minutes=result['sleep_duration_minutes'])
         self.sleep_queue[agent_id] = wake_time
         
         return result
@@ -550,7 +550,7 @@ class SleepManager:
     def check_and_wake_agents(self) -> List[Dict[str, Any]]:
         """Check for agents ready to wake up."""
         woken = []
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         
         to_remove = []
         for agent_id, wake_time in self.sleep_queue.items():
@@ -616,7 +616,7 @@ class BreakSystem:
             'alias': alias,
             'break_type': break_type,
             'justification': justification,
-            'requested_at': datetime.utcnow().isoformat(),
+            'requested_at': datetime.now(timezone.utc).isoformat(),
             'status': 'pending'
         }
         
@@ -657,7 +657,7 @@ class BreakSystem:
         self.db.record_break(agent_id, request['break_type'], duration_minutes)
         
         # Set break end time
-        end_time = datetime.utcnow() + timedelta(minutes=duration_minutes)
+        end_time = datetime.now(timezone.utc) + timedelta(minutes=duration_minutes)
         self.break_queue[agent_id] = end_time
         
         # Update request status
@@ -688,7 +688,7 @@ class BreakSystem:
     def check_break_endings(self) -> List[Dict[str, Any]]:
         """Check for breaks that have ended."""
         ended = []
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         
         to_remove = []
         for agent_id, end_time in self.break_queue.items():
@@ -740,7 +740,7 @@ class DynamicSpawner:
         """Check if a new agent can be spawned."""
         # Check cooldown
         if self.last_spawn_time:
-            elapsed = (datetime.utcnow() - self.last_spawn_time).total_seconds()
+            elapsed = (datetime.now(timezone.utc) - self.last_spawn_time).total_seconds()
             if elapsed < SPAWN_COOLDOWN_SECONDS:
                 remaining = SPAWN_COOLDOWN_SECONDS - elapsed
                 return False, f"Spawn cooldown: {remaining:.0f}s remaining"
@@ -796,7 +796,7 @@ class DynamicSpawner:
         self.db.start_work_tracking(agent_id)
         
         # Record spawn
-        self.last_spawn_time = datetime.utcnow()
+        self.last_spawn_time = datetime.now(timezone.utc)
         spawn_record = {
             'agent_id': agent_id,
             'alias': alias,

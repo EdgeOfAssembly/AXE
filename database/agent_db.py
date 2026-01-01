@@ -7,7 +7,7 @@ import sqlite3
 import json
 import uuid
 import hashlib
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, List, Tuple, Any
 
 # Import from local modules
@@ -58,7 +58,7 @@ class AgentDatabase:
                 alias,
                 model_name,
                 supervisor_id,
-                datetime.utcnow(),
+                datetime.now(timezone.utc),
                 json.dumps(memory_dict),
                 json.dumps(diffs[-10:]),  # Keep last 10 diffs
                 error_count,
@@ -153,7 +153,7 @@ class AgentDatabase:
             c.execute('''
                 UPDATE agent_state SET xp = ?, level = ?, last_updated = ?
                 WHERE agent_id = ?
-            ''', (new_xp, new_level, datetime.utcnow(), agent_id))
+            ''', (new_xp, new_level, datetime.now(timezone.utc), agent_id))
             conn.commit()
             
             result = {
@@ -179,7 +179,7 @@ class AgentDatabase:
             c.execute('''
                 INSERT INTO supervisor_log (log_id, supervisor_id, timestamp, event_type, details)
                 VALUES (?, ?, ?, ?, ?)
-            ''', (log_id, supervisor_id, datetime.utcnow(), event_type, json.dumps(details)))
+            ''', (log_id, supervisor_id, datetime.now(timezone.utc), event_type, json.dumps(details)))
             conn.commit()
     
     def alias_exists(self, alias: str) -> bool:
@@ -198,7 +198,7 @@ class AgentDatabase:
             c.execute('''
                 UPDATE agent_state SET work_start_time = ?, status = 'active'
                 WHERE agent_id = ?
-            ''', (datetime.utcnow(), agent_id))
+            ''', (datetime.now(timezone.utc), agent_id))
             conn.commit()
     
     def get_work_duration_minutes(self, agent_id: str) -> int:
@@ -211,7 +211,7 @@ class AgentDatabase:
             if row and row[0]:
                 try:
                     start_time = datetime.fromisoformat(row[0])
-                    elapsed = datetime.utcnow() - start_time
+                    elapsed = datetime.now(timezone.utc) - start_time
                     return int(elapsed.total_seconds() / 60)
                 except (ValueError, TypeError):
                     return 0
@@ -229,7 +229,7 @@ class AgentDatabase:
             work_duration = self.get_work_duration_minutes(agent_id)
             
             # Update agent status
-            sleep_until = datetime.utcnow() + timedelta(minutes=duration_minutes)
+            sleep_until = datetime.now(timezone.utc) + timedelta(minutes=duration_minutes)
             c.execute('''
                 UPDATE agent_state 
                 SET status = 'sleeping', 
@@ -262,7 +262,7 @@ class AgentDatabase:
                 UPDATE agent_state 
                 SET status = 'active', work_start_time = ?
                 WHERE agent_id = ?
-            ''', (datetime.utcnow(), agent_id))
+            ''', (datetime.now(timezone.utc), agent_id))
             
             # Get agent alias
             c.execute('SELECT alias FROM agent_state WHERE agent_id = ?', (agent_id,))
@@ -275,7 +275,7 @@ class AgentDatabase:
                 'agent_id': agent_id,
                 'alias': alias,
                 'status': 'active',
-                'woke_at': datetime.utcnow().isoformat()
+                'woke_at': datetime.now(timezone.utc).isoformat()
             }
     
     def get_sleeping_agents(self) -> List[Dict[str, Any]]:
@@ -362,7 +362,7 @@ class AgentDatabase:
                 
                 # Add new diff with timestamp and error info
                 diff_record = {
-                    'timestamp': datetime.utcnow().isoformat(),
+                    'timestamp': datetime.now(timezone.utc).isoformat(),
                     'content_hash': hashlib.sha256(diff_content.encode()).hexdigest()[:16],
                     'errors': error_count,
                     'size': len(diff_content)
@@ -377,7 +377,7 @@ class AgentDatabase:
                     UPDATE agent_state 
                     SET recent_diffs = ?, error_count = ?, last_updated = ?
                     WHERE agent_id = ?
-                ''', (json.dumps(diffs), current_errors + error_count, datetime.utcnow(), agent_id))
+                ''', (json.dumps(diffs), current_errors + error_count, datetime.now(timezone.utc), agent_id))
                 conn.commit()
     
     def get_error_rate(self, agent_id: str) -> float:
@@ -435,18 +435,18 @@ class AgentDatabase:
                 
                 memory['breaks'].append({
                     'type': break_type,
-                    'timestamp': datetime.utcnow().isoformat(),
+                    'timestamp': datetime.now(timezone.utc).isoformat(),
                     'duration_minutes': duration_minutes
                 })
                 
                 # Keep only last 24 hours of breaks
-                cutoff = (datetime.utcnow() - timedelta(hours=24)).isoformat()
+                cutoff = (datetime.now(timezone.utc) - timedelta(hours=24)).isoformat()
                 memory['breaks'] = [b for b in memory['breaks'] if b['timestamp'] > cutoff]
                 
                 c.execute('''
                     UPDATE agent_state SET memory_json = ?, last_updated = ?
                     WHERE agent_id = ?
-                ''', (json.dumps(memory), datetime.utcnow(), agent_id))
+                ''', (json.dumps(memory), datetime.now(timezone.utc), agent_id))
                 conn.commit()
     
     def get_breaks_in_last_hour(self, agent_id: str) -> int:
@@ -460,7 +460,7 @@ class AgentDatabase:
                 try:
                     memory = json.loads(row[0])
                     breaks = memory.get('breaks', [])
-                    cutoff = (datetime.utcnow() - timedelta(hours=1)).isoformat()
+                    cutoff = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
                     return len([b for b in breaks if b['timestamp'] > cutoff])
                 except (json.JSONDecodeError, TypeError):
                     pass
