@@ -34,13 +34,16 @@
 ├── safety
 │   ├── __init__.py
 │   └── rules.py
+├── team_test
 ├── utils
 │   ├── formatting.py
 │   ├── __init__.py
 │   └── token_tracker.py
 ├── API_PROVIDERS.md
+├── axe_agents.db
+├── axe_agents.db-shm
+├── axe_agents.db-wal
 ├── axe.py
-├── _axe.yaml_
 ├── axe.yaml
 ├── demo_improvements.py
 ├── IMPLEMENTATION_COMPLETE.md
@@ -54,22 +57,22 @@
 ├── requirements.txt
 └── test_axe_improvements.py
 
-10 directories, 38 files
+11 directories, 40 files
 ```
 
 ## Code Statistics
 
 ```text
-github.com/AlDanial/cloc v 2.00  T=0.05 s (655.0 files/s, 180948.3 lines/s)
+github.com/AlDanial/cloc v 2.00  T=0.05 s (673.3 files/s, 191654.1 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
 Python                          18            999           1262           3338
-Markdown                        11            750              0           2408
-YAML                             1             32             17            215
-Text                             3              2              0             93
+Markdown                        13            893              0           2662
+YAML                             1             99             40            571
+Text                             3              2              0             96
 -------------------------------------------------------------------------------
-SUM:                            33           1783           1279           6054
+SUM:                            35           1993           1302           6667
 -------------------------------------------------------------------------------
 ```
 
