@@ -90,6 +90,19 @@ from progression.levels import (
 from database.agent_db import AgentDatabase
 from models.metadata import get_model_info, format_token_count
 
+# Models that require max_completion_tokens instead of max_tokens
+# GPT-5 and future models use the new parameter name
+USE_MAX_COMPLETION_TOKENS = {
+    "gpt-5",
+    "gpt-5-0806", 
+    "gpt-5.2-2025-12-11",
+    "gpt-5.2",
+    "o1-preview",
+    "o1-mini",
+    "o1",
+    "o3-mini"
+}
+
 # Collaborative session constants
 COLLAB_HISTORY_LIMIT = 20      # Max messages to show in conversation history
 COLLAB_CONTENT_LIMIT = 2000    # Max chars per message in history
@@ -931,6 +944,14 @@ class AgentManager:
         self.clients = {}
         self._init_clients()
     
+    def _uses_max_completion_tokens(self, model: str) -> bool:
+        """Check if a model requires max_completion_tokens parameter."""
+        # Check if model name or prefix matches models that need max_completion_tokens
+        for model_prefix in USE_MAX_COMPLETION_TOKENS:
+            if model.startswith(model_prefix):
+                return True
+        return False
+    
     def _init_clients(self) -> None:
         """Initialize API clients for enabled providers."""
         providers = self.config.get('providers', default={})
@@ -1035,14 +1056,20 @@ class AgentManager:
                 return resp.content[0].text
             
             elif provider in ['openai', 'xai', 'github']:
-                resp = client.chat.completions.create(
-                    model=model,
-                    max_tokens=4096,
-                    messages=[
+                # Use max_completion_tokens for GPT-5 and newer models
+                api_params = {
+                    'model': model,
+                    'messages': [
                         {'role': 'system', 'content': system_prompt},
                         {'role': 'user', 'content': full_prompt}
                     ]
-                )
+                }
+                if self._uses_max_completion_tokens(model):
+                    api_params['max_completion_tokens'] = 4096
+                else:
+                    api_params['max_tokens'] = 4096
+                
+                resp = client.chat.completions.create(**api_params)
                 return resp.choices[0].message.content
             
             elif provider == 'huggingface':
@@ -1181,6 +1208,193 @@ class ToolRunner:
                 sys.stderr.write(f"AXE ToolRunner log error: {e}\n")
             except Exception:
                 pass  # Last resort: ignore all errors in logging
+
+
+class ResponseProcessor:
+    """Processes agent responses and executes code blocks (READ, EXEC, WRITE)."""
+    
+    # Constants for file operations
+    MAX_READ_SIZE = 10000  # Maximum bytes to read from a file
+    
+    def __init__(self, config: Config, project_dir: str, tool_runner: 'ToolRunner'):
+        self.config = config
+        self.project_dir = os.path.abspath(project_dir)
+        self.tool_runner = tool_runner
+    
+    def process_response(self, response: str, agent_name: str = "") -> str:
+        """
+        Process agent response and execute any code blocks.
+        Returns the response with execution results appended.
+        """
+        import re
+        
+        # Pattern to match code blocks: ```TYPE [args]\ncontent\n```
+        # Matches READ, EXEC, WRITE blocks
+        pattern = r'```(READ|EXEC|WRITE)\s*([^\n]*)\n(.*?)```'
+        
+        matches = list(re.finditer(pattern, response, re.DOTALL))
+        
+        if not matches:
+            return response
+        
+        # Process each block
+        results = []
+        for match in matches:
+            block_type = match.group(1)
+            args = match.group(2).strip()
+            content = match.group(3).rstrip('\n')
+            
+            if block_type == 'READ':
+                result = self._handle_read(args or content)
+                results.append(f"\n[READ {args or content}]\n{result}")
+            
+            elif block_type == 'EXEC':
+                command = args or content
+                result = self._handle_exec(command)
+                results.append(f"\n[EXEC: {command}]\n{result}")
+            
+            elif block_type == 'WRITE':
+                # args contains the filename, content contains the file content
+                filename = args.strip()
+                # Basic validation: non-empty and no path traversal / absolute paths
+                if not filename:
+                    results.append(f"\n[WRITE ERROR: Invalid or empty filename]")
+                    continue
+                normalized = os.path.normpath(filename)
+                # Disallow absolute paths and any use of parent-directory components
+                if os.path.isabs(normalized) or os.pardir in Path(normalized).parts:
+                    results.append(f"\n[WRITE ERROR: Invalid filename (path traversal not allowed)]")
+                    continue
+                result = self._handle_write(filename, content)
+                results.append(f"\n[WRITE {filename}]\n{result}")
+        
+        # Append all results to the original response
+        if results:
+            return response + "\n\n--- Execution Results ---" + "".join(results)
+        
+        return response
+    
+    def _resolve_project_path(self, filename: str) -> Optional[str]:
+        """
+        Resolve a filename against the project directory and ensure it
+        does not escape the project directory.
+        Returns the absolute path if valid, otherwise None.
+        """
+        # Disallow absolute paths outright
+        if os.path.isabs(filename):
+            return None
+
+        # Build an absolute path under the project directory
+        full_path = os.path.abspath(os.path.join(self.project_dir, filename))
+
+        # Ensure the resolved path is inside the project directory
+        project_root = self.project_dir
+        if not (full_path == project_root or full_path.startswith(project_root + os.sep)):
+            return None
+
+        return full_path
+    
+    def _handle_read(self, filename: str) -> str:
+        """Handle READ block - read and return file content."""
+        filepath = self._resolve_project_path(filename)
+        if filepath is None:
+            return f"ERROR: Access denied to {filename}"
+        
+        # Check if path is allowed
+        allowed_dirs = self.config.get('directories', 'allowed', default=[])
+        readonly_dirs = self.config.get('directories', 'readonly', default=[])
+        forbidden_dirs = self.config.get('directories', 'forbidden', default=[])
+        
+        # Simple directory access check
+        if not self._check_file_access(filepath, allowed_dirs + readonly_dirs, forbidden_dirs):
+            return f"ERROR: Access denied to {filename}"
+        
+        try:
+            if not os.path.exists(filepath):
+                return f"ERROR: File not found: {filename}"
+            
+            with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
+                content = f.read(self.MAX_READ_SIZE)
+                if len(content) >= self.MAX_READ_SIZE:
+                    content += f"\n[... truncated at {self.MAX_READ_SIZE} bytes ...]"
+                return content
+        except Exception as e:
+            return f"ERROR reading file: {e}"
+    
+    def _handle_exec(self, command: str) -> str:
+        """Handle EXEC block - execute command via ToolRunner."""
+        success, output = self.tool_runner.run(command)
+        if success:
+            return output if output else "[Command executed successfully]"
+        else:
+            return f"ERROR: {output}"
+    
+    def _handle_write(self, filename: str, content: str) -> str:
+        """Handle WRITE block - write content to file."""
+        filepath = self._resolve_project_path(filename)
+        if filepath is None:
+            return f"ERROR: Access denied to {filename}"
+        
+        # Check if path is allowed for writing
+        allowed_dirs = self.config.get('directories', 'allowed', default=[])
+        forbidden_dirs = self.config.get('directories', 'forbidden', default=[])
+        
+        if not self._check_file_access(filepath, allowed_dirs, forbidden_dirs):
+            return f"ERROR: Write access denied to {filename}"
+        
+        try:
+            # Create directory if it doesn't exist (but not for files in root)
+            dir_path = os.path.dirname(filepath)
+            if dir_path:  # Only create if there's actually a directory path
+                # Ensure directory path itself is permitted before creating it
+                if not self._check_file_access(dir_path, allowed_dirs, forbidden_dirs):
+                    return f"ERROR: Write access denied to directory for {filename}"
+                os.makedirs(dir_path, exist_ok=True)
+            
+            # Write the file
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(content)
+            
+            return f"✓ File written successfully ({len(content)} bytes)"
+        except Exception as e:
+            return f"ERROR writing file: {e}"
+    
+    def _check_file_access(self, filepath: str, allowed: list, forbidden: list) -> bool:
+        """Check if file access is allowed based on directory rules."""
+        # Normalize the file path
+        filepath = os.path.abspath(filepath)
+        project_root = os.path.abspath(self.project_dir)
+
+        def _is_within_dir(path: str, directory: str) -> bool:
+            """Return True if 'path' is the same as or within 'directory' based on path components."""
+            try:
+                return os.path.commonpath([path, directory]) == directory
+            except ValueError:
+                # Different drives or otherwise incomparable paths
+                return False
+        
+        # Check forbidden directories first
+        for forbidden_dir in forbidden:
+            forbidden_path = os.path.abspath(os.path.expanduser(forbidden_dir))
+            if not os.path.isabs(forbidden_path):
+                forbidden_path = os.path.join(project_root, forbidden_path)
+            forbidden_path = os.path.abspath(forbidden_path)
+            
+            if _is_within_dir(filepath, forbidden_path):
+                return False
+        
+        # Check if in allowed directories
+        for allowed_dir in allowed:
+            allowed_path = os.path.expanduser(allowed_dir)
+            if not os.path.isabs(allowed_path):
+                allowed_path = os.path.join(project_root, allowed_path)
+            allowed_path = os.path.abspath(allowed_path)
+            
+            if _is_within_dir(filepath, allowed_path):
+                return True
+        
+        # If no specific allowed directory matches, check if it's in project dir
+        return _is_within_dir(filepath, project_root)
 
 
 class ProjectContext:
@@ -1431,6 +1645,8 @@ class CollaborativeSession:
         self.agent_mgr = AgentManager(config)
         self.workspace = SharedWorkspace(workspace_dir)
         self.project_ctx = ProjectContext(workspace_dir, config)
+        self.tool_runner = ToolRunner(config, workspace_dir)
+        self.response_processor = ResponseProcessor(config, workspace_dir, self.tool_runner)
         self.db = AgentDatabase(db_path)
         
         # Initialize Phase 6-10 systems
@@ -1809,14 +2025,20 @@ It's YOUR TURN. What would you like to contribute? Remember:
                         else:
                             response = "[No response from model]"
                     elif provider in ['openai', 'xai', 'github']:
-                        resp = client.chat.completions.create(
-                            model=model,
-                            max_tokens=2048,
-                            messages=[
+                        # Use max_completion_tokens for GPT-5 and newer models
+                        api_params = {
+                            'model': model,
+                            'messages': [
                                 {'role': 'system', 'content': system_prompt},
                                 {'role': 'user', 'content': prompt}
                             ]
-                        )
+                        }
+                        if self.agent_mgr._uses_max_completion_tokens(model):
+                            api_params['max_completion_tokens'] = 2048
+                        else:
+                            api_params['max_tokens'] = 2048
+                        
+                        resp = client.chat.completions.create(**api_params)
                         # Check for None content
                         if resp.choices and len(resp.choices) > 0 and resp.choices[0].message.content:
                             response = resp.choices[0].message.content
@@ -1839,19 +2061,22 @@ It's YOUR TURN. What would you like to contribute? Remember:
                 except Exception as e:
                     response = f"[API Error: {e}]"
                 
+                # Process response for code blocks (READ, EXEC, WRITE)
+                processed_response = self.response_processor.process_response(response, current_agent)
+                
                 # Print response with alias
                 print(c(f"\n[{alias}]:", Colors.CYAN + Colors.BOLD))
-                print(response)
+                print(processed_response)
                 
                 # Record in history
                 self.conversation_history.append({
                     'role': current_agent,
-                    'content': response,
+                    'content': processed_response,
                     'timestamp': datetime.now().strftime("%H:%M:%S")
                 })
                 
                 # ===== Process special commands from response =====
-                response_upper = response.upper() if response else ""
+                response_upper = processed_response.upper() if processed_response else ""
                 
                 # Phase 9: Break request
                 if 'BREAK REQUEST:' in response_upper:
@@ -1870,10 +2095,10 @@ It's YOUR TURN. What would you like to contribute? Remember:
                     self._print_status()
                 
                 # Award XP for meaningful contribution (not for PASS)
-                non_empty_lines = [line.strip().upper() for line in response.splitlines() if line.strip()]
+                non_empty_lines = [line.strip().upper() for line in processed_response.splitlines() if line.strip()]
                 is_pass = bool(non_empty_lines) and non_empty_lines[0] == 'PASS'
                 
-                if not is_pass and response and not response.startswith("[API Error"):
+                if not is_pass and processed_response and not processed_response.startswith("[API Error"):
                     # Award XP for contribution
                     if agent_id:
                         xp_award = 50  # Base XP for participation
@@ -2163,6 +2388,7 @@ class ChatSession:
         self.agent_mgr = AgentManager(config)
         self.tool_runner = ToolRunner(config, project_dir)
         self.project_ctx = ProjectContext(project_dir, config)
+        self.response_processor = ResponseProcessor(config, project_dir, self.tool_runner)
         self.history: List[dict] = []
         self.default_agent = 'claude'
     
@@ -2435,12 +2661,15 @@ Examples:
         print(c(f"\n[{agent_name}] Processing...", Colors.DIM))
         response = self.agent_mgr.call_agent(agent_name, prompt, context)
         
+        # Process response for code blocks (READ, EXEC, WRITE)
+        processed_response = self.response_processor.process_response(response, agent_name)
+        
         # Record response
-        self.history.append({'role': agent_name, 'content': response})
+        self.history.append({'role': agent_name, 'content': processed_response})
         
         # Print response
         print(c(f"\n[{agent_name}]:", Colors.CYAN + Colors.BOLD))
-        print(response)
+        print(processed_response)
         print()
     
     def run(self) -> None:
