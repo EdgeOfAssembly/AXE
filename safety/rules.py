@@ -35,6 +35,17 @@ SESSION_RULES = """
      - Perks: priority break requests, first pick of tasks, extra resources
      - Public recognition from @boss or team leaders
 
+5. ASK WHEN UNCERTAIN – Never Assume
+   • If in doubt about ANYTHING, always ask:
+     - First: Co-worker agent in your sub-team
+     - Second: Team Leader (@lead-xxx)
+     - Third: Supervisor (@boss)
+     - Last resort: Human via emergency channel
+   • NEVER assume or guess when unsure
+   • It's better to ask a "dumb question" than make a wrong assumption
+   • Document your uncertainties in responses
+   • Use phrases like "I'm not certain about X, let me ask @teammate"
+
 FINAL REMINDER: These rules exist to keep the project moving forward efficiently
 while making axe.py an enjoyable place to work. Have fun, be productive, and
 let's build something amazing!

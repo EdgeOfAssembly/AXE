@@ -167,6 +167,50 @@ tools:
     - clang-tidy
     - flake8
 
+  fileops:
+    - cat
+    - head
+    - tail
+    - touch
+    - mkdir
+    - cp
+    - mv
+    - rm
+    - tree
+    - find
+    - ls
+
+  textproc:
+    - grep
+    - sed
+    - awk
+    - sort
+    - uniq
+    - wc
+    - tr
+    - cut
+
+  archive:
+    - tar
+    - gzip
+    - gunzip
+    - zip
+    - unzip
+
+  network:
+    - ping
+    - host
+    - dig
+
+  reveng:
+    - radare2
+    - r2
+    - binwalk
+    - xxd
+    - file
+    - ldd
+    - objcopy
+
 # Directory Access Control
 directories:
   # Agents can read/write these directories

@@ -87,6 +87,7 @@ from progression.levels import (
     LEVEL_SUPERVISOR_ELIGIBLE
 )
 from database.agent_db import AgentDatabase
+from models.metadata import get_model_info, format_token_count
 
 # Collaborative session constants
 COLLAB_HISTORY_LIMIT = 20      # Max messages to show in conversation history
@@ -982,20 +983,26 @@ class AgentManager:
         return None
     
     def list_agents(self) -> List[dict]:
-        """List all available agents with status."""
+        """List all available agents with status and metadata."""
         result = []
         agents = self.config.get('agents', default={})
         
         for name, agent_config in agents.items():
             provider = agent_config.get('provider', '')
+            model = agent_config.get('model', '')
             available = provider in self.clients
+            
+            # Get model metadata
+            model_info = get_model_info(model)
+            
             result.append({
                 'name': name,
                 'aliases': agent_config.get('alias', []),
                 'role': agent_config.get('role', ''),
                 'provider': provider,
-                'model': agent_config.get('model', ''),
-                'available': available
+                'model': model,
+                'available': available,
+                'metadata': model_info
             })
         
         return result
@@ -2217,7 +2224,7 @@ Examples:
         print(c(help_text, Colors.CYAN))
     
     def list_agents(self) -> None:
-        """List available agents."""
+        """List available agents with enhanced metadata."""
         print(c("\nAvailable Agents:", Colors.BOLD))
         print("-" * 60)
         
@@ -2227,6 +2234,17 @@ Examples:
             print(f"  {status} {c(agent['name'], Colors.CYAN):12} ({aliases})")
             print(f"     {c(agent['role'], Colors.DIM)}")
             print(f"     Model: {agent['model']}")
+            
+            # Display metadata if available
+            if 'metadata' in agent:
+                metadata = agent['metadata']
+                context_tokens = format_token_count(metadata['context_tokens'])
+                max_output = format_token_count(metadata['max_output_tokens'])
+                input_modes = ', '.join(metadata['input_modes'])
+                output_modes = ', '.join(metadata['output_modes'])
+                
+                print(f"     Context: {context_tokens} tokens | Max Output: {max_output} tokens")
+                print(f"     Input: {input_modes} | Output: {output_modes}")
         print()
     
     def list_tools(self) -> None:
