@@ -1245,8 +1245,10 @@ class ResponseProcessor:
             content = match.group(3).rstrip('\n')
             
             if block_type == 'READ':
-                result = self._handle_read(args or content)
-                results.append(f"\n[READ {args or content}]\n{result}")
+                # Sanitize filename: strip trailing backticks that may be included by accident
+                filename = (args or content).strip().rstrip('`')
+                result = self._handle_read(filename)
+                results.append(f"\n[READ {filename}]\n{result}")
             
             elif block_type == 'EXEC':
                 command = args or content
@@ -1255,7 +1257,8 @@ class ResponseProcessor:
             
             elif block_type == 'WRITE':
                 # args contains the filename, content contains the file content
-                filename = args.strip()
+                # Sanitize filename: strip trailing backticks that may be included by accident
+                filename = args.strip().rstrip('`')
                 # Basic validation: non-empty and no path traversal / absolute paths
                 if not filename:
                     results.append(f"\n[WRITE ERROR: Invalid or empty filename]")
@@ -1280,15 +1283,21 @@ class ResponseProcessor:
         does not escape the project directory.
         Returns the absolute path if valid, otherwise None.
         """
-        # Disallow absolute paths outright
+        project_root = os.path.abspath(self.project_dir)
+        
+        # If absolute path is provided, check if it's within project directory
         if os.path.isabs(filename):
-            return None
-
+            full_path = os.path.abspath(filename)
+            # Allow if it's the project root or within it
+            if full_path == project_root or full_path.startswith(project_root + os.sep):
+                return full_path
+            else:
+                return None
+        
         # Build an absolute path under the project directory
         full_path = os.path.abspath(os.path.join(self.project_dir, filename))
 
         # Ensure the resolved path is inside the project directory
-        project_root = self.project_dir
         if not (full_path == project_root or full_path.startswith(project_root + os.sep)):
             return None
 
@@ -1646,6 +1655,8 @@ class CollaborativeSession:
         self.workspace = SharedWorkspace(workspace_dir)
         self.project_ctx = ProjectContext(workspace_dir, config)
         self.tool_runner = ToolRunner(config, workspace_dir)
+        # Enable auto-approve in collaborative mode to avoid blocking on each EXEC
+        self.tool_runner.auto_approve = True
         self.response_processor = ResponseProcessor(config, workspace_dir, self.tool_runner)
         self.db = AgentDatabase(db_path)
         

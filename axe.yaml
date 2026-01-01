@@ -27,8 +27,8 @@ providers:
     enabled: true
     env_key: HUGGINGFACE_API_KEY
     models: 
-      - meta-llama/Llama-3.1-405B-Instruct             # Largest Llama 3
-      - meta-llama/Llama-3.1-70B-Instruct              # Stable fallback
+      - meta-llama/Llama-3.1-70B-Instruct              # Stable working model
+      - meta-llama/Llama-3.1-8B-Instruct               # Fast fallback
 
   xai: 
     enabled: true
@@ -156,7 +156,7 @@ agents:
   llama:
     alias:  [l, hf]
     provider: huggingface
-    model: meta-llama/Llama-3.1-405B-Instruct
+    model: meta-llama/Llama-3.1-70B-Instruct
     role: Open-source hacker and assembly expert
     context_window:  131072
     capabilities: [text]
