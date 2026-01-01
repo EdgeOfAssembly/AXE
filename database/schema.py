@@ -16,7 +16,9 @@ CREATE TABLE IF NOT EXISTS agent_state (
     level INTEGER DEFAULT 1,
     status TEXT DEFAULT 'active',
     work_start_time TIMESTAMP,
-    total_work_minutes INTEGER DEFAULT 0
+    total_work_minutes INTEGER DEFAULT 0,
+    tokens_used INTEGER DEFAULT 0,
+    context_summary TEXT
 )
 """
 

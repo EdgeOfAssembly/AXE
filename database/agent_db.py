@@ -478,6 +478,184 @@ class AgentDatabase:
         if breaks_this_hour >= max_breaks_per_hour:
             return False, f"Maximum breaks per hour ({max_breaks_per_hour}) reached"
         
+        # Check maximum workforce percentage on break
+        if total_agents > 0:
+            workforce_on_break = agents_on_break / total_agents
+            if workforce_on_break >= max_workforce_on_break:
+                return False, f"Too many agents on break ({agents_on_break}/{total_agents})"
+        
+        return True, "Break approved"
+    
+    # ========== Phase 8: Token Tracking ==========
+    
+    def update_token_usage(self, agent_id: str, tokens_used: int) -> None:
+        """
+        Update token usage for an agent.
+        
+        Args:
+            agent_id: Unique identifier for the agent
+            tokens_used: Total tokens used by the agent
+        """
+        with sqlite3.connect(self.db_path) as conn:
+            c = conn.cursor()
+            c.execute('''
+                UPDATE agent_state SET tokens_used = ?, last_updated = ?
+                WHERE agent_id = ?
+            ''', (tokens_used, datetime.now(timezone.utc), agent_id))
+            conn.commit()
+    
+    def get_token_usage(self, agent_id: str) -> int:
+        """
+        Get token usage for an agent.
+        
+        Args:
+            agent_id: Unique identifier for the agent
+        
+        Returns:
+            Total tokens used, or 0 if agent not found
+        """
+        with sqlite3.connect(self.db_path) as conn:
+            c = conn.cursor()
+            c.execute('SELECT tokens_used FROM agent_state WHERE agent_id = ?', (agent_id,))
+            row = c.fetchone()
+            return row[0] if row and row[0] else 0
+    
+    def save_context_summary(self, agent_id: str, summary: str) -> None:
+        """
+        Save a compressed context summary for an agent.
+        
+        Args:
+            agent_id: Unique identifier for the agent
+            summary: Compressed context summary text
+        """
+        with sqlite3.connect(self.db_path) as conn:
+            c = conn.cursor()
+            c.execute('''
+                UPDATE agent_state SET context_summary = ?, last_updated = ?
+                WHERE agent_id = ?
+            ''', (summary, datetime.now(timezone.utc), agent_id))
+            conn.commit()
+    
+    def get_context_summary(self, agent_id: str) -> Optional[str]:
+        """
+        Get context summary for an agent.
+        
+        Args:
+            agent_id: Unique identifier for the agent
+        
+        Returns:
+            Context summary text, or None if not found
+        """
+        with sqlite3.connect(self.db_path) as conn:
+            c = conn.cursor()
+            c.execute('SELECT context_summary FROM agent_state WHERE agent_id = ?', (agent_id,))
+            row = c.fetchone()
+            return row[0] if row else None
+    
+    # ========== Phase 7: Persistence Lifecycle Hooks ==========
+    
+    def restore_all_agents(self) -> List[Dict[str, Any]]:
+        """
+        Restore all agents from database on startup.
+        
+        Returns:
+            List of agent state dictionaries
+        """
+        with sqlite3.connect(self.db_path) as conn:
+            c = conn.cursor()
+            c.execute('''
+                SELECT agent_id, alias, model_name, memory_json, xp, level, 
+                       status, tokens_used, context_summary
+                FROM agent_state
+                WHERE status IN ('active', 'sleeping')
+                ORDER BY xp DESC
+            ''')
+            rows = c.fetchall()
+            
+            agents = []
+            for row in rows:
+                agent = {
+                    'agent_id': row[0],
+                    'alias': row[1],
+                    'model_name': row[2],
+                    'memory': json.loads(row[3]) if row[3] else {},
+                    'xp': row[4],
+                    'level': row[5],
+                    'status': row[6],
+                    'tokens_used': row[7] if row[7] else 0,
+                    'context_summary': row[8]
+                }
+                agents.append(agent)
+            
+            return agents
+    
+    def sync_conversation(self, agent_id: str, message_snippet: str, 
+                         message_type: str = 'message') -> None:
+        """
+        Store conversation snippet in agent memory for context continuity.
+        
+        Args:
+            agent_id: Unique identifier for the agent
+            message_snippet: Short snippet of conversation to store
+            message_type: Type of message ('message', 'action', 'thought', etc.)
+        """
+        with sqlite3.connect(self.db_path) as conn:
+            c = conn.cursor()
+            c.execute('SELECT memory_json FROM agent_state WHERE agent_id = ?', (agent_id,))
+            row = c.fetchone()
+            
+            if row:
+                try:
+                    memory = json.loads(row[0]) if row[0] else {}
+                except json.JSONDecodeError:
+                    memory = {}
+                
+                # Initialize conversation history if not present
+                if 'conversation_history' not in memory:
+                    memory['conversation_history'] = []
+                
+                # Add new message snippet
+                memory['conversation_history'].append({
+                    'timestamp': datetime.now(timezone.utc).isoformat(),
+                    'type': message_type,
+                    'content': message_snippet[:500]  # Limit snippet size
+                })
+                
+                # Keep only last 50 messages
+                memory['conversation_history'] = memory['conversation_history'][-50:]
+                
+                c.execute('''
+                    UPDATE agent_state SET memory_json = ?, last_updated = ?
+                    WHERE agent_id = ?
+                ''', (json.dumps(memory), datetime.now(timezone.utc), agent_id))
+                conn.commit()
+    
+    def get_agent_context_history(self, agent_id: str, limit: int = 20) -> List[Dict[str, Any]]:
+        """
+        Get recent conversation history for an agent.
+        
+        Args:
+            agent_id: Unique identifier for the agent
+            limit: Maximum number of messages to return
+        
+        Returns:
+            List of conversation history entries
+        """
+        with sqlite3.connect(self.db_path) as conn:
+            c = conn.cursor()
+            c.execute('SELECT memory_json FROM agent_state WHERE agent_id = ?', (agent_id,))
+            row = c.fetchone()
+            
+            if row and row[0]:
+                try:
+                    memory = json.loads(row[0])
+                    history = memory.get('conversation_history', [])
+                    return history[-limit:] if history else []
+                except (json.JSONDecodeError, TypeError):
+                    return []
+        
+        return []
+        
         # Check workforce on break percentage
         if total_agents > 0:
             on_break_ratio = (agents_on_break + 1) / total_agents
