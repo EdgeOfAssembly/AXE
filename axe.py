@@ -90,6 +90,19 @@ from progression.levels import (
 from database.agent_db import AgentDatabase
 from models.metadata import get_model_info, format_token_count
 
+# Models that require max_completion_tokens instead of max_tokens
+# GPT-5 and future models use the new parameter name
+USE_MAX_COMPLETION_TOKENS = {
+    "gpt-5",
+    "gpt-5-0806", 
+    "gpt-5.2-2025-12-11",
+    "gpt-5.2",
+    "o1-preview",
+    "o1-mini",
+    "o1",
+    "o3-mini"
+}
+
 # Collaborative session constants
 COLLAB_HISTORY_LIMIT = 20      # Max messages to show in conversation history
 COLLAB_CONTENT_LIMIT = 2000    # Max chars per message in history
@@ -931,6 +944,14 @@ class AgentManager:
         self.clients = {}
         self._init_clients()
     
+    def _uses_max_completion_tokens(self, model: str) -> bool:
+        """Check if a model requires max_completion_tokens parameter."""
+        # Check if model name or prefix matches models that need max_completion_tokens
+        for model_prefix in USE_MAX_COMPLETION_TOKENS:
+            if model.startswith(model_prefix):
+                return True
+        return False
+    
     def _init_clients(self) -> None:
         """Initialize API clients for enabled providers."""
         providers = self.config.get('providers', default={})
@@ -1035,14 +1056,20 @@ class AgentManager:
                 return resp.content[0].text
             
             elif provider in ['openai', 'xai', 'github']:
-                resp = client.chat.completions.create(
-                    model=model,
-                    max_tokens=4096,
-                    messages=[
+                # Use max_completion_tokens for GPT-5 and newer models
+                api_params = {
+                    'model': model,
+                    'messages': [
                         {'role': 'system', 'content': system_prompt},
                         {'role': 'user', 'content': full_prompt}
                     ]
-                )
+                }
+                if self._uses_max_completion_tokens(model):
+                    api_params['max_completion_tokens'] = 4096
+                else:
+                    api_params['max_tokens'] = 4096
+                
+                resp = client.chat.completions.create(**api_params)
                 return resp.choices[0].message.content
             
             elif provider == 'huggingface':
@@ -1809,14 +1836,20 @@ It's YOUR TURN. What would you like to contribute? Remember:
                         else:
                             response = "[No response from model]"
                     elif provider in ['openai', 'xai', 'github']:
-                        resp = client.chat.completions.create(
-                            model=model,
-                            max_tokens=2048,
-                            messages=[
+                        # Use max_completion_tokens for GPT-5 and newer models
+                        api_params = {
+                            'model': model,
+                            'messages': [
                                 {'role': 'system', 'content': system_prompt},
                                 {'role': 'user', 'content': prompt}
                             ]
-                        )
+                        }
+                        if self.agent_mgr._uses_max_completion_tokens(model):
+                            api_params['max_completion_tokens'] = 2048
+                        else:
+                            api_params['max_tokens'] = 2048
+                        
+                        resp = client.chat.completions.create(**api_params)
                         # Check for None content
                         if resp.choices and len(resp.choices) > 0 and resp.choices[0].message.content:
                             response = resp.choices[0].message.content
