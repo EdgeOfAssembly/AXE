@@ -1213,6 +1213,9 @@ class ToolRunner:
 class ResponseProcessor:
     """Processes agent responses and executes code blocks (READ, EXEC, WRITE)."""
     
+    # Constants for file operations
+    MAX_READ_SIZE = 10000  # Maximum bytes to read from a file
+    
     def __init__(self, config: Config, project_dir: str, tool_runner: 'ToolRunner'):
         self.config = config
         self.project_dir = os.path.abspath(project_dir)
@@ -1252,9 +1255,9 @@ class ResponseProcessor:
             
             elif block_type == 'WRITE':
                 # args contains the filename, content contains the file content
-                filename = args
-                if not filename:
-                    results.append(f"\n[WRITE ERROR: No filename specified]")
+                filename = args.strip()
+                if not filename or not filename.replace('.', '').replace('/', '').replace('_', '').replace('-', '').strip():
+                    results.append(f"\n[WRITE ERROR: Invalid or empty filename]")
                     continue
                 result = self._handle_write(filename, content)
                 results.append(f"\n[WRITE {filename}]\n{result}")
@@ -1283,9 +1286,9 @@ class ResponseProcessor:
                 return f"ERROR: File not found: {filename}"
             
             with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
-                content = f.read(10000)  # Limit to 10KB
-                if len(content) >= 10000:
-                    content += "\n[... truncated at 10KB ...]"
+                content = f.read(self.MAX_READ_SIZE)
+                if len(content) >= self.MAX_READ_SIZE:
+                    content += f"\n[... truncated at {self.MAX_READ_SIZE} bytes ...]"
                 return content
         except Exception as e:
             return f"ERROR reading file: {e}"
@@ -1310,8 +1313,10 @@ class ResponseProcessor:
             return f"ERROR: Write access denied to {filename}"
         
         try:
-            # Create directory if it doesn't exist
-            os.makedirs(os.path.dirname(filepath), exist_ok=True)
+            # Create directory if it doesn't exist (but not for files in root)
+            dir_path = os.path.dirname(filepath)
+            if dir_path:  # Only create if there's actually a directory path
+                os.makedirs(dir_path, exist_ok=True)
             
             # Write the file
             with open(filepath, 'w', encoding='utf-8') as f:
