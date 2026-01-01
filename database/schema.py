@@ -16,9 +16,17 @@ CREATE TABLE IF NOT EXISTS agent_state (
     level INTEGER DEFAULT 1,
     status TEXT DEFAULT 'active',
     work_start_time TIMESTAMP,
-    total_work_minutes INTEGER DEFAULT 0
+    total_work_minutes INTEGER DEFAULT 0,
+    tokens_used INTEGER DEFAULT 0,
+    context_summary TEXT
 )
 """
+
+# Migration statements for updating existing agent_state tables
+AGENT_STATE_MIGRATIONS = [
+    "ALTER TABLE agent_state ADD COLUMN tokens_used INTEGER DEFAULT 0",
+    "ALTER TABLE agent_state ADD COLUMN context_summary TEXT",
+]
 
 SUPERVISOR_LOG_TABLE = """
 CREATE TABLE IF NOT EXISTS supervisor_log (

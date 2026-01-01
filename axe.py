@@ -30,8 +30,9 @@ import uuid
 import threading
 import base64
 import hashlib
+import atexit
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import List, Optional, Tuple, Dict, Any
 import time
 import shutil
@@ -87,6 +88,7 @@ from progression.levels import (
     LEVEL_SUPERVISOR_ELIGIBLE
 )
 from database.agent_db import AgentDatabase
+from models.metadata import get_model_info, format_token_count
 
 # Collaborative session constants
 COLLAB_HISTORY_LIMIT = 20      # Max messages to show in conversation history
@@ -274,7 +276,7 @@ Focus on practical, working solutions."""
 
 def collect_resources() -> str:
     """Collect system resource information."""
-    timestamp = datetime.utcnow().isoformat()
+    timestamp = datetime.now(timezone.utc).isoformat()
     output = [f"--- Resource Snapshot @ {timestamp} ---"]
     
     try:
@@ -378,7 +380,7 @@ class EmergencyMailbox:
         """
         # DEMO ONLY: base64 + simple obfuscation
         # Production should use proper GPG encryption
-        timestamp = datetime.utcnow().isoformat()
+        timestamp = datetime.now(timezone.utc).isoformat()
         full_message = f"TIMESTAMP: {timestamp}\n\n{message}"
         
         # Simple encryption: base64 + XOR with timestamp-based key
@@ -402,7 +404,7 @@ class EmergencyMailbox:
         Returns:
             Tuple of (success, message/filename)
         """
-        timestamp = datetime.utcnow()
+        timestamp = datetime.now(timezone.utc)
         filename = f"emergency_{timestamp.strftime('%Y%m%d_%H%M%S_%f')}_{agent_alias.replace('@', '')}.gpg"
         filepath = os.path.join(self.mailbox_dir, filename)
         
@@ -542,7 +544,7 @@ class SleepManager:
             })
         
         # Track wake time
-        wake_time = datetime.utcnow() + timedelta(minutes=result['sleep_duration_minutes'])
+        wake_time = datetime.now(timezone.utc) + timedelta(minutes=result['sleep_duration_minutes'])
         self.sleep_queue[agent_id] = wake_time
         
         return result
@@ -550,7 +552,7 @@ class SleepManager:
     def check_and_wake_agents(self) -> List[Dict[str, Any]]:
         """Check for agents ready to wake up."""
         woken = []
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         
         to_remove = []
         for agent_id, wake_time in self.sleep_queue.items():
@@ -616,7 +618,7 @@ class BreakSystem:
             'alias': alias,
             'break_type': break_type,
             'justification': justification,
-            'requested_at': datetime.utcnow().isoformat(),
+            'requested_at': datetime.now(timezone.utc).isoformat(),
             'status': 'pending'
         }
         
@@ -657,7 +659,7 @@ class BreakSystem:
         self.db.record_break(agent_id, request['break_type'], duration_minutes)
         
         # Set break end time
-        end_time = datetime.utcnow() + timedelta(minutes=duration_minutes)
+        end_time = datetime.now(timezone.utc) + timedelta(minutes=duration_minutes)
         self.break_queue[agent_id] = end_time
         
         # Update request status
@@ -688,7 +690,7 @@ class BreakSystem:
     def check_break_endings(self) -> List[Dict[str, Any]]:
         """Check for breaks that have ended."""
         ended = []
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         
         to_remove = []
         for agent_id, end_time in self.break_queue.items():
@@ -740,7 +742,7 @@ class DynamicSpawner:
         """Check if a new agent can be spawned."""
         # Check cooldown
         if self.last_spawn_time:
-            elapsed = (datetime.utcnow() - self.last_spawn_time).total_seconds()
+            elapsed = (datetime.now(timezone.utc) - self.last_spawn_time).total_seconds()
             if elapsed < SPAWN_COOLDOWN_SECONDS:
                 remaining = SPAWN_COOLDOWN_SECONDS - elapsed
                 return False, f"Spawn cooldown: {remaining:.0f}s remaining"
@@ -796,7 +798,7 @@ class DynamicSpawner:
         self.db.start_work_tracking(agent_id)
         
         # Record spawn
-        self.last_spawn_time = datetime.utcnow()
+        self.last_spawn_time = datetime.now(timezone.utc)
         spawn_record = {
             'agent_id': agent_id,
             'alias': alias,
@@ -982,20 +984,26 @@ class AgentManager:
         return None
     
     def list_agents(self) -> List[dict]:
-        """List all available agents with status."""
+        """List all available agents with status and metadata."""
         result = []
         agents = self.config.get('agents', default={})
         
         for name, agent_config in agents.items():
             provider = agent_config.get('provider', '')
+            model = agent_config.get('model', '')
             available = provider in self.clients
+            
+            # Get model metadata
+            model_info = get_model_info(model)
+            
             result.append({
                 'name': name,
                 'aliases': agent_config.get('alias', []),
                 'role': agent_config.get('role', ''),
                 'provider': provider,
-                'model': agent_config.get('model', ''),
-                'available': available
+                'model': model,
+                'available': available,
+                'metadata': model_info
             })
         
         return result
@@ -2217,7 +2225,7 @@ Examples:
         print(c(help_text, Colors.CYAN))
     
     def list_agents(self) -> None:
-        """List available agents."""
+        """List available agents with enhanced metadata."""
         print(c("\nAvailable Agents:", Colors.BOLD))
         print("-" * 60)
         
@@ -2227,6 +2235,17 @@ Examples:
             print(f"  {status} {c(agent['name'], Colors.CYAN):12} ({aliases})")
             print(f"     {c(agent['role'], Colors.DIM)}")
             print(f"     Model: {agent['model']}")
+            
+            # Display metadata if available
+            if 'metadata' in agent:
+                metadata = agent['metadata']
+                context_tokens = format_token_count(metadata['context_tokens'])
+                max_output = format_token_count(metadata['max_output_tokens'])
+                input_modes = ', '.join(metadata['input_modes'])
+                output_modes = ', '.join(metadata['output_modes'])
+                
+                print(f"     Context: {context_tokens} tokens | Max Output: {max_output} tokens")
+                print(f"     Input: {input_modes} | Output: {output_modes}")
         print()
     
     def list_tools(self) -> None:
@@ -2460,6 +2479,56 @@ def generate_sample_config(path: str = 'axe.yaml') -> None:
     print("Edit this file to customize your setup.")
 
 
+# ========== Persistence Lifecycle Hooks ==========
+
+# Global reference to database for shutdown hook
+_global_db = None
+
+
+def restore_agents_on_startup(db_path: str = "axe_agents.db") -> None:
+    """
+    Display agents from database on startup (informational only).
+    
+    Note: This function displays agent information from previous sessions
+    but does not automatically recreate them in the current session.
+    Agents must be explicitly spawned via collaborative sessions or
+    other mechanisms. This is informational to show what agents
+    existed in previous sessions.
+    
+    Args:
+        db_path: Path to SQLite database
+    """
+    global _global_db
+    _global_db = AgentDatabase(db_path)
+    
+    agents = _global_db.restore_all_agents()
+    
+    if agents:
+        print(c(f"\n✓ Found {len(agents)} agent(s) from previous session:", Colors.GREEN))
+        print(c("   (Informational only - agents not automatically restored)", Colors.DIM))
+        for agent in agents[:5]:  # Show first 5
+            status_color = Colors.GREEN if agent['status'] == 'active' else Colors.YELLOW
+            print(f"  • {agent['alias']} ({agent['model_name']}) - "
+                  f"Level {agent['level']}, {agent['xp']} XP - "
+                  f"{c(agent['status'], status_color)}")
+        
+        if len(agents) > 5:
+            print(f"  ... and {len(agents) - 5} more")
+        print()
+
+
+def sync_agents_on_shutdown() -> None:
+    """
+    Sync agent state to database on shutdown.
+    This is called automatically via atexit.
+    """
+    global _global_db
+    if _global_db:
+        # Database sync happens automatically via save_agent_state
+        # This hook is here for future extensions
+        pass
+
+
 def main():
     """Main entry point."""
     parser = argparse.ArgumentParser(
@@ -2502,10 +2571,20 @@ Collaborative Mode:
     
     args = parser.parse_args()
     
+    # Register shutdown hook
+    atexit.register(sync_agents_on_shutdown)
+    
     # Generate sample config
     if args.init:
         generate_sample_config()
         return
+    
+    # Restore agents from previous session (optional, informational)
+    try:
+        restore_agents_on_startup()
+    except Exception:
+        # Don't fail if restoration fails, just continue
+        pass
     
     # Start resource monitoring
     start_resource_monitor()
