@@ -27,7 +27,6 @@ providers:
     enabled: true
     env_key: HUGGINGFACE_API_KEY
     models: 
-      - meta-llama/Llama-4-Maverick-17B-128E-Instruct  # Latest Llama 4 (from RetroCodeMess)
       - meta-llama/Llama-3.1-405B-Instruct             # Largest Llama 3
       - meta-llama/Llama-3.1-70B-Instruct              # Stable fallback
 
@@ -157,7 +156,7 @@ agents:
   llama:
     alias:  [l, hf]
     provider: huggingface
-    model: meta-llama/Llama-4-Maverick-17B-128E-Instruct
+    model: meta-llama/Llama-3.1-405B-Instruct
     role: Open-source hacker and assembly expert
     context_window:  131072
     capabilities: [text]
