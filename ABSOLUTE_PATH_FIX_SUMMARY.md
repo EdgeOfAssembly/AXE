@@ -137,7 +137,9 @@ The fix maintains all existing security protections:
 - Absolute paths **outside** project directory: `/etc/passwd` → ❌ Blocked
 - Path traversal attempts: `../../../etc/passwd` → ❌ Blocked
 - Hidden traversal: `subdir/../../outside.txt` → ❌ Blocked
-- Symlink attacks are handled by `os.path.realpath()` in `_resolve_project_path()`
+
+### ⚠️ Known Limitation:
+- **Symlink attacks**: `_resolve_project_path()` currently uses `os.path.abspath()` instead of `os.path.realpath()`, which means it does NOT resolve symlinks. A symlink inside the project pointing outside (e.g., `project/evil -> /etc/passwd`) could pass validation but write outside the project. This should be addressed in a follow-up by using `os.path.realpath()` as done in other parts of the codebase.
 
 ### ✅ Now Allowed (Bug Fixed):
 - Absolute paths **within** project directory: `/tmp/AXE/file.txt` → ✅ Allowed

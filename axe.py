@@ -1268,6 +1268,16 @@ class ResponseProcessor:
                 # - Relative paths (allowed if within project)
                 # - Path traversal attempts (rejected)
                 # - Paths outside project directory (rejected)
+                #
+                # NOTE SECURITY LIMITATION:
+                # _resolve_project_path() currently relies on os.path.abspath(), which does *not*
+                # resolve symlinks. This means a symlink inside the project (e.g. "evil" -> /etc/passwd)
+                # could pass this check while pointing outside the project directory, enabling
+                # a potential symlink-based directory escape on WRITE.
+                #
+                # FOLLOW-UP: Harden _resolve_project_path() to use os.path.realpath() (as done in
+                # other parts of the codebase) and ensure that the resolved path is used for all
+                # file operations, to robustly prevent symlink-based escapes.
                 resolved_path = self._resolve_project_path(filename)
                 if resolved_path is None:
                     results.append(f"\n[WRITE ERROR: Invalid filename (path outside project directory)]")

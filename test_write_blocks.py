@@ -266,7 +266,7 @@ def test_path_traversal_attacks():
 malicious content
 ```"""
         result1 = processor.process_response(response1, "test_agent")
-        assert "ERROR" in result1 or "denied" in result1.lower() or "not allowed" in result1.lower(), \
+        assert "ERROR" in result1 or "denied" in result1.lower() or "not allowed" in result1.lower() or "outside" in result1.lower(), \
             f"Should block ../ traversal, got: {result1}"
         # Verify our code didn't attempt to write (the error message should appear)
         print("  ✓ Blocked ../ traversal")
@@ -276,7 +276,7 @@ malicious content
 test content
 ```"""
         result2 = processor.process_response(response2, "test_agent")
-        assert "ERROR" in result2 or "denied" in result2.lower() or "not allowed" in result2.lower(), \
+        assert "ERROR" in result2 or "denied" in result2.lower() or "not allowed" in result2.lower() or "outside" in result2.lower(), \
             "Should block ../outside/"
         print("  ✓ Blocked ../outside/ traversal")
         
@@ -294,7 +294,7 @@ evil content
 sneaky content
 ```"""
         result4 = processor.process_response(response4, "test_agent")
-        assert "ERROR" in result4 or "denied" in result4.lower() or "not allowed" in result4.lower(), \
+        assert "ERROR" in result4 or "denied" in result4.lower() or "not allowed" in result4.lower() or "outside" in result4.lower(), \
             "Should block hidden traversal"
         print("  ✓ Blocked hidden parent directory traversal")
         
@@ -340,13 +340,13 @@ Nested content via absolute path
         assert content == "Nested content via absolute path", "Nested content should match"
         print("  ✓ Absolute path to file in subdirectory works")
         
-        # Test 3: Absolute path that equals project directory should fail (can't write to directory)
+        # Test 3: Absolute path that equals project directory (edge case - should fail gracefully)
         response3 = f"""```WRITE {tmpdir}
 Invalid: trying to write to directory
 ```"""
-        result3 = processor.process_response(response3, "test_agent")
-        # This should either fail or create unusual behavior, but at minimum shouldn't crash
-        # The _handle_write will handle this case
+        processor.process_response(response3, "test_agent")
+        # This edge case is handled by _handle_write which will fail when trying to write to a directory
+        # We don't assert specific behavior, just verify it doesn't crash
         print("  ✓ Absolute path edge cases handled")
         
         print("  ✓ All absolute path within project tests passed")
