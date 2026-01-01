@@ -1256,8 +1256,14 @@ class ResponseProcessor:
             elif block_type == 'WRITE':
                 # args contains the filename, content contains the file content
                 filename = args.strip()
-                if not filename or not filename.replace('.', '').replace('/', '').replace('_', '').replace('-', '').strip():
+                # Basic validation: non-empty and no path traversal / absolute paths
+                if not filename:
                     results.append(f"\n[WRITE ERROR: Invalid or empty filename]")
+                    continue
+                normalized = os.path.normpath(filename)
+                # Disallow absolute paths and any use of parent-directory components
+                if os.path.isabs(normalized) or os.pardir in Path(normalized).parts:
+                    results.append(f"\n[WRITE ERROR: Invalid filename (path traversal not allowed)]")
                     continue
                 result = self._handle_write(filename, content)
                 results.append(f"\n[WRITE {filename}]\n{result}")
@@ -1268,9 +1274,31 @@ class ResponseProcessor:
         
         return response
     
+    def _resolve_project_path(self, filename: str) -> Optional[str]:
+        """
+        Resolve a filename against the project directory and ensure it
+        does not escape the project directory.
+        Returns the absolute path if valid, otherwise None.
+        """
+        # Disallow absolute paths outright
+        if os.path.isabs(filename):
+            return None
+
+        # Build an absolute path under the project directory
+        full_path = os.path.abspath(os.path.join(self.project_dir, filename))
+
+        # Ensure the resolved path is inside the project directory
+        project_root = self.project_dir
+        if not (full_path == project_root or full_path.startswith(project_root + os.sep)):
+            return None
+
+        return full_path
+    
     def _handle_read(self, filename: str) -> str:
         """Handle READ block - read and return file content."""
-        filepath = os.path.join(self.project_dir, filename)
+        filepath = self._resolve_project_path(filename)
+        if filepath is None:
+            return f"ERROR: Access denied to {filename}"
         
         # Check if path is allowed
         allowed_dirs = self.config.get('directories', 'allowed', default=[])
@@ -1303,7 +1331,9 @@ class ResponseProcessor:
     
     def _handle_write(self, filename: str, content: str) -> str:
         """Handle WRITE block - write content to file."""
-        filepath = os.path.join(self.project_dir, filename)
+        filepath = self._resolve_project_path(filename)
+        if filepath is None:
+            return f"ERROR: Access denied to {filename}"
         
         # Check if path is allowed for writing
         allowed_dirs = self.config.get('directories', 'allowed', default=[])
@@ -1316,6 +1346,9 @@ class ResponseProcessor:
             # Create directory if it doesn't exist (but not for files in root)
             dir_path = os.path.dirname(filepath)
             if dir_path:  # Only create if there's actually a directory path
+                # Ensure directory path itself is permitted before creating it
+                if not self._check_file_access(dir_path, allowed_dirs, forbidden_dirs):
+                    return f"ERROR: Write access denied to directory for {filename}"
                 os.makedirs(dir_path, exist_ok=True)
             
             # Write the file
@@ -1330,29 +1363,38 @@ class ResponseProcessor:
         """Check if file access is allowed based on directory rules."""
         # Normalize the file path
         filepath = os.path.abspath(filepath)
+        project_root = os.path.abspath(self.project_dir)
+
+        def _is_within_dir(path: str, directory: str) -> bool:
+            """Return True if 'path' is the same as or within 'directory' based on path components."""
+            try:
+                return os.path.commonpath([path, directory]) == directory
+            except ValueError:
+                # Different drives or otherwise incomparable paths
+                return False
         
         # Check forbidden directories first
         for forbidden_dir in forbidden:
             forbidden_path = os.path.abspath(os.path.expanduser(forbidden_dir))
             if not os.path.isabs(forbidden_path):
-                forbidden_path = os.path.join(self.project_dir, forbidden_path)
+                forbidden_path = os.path.join(project_root, forbidden_path)
             forbidden_path = os.path.abspath(forbidden_path)
             
-            if filepath.startswith(forbidden_path):
+            if _is_within_dir(filepath, forbidden_path):
                 return False
         
         # Check if in allowed directories
         for allowed_dir in allowed:
             allowed_path = os.path.expanduser(allowed_dir)
             if not os.path.isabs(allowed_path):
-                allowed_path = os.path.join(self.project_dir, allowed_path)
+                allowed_path = os.path.join(project_root, allowed_path)
             allowed_path = os.path.abspath(allowed_path)
             
-            if filepath.startswith(allowed_path):
+            if _is_within_dir(filepath, allowed_path):
                 return True
         
         # If no specific allowed directory matches, check if it's in project dir
-        return filepath.startswith(self.project_dir)
+        return _is_within_dir(filepath, project_root)
 
 
 class ProjectContext:

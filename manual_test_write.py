@@ -68,7 +68,7 @@ def test_agent(agent_name: str):
             
             print(f"  Sending request...")
             response2 = agent_mgr.call_agent(agent_name, prompt2, "")
-            processed2 = processor.process_response(response2, agent_name)
+            processor.process_response(response2, agent_name)
             
             hello_file = os.path.join(tmpdir, "hello.py")
             if os.path.exists(hello_file):
