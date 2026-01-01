@@ -30,6 +30,7 @@ import uuid
 import threading
 import base64
 import hashlib
+import atexit
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
 from typing import List, Optional, Tuple, Dict, Any
@@ -2478,6 +2479,49 @@ def generate_sample_config(path: str = 'axe.yaml') -> None:
     print("Edit this file to customize your setup.")
 
 
+# ========== Persistence Lifecycle Hooks ==========
+
+# Global reference to database for shutdown hook
+_global_db = None
+
+
+def restore_agents_on_startup(db_path: str = "axe_agents.db") -> None:
+    """
+    Restore agents from database on startup.
+    
+    Args:
+        db_path: Path to SQLite database
+    """
+    global _global_db
+    _global_db = AgentDatabase(db_path)
+    
+    agents = _global_db.restore_all_agents()
+    
+    if agents:
+        print(c(f"\n✓ Restored {len(agents)} agent(s) from previous session:", Colors.GREEN))
+        for agent in agents[:5]:  # Show first 5
+            status_color = Colors.GREEN if agent['status'] == 'active' else Colors.YELLOW
+            print(f"  • {agent['alias']} ({agent['model_name']}) - "
+                  f"Level {agent['level']}, {agent['xp']} XP - "
+                  f"{c(agent['status'], status_color)}")
+        
+        if len(agents) > 5:
+            print(f"  ... and {len(agents) - 5} more")
+        print()
+
+
+def sync_agents_on_shutdown() -> None:
+    """
+    Sync agent state to database on shutdown.
+    This is called automatically via atexit.
+    """
+    global _global_db
+    if _global_db:
+        # Database sync happens automatically via save_agent_state
+        # This hook is here for future extensions
+        pass
+
+
 def main():
     """Main entry point."""
     parser = argparse.ArgumentParser(
@@ -2520,10 +2564,20 @@ Collaborative Mode:
     
     args = parser.parse_args()
     
+    # Register shutdown hook
+    atexit.register(sync_agents_on_shutdown)
+    
     # Generate sample config
     if args.init:
         generate_sample_config()
         return
+    
+    # Restore agents from previous session (optional, informational)
+    try:
+        restore_agents_on_startup()
+    except Exception:
+        # Don't fail if restoration fails, just continue
+        pass
     
     # Start resource monitoring
     start_resource_monitor()
