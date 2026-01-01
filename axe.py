@@ -1259,14 +1259,18 @@ class ResponseProcessor:
                 # args contains the filename, content contains the file content
                 # Sanitize filename: strip trailing backticks that may be included by accident
                 filename = args.strip().rstrip('`')
-                # Basic validation: non-empty and no path traversal / absolute paths
+                # Basic validation: non-empty filename
                 if not filename:
                     results.append(f"\n[WRITE ERROR: Invalid or empty filename]")
                     continue
-                normalized = os.path.normpath(filename)
-                # Disallow absolute paths and any use of parent-directory components
-                if os.path.isabs(normalized) or os.pardir in Path(normalized).parts:
-                    results.append(f"\n[WRITE ERROR: Invalid filename (path traversal not allowed)]")
+                # Validate path using _resolve_project_path which handles:
+                # - Absolute paths within project directory (allowed)
+                # - Relative paths (allowed if within project)
+                # - Path traversal attempts (rejected)
+                # - Paths outside project directory (rejected)
+                resolved_path = self._resolve_project_path(filename)
+                if resolved_path is None:
+                    results.append(f"\n[WRITE ERROR: Invalid filename (path outside project directory)]")
                     continue
                 result = self._handle_write(filename, content)
                 results.append(f"\n[WRITE {filename}]\n{result}")

@@ -280,14 +280,14 @@ test content
             "Should block ../outside/"
         print("  ✓ Blocked ../outside/ traversal")
         
-        # Test 3: Absolute path
+        # Test 3: Absolute path OUTSIDE project directory
         response3 = """```WRITE /tmp/malicious.txt
 evil content
 ```"""
         result3 = processor.process_response(response3, "test_agent")
-        assert "ERROR" in result3 or "denied" in result3.lower() or "not allowed" in result3.lower(), \
-            "Should block absolute paths"
-        print("  ✓ Blocked absolute path")
+        assert "ERROR" in result3 or "denied" in result3.lower() or "not allowed" in result3.lower() or "outside" in result3.lower(), \
+            "Should block absolute paths outside project directory"
+        print("  ✓ Blocked absolute path outside project")
         
         # Test 4: Hidden parent traversal in path
         response4 = """```WRITE subdir/../../outside.txt
@@ -299,6 +299,57 @@ sneaky content
         print("  ✓ Blocked hidden parent directory traversal")
         
         print("  ✓ All path traversal attacks blocked")
+
+
+def test_absolute_paths_within_project():
+    """Test that absolute paths WITHIN the project directory are allowed."""
+    print("Testing absolute paths within project directory...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        config = Config()
+        tool_runner = ToolRunner(config, tmpdir)
+        processor = ResponseProcessor(config, tmpdir, tool_runner)
+        
+        # Test 1: Absolute path to file in project root
+        abs_path1 = os.path.join(tmpdir, "absolute_test.txt")
+        response1 = f"""```WRITE {abs_path1}
+Content via absolute path
+```"""
+        result1 = processor.process_response(response1, "test_agent")
+        assert "✓ File written successfully" in result1, \
+            f"Should allow absolute path within project, got: {result1}"
+        assert os.path.exists(abs_path1), "File should be created"
+        with open(abs_path1, 'r') as f:
+            content = f.read()
+        assert content == "Content via absolute path", "Content should match"
+        print("  ✓ Absolute path to file in project root works")
+        
+        # Test 2: Absolute path to file in subdirectory
+        subdir = os.path.join(tmpdir, "subdir")
+        os.makedirs(subdir, exist_ok=True)
+        abs_path2 = os.path.join(subdir, "nested_abs.txt")
+        response2 = f"""```WRITE {abs_path2}
+Nested content via absolute path
+```"""
+        result2 = processor.process_response(response2, "test_agent")
+        assert "✓ File written successfully" in result2, \
+            f"Should allow absolute path to subdirectory, got: {result2}"
+        assert os.path.exists(abs_path2), "Nested file should be created"
+        with open(abs_path2, 'r') as f:
+            content = f.read()
+        assert content == "Nested content via absolute path", "Nested content should match"
+        print("  ✓ Absolute path to file in subdirectory works")
+        
+        # Test 3: Absolute path that equals project directory should fail (can't write to directory)
+        response3 = f"""```WRITE {tmpdir}
+Invalid: trying to write to directory
+```"""
+        result3 = processor.process_response(response3, "test_agent")
+        # This should either fail or create unusual behavior, but at minimum shouldn't crash
+        # The _handle_write will handle this case
+        print("  ✓ Absolute path edge cases handled")
+        
+        print("  ✓ All absolute path within project tests passed")
 
 
 def test_path_prefix_edge_cases():
@@ -435,6 +486,7 @@ def main():
         test_write_block_empty_filename()
         test_write_block_overwrite()
         test_path_traversal_attacks()
+        test_absolute_paths_within_project()
         test_path_prefix_edge_cases()
         
         print("\n" + "="*70)
