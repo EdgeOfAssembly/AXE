@@ -1141,11 +1141,12 @@ class ToolRunner:
         """
         # Split on shell operators while preserving them for context
         # Pattern matches: || && | ; and splits on them
+        # Note: | inside [|;] is literal, not a regex OR operator in character class
         pattern = r'\s*(\|\||&&|[|;])\s*'
         parts = re.split(pattern, cmd)
         
         commands = []
-        for i, part in enumerate(parts):
+        for part in parts:
             # Skip the operator tokens themselves
             if part in self.SHELL_OPERATORS:
                 continue
@@ -1165,10 +1166,13 @@ class ToolRunner:
                 continue
             
             # Find first token that's not a redirect, heredoc, or env var
-            for j, token in enumerate(tokens):
+            for token in tokens:
                 # Skip environment variable assignments (VAR=value)
+                # Only if it looks like a valid variable name (letters/underscore before =)
                 if '=' in token and not token.startswith(('>', '<', '2')):
-                    continue
+                    eq_pos = token.index('=')
+                    if eq_pos > 0 and token[:eq_pos].replace('_', '').isalnum():
+                        continue
                 
                 # Skip redirect operators and heredoc markers
                 if token in self.REDIRECT_OPERATORS or token.startswith(('>', '<', '2>')):
@@ -1185,8 +1189,21 @@ class ToolRunner:
     
     def _needs_shell(self, cmd: str) -> bool:
         """Check if command needs shell execution."""
-        shell_indicators = ['|', '&&', '||', ';', '>', '>>', '<', '$(', '`', '<<']
-        return any(ind in cmd for ind in shell_indicators)
+        # Check for shell operators
+        for op in self.SHELL_OPERATORS:
+            if op in cmd:
+                return True
+        
+        # Check for redirect operators
+        for op in self.REDIRECT_OPERATORS:
+            if op in cmd:
+                return True
+        
+        # Check for command substitution and heredocs
+        if '$(' in cmd or '`' in cmd or '<<' in cmd:
+            return True
+        
+        return False
     
     def is_tool_allowed(self, cmd: str) -> Tuple[bool, str]:
         """Check if a command (including pipelines) is allowed."""
