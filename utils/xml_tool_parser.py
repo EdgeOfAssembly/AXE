@@ -193,7 +193,8 @@ def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:
     calls = []
     
     # ```READ /path``` - Use non-greedy match and stop at closing backticks
-    read_pattern = r'```READ\s+([^`]+?)```'
+    # Backticks are escaped for clarity even though not strictly necessary in character class
+    read_pattern = r'```READ\s+([^\`]+?)```'
     for path in re.findall(read_pattern, response):
         calls.append({
             'tool': 'READ',
@@ -202,7 +203,7 @@ def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:
         })
     
     # ```EXEC command``` - Use non-greedy match for command
-    exec_pattern = r'```EXEC\s+([^`]+?)```'
+    exec_pattern = r'```EXEC\s+([^\`]+?)```'
     for cmd in re.findall(exec_pattern, response):
         calls.append({
             'tool': 'EXEC',
@@ -211,7 +212,7 @@ def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:
         })
     
     # ```WRITE /path\ncontent``` - Make content optional
-    write_pattern = r'```WRITE\s+([^\n`]+)(?:\n(.*?))?```'
+    write_pattern = r'```WRITE\s+([^\n\`]+)(?:\n(.*?))?```'
     for match in re.findall(write_pattern, response, re.DOTALL):
         path = match[0]
         content = match[1] if len(match) > 1 and match[1] else ''
@@ -277,8 +278,15 @@ def deduplicate_calls(calls: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     seen = set()
     unique = []
     for call in calls:
-        # Use JSON serialization for consistent hashing
-        key = (call['tool'], json.dumps(call['params'], sort_keys=True))
+        # Use frozenset for better performance than JSON serialization
+        # Convert params dict to frozenset of items for hashable key
+        try:
+            params_key = frozenset(call['params'].items())
+            key = (call['tool'], params_key)
+        except (TypeError, AttributeError):
+            # Fallback to JSON for complex nested structures
+            key = (call['tool'], json.dumps(call['params'], sort_keys=True))
+        
         if key not in seen:
             seen.add(key)
             unique.append(call)
