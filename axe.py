@@ -1118,6 +1118,12 @@ class AgentManager:
 class ToolRunner:
     """Manages tool execution with safety checks."""
     
+    # Shell operators that connect commands
+    SHELL_OPERATORS = {'|', '&&', '||', ';'}
+    
+    # Redirect operators (not security risks, just I/O)
+    REDIRECT_OPERATORS = {'>', '>>', '<', '2>', '2>>', '&>', '2>&1'}
+    
     def __init__(self, config: Config, project_dir: str):
         self.config = config
         self.project_dir = os.path.abspath(project_dir)
@@ -1126,17 +1132,86 @@ class ToolRunner:
         self.auto_approve = False
         self.dry_run = False
     
+    def _extract_commands_from_shell(self, cmd: str) -> List[str]:
+        """
+        Extract actual command names from a shell command string.
+        Handles pipes, logical operators, redirects, heredocs, etc.
+        
+        Returns list of command names (first word of each command in pipeline).
+        """
+        # Split on shell operators while preserving them for context
+        # Pattern matches: || && | ; and splits on them
+        pattern = r'\s*(\|\||&&|[|;])\s*'
+        parts = re.split(pattern, cmd)
+        
+        commands = []
+        for i, part in enumerate(parts):
+            # Skip the operator tokens themselves
+            if part in self.SHELL_OPERATORS:
+                continue
+                
+            part = part.strip()
+            if not part:
+                continue
+            
+            try:
+                # Use shlex to properly handle quotes and escapes
+                tokens = shlex.split(part)
+            except ValueError:
+                # If shlex fails (e.g., unclosed quotes), try simple split
+                tokens = part.split()
+            
+            if not tokens:
+                continue
+            
+            # Find first token that's not a redirect, heredoc, or env var
+            for j, token in enumerate(tokens):
+                # Skip environment variable assignments (VAR=value)
+                if '=' in token and not token.startswith(('>', '<', '2')):
+                    continue
+                
+                # Skip redirect operators and heredoc markers
+                if token in self.REDIRECT_OPERATORS or token.startswith(('>', '<', '2>')):
+                    continue
+                
+                if token in ('<<', '<<-', '<<<'):
+                    break  # Heredoc found, stop here
+                
+                # This should be the command name
+                commands.append(token)
+                break
+        
+        return commands
+    
+    def _needs_shell(self, cmd: str) -> bool:
+        """Check if command needs shell execution."""
+        shell_indicators = ['|', '&&', '||', ';', '>', '>>', '<', '$(', '`', '<<']
+        return any(ind in cmd for ind in shell_indicators)
+    
     def is_tool_allowed(self, cmd: str) -> Tuple[bool, str]:
-        """Check if a command is allowed."""
-        parts = cmd.split()
-        if not parts:
+        """Check if a command (including pipelines) is allowed."""
+        if not cmd or not cmd.strip():
             return False, "Empty command"
         
-        tool = parts[0]
-        if tool not in self.whitelist:
-            return False, f"Tool '{tool}' not in whitelist"
+        # Extract all command names from the shell string
+        try:
+            commands = self._extract_commands_from_shell(cmd)
+        except Exception as e:
+            return False, f"Failed to parse command: {e}"
         
-        # Check for forbidden paths with directory traversal protection
+        if not commands:
+            return False, "No commands found in input"
+        
+        # Check each command against whitelist
+        for command in commands:
+            # Get base command name (handle paths like /usr/bin/grep)
+            base_cmd = os.path.basename(command)
+            
+            if base_cmd not in self.whitelist:
+                return False, f"Tool '{base_cmd}' not in whitelist"
+        
+        # Check for forbidden paths in the entire command
+        # We need to extract arguments from the full command for path checking
         forbidden = self.config.get('directories', 'forbidden', default=[])
         
         # Resolve forbidden directories to real absolute paths
@@ -1147,26 +1222,40 @@ class ToolRunner:
                 expanded_forbidden = os.path.join(self.project_dir, expanded_forbidden)
             resolved_forbidden.append(os.path.realpath(os.path.abspath(expanded_forbidden)))
         
-        for part in parts[1:]:
-            # Simple prefix check for non-path-like arguments
-            for forbidden_path in forbidden:
-                expanded = os.path.expanduser(forbidden_path)
-                if part.startswith(expanded) or part.startswith(forbidden_path):
-                    return False, f"Access to '{forbidden_path}' forbidden"
-            
-            # Robust path-based check for arguments that look like paths
-            if (os.path.sep in part or 
-                (os.path.altsep and os.path.altsep in part) or 
-                part.startswith(("~", "."))):
-                expanded_part = os.path.expanduser(part)
-                if not os.path.isabs(expanded_part):
-                    expanded_part = os.path.join(self.project_dir, expanded_part)
-                resolved_part = os.path.realpath(os.path.abspath(expanded_part))
-                for forbidden_real in resolved_forbidden:
-                    # Match the forbidden directory itself or any path under it
-                    if (resolved_part == forbidden_real or
-                        resolved_part.startswith(forbidden_real + os.path.sep)):
-                        return False, f"Access to '{forbidden_real}' forbidden"
+        # Parse all tokens from the command to check for forbidden paths
+        try:
+            # Split the command to get all parts for path checking
+            # We use a simple split here to catch all arguments
+            all_parts = cmd.split()
+            for part in all_parts:
+                # Skip operators and redirects
+                if part in self.SHELL_OPERATORS or part in self.REDIRECT_OPERATORS:
+                    continue
+                if part.startswith(('>', '<', '2>', '|', '&')):
+                    continue
+                
+                # Simple prefix check for non-path-like arguments
+                for forbidden_path in forbidden:
+                    expanded = os.path.expanduser(forbidden_path)
+                    if part.startswith(expanded) or part.startswith(forbidden_path):
+                        return False, f"Access to '{forbidden_path}' forbidden"
+                
+                # Robust path-based check for arguments that look like paths
+                if (os.path.sep in part or 
+                    (os.path.altsep and os.path.altsep in part) or 
+                    part.startswith(("~", "."))):
+                    expanded_part = os.path.expanduser(part)
+                    if not os.path.isabs(expanded_part):
+                        expanded_part = os.path.join(self.project_dir, expanded_part)
+                    resolved_part = os.path.realpath(os.path.abspath(expanded_part))
+                    for forbidden_real in resolved_forbidden:
+                        # Match the forbidden directory itself or any path under it
+                        if (resolved_part == forbidden_real or
+                            resolved_part.startswith(forbidden_real + os.path.sep)):
+                            return False, f"Access to '{forbidden_real}' forbidden"
+        except Exception:
+            # If parsing fails, continue with basic validation
+            pass
         
         return True, "OK"
     
@@ -1197,15 +1286,28 @@ class ToolRunner:
         
         try:
             os.chdir(self.project_dir)
-            # Use shlex.split for safe argument parsing to prevent shell injection
-            cmd_args = shlex.split(cmd)
-            result = subprocess.run(
-                cmd_args,
-                shell=False,
-                capture_output=True,
-                text=True,
-                timeout=120
-            )
+            
+            # Check if command needs shell execution (pipes, redirects, etc.)
+            if self._needs_shell(cmd):
+                # Use shell for complex commands (all commands already validated)
+                result = subprocess.run(
+                    cmd,
+                    shell=True,
+                    capture_output=True,
+                    text=True,
+                    timeout=120,
+                    cwd=self.project_dir
+                )
+            else:
+                # Use direct execution for simple commands (safer)
+                cmd_args = shlex.split(cmd)
+                result = subprocess.run(
+                    cmd_args,
+                    shell=False,
+                    capture_output=True,
+                    text=True,
+                    timeout=120
+                )
             
             output = result.stdout + result.stderr
             self._log(f"EXEC: {cmd}\nOUTPUT: {output[:1000]}")
