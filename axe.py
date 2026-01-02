@@ -1661,6 +1661,78 @@ class SharedWorkspace:
             return False
 
 
+def is_genuine_task_completion(response: str) -> bool:
+    """
+    Check if agent is genuinely declaring task complete.
+    
+    Returns False for:
+    - "TASK COMPLETE" inside <result> blocks (file content)
+    - "TASK COMPLETE" inside quoted text
+    - "TASK COMPLETE" in warnings/instructions
+    - "TASK COMPLETE" inside [READ ...] blocks
+    
+    Returns True only for genuine declarations like:
+    - "TASK COMPLETE: Here's what we accomplished..."
+    - "✅ TASK COMPLETE"
+    - "I declare TASK COMPLETE"
+    - "THE TASK IS COMPLETE"
+    """
+    import re
+    
+    response_upper = response.upper()
+    
+    # Must contain task completion phrase (TASK COMPLETE or TASK IS COMPLETE)
+    if 'TASK COMPLETE' not in response_upper and 'TASK IS COMPLETE' not in response_upper:
+        return False
+    
+    # Remove content that should be ignored:
+    cleaned = response
+    
+    # 1. Remove <result>...</result> blocks (file read outputs)
+    cleaned = re.sub(r'<result>.*?</result>', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+    
+    # 2. Remove <function_result>...</function_result> blocks
+    cleaned = re.sub(r'<function_result>.*?</function_result>', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+    
+    # 3. Remove [READ filename] ... blocks
+    cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[|\Z)', '', cleaned, flags=re.DOTALL)
+    
+    # 4. Remove markdown code blocks (```...```)
+    cleaned = re.sub(r'```.*?```', '', cleaned, flags=re.DOTALL)
+    
+    # 5. Remove blockquotes (lines starting with >)
+    cleaned = re.sub(r'^>.*$', '', cleaned, flags=re.MULTILINE)
+    
+    # 6. Remove content inside quotation marks containing task completion phrases
+    cleaned = re.sub(r'"[^"]*TASK\s+(COMPLETE|IS\s+COMPLETE)[^"]*"', '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"'[^']*TASK\s+(COMPLETE|IS\s+COMPLETE)[^']*'", '', cleaned, flags=re.IGNORECASE)
+    
+    # Now check if task completion phrases still exist in cleaned content
+    cleaned_upper = cleaned.upper()
+    
+    if 'TASK COMPLETE' not in cleaned_upper and 'TASK IS COMPLETE' not in cleaned_upper:
+        return False
+    
+    # Additional validation: should be at start of line or after certain patterns
+    # This catches genuine declarations vs passing mentions
+    genuine_patterns = [
+        r'^\s*✅?\s*TASK\s+COMPLETE',           # Starts line (with optional checkmark)
+        r'TASK\s+COMPLETE\s*:',                  # Followed by colon (summary)
+        r'TASK\s+COMPLETE\s*!',                  # Followed by exclamation
+        r'I\s+DECLARE\s+TASK\s+COMPLETE',        # Explicit declaration
+        r'MARKING\s+TASK\s+COMPLETE',            # Marking complete
+        r'THE\s+TASK\s+IS\s+COMPLETE',           # Statement form
+    ]
+    
+    for pattern in genuine_patterns:
+        if re.search(pattern, cleaned_upper, re.MULTILINE):
+            return True
+    
+    # If we get here, TASK COMPLETE exists but doesn't match genuine patterns
+    # Be conservative - don't trigger on ambiguous cases
+    return False
+
+
 class CollaborativeSession:
     """
     Multi-agent collaborative session where models communicate and cooperate.
@@ -2151,7 +2223,7 @@ It's YOUR TURN. What would you like to contribute? Remember:
                             print(c(f"   Total XP: {result['xp']}", Colors.DIM))
                 
                 # Check for special responses
-                if 'TASK COMPLETE' in response_upper:
+                if is_genuine_task_completion(response):
                     print(c("\n✅ TASK MARKED COMPLETE!", Colors.GREEN + Colors.BOLD))
                     
                     # Award bonus XP for task completion to all agents
