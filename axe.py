@@ -2207,32 +2207,36 @@ Follow the session rules to keep work productive and enjoyable for all agents.""
             
             # ===== Phase 6: Check for mandatory sleep =====
             if agent_id:
-                needs_sleep, sleep_msg = self.db.check_mandatory_sleep(agent_id)
-                if needs_sleep:
-                    print(c(f"\n😴 {alias} requires mandatory sleep: {sleep_msg}", Colors.YELLOW))
-                    sleep_result = self.sleep_manager.force_sleep(
-                        agent_id, SLEEP_REASON_TIMEOUT, 
-                        self.agent_ids.get(self.supervisor_name)
-                    )
-                    print(c(f"   Sleep duration: {sleep_result['sleep_duration_minutes']} minutes", Colors.DIM))
-                    # Skip this agent's turn
-                    self.current_turn += 1
-                    continue
-                elif sleep_msg:  # Warning message
-                    print(c(f"⚠️  {alias}: {sleep_msg}", Colors.YELLOW))
+                # Supervisor cannot be forced to sleep - must always be available
+                if alias != self.supervisor_alias and alias != "@boss":
+                    needs_sleep, sleep_msg = self.db.check_mandatory_sleep(agent_id)
+                    if needs_sleep:
+                        print(c(f"\n😴 {alias} requires mandatory sleep: {sleep_msg}", Colors.YELLOW))
+                        sleep_result = self.sleep_manager.force_sleep(
+                            agent_id, SLEEP_REASON_TIMEOUT, 
+                            self.agent_ids.get(self.supervisor_name)
+                        )
+                        print(c(f"   Sleep duration: {sleep_result['sleep_duration_minutes']} minutes", Colors.DIM))
+                        # Skip this agent's turn
+                        self.current_turn += 1
+                        continue
+                    elif sleep_msg:  # Warning message
+                        print(c(f"⚠️  {alias}: {sleep_msg}", Colors.YELLOW))
             
             # ===== Phase 7: Check degradation every N turns =====
             if turn_counter % DEGRADATION_CHECK_INTERVAL == 0 and agent_id:
-                degraded, deg_msg = self.db.check_degradation(agent_id)
-                if degraded:
-                    print(c(f"\n⚠️  {alias} showing degradation: {deg_msg}", Colors.RED))
-                    sleep_result = self.sleep_manager.force_sleep(
-                        agent_id, SLEEP_REASON_DEGRADATION,
-                        self.agent_ids.get(self.supervisor_name)
-                    )
-                    print(c(f"   Forced sleep for {sleep_result['sleep_duration_minutes']} minutes", Colors.DIM))
-                    self.current_turn += 1
-                    continue
+                # Supervisor cannot be forced to sleep - must always be available
+                if alias != self.supervisor_alias and alias != "@boss":
+                    degraded, deg_msg = self.db.check_degradation(agent_id)
+                    if degraded:
+                        print(c(f"\n⚠️  {alias} showing degradation: {deg_msg}", Colors.RED))
+                        sleep_result = self.sleep_manager.force_sleep(
+                            agent_id, SLEEP_REASON_DEGRADATION,
+                            self.agent_ids.get(self.supervisor_name)
+                        )
+                        print(c(f"   Forced sleep for {sleep_result['sleep_duration_minutes']} minutes", Colors.DIM))
+                        self.current_turn += 1
+                        continue
             
             # ===== Check for agents waking up =====
             woken_agents = self.sleep_manager.check_and_wake_agents()
@@ -2481,6 +2485,11 @@ It's YOUR TURN. What would you like to contribute? Remember:
         alias = self.agent_aliases.get(agent_name, agent_name)
         agent_id = self.agent_ids.get(agent_name)
         
+        # Supervisor cannot take breaks - must always be available
+        if alias == self.supervisor_alias or alias == "@boss":
+            print(c(f"\n   ❌ Supervisors cannot take breaks during active sessions", Colors.YELLOW))
+            return
+        
         # Use extracted content if available, otherwise try old format
         reason = content if content else "Unspecified"
         if not content:
@@ -2498,15 +2507,8 @@ It's YOUR TURN. What would you like to contribute? Remember:
             agent_id, alias, 'coffee', reason
         )
         
-        # Auto-approve if supervisor or if conditions are met
-        if alias == self.supervisor_alias:
-            result = self.break_system.approve_break(request['id'])
-            if result['approved']:
-                print(c(f"   Break approved ({result['duration_minutes']} min)", Colors.GREEN))
-            else:
-                print(c(f"   Break denied: {result['reason']}", Colors.YELLOW))
-        else:
-            print(c(f"   Request pending supervisor approval (ID: {request['id'][:8]})", Colors.DIM))
+        # Request pending supervisor approval
+        print(c(f"   Request pending supervisor approval (ID: {request['id'][:8]})", Colors.DIM))
     
     def _handle_emergency_message(self, agent_name: str, response: str, content: str = "") -> None:
         """Handle an emergency message from an agent."""
