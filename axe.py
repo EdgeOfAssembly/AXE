@@ -1687,11 +1687,21 @@ def is_genuine_task_completion(response: str) -> bool:
     # Remove content that should be ignored:
     cleaned = response
     
-    # 1. Remove <result>...</result> blocks (file read outputs)
-    cleaned = re.sub(r'<result>.*?</result>', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+    # 1. Remove <result>...</result> blocks (file read outputs), handling possible nesting
+    result_pattern = re.compile(r'<result>.*?</result>', flags=re.DOTALL | re.IGNORECASE)
+    while True:
+        new_cleaned = result_pattern.sub('', cleaned)
+        if new_cleaned == cleaned:
+            break
+        cleaned = new_cleaned
     
-    # 2. Remove <function_result>...</function_result> blocks
-    cleaned = re.sub(r'<function_result>.*?</function_result>', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+    # 2. Remove <function_result>...</function_result> blocks, handling possible nesting
+    function_result_pattern = re.compile(r'<function_result>.*?</function_result>', flags=re.DOTALL | re.IGNORECASE)
+    while True:
+        new_cleaned = function_result_pattern.sub('', cleaned)
+        if new_cleaned == cleaned:
+            break
+        cleaned = new_cleaned
     
     # 3. Remove [READ filename] ... blocks
     # Pattern matches [READ ...] followed by content until: double newline, another [, or end of string
@@ -1704,7 +1714,12 @@ def is_genuine_task_completion(response: str) -> bool:
     cleaned = re.sub(r'^>.*$', '', cleaned, flags=re.MULTILINE)
     
     # 6. Remove content inside quotation marks containing task completion phrases
-    cleaned = re.sub(r'["\'][^"\']*TASK\s+(COMPLETE|IS\s+COMPLETE)[^"\']*["\']', '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(
+        r'"[^"]*TASK\s+(?:COMPLETE|IS\s+COMPLETE)[^"]*"|\'[^\']*TASK\s+(?:COMPLETE|IS\s+COMPLETE)[^\']*\'',
+        '',
+        cleaned,
+        flags=re.IGNORECASE,
+    )
     
     # Now check if task completion phrases still exist in cleaned content
     cleaned_upper = cleaned.upper()
@@ -2226,7 +2241,7 @@ It's YOUR TURN. What would you like to contribute? Remember:
                             print(c(f"   Total XP: {result['xp']}", Colors.DIM))
                 
                 # Check for special responses
-                if is_genuine_task_completion(response):
+                if is_genuine_task_completion(processed_response):
                     print(c("\n✅ TASK MARKED COMPLETE!", Colors.GREEN + Colors.BOLD))
                     
                     # Award bonus XP for task completion to all agents

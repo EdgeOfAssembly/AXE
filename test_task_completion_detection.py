@@ -176,6 +176,20 @@ def test_ambiguous_mention_not_trigger():
     print("✓ PASSED: Ambiguous mention does not trigger")
 
 
+def test_nested_quotes_in_code_not_trigger():
+    """TASK COMPLETE in code blocks showing quote usage should not trigger."""
+    print("\nTesting: Nested quotes in code block...")
+    response = '''Here's how to check for completion:
+```python
+def check():
+    print("The string 'TASK COMPLETE' should trigger")
+    return True
+```
+This is just example code.'''
+    assert not is_genuine_task_completion(response), "Nested quotes in code should not trigger"
+    print("✓ PASSED: Nested quotes in code block does not trigger")
+
+
 def run_all_tests():
     """Run all tests."""
     print("=" * 60)
@@ -192,6 +206,7 @@ def run_all_tests():
         test_read_block_not_trigger()
         test_lowercase_read_block_not_trigger()
         test_ambiguous_mention_not_trigger()
+        test_nested_quotes_in_code_not_trigger()
         
         # Tests that SHOULD trigger
         test_genuine_with_colon_triggers()

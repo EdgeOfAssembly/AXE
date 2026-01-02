@@ -12,15 +12,16 @@ Prevent sessions from terminating when agents read files containing "TASK COMPLE
 ### Implementation
 - Added `is_genuine_task_completion()` function (axe.py, lines 1665-1732)
 - Context-aware detection that filters out false positives
-- Updated line 2226 to use new function instead of simple string match
+- Updated line 2229 to use new function instead of simple string match
 
 ### Testing
-17 comprehensive tests covering all scenarios:
+18 comprehensive tests covering all scenarios:
 - File content with "TASK COMPLETE" → ✅ doesn't trigger
 - Quoted text with "TASK COMPLETE" → ✅ doesn't trigger  
 - Code blocks with "TASK COMPLETE" → ✅ doesn't trigger
 - READ blocks (uppercase/lowercase) → ✅ doesn't trigger
 - Blockquotes with "TASK COMPLETE" → ✅ doesn't trigger
+- Nested quotes in code blocks → ✅ doesn't trigger
 - Genuine declarations → ✅ correctly trigger
 - Complex scenarios → ✅ handled properly
 
@@ -47,7 +48,7 @@ Fix counter showing 0 when agents are initialized
 - [x] Active agents counter shows correct number
 - [x] Status report reflects actual session state
 - [x] All existing functionality preserved
-- [x] All tests pass (17 new + all existing)
+- [x] All tests pass (18 new + all existing)
 - [x] Code follows best practices (PEP 8, proper imports, clear comments)
 
 ## Code Review ✅
@@ -59,7 +60,7 @@ Fix counter showing 0 when agents are initialized
 ## Test Results
 
 ### New Tests
-- `test_task_completion_detection.py`: **17/17 PASSED** ✅
+- `test_task_completion_detection.py`: **18/18 PASSED** ✅
 
 ### Existing Tests  
 - `test_axe_improvements.py`: **ALL PASSED** ✅
@@ -79,7 +80,7 @@ All existing functionality works correctly.
    - Improved imports organization
 
 2. **test_task_completion_detection.py** (new, +220 lines)
-   - 17 comprehensive test cases
+   - 18 comprehensive test cases
    - Covers all false positive scenarios
    - Validates genuine completion detection
 
