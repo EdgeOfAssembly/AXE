@@ -167,6 +167,14 @@ AGENT_TOKEN_EMERGENCY = "[[AGENT_EMERGENCY:"  # Followed by message, ends with ]
 AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"  # Followed by model, role, ends with ]]
 AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
 
+# Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives
+# Matches: [READ ...] (case-insensitive) followed by content until:
+#   - \n\n (double newline) OR
+#   - \n\[(?!\[)[A-Z] (newline + [ + not another [ + any letter, indicating [COMMAND]) OR
+#   - \Z (end of string)
+# Note: Used with re.IGNORECASE flag, so [A-Z] matches both uppercase and lowercase letters
+READ_BLOCK_PATTERN = r'\[READ[^\]]*\].*?(?=\n\n|\n\[(?!\[)[A-Z]|\Z)'
+
 # Session rules displayed at startup (now imported from safety.rules module)
 # SESSION_RULES = """..."""  # Commented out - imported from safety.rules
 
@@ -1721,8 +1729,8 @@ def is_genuine_task_completion(response: str) -> bool:
         cleaned = new_cleaned
     
     # 3. Remove [READ filename] ... blocks
-    # Pattern matches [READ ...] followed by content until: double newline, another [, or end of string
-    cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[|\Z)', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+    # Don't stop at [[ tokens (agent tokens start with [[)
+    cleaned = re.sub(READ_BLOCK_PATTERN, '', cleaned, flags=re.DOTALL | re.IGNORECASE)
     
     # 4. Remove markdown code blocks (```...```)
     cleaned = re.sub(r'```.*?```', '', cleaned, flags=re.DOTALL)
@@ -1780,15 +1788,41 @@ def detect_agent_token(response: str, token: str) -> tuple[bool, str]:
     if not response:
         return False, ""
     
-    # For simple tokens (no content), just check presence
-    if token in response:
+    # Strip file content before checking for tokens (same logic as is_genuine_task_completion)
+    cleaned = response
+    
+    # 1. Remove <result>...</result> blocks (file read outputs), handling possible nesting
+    result_pattern = re.compile(r'<result>.*?</result>', flags=re.DOTALL | re.IGNORECASE)
+    while True:
+        new_cleaned = result_pattern.sub('', cleaned)
+        if new_cleaned == cleaned:
+            break
+        cleaned = new_cleaned
+    
+    # 2. Remove <function_result>...</function_result> blocks, handling possible nesting
+    function_result_pattern = re.compile(r'<function_result>.*?</function_result>', flags=re.DOTALL | re.IGNORECASE)
+    while True:
+        new_cleaned = function_result_pattern.sub('', cleaned)
+        if new_cleaned == cleaned:
+            break
+        cleaned = new_cleaned
+    
+    # 3. Remove [READ filename] ... blocks
+    # Don't stop at [[ tokens (agent tokens start with [[)
+    cleaned = re.sub(READ_BLOCK_PATTERN, '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+    
+    # 4. Remove markdown code blocks (```...```)
+    cleaned = re.sub(r'```.*?```', '', cleaned, flags=re.DOTALL)
+    
+    # Now check for token in cleaned content
+    if token in cleaned:
         # Extract content if token expects it (has trailing colon)
         if token.endswith(':'):
             try:
-                start_idx = response.index(token) + len(token)
+                start_idx = cleaned.index(token) + len(token)
                 # Find the closing ]]
-                end_idx = response.index(']]', start_idx)
-                content = response[start_idx:end_idx].strip()
+                end_idx = cleaned.index(']]', start_idx)
+                content = cleaned[start_idx:end_idx].strip()
                 return True, content
             except (ValueError, IndexError):
                 # Malformed token, ignore
@@ -2181,32 +2215,36 @@ Follow the session rules to keep work productive and enjoyable for all agents.""
             
             # ===== Phase 6: Check for mandatory sleep =====
             if agent_id:
-                needs_sleep, sleep_msg = self.db.check_mandatory_sleep(agent_id)
-                if needs_sleep:
-                    print(c(f"\n😴 {alias} requires mandatory sleep: {sleep_msg}", Colors.YELLOW))
-                    sleep_result = self.sleep_manager.force_sleep(
-                        agent_id, SLEEP_REASON_TIMEOUT, 
-                        self.agent_ids.get(self.supervisor_name)
-                    )
-                    print(c(f"   Sleep duration: {sleep_result['sleep_duration_minutes']} minutes", Colors.DIM))
-                    # Skip this agent's turn
-                    self.current_turn += 1
-                    continue
-                elif sleep_msg:  # Warning message
-                    print(c(f"⚠️  {alias}: {sleep_msg}", Colors.YELLOW))
+                # Supervisor cannot be forced to sleep - must always be available
+                if alias != self.supervisor_alias:
+                    needs_sleep, sleep_msg = self.db.check_mandatory_sleep(agent_id)
+                    if needs_sleep:
+                        print(c(f"\n😴 {alias} requires mandatory sleep: {sleep_msg}", Colors.YELLOW))
+                        sleep_result = self.sleep_manager.force_sleep(
+                            agent_id, SLEEP_REASON_TIMEOUT, 
+                            self.agent_ids.get(self.supervisor_name)
+                        )
+                        print(c(f"   Sleep duration: {sleep_result['sleep_duration_minutes']} minutes", Colors.DIM))
+                        # Skip this agent's turn
+                        self.current_turn += 1
+                        continue
+                    elif sleep_msg:  # Warning message
+                        print(c(f"⚠️  {alias}: {sleep_msg}", Colors.YELLOW))
             
             # ===== Phase 7: Check degradation every N turns =====
             if turn_counter % DEGRADATION_CHECK_INTERVAL == 0 and agent_id:
-                degraded, deg_msg = self.db.check_degradation(agent_id)
-                if degraded:
-                    print(c(f"\n⚠️  {alias} showing degradation: {deg_msg}", Colors.RED))
-                    sleep_result = self.sleep_manager.force_sleep(
-                        agent_id, SLEEP_REASON_DEGRADATION,
-                        self.agent_ids.get(self.supervisor_name)
-                    )
-                    print(c(f"   Forced sleep for {sleep_result['sleep_duration_minutes']} minutes", Colors.DIM))
-                    self.current_turn += 1
-                    continue
+                # Supervisor cannot be forced to sleep - must always be available
+                if alias != self.supervisor_alias:
+                    degraded, deg_msg = self.db.check_degradation(agent_id)
+                    if degraded:
+                        print(c(f"\n⚠️  {alias} showing degradation: {deg_msg}", Colors.RED))
+                        sleep_result = self.sleep_manager.force_sleep(
+                            agent_id, SLEEP_REASON_DEGRADATION,
+                            self.agent_ids.get(self.supervisor_name)
+                        )
+                        print(c(f"   Forced sleep for {sleep_result['sleep_duration_minutes']} minutes", Colors.DIM))
+                        self.current_turn += 1
+                        continue
             
             # ===== Check for agents waking up =====
             woken_agents = self.sleep_manager.check_and_wake_agents()
@@ -2455,6 +2493,11 @@ It's YOUR TURN. What would you like to contribute? Remember:
         alias = self.agent_aliases.get(agent_name, agent_name)
         agent_id = self.agent_ids.get(agent_name)
         
+        # Supervisor cannot take breaks - must always be available
+        if alias == self.supervisor_alias:
+            print(c(f"\n   ❌ Supervisors cannot take breaks during active sessions", Colors.YELLOW))
+            return
+        
         # Use extracted content if available, otherwise try old format
         reason = content if content else "Unspecified"
         if not content:
@@ -2472,15 +2515,8 @@ It's YOUR TURN. What would you like to contribute? Remember:
             agent_id, alias, 'coffee', reason
         )
         
-        # Auto-approve if supervisor or if conditions are met
-        if alias == self.supervisor_alias:
-            result = self.break_system.approve_break(request['id'])
-            if result['approved']:
-                print(c(f"   Break approved ({result['duration_minutes']} min)", Colors.GREEN))
-            else:
-                print(c(f"   Break denied: {result['reason']}", Colors.YELLOW))
-        else:
-            print(c(f"   Request pending supervisor approval (ID: {request['id'][:8]})", Colors.DIM))
+        # Request pending supervisor approval
+        print(c(f"   Request pending supervisor approval (ID: {request['id'][:8]})", Colors.DIM))
     
     def _handle_emergency_message(self, agent_name: str, response: str, content: str = "") -> None:
         """Handle an emergency message from an agent."""

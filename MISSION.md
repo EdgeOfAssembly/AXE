@@ -11,39 +11,35 @@ AXE is a lightweight, modular execution engine designed to orchestrate AI agent 
 3. **Modularity** - Components that can be mixed and matched as needed
 4. **Observability** - Full visibility into agent execution and state
 
-## Token Documentation
+## Agent Communication Tokens
 
-The following control tokens are used to manage agent turn-taking and execution flow. These tokens are parsed by the execution engine to coordinate multi-agent interactions.
+AXE uses special control tokens to coordinate multi-agent interactions. These tokens are defined in `axe.py` and should NEVER be written literally in files, as they trigger detection.
 
-### Available Tokens
+### Token Reference
 
-| Token | Description |
-|-------|-------------|
-| `[[` + `AGENT_PASS_TURN]]` | Signals that the current agent is yielding control to the next agent in the queue |
-| `[[` + `AGENT_REQUEST_INPUT]]` | Indicates the agent needs user input before proceeding |
-| `[[` + `AGENT_COMPLETE]]` | Marks the successful completion of an agent's task |
-| `[[` + `AGENT_ERROR]]` | Signals an error condition that requires handling |
-| `[[` + `AGENT_WAIT]]` | Pauses execution until an external condition is met |
-
-### Usage Examples
-
-When an agent finishes its subtask and needs to hand off:
-```
-Result: Analysis complete.
-[[` + `AGENT_PASS_TURN]]
+To see the current token definitions, run:
+```bash
+grep "AGENT_TOKEN" axe.py | head -6
 ```
 
-When an agent encounters an unrecoverable error:
-```
-Error: Unable to access resource.
-[[` + `AGENT_ERROR]]
-```
+**Important**: Do not copy or paste these tokens into any documentation or files. While the token detection system now properly filters out file content and code blocks, it's still best practice to avoid literal tokens in documentation.
 
-When all work is successfully completed:
-```
-Task finished successfully.
-[[` + `AGENT_COMPLETE]]
-```
+### Token Purpose
+
+The tokens enable agents to:
+- **Pass control** to the next agent in sequence
+- **Request breaks** when needing rest
+- **Report task completion** with a summary
+- **Signal emergencies** that need immediate attention  
+- **Spawn new agents** (supervisor only)
+- **Check status** of the collaboration
+
+### Usage Guidelines
+
+- Tokens are automatically detected in agent responses
+- Only use tokens when you genuinely intend to trigger that action
+- Reading files that contain token definitions will NOT trigger false positives (the engine strips file content)
+- Tokens work whether in old format or new format
 
 ## Architecture Overview
 
