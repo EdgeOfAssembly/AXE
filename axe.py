@@ -1225,8 +1225,14 @@ class ResponseProcessor:
         """
         Process agent response and execute any code blocks.
         Returns the response with execution results appended.
+        
+        Supports both XML function calls and markdown code blocks.
         """
         import re
+        from utils.xml_tool_parser import process_agent_response as process_xml_calls
+        
+        # First, check for XML function calls
+        original_response, xml_results = process_xml_calls(response, self.project_dir, self)
         
         # Pattern to match code blocks: ```TYPE [args]\ncontent\n```
         # Matches READ, EXEC, WRITE blocks
@@ -1234,60 +1240,69 @@ class ResponseProcessor:
         
         matches = list(re.finditer(pattern, response, re.DOTALL))
         
-        if not matches:
-            return response
+        # Collect all results (both XML and markdown blocks)
+        all_results = []
         
-        # Process each block
-        results = []
-        for match in matches:
-            block_type = match.group(1)
-            args = match.group(2).strip()
-            content = match.group(3).rstrip('\n')
+        # Add XML results first
+        if xml_results:
+            for xml_result in xml_results:
+                all_results.append(f"\n{xml_result}")
+        
+        # Process markdown blocks if found
+        if matches:
+            # Process each block
+            results = []
+            for match in matches:
+                block_type = match.group(1)
+                args = match.group(2).strip()
+                content = match.group(3).rstrip('\n')
+                
+                if block_type == 'READ':
+                    # Sanitize filename: strip trailing backticks that may be included by accident
+                    filename = (args or content).strip().rstrip('`')
+                    result = self._handle_read(filename)
+                    results.append(f"\n[READ {filename}]\n{result}")
+                
+                elif block_type == 'EXEC':
+                    command = args or content
+                    result = self._handle_exec(command)
+                    results.append(f"\n[EXEC: {command}]\n{result}")
+                
+                elif block_type == 'WRITE':
+                    # args contains the filename, content contains the file content
+                    # Sanitize filename: strip trailing backticks that may be included by accident
+                    filename = args.strip().rstrip('`')
+                    # Basic validation: non-empty filename
+                    if not filename:
+                        results.append(f"\n[WRITE ERROR: Invalid or empty filename]")
+                        continue
+                    # Validate path using _resolve_project_path which handles:
+                    # - Absolute paths within project directory (allowed)
+                    # - Relative paths (allowed if within project)
+                    # - Path traversal attempts (rejected)
+                    # - Paths outside project directory (rejected)
+                    #
+                    # NOTE SECURITY LIMITATION:
+                    # _resolve_project_path() currently relies on os.path.abspath(), which does *not*
+                    # resolve symlinks. This means a symlink inside the project (e.g. "evil" -> /etc/passwd)
+                    # could pass this check while pointing outside the project directory, enabling
+                    # a potential symlink-based directory escape on WRITE.
+                    #
+                    # FOLLOW-UP: Harden _resolve_project_path() to use os.path.realpath() (as done in
+                    # other parts of the codebase) and ensure that the resolved path is used for all
+                    # file operations, to robustly prevent symlink-based escapes.
+                    resolved_path = self._resolve_project_path(filename)
+                    if resolved_path is None:
+                        results.append(f"\n[WRITE ERROR: Invalid filename (path outside project directory)]")
+                        continue
+                    result = self._handle_write(filename, content)
+                    results.append(f"\n[WRITE {filename}]\n{result}")
             
-            if block_type == 'READ':
-                # Sanitize filename: strip trailing backticks that may be included by accident
-                filename = (args or content).strip().rstrip('`')
-                result = self._handle_read(filename)
-                results.append(f"\n[READ {filename}]\n{result}")
-            
-            elif block_type == 'EXEC':
-                command = args or content
-                result = self._handle_exec(command)
-                results.append(f"\n[EXEC: {command}]\n{result}")
-            
-            elif block_type == 'WRITE':
-                # args contains the filename, content contains the file content
-                # Sanitize filename: strip trailing backticks that may be included by accident
-                filename = args.strip().rstrip('`')
-                # Basic validation: non-empty filename
-                if not filename:
-                    results.append(f"\n[WRITE ERROR: Invalid or empty filename]")
-                    continue
-                # Validate path using _resolve_project_path which handles:
-                # - Absolute paths within project directory (allowed)
-                # - Relative paths (allowed if within project)
-                # - Path traversal attempts (rejected)
-                # - Paths outside project directory (rejected)
-                #
-                # NOTE SECURITY LIMITATION:
-                # _resolve_project_path() currently relies on os.path.abspath(), which does *not*
-                # resolve symlinks. This means a symlink inside the project (e.g. "evil" -> /etc/passwd)
-                # could pass this check while pointing outside the project directory, enabling
-                # a potential symlink-based directory escape on WRITE.
-                #
-                # FOLLOW-UP: Harden _resolve_project_path() to use os.path.realpath() (as done in
-                # other parts of the codebase) and ensure that the resolved path is used for all
-                # file operations, to robustly prevent symlink-based escapes.
-                resolved_path = self._resolve_project_path(filename)
-                if resolved_path is None:
-                    results.append(f"\n[WRITE ERROR: Invalid filename (path outside project directory)]")
-                    continue
-                result = self._handle_write(filename, content)
-                results.append(f"\n[WRITE {filename}]\n{result}")
+            all_results.extend(results)
         
         # Append all results to the original response
-        if results:
-            return response + "\n\n--- Execution Results ---" + "".join(results)
+        if all_results:
+            return response + "\n\n--- Execution Results ---" + "".join(all_results)
         
         return response
     
