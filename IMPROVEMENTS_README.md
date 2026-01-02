@@ -343,6 +343,8 @@ cat /tmp/axe_resources.txt
 
 ## Database Inspection
 
+The agent database (`axe_agents.db`) is stored in the AXE installation directory and persists across different workspace sessions.
+
 To inspect the agent database:
 ```bash
 sqlite3 axe_agents.db

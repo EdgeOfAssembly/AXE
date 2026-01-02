@@ -60,7 +60,7 @@ python3 axe.py --collab llama,grok,claude \
 
 ## Database
 
-**Location**: `axe_agents.db` in current directory
+**Location**: `axe_agents.db` in AXE installation directory (persists across workspaces)
 
 **Inspect**:
 ```bash
