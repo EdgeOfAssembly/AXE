@@ -6,6 +6,7 @@ not the workspace directory.
 """
 import os
 import sys
+import sqlite3
 import tempfile
 import shutil
 from pathlib import Path
@@ -100,13 +101,11 @@ def test_database_tables_autocreate():
         print("  ✓ Database file created")
         
         # Verify tables exist
-        import sqlite3
-        conn = sqlite3.connect(test_db_path)
-        cursor = conn.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"
-        )
-        tables = [row[0] for row in cursor.fetchall()]
-        conn.close()
+        with sqlite3.connect(test_db_path) as conn:
+            cursor = conn.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"
+            )
+            tables = [row[0] for row in cursor.fetchall()]
         
         print(f"  Tables found: {tables}")
         
@@ -194,13 +193,11 @@ def test_empty_database_file():
         db = AgentDatabase(db_path=test_db_path)
         
         # Verify tables were created
-        import sqlite3
-        conn = sqlite3.connect(test_db_path)
-        cursor = conn.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"
-        )
-        tables = [row[0] for row in cursor.fetchall()]
-        conn.close()
+        with sqlite3.connect(test_db_path) as conn:
+            cursor = conn.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"
+            )
+            tables = [row[0] for row in cursor.fetchall()]
         
         assert 'agent_state' in tables, "agent_state table should exist"
         assert 'supervisor_log' in tables, "supervisor_log table should exist"

@@ -62,7 +62,7 @@ def simulate_problem_scenario():
             # Try to use the database to ensure tables exist
             print("Testing database operations...")
             try:
-                # This would crash with "no such table: agent_state" if tables don't exist
+                # This would cause a "no such table: agent_state" error if tables don't exist
                 agent_id = "test_agent_123"
                 db.save_agent_state(
                     agent_id=agent_id,
@@ -91,12 +91,11 @@ def simulate_problem_scenario():
             
             # Verify tables exist
             print("Verifying database tables...")
-            conn = sqlite3.connect(db.db_path)
-            cursor = conn.execute(
-                "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"
-            )
-            tables = [row[0] for row in cursor.fetchall()]
-            conn.close()
+            with sqlite3.connect(db.db_path) as conn:
+                cursor = conn.execute(
+                    "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"
+                )
+                tables = [row[0] for row in cursor.fetchall()]
             
             print(f"  Tables: {', '.join(tables)}")
             
