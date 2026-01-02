@@ -10,6 +10,9 @@ from unittest.mock import MagicMock, Mock
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+# Import the actual class to get methods
+from axe import CollaborativeSession
+
 
 def test_supervisor_cannot_request_break():
     """Supervisor should not be able to request breaks."""
@@ -30,8 +33,7 @@ def test_supervisor_cannot_request_break():
         return {'id': 'test-break-123'}
     session.break_system.request_break = track_break_request
     
-    # Import the actual method and bind it to our mock
-    from axe import CollaborativeSession
+    # Use the actual method
     method = CollaborativeSession._handle_break_request
     
     # Test: Supervisor tries to request a break
@@ -61,8 +63,7 @@ def test_non_supervisor_can_request_break():
         return {'id': 'test-break-123'}
     session.break_system.request_break = track_break_request
     
-    # Import the actual method and bind it to our mock
-    from axe import CollaborativeSession
+    # Use the actual method
     method = CollaborativeSession._handle_break_request
     
     # Test: Non-supervisor agent requests a break
@@ -93,8 +94,7 @@ def test_supervisor_with_boss_alias_blocked():
         return {'id': 'test-break-123'}
     session.break_system.request_break = track_break_request
     
-    # Import the actual method and bind it to our mock
-    from axe import CollaborativeSession
+    # Use the actual method
     method = CollaborativeSession._handle_break_request
     
     # Test: Try break request (alias should be checked)

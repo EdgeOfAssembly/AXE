@@ -167,6 +167,13 @@ AGENT_TOKEN_EMERGENCY = "[[AGENT_EMERGENCY:"  # Followed by message, ends with ]
 AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"  # Followed by model, role, ends with ]]
 AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
 
+# Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives
+# Matches: [READ ...] followed by content until:
+#   - \n\n (double newline) OR
+#   - \n\[(?!\[)[A-Z] (newline + [ + not another [ + uppercase letter, indicating [COMMAND]) OR
+#   - \Z (end of string)
+READ_BLOCK_PATTERN = r'\[READ[^\]]*\].*?(?=\n\n|\n\[(?!\[)[A-Z]|\Z)'
+
 # Session rules displayed at startup (now imported from safety.rules module)
 # SESSION_RULES = """..."""  # Commented out - imported from safety.rules
 
@@ -1721,9 +1728,8 @@ def is_genuine_task_completion(response: str) -> bool:
         cleaned = new_cleaned
     
     # 3. Remove [READ filename] ... blocks
-    # Pattern matches [READ ...] followed by content until: double newline, another command [WORD], or end of string
     # Don't stop at [[ tokens (agent tokens start with [[)
-    cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[(?!\[)[A-Z]|\Z)', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+    cleaned = re.sub(READ_BLOCK_PATTERN, '', cleaned, flags=re.DOTALL | re.IGNORECASE)
     
     # 4. Remove markdown code blocks (```...```)
     cleaned = re.sub(r'```.*?```', '', cleaned, flags=re.DOTALL)
@@ -1801,9 +1807,8 @@ def detect_agent_token(response: str, token: str) -> tuple[bool, str]:
         cleaned = new_cleaned
     
     # 3. Remove [READ filename] ... blocks
-    # Pattern matches [READ ...] followed by content until: double newline, another command [WORD], or end of string
     # Don't stop at [[ tokens (agent tokens start with [[)
-    cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[(?!\[)[A-Z]|\Z)', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+    cleaned = re.sub(READ_BLOCK_PATTERN, '', cleaned, flags=re.DOTALL | re.IGNORECASE)
     
     # 4. Remove markdown code blocks (```...```)
     cleaned = re.sub(r'```.*?```', '', cleaned, flags=re.DOTALL)
