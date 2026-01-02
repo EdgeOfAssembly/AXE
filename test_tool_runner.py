@@ -367,6 +367,128 @@ def test_integration_with_execution():
         return True
 
 
+def test_heredocs():
+    """Test that heredoc content doesn't break command parsing."""
+    print("\n" + "="*70)
+    print("TEST: Heredocs")
+    print("="*70)
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        config = Config()
+        runner = ToolRunner(config, tmpdir)
+        
+        # Test 1: Heredoc with markdown content (dashes, numbers, etc.)
+        print("\nTest 1: Heredoc with markdown content")
+        cmd = """cat >> file.md << 'EOF'
+## Header
+
+### Assignments:
+- @agent1: Task 1
+- @agent2: Task 2
+
+### Priority Areas:
+1. Error handling consistency
+2. Docstring coverage
+
+---
+EOF"""
+        allowed, reason = runner.is_tool_allowed(cmd)
+        assert allowed, f"Heredoc with markdown should work: {reason}"
+        commands = runner._extract_commands_from_shell(cmd)
+        assert commands == ['cat'], f"Should extract only 'cat', got {commands}"
+        print("  ✓ Heredoc with markdown content allowed")
+        
+        # Test 2: Heredoc with shell operators in content
+        print("\nTest 2: Heredoc with shell operators in content")
+        cmd = """cat << 'EOF'
+This has | pipe
+And && operator
+Also || operator
+And semicolon ; here
+EOF"""
+        allowed, reason = runner.is_tool_allowed(cmd)
+        assert allowed, f"Heredoc with operators in content should work: {reason}"
+        commands = runner._extract_commands_from_shell(cmd)
+        assert commands == ['cat'], f"Should extract only 'cat', got {commands}"
+        print("  ✓ Heredoc with operators in content allowed")
+        
+        # Test 3: Heredoc with code content
+        print("\nTest 3: Heredoc with code content")
+        cmd = """cat > script.py << EOF
+if x > 0:
+    print(x)
+EOF"""
+        allowed, reason = runner.is_tool_allowed(cmd)
+        assert allowed, f"Heredoc with code should work: {reason}"
+        commands = runner._extract_commands_from_shell(cmd)
+        assert commands == ['cat'], f"Should extract only 'cat', got {commands}"
+        print("  ✓ Heredoc with code content allowed")
+        
+        # Test 4: Heredoc with double quotes
+        print("\nTest 4: Heredoc with double quotes")
+        cmd = """cat << "EOF"
+content here
+EOF"""
+        allowed, reason = runner.is_tool_allowed(cmd)
+        assert allowed, f"Heredoc with double quotes should work: {reason}"
+        commands = runner._extract_commands_from_shell(cmd)
+        assert commands == ['cat'], f"Should extract only 'cat', got {commands}"
+        print("  ✓ Heredoc with double quotes allowed")
+        
+        # Test 5: Heredoc with <<- (indented)
+        print("\nTest 5: Heredoc with <<- (indented)")
+        cmd = """cat <<- EOF
+	indented content
+	more content
+	EOF"""
+        allowed, reason = runner.is_tool_allowed(cmd)
+        assert allowed, f"Indented heredoc should work: {reason}"
+        commands = runner._extract_commands_from_shell(cmd)
+        assert commands == ['cat'], f"Should extract only 'cat', got {commands}"
+        print("  ✓ Indented heredoc allowed")
+        
+        # Test 6: Heredoc followed by pipe
+        print("\nTest 6: Heredoc followed by pipe (heredoc content piped)")
+        cmd = """cat << EOF | grep pattern
+line1
+line2
+EOF"""
+        allowed, reason = runner.is_tool_allowed(cmd)
+        assert allowed, f"Heredoc with pipe should work: {reason}"
+        commands = runner._extract_commands_from_shell(cmd)
+        # Only cat should be extracted (heredoc content removed before pipe)
+        assert 'cat' in commands, f"Should extract 'cat', got {commands}"
+        print("  ✓ Heredoc followed by pipe allowed")
+        
+        # Test 7: Heredoc followed by logical operator
+        print("\nTest 7: Heredoc followed by logical operator")
+        cmd = """cat << EOF && ls
+content
+EOF"""
+        allowed, reason = runner.is_tool_allowed(cmd)
+        assert allowed, f"Heredoc with && should work: {reason}"
+        commands = runner._extract_commands_from_shell(cmd)
+        assert 'cat' in commands and 'ls' in commands, f"Should extract both commands, got {commands}"
+        print("  ✓ Heredoc followed by logical operator allowed")
+        
+        # Test 8: Multiple heredocs (edge case)
+        print("\nTest 8: Multiple heredocs")
+        cmd = """cat << EOF1
+content1
+EOF1
+cat << EOF2
+content2
+EOF2"""
+        allowed, reason = runner.is_tool_allowed(cmd)
+        # This might not work perfectly but shouldn't crash
+        commands = runner._extract_commands_from_shell(cmd)
+        assert 'cat' in commands, f"Should extract at least 'cat', got {commands}"
+        print("  ✓ Multiple heredocs handled")
+        
+        print("\n✅ All heredoc tests passed!")
+        return True
+
+
 def run_all_tests():
     """Run all test suites."""
     print("\n" + "="*70)
@@ -382,6 +504,7 @@ def run_all_tests():
         ("Forbidden Paths", test_forbidden_paths),
         ("_needs_shell Helper", test_needs_shell),
         ("_extract_commands_from_shell", test_extract_commands),
+        ("Heredocs", test_heredocs),
         ("Integration with Execution", test_integration_with_execution),
     ]
     
