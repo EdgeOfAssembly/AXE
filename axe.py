@@ -1721,8 +1721,9 @@ def is_genuine_task_completion(response: str) -> bool:
         cleaned = new_cleaned
     
     # 3. Remove [READ filename] ... blocks
-    # Pattern matches [READ ...] followed by content until: double newline, another [, or end of string
-    cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[|\Z)', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+    # Pattern matches [READ ...] followed by content until: double newline, another command [WORD], or end of string
+    # Don't stop at [[ tokens (agent tokens start with [[)
+    cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[(?!\[)[A-Z]|\Z)', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
     
     # 4. Remove markdown code blocks (```...```)
     cleaned = re.sub(r'```.*?```', '', cleaned, flags=re.DOTALL)
@@ -1800,8 +1801,9 @@ def detect_agent_token(response: str, token: str) -> tuple[bool, str]:
         cleaned = new_cleaned
     
     # 3. Remove [READ filename] ... blocks
-    # Pattern matches [READ ...] followed by content until: double newline, another [, or end of string
-    cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[|\Z)', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+    # Pattern matches [READ ...] followed by content until: double newline, another command [WORD], or end of string
+    # Don't stop at [[ tokens (agent tokens start with [[)
+    cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[(?!\[)[A-Z]|\Z)', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
     
     # 4. Remove markdown code blocks (```...```)
     cleaned = re.sub(r'```.*?```', '', cleaned, flags=re.DOTALL)
