@@ -31,6 +31,7 @@ import threading
 import base64
 import hashlib
 import atexit
+import re
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
 from typing import List, Optional, Tuple, Dict, Any
@@ -1677,8 +1678,6 @@ def is_genuine_task_completion(response: str) -> bool:
     - "I declare TASK COMPLETE"
     - "THE TASK IS COMPLETE"
     """
-    import re
-    
     response_upper = response.upper()
     
     # Must contain task completion phrase (TASK COMPLETE or TASK IS COMPLETE)
@@ -1695,6 +1694,7 @@ def is_genuine_task_completion(response: str) -> bool:
     cleaned = re.sub(r'<function_result>.*?</function_result>', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
     
     # 3. Remove [READ filename] ... blocks
+    # Pattern matches [READ ...] followed by content until: double newline, another [, or end of string
     cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[|\Z)', '', cleaned, flags=re.DOTALL)
     
     # 4. Remove markdown code blocks (```...```)
@@ -1704,8 +1704,7 @@ def is_genuine_task_completion(response: str) -> bool:
     cleaned = re.sub(r'^>.*$', '', cleaned, flags=re.MULTILINE)
     
     # 6. Remove content inside quotation marks containing task completion phrases
-    cleaned = re.sub(r'"[^"]*TASK\s+(COMPLETE|IS\s+COMPLETE)[^"]*"', '', cleaned, flags=re.IGNORECASE)
-    cleaned = re.sub(r"'[^']*TASK\s+(COMPLETE|IS\s+COMPLETE)[^']*'", '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r'["\'][^"\']*TASK\s+(COMPLETE|IS\s+COMPLETE)[^"\']*["\']', '', cleaned, flags=re.IGNORECASE)
     
     # Now check if task completion phrases still exist in cleaned content
     cleaned_upper = cleaned.upper()
