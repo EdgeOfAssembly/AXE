@@ -77,7 +77,7 @@ I have successfully implemented **all 5 requested phases** from your improvement
 - Error counts and work time
 - Supervisor decisions (audit trail)
 
-**Database location**: `axe_agents.db` in current directory
+**Database location**: `axe_agents.db` in AXE installation directory (persists across workspaces)
 
 **See it**: Demo section 5 shows save/load cycle with 3 agents
 
