@@ -8,6 +8,79 @@
 
 ---
 
+## ⛔ CRITICAL RESOURCE CONSTRAINTS
+
+> **READ THIS FIRST - VIOLATION = SESSION TERMINATION**
+
+### 🚫 DO NOT SPAWN AGENTS
+- **DO NOT** use the spawn command under any circumstances
+- **DO NOT** request additional agents - work with what you have
+- The initial team is sufficient for all tasks
+- Spawning wastes API credits and risks rate limits
+
+### 💰 API Budget Awareness
+- You are using **paid API credits** - every token costs money
+- Be **concise** - don't repeat yourself, don't pad responses
+- Prefer **cheaper models** for routine tasks:
+  - `@llama` (HuggingFace) = FREE tier
+  - `@copilot` (GitHub) = FREE with Copilot subscription
+- Reserve expensive models (`@claude`, `@gpt`) for complex reasoning only
+
+### ⏱️ Rate Limit Protocol
+If you see "rate limit" or "429" errors:
+1. **STOP** making requests to that provider
+2. **WAIT** at least 60 seconds
+3. **SWITCH** to a different agent/provider if urgent
+4. **REPORT** to @boss: "Rate limited on [provider], switching to [alternative]"
+
+### 📊 Token Limits
+- Keep responses under **2000 tokens** unless absolutely necessary
+- Summarize long file contents instead of quoting entirely
+- Use `head`/`tail` when reading large files
+
+---
+
+## 📂 OUTPUT STRATEGY: Patches + Direct Edits
+
+### When to Create Patches (Preferred for Core Files)
+Create `.patch` files in `patches/` directory for:
+- Changes to `axe.py` (core engine)
+- Changes to `database/agent_db.py`
+- Any security-sensitive modifications
+- Complex multi-file refactors
+
+**Patch Format:**
+```bash
+# Create patch
+diff -u original_file.py modified_file.py > patches/YYYYMMDD_description.patch
+
+# Or use git
+git diff path/to/file > patches/YYYYMMDD_description.patch
+```
+
+**Patch Naming Convention:**
+```
+patches/
+├── 20260102_plugin_system_core.patch
+├── 20260102_rate_limit_handler.patch
+└── 20260102_token_tracker_integration.patch
+```
+
+### When to Directly Modify Files
+Direct `WRITE` blocks are OK for:
+- New files (new modules, tests, docs)
+- Configuration files (`axe.yaml`)
+- Documentation (`*.md` files)
+- Test files (`test_*.py`)
+- Files in `utils/`, `models/`, `progression/`
+
+### Workflow
+1. **Small changes** → Direct WRITE
+2. **Core engine changes** → Create patch + explain in shared notes
+3. **New features** → New files (direct) + patches for integration points
+
+---
+
 ## 🎯 What is AXE?
 
 AXE is a **terminal-based multiagent coding assistant** that orchestrates multiple AI models
@@ -27,6 +100,10 @@ AXE is a **terminal-based multiagent coding assistant** that orchestrates multip
 AXE/
 ├── axe.py              # Main entry point (3000+ lines) - Core engine
 ├── axe.yaml            # Configuration: providers, agents, tools, directories
+├── MISSION.md          # THIS FILE - read first!
+│
+├── patches/            # Patch files for core changes (CREATE IF MISSING)
+│   └── *.patch
 │
 ├── core/               # Core multiprocessing utilities
 │   └── multiprocess.py
@@ -72,7 +149,7 @@ AXE/
 | `ChatSession` | Interactive single-user chat mode |
 | `SleepManager` | Mandatory rest system for agents (Phase 6) |
 | `BreakSystem` | Coffee/play break requests and approval (Phase 9) |
-| `DynamicSpawner` | On-demand agent spawning (Phase 10) |
+| `DynamicSpawner` | On-demand agent spawning (Phase 10) - **DISABLED** |
 | `EmergencyMailbox` | Encrypted whistleblower channel (Phase 8) |
 
 ---
@@ -87,7 +164,7 @@ AGENT_TOKEN_PASS = "[[AGENT_PASS_TURN]]"
 AGENT_TOKEN_TASK_COMPLETE = "[[AGENT_TASK_COMPLETE:"  # Ends with ]]
 AGENT_TOKEN_BREAK_REQUEST = "[[AGENT_BREAK_REQUEST:"  # Ends with ]]
 AGENT_TOKEN_EMERGENCY = "[[AGENT_EMERGENCY:"         # Ends with ]]
-AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"                 # Ends with ]]
+AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"                 # DISABLED - DO NOT USE
 AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
 ```
 
@@ -283,6 +360,10 @@ When working with other agents on AXE improvements:
    - Existing tests
    - The collaborative session loop
 
+4. **Never spawn:**
+   - Additional agents (disabled for cost control)
+   - Use the team you were given
+
 ---
 
 ## 📚 Key Files to Understand
@@ -309,6 +390,7 @@ A task is complete when:
 5. ✅ Code follows style guidelines
 6. ✅ Security implications considered
 7. ✅ Ready for PR review
+8. ✅ Patches created for core file changes
 
 ---
 
@@ -318,9 +400,10 @@ A task is complete when:
 - **Architecture decisions:** Discuss with team before implementing
 - **Security concerns:** Flag immediately with `[[AGENT_EMERGENCY: description ]]`
 - **Human intervention:** Use emergency mailbox for critical issues
+- **Rate limits:** Switch providers, don't keep retrying
 
 ---
 
 *Last updated: 2026-01-02*
-*Version: 1.0*
+*Version: 1.1*
 *Maintainer: EdgeOfAssembly*
