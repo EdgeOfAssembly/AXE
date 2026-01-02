@@ -127,6 +127,192 @@ def parse_xml_function_calls(response: str) -> List[Dict[str, Any]]:
     return calls
 
 
+def parse_bash_tags(response: str) -> List[Dict[str, Any]]:
+    """
+    Parse <bash>command</bash> format.
+    
+    Args:
+        response: Agent response text
+    
+    Returns:
+        List of parsed calls in standard format
+    """
+    pattern = r'<bash>(.*?)</bash>'
+    calls = []
+    for match in re.findall(pattern, response, re.DOTALL):
+        cmd = match.strip()
+        if cmd:
+            calls.append({
+                'tool': 'EXEC',
+                'params': {'command': cmd},
+                'raw_name': 'bash'
+            })
+    return calls
+
+
+def parse_shell_codeblocks(response: str) -> List[Dict[str, Any]]:
+    """
+    Parse ```bash, ```shell, ```sh code blocks.
+    
+    Args:
+        response: Agent response text
+    
+    Returns:
+        List of parsed calls in standard format
+    """
+    # Match ```bash or ```shell or ```sh followed by content and closing ```
+    pattern = r'```(?:bash|shell|sh)\n(.*?)```'
+    calls = []
+    for match in re.findall(pattern, response, re.DOTALL):
+        cmd = match.strip()
+        if cmd:
+            # Handle multi-line commands (execute each line)
+            for line in cmd.split('\n'):
+                line = line.strip()
+                if line and not line.startswith('#'):
+                    calls.append({
+                        'tool': 'EXEC',
+                        'params': {'command': line},
+                        'raw_name': 'shell'
+                    })
+    return calls
+
+
+def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:
+    """
+    Parse AXE native ```READ, ```WRITE, ```EXEC blocks.
+    
+    Args:
+        response: Agent response text
+    
+    Returns:
+        List of parsed calls in standard format
+    """
+    calls = []
+    
+    # ```READ /path```
+    read_pattern = r'```READ\s+([^\n`]+)```'
+    for path in re.findall(read_pattern, response):
+        calls.append({
+            'tool': 'READ',
+            'params': {'file_path': path.strip()},
+            'raw_name': 'READ'
+        })
+    
+    # ```EXEC command```
+    exec_pattern = r'```EXEC\s+([^\n`]+)```'
+    for cmd in re.findall(exec_pattern, response):
+        calls.append({
+            'tool': 'EXEC',
+            'params': {'command': cmd.strip()},
+            'raw_name': 'EXEC'
+        })
+    
+    # ```WRITE /path\ncontent```
+    write_pattern = r'```WRITE\s+([^\n]+)\n(.*?)```'
+    for match in re.findall(write_pattern, response, re.DOTALL):
+        path, content = match
+        calls.append({
+            'tool': 'WRITE',
+            'params': {'file_path': path.strip(), 'content': content},
+            'raw_name': 'WRITE'
+        })
+    
+    return calls
+
+
+def parse_simple_xml_tags(response: str) -> List[Dict[str, Any]]:
+    """
+    Parse simple XML tags like <read_file>, <shell>, <bash>.
+    
+    Args:
+        response: Agent response text
+    
+    Returns:
+        List of parsed calls in standard format
+    """
+    calls = []
+    
+    # <read_file>/path</read_file>
+    for path in re.findall(r'<read_file>(.*?)</read_file>', response, re.DOTALL):
+        calls.append({
+            'tool': 'READ',
+            'params': {'file_path': path.strip()},
+            'raw_name': 'read_file'
+        })
+    
+    # <shell>command</shell>
+    for cmd in re.findall(r'<shell>(.*?)</shell>', response, re.DOTALL):
+        calls.append({
+            'tool': 'EXEC',
+            'params': {'command': cmd.strip()},
+            'raw_name': 'shell'
+        })
+    
+    # <write_file path="...">content</write_file>
+    for match in re.findall(r'<write_file\s+path=["\']([^"\']+)["\']>(.*?)</write_file>', response, re.DOTALL):
+        path, content = match
+        calls.append({
+            'tool': 'WRITE',
+            'params': {'file_path': path.strip(), 'content': content},
+            'raw_name': 'write_file'
+        })
+    
+    return calls
+
+
+def deduplicate_calls(calls: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """
+    Remove duplicate tool calls.
+    
+    Args:
+        calls: List of parsed calls
+    
+    Returns:
+        Deduplicated list of calls
+    """
+    seen = set()
+    unique = []
+    for call in calls:
+        key = (call['tool'], str(sorted(call['params'].items())))
+        if key not in seen:
+            seen.add(key)
+            unique.append(call)
+    return unique
+
+
+def parse_all_tool_formats(response: str) -> List[Dict[str, Any]]:
+    """
+    Parse ALL known LLM tool-calling formats from agent response.
+    Returns unified list of tool calls.
+    
+    Args:
+        response: Agent response text that may contain various tool call formats
+    
+    Returns:
+        List of parsed calls from all formats, deduplicated
+    """
+    calls = []
+    
+    # 1. XML function_calls format (existing from PR #6)
+    calls.extend(parse_xml_function_calls(response))
+    
+    # 2. <bash> format
+    calls.extend(parse_bash_tags(response))
+    
+    # 3. ```bash / ```shell / ```sh code blocks
+    calls.extend(parse_shell_codeblocks(response))
+    
+    # 4. AXE native ```READ/WRITE/EXEC``` blocks
+    calls.extend(parse_axe_native_blocks(response))
+    
+    # 5. Simple XML tags like <read_file>, <shell>
+    calls.extend(parse_simple_xml_tags(response))
+    
+    # Deduplicate identical calls
+    return deduplicate_calls(calls)
+
+
 def execute_parsed_call(call: Dict[str, Any], workspace: str, 
                        response_processor: Any) -> str:
     """
@@ -254,26 +440,53 @@ def format_xml_result(tool: str, params: Dict[str, Any], result: str) -> str:
 </result>"""
 
 
+def clean_tool_syntax(response: str) -> str:
+    """
+    Remove all tool-calling syntax from response for cleaner display.
+    
+    Args:
+        response: Agent response with tool syntax
+    
+    Returns:
+        Cleaned response with tool calls replaced
+    """
+    cleaned = response
+    
+    # Remove <function_calls>...</function_calls>
+    cleaned = re.sub(r'<function_calls>.*?</function_calls>', '[TOOL EXECUTED]', cleaned, flags=re.DOTALL)
+    
+    # Remove <bash>...</bash>
+    cleaned = re.sub(r'<bash>.*?</bash>', '[TOOL EXECUTED]', cleaned, flags=re.DOTALL)
+    
+    # Remove ```bash...``` blocks
+    cleaned = re.sub(r'```(?:bash|shell|sh)\n.*?```', '[TOOL EXECUTED]', cleaned, flags=re.DOTALL)
+    
+    # Remove ```READ/WRITE/EXEC...``` blocks
+    cleaned = re.sub(r'```(?:READ|WRITE|EXEC).*?```', '[TOOL EXECUTED]', cleaned, flags=re.DOTALL)
+    
+    return cleaned
+
+
 def process_agent_response(response: str, workspace: str, 
                           response_processor: Any) -> Tuple[str, List[str]]:
     """
-    Main entry point for processing agent responses with XML function calls.
+    Main entry point for processing agent responses with ALL tool call formats.
     
-    Parses XML function calls, executes them, and returns formatted results.
+    Parses all known tool call formats, executes them, and returns formatted results.
     
     Args:
-        response: Agent response that may contain XML function calls
+        response: Agent response that may contain various tool call formats
         workspace: Workspace directory path
         response_processor: ResponseProcessor instance for tool execution
     
     Returns:
         Tuple of (original_response, list_of_xml_results)
     """
-    # Parse XML function calls
-    calls = parse_xml_function_calls(response)
+    # Use comprehensive parser instead of just XML
+    calls = parse_all_tool_formats(response)
     
     if not calls:
-        # No XML function calls found
+        # No tool calls found
         return response, []
     
     # Execute each call and collect results
