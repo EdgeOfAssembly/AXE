@@ -3,6 +3,7 @@ Database operations for agent state persistence.
 Thread-safe SQLite operations with WAL mode.
 """
 
+import os
 import sqlite3
 import json
 import uuid
@@ -20,10 +21,34 @@ from .schema import (
 )
 
 
+def get_database_path() -> str:
+    """Get the path to the AXE database file.
+    
+    Always uses the AXE installation directory, NOT the workspace.
+    This ensures agent XP, levels, and history persist across sessions.
+    
+    Returns:
+        Absolute path to axe_agents.db in the AXE installation directory
+    """
+    # Get the directory where this file (agent_db.py) is located
+    # which is the database/ subdirectory of the AXE installation
+    database_dir = os.path.dirname(os.path.abspath(__file__))
+    # Go up one level to the AXE installation root
+    axe_dir = os.path.dirname(database_dir)
+    return os.path.join(axe_dir, "axe_agents.db")
+
+
 class AgentDatabase:
     """SQLite database manager for agent state, memory, and progression."""
     
-    def __init__(self, db_path: str = "axe_agents.db"):
+    def __init__(self, db_path: Optional[str] = None):
+        """Initialize database connection.
+        
+        Args:
+            db_path: Optional path override. If None, uses AXE installation directory.
+        """
+        if db_path is None:
+            db_path = get_database_path()
         self.db_path = db_path
         self._init_db()
     
