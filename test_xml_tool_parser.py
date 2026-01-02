@@ -533,6 +533,19 @@ def test_sh_codeblock():
     print("  ✓ ```sh blocks parsed correctly")
 
 
+def test_inline_codeblock():
+    """Test parsing inline code blocks without newline."""
+    print("Testing inline code block parsing...")
+    
+    # Test inline format without newline after language specifier
+    response = '```bash ls -la```'
+    calls = parse_shell_codeblocks(response)
+    assert len(calls) == 1
+    assert "ls -la" in calls[0]["params"]["command"]
+    
+    print("  ✓ Inline code blocks parsed correctly")
+
+
 def test_multiline_codeblock():
     """Test parsing multi-line shell code blocks."""
     print("Testing multi-line code block parsing...")
@@ -770,6 +783,7 @@ def main():
         test_bash_codeblock()
         test_shell_codeblock()
         test_sh_codeblock()
+        test_inline_codeblock()
         test_multiline_codeblock()
         test_axe_read_block()
         test_axe_write_block()

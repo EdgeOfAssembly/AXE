@@ -16,6 +16,7 @@ Maps to AXE tools: READ, WRITE, APPEND, EXEC
 """
 import re
 import os
+import json
 from typing import List, Dict, Any, Tuple, Optional
 import xml.etree.ElementTree as ET
 
@@ -161,7 +162,8 @@ def parse_shell_codeblocks(response: str) -> List[Dict[str, Any]]:
         List of parsed calls in standard format
     """
     # Match ```bash or ```shell or ```sh followed by content and closing ```
-    pattern = r'```(?:bash|shell|sh)\n(.*?)```'
+    # Make newline optional to handle inline code blocks
+    pattern = r'```(?:bash|shell|sh)\n?(.*?)```'
     calls = []
     for match in re.findall(pattern, response, re.DOTALL):
         cmd = match.strip()
@@ -190,8 +192,8 @@ def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:
     """
     calls = []
     
-    # ```READ /path```
-    read_pattern = r'```READ\s+([^\n`]+)```'
+    # ```READ /path``` - Use non-greedy match and stop at closing backticks
+    read_pattern = r'```READ\s+([^`]+?)```'
     for path in re.findall(read_pattern, response):
         calls.append({
             'tool': 'READ',
@@ -199,8 +201,8 @@ def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:
             'raw_name': 'READ'
         })
     
-    # ```EXEC command```
-    exec_pattern = r'```EXEC\s+([^\n`]+)```'
+    # ```EXEC command``` - Use non-greedy match for command
+    exec_pattern = r'```EXEC\s+([^`]+?)```'
     for cmd in re.findall(exec_pattern, response):
         calls.append({
             'tool': 'EXEC',
@@ -274,7 +276,8 @@ def deduplicate_calls(calls: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     seen = set()
     unique = []
     for call in calls:
-        key = (call['tool'], str(sorted(call['params'].items())))
+        # Use JSON serialization for consistent hashing
+        key = (call['tool'], json.dumps(call['params'], sort_keys=True))
         if key not in seen:
             seen.add(key)
             unique.append(call)
