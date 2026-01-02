@@ -1797,6 +1797,8 @@ class CollaborativeSession:
                     xp=0,
                     level=1
                 )
+                # Start work tracking immediately
+                self.db.start_work_tracking(agent_id)
             else:
                 print(c(f"Warning: Agent '{agent_name}' not available, skipping", Colors.YELLOW))
         
@@ -1822,6 +1824,8 @@ class CollaborativeSession:
             xp=supervisor_xp,
             level=LEVEL_SUPERVISOR_ELIGIBLE  # Supervisor starts at level 40
         )
+        # Start work tracking for supervisor
+        self.db.start_work_tracking(supervisor_id)
         
         # Session settings
         self.time_limit = time_limit_minutes * 60  # Convert to seconds
