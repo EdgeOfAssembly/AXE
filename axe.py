@@ -96,7 +96,7 @@ from progression.levels import (
     LEVEL_DEPUTY_SUPERVISOR,
     LEVEL_SUPERVISOR_ELIGIBLE
 )
-from database.agent_db import AgentDatabase
+from database.agent_db import AgentDatabase, get_database_path
 from models.metadata import get_model_info, format_token_count
 
 # Models that require max_completion_tokens instead of max_tokens
@@ -1888,7 +1888,7 @@ class CollaborativeSession:
     """
     
     def __init__(self, config: Config, agents: List[str], workspace_dir: str, 
-                 time_limit_minutes: int = 30, db_path: str = "axe_agents.db"):
+                 time_limit_minutes: int = 30, db_path: Optional[str] = None):
         self.config = config
         self.agent_mgr = AgentManager(config)
         self.workspace = SharedWorkspace(workspace_dir)
@@ -2992,7 +2992,7 @@ def generate_sample_config(path: str = 'axe.yaml') -> None:
 _global_db = None
 
 
-def restore_agents_on_startup(db_path: str = "axe_agents.db") -> None:
+def restore_agents_on_startup(db_path: Optional[str] = None) -> None:
     """
     Display agents from database on startup (informational only).
     
@@ -3003,7 +3003,7 @@ def restore_agents_on_startup(db_path: str = "axe_agents.db") -> None:
     existed in previous sessions.
     
     Args:
-        db_path: Path to SQLite database
+        db_path: Optional path to SQLite database. If None, uses AXE installation directory.
     """
     global _global_db
     _global_db = AgentDatabase(db_path)

@@ -87,6 +87,7 @@ All existing functionality works correctly.
 3. **demo_task_completion_fix.py** (new, +110 lines)
    - Demonstration of fix in action
    - Shows old vs new behavior
+**Database location**: `axe_agents.db` in AXE installation directory (persists across workspaces)
 
 4. **TASK_COMPLETION_FIX_SUMMARY.md** (new)
    - Comprehensive documentation
