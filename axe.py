@@ -1780,15 +1780,41 @@ def detect_agent_token(response: str, token: str) -> tuple[bool, str]:
     if not response:
         return False, ""
     
-    # For simple tokens (no content), just check presence
-    if token in response:
+    # Strip file content before checking for tokens (same logic as is_genuine_task_completion)
+    cleaned = response
+    
+    # 1. Remove <result>...</result> blocks (file read outputs), handling possible nesting
+    result_pattern = re.compile(r'<result>.*?</result>', flags=re.DOTALL | re.IGNORECASE)
+    while True:
+        new_cleaned = result_pattern.sub('', cleaned)
+        if new_cleaned == cleaned:
+            break
+        cleaned = new_cleaned
+    
+    # 2. Remove <function_result>...</function_result> blocks, handling possible nesting
+    function_result_pattern = re.compile(r'<function_result>.*?</function_result>', flags=re.DOTALL | re.IGNORECASE)
+    while True:
+        new_cleaned = function_result_pattern.sub('', cleaned)
+        if new_cleaned == cleaned:
+            break
+        cleaned = new_cleaned
+    
+    # 3. Remove [READ filename] ... blocks
+    # Pattern matches [READ ...] followed by content until: double newline, another [, or end of string
+    cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[|\Z)', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+    
+    # 4. Remove markdown code blocks (```...```)
+    cleaned = re.sub(r'```.*?```', '', cleaned, flags=re.DOTALL)
+    
+    # Now check for token in cleaned content
+    if token in cleaned:
         # Extract content if token expects it (has trailing colon)
         if token.endswith(':'):
             try:
-                start_idx = response.index(token) + len(token)
+                start_idx = cleaned.index(token) + len(token)
                 # Find the closing ]]
-                end_idx = response.index(']]', start_idx)
-                content = response[start_idx:end_idx].strip()
+                end_idx = cleaned.index(']]', start_idx)
+                content = cleaned[start_idx:end_idx].strip()
                 return True, content
             except (ValueError, IndexError):
                 # Malformed token, ignore
