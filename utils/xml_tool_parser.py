@@ -210,10 +210,11 @@ def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:
             'raw_name': 'EXEC'
         })
     
-    # ```WRITE /path\ncontent```
-    write_pattern = r'```WRITE\s+([^\n]+)\n(.*?)```'
+    # ```WRITE /path\ncontent``` - Make content optional
+    write_pattern = r'```WRITE\s+([^\n`]+)(?:\n(.*?))?```'
     for match in re.findall(write_pattern, response, re.DOTALL):
-        path, content = match
+        path = match[0]
+        content = match[1] if len(match) > 1 and match[1] else ''
         calls.append({
             'tool': 'WRITE',
             'params': {'file_path': path.strip(), 'content': content},
@@ -461,8 +462,8 @@ def clean_tool_syntax(response: str) -> str:
     # Remove <bash>...</bash>
     cleaned = re.sub(r'<bash>.*?</bash>', '[TOOL EXECUTED]', cleaned, flags=re.DOTALL)
     
-    # Remove ```bash...``` blocks
-    cleaned = re.sub(r'```(?:bash|shell|sh)\n.*?```', '[TOOL EXECUTED]', cleaned, flags=re.DOTALL)
+    # Remove ```bash...``` blocks - make newline optional to match parser logic
+    cleaned = re.sub(r'```(?:bash|shell|sh)\n?.*?```', '[TOOL EXECUTED]', cleaned, flags=re.DOTALL)
     
     # Remove ```READ/WRITE/EXEC...``` blocks
     cleaned = re.sub(r'```(?:READ|WRITE|EXEC).*?```', '[TOOL EXECUTED]', cleaned, flags=re.DOTALL)

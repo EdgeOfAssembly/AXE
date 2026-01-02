@@ -581,6 +581,14 @@ def test_axe_write_block():
     assert calls[0]["params"]["file_path"] == "/tmp/out.txt"
     assert "hello world" in calls[0]["params"]["content"]
     
+    # Test WRITE without content
+    response2 = '```WRITE /tmp/empty.txt```'
+    calls2 = parse_axe_native_blocks(response2)
+    assert len(calls2) == 1
+    assert calls2[0]["tool"] == "WRITE"
+    assert calls2[0]["params"]["file_path"] == "/tmp/empty.txt"
+    assert calls2[0]["params"]["content"] == ''
+    
     print("  ✓ ```WRITE blocks parsed correctly")
 
 
@@ -712,6 +720,12 @@ def test_clean_tool_syntax():
     assert '```READ' not in cleaned
     assert '[TOOL EXECUTED]' in cleaned
     assert 'Some text here' in cleaned  # Keep non-tool text
+    
+    # Test inline code block cleaning
+    response2 = 'Quick command: ```bash ls -la``` done'
+    cleaned2 = clean_tool_syntax(response2)
+    assert '```bash' not in cleaned2
+    assert '[TOOL EXECUTED]' in cleaned2
     
     print("  ✓ Tool syntax cleaning works correctly")
 
