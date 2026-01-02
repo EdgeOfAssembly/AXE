@@ -168,10 +168,11 @@ AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"  # Followed by model, role, ends with ]]
 AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
 
 # Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives
-# Matches: [READ ...] followed by content until:
+# Matches: [READ ...] (case-insensitive) followed by content until:
 #   - \n\n (double newline) OR
-#   - \n\[(?!\[)[A-Z] (newline + [ + not another [ + uppercase letter, indicating [COMMAND]) OR
+#   - \n\[(?!\[)[A-Z] (newline + [ + not another [ + letter, indicating [COMMAND]) OR
 #   - \Z (end of string)
+# Note: Used with re.IGNORECASE flag, so [A-Z] matches any letter
 READ_BLOCK_PATTERN = r'\[READ[^\]]*\].*?(?=\n\n|\n\[(?!\[)[A-Z]|\Z)'
 
 # Session rules displayed at startup (now imported from safety.rules module)
