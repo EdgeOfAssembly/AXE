@@ -31,12 +31,12 @@ import threading
 import base64
 import hashlib
 import atexit
-import re
 from pathlib import Path
 from datetime import datetime, timedelta, timezone
 from typing import List, Optional, Tuple, Dict, Any
 import time
 import shutil
+import re
 
 # readline import enables command history in terminal (side effect import)
 try:
@@ -1695,7 +1695,7 @@ def is_genuine_task_completion(response: str) -> bool:
     
     # 3. Remove [READ filename] ... blocks
     # Pattern matches [READ ...] followed by content until: double newline, another [, or end of string
-    cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[|\Z)', '', cleaned, flags=re.DOTALL)
+    cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[|\Z)', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
     
     # 4. Remove markdown code blocks (```...```)
     cleaned = re.sub(r'```.*?```', '', cleaned, flags=re.DOTALL)

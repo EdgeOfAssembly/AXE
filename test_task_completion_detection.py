@@ -83,6 +83,18 @@ This is important to note.'''
     print("✓ PASSED: READ block does not trigger")
 
 
+def test_lowercase_read_block_not_trigger():
+    """TASK COMPLETE in [read ...] blocks (lowercase) should not end session."""
+    print("\nTesting: lowercase read block with TASK COMPLETE...")
+    response = '''[read mission.md]
+⚠️ WARNING: Saying "TASK COMPLETE" without actual code changes
+will be considered task failure.
+
+This is important to note.'''
+    assert not is_genuine_task_completion(response), "Lowercase read block should not trigger"
+    print("✓ PASSED: Lowercase read block does not trigger")
+
+
 def test_genuine_with_colon_triggers():
     """Genuine TASK COMPLETE: summary should trigger."""
     print("\nTesting: Genuine TASK COMPLETE with colon...")
@@ -178,6 +190,7 @@ def run_all_tests():
         test_codeblock_not_trigger()
         test_blockquote_not_trigger()
         test_read_block_not_trigger()
+        test_lowercase_read_block_not_trigger()
         test_ambiguous_mention_not_trigger()
         
         # Tests that SHOULD trigger
