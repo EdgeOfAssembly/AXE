@@ -18,7 +18,14 @@ from utils.xml_tool_parser import (
     normalize_tool_name,
     execute_parsed_call,
     format_xml_result,
-    process_agent_response
+    process_agent_response,
+    parse_bash_tags,
+    parse_shell_codeblocks,
+    parse_axe_native_blocks,
+    parse_simple_xml_tags,
+    parse_all_tool_formats,
+    deduplicate_calls,
+    clean_tool_syntax
 )
 from axe import Config, ResponseProcessor, ToolRunner
 
@@ -477,6 +484,291 @@ def test_malformed_xml():
     print("  ✓ Malformed XML handled gracefully")
 
 
+def test_bash_tags():
+    """Test parsing <bash>command</bash> format."""
+    print("Testing <bash> tag parsing...")
+    
+    response = '<bash>cat /tmp/file.txt</bash>'
+    calls = parse_bash_tags(response)
+    assert len(calls) == 1, f"Expected 1 call, got {len(calls)}"
+    assert calls[0]["tool"] == "EXEC"
+    assert calls[0]["params"]["command"] == "cat /tmp/file.txt"
+    
+    print("  ✓ <bash> tags parsed correctly")
+
+
+def test_bash_codeblock():
+    """Test parsing ```bash code blocks."""
+    print("Testing ```bash code block parsing...")
+    
+    response = '```bash\nls -la /tmp\n```'
+    calls = parse_shell_codeblocks(response)
+    assert len(calls) == 1
+    assert calls[0]["params"]["command"] == "ls -la /tmp"
+    
+    print("  ✓ ```bash blocks parsed correctly")
+
+
+def test_shell_codeblock():
+    """Test parsing ```shell code blocks."""
+    print("Testing ```shell code block parsing...")
+    
+    response = '```shell\nfind . -name "*.pdf"\n```'
+    calls = parse_shell_codeblocks(response)
+    assert len(calls) == 1
+    assert "find" in calls[0]["params"]["command"]
+    
+    print("  ✓ ```shell blocks parsed correctly")
+
+
+def test_sh_codeblock():
+    """Test parsing ```sh code blocks."""
+    print("Testing ```sh code block parsing...")
+    
+    response = '```sh\necho "hello"\n```'
+    calls = parse_shell_codeblocks(response)
+    assert len(calls) == 1
+    assert "echo" in calls[0]["params"]["command"]
+    
+    print("  ✓ ```sh blocks parsed correctly")
+
+
+def test_inline_codeblock():
+    """Test parsing inline code blocks without newline."""
+    print("Testing inline code block parsing...")
+    
+    # Test inline format without newline after language specifier
+    response = '```bash ls -la```'
+    calls = parse_shell_codeblocks(response)
+    assert len(calls) == 1
+    assert "ls -la" in calls[0]["params"]["command"]
+    
+    print("  ✓ Inline code blocks parsed correctly")
+
+
+def test_multiline_codeblock():
+    """Test parsing multi-line shell code blocks."""
+    print("Testing multi-line code block parsing...")
+    
+    response = '```bash\ncd /tmp\nls -la\npwd\n```'
+    calls = parse_shell_codeblocks(response)
+    assert len(calls) == 3, f"Expected 3 calls, got {len(calls)}"  # One per line
+    
+    print("  ✓ Multi-line blocks parsed correctly")
+
+
+def test_axe_read_block():
+    """Test parsing ```READ blocks."""
+    print("Testing ```READ block parsing...")
+    
+    response = '```READ /tmp/playground/MISSION.md```'
+    calls = parse_axe_native_blocks(response)
+    assert len(calls) == 1
+    assert calls[0]["tool"] == "READ"
+    assert calls[0]["params"]["file_path"] == "/tmp/playground/MISSION.md"
+    
+    print("  ✓ ```READ blocks parsed correctly")
+
+
+def test_axe_write_block():
+    """Test parsing ```WRITE blocks."""
+    print("Testing ```WRITE block parsing...")
+    
+    response = '```WRITE /tmp/out.txt\nhello world\n```'
+    calls = parse_axe_native_blocks(response)
+    assert len(calls) == 1
+    assert calls[0]["tool"] == "WRITE"
+    assert calls[0]["params"]["file_path"] == "/tmp/out.txt"
+    assert "hello world" in calls[0]["params"]["content"]
+    
+    # Test WRITE without content
+    response2 = '```WRITE /tmp/empty.txt```'
+    calls2 = parse_axe_native_blocks(response2)
+    assert len(calls2) == 1
+    assert calls2[0]["tool"] == "WRITE"
+    assert calls2[0]["params"]["file_path"] == "/tmp/empty.txt"
+    assert calls2[0]["params"]["content"] == ''
+    
+    print("  ✓ ```WRITE blocks parsed correctly")
+
+
+def test_axe_exec_block():
+    """Test parsing ```EXEC blocks."""
+    print("Testing ```EXEC block parsing...")
+    
+    response = '```EXEC ls -la /tmp```'
+    calls = parse_axe_native_blocks(response)
+    assert len(calls) == 1
+    assert calls[0]["tool"] == "EXEC"
+    assert calls[0]["params"]["command"] == "ls -la /tmp"
+    
+    print("  ✓ ```EXEC blocks parsed correctly")
+
+
+def test_simple_xml_read():
+    """Test parsing <read_file> tags."""
+    print("Testing <read_file> tag parsing...")
+    
+    response = '<read_file>/tmp/x.txt</read_file>'
+    calls = parse_simple_xml_tags(response)
+    assert len(calls) == 1
+    assert calls[0]["tool"] == "READ"
+    assert calls[0]["params"]["file_path"] == "/tmp/x.txt"
+    
+    print("  ✓ <read_file> tags parsed correctly")
+
+
+def test_simple_xml_shell():
+    """Test parsing <shell> tags."""
+    print("Testing <shell> tag parsing...")
+    
+    response = '<shell>ls -la</shell>'
+    calls = parse_simple_xml_tags(response)
+    assert len(calls) == 1
+    assert calls[0]["tool"] == "EXEC"
+    assert calls[0]["params"]["command"] == "ls -la"
+    
+    print("  ✓ <shell> tags parsed correctly")
+
+
+def test_simple_xml_write():
+    """Test parsing <write_file> tags."""
+    print("Testing <write_file> tag parsing...")
+    
+    response = '<write_file path="/tmp/x.txt">hello world</write_file>'
+    calls = parse_simple_xml_tags(response)
+    assert len(calls) == 1
+    assert calls[0]["tool"] == "WRITE"
+    assert calls[0]["params"]["file_path"] == "/tmp/x.txt"
+    assert calls[0]["params"]["content"] == "hello world"
+    
+    print("  ✓ <write_file> tags parsed correctly")
+
+
+def test_mixed_formats():
+    """Test parsing mixed tool call formats."""
+    print("Testing mixed format parsing...")
+    
+    response = '''
+    <bash>echo "hello"</bash>
+    ```bash
+    ls -la
+    ```
+    ```READ /tmp/file.txt```
+    '''
+    calls = parse_all_tool_formats(response)
+    assert len(calls) >= 3, f"Expected at least 3 calls, got {len(calls)}"
+    
+    print("  ✓ Mixed formats parsed correctly")
+
+
+def test_deduplication():
+    """Test deduplication of identical calls."""
+    print("Testing deduplication...")
+    
+    response = '''
+    <bash>cat /tmp/file.txt</bash>
+    <bash>cat /tmp/file.txt</bash>
+    '''
+    calls = parse_all_tool_formats(response)
+    assert len(calls) == 1, f"Expected 1 deduplicated call, got {len(calls)}"
+    
+    print("  ✓ Deduplication works correctly")
+
+
+def test_comments_ignored_in_codeblock():
+    """Test that comments in code blocks are ignored."""
+    print("Testing comment filtering in code blocks...")
+    
+    response = '```bash\n# This is a comment\nls -la\n# Another comment\n```'
+    calls = parse_shell_codeblocks(response)
+    assert len(calls) == 1
+    assert calls[0]["params"]["command"] == "ls -la"
+    
+    print("  ✓ Comments ignored correctly")
+
+
+def test_empty_commands_ignored():
+    """Test that empty commands are ignored."""
+    print("Testing empty command filtering...")
+    
+    response = '<bash>   </bash>'
+    calls = parse_bash_tags(response)
+    assert len(calls) == 0
+    
+    print("  ✓ Empty commands ignored correctly")
+
+
+def test_clean_tool_syntax():
+    """Test cleaning tool syntax from response."""
+    print("Testing tool syntax cleaning...")
+    
+    response = '''
+    Here's my plan:
+    <bash>ls -la</bash>
+    ```bash
+    echo "test"
+    ```
+    Some text here.
+    ```READ /tmp/file.txt```
+    '''
+    
+    cleaned = clean_tool_syntax(response)
+    
+    assert '<bash>' not in cleaned
+    assert '```bash' not in cleaned
+    assert '```READ' not in cleaned
+    assert '[TOOL EXECUTED]' in cleaned
+    assert 'Some text here' in cleaned  # Keep non-tool text
+    
+    # Test inline code block cleaning
+    response2 = 'Quick command: ```bash ls -la``` done'
+    cleaned2 = clean_tool_syntax(response2)
+    assert '```bash' not in cleaned2
+    assert '[TOOL EXECUTED]' in cleaned2
+    
+    print("  ✓ Tool syntax cleaning works correctly")
+
+
+def test_all_formats_execution():
+    """Test execution of all formats with actual file operations."""
+    print("Testing execution of all formats...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        # Create test file
+        test_file = os.path.join(tmpdir, "test.txt")
+        with open(test_file, 'w') as f:
+            f.write("Test content")
+        
+        config = Config()
+        tool_runner = ToolRunner(config, tmpdir)
+        tool_runner.auto_approve = True
+        processor = ResponseProcessor(config, tmpdir, tool_runner)
+        
+        # Test <bash> format
+        response1 = f'<bash>cat {test_file}</bash>'
+        _, results1 = process_agent_response(response1, tmpdir, processor)
+        assert len(results1) > 0
+        
+        # Test ```bash format
+        response2 = f'```bash\ncat {test_file}\n```'
+        _, results2 = process_agent_response(response2, tmpdir, processor)
+        assert len(results2) > 0
+        
+        # Test ```READ format
+        response3 = f'```READ test.txt```'
+        _, results3 = process_agent_response(response3, tmpdir, processor)
+        assert len(results3) > 0
+        assert "Test content" in results3[0] or "result" in results3[0]
+        
+        # Test <read_file> format
+        response4 = '<read_file>test.txt</read_file>'
+        _, results4 = process_agent_response(response4, tmpdir, processor)
+        assert len(results4) > 0
+        
+        print("  ✓ All formats execute correctly")
+
+
 def main():
     """Run all tests."""
     print("="*70)
@@ -484,7 +776,7 @@ def main():
     print("="*70)
     
     try:
-        # Unit tests
+        # Unit tests - existing
         test_parse_single_function_call()
         test_parse_multiple_function_calls()
         test_tool_name_normalization()
@@ -499,6 +791,26 @@ def main():
         test_mixed_xml_and_markdown()
         test_nested_xml_content()
         test_malformed_xml()
+        
+        # New multi-format tests
+        test_bash_tags()
+        test_bash_codeblock()
+        test_shell_codeblock()
+        test_sh_codeblock()
+        test_inline_codeblock()
+        test_multiline_codeblock()
+        test_axe_read_block()
+        test_axe_write_block()
+        test_axe_exec_block()
+        test_simple_xml_read()
+        test_simple_xml_shell()
+        test_simple_xml_write()
+        test_mixed_formats()
+        test_deduplication()
+        test_comments_ignored_in_codeblock()
+        test_empty_commands_ignored()
+        test_clean_tool_syntax()
+        test_all_formats_execution()
         
         print("\n" + "="*70)
         print("✅ ALL TESTS PASSED!")
