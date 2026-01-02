@@ -28,7 +28,7 @@ will be considered task failure.
 
 Now let me analyze this...'''
     
-    assert is_genuine_task_completion(response) == False, "File content should not trigger"
+    assert is_genuine_task_completion(response) is False, "File content should not trigger"
     print("✓ PASSED: File content does not trigger")
 
 
@@ -36,7 +36,7 @@ def test_quoted_not_trigger():
     """TASK COMPLETE in quotes should not end session."""
     print("\nTesting: Quoted TASK COMPLETE...")
     response = '''The instructions say "TASK COMPLETE" should only be said when done.'''
-    assert is_genuine_task_completion(response) == False, "Quoted text should not trigger"
+    assert is_genuine_task_completion(response) is False, "Quoted text should not trigger"
     print("✓ PASSED: Quoted text does not trigger")
 
 
@@ -44,7 +44,7 @@ def test_single_quoted_not_trigger():
     """TASK COMPLETE in single quotes should not end session."""
     print("\nTesting: Single-quoted TASK COMPLETE...")
     response = """The file says 'TASK COMPLETE' at the end."""
-    assert is_genuine_task_completion(response) == False, "Single-quoted text should not trigger"
+    assert is_genuine_task_completion(response) is False, "Single-quoted text should not trigger"
     print("✓ PASSED: Single-quoted text does not trigger")
 
 
@@ -57,7 +57,7 @@ if done:
     print("TASK COMPLETE")
 ```
 '''
-    assert is_genuine_task_completion(response) == False, "Code block should not trigger"
+    assert is_genuine_task_completion(response) is False, "Code block should not trigger"
     print("✓ PASSED: Code block does not trigger")
 
 
@@ -67,7 +67,7 @@ def test_blockquote_not_trigger():
     response = '''>The instruction says TASK COMPLETE when done.
 
 I will follow this instruction.'''
-    assert is_genuine_task_completion(response) == False, "Blockquote should not trigger"
+    assert is_genuine_task_completion(response) is False, "Blockquote should not trigger"
     print("✓ PASSED: Blockquote does not trigger")
 
 
@@ -79,7 +79,7 @@ def test_read_block_not_trigger():
 will be considered task failure.
 
 This is important to note.'''
-    assert is_genuine_task_completion(response) == False, "READ block should not trigger"
+    assert is_genuine_task_completion(response) is False, "READ block should not trigger"
     print("✓ PASSED: READ block does not trigger")
 
 
@@ -87,7 +87,7 @@ def test_genuine_with_colon_triggers():
     """Genuine TASK COMPLETE: summary should trigger."""
     print("\nTesting: Genuine TASK COMPLETE with colon...")
     response = "TASK COMPLETE: We finished all three phases."
-    assert is_genuine_task_completion(response) == True, "Genuine with colon should trigger"
+    assert is_genuine_task_completion(response) is True, "Genuine with colon should trigger"
     print("✓ PASSED: Genuine declaration with colon triggers")
 
 
@@ -95,7 +95,7 @@ def test_genuine_with_checkmark_triggers():
     """Genuine ✅ TASK COMPLETE should trigger."""
     print("\nTesting: Genuine TASK COMPLETE with checkmark...")
     response = "✅ TASK COMPLETE"
-    assert is_genuine_task_completion(response) == True, "Genuine with checkmark should trigger"
+    assert is_genuine_task_completion(response) is True, "Genuine with checkmark should trigger"
     print("✓ PASSED: Genuine declaration with checkmark triggers")
 
 
@@ -103,7 +103,7 @@ def test_genuine_with_exclamation_triggers():
     """Genuine TASK COMPLETE! should trigger."""
     print("\nTesting: Genuine TASK COMPLETE with exclamation...")
     response = "TASK COMPLETE! All deliverables are ready."
-    assert is_genuine_task_completion(response) == True, "Genuine with exclamation should trigger"
+    assert is_genuine_task_completion(response) is True, "Genuine with exclamation should trigger"
     print("✓ PASSED: Genuine declaration with exclamation triggers")
 
 
@@ -111,7 +111,7 @@ def test_genuine_declaration_triggers():
     """Genuine "I declare TASK COMPLETE" should trigger."""
     print("\nTesting: Genuine declaration...")
     response = "I declare TASK COMPLETE - see benchmark_results.md"
-    assert is_genuine_task_completion(response) == True, "Genuine declaration should trigger"
+    assert is_genuine_task_completion(response) is True, "Genuine declaration should trigger"
     print("✓ PASSED: Genuine declaration triggers")
 
 
@@ -119,7 +119,7 @@ def test_marking_complete_triggers():
     """Genuine "MARKING TASK COMPLETE" should trigger."""
     print("\nTesting: MARKING TASK COMPLETE...")
     response = "MARKING TASK COMPLETE after successful implementation."
-    assert is_genuine_task_completion(response) == True, "Marking complete should trigger"
+    assert is_genuine_task_completion(response) is True, "Marking complete should trigger"
     print("✓ PASSED: Marking complete triggers")
 
 
@@ -127,7 +127,7 @@ def test_task_is_complete_triggers():
     """Genuine "THE TASK IS COMPLETE" should trigger."""
     print("\nTesting: THE TASK IS COMPLETE...")
     response = "THE TASK IS COMPLETE. All tests pass."
-    assert is_genuine_task_completion(response) == True, "Task is complete should trigger"
+    assert is_genuine_task_completion(response) is True, "Task is complete should trigger"
     print("✓ PASSED: Task is complete triggers")
 
 
@@ -135,7 +135,7 @@ def test_no_task_complete_returns_false():
     """Response without TASK COMPLETE should return False."""
     print("\nTesting: Response without TASK COMPLETE...")
     response = "I'm still working on the implementation. Making progress."
-    assert is_genuine_task_completion(response) == False, "No TASK COMPLETE should not trigger"
+    assert is_genuine_task_completion(response) is False, "No TASK COMPLETE should not trigger"
     print("✓ PASSED: No TASK COMPLETE returns False")
 
 
@@ -152,7 +152,7 @@ After analyzing everything, I can now say:
 
 TASK COMPLETE: All requirements have been implemented successfully.'''
     
-    assert is_genuine_task_completion(response) == True, "Should trigger on genuine part"
+    assert is_genuine_task_completion(response) is True, "Should trigger on genuine part"
     print("✓ PASSED: Complex scenario correctly identifies genuine declaration")
 
 
@@ -160,7 +160,7 @@ def test_ambiguous_mention_not_trigger():
     """Ambiguous mention without patterns should not trigger."""
     print("\nTesting: Ambiguous mention...")
     response = "We need to make sure task complete happens properly."
-    assert is_genuine_task_completion(response) == False, "Ambiguous mention should not trigger"
+    assert is_genuine_task_completion(response) is False, "Ambiguous mention should not trigger"
     print("✓ PASSED: Ambiguous mention does not trigger")
 
 
