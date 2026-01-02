@@ -22,7 +22,7 @@ To see the current token definitions, run:
 grep "AGENT_TOKEN" axe.py | head -6
 ```
 
-**Important**: Do not copy or paste these tokens into any documentation or files. The token detection system will trigger on them even in quoted text or file content.
+**Important**: Do not copy or paste these tokens into any documentation or files. While the token detection system now properly filters out file content and code blocks, it's still best practice to avoid literal tokens in documentation.
 
 ### Token Purpose
 

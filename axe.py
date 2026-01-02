@@ -170,9 +170,9 @@ AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
 # Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives
 # Matches: [READ ...] (case-insensitive) followed by content until:
 #   - \n\n (double newline) OR
-#   - \n\[(?!\[)[A-Z] (newline + [ + not another [ + letter, indicating [COMMAND]) OR
+#   - \n\[(?!\[)[A-Z] (newline + [ + not another [ + any letter, indicating [COMMAND]) OR
 #   - \Z (end of string)
-# Note: Used with re.IGNORECASE flag, so [A-Z] matches any letter
+# Note: Used with re.IGNORECASE flag, so [A-Z] matches both uppercase and lowercase letters
 READ_BLOCK_PATTERN = r'\[READ[^\]]*\].*?(?=\n\n|\n\[(?!\[)[A-Z]|\Z)'
 
 # Session rules displayed at startup (now imported from safety.rules module)
@@ -2216,7 +2216,7 @@ Follow the session rules to keep work productive and enjoyable for all agents.""
             # ===== Phase 6: Check for mandatory sleep =====
             if agent_id:
                 # Supervisor cannot be forced to sleep - must always be available
-                if alias != self.supervisor_alias and alias != "@boss":
+                if alias != self.supervisor_alias:
                     needs_sleep, sleep_msg = self.db.check_mandatory_sleep(agent_id)
                     if needs_sleep:
                         print(c(f"\n😴 {alias} requires mandatory sleep: {sleep_msg}", Colors.YELLOW))
@@ -2234,7 +2234,7 @@ Follow the session rules to keep work productive and enjoyable for all agents.""
             # ===== Phase 7: Check degradation every N turns =====
             if turn_counter % DEGRADATION_CHECK_INTERVAL == 0 and agent_id:
                 # Supervisor cannot be forced to sleep - must always be available
-                if alias != self.supervisor_alias and alias != "@boss":
+                if alias != self.supervisor_alias:
                     degraded, deg_msg = self.db.check_degradation(agent_id)
                     if degraded:
                         print(c(f"\n⚠️  {alias} showing degradation: {deg_msg}", Colors.RED))
@@ -2494,7 +2494,7 @@ It's YOUR TURN. What would you like to contribute? Remember:
         agent_id = self.agent_ids.get(agent_name)
         
         # Supervisor cannot take breaks - must always be available
-        if alias == self.supervisor_alias or alias == "@boss":
+        if alias == self.supervisor_alias:
             print(c(f"\n   ❌ Supervisors cannot take breaks during active sessions", Colors.YELLOW))
             return
         

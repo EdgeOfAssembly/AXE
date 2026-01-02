@@ -5,7 +5,7 @@ Ensures supervisor cannot take breaks or sleep during active sessions.
 """
 import os
 import sys
-from unittest.mock import MagicMock, Mock
+from unittest.mock import MagicMock
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
