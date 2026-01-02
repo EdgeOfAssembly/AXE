@@ -1132,6 +1132,68 @@ class ToolRunner:
         self.auto_approve = False
         self.dry_run = False
     
+    def _strip_heredoc_content(self, cmd: str) -> str:
+        """
+        Remove heredoc content from command string to prevent content from being parsed as commands.
+        Handles: << EOF, << 'EOF', << "EOF", <<- EOF (indented), <<< "string" (here-string)
+        
+        Example:
+            Input:  cat << EOF\nline1\nline2\nEOF
+            Output: cat << EOF
+        
+        Args:
+            cmd: Shell command string that may contain heredocs
+            
+        Returns:
+            Command string with heredoc content removed
+        """
+        # Pattern to match heredoc start: <<- or << followed by optional quotes and delimiter word
+        # Captures: quote char (if any) and delimiter word
+        heredoc_start = re.compile(
+            r'<<-?\s*([\'"]?)(\w+)\1',  # << or <<- followed by optional quotes and word
+            re.MULTILINE
+        )
+        
+        result = cmd
+        
+        # Find all heredoc markers and remove their content
+        # Process in reverse order to maintain correct positions after removal
+        matches = list(heredoc_start.finditer(cmd))
+        for match in reversed(matches):
+            delimiter = match.group(2)  # The delimiter word (e.g., EOF)
+            
+            # Find the end of the line containing the heredoc marker
+            # Heredoc content starts AFTER this line (not on the same line)
+            line_end = cmd.find('\n', match.end())
+            if line_end == -1:
+                # No newline after heredoc marker, heredoc content doesn't exist yet
+                continue
+            
+            # Heredoc content starts after the newline
+            heredoc_content_start = line_end + 1
+            
+            # Find the closing delimiter (on its own line)
+            # Pattern: optional whitespace (for <<-), delimiter, end of line or string
+            # Must be at start of line (or after whitespace)
+            close_pattern = re.compile(
+                rf'^[ \t]*{re.escape(delimiter)}[ \t]*$',
+                re.MULTILINE
+            )
+            close_match = close_pattern.search(cmd, heredoc_content_start)
+            
+            if close_match:
+                # Remove from start of heredoc content to end of closing delimiter line
+                # Keep everything up to and including the line with << EOF
+                heredoc_content_end = close_match.end()
+                result = result[:heredoc_content_start] + result[heredoc_content_end:]
+        
+        # Also handle here-strings: <<< "string" or <<< string
+        # Replace with a placeholder to avoid parsing the string content
+        result = re.sub(r'<<<\s*([\'"])[^\1]*?\1', '<<< ""', result)
+        result = re.sub(r'<<<\s+\S+', '<<< ""', result)
+        
+        return result
+    
     def _extract_commands_from_shell(self, cmd: str) -> List[str]:
         """
         Extract actual command names from a shell command string.
@@ -1139,11 +1201,15 @@ class ToolRunner:
         
         Returns list of command names (first word of each command in pipeline).
         """
+        # FIRST: Strip heredoc content to prevent it from being parsed as commands
+        # This prevents heredoc content containing operators from being split and treated as commands
+        cleaned_cmd = self._strip_heredoc_content(cmd)
+        
         # Split on shell operators while preserving them for context
         # Pattern matches: || && | ; and splits on them
         # Note: | inside [|;] is literal, not a regex OR operator in character class
         pattern = r'\s*(\|\||&&|[|;])\s*'
-        parts = re.split(pattern, cmd)
+        parts = re.split(pattern, cleaned_cmd)
         
         commands = []
         for part in parts:
