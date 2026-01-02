@@ -36,12 +36,21 @@ from datetime import datetime, timedelta, timezone
 from typing import List, Optional, Tuple, Dict, Any
 import time
 import shutil
+import re
 
 # readline import enables command history in terminal (side effect import)
+# Try gnureadline first (more feature-complete on some platforms), then readline
 try:
-    import readline  # noqa: F401
+    import gnureadline as readline  # noqa: F401
+    HAS_READLINE = True
 except ImportError:
-    pass  # readline not available on all platforms
+    try:
+        import readline  # noqa: F401
+        HAS_READLINE = True
+    except ImportError:
+        HAS_READLINE = False
+        # readline not available - command history will not work in terminal
+        print("Note: readline not installed. Command history (↑/↓ arrows) disabled. Install with: pip install gnureadline")
 
 # Optional imports - gracefully handle missing dependencies
 try:
@@ -148,6 +157,15 @@ MAX_WORKFORCE_ON_BREAK = 0.4    # Never more than 40% of agents on break
 MIN_ACTIVE_AGENTS = 2           # Minimum agents that must be active
 MAX_TOTAL_AGENTS = 10           # Maximum total agents allowed
 SPAWN_COOLDOWN_SECONDS = 60     # Minimum time between spawns
+
+# Agent Communication: Unique Token System
+# These tokens are extremely unlikely to appear in normal text/files/command output
+AGENT_TOKEN_PASS = "[[AGENT_PASS_TURN]]"
+AGENT_TOKEN_TASK_COMPLETE = "[[AGENT_TASK_COMPLETE:"  # Followed by summary, ends with ]]
+AGENT_TOKEN_BREAK_REQUEST = "[[AGENT_BREAK_REQUEST:"  # Followed by type, reason, ends with ]]
+AGENT_TOKEN_EMERGENCY = "[[AGENT_EMERGENCY:"  # Followed by message, ends with ]]
+AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"  # Followed by model, role, ends with ]]
+AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
 
 # Session rules displayed at startup (now imported from safety.rules module)
 # SESSION_RULES = """..."""  # Commented out - imported from safety.rules
@@ -1661,6 +1679,198 @@ class SharedWorkspace:
             return False
 
 
+def is_genuine_task_completion(response: str) -> bool:
+    """
+    Check if agent is genuinely declaring task complete.
+    
+    Returns False for:
+    - "TASK COMPLETE" inside <result> blocks (file content)
+    - "TASK COMPLETE" inside quoted text
+    - "TASK COMPLETE" in warnings/instructions
+    - "TASK COMPLETE" inside [READ ...] blocks
+    
+    Returns True only for genuine declarations like:
+    - "TASK COMPLETE: Here's what we accomplished..."
+    - "✅ TASK COMPLETE"
+    - "I declare TASK COMPLETE"
+    - "THE TASK IS COMPLETE"
+    """
+    response_upper = response.upper()
+    
+    # Must contain task completion phrase (TASK COMPLETE or TASK IS COMPLETE)
+    if 'TASK COMPLETE' not in response_upper and 'TASK IS COMPLETE' not in response_upper:
+        return False
+    
+    # Remove content that should be ignored:
+    cleaned = response
+    
+    # 1. Remove <result>...</result> blocks (file read outputs), handling possible nesting
+    result_pattern = re.compile(r'<result>.*?</result>', flags=re.DOTALL | re.IGNORECASE)
+    while True:
+        new_cleaned = result_pattern.sub('', cleaned)
+        if new_cleaned == cleaned:
+            break
+        cleaned = new_cleaned
+    
+    # 2. Remove <function_result>...</function_result> blocks, handling possible nesting
+    function_result_pattern = re.compile(r'<function_result>.*?</function_result>', flags=re.DOTALL | re.IGNORECASE)
+    while True:
+        new_cleaned = function_result_pattern.sub('', cleaned)
+        if new_cleaned == cleaned:
+            break
+        cleaned = new_cleaned
+    
+    # 3. Remove [READ filename] ... blocks
+    # Pattern matches [READ ...] followed by content until: double newline, another [, or end of string
+    cleaned = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[|\Z)', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+    
+    # 4. Remove markdown code blocks (```...```)
+    cleaned = re.sub(r'```.*?```', '', cleaned, flags=re.DOTALL)
+    
+    # 5. Remove blockquotes (lines starting with >)
+    cleaned = re.sub(r'^>.*$', '', cleaned, flags=re.MULTILINE)
+    
+    # 6. Remove content inside quotation marks containing task completion phrases
+    cleaned = re.sub(
+        r'"[^"]*TASK\s+(?:COMPLETE|IS\s+COMPLETE)[^"]*"|\'[^\']*TASK\s+(?:COMPLETE|IS\s+COMPLETE)[^\']*\'',
+        '',
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+    
+    # Now check if task completion phrases still exist in cleaned content
+    cleaned_upper = cleaned.upper()
+    
+    if 'TASK COMPLETE' not in cleaned_upper and 'TASK IS COMPLETE' not in cleaned_upper:
+        return False
+    
+    # Additional validation: should be at start of line or after certain patterns
+    # This catches genuine declarations vs passing mentions
+    genuine_patterns = [
+        r'^\s*✅?\s*TASK\s+COMPLETE',           # Starts line (with optional checkmark)
+        r'TASK\s+COMPLETE\s*:',                  # Followed by colon (summary)
+        r'TASK\s+COMPLETE\s*!',                  # Followed by exclamation
+        r'I\s+DECLARE\s+TASK\s+COMPLETE',        # Explicit declaration
+        r'MARKING\s+TASK\s+COMPLETE',            # Marking complete
+        r'THE\s+TASK\s+IS\s+COMPLETE',           # Statement form
+    ]
+    
+    for pattern in genuine_patterns:
+        if re.search(pattern, cleaned_upper, re.MULTILINE):
+            return True
+    
+    # If we get here, TASK COMPLETE exists but doesn't match genuine patterns
+    # Be conservative - don't trigger on ambiguous cases
+    return False
+
+
+def detect_agent_token(response: str, token: str) -> tuple[bool, str]:
+    """
+    Detect unique agent communication tokens in response.
+    
+    Args:
+        response: The agent's response text
+        token: The token to search for (e.g., AGENT_TOKEN_PASS)
+    
+    Returns:
+        Tuple of (found: bool, content: str)
+        - found: Whether the token was detected
+        - content: Extracted content after the token (empty for simple tokens)
+    """
+    if not response:
+        return False, ""
+    
+    # For simple tokens (no content), just check presence
+    if token in response:
+        # Extract content if token expects it (has trailing colon)
+        if token.endswith(':'):
+            try:
+                start_idx = response.index(token) + len(token)
+                # Find the closing ]]
+                end_idx = response.index(']]', start_idx)
+                content = response[start_idx:end_idx].strip()
+                return True, content
+            except (ValueError, IndexError):
+                # Malformed token, ignore
+                return False, ""
+        else:
+            # Simple token without content
+            return True, ""
+    
+    return False, ""
+
+
+def check_agent_pass(response: str) -> bool:
+    """Check if agent is passing their turn using unique token."""
+    found, _ = detect_agent_token(response, AGENT_TOKEN_PASS)
+    if found:
+        return True
+    
+    # Backward compatibility: check old PASS format
+    # Only for transition period - can be removed later
+    non_empty_lines = [line.strip().upper() for line in response.splitlines() if line.strip()]
+    return bool(non_empty_lines) and non_empty_lines[0] == 'PASS'
+
+
+def check_agent_task_complete(response: str) -> tuple[bool, str]:
+    """
+    Check if agent is declaring task complete using unique token.
+    
+    Returns:
+        Tuple of (is_complete: bool, summary: str)
+    """
+    found, summary = detect_agent_token(response, AGENT_TOKEN_TASK_COMPLETE)
+    if found:
+        return True, summary
+    
+    # Backward compatibility: check old TASK COMPLETE format
+    # Only for transition period - can be removed later
+    if is_genuine_task_completion(response):
+        # Try to extract summary if present
+        lines = response.split('\n')
+        for line in lines:
+            if 'TASK COMPLETE' in line.upper():
+                parts = line.split(':', 1)
+                if len(parts) > 1:
+                    return True, parts[1].strip()
+                return True, "Task completed"
+        return True, "Task completed"
+    
+    return False, ""
+
+
+def check_agent_command(response: str, token: str) -> tuple[bool, str]:
+    """
+    Check for agent commands that include content (BREAK REQUEST, EMERGENCY, SPAWN).
+    
+    Returns:
+        Tuple of (found: bool, content: str)
+    """
+    found, content = detect_agent_token(response, token)
+    if found:
+        return True, content
+    
+    # Backward compatibility for old format
+    # Map token to old keyword
+    old_keywords = {
+        AGENT_TOKEN_BREAK_REQUEST: 'BREAK REQUEST:',
+        AGENT_TOKEN_EMERGENCY: 'EMERGENCY:',
+        AGENT_TOKEN_SPAWN: 'SPAWN:',
+    }
+    
+    if token in old_keywords:
+        old_keyword = old_keywords[token]
+        if old_keyword in response.upper():
+            try:
+                start_idx = response.upper().index(old_keyword) + len(old_keyword)
+                content = response[start_idx:].split('\n')[0].strip()
+                return True, content
+            except (ValueError, IndexError):
+                return True, ""
+    
+    return False, ""
+
+
 class CollaborativeSession:
     """
     Multi-agent collaborative session where models communicate and cooperate.
@@ -1725,6 +1935,8 @@ class CollaborativeSession:
                     xp=0,
                     level=1
                 )
+                # Start work tracking immediately
+                self.db.start_work_tracking(agent_id)
             else:
                 print(c(f"Warning: Agent '{agent_name}' not available, skipping", Colors.YELLOW))
         
@@ -1750,6 +1962,8 @@ class CollaborativeSession:
             xp=supervisor_xp,
             level=LEVEL_SUPERVISOR_ELIGIBLE  # Supervisor starts at level 40
         )
+        # Start work tracking for supervisor
+        self.db.start_work_tracking(supervisor_id)
         
         # Session settings
         self.time_limit = time_limit_minutes * 60  # Convert to seconds
@@ -1837,10 +2051,17 @@ COLLABORATION RULES (READ CAREFULLY):
 5. Use the SHARED WORKSPACE at: {self.workspace.workspace_dir}
 6. If you modify files, explain what you changed and why.
 7. Address other agents by their aliases: "Hey {other_aliases[0] if other_aliases else '@agent'}, I noticed..."
-8. If you're done with your part, say "PASS" to give others a turn.
-9. When the task is complete, any agent can say "TASK COMPLETE" with a summary.
+8. If you're done with your part, use the token: {AGENT_TOKEN_PASS}
+9. When the task is complete, use: {AGENT_TOKEN_TASK_COMPLETE} summary of work ]]
 10. Earn XP by completing tasks well. Level up to unlock new titles and privileges!
 11. When introducing yourself, share your context window size and capabilities.
+
+SPECIAL COMMANDS (use these exact tokens):
+- Pass turn: {AGENT_TOKEN_PASS}
+- Task complete: {AGENT_TOKEN_TASK_COMPLETE} your summary here ]]
+- Request break: {AGENT_TOKEN_BREAK_REQUEST} coffee, need rest ]]
+- Emergency: {AGENT_TOKEN_EMERGENCY} urgent message ]]
+- Check status: {AGENT_TOKEN_STATUS}
 
 WORKSPACE INFO:
 - Files: {', '.join(workspace_files) or 'empty'}
@@ -2012,12 +2233,12 @@ Follow the session rules to keep work productive and enjoyable for all agents.""
                 shared_notes = self.workspace.read_shared_notes()
                 
                 # Add Phase 6-10 specific instructions
-                phase_instructions = """
-ADVANCED COMMANDS (Phase 6-10):
-- Say "BREAK REQUEST: [reason]" to request a coffee/play break
-- Say "EMERGENCY: [message]" to send encrypted report to human
-- Say "SPAWN: [model_type]" to request spawning a new agent (supervisor only)
-- Say "STATUS" to check sleep/break status of all agents
+                phase_instructions = f"""
+ADVANCED COMMANDS (use exact tokens):
+- Break request: {AGENT_TOKEN_BREAK_REQUEST} coffee, need rest ]]
+- Emergency report: {AGENT_TOKEN_EMERGENCY} urgent message ]]
+- Spawn agent (supervisor only): {AGENT_TOKEN_SPAWN} model_type, reason ]]
+- Check status: {AGENT_TOKEN_STATUS}
 """
                 
                 prompt = f"""Current task: {self.task_description}
@@ -2035,8 +2256,8 @@ Shared Notes Summary (last {COLLAB_SHARED_NOTES_LIMIT} chars):
 It's YOUR TURN. What would you like to contribute? Remember:
 - Be concise and actionable
 - Reference other agents' work
-- Say "PASS" if you have nothing to add right now
-- Say "TASK COMPLETE: [summary]" if the task is done
+- Use {AGENT_TOKEN_PASS} if you have nothing to add right now
+- Use {AGENT_TOKEN_TASK_COMPLETE} summary ]] if the task is done
 """
                 
                 # Get agent's system prompt for collaboration
@@ -2116,28 +2337,33 @@ It's YOUR TURN. What would you like to contribute? Remember:
                 })
                 
                 # ===== Process special commands from response =====
-                response_upper = processed_response.upper() if processed_response else ""
+                # Use new unique token system for reliable command detection
                 
                 # Phase 9: Break request
-                if 'BREAK REQUEST:' in response_upper:
-                    self._handle_break_request(current_agent, response)
+                break_found, break_content = check_agent_command(processed_response, AGENT_TOKEN_BREAK_REQUEST)
+                if break_found:
+                    self._handle_break_request(current_agent, processed_response, break_content)
                 
                 # Phase 8: Emergency message
-                if 'EMERGENCY:' in response_upper:
-                    self._handle_emergency_message(current_agent, response)
+                emergency_found, emergency_content = check_agent_command(processed_response, AGENT_TOKEN_EMERGENCY)
+                if emergency_found:
+                    self._handle_emergency_message(current_agent, processed_response, emergency_content)
                 
                 # Phase 10: Spawn request (supervisor only)
-                if 'SPAWN:' in response_upper and alias == self.supervisor_alias:
-                    self._handle_spawn_request(current_agent, response)
+                if alias == self.supervisor_alias:
+                    spawn_found, spawn_content = check_agent_command(processed_response, AGENT_TOKEN_SPAWN)
+                    if spawn_found:
+                        self._handle_spawn_request(current_agent, processed_response, spawn_content)
                 
                 # Status check
-                if 'STATUS' in response_upper:
+                status_found, _ = detect_agent_token(processed_response, AGENT_TOKEN_STATUS)
+                if status_found:
                     self._print_status()
                 
-                # Award XP for meaningful contribution (not for PASS)
-                non_empty_lines = [line.strip().upper() for line in processed_response.splitlines() if line.strip()]
-                is_pass = bool(non_empty_lines) and non_empty_lines[0] == 'PASS'
+                # Check if agent is passing turn
+                is_pass = check_agent_pass(processed_response)
                 
+                # Award XP for meaningful contribution (not for PASS)
                 if not is_pass and processed_response and not processed_response.startswith("[API Error"):
                     # Award XP for contribution
                     if agent_id:
@@ -2150,9 +2376,12 @@ It's YOUR TURN. What would you like to contribute? Remember:
                             print(c(f"   New Title: {result['new_title']}", Colors.GREEN))
                             print(c(f"   Total XP: {result['xp']}", Colors.DIM))
                 
-                # Check for special responses
-                if 'TASK COMPLETE' in response_upper:
+                # Check for task completion using unique token system
+                is_complete, summary = check_agent_task_complete(processed_response)
+                if is_complete:
                     print(c("\n✅ TASK MARKED COMPLETE!", Colors.GREEN + Colors.BOLD))
+                    if summary:
+                        print(c(f"   Summary: {summary}", Colors.GREEN))
                     
                     # Award bonus XP for task completion to all agents
                     for agent in self.agents:
@@ -2221,17 +2450,20 @@ It's YOUR TURN. What would you like to contribute? Remember:
         # Session ended
         self._end_session()
     
-    def _handle_break_request(self, agent_name: str, response: str) -> None:
+    def _handle_break_request(self, agent_name: str, response: str, content: str = "") -> None:
         """Handle a break request from an agent."""
         alias = self.agent_aliases.get(agent_name, agent_name)
         agent_id = self.agent_ids.get(agent_name)
         
-        # Extract reason from response
-        try:
-            reason_start = response.upper().index('BREAK REQUEST:') + 14
-            reason = response[reason_start:].split('\n')[0].strip()
-        except (ValueError, IndexError):
-            reason = "Unspecified"
+        # Use extracted content if available, otherwise try old format
+        reason = content if content else "Unspecified"
+        if not content:
+            # Backward compatibility: try to extract from old format
+            try:
+                reason_start = response.upper().index('BREAK REQUEST:') + 14
+                reason = response[reason_start:].split('\n')[0].strip()
+            except (ValueError, IndexError):
+                pass
         
         print(c(f"\n☕ {alias} requests a break: {reason}", Colors.CYAN))
         
@@ -2250,16 +2482,19 @@ It's YOUR TURN. What would you like to contribute? Remember:
         else:
             print(c(f"   Request pending supervisor approval (ID: {request['id'][:8]})", Colors.DIM))
     
-    def _handle_emergency_message(self, agent_name: str, response: str) -> None:
+    def _handle_emergency_message(self, agent_name: str, response: str, content: str = "") -> None:
         """Handle an emergency message from an agent."""
         alias = self.agent_aliases.get(agent_name, agent_name)
         
-        # Extract message from response
-        try:
-            msg_start = response.upper().index('EMERGENCY:') + 10
-            emergency_msg = response[msg_start:].split('\n')[0].strip()
-        except (ValueError, IndexError):
-            emergency_msg = response
+        # Use extracted content if available, otherwise try old format
+        emergency_msg = content if content else response
+        if not content:
+            # Backward compatibility: try to extract from old format
+            try:
+                msg_start = response.upper().index('EMERGENCY:') + 10
+                emergency_msg = response[msg_start:].split('\n')[0].strip()
+            except (ValueError, IndexError):
+                pass
         
         print(c(f"\n🚨 EMERGENCY from {alias}", Colors.RED + Colors.BOLD))
         
@@ -2274,14 +2509,17 @@ It's YOUR TURN. What would you like to contribute? Remember:
         else:
             print(c(f"   Failed to save report: {result}", Colors.RED))
     
-    def _handle_spawn_request(self, agent_name: str, response: str) -> None:
+    def _handle_spawn_request(self, agent_name: str, response: str, content: str = "") -> None:
         """Handle a spawn request from the supervisor."""
-        # Extract model type from response
-        try:
-            spawn_start = response.upper().index('SPAWN:') + 6
-            model_type = response[spawn_start:].split('\n')[0].strip().lower()
-        except (ValueError, IndexError):
-            model_type = 'llama'  # Default
+        # Use extracted content if available, otherwise try old format
+        model_type = content.split(',')[0].strip().lower() if content else 'llama'
+        if not content:
+            # Backward compatibility: try to extract from old format
+            try:
+                spawn_start = response.upper().index('SPAWN:') + 6
+                model_type = response[spawn_start:].split('\n')[0].strip().lower()
+            except (ValueError, IndexError):
+                pass
         
         print(c(f"\n🔄 Spawn request for: {model_type}", Colors.CYAN))
         
