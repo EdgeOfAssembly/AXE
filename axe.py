@@ -1475,7 +1475,14 @@ class ResponseProcessor:
                     results.append(f"\n[READ {filename}]\n{result}")
                 
                 elif block_type == 'EXEC':
-                    command = args or content
+                    # Handle heredocs: if args has command start and content has heredoc body,
+                    # combine them. Otherwise use args if present, else content.
+                    if args and content:
+                        # Both present: combine with newline (e.g., "cat << EOF" + "\nlines\nEOF")
+                        command = args + '\n' + content
+                    else:
+                        # Only one present: use whichever exists
+                        command = args or content
                     result = self._handle_exec(command)
                     results.append(f"\n[EXEC: {command}]\n{result}")
                 
