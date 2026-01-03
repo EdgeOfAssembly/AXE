@@ -240,9 +240,30 @@ def _split_shell_commands(cmd: str) -> List[str]:
     return commands
 
 
+def _contains_heredoc(content: str) -> bool:
+    """
+    Check if content contains a heredoc marker.
+    Detects: << EOF, <<- EOF, <<'EOF', <<"EOF", <<< (here-string)
+    Supports delimiters with word chars, hyphens, and underscores (e.g., END-OF-FILE, DATA_BLOCK)
+    
+    Args:
+        content: Shell code block content
+        
+    Returns:
+        True if heredoc is detected, False otherwise
+    """
+    # Pattern matches heredoc starters:
+    # << or <<- followed by optional quotes and a delimiter (word chars, hyphens, underscores)
+    # Also matches here-strings: <<<
+    # This matches the pattern used in _split_shell_commands() on line 192
+    heredoc_pattern = r'<<-?\s*[\'"]?[\w\-_]+[\'"]?|<<<'
+    return bool(re.search(heredoc_pattern, content))
+
+
 def parse_shell_codeblocks(response: str) -> List[Dict[str, Any]]:
     """
     Parse ```bash, ```shell, ```sh code blocks.
+    Properly handles heredocs by preserving them as single commands.
     
     Args:
         response: Agent response text
@@ -257,20 +278,40 @@ def parse_shell_codeblocks(response: str) -> List[Dict[str, Any]]:
     for match in re.findall(pattern, response, re.DOTALL):
         cmd = match.strip()
         if cmd:
-            # Split commands while preserving heredocs
-            for command in _split_shell_commands(cmd):
-                if command and not command.startswith('#'):
-                    calls.append({
-                        'tool': 'EXEC',
-                        'params': {'command': command},
-                        'raw_name': 'shell'
-                    })
+            # Check if the entire block contains a heredoc
+            # If so, treat the whole block as a single command
+            if _contains_heredoc(cmd):
+                calls.append({
+                    'tool': 'EXEC',
+                    'params': {'command': cmd},
+                    'raw_name': 'shell'
+                })
+            else:
+                # No heredoc - process line by line as before
+                # Split commands while preserving heredocs
+                for command in _split_shell_commands(cmd):
+                    if command and not command.startswith('#'):
+                        calls.append({
+                            'tool': 'EXEC',
+                            'params': {'command': command},
+                            'raw_name': 'shell'
+                        })
     return calls
 
 
 def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:
     """
     Parse AXE native ```READ, ```WRITE, ```EXEC blocks.
+    
+    NOTE: This function is currently NOT called by parse_all_tool_formats()
+    to prevent duplicate command execution. These blocks are now handled
+    EXCLUSIVELY by axe.py's ResponseProcessor.process_response() which
+    provides more robust handling including heredoc support.
+    
+    This function is kept here for:
+    - Backward compatibility if needed
+    - Potential future use cases
+    - Testing individual block parsing
     
     Args:
         response: Agent response text
@@ -404,7 +445,12 @@ def parse_all_tool_formats(response: str) -> List[Dict[str, Any]]:
     calls.extend(parse_shell_codeblocks(response))
     
     # 4. AXE native ```READ/WRITE/EXEC``` blocks
-    calls.extend(parse_axe_native_blocks(response))
+    # REMOVED: parse_axe_native_blocks() is no longer called here to prevent duplicate execution
+    # These blocks are now handled EXCLUSIVELY by axe.py's ResponseProcessor.process_response()
+    # which is the original and more robust handler with full heredoc support.
+    # This eliminates the bug where commands were executed twice (once here, once in axe.py).
+    # The parse_axe_native_blocks() function is kept below for potential future use.
+    # calls.extend(parse_axe_native_blocks(response))  # COMMENTED OUT
     
     # 5. Simple XML tags like <read_file>, <shell>
     calls.extend(parse_simple_xml_tags(response))
