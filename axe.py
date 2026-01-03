@@ -99,6 +99,18 @@ from progression.levels import (
 from database.agent_db import AgentDatabase, get_database_path
 from models.metadata import get_model_info, format_token_count
 
+# Workshop dynamic analysis tools
+try:
+    from workshop import (
+        ChiselAnalyzer, SawTracker, PlaneEnumerator, HammerInstrumentor,
+        HAS_CHISEL, HAS_SAW, HAS_PLANE, HAS_HAMMER
+    )
+    HAS_WORKSHOP = True
+except ImportError:
+    HAS_WORKSHOP = False
+    HAS_CHISEL = HAS_SAW = HAS_PLANE = HAS_HAMMER = False
+    # Note: Saw and Plane are built-in tools. For full functionality: pip install angr (Chisel), frida-python psutil (Hammer)
+
 # Models that require max_completion_tokens instead of max_tokens
 # GPT-5 and future models use the new parameter name
 USE_MAX_COMPLETION_TOKENS = {
@@ -226,7 +238,7 @@ DEFAULT_CONFIG = {
             'system_prompt': """You are an expert software engineer. Provide clear, working code.
 For C/C++: Prefer portable code; when DOS/16-bit targets are requested, explain that true DOS support typically needs compilers like Open Watcom or DJGPP and that 16-bit ints/far pointers are non-standard in modern toolchains.
 For Python: Clean, type-hinted code.
-For reverse-engineering: Use hexdump/objdump analysis."""
+For reverse-engineering: Use hexdump/objdump analysis. Workshop tools available: /workshop chisel for symbolic execution, /workshop saw for taint analysis, /workshop plane for source/sink enumeration."""
         },
         'claude': {
             'alias': ['c', 'anthropic'],
@@ -237,7 +249,8 @@ For reverse-engineering: Use hexdump/objdump analysis."""
             'capabilities': ['text', 'vision', 'function_calling'],
             'system_prompt': """You are a code review expert and security auditor.
 Analyze code for bugs, security issues, and improvements.
-For rev-eng: Check endianness, memory safety, DOS compatibility."""
+For rev-eng: Check endianness, memory safety, DOS compatibility.
+For security analysis: Use Workshop tools: /workshop saw for taint analysis to find injection vulnerabilities, /workshop plane to enumerate attack surface, /workshop chisel for binary vulnerability analysis."""
         },
         'llama': {
             'alias': ['l', 'hf'],
@@ -248,7 +261,8 @@ For rev-eng: Check endianness, memory safety, DOS compatibility."""
             'capabilities': ['text'],
             'system_prompt': """You are an open-source hacker fluent in x86 assembly.
 Specialize in nasm, DOS interrupts, binary analysis.
-Use hexdump, objdump, ndisasm for reverse engineering."""
+Use hexdump, objdump, ndisasm for reverse engineering.
+Workshop tools available: /workshop chisel for symbolic execution of binaries, /workshop hammer for live process instrumentation."""
         },
         'grok': {
             'alias': ['x', 'xai'],
@@ -3246,6 +3260,29 @@ class ChatSession:
         self.response_processor: ResponseProcessor = ResponseProcessor(config, project_dir, self.tool_runner)
         self.history: list[dict[str, Any]] = []
         self.default_agent: str = 'claude'
+        
+        # Initialize workshop tools if available
+        self.workshop_chisel: Optional[Any] = None
+        self.workshop_saw: Optional[Any] = None
+        self.workshop_plane: Optional[Any] = None
+        self.workshop_hammer: Optional[Any] = None
+        if HAS_WORKSHOP:
+            try:
+                workshop_config = config.get('workshop', default={})
+                if HAS_CHISEL:
+                    chisel_config = workshop_config.get('chisel', {})
+                    self.workshop_chisel = ChiselAnalyzer(chisel_config)
+                if HAS_SAW:
+                    saw_config = workshop_config.get('saw', {})
+                    self.workshop_saw = SawTracker(saw_config)
+                if HAS_PLANE:
+                    plane_config = workshop_config.get('plane', {})
+                    self.workshop_plane = PlaneEnumerator(plane_config)
+                if HAS_HAMMER:
+                    hammer_config = workshop_config.get('hammer', {})
+                    self.workshop_hammer = HammerInstrumentor(hammer_config)
+            except Exception as e:
+                print(c(f"Warning: Failed to initialize workshop tools: {e}", Colors.YELLOW))
     
     def print_banner(self) -> None:
         """Print welcome banner."""
@@ -3276,8 +3313,18 @@ Commands:
   /history          Show chat history
   /clear            Clear chat history
   /save             Save current config
+  /workshop         Workshop dynamic analysis tools
   /help             Show this help
   /quit             Exit
+
+Workshop Tools:
+  /workshop chisel <binary> [func]    - Symbolic execution
+  /workshop saw "<code>"              - Taint analysis
+  /workshop plane <path>              - Source/sink enumeration
+  /workshop hammer <process>          - Live instrumentation
+  /workshop history [tool]            - View analysis history
+  /workshop stats [tool]              - View usage statistics
+  /workshop help                      - Workshop help
 
 Collaborative Mode:
   /collab <agents> <workspace> <time> <task>
@@ -3301,6 +3348,7 @@ Examples:
   @gpt write a parser for DOS WAD files in C
   @llama disassemble the interrupt handler at 0x1000
   /exec hexdump -C game.exe | head -20
+  /workshop saw "import os; os.system(input())"
   /collab llama,copilot ./playground 30 "Analyze and document wadextract.c"
         """
         print(c(help_text, Colors.CYAN))
@@ -3354,6 +3402,272 @@ Examples:
         
         forbidden: list[str] = dirs.get('forbidden', [])
         print(f"  {c('Forbidden:', Colors.RED)} {', '.join(forbidden)}")
+        print()
+    
+    def handle_workshop_command(self, args: str) -> None:
+        """Handle workshop tool commands."""
+        if not HAS_WORKSHOP:
+            print(c("Workshop tools not available. Install with: pip install angr frida-python psutil", Colors.RED))
+            return
+        
+        if not args or args == 'help':
+            self.show_workshop_help()
+            return
+        
+        parts = args.split(maxsplit=1)
+        subcmd = parts[0].lower()
+        subcmd_args = parts[1] if len(parts) > 1 else ""
+        
+        if subcmd == 'chisel':
+            self.run_chisel(subcmd_args)
+        elif subcmd == 'saw':
+            self.run_saw(subcmd_args)
+        elif subcmd == 'plane':
+            self.run_plane(subcmd_args)
+        elif subcmd == 'hammer':
+            self.run_hammer(subcmd_args)
+        elif subcmd == 'history':
+            self.show_workshop_history(subcmd_args)
+        elif subcmd == 'stats':
+            self.show_workshop_stats(subcmd_args)
+        else:
+            print(c(f"Unknown workshop command: {subcmd}. Type /workshop help for help.", Colors.YELLOW))
+    
+    def run_chisel(self, args: str) -> None:
+        """Run Chisel symbolic execution tool."""
+        if not HAS_CHISEL or self.workshop_chisel is None:
+            print(c("Chisel not available. Install with: pip install angr", Colors.RED))
+            return
+        
+        if not args:
+            print(c("Usage: /workshop chisel <binary_path> [function_name]", Colors.YELLOW))
+            return
+        
+        parts = args.split(maxsplit=1)
+        binary_path = parts[0]
+        func_name = parts[1] if len(parts) > 1 else None
+        
+        print(c(f"Running Chisel on {binary_path}...", Colors.CYAN))
+        start_time = time.time()
+        
+        try:
+            results = self.workshop_chisel.analyze_binary(binary_path, func_name)
+            duration = time.time() - start_time
+            
+            # Save to database
+            db = AgentDatabase(get_database_path())
+            analysis_id = db.save_workshop_analysis('chisel', binary_path, None, results, duration)
+            
+            # Display results
+            print(c(f"\n✓ Analysis complete (ID: {analysis_id[:8]}...)", Colors.GREEN))
+            print(json.dumps(results, indent=2))
+            
+        except Exception as e:
+            duration = time.time() - start_time
+            db = AgentDatabase(get_database_path())
+            db.save_workshop_analysis('chisel', binary_path, None, {}, duration, str(e))
+            print(c(f"Error: {e}", Colors.RED))
+    
+    def run_saw(self, args: str) -> None:
+        """Run Saw taint analysis tool."""
+        if not HAS_SAW or self.workshop_saw is None:
+            print(c("Saw not available. This is a built-in tool; please check your AXE installation.", Colors.RED))
+            return
+        
+        if not args:
+            print(c("Usage: /workshop saw \"<python_code>\"", Colors.YELLOW))
+            return
+        
+        # Remove quotes if present
+        code = args.strip('"\'')
+        
+        print(c(f"Running Saw taint analysis...", Colors.CYAN))
+        start_time = time.time()
+        
+        try:
+            results = self.workshop_saw.analyze_code(code)
+            duration = time.time() - start_time
+            
+            # Save to database
+            db = AgentDatabase(get_database_path())
+            analysis_id = db.save_workshop_analysis('saw', '<inline_code>', None, results, duration)
+            
+            # Display results
+            print(c(f"\n✓ Analysis complete (ID: {analysis_id[:8]}...)", Colors.GREEN))
+            print(json.dumps(results, indent=2))
+            
+        except Exception as e:
+            duration = time.time() - start_time
+            db = AgentDatabase(get_database_path())
+            db.save_workshop_analysis('saw', '<inline_code>', None, {}, duration, str(e))
+            print(c(f"Error: {e}", Colors.RED))
+    
+    def run_plane(self, args: str) -> None:
+        """Run Plane source/sink enumeration tool."""
+        if not HAS_PLANE or self.workshop_plane is None:
+            print(c("Plane not available. This is a built-in tool; please check your AXE installation.", Colors.RED))
+            return
+        
+        if not args:
+            print(c("Usage: /workshop plane <project_path>", Colors.YELLOW))
+            return
+        
+        project_path = args.strip()
+        
+        print(c(f"Running Plane enumeration on {project_path}...", Colors.CYAN))
+        start_time = time.time()
+        
+        try:
+            results = self.workshop_plane.enumerate_project(project_path)
+            duration = time.time() - start_time
+            
+            # Save to database
+            db = AgentDatabase(get_database_path())
+            analysis_id = db.save_workshop_analysis('plane', project_path, None, results, duration)
+            
+            # Display results
+            print(c(f"\n✓ Analysis complete (ID: {analysis_id[:8]}...)", Colors.GREEN))
+            print(json.dumps(results, indent=2))
+            
+        except Exception as e:
+            duration = time.time() - start_time
+            db = AgentDatabase(get_database_path())
+            db.save_workshop_analysis('plane', project_path, None, {}, duration, str(e))
+            print(c(f"Error: {e}", Colors.RED))
+    
+    def run_hammer(self, args: str) -> None:
+        """Run Hammer live instrumentation tool."""
+        if not HAS_HAMMER or self.workshop_hammer is None:
+            print(c("Hammer not available. Install with: pip install frida-python psutil", Colors.RED))
+            return
+        
+        if not args:
+            print(c("Usage: /workshop hammer <process_name>", Colors.YELLOW))
+            return
+        
+        process_name = args.strip()
+        
+        print(c(f"Running Hammer instrumentation on {process_name}...", Colors.CYAN))
+        print(c("Press Ctrl+C to stop monitoring", Colors.DIM))
+        start_time = time.time()
+        
+        try:
+            results = self.workshop_hammer.instrument_process(process_name)
+            duration = time.time() - start_time
+            
+            # Save to database
+            db = AgentDatabase(get_database_path())
+            analysis_id = db.save_workshop_analysis('hammer', process_name, None, results, duration)
+            
+            # Display results
+            print(c(f"\n✓ Instrumentation session complete (ID: {analysis_id[:8]}...)", Colors.GREEN))
+            print(json.dumps(results, indent=2))
+            
+        except KeyboardInterrupt:
+            duration = time.time() - start_time
+            db = AgentDatabase(get_database_path())
+            db.save_workshop_analysis('hammer', process_name, None, {'status': 'interrupted'}, duration)
+            print(c("\nInstrumentation stopped by user", Colors.YELLOW))
+        except Exception as e:
+            duration = time.time() - start_time
+            db = AgentDatabase(get_database_path())
+            db.save_workshop_analysis('hammer', process_name, None, {}, duration, str(e))
+            print(c(f"Error: {e}", Colors.RED))
+    
+    def show_workshop_help(self) -> None:
+        """Display workshop tools help."""
+        help_text = f"""
+{c('Workshop - Dynamic Analysis Tools', Colors.BOLD + Colors.CYAN)}
+
+Available Tools:
+  {c('chisel', Colors.GREEN)} - Symbolic execution for binary analysis
+    Usage: /workshop chisel <binary_path> [function_name]
+    Example: /workshop chisel ./vulnerable.exe main
+  
+  {c('saw', Colors.GREEN)} - Taint analysis for Python code
+    Usage: /workshop saw "<python_code>"
+    Example: /workshop saw "import os; os.system(input())"
+  
+  {c('plane', Colors.GREEN)} - Source/sink enumeration
+    Usage: /workshop plane <project_path>
+    Example: /workshop plane .
+  
+  {c('hammer', Colors.GREEN)} - Live process instrumentation
+    Usage: /workshop hammer <process_name>
+    Example: /workshop hammer python.exe
+
+Management Commands:
+  {c('history', Colors.CYAN)} [tool_name] - View analysis history
+    Example: /workshop history chisel
+  
+  {c('stats', Colors.CYAN)} [tool_name] - View usage statistics
+    Example: /workshop stats
+
+Tool Status:
+  Chisel: {c('Available' if HAS_CHISEL else 'Not installed', Colors.GREEN if HAS_CHISEL else Colors.RED)}
+  Saw: {c('Available' if HAS_SAW else 'Not installed', Colors.GREEN if HAS_SAW else Colors.RED)}
+  Plane: {c('Available' if HAS_PLANE else 'Not installed', Colors.GREEN if HAS_PLANE else Colors.RED)}
+  Hammer: {c('Available' if HAS_HAMMER else 'Not installed', Colors.GREEN if HAS_HAMMER else Colors.RED)}
+
+Dependencies:
+  pip install angr frida-python psutil
+
+For detailed documentation, see: workshop_quick_reference.md
+"""
+        print(help_text)
+    
+    def show_workshop_history(self, args: str) -> None:
+        """Display workshop analysis history."""
+        tool_name = args.strip() if args else None
+        
+        db = AgentDatabase(get_database_path())
+        analyses = db.get_workshop_analyses(tool_name=tool_name, limit=20)
+        
+        if not analyses:
+            print(c("No workshop analyses found.", Colors.YELLOW))
+            return
+        
+        print(c("\nWorkshop Analysis History:", Colors.BOLD))
+        print("-" * 80)
+        
+        for analysis in analyses:
+            tool = c(analysis['tool_name'], Colors.CYAN)
+            status = c(analysis['status'], Colors.GREEN if analysis['status'] == 'completed' else Colors.RED)
+            timestamp = analysis['timestamp'][:19]  # Truncate microseconds
+            duration = f"{analysis.get('duration_seconds', 0):.2f}s"
+            
+            print(f"{tool:15} | {status:12} | {timestamp} | {duration:8} | {analysis['target'][:40]}")
+        
+        print()
+    
+    def show_workshop_stats(self, args: str) -> None:
+        """Display workshop usage statistics."""
+        tool_name = args.strip() if args else None
+        
+        db = AgentDatabase(get_database_path())
+        stats = db.get_workshop_stats()
+        
+        if not stats:
+            print(c("No workshop statistics available.", Colors.YELLOW))
+            return
+        
+        print(c("\nWorkshop Usage Statistics:", Colors.BOLD))
+        print("-" * 80)
+        print(f"{'Tool':<12} | {'Total':<8} | {'Successful':<12} | {'Failed':<8} | {'Avg Duration':<12}")
+        print("-" * 80)
+        
+        # Filter to specific tool if requested
+        if tool_name:
+            stats = {k: v for k, v in stats.items() if k == tool_name}
+        
+        for tool, data in stats.items():
+            total = data['total_analyses']
+            success = data['successful']
+            failed = data['failed']
+            avg_dur = f"{data['avg_duration']:.2f}s"
+            
+            print(f"{tool:<12} | {total:<8} | {success:<12} | {failed:<8} | {avg_dur:<12}")
+        
         print()
     
     def process_command(self, cmd: str) -> bool:
@@ -3494,6 +3808,9 @@ Examples:
                 print(c(f"Cannot start collaboration: {e}", Colors.RED))
             except Exception as e:
                 print(c(f"Collaboration error: {e}", Colors.RED))
+        
+        elif command == '/workshop':
+            self.handle_workshop_command(args)
         
         else:
             print(c(f"Unknown command: {command}. Type /help for help.", Colors.YELLOW))

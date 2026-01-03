@@ -27,6 +27,7 @@
 - [Tool Whitelist](#tool-whitelist)
 - [Advanced Usage](#advanced-usage)
 - [Multi-Agent Collaboration](#multi-agent-collaboration)
+- [Workshop - Dynamic Analysis Tools](#workshop---dynamic-analysis-tools)
 - [Troubleshooting](#troubleshooting)
 
 ---
@@ -657,6 +658,220 @@ axe> @grok suggest unconventional approaches to improve performance
 
 ---
 
+## Workshop - Dynamic Analysis Tools
+
+AXE includes **Workshop**, a comprehensive suite of reverse-engineering and security analysis tools designed for advanced code analysis and vulnerability detection.
+
+### Overview
+
+The Workshop framework provides four powerful analysis tools, each named after woodworking implements:
+
+| Tool | Purpose | Command | Dependencies |
+|------|---------|---------|--------------|
+| **Chisel** | Symbolic execution for binary analysis | `/workshop chisel <binary> [func]` | angr |
+| **Saw** | Taint analysis for Python code | `/workshop saw "<code>"` | (built-in) |
+| **Plane** | Source/sink enumeration | `/workshop plane <path>` | (built-in) |
+| **Hammer** | Live process instrumentation | `/workshop hammer <process>` | frida-python, psutil |
+
+### Installation
+
+Install Workshop dependencies:
+
+```bash
+# Install all dependencies
+pip install 'angr>=9.2.0' 'frida-python>=16.0.0' 'psutil>=5.9.0'
+
+# Or install individually
+pip install 'angr>=9.2.0'           # For Chisel symbolic execution
+pip install 'frida-python>=16.0.0'  # For Hammer instrumentation
+pip install 'psutil>=5.9.0'         # For Hammer process monitoring
+```
+
+### Quick Examples
+
+#### Chisel - Symbolic Execution
+Analyze binary execution paths and find vulnerabilities:
+
+```bash
+axe> /workshop chisel ./vulnerable.exe main
+# Outputs: paths explored, constraints found, potential vulnerabilities
+```
+
+**Use Chisel when:**
+- Analyzing compiled binaries for security issues
+- Finding buffer overflows and memory corruption bugs
+- Exploring execution paths in compiled code
+- Analyzing obfuscated or packed executables
+
+#### Saw - Taint Analysis
+Track data flow to identify injection vulnerabilities:
+
+```bash
+axe> /workshop saw "import os; os.system(input())"
+# Outputs: taint sources, sinks, flows, and vulnerability classifications
+```
+
+**Use Saw when:**
+- Auditing Python code for injection vulnerabilities
+- Tracking user input through application flow
+- Finding SQL injection, XSS, command injection risks
+- Validating input sanitization
+
+#### Plane - Source/Sink Enumeration
+Catalog all data entry and exit points in a codebase:
+
+```bash
+axe> /workshop plane .
+# Outputs: all sources (input, file reads, network) and sinks (exec, eval, db queries)
+```
+
+**Use Plane when:**
+- Performing comprehensive security audits
+- Mapping attack surface of applications
+- Planning focused security reviews
+- Documenting data flow architecture
+
+#### Hammer - Live Instrumentation
+Monitor and instrument running processes in real-time:
+
+```bash
+axe> /workshop hammer python.exe
+# Starts live monitoring session (Ctrl+C to stop)
+```
+
+**Use Hammer when:**
+- Debugging runtime behavior
+- Analyzing malware or suspicious processes
+- Monitoring function calls and API usage
+- Dynamic analysis of running applications
+
+### Management Commands
+
+#### View Analysis History
+
+```bash
+# View all analyses
+axe> /workshop history
+
+# View specific tool history
+axe> /workshop history chisel
+axe> /workshop history saw
+```
+
+#### View Usage Statistics
+
+```bash
+# View overall statistics
+axe> /workshop stats
+
+# View specific tool stats
+axe> /workshop stats hammer
+```
+
+### Configuration
+
+Workshop tools can be configured in `axe.yaml`:
+
+```yaml
+workshop:
+  enabled: true
+  
+  # Tool-specific configuration is passed to each workshop tool
+  # The actual configuration options depend on the tool implementation
+  # See workshop module documentation for supported options
+  
+  chisel:
+    # Chisel-specific options (if supported)
+  
+  saw:
+    # Saw-specific options (if supported)
+  
+  plane:
+    # Plane-specific options (if supported)
+  
+  hammer:
+    # Hammer-specific options (if supported)
+```
+
+**Note**: The workshop tools accept configuration parameters, but the specific options available depend on each tool's implementation. Refer to the individual tool documentation in the `workshop/` module for details on supported configuration keys.
+
+### Integration with Agents
+
+Agents can leverage Workshop tools for enhanced analysis:
+
+```bash
+# Ask Claude to use Workshop for security audit
+axe> @claude use /workshop saw to analyze this code for injection vulnerabilities
+
+# Ask GPT to analyze a binary
+axe> @gpt analyze this binary with /workshop chisel and explain the findings
+
+# Collaborative security review
+axe> /collab claude,llama ./project 60 "Use workshop tools to perform comprehensive security audit"
+```
+
+### Database Integration
+
+All Workshop analyses are automatically:
+- Saved to the AXE database with full results
+- Tracked with performance metrics (duration, success/failure)
+- Available for historical review and statistics
+
+### XP Rewards
+
+Workshop tool usage awards XP when agents use the tools programmatically (not when invoked directly via CLI commands by humans):
+
+| Tool | Base XP | Bonuses |
+|------|---------|---------|
+| **Chisel** | 25 XP | +10 per vulnerability, +20 for path exploration |
+| **Saw** | 20 XP | +15 per taint flow, +25 per vulnerability |
+| **Plane** | 15 XP | +1 per 5 sources/sinks enumerated |
+| **Hammer** | 30 XP | +20 for successful instrumentation |
+
+**Note**: XP rewards apply when agents invoke workshop tools through the programmatic API. Direct CLI usage (e.g., `/workshop saw "<code>"`) tracks the analysis but does not award XP since no agent is performing the work.
+
+### Real-World Example: Security Audit Workflow
+
+```bash
+# Start AXE in your project
+cd ~/my-project
+axe
+
+# Step 1: Enumerate attack surface
+axe> /workshop plane .
+
+# Step 2: Analyze suspicious code
+axe> /workshop saw "$(cat suspicious_function.py)"
+
+# Step 3: Review with agents
+axe> @claude I found taint flows with Saw. Can you review the results and suggest fixes?
+
+# Step 4: Verify fixes
+axe> /workshop saw "$(cat fixed_function.py)"
+
+# Step 5: Check statistics
+axe> /workshop stats
+```
+
+### Documentation
+
+For detailed documentation, see:
+- **[workshop_quick_reference.md](workshop_quick_reference.md)** - Complete usage guide
+- **[workshop_benchmarks.md](workshop_benchmarks.md)** - Performance metrics
+- **[workshop_security_audit.md](workshop_security_audit.md)** - Security validation
+- **[workshop_test_results.md](workshop_test_results.md)** - Test coverage details
+
+### Help
+
+Get help anytime with:
+
+```bash
+axe> /workshop help
+axe> /workshop          # Same as /workshop help
+```
+
+---
+
 ## Troubleshooting
 
 ### Common Issues
@@ -780,7 +995,15 @@ Email: haxbox2000@gmail.com
 │   /files   - List code files    /context - Project summary     │
 │   /read X  - Read file X        /exec X  - Run command X       │
 │   /history - Chat history       /clear   - Clear history       │
-│   /help    - Show help          /quit    - Exit                │
+│   /workshop - Analysis tools    /help    - Show help           │
+│   /quit    - Exit                                               │
+├─────────────────────────────────────────────────────────────────┤
+│ WORKSHOP TOOLS (Dynamic Analysis)                               │
+│   /workshop chisel <binary>     - Symbolic execution           │
+│   /workshop saw "<code>"        - Taint analysis               │
+│   /workshop plane <path>        - Source/sink enumeration      │
+│   /workshop hammer <process>    - Live instrumentation         │
+│   /workshop history             - View analysis history        │
 ├─────────────────────────────────────────────────────────────────┤
 │ COLLABORATIVE MODE (NEW!)                                       │
 │   /collab agents workspace time "task"                         │
