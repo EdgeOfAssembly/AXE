@@ -17,7 +17,9 @@ from .schema import (
     AGENT_STATE_MIGRATIONS,
     SUPERVISOR_LOG_TABLE,
     ALIAS_MAPPINGS_TABLE,
-    WAL_MODE_PRAGMA
+    WAL_MODE_PRAGMA,
+    WORKSHOP_ANALYSIS_TABLE,
+    WORKSHOP_ANALYSIS_INDEXES
 )
 
 
@@ -64,6 +66,11 @@ class AgentDatabase:
             c.execute(AGENT_STATE_TABLE)
             c.execute(SUPERVISOR_LOG_TABLE)
             c.execute(ALIAS_MAPPINGS_TABLE)
+            c.execute(WORKSHOP_ANALYSIS_TABLE)
+            
+            # Create indexes for workshop analysis
+            for index_sql in WORKSHOP_ANALYSIS_INDEXES:
+                c.execute(index_sql)
             
             # Apply migrations for existing databases
             self._apply_migrations(conn)
@@ -600,6 +607,132 @@ class AgentDatabase:
             c.execute('SELECT context_summary FROM agent_state WHERE agent_id = ?', (agent_id,))
             row = c.fetchone()
             return row[0] if row else None
+    
+    # ========== Workshop Analysis Persistence ==========
+    
+    def save_workshop_analysis(self, tool_name: str, target: str, agent_id: Optional[str],
+                              results: Dict[str, Any], duration: Optional[float] = None,
+                              error_message: Optional[str] = None) -> str:
+        """
+        Save workshop analysis results to database.
+        
+        Args:
+            tool_name: Name of the workshop tool ('chisel', 'saw', 'plane', 'hammer')
+            target: Analysis target (file path, code, process name, etc.)
+            agent_id: ID of agent that requested analysis
+            results: Analysis results dictionary
+            duration: Analysis duration in seconds
+            error_message: Error message if analysis failed
+            
+        Returns:
+            Analysis ID for the saved record
+        """
+        analysis_id = str(uuid.uuid4())
+        status = 'failed' if error_message else 'completed'
+        
+        with sqlite3.connect(self.db_path) as conn:
+            c = conn.cursor()
+            c.execute('''
+                INSERT INTO workshop_analysis 
+                (analysis_id, tool_name, target, agent_id, results_json, status, 
+                 duration_seconds, error_message, timestamp)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (analysis_id, tool_name, target, agent_id, json.dumps(results), 
+                  status, duration, error_message, datetime.now(timezone.utc)))
+            conn.commit()
+        
+        return analysis_id
+    
+    def get_workshop_analyses(self, agent_id: Optional[str] = None, tool_name: Optional[str] = None,
+                             limit: int = 50) -> List[Dict[str, Any]]:
+        """
+        Retrieve workshop analysis results.
+        
+        Args:
+            agent_id: Filter by agent ID
+            tool_name: Filter by tool name
+            limit: Maximum number of results to return
+            
+        Returns:
+            List of analysis records
+        """
+        query = "SELECT * FROM workshop_analysis WHERE 1=1"
+        params = []
+        
+        if agent_id:
+            query += " AND agent_id = ?"
+            params.append(agent_id)
+            
+        if tool_name:
+            query += " AND tool_name = ?"
+            params.append(tool_name)
+            
+        query += " ORDER BY timestamp DESC LIMIT ?"
+        params.append(limit)
+        
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            c = conn.cursor()
+            c.execute(query, params)
+            
+            results = []
+            for row in c.fetchall():
+                result = dict(row)
+                # Parse JSON results
+                if result.get('results_json'):
+                    try:
+                        result['results'] = json.loads(result['results_json'])
+                        del result['results_json']
+                    except json.JSONDecodeError:
+                        result['results'] = {}
+                else:
+                    result['results'] = {}
+                results.append(result)
+            
+            return results
+    
+    def get_workshop_stats(self, agent_id: Optional[str] = None) -> Dict[str, Any]:
+        """
+        Get workshop usage statistics.
+        
+        Args:
+            agent_id: Filter by agent ID
+            
+        Returns:
+            Statistics dictionary
+        """
+        query = """
+            SELECT 
+                tool_name,
+                COUNT(*) as total_analyses,
+                AVG(duration_seconds) as avg_duration,
+                SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as successful,
+                SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed
+            FROM workshop_analysis
+        """
+        params = []
+        
+        if agent_id:
+            query += " WHERE agent_id = ?"
+            params.append(agent_id)
+            
+        query += " GROUP BY tool_name"
+        
+        with sqlite3.connect(self.db_path) as conn:
+            c = conn.cursor()
+            c.execute(query, params)
+            
+            stats = {}
+            for row in c.fetchall():
+                tool_name = row[0]
+                stats[tool_name] = {
+                    'total_analyses': row[1],
+                    'avg_duration': row[2] or 0,
+                    'successful': row[3],
+                    'failed': row[4]
+                }
+            
+            return stats
     
     # ========== Phase 7: Persistence Lifecycle Hooks ==========
     

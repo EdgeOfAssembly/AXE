@@ -74,6 +74,19 @@ The "whistleblower" mechanism – which allows worker agents to send GPG-encrypt
 - **Analysis**: cppcheck, clang-format, clang-tidy, pylint, mypy
 - **Emulation**: dosbox-x, xvfb-run
 
+### Workshop - Dynamic Analysis Tools
+
+AXE includes woodworking-themed dynamic analysis tools for advanced code analysis:
+
+- **Chisel**: Symbolic execution for precise path analysis and vulnerability detection
+- **Saw**: Taint analysis for tracking data flow and identifying injection vulnerabilities  
+- **Plane**: Source/sink enumeration for cataloging entry/exit points in codebases
+- **Hammer**: Live instrumentation for runtime monitoring and hooking
+
+Access via `/workshop <tool> <args>` in interactive mode.
+
+**Validation & Performance**: See [Workshop Benchmarks](workshop_benchmarks.md), [Security Audit](workshop_security_audit.md), [Dependency Validation](workshop_dependency_validation.md), and [Test Results](workshop_test_results.md).
+
 ---
 
 ## Quick Start

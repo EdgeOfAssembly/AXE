@@ -38,6 +38,14 @@ import time
 import shutil
 import re
 
+# Workshop dynamic analysis tools
+try:
+    from workshop import ChiselAnalyzer, SawTracker, PlaneEnumerator, HammerInstrumentor
+    HAS_WORKSHOP = True
+except ImportError:
+    HAS_WORKSHOP = False
+    print("Note: Workshop tools not available. Install dependencies: pip install angr frida-python psutil")
+
 # readline import enables command history in terminal (side effect import)
 # Try gnureadline first (more feature-complete on some platforms), then readline
 try:
@@ -3228,6 +3236,7 @@ Commands:
   /agents           List available agents and their status
   /rules            Display session rules
   /tools            List available tools by category
+  /workshop         Access dynamic analysis tools (chisel, saw, plane, hammer)
   /dirs             Show directory access permissions
   /config           Show current configuration
   /files            List project code files
@@ -3317,6 +3326,319 @@ Examples:
         print(f"  {c('Forbidden:', Colors.RED)} {', '.join(forbidden)}")
         print()
     
+    def handle_workshop_command(self, args: str) -> None:
+        """Handle workshop dynamic analysis commands."""
+        if not HAS_WORKSHOP:
+            print(c("Workshop tools not available. Install dependencies: pip install angr frida-python psutil", Colors.RED))
+            return
+        
+        if not args:
+            self.show_workshop_help()
+            return
+        
+        parts = args.split(maxsplit=1)
+        command = parts[0].lower()
+        tool_args = parts[1] if len(parts) > 1 else ""
+        
+        if command == 'history':
+            self.show_workshop_history(tool_args)
+        elif command == 'stats':
+            self.show_workshop_stats(tool_args)
+        elif command in ['chisel', 'saw', 'plane', 'hammer']:
+            tool_method = getattr(self, f'run_{command}')
+            tool_method(tool_args)
+        else:
+            print(c(f"Unknown workshop command: {command}", Colors.RED))
+            self.show_workshop_help()
+    
+    def show_workshop_help(self) -> None:
+        """Show workshop tools help."""
+        help_text = """
+Workshop - Dynamic Analysis Tools:
+
+  chisel <binary> [options]    Symbolic execution analysis
+  saw <code>                   Taint analysis on code
+  plane <project>              Enumerate sources/sinks
+  hammer <process>             Live instrumentation
+  history [tool]               Show analysis history
+  stats [tool]                 Show usage statistics
+
+Examples:
+  /workshop chisel ./binary.exe
+  /workshop saw "import os; os.system(input())"
+  /workshop plane .
+  /workshop hammer python.exe
+  /workshop history chisel
+  /workshop stats
+"""
+        print(c(help_text, Colors.CYAN))
+    
+    def show_workshop_history(self, args: str) -> None:
+        """Show workshop analysis history."""
+        if not hasattr(self, 'db') or not self.db:
+            print(c("Database not available for history", Colors.RED))
+            return
+        
+        tool_filter = args.strip() if args else None
+        
+        try:
+            analyses = self.db.get_workshop_analyses(tool_name=tool_filter, limit=20)
+            
+            if not analyses:
+                print(c("No workshop analyses found", Colors.YELLOW))
+                return
+            
+            print(c("Workshop Analysis History:", Colors.BOLD))
+            print("-" * 60)
+            
+            for analysis in analyses:
+                timestamp = analysis.get('timestamp', 'Unknown')
+                tool = analysis.get('tool_name', 'Unknown')
+                target = analysis.get('target', 'Unknown')[:50]
+                status = analysis.get('status', 'Unknown')
+                duration = analysis.get('duration_seconds', 0)
+                
+                status_color = Colors.GREEN if status == 'completed' else Colors.RED
+                print(f"{timestamp} | {c(tool, Colors.CYAN)} | {target} | {c(status, status_color)} | {duration:.2f}s")
+                
+        except Exception as e:
+            print(c(f"Error retrieving history: {e}", Colors.RED))
+    
+    def show_workshop_stats(self, args: str) -> None:
+        """Show workshop usage statistics."""
+        if not hasattr(self, 'db') or not self.db:
+            print(c("Database not available for statistics", Colors.RED))
+            return
+        
+        try:
+            stats = self.db.get_workshop_stats()
+            
+            if not stats:
+                print(c("No workshop statistics available", Colors.YELLOW))
+                return
+            
+            print(c("Workshop Usage Statistics:", Colors.BOLD))
+            print("-" * 50)
+            
+            total_analyses = sum(tool_stats['total_analyses'] for tool_stats in stats.values())
+            print(f"Total Analyses: {total_analyses}")
+            print()
+            
+            for tool_name, tool_stats in stats.items():
+                success_rate = (tool_stats['successful'] / tool_stats['total_analyses'] * 100) if tool_stats['total_analyses'] > 0 else 0
+                avg_duration = tool_stats['avg_duration']
+                
+                print(f"{c(tool_name.title(), Colors.CYAN)}:")
+                print(f"  Total: {tool_stats['total_analyses']}")
+                print(f"  Success Rate: {success_rate:.1f}%")
+                print(f"  Avg Duration: {avg_duration:.2f}s")
+                print()
+                
+        except Exception as e:
+            print(c(f"Error retrieving statistics: {e}", Colors.RED))
+    
+    def run_chisel(self, args: str) -> None:
+        """Run chisel symbolic execution."""
+        if not args:
+            print(c("Usage: /workshop chisel <binary_path> [function_name]", Colors.YELLOW))
+            return
+        
+        from workshop import ChiselAnalyzer
+        analyzer = ChiselAnalyzer(self.config.get('workshop.chisel', {}))
+        
+        parts = args.split()
+        binary_path = parts[0]
+        func_name = parts[1] if len(parts) > 1 else None
+        
+        import time
+        start_time = time.time()
+        
+        try:
+            if func_name:
+                result = analyzer.analyze_function(binary_path, func_name)
+            else:
+                result = analyzer.analyze_binary(binary_path)
+            
+            duration = time.time() - start_time
+            
+            # Save to database
+            if hasattr(self, 'db') and self.db:
+                analysis_id = self.db.save_workshop_analysis(
+                    'chisel', binary_path, None, result, duration
+                )
+                result['analysis_id'] = analysis_id
+            
+            # Award XP for successful analysis
+            from progression.xp_system import award_xp_for_activity, get_workshop_xp_bonus
+            base_xp = award_xp_for_activity('workshop_chisel')
+            bonus_xp = get_workshop_xp_bonus(result, 'chisel')
+            total_xp = base_xp + bonus_xp
+            
+            # Note: In a full implementation, we'd track which agent requested this
+            # For now, just show the XP that would be awarded
+            result['xp_awarded'] = total_xp
+            
+            print(c("Chisel Analysis Results:", Colors.BOLD))
+            print(json.dumps(result, indent=2))
+            
+        except Exception as e:
+            duration = time.time() - start_time
+            error_result = {'error': str(e)}
+            
+            # Save failed analysis
+            if hasattr(self, 'db') and self.db:
+                self.db.save_workshop_analysis(
+                    'chisel', binary_path, None, error_result, duration, str(e)
+                )
+            
+            print(c(f"Chisel analysis failed: {e}", Colors.RED))
+    
+    def run_saw(self, args: str) -> None:
+        """Run saw taint analysis."""
+        if not args:
+            print(c("Usage: /workshop saw <code_string>", Colors.YELLOW))
+            return
+        
+        from workshop import SawTracker
+        tracker = SawTracker(self.config.get('workshop.saw', {}))
+        
+        import time
+        start_time = time.time()
+        
+        try:
+            result = tracker.analyze_code(args)
+            duration = time.time() - start_time
+            
+            # Save to database
+            if hasattr(self, 'db') and self.db:
+                analysis_id = self.db.save_workshop_analysis(
+                    'saw', args[:100] + "..." if len(args) > 100 else args, 
+                    None, result, duration
+                )
+                result['analysis_id'] = analysis_id
+            
+            # Award XP for successful analysis
+            from progression.xp_system import award_xp_for_activity, get_workshop_xp_bonus
+            base_xp = award_xp_for_activity('workshop_saw')
+            bonus_xp = get_workshop_xp_bonus(result, 'saw')
+            total_xp = base_xp + bonus_xp
+            result['xp_awarded'] = total_xp
+            
+            print(c("Saw Taint Analysis Results:", Colors.BOLD))
+            print(json.dumps(result, indent=2))
+            
+        except Exception as e:
+            duration = time.time() - start_time
+            error_result = {'error': str(e)}
+            
+            # Save failed analysis
+            if hasattr(self, 'db') and self.db:
+                self.db.save_workshop_analysis(
+                    'saw', args[:100] + "..." if len(args) > 100 else args,
+                    None, error_result, duration, str(e)
+                )
+            
+            print(c(f"Saw analysis failed: {e}", Colors.RED))
+    
+    def run_plane(self, args: str) -> None:
+        """Run plane source/sink enumeration."""
+        project_path = args if args else "."
+        
+        from workshop import PlaneEnumerator
+        enumerator = PlaneEnumerator(self.config.get('workshop.plane', {}))
+        
+        import time
+        start_time = time.time()
+        
+        try:
+            result = enumerator.enumerate_project(project_path)
+            duration = time.time() - start_time
+            
+            # Save to database
+            if hasattr(self, 'db') and self.db:
+                analysis_id = self.db.save_workshop_analysis(
+                    'plane', project_path, None, result, duration
+                )
+                result['analysis_id'] = analysis_id
+            
+            # Award XP for successful analysis
+            from progression.xp_system import award_xp_for_activity, get_workshop_xp_bonus
+            base_xp = award_xp_for_activity('workshop_plane')
+            bonus_xp = get_workshop_xp_bonus(result, 'plane')
+            total_xp = base_xp + bonus_xp
+            result['xp_awarded'] = total_xp
+            
+            print(c("Plane Enumeration Results:", Colors.BOLD))
+            print(json.dumps(result, indent=2))
+            
+        except Exception as e:
+            duration = time.time() - start_time
+            error_result = {'error': str(e)}
+            
+            # Save failed analysis
+            if hasattr(self, 'db') and self.db:
+                self.db.save_workshop_analysis(
+                    'plane', project_path, None, error_result, duration, str(e)
+                )
+            
+            print(c(f"Plane enumeration failed: {e}", Colors.RED))
+    
+    def run_hammer(self, args: str) -> None:
+        """Run hammer live instrumentation."""
+        if not args:
+            print(c("Usage: /workshop hammer <process_name>", Colors.YELLOW))
+            return
+        
+        from workshop import HammerInstrumentor
+        instrumentor = HammerInstrumentor(self.config.get('workshop.hammer', {}))
+        
+        import time
+        start_time = time.time()
+        
+        try:
+            session_id = instrumentor.instrument_process(args, {})
+            duration = time.time() - start_time
+            
+            if session_id.startswith("Error"):
+                # Save failed analysis
+                if hasattr(self, 'db') and self.db:
+                    error_result = {'error': session_id}
+                    self.db.save_workshop_analysis(
+                        'hammer', args, None, error_result, duration, session_id
+                    )
+                print(c(f"Hammer instrumentation failed: {session_id}", Colors.RED))
+            else:
+                # Save successful analysis
+                result = {'session_id': session_id, 'status': 'running'}
+                if hasattr(self, 'db') and self.db:
+                    analysis_id = self.db.save_workshop_analysis(
+                        'hammer', args, None, result, duration
+                    )
+                    result['analysis_id'] = analysis_id
+                
+                # Award XP for successful instrumentation
+                from progression.xp_system import award_xp_for_activity, get_workshop_xp_bonus
+                base_xp = award_xp_for_activity('workshop_hammer')
+                bonus_xp = get_workshop_xp_bonus(result, 'hammer')
+                total_xp = base_xp + bonus_xp
+                result['xp_awarded'] = total_xp
+                
+                print(c(f"Hammer session started: {session_id}", Colors.GREEN))
+                print(c(f"XP awarded: {total_xp}", Colors.CYAN))
+                instrumentor.start_monitoring(session_id)
+                
+        except Exception as e:
+            duration = time.time() - start_time
+            error_result = {'error': str(e)}
+            
+            # Save failed analysis
+            if hasattr(self, 'db') and self.db:
+                self.db.save_workshop_analysis(
+                    'hammer', args, None, error_result, duration, str(e)
+                )
+            
+            print(c(f"Hammer instrumentation failed: {e}", Colors.RED))
+    
     def process_command(self, cmd: str) -> bool:
         """Process a slash command. Returns False to exit."""
         cmd = cmd.strip()
@@ -3338,6 +3660,9 @@ Examples:
         
         elif command == '/tools':
             self.list_tools()
+        
+        elif command == '/workshop':
+            self.handle_workshop_command(args)
         
         elif command == '/dirs':
             self.list_dirs()

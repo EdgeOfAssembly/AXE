@@ -708,3 +708,47 @@ code_extensions:
   - Makefile
   - . mk
   - CMakeLists.txt
+
+# Workshop - Dynamic Analysis Tools Configuration
+# Configuration for woodworking-themed dynamic analysis tools
+workshop:
+  enabled: true
+
+  # Chisel - Symbolic Execution
+  chisel:
+    enabled: true
+    max_paths: 1000          # Maximum paths to explore
+    timeout: 30              # Analysis timeout in seconds
+    find_targets: []         # Addresses to find (empty = auto-detect)
+    avoid_targets: []        # Addresses to avoid
+    memory_limit: 1024       # Memory limit in MB
+
+  # Saw - Taint Analysis
+  saw:
+    enabled: true
+    max_depth: 10            # Maximum taint propagation depth
+    confidence_threshold: 0.7 # Minimum confidence for reporting
+    custom_sources: []       # Additional taint sources
+    custom_sinks: []         # Additional taint sinks
+
+  # Plane - Source/Sink Enumeration
+  plane:
+    enabled: true
+    exclude_patterns:        # Patterns to exclude from enumeration
+      - __pycache__
+      - .git
+      - venv
+      - node_modules
+      - .pytest_cache
+    max_files: 1000          # Maximum files to analyze
+    confidence_threshold: 0.6 # Minimum confidence for enumeration
+
+  # Hammer - Live Instrumentation
+  hammer:
+    enabled: true
+    monitoring_interval: 0.1 # Polling interval for monitoring
+    max_sessions: 5          # Maximum concurrent instrumentation sessions
+    default_hooks:           # Default hooks to attach
+      memory: true
+      functions: true
+      syscalls: false

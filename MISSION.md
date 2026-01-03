@@ -11,6 +11,19 @@ AXE is a lightweight, modular execution engine designed to orchestrate AI agent 
 3. **Modularity** - Components that can be mixed and matched as needed
 4. **Observability** - Full visibility into agent execution and state
 
+## Workshop - Dynamic Analysis Tools
+
+AXE includes advanced dynamic analysis capabilities through our "Workshop" module, featuring woodworking-themed tools for comprehensive code analysis:
+
+- **Chisel**: Symbolic execution engine for precise vulnerability detection and path analysis
+- **Saw**: Taint tracking system for identifying data flow vulnerabilities and injection attacks
+- **Plane**: Source/sink enumeration for cataloging all entry and exit points in codebases
+- **Hammer**: Live instrumentation framework for runtime monitoring and dynamic analysis
+
+These tools enhance AXE's security auditing and reverse engineering capabilities, providing agents with powerful analysis instruments.
+
+**Quality Assurance**: Comprehensive validation completed including [performance benchmarks](workshop_benchmarks.md), [security audit](workshop_security_audit.md), [dependency validation](workshop_dependency_validation.md), and [test suite results](workshop_test_results.md).
+
 ## Agent Communication Tokens
 
 AXE uses special control tokens to coordinate multi-agent interactions. These tokens are defined in `axe.py` and should NEVER be written literally in files, as they trigger detection.
