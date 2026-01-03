@@ -3,3 +3,6 @@ anthropic
 huggingface_hub
 requests
 pyyaml
+angr
+frida-python
+psutil
