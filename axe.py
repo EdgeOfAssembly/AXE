@@ -3237,15 +3237,15 @@ Focus on practical, well-tested solutions."""
 class ChatSession:
     """Interactive chat session manager."""
     
-    def __init__(self, config: Config, project_dir: str):
-        self.config = config
-        self.project_dir = os.path.abspath(project_dir)
-        self.agent_mgr = AgentManager(config)
-        self.tool_runner = ToolRunner(config, project_dir)
-        self.project_ctx = ProjectContext(project_dir, config)
-        self.response_processor = ResponseProcessor(config, project_dir, self.tool_runner)
-        self.history: List[dict] = []
-        self.default_agent = 'claude'
+    def __init__(self, config: Config, project_dir: str) -> None:
+        self.config: Config = config
+        self.project_dir: str = os.path.abspath(project_dir)
+        self.agent_mgr: AgentManager = AgentManager(config)
+        self.tool_runner: ToolRunner = ToolRunner(config, project_dir)
+        self.project_ctx: ProjectContext = ProjectContext(project_dir, config)
+        self.response_processor: ResponseProcessor = ResponseProcessor(config, project_dir, self.tool_runner)
+        self.history: list[dict[str, Any]] = []
+        self.default_agent: str = 'claude'
     
     def print_banner(self) -> None:
         """Print welcome banner."""
@@ -3261,7 +3261,7 @@ class ChatSession:
     
     def print_help(self) -> None:
         """Print help message."""
-        help_text = """
+        help_text: str = """
 Commands:
   @<agent> <task>   Send task to agent (e.g., @gpt analyze this code)
   /agents           List available agents and their status
@@ -3311,19 +3311,19 @@ Examples:
         print("-" * 60)
         
         for agent in self.agent_mgr.list_agents():
-            status = c("✓", Colors.GREEN) if agent['available'] else c("✗", Colors.RED)
-            aliases = ', '.join(agent['aliases'])
+            status: str = c("✓", Colors.GREEN) if agent['available'] else c("✗", Colors.RED)
+            aliases: str = ', '.join(agent['aliases'])
             print(f"  {status} {c(agent['name'], Colors.CYAN):12} ({aliases})")
             print(f"     {c(agent['role'], Colors.DIM)}")
             print(f"     Model: {agent['model']}")
             
             # Display metadata if available
             if 'metadata' in agent:
-                metadata = agent['metadata']
-                context_tokens = format_token_count(metadata['context_tokens'])
-                max_output = format_token_count(metadata['max_output_tokens'])
-                input_modes = ', '.join(metadata['input_modes'])
-                output_modes = ', '.join(metadata['output_modes'])
+                metadata: dict[str, Any] = agent['metadata']
+                context_tokens: str = format_token_count(metadata['context_tokens'])
+                max_output: str = format_token_count(metadata['max_output_tokens'])
+                input_modes: str = ', '.join(metadata['input_modes'])
+                output_modes: str = ', '.join(metadata['output_modes'])
                 
                 print(f"     Context: {context_tokens} tokens | Max Output: {max_output} tokens")
                 print(f"     Input: {input_modes} | Output: {output_modes}")
@@ -3334,7 +3334,7 @@ Examples:
         print(c("\nAvailable Tools:", Colors.BOLD))
         print("-" * 40)
         
-        tools = self.config.get('tools', default={})
+        tools: dict[str, list[str]] = self.config.get('tools', default={})
         for category, tool_list in tools.items():
             print(f"  {c(category, Colors.CYAN)}: {', '.join(tool_list)}")
         print()
@@ -3344,24 +3344,24 @@ Examples:
         print(c("\nDirectory Access:", Colors.BOLD))
         print("-" * 40)
         
-        dirs = self.config.get('directories', default={})
+        dirs: dict[str, list[str]] = self.config.get('directories', default={})
         
-        allowed = dirs.get('allowed', [])
+        allowed: list[str] = dirs.get('allowed', [])
         print(f"  {c('Allowed:', Colors.GREEN)} {', '.join(allowed)}")
         
-        readonly = dirs.get('readonly', [])
+        readonly: list[str] = dirs.get('readonly', [])
         print(f"  {c('Read-only:', Colors.YELLOW)} {', '.join(readonly)}")
         
-        forbidden = dirs.get('forbidden', [])
+        forbidden: list[str] = dirs.get('forbidden', [])
         print(f"  {c('Forbidden:', Colors.RED)} {', '.join(forbidden)}")
         print()
     
     def process_command(self, cmd: str) -> bool:
         """Process a slash command. Returns False to exit."""
         cmd = cmd.strip()
-        parts = cmd.split(maxsplit=1)
-        command = parts[0].lower()
-        args = parts[1] if len(parts) > 1 else ""
+        parts: list[str] = cmd.split(maxsplit=1)
+        command: str = parts[0].lower()
+        args: str = parts[1] if len(parts) > 1 else ""
         
         if command in ['/quit', '/exit', '/q']:
             return False
@@ -3388,8 +3388,10 @@ Examples:
                 print(json.dumps(self.config.config, indent=2))
         
         elif command == '/files':
+            files: list[str]
+            total: int
             files, total = self.project_ctx.list_code_files()
-            header = f"\nCode files ({len(files)}"
+            header: str = f"\nCode files ({len(files)}"
             if total > len(files):
                 header += f" of {total} total"
             header += "):"
@@ -3409,18 +3411,20 @@ Examples:
         
         elif command == '/exec':
             if args:
+                success: bool
+                output: str
                 success, output = self.tool_runner.run(args)
-                color = Colors.GREEN if success else Colors.RED
+                color: str = Colors.GREEN if success else Colors.RED
                 print(c(output[:1000], color))
             else:
                 print(c("Usage: /exec <command>", Colors.YELLOW))
         
         elif command == '/history':
-            total_entries = len(self.history)
-            entries_to_show = self.history[-20:]
+            total_entries: int = len(self.history)
+            entries_to_show: list[dict[str, Any]] = self.history[-20:]
             for entry in entries_to_show:
-                role = c(entry['role'], Colors.CYAN)
-                msg = entry['content'][:100]
+                role: str = c(entry['role'], Colors.CYAN)
+                msg: str = entry['content'][:100]
                 print(f"[{role}] {msg}...")
             if total_entries > len(entries_to_show):
                 print(c(f"Showing last {len(entries_to_show)} of {total_entries} history entries.", Colors.YELLOW))
@@ -3439,8 +3443,8 @@ Examples:
                 return True
             
             # Parse arguments: agents workspace time task
-            parts = args.split(maxsplit=3)
-            if len(parts) < 4:
+            collab_parts: list[str] = args.split(maxsplit=3)
+            if len(collab_parts) < 4:
                 print(c("Usage: /collab <agents> <workspace> <time_minutes> <task>", Colors.YELLOW))
                 print(c("  agents: comma-separated list (e.g., llama,copilot)", Colors.DIM))
                 print(c("  workspace: directory path (e.g., ./playground)", Colors.DIM))
@@ -3448,9 +3452,14 @@ Examples:
                 print(c("  task: description in quotes (e.g., \"Review the code\")", Colors.DIM))
                 return True
             
-            agents_str, workspace, time_str, task = parts
-            agents = [a.strip() for a in agents_str.split(',')]
+            agents_str: str
+            workspace: str
+            time_str: str
+            task: str
+            agents_str, workspace, time_str, task = collab_parts
+            agents: list[str] = [a.strip() for a in agents_str.split(',')]
             
+            time_limit: int
             try:
                 time_limit = int(time_str)
             except ValueError:
@@ -3474,7 +3483,7 @@ Examples:
             task = task.strip('"\'')
             
             try:
-                collab = CollaborativeSession(
+                collab: CollaborativeSession = CollaborativeSession(
                     config=self.config,
                     agents=agents,
                     workspace_dir=workspace,
@@ -3494,11 +3503,13 @@ Examples:
     def process_agent_message(self, message: str) -> None:
         """Process an @agent message."""
         # Parse @agent from message
+        agent_name: str
+        prompt: str
         if not message.startswith('@'):
             agent_name = self.default_agent
             prompt = message
         else:
-            parts = message[1:].split(maxsplit=1)
+            parts: list[str] = message[1:].split(maxsplit=1)
             agent_name = parts[0]
             prompt = parts[1] if len(parts) > 1 else ""
         
@@ -3507,17 +3518,17 @@ Examples:
             return
         
         # Get context
-        context = self.project_ctx.get_context_summary()
+        context: str = self.project_ctx.get_context_summary()
         
         # Record in history
         self.history.append({'role': 'user', 'agent': agent_name, 'content': prompt})
         
         # Call agent
         print(c(f"\n[{agent_name}] Processing...", Colors.DIM))
-        response = self.agent_mgr.call_agent(agent_name, prompt, context)
+        response: str = self.agent_mgr.call_agent(agent_name, prompt, context)
         
         # Process response for code blocks (READ, EXEC, WRITE)
-        processed_response = self.response_processor.process_response(response, agent_name)
+        processed_response: str = self.response_processor.process_response(response, agent_name)
         
         # Record response
         self.history.append({'role': agent_name, 'content': processed_response})
@@ -3533,6 +3544,7 @@ Examples:
         
         try:
             while True:
+                prompt: str
                 try:
                     prompt = input(c("axe> ", Colors.GREEN + Colors.BOLD))
                 except EOFError:
