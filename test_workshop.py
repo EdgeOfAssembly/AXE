@@ -45,7 +45,7 @@ def vulnerable_func(user_input):
 """
 
         result = tracker.analyze_code(code)
-        self.assertIn('flows', result)
+        self.assertIn('taint_flows', result)
         self.assertIn('vulnerabilities', result)
 
     def test_plane_basic(self):

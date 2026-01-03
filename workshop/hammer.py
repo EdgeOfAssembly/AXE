@@ -192,7 +192,7 @@ class HammerInstrumentor:
                 console.log('[Hammer] Entering {hook_name}');
                 // Log arguments
                 for (var i = 0; i < args.length; i++) {{
-                    console.log('  arg{i}: ' + args[i]);
+                    console.log('  arg' + i + ': ' + args[i]);
                 }}
             }},
             onLeave: function(retval) {{
