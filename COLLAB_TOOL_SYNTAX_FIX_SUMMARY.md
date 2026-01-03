@@ -130,9 +130,9 @@ Result: ✅ File actually created using proper WRITE block syntax
 
 After this fix, agents in collaborative mode will:
 
-✅ Use `\`\`\`WRITE filename.txt` blocks to create/modify files
-✅ Use `\`\`\`READ filename.txt` blocks to read files  
-✅ Use `\`\`\`EXEC command` blocks to run commands
+✅ Use `` ```WRITE filename.txt`` blocks to create/modify files
+✅ Use `` ```READ filename.txt`` blocks to read files  
+✅ Use `` ```EXEC command`` blocks to run commands
 ✅ Actually perform file operations instead of just describing them
 ✅ Understand the critical distinction between describing and executing
 

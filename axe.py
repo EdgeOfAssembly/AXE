@@ -2511,7 +2511,7 @@ TO RUN COMMANDS:
 
 ⚠️ CRITICAL DISTINCTION:
 ❌ WRONG: "I created boss.txt with content X" (just text - NOTHING HAPPENS!)
-✅ RIGHT: Use the ```WRITE boss.txt block above (file actually created)
+✅ RIGHT: Use the ```WRITE boss.txt``` block above (file actually created)
 
 Examples that WORK:
 ```WRITE hello.py
