@@ -654,9 +654,12 @@ def test_mixed_formats():
     ```bash
     ls -la
     ```
-    ```READ /tmp/file.txt```
+    <read_file>/tmp/file.txt</read_file>
     '''
     calls = parse_all_tool_formats(response)
+    # Note: ```READ/WRITE/EXEC blocks are no longer parsed here to prevent duplicate execution
+    # They are handled exclusively by axe.py's ResponseProcessor
+    # So we expect 3 calls: <bash>, ```bash, and <read_file>
     assert len(calls) >= 3, f"Expected at least 3 calls, got {len(calls)}"
     
     print("  ✓ Mixed formats parsed correctly")
@@ -755,11 +758,12 @@ def test_all_formats_execution():
         _, results2 = process_agent_response(response2, tmpdir, processor)
         assert len(results2) > 0
         
-        # Test ```READ format
-        response3 = f'```READ test.txt```'
-        _, results3 = process_agent_response(response3, tmpdir, processor)
-        assert len(results3) > 0
-        assert "Test content" in results3[0] or "result" in results3[0]
+        # Test ```READ format - now handled by ResponseProcessor, not xml_tool_parser
+        # So we test via ResponseProcessor.process_response() instead
+        # Note: Pattern requires newline after READ
+        response3 = f'```READ test.txt\n```'
+        processed3 = processor.process_response(response3, "test_agent")
+        assert "Test content" in processed3 or "Execution Results" in processed3
         
         # Test <read_file> format
         response4 = '<read_file>test.txt</read_file>'
@@ -767,6 +771,122 @@ def test_all_formats_execution():
         assert len(results4) > 0
         
         print("  ✓ All formats execute correctly")
+
+
+def test_no_duplicate_execution():
+    """Test that commands are not executed twice (Fix 1)."""
+    print("Testing no duplicate execution...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        # Create a test file
+        test_file = os.path.join(tmpdir, "deleteme.txt")
+        with open(test_file, 'w') as f:
+            f.write("Delete me")
+        
+        config = Config()
+        tool_runner = ToolRunner(config, tmpdir)
+        tool_runner.auto_approve = True
+        processor = ResponseProcessor(config, tmpdir, tool_runner)
+        
+        # Create a response with a ```EXEC block that deletes the file
+        # This should only be executed once, by ResponseProcessor
+        response = f'```EXEC\nrm {test_file}\n```'
+        
+        # First, verify parse_all_tool_formats does NOT parse this
+        calls_from_parser = parse_all_tool_formats(response)
+        # Should be 0 because we removed parse_axe_native_blocks from parse_all_tool_formats
+        assert len(calls_from_parser) == 0, f"parse_all_tool_formats should not parse ```EXEC blocks, got {len(calls_from_parser)} calls"
+        
+        # Now process via ResponseProcessor (should execute once)
+        processed = processor.process_response(response, "test_agent")
+        
+        # File should be deleted
+        assert not os.path.exists(test_file), "File should be deleted after single execution"
+        
+        # Response should contain execution result
+        assert "Execution Results" in processed or "EXEC" in processed
+        
+        print("  ✓ No duplicate execution - commands only executed once")
+
+
+def test_heredoc_in_shell_block():
+    """Test that heredocs in shell blocks are handled correctly (Fix 2)."""
+    print("Testing heredoc in shell block...")
+    
+    response = '''```bash
+cat << EOF > notes.md
+- Item 1
+- Item 2
+EOF
+```'''
+    
+    calls = parse_shell_codeblocks(response)
+    
+    # Should have 1 call (entire heredoc as single command)
+    assert len(calls) == 1, f"Expected 1 call for heredoc, got {len(calls)}"
+    
+    # The command should include the heredoc marker and content
+    command = calls[0]['params']['command']
+    assert '<<' in command, "Command should contain heredoc marker"
+    assert '- Item 1' in command, "Command should contain heredoc content"
+    assert 'EOF' in command, "Command should contain heredoc delimiter"
+    
+    print("  ✓ Heredoc in shell block handled correctly")
+
+
+def test_multiline_without_heredoc():
+    """Test that multi-line commands without heredoc still work correctly."""
+    print("Testing multi-line without heredoc...")
+    
+    response = '''```bash
+echo "line 1"
+echo "line 2"
+```'''
+    
+    calls = parse_shell_codeblocks(response)
+    
+    # Should have 2 separate calls (no heredoc, so split by lines)
+    assert len(calls) == 2, f"Expected 2 calls, got {len(calls)}"
+    
+    # Verify both commands
+    assert 'line 1' in calls[0]['params']['command']
+    assert 'line 2' in calls[1]['params']['command']
+    
+    print("  ✓ Multi-line without heredoc works correctly")
+
+
+def test_heredoc_variations():
+    """Test various heredoc formats."""
+    print("Testing heredoc variations...")
+    
+    # Test <<- (indented heredoc)
+    response1 = '''```bash
+cat <<- EOF
+content
+EOF
+```'''
+    calls1 = parse_shell_codeblocks(response1)
+    assert len(calls1) == 1, "Should handle <<- heredoc"
+    assert '<<-' in calls1[0]['params']['command']
+    
+    # Test with quoted delimiter
+    response2 = '''```bash
+cat << "EOF"
+content
+EOF
+```'''
+    calls2 = parse_shell_codeblocks(response2)
+    assert len(calls2) == 1, "Should handle quoted delimiter heredoc"
+    
+    # Test here-string
+    response3 = '''```bash
+grep pattern <<< "search text"
+```'''
+    calls3 = parse_shell_codeblocks(response3)
+    assert len(calls3) == 1, "Should handle here-string"
+    assert '<<<' in calls3[0]['params']['command']
+    
+    print("  ✓ Heredoc variations handled correctly")
 
 
 def main():
@@ -811,6 +931,12 @@ def main():
         test_empty_commands_ignored()
         test_clean_tool_syntax()
         test_all_formats_execution()
+        
+        # New tests for bug fixes
+        test_no_duplicate_execution()
+        test_heredoc_in_shell_block()
+        test_multiline_without_heredoc()
+        test_heredoc_variations()
         
         print("\n" + "="*70)
         print("✅ ALL TESTS PASSED!")
