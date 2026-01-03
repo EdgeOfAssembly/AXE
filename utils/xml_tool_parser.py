@@ -301,6 +301,16 @@ def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:
     """
     Parse AXE native ```READ, ```WRITE, ```EXEC blocks.
     
+    NOTE: This function is currently NOT called by parse_all_tool_formats()
+    to prevent duplicate command execution. These blocks are now handled
+    EXCLUSIVELY by axe.py's ResponseProcessor.process_response() which
+    provides more robust handling including heredoc support.
+    
+    This function is kept here for:
+    - Backward compatibility if needed
+    - Potential future use cases
+    - Testing individual block parsing
+    
     Args:
         response: Agent response text
     
