@@ -1137,15 +1137,24 @@ class ToolRunner:
         Remove heredoc content from command string to prevent content from being parsed as commands.
         Handles: << EOF, << 'EOF', << "EOF", <<- EOF (indented), <<< "string" (here-string)
         
+        ⚠️  CRITICAL: This function is for VALIDATION ONLY!
+        The returned string should ONLY be used for:
+        - Command name extraction (whitelist checking)
+        - Operator parsing (to avoid false positives from content)
+        
+        The returned string should NEVER be used for:
+        - Actual command execution (heredoc content would be missing!)
+        - Passing to subprocess.run() or similar
+        
         Example:
-            Input:  cat << EOF\nline1\nline2\nEOF
+            Input:  cat << EOF\\nline1\\nline2\\nEOF
             Output: cat << EOF
         
         Args:
             cmd: Shell command string that may contain heredocs
             
         Returns:
-            Command string with heredoc content removed
+            Command string with heredoc content removed (FOR VALIDATION ONLY!)
         """
         # Pattern to match heredoc start: <<- or << followed by optional quotes and delimiter word
         # Captures: quote char (if any) and delimiter word
@@ -1199,10 +1208,15 @@ class ToolRunner:
         Extract actual command names from a shell command string.
         Handles pipes, logical operators, redirects, heredocs, etc.
         
+        IMPORTANT: This is a validation helper that returns command names only.
+        It does NOT modify the input command - the input parameter `cmd` remains unchanged.
+        Heredoc stripping happens only on a local copy for parsing purposes.
+        
         Returns list of command names (first word of each command in pipeline).
         """
         # FIRST: Strip heredoc content to prevent it from being parsed as commands
         # This prevents heredoc content containing operators from being split and treated as commands
+        # NOTE: This creates a LOCAL variable - the original `cmd` parameter is NEVER modified
         cleaned_cmd = self._strip_heredoc_content(cmd)
         
         # Split on shell operators while preserving them for context
@@ -1272,11 +1286,26 @@ class ToolRunner:
         return False
     
     def is_tool_allowed(self, cmd: str) -> Tuple[bool, str]:
-        """Check if a command (including pipelines) is allowed."""
+        """
+        Check if a command (including pipelines) is allowed.
+        
+        This method validates commands against the whitelist and security rules.
+        It uses _extract_commands_from_shell() which internally strips heredoc
+        content for validation purposes only. The input `cmd` parameter is never
+        modified and should be passed unchanged to run() for execution.
+        
+        Args:
+            cmd: The complete shell command string to validate
+            
+        Returns:
+            Tuple of (allowed: bool, reason: str)
+        """
         if not cmd or not cmd.strip():
             return False, "Empty command"
         
         # Extract all command names from the shell string
+        # NOTE: This uses _strip_heredoc_content() internally for parsing only
+        # The original `cmd` remains unchanged and should be used for execution
         try:
             commands = self._extract_commands_from_shell(cmd)
         except Exception as e:
@@ -1343,38 +1372,60 @@ class ToolRunner:
         return True, "OK"
     
     def run(self, cmd: str, auto_approve: Optional[bool] = None, dry_run: Optional[bool] = None) -> Tuple[bool, str]:
-        """Run a command with safety checks."""
+        """
+        Run a command with safety checks.
+        
+        IMPORTANT: This method must ALWAYS execute the original `cmd` parameter.
+        The _strip_heredoc_content() function is used ONLY for validation purposes
+        in is_tool_allowed() and must NEVER affect the command that gets executed.
+        Heredoc content must remain intact for execution.
+        
+        Args:
+            cmd: The complete shell command to execute (with heredoc content intact)
+            auto_approve: Whether to skip user approval prompt
+            dry_run: Whether to simulate execution without running
+            
+        Returns:
+            Tuple of (success: bool, output: str)
+        """
         # Use instance defaults if not specified
         if auto_approve is None:
             auto_approve = self.auto_approve
         if dry_run is None:
             dry_run = self.dry_run
         
-        allowed, reason = self.is_tool_allowed(cmd)
+        # CRITICAL: Store original command to ensure we execute it, not a stripped version
+        # The is_tool_allowed() method internally uses _strip_heredoc_content() for
+        # validation only. We must execute the ORIGINAL command with heredoc content intact.
+        original_cmd = cmd
+        
+        allowed, reason = self.is_tool_allowed(original_cmd)
         
         if not allowed:
-            self._log(f"BLOCKED: {cmd} ({reason})")
+            self._log(f"BLOCKED: {original_cmd} ({reason})")
             return False, reason
         
         if dry_run:
-            self._log(f"DRY-RUN: {cmd}")
-            return True, f"[DRY-RUN] Would execute: {cmd}"
+            self._log(f"DRY-RUN: {original_cmd}")
+            return True, f"[DRY-RUN] Would execute: {original_cmd}"
         
         if not auto_approve:
-            print(colorize(f"Execute: {cmd}", Colors.YELLOW))
+            print(colorize(f"Execute: {original_cmd}", Colors.YELLOW))
             response = input("Approve? (y/n): ").strip().lower()
             if response != 'y':
-                self._log(f"SKIPPED: {cmd}")
+                self._log(f"SKIPPED: {original_cmd}")
                 return False, "Skipped by user"
         
         try:
             os.chdir(self.project_dir)
             
             # Check if command needs shell execution (pipes, redirects, etc.)
-            if self._needs_shell(cmd):
+            # IMPORTANT: Use original_cmd here, NOT any stripped/modified version
+            if self._needs_shell(original_cmd):
                 # Use shell for complex commands (all commands already validated)
+                # CRITICAL: Execute original_cmd with heredoc content intact!
                 result = subprocess.run(
-                    cmd,
+                    original_cmd,  # <- MUST be original command, not stripped
                     shell=True,
                     capture_output=True,
                     text=True,
@@ -1383,7 +1434,7 @@ class ToolRunner:
                 )
             else:
                 # Use direct execution for simple commands (safer)
-                cmd_args = shlex.split(cmd)
+                cmd_args = shlex.split(original_cmd)
                 result = subprocess.run(
                     cmd_args,
                     shell=False,
@@ -1393,7 +1444,7 @@ class ToolRunner:
                 )
             
             output = result.stdout + result.stderr
-            self._log(f"EXEC: {cmd}\nOUTPUT: {output[:1000]}")
+            self._log(f"EXEC: {original_cmd}\nOUTPUT: {output[:1000]}")
             
             if result.returncode == 0:
                 return True, output
@@ -1401,10 +1452,10 @@ class ToolRunner:
                 return False, f"Exit code {result.returncode}: {output}"
                 
         except subprocess.TimeoutExpired:
-            self._log(f"TIMEOUT: {cmd}")
+            self._log(f"TIMEOUT: {original_cmd}")
             return False, "Command timed out (120s)"
         except Exception as e:
-            self._log(f"ERROR: {cmd} - {e}")
+            self._log(f"ERROR: {original_cmd} - {e}")
             return False, str(e)
     
     def _log(self, message: str) -> None:
