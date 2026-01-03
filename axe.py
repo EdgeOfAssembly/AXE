@@ -2326,6 +2326,7 @@ class CollaborativeSession:
         self.agents = []
         self.agent_ids = {}  # Maps agent name to unique ID
         self.agent_aliases = {}  # Maps agent name to @alias
+        self.spawned_agents = {}  # Maps agent name (UUID) to config dict for dynamically spawned agents
         
         for agent_name in agents:
             agent = self.agent_mgr.resolve_agent(agent_name)
@@ -2419,7 +2420,13 @@ class CollaborativeSession:
         agent_id = self.agent_ids.get(agent_name)
         alias = self.agent_aliases.get(agent_name, agent_name)
         state = self.db.load_agent_state(agent_id) if agent_id else None
-        agent_config = self.agent_mgr.resolve_agent(agent_name)
+        
+        # Resolve agent config - check spawned agents first
+        agent_config = None
+        if agent_name in self.spawned_agents:
+            agent_config = self.spawned_agents[agent_name]
+        else:
+            agent_config = self.agent_mgr.resolve_agent(agent_name)
         
         level_info = ""
         if state:
@@ -2445,7 +2452,11 @@ class CollaborativeSession:
         other_info_list = []
         for a in other_agents:
             a_alias = self.agent_aliases.get(a, a)
-            a_config = self.agent_mgr.resolve_agent(a)
+            # Check spawned agents first
+            if a in self.spawned_agents:
+                a_config = self.spawned_agents[a]
+            else:
+                a_config = self.agent_mgr.resolve_agent(a)
             if a_config:
                 a_ctx = a_config.get('context_window', '?')
                 a_caps = ', '.join(a_config.get('capabilities', ['text']))
@@ -2687,7 +2698,20 @@ It's YOUR TURN. What would you like to contribute? Remember:
                 # Call the agent
                 print(c(f"[{current_agent}] Thinking...", Colors.DIM))
                 
-                agent_config = self.agent_mgr.resolve_agent(current_agent)
+                # Resolve agent config - check spawned agents first, then static config
+                agent_config = None
+                if current_agent in self.spawned_agents:
+                    # This is a dynamically spawned agent
+                    agent_config = self.spawned_agents[current_agent]
+                else:
+                    # This is a static agent from config
+                    agent_config = self.agent_mgr.resolve_agent(current_agent)
+                
+                if not agent_config:
+                    print(c(f"ERROR: Could not resolve agent '{current_agent}'", Colors.RED))
+                    self.current_turn += 1
+                    continue
+                
                 provider = agent_config.get('provider', '')
                 client = self.agent_mgr.clients.get(provider)
                 model = agent_config.get('model', '')
@@ -2965,13 +2989,41 @@ It's YOUR TURN. What would you like to contribute? Remember:
         
         if result['spawned']:
             print(c(f"   ✓ Spawned new agent: {result['alias']}", Colors.GREEN))
-            # Add to session using unique agent_id as key to prevent conflicts
-            unique_key = result['agent_id']
-            self.agents.append(unique_key)
-            self.agent_ids[unique_key] = result['agent_id']
-            self.agent_aliases[unique_key] = result['alias']
+            # Use agent_id as the key for spawned agents
+            agent_key = result['agent_id']
+            self.agents.append(agent_key)
+            self.agent_ids[agent_key] = result['agent_id']
+            self.agent_aliases[agent_key] = result['alias']
+            
+            # Store spawned agent configuration so it can be resolved
+            self.spawned_agents[agent_key] = {
+                'name': agent_key,
+                'provider': provider,
+                'model': model_name,
+                'alias': result['alias'],
+                'system_prompt': self._get_spawned_agent_system_prompt(model_type)
+            }
         else:
             print(c(f"   ✗ Spawn failed: {result['reason']}", Colors.YELLOW))
+    
+    def _get_spawned_agent_system_prompt(self, model_type: str) -> str:
+        """Get appropriate system prompt for a spawned agent based on model type."""
+        prompts = {
+            'llama': """You are an open-source hacker fluent in x86 assembly.
+Specialize in nasm, DOS interrupts, binary analysis.""",
+            'gpt': """You are an expert software engineer. Provide clear, working code.
+For C/C++: Prefer portable code; when DOS/16-bit targets are requested, explain that true DOS support typically needs compilers like Open Watcom or DJGPP and that 16-bit ints/far pointers are non-standard in modern toolchains.
+For Python: Clean, type-hinted code.
+For reverse-engineering: Use hexdump/objdump analysis.""",
+            'claude': """You are a code review expert and security auditor.
+Analyze code for bugs, security issues, and improvements.
+For rev-eng: Check endianness, memory safety, DOS compatibility.""",
+            'grok': """You are a fast-coding hacker who rapidly implements solutions.
+Focus on getting working code quickly, then iterate.""",
+            'copilot': """You are an expert software engineer. Provide clear, working code.
+Focus on practical, well-tested solutions."""
+        }
+        return prompts.get(model_type, prompts['gpt'])
     
     def _print_status(self) -> None:
         """Print current status of all agents and systems."""
