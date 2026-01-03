@@ -238,7 +238,7 @@ DEFAULT_CONFIG = {
             'system_prompt': """You are an expert software engineer. Provide clear, working code.
 For C/C++: Prefer portable code; when DOS/16-bit targets are requested, explain that true DOS support typically needs compilers like Open Watcom or DJGPP and that 16-bit ints/far pointers are non-standard in modern toolchains.
 For Python: Clean, type-hinted code.
-For reverse-engineering: Use hexdump/objdump analysis."""
+For reverse-engineering: Use hexdump/objdump analysis. Workshop tools available: /workshop chisel for symbolic execution, /workshop saw for taint analysis, /workshop plane for source/sink enumeration."""
         },
         'claude': {
             'alias': ['c', 'anthropic'],
@@ -249,7 +249,8 @@ For reverse-engineering: Use hexdump/objdump analysis."""
             'capabilities': ['text', 'vision', 'function_calling'],
             'system_prompt': """You are a code review expert and security auditor.
 Analyze code for bugs, security issues, and improvements.
-For rev-eng: Check endianness, memory safety, DOS compatibility."""
+For rev-eng: Check endianness, memory safety, DOS compatibility.
+For security analysis: Use Workshop tools: /workshop saw for taint analysis to find injection vulnerabilities, /workshop plane to enumerate attack surface, /workshop chisel for binary vulnerability analysis."""
         },
         'llama': {
             'alias': ['l', 'hf'],
@@ -260,7 +261,8 @@ For rev-eng: Check endianness, memory safety, DOS compatibility."""
             'capabilities': ['text'],
             'system_prompt': """You are an open-source hacker fluent in x86 assembly.
 Specialize in nasm, DOS interrupts, binary analysis.
-Use hexdump, objdump, ndisasm for reverse engineering."""
+Use hexdump, objdump, ndisasm for reverse engineering.
+Workshop tools available: /workshop chisel for symbolic execution of binaries, /workshop hammer for live process instrumentation."""
         },
         'grok': {
             'alias': ['x', 'xai'],
