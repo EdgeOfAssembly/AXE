@@ -1248,7 +1248,10 @@ class ToolRunner:
             # Find first token that's not a redirect, heredoc, or env var
             for token in tokens:
                 # Strip leading/trailing parentheses (subshells)
-                # e.g., "(ls" -> "ls", "ls)" -> "ls", "(ls)" -> "ls"
+                # Note: strip('()') removes ALL leading/trailing parens, which is correct
+                # because we want the actual command name without subshell syntax.
+                # Examples: "(ls" -> "ls", "ls)" -> "ls", "(ls)" -> "ls", "((ls))" -> "ls"
+                # This is intentional - we validate the command name, not the subshell syntax.
                 token = token.strip('()')
                 if not token:
                     continue
@@ -1259,7 +1262,10 @@ class ToolRunner:
                 if '<' in token or '>' in token:
                     # Find the position of the first redirect operator
                     redirect_pos = len(token)
-                    for redirect_op in ['<<', '<', '>>', '>', '2>>', '2>', '&>']:
+                    # Check redirect operators in order of longest first to avoid partial matches
+                    # e.g., '>>' before '>', '2>>' before '2>'
+                    redirect_ops_sorted = sorted(self.REDIRECT_OPERATORS, key=len, reverse=True)
+                    for redirect_op in redirect_ops_sorted:
                         pos = token.find(redirect_op)
                         if pos != -1 and pos < redirect_pos:
                             redirect_pos = pos
