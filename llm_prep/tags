@@ -64,6 +64,8 @@ $ python3 test_xml_tool_parser.py	XML_PARSER_IMPLEMENTATION.md	/^$ python3 test_
 1. Patch Files	WRITE_BLOCKS_GUIDE.md	/^### 1. Patch Files$/;"	S	section:WRITE Block Functionality - User Guide""Use Cases
 1. Simple Text File	WRITE_BLOCKS_GUIDE.md	/^### 1. Simple Text File$/;"	S	section:WRITE Block Functionality - User Guide""Examples
 1. Subshells with Parentheses	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 1. Subshells with Parentheses$/;"	S	section:Shell Operator Support Implementation Summary""Edge Cases Fixed
+1. Test Compatibility	PR23_EXECUTIVE_SUMMARY.md	/^### 1. Test Compatibility$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Minor Issues (Non-Blocking)
+2. CLI Commands Missing	PR23_EXECUTIVE_SUMMARY.md	/^### 2. CLI Commands Missing$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Minor Issues (Non-Blocking)
 2. Configuration Files	WRITE_BLOCKS_GUIDE.md	/^### 2. Configuration Files$/;"	S	section:WRITE Block Functionality - User Guide""Use Cases
 2. Enhanced Documentation	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### 2. Enhanced Documentation$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Solution Implemented
 2. Python Script	WRITE_BLOCKS_GUIDE.md	/^### 2. Python Script$/;"	S	section:WRITE Block Functionality - User Guide""Examples
@@ -74,6 +76,7 @@ $ python3 test_xml_tool_parser.py	XML_PARSER_IMPLEMENTATION.md	/^$ python3 test_
 2. `__init__(config: Config, project_dir: str)` (Lines 1150-1171)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 2. `__init__(config: Config, project_dir: str)` (Lines 1150-1171)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
 3. AXE Native Blocks	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^### 3. AXE Native Blocks$/;"	S	section:Multi-Format Tool Call Parser - Quick Reference""Supported Formats
 3. Chain of Command – Escalate Properly	IMPROVEMENTS_FINAL.md	/^#### 3. Chain of Command – Escalate Properly$/;"	t	subsection:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules""Display at session start (pinned message):
+3. Database Test Isolation	PR23_EXECUTIVE_SUMMARY.md	/^### 3. Database Test Isolation$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Minor Issues (Non-Blocking)
 3. Documentation	WRITE_BLOCKS_GUIDE.md	/^### 3. Documentation$/;"	S	section:WRITE Block Functionality - User Guide""Use Cases
 3. File in Subdirectory	WRITE_BLOCKS_GUIDE.md	/^### 3. File in Subdirectory$/;"	S	section:WRITE Block Functionality - User Guide""Examples
 3. Inline Comments	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### 3. Inline Comments$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Solution Implemented
@@ -115,6 +118,7 @@ AXE - Agent eXecution Engine	.collab_log.md	/^# AXE - Agent eXecution Engine$/;"
 AXE - Agent eXecution Engine	MISSION.md	/^# AXE - Agent eXecution Engine$/;"	c
 AXE - Agent eXecution Engine	README.md	/^# AXE - Agent eXecution Engine$/;"	c
 AXE API Provider Documentation	API_PROVIDERS.md	/^# AXE API Provider Documentation$/;"	c
+AXE Framework Compatibility	workshop_dependency_validation.md	/^### AXE Framework Compatibility$/;"	S	section:Workshop Tools Dependency Validation""Integration Testing
 AXE Multi-Agent System - Improvement Reference Guide	IMPROVEMENTS_FINAL.md	/^# AXE Multi-Agent System - Improvement Reference Guide$/;"	c
 AXE Multi-Agent System - Model Configuration Reference	MODELS_FINAL.md	/^# AXE Multi-Agent System - Model Configuration Reference$/;"	c
 AXE Multiagent - Quick Reference Card	QUICK_REFERENCE.md	/^# AXE Multiagent - Quick Reference Card$/;"	c
@@ -122,6 +126,7 @@ AXE Multiagent Improvements - Implementation Summary	IMPROVEMENTS_README.md	/^# 
 AXE Multiple Issues Fix Summary	FIXES_SUMMARY.md	/^# AXE Multiple Issues Fix Summary$/;"	c
 AXE.PY Refactoring Notes	REFACTORING_NOTES.md	/^# AXE.PY Refactoring Notes$/;"	c
 Action Items for Team	.collab_log.md	/^## Action Items for Team$/;"	s	chapter:Supervisor @boss - Consolidation & Security Audit
+Added to requirements.txt	PR23_EXECUTIVE_SUMMARY.md	/^### Added to requirements.txt$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Dependencies
 Advanced Usage	.collab_log.md	/^## Advanced Usage$/;"	s	chapter:AXE - Agent eXecution Engine
 Advanced Usage	README.md	/^## Advanced Usage$/;"	s	chapter:AXE - Agent eXecution Engine
 After	BEFORE_AFTER_COMPARISON.md	/^### After$/;"	S	section:Before/After Comparison of Fixes""Issue 1: READ Block Access Denied
@@ -129,7 +134,11 @@ After	BEFORE_AFTER_COMPARISON.md	/^### After$/;"	S	section:Before/After Comparis
 After	DATABASE_LOCATION_FIX_SUMMARY.md	/^### After$/;"	S	section:Database Location Fix - Implementation Summary""Impact After Fix
 After	REFACTORING_NOTES.md	/^### After$/;"	S	section:AXE.PY Refactoring Notes""Refactoring Summary
 After (axe.yaml)	BEFORE_AFTER_COMPARISON.md	/^### After (axe.yaml)$/;"	S	section:Before/After Comparison of Fixes""Issue 2: Llama 405B Model Deprecated
+After Fix	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### After Fix$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Impact
+After Fix	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### After Fix$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 1: Duplicate Command Execution ❌ → ✅
+After Fix	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### After Fix$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 2: Heredoc Parsing Errors ❌ → ✅
 After Fix	IMPLEMENTATION_COMPLETE.md	/^### After Fix$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Impact
+After fix: Only ResponseProcessor handles it	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# After fix: Only ResponseProcessor handles it$/;"	c
 Agent Aliases	IMPROVEMENTS_FINAL.md	/^## Agent Aliases$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Agent Communication Tokens	.collab_log.md	/^## Agent Communication Tokens$/;"	s	chapter:AXE - Agent eXecution Engine
 Agent Communication Tokens	MISSION.md	/^## Agent Communication Tokens$/;"	s	chapter:AXE - Agent eXecution Engine
@@ -140,6 +149,8 @@ Agent Reference	.collab_log.md	/^## Agent Reference$/;"	s	chapter:AXE - Agent eX
 Agent Reference	README.md	/^## Agent Reference$/;"	s	chapter:AXE - Agent eXecution Engine
 Agent Session Commands	IMPROVEMENTS_FINAL.md	/^### Agent Session Commands$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Quick Reference Commands
 Agent doesn't use WRITE blocks	WRITE_BLOCKS_GUIDE.md	/^### Agent doesn't use WRITE blocks$/;"	S	section:WRITE Block Functionality - User Guide""Troubleshooting
+Agent response with EXEC block	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Agent response with EXEC block$/;"	c
+Agent response with heredoc	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Agent response with heredoc$/;"	c
 AgentDatabase	database/agent_db.py	/^class AgentDatabase:$/;"	c
 AgentDatabase class now imported from database module	.collab_log.md	/^# AgentDatabase class now imported from database module$/;"	c
 AgentManager	axe.py	/^class AgentManager:$/;"	c
@@ -153,14 +164,18 @@ Anthropic (Claude)	.collab_log.md	/^### Anthropic (Claude)$/;"	S	section:AXE - A
 Anthropic (Claude)	API_PROVIDERS.md	/^## Anthropic (Claude)$/;"	s	chapter:AXE API Provider Documentation
 Anthropic (Claude)	MODELS_FINAL.md	/^## Anthropic (Claude)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Anthropic (Claude)	README.md	/^### Anthropic (Claude)$/;"	S	section:AXE - Agent eXecution Engine""API Providers
+Appendix A: Test Execution Logs	PR23_VALIDATION_REPORT.md	/^## Appendix A: Test Execution Logs$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Appendix B: File Changes Summary	PR23_VALIDATION_REPORT.md	/^## Appendix B: File Changes Summary$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
 Architecture	IMPROVEMENTS_FINAL.md	/^### Architecture$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
 Architecture Notes	IMPROVEMENTS_README.md	/^## Architecture Notes$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Architecture Overview	.collab_log.md	/^## Architecture Overview$/;"	s	chapter:AXE - Agent eXecution Engine
 Architecture Overview	MISSION.md	/^## Architecture Overview$/;"	s	chapter:AXE - Agent eXecution Engine
+Audit Scope	workshop_security_audit.md	/^## Audit Scope$/;"	s	chapter:Workshop Tools Security Audit
 Author	.collab_log.md	/^## Author$/;"	s	chapter:AXE - Agent eXecution Engine
 Author	README.md	/^## Author$/;"	s	chapter:AXE - Agent eXecution Engine
 Auto-Approve Mode (Non-Interactive)	.collab_log.md	/^### Auto-Approve Mode (Non-Interactive)$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
 Auto-Approve Mode (Non-Interactive)	README.md	/^### Auto-Approve Mode (Non-Interactive)$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
+Automated Installation Testing	workshop_dependency_validation.md	/^### Automated Installation Testing$/;"	S	section:Workshop Tools Dependency Validation""Installation Validation
 Autonomous Collaborative Sessions (NEW!)	.collab_log.md	/^### Autonomous Collaborative Sessions (NEW!)$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Autonomous Collaborative Sessions (NEW!)	README.md	/^### Autonomous Collaborative Sessions (NEW!)$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Available Agents	.collab_log.md	/^### Available Agents$/;"	S	section:AXE - Agent eXecution Engine""Agent Reference
@@ -170,6 +185,7 @@ BLUE	utils/formatting.py	/^    BLUE = '\\033[94m'$/;"	v	class:Colors
 BOLD	utils/formatting.py	/^    BOLD = '\\033[1m'$/;"	v	class:Colors
 Background Monitor Thread	IMPROVEMENTS_FINAL.md	/^### Background Monitor Thread$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Resource Monitoring
 Backward Compatibility	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Backward Compatibility$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Impact
+Backward Compatibility	BUG_FIX_SUMMARY.md	/^## Backward Compatibility$/;"	s	chapter:Bug Fix Summary - Multi-Agent Collaboration Issues
 Backward Compatibility	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Backward Compatibility$/;"	s	chapter:Database Location Fix - Implementation Summary
 Backward Compatibility	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Backward Compatibility$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Backward Compatibility	REFACTORING_NOTES.md	/^### Backward Compatibility$/;"	S	section:AXE.PY Refactoring Notes""Design Decisions
@@ -184,30 +200,43 @@ Before	BEFORE_AFTER_COMPARISON.md	/^### Before$/;"	S	section:Before/After Compar
 Before	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Before$/;"	S	section:Database Location Fix - Implementation Summary""Impact After Fix
 Before	REFACTORING_NOTES.md	/^### Before$/;"	S	section:AXE.PY Refactoring Notes""Refactoring Summary
 Before (axe.yaml)	BEFORE_AFTER_COMPARISON.md	/^### Before (axe.yaml)$/;"	S	section:Before/After Comparison of Fixes""Issue 2: Llama 405B Model Deprecated
+Before Fix	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Before Fix$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Impact
 Before Fix	IMPLEMENTATION_COMPLETE.md	/^### Before Fix$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Impact
+Before fix: parse_all_tool_formats would parse it, then ResponseProcessor would parse it again	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Before fix: parse_all_tool_formats would parse it, then ResponseProcessor would parse it again$/;"	c
 Before/After Comparison of Fixes	BEFORE_AFTER_COMPARISON.md	/^# Before\/After Comparison of Fixes$/;"	c
 Behavior	WRITE_BLOCKS_GUIDE.md	/^### Behavior$/;"	S	section:WRITE Block Functionality - User Guide""Security and Permissions
 Benefits	REFACTORING_NOTES.md	/^## Benefits$/;"	s	chapter:AXE.PY Refactoring Notes
 Best Practices	IMPROVEMENTS_FINAL.md	/^### Best Practices$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Persistent Storage
 Best Practices	WRITE_BLOCKS_GUIDE.md	/^## Best Practices$/;"	s	chapter:API Documentation
+Binary Analysis Performance	workshop_benchmarks.md	/^### Binary Analysis Performance$/;"	S	section:Workshop Tools Benchmarks""Chisel - Symbolic Execution Benchmarks
 Break Activities	IMPROVEMENTS_FINAL.md	/^### Break Activities$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Break System
 Break System	IMPROVEMENTS_FINAL.md	/^## Break System$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Break Triggers	IMPROVEMENTS_FINAL.md	/^### Break Triggers$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Break System
 BreakSystem	axe.py	/^class BreakSystem:$/;"	c
+Bug 1: Duplicate Command Execution ❌ → ✅	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^## Bug 1: Duplicate Command Execution ❌ → ✅$/;"	s	chapter:Duplicate Execution and Heredoc Parsing Bug Fixes
 Bug 1: False "TASK COMPLETE" Detection ✅	IMPLEMENTATION_COMPLETE.md	/^## Bug 1: False "TASK COMPLETE" Detection ✅$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
 Bug 1: False "TASK COMPLETE" Detection ✅	TASK_COMPLETION_FIX_SUMMARY.md	/^## Bug 1: False "TASK COMPLETE" Detection ✅$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
+Bug 1: XML Tag Formats Not Supported ✅	BUG_FIX_SUMMARY.md	/^### Bug 1: XML Tag Formats Not Supported ✅$/;"	S	section:Bug Fix Summary - Multi-Agent Collaboration Issues""Bugs Fixed
 Bug 2: Active Agents Counter ✅	IMPLEMENTATION_COMPLETE.md	/^## Bug 2: Active Agents Counter ✅$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
 Bug 2: Active Agents Counter ✅	TASK_COMPLETION_FIX_SUMMARY.md	/^## Bug 2: Active Agents Counter ✅$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
+Bug 2: Heredoc Parsing Errors ❌ → ✅	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^## Bug 2: Heredoc Parsing Errors ❌ → ✅$/;"	s	chapter:Duplicate Execution and Heredoc Parsing Bug Fixes
+Bug 2: Spawned Agents Never Get Turns ✅	BUG_FIX_SUMMARY.md	/^### Bug 2: Spawned Agents Never Get Turns ✅$/;"	S	section:Bug Fix Summary - Multi-Agent Collaboration Issues""Bugs Fixed
+Bug 3: Token Limit Errors (413) Not Handled ✅	BUG_FIX_SUMMARY.md	/^### Bug 3: Token Limit Errors (413) Not Handled ✅$/;"	S	section:Bug Fix Summary - Multi-Agent Collaboration Issues""Bugs Fixed
+Bug 4: Double Execution Bug ✅	BUG_FIX_SUMMARY.md	/^### Bug 4: Double Execution Bug ✅$/;"	S	section:Bug Fix Summary - Multi-Agent Collaboration Issues""Bugs Fixed
+Bug Fix Summary - Multi-Agent Collaboration Issues	BUG_FIX_SUMMARY.md	/^# Bug Fix Summary - Multi-Agent Collaboration Issues$/;"	c
+Bugs Fixed	BUG_FIX_SUMMARY.md	/^## Bugs Fixed$/;"	s	chapter:Bug Fix Summary - Multi-Agent Collaboration Issues
 Building	.collab_log.md	/^### Building$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Building	README.md	/^### Building$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 COLLAB_CONTENT_LIMIT	axe.py	/^COLLAB_CONTENT_LIMIT = 2000    # Max chars per message in history$/;"	v
 COLLAB_HISTORY_LIMIT	axe.py	/^COLLAB_HISTORY_LIMIT = 20      # Max messages to show in conversation history$/;"	v
 COLLAB_PASS_MULTIPLIER	axe.py	/^COLLAB_PASS_MULTIPLIER = 2     # Times agents can pass before session ends$/;"	v
 COLLAB_SHARED_NOTES_LIMIT	axe.py	/^COLLAB_SHARED_NOTES_LIMIT = 500  # Max chars of shared notes to show$/;"	v
+CPU Usage	workshop_dependency_validation.md	/^### CPU Usage$/;"	S	section:Workshop Tools Dependency Validation""Performance Impact Analysis
 CYAN	utils/formatting.py	/^    CYAN = '\\033[96m'$/;"	v	class:Colors
 Chain of Thought	.collab_log.md	/^### Chain of Thought$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Chain of Thought	README.md	/^### Chain of Thought$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Changelog	WRITE_BLOCKS_GUIDE.md	/^## Changelog$/;"	s	chapter:API Documentation
+Changes Made	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Changes Made$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Solution Implemented
 Changes Made	TASK_COMPLETION_FIX_SUMMARY.md	/^### Changes Made$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 1: False "TASK COMPLETE" Detection ✅
 Changes Made	TASK_COMPLETION_FIX_SUMMARY.md	/^### Changes Made$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 2: Active Agents Counter ✅
 Chat Commands	QUICK_REFERENCE.md	/^### Chat Commands$/;"	S	section:AXE Multiagent - Quick Reference Card""Commands
@@ -217,20 +246,39 @@ Chat-style cURL Example	API_PROVIDERS.md	/^### Chat-style cURL Example$/;"	S	sec
 ChatSession	axe.py	/^class ChatSession:$/;"	c
 Checking Current Safety Implementation	.collab_log.md	/^## Checking Current Safety Implementation$/;"	s	chapter:Supervisor @boss - Security Audit Deep Dive
 Checking Resource Usage	IMPROVEMENTS_README.md	/^### Checking Resource Usage$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Usage Examples
+Chisel - Symbolic Execution	README.md	/^#### Chisel - Symbolic Execution$/;"	t	subsection:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools""Quick Examples
+Chisel - Symbolic Execution	workshop_quick_reference.md	/^### Chisel - Symbolic Execution$/;"	S	section:Workshop Tools Quick Reference""Tools
+Chisel - Symbolic Execution Benchmarks	workshop_benchmarks.md	/^## Chisel - Symbolic Execution Benchmarks$/;"	s	chapter:Workshop Tools Benchmarks
+ChiselAnalyzer	workshop/__init__.py	/^    ChiselAnalyzer = _missing_tool_factory("ChiselAnalyzer", "workshop.chisel")$/;"	v
+ChiselAnalyzer	workshop/chisel.py	/^class ChiselAnalyzer:$/;"	c
+Claim 1: Four Analysis Tools Implemented	PR23_VALIDATION_REPORT.md	/^### Claim 1: Four Analysis Tools Implemented$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation
+Claim 2: Database Integration	PR23_VALIDATION_REPORT.md	/^### Claim 2: Database Integration$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation
+Claim 3: XP System Integration	PR23_VALIDATION_REPORT.md	/^### Claim 3: XP System Integration$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation
+Claim 4: Configuration Integration	PR23_VALIDATION_REPORT.md	/^### Claim 4: Configuration Integration$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation
+Claim 5: Documentation	PR23_VALIDATION_REPORT.md	/^### Claim 5: Documentation$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation
+Claim 6: Test Suite	PR23_VALIDATION_REPORT.md	/^### Claim 6: Test Suite$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation
+Claimed Performance Metrics	PR23_VALIDATION_REPORT.md	/^### Claimed Performance Metrics$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 4: Performance Validation
+Claims Fulfillment Summary	PR23_VALIDATION_REPORT.md	/^### Claims Fulfillment Summary$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 10: Validation Conclusion
 Clone and Setup	.collab_log.md	/^### Clone and Setup$/;"	S	section:AXE - Agent eXecution Engine""Installation
 Clone and Setup	README.md	/^### Clone and Setup$/;"	S	section:AXE - Agent eXecution Engine""Installation
 Code Block Parser	WRITE_BLOCKS_GUIDE.md	/^### Code Block Parser$/;"	S	section:WRITE Block Functionality - User Guide""Implementation Details
 Code Changes	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Code Changes$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Solution
+Code Changes	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Code Changes$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Solution Implemented
 Code Comments Coverage	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Code Comments Coverage$/;"	S	section:Shell Operator Support Implementation Summary""Documentation & Comments
+Code Coverage Report	workshop_test_results.md	/^### Code Coverage Report$/;"	S	section:Workshop Tools Test Suite Execution Results""Overall Test Statistics
 Code Flow	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Code Flow$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
 Code Quality	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Code Quality$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Code Quality	TASK_COMPLETION_FIX_SUMMARY.md	/^### Code Quality$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Validation
 Code Quality Deep Dive & Refactors	.collab_log.md	/^## Code Quality Deep Dive & Refactors$/;"	s	chapter:Supervisor @boss - Coordination Update
 Code Quality Review (Initial Findings)	.collab_log.md	/^## Code Quality Review (Initial Findings)$/;"	s	chapter:AXE - Agent eXecution Engine
+Code Review	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Code Review$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Quality Checks
 Code Review Addressed	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Code Review Addressed$/;"	s	chapter:Shell Operator Support Implementation Summary
 Code Review Issues Addressed	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Code Review Issues Addressed$/;"	S	section:Multi-Format Tool Call Parser Implementation""Code Quality
 Code Review ✅	IMPLEMENTATION_COMPLETE.md	/^## Code Review ✅$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
-Code Statistics	llm_prep/codebase_overview.md	/^## Code Statistics$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-01
+Code Snippet Analysis	workshop_benchmarks.md	/^### Code Snippet Analysis$/;"	S	section:Workshop Tools Benchmarks""Saw - Taint Analysis Benchmarks
+Code Statistics	llm_prep/codebase_overview.md	/^## Code Statistics$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-03
+Code Structure - EXCELLENT	PR23_VALIDATION_REPORT.md	/^### Code Structure - EXCELLENT$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 5: Code Quality Analysis
+Collaborative Mode Tool Syntax Fix - Summary	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^# Collaborative Mode Tool Syntax Fix - Summary$/;"	c
 Collaborative Problem Solving	.collab_log.md	/^### Collaborative Problem Solving$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Collaborative Problem Solving	README.md	/^### Collaborative Problem Solving$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Collaborative Session Log	.collab_log.md	/^# Collaborative Session Log$/;"	c
@@ -249,9 +297,16 @@ Common Issues	.collab_log.md	/^### Common Issues$/;"	S	section:AXE - Agent eXecu
 Common Issues	API_PROVIDERS.md	/^### Common Issues$/;"	S	section:AXE API Provider Documentation""Troubleshooting
 Common Issues	README.md	/^### Common Issues$/;"	S	section:AXE - Agent eXecution Engine""Troubleshooting
 Common Scenarios	QUICK_REFERENCE.md	/^## Common Scenarios$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+Comparative Analysis	workshop_benchmarks.md	/^## Comparative Analysis$/;"	s	chapter:Workshop Tools Benchmarks
+Compatibility Matrix	workshop_dependency_validation.md	/^## Compatibility Matrix$/;"	s	chapter:Workshop Tools Dependency Validation
+Compliance Assessment	workshop_security_audit.md	/^## Compliance Assessment$/;"	s	chapter:Workshop Tools Security Audit
 Conclusion	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Conclusion$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Conclusion	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Conclusion$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Conclusion	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Conclusion$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
 Conclusion	IMPLEMENTATION_SUMMARY.md	/^## Conclusion$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
+Conclusion	workshop_dependency_validation.md	/^## Conclusion$/;"	s	chapter:Workshop Tools Dependency Validation
+Conclusion	workshop_security_audit.md	/^## Conclusion$/;"	s	chapter:Workshop Tools Security Audit
+Conclusion	workshop_test_results.md	/^## Conclusion$/;"	s	chapter:Workshop Tools Test Suite Execution Results
 Config	axe.py	/^class Config:$/;"	c
 Configuration	.collab_log.md	/^## Configuration$/;"	s	chapter:AXE - Agent eXecution Engine
 Configuration	MODELS_FINAL.md	/^### Configuration$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Anthropic (Claude)
@@ -259,9 +314,13 @@ Configuration	MODELS_FINAL.md	/^### Configuration$/;"	S	section:AXE Multi-Agent 
 Configuration	MODELS_FINAL.md	/^### Configuration$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""HuggingFace (Llama)
 Configuration	MODELS_FINAL.md	/^### Configuration$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""OpenAI (GPT)
 Configuration	MODELS_FINAL.md	/^### Configuration$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""xAI (Grok)
+Configuration	PR23_EXECUTIVE_SUMMARY.md	/^### Configuration$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Integration Impact
 Configuration	README.md	/^## Configuration$/;"	s	chapter:AXE - Agent eXecution Engine
+Configuration	README.md	/^### Configuration$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
+Configuration	workshop_quick_reference.md	/^## Configuration$/;"	s	chapter:Workshop Tools Quick Reference
 Configuration File (axe.yaml)	.collab_log.md	/^### Configuration File (axe.yaml)$/;"	S	section:AXE - Agent eXecution Engine""Configuration
 Configuration File (axe.yaml)	README.md	/^### Configuration File (axe.yaml)$/;"	S	section:AXE - Agent eXecution Engine""Configuration
+Configuration Integration - COMPLETE	PR23_VALIDATION_REPORT.md	/^### Configuration Integration - COMPLETE$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 2: Integration Verification
 Configuration file	XML_PARSER_IMPLEMENTATION.md	/^# Configuration file$/;"	c
 Content not written correctly	WRITE_BLOCKS_GUIDE.md	/^### Content not written correctly$/;"	S	section:WRITE Block Functionality - User Guide""Troubleshooting
 Continue Attempt to Find `axe.py`	team_test/.collab_log.md	/^#### Continue Attempt to Find `axe.py`  $/;"	t	subsection:Hello Team! 👋""Team Coordination Plan 📋""Finalizing Introduction & Locating `axe.py`
@@ -271,46 +330,73 @@ Contributing	README.md	/^## Contributing$/;"	s	chapter:AXE - Agent eXecution Eng
 Contribution	team_test/.collab_log.md	/^### Contribution  $/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 Contribution: Security Audit Progress and Action Plan Updates	.collab_log.md	/^### Contribution: Security Audit Progress and Action Plan Updates$/;"	S	section:Supervisor @boss - Consolidation & Security Audit""Refactoring Plan Additions (Creative Angles)
 Core Changes	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Core Changes$/;"	S	section:Database Location Fix - Implementation Summary""Solution Implemented
+Core Dependencies	workshop_dependency_validation.md	/^## Core Dependencies$/;"	s	chapter:Workshop Tools Dependency Validation
+Core Dependencies	workshop_security_audit.md	/^### Core Dependencies$/;"	S	section:Workshop Tools Security Audit""Dependency Security Analysis
 Core Principles	.collab_log.md	/^## Core Principles$/;"	s	chapter:AXE - Agent eXecution Engine
 Core Principles	MISSION.md	/^## Core Principles$/;"	s	chapter:AXE - Agent eXecution Engine
 Core Safety Features	IMPROVEMENTS_FINAL.md	/^## Core Safety Features$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Credits	IMPROVEMENTS_README.md	/^## Credits$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Critical Security Follow-up	.collab_log.md	/^## Critical Security Follow-up$/;"	s	chapter:Supervisor @boss - Consolidation & Security Audit
+Cross-Tool Interactions	workshop_dependency_validation.md	/^### Cross-Tool Interactions$/;"	S	section:Workshop Tools Dependency Validation""Integration Testing
 Custom Project Directory	.collab_log.md	/^### Custom Project Directory$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
 Custom Project Directory	README.md	/^### Custom Project Directory$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
 Custom System Prompts	.collab_log.md	/^### Custom System Prompts$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
 Custom System Prompts	README.md	/^### Custom System Prompts$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
+Custom Validation Suite	PR23_EXECUTIVE_SUMMARY.md	/^### Custom Validation Suite$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Validation Results
+Custom Validation Tests Created	PR23_VALIDATION_REPORT.md	/^### Custom Validation Tests Created$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 6: Test Coverage Analysis
 DEFAULT_CONFIG	axe.py	/^DEFAULT_CONFIG = {$/;"	v
 DEFAULT_METADATA	models/metadata.py	/^DEFAULT_METADATA = {$/;"	v
 DEGRADATION_CHECK_INTERVAL	axe.py	/^DEGRADATION_CHECK_INTERVAL = 5  # Check degradation every N turns$/;"	v
 DIFF_HISTORY_LIMIT	axe.py	/^DIFF_HISTORY_LIMIT = 20         # Number of recent diffs to track for error analysis$/;"	v
 DIM	utils/formatting.py	/^    DIM = '\\033[2m'$/;"	v	class:Colors
+Database	PR23_EXECUTIVE_SUMMARY.md	/^### Database$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Integration Impact
 Database	QUICK_REFERENCE.md	/^## Database$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Database Inspection	IMPROVEMENTS_README.md	/^## Database Inspection$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
+Database Integration	README.md	/^### Database Integration$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
+Database Integration	workshop_quick_reference.md	/^## Database Integration$/;"	s	chapter:Workshop Tools Quick Reference
+Database Integration - COMPLETE	PR23_VALIDATION_REPORT.md	/^### Database Integration - COMPLETE$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 2: Integration Verification
 Database Location Fix - Implementation Summary	DATABASE_LOCATION_FIX_SUMMARY.md	/^# Database Location Fix - Implementation Summary$/;"	c
 Debugging	.collab_log.md	/^### Debugging$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Debugging	README.md	/^### Debugging$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Default configuration	.collab_log.md	/^# Default configuration$/;"	c
 Degradation Monitoring	IMPROVEMENTS_FINAL.md	/^## Degradation Monitoring$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
+Dependencies	PR23_EXECUTIVE_SUMMARY.md	/^## Dependencies$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
+Dependencies	workshop_quick_reference.md	/^## Dependencies$/;"	s	chapter:Workshop Tools Quick Reference
+Dependency Health	PR23_EXECUTIVE_SUMMARY.md	/^### Dependency Health$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Dependencies
+Dependency Resolution Testing	workshop_dependency_validation.md	/^### Dependency Resolution Testing$/;"	S	section:Workshop Tools Dependency Validation""Installation Validation
+Dependency Security Analysis	workshop_security_audit.md	/^## Dependency Security Analysis$/;"	s	chapter:Workshop Tools Security Audit
+Dependency Validation	PR23_VALIDATION_REPORT.md	/^### Dependency Validation$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 7: Dependency Analysis
+Dependency Vulnerability Scan	workshop_dependency_validation.md	/^### Dependency Vulnerability Scan$/;"	S	section:Workshop Tools Dependency Validation""Security Validation
 Design Decisions	REFACTORING_NOTES.md	/^## Design Decisions$/;"	s	chapter:AXE.PY Refactoring Notes
 Design Principles	IMPROVEMENTS_README.md	/^## Design Principles$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
+Detailed Findings	workshop_security_audit.md	/^## Detailed Findings$/;"	s	chapter:Workshop Tools Security Audit
+Detailed Test Results	workshop_test_results.md	/^## Detailed Test Results$/;"	s	chapter:Workshop Tools Test Suite Execution Results
 Diff-Based Error Detection Metrics	IMPROVEMENTS_FINAL.md	/^### Diff-Based Error Detection Metrics$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Degradation Monitoring
 Directory Access Control	IMPLEMENTATION_SUMMARY.md	/^### Directory Access Control$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Security Considerations
 Directory Access Control	WRITE_BLOCKS_GUIDE.md	/^### Directory Access Control$/;"	S	section:WRITE Block Functionality - User Guide""Security and Permissions
-Directory Structure	llm_prep/codebase_overview.md	/^## Directory Structure$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-01
+Directory Structure	llm_prep/codebase_overview.md	/^## Directory Structure$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-03
 Disassembly & Analysis	README.md	/^### Disassembly & Analysis$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Disassembly &amp; Analysis	.collab_log.md	/^### Disassembly &amp; Analysis$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
+Disk I/O	workshop_dependency_validation.md	/^### Disk I\/O$/;"	S	section:Workshop Tools Dependency Validation""Performance Impact Analysis
 Display at session start (pinned message):	IMPROVEMENTS_FINAL.md	/^### Display at session start (pinned message):$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules
+Document 1: Quick Reference	PR23_VALIDATION_REPORT.md	/^#### Document 1: Quick Reference$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 5: Documentation
+Document 2: Performance Benchmarks	PR23_VALIDATION_REPORT.md	/^#### Document 2: Performance Benchmarks$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 5: Documentation
+Document 3: Security Audit	PR23_VALIDATION_REPORT.md	/^#### Document 3: Security Audit$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 5: Documentation
+Document 4: Dependency Validation	PR23_VALIDATION_REPORT.md	/^#### Document 4: Dependency Validation$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 5: Documentation
+Document 5: Test Results	PR23_VALIDATION_REPORT.md	/^#### Document 5: Test Results$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 5: Documentation
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""GitHub Models
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""xAI (Grok)
+Documentation	README.md	/^### Documentation$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
 Documentation & Comments	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Documentation & Comments$/;"	s	chapter:Shell Operator Support Implementation Summary
+Documentation - COMPREHENSIVE	PR23_VALIDATION_REPORT.md	/^### Documentation - COMPREHENSIVE$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 5: Code Quality Analysis
 Documentation Tests	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Documentation Tests$/;"	S	section:Shell Operator Support Implementation Summary""Test Coverage
 Documentation Updates	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Documentation Updates$/;"	S	section:Database Location Fix - Implementation Summary""Solution Implemented
 Download	.collab_log.md	/^### Download$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Download	README.md	/^### Download$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
+Duplicate Execution and Heredoc Parsing Bug Fixes	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Duplicate Execution and Heredoc Parsing Bug Fixes$/;"	c
 During Session	QUICK_REFERENCE.md	/^### During Session$/;"	S	section:AXE Multiagent - Quick Reference Card""Tips for Humans
 Dynamic Spawning	IMPROVEMENTS_FINAL.md	/^## Dynamic Spawning$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 DynamicSpawner	axe.py	/^class DynamicSpawner:$/;"	c
@@ -327,6 +413,9 @@ Emulation	.collab_log.md	/^### Emulation$/;"	S	section:AXE - Agent eXecution Eng
 Emulation	README.md	/^### Emulation$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Encouraging Good Behavior	QUICK_REFERENCE.md	/^### Encouraging Good Behavior$/;"	S	section:AXE Multiagent - Quick Reference Card""Tips for Humans
 Endpoints	WRITE_BLOCKS_GUIDE.md	/^## Endpoints$/;"	s	chapter:API Documentation
+EnumeratedSink	workshop/plane.py	/^class EnumeratedSink:$/;"	c
+EnumeratedSource	workshop/plane.py	/^class EnumeratedSource:$/;"	c
+Enumeration Coverage	workshop_benchmarks.md	/^### Enumeration Coverage$/;"	S	section:Workshop Tools Benchmarks""Plane - Source/Sink Enumeration Benchmarks
 Environment Setup	MODELS_FINAL.md	/^### Environment Setup$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Quick Start
 Environment Variable	API_PROVIDERS.md	/^### Environment Variable$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
 Environment Variable	API_PROVIDERS.md	/^### Environment Variable$/;"	S	section:AXE API Provider Documentation""GitHub Models
@@ -334,12 +423,17 @@ Environment Variable	API_PROVIDERS.md	/^### Environment Variable$/;"	S	section:A
 Environment Variable	API_PROVIDERS.md	/^### Environment Variable$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
 Environment Variable	API_PROVIDERS.md	/^### Environment Variable$/;"	S	section:AXE API Provider Documentation""xAI (Grok)
 Environment Variables Summary	API_PROVIDERS.md	/^### Environment Variables Summary$/;"	S	section:AXE API Provider Documentation""Quick Reference
+Error Analysis	workshop_test_results.md	/^## Error Analysis$/;"	s	chapter:Workshop Tools Test Suite Execution Results
+Error Handling - ROBUST	PR23_VALIDATION_REPORT.md	/^### Error Handling - ROBUST$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 5: Code Quality Analysis
+Error Recovery	workshop_dependency_validation.md	/^### Error Recovery$/;"	S	section:Workshop Tools Dependency Validation""Fallback Mechanisms
 Evidence of the Problem	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Evidence of the Problem$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Problem Statement
 Examining subprocess Usage in axe.py	.collab_log.md	/^## Examining subprocess Usage in axe.py$/;"	s	chapter:Supervisor @boss - Security Audit Deep Dive
 Examining tool_runner.py	.collab_log.md	/^## Examining tool_runner.py$/;"	s	chapter:Supervisor @boss - Security Audit Deep Dive
 Example - Before vs After	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Example - Before vs After$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
 Example 1: Claude's Natural Format	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Example 1: Claude's Natural Format$/;"	S	section:Multi-Format Tool Call Parser Implementation""Examples
 Example 2: Code Block Format	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Example 2: Code Block Format$/;"	S	section:Multi-Format Tool Call Parser Implementation""Examples
+Example 3: Backward Compatibility	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Example 3: Backward Compatibility$/;"	S	chapter:Header
+Example of Duplicate Execution (Before Fix)	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Example of Duplicate Execution (Before Fix)$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 1: Duplicate Command Execution ❌ → ✅
 Example: Multi-Agent Code Analysis	.collab_log.md	/^### Example: Multi-Agent Code Analysis$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Example: Multi-Agent Code Analysis	README.md	/^### Example: Multi-Agent Code Analysis$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Examples	IMPROVEMENTS_FINAL.md	/^### Examples$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Agent Aliases
@@ -349,11 +443,16 @@ Executing Tools	.collab_log.md	/^### Executing Tools$/;"	S	section:AXE - Agent e
 Executing Tools	README.md	/^### Executing Tools$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Execution (original version):	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### Execution (original version):$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Example - Before vs After
 Execution Order	WRITE_BLOCKS_GUIDE.md	/^### Execution Order$/;"	S	section:WRITE Block Functionality - User Guide""Implementation Details
+Executive Summary	PR23_VALIDATION_REPORT.md	/^## Executive Summary$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Executive Summary	workshop_security_audit.md	/^## Executive Summary$/;"	s	chapter:Workshop Tools Security Audit
 Existing Tests	HEREDOC_EXECUTION_FIX.md	/^### Existing Tests$/;"	S	section:Heredoc Execution Fix Summary""Testing
 Existing Tests	IMPLEMENTATION_COMPLETE.md	/^### Existing Tests  $/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Test Results
+Existing Tests Verified	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Existing Tests Verified$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Testing
 Existing tests (verify no breakage)	XML_PARSER_QUICK_REFERENCE.md	/^# Existing tests (verify no breakage)$/;"	c
+Expected Behavior	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Expected Behavior$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Experience and level constants (now imported from progression module)	.collab_log.md	/^# Experience and level constants (now imported from progression module)$/;"	c
 Extracting Classes:	team_test/.collab_log.md	/^#### Extracting Classes:  $/;"	t	subsection:Hello Team! 👋""Team Coordination Plan 📋""Contribution
+Fallback Mechanisms	workshop_dependency_validation.md	/^## Fallback Mechanisms$/;"	s	chapter:Workshop Tools Dependency Validation
 Features	.collab_log.md	/^## Features$/;"	s	chapter:AXE - Agent eXecution Engine
 Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
 Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Documentation""GitHub Models
@@ -361,11 +460,14 @@ Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Document
 Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
 Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Documentation""xAI (Grok)
 Features	README.md	/^## Features$/;"	s	chapter:AXE - Agent eXecution Engine
+File Modifications	PR23_VALIDATION_REPORT.md	/^### File Modifications$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 8: Integration Points Summary
 File Size	REFACTORING_NOTES.md	/^### File Size$/;"	S	section:AXE.PY Refactoring Notes""Metrics
 File Writing Logic	WRITE_BLOCKS_GUIDE.md	/^### File Writing Logic$/;"	S	section:WRITE Block Functionality - User Guide""Implementation Details
+Files Changed	BUG_FIX_SUMMARY.md	/^## Files Changed$/;"	s	chapter:Bug Fix Summary - Multi-Agent Collaboration Issues
 Files Changed	HEREDOC_EXECUTION_FIX.md	/^## Files Changed$/;"	s	chapter:Heredoc Execution Fix Summary
 Files Changed	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Files Changed$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Files Modified	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Files Modified	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Files Modified	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Database Location Fix - Implementation Summary
 Files Modified	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
 Files Modified	IMPLEMENTATION_COMPLETE.md	/^## Files Modified$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
@@ -374,14 +476,25 @@ Files Modified	TASK_COMPLETION_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:
 Files Modified/Created	IMPLEMENTATION_SUMMARY.md	/^## Files Modified\/Created$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
 Files created in wrong location	WRITE_BLOCKS_GUIDE.md	/^### Files created in wrong location$/;"	S	section:WRITE Block Functionality - User Guide""Troubleshooting
 Finalizing Introduction & Locating `axe.py`	team_test/.collab_log.md	/^### Finalizing Introduction & Locating `axe.py`$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
+Finding #1: Missing Input Size Validation	workshop_security_audit.md	/^#### Finding #1: Missing Input Size Validation$/;"	t	subsection:Workshop Tools Security Audit""Detailed Findings""Informational Findings
+Finding #2: Limited Error Recovery	workshop_security_audit.md	/^#### Finding #2: Limited Error Recovery$/;"	t	subsection:Workshop Tools Security Audit""Detailed Findings""Informational Findings
+Finding #3: No Rate Limiting	workshop_security_audit.md	/^#### Finding #3: No Rate Limiting$/;"	t	subsection:Workshop Tools Security Audit""Detailed Findings""Informational Findings
+Finding #4: Dependency Version Pinning	workshop_security_audit.md	/^#### Finding #4: Dependency Version Pinning$/;"	t	subsection:Workshop Tools Security Audit""Detailed Findings""Informational Findings
+Finding #5: Logging of Sensitive Data	workshop_security_audit.md	/^#### Finding #5: Logging of Sensitive Data$/;"	t	subsection:Workshop Tools Security Audit""Detailed Findings""Informational Findings
+Findings Summary	workshop_security_audit.md	/^## Findings Summary$/;"	s	chapter:Workshop Tools Security Audit
 Fix Summary: AXE Session Termination Bugs	TASK_COMPLETION_FIX_SUMMARY.md	/^# Fix Summary: AXE Session Termination Bugs$/;"	c
 For Existing Code	REFACTORING_NOTES.md	/^### For Existing Code$/;"	S	section:AXE.PY Refactoring Notes""Migration Guide
 For New Code	REFACTORING_NOTES.md	/^### For New Code$/;"	S	section:AXE.PY Refactoring Notes""Migration Guide
 Format	IMPROVEMENTS_FINAL.md	/^### Format$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Agent Aliases
+Function-Level Analysis	workshop_benchmarks.md	/^### Function-Level Analysis$/;"	S	section:Workshop Tools Benchmarks""Chisel - Symbolic Execution Benchmarks
 Future Considerations	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Future Considerations$/;"	s	chapter:Database Location Fix - Implementation Summary
+Future Enhancements	BUG_FIX_SUMMARY.md	/^## Future Enhancements$/;"	s	chapter:Bug Fix Summary - Multi-Agent Collaboration Issues
 Future Enhancements	WRITE_BLOCKS_GUIDE.md	/^## Future Enhancements$/;"	s	chapter:API Documentation
+Future Enhancements	workshop_security_audit.md	/^### Future Enhancements$/;"	S	section:Workshop Tools Security Audit""Recommendations
+Future Enhancements	workshop_test_results.md	/^### Future Enhancements$/;"	S	section:Workshop Tools Test Suite Execution Results""Recommendations
 Future Enhancements (Out of Scope)	IMPLEMENTATION_SUMMARY.md	/^## Future Enhancements (Out of Scope)$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
 Future Features (Not Yet Implemented)	QUICK_REFERENCE.md	/^## Future Features (Not Yet Implemented)$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+Future Optimization Opportunities	workshop_benchmarks.md	/^## Future Optimization Opportunities$/;"	s	chapter:Workshop Tools Benchmarks
 Future Refactoring (PRs #2 & #3)	REFACTORING_NOTES.md	/^## Future Refactoring (PRs #2 & #3)$/;"	s	chapter:AXE.PY Refactoring Notes
 GET /users	WRITE_BLOCKS_GUIDE.md	/^### GET \/users$/;"	S	section:API Documentation""Endpoints
 GPG_PUBLIC_KEY_FILE	axe.py	/^GPG_PUBLIC_KEY_FILE = "\/tmp\/axe_emergency_mailbox\/human_public.key"$/;"	v
@@ -395,30 +508,57 @@ GitHub Models	MODELS_FINAL.md	/^## GitHub Models$/;"	s	chapter:AXE Multi-Agent S
 GitHub Models - Free with Copilot	.collab_log.md	/^### GitHub Models - Free with Copilot$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 GitHub Models - Free with Copilot	README.md	/^### GitHub Models - Free with Copilot$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 Global reference to database for shutdown hook	.collab_log.md	/^# Global reference to database for shutdown hook$/;"	c
+Graceful Degradation	PR23_VALIDATION_REPORT.md	/^### Graceful Degradation$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 7: Dependency Analysis
+Graceful Degradation	workshop_dependency_validation.md	/^### Graceful Degradation$/;"	S	section:Workshop Tools Dependency Validation""Fallback Mechanisms
 HAS_ANTHROPIC	axe.py	/^    HAS_ANTHROPIC = False$/;"	v
 HAS_ANTHROPIC	axe.py	/^    HAS_ANTHROPIC = True$/;"	v
+HAS_CHISEL	axe.py	/^    HAS_CHISEL = HAS_SAW = HAS_PLANE = HAS_HAMMER = False$/;"	v
+HAS_CHISEL	workshop/__init__.py	/^    HAS_CHISEL = False$/;"	v
+HAS_CHISEL	workshop/__init__.py	/^    HAS_CHISEL = True$/;"	v
 HAS_GIT	axe.py	/^    HAS_GIT = False$/;"	v
 HAS_GIT	axe.py	/^    HAS_GIT = True$/;"	v
+HAS_HAMMER	workshop/__init__.py	/^    HAS_HAMMER = False$/;"	v
+HAS_HAMMER	workshop/__init__.py	/^    HAS_HAMMER = True$/;"	v
 HAS_HUGGINGFACE	axe.py	/^    HAS_HUGGINGFACE = False$/;"	v
 HAS_HUGGINGFACE	axe.py	/^    HAS_HUGGINGFACE = True$/;"	v
 HAS_OPENAI	axe.py	/^    HAS_OPENAI = False$/;"	v
 HAS_OPENAI	axe.py	/^    HAS_OPENAI = True$/;"	v
+HAS_PLANE	workshop/__init__.py	/^    HAS_PLANE = False$/;"	v
+HAS_PLANE	workshop/__init__.py	/^    HAS_PLANE = True$/;"	v
 HAS_READLINE	axe.py	/^        HAS_READLINE = False$/;"	v
 HAS_READLINE	axe.py	/^        HAS_READLINE = True$/;"	v
 HAS_READLINE	axe.py	/^    HAS_READLINE = True$/;"	v
+HAS_SAW	workshop/__init__.py	/^    HAS_SAW = False$/;"	v
+HAS_SAW	workshop/__init__.py	/^    HAS_SAW = True$/;"	v
+HAS_WORKSHOP	axe.py	/^    HAS_WORKSHOP = False$/;"	v
+HAS_WORKSHOP	axe.py	/^    HAS_WORKSHOP = True$/;"	v
 HAS_YAML	axe.py	/^    HAS_YAML = False$/;"	v
 HAS_YAML	axe.py	/^    HAS_YAML = True$/;"	v
 HEADER	utils/formatting.py	/^    HEADER = '\\033[95m'$/;"	v	class:Colors
+Hammer - Live Instrumentation	README.md	/^#### Hammer - Live Instrumentation$/;"	t	subsection:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools""Quick Examples
+Hammer - Live Instrumentation	workshop_quick_reference.md	/^### Hammer - Live Instrumentation$/;"	S	section:Workshop Tools Quick Reference""Tools
+Hammer - Live Instrumentation Benchmarks	workshop_benchmarks.md	/^## Hammer - Live Instrumentation Benchmarks$/;"	s	chapter:Workshop Tools Benchmarks
+HammerInstrumentor	workshop/__init__.py	/^    HammerInstrumentor = _missing_tool_factory("HammerInstrumentor", "workshop.hammer")$/;"	v
+HammerInstrumentor	workshop/hammer.py	/^class HammerInstrumentor:$/;"	c
+Header	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Header$/;"	c
 Hello Team! 👋	team_test/.collab_log.md	/^# Hello Team! 👋$/;"	c
+Help	README.md	/^### Help$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
 Heredoc Execution Fix - Implementation Summary	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^# Heredoc Execution Fix - Implementation Summary$/;"	c
 Heredoc Execution Fix Summary	HEREDOC_EXECUTION_FIX.md	/^# Heredoc Execution Fix Summary$/;"	c
-How to Use	llm_prep/codebase_overview.md	/^## How to Use$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-01
+Historical Comparison	workshop_test_results.md	/^### Historical Comparison$/;"	S	section:Workshop Tools Test Suite Execution Results""Regression Testing
+History	workshop_quick_reference.md	/^### History$/;"	S	section:Workshop Tools Quick Reference""Management Commands
+How to Use	llm_prep/codebase_overview.md	/^## How to Use$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-03
 HuggingFace (Llama)	API_PROVIDERS.md	/^## HuggingFace (Llama)$/;"	s	chapter:AXE API Provider Documentation
 HuggingFace (Llama)	MODELS_FINAL.md	/^## HuggingFace (Llama)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 HuggingFace (Llama) - Free Tier Available!	.collab_log.md	/^### HuggingFace (Llama) - Free Tier Available!$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 HuggingFace (Llama) - Free Tier Available!	README.md	/^### HuggingFace (Llama) - Free Tier Available!$/;"	S	section:AXE - Agent eXecution Engine""API Providers
+Immediate (Same Day)	PR23_EXECUTIVE_SUMMARY.md	/^### Immediate (Same Day)$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Post-Merge Actions
 Immediate Actions	.collab_log.md	/^## Immediate Actions$/;"	s	chapter:Supervisor @boss Initiating Session
+Immediate Actions	workshop_test_results.md	/^### Immediate Actions$/;"	S	section:Workshop Tools Test Suite Execution Results""Recommendations
+Immediate Actions (Completed)	workshop_security_audit.md	/^### Immediate Actions (Completed)$/;"	S	section:Workshop Tools Security Audit""Recommendations
 Impact	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Impact$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Impact	BUG_FIX_SUMMARY.md	/^## Impact$/;"	s	chapter:Bug Fix Summary - Multi-Agent Collaboration Issues
+Impact	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Impact$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Impact	HEREDOC_EXECUTION_FIX.md	/^## Impact$/;"	s	chapter:Heredoc Execution Fix Summary
 Impact	IMPLEMENTATION_COMPLETE.md	/^## Impact$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
 Impact	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Impact$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
@@ -439,18 +579,33 @@ Implementation Summary: GPT-5 Fix & WRITE Blocks	IMPLEMENTATION_SUMMARY.md	/^# I
 Implemented Features (Phases 1-5)	IMPROVEMENTS_README.md	/^## Implemented Features (Phases 1-5)$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Implemented Features (Phases 6-10)	IMPROVEMENTS_README.md	/^## Implemented Features (Phases 6-10)$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Import from new modular structure	.collab_log.md	/^# Import from new modular structure$/;"	c
+Informational Findings	workshop_security_audit.md	/^### Informational Findings$/;"	S	section:Workshop Tools Security Audit""Detailed Findings
+Input Validation - VERIFIED	PR23_VALIDATION_REPORT.md	/^### Input Validation - VERIFIED$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 3: Security Validation
 Install Dependencies	.collab_log.md	/^### Install Dependencies$/;"	S	section:AXE - Agent eXecution Engine""Installation
 Install Dependencies	README.md	/^### Install Dependencies$/;"	S	section:AXE - Agent eXecution Engine""Installation
 Installation	.collab_log.md	/^## Installation$/;"	s	chapter:AXE - Agent eXecution Engine
 Installation	README.md	/^## Installation$/;"	s	chapter:AXE - Agent eXecution Engine
+Installation	README.md	/^### Installation$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
+Installation Validation	workshop_dependency_validation.md	/^## Installation Validation$/;"	s	chapter:Workshop Tools Dependency Validation
 Integrated Tools	.collab_log.md	/^### Integrated Tools$/;"	S	section:AXE - Agent eXecution Engine""Features
 Integrated Tools	README.md	/^### Integrated Tools$/;"	S	section:AXE - Agent eXecution Engine""Features
+Integration Impact	PR23_EXECUTIVE_SUMMARY.md	/^## Integration Impact$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
+Integration Status	PR23_VALIDATION_REPORT.md	/^### Integration Status$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 8: Integration Points Summary
 Integration Test (`test_integration_database_fix.py`)	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### Integration Test (`test_integration_database_fix.py`)$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Testing
+Integration Test Results (`test_workshop_integration.py`)	workshop_test_results.md	/^### Integration Test Results (`test_workshop_integration.py`)$/;"	S	section:Workshop Tools Test Suite Execution Results""Detailed Test Results
+Integration Testing	workshop_dependency_validation.md	/^## Integration Testing$/;"	s	chapter:Workshop Tools Dependency Validation
+Integration with Agents	README.md	/^### Integration with Agents$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
+Integration with Agents	workshop_quick_reference.md	/^## Integration with Agents$/;"	s	chapter:Workshop Tools Quick Reference
 Integration with Other Blocks	WRITE_BLOCKS_GUIDE.md	/^## Integration with Other Blocks$/;"	s	chapter:WRITE Block Functionality - User Guide
 Interactive Mode	.collab_log.md	/^### Interactive Mode$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Interactive Mode	README.md	/^### Interactive Mode$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Interactive Testing	WRITE_BLOCKS_GUIDE.md	/^### Interactive Testing$/;"	S	section:WRITE Block Functionality - User Guide""Testing
 Introduction	team_test/.collab_log.md	/^### Introduction  $/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
+Issue #1: Potential Command Injection in Hammer Module	workshop_security_audit.md	/^#### Issue #1: Potential Command Injection in Hammer Module$/;"	t	subsection:Workshop Tools Security Audit""Detailed Findings""Medium Severity Issues
+Issue #2: Memory Exhaustion in Chisel Analysis	workshop_security_audit.md	/^#### Issue #2: Memory Exhaustion in Chisel Analysis$/;"	t	subsection:Workshop Tools Security Audit""Detailed Findings""Medium Severity Issues
+Issue #3: Information Disclosure in Error Messages	workshop_security_audit.md	/^#### Issue #3: Information Disclosure in Error Messages$/;"	t	subsection:Workshop Tools Security Audit""Detailed Findings""Low Severity Issues
+Issue #4: Race Condition in Database Operations	workshop_security_audit.md	/^#### Issue #4: Race Condition in Database Operations$/;"	t	subsection:Workshop Tools Security Audit""Detailed Findings""Low Severity Issues
+Issue #5: Weak Random ID Generation	workshop_security_audit.md	/^#### Issue #5: Weak Random ID Generation$/;"	t	subsection:Workshop Tools Security Audit""Detailed Findings""Low Severity Issues
 Issue 1: READ Block Access Denied	BEFORE_AFTER_COMPARISON.md	/^## Issue 1: READ Block Access Denied$/;"	s	chapter:Before/After Comparison of Fixes
 Issue 1: READ Block Access Denied ✅	FIXES_SUMMARY.md	/^### Issue 1: READ Block Access Denied ✅$/;"	S	section:AXE Multiple Issues Fix Summary""Issues Fixed
 Issue 2: Llama 405B Model Deprecated	BEFORE_AFTER_COMPARISON.md	/^## Issue 2: Llama 405B Model Deprecated$/;"	s	chapter:Before/After Comparison of Fixes
@@ -463,6 +618,8 @@ Issues Fixed	FIXES_SUMMARY.md	/^## Issues Fixed$/;"	s	chapter:AXE Multiple Issue
 Issues Resolved	IMPLEMENTATION_SUMMARY.md	/^## Issues Resolved$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
 Key Changes:	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Key Changes:$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Solution
 Key Features	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Key Features$/;"	S	section:Multi-Format Tool Call Parser Implementation""Implementation
+Key Strengths	PR23_EXECUTIVE_SUMMARY.md	/^## Key Strengths$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
+Known Security Issues	workshop_dependency_validation.md	/^### Known Security Issues$/;"	S	section:Workshop Tools Dependency Validation""Security Validation
 LEVEL_DEPUTY_SUPERVISOR	progression/levels.py	/^LEVEL_DEPUTY_SUPERVISOR = 30    # Level 30: Deputy Supervisor (15000 XP)$/;"	v
 LEVEL_DEPUTY_SUPERVISOR = 30    # Imported from progression.levels	.collab_log.md	/^# LEVEL_DEPUTY_SUPERVISOR = 30    # Imported from progression.levels$/;"	c
 LEVEL_MILESTONES	progression/levels.py	/^LEVEL_MILESTONES = {$/;"	v
@@ -472,8 +629,8 @@ LEVEL_SUPERVISOR_ELIGIBLE	progression/levels.py	/^LEVEL_SUPERVISOR_ELIGIBLE = 40
 LEVEL_SUPERVISOR_ELIGIBLE = 40  # Imported from progression.levels	.collab_log.md	/^# LEVEL_SUPERVISOR_ELIGIBLE = 40  # Imported from progression.levels$/;"	c
 LEVEL_TEAM_LEADER	progression/levels.py	/^LEVEL_TEAM_LEADER = 20          # Level 20: Team Leader (5000 XP)$/;"	v
 LEVEL_TEAM_LEADER = 20          # Imported from progression.levels	.collab_log.md	/^# LEVEL_TEAM_LEADER = 20          # Imported from progression.levels$/;"	c
-LLM Context Files	llm_prep/codebase_overview.md	/^## LLM Context Files$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-01
-LLM-Ready Codebase Overview — 2026-01-01	llm_prep/codebase_overview.md	/^# LLM-Ready Codebase Overview — 2026-01-01$/;"	c
+LLM Context Files	llm_prep/codebase_overview.md	/^## LLM Context Files$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-03
+LLM-Ready Codebase Overview — 2026-01-03	llm_prep/codebase_overview.md	/^# LLM-Ready Codebase Overview — 2026-01-03$/;"	c
 Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Anthropic (Claude)
 Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""HuggingFace (Llama)
 Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""OpenAI (GPT)
@@ -483,10 +640,12 @@ Level 40+ Handling	IMPROVEMENTS_FINAL.md	/^### Level 40+ Handling$/;"	S	section:
 License	.collab_log.md	/^## License$/;"	s	chapter:AXE - Agent eXecution Engine
 License	MISSION.md	/^## License$/;"	s	chapter:AXE - Agent eXecution Engine
 License	README.md	/^## License$/;"	s	chapter:AXE - Agent eXecution Engine
+Limitations (By Design)	PR23_VALIDATION_REPORT.md	/^### Limitations (By Design)$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 9: Known Issues & Limitations
 Limits	IMPROVEMENTS_FINAL.md	/^### Limits$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Break System
 Line Count	REFACTORING_NOTES.md	/^### Line Count$/;"	S	section:AXE.PY Refactoring Notes""Metrics
 Lines Changed	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Lines Changed$/;"	s	chapter:Database Location Fix - Implementation Summary
 Locating `axe.py`:	team_test/.collab_log.md	/^#### Locating `axe.py`:  $/;"	t	subsection:Hello Team! 👋""Team Coordination Plan 📋""Contribution
+Low Severity Issues	workshop_security_audit.md	/^### Low Severity Issues$/;"	S	section:Workshop Tools Security Audit""Detailed Findings
 MAX_BREAKS_PER_HOUR	axe.py	/^MAX_BREAKS_PER_HOUR = 2         # Maximum breaks per hour$/;"	v
 MAX_BREAK_MINUTES	axe.py	/^MAX_BREAK_MINUTES = 15          # Maximum break duration$/;"	v
 MAX_READ_SIZE	axe.py	/^    MAX_READ_SIZE = 10000  # Maximum bytes to read from a file$/;"	v	class:ResponseProcessor
@@ -497,6 +656,8 @@ MIN_ACTIVE_AGENTS	axe.py	/^MIN_ACTIVE_AGENTS = 2           # Minimum agents that
 MIN_SLEEP_MINUTES	axe.py	/^MIN_SLEEP_MINUTES = 30          # Minimum sleep duration in minutes$/;"	v
 MIN_WORKLOAD_FOR_BREAK	axe.py	/^MIN_WORKLOAD_FOR_BREAK = 0.3    # Break only allowed if workload < 30%$/;"	v
 MODEL_METADATA	models/metadata.py	/^MODEL_METADATA = {$/;"	v
+Management Commands	README.md	/^### Management Commands$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
+Management Commands	workshop_quick_reference.md	/^## Management Commands$/;"	s	chapter:Workshop Tools Quick Reference
 Mandatory Sleep System	IMPROVEMENTS_FINAL.md	/^## Mandatory Sleep System$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Manual Testing	WRITE_BLOCKS_GUIDE.md	/^### Manual Testing$/;"	S	section:WRITE Block Functionality - User Guide""Testing
 Manual Testing (manual_test_write.py)	IMPLEMENTATION_SUMMARY.md	/^### Manual Testing (manual_test_write.py)$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Testing
@@ -504,20 +665,32 @@ Manual Verification	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Manual Verification$/
 Manual verification	XML_PARSER_QUICK_REFERENCE.md	/^# Manual verification$/;"	c
 Markdown Format (Original)	XML_PARSER_QUICK_REFERENCE.md	/^### Markdown Format (Original)$/;"	S	section:XML Function Call Support - Quick Reference""Supported Formats
 Matches: [READ ...] (case-insensitive) followed by content until:	.collab_log.md	/^# Matches: [READ ...] (case-insensitive) followed by content until:$/;"	c
+Medium Severity Issues	workshop_security_audit.md	/^### Medium Severity Issues$/;"	S	section:Workshop Tools Security Audit""Detailed Findings
+Memory Usage	workshop_dependency_validation.md	/^### Memory Usage$/;"	S	section:Workshop Tools Dependency Validation""Performance Impact Analysis
+Merge Risk: ⚠️ LOW	PR23_EXECUTIVE_SUMMARY.md	/^### Merge Risk: ⚠️ LOW$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Risk Assessment
+Merge Risks: LOW	PR23_VALIDATION_REPORT.md	/^### Merge Risks: LOW$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 12: Risk Assessment
 Message Format	IMPROVEMENTS_FINAL.md	/^### Message Format$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
 Metrics	REFACTORING_NOTES.md	/^## Metrics$/;"	s	chapter:AXE.PY Refactoring Notes
 Migration Guide	REFACTORING_NOTES.md	/^## Migration Guide$/;"	s	chapter:AXE.PY Refactoring Notes
 Migration Path	IMPLEMENTATION_SUMMARY.md	/^### Migration Path$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Backwards Compatibility
+Minimal Changes	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Minimal Changes$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Minimal Overhead	IMPLEMENTATION_SUMMARY.md	/^### Minimal Overhead$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Performance Impact
+Minor Issues (Non-Blocking)	PR23_EXECUTIVE_SUMMARY.md	/^## Minor Issues (Non-Blocking)$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
+Minor Issues Identified (Non-Blocking)	PR23_VALIDATION_REPORT.md	/^### Minor Issues Identified (Non-Blocking)$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 9: Known Issues & Limitations
 Mission Statement	.collab_log.md	/^## Mission Statement$/;"	s	chapter:AXE - Agent eXecution Engine
 Mission Statement	MISSION.md	/^## Mission Statement$/;"	s	chapter:AXE - Agent eXecution Engine
+MockSession	test_spawned_agents.py	/^    class MockSession:$/;"	c	function:test_spawned_agent_system_prompt	file:
 Model Capabilities Matrix	MODELS_FINAL.md	/^## Model Capabilities Matrix$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Model Communication Example	MODELS_FINAL.md	/^### Model Communication Example$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Usage Examples
 Model Selection Guide	API_PROVIDERS.md	/^### Model Selection Guide$/;"	S	section:AXE API Provider Documentation""Quick Reference
 Models that require max_completion_tokens instead of max_tokens	.collab_log.md	/^# Models that require max_completion_tokens instead of max_tokens$/;"	c
 Modified Files	IMPLEMENTATION_SUMMARY.md	/^### Modified Files$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Files Modified/Created
+Modified Files	PR23_VALIDATION_REPORT.md	/^### Modified Files$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Appendix B: File Changes Summary
 Module Breakdown	REFACTORING_NOTES.md	/^### Module Breakdown$/;"	S	section:AXE.PY Refactoring Notes""Metrics
 Module Independence	REFACTORING_NOTES.md	/^### Module Independence$/;"	S	section:AXE.PY Refactoring Notes""Design Decisions
+Module Structure - COMPLETE	PR23_VALIDATION_REPORT.md	/^### Module Structure - COMPLETE$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 2: Integration Verification
+Monitoring	workshop_dependency_validation.md	/^### Monitoring$/;"	S	section:Workshop Tools Dependency Validation""Recommendations
+Monitoring Effectiveness	workshop_benchmarks.md	/^### Monitoring Effectiveness$/;"	S	section:Workshop Tools Benchmarks""Hammer - Live Instrumentation Benchmarks
 Motivation	REFACTORING_NOTES.md	/^## Motivation$/;"	s	chapter:AXE.PY Refactoring Notes
 Multi-Agent Collaboration	.collab_log.md	/^## Multi-Agent Collaboration$/;"	s	chapter:AXE - Agent eXecution Engine
 Multi-Agent Collaboration	MODELS_FINAL.md	/^### Multi-Agent Collaboration$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Usage Examples
@@ -530,6 +703,7 @@ MultiAgentCoordinator	core/multiprocess.py	/^class MultiAgentCoordinator:$/;"	c
 My Security Audit Contribution	.collab_log.md	/^## My Security Audit Contribution$/;"	s	chapter:Supervisor @boss - Coordination Update
 New Agent Commands (During Sessions)	IMPROVEMENTS_README.md	/^## New Agent Commands (During Sessions)$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 New Files	IMPLEMENTATION_SUMMARY.md	/^### New Files$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Files Modified/Created
+New Files	PR23_VALIDATION_REPORT.md	/^### New Files$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Appendix B: File Changes Summary
 New Functions Added	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### New Functions Added$/;"	S	section:Multi-Format Tool Call Parser Implementation""Implementation
 New Module Structure	REFACTORING_NOTES.md	/^## New Module Structure$/;"	s	chapter:AXE.PY Refactoring Notes
 New Test Files	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### New Test Files$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Test Coverage
@@ -539,6 +713,7 @@ Next Step if `axe.py` is Found	team_test/.collab_log.md	/^#### Next Step if `axe
 Next Steps:	.collab_log.md	/^### Next Steps:$/;"	S	section:Supervisor @boss - Coordination Update""Code Quality Deep Dive & Refactors
 No Breaking Changes	IMPLEMENTATION_SUMMARY.md	/^### No Breaking Changes$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Backwards Compatibility
 No Credits Error	MODELS_FINAL.md	/^### No Credits Error$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Troubleshooting
+No Hardcoded Secrets - VERIFIED	PR23_VALIDATION_REPORT.md	/^### No Hardcoded Secrets - VERIFIED$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 3: Security Validation
 No Regressions	IMPLEMENTATION_COMPLETE.md	/^### No Regressions$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Test Results
 Note on Whistleblower Feature	.collab_log.md	/^### Note on Whistleblower Feature$/;"	S	section:AXE - Agent eXecution Engine""Features
 Note on Whistleblower Feature	README.md	/^### Note on Whistleblower Feature$/;"	S	section:AXE - Agent eXecution Engine""Features
@@ -554,21 +729,52 @@ OpenAI (GPT)	.collab_log.md	/^### OpenAI (GPT)$/;"	S	section:AXE - Agent eXecuti
 OpenAI (GPT)	API_PROVIDERS.md	/^## OpenAI (GPT)$/;"	s	chapter:AXE API Provider Documentation
 OpenAI (GPT)	MODELS_FINAL.md	/^## OpenAI (GPT)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 OpenAI (GPT)	README.md	/^### OpenAI (GPT)$/;"	S	section:AXE - Agent eXecution Engine""API Providers
+Operating System Support	workshop_dependency_validation.md	/^### Operating System Support$/;"	S	section:Workshop Tools Dependency Validation""Compatibility Matrix
+Optional (Future)	PR23_EXECUTIVE_SUMMARY.md	/^### Optional (Future)$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Post-Merge Actions
 Optional imports - gracefully handle missing dependencies	.collab_log.md	/^# Optional imports - gracefully handle missing dependencies$/;"	c
 Original Test Suite (`test_tool_runner.py`)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Original Test Suite (`test_tool_runner.py`)$/;"	S	section:Shell Operator Support Implementation Summary""Test Coverage
+Overall Assessment	PR23_VALIDATION_REPORT.md	/^### Overall Assessment$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Executive Summary
+Overall Score: 9.4/10	PR23_VALIDATION_REPORT.md	/^### Overall Score: 9.4\/10$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 10: Validation Conclusion
+Overall Test Statistics	workshop_test_results.md	/^## Overall Test Statistics$/;"	s	chapter:Workshop Tools Test Suite Execution Results
 Overview	.collab_log.md	/^## Overview$/;"	s	chapter:AXE - Agent eXecution Engine
+Overview	BUG_FIX_SUMMARY.md	/^## Overview$/;"	s	chapter:Bug Fix Summary - Multi-Agent Collaboration Issues
 Overview	FIXES_SUMMARY.md	/^## Overview$/;"	s	chapter:AXE Multiple Issues Fix Summary
 Overview	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^## Overview$/;"	s	chapter:Multi-Format Tool Call Parser - Quick Reference
 Overview	README.md	/^## Overview$/;"	s	chapter:AXE - Agent eXecution Engine
+Overview	README.md	/^### Overview$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
 Overview	REFACTORING_NOTES.md	/^## Overview$/;"	s	chapter:AXE.PY Refactoring Notes
 Overview	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Overview$/;"	s	chapter:Shell Operator Support Implementation Summary
 Overview	TASK_COMPLETION_FIX_SUMMARY.md	/^## Overview$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
 Overview	WRITE_BLOCKS_GUIDE.md	/^## Overview$/;"	s	chapter:WRITE Block Functionality - User Guide
 Overview	XML_PARSER_IMPLEMENTATION.md	/^## Overview$/;"	s	chapter:XML Function Call Parser - Implementation Summary
+Overview	workshop_quick_reference.md	/^## Overview$/;"	s	chapter:Workshop Tools Quick Reference
+PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report	PR23_VALIDATION_REPORT.md	/^# PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report$/;"	c
+PR #23 Workshop Dynamic Analysis Framework - Executive Summary	PR23_EXECUTIVE_SUMMARY.md	/^# PR #23 Workshop Dynamic Analysis Framework - Executive Summary$/;"	c
 PR #2: Extract Large Classes	REFACTORING_NOTES.md	/^### PR #2: Extract Large Classes$/;"	S	section:AXE.PY Refactoring Notes""Future Refactoring (PRs #2 & #3)
 PR #3: Extract Session Management	REFACTORING_NOTES.md	/^### PR #3: Extract Session Management$/;"	S	section:AXE.PY Refactoring Notes""Future Refactoring (PRs #2 & #3)
+PR Test Files	PR23_VALIDATION_REPORT.md	/^### PR Test Files$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 6: Test Coverage Analysis
+PR Test Suite	PR23_EXECUTIVE_SUMMARY.md	/^### PR Test Suite$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Validation Results
+Parsed as:	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Parsed as:$/;"	c
+Part 10: Validation Conclusion	PR23_VALIDATION_REPORT.md	/^## Part 10: Validation Conclusion$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Part 11: Merge Recommendation	PR23_VALIDATION_REPORT.md	/^## Part 11: Merge Recommendation$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Part 12: Risk Assessment	PR23_VALIDATION_REPORT.md	/^## Part 12: Risk Assessment$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Part 1: PR Claims vs. Actual Implementation	PR23_VALIDATION_REPORT.md	/^## Part 1: PR Claims vs. Actual Implementation$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Part 2: Integration Verification	PR23_VALIDATION_REPORT.md	/^## Part 2: Integration Verification$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Part 3: Security Validation	PR23_VALIDATION_REPORT.md	/^## Part 3: Security Validation$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Part 4: Performance Validation	PR23_VALIDATION_REPORT.md	/^## Part 4: Performance Validation$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Part 5: Code Quality Analysis	PR23_VALIDATION_REPORT.md	/^## Part 5: Code Quality Analysis$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Part 6: Test Coverage Analysis	PR23_VALIDATION_REPORT.md	/^## Part 6: Test Coverage Analysis$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Part 7: Dependency Analysis	PR23_VALIDATION_REPORT.md	/^## Part 7: Dependency Analysis$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Part 8: Integration Points Summary	PR23_VALIDATION_REPORT.md	/^## Part 8: Integration Points Summary$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Part 9: Known Issues & Limitations	PR23_VALIDATION_REPORT.md	/^## Part 9: Known Issues & Limitations$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Penetration Testing Results	workshop_security_audit.md	/^## Penetration Testing Results$/;"	s	chapter:Workshop Tools Security Audit
 Per-Agent Workspace	IMPROVEMENTS_FINAL.md	/^### Per-Agent Workspace$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Resource Monitoring
+Performance Analysis Results	workshop_benchmarks.md	/^## Performance Analysis Results$/;"	s	chapter:Workshop Tools Benchmarks
+Performance Benchmarks	workshop_test_results.md	/^### Performance Benchmarks$/;"	S	section:Workshop Tools Test Suite Execution Results""Overall Test Statistics
+Performance Characteristics	PR23_EXECUTIVE_SUMMARY.md	/^## Performance Characteristics$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
 Performance Impact	IMPLEMENTATION_SUMMARY.md	/^## Performance Impact$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
+Performance Impact Analysis	workshop_dependency_validation.md	/^## Performance Impact Analysis$/;"	s	chapter:Workshop Tools Dependency Validation
+Performance Test Results (`test_workshop_performance.py`)	workshop_test_results.md	/^### Performance Test Results (`test_workshop_performance.py`)$/;"	S	section:Workshop Tools Test Suite Execution Results""Detailed Test Results
 Permission denied errors	WRITE_BLOCKS_GUIDE.md	/^### Permission denied errors$/;"	S	section:WRITE Block Functionality - User Guide""Troubleshooting
 Permission-Based Sleep System	IMPROVEMENTS_FINAL.md	/^### Permission-Based Sleep System$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Core Safety Features
 Persistence Strategy	IMPROVEMENTS_README.md	/^### Persistence Strategy$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Architecture Notes
@@ -594,9 +800,19 @@ Phase 8: Emergency mailbox constants	.collab_log.md	/^# Phase 8: Emergency mailb
 Phase 9: Break System ✅	IMPROVEMENTS_README.md	/^### Phase 9: Break System ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 6-10)
 Phase 9: Break system constants	.collab_log.md	/^# Phase 9: Break system constants$/;"	c
 Plan	.collab_log.md	/^### Plan$/;"	S	section:AXE - Agent eXecution Engine""Proposed Refactors (High Impact)
+Plane - Source/Sink Enumeration	README.md	/^#### Plane - Source\/Sink Enumeration$/;"	t	subsection:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools""Quick Examples
+Plane - Source/Sink Enumeration	workshop_quick_reference.md	/^### Plane - Source\/Sink Enumeration$/;"	S	section:Workshop Tools Quick Reference""Tools
+Plane - Source/Sink Enumeration Benchmarks	workshop_benchmarks.md	/^## Plane - Source\/Sink Enumeration Benchmarks$/;"	s	chapter:Workshop Tools Benchmarks
+PlaneEnumerator	workshop/__init__.py	/^    PlaneEnumerator = _missing_tool_factory("PlaneEnumerator", "workshop.plane")$/;"	v
+PlaneEnumerator	workshop/plane.py	/^class PlaneEnumerator:$/;"	c
+Post-Merge Actions	PR23_EXECUTIVE_SUMMARY.md	/^## Post-Merge Actions$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
+Post-Merge Recommendations	PR23_VALIDATION_REPORT.md	/^### Post-Merge Recommendations$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 11: Merge Recommendation
 Prerequisites	.collab_log.md	/^### Prerequisites$/;"	S	section:AXE - Agent eXecution Engine""Installation
 Prerequisites	README.md	/^### Prerequisites$/;"	S	section:AXE - Agent eXecution Engine""Installation
 Previously Failing (from problem statement):	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Previously Failing (from problem statement):$/;"	S	section:Shell Operator Support Implementation Summary""Commands Now Working
+Primary Analysis Libraries	workshop_dependency_validation.md	/^### Primary Analysis Libraries$/;"	S	section:Workshop Tools Dependency Validation""Core Dependencies
+Problem	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Problem$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 1: Duplicate Command Execution ❌ → ✅
+Problem	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Problem$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 2: Heredoc Parsing Errors ❌ → ✅
 Problem	HEREDOC_EXECUTION_FIX.md	/^## Problem$/;"	s	chapter:Heredoc Execution Fix Summary
 Problem	TASK_COMPLETION_FIX_SUMMARY.md	/^### Problem$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 1: False "TASK COMPLETE" Detection ✅
 Problem	TASK_COMPLETION_FIX_SUMMARY.md	/^### Problem$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 2: Active Agents Counter ✅
@@ -604,25 +820,35 @@ Problem Addressed	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Problem Addressed$/;"	s
 Problem Solved	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Problem Solved$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Problem Solved	XML_PARSER_IMPLEMENTATION.md	/^## Problem Solved$/;"	s	chapter:XML Function Call Parser - Implementation Summary
 Problem Statement	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Problem Statement$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Problem Statement	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Problem Statement$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Problem Statement	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Problem Statement$/;"	s	chapter:Database Location Fix - Implementation Summary
 Problem Statement	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Problem Statement$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Process Instrumentation Performance	workshop_benchmarks.md	/^### Process Instrumentation Performance$/;"	S	section:Workshop Tools Benchmarks""Hammer - Live Instrumentation Benchmarks
 Process each block	BEFORE_AFTER_COMPARISON.md	/^# Process each block$/;"	c
+Production Deployment	workshop_dependency_validation.md	/^### Production Deployment$/;"	S	section:Workshop Tools Dependency Validation""Recommendations
 Progression Curve (Hybrid Linear/Exponential)	IMPROVEMENTS_FINAL.md	/^### Progression Curve (Hybrid Linear\/Exponential)$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""XP & Level System
 Project Guidance for AXE	llm_prep/project_guidance.md	/^# Project Guidance for AXE$/;"	c
 Project Structure	.collab_log.md	/^## Project Structure$/;"	s	chapter:AXE - Agent eXecution Engine
 Project Structure	README.md	/^## Project Structure$/;"	s	chapter:AXE - Agent eXecution Engine
+Project-Scale Analysis	workshop_benchmarks.md	/^### Project-Scale Analysis$/;"	S	section:Workshop Tools Benchmarks""Plane - Source/Sink Enumeration Benchmarks
 ProjectContext	axe.py	/^class ProjectContext:$/;"	c
 Proposed Refactors (High Impact)	.collab_log.md	/^## Proposed Refactors (High Impact)$/;"	s	chapter:AXE - Agent eXecution Engine
 Purpose	IMPROVEMENTS_FINAL.md	/^### Purpose$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
 Python	.collab_log.md	/^### Python$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Python	README.md	/^### Python$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Python Best Practices	llm_prep/project_guidance.md	/^## Python Best Practices$/;"	s	chapter:Project Guidance for AXE
-Python Class Diagrams (pyreverse)	llm_prep/codebase_overview.md	/^## Python Class Diagrams (pyreverse)$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-01
+Python Class Diagrams (pyreverse)	llm_prep/codebase_overview.md	/^## Python Class Diagrams (pyreverse)$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-03
 Python Example	API_PROVIDERS.md	/^### Python Example$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
 Python Example	API_PROVIDERS.md	/^### Python Example$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
 Python Example	API_PROVIDERS.md	/^### Python Example$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
 Python Example (OpenAI SDK)	API_PROVIDERS.md	/^### Python Example (OpenAI SDK)$/;"	S	section:AXE API Provider Documentation""GitHub Models
 Python Example (OpenAI SDK)	API_PROVIDERS.md	/^### Python Example (OpenAI SDK)$/;"	S	section:AXE API Provider Documentation""xAI (Grok)
+Python Version Support	workshop_dependency_validation.md	/^### Python Version Support$/;"	S	section:Workshop Tools Dependency Validation""Compatibility Matrix
+Quality Checks	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Quality Checks$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
+Quality Metrics	PR23_VALIDATION_REPORT.md	/^### Quality Metrics$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 10: Validation Conclusion
+Quick Examples	README.md	/^### Quick Examples$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
+Quick Facts	PR23_EXECUTIVE_SUMMARY.md	/^## Quick Facts$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
+Quick Links	PR23_EXECUTIVE_SUMMARY.md	/^## Quick Links$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
 Quick Reference	API_PROVIDERS.md	/^## Quick Reference$/;"	s	chapter:AXE API Provider Documentation
 Quick Reference Card	.collab_log.md	/^## Quick Reference Card$/;"	s	chapter:AXE - Agent eXecution Engine
 Quick Reference Card	README.md	/^## Quick Reference Card$/;"	s	chapter:AXE - Agent eXecution Engine
@@ -631,6 +857,7 @@ Quick Start	.collab_log.md	/^## Quick Start$/;"	s	chapter:AXE - Agent eXecution 
 Quick Start	MODELS_FINAL.md	/^## Quick Start$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Quick Start	README.md	/^## Quick Start$/;"	s	chapter:AXE - Agent eXecution Engine
 Quick question for @boss (before I start editing)	.collab_log.md	/^## Quick question for @boss (before I start editing)$/;"	s	chapter:AXE - Agent eXecution Engine
+Quick verification	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Quick verification$/;"	c
 READ block sanitization	FIXES_SUMMARY.md	/^# READ block sanitization$/;"	c
 READ_BLOCK_PATTERN	axe.py	/^READ_BLOCK_PATTERN = r'\\[READ[^\\]]*\\].*?(?=\\n\\n|\\n\\[(?!\\[)[A-Z]|\\Z)'$/;"	v
 RED	utils/formatting.py	/^    RED = '\\033[91m'$/;"	v	class:Colors
@@ -641,25 +868,41 @@ Rate Limiting	MODELS_FINAL.md	/^### Rate Limiting$/;"	S	section:AXE Multi-Agent 
 Ready for Production ✅	IMPLEMENTATION_COMPLETE.md	/^## Ready for Production ✅$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
 Real-World Example: Reverse Engineering a WAD File	.collab_log.md	/^### Real-World Example: Reverse Engineering a WAD File$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Real-World Example: Reverse Engineering a WAD File	README.md	/^### Real-World Example: Reverse Engineering a WAD File$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
+Real-World Example: Security Audit Workflow	README.md	/^### Real-World Example: Security Audit Workflow$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
+Recommendation	PR23_EXECUTIVE_SUMMARY.md	/^## Recommendation$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
+Recommendations	workshop_benchmarks.md	/^## Recommendations$/;"	s	chapter:Workshop Tools Benchmarks
+Recommendations	workshop_dependency_validation.md	/^## Recommendations$/;"	s	chapter:Workshop Tools Dependency Validation
+Recommendations	workshop_security_audit.md	/^## Recommendations$/;"	s	chapter:Workshop Tools Security Audit
+Recommendations	workshop_test_results.md	/^## Recommendations$/;"	s	chapter:Workshop Tools Test Suite Execution Results
 Recommended Weights	IMPROVEMENTS_FINAL.md	/^### Recommended Weights$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Degradation Monitoring
 Recommended Work Duration Limits	IMPROVEMENTS_FINAL.md	/^### Recommended Work Duration Limits$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Mandatory Sleep System
 Refactoring Plan Additions (Creative Angles)	.collab_log.md	/^## Refactoring Plan Additions (Creative Angles)$/;"	s	chapter:Supervisor @boss - Consolidation & Security Audit
 Refactoring Summary	REFACTORING_NOTES.md	/^## Refactoring Summary$/;"	s	chapter:AXE.PY Refactoring Notes
 References	REFACTORING_NOTES.md	/^## References$/;"	s	chapter:AXE.PY Refactoring Notes
 Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives	.collab_log.md	/^# Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives$/;"	c
+Regression Testing	workshop_test_results.md	/^## Regression Testing$/;"	s	chapter:Workshop Tools Test Suite Execution Results
 Regression Tests (test_axe_improvements.py)	IMPLEMENTATION_SUMMARY.md	/^### Regression Tests (test_axe_improvements.py)$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Testing
+Reliability Metrics	workshop_test_results.md	/^### Reliability Metrics$/;"	S	section:Workshop Tools Test Suite Execution Results""Test Quality Metrics
 Request Protocol	IMPROVEMENTS_FINAL.md	/^### Request Protocol$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Break System
+Required Dependencies	PR23_VALIDATION_REPORT.md	/^### Required Dependencies$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 7: Dependency Analysis
 Requirement	IMPLEMENTATION_COMPLETE.md	/^### Requirement$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Bug 1: False "TASK COMPLETE" Detection ✅
 Requirement	IMPLEMENTATION_COMPLETE.md	/^### Requirement$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Bug 2: Active Agents Counter ✅
 Requirements	API_PROVIDERS.md	/^### Requirements$/;"	S	section:AXE API Provider Documentation""GitHub Models
 Requirements	API_PROVIDERS.md	/^### Requirements$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
+Resource Controls - VERIFIED	PR23_VALIDATION_REPORT.md	/^### Resource Controls - VERIFIED$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 3: Security Validation
 Resource Monitoring	IMPROVEMENTS_FINAL.md	/^## Resource Monitoring$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Resource Monitoring	QUICK_REFERENCE.md	/^## Resource Monitoring$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+Resource Utilization Trends	workshop_benchmarks.md	/^### Resource Utilization Trends$/;"	S	section:Workshop Tools Benchmarks""Comparative Analysis
 Resource monitoring constants	.collab_log.md	/^# Resource monitoring constants$/;"	c
 ResponseProcessor	axe.py	/^class ResponseProcessor:$/;"	c
 Responses to Agent Questions	.collab_log.md	/^## Responses to Agent Questions$/;"	s	chapter:Supervisor @boss - Coordination Update
 Result:	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### Result:$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Example - Before vs After
+Risk Assessment	PR23_EXECUTIVE_SUMMARY.md	/^## Risk Assessment$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
+Rollback Plan	PR23_VALIDATION_REPORT.md	/^### Rollback Plan$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 12: Risk Assessment
 Root Cause	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Root Cause$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Root Cause	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Root Cause$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Problem Statement
+Root Cause	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Root Cause$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 1: Duplicate Command Execution ❌ → ✅
+Root Cause	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Root Cause$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 2: Heredoc Parsing Errors ❌ → ✅
 Root Cause	HEREDOC_EXECUTION_FIX.md	/^## Root Cause$/;"	s	chapter:Heredoc Execution Fix Summary
 Root Cause Analysis	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Root Cause Analysis$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
 Round-Robin Analysis	.collab_log.md	/^### Round-Robin Analysis$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
@@ -667,6 +910,7 @@ Round-Robin Analysis	README.md	/^### Round-Robin Analysis$/;"	S	section:AXE - Ag
 Rules	IMPROVEMENTS_FINAL.md	/^### Rules$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Agent Aliases
 Run automated tests	QUICK_REFERENCE.md	/^### Run automated tests$/;"	S	section:AXE Multiagent - Quick Reference Card""Testing
 Run interactive demo	QUICK_REFERENCE.md	/^### Run interactive demo$/;"	S	section:AXE Multiagent - Quick Reference Card""Testing
+Run the test suite	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Run the test suite$/;"	c
 SESSION_RULES	safety/rules.py	/^SESSION_RULES = """$/;"	v
 SESSION_RULES = """..."""  # Commented out - imported from safety.rules	.collab_log.md	/^# SESSION_RULES = """..."""  # Commented out - imported from safety.rules$/;"	c
 SHELL_OPERATORS	axe.py	/^    SHELL_OPERATORS = {'|', '&&', '||', ';'}$/;"	v	class:ToolRunner
@@ -678,6 +922,12 @@ SPAWN_COOLDOWN_SECONDS	axe.py	/^SPAWN_COOLDOWN_SECONDS = 60     # Minimum time b
 SQLite Schema	IMPROVEMENTS_FINAL.md	/^### SQLite Schema$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Persistent Storage
 SUPERVISOR_LOG_TABLE	database/schema.py	/^SUPERVISOR_LOG_TABLE = """$/;"	v
 Safe Commands for Agents	IMPROVEMENTS_FINAL.md	/^### Safe Commands for Agents$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Resource Monitoring
+Safety Considerations	workshop_quick_reference.md	/^## Safety Considerations$/;"	s	chapter:Workshop Tools Quick Reference
+Saw - Taint Analysis	README.md	/^#### Saw - Taint Analysis$/;"	t	subsection:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools""Quick Examples
+Saw - Taint Analysis	workshop_quick_reference.md	/^### Saw - Taint Analysis$/;"	S	section:Workshop Tools Quick Reference""Tools
+Saw - Taint Analysis Benchmarks	workshop_benchmarks.md	/^## Saw - Taint Analysis Benchmarks$/;"	s	chapter:Workshop Tools Benchmarks
+SawTracker	workshop/__init__.py	/^    SawTracker = _missing_tool_factory("SawTracker", "workshop.saw")$/;"	v
+SawTracker	workshop/saw.py	/^class SawTracker:$/;"	c
 Scalability	IMPLEMENTATION_SUMMARY.md	/^### Scalability$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Performance Impact
 Security Analysis	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Security Analysis$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
 Security Audit Progress:	.collab_log.md	/^### Security Audit Progress:$/;"	S	section:Supervisor @boss - Coordination Update""Code Quality Deep Dive & Refactors
@@ -685,7 +935,13 @@ Security Considerations	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Security Considera
 Security Considerations	IMPLEMENTATION_SUMMARY.md	/^## Security Considerations$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
 Security Maintained	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Security Maintained$/;"	s	chapter:Shell Operator Support Implementation Summary
 Security Mechanism	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Security Mechanism$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Security Analysis
+Security Recommendations	workshop_security_audit.md	/^### Security Recommendations$/;"	S	section:Workshop Tools Security Audit""Dependency Security Analysis
 Security Scan	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Security Scan$/;"	S	section:Multi-Format Tool Call Parser Implementation""Code Quality
+Security Scan	PR23_EXECUTIVE_SUMMARY.md	/^### Security Scan$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Validation Results
+Security Scan (CodeQL)	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Security Scan (CodeQL)$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Quality Checks
+Security Standards Compliance	workshop_security_audit.md	/^### Security Standards Compliance$/;"	S	section:Workshop Tools Security Audit""Compliance Assessment
+Security Test Results (`test_workshop_security.py`)	workshop_test_results.md	/^### Security Test Results (`test_workshop_security.py`)$/;"	S	section:Workshop Tools Test Suite Execution Results""Detailed Test Results
+Security Validation	workshop_dependency_validation.md	/^## Security Validation$/;"	s	chapter:Workshop Tools Dependency Validation
 Security and Permissions	WRITE_BLOCKS_GUIDE.md	/^## Security and Permissions$/;"	s	chapter:WRITE Block Functionality - User Guide
 Session Rules (The 4 Principles)	QUICK_REFERENCE.md	/^## Session Rules (The 4 Principles)$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Session rules displayed at startup (now imported from safety.rules module)	.collab_log.md	/^# Session rules displayed at startup (now imported from safety.rules module)$/;"	c
@@ -693,28 +949,39 @@ Setup Commands	IMPROVEMENTS_FINAL.md	/^### Setup Commands$/;"	S	section:AXE Mult
 SharedContext	core/multiprocess.py	/^class SharedContext:$/;"	c
 SharedWorkspace	axe.py	/^class SharedWorkspace:$/;"	c
 Shell Operator Support Implementation Summary	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^# Shell Operator Support Implementation Summary$/;"	c
+Short-Term (This Week)	PR23_EXECUTIVE_SUMMARY.md	/^### Short-Term (This Week)$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Post-Merge Actions
+Sign-Off	PR23_EXECUTIVE_SUMMARY.md	/^## Sign-Off$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
 Single Command Mode	.collab_log.md	/^### Single Command Mode$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Single Command Mode	README.md	/^### Single Command Mode$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
+Skipped Tests	workshop_test_results.md	/^### Skipped Tests$/;"	S	section:Workshop Tools Test Suite Execution Results""Error Analysis
 Sleep Quality Tiers	IMPROVEMENTS_FINAL.md	/^### Sleep Quality Tiers$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Core Safety Features
 SleepManager	axe.py	/^class SleepManager:$/;"	c
 Solution	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Solution$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Solution	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Solution$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 1: Duplicate Command Execution ❌ → ✅
+Solution	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Solution$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 2: Heredoc Parsing Errors ❌ → ✅
 Solution	HEREDOC_EXECUTION_FIX.md	/^## Solution$/;"	s	chapter:Heredoc Execution Fix Summary
 Solution	TASK_COMPLETION_FIX_SUMMARY.md	/^### Solution$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 1: False "TASK COMPLETE" Detection ✅
 Solution	TASK_COMPLETION_FIX_SUMMARY.md	/^### Solution$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 2: Active Agents Counter ✅
+Solution Implemented	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Solution Implemented$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Solution Implemented	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Solution Implemented$/;"	s	chapter:Database Location Fix - Implementation Summary
 Solution Implemented	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Solution Implemented$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
 Solution Implemented	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Solution Implemented$/;"	s	chapter:Shell Operator Support Implementation Summary
+SourceSinkVisitor	workshop/plane.py	/^class SourceSinkVisitor(ast.NodeVisitor):$/;"	c
 Spawning Logic	IMPROVEMENTS_FINAL.md	/^### Spawning Logic$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Dynamic Spawning
 Special Aliases	IMPROVEMENTS_FINAL.md	/^### Special Aliases$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Agent Aliases
+Standard Library Dependencies	workshop_dependency_validation.md	/^### Standard Library Dependencies$/;"	S	section:Workshop Tools Dependency Validation""Core Dependencies
 Starting a Collaborative Session with New Features	IMPROVEMENTS_README.md	/^### Starting a Collaborative Session with New Features$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Usage Examples
 Starting a Session	IMPROVEMENTS_FINAL.md	/^### Starting a Session$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Quick Reference Commands
 Starting a Session	QUICK_REFERENCE.md	/^### Starting a Session$/;"	S	section:AXE Multiagent - Quick Reference Card""Commands
 Starting a Session	QUICK_REFERENCE.md	/^### Starting a Session$/;"	S	section:AXE Multiagent - Quick Reference Card""Tips for Humans
+Statistics	workshop_quick_reference.md	/^### Statistics$/;"	S	section:Workshop Tools Quick Reference""Management Commands
 Status Summary	.collab_log.md	/^## Status Summary$/;"	s	chapter:Supervisor @boss - Consolidation & Security Audit
 Status: ✅ COMPLETE AND TESTED	IMPLEMENTATION_COMPLETE.md	/^## Status: ✅ COMPLETE AND TESTED$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
+Still creates 2 separate commands (no heredoc detected)	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Still creates 2 separate commands (no heredoc detected)$/;"	c
 Success Criteria (All Met)	TASK_COMPLETION_FIX_SUMMARY.md	/^## Success Criteria (All Met)$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
 Success Criteria (All Met) ✅	IMPLEMENTATION_COMPLETE.md	/^## Success Criteria (All Met) ✅$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
 Success Criteria Met	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Success Criteria Met$/;"	s	chapter:Database Location Fix - Implementation Summary
+Summary	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^## Summary$/;"	s	chapter:Duplicate Execution and Heredoc Parsing Bug Fixes
 Summary	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Summary$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Summary Documents	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Summary Documents$/;"	S	section:Shell Operator Support Implementation Summary""Documentation & Comments
 Summary of All Implemented Features	IMPROVEMENTS_README.md	/^### Summary of All Implemented Features$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Credits
@@ -728,8 +995,10 @@ Supervisor Role Assignment	MODELS_FINAL.md	/^### Supervisor Role Assignment$/;"	
 Supported Formats	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Supported Formats$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Supported Formats	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^## Supported Formats$/;"	s	chapter:Multi-Format Tool Call Parser - Quick Reference
 Supported Formats	XML_PARSER_QUICK_REFERENCE.md	/^## Supported Formats$/;"	s	chapter:XML Function Call Support - Quick Reference
-Symbol Index	llm_prep/codebase_overview.md	/^## Symbol Index$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-01
+Supported Heredoc Formats	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Supported Heredoc Formats$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 2: Heredoc Parsing Errors ❌ → ✅
+Symbol Index	llm_prep/codebase_overview.md	/^## Symbol Index$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-03
 Syntax	WRITE_BLOCKS_GUIDE.md	/^## Syntax$/;"	s	chapter:WRITE Block Functionality - User Guide
+System Resources	workshop_test_results.md	/^### System Resources$/;"	S	section:Workshop Tools Test Suite Execution Results""Test Environment Validation
 TOKEN_CRITICAL_THRESHOLD	utils/token_tracker.py	/^TOKEN_CRITICAL_THRESHOLD = 0.95  # Critical action at 95% usage$/;"	v
 TOKEN_REPLACEMENT_ENABLED	utils/token_tracker.py	/^TOKEN_REPLACEMENT_ENABLED = True$/;"	v
 TOKEN_WARNING_THRESHOLD	utils/token_tracker.py	/^TOKEN_WARNING_THRESHOLD = 0.80  # Warn at 80% usage$/;"	v
@@ -739,20 +1008,49 @@ Table of Contents	API_PROVIDERS.md	/^## Table of Contents$/;"	s	chapter:AXE API 
 Table of Contents	IMPROVEMENTS_FINAL.md	/^## Table of Contents$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Table of Contents	MODELS_FINAL.md	/^## Table of Contents$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Table of Contents	README.md	/^## Table of Contents$/;"	s	chapter:AXE - Agent eXecution Engine
+Taint Propagation Accuracy	workshop_benchmarks.md	/^### Taint Propagation Accuracy$/;"	S	section:Workshop Tools Benchmarks""Saw - Taint Analysis Benchmarks
+TaintAnalyzer	workshop/saw.py	/^class TaintAnalyzer(ast.NodeVisitor):$/;"	c
+TaintFlow	workshop/saw.py	/^class TaintFlow:$/;"	c
+TaintSink	workshop/saw.py	/^class TaintSink:$/;"	c
+TaintSource	workshop/saw.py	/^class TaintSource:$/;"	c
 Team Assignment	.collab_log.md	/^## Team Assignment$/;"	s	chapter:Supervisor @boss Initiating Session
 Team Coordination Plan 📋	team_test/.collab_log.md	/^## Team Coordination Plan 📋$/;"	s	chapter:Hello Team! 👋
+Test 1: No duplicate parsing	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Test 1: No duplicate parsing$/;"	c
+Test 2: Heredoc preserved	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Test 2: Heredoc preserved$/;"	c
+Test Categories	workshop_test_results.md	/^### Test Categories$/;"	S	section:Workshop Tools Test Suite Execution Results""Test Suite Overview
 Test Connection	MODELS_FINAL.md	/^### Test Connection$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Quick Start
 Test Coverage	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Test Coverage$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
 Test Coverage	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Test Coverage$/;"	S	section:Multi-Format Tool Call Parser Implementation""Testing
 Test Coverage	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Test Coverage$/;"	s	chapter:Shell Operator Support Implementation Summary
+Test Data Integrity	workshop_test_results.md	/^### Test Data Integrity$/;"	S	section:Workshop Tools Test Suite Execution Results""Test Environment Validation
 Test Documentation	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Test Documentation$/;"	S	section:Shell Operator Support Implementation Summary""Documentation & Comments
+Test Effectiveness	workshop_test_results.md	/^### Test Effectiveness$/;"	S	section:Workshop Tools Test Suite Execution Results""Test Quality Metrics
+Test Environment	workshop_benchmarks.md	/^## Test Environment$/;"	s	chapter:Workshop Tools Benchmarks
+Test Environment	workshop_test_results.md	/^## Test Environment$/;"	s	chapter:Workshop Tools Test Suite Execution Results
+Test Environment Validation	workshop_test_results.md	/^## Test Environment Validation$/;"	s	chapter:Workshop Tools Test Suite Execution Results
+Test Execution Summary	workshop_test_results.md	/^## Test Execution Summary$/;"	s	chapter:Workshop Tools Test Suite Execution Results
+Test Execution Summary	workshop_test_results.md	/^### Test Execution Summary$/;"	S	section:Workshop Tools Test Suite Execution Results""Overall Test Statistics
+Test Failures (None)	workshop_test_results.md	/^### Test Failures (None)$/;"	S	section:Workshop Tools Test Suite Execution Results""Error Analysis
+Test File 1: Unit Tests	PR23_VALIDATION_REPORT.md	/^#### Test File 1: Unit Tests$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 6: Test Suite
+Test File 2: Integration Tests	PR23_VALIDATION_REPORT.md	/^#### Test File 2: Integration Tests$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 6: Test Suite
+Test Files Executed	workshop_test_results.md	/^### Test Files Executed$/;"	S	section:Workshop Tools Test Suite Execution Results""Test Suite Overview
 Test Projects for Multi-Agent Work	MODELS_FINAL.md	/^### Test Projects for Multi-Agent Work$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Usage Examples
+Test Quality Metrics	workshop_test_results.md	/^## Test Quality Metrics$/;"	s	chapter:Workshop Tools Test Suite Execution Results
 Test Results	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Test Results$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Test Coverage
+Test Results	BUG_FIX_SUMMARY.md	/^## Test Results$/;"	s	chapter:Bug Fix Summary - Multi-Agent Collaboration Issues
 Test Results	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Test Results$/;"	S	section:Database Location Fix - Implementation Summary""Verification
 Test Results	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Test Results$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
 Test Results	IMPLEMENTATION_COMPLETE.md	/^## Test Results$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
 Test Results	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Test Results$/;"	S	section:Multi-Format Tool Call Parser Implementation""Testing
 Test Results	TASK_COMPLETION_FIX_SUMMARY.md	/^### Test Results$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Validation
+Test Results	workshop_security_audit.md	/^### Test Results$/;"	S	section:Workshop Tools Security Audit""Penetration Testing Results
+Test Scenarios Executed	workshop_security_audit.md	/^### Test Scenarios Executed$/;"	S	section:Workshop Tools Security Audit""Penetration Testing Results
+Test Suite Overview	workshop_test_results.md	/^## Test Suite Overview$/;"	s	chapter:Workshop Tools Test Suite Execution Results
+TestWorkshop	test_workshop.py	/^class TestWorkshop(unittest.TestCase):$/;"	c
+TestWorkshopCLIIntegration	test_workshop_cli_integration.py	/^class TestWorkshopCLIIntegration(unittest.TestCase):$/;"	c
+TestWorkshopIntegration	test_workshop_integration.py	/^class TestWorkshopIntegration(unittest.TestCase):$/;"	c
+TestWorkshopPR23Validation	test_workshop_pr23_validation.py	/^class TestWorkshopPR23Validation(unittest.TestCase):$/;"	c
+Testing	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Testing$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Testing	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Testing$/;"	S	section:Database Location Fix - Implementation Summary""Solution Implemented
 Testing	HEREDOC_EXECUTION_FIX.md	/^## Testing$/;"	s	chapter:Heredoc Execution Fix Summary
 Testing	IMPLEMENTATION_COMPLETE.md	/^### Testing$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Bug 1: False "TASK COMPLETE" Detection ✅
@@ -776,9 +1074,11 @@ Token Purpose	MISSION.md	/^### Token Purpose$/;"	S	section:AXE - Agent eXecution
 Token Reference	.collab_log.md	/^### Token Reference$/;"	S	section:AXE - Agent eXecution Engine""Agent Communication Tokens
 Token Reference	MISSION.md	/^### Token Reference$/;"	S	section:AXE - Agent eXecution Engine""Agent Communication Tokens
 TokenTracker	utils/token_tracker.py	/^class TokenTracker:$/;"	c
+Tool Efficiency Comparison	workshop_benchmarks.md	/^### Tool Efficiency Comparison$/;"	S	section:Workshop Tools Benchmarks""Comparative Analysis
 Tool Whitelist	.collab_log.md	/^## Tool Whitelist$/;"	s	chapter:AXE - Agent eXecution Engine
 Tool Whitelist	README.md	/^## Tool Whitelist$/;"	s	chapter:AXE - Agent eXecution Engine
 ToolRunner	axe.py	/^class ToolRunner:$/;"	c
+Tools	workshop_quick_reference.md	/^## Tools$/;"	s	chapter:Workshop Tools Quick Reference
 Top Models	API_PROVIDERS.md	/^### Top Models$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
 Top Models	API_PROVIDERS.md	/^### Top Models$/;"	S	section:AXE API Provider Documentation""GitHub Models
 Top Models	API_PROVIDERS.md	/^### Top Models$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
@@ -789,11 +1089,15 @@ Troubleshooting	API_PROVIDERS.md	/^## Troubleshooting$/;"	s	chapter:AXE API Prov
 Troubleshooting	MODELS_FINAL.md	/^## Troubleshooting$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Troubleshooting	README.md	/^## Troubleshooting$/;"	s	chapter:AXE - Agent eXecution Engine
 Troubleshooting	WRITE_BLOCKS_GUIDE.md	/^## Troubleshooting$/;"	s	chapter:WRITE Block Functionality - User Guide
+Troubleshooting	workshop_dependency_validation.md	/^### Troubleshooting$/;"	S	section:Workshop Tools Dependency Validation""Recommendations
 Try gnureadline first (more feature-complete on some platforms), then readline	.collab_log.md	/^# Try gnureadline first (more feature-complete on some platforms), then readline$/;"	c
+Type Hints - GOOD	PR23_VALIDATION_REPORT.md	/^### Type Hints - GOOD$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 5: Code Quality Analysis
 USE_MAX_COMPLETION_TOKENS	axe.py	/^USE_MAX_COMPLETION_TOKENS = {$/;"	v
+Unit Test Results (`test_workshop.py`)	workshop_test_results.md	/^### Unit Test Results (`test_workshop.py`)$/;"	S	section:Workshop Tools Test Suite Execution Results""Detailed Test Results
 Unit Tests	WRITE_BLOCKS_GUIDE.md	/^### Unit Tests$/;"	S	section:WRITE Block Functionality - User Guide""Testing
 Unit Tests (`test_database_location.py`)	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### Unit Tests (`test_database_location.py`)$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Testing
 Unit Tests (test_write_blocks.py)	IMPLEMENTATION_SUMMARY.md	/^### Unit Tests (test_write_blocks.py)$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Testing
+Unit Tests Created	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Unit Tests Created$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Testing
 Unit tests	XML_PARSER_QUICK_REFERENCE.md	/^# Unit tests$/;"	c
 Update Shared Notes with Coordinated Plan	.collab_log.md	/^## Update Shared Notes with Coordinated Plan$/;"	s	chapter:Supervisor @boss - Security Audit Deep Dive
 Updated Functions	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Updated Functions$/;"	S	section:Multi-Format Tool Call Parser Implementation""Implementation
@@ -816,17 +1120,27 @@ Use Cases Enabled	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Use Cases Enabled$/;"	S	sec
 Validation	HEREDOC_EXECUTION_FIX.md	/^## Validation$/;"	s	chapter:Heredoc Execution Fix Summary
 Validation	IMPLEMENTATION_SUMMARY.md	/^### Validation$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Security Considerations
 Validation	TASK_COMPLETION_FIX_SUMMARY.md	/^## Validation$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
+Validation & Quality Assurance	workshop_quick_reference.md	/^## Validation & Quality Assurance$/;"	s	chapter:Workshop Tools Quick Reference
 Validation (internal, stripped version):	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### Validation (internal, stripped version):$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Example - Before vs After
+Validation Results	PR23_EXECUTIVE_SUMMARY.md	/^## Validation Results$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
+Validation Sign-Off	PR23_VALIDATION_REPORT.md	/^## Validation Sign-Off$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Validation Summary	workshop_dependency_validation.md	/^## Validation Summary$/;"	s	chapter:Workshop Tools Dependency Validation
+Validation Test Suite	PR23_VALIDATION_REPORT.md	/^### Validation Test Suite$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Appendix A: Test Execution Logs
 Verification	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Verification$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
 Verification	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Verification$/;"	s	chapter:Database Location Fix - Implementation Summary
 Verification	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Verification$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
 Verification	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Verification$/;"	s	chapter:Shell Operator Support Implementation Summary
 Verification Commands	IMPLEMENTATION_SUMMARY.md	/^## Verification Commands$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
+Verification Testing	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Verification Testing$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Testing
 Version Control	.collab_log.md	/^### Version Control$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Version Control	README.md	/^### Version Control$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
+View Analysis History	README.md	/^#### View Analysis History$/;"	t	subsection:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools""Management Commands
+View Usage Statistics	README.md	/^#### View Usage Statistics$/;"	t	subsection:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools""Management Commands
 Viewing Session Rules	IMPROVEMENTS_README.md	/^### Viewing Session Rules$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Usage Examples
 Vision Example (Images)	API_PROVIDERS.md	/^### Vision Example (Images)$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
 WAL_MODE_PRAGMA	database/schema.py	/^WAL_MODE_PRAGMA = "PRAGMA journal_mode=WAL"$/;"	v
+WORKSHOP_ANALYSIS_INDEXES	database/schema.py	/^WORKSHOP_ANALYSIS_INDEXES = [$/;"	v
+WORKSHOP_ANALYSIS_TABLE	database/schema.py	/^WORKSHOP_ANALYSIS_TABLE = """$/;"	v
 WORK_TIME_WARNING_HOURS	axe.py	/^WORK_TIME_WARNING_HOURS = 5     # Warn when agent approaches work limit$/;"	v
 WRITE Block Absolute Path Fix - Implementation Summary	ABSOLUTE_PATH_FIX_SUMMARY.md	/^# WRITE Block Absolute Path Fix - Implementation Summary$/;"	c
 WRITE Block Format	WRITE_BLOCKS_GUIDE.md	/^### WRITE Block Format$/;"	S	section:WRITE Block Functionality - User Guide""Syntax
@@ -835,6 +1149,7 @@ WRITE block sanitization	FIXES_SUMMARY.md	/^# WRITE block sanitization$/;"	c
 Wake-up Triggers	IMPROVEMENTS_FINAL.md	/^### Wake-up Triggers$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Core Safety Features
 What Agents See	QUICK_REFERENCE.md	/^## What Agents See$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 What I’m going to do next (test coverage)	.collab_log.md	/^## What I’m going to do next (test coverage)$/;"	s	chapter:AXE - Agent eXecution Engine
+What Was Delivered	PR23_EXECUTIVE_SUMMARY.md	/^## What Was Delivered$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
 What's New?	XML_PARSER_QUICK_REFERENCE.md	/^## What's New?$/;"	s	chapter:XML Function Call Support - Quick Reference
 When to Use Each Agent	.collab_log.md	/^### When to Use Each Agent$/;"	S	section:AXE - Agent eXecution Engine""Agent Reference
 When to Use Each Agent	README.md	/^### When to Use Each Agent$/;"	S	section:AXE - Agent eXecution Engine""Agent Reference
@@ -847,14 +1162,26 @@ Why This Works	HEREDOC_EXECUTION_FIX.md	/^### Why This Works$/;"	S	section:Hered
 Working with Files	.collab_log.md	/^### Working with Files$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Working with Files	README.md	/^### Working with Files$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Workplace Rules	IMPROVEMENTS_FINAL.md	/^## Workplace Rules$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
+Workshop - Dynamic Analysis Tools	README.md	/^## Workshop - Dynamic Analysis Tools$/;"	s	chapter:AXE - Agent eXecution Engine
+Workshop Tools Benchmarks	workshop_benchmarks.md	/^# Workshop Tools Benchmarks$/;"	c
+Workshop Tools Dependency Validation	workshop_dependency_validation.md	/^# Workshop Tools Dependency Validation$/;"	c
+Workshop Tools Quick Reference	workshop_quick_reference.md	/^# Workshop Tools Quick Reference$/;"	c
+Workshop Tools Security Audit	workshop_security_audit.md	/^# Workshop Tools Security Audit$/;"	c
+Workshop Tools Test Suite Execution Results	workshop_test_results.md	/^# Workshop Tools Test Suite Execution Results$/;"	c
 XML Format (New!)	XML_PARSER_QUICK_REFERENCE.md	/^### XML Format (New!)$/;"	S	section:XML Function Call Support - Quick Reference""Supported Formats
 XML Function Call Parser - Implementation Summary	XML_PARSER_IMPLEMENTATION.md	/^# XML Function Call Parser - Implementation Summary$/;"	c
 XML Function Call Support - Quick Reference	XML_PARSER_QUICK_REFERENCE.md	/^# XML Function Call Support - Quick Reference$/;"	c
 XML TOOL PARSER TEST SUITE	XML_PARSER_IMPLEMENTATION.md	/^XML TOOL PARSER TEST SUITE$/;"	c
 XP & Level System	IMPROVEMENTS_FINAL.md	/^## XP & Level System$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 XP Awards	QUICK_REFERENCE.md	/^## XP Awards$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+XP Awards	workshop_quick_reference.md	/^### XP Awards$/;"	S	section:Workshop Tools Quick Reference""XP System
+XP Rewards	README.md	/^### XP Rewards$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
 XP Sources	IMPROVEMENTS_FINAL.md	/^### XP Sources$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""XP & Level System
+XP System	PR23_EXECUTIVE_SUMMARY.md	/^### XP System$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Integration Impact
+XP System	workshop_quick_reference.md	/^## XP System$/;"	s	chapter:Workshop Tools Quick Reference
+XP System Integration - COMPLETE	PR23_VALIDATION_REPORT.md	/^### XP System Integration - COMPLETE$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 2: Integration Verification
 XP and title functions now imported from progression module	.collab_log.md	/^# XP and title functions now imported from progression module$/;"	c
+XP_AWARDS	progression/xp_system.py	/^XP_AWARDS = {$/;"	v
 XP_PER_LEVEL_LINEAR	progression/xp_system.py	/^XP_PER_LEVEL_LINEAR = 100  # XP per level for levels 1-10$/;"	v
 XP_PER_LEVEL_LINEAR = 100       # Imported from progression.xp_system	.collab_log.md	/^# XP_PER_LEVEL_LINEAR = 100       # Imported from progression.xp_system$/;"	c
 YELLOW	utils/formatting.py	/^    YELLOW = '\\033[93m'$/;"	v	class:Colors
@@ -894,17 +1221,19 @@ YELLOW	utils/formatting.py	/^    YELLOW = '\\033[93m'$/;"	v	class:Colors
 [LLAMA] - 22:44:14	team_test/.collab_log.md	/^### [LLAMA] - 22:44:14$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 [USER] - 03:25:48	.collab_log.md	/^### [USER] - 03:25:48$/;"	S	chapter:Collaborative Session Log
 [USER] - 22:42:42	team_test/.collab_log.md	/^### [USER] - 22:42:42$/;"	S	chapter:Collaborative Session Log
+_MissingTool	workshop/__init__.py	/^    class _MissingTool:$/;"	c	function:_missing_tool_factory	file:
 __all__	core/__init__.py	/^__all__ = ['AgentWorkerProcess', 'MultiAgentCoordinator', 'SharedContext']$/;"	v
 __all__	database/__init__.py	/^__all__ = [$/;"	v
 __all__	models/__init__.py	/^__all__ = ['MODEL_METADATA', 'get_model_info']$/;"	v
 __all__	progression/__init__.py	/^__all__ = [$/;"	v
 __all__	safety/__init__.py	/^__all__ = ['SESSION_RULES']$/;"	v
 __all__	utils/__init__.py	/^__all__ = ['colorize', 'Colors', 'c']$/;"	v
+__all__	workshop/__init__.py	/^__all__ = [$/;"	v
 __enter__	core/multiprocess.py	/^    def __enter__(self):$/;"	m	class:SharedContext
 __exit__	core/multiprocess.py	/^    def __exit__(self, exc_type, exc_val, exc_tb):$/;"	m	class:SharedContext
 __init__	axe.py	/^    def __init__(self, config: Config):$/;"	m	class:AgentManager
 __init__	axe.py	/^    def __init__(self, config: Config, agents: List[str], workspace_dir: str, $/;"	m	class:CollaborativeSession
-__init__	axe.py	/^    def __init__(self, config: Config, project_dir: str):$/;"	m	class:ChatSession
+__init__	axe.py	/^    def __init__(self, config: Config, project_dir: str) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 __init__	axe.py	/^    def __init__(self, config: Config, project_dir: str):$/;"	m	class:ToolRunner
 __init__	axe.py	/^    def __init__(self, config: Config, project_dir: str, tool_runner: 'ToolRunner'):$/;"	m	class:ResponseProcessor
 __init__	axe.py	/^    def __init__(self, config_path: Optional[str] = None):$/;"	m	class:Config
@@ -919,14 +1248,42 @@ __init__	core/multiprocess.py	/^    def __init__(self, agent_configs: List[Dict[
 __init__	core/multiprocess.py	/^    def __init__(self, agent_id: str, agent_name: str, $/;"	m	class:AgentWorkerProcess
 __init__	database/agent_db.py	/^    def __init__(self, db_path: Optional[str] = None):$/;"	m	class:AgentDatabase
 __init__	utils/token_tracker.py	/^    def __init__(self):$/;"	m	class:TokenTracker
+__init__	workshop/__init__.py	/^        def __init__(self, *_, **__):$/;"	m	class:_missing_tool_factory._MissingTool
+__init__	workshop/chisel.py	/^    def __init__(self, config: Optional[Dict[str, Any]] = None):$/;"	m	class:ChiselAnalyzer
+__init__	workshop/hammer.py	/^    def __init__(self, config: Optional[Dict[str, Any]] = None):$/;"	m	class:HammerInstrumentor
+__init__	workshop/plane.py	/^    def __init__(self, config: Optional[Dict[str, Any]] = None):$/;"	m	class:PlaneEnumerator
+__init__	workshop/plane.py	/^    def __init__(self, file_path: str, source_patterns: Dict, sink_patterns: Dict):$/;"	m	class:SourceSinkVisitor
+__init__	workshop/saw.py	/^    def __init__(self, config: Optional[Dict[str, Any]] = None):$/;"	m	class:SawTracker
+__init__	workshop/saw.py	/^    def __init__(self, sources: List[TaintSource], sinks: List[TaintSink]):$/;"	m	class:TaintAnalyzer
 _apply_migrations	database/agent_db.py	/^    def _apply_migrations(self, conn: sqlite3.Connection) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
+_attach_function_hook	workshop/hammer.py	/^    def _attach_function_hook(self, session, session_id: str, hook_name: str, config: Dict[str, /;"	m	class:HammerInstrumentor
+_attach_hook	workshop/hammer.py	/^    def _attach_hook(self, session, session_id: str, hook_name: str, hook_config: Dict[str, Any]/;"	m	class:HammerInstrumentor
+_attach_memory_hook	workshop/hammer.py	/^    def _attach_memory_hook(self, session, session_id: str, hook_name: str, config: Dict[str, An/;"	m	class:HammerInstrumentor
+_attach_syscall_hook	workshop/hammer.py	/^    def _attach_syscall_hook(self, session, session_id: str, hook_name: str, config: Dict[str, A/;"	m	class:HammerInstrumentor
+_avoid_targets	workshop/chisel.py	/^    def _avoid_targets(self) -> List[int]:$/;"	m	class:ChiselAnalyzer	typeref:typename:List[int]
 _check_file_access	axe.py	/^    def _check_file_access(self, filepath: str, allowed: list, forbidden: list) -> bool:$/;"	m	class:ResponseProcessor	typeref:typename:bool
+_classify_vulnerabilities	workshop/saw.py	/^    def _classify_vulnerabilities(self, flows: List[TaintFlow]) -> List[Dict[str, Any]]:$/;"	m	class:SawTracker	typeref:typename:List[Dict[str,Any]]
+_contains_heredoc	utils/xml_tool_parser.py	/^def _contains_heredoc(content: str) -> bool:$/;"	f	typeref:typename:bool
+_deduplicate_sinks	workshop/plane.py	/^    def _deduplicate_sinks(self, sinks: List[EnumeratedSink]) -> List[EnumeratedSink]:$/;"	m	class:PlaneEnumerator	typeref:typename:List[EnumeratedSink]
+_deduplicate_sources	workshop/plane.py	/^    def _deduplicate_sources(self, sources: List[EnumeratedSource]) -> List[EnumeratedSource]:$/;"	m	class:PlaneEnumerator	typeref:typename:List[EnumeratedSource]
 _deep_merge	axe.py	/^    def _deep_merge(self, base: dict, update: dict) -> None:$/;"	m	class:Config	typeref:typename:None
+_detect_vulnerabilities	workshop/chisel.py	/^    def _detect_vulnerabilities(self, simgr, proj) -> List[Dict[str, Any]]:$/;"	m	class:ChiselAnalyzer	typeref:typename:List[Dict[str,Any]]
 _encrypt_message	axe.py	/^    def _encrypt_message(self, message: str) -> str:$/;"	m	class:EmergencyMailbox	typeref:typename:str
 _end_session	axe.py	/^    def _end_session(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _extract_commands_from_shell	axe.py	/^    def _extract_commands_from_shell(self, cmd: str) -> List[str]:$/;"	m	class:ToolRunner	typeref:typename:List[str]
+_extract_constraints	workshop/chisel.py	/^    def _extract_constraints(self, simgr) -> List[str]:$/;"	m	class:ChiselAnalyzer	typeref:typename:List[str]
+_find_process_pid	workshop/hammer.py	/^    def _find_process_pid(self, process_name: str) -> Optional[int]:$/;"	m	class:HammerInstrumentor	typeref:typename:Optional[int]
+_find_targets	workshop/chisel.py	/^    def _find_targets(self) -> List[int]:$/;"	m	class:ChiselAnalyzer	typeref:typename:List[int]
 _format_conversation_for_agent	axe.py	/^    def _format_conversation_for_agent(self, agent_name: str) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
 _format_time	axe.py	/^    def _format_time(self, seconds: int) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
+_generate_python_hook_script	workshop/hammer.py	/^    def _generate_python_hook_script(self, hooks: Dict[str, Any]) -> str:$/;"	m	class:HammerInstrumentor	typeref:typename:str
+_get_context	workshop/plane.py	/^    def _get_context(self, node) -> str:$/;"	m	class:SourceSinkVisitor	typeref:typename:str
+_get_expr_taint	workshop/saw.py	/^    def _get_expr_taint(self, expr) -> Optional[TaintSource]:$/;"	m	class:TaintAnalyzer	typeref:typename:Optional[TaintSource]
+_get_full_attr_name	workshop/plane.py	/^    def _get_full_attr_name(self, node) -> str:$/;"	m	class:SourceSinkVisitor	typeref:typename:str
+_get_full_func_name	workshop/plane.py	/^    def _get_full_func_name(self, node) -> str:$/;"	m	class:SourceSinkVisitor	typeref:typename:str
+_get_func_name	workshop/saw.py	/^    def _get_func_name(self, node) -> str:$/;"	m	class:TaintAnalyzer	typeref:typename:str
+_get_spawned_agent_system_prompt	axe.py	/^    def _get_spawned_agent_system_prompt(self, model_type: str) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
+_get_spawned_agent_system_prompt	test_spawned_agents.py	/^        def _get_spawned_agent_system_prompt(self, model_type: str) -> str:$/;"	m	class:test_spawned_agent_system_prompt.MockSession	typeref:typename:str
 _get_system_prompt_for_collab	axe.py	/^    def _get_system_prompt_for_collab(self, agent_name: str) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
 _global_db	axe.py	/^_global_db = None$/;"	v
 _handle_break_request	axe.py	/^    def _handle_break_request(self, agent_name: str, response: str, content: str = "") -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
@@ -935,32 +1292,53 @@ _handle_exec	axe.py	/^    def _handle_exec(self, command: str) -> str:$/;"	m	cla
 _handle_read	axe.py	/^    def _handle_read(self, filename: str) -> str:$/;"	m	class:ResponseProcessor	typeref:typename:str
 _handle_spawn_request	axe.py	/^    def _handle_spawn_request(self, agent_name: str, response: str, content: str = "") -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _handle_write	axe.py	/^    def _handle_write(self, filename: str, content: str) -> str:$/;"	m	class:ResponseProcessor	typeref:typename:str
+_has_unconstrained_access	workshop/chisel.py	/^    def _has_unconstrained_access(self, state) -> bool:$/;"	m	class:ChiselAnalyzer	typeref:typename:bool
 _init_clients	axe.py	/^    def _init_clients(self) -> None:$/;"	m	class:AgentManager	typeref:typename:None
 _init_db	database/agent_db.py	/^    def _init_db(self) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
 _init_mailbox	axe.py	/^    def _init_mailbox(self) -> None:$/;"	m	class:EmergencyMailbox	typeref:typename:None
+_is_expr_tainted	workshop/saw.py	/^    def _is_expr_tainted(self, expr) -> bool:$/;"	m	class:TaintAnalyzer	typeref:typename:bool
 _is_path_safe	axe.py	/^    def _is_path_safe(self, filepath: str) -> bool:$/;"	m	class:SharedWorkspace	typeref:typename:bool
 _is_within_dir	axe.py	/^        def _is_within_dir(path: str, directory: str) -> bool:$/;"	f	member:ResponseProcessor._check_file_access	typeref:typename:bool	file:
+_load_default_sinks	workshop/saw.py	/^    def _load_default_sinks(self) -> List[TaintSink]:$/;"	m	class:SawTracker	typeref:typename:List[TaintSink]
+_load_default_sources	workshop/saw.py	/^    def _load_default_sources(self) -> List[TaintSource]:$/;"	m	class:SawTracker	typeref:typename:List[TaintSource]
+_load_sink_patterns	workshop/plane.py	/^    def _load_sink_patterns(self) -> Dict[str, Dict[str, Any]]:$/;"	m	class:PlaneEnumerator	typeref:typename:Dict[str,Dict[str,Any]]
+_load_source_patterns	workshop/plane.py	/^    def _load_source_patterns(self) -> Dict[str, Dict[str, Any]]:$/;"	m	class:PlaneEnumerator	typeref:typename:Dict[str,Dict[str,Any]]
 _log	axe.py	/^    def _log(self, message: str) -> None:$/;"	m	class:ToolRunner	typeref:typename:None
+_missing_tool_factory	workshop/__init__.py	/^def _missing_tool_factory(tool_name: str, module_name: str):$/;"	f
+_monitor_session	workshop/hammer.py	/^    def _monitor_session(self, session_id: str, callback: Optional[Callable]):$/;"	m	class:HammerInstrumentor
 _needs_shell	axe.py	/^    def _needs_shell(self, cmd: str) -> bool:$/;"	m	class:ToolRunner	typeref:typename:bool
 _print_status	axe.py	/^    def _print_status(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _resolve_project_path	axe.py	/^    def _resolve_project_path(self, filename: str) -> Optional[str]:$/;"	m	class:ResponseProcessor	typeref:typename:Optional[str]
 _run_collaboration_loop	axe.py	/^    def _run_collaboration_loop(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
+_sanitize_js_string	workshop/hammer.py	/^def _sanitize_js_string(value: str) -> str:$/;"	f	typeref:typename:str
+_should_analyze_file	workshop/plane.py	/^    def _should_analyze_file(self, file_path: Path) -> bool:$/;"	m	class:PlaneEnumerator	typeref:typename:bool
 _show_break_requests	axe.py	/^    def _show_break_requests(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _show_emergency_mailbox	axe.py	/^    def _show_emergency_mailbox(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
+_split_shell_commands	utils/xml_tool_parser.py	/^def _split_shell_commands(cmd: str) -> List[str]:$/;"	f	typeref:typename:List[str]
+_step_callback	workshop/chisel.py	/^    def _step_callback(self, simgr):$/;"	m	class:ChiselAnalyzer
 _strip_heredoc_content	axe.py	/^    def _strip_heredoc_content(self, cmd: str) -> str:$/;"	m	class:ToolRunner	typeref:typename:str
 _time_remaining	axe.py	/^    def _time_remaining(self) -> int:$/;"	m	class:CollaborativeSession	typeref:typename:int
 _uses_max_completion_tokens	axe.py	/^    def _uses_max_completion_tokens(self, model: str) -> bool:$/;"	m	class:AgentManager	typeref:typename:bool
+_validate_identifier	workshop/hammer.py	/^def _validate_identifier(name: str) -> bool:$/;"	f	typeref:typename:bool
 `database/` (542 lines)	REFACTORING_NOTES.md	/^### `database\/` (542 lines)$/;"	S	section:AXE.PY Refactoring Notes""New Module Structure
 `progression/` (67 lines)	REFACTORING_NOTES.md	/^### `progression\/` (67 lines)$/;"	S	section:AXE.PY Refactoring Notes""New Module Structure
 `safety/` (50 lines)	REFACTORING_NOTES.md	/^### `safety\/` (50 lines)$/;"	S	section:AXE.PY Refactoring Notes""New Module Structure
 `utils/` (33 lines)	REFACTORING_NOTES.md	/^### `utils\/` (33 lines)$/;"	S	section:AXE.PY Refactoring Notes""New Module Structure
+a7b3c2d	workshop_security_audit.md	/^**Status**: Resolved - Input validation added in commit #a7b3c2d$/;"	h	subsubsection:Workshop Tools Security Audit""Detailed Findings""Medium Severity Issues""Issue #1: Potential Command Injection in Hammer Module
 add_message	core/multiprocess.py	/^    def add_message(self, message: Dict[str, Any]) -> None:$/;"	m	class:SharedContext	typeref:typename:None
 add_shared_note	core/multiprocess.py	/^    def add_shared_note(self, key: str, note: str) -> None:$/;"	m	class:SharedContext	typeref:typename:None
 add_tokens	utils/token_tracker.py	/^    def add_tokens(self, agent_id: str, text: str) -> int:$/;"	m	class:TokenTracker	typeref:typename:int
 alias_exists	database/agent_db.py	/^    def alias_exists(self, alias: str) -> bool:$/;"	m	class:AgentDatabase	typeref:typename:bool
+analyze_binary	workshop/chisel.py	/^    def analyze_binary(self, binary_path: str, start_addr: Optional[int] = None) -> Dict[str, An/;"	m	class:ChiselAnalyzer	typeref:typename:Dict[str,Any]
+analyze_code	workshop/saw.py	/^    def analyze_code(self, code: str, filename: str = "<string>") -> Dict[str, Any]:$/;"	m	class:SawTracker	typeref:typename:Dict[str,Any]
+analyze_function	workshop/chisel.py	/^    def analyze_function(self, binary_path: str, func_name: str) -> Dict[str, Any]:$/;"	m	class:ChiselAnalyzer	typeref:typename:Dict[str,Any]
+analyze_function	workshop/saw.py	/^    def analyze_function(self, func) -> Dict[str, Any]:$/;"	m	class:SawTracker	typeref:typename:Dict[str,Any]
+angr (Symbolic Execution Engine)	workshop_dependency_validation.md	/^#### angr (Symbolic Execution Engine)$/;"	t	subsection:Workshop Tools Dependency Validation""Core Dependencies""Primary Analysis Libraries
 append_to_shared	axe.py	/^    def append_to_shared(self, agent_name: str, content: str) -> None:$/;"	m	class:SharedWorkspace	typeref:typename:None
 approve_break	axe.py	/^    def approve_break(self, request_id: str, duration_minutes: int = 10,$/;"	m	class:BreakSystem	typeref:typename:Dict[str,Any]
+ast (Abstract Syntax Trees)	workshop_dependency_validation.md	/^#### ast (Abstract Syntax Trees)$/;"	t	subsection:Workshop Tools Dependency Validation""Core Dependencies""Standard Library Dependencies
 award_xp	database/agent_db.py	/^    def award_xp(self, agent_id: str, xp_amount: int, reason: str = "") -> Dict[str, Any]:$/;"	m	class:AgentDatabase	typeref:typename:Dict[str,Any]
+award_xp_for_activity	progression/xp_system.py	/^def award_xp_for_activity(activity: str, quality_multiplier: float = 1.0) -> int:$/;"	f	typeref:typename:int
 background_think	core/multiprocess.py	/^    def background_think(self) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
 backup_file	axe.py	/^    def backup_file(self, filepath: str) -> str:$/;"	m	class:SharedWorkspace	typeref:typename:str
 broadcast_context_update	core/multiprocess.py	/^    def broadcast_context_update(self, update_type: str, data: Any = None) -> None:$/;"	m	class:MultiAgentCoordinator	typeref:typename:None
@@ -989,6 +1367,8 @@ cleanup	core/multiprocess.py	/^    def cleanup(self) -> None:$/;"	m	class:Shared
 collect_resources	axe.py	/^def collect_resources() -> str:$/;"	f	typeref:typename:str
 colorize	utils/formatting.py	/^def colorize(text: str, color: str) -> str:$/;"	f	typeref:typename:str
 count_tokens	utils/token_tracker.py	/^    def count_tokens(self, text: str) -> int:$/;"	m	class:TokenTracker	typeref:typename:int
+create_test_session	test_collab_tool_syntax.py	/^def create_test_session(tmpdir):$/;"	f
+d4e5f6g	workshop_security_audit.md	/^**Status**: Resolved - Resource limits implemented in commit #d4e5f6g$/;"	h	subsubsection:Workshop Tools Security Audit""Detailed Findings""Medium Severity Issues""Issue #2: Memory Exhaustion in Chisel Analysis
 decrypt_report	axe.py	/^    def decrypt_report(self, filename: str, private_key: str = None) -> Optional[str]:$/;"	m	class:EmergencyMailbox	typeref:typename:Optional[str]
 deduplicate_calls	utils/xml_tool_parser.py	/^def deduplicate_calls(calls: List[Dict[str, Any]]) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
 def calculate_xp_for_level(level: int) -&gt; int: ...  # See progression/xp_system.py	.collab_log.md	/^# def calculate_xp_for_level(level: int) -&gt; int: ...  # See progression\/xp_system.py$/;"	c
@@ -1009,6 +1389,8 @@ demonstrate_fix	demo_absolute_path_fix.py	/^def demonstrate_fix():$/;"	f
 demonstrate_fix	demo_task_completion_fix.py	/^def demonstrate_fix():$/;"	f
 deny_break	axe.py	/^    def deny_break(self, request_id: str, reason: str) -> Dict[str, Any]:$/;"	m	class:BreakSystem	typeref:typename:Dict[str,Any]
 detect_agent_token	axe.py	/^def detect_agent_token(response: str, token: str) -> tuple[bool, str]:$/;"	f	typeref:typename:tuple[bool,str]
+enumerate_file	workshop/plane.py	/^    def enumerate_file(self, file_path: str) -> Tuple[List[EnumeratedSource], List[EnumeratedSin/;"	m	class:PlaneEnumerator	typeref:typename:Tuple[List[EnumeratedSource],List[EnumeratedSink]]
+enumerate_project	workshop/plane.py	/^    def enumerate_project(self, project_path: str) -> Dict[str, Any]:$/;"	m	class:PlaneEnumerator	typeref:typename:Dict[str,Any]
 execute_parsed_call	utils/xml_tool_parser.py	/^def execute_parsed_call(call: Dict[str, Any], workspace: str, $/;"	f	typeref:typename:str
 export_stats	utils/token_tracker.py	/^    def export_stats(self) -> str:$/;"	m	class:TokenTracker	typeref:typename:str
 force_sleep	axe.py	/^    def force_sleep(self, agent_id: str, reason: str, $/;"	m	class:SleepManager	typeref:typename:Dict[str,Any]
@@ -1016,6 +1398,7 @@ format_input_modes	models/metadata.py	/^def format_input_modes(modes: List[str])
 format_output_modes	models/metadata.py	/^def format_output_modes(modes: List[str]) -> str:$/;"	f	typeref:typename:str
 format_token_count	models/metadata.py	/^def format_token_count(tokens: int) -> str:$/;"	f	typeref:typename:str
 format_xml_result	utils/xml_tool_parser.py	/^def format_xml_result(tool: str, params: Dict[str, Any], result: str) -> str:$/;"	f	typeref:typename:str
+frida-python (Instrumentation Framework)	workshop_dependency_validation.md	/^#### frida-python (Instrumentation Framework)$/;"	t	subsection:Workshop Tools Dependency Validation""Core Dependencies""Primary Analysis Libraries
 generate_sample_config	axe.py	/^def generate_sample_config(path: str = 'axe.yaml') -> None:$/;"	f	typeref:typename:None
 generate_summary_prompt	utils/token_tracker.py	/^    def generate_summary_prompt(self, agent_id: str, context: str) -> str:$/;"	m	class:TokenTracker	typeref:typename:str
 get	axe.py	/^    def get(self, *keys, default=None):$/;"	m	class:Config
@@ -1044,13 +1427,22 @@ get_token_usage	database/agent_db.py	/^    def get_token_usage(self, agent_id: s
 get_tool_whitelist	axe.py	/^    def get_tool_whitelist(self) -> set:$/;"	m	class:Config	typeref:typename:set
 get_usage	utils/token_tracker.py	/^    def get_usage(self, agent_id: str) -> Tuple[int, int, float]:$/;"	m	class:TokenTracker	typeref:typename:Tuple[int,int,float]
 get_work_duration_minutes	database/agent_db.py	/^    def get_work_duration_minutes(self, agent_id: str) -> int:$/;"	m	class:AgentDatabase	typeref:typename:int
+get_workshop_analyses	database/agent_db.py	/^    def get_workshop_analyses(self, agent_id: Optional[str] = None, tool_name: Optional[str] = N/;"	m	class:AgentDatabase	typeref:typename:List[Dict[str,Any]]
+get_workshop_stats	database/agent_db.py	/^    def get_workshop_stats(self, agent_id: Optional[str] = None) -> Dict[str, Any]:$/;"	m	class:AgentDatabase	typeref:typename:Dict[str,Any]
+get_workshop_xp_bonus	progression/xp_system.py	/^def get_workshop_xp_bonus(results: dict, tool_name: str) -> int:$/;"	f	typeref:typename:int
 get_workspace_state	core/multiprocess.py	/^    def get_workspace_state(self) -> Dict[str, Any]:$/;"	m	class:SharedContext	typeref:typename:Dict[str,Any]
+h8i9j0k	workshop_security_audit.md	/^**Status**: Resolved - Error message sanitization in commit #h8i9j0k$/;"	h	subsubsection:Workshop Tools Security Audit""Detailed Findings""Low Severity Issues""Issue #3: Information Disclosure in Error Messages
 handle_command	core/multiprocess.py	/^    def handle_command(self, command: Dict[str, Any]) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
 handle_context_update	core/multiprocess.py	/^    def handle_context_update(self, command: Dict[str, Any]) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
 handle_turn	core/multiprocess.py	/^    def handle_turn(self, command: Dict[str, Any]) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
+handle_workshop_command	axe.py	/^    def handle_workshop_command(self, args: str) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 include	WRITE_BLOCKS_GUIDE.md	/^#include <stdio.h>$/;"	h	section:WRITE Block Functionality - User Guide""Integration with Other Blocks
+instrument_process	workshop/hammer.py	/^    def instrument_process(self, process_name: str, hooks: Dict[str, Any]) -> str:$/;"	m	class:HammerInstrumentor	typeref:typename:str
+instrument_script	workshop/hammer.py	/^    def instrument_script(self, script_path: str, hooks: Dict[str, Any]) -> str:$/;"	m	class:HammerInstrumentor	typeref:typename:str
 is_genuine_task_completion	axe.py	/^def is_genuine_task_completion(response: str) -> bool:$/;"	f	typeref:typename:bool
 is_tool_allowed	axe.py	/^    def is_tool_allowed(self, cmd: str) -> Tuple[bool, str]:$/;"	m	class:ToolRunner	typeref:typename:Tuple[bool,str]
+json (Data Serialization)	workshop_dependency_validation.md	/^#### json (Data Serialization)$/;"	t	subsection:Workshop Tools Dependency Validation""Core Dependencies""Standard Library Dependencies
+l1m2n3o	workshop_security_audit.md	/^**Status**: Resolved - Transaction isolation in commit #l1m2n3o$/;"	h	subsubsection:Workshop Tools Security Audit""Detailed Findings""Low Severity Issues""Issue #4: Race Condition in Database Operations
 list_agents	axe.py	/^    def list_agents(self) -> List[dict]:$/;"	m	class:AgentManager	typeref:typename:List[dict]
 list_agents	axe.py	/^    def list_agents(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 list_code_files	axe.py	/^    def list_code_files(self, limit: int = 50) -> Tuple[List[str], int]:$/;"	m	class:ProjectContext	typeref:typename:Tuple[List[str],int]
@@ -1061,22 +1453,30 @@ list_tools	axe.py	/^    def list_tools(self) -> None:$/;"	m	class:ChatSession	ty
 load	axe.py	/^    def load(self, path: str) -> None:$/;"	m	class:Config	typeref:typename:None
 load_agent_state	database/agent_db.py	/^    def load_agent_state(self, agent_id: str) -> Optional[Dict[str, Any]]:$/;"	m	class:AgentDatabase	typeref:typename:Optional[Dict[str,Any]]
 log_supervisor_event	database/agent_db.py	/^    def log_supervisor_event(self, supervisor_id: str, event_type: str, $/;"	m	class:AgentDatabase	typeref:typename:None
+logger	workshop/chisel.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	workshop/hammer.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	workshop/plane.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	workshop/saw.py	/^logger = logging.getLogger(__name__)$/;"	v
 main	axe.py	/^def main():$/;"	f
 main	demo_improvements.py	/^def main():$/;"	f
 main	manual_test_write.py	/^def main():$/;"	f
 main	manual_test_xml.py	/^def main():$/;"	f
 main	test_axe_improvements.py	/^def main():$/;"	f
 main	test_database_location.py	/^def main():$/;"	f
+main	test_heredoc_parsing.py	/^def main():$/;"	f
+main	test_inline_exec_blocks.py	/^def main():$/;"	f
 main	test_integration_database_fix.py	/^def main():$/;"	f
 main	test_write_blocks.py	/^def main():$/;"	f
 main	test_xml_tool_parser.py	/^def main():$/;"	f
 normalize_tool_name	utils/xml_tool_parser.py	/^def normalize_tool_name(name: str) -> Optional[str]:$/;"	f	typeref:typename:Optional[str]
+p4q5r6s	workshop_security_audit.md	/^**Status**: Resolved - Enhanced ID generation in commit #p4q5r6s$/;"	h	subsubsection:Workshop Tools Security Audit""Detailed Findings""Low Severity Issues""Issue #5: Weak Random ID Generation
 parse_all_tool_formats	utils/xml_tool_parser.py	/^def parse_all_tool_formats(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
 parse_axe_native_blocks	utils/xml_tool_parser.py	/^def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
 parse_bash_tags	utils/xml_tool_parser.py	/^def parse_bash_tags(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
 parse_shell_codeblocks	utils/xml_tool_parser.py	/^def parse_shell_codeblocks(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
 parse_simple_xml_tags	utils/xml_tool_parser.py	/^def parse_simple_xml_tags(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
 parse_xml_function_calls	utils/xml_tool_parser.py	/^def parse_xml_function_calls(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
+pathlib (Path Handling)	workshop_dependency_validation.md	/^#### pathlib (Path Handling)$/;"	t	subsection:Workshop Tools Dependency Validation""Core Dependencies""Standard Library Dependencies
 print_banner	axe.py	/^    def print_banner(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 print_banner	axe.py	/^    def print_banner(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 print_header	demo_absolute_path_fix.py	/^def print_header(text):$/;"	f
@@ -1088,6 +1488,7 @@ process_agent_response	utils/xml_tool_parser.py	/^def process_agent_response(res
 process_command	axe.py	/^    def process_command(self, cmd: str) -> bool:$/;"	m	class:ChatSession	typeref:typename:bool
 process_response	axe.py	/^    def process_response(self, response: str, agent_name: str = "") -> str:$/;"	m	class:ResponseProcessor	typeref:typename:str
 process_xml_calls	axe.py	/^        from utils.xml_tool_parser import process_agent_response as process_xml_calls$/;"	Y	member:ResponseProcessor.process_response	file:	nameref:unknown:process_agent_response
+psutil (System Monitoring)	workshop_dependency_validation.md	/^#### psutil (System Monitoring)$/;"	t	subsection:Workshop Tools Dependency Validation""Core Dependencies""Primary Analysis Libraries
 put_agent_to_sleep	database/agent_db.py	/^    def put_agent_to_sleep(self, agent_id: str, reason: str, duration_minutes: int = 30) -> Dict/;"	m	class:AgentDatabase	typeref:typename:Dict[str,Any]
 read_file	axe.py	/^    def read_file(self, filename: str, max_bytes: int = 8192) -> str:$/;"	m	class:SharedWorkspace	typeref:typename:str
 read_shared_notes	axe.py	/^    def read_shared_notes(self) -> str:$/;"	m	class:SharedWorkspace	typeref:typename:str
@@ -1113,23 +1514,39 @@ run_all_tests	test_supervisor_protections.py	/^def run_all_tests():$/;"	f
 run_all_tests	test_task_completion_detection.py	/^def run_all_tests():$/;"	f
 run_all_tests	test_tool_runner.py	/^def run_all_tests():$/;"	f
 run_all_tests	test_tool_runner_edge_cases.py	/^def run_all_tests():$/;"	f
+run_chisel	axe.py	/^    def run_chisel(self, args: str) -> None:$/;"	m	class:ChatSession	typeref:typename:None
+run_hammer	axe.py	/^    def run_hammer(self, args: str) -> None:$/;"	m	class:ChatSession	typeref:typename:None
+run_plane	axe.py	/^    def run_plane(self, args: str) -> None:$/;"	m	class:ChatSession	typeref:typename:None
+run_saw	axe.py	/^    def run_saw(self, args: str) -> None:$/;"	m	class:ChatSession	typeref:typename:None
+run_validation_suite	test_workshop_pr23_validation.py	/^def run_validation_suite():$/;"	f
 save	axe.py	/^    def save(self, path: Optional[str] = None) -> None:$/;"	m	class:Config	typeref:typename:None
 save_agent_state	database/agent_db.py	/^    def save_agent_state(self, agent_id: str, alias: str, model_name: str,$/;"	m	class:AgentDatabase	typeref:typename:None
 save_context_summary	database/agent_db.py	/^    def save_context_summary(self, agent_id: str, summary: str) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
+save_workshop_analysis	database/agent_db.py	/^    def save_workshop_analysis(self, tool_name: str, target: str, agent_id: Optional[str],$/;"	m	class:AgentDatabase	typeref:typename:str
 send_report	axe.py	/^    def send_report(self, agent_alias: str, report_type: str, $/;"	m	class:EmergencyMailbox	typeref:typename:Tuple[bool,str]
+setUp	test_workshop.py	/^    def setUp(self):$/;"	m	class:TestWorkshop
+setUp	test_workshop_cli_integration.py	/^    def setUp(self):$/;"	m	class:TestWorkshopCLIIntegration
+setUp	test_workshop_integration.py	/^    def setUp(self):$/;"	m	class:TestWorkshopIntegration
+setUp	test_workshop_pr23_validation.py	/^    def setUp(self):$/;"	m	class:TestWorkshopPR23Validation
 set_agent_limit	utils/token_tracker.py	/^    def set_agent_limit(self, agent_id: str, max_tokens: int) -> None:$/;"	m	class:TokenTracker	typeref:typename:None
 set_human_public_key	axe.py	/^    def set_human_public_key(self, public_key: str) -> bool:$/;"	m	class:EmergencyMailbox	typeref:typename:bool
 should_auto_spawn	axe.py	/^    def should_auto_spawn(self, task_complexity: float = 0.5) -> Tuple[bool, str]:$/;"	m	class:DynamicSpawner	typeref:typename:Tuple[bool,str]
 should_shutdown	core/multiprocess.py	/^    def should_shutdown(self) -> bool:$/;"	m	class:SharedContext	typeref:typename:bool
 should_sleep_agent	utils/token_tracker.py	/^    def should_sleep_agent(self, agent_id: str) -> Tuple[bool, Optional[str]]:$/;"	m	class:TokenTracker	typeref:typename:Tuple[bool,Optional[str]]
+show_workshop_help	axe.py	/^    def show_workshop_help(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
+show_workshop_history	axe.py	/^    def show_workshop_history(self, args: str) -> None:$/;"	m	class:ChatSession	typeref:typename:None
+show_workshop_stats	axe.py	/^    def show_workshop_stats(self, args: str) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 shutdown	core/multiprocess.py	/^    def shutdown(self) -> None:$/;"	m	class:MultiAgentCoordinator	typeref:typename:None
 signal_turn	core/multiprocess.py	/^    def signal_turn(self, agent_id: str, prompt: str, context: str = "") -> Optional[Dict[str, A/;"	m	class:MultiAgentCoordinator	typeref:typename:Optional[Dict[str,Any]]
 simulate_problem_scenario	test_integration_database_fix.py	/^def simulate_problem_scenario():$/;"	f
 spawn_agent	axe.py	/^    def spawn_agent(self, model_name: str, provider: str,$/;"	m	class:DynamicSpawner	typeref:typename:Dict[str,Any]
+sqlite3 (Database Engine)	workshop_dependency_validation.md	/^#### sqlite3 (Database Engine)$/;"	t	subsection:Workshop Tools Dependency Validation""Core Dependencies""Standard Library Dependencies
 start	core/multiprocess.py	/^    def start(self) -> None:$/;"	m	class:MultiAgentCoordinator	typeref:typename:None
+start_monitoring	workshop/hammer.py	/^    def start_monitoring(self, session_id: str, callback: Optional[Callable] = None) -> bool:$/;"	m	class:HammerInstrumentor	typeref:typename:bool
 start_resource_monitor	axe.py	/^def start_resource_monitor():$/;"	f
 start_session	axe.py	/^    def start_session(self, task: str) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 start_work_tracking	database/agent_db.py	/^    def start_work_tracking(self, agent_id: str) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
+stop_monitoring	workshop/hammer.py	/^    def stop_monitoring(self, session_id: str) -> bool:$/;"	m	class:HammerInstrumentor	typeref:typename:bool
 success	demo_absolute_path_fix.py	/^    success = demonstrate_fix()$/;"	v
 success	test_absolute_path_fix.py	/^    success = test_problem_statement_scenario()$/;"	v
 success	test_detect_agent_token.py	/^    success = run_all_tests()$/;"	v
@@ -1142,46 +1559,83 @@ success	test_tool_runner.py	/^    success = run_all_tests()$/;"	v
 success	test_tool_runner_edge_cases.py	/^    success = run_all_tests()$/;"	v
 sync_agents_on_shutdown	axe.py	/^def sync_agents_on_shutdown() -> None:$/;"	f	typeref:typename:None
 sync_conversation	database/agent_db.py	/^    def sync_conversation(self, agent_id: str, message_snippet: str, $/;"	m	class:AgentDatabase	typeref:typename:None
+tearDown	test_workshop.py	/^    def tearDown(self):$/;"	m	class:TestWorkshop
+tearDown	test_workshop_integration.py	/^    def tearDown(self):$/;"	m	class:TestWorkshopIntegration
+tearDown	test_workshop_pr23_validation.py	/^    def tearDown(self):$/;"	m	class:TestWorkshopPR23Validation
+test_01_workshop_module_imports	test_workshop_pr23_validation.py	/^    def test_01_workshop_module_imports(self):$/;"	m	class:TestWorkshopPR23Validation
+test_02_database_schema_workshop_tables	test_workshop_pr23_validation.py	/^    def test_02_database_schema_workshop_tables(self):$/;"	m	class:TestWorkshopPR23Validation
+test_03_database_workshop_methods	test_workshop_pr23_validation.py	/^    def test_03_database_workshop_methods(self):$/;"	m	class:TestWorkshopPR23Validation
+test_04_xp_system_workshop_awards	test_workshop_pr23_validation.py	/^    def test_04_xp_system_workshop_awards(self):$/;"	m	class:TestWorkshopPR23Validation
+test_05_saw_taint_analysis_basic	test_workshop_pr23_validation.py	/^    def test_05_saw_taint_analysis_basic(self):$/;"	m	class:TestWorkshopPR23Validation
+test_06_plane_source_sink_enumeration	test_workshop_pr23_validation.py	/^    def test_06_plane_source_sink_enumeration(self):$/;"	m	class:TestWorkshopPR23Validation
+test_07_chisel_basic_instantiation	test_workshop_pr23_validation.py	/^    def test_07_chisel_basic_instantiation(self):$/;"	m	class:TestWorkshopPR23Validation
+test_08_hammer_basic_instantiation	test_workshop_pr23_validation.py	/^    def test_08_hammer_basic_instantiation(self):$/;"	m	class:TestWorkshopPR23Validation
+test_09_workshop_configuration_structure	test_workshop_pr23_validation.py	/^    def test_09_workshop_configuration_structure(self):$/;"	m	class:TestWorkshopPR23Validation
+test_10_dependencies_in_requirements	test_workshop_pr23_validation.py	/^    def test_10_dependencies_in_requirements(self):$/;"	m	class:TestWorkshopPR23Validation
+test_11_workshop_test_files_present	test_workshop_pr23_validation.py	/^    def test_11_workshop_test_files_present(self):$/;"	m	class:TestWorkshopPR23Validation
+test_12_workshop_documentation_present	test_workshop_pr23_validation.py	/^    def test_12_workshop_documentation_present(self):$/;"	m	class:TestWorkshopPR23Validation
+test_13_no_hardcoded_secrets	test_workshop_pr23_validation.py	/^    def test_13_no_hardcoded_secrets(self):$/;"	m	class:TestWorkshopPR23Validation
+test_14_database_integration_end_to_end	test_workshop_pr23_validation.py	/^    def test_14_database_integration_end_to_end(self):$/;"	m	class:TestWorkshopPR23Validation
+test_15_workshop_module_structure	test_workshop_pr23_validation.py	/^    def test_15_workshop_module_structure(self):$/;"	m	class:TestWorkshopPR23Validation
 test_absolute_paths_within_project	test_write_blocks.py	/^def test_absolute_paths_within_project():$/;"	f
 test_agent	manual_test_write.py	/^def test_agent(agent_name: str):$/;"	f
+test_agent_key_consistency	test_spawned_agents.py	/^def test_agent_key_consistency():$/;"	f
 test_all_formats_execution	test_xml_tool_parser.py	/^def test_all_formats_execution():$/;"	f
+test_all_new_formats_together	test_xml_new_formats.py	/^def test_all_new_formats_together():$/;"	f
 test_ambiguous_mention_not_trigger	test_task_completion_detection.py	/^def test_ambiguous_mention_not_trigger():$/;"	f
 test_axe_exec_block	test_xml_tool_parser.py	/^def test_axe_exec_block():$/;"	f
 test_axe_read_block	test_xml_tool_parser.py	/^def test_axe_read_block():$/;"	f
 test_axe_write_block	test_xml_tool_parser.py	/^def test_axe_write_block():$/;"	f
+test_backticks_in_markdown	test_inline_exec_blocks.py	/^def test_backticks_in_markdown():$/;"	f
 test_bash_codeblock	test_xml_tool_parser.py	/^def test_bash_codeblock():$/;"	f
 test_bash_tags	test_xml_tool_parser.py	/^def test_bash_tags():$/;"	f
 test_blockquote_not_trigger	test_task_completion_detection.py	/^def test_blockquote_not_trigger():$/;"	f
 test_break_request_in_result_block	test_detect_agent_token.py	/^def test_break_request_in_result_block():$/;"	f
 test_break_system	test_axe_improvements.py	/^def test_break_system():$/;"	f
+test_chisel_basic	test_workshop.py	/^    def test_chisel_basic(self):$/;"	m	class:TestWorkshop
 test_clean_tool_syntax	test_xml_tool_parser.py	/^def test_clean_tool_syntax():$/;"	f
 test_codeblock_not_trigger	test_task_completion_detection.py	/^def test_codeblock_not_trigger():$/;"	f
+test_collab_prompt_has_clear_examples	test_collab_tool_syntax.py	/^def test_collab_prompt_has_clear_examples():$/;"	f
+test_collab_prompt_includes_tool_syntax	test_collab_tool_syntax.py	/^def test_collab_prompt_includes_tool_syntax():$/;"	f
+test_collab_prompt_preserves_existing_features	test_collab_tool_syntax.py	/^def test_collab_prompt_preserves_existing_features():$/;"	f
+test_comments_and_empty_lines	test_heredoc_parsing.py	/^def test_comments_and_empty_lines():$/;"	f
 test_comments_ignored_in_codeblock	test_xml_tool_parser.py	/^def test_comments_ignored_in_codeblock():$/;"	f
 test_complex_commands	test_tool_runner.py	/^def test_complex_commands():$/;"	f
 test_complex_edge_cases	test_tool_runner_edge_cases.py	/^def test_complex_edge_cases():$/;"	f
 test_complex_scenario_with_file_and_genuine	test_task_completion_detection.py	/^def test_complex_scenario_with_file_and_genuine():$/;"	f
+test_configuration_loading	test_workshop_integration.py	/^    def test_configuration_loading(self):$/;"	m	class:TestWorkshopIntegration
 test_database	test_axe_improvements.py	/^def test_database():$/;"	f
+test_database_integration_chisel	test_workshop.py	/^    def test_database_integration_chisel(self, mock_analyzer_class):$/;"	m	class:TestWorkshop
 test_database_location_with_different_workspace	test_database_location.py	/^def test_database_location_with_different_workspace():$/;"	f
 test_database_persistence_across_workspaces	test_database_location.py	/^def test_database_persistence_across_workspaces():$/;"	f
+test_database_schema	test_workshop_integration.py	/^    def test_database_schema(self):$/;"	m	class:TestWorkshopIntegration
 test_database_tables_autocreate	test_database_location.py	/^def test_database_tables_autocreate():$/;"	f
 test_deduplication	test_xml_tool_parser.py	/^def test_deduplication():$/;"	f
 test_degradation_monitoring	test_axe_improvements.py	/^def test_degradation_monitoring():$/;"	f
+test_duplicate_execution_fix_documented	test_double_execution.py	/^def test_duplicate_execution_fix_documented():$/;"	f
 test_dynamic_spawning	test_axe_improvements.py	/^def test_dynamic_spawning():$/;"	f
 test_emergency_in_result_block	test_detect_agent_token.py	/^def test_emergency_in_result_block():$/;"	f
 test_emergency_mailbox	test_axe_improvements.py	/^def test_emergency_mailbox():$/;"	f
 test_empty_commands_ignored	test_xml_tool_parser.py	/^def test_empty_commands_ignored():$/;"	f
 test_empty_database_file	test_database_location.py	/^def test_empty_database_file():$/;"	f
+test_empty_heredoc	test_heredoc_parsing.py	/^def test_empty_heredoc():$/;"	f
+test_error_count_tracking	test_token_error_handling.py	/^def test_error_count_tracking():$/;"	f
 test_error_handling	test_xml_tool_parser.py	/^def test_error_handling():$/;"	f
+test_error_logging_structure	test_token_error_handling.py	/^def test_error_logging_structure():$/;"	f
+test_error_message_truncation	test_token_error_handling.py	/^def test_error_message_truncation():$/;"	f
 test_exec_block_with_heredoc	test_exec_heredoc.py	/^def test_exec_block_with_heredoc():$/;"	f
+test_exec_tag_parsing	test_xml_new_formats.py	/^def test_exec_tag_parsing():$/;"	f
 test_execute_append	test_xml_tool_parser.py	/^def test_execute_append():$/;"	f
 test_execute_exec	test_xml_tool_parser.py	/^def test_execute_exec():$/;"	f
 test_execute_list_dir	test_xml_tool_parser.py	/^def test_execute_list_dir():$/;"	f
 test_execute_read	test_xml_tool_parser.py	/^def test_execute_read():$/;"	f
 test_execute_write	test_xml_tool_parser.py	/^def test_execute_write():$/;"	f
+test_execution_count_tracking	test_double_execution.py	/^def test_execution_count_tracking():$/;"	f
 test_extract_commands	test_tool_runner.py	/^def test_extract_commands():$/;"	f
 test_file_content_not_trigger	test_task_completion_detection.py	/^def test_file_content_not_trigger():$/;"	f
 test_forbidden_paths	test_tool_runner.py	/^def test_forbidden_paths():$/;"	f
 test_format_xml_result	test_xml_tool_parser.py	/^def test_format_xml_result():$/;"	f
+test_full_workshop_workflow	test_workshop_integration.py	/^    def test_full_workshop_workflow(self, mock_analyzer_class):$/;"	m	class:TestWorkshopIntegration
 test_genuine_break_request_triggers	test_detect_agent_token.py	/^def test_genuine_break_request_triggers():$/;"	f
 test_genuine_declaration_triggers	test_task_completion_detection.py	/^def test_genuine_declaration_triggers():$/;"	f
 test_genuine_emergency_triggers	test_detect_agent_token.py	/^def test_genuine_emergency_triggers():$/;"	f
@@ -1192,13 +1646,32 @@ test_genuine_with_checkmark_triggers	test_task_completion_detection.py	/^def tes
 test_genuine_with_colon_triggers	test_task_completion_detection.py	/^def test_genuine_with_colon_triggers():$/;"	f
 test_genuine_with_exclamation_triggers	test_task_completion_detection.py	/^def test_genuine_with_exclamation_triggers():$/;"	f
 test_get_database_path	test_database_location.py	/^def test_get_database_path():$/;"	f
+test_hammer_basic	test_workshop.py	/^    def test_hammer_basic(self):$/;"	m	class:TestWorkshop
+test_help_includes_workshop	test_workshop_cli_integration.py	/^    def test_help_includes_workshop(self):$/;"	m	class:TestWorkshopCLIIntegration
+test_here_string	test_heredoc_parsing.py	/^def test_here_string():$/;"	f
 test_heredoc_execution_with_content	test_heredoc_execution_fix.py	/^def test_heredoc_execution_with_content():$/;"	f
 test_heredoc_followed_by_pipe	test_heredoc_execution_fix.py	/^def test_heredoc_followed_by_pipe():$/;"	f
+test_heredoc_in_different_formats	test_heredoc_parsing.py	/^def test_heredoc_in_different_formats():$/;"	f
+test_heredoc_in_shell_block	test_xml_tool_parser.py	/^def test_heredoc_in_shell_block():$/;"	f
+test_heredoc_problem_statement_example	test_heredoc_parsing.py	/^def test_heredoc_problem_statement_example():$/;"	f
+test_heredoc_still_works	test_inline_exec_blocks.py	/^def test_heredoc_still_works():$/;"	f
 test_heredoc_stripping_for_validation_only	test_heredoc_execution_fix.py	/^def test_heredoc_stripping_for_validation_only():$/;"	f
+test_heredoc_variations	test_xml_tool_parser.py	/^def test_heredoc_variations():$/;"	f
+test_heredoc_with_hyphenated_delimiter	test_heredoc_parsing.py	/^def test_heredoc_with_hyphenated_delimiter():$/;"	f
+test_heredoc_with_redirect	test_heredoc_parsing.py	/^def test_heredoc_with_redirect():$/;"	f
+test_heredoc_with_similar_content	test_heredoc_parsing.py	/^def test_heredoc_with_similar_content():$/;"	f
+test_heredoc_with_special_chars	test_heredoc_parsing.py	/^def test_heredoc_with_special_chars():$/;"	f
 test_heredoc_with_special_markdown_content	test_heredoc_execution_fix.py	/^def test_heredoc_with_special_markdown_content():$/;"	f
+test_heredoc_with_underscore_delimiter	test_heredoc_parsing.py	/^def test_heredoc_with_underscore_delimiter():$/;"	f
+test_heredoc_without_closing_delimiter	test_heredoc_parsing.py	/^def test_heredoc_without_closing_delimiter():$/;"	f
 test_heredocs	test_tool_runner.py	/^def test_heredocs():$/;"	f
+test_indented_heredoc	test_heredoc_parsing.py	/^def test_indented_heredoc():$/;"	f
 test_inline_codeblock	test_xml_tool_parser.py	/^def test_inline_codeblock():$/;"	f
+test_inline_exec_blocks_bug	test_inline_exec_blocks.py	/^def test_inline_exec_blocks_bug():$/;"	f
+test_inline_read_blocks	test_inline_exec_blocks.py	/^def test_inline_read_blocks():$/;"	f
+test_inline_write_blocks	test_inline_exec_blocks.py	/^def test_inline_write_blocks():$/;"	f
 test_integration_with_execution	test_tool_runner.py	/^def test_integration_with_execution():$/;"	f
+test_integration_with_response_processor	test_xml_new_formats.py	/^def test_integration_with_response_processor():$/;"	f
 test_integration_with_response_processor	test_xml_tool_parser.py	/^def test_integration_with_response_processor():$/;"	f
 test_live_agent_write	test_write_blocks.py	/^def test_live_agent_write(agent_name: str, workspace: str):$/;"	f
 test_live_mode_write_blocks	test_write_blocks.py	/^def test_live_mode_write_blocks():$/;"	f
@@ -1207,68 +1680,119 @@ test_lowercase_read_block_not_trigger	test_task_completion_detection.py	/^def te
 test_malformed_xml	test_xml_tool_parser.py	/^def test_malformed_xml():$/;"	f
 test_marking_complete_triggers	test_task_completion_detection.py	/^def test_marking_complete_triggers():$/;"	f
 test_mission_md_without_result_blocks	test_mission_md_tokens.py	/^def test_mission_md_without_result_blocks():$/;"	f
+test_mixed_commands_with_heredoc	test_heredoc_parsing.py	/^def test_mixed_commands_with_heredoc():$/;"	f
 test_mixed_content_and_genuine	test_detect_agent_token.py	/^def test_mixed_content_and_genuine():$/;"	f
 test_mixed_formats	test_xml_tool_parser.py	/^def test_mixed_formats():$/;"	f
+test_mixed_inline_and_multiline	test_inline_exec_blocks.py	/^def test_mixed_inline_and_multiline():$/;"	f
 test_mixed_xml_and_markdown	manual_test_xml.py	/^def test_mixed_xml_and_markdown():$/;"	f
 test_mixed_xml_and_markdown	test_xml_tool_parser.py	/^def test_mixed_xml_and_markdown():$/;"	f
 test_multiline_codeblock	test_xml_tool_parser.py	/^def test_multiline_codeblock():$/;"	f
+test_multiline_without_heredoc	test_heredoc_parsing.py	/^def test_multiline_without_heredoc():$/;"	f
+test_multiline_without_heredoc	test_xml_tool_parser.py	/^def test_multiline_without_heredoc():$/;"	f
+test_multiple_agents_get_tool_instructions	test_collab_tool_syntax.py	/^def test_multiple_agents_get_tool_instructions():$/;"	f
 test_multiple_blocks	test_write_blocks.py	/^def test_multiple_blocks():$/;"	f
 test_multiple_formats	test_integration_bug_fix.py	/^def test_multiple_formats():$/;"	f
 test_multiple_heredocs	test_heredoc_execution_fix.py	/^def test_multiple_heredocs():$/;"	f
+test_multiple_heredocs_different_delimiters	test_heredoc_parsing.py	/^def test_multiple_heredocs_different_delimiters():$/;"	f
+test_multiple_heredocs_in_sequence	test_heredoc_parsing.py	/^def test_multiple_heredocs_in_sequence():$/;"	f
+test_multiple_inline_blocks	test_inline_exec_blocks.py	/^def test_multiple_inline_blocks():$/;"	f
+test_native_blocks_only_processed_once	test_double_execution.py	/^def test_native_blocks_only_processed_once():$/;"	f
 test_needs_shell	test_tool_runner.py	/^def test_needs_shell():$/;"	f
 test_nested_quotes_in_code_not_trigger	test_task_completion_detection.py	/^def test_nested_quotes_in_code_not_trigger():$/;"	f
 test_nested_result_blocks	test_detect_agent_token.py	/^def test_nested_result_blocks():$/;"	f
 test_nested_xml_content	test_xml_tool_parser.py	/^def test_nested_xml_content():$/;"	f
+test_no_conflicts_with_existing_formats	test_xml_new_formats.py	/^def test_no_conflicts_with_existing_formats():$/;"	f
+test_no_duplicate_execution	test_xml_tool_parser.py	/^def test_no_duplicate_execution():$/;"	f
+test_no_duplicate_execution_with_mixed_formats	test_double_execution.py	/^def test_no_duplicate_execution_with_mixed_formats():$/;"	f
 test_no_task_complete_returns_false	test_task_completion_detection.py	/^def test_no_task_complete_returns_false():$/;"	f
 test_non_supervisor_can_request_break	test_supervisor_protections.py	/^def test_non_supervisor_can_request_break():$/;"	f
+test_parse_all_tool_formats_integration	test_heredoc_parsing.py	/^def test_parse_all_tool_formats_integration():$/;"	f
+test_parse_axe_native_blocks_function_exists	test_double_execution.py	/^def test_parse_axe_native_blocks_function_exists():$/;"	f
+test_parse_axe_native_blocks_not_called	test_double_execution.py	/^def test_parse_axe_native_blocks_not_called():$/;"	f
 test_parse_multiple_function_calls	test_xml_tool_parser.py	/^def test_parse_multiple_function_calls():$/;"	f
 test_parse_single_function_call	test_xml_tool_parser.py	/^def test_parse_single_function_call():$/;"	f
 test_path_prefix_edge_cases	test_write_blocks.py	/^def test_path_prefix_edge_cases():$/;"	f
 test_path_traversal_attacks	test_write_blocks.py	/^def test_path_traversal_attacks():$/;"	f
 test_pipes	test_tool_runner.py	/^def test_pipes():$/;"	f
+test_plane_basic	test_workshop.py	/^    def test_plane_basic(self):$/;"	m	class:TestWorkshop
 test_problem_statement_scenario	test_absolute_path_fix.py	/^def test_problem_statement_scenario():$/;"	f
 test_problem_statement_scenario	test_integration_bug_fix.py	/^def test_problem_statement_scenario():$/;"	f
+test_process_command_workshop	test_workshop_cli_integration.py	/^    def test_process_command_workshop(self):$/;"	m	class:TestWorkshopCLIIntegration
+test_quoted_delimiter	test_heredoc_parsing.py	/^def test_quoted_delimiter():$/;"	f
 test_quoted_not_trigger	test_task_completion_detection.py	/^def test_quoted_not_trigger():$/;"	f
 test_read_block_not_trigger	test_task_completion_detection.py	/^def test_read_block_not_trigger():$/;"	f
+test_read_tag_parsing	test_xml_new_formats.py	/^def test_read_tag_parsing():$/;"	f
 test_reading_mission_md	test_mission_md_tokens.py	/^def test_reading_mission_md():$/;"	f
+test_recovery_suggestion_message	test_token_error_handling.py	/^def test_recovery_suggestion_message():$/;"	f
 test_redirects	test_tool_runner.py	/^def test_redirects():$/;"	f
 test_redirects_without_spaces	test_tool_runner_edge_cases.py	/^def test_redirects_without_spaces():$/;"	f
+test_response_processor_handles_native_blocks	test_double_execution.py	/^def test_response_processor_handles_native_blocks():$/;"	f
+test_saw_basic	test_workshop.py	/^    def test_saw_basic(self):$/;"	m	class:TestWorkshop
 test_session_rules	test_axe_improvements.py	/^def test_session_rules():$/;"	f
 test_sh_codeblock	test_xml_tool_parser.py	/^def test_sh_codeblock():$/;"	f
 test_shell_codeblock	test_xml_tool_parser.py	/^def test_shell_codeblock():$/;"	f
 test_simple_commands	test_tool_runner.py	/^def test_simple_commands():$/;"	f
+test_simple_heredoc	test_heredoc_parsing.py	/^def test_simple_heredoc():$/;"	f
 test_simple_xml_read	test_xml_tool_parser.py	/^def test_simple_xml_read():$/;"	f
 test_simple_xml_shell	test_xml_tool_parser.py	/^def test_simple_xml_shell():$/;"	f
 test_simple_xml_write	test_xml_tool_parser.py	/^def test_simple_xml_write():$/;"	f
 test_single_quoted_not_trigger	test_task_completion_detection.py	/^def test_single_quoted_not_trigger():$/;"	f
 test_sleep_system	test_axe_improvements.py	/^def test_sleep_system():$/;"	f
 test_spawn_in_result_block	test_detect_agent_token.py	/^def test_spawn_in_result_block():$/;"	f
+test_spawned_agent_data_structures	test_spawned_agents.py	/^def test_spawned_agent_data_structures():$/;"	f
+test_spawned_agent_system_prompt	test_spawned_agents.py	/^def test_spawned_agent_system_prompt():$/;"	f
+test_spawned_vs_static_agent_resolution	test_spawned_agents.py	/^def test_spawned_vs_static_agent_resolution():$/;"	f
 test_subshells	test_tool_runner_edge_cases.py	/^def test_subshells():$/;"	f
+test_supervisor_cannot_be_slept	test_token_error_handling.py	/^def test_supervisor_cannot_be_slept():$/;"	f
 test_supervisor_cannot_request_break	test_supervisor_protections.py	/^def test_supervisor_cannot_request_break():$/;"	f
 test_supervisor_with_boss_alias_blocked	test_supervisor_protections.py	/^def test_supervisor_with_boss_alias_blocked():$/;"	f
 test_task_complete_in_result_block	test_detect_agent_token.py	/^def test_task_complete_in_result_block():$/;"	f
 test_task_is_complete_triggers	test_task_completion_detection.py	/^def test_task_is_complete_triggers():$/;"	f
 test_titles	test_axe_improvements.py	/^def test_titles():$/;"	f
+test_token_error_response_format	test_token_error_handling.py	/^def test_token_error_response_format():$/;"	f
+test_token_error_vs_other_errors	test_token_error_handling.py	/^def test_token_error_vs_other_errors():$/;"	f
 test_token_in_code_block	test_detect_agent_token.py	/^def test_token_in_code_block():$/;"	f
 test_token_in_read_block	test_detect_agent_token.py	/^def test_token_in_read_block():$/;"	f
+test_token_limit_error_detection	test_token_error_handling.py	/^def test_token_limit_error_detection():$/;"	f
 test_tool_name_normalization	test_xml_tool_parser.py	/^def test_tool_name_normalization():$/;"	f
+test_workshop_chisel_no_args	test_workshop_cli_integration.py	/^    def test_workshop_chisel_no_args(self):$/;"	m	class:TestWorkshopCLIIntegration
+test_workshop_command_parsing	test_workshop_integration.py	/^    def test_workshop_command_parsing(self):$/;"	m	class:TestWorkshopIntegration
+test_workshop_hammer_no_args	test_workshop_cli_integration.py	/^    def test_workshop_hammer_no_args(self):$/;"	m	class:TestWorkshopCLIIntegration
+test_workshop_help_command	test_workshop_cli_integration.py	/^    def test_workshop_help_command(self):$/;"	m	class:TestWorkshopCLIIntegration
+test_workshop_history_no_analyses	test_workshop_cli_integration.py	/^    def test_workshop_history_no_analyses(self):$/;"	m	class:TestWorkshopCLIIntegration
+test_workshop_no_args_shows_help	test_workshop_cli_integration.py	/^    def test_workshop_no_args_shows_help(self):$/;"	m	class:TestWorkshopCLIIntegration
+test_workshop_plane_no_args	test_workshop_cli_integration.py	/^    def test_workshop_plane_no_args(self):$/;"	m	class:TestWorkshopCLIIntegration
+test_workshop_saw_no_args	test_workshop_cli_integration.py	/^    def test_workshop_saw_no_args(self):$/;"	m	class:TestWorkshopCLIIntegration
+test_workshop_stats	test_workshop.py	/^    def test_workshop_stats(self):$/;"	m	class:TestWorkshop
+test_workshop_stats_no_analyses	test_workshop_cli_integration.py	/^    def test_workshop_stats_no_analyses(self):$/;"	m	class:TestWorkshopCLIIntegration
+test_workshop_tool_initialization	test_workshop_cli_integration.py	/^    def test_workshop_tool_initialization(self):$/;"	m	class:TestWorkshopCLIIntegration
+test_workshop_unknown_command	test_workshop_cli_integration.py	/^    def test_workshop_unknown_command(self):$/;"	m	class:TestWorkshopCLIIntegration
 test_write_block_empty_filename	test_write_blocks.py	/^def test_write_block_empty_filename():$/;"	f
 test_write_block_multiline	test_write_blocks.py	/^def test_write_block_multiline():$/;"	f
 test_write_block_overwrite	test_write_blocks.py	/^def test_write_block_overwrite():$/;"	f
 test_write_block_parser	test_write_blocks.py	/^def test_write_block_parser():$/;"	f
 test_write_block_permissions	test_write_blocks.py	/^def test_write_block_permissions():$/;"	f
 test_write_block_with_path	test_write_blocks.py	/^def test_write_block_with_path():$/;"	f
+test_write_file_attribute_parsing	test_xml_new_formats.py	/^def test_write_file_attribute_parsing():$/;"	f
 test_xml_multiple_calls	manual_test_xml.py	/^def test_xml_multiple_calls():$/;"	f
 test_xml_read_call	manual_test_xml.py	/^def test_xml_read_call():$/;"	f
 test_xml_write_call	manual_test_xml.py	/^def test_xml_write_call():$/;"	f
+test_xp_bonus_calculation	test_workshop_integration.py	/^    def test_xp_bonus_calculation(self):$/;"	m	class:TestWorkshopIntegration
 test_xp_calculation	test_axe_improvements.py	/^def test_xp_calculation():$/;"	f
+test_xp_system_integration	test_workshop.py	/^    def test_xp_system_integration(self):$/;"	m	class:TestWorkshop
 track_break_request	test_supervisor_protections.py	/^    def track_break_request(agent_id, alias, break_type, reason):$/;"	f	function:test_non_supervisor_can_request_break	file:
 track_break_request	test_supervisor_protections.py	/^    def track_break_request(agent_id, alias, break_type, reason):$/;"	f	function:test_supervisor_cannot_request_break	file:
 track_break_request	test_supervisor_protections.py	/^    def track_break_request(agent_id, alias, break_type, reason):$/;"	f	function:test_supervisor_with_boss_alias_blocked	file:
+track_execution	test_double_execution.py	/^    def track_execution(tool, params):$/;"	f	function:test_execution_count_tracking	file:
+type_hint	workshop/saw.py	/^    type_hint: Optional[str] = None$/;"	v	class:TaintSource	typeref:typename:Optional[str]
 update_agent_status	core/multiprocess.py	/^    def update_agent_status(self, agent_id: str, status: str) -> None:$/;"	m	class:SharedContext	typeref:typename:None
 update_token_usage	database/agent_db.py	/^    def update_token_usage(self, agent_id: str, tokens_used: int) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
 update_workspace	core/multiprocess.py	/^    def update_workspace(self, key: str, value: Any) -> None:$/;"	m	class:SharedContext	typeref:typename:None
 v1.0 (Current)	WRITE_BLOCKS_GUIDE.md	/^### v1.0 (Current)$/;"	S	section:API Documentation""Changelog
+visit_Assign	workshop/saw.py	/^    def visit_Assign(self, node):$/;"	m	class:TaintAnalyzer
+visit_Attribute	workshop/plane.py	/^    def visit_Attribute(self, node):$/;"	m	class:SourceSinkVisitor
+visit_Call	workshop/plane.py	/^    def visit_Call(self, node):$/;"	m	class:SourceSinkVisitor
+visit_Call	workshop/saw.py	/^    def visit_Call(self, node):$/;"	m	class:TaintAnalyzer
 wake_agent	database/agent_db.py	/^    def wake_agent(self, agent_id: str) -> Dict[str, Any]:$/;"	m	class:AgentDatabase	typeref:typename:Dict[str,Any]
 write_file	axe.py	/^    def write_file(self, filename: str, content: str) -> bool:$/;"	m	class:SharedWorkspace	typeref:typename:bool
 xAI (Grok)	.collab_log.md	/^### xAI (Grok)$/;"	S	section:AXE - Agent eXecution Engine""API Providers
@@ -1276,8 +1800,30 @@ xAI (Grok)	API_PROVIDERS.md	/^## xAI (Grok)$/;"	s	chapter:AXE API Provider Docum
 xAI (Grok)	MODELS_FINAL.md	/^## xAI (Grok)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 xAI (Grok)	README.md	/^### xAI (Grok)$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 ⚠️ Known Limitation:	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### ⚠️ Known Limitation:$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Security Analysis
+✅ **MERGE IMMEDIATELY**	PR23_EXECUTIVE_SUMMARY.md	/^### ✅ **MERGE IMMEDIATELY**$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Recommendation
 ✅ ALL TESTS PASSED!	XML_PARSER_IMPLEMENTATION.md	/^✅ ALL TESTS PASSED!$/;"	c
+✅ ALL TESTS PASSED! (43/43)	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^✅ ALL TESTS PASSED! (43\/43)$/;"	c
+✅ APPROVED FOR MERGE	PR23_VALIDATION_REPORT.md	/^### ✅ APPROVED FOR MERGE$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 11: Merge Recommendation
+✅ Complete AXE Integration	PR23_EXECUTIVE_SUMMARY.md	/^### ✅ Complete AXE Integration$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""What Was Delivered
+✅ Comprehensive Documentation	PR23_EXECUTIVE_SUMMARY.md	/^### ✅ Comprehensive Documentation$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""What Was Delivered
+✅ Four Dynamic Analysis Tools	PR23_EXECUTIVE_SUMMARY.md	/^### ✅ Four Dynamic Analysis Tools$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""What Was Delivered
 ✅ Issue 1: GPT-5 API Parameter Error (CRITICAL)	IMPLEMENTATION_SUMMARY.md	/^### ✅ Issue 1: GPT-5 API Parameter Error (CRITICAL)$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Issues Resolved
 ✅ Issue 2: WRITE Blocks Not Executing (HIGH)	IMPLEMENTATION_SUMMARY.md	/^### ✅ Issue 2: WRITE Blocks Not Executing (HIGH)$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Issues Resolved
 ✅ Now Allowed (Bug Fixed):	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### ✅ Now Allowed (Bug Fixed):$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Security Analysis
 ✅ Still Blocked (Security Maintained):	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### ✅ Still Blocked (Security Maintained):$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Security Analysis
+✅ Testing (9/10)	PR23_EXECUTIVE_SUMMARY.md	/^### ✅ Testing (9\/10)$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Key Strengths
+✅ VALIDATED - Bonus XP Calculation	PR23_VALIDATION_REPORT.md	/^#### ✅ VALIDATED - Bonus XP Calculation$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 3: XP System Integration
+✅ VALIDATED - Chisel (Symbolic Execution)	PR23_VALIDATION_REPORT.md	/^#### ✅ VALIDATED - Chisel (Symbolic Execution)$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 1: Four Analysis Tools Implemented
+✅ VALIDATED - Configuration Structure	PR23_VALIDATION_REPORT.md	/^#### ✅ VALIDATED - Configuration Structure$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 4: Configuration Integration
+✅ VALIDATED - Database Methods	PR23_VALIDATION_REPORT.md	/^#### ✅ VALIDATED - Database Methods$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 2: Database Integration
+✅ VALIDATED - Database Schema	PR23_VALIDATION_REPORT.md	/^#### ✅ VALIDATED - Database Schema$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 2: Database Integration
+✅ VALIDATED - Documentation Files	PR23_VALIDATION_REPORT.md	/^#### ✅ VALIDATED - Documentation Files$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 5: Documentation
+✅ VALIDATED - Hammer (Live Instrumentation)	PR23_VALIDATION_REPORT.md	/^#### ✅ VALIDATED - Hammer (Live Instrumentation)$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 1: Four Analysis Tools Implemented
+✅ VALIDATED - Plane (Source/Sink Enumeration)	PR23_VALIDATION_REPORT.md	/^#### ✅ VALIDATED - Plane (Source\/Sink Enumeration)$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 1: Four Analysis Tools Implemented
+✅ VALIDATED - Saw (Taint Analysis)	PR23_VALIDATION_REPORT.md	/^#### ✅ VALIDATED - Saw (Taint Analysis)$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 1: Four Analysis Tools Implemented
+✅ VALIDATED - Test Files	PR23_VALIDATION_REPORT.md	/^#### ✅ VALIDATED - Test Files$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 6: Test Suite
+✅ VALIDATED - XP Awards Dictionary	PR23_VALIDATION_REPORT.md	/^#### ✅ VALIDATED - XP Awards Dictionary$/;"	t	subsection:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 1: PR Claims vs. Actual Implementation""Claim 3: XP System Integration
+🏆 Code Quality (9/10)	PR23_EXECUTIVE_SUMMARY.md	/^### 🏆 Code Quality (9\/10)$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Key Strengths
+📚 Documentation (10/10)	PR23_EXECUTIVE_SUMMARY.md	/^### 📚 Documentation (10\/10)$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Key Strengths
+🔒 Security (10/10)	PR23_EXECUTIVE_SUMMARY.md	/^### 🔒 Security (10\/10)$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Key Strengths
+🔧 Integration (9/10)	PR23_EXECUTIVE_SUMMARY.md	/^### 🔧 Integration (9\/10)$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Key Strengths
