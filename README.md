@@ -679,12 +679,12 @@ Install Workshop dependencies:
 
 ```bash
 # Install all dependencies
-pip install angr frida-python psutil
+pip install 'angr>=9.2.0' 'frida-python>=16.0.0' 'psutil>=5.9.0'
 
 # Or install individually
-pip install angr           # For Chisel symbolic execution
-pip install frida-python   # For Hammer instrumentation
-pip install psutil         # For Hammer process monitoring
+pip install 'angr>=9.2.0'           # For Chisel symbolic execution
+pip install 'frida-python>=16.0.0'  # For Hammer instrumentation
+pip install 'psutil>=5.9.0'         # For Hammer process monitoring
 ```
 
 ### Quick Examples
