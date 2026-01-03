@@ -278,24 +278,15 @@ def parse_shell_codeblocks(response: str) -> List[Dict[str, Any]]:
     for match in re.findall(pattern, response, re.DOTALL):
         cmd = match.strip()
         if cmd:
-            # Check if the entire block contains a heredoc
-            # If so, treat the whole block as a single command
-            if _contains_heredoc(cmd):
-                calls.append({
-                    'tool': 'EXEC',
-                    'params': {'command': cmd},
-                    'raw_name': 'shell'
-                })
-            else:
-                # No heredoc - process line by line as before
-                # Split commands while preserving heredocs
-                for command in _split_shell_commands(cmd):
-                    if command and not command.startswith('#'):
-                        calls.append({
-                            'tool': 'EXEC',
-                            'params': {'command': command},
-                            'raw_name': 'shell'
-                        })
+            # Use _split_shell_commands which properly handles heredocs
+            # It keeps heredocs as single commands while splitting others
+            for command in _split_shell_commands(cmd):
+                if command and not command.startswith('#'):
+                    calls.append({
+                        'tool': 'EXEC',
+                        'params': {'command': command},
+                        'raw_name': 'shell'
+                    })
     return calls
 
 
