@@ -151,6 +151,72 @@ def parse_bash_tags(response: str) -> List[Dict[str, Any]]:
     return calls
 
 
+def _split_shell_commands(cmd: str) -> List[str]:
+    """
+    Split shell code into individual commands while preserving heredocs.
+    
+    Heredocs (<<, <<-, <<<) are kept as part of their command instead of
+    being split across lines.
+    
+    Args:
+        cmd: Shell code block content
+    
+    Returns:
+        List of individual commands
+    """
+    commands = []
+    lines = cmd.split('\n')
+    i = 0
+    
+    while i < len(lines):
+        line = lines[i].strip()
+        
+        # Skip empty lines and comments
+        if not line or line.startswith('#'):
+            i += 1
+            continue
+        
+        # Check if this line contains a heredoc marker
+        # Pattern matches: << EOF, <<- EOF, <<'EOF', <<"EOF", <<-'EOF', etc.
+        # Also matches here-string: <<< "string" or <<< string
+        heredoc_match = re.search(r'<<-?\s*([\'"]?)(\w+)\1|<<<', line)
+        
+        if heredoc_match:
+            # This line starts a heredoc command
+            command_lines = [lines[i]]
+            
+            # Check if it's a here-string (<<<)
+            if '<<<' in line:
+                # Here-string is single line, no delimiter to find
+                commands.append('\n'.join(command_lines))
+                i += 1
+                continue
+            
+            # Extract the delimiter for heredoc
+            delimiter = heredoc_match.group(2)
+            i += 1
+            
+            # Find the closing delimiter
+            while i < len(lines):
+                command_lines.append(lines[i])
+                # Check if this line is the closing delimiter
+                # Must be on its own line (possibly with leading whitespace for <<-)
+                if re.match(rf'^\s*{re.escape(delimiter)}\s*$', lines[i]):
+                    # Found closing delimiter
+                    break
+                i += 1
+            
+            # Add the complete heredoc command
+            commands.append('\n'.join(command_lines))
+            i += 1
+        else:
+            # Regular command line (no heredoc)
+            commands.append(line)
+            i += 1
+    
+    return commands
+
+
 def parse_shell_codeblocks(response: str) -> List[Dict[str, Any]]:
     """
     Parse ```bash, ```shell, ```sh code blocks.
@@ -168,13 +234,12 @@ def parse_shell_codeblocks(response: str) -> List[Dict[str, Any]]:
     for match in re.findall(pattern, response, re.DOTALL):
         cmd = match.strip()
         if cmd:
-            # Handle multi-line commands (execute each line)
-            for line in cmd.split('\n'):
-                line = line.strip()
-                if line and not line.startswith('#'):
+            # Split commands while preserving heredocs
+            for command in _split_shell_commands(cmd):
+                if command and not command.startswith('#'):
                     calls.append({
                         'tool': 'EXEC',
-                        'params': {'command': line},
+                        'params': {'command': command},
                         'raw_name': 'shell'
                     })
     return calls
