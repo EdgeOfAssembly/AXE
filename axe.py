@@ -3266,14 +3266,19 @@ class ChatSession:
         self.workshop_hammer: Optional[Any] = None
         if HAS_WORKSHOP:
             try:
+                workshop_config = config.get('workshop', default={})
                 if HAS_CHISEL:
-                    self.workshop_chisel = ChiselAnalyzer(config.get('workshop', {}).get('chisel', {}))
+                    chisel_config = workshop_config.get('chisel', {}) if isinstance(workshop_config, dict) else {}
+                    self.workshop_chisel = ChiselAnalyzer(chisel_config)
                 if HAS_SAW:
-                    self.workshop_saw = SawTracker(config.get('workshop', {}).get('saw', {}))
+                    saw_config = workshop_config.get('saw', {}) if isinstance(workshop_config, dict) else {}
+                    self.workshop_saw = SawTracker(saw_config)
                 if HAS_PLANE:
-                    self.workshop_plane = PlaneEnumerator(config.get('workshop', {}).get('plane', {}))
+                    plane_config = workshop_config.get('plane', {}) if isinstance(workshop_config, dict) else {}
+                    self.workshop_plane = PlaneEnumerator(plane_config)
                 if HAS_HAMMER:
-                    self.workshop_hammer = HammerInstrumentor(config.get('workshop', {}).get('hammer', {}))
+                    hammer_config = workshop_config.get('hammer', {}) if isinstance(workshop_config, dict) else {}
+                    self.workshop_hammer = HammerInstrumentor(hammer_config)
             except Exception as e:
                 print(c(f"Warning: Failed to initialize workshop tools: {e}", Colors.YELLOW))
     
