@@ -1777,7 +1777,7 @@ class ResponseProcessor:
             return f"ERROR: {output}"
     
     def _handle_write(self, filename: str, content: str) -> str:
-        """Handle WRITE block - write content to file."""
+        """Handle WRITE block - write content to file with verification."""
         filepath = self._resolve_project_path(filename)
         if filepath is None:
             return f"ERROR: Access denied to {filename}"
@@ -1799,10 +1799,19 @@ class ResponseProcessor:
                 os.makedirs(dir_path, exist_ok=True)
             
             # Write the file
+            expected_size = len(content.encode('utf-8'))
             with open(filepath, 'w', encoding='utf-8') as f:
                 f.write(content)
             
-            return f"✓ File written successfully ({len(content)} bytes)"
+            # Verify write (Bug 5 & 6: Add verification and feedback)
+            if os.path.exists(filepath):
+                actual_size = os.path.getsize(filepath)
+                if actual_size == expected_size:
+                    return f"✓ File written successfully: {filename} ({actual_size} bytes)"
+                else:
+                    return f"⚠️  File written but size mismatch: {filename} (expected {expected_size}, got {actual_size} bytes)"
+            else:
+                return f"ERROR: File write verification failed - file not found after write: {filename}"
         except Exception as e:
             return f"ERROR writing file: {e}"
     
@@ -2326,6 +2335,7 @@ class CollaborativeSession:
         self.agents = []
         self.agent_ids = {}  # Maps agent name to unique ID
         self.agent_aliases = {}  # Maps agent name to @alias
+        self.spawned_agent_configs = {}  # Maps spawned agent UUID to config (Bug 2 fix)
         
         for agent_name in agents:
             agent = self.agent_mgr.resolve_agent(agent_name)
@@ -2687,7 +2697,17 @@ It's YOUR TURN. What would you like to contribute? Remember:
                 # Call the agent
                 print(c(f"[{current_agent}] Thinking...", Colors.DIM))
                 
-                agent_config = self.agent_mgr.resolve_agent(current_agent)
+                # Bug 2 Fix: Check if this is a spawned agent first
+                if current_agent in self.spawned_agent_configs:
+                    agent_config = self.spawned_agent_configs[current_agent]
+                else:
+                    agent_config = self.agent_mgr.resolve_agent(current_agent)
+                
+                if not agent_config:
+                    print(c(f"ERROR: Could not resolve agent config for {current_agent}", Colors.RED))
+                    self.current_turn += 1
+                    continue
+                
                 provider = agent_config.get('provider', '')
                 client = self.agent_mgr.clients.get(provider)
                 model = agent_config.get('model', '')
@@ -2741,7 +2761,31 @@ It's YOUR TURN. What would you like to contribute? Remember:
                         else:
                             response = "[No response from model]"
                 except Exception as e:
-                    response = f"[API Error: {e}]"
+                    error_str = str(e)
+                    response = f"[API Error: {error_str}]"
+                    
+                    # Bug 3 Fix: Detect token limit errors (413)
+                    if "413" in error_str or "tokens_limit_reached" in error_str.lower() or "token limit" in error_str.lower():
+                        print(c(f"\n⚠️  {alias} hit token limit (413 error)", Colors.RED))
+                        print(c(f"   Error: {error_str[:200]}", Colors.DIM))
+                        
+                        # Put agent to sleep to recover
+                        if agent_id and alias != self.supervisor_alias:
+                            print(c(f"   Forcing {alias} to sleep for recovery...", Colors.YELLOW))
+                            sleep_result = self.sleep_manager.force_sleep(
+                                agent_id, "token_limit_error",
+                                self.agent_ids.get(self.supervisor_name)
+                            )
+                            print(c(f"   Sleep duration: {sleep_result['sleep_duration_minutes']} minutes", Colors.DIM))
+                        
+                        # If supervisor, try to spawn replacement (can't force supervisor to sleep)
+                        if alias == self.supervisor_alias:
+                            print(c("   ⚠️  Supervisor hit token limit but cannot be put to sleep", Colors.YELLOW))
+                            print(c("   Consider ending session or spawning replacement agent", Colors.YELLOW))
+                        
+                        # Skip this turn
+                        self.current_turn += 1
+                        continue
                 
                 # Process response for code blocks (READ, EXEC, WRITE)
                 processed_response = self.response_processor.process_response(response, current_agent)
@@ -2965,11 +3009,18 @@ It's YOUR TURN. What would you like to contribute? Remember:
         
         if result['spawned']:
             print(c(f"   ✓ Spawned new agent: {result['alias']}", Colors.GREEN))
-            # Add to session using unique agent_id as key to prevent conflicts
+            # Bug 2 Fix: Store spawned agent config so it can be called later
             unique_key = result['agent_id']
             self.agents.append(unique_key)
             self.agent_ids[unique_key] = result['agent_id']
             self.agent_aliases[unique_key] = result['alias']
+            # Store the config so we can call this agent
+            self.spawned_agent_configs[unique_key] = {
+                'model': model_name,
+                'provider': provider,
+                'name': unique_key,
+                'alias': result['alias']
+            }
         else:
             print(c(f"   ✗ Spawn failed: {result['reason']}", Colors.YELLOW))
     

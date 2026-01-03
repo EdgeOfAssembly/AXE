@@ -356,7 +356,13 @@ def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:
 
 def parse_simple_xml_tags(response: str) -> List[Dict[str, Any]]:
     """
-    Parse simple XML tags like <read_file>, <shell>, <bash>.
+    Parse simple XML tags like <read_file>, <shell>, <bash>, <exec>, <read>, <write>, <executor>.
+    
+    Supports formats used by agents in multi-agent sessions:
+    - <exec>command</exec>
+    - <executor>command</executor>
+    - <read>path</read>
+    - <write file="path">content</write>
     
     Args:
         response: Agent response text
@@ -374,12 +380,36 @@ def parse_simple_xml_tags(response: str) -> List[Dict[str, Any]]:
             'raw_name': 'read_file'
         })
     
+    # <read>path</read> - New format from Bug 1
+    for path in re.findall(r'<read>(.*?)</read>', response, re.DOTALL):
+        calls.append({
+            'tool': 'READ',
+            'params': {'file_path': path.strip()},
+            'raw_name': 'read'
+        })
+    
     # <shell>command</shell>
     for cmd in re.findall(r'<shell>(.*?)</shell>', response, re.DOTALL):
         calls.append({
             'tool': 'EXEC',
             'params': {'command': cmd.strip()},
             'raw_name': 'shell'
+        })
+    
+    # <exec>command</exec> - New format from Bug 1
+    for cmd in re.findall(r'<exec>(.*?)</exec>', response, re.DOTALL):
+        calls.append({
+            'tool': 'EXEC',
+            'params': {'command': cmd.strip()},
+            'raw_name': 'exec'
+        })
+    
+    # <executor>command</executor> - New format from Bug 1
+    for cmd in re.findall(r'<executor>(.*?)</executor>', response, re.DOTALL):
+        calls.append({
+            'tool': 'EXEC',
+            'params': {'command': cmd.strip()},
+            'raw_name': 'executor'
         })
     
     # <write_file path="...">content</write_file>
@@ -389,6 +419,15 @@ def parse_simple_xml_tags(response: str) -> List[Dict[str, Any]]:
             'tool': 'WRITE',
             'params': {'file_path': path.strip(), 'content': content},
             'raw_name': 'write_file'
+        })
+    
+    # <write file="...">content</write> - New format from Bug 1
+    for match in re.findall(r'<write\s+file=["\']([^"\']+)["\']>(.*?)</write>', response, re.DOTALL):
+        path, content = match
+        calls.append({
+            'tool': 'WRITE',
+            'params': {'file_path': path.strip(), 'content': content},
+            'raw_name': 'write'
         })
     
     return calls
@@ -613,12 +652,61 @@ def clean_tool_syntax(response: str) -> str:
     return cleaned
 
 
+def detect_malformed_tool_syntax(response: str) -> List[str]:
+    """
+    Detect malformed or unusual tool syntax that won't be parsed.
+    
+    Returns list of warning messages about malformed syntax found.
+    
+    Args:
+        response: Agent response text
+    
+    Returns:
+        List of warning strings describing malformed syntax found
+    """
+    warnings = []
+    
+    # Pattern 1: Check for tags with non-ASCII attributes (Bug 7 example: <exec 天天中奖彩票="json">)
+    non_ascii_attrs = re.findall(r'<(\w+)\s+[^\x00-\x7F]+[^>]*>', response)
+    if non_ascii_attrs:
+        warnings.append(f"⚠️  Malformed tag with non-ASCII attributes detected: <{non_ascii_attrs[0]} ...>")
+    
+    # Pattern 2: Check for unclosed tags
+    # Find opening tags
+    opening_tags = set(re.findall(r'<(exec|read|write|executor|bash|shell)(?:\s|>)', response, re.IGNORECASE))
+    # Find closing tags
+    closing_tags = set(re.findall(r'</(exec|read|write|executor|bash|shell)>', response, re.IGNORECASE))
+    
+    unclosed = opening_tags - closing_tags
+    if unclosed:
+        warnings.append(f"⚠️  Unclosed tags detected: {', '.join(f'<{tag}>' for tag in unclosed)}")
+    
+    # Pattern 3: Check for tags with JSON-like content instead of proper format
+    # Example: <exec code="python - <<'PY'...">
+    json_in_tag = re.findall(r'<(exec|executor|bash|shell)\s+[^>]*[{"\[]', response, re.IGNORECASE)
+    if json_in_tag:
+        warnings.append(f"⚠️  Tag appears to contain JSON/code in attributes instead of content: <{json_in_tag[0]} ...>")
+    
+    # Pattern 4: Check for commentary/malformed tags (from Bug 7 example)
+    commentary_tags = re.findall(r'<commentary[^>]*>', response, re.IGNORECASE)
+    if commentary_tags:
+        warnings.append(f"⚠️  Non-standard tag detected: {commentary_tags[0]}")
+    
+    # Pattern 5: Check for tags with malformed attributes (missing quotes, etc.)
+    malformed_attrs = re.findall(r'<(write|read)\s+file=[^"\'][^>\s]*[>\s]', response, re.IGNORECASE)
+    if malformed_attrs:
+        warnings.append(f"⚠️  Tag with unquoted attribute detected: <{malformed_attrs[0]} file=...>")
+    
+    return warnings
+
+
 def process_agent_response(response: str, workspace: str, 
                           response_processor: Any) -> Tuple[str, List[str]]:
     """
     Main entry point for processing agent responses with ALL tool call formats.
     
     Parses all known tool call formats, executes them, and returns formatted results.
+    Also detects malformed tool syntax and returns warnings.
     
     Args:
         response: Agent response that may contain various tool call formats
@@ -626,17 +714,24 @@ def process_agent_response(response: str, workspace: str,
         response_processor: ResponseProcessor instance for tool execution
     
     Returns:
-        Tuple of (original_response, list_of_xml_results)
+        Tuple of (original_response, list_of_xml_results_and_warnings)
     """
+    # Check for malformed syntax first (Bug 7)
+    malformed_warnings = detect_malformed_tool_syntax(response)
+    
     # Use comprehensive parser instead of just XML
     calls = parse_all_tool_formats(response)
     
-    if not calls:
-        # No tool calls found
+    if not calls and not malformed_warnings:
+        # No tool calls found and no warnings
         return response, []
     
     # Execute each call and collect results
     xml_results = []
+    
+    # Add malformed syntax warnings first
+    for warning in malformed_warnings:
+        xml_results.append(f"\n{warning}\n")
     
     for call in calls:
         result = execute_parsed_call(call, workspace, response_processor)
