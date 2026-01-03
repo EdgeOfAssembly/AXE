@@ -356,7 +356,7 @@ def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:
 
 def parse_simple_xml_tags(response: str) -> List[Dict[str, Any]]:
     """
-    Parse simple XML tags like <read_file>, <shell>, <bash>.
+    Parse simple XML tags like <read_file>, <shell>, <bash>, <exec>, <read>, <write>.
     
     Args:
         response: Agent response text
@@ -374,12 +374,28 @@ def parse_simple_xml_tags(response: str) -> List[Dict[str, Any]]:
             'raw_name': 'read_file'
         })
     
+    # <read>/path</read>
+    for path in re.findall(r'<read>(.*?)</read>', response, re.DOTALL):
+        calls.append({
+            'tool': 'READ',
+            'params': {'file_path': path.strip()},
+            'raw_name': 'read'
+        })
+    
     # <shell>command</shell>
     for cmd in re.findall(r'<shell>(.*?)</shell>', response, re.DOTALL):
         calls.append({
             'tool': 'EXEC',
             'params': {'command': cmd.strip()},
             'raw_name': 'shell'
+        })
+    
+    # <exec>command</exec>
+    for cmd in re.findall(r'<exec>(.*?)</exec>', response, re.DOTALL):
+        calls.append({
+            'tool': 'EXEC',
+            'params': {'command': cmd.strip()},
+            'raw_name': 'exec'
         })
     
     # <write_file path="...">content</write_file>
@@ -389,6 +405,15 @@ def parse_simple_xml_tags(response: str) -> List[Dict[str, Any]]:
             'tool': 'WRITE',
             'params': {'file_path': path.strip(), 'content': content},
             'raw_name': 'write_file'
+        })
+    
+    # <write file="...">content</write>
+    for match in re.findall(r'<write\s+file=["\']([^"\']+)["\']>(.*?)</write>', response, re.DOTALL):
+        path, content = match
+        calls.append({
+            'tool': 'WRITE',
+            'params': {'file_path': path.strip(), 'content': content},
+            'raw_name': 'write'
         })
     
     return calls
