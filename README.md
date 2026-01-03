@@ -776,26 +776,24 @@ Workshop tools can be configured in `axe.yaml`:
 workshop:
   enabled: true
   
+  # Tool-specific configuration is passed to each workshop tool
+  # The actual configuration options depend on the tool implementation
+  # See workshop module documentation for supported options
+  
   chisel:
-    max_paths: 1000          # Maximum paths to explore
-    timeout: 30              # Analysis timeout in seconds
-    memory_limit: 1024       # Memory limit in MB
+    # Chisel-specific options (if supported)
   
   saw:
-    max_depth: 10            # Maximum taint propagation depth
-    confidence_threshold: 0.7 # Minimum confidence for reporting
+    # Saw-specific options (if supported)
   
   plane:
-    exclude_patterns:        # Patterns to exclude from enumeration
-      - __pycache__
-      - .git
-      - venv
-    max_files: 1000          # Maximum files to analyze
+    # Plane-specific options (if supported)
   
   hammer:
-    monitoring_interval: 0.1 # Polling interval for monitoring
-    max_sessions: 5          # Maximum concurrent sessions
+    # Hammer-specific options (if supported)
 ```
+
+**Note**: The workshop tools accept configuration parameters, but the specific options available depend on each tool's implementation. Refer to the individual tool documentation in the `workshop/` module for details on supported configuration keys.
 
 ### Integration with Agents
 
@@ -817,12 +815,11 @@ axe> /collab claude,llama ./project 60 "Use workshop tools to perform comprehens
 All Workshop analyses are automatically:
 - Saved to the AXE database with full results
 - Tracked with performance metrics (duration, success/failure)
-- Linked to the XP system for agent progression
 - Available for historical review and statistics
 
 ### XP Rewards
 
-Workshop tool usage awards XP to agents:
+Workshop tool usage awards XP when agents use the tools programmatically (not when invoked directly via CLI commands by humans):
 
 | Tool | Base XP | Bonuses |
 |------|---------|---------|
@@ -830,6 +827,8 @@ Workshop tool usage awards XP to agents:
 | **Saw** | 20 XP | +15 per taint flow, +25 per vulnerability |
 | **Plane** | 15 XP | +1 per 5 sources/sinks enumerated |
 | **Hammer** | 30 XP | +20 for successful instrumentation |
+
+**Note**: XP rewards apply when agents invoke workshop tools through the programmatic API. Direct CLI usage (e.g., `/workshop saw "<code>"`) tracks the analysis but does not award XP since no agent is performing the work.
 
 ### Real-World Example: Security Audit Workflow
 

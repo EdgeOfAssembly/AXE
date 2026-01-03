@@ -109,7 +109,7 @@ try:
 except ImportError:
     HAS_WORKSHOP = False
     HAS_CHISEL = HAS_SAW = HAS_PLANE = HAS_HAMMER = False
-    print("Note: Workshop tools not available. Install with: pip install angr frida-python psutil")
+    # Note: Saw and Plane are built-in tools. For full functionality: pip install angr (Chisel), frida-python psutil (Hammer)
 
 # Models that require max_completion_tokens instead of max_tokens
 # GPT-5 and future models use the new parameter name
@@ -3471,7 +3471,7 @@ Examples:
     def run_saw(self, args: str) -> None:
         """Run Saw taint analysis tool."""
         if not HAS_SAW or self.workshop_saw is None:
-            print(c("Saw not available. Install with: pip install angr", Colors.RED))
+            print(c("Saw not available. This is a built-in tool; please check your AXE installation.", Colors.RED))
             return
         
         if not args:
@@ -3505,7 +3505,7 @@ Examples:
     def run_plane(self, args: str) -> None:
         """Run Plane source/sink enumeration tool."""
         if not HAS_PLANE or self.workshop_plane is None:
-            print(c("Plane not available. Install with: pip install angr", Colors.RED))
+            print(c("Plane not available. This is a built-in tool; please check your AXE installation.", Colors.RED))
             return
         
         if not args:
