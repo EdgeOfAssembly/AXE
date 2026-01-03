@@ -1636,11 +1636,17 @@ class ResponseProcessor:
         # First, check for XML function calls
         original_response, xml_results = process_xml_calls(response, self.project_dir, self)
         
-        # Pattern to match code blocks: ```TYPE [args]\ncontent\n```
-        # Matches READ, EXEC, WRITE blocks
-        pattern = r'```(READ|EXEC|WRITE)\s*([^\n]*)\n(.*?)```'
+        # Pattern to match code blocks in both inline and multiline formats:
+        # - Inline: ```TYPE args``` (no newline, args on same line)
+        # - Multiline: ```TYPE args\ncontent\n``` (newline separates args from content)
+        # 
+        # Key fixes:
+        # - [^\n`]*? in args group prevents matching backticks (fixes inline format bug)
+        # - (?:\n((?:(?!```).)*?))? makes newline+content optional (supports inline)
+        # - (?!```) negative lookahead stops at first ``` (prevents wrong closing match)
+        BLOCK_PATTERN = r'```(READ|EXEC|WRITE)\s*([^\n`]*?)(?:\n((?:(?!```).)*?))?```'
         
-        matches = list(re.finditer(pattern, response, re.DOTALL))
+        matches = list(re.finditer(BLOCK_PATTERN, response, re.DOTALL))
         
         # Collect all results (both XML and markdown blocks)
         all_results = []
@@ -1657,7 +1663,7 @@ class ResponseProcessor:
             for match in matches:
                 block_type = match.group(1)
                 args = match.group(2).strip()
-                content = match.group(3).rstrip('\n')
+                content = match.group(3).rstrip('\n') if match.group(3) else ''
                 
                 if block_type == 'READ':
                     # Sanitize filename: strip trailing backticks that may be included by accident
