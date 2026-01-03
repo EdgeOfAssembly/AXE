@@ -2765,7 +2765,74 @@ It's YOUR TURN. What would you like to contribute? Remember:
                         else:
                             response = "[No response from model]"
                 except Exception as e:
-                    response = f"[API Error: {e}]"
+                    error_str = str(e)
+                    
+                    # Detect token limit errors (413 or specific error messages)
+                    is_token_limit = (
+                        '413' in error_str or 
+                        'tokens_limit_reached' in error_str.lower() or
+                        'context_length_exceeded' in error_str.lower() or
+                        'maximum context length' in error_str.lower()
+                    )
+                    
+                    if is_token_limit:
+                        print(c(f"\n⚠️  Token limit error detected for {alias}", Colors.RED))
+                        print(c(f"   Error: {error_str[:200]}", Colors.DIM))
+                        
+                        # Log the error
+                        if agent_id:
+                            self.db.log_supervisor_event(
+                                self.agent_ids.get(self.supervisor_name),
+                                'token_limit_error',
+                                {
+                                    'agent_id': agent_id,
+                                    'alias': alias,
+                                    'error': error_str[:500],
+                                    'timestamp': datetime.now().isoformat()
+                                }
+                            )
+                        
+                        # If this is a recurring issue, mark agent as incapacitated
+                        # Check recent error count for this agent
+                        if agent_id:
+                            state = self.db.load_agent_state(agent_id)
+                            error_count = state.get('error_count', 0) if state else 0
+                            error_count += 1
+                            
+                            if error_count >= 3:
+                                print(c(f"   ⚠️  {alias} has hit token limit {error_count} times, forcing sleep", Colors.YELLOW))
+                                # Force agent to sleep to give it time to recover
+                                self.sleep_manager.force_sleep(
+                                    agent_id, 
+                                    'Token limit errors',
+                                    self.agent_ids.get(self.supervisor_name)
+                                )
+                                
+                                # Supervisor can spawn a replacement if needed
+                                if alias == self.supervisor_alias:
+                                    print(c(f"   Note: Supervisor cannot be replaced. Continuing with reduced capacity.", Colors.YELLOW))
+                                else:
+                                    print(c(f"   Suggestion: @boss can spawn a replacement agent if needed", Colors.CYAN))
+                            
+                            # Update error count in database
+                            if state:
+                                self.db.save_agent_state(
+                                    agent_id=agent_id,
+                                    alias=state.get('alias', alias),
+                                    model_name=state.get('model_name', 'unknown'),
+                                    memory_dict=state.get('memory', {}),
+                                    diffs=state.get('diffs', []),
+                                    error_count=error_count,
+                                    xp=state.get('xp', 0),
+                                    level=state.get('level', 1),
+                                    supervisor_id=state.get('supervisor_id')
+                                )
+                        
+                        response = f"[Token Limit Error: Unable to process request due to context length. Error count: {error_count}]"
+                    else:
+                        # Other API errors
+                        print(c(f"\n⚠️  API Error for {alias}: {error_str[:200]}", Colors.YELLOW))
+                        response = f"[API Error: {e}]"
                 
                 # Process response for code blocks (READ, EXEC, WRITE)
                 processed_response = self.response_processor.process_response(response, current_agent)
