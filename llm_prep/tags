@@ -52,105 +52,233 @@
 "Agents not cooperating"	QUICK_REFERENCE.md	/^### "Agents not cooperating"$/;"	S	section:AXE Multiagent - Quick Reference Card""Common Scenarios
 "System slowing down"	QUICK_REFERENCE.md	/^### "System slowing down"$/;"	S	section:AXE Multiagent - Quick Reference Card""Common Scenarios
 "Want to resume later"	QUICK_REFERENCE.md	/^### "Want to resume later"$/;"	S	section:AXE Multiagent - Quick Reference Card""Common Scenarios
+$ python3 test_xml_tool_parser.py	XML_PARSER_IMPLEMENTATION.md	/^$ python3 test_xml_tool_parser.py$/;"	c
+- \\Z (end of string)	.collab_log.md	/^#   - \\Z (end of string)$/;"	c
+- \\n\\[(?!\\[)[A-Z] (newline + [ + not another [ + any letter, indicating [COMMAND]) OR	.collab_log.md	/^#   - \\n\\[(?!\\[)[A-Z] (newline + [ + not another [ + any letter, indicating [COMMAND]) OR$/;"	c
+- \\n\\n (double newline) OR	.collab_log.md	/^#   - \\n\\n (double newline) OR$/;"	c
+1. Added `get_database_path()` Helper Function	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### 1. Added `get_database_path()` Helper Function$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Core Changes
+1. Bash XML Tags (Claude's Favorite)	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^### 1. Bash XML Tags (Claude's Favorite)$/;"	S	section:Multi-Format Tool Call Parser - Quick Reference""Supported Formats
+1. Class Constants (Lines 1121-1148)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 1. Class Constants (Lines 1121-1148)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+1. Defensive Programming in `run()` Method	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### 1. Defensive Programming in `run()` Method$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Solution Implemented
 1. Mission First – The Project / Task Is Sacred	IMPROVEMENTS_FINAL.md	/^#### 1. Mission First – The Project \/ Task Is Sacred$/;"	t	subsection:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules""Display at session start (pinned message):
-1. Run the Test Suite	IMPLEMENTATION_COMPLETE.md	/^### 1. Run the Test Suite$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""How to Use
+1. Patch Files	WRITE_BLOCKS_GUIDE.md	/^### 1. Patch Files$/;"	S	section:WRITE Block Functionality - User Guide""Use Cases
+1. Simple Text File	WRITE_BLOCKS_GUIDE.md	/^### 1. Simple Text File$/;"	S	section:WRITE Block Functionality - User Guide""Examples
+1. Subshells with Parentheses	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 1. Subshells with Parentheses$/;"	S	section:Shell Operator Support Implementation Summary""Edge Cases Fixed
+2. Configuration Files	WRITE_BLOCKS_GUIDE.md	/^### 2. Configuration Files$/;"	S	section:WRITE Block Functionality - User Guide""Use Cases
+2. Enhanced Documentation	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### 2. Enhanced Documentation$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Solution Implemented
+2. Python Script	WRITE_BLOCKS_GUIDE.md	/^### 2. Python Script$/;"	S	section:WRITE Block Functionality - User Guide""Examples
+2. Redirects Without Spaces	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 2. Redirects Without Spaces$/;"	S	section:Shell Operator Support Implementation Summary""Edge Cases Fixed
 2. Respect & Well-Being – No Real Bullying	IMPROVEMENTS_FINAL.md	/^#### 2. Respect & Well-Being – No Real Bullying$/;"	t	subsection:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules""Display at session start (pinned message):
-2. Run the Interactive Demo	IMPLEMENTATION_COMPLETE.md	/^### 2. Run the Interactive Demo$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""How to Use
+2. Shell Code Blocks	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^### 2. Shell Code Blocks$/;"	S	section:Multi-Format Tool Call Parser - Quick Reference""Supported Formats
+2. Updated `AgentDatabase.__init__()`	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### 2. Updated `AgentDatabase.__init__()`$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Core Changes
+2. `__init__(config: Config, project_dir: str)` (Lines 1150-1171)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 2. `__init__(config: Config, project_dir: str)` (Lines 1150-1171)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+3. AXE Native Blocks	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^### 3. AXE Native Blocks$/;"	S	section:Multi-Format Tool Call Parser - Quick Reference""Supported Formats
 3. Chain of Command – Escalate Properly	IMPROVEMENTS_FINAL.md	/^#### 3. Chain of Command – Escalate Properly$/;"	t	subsection:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules""Display at session start (pinned message):
-3. Test with Live Models	IMPLEMENTATION_COMPLETE.md	/^### 3. Test with Live Models$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""How to Use
+3. Documentation	WRITE_BLOCKS_GUIDE.md	/^### 3. Documentation$/;"	S	section:WRITE Block Functionality - User Guide""Use Cases
+3. File in Subdirectory	WRITE_BLOCKS_GUIDE.md	/^### 3. File in Subdirectory$/;"	S	section:WRITE Block Functionality - User Guide""Examples
+3. Inline Comments	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### 3. Inline Comments$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Solution Implemented
+3. Nested Subshells	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 3. Nested Subshells$/;"	S	section:Shell Operator Support Implementation Summary""Edge Cases Fixed
+3. Updated Function Signatures	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### 3. Updated Function Signatures$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Core Changes
+3. `_strip_heredoc_content(cmd: str) -> str` (Lines 1173-1287)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 3. `_strip_heredoc_content(cmd: str) -> str` (Lines 1173-1287)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+4. Comprehensive Test Suite	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### 4. Comprehensive Test Suite$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Solution Implemented
+4. Exported Helper Function	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### 4. Exported Helper Function$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Core Changes
+4. Multiple Files in One Response	WRITE_BLOCKS_GUIDE.md	/^### 4. Multiple Files in One Response$/;"	S	section:WRITE Block Functionality - User Guide""Examples
 4. Performance & Rewards – Good Work Gets Recognized	IMPROVEMENTS_FINAL.md	/^#### 4. Performance & Rewards – Good Work Gets Recognized$/;"	t	subsection:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules""Display at session start (pinned message):
+4. Test Files	WRITE_BLOCKS_GUIDE.md	/^### 4. Test Files$/;"	S	section:API Documentation""Endpoints
+4. `_extract_commands_from_shell(cmd: str) -> List[str]` (Lines 1289-1408)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 4. `_extract_commands_from_shell(cmd: str) -> List[str]` (Lines 1289-1408)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+5. Build Scripts	WRITE_BLOCKS_GUIDE.md	/^### 5. Build Scripts$/;"	S	section:API Documentation""Endpoints
+5. `_needs_shell(cmd: str) -> bool` (Lines 1410-1458)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 5. `_needs_shell(cmd: str) -> bool` (Lines 1410-1458)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+6. Updated `is_tool_allowed(cmd: str)` (Lines 1460-1542)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 6. Updated `is_tool_allowed(cmd: str)` (Lines 1460-1542)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+7. Updated `run(cmd: str, ...)` (Lines 1544-1629)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 7. Updated `run(cmd: str, ...)` (Lines 1544-1629)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+========== Persistence Lifecycle Hooks ==========	.collab_log.md	/^# ========== Persistence Lifecycle Hooks ==========$/;"	c
+========== Phase 10: Dynamic Spawning ==========	.collab_log.md	/^# ========== Phase 10: Dynamic Spawning ==========$/;"	c
+========== Phase 6: Sleep Manager ==========	.collab_log.md	/^# ========== Phase 6: Sleep Manager ==========$/;"	c
+========== Phase 8: Emergency Mailbox ==========	.collab_log.md	/^# ========== Phase 8: Emergency Mailbox ==========$/;"	c
+========== Phase 9: Break System ==========	.collab_log.md	/^# ========== Phase 9: Break System ==========$/;"	c
 AGENT_STATE_MIGRATIONS	database/schema.py	/^AGENT_STATE_MIGRATIONS = [$/;"	v
 AGENT_STATE_TABLE	database/schema.py	/^AGENT_STATE_TABLE = """$/;"	v
+AGENT_TOKEN_BREAK_REQUEST	axe.py	/^AGENT_TOKEN_BREAK_REQUEST = "[[AGENT_BREAK_REQUEST:"  # Followed by type, reason, ends with ]]$/;"	v
+AGENT_TOKEN_EMERGENCY	axe.py	/^AGENT_TOKEN_EMERGENCY = "[[AGENT_EMERGENCY:"  # Followed by message, ends with ]]$/;"	v
+AGENT_TOKEN_PASS	axe.py	/^AGENT_TOKEN_PASS = "[[AGENT_PASS_TURN]]"$/;"	v
+AGENT_TOKEN_SPAWN	axe.py	/^AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"  # Followed by model, role, ends with ]]$/;"	v
+AGENT_TOKEN_STATUS	axe.py	/^AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"$/;"	v
+AGENT_TOKEN_TASK_COMPLETE	axe.py	/^AGENT_TOKEN_TASK_COMPLETE = "[[AGENT_TASK_COMPLETE:"  # Followed by summary, ends with ]]$/;"	v
 ALIAS_MAPPINGS_TABLE	database/schema.py	/^ALIAS_MAPPINGS_TABLE = """$/;"	v
+API Documentation	WRITE_BLOCKS_GUIDE.md	/^# API Documentation$/;"	c
 API Endpoints Summary	API_PROVIDERS.md	/^### API Endpoints Summary$/;"	S	section:AXE API Provider Documentation""Quick Reference
+API Keys Setup	.collab_log.md	/^### API Keys Setup$/;"	S	section:AXE - Agent eXecution Engine""Configuration
 API Keys Setup	README.md	/^### API Keys Setup$/;"	S	section:AXE - Agent eXecution Engine""Configuration
 API Provider Limits	IMPROVEMENTS_FINAL.md	/^### API Provider Limits$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Dynamic Spawning
+API Providers	.collab_log.md	/^## API Providers$/;"	s	chapter:AXE - Agent eXecution Engine
 API Providers	README.md	/^## API Providers$/;"	s	chapter:AXE - Agent eXecution Engine
+AXE - Agent eXecution Engine	.collab_log.md	/^# AXE - Agent eXecution Engine$/;"	c
+AXE - Agent eXecution Engine	MISSION.md	/^# AXE - Agent eXecution Engine$/;"	c
 AXE - Agent eXecution Engine	README.md	/^# AXE - Agent eXecution Engine$/;"	c
 AXE API Provider Documentation	API_PROVIDERS.md	/^# AXE API Provider Documentation$/;"	c
 AXE Multi-Agent System - Improvement Reference Guide	IMPROVEMENTS_FINAL.md	/^# AXE Multi-Agent System - Improvement Reference Guide$/;"	c
 AXE Multi-Agent System - Model Configuration Reference	MODELS_FINAL.md	/^# AXE Multi-Agent System - Model Configuration Reference$/;"	c
 AXE Multiagent - Quick Reference Card	QUICK_REFERENCE.md	/^# AXE Multiagent - Quick Reference Card$/;"	c
-AXE Multiagent AI Safety Implementation - COMPLETE	IMPLEMENTATION_COMPLETE.md	/^# AXE Multiagent AI Safety Implementation - COMPLETE$/;"	c
 AXE Multiagent Improvements - Implementation Summary	IMPROVEMENTS_README.md	/^# AXE Multiagent Improvements - Implementation Summary$/;"	c
+AXE Multiple Issues Fix Summary	FIXES_SUMMARY.md	/^# AXE Multiple Issues Fix Summary$/;"	c
 AXE.PY Refactoring Notes	REFACTORING_NOTES.md	/^# AXE.PY Refactoring Notes$/;"	c
+Action Items for Team	.collab_log.md	/^## Action Items for Team$/;"	s	chapter:Supervisor @boss - Consolidation & Security Audit
+Advanced Usage	.collab_log.md	/^## Advanced Usage$/;"	s	chapter:AXE - Agent eXecution Engine
 Advanced Usage	README.md	/^## Advanced Usage$/;"	s	chapter:AXE - Agent eXecution Engine
+After	BEFORE_AFTER_COMPARISON.md	/^### After$/;"	S	section:Before/After Comparison of Fixes""Issue 1: READ Block Access Denied
+After	BEFORE_AFTER_COMPARISON.md	/^### After$/;"	S	section:Before/After Comparison of Fixes""Issue 3: Auto-approve Not Default in Collab Mode
+After	DATABASE_LOCATION_FIX_SUMMARY.md	/^### After$/;"	S	section:Database Location Fix - Implementation Summary""Impact After Fix
 After	REFACTORING_NOTES.md	/^### After$/;"	S	section:AXE.PY Refactoring Notes""Refactoring Summary
+After (axe.yaml)	BEFORE_AFTER_COMPARISON.md	/^### After (axe.yaml)$/;"	S	section:Before/After Comparison of Fixes""Issue 2: Llama 405B Model Deprecated
+After Fix	IMPLEMENTATION_COMPLETE.md	/^### After Fix$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Impact
 Agent Aliases	IMPROVEMENTS_FINAL.md	/^## Agent Aliases$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
+Agent Communication Tokens	.collab_log.md	/^## Agent Communication Tokens$/;"	s	chapter:AXE - Agent eXecution Engine
+Agent Communication Tokens	MISSION.md	/^## Agent Communication Tokens$/;"	s	chapter:AXE - Agent eXecution Engine
+Agent Communication: Unique Token System	.collab_log.md	/^# Agent Communication: Unique Token System$/;"	c
 Agent Lifecycle	IMPROVEMENTS_README.md	/^### Agent Lifecycle$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Architecture Notes
 Agent Ranks & Levels	QUICK_REFERENCE.md	/^## Agent Ranks & Levels$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+Agent Reference	.collab_log.md	/^## Agent Reference$/;"	s	chapter:AXE - Agent eXecution Engine
 Agent Reference	README.md	/^## Agent Reference$/;"	s	chapter:AXE - Agent eXecution Engine
 Agent Session Commands	IMPROVEMENTS_FINAL.md	/^### Agent Session Commands$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Quick Reference Commands
+Agent doesn't use WRITE blocks	WRITE_BLOCKS_GUIDE.md	/^### Agent doesn't use WRITE blocks$/;"	S	section:WRITE Block Functionality - User Guide""Troubleshooting
 AgentDatabase	database/agent_db.py	/^class AgentDatabase:$/;"	c
+AgentDatabase class now imported from database module	.collab_log.md	/^# AgentDatabase class now imported from database module$/;"	c
 AgentManager	axe.py	/^class AgentManager:$/;"	c
 AgentWorkerProcess	core/multiprocess.py	/^class AgentWorkerProcess:$/;"	c
+Agents Now Working	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Agents Now Working$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Impact
 Aliases	QUICK_REFERENCE.md	/^## Aliases$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+All methods including award_xp, save_agent_state, load_agent_state, sleep management,	.collab_log.md	/^# All methods including award_xp, save_agent_state, load_agent_state, sleep management,$/;"	c
+Analysis	.collab_log.md	/^### Analysis$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Analysis	README.md	/^### Analysis$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
+Anthropic (Claude)	.collab_log.md	/^### Anthropic (Claude)$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 Anthropic (Claude)	API_PROVIDERS.md	/^## Anthropic (Claude)$/;"	s	chapter:AXE API Provider Documentation
 Anthropic (Claude)	MODELS_FINAL.md	/^## Anthropic (Claude)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Anthropic (Claude)	README.md	/^### Anthropic (Claude)$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 Architecture	IMPROVEMENTS_FINAL.md	/^### Architecture$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
 Architecture Notes	IMPROVEMENTS_README.md	/^## Architecture Notes$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
+Architecture Overview	.collab_log.md	/^## Architecture Overview$/;"	s	chapter:AXE - Agent eXecution Engine
+Architecture Overview	MISSION.md	/^## Architecture Overview$/;"	s	chapter:AXE - Agent eXecution Engine
+Author	.collab_log.md	/^## Author$/;"	s	chapter:AXE - Agent eXecution Engine
 Author	README.md	/^## Author$/;"	s	chapter:AXE - Agent eXecution Engine
+Auto-Approve Mode (Non-Interactive)	.collab_log.md	/^### Auto-Approve Mode (Non-Interactive)$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
 Auto-Approve Mode (Non-Interactive)	README.md	/^### Auto-Approve Mode (Non-Interactive)$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
-Automated Tests ✅	IMPLEMENTATION_COMPLETE.md	/^### Automated Tests ✅$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Testing Results
+Autonomous Collaborative Sessions (NEW!)	.collab_log.md	/^### Autonomous Collaborative Sessions (NEW!)$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Autonomous Collaborative Sessions (NEW!)	README.md	/^### Autonomous Collaborative Sessions (NEW!)$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
+Available Agents	.collab_log.md	/^### Available Agents$/;"	S	section:AXE - Agent eXecution Engine""Agent Reference
 Available Agents	README.md	/^### Available Agents$/;"	S	section:AXE - Agent eXecution Engine""Agent Reference
 Available Models	MODELS_FINAL.md	/^### Available Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""GitHub Models
 BLUE	utils/formatting.py	/^    BLUE = '\\033[94m'$/;"	v	class:Colors
 BOLD	utils/formatting.py	/^    BOLD = '\\033[1m'$/;"	v	class:Colors
 Background Monitor Thread	IMPROVEMENTS_FINAL.md	/^### Background Monitor Thread$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Resource Monitoring
+Backward Compatibility	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Backward Compatibility$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Impact
+Backward Compatibility	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Backward Compatibility$/;"	s	chapter:Database Location Fix - Implementation Summary
+Backward Compatibility	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Backward Compatibility$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Backward Compatibility	REFACTORING_NOTES.md	/^### Backward Compatibility$/;"	S	section:AXE.PY Refactoring Notes""Design Decisions
+Backwards Compatibility	IMPLEMENTATION_SUMMARY.md	/^## Backwards Compatibility$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
+Basic Agent Conversations	.collab_log.md	/^### Basic Agent Conversations$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Basic Agent Conversations	README.md	/^### Basic Agent Conversations$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
+Batch Processing	.collab_log.md	/^### Batch Processing$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
 Batch Processing	README.md	/^### Batch Processing$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
+Before	BEFORE_AFTER_COMPARISON.md	/^### Before$/;"	S	section:Before/After Comparison of Fixes""Issue 1: READ Block Access Denied
+Before	BEFORE_AFTER_COMPARISON.md	/^### Before$/;"	S	section:Before/After Comparison of Fixes""Issue 3: Auto-approve Not Default in Collab Mode
+Before	BEFORE_AFTER_COMPARISON.md	/^### Before$/;"	S	section:Before/After Comparison of Fixes""Issue 4: Agents Confused About READ/WRITE Block Syntax
+Before	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Before$/;"	S	section:Database Location Fix - Implementation Summary""Impact After Fix
 Before	REFACTORING_NOTES.md	/^### Before$/;"	S	section:AXE.PY Refactoring Notes""Refactoring Summary
+Before (axe.yaml)	BEFORE_AFTER_COMPARISON.md	/^### Before (axe.yaml)$/;"	S	section:Before/After Comparison of Fixes""Issue 2: Llama 405B Model Deprecated
+Before Fix	IMPLEMENTATION_COMPLETE.md	/^### Before Fix$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Impact
+Before/After Comparison of Fixes	BEFORE_AFTER_COMPARISON.md	/^# Before\/After Comparison of Fixes$/;"	c
+Behavior	WRITE_BLOCKS_GUIDE.md	/^### Behavior$/;"	S	section:WRITE Block Functionality - User Guide""Security and Permissions
 Benefits	REFACTORING_NOTES.md	/^## Benefits$/;"	s	chapter:AXE.PY Refactoring Notes
 Best Practices	IMPROVEMENTS_FINAL.md	/^### Best Practices$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Persistent Storage
+Best Practices	WRITE_BLOCKS_GUIDE.md	/^## Best Practices$/;"	s	chapter:API Documentation
 Break Activities	IMPROVEMENTS_FINAL.md	/^### Break Activities$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Break System
 Break System	IMPROVEMENTS_FINAL.md	/^## Break System$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Break Triggers	IMPROVEMENTS_FINAL.md	/^### Break Triggers$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Break System
 BreakSystem	axe.py	/^class BreakSystem:$/;"	c
+Bug 1: False "TASK COMPLETE" Detection ✅	IMPLEMENTATION_COMPLETE.md	/^## Bug 1: False "TASK COMPLETE" Detection ✅$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
+Bug 1: False "TASK COMPLETE" Detection ✅	TASK_COMPLETION_FIX_SUMMARY.md	/^## Bug 1: False "TASK COMPLETE" Detection ✅$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
+Bug 2: Active Agents Counter ✅	IMPLEMENTATION_COMPLETE.md	/^## Bug 2: Active Agents Counter ✅$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
+Bug 2: Active Agents Counter ✅	TASK_COMPLETION_FIX_SUMMARY.md	/^## Bug 2: Active Agents Counter ✅$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
+Building	.collab_log.md	/^### Building$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Building	README.md	/^### Building$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 COLLAB_CONTENT_LIMIT	axe.py	/^COLLAB_CONTENT_LIMIT = 2000    # Max chars per message in history$/;"	v
 COLLAB_HISTORY_LIMIT	axe.py	/^COLLAB_HISTORY_LIMIT = 20      # Max messages to show in conversation history$/;"	v
 COLLAB_PASS_MULTIPLIER	axe.py	/^COLLAB_PASS_MULTIPLIER = 2     # Times agents can pass before session ends$/;"	v
 COLLAB_SHARED_NOTES_LIMIT	axe.py	/^COLLAB_SHARED_NOTES_LIMIT = 500  # Max chars of shared notes to show$/;"	v
 CYAN	utils/formatting.py	/^    CYAN = '\\033[96m'$/;"	v	class:Colors
+Chain of Thought	.collab_log.md	/^### Chain of Thought$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Chain of Thought	README.md	/^### Chain of Thought$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
+Changelog	WRITE_BLOCKS_GUIDE.md	/^## Changelog$/;"	s	chapter:API Documentation
+Changes Made	TASK_COMPLETION_FIX_SUMMARY.md	/^### Changes Made$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 1: False "TASK COMPLETE" Detection ✅
+Changes Made	TASK_COMPLETION_FIX_SUMMARY.md	/^### Changes Made$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 2: Active Agents Counter ✅
 Chat Commands	QUICK_REFERENCE.md	/^### Chat Commands$/;"	S	section:AXE Multiagent - Quick Reference Card""Commands
+Chat Commands Reference	.collab_log.md	/^## Chat Commands Reference$/;"	s	chapter:AXE - Agent eXecution Engine
 Chat Commands Reference	README.md	/^## Chat Commands Reference$/;"	s	chapter:AXE - Agent eXecution Engine
 Chat-style cURL Example	API_PROVIDERS.md	/^### Chat-style cURL Example$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
 ChatSession	axe.py	/^class ChatSession:$/;"	c
+Checking Current Safety Implementation	.collab_log.md	/^## Checking Current Safety Implementation$/;"	s	chapter:Supervisor @boss - Security Audit Deep Dive
 Checking Resource Usage	IMPROVEMENTS_README.md	/^### Checking Resource Usage$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Usage Examples
+Clone and Setup	.collab_log.md	/^### Clone and Setup$/;"	S	section:AXE - Agent eXecution Engine""Installation
 Clone and Setup	README.md	/^### Clone and Setup$/;"	S	section:AXE - Agent eXecution Engine""Installation
-Code Quality ✅	IMPLEMENTATION_COMPLETE.md	/^### Code Quality ✅$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Testing Results
+Code Block Parser	WRITE_BLOCKS_GUIDE.md	/^### Code Block Parser$/;"	S	section:WRITE Block Functionality - User Guide""Implementation Details
+Code Changes	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Code Changes$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Solution
+Code Comments Coverage	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Code Comments Coverage$/;"	S	section:Shell Operator Support Implementation Summary""Documentation & Comments
+Code Flow	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Code Flow$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Code Quality	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Code Quality$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
+Code Quality	TASK_COMPLETION_FIX_SUMMARY.md	/^### Code Quality$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Validation
+Code Quality Deep Dive & Refactors	.collab_log.md	/^## Code Quality Deep Dive & Refactors$/;"	s	chapter:Supervisor @boss - Coordination Update
+Code Quality Review (Initial Findings)	.collab_log.md	/^## Code Quality Review (Initial Findings)$/;"	s	chapter:AXE - Agent eXecution Engine
+Code Review Addressed	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Code Review Addressed$/;"	s	chapter:Shell Operator Support Implementation Summary
+Code Review Issues Addressed	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Code Review Issues Addressed$/;"	S	section:Multi-Format Tool Call Parser Implementation""Code Quality
+Code Review ✅	IMPLEMENTATION_COMPLETE.md	/^## Code Review ✅$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
 Code Statistics	llm_prep/codebase_overview.md	/^## Code Statistics$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-01
+Collaborative Problem Solving	.collab_log.md	/^### Collaborative Problem Solving$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Collaborative Problem Solving	README.md	/^### Collaborative Problem Solving$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
+Collaborative Session Log	.collab_log.md	/^# Collaborative Session Log$/;"	c
 Collaborative Session Log	team_test/.collab_log.md	/^# Collaborative Session Log$/;"	c
+Collaborative Session Notes	.collab_shared.md	/^# Collaborative Session Notes$/;"	c
 Collaborative Session Notes	team_test/.collab_shared.md	/^# Collaborative Session Notes$/;"	c
+Collaborative session constants	.collab_log.md	/^# Collaborative session constants$/;"	c
 CollaborativeSession	axe.py	/^class CollaborativeSession:$/;"	c
 Colors	utils/formatting.py	/^class Colors:$/;"	c
+Command:	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### Command:$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Example - Before vs After
 Commands	QUICK_REFERENCE.md	/^## Commands$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+Commands Now Working	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Commands Now Working$/;"	s	chapter:Shell Operator Support Implementation Summary
+Commercial License	.collab_log.md	/^### Commercial License$/;"	S	section:AXE - Agent eXecution Engine""License
 Commercial License	README.md	/^### Commercial License$/;"	S	section:AXE - Agent eXecution Engine""License
+Common Issues	.collab_log.md	/^### Common Issues$/;"	S	section:AXE - Agent eXecution Engine""Troubleshooting
 Common Issues	API_PROVIDERS.md	/^### Common Issues$/;"	S	section:AXE API Provider Documentation""Troubleshooting
 Common Issues	README.md	/^### Common Issues$/;"	S	section:AXE - Agent eXecution Engine""Troubleshooting
 Common Scenarios	QUICK_REFERENCE.md	/^## Common Scenarios$/;"	s	chapter:AXE Multiagent - Quick Reference Card
-Conclusion	IMPLEMENTATION_COMPLETE.md	/^## Conclusion$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
+Conclusion	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Conclusion$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Conclusion	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Conclusion$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Conclusion	IMPLEMENTATION_SUMMARY.md	/^## Conclusion$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
 Config	axe.py	/^class Config:$/;"	c
+Configuration	.collab_log.md	/^## Configuration$/;"	s	chapter:AXE - Agent eXecution Engine
 Configuration	MODELS_FINAL.md	/^### Configuration$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Anthropic (Claude)
 Configuration	MODELS_FINAL.md	/^### Configuration$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""GitHub Models
 Configuration	MODELS_FINAL.md	/^### Configuration$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""HuggingFace (Llama)
 Configuration	MODELS_FINAL.md	/^### Configuration$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""OpenAI (GPT)
 Configuration	MODELS_FINAL.md	/^### Configuration$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""xAI (Grok)
 Configuration	README.md	/^## Configuration$/;"	s	chapter:AXE - Agent eXecution Engine
+Configuration File (axe.yaml)	.collab_log.md	/^### Configuration File (axe.yaml)$/;"	S	section:AXE - Agent eXecution Engine""Configuration
 Configuration File (axe.yaml)	README.md	/^### Configuration File (axe.yaml)$/;"	S	section:AXE - Agent eXecution Engine""Configuration
+Configuration file	XML_PARSER_IMPLEMENTATION.md	/^# Configuration file$/;"	c
+Content not written correctly	WRITE_BLOCKS_GUIDE.md	/^### Content not written correctly$/;"	S	section:WRITE Block Functionality - User Guide""Troubleshooting
 Continue Attempt to Find `axe.py`	team_test/.collab_log.md	/^#### Continue Attempt to Find `axe.py`  $/;"	t	subsection:Hello Team! 👋""Team Coordination Plan 📋""Finalizing Introduction & Locating `axe.py`
+Contributing	.collab_log.md	/^## Contributing$/;"	s	chapter:AXE - Agent eXecution Engine
+Contributing	MISSION.md	/^## Contributing$/;"	s	chapter:AXE - Agent eXecution Engine
 Contributing	README.md	/^## Contributing$/;"	s	chapter:AXE - Agent eXecution Engine
 Contribution	team_test/.collab_log.md	/^### Contribution  $/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
+Contribution: Security Audit Progress and Action Plan Updates	.collab_log.md	/^### Contribution: Security Audit Progress and Action Plan Updates$/;"	S	section:Supervisor @boss - Consolidation & Security Audit""Refactoring Plan Additions (Creative Angles)
+Core Changes	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Core Changes$/;"	S	section:Database Location Fix - Implementation Summary""Solution Implemented
+Core Principles	.collab_log.md	/^## Core Principles$/;"	s	chapter:AXE - Agent eXecution Engine
+Core Principles	MISSION.md	/^## Core Principles$/;"	s	chapter:AXE - Agent eXecution Engine
 Core Safety Features	IMPROVEMENTS_FINAL.md	/^## Core Safety Features$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
-Created	IMPLEMENTATION_COMPLETE.md	/^### Created$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Files Added/Modified
 Credits	IMPROVEMENTS_README.md	/^## Credits$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
+Critical Security Follow-up	.collab_log.md	/^## Critical Security Follow-up$/;"	s	chapter:Supervisor @boss - Consolidation & Security Audit
+Custom Project Directory	.collab_log.md	/^### Custom Project Directory$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
 Custom Project Directory	README.md	/^### Custom Project Directory$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
+Custom System Prompts	.collab_log.md	/^### Custom System Prompts$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
 Custom System Prompts	README.md	/^### Custom System Prompts$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
 DEFAULT_CONFIG	axe.py	/^DEFAULT_CONFIG = {$/;"	v
 DEFAULT_METADATA	models/metadata.py	/^DEFAULT_METADATA = {$/;"	v
@@ -159,20 +287,29 @@ DIFF_HISTORY_LIMIT	axe.py	/^DIFF_HISTORY_LIMIT = 20         # Number of recent d
 DIM	utils/formatting.py	/^    DIM = '\\033[2m'$/;"	v	class:Colors
 Database	QUICK_REFERENCE.md	/^## Database$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Database Inspection	IMPROVEMENTS_README.md	/^## Database Inspection$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
+Database Location Fix - Implementation Summary	DATABASE_LOCATION_FIX_SUMMARY.md	/^# Database Location Fix - Implementation Summary$/;"	c
+Debugging	.collab_log.md	/^### Debugging$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Debugging	README.md	/^### Debugging$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
+Default configuration	.collab_log.md	/^# Default configuration$/;"	c
 Degradation Monitoring	IMPROVEMENTS_FINAL.md	/^## Degradation Monitoring$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
-Demo Tests ✅	IMPLEMENTATION_COMPLETE.md	/^### Demo Tests ✅$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Testing Results
 Design Decisions	REFACTORING_NOTES.md	/^## Design Decisions$/;"	s	chapter:AXE.PY Refactoring Notes
 Design Principles	IMPROVEMENTS_README.md	/^## Design Principles$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Diff-Based Error Detection Metrics	IMPROVEMENTS_FINAL.md	/^### Diff-Based Error Detection Metrics$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Degradation Monitoring
+Directory Access Control	IMPLEMENTATION_SUMMARY.md	/^### Directory Access Control$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Security Considerations
+Directory Access Control	WRITE_BLOCKS_GUIDE.md	/^### Directory Access Control$/;"	S	section:WRITE Block Functionality - User Guide""Security and Permissions
 Directory Structure	llm_prep/codebase_overview.md	/^## Directory Structure$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-01
 Disassembly & Analysis	README.md	/^### Disassembly & Analysis$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
+Disassembly &amp; Analysis	.collab_log.md	/^### Disassembly &amp; Analysis$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Display at session start (pinned message):	IMPROVEMENTS_FINAL.md	/^### Display at session start (pinned message):$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""GitHub Models
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""xAI (Grok)
+Documentation & Comments	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Documentation & Comments$/;"	s	chapter:Shell Operator Support Implementation Summary
+Documentation Tests	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Documentation Tests$/;"	S	section:Shell Operator Support Implementation Summary""Test Coverage
+Documentation Updates	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Documentation Updates$/;"	S	section:Database Location Fix - Implementation Summary""Solution Implemented
+Download	.collab_log.md	/^### Download$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Download	README.md	/^### Download$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 During Session	QUICK_REFERENCE.md	/^### During Session$/;"	S	section:AXE Multiagent - Quick Reference Card""Tips for Humans
 Dynamic Spawning	IMPROVEMENTS_FINAL.md	/^## Dynamic Spawning$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
@@ -180,10 +317,16 @@ DynamicSpawner	axe.py	/^class DynamicSpawner:$/;"	c
 EMERGENCY_MAILBOX_DIR	axe.py	/^EMERGENCY_MAILBOX_DIR = "\/tmp\/axe_emergency_mailbox"$/;"	v
 END	utils/formatting.py	/^    END = '\\033[0m'$/;"	v	class:Colors
 ERROR_THRESHOLD_PERCENT	axe.py	/^ERROR_THRESHOLD_PERCENT = 20    # Force sleep if error rate exceeds this$/;"	v
+ET	utils/xml_tool_parser.py	/^import xml.etree.ElementTree as ET$/;"	I	nameref:module:xml.etree.ElementTree
+Edge Case Test Suite (`test_tool_runner_edge_cases.py`)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Edge Case Test Suite (`test_tool_runner_edge_cases.py`)$/;"	S	section:Shell Operator Support Implementation Summary""Test Coverage
+Edge Cases (newly fixed):	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Edge Cases (newly fixed):$/;"	S	section:Shell Operator Support Implementation Summary""Commands Now Working
+Edge Cases Fixed	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Edge Cases Fixed$/;"	s	chapter:Shell Operator Support Implementation Summary
 Emergency Mailbox	IMPROVEMENTS_FINAL.md	/^## Emergency Mailbox$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 EmergencyMailbox	axe.py	/^class EmergencyMailbox:$/;"	c
+Emulation	.collab_log.md	/^### Emulation$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Emulation	README.md	/^### Emulation$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Encouraging Good Behavior	QUICK_REFERENCE.md	/^### Encouraging Good Behavior$/;"	S	section:AXE Multiagent - Quick Reference Card""Tips for Humans
+Endpoints	WRITE_BLOCKS_GUIDE.md	/^## Endpoints$/;"	s	chapter:API Documentation
 Environment Setup	MODELS_FINAL.md	/^### Environment Setup$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Quick Start
 Environment Variable	API_PROVIDERS.md	/^### Environment Variable$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
 Environment Variable	API_PROVIDERS.md	/^### Environment Variable$/;"	S	section:AXE API Provider Documentation""GitHub Models
@@ -191,11 +334,27 @@ Environment Variable	API_PROVIDERS.md	/^### Environment Variable$/;"	S	section:A
 Environment Variable	API_PROVIDERS.md	/^### Environment Variable$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
 Environment Variable	API_PROVIDERS.md	/^### Environment Variable$/;"	S	section:AXE API Provider Documentation""xAI (Grok)
 Environment Variables Summary	API_PROVIDERS.md	/^### Environment Variables Summary$/;"	S	section:AXE API Provider Documentation""Quick Reference
+Evidence of the Problem	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Evidence of the Problem$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Problem Statement
+Examining subprocess Usage in axe.py	.collab_log.md	/^## Examining subprocess Usage in axe.py$/;"	s	chapter:Supervisor @boss - Security Audit Deep Dive
+Examining tool_runner.py	.collab_log.md	/^## Examining tool_runner.py$/;"	s	chapter:Supervisor @boss - Security Audit Deep Dive
+Example - Before vs After	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Example - Before vs After$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Example 1: Claude's Natural Format	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Example 1: Claude's Natural Format$/;"	S	section:Multi-Format Tool Call Parser Implementation""Examples
+Example 2: Code Block Format	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Example 2: Code Block Format$/;"	S	section:Multi-Format Tool Call Parser Implementation""Examples
+Example: Multi-Agent Code Analysis	.collab_log.md	/^### Example: Multi-Agent Code Analysis$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Example: Multi-Agent Code Analysis	README.md	/^### Example: Multi-Agent Code Analysis$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Examples	IMPROVEMENTS_FINAL.md	/^### Examples$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Agent Aliases
+Examples	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Examples$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
+Examples	WRITE_BLOCKS_GUIDE.md	/^## Examples$/;"	s	chapter:WRITE Block Functionality - User Guide
+Executing Tools	.collab_log.md	/^### Executing Tools$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Executing Tools	README.md	/^### Executing Tools$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
-Executive Summary	IMPLEMENTATION_COMPLETE.md	/^## Executive Summary$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
+Execution (original version):	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### Execution (original version):$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Example - Before vs After
+Execution Order	WRITE_BLOCKS_GUIDE.md	/^### Execution Order$/;"	S	section:WRITE Block Functionality - User Guide""Implementation Details
+Existing Tests	HEREDOC_EXECUTION_FIX.md	/^### Existing Tests$/;"	S	section:Heredoc Execution Fix Summary""Testing
+Existing Tests	IMPLEMENTATION_COMPLETE.md	/^### Existing Tests  $/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Test Results
+Existing tests (verify no breakage)	XML_PARSER_QUICK_REFERENCE.md	/^# Existing tests (verify no breakage)$/;"	c
+Experience and level constants (now imported from progression module)	.collab_log.md	/^# Experience and level constants (now imported from progression module)$/;"	c
 Extracting Classes:	team_test/.collab_log.md	/^#### Extracting Classes:  $/;"	t	subsection:Hello Team! 👋""Team Coordination Plan 📋""Contribution
+Features	.collab_log.md	/^## Features$/;"	s	chapter:AXE - Agent eXecution Engine
 Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
 Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Documentation""GitHub Models
 Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
@@ -203,19 +362,39 @@ Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Document
 Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Documentation""xAI (Grok)
 Features	README.md	/^## Features$/;"	s	chapter:AXE - Agent eXecution Engine
 File Size	REFACTORING_NOTES.md	/^### File Size$/;"	S	section:AXE.PY Refactoring Notes""Metrics
-Files Added/Modified	IMPLEMENTATION_COMPLETE.md	/^## Files Added\/Modified$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
+File Writing Logic	WRITE_BLOCKS_GUIDE.md	/^### File Writing Logic$/;"	S	section:WRITE Block Functionality - User Guide""Implementation Details
+Files Changed	HEREDOC_EXECUTION_FIX.md	/^## Files Changed$/;"	s	chapter:Heredoc Execution Fix Summary
+Files Changed	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Files Changed$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
+Files Modified	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Files Modified	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Database Location Fix - Implementation Summary
+Files Modified	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Files Modified	IMPLEMENTATION_COMPLETE.md	/^## Files Modified$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
+Files Modified	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Shell Operator Support Implementation Summary
+Files Modified	TASK_COMPLETION_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
+Files Modified/Created	IMPLEMENTATION_SUMMARY.md	/^## Files Modified\/Created$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
+Files created in wrong location	WRITE_BLOCKS_GUIDE.md	/^### Files created in wrong location$/;"	S	section:WRITE Block Functionality - User Guide""Troubleshooting
 Finalizing Introduction & Locating `axe.py`	team_test/.collab_log.md	/^### Finalizing Introduction & Locating `axe.py`$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
+Fix Summary: AXE Session Termination Bugs	TASK_COMPLETION_FIX_SUMMARY.md	/^# Fix Summary: AXE Session Termination Bugs$/;"	c
 For Existing Code	REFACTORING_NOTES.md	/^### For Existing Code$/;"	S	section:AXE.PY Refactoring Notes""Migration Guide
 For New Code	REFACTORING_NOTES.md	/^### For New Code$/;"	S	section:AXE.PY Refactoring Notes""Migration Guide
 Format	IMPROVEMENTS_FINAL.md	/^### Format$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Agent Aliases
+Future Considerations	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Future Considerations$/;"	s	chapter:Database Location Fix - Implementation Summary
+Future Enhancements	WRITE_BLOCKS_GUIDE.md	/^## Future Enhancements$/;"	s	chapter:API Documentation
+Future Enhancements (Out of Scope)	IMPLEMENTATION_SUMMARY.md	/^## Future Enhancements (Out of Scope)$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
 Future Features (Not Yet Implemented)	QUICK_REFERENCE.md	/^## Future Features (Not Yet Implemented)$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Future Refactoring (PRs #2 & #3)	REFACTORING_NOTES.md	/^## Future Refactoring (PRs #2 & #3)$/;"	s	chapter:AXE.PY Refactoring Notes
+GET /users	WRITE_BLOCKS_GUIDE.md	/^### GET \/users$/;"	S	section:API Documentation""Endpoints
 GPG_PUBLIC_KEY_FILE	axe.py	/^GPG_PUBLIC_KEY_FILE = "\/tmp\/axe_emergency_mailbox\/human_public.key"$/;"	v
+GPT-5 and future models use the new parameter name	.collab_log.md	/^# GPT-5 and future models use the new parameter name$/;"	c
 GREEN	utils/formatting.py	/^    GREEN = '\\033[92m'$/;"	v	class:Colors
 General Guidelines	llm_prep/project_guidance.md	/^## General Guidelines$/;"	s	chapter:Project Guidance for AXE
+Getting Started	.collab_log.md	/^## Getting Started$/;"	s	chapter:AXE - Agent eXecution Engine
+Getting Started	MISSION.md	/^## Getting Started$/;"	s	chapter:AXE - Agent eXecution Engine
 GitHub Models	API_PROVIDERS.md	/^## GitHub Models$/;"	s	chapter:AXE API Provider Documentation
 GitHub Models	MODELS_FINAL.md	/^## GitHub Models$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
+GitHub Models - Free with Copilot	.collab_log.md	/^### GitHub Models - Free with Copilot$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 GitHub Models - Free with Copilot	README.md	/^### GitHub Models - Free with Copilot$/;"	S	section:AXE - Agent eXecution Engine""API Providers
+Global reference to database for shutdown hook	.collab_log.md	/^# Global reference to database for shutdown hook$/;"	c
 HAS_ANTHROPIC	axe.py	/^    HAS_ANTHROPIC = False$/;"	v
 HAS_ANTHROPIC	axe.py	/^    HAS_ANTHROPIC = True$/;"	v
 HAS_GIT	axe.py	/^    HAS_GIT = False$/;"	v
@@ -224,31 +403,75 @@ HAS_HUGGINGFACE	axe.py	/^    HAS_HUGGINGFACE = False$/;"	v
 HAS_HUGGINGFACE	axe.py	/^    HAS_HUGGINGFACE = True$/;"	v
 HAS_OPENAI	axe.py	/^    HAS_OPENAI = False$/;"	v
 HAS_OPENAI	axe.py	/^    HAS_OPENAI = True$/;"	v
+HAS_READLINE	axe.py	/^        HAS_READLINE = False$/;"	v
+HAS_READLINE	axe.py	/^        HAS_READLINE = True$/;"	v
+HAS_READLINE	axe.py	/^    HAS_READLINE = True$/;"	v
 HAS_YAML	axe.py	/^    HAS_YAML = False$/;"	v
 HAS_YAML	axe.py	/^    HAS_YAML = True$/;"	v
 HEADER	utils/formatting.py	/^    HEADER = '\\033[95m'$/;"	v	class:Colors
 Hello Team! 👋	team_test/.collab_log.md	/^# Hello Team! 👋$/;"	c
-How to Use	IMPLEMENTATION_COMPLETE.md	/^## How to Use$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
+Heredoc Execution Fix - Implementation Summary	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^# Heredoc Execution Fix - Implementation Summary$/;"	c
+Heredoc Execution Fix Summary	HEREDOC_EXECUTION_FIX.md	/^# Heredoc Execution Fix Summary$/;"	c
 How to Use	llm_prep/codebase_overview.md	/^## How to Use$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-01
 HuggingFace (Llama)	API_PROVIDERS.md	/^## HuggingFace (Llama)$/;"	s	chapter:AXE API Provider Documentation
 HuggingFace (Llama)	MODELS_FINAL.md	/^## HuggingFace (Llama)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
+HuggingFace (Llama) - Free Tier Available!	.collab_log.md	/^### HuggingFace (Llama) - Free Tier Available!$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 HuggingFace (Llama) - Free Tier Available!	README.md	/^### HuggingFace (Llama) - Free Tier Available!$/;"	S	section:AXE - Agent eXecution Engine""API Providers
+Immediate Actions	.collab_log.md	/^## Immediate Actions$/;"	s	chapter:Supervisor @boss Initiating Session
+Impact	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Impact$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Impact	HEREDOC_EXECUTION_FIX.md	/^## Impact$/;"	s	chapter:Heredoc Execution Fix Summary
+Impact	IMPLEMENTATION_COMPLETE.md	/^## Impact$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
+Impact	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Impact$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
+Impact	TASK_COMPLETION_FIX_SUMMARY.md	/^## Impact$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
+Impact After Fix	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Impact After Fix$/;"	s	chapter:Database Location Fix - Implementation Summary
+Impact Before Fix	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Impact Before Fix$/;"	S	section:Database Location Fix - Implementation Summary""Problem Statement
+Implementation	IMPLEMENTATION_COMPLETE.md	/^### Implementation$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Bug 1: False "TASK COMPLETE" Detection ✅
+Implementation	IMPLEMENTATION_COMPLETE.md	/^### Implementation$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Bug 2: Active Agents Counter ✅
 Implementation	IMPROVEMENTS_FINAL.md	/^### Implementation$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Degradation Monitoring
 Implementation	IMPROVEMENTS_FINAL.md	/^### Implementation$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Mandatory Sleep System
+Implementation	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Implementation$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Implementation Approach	REFACTORING_NOTES.md	/^## Implementation Approach$/;"	s	chapter:AXE.PY Refactoring Notes
+Implementation Complete: AXE Session Termination Bug Fixes	IMPLEMENTATION_COMPLETE.md	/^# Implementation Complete: AXE Session Termination Bug Fixes$/;"	c
+Implementation Details	WRITE_BLOCKS_GUIDE.md	/^## Implementation Details$/;"	s	chapter:WRITE Block Functionality - User Guide
+Implementation Notes	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Implementation Notes$/;"	s	chapter:Shell Operator Support Implementation Summary
 Implementation Priority	IMPROVEMENTS_FINAL.md	/^## Implementation Priority$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
+Implementation Summary: GPT-5 Fix & WRITE Blocks	IMPLEMENTATION_SUMMARY.md	/^# Implementation Summary: GPT-5 Fix & WRITE Blocks$/;"	c
 Implemented Features (Phases 1-5)	IMPROVEMENTS_README.md	/^## Implemented Features (Phases 1-5)$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Implemented Features (Phases 6-10)	IMPROVEMENTS_README.md	/^## Implemented Features (Phases 6-10)$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
+Import from new modular structure	.collab_log.md	/^# Import from new modular structure$/;"	c
+Install Dependencies	.collab_log.md	/^### Install Dependencies$/;"	S	section:AXE - Agent eXecution Engine""Installation
 Install Dependencies	README.md	/^### Install Dependencies$/;"	S	section:AXE - Agent eXecution Engine""Installation
+Installation	.collab_log.md	/^## Installation$/;"	s	chapter:AXE - Agent eXecution Engine
 Installation	README.md	/^## Installation$/;"	s	chapter:AXE - Agent eXecution Engine
+Integrated Tools	.collab_log.md	/^### Integrated Tools$/;"	S	section:AXE - Agent eXecution Engine""Features
 Integrated Tools	README.md	/^### Integrated Tools$/;"	S	section:AXE - Agent eXecution Engine""Features
+Integration Test (`test_integration_database_fix.py`)	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### Integration Test (`test_integration_database_fix.py`)$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Testing
+Integration with Other Blocks	WRITE_BLOCKS_GUIDE.md	/^## Integration with Other Blocks$/;"	s	chapter:WRITE Block Functionality - User Guide
+Interactive Mode	.collab_log.md	/^### Interactive Mode$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Interactive Mode	README.md	/^### Interactive Mode$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
+Interactive Testing	WRITE_BLOCKS_GUIDE.md	/^### Interactive Testing$/;"	S	section:WRITE Block Functionality - User Guide""Testing
 Introduction	team_test/.collab_log.md	/^### Introduction  $/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
+Issue 1: READ Block Access Denied	BEFORE_AFTER_COMPARISON.md	/^## Issue 1: READ Block Access Denied$/;"	s	chapter:Before/After Comparison of Fixes
+Issue 1: READ Block Access Denied ✅	FIXES_SUMMARY.md	/^### Issue 1: READ Block Access Denied ✅$/;"	S	section:AXE Multiple Issues Fix Summary""Issues Fixed
+Issue 2: Llama 405B Model Deprecated	BEFORE_AFTER_COMPARISON.md	/^## Issue 2: Llama 405B Model Deprecated$/;"	s	chapter:Before/After Comparison of Fixes
+Issue 2: Llama 405B Model Deprecated ✅	FIXES_SUMMARY.md	/^### Issue 2: Llama 405B Model Deprecated ✅$/;"	S	section:AXE Multiple Issues Fix Summary""Issues Fixed
+Issue 3: Auto-approve Not Default in Collab Mode	BEFORE_AFTER_COMPARISON.md	/^## Issue 3: Auto-approve Not Default in Collab Mode$/;"	s	chapter:Before/After Comparison of Fixes
+Issue 3: Auto-approve Not Default in Collab Mode ✅	FIXES_SUMMARY.md	/^### Issue 3: Auto-approve Not Default in Collab Mode ✅$/;"	S	section:AXE Multiple Issues Fix Summary""Issues Fixed
+Issue 4: Agents Confused About READ/WRITE Block Syntax	BEFORE_AFTER_COMPARISON.md	/^## Issue 4: Agents Confused About READ\/WRITE Block Syntax$/;"	s	chapter:Before/After Comparison of Fixes
+Issue 4: Agents Confused About READ/WRITE Block Syntax ✅	FIXES_SUMMARY.md	/^### Issue 4: Agents Confused About READ\/WRITE Block Syntax ✅$/;"	S	section:AXE Multiple Issues Fix Summary""Issues Fixed
+Issues Fixed	FIXES_SUMMARY.md	/^## Issues Fixed$/;"	s	chapter:AXE Multiple Issues Fix Summary
+Issues Resolved	IMPLEMENTATION_SUMMARY.md	/^## Issues Resolved$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
+Key Changes:	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Key Changes:$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Solution
+Key Features	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Key Features$/;"	S	section:Multi-Format Tool Call Parser Implementation""Implementation
 LEVEL_DEPUTY_SUPERVISOR	progression/levels.py	/^LEVEL_DEPUTY_SUPERVISOR = 30    # Level 30: Deputy Supervisor (15000 XP)$/;"	v
+LEVEL_DEPUTY_SUPERVISOR = 30    # Imported from progression.levels	.collab_log.md	/^# LEVEL_DEPUTY_SUPERVISOR = 30    # Imported from progression.levels$/;"	c
 LEVEL_MILESTONES	progression/levels.py	/^LEVEL_MILESTONES = {$/;"	v
 LEVEL_SENIOR_WORKER	progression/levels.py	/^LEVEL_SENIOR_WORKER = 10        # Level 10: Senior Worker (1000 XP)$/;"	v
+LEVEL_SENIOR_WORKER = 10        # Imported from progression.levels	.collab_log.md	/^# LEVEL_SENIOR_WORKER = 10        # Imported from progression.levels$/;"	c
 LEVEL_SUPERVISOR_ELIGIBLE	progression/levels.py	/^LEVEL_SUPERVISOR_ELIGIBLE = 40  # Level 40: Supervisor-eligible (30000 XP)$/;"	v
+LEVEL_SUPERVISOR_ELIGIBLE = 40  # Imported from progression.levels	.collab_log.md	/^# LEVEL_SUPERVISOR_ELIGIBLE = 40  # Imported from progression.levels$/;"	c
 LEVEL_TEAM_LEADER	progression/levels.py	/^LEVEL_TEAM_LEADER = 20          # Level 20: Team Leader (5000 XP)$/;"	v
+LEVEL_TEAM_LEADER = 20          # Imported from progression.levels	.collab_log.md	/^# LEVEL_TEAM_LEADER = 20          # Imported from progression.levels$/;"	c
 LLM Context Files	llm_prep/codebase_overview.md	/^## LLM Context Files$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-01
 LLM-Ready Codebase Overview — 2026-01-01	llm_prep/codebase_overview.md	/^# LLM-Ready Codebase Overview — 2026-01-01$/;"	c
 Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Anthropic (Claude)
@@ -257,12 +480,16 @@ Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent 
 Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""xAI (Grok)
 Lessons Learned	REFACTORING_NOTES.md	/^## Lessons Learned$/;"	s	chapter:AXE.PY Refactoring Notes
 Level 40+ Handling	IMPROVEMENTS_FINAL.md	/^### Level 40+ Handling$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""XP & Level System
+License	.collab_log.md	/^## License$/;"	s	chapter:AXE - Agent eXecution Engine
+License	MISSION.md	/^## License$/;"	s	chapter:AXE - Agent eXecution Engine
 License	README.md	/^## License$/;"	s	chapter:AXE - Agent eXecution Engine
 Limits	IMPROVEMENTS_FINAL.md	/^### Limits$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Break System
 Line Count	REFACTORING_NOTES.md	/^### Line Count$/;"	S	section:AXE.PY Refactoring Notes""Metrics
+Lines Changed	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Lines Changed$/;"	s	chapter:Database Location Fix - Implementation Summary
 Locating `axe.py`:	team_test/.collab_log.md	/^#### Locating `axe.py`:  $/;"	t	subsection:Hello Team! 👋""Team Coordination Plan 📋""Contribution
 MAX_BREAKS_PER_HOUR	axe.py	/^MAX_BREAKS_PER_HOUR = 2         # Maximum breaks per hour$/;"	v
 MAX_BREAK_MINUTES	axe.py	/^MAX_BREAK_MINUTES = 15          # Maximum break duration$/;"	v
+MAX_READ_SIZE	axe.py	/^    MAX_READ_SIZE = 10000  # Maximum bytes to read from a file$/;"	v	class:ResponseProcessor
 MAX_TOTAL_AGENTS	axe.py	/^MAX_TOTAL_AGENTS = 10           # Maximum total agents allowed$/;"	v
 MAX_WORKFORCE_ON_BREAK	axe.py	/^MAX_WORKFORCE_ON_BREAK = 0.4    # Never more than 40% of agents on break$/;"	v
 MAX_WORK_HOURS	axe.py	/^MAX_WORK_HOURS = 6              # Maximum continuous work hours before mandatory sleep$/;"	v
@@ -271,45 +498,83 @@ MIN_SLEEP_MINUTES	axe.py	/^MIN_SLEEP_MINUTES = 30          # Minimum sleep durat
 MIN_WORKLOAD_FOR_BREAK	axe.py	/^MIN_WORKLOAD_FOR_BREAK = 0.3    # Break only allowed if workload < 30%$/;"	v
 MODEL_METADATA	models/metadata.py	/^MODEL_METADATA = {$/;"	v
 Mandatory Sleep System	IMPROVEMENTS_FINAL.md	/^## Mandatory Sleep System$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
+Manual Testing	WRITE_BLOCKS_GUIDE.md	/^### Manual Testing$/;"	S	section:WRITE Block Functionality - User Guide""Testing
+Manual Testing (manual_test_write.py)	IMPLEMENTATION_SUMMARY.md	/^### Manual Testing (manual_test_write.py)$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Testing
+Manual Verification	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Manual Verification$/;"	S	section:Database Location Fix - Implementation Summary""Verification
+Manual verification	XML_PARSER_QUICK_REFERENCE.md	/^# Manual verification$/;"	c
+Markdown Format (Original)	XML_PARSER_QUICK_REFERENCE.md	/^### Markdown Format (Original)$/;"	S	section:XML Function Call Support - Quick Reference""Supported Formats
+Matches: [READ ...] (case-insensitive) followed by content until:	.collab_log.md	/^# Matches: [READ ...] (case-insensitive) followed by content until:$/;"	c
 Message Format	IMPROVEMENTS_FINAL.md	/^### Message Format$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
 Metrics	REFACTORING_NOTES.md	/^## Metrics$/;"	s	chapter:AXE.PY Refactoring Notes
 Migration Guide	REFACTORING_NOTES.md	/^## Migration Guide$/;"	s	chapter:AXE.PY Refactoring Notes
+Migration Path	IMPLEMENTATION_SUMMARY.md	/^### Migration Path$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Backwards Compatibility
+Minimal Overhead	IMPLEMENTATION_SUMMARY.md	/^### Minimal Overhead$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Performance Impact
+Mission Statement	.collab_log.md	/^## Mission Statement$/;"	s	chapter:AXE - Agent eXecution Engine
+Mission Statement	MISSION.md	/^## Mission Statement$/;"	s	chapter:AXE - Agent eXecution Engine
 Model Capabilities Matrix	MODELS_FINAL.md	/^## Model Capabilities Matrix$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Model Communication Example	MODELS_FINAL.md	/^### Model Communication Example$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Usage Examples
 Model Selection Guide	API_PROVIDERS.md	/^### Model Selection Guide$/;"	S	section:AXE API Provider Documentation""Quick Reference
-Modified	IMPLEMENTATION_COMPLETE.md	/^### Modified$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Files Added/Modified
+Models that require max_completion_tokens instead of max_tokens	.collab_log.md	/^# Models that require max_completion_tokens instead of max_tokens$/;"	c
+Modified Files	IMPLEMENTATION_SUMMARY.md	/^### Modified Files$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Files Modified/Created
 Module Breakdown	REFACTORING_NOTES.md	/^### Module Breakdown$/;"	S	section:AXE.PY Refactoring Notes""Metrics
 Module Independence	REFACTORING_NOTES.md	/^### Module Independence$/;"	S	section:AXE.PY Refactoring Notes""Design Decisions
 Motivation	REFACTORING_NOTES.md	/^## Motivation$/;"	s	chapter:AXE.PY Refactoring Notes
+Multi-Agent Collaboration	.collab_log.md	/^## Multi-Agent Collaboration$/;"	s	chapter:AXE - Agent eXecution Engine
 Multi-Agent Collaboration	MODELS_FINAL.md	/^### Multi-Agent Collaboration$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Usage Examples
 Multi-Agent Collaboration	README.md	/^## Multi-Agent Collaboration$/;"	s	chapter:AXE - Agent eXecution Engine
+Multi-Format Tool Call Parser - Quick Reference	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^# Multi-Format Tool Call Parser - Quick Reference$/;"	c
+Multi-Format Tool Call Parser Implementation	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^# Multi-Format Tool Call Parser Implementation$/;"	c
+Multi-Provider AI Support	.collab_log.md	/^### Multi-Provider AI Support$/;"	S	section:AXE - Agent eXecution Engine""Features
 Multi-Provider AI Support	README.md	/^### Multi-Provider AI Support$/;"	S	section:AXE - Agent eXecution Engine""Features
 MultiAgentCoordinator	core/multiprocess.py	/^class MultiAgentCoordinator:$/;"	c
+My Security Audit Contribution	.collab_log.md	/^## My Security Audit Contribution$/;"	s	chapter:Supervisor @boss - Coordination Update
 New Agent Commands (During Sessions)	IMPROVEMENTS_README.md	/^## New Agent Commands (During Sessions)$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
+New Files	IMPLEMENTATION_SUMMARY.md	/^### New Files$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Files Modified/Created
+New Functions Added	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### New Functions Added$/;"	S	section:Multi-Format Tool Call Parser Implementation""Implementation
 New Module Structure	REFACTORING_NOTES.md	/^## New Module Structure$/;"	s	chapter:AXE.PY Refactoring Notes
+New Test Files	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### New Test Files$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Test Coverage
+New Tests	IMPLEMENTATION_COMPLETE.md	/^### New Tests$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Test Results
+New Tests Added	HEREDOC_EXECUTION_FIX.md	/^### New Tests Added$/;"	S	section:Heredoc Execution Fix Summary""Testing
 Next Step if `axe.py` is Found	team_test/.collab_log.md	/^#### Next Step if `axe.py` is Found  $/;"	t	subsection:Hello Team! 👋""Team Coordination Plan 📋""Finalizing Introduction & Locating `axe.py`
-Next Steps (Future PRs)	IMPLEMENTATION_COMPLETE.md	/^## Next Steps (Future PRs)$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
+Next Steps:	.collab_log.md	/^### Next Steps:$/;"	S	section:Supervisor @boss - Coordination Update""Code Quality Deep Dive & Refactors
+No Breaking Changes	IMPLEMENTATION_SUMMARY.md	/^### No Breaking Changes$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Backwards Compatibility
 No Credits Error	MODELS_FINAL.md	/^### No Credits Error$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Troubleshooting
+No Regressions	IMPLEMENTATION_COMPLETE.md	/^### No Regressions$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Test Results
+Note on Whistleblower Feature	.collab_log.md	/^### Note on Whistleblower Feature$/;"	S	section:AXE - Agent eXecution Engine""Features
 Note on Whistleblower Feature	README.md	/^### Note on Whistleblower Feature$/;"	S	section:AXE - Agent eXecution Engine""Features
+Note: Used with re.IGNORECASE flag, so [A-Z] matches both uppercase and lowercase letters	.collab_log.md	/^# Note: Used with re.IGNORECASE flag, so [A-Z] matches both uppercase and lowercase letters$/;"	c
 Notes	MODELS_FINAL.md	/^### Notes$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Anthropic (Claude)
 Notes	MODELS_FINAL.md	/^### Notes$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""GitHub Models
 Notes	MODELS_FINAL.md	/^### Notes$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""HuggingFace (Llama)
 Notes	MODELS_FINAL.md	/^### Notes$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""OpenAI (GPT)
 Notes	MODELS_FINAL.md	/^### Notes$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""xAI (Grok)
+Open Source License (Default)	.collab_log.md	/^### Open Source License (Default)$/;"	S	section:AXE - Agent eXecution Engine""License
 Open Source License (Default)	README.md	/^### Open Source License (Default)$/;"	S	section:AXE - Agent eXecution Engine""License
+OpenAI (GPT)	.collab_log.md	/^### OpenAI (GPT)$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 OpenAI (GPT)	API_PROVIDERS.md	/^## OpenAI (GPT)$/;"	s	chapter:AXE API Provider Documentation
 OpenAI (GPT)	MODELS_FINAL.md	/^## OpenAI (GPT)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 OpenAI (GPT)	README.md	/^### OpenAI (GPT)$/;"	S	section:AXE - Agent eXecution Engine""API Providers
+Optional imports - gracefully handle missing dependencies	.collab_log.md	/^# Optional imports - gracefully handle missing dependencies$/;"	c
+Original Test Suite (`test_tool_runner.py`)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Original Test Suite (`test_tool_runner.py`)$/;"	S	section:Shell Operator Support Implementation Summary""Test Coverage
+Overview	.collab_log.md	/^## Overview$/;"	s	chapter:AXE - Agent eXecution Engine
+Overview	FIXES_SUMMARY.md	/^## Overview$/;"	s	chapter:AXE Multiple Issues Fix Summary
+Overview	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^## Overview$/;"	s	chapter:Multi-Format Tool Call Parser - Quick Reference
 Overview	README.md	/^## Overview$/;"	s	chapter:AXE - Agent eXecution Engine
 Overview	REFACTORING_NOTES.md	/^## Overview$/;"	s	chapter:AXE.PY Refactoring Notes
+Overview	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Overview$/;"	s	chapter:Shell Operator Support Implementation Summary
+Overview	TASK_COMPLETION_FIX_SUMMARY.md	/^## Overview$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
+Overview	WRITE_BLOCKS_GUIDE.md	/^## Overview$/;"	s	chapter:WRITE Block Functionality - User Guide
+Overview	XML_PARSER_IMPLEMENTATION.md	/^## Overview$/;"	s	chapter:XML Function Call Parser - Implementation Summary
 PR #2: Extract Large Classes	REFACTORING_NOTES.md	/^### PR #2: Extract Large Classes$/;"	S	section:AXE.PY Refactoring Notes""Future Refactoring (PRs #2 & #3)
 PR #3: Extract Session Management	REFACTORING_NOTES.md	/^### PR #3: Extract Session Management$/;"	S	section:AXE.PY Refactoring Notes""Future Refactoring (PRs #2 & #3)
 Per-Agent Workspace	IMPROVEMENTS_FINAL.md	/^### Per-Agent Workspace$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Resource Monitoring
+Performance Impact	IMPLEMENTATION_SUMMARY.md	/^## Performance Impact$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
+Permission denied errors	WRITE_BLOCKS_GUIDE.md	/^### Permission denied errors$/;"	S	section:WRITE Block Functionality - User Guide""Troubleshooting
 Permission-Based Sleep System	IMPROVEMENTS_FINAL.md	/^### Permission-Based Sleep System$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Core Safety Features
 Persistence Strategy	IMPROVEMENTS_README.md	/^### Persistence Strategy$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Architecture Notes
 Persistent Storage	IMPROVEMENTS_FINAL.md	/^## Persistent Storage$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
-Phase 10: Dynamic Spawning	IMPLEMENTATION_COMPLETE.md	/^### Phase 10: Dynamic Spawning$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Next Steps (Future PRs)
 Phase 10: Dynamic Spawning ✅	IMPROVEMENTS_README.md	/^### Phase 10: Dynamic Spawning ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 6-10)
+Phase 10: Dynamic spawning constants	.collab_log.md	/^# Phase 10: Dynamic spawning constants$/;"	c
 Phase 1: Create Directory Structure ✅	REFACTORING_NOTES.md	/^### Phase 1: Create Directory Structure ✅$/;"	S	section:AXE.PY Refactoring Notes""Implementation Approach
 Phase 1: Session Rules & Guidelines ✅	IMPROVEMENTS_README.md	/^### Phase 1: Session Rules & Guidelines ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 1-5)
 Phase 2: Agent Aliasing System ✅	IMPROVEMENTS_README.md	/^### Phase 2: Agent Aliasing System ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 1-5)
@@ -320,20 +585,36 @@ Phase 4: Persistent SQLite Storage ✅	IMPROVEMENTS_README.md	/^### Phase 4: Per
 Phase 4: Testing ✅	REFACTORING_NOTES.md	/^### Phase 4: Testing ✅$/;"	S	section:AXE.PY Refactoring Notes""Implementation Approach
 Phase 5: Cleanup ✅	REFACTORING_NOTES.md	/^### Phase 5: Cleanup ✅$/;"	S	section:AXE.PY Refactoring Notes""Implementation Approach
 Phase 5: Resource Tracking ✅	IMPROVEMENTS_README.md	/^### Phase 5: Resource Tracking ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 1-5)
-Phase 6: Mandatory Sleep System	IMPLEMENTATION_COMPLETE.md	/^### Phase 6: Mandatory Sleep System$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Next Steps (Future PRs)
 Phase 6: Mandatory Sleep System ✅	IMPROVEMENTS_README.md	/^### Phase 6: Mandatory Sleep System ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 6-10)
-Phase 7: Degradation Monitoring	IMPLEMENTATION_COMPLETE.md	/^### Phase 7: Degradation Monitoring$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Next Steps (Future PRs)
+Phase 6: Mandatory sleep system constants	.collab_log.md	/^# Phase 6: Mandatory sleep system constants$/;"	c
 Phase 7: Degradation Monitoring ✅	IMPROVEMENTS_README.md	/^### Phase 7: Degradation Monitoring ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 6-10)
-Phase 8: Emergency Mailbox	IMPLEMENTATION_COMPLETE.md	/^### Phase 8: Emergency Mailbox$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Next Steps (Future PRs)
+Phase 7: Degradation monitoring constants	.collab_log.md	/^# Phase 7: Degradation monitoring constants$/;"	c
 Phase 8: Emergency Mailbox ✅	IMPROVEMENTS_README.md	/^### Phase 8: Emergency Mailbox ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 6-10)
-Phase 9: Break System	IMPLEMENTATION_COMPLETE.md	/^### Phase 9: Break System$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""Next Steps (Future PRs)
+Phase 8: Emergency mailbox constants	.collab_log.md	/^# Phase 8: Emergency mailbox constants$/;"	c
 Phase 9: Break System ✅	IMPROVEMENTS_README.md	/^### Phase 9: Break System ✅$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Implemented Features (Phases 6-10)
+Phase 9: Break system constants	.collab_log.md	/^# Phase 9: Break system constants$/;"	c
+Plan	.collab_log.md	/^### Plan$/;"	S	section:AXE - Agent eXecution Engine""Proposed Refactors (High Impact)
+Prerequisites	.collab_log.md	/^### Prerequisites$/;"	S	section:AXE - Agent eXecution Engine""Installation
 Prerequisites	README.md	/^### Prerequisites$/;"	S	section:AXE - Agent eXecution Engine""Installation
+Previously Failing (from problem statement):	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Previously Failing (from problem statement):$/;"	S	section:Shell Operator Support Implementation Summary""Commands Now Working
+Problem	HEREDOC_EXECUTION_FIX.md	/^## Problem$/;"	s	chapter:Heredoc Execution Fix Summary
+Problem	TASK_COMPLETION_FIX_SUMMARY.md	/^### Problem$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 1: False "TASK COMPLETE" Detection ✅
+Problem	TASK_COMPLETION_FIX_SUMMARY.md	/^### Problem$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 2: Active Agents Counter ✅
+Problem Addressed	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Problem Addressed$/;"	s	chapter:Shell Operator Support Implementation Summary
+Problem Solved	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Problem Solved$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
+Problem Solved	XML_PARSER_IMPLEMENTATION.md	/^## Problem Solved$/;"	s	chapter:XML Function Call Parser - Implementation Summary
+Problem Statement	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Problem Statement$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Problem Statement	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Problem Statement$/;"	s	chapter:Database Location Fix - Implementation Summary
+Problem Statement	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Problem Statement$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Process each block	BEFORE_AFTER_COMPARISON.md	/^# Process each block$/;"	c
 Progression Curve (Hybrid Linear/Exponential)	IMPROVEMENTS_FINAL.md	/^### Progression Curve (Hybrid Linear\/Exponential)$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""XP & Level System
 Project Guidance for AXE	llm_prep/project_guidance.md	/^# Project Guidance for AXE$/;"	c
+Project Structure	.collab_log.md	/^## Project Structure$/;"	s	chapter:AXE - Agent eXecution Engine
 Project Structure	README.md	/^## Project Structure$/;"	s	chapter:AXE - Agent eXecution Engine
 ProjectContext	axe.py	/^class ProjectContext:$/;"	c
+Proposed Refactors (High Impact)	.collab_log.md	/^## Proposed Refactors (High Impact)$/;"	s	chapter:AXE - Agent eXecution Engine
 Purpose	IMPROVEMENTS_FINAL.md	/^### Purpose$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
+Python	.collab_log.md	/^### Python$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Python	README.md	/^### Python$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Python Best Practices	llm_prep/project_guidance.md	/^## Python Best Practices$/;"	s	chapter:Project Guidance for AXE
 Python Class Diagrams (pyreverse)	llm_prep/codebase_overview.md	/^## Python Class Diagrams (pyreverse)$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-01
@@ -343,30 +624,52 @@ Python Example	API_PROVIDERS.md	/^### Python Example$/;"	S	section:AXE API Provi
 Python Example (OpenAI SDK)	API_PROVIDERS.md	/^### Python Example (OpenAI SDK)$/;"	S	section:AXE API Provider Documentation""GitHub Models
 Python Example (OpenAI SDK)	API_PROVIDERS.md	/^### Python Example (OpenAI SDK)$/;"	S	section:AXE API Provider Documentation""xAI (Grok)
 Quick Reference	API_PROVIDERS.md	/^## Quick Reference$/;"	s	chapter:AXE API Provider Documentation
+Quick Reference Card	.collab_log.md	/^## Quick Reference Card$/;"	s	chapter:AXE - Agent eXecution Engine
 Quick Reference Card	README.md	/^## Quick Reference Card$/;"	s	chapter:AXE - Agent eXecution Engine
 Quick Reference Commands	IMPROVEMENTS_FINAL.md	/^## Quick Reference Commands$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
+Quick Start	.collab_log.md	/^## Quick Start$/;"	s	chapter:AXE - Agent eXecution Engine
 Quick Start	MODELS_FINAL.md	/^## Quick Start$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Quick Start	README.md	/^## Quick Start$/;"	s	chapter:AXE - Agent eXecution Engine
-Quick Start Command	IMPLEMENTATION_COMPLETE.md	/^## Quick Start Command$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
+Quick question for @boss (before I start editing)	.collab_log.md	/^## Quick question for @boss (before I start editing)$/;"	s	chapter:AXE - Agent eXecution Engine
+READ block sanitization	FIXES_SUMMARY.md	/^# READ block sanitization$/;"	c
+READ_BLOCK_PATTERN	axe.py	/^READ_BLOCK_PATTERN = r'\\[READ[^\\]]*\\].*?(?=\\n\\n|\\n\\[(?!\\[)[A-Z]|\\Z)'$/;"	v
 RED	utils/formatting.py	/^    RED = '\\033[91m'$/;"	v	class:Colors
+REDIRECT_OPERATORS	axe.py	/^    REDIRECT_OPERATORS = {'>', '>>', '<', '2>', '2>>', '&>', '2>&1'}$/;"	v	class:ToolRunner
 RESOURCE_FILE	axe.py	/^RESOURCE_FILE = "\/tmp\/axe_resources.txt"$/;"	v
 RESOURCE_UPDATE_INTERVAL	axe.py	/^RESOURCE_UPDATE_INTERVAL = 60   # Seconds between resource snapshots$/;"	v
 Rate Limiting	MODELS_FINAL.md	/^### Rate Limiting$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Troubleshooting
+Ready for Production ✅	IMPLEMENTATION_COMPLETE.md	/^## Ready for Production ✅$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
+Real-World Example: Reverse Engineering a WAD File	.collab_log.md	/^### Real-World Example: Reverse Engineering a WAD File$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Real-World Example: Reverse Engineering a WAD File	README.md	/^### Real-World Example: Reverse Engineering a WAD File$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Recommended Weights	IMPROVEMENTS_FINAL.md	/^### Recommended Weights$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Degradation Monitoring
 Recommended Work Duration Limits	IMPROVEMENTS_FINAL.md	/^### Recommended Work Duration Limits$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Mandatory Sleep System
+Refactoring Plan Additions (Creative Angles)	.collab_log.md	/^## Refactoring Plan Additions (Creative Angles)$/;"	s	chapter:Supervisor @boss - Consolidation & Security Audit
 Refactoring Summary	REFACTORING_NOTES.md	/^## Refactoring Summary$/;"	s	chapter:AXE.PY Refactoring Notes
 References	REFACTORING_NOTES.md	/^## References$/;"	s	chapter:AXE.PY Refactoring Notes
+Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives	.collab_log.md	/^# Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives$/;"	c
+Regression Tests (test_axe_improvements.py)	IMPLEMENTATION_SUMMARY.md	/^### Regression Tests (test_axe_improvements.py)$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Testing
 Request Protocol	IMPROVEMENTS_FINAL.md	/^### Request Protocol$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Break System
+Requirement	IMPLEMENTATION_COMPLETE.md	/^### Requirement$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Bug 1: False "TASK COMPLETE" Detection ✅
+Requirement	IMPLEMENTATION_COMPLETE.md	/^### Requirement$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Bug 2: Active Agents Counter ✅
 Requirements	API_PROVIDERS.md	/^### Requirements$/;"	S	section:AXE API Provider Documentation""GitHub Models
 Requirements	API_PROVIDERS.md	/^### Requirements$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
 Resource Monitoring	IMPROVEMENTS_FINAL.md	/^## Resource Monitoring$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Resource Monitoring	QUICK_REFERENCE.md	/^## Resource Monitoring$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+Resource monitoring constants	.collab_log.md	/^# Resource monitoring constants$/;"	c
+ResponseProcessor	axe.py	/^class ResponseProcessor:$/;"	c
+Responses to Agent Questions	.collab_log.md	/^## Responses to Agent Questions$/;"	s	chapter:Supervisor @boss - Coordination Update
+Result:	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### Result:$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Example - Before vs After
+Root Cause	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Root Cause$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Root Cause	HEREDOC_EXECUTION_FIX.md	/^## Root Cause$/;"	s	chapter:Heredoc Execution Fix Summary
+Root Cause Analysis	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Root Cause Analysis$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Round-Robin Analysis	.collab_log.md	/^### Round-Robin Analysis$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Round-Robin Analysis	README.md	/^### Round-Robin Analysis$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Rules	IMPROVEMENTS_FINAL.md	/^### Rules$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Agent Aliases
 Run automated tests	QUICK_REFERENCE.md	/^### Run automated tests$/;"	S	section:AXE Multiagent - Quick Reference Card""Testing
 Run interactive demo	QUICK_REFERENCE.md	/^### Run interactive demo$/;"	S	section:AXE Multiagent - Quick Reference Card""Testing
 SESSION_RULES	safety/rules.py	/^SESSION_RULES = """$/;"	v
+SESSION_RULES = """..."""  # Commented out - imported from safety.rules	.collab_log.md	/^# SESSION_RULES = """..."""  # Commented out - imported from safety.rules$/;"	c
+SHELL_OPERATORS	axe.py	/^    SHELL_OPERATORS = {'|', '&&', '||', ';'}$/;"	v	class:ToolRunner
 SLEEP_REASON_BREAK	axe.py	/^SLEEP_REASON_BREAK = "break_request"$/;"	v
 SLEEP_REASON_DEGRADATION	axe.py	/^SLEEP_REASON_DEGRADATION = "error_threshold"$/;"	v
 SLEEP_REASON_MANUAL	axe.py	/^SLEEP_REASON_MANUAL = "manual_request"$/;"	v
@@ -375,43 +678,105 @@ SPAWN_COOLDOWN_SECONDS	axe.py	/^SPAWN_COOLDOWN_SECONDS = 60     # Minimum time b
 SQLite Schema	IMPROVEMENTS_FINAL.md	/^### SQLite Schema$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Persistent Storage
 SUPERVISOR_LOG_TABLE	database/schema.py	/^SUPERVISOR_LOG_TABLE = """$/;"	v
 Safe Commands for Agents	IMPROVEMENTS_FINAL.md	/^### Safe Commands for Agents$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Resource Monitoring
-Safety & Well-Being	IMPLEMENTATION_COMPLETE.md	/^## Safety & Well-Being$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
+Scalability	IMPLEMENTATION_SUMMARY.md	/^### Scalability$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Performance Impact
+Security Analysis	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Security Analysis$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Security Audit Progress:	.collab_log.md	/^### Security Audit Progress:$/;"	S	section:Supervisor @boss - Coordination Update""Code Quality Deep Dive & Refactors
+Security Considerations	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Security Considerations$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Security Considerations	IMPLEMENTATION_SUMMARY.md	/^## Security Considerations$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
+Security Maintained	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Security Maintained$/;"	s	chapter:Shell Operator Support Implementation Summary
+Security Mechanism	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Security Mechanism$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Security Analysis
+Security Scan	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Security Scan$/;"	S	section:Multi-Format Tool Call Parser Implementation""Code Quality
+Security and Permissions	WRITE_BLOCKS_GUIDE.md	/^## Security and Permissions$/;"	s	chapter:WRITE Block Functionality - User Guide
 Session Rules (The 4 Principles)	QUICK_REFERENCE.md	/^## Session Rules (The 4 Principles)$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+Session rules displayed at startup (now imported from safety.rules module)	.collab_log.md	/^# Session rules displayed at startup (now imported from safety.rules module)$/;"	c
 Setup Commands	IMPROVEMENTS_FINAL.md	/^### Setup Commands$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
 SharedContext	core/multiprocess.py	/^class SharedContext:$/;"	c
 SharedWorkspace	axe.py	/^class SharedWorkspace:$/;"	c
+Shell Operator Support Implementation Summary	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^# Shell Operator Support Implementation Summary$/;"	c
+Single Command Mode	.collab_log.md	/^### Single Command Mode$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Single Command Mode	README.md	/^### Single Command Mode$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Sleep Quality Tiers	IMPROVEMENTS_FINAL.md	/^### Sleep Quality Tiers$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Core Safety Features
 SleepManager	axe.py	/^class SleepManager:$/;"	c
+Solution	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Solution$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Solution	HEREDOC_EXECUTION_FIX.md	/^## Solution$/;"	s	chapter:Heredoc Execution Fix Summary
+Solution	TASK_COMPLETION_FIX_SUMMARY.md	/^### Solution$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 1: False "TASK COMPLETE" Detection ✅
+Solution	TASK_COMPLETION_FIX_SUMMARY.md	/^### Solution$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 2: Active Agents Counter ✅
+Solution Implemented	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Solution Implemented$/;"	s	chapter:Database Location Fix - Implementation Summary
+Solution Implemented	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Solution Implemented$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Solution Implemented	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Solution Implemented$/;"	s	chapter:Shell Operator Support Implementation Summary
 Spawning Logic	IMPROVEMENTS_FINAL.md	/^### Spawning Logic$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Dynamic Spawning
 Special Aliases	IMPROVEMENTS_FINAL.md	/^### Special Aliases$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Agent Aliases
 Starting a Collaborative Session with New Features	IMPROVEMENTS_README.md	/^### Starting a Collaborative Session with New Features$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Usage Examples
 Starting a Session	IMPROVEMENTS_FINAL.md	/^### Starting a Session$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Quick Reference Commands
 Starting a Session	QUICK_REFERENCE.md	/^### Starting a Session$/;"	S	section:AXE Multiagent - Quick Reference Card""Commands
 Starting a Session	QUICK_REFERENCE.md	/^### Starting a Session$/;"	S	section:AXE Multiagent - Quick Reference Card""Tips for Humans
+Status Summary	.collab_log.md	/^## Status Summary$/;"	s	chapter:Supervisor @boss - Consolidation & Security Audit
+Status: ✅ COMPLETE AND TESTED	IMPLEMENTATION_COMPLETE.md	/^## Status: ✅ COMPLETE AND TESTED$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
+Success Criteria (All Met)	TASK_COMPLETION_FIX_SUMMARY.md	/^## Success Criteria (All Met)$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
+Success Criteria (All Met) ✅	IMPLEMENTATION_COMPLETE.md	/^## Success Criteria (All Met) ✅$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
+Success Criteria Met	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Success Criteria Met$/;"	s	chapter:Database Location Fix - Implementation Summary
+Summary	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Summary$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
+Summary Documents	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Summary Documents$/;"	S	section:Shell Operator Support Implementation Summary""Documentation & Comments
 Summary of All Implemented Features	IMPROVEMENTS_README.md	/^### Summary of All Implemented Features$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Credits
+Summary of Changes	BEFORE_AFTER_COMPARISON.md	/^## Summary of Changes$/;"	s	chapter:Process each block
+Supervisor @boss - Consolidation & Security Audit	.collab_log.md	/^# Supervisor @boss - Consolidation & Security Audit$/;"	c
+Supervisor @boss - Coordination Update	.collab_log.md	/^# Supervisor @boss - Coordination Update$/;"	c
+Supervisor @boss - Security Audit Deep Dive	.collab_log.md	/^# Supervisor @boss - Security Audit Deep Dive$/;"	c
+Supervisor @boss Initiating Session	.collab_log.md	/^# Supervisor @boss Initiating Session$/;"	c
 Supervisor Role	IMPROVEMENTS_README.md	/^### Supervisor Role$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Architecture Notes
 Supervisor Role Assignment	MODELS_FINAL.md	/^### Supervisor Role Assignment$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Usage Examples
+Supported Formats	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Supported Formats$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
+Supported Formats	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^## Supported Formats$/;"	s	chapter:Multi-Format Tool Call Parser - Quick Reference
+Supported Formats	XML_PARSER_QUICK_REFERENCE.md	/^## Supported Formats$/;"	s	chapter:XML Function Call Support - Quick Reference
 Symbol Index	llm_prep/codebase_overview.md	/^## Symbol Index$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-01
+Syntax	WRITE_BLOCKS_GUIDE.md	/^## Syntax$/;"	s	chapter:WRITE Block Functionality - User Guide
 TOKEN_CRITICAL_THRESHOLD	utils/token_tracker.py	/^TOKEN_CRITICAL_THRESHOLD = 0.95  # Critical action at 95% usage$/;"	v
 TOKEN_REPLACEMENT_ENABLED	utils/token_tracker.py	/^TOKEN_REPLACEMENT_ENABLED = True$/;"	v
 TOKEN_WARNING_THRESHOLD	utils/token_tracker.py	/^TOKEN_WARNING_THRESHOLD = 0.80  # Warn at 80% usage$/;"	v
+TOOL_NAME_MAPPING	utils/xml_tool_parser.py	/^TOOL_NAME_MAPPING = {$/;"	v
+Table of Contents	.collab_log.md	/^## Table of Contents$/;"	s	chapter:AXE - Agent eXecution Engine
 Table of Contents	API_PROVIDERS.md	/^## Table of Contents$/;"	s	chapter:AXE API Provider Documentation
 Table of Contents	IMPROVEMENTS_FINAL.md	/^## Table of Contents$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Table of Contents	MODELS_FINAL.md	/^## Table of Contents$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Table of Contents	README.md	/^## Table of Contents$/;"	s	chapter:AXE - Agent eXecution Engine
-Talk to Your Models	IMPLEMENTATION_COMPLETE.md	/^## Talk to Your Models$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
+Team Assignment	.collab_log.md	/^## Team Assignment$/;"	s	chapter:Supervisor @boss Initiating Session
 Team Coordination Plan 📋	team_test/.collab_log.md	/^## Team Coordination Plan 📋$/;"	s	chapter:Hello Team! 👋
 Test Connection	MODELS_FINAL.md	/^### Test Connection$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Quick Start
+Test Coverage	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Test Coverage$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Test Coverage	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Test Coverage$/;"	S	section:Multi-Format Tool Call Parser Implementation""Testing
+Test Coverage	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Test Coverage$/;"	s	chapter:Shell Operator Support Implementation Summary
+Test Documentation	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Test Documentation$/;"	S	section:Shell Operator Support Implementation Summary""Documentation & Comments
 Test Projects for Multi-Agent Work	MODELS_FINAL.md	/^### Test Projects for Multi-Agent Work$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Usage Examples
+Test Results	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Test Results$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Test Coverage
+Test Results	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Test Results$/;"	S	section:Database Location Fix - Implementation Summary""Verification
+Test Results	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Test Results$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Test Results	IMPLEMENTATION_COMPLETE.md	/^## Test Results$/;"	s	chapter:Implementation Complete: AXE Session Termination Bug Fixes
+Test Results	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Test Results$/;"	S	section:Multi-Format Tool Call Parser Implementation""Testing
+Test Results	TASK_COMPLETION_FIX_SUMMARY.md	/^### Test Results$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Validation
+Testing	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Testing$/;"	S	section:Database Location Fix - Implementation Summary""Solution Implemented
+Testing	HEREDOC_EXECUTION_FIX.md	/^## Testing$/;"	s	chapter:Heredoc Execution Fix Summary
+Testing	IMPLEMENTATION_COMPLETE.md	/^### Testing$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Bug 1: False "TASK COMPLETE" Detection ✅
+Testing	IMPLEMENTATION_COMPLETE.md	/^### Testing$/;"	S	section:Implementation Complete: AXE Session Termination Bug Fixes""Bug 2: Active Agents Counter ✅
+Testing	IMPLEMENTATION_SUMMARY.md	/^## Testing$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
 Testing	IMPROVEMENTS_README.md	/^## Testing$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
+Testing	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Testing$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Testing	QUICK_REFERENCE.md	/^## Testing$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Testing	REFACTORING_NOTES.md	/^## Testing$/;"	s	chapter:AXE.PY Refactoring Notes
+Testing	TASK_COMPLETION_FIX_SUMMARY.md	/^### Testing$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 1: False "TASK COMPLETE" Detection ✅
+Testing	WRITE_BLOCKS_GUIDE.md	/^## Testing$/;"	s	chapter:WRITE Block Functionality - User Guide
+Testing API Connections	.collab_log.md	/^### Testing API Connections$/;"	S	section:AXE - Agent eXecution Engine""Troubleshooting
 Testing API Connections	README.md	/^### Testing API Connections$/;"	S	section:AXE - Agent eXecution Engine""Troubleshooting
 Testing API Keys	API_PROVIDERS.md	/^### Testing API Keys$/;"	S	section:AXE API Provider Documentation""Troubleshooting
-Testing Results	IMPLEMENTATION_COMPLETE.md	/^## Testing Results$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
+The Issue	HEREDOC_EXECUTION_FIX.md	/^### The Issue$/;"	S	section:Heredoc Execution Fix Summary""Problem
+The original AgentDatabase class (lines 291-764) has been moved to database/agent_db.py	.collab_log.md	/^# The original AgentDatabase class (lines 291-764) has been moved to database\/agent_db.py$/;"	c
+These tokens are extremely unlikely to appear in normal text/files/command output	.collab_log.md	/^# These tokens are extremely unlikely to appear in normal text\/files\/command output$/;"	c
 Tips for Humans	QUICK_REFERENCE.md	/^## Tips for Humans$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+Token Purpose	.collab_log.md	/^### Token Purpose$/;"	S	section:AXE - Agent eXecution Engine""Agent Communication Tokens
+Token Purpose	MISSION.md	/^### Token Purpose$/;"	S	section:AXE - Agent eXecution Engine""Agent Communication Tokens
+Token Reference	.collab_log.md	/^### Token Reference$/;"	S	section:AXE - Agent eXecution Engine""Agent Communication Tokens
+Token Reference	MISSION.md	/^### Token Reference$/;"	S	section:AXE - Agent eXecution Engine""Agent Communication Tokens
 TokenTracker	utils/token_tracker.py	/^class TokenTracker:$/;"	c
+Tool Whitelist	.collab_log.md	/^## Tool Whitelist$/;"	s	chapter:AXE - Agent eXecution Engine
 Tool Whitelist	README.md	/^## Tool Whitelist$/;"	s	chapter:AXE - Agent eXecution Engine
 ToolRunner	axe.py	/^class ToolRunner:$/;"	c
 Top Models	API_PROVIDERS.md	/^### Top Models$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
@@ -419,9 +784,20 @@ Top Models	API_PROVIDERS.md	/^### Top Models$/;"	S	section:AXE API Provider Docu
 Top Models	API_PROVIDERS.md	/^### Top Models$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
 Top Models	API_PROVIDERS.md	/^### Top Models$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
 Top Models	API_PROVIDERS.md	/^### Top Models$/;"	S	section:AXE API Provider Documentation""xAI (Grok)
+Troubleshooting	.collab_log.md	/^## Troubleshooting$/;"	s	chapter:AXE - Agent eXecution Engine
 Troubleshooting	API_PROVIDERS.md	/^## Troubleshooting$/;"	s	chapter:AXE API Provider Documentation
 Troubleshooting	MODELS_FINAL.md	/^## Troubleshooting$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Troubleshooting	README.md	/^## Troubleshooting$/;"	s	chapter:AXE - Agent eXecution Engine
+Troubleshooting	WRITE_BLOCKS_GUIDE.md	/^## Troubleshooting$/;"	s	chapter:WRITE Block Functionality - User Guide
+Try gnureadline first (more feature-complete on some platforms), then readline	.collab_log.md	/^# Try gnureadline first (more feature-complete on some platforms), then readline$/;"	c
+USE_MAX_COMPLETION_TOKENS	axe.py	/^USE_MAX_COMPLETION_TOKENS = {$/;"	v
+Unit Tests	WRITE_BLOCKS_GUIDE.md	/^### Unit Tests$/;"	S	section:WRITE Block Functionality - User Guide""Testing
+Unit Tests (`test_database_location.py`)	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### Unit Tests (`test_database_location.py`)$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Testing
+Unit Tests (test_write_blocks.py)	IMPLEMENTATION_SUMMARY.md	/^### Unit Tests (test_write_blocks.py)$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Testing
+Unit tests	XML_PARSER_QUICK_REFERENCE.md	/^# Unit tests$/;"	c
+Update Shared Notes with Coordinated Plan	.collab_log.md	/^## Update Shared Notes with Coordinated Plan$/;"	s	chapter:Supervisor @boss - Security Audit Deep Dive
+Updated Functions	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Updated Functions$/;"	S	section:Multi-Format Tool Call Parser Implementation""Implementation
+Updated Tests	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Updated Tests$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Test Coverage
 Usage	MODELS_FINAL.md	/^### Usage$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Anthropic (Claude)
 Usage	MODELS_FINAL.md	/^### Usage$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""GitHub Models
 Usage	MODELS_FINAL.md	/^### Usage$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""OpenAI (GPT)
@@ -429,49 +805,97 @@ Usage - Image Generation	MODELS_FINAL.md	/^### Usage - Image Generation$/;"	S	se
 Usage - OpenAI-Compatible API	MODELS_FINAL.md	/^### Usage - OpenAI-Compatible API$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""HuggingFace (Llama)
 Usage - Text Generation	MODELS_FINAL.md	/^### Usage - Text Generation$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""xAI (Grok)
 Usage - Transformers (Local)	MODELS_FINAL.md	/^### Usage - Transformers (Local)$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""HuggingFace (Llama)
+Usage Examples	.collab_log.md	/^## Usage Examples$/;"	s	chapter:AXE - Agent eXecution Engine
 Usage Examples	IMPROVEMENTS_README.md	/^## Usage Examples$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Usage Examples	MODELS_FINAL.md	/^## Usage Examples$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Usage Examples	README.md	/^## Usage Examples$/;"	s	chapter:AXE - Agent eXecution Engine
+Usage Guidelines	.collab_log.md	/^### Usage Guidelines$/;"	S	section:AXE - Agent eXecution Engine""Agent Communication Tokens
+Usage Guidelines	MISSION.md	/^### Usage Guidelines$/;"	S	section:AXE - Agent eXecution Engine""Agent Communication Tokens
+Use Cases	WRITE_BLOCKS_GUIDE.md	/^## Use Cases$/;"	s	chapter:WRITE Block Functionality - User Guide
+Use Cases Enabled	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Use Cases Enabled$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Impact
+Validation	HEREDOC_EXECUTION_FIX.md	/^## Validation$/;"	s	chapter:Heredoc Execution Fix Summary
+Validation	IMPLEMENTATION_SUMMARY.md	/^### Validation$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Security Considerations
+Validation	TASK_COMPLETION_FIX_SUMMARY.md	/^## Validation$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
+Validation (internal, stripped version):	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### Validation (internal, stripped version):$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Example - Before vs After
+Verification	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Verification$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Verification	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Verification$/;"	s	chapter:Database Location Fix - Implementation Summary
+Verification	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Verification$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Verification	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Verification$/;"	s	chapter:Shell Operator Support Implementation Summary
+Verification Commands	IMPLEMENTATION_SUMMARY.md	/^## Verification Commands$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
+Version Control	.collab_log.md	/^### Version Control$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Version Control	README.md	/^### Version Control$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Viewing Session Rules	IMPROVEMENTS_README.md	/^### Viewing Session Rules$/;"	S	section:AXE Multiagent Improvements - Implementation Summary""Usage Examples
 Vision Example (Images)	API_PROVIDERS.md	/^### Vision Example (Images)$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
 WAL_MODE_PRAGMA	database/schema.py	/^WAL_MODE_PRAGMA = "PRAGMA journal_mode=WAL"$/;"	v
 WORK_TIME_WARNING_HOURS	axe.py	/^WORK_TIME_WARNING_HOURS = 5     # Warn when agent approaches work limit$/;"	v
+WRITE Block Absolute Path Fix - Implementation Summary	ABSOLUTE_PATH_FIX_SUMMARY.md	/^# WRITE Block Absolute Path Fix - Implementation Summary$/;"	c
+WRITE Block Format	WRITE_BLOCKS_GUIDE.md	/^### WRITE Block Format$/;"	S	section:WRITE Block Functionality - User Guide""Syntax
+WRITE Block Functionality - User Guide	WRITE_BLOCKS_GUIDE.md	/^# WRITE Block Functionality - User Guide$/;"	c
+WRITE block sanitization	FIXES_SUMMARY.md	/^# WRITE block sanitization$/;"	c
 Wake-up Triggers	IMPROVEMENTS_FINAL.md	/^### Wake-up Triggers$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Core Safety Features
 What Agents See	QUICK_REFERENCE.md	/^## What Agents See$/;"	s	chapter:AXE Multiagent - Quick Reference Card
-What Was Implemented	IMPLEMENTATION_COMPLETE.md	/^## What Was Implemented$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
-What's Ready for You	IMPLEMENTATION_COMPLETE.md	/^## What's Ready for You$/;"	s	chapter:AXE Multiagent AI Safety Implementation - COMPLETE
+What I’m going to do next (test coverage)	.collab_log.md	/^## What I’m going to do next (test coverage)$/;"	s	chapter:AXE - Agent eXecution Engine
+What's New?	XML_PARSER_QUICK_REFERENCE.md	/^## What's New?$/;"	s	chapter:XML Function Call Support - Quick Reference
+When to Use Each Agent	.collab_log.md	/^### When to Use Each Agent$/;"	S	section:AXE - Agent eXecution Engine""Agent Reference
 When to Use Each Agent	README.md	/^### When to Use Each Agent$/;"	S	section:AXE - Agent eXecution Engine""Agent Reference
+Why AXE?	.collab_log.md	/^### Why AXE?$/;"	S	section:AXE - Agent eXecution Engine""Overview
 Why AXE?	README.md	/^### Why AXE?$/;"	S	section:AXE - Agent eXecution Engine""Overview
 Why These Limits?	IMPROVEMENTS_FINAL.md	/^### Why These Limits?$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Mandatory Sleep System
 Why These Modules First?	REFACTORING_NOTES.md	/^### Why These Modules First?$/;"	S	section:AXE.PY Refactoring Notes""Design Decisions
+Why This Matters	XML_PARSER_QUICK_REFERENCE.md	/^## Why This Matters$/;"	s	chapter:XML Function Call Support - Quick Reference
+Why This Works	HEREDOC_EXECUTION_FIX.md	/^### Why This Works$/;"	S	section:Heredoc Execution Fix Summary""Solution
+Working with Files	.collab_log.md	/^### Working with Files$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Working with Files	README.md	/^### Working with Files$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Workplace Rules	IMPROVEMENTS_FINAL.md	/^## Workplace Rules$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
+XML Format (New!)	XML_PARSER_QUICK_REFERENCE.md	/^### XML Format (New!)$/;"	S	section:XML Function Call Support - Quick Reference""Supported Formats
+XML Function Call Parser - Implementation Summary	XML_PARSER_IMPLEMENTATION.md	/^# XML Function Call Parser - Implementation Summary$/;"	c
+XML Function Call Support - Quick Reference	XML_PARSER_QUICK_REFERENCE.md	/^# XML Function Call Support - Quick Reference$/;"	c
+XML TOOL PARSER TEST SUITE	XML_PARSER_IMPLEMENTATION.md	/^XML TOOL PARSER TEST SUITE$/;"	c
 XP & Level System	IMPROVEMENTS_FINAL.md	/^## XP & Level System$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 XP Awards	QUICK_REFERENCE.md	/^## XP Awards$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 XP Sources	IMPROVEMENTS_FINAL.md	/^### XP Sources$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""XP & Level System
+XP and title functions now imported from progression module	.collab_log.md	/^# XP and title functions now imported from progression module$/;"	c
 XP_PER_LEVEL_LINEAR	progression/xp_system.py	/^XP_PER_LEVEL_LINEAR = 100  # XP per level for levels 1-10$/;"	v
+XP_PER_LEVEL_LINEAR = 100       # Imported from progression.xp_system	.collab_log.md	/^# XP_PER_LEVEL_LINEAR = 100       # Imported from progression.xp_system$/;"	c
 YELLOW	utils/formatting.py	/^    YELLOW = '\\033[93m'$/;"	v	class:Colors
+[... all tests ...]	XML_PARSER_IMPLEMENTATION.md	/^[... all tests ...]$/;"	c
+[CLAUDE] - 03:26:02	.collab_log.md	/^### [CLAUDE] - 03:26:02$/;"	S	chapter:Collaborative Session Log
+[CLAUDE] - 03:26:46	.collab_log.md	/^### [CLAUDE] - 03:26:46$/;"	S	chapter:Global reference to database for shutdown hook
+[CLAUDE] - 03:27:54	.collab_log.md	/^### [CLAUDE] - 03:27:54$/;"	S	section:Supervisor @boss - Coordination Update""Code Quality Deep Dive & Refactors
+[CLAUDE] - 03:28:39	.collab_log.md	/^### [CLAUDE] - 03:28:39$/;"	S	section:Supervisor @boss - Consolidation & Security Audit""Refactoring Plan Additions (Creative Angles)
 [CLAUDE] - 22:42:51	team_test/.collab_log.md	/^### [CLAUDE] - 22:42:51$/;"	S	chapter:Collaborative Session Log
 [CLAUDE] - 22:43:33	team_test/.collab_log.md	/^### [CLAUDE] - 22:43:33$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 [CLAUDE] - 22:44:13	team_test/.collab_log.md	/^### [CLAUDE] - 22:44:13$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
+[COPILOT] - 03:26:30	.collab_log.md	/^### [COPILOT] - 03:26:30$/;"	S	section:AXE - Agent eXecution Engine""Proposed Refactors (High Impact)
+[COPILOT] - 03:27:40	.collab_log.md	/^### [COPILOT] - 03:27:40$/;"	S	section:Supervisor @boss - Coordination Update""Code Quality Deep Dive & Refactors
+[COPILOT] - 03:28:27	.collab_log.md	/^### [COPILOT] - 03:28:27$/;"	S	section:Supervisor @boss - Consolidation & Security Audit""Refactoring Plan Additions (Creative Angles)
 [COPILOT] - 22:42:56	team_test/.collab_log.md	/^### [COPILOT] - 22:42:56$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 [COPILOT] - 22:43:38	team_test/.collab_log.md	/^### [COPILOT] - 22:43:38$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 [COPILOT] - 22:44:19	team_test/.collab_log.md	/^### [COPILOT] - 22:44:19$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
+[GPT] - 03:26:13	.collab_log.md	/^### [GPT] - 03:26:13$/;"	S	section:AXE - Agent eXecution Engine""License
+[GPT] - 03:27:18	.collab_log.md	/^### [GPT] - 03:27:18$/;"	S	section:Supervisor @boss - Coordination Update""My Security Audit Contribution
+[GPT] - 03:28:07	.collab_log.md	/^### [GPT] - 03:28:07$/;"	S	section:Supervisor @boss - Consolidation & Security Audit""Action Items for Team
 [GPT] - 22:42:58	team_test/.collab_log.md	/^### [GPT] - 22:42:58$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 [GPT] - 22:43:40	team_test/.collab_log.md	/^### [GPT] - 22:43:40$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 [GPT] - 22:44:20	team_test/.collab_log.md	/^### [GPT] - 22:44:20$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
+[GROK] - 03:26:25	.collab_log.md	/^### [GROK] - 03:26:25$/;"	S	section:AXE - Agent eXecution Engine""Quick Reference Card
+[GROK] - 03:27:33	.collab_log.md	/^### [GROK] - 03:27:33$/;"	S	section:Supervisor @boss - Coordination Update""My Security Audit Contribution
+[GROK] - 03:28:18	.collab_log.md	/^### [GROK] - 03:28:18$/;"	S	section:Supervisor @boss - Consolidation & Security Audit""Action Items for Team
 [GROK] - 22:43:06	team_test/.collab_log.md	/^### [GROK] - 22:43:06$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 [GROK] - 22:43:50	team_test/.collab_log.md	/^### [GROK] - 22:43:50$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 [GROK] - 22:44:29	team_test/.collab_log.md	/^### [GROK] - 22:44:29$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 [GROK_CODE] - 22:43:21	team_test/.collab_log.md	/^### [GROK_CODE] - 22:43:21$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 [GROK_CODE] - 22:44:02	team_test/.collab_log.md	/^### [GROK_CODE] - 22:44:02$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
+[LLAMA] - 03:26:15	.collab_log.md	/^### [LLAMA] - 03:26:15$/;"	S	section:AXE - Agent eXecution Engine""Quick question for @boss (before I start editing)
+[LLAMA] - 03:27:19	.collab_log.md	/^### [LLAMA] - 03:27:19$/;"	S	section:Supervisor @boss - Coordination Update""My Security Audit Contribution
+[LLAMA] - 03:28:09	.collab_log.md	/^### [LLAMA] - 03:28:09$/;"	S	section:Supervisor @boss - Consolidation & Security Audit""Action Items for Team
 [LLAMA] - 22:42:52	team_test/.collab_log.md	/^### [LLAMA] - 22:42:52$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 [LLAMA] - 22:43:34	team_test/.collab_log.md	/^### [LLAMA] - 22:43:34$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
 [LLAMA] - 22:44:14	team_test/.collab_log.md	/^### [LLAMA] - 22:44:14$/;"	S	section:Hello Team! 👋""Team Coordination Plan 📋
+[USER] - 03:25:48	.collab_log.md	/^### [USER] - 03:25:48$/;"	S	chapter:Collaborative Session Log
 [USER] - 22:42:42	team_test/.collab_log.md	/^### [USER] - 22:42:42$/;"	S	chapter:Collaborative Session Log
 __all__	core/__init__.py	/^__all__ = ['AgentWorkerProcess', 'MultiAgentCoordinator', 'SharedContext']$/;"	v
-__all__	database/__init__.py	/^__all__ = ['AgentDatabase', 'AGENT_STATE_TABLE', 'SUPERVISOR_LOG_TABLE', 'ALIAS_MAPPINGS_TABLE']$/;"	v
+__all__	database/__init__.py	/^__all__ = [$/;"	v
 __all__	models/__init__.py	/^__all__ = ['MODEL_METADATA', 'get_model_info']$/;"	v
 __all__	progression/__init__.py	/^__all__ = [$/;"	v
 __all__	safety/__init__.py	/^__all__ = ['SESSION_RULES']$/;"	v
@@ -482,6 +906,7 @@ __init__	axe.py	/^    def __init__(self, config: Config):$/;"	m	class:AgentManag
 __init__	axe.py	/^    def __init__(self, config: Config, agents: List[str], workspace_dir: str, $/;"	m	class:CollaborativeSession
 __init__	axe.py	/^    def __init__(self, config: Config, project_dir: str):$/;"	m	class:ChatSession
 __init__	axe.py	/^    def __init__(self, config: Config, project_dir: str):$/;"	m	class:ToolRunner
+__init__	axe.py	/^    def __init__(self, config: Config, project_dir: str, tool_runner: 'ToolRunner'):$/;"	m	class:ResponseProcessor
 __init__	axe.py	/^    def __init__(self, config_path: Optional[str] = None):$/;"	m	class:Config
 __init__	axe.py	/^    def __init__(self, db: AgentDatabase):$/;"	m	class:BreakSystem
 __init__	axe.py	/^    def __init__(self, db: AgentDatabase):$/;"	m	class:SleepManager
@@ -492,29 +917,39 @@ __init__	axe.py	/^    def __init__(self, workspace_dir: str):$/;"	m	class:Shared
 __init__	core/multiprocess.py	/^    def __init__(self):$/;"	m	class:SharedContext
 __init__	core/multiprocess.py	/^    def __init__(self, agent_configs: List[Dict[str, str]]):$/;"	m	class:MultiAgentCoordinator
 __init__	core/multiprocess.py	/^    def __init__(self, agent_id: str, agent_name: str, $/;"	m	class:AgentWorkerProcess
-__init__	database/agent_db.py	/^    def __init__(self, db_path: str = "axe_agents.db"):$/;"	m	class:AgentDatabase
+__init__	database/agent_db.py	/^    def __init__(self, db_path: Optional[str] = None):$/;"	m	class:AgentDatabase
 __init__	utils/token_tracker.py	/^    def __init__(self):$/;"	m	class:TokenTracker
 _apply_migrations	database/agent_db.py	/^    def _apply_migrations(self, conn: sqlite3.Connection) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
+_check_file_access	axe.py	/^    def _check_file_access(self, filepath: str, allowed: list, forbidden: list) -> bool:$/;"	m	class:ResponseProcessor	typeref:typename:bool
 _deep_merge	axe.py	/^    def _deep_merge(self, base: dict, update: dict) -> None:$/;"	m	class:Config	typeref:typename:None
 _encrypt_message	axe.py	/^    def _encrypt_message(self, message: str) -> str:$/;"	m	class:EmergencyMailbox	typeref:typename:str
 _end_session	axe.py	/^    def _end_session(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
+_extract_commands_from_shell	axe.py	/^    def _extract_commands_from_shell(self, cmd: str) -> List[str]:$/;"	m	class:ToolRunner	typeref:typename:List[str]
 _format_conversation_for_agent	axe.py	/^    def _format_conversation_for_agent(self, agent_name: str) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
 _format_time	axe.py	/^    def _format_time(self, seconds: int) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
 _get_system_prompt_for_collab	axe.py	/^    def _get_system_prompt_for_collab(self, agent_name: str) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
 _global_db	axe.py	/^_global_db = None$/;"	v
-_handle_break_request	axe.py	/^    def _handle_break_request(self, agent_name: str, response: str) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
-_handle_emergency_message	axe.py	/^    def _handle_emergency_message(self, agent_name: str, response: str) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
-_handle_spawn_request	axe.py	/^    def _handle_spawn_request(self, agent_name: str, response: str) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
+_handle_break_request	axe.py	/^    def _handle_break_request(self, agent_name: str, response: str, content: str = "") -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
+_handle_emergency_message	axe.py	/^    def _handle_emergency_message(self, agent_name: str, response: str, content: str = "") -> No/;"	m	class:CollaborativeSession	typeref:typename:None
+_handle_exec	axe.py	/^    def _handle_exec(self, command: str) -> str:$/;"	m	class:ResponseProcessor	typeref:typename:str
+_handle_read	axe.py	/^    def _handle_read(self, filename: str) -> str:$/;"	m	class:ResponseProcessor	typeref:typename:str
+_handle_spawn_request	axe.py	/^    def _handle_spawn_request(self, agent_name: str, response: str, content: str = "") -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
+_handle_write	axe.py	/^    def _handle_write(self, filename: str, content: str) -> str:$/;"	m	class:ResponseProcessor	typeref:typename:str
 _init_clients	axe.py	/^    def _init_clients(self) -> None:$/;"	m	class:AgentManager	typeref:typename:None
 _init_db	database/agent_db.py	/^    def _init_db(self) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
 _init_mailbox	axe.py	/^    def _init_mailbox(self) -> None:$/;"	m	class:EmergencyMailbox	typeref:typename:None
 _is_path_safe	axe.py	/^    def _is_path_safe(self, filepath: str) -> bool:$/;"	m	class:SharedWorkspace	typeref:typename:bool
+_is_within_dir	axe.py	/^        def _is_within_dir(path: str, directory: str) -> bool:$/;"	f	member:ResponseProcessor._check_file_access	typeref:typename:bool	file:
 _log	axe.py	/^    def _log(self, message: str) -> None:$/;"	m	class:ToolRunner	typeref:typename:None
+_needs_shell	axe.py	/^    def _needs_shell(self, cmd: str) -> bool:$/;"	m	class:ToolRunner	typeref:typename:bool
 _print_status	axe.py	/^    def _print_status(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
+_resolve_project_path	axe.py	/^    def _resolve_project_path(self, filename: str) -> Optional[str]:$/;"	m	class:ResponseProcessor	typeref:typename:Optional[str]
 _run_collaboration_loop	axe.py	/^    def _run_collaboration_loop(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _show_break_requests	axe.py	/^    def _show_break_requests(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _show_emergency_mailbox	axe.py	/^    def _show_emergency_mailbox(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
+_strip_heredoc_content	axe.py	/^    def _strip_heredoc_content(self, cmd: str) -> str:$/;"	m	class:ToolRunner	typeref:typename:str
 _time_remaining	axe.py	/^    def _time_remaining(self) -> int:$/;"	m	class:CollaborativeSession	typeref:typename:int
+_uses_max_completion_tokens	axe.py	/^    def _uses_max_completion_tokens(self, model: str) -> bool:$/;"	m	class:AgentManager	typeref:typename:bool
 `database/` (542 lines)	REFACTORING_NOTES.md	/^### `database\/` (542 lines)$/;"	S	section:AXE.PY Refactoring Notes""New Module Structure
 `progression/` (67 lines)	REFACTORING_NOTES.md	/^### `progression\/` (67 lines)$/;"	S	section:AXE.PY Refactoring Notes""New Module Structure
 `safety/` (50 lines)	REFACTORING_NOTES.md	/^### `safety\/` (50 lines)$/;"	S	section:AXE.PY Refactoring Notes""New Module Structure
@@ -540,18 +975,27 @@ calculate_xp_for_level	progression/xp_system.py	/^def calculate_xp_for_level(lev
 call_agent	axe.py	/^    def call_agent(self, agent_name: str, prompt: str, context: str = "") -> str:$/;"	m	class:AgentManager	typeref:typename:str
 can_spawn	axe.py	/^    def can_spawn(self) -> Tuple[bool, str]:$/;"	m	class:DynamicSpawner	typeref:typename:Tuple[bool,str]
 can_take_break	database/agent_db.py	/^    def can_take_break(self, agent_id: str, total_agents: int, agents_on_break: int,$/;"	m	class:AgentDatabase	typeref:typename:Tuple[bool,str]
+check_agent_command	axe.py	/^def check_agent_command(response: str, token: str) -> tuple[bool, str]:$/;"	f	typeref:typename:tuple[bool,str]
+check_agent_pass	axe.py	/^def check_agent_pass(response: str) -> bool:$/;"	f	typeref:typename:bool
+check_agent_task_complete	axe.py	/^def check_agent_task_complete(response: str) -> tuple[bool, str]:$/;"	f	typeref:typename:tuple[bool,str]
 check_all_agents	axe.py	/^    def check_all_agents(self) -> List[Dict[str, Any]]:$/;"	m	class:SleepManager	typeref:typename:List[Dict[str,Any]]
 check_and_wake_agents	axe.py	/^    def check_and_wake_agents(self) -> List[Dict[str, Any]]:$/;"	m	class:SleepManager	typeref:typename:List[Dict[str,Any]]
 check_break_endings	axe.py	/^    def check_break_endings(self) -> List[Dict[str, Any]]:$/;"	m	class:BreakSystem	typeref:typename:List[Dict[str,Any]]
 check_degradation	database/agent_db.py	/^    def check_degradation(self, agent_id: str, error_threshold: int = 20) -> Tuple[bool, str]:$/;"	m	class:AgentDatabase	typeref:typename:Tuple[bool,str]
 check_mandatory_sleep	database/agent_db.py	/^    def check_mandatory_sleep(self, agent_id: str, max_work_hours: int = 6, $/;"	m	class:AgentDatabase	typeref:typename:Tuple[bool,str]
 check_threshold	utils/token_tracker.py	/^    def check_threshold(self, agent_id: str) -> Tuple[str, Optional[str]]:$/;"	m	class:TokenTracker	typeref:typename:Tuple[str,Optional[str]]
+clean_tool_syntax	utils/xml_tool_parser.py	/^def clean_tool_syntax(response: str) -> str:$/;"	f	typeref:typename:str
 cleanup	core/multiprocess.py	/^    def cleanup(self) -> None:$/;"	m	class:SharedContext	typeref:typename:None
 collect_resources	axe.py	/^def collect_resources() -> str:$/;"	f	typeref:typename:str
 colorize	utils/formatting.py	/^def colorize(text: str, color: str) -> str:$/;"	f	typeref:typename:str
 count_tokens	utils/token_tracker.py	/^    def count_tokens(self, text: str) -> int:$/;"	m	class:TokenTracker	typeref:typename:int
 decrypt_report	axe.py	/^    def decrypt_report(self, filename: str, private_key: str = None) -> Optional[str]:$/;"	m	class:EmergencyMailbox	typeref:typename:Optional[str]
+deduplicate_calls	utils/xml_tool_parser.py	/^def deduplicate_calls(calls: List[Dict[str, Any]]) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
+def calculate_xp_for_level(level: int) -&gt; int: ...  # See progression/xp_system.py	.collab_log.md	/^# def calculate_xp_for_level(level: int) -&gt; int: ...  # See progression\/xp_system.py$/;"	c
+def get_title_for_level(level: int) -&gt; str: ...     # See progression/levels.py	.collab_log.md	/^# def get_title_for_level(level: int) -&gt; str: ...     # See progression\/levels.py$/;"	c
+degradation monitoring, and break system are now in the modular structure.	.collab_log.md	/^# degradation monitoring, and break system are now in the modular structure.$/;"	c
 demo_aliasing	demo_improvements.py	/^def demo_aliasing():$/;"	f
+demo_before_and_after	demo_heredoc_fix.py	/^def demo_before_and_after():$/;"	f
 demo_break_system	demo_improvements.py	/^def demo_break_system():$/;"	f
 demo_dynamic_spawning	demo_improvements.py	/^def demo_dynamic_spawning():$/;"	f
 demo_emergency_mailbox	demo_improvements.py	/^def demo_emergency_mailbox():$/;"	f
@@ -561,12 +1005,17 @@ demo_resources	demo_improvements.py	/^def demo_resources():$/;"	f
 demo_session_rules	demo_improvements.py	/^def demo_session_rules():$/;"	f
 demo_sleep_system	demo_improvements.py	/^def demo_sleep_system():$/;"	f
 demo_xp_progression	demo_improvements.py	/^def demo_xp_progression():$/;"	f
+demonstrate_fix	demo_absolute_path_fix.py	/^def demonstrate_fix():$/;"	f
+demonstrate_fix	demo_task_completion_fix.py	/^def demonstrate_fix():$/;"	f
 deny_break	axe.py	/^    def deny_break(self, request_id: str, reason: str) -> Dict[str, Any]:$/;"	m	class:BreakSystem	typeref:typename:Dict[str,Any]
+detect_agent_token	axe.py	/^def detect_agent_token(response: str, token: str) -> tuple[bool, str]:$/;"	f	typeref:typename:tuple[bool,str]
+execute_parsed_call	utils/xml_tool_parser.py	/^def execute_parsed_call(call: Dict[str, Any], workspace: str, $/;"	f	typeref:typename:str
 export_stats	utils/token_tracker.py	/^    def export_stats(self) -> str:$/;"	m	class:TokenTracker	typeref:typename:str
 force_sleep	axe.py	/^    def force_sleep(self, agent_id: str, reason: str, $/;"	m	class:SleepManager	typeref:typename:Dict[str,Any]
 format_input_modes	models/metadata.py	/^def format_input_modes(modes: List[str]) -> str:$/;"	f	typeref:typename:str
 format_output_modes	models/metadata.py	/^def format_output_modes(modes: List[str]) -> str:$/;"	f	typeref:typename:str
 format_token_count	models/metadata.py	/^def format_token_count(tokens: int) -> str:$/;"	f	typeref:typename:str
+format_xml_result	utils/xml_tool_parser.py	/^def format_xml_result(tool: str, params: Dict[str, Any], result: str) -> str:$/;"	f	typeref:typename:str
 generate_sample_config	axe.py	/^def generate_sample_config(path: str = 'axe.yaml') -> None:$/;"	f	typeref:typename:None
 generate_summary_prompt	utils/token_tracker.py	/^    def generate_summary_prompt(self, agent_id: str, context: str) -> str:$/;"	m	class:TokenTracker	typeref:typename:str
 get	axe.py	/^    def get(self, *keys, default=None):$/;"	m	class:Config
@@ -578,6 +1027,7 @@ get_all_usage	utils/token_tracker.py	/^    def get_all_usage(self) -> Dict[str, 
 get_breaks_in_last_hour	database/agent_db.py	/^    def get_breaks_in_last_hour(self, agent_id: str) -> int:$/;"	m	class:AgentDatabase	typeref:typename:int
 get_context_summary	axe.py	/^    def get_context_summary(self) -> str:$/;"	m	class:ProjectContext	typeref:typename:str
 get_context_summary	database/agent_db.py	/^    def get_context_summary(self, agent_id: str) -> Optional[str]:$/;"	m	class:AgentDatabase	typeref:typename:Optional[str]
+get_database_path	database/agent_db.py	/^def get_database_path() -> str:$/;"	f	typeref:typename:str
 get_error_rate	database/agent_db.py	/^    def get_error_rate(self, agent_id: str) -> float:$/;"	m	class:AgentDatabase	typeref:typename:float
 get_file_content	axe.py	/^    def get_file_content(self, filepath: str, max_bytes: int = 4096) -> str:$/;"	m	class:ProjectContext	typeref:typename:str
 get_model_info	models/metadata.py	/^def get_model_info(model_name: str) -> Dict:$/;"	f	typeref:typename:Dict
@@ -598,6 +1048,8 @@ get_workspace_state	core/multiprocess.py	/^    def get_workspace_state(self) -> 
 handle_command	core/multiprocess.py	/^    def handle_command(self, command: Dict[str, Any]) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
 handle_context_update	core/multiprocess.py	/^    def handle_context_update(self, command: Dict[str, Any]) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
 handle_turn	core/multiprocess.py	/^    def handle_turn(self, command: Dict[str, Any]) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
+include	WRITE_BLOCKS_GUIDE.md	/^#include <stdio.h>$/;"	h	section:WRITE Block Functionality - User Guide""Integration with Other Blocks
+is_genuine_task_completion	axe.py	/^def is_genuine_task_completion(response: str) -> bool:$/;"	f	typeref:typename:bool
 is_tool_allowed	axe.py	/^    def is_tool_allowed(self, cmd: str) -> Tuple[bool, str]:$/;"	m	class:ToolRunner	typeref:typename:Tuple[bool,str]
 list_agents	axe.py	/^    def list_agents(self) -> List[dict]:$/;"	m	class:AgentManager	typeref:typename:List[dict]
 list_agents	axe.py	/^    def list_agents(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
@@ -611,16 +1063,36 @@ load_agent_state	database/agent_db.py	/^    def load_agent_state(self, agent_id:
 log_supervisor_event	database/agent_db.py	/^    def log_supervisor_event(self, supervisor_id: str, event_type: str, $/;"	m	class:AgentDatabase	typeref:typename:None
 main	axe.py	/^def main():$/;"	f
 main	demo_improvements.py	/^def main():$/;"	f
+main	manual_test_write.py	/^def main():$/;"	f
+main	manual_test_xml.py	/^def main():$/;"	f
 main	test_axe_improvements.py	/^def main():$/;"	f
+main	test_database_location.py	/^def main():$/;"	f
+main	test_integration_database_fix.py	/^def main():$/;"	f
+main	test_write_blocks.py	/^def main():$/;"	f
+main	test_xml_tool_parser.py	/^def main():$/;"	f
+normalize_tool_name	utils/xml_tool_parser.py	/^def normalize_tool_name(name: str) -> Optional[str]:$/;"	f	typeref:typename:Optional[str]
+parse_all_tool_formats	utils/xml_tool_parser.py	/^def parse_all_tool_formats(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
+parse_axe_native_blocks	utils/xml_tool_parser.py	/^def parse_axe_native_blocks(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
+parse_bash_tags	utils/xml_tool_parser.py	/^def parse_bash_tags(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
+parse_shell_codeblocks	utils/xml_tool_parser.py	/^def parse_shell_codeblocks(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
+parse_simple_xml_tags	utils/xml_tool_parser.py	/^def parse_simple_xml_tags(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
+parse_xml_function_calls	utils/xml_tool_parser.py	/^def parse_xml_function_calls(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
 print_banner	axe.py	/^    def print_banner(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 print_banner	axe.py	/^    def print_banner(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
+print_header	demo_absolute_path_fix.py	/^def print_header(text):$/;"	f
 print_help	axe.py	/^    def print_help(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 print_section	demo_improvements.py	/^def print_section(title):$/;"	f
+print_test	demo_absolute_path_fix.py	/^def print_test(test_num, description):$/;"	f
 process_agent_message	axe.py	/^    def process_agent_message(self, message: str) -> None:$/;"	m	class:ChatSession	typeref:typename:None
+process_agent_response	utils/xml_tool_parser.py	/^def process_agent_response(response: str, workspace: str, $/;"	f	typeref:typename:Tuple[str,List[str]]
 process_command	axe.py	/^    def process_command(self, cmd: str) -> bool:$/;"	m	class:ChatSession	typeref:typename:bool
+process_response	axe.py	/^    def process_response(self, response: str, agent_name: str = "") -> str:$/;"	m	class:ResponseProcessor	typeref:typename:str
+process_xml_calls	axe.py	/^        from utils.xml_tool_parser import process_agent_response as process_xml_calls$/;"	Y	member:ResponseProcessor.process_response	file:	nameref:unknown:process_agent_response
 put_agent_to_sleep	database/agent_db.py	/^    def put_agent_to_sleep(self, agent_id: str, reason: str, duration_minutes: int = 30) -> Dict/;"	m	class:AgentDatabase	typeref:typename:Dict[str,Any]
 read_file	axe.py	/^    def read_file(self, filename: str, max_bytes: int = 8192) -> str:$/;"	m	class:SharedWorkspace	typeref:typename:str
 read_shared_notes	axe.py	/^    def read_shared_notes(self) -> str:$/;"	m	class:SharedWorkspace	typeref:typename:str
+readline	axe.py	/^    import gnureadline as readline  # noqa: F401$/;"	I	nameref:module:gnureadline
+readline import enables command history in terminal (side effect import)	.collab_log.md	/^# readline import enables command history in terminal (side effect import)$/;"	c
 record_break	database/agent_db.py	/^    def record_break(self, agent_id: str, break_type: str, duration_minutes: int) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
 record_diff	database/agent_db.py	/^    def record_diff(self, agent_id: str, diff_content: str, error_count: int = 0,$/;"	m	class:AgentDatabase	typeref:typename:None
 request_break	axe.py	/^    def request_break(self, agent_id: str, alias: str, $/;"	m	class:BreakSystem	typeref:typename:Dict[str,Any]
@@ -628,11 +1100,19 @@ request_shutdown	core/multiprocess.py	/^    def request_shutdown(self) -> None:$
 reset_agent	utils/token_tracker.py	/^    def reset_agent(self, agent_id: str) -> None:$/;"	m	class:TokenTracker	typeref:typename:None
 resolve_agent	axe.py	/^    def resolve_agent(self, name: str) -> Optional[dict]:$/;"	m	class:AgentManager	typeref:typename:Optional[dict]
 resource_monitor_thread	axe.py	/^def resource_monitor_thread():$/;"	f
-restore_agents_on_startup	axe.py	/^def restore_agents_on_startup(db_path: str = "axe_agents.db") -> None:$/;"	f	typeref:typename:None
+restore_agents_on_startup	axe.py	/^def restore_agents_on_startup(db_path: Optional[str] = None) -> None:$/;"	f	typeref:typename:None
 restore_all_agents	database/agent_db.py	/^    def restore_all_agents(self) -> List[Dict[str, Any]]:$/;"	m	class:AgentDatabase	typeref:typename:List[Dict[str,Any]]
 run	axe.py	/^    def run(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 run	axe.py	/^    def run(self, cmd: str, auto_approve: Optional[bool] = None, dry_run: Optional[bool] = None)/;"	m	class:ToolRunner	typeref:typename:Tuple[bool,str]
 run	core/multiprocess.py	/^    def run(self) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
+run_all_tests	test_detect_agent_token.py	/^def run_all_tests():$/;"	f
+run_all_tests	test_heredoc_execution_fix.py	/^def run_all_tests():$/;"	f
+run_all_tests	test_integration_bug_fix.py	/^def run_all_tests():$/;"	f
+run_all_tests	test_mission_md_tokens.py	/^def run_all_tests():$/;"	f
+run_all_tests	test_supervisor_protections.py	/^def run_all_tests():$/;"	f
+run_all_tests	test_task_completion_detection.py	/^def run_all_tests():$/;"	f
+run_all_tests	test_tool_runner.py	/^def run_all_tests():$/;"	f
+run_all_tests	test_tool_runner_edge_cases.py	/^def run_all_tests():$/;"	f
 save	axe.py	/^    def save(self, path: Optional[str] = None) -> None:$/;"	m	class:Config	typeref:typename:None
 save_agent_state	database/agent_db.py	/^    def save_agent_state(self, agent_id: str, alias: str, model_name: str,$/;"	m	class:AgentDatabase	typeref:typename:None
 save_context_summary	database/agent_db.py	/^    def save_context_summary(self, agent_id: str, summary: str) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
@@ -644,32 +1124,160 @@ should_shutdown	core/multiprocess.py	/^    def should_shutdown(self) -> bool:$/;
 should_sleep_agent	utils/token_tracker.py	/^    def should_sleep_agent(self, agent_id: str) -> Tuple[bool, Optional[str]]:$/;"	m	class:TokenTracker	typeref:typename:Tuple[bool,Optional[str]]
 shutdown	core/multiprocess.py	/^    def shutdown(self) -> None:$/;"	m	class:MultiAgentCoordinator	typeref:typename:None
 signal_turn	core/multiprocess.py	/^    def signal_turn(self, agent_id: str, prompt: str, context: str = "") -> Optional[Dict[str, A/;"	m	class:MultiAgentCoordinator	typeref:typename:Optional[Dict[str,Any]]
+simulate_problem_scenario	test_integration_database_fix.py	/^def simulate_problem_scenario():$/;"	f
 spawn_agent	axe.py	/^    def spawn_agent(self, model_name: str, provider: str,$/;"	m	class:DynamicSpawner	typeref:typename:Dict[str,Any]
 start	core/multiprocess.py	/^    def start(self) -> None:$/;"	m	class:MultiAgentCoordinator	typeref:typename:None
 start_resource_monitor	axe.py	/^def start_resource_monitor():$/;"	f
 start_session	axe.py	/^    def start_session(self, task: str) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 start_work_tracking	database/agent_db.py	/^    def start_work_tracking(self, agent_id: str) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
+success	demo_absolute_path_fix.py	/^    success = demonstrate_fix()$/;"	v
+success	test_absolute_path_fix.py	/^    success = test_problem_statement_scenario()$/;"	v
+success	test_detect_agent_token.py	/^    success = run_all_tests()$/;"	v
+success	test_heredoc_execution_fix.py	/^    success = run_all_tests()$/;"	v
+success	test_integration_bug_fix.py	/^    success = run_all_tests()$/;"	v
+success	test_mission_md_tokens.py	/^    success = run_all_tests()$/;"	v
+success	test_supervisor_protections.py	/^    success = run_all_tests()$/;"	v
+success	test_task_completion_detection.py	/^    success = run_all_tests()$/;"	v
+success	test_tool_runner.py	/^    success = run_all_tests()$/;"	v
+success	test_tool_runner_edge_cases.py	/^    success = run_all_tests()$/;"	v
 sync_agents_on_shutdown	axe.py	/^def sync_agents_on_shutdown() -> None:$/;"	f	typeref:typename:None
 sync_conversation	database/agent_db.py	/^    def sync_conversation(self, agent_id: str, message_snippet: str, $/;"	m	class:AgentDatabase	typeref:typename:None
+test_absolute_paths_within_project	test_write_blocks.py	/^def test_absolute_paths_within_project():$/;"	f
+test_agent	manual_test_write.py	/^def test_agent(agent_name: str):$/;"	f
+test_all_formats_execution	test_xml_tool_parser.py	/^def test_all_formats_execution():$/;"	f
+test_ambiguous_mention_not_trigger	test_task_completion_detection.py	/^def test_ambiguous_mention_not_trigger():$/;"	f
+test_axe_exec_block	test_xml_tool_parser.py	/^def test_axe_exec_block():$/;"	f
+test_axe_read_block	test_xml_tool_parser.py	/^def test_axe_read_block():$/;"	f
+test_axe_write_block	test_xml_tool_parser.py	/^def test_axe_write_block():$/;"	f
+test_bash_codeblock	test_xml_tool_parser.py	/^def test_bash_codeblock():$/;"	f
+test_bash_tags	test_xml_tool_parser.py	/^def test_bash_tags():$/;"	f
+test_blockquote_not_trigger	test_task_completion_detection.py	/^def test_blockquote_not_trigger():$/;"	f
+test_break_request_in_result_block	test_detect_agent_token.py	/^def test_break_request_in_result_block():$/;"	f
 test_break_system	test_axe_improvements.py	/^def test_break_system():$/;"	f
+test_clean_tool_syntax	test_xml_tool_parser.py	/^def test_clean_tool_syntax():$/;"	f
+test_codeblock_not_trigger	test_task_completion_detection.py	/^def test_codeblock_not_trigger():$/;"	f
+test_comments_ignored_in_codeblock	test_xml_tool_parser.py	/^def test_comments_ignored_in_codeblock():$/;"	f
+test_complex_commands	test_tool_runner.py	/^def test_complex_commands():$/;"	f
+test_complex_edge_cases	test_tool_runner_edge_cases.py	/^def test_complex_edge_cases():$/;"	f
+test_complex_scenario_with_file_and_genuine	test_task_completion_detection.py	/^def test_complex_scenario_with_file_and_genuine():$/;"	f
 test_database	test_axe_improvements.py	/^def test_database():$/;"	f
+test_database_location_with_different_workspace	test_database_location.py	/^def test_database_location_with_different_workspace():$/;"	f
+test_database_persistence_across_workspaces	test_database_location.py	/^def test_database_persistence_across_workspaces():$/;"	f
+test_database_tables_autocreate	test_database_location.py	/^def test_database_tables_autocreate():$/;"	f
+test_deduplication	test_xml_tool_parser.py	/^def test_deduplication():$/;"	f
 test_degradation_monitoring	test_axe_improvements.py	/^def test_degradation_monitoring():$/;"	f
 test_dynamic_spawning	test_axe_improvements.py	/^def test_dynamic_spawning():$/;"	f
+test_emergency_in_result_block	test_detect_agent_token.py	/^def test_emergency_in_result_block():$/;"	f
 test_emergency_mailbox	test_axe_improvements.py	/^def test_emergency_mailbox():$/;"	f
+test_empty_commands_ignored	test_xml_tool_parser.py	/^def test_empty_commands_ignored():$/;"	f
+test_empty_database_file	test_database_location.py	/^def test_empty_database_file():$/;"	f
+test_error_handling	test_xml_tool_parser.py	/^def test_error_handling():$/;"	f
+test_exec_block_with_heredoc	test_exec_heredoc.py	/^def test_exec_block_with_heredoc():$/;"	f
+test_execute_append	test_xml_tool_parser.py	/^def test_execute_append():$/;"	f
+test_execute_exec	test_xml_tool_parser.py	/^def test_execute_exec():$/;"	f
+test_execute_list_dir	test_xml_tool_parser.py	/^def test_execute_list_dir():$/;"	f
+test_execute_read	test_xml_tool_parser.py	/^def test_execute_read():$/;"	f
+test_execute_write	test_xml_tool_parser.py	/^def test_execute_write():$/;"	f
+test_extract_commands	test_tool_runner.py	/^def test_extract_commands():$/;"	f
+test_file_content_not_trigger	test_task_completion_detection.py	/^def test_file_content_not_trigger():$/;"	f
+test_forbidden_paths	test_tool_runner.py	/^def test_forbidden_paths():$/;"	f
+test_format_xml_result	test_xml_tool_parser.py	/^def test_format_xml_result():$/;"	f
+test_genuine_break_request_triggers	test_detect_agent_token.py	/^def test_genuine_break_request_triggers():$/;"	f
+test_genuine_declaration_triggers	test_task_completion_detection.py	/^def test_genuine_declaration_triggers():$/;"	f
+test_genuine_emergency_triggers	test_detect_agent_token.py	/^def test_genuine_emergency_triggers():$/;"	f
+test_genuine_spawn_triggers	test_detect_agent_token.py	/^def test_genuine_spawn_triggers():$/;"	f
+test_genuine_task_complete_triggers	test_detect_agent_token.py	/^def test_genuine_task_complete_triggers():$/;"	f
+test_genuine_tokens_still_work	test_integration_bug_fix.py	/^def test_genuine_tokens_still_work():$/;"	f
+test_genuine_with_checkmark_triggers	test_task_completion_detection.py	/^def test_genuine_with_checkmark_triggers():$/;"	f
+test_genuine_with_colon_triggers	test_task_completion_detection.py	/^def test_genuine_with_colon_triggers():$/;"	f
+test_genuine_with_exclamation_triggers	test_task_completion_detection.py	/^def test_genuine_with_exclamation_triggers():$/;"	f
+test_get_database_path	test_database_location.py	/^def test_get_database_path():$/;"	f
+test_heredoc_execution_with_content	test_heredoc_execution_fix.py	/^def test_heredoc_execution_with_content():$/;"	f
+test_heredoc_followed_by_pipe	test_heredoc_execution_fix.py	/^def test_heredoc_followed_by_pipe():$/;"	f
+test_heredoc_stripping_for_validation_only	test_heredoc_execution_fix.py	/^def test_heredoc_stripping_for_validation_only():$/;"	f
+test_heredoc_with_special_markdown_content	test_heredoc_execution_fix.py	/^def test_heredoc_with_special_markdown_content():$/;"	f
+test_heredocs	test_tool_runner.py	/^def test_heredocs():$/;"	f
+test_inline_codeblock	test_xml_tool_parser.py	/^def test_inline_codeblock():$/;"	f
+test_integration_with_execution	test_tool_runner.py	/^def test_integration_with_execution():$/;"	f
+test_integration_with_response_processor	test_xml_tool_parser.py	/^def test_integration_with_response_processor():$/;"	f
+test_live_agent_write	test_write_blocks.py	/^def test_live_agent_write(agent_name: str, workspace: str):$/;"	f
+test_live_mode_write_blocks	test_write_blocks.py	/^def test_live_mode_write_blocks():$/;"	f
+test_logical_operators	test_tool_runner.py	/^def test_logical_operators():$/;"	f
+test_lowercase_read_block_not_trigger	test_task_completion_detection.py	/^def test_lowercase_read_block_not_trigger():$/;"	f
+test_malformed_xml	test_xml_tool_parser.py	/^def test_malformed_xml():$/;"	f
+test_marking_complete_triggers	test_task_completion_detection.py	/^def test_marking_complete_triggers():$/;"	f
+test_mission_md_without_result_blocks	test_mission_md_tokens.py	/^def test_mission_md_without_result_blocks():$/;"	f
+test_mixed_content_and_genuine	test_detect_agent_token.py	/^def test_mixed_content_and_genuine():$/;"	f
+test_mixed_formats	test_xml_tool_parser.py	/^def test_mixed_formats():$/;"	f
+test_mixed_xml_and_markdown	manual_test_xml.py	/^def test_mixed_xml_and_markdown():$/;"	f
+test_mixed_xml_and_markdown	test_xml_tool_parser.py	/^def test_mixed_xml_and_markdown():$/;"	f
+test_multiline_codeblock	test_xml_tool_parser.py	/^def test_multiline_codeblock():$/;"	f
+test_multiple_blocks	test_write_blocks.py	/^def test_multiple_blocks():$/;"	f
+test_multiple_formats	test_integration_bug_fix.py	/^def test_multiple_formats():$/;"	f
+test_multiple_heredocs	test_heredoc_execution_fix.py	/^def test_multiple_heredocs():$/;"	f
+test_needs_shell	test_tool_runner.py	/^def test_needs_shell():$/;"	f
+test_nested_quotes_in_code_not_trigger	test_task_completion_detection.py	/^def test_nested_quotes_in_code_not_trigger():$/;"	f
+test_nested_result_blocks	test_detect_agent_token.py	/^def test_nested_result_blocks():$/;"	f
+test_nested_xml_content	test_xml_tool_parser.py	/^def test_nested_xml_content():$/;"	f
+test_no_task_complete_returns_false	test_task_completion_detection.py	/^def test_no_task_complete_returns_false():$/;"	f
+test_non_supervisor_can_request_break	test_supervisor_protections.py	/^def test_non_supervisor_can_request_break():$/;"	f
+test_parse_multiple_function_calls	test_xml_tool_parser.py	/^def test_parse_multiple_function_calls():$/;"	f
+test_parse_single_function_call	test_xml_tool_parser.py	/^def test_parse_single_function_call():$/;"	f
+test_path_prefix_edge_cases	test_write_blocks.py	/^def test_path_prefix_edge_cases():$/;"	f
+test_path_traversal_attacks	test_write_blocks.py	/^def test_path_traversal_attacks():$/;"	f
+test_pipes	test_tool_runner.py	/^def test_pipes():$/;"	f
+test_problem_statement_scenario	test_absolute_path_fix.py	/^def test_problem_statement_scenario():$/;"	f
+test_problem_statement_scenario	test_integration_bug_fix.py	/^def test_problem_statement_scenario():$/;"	f
+test_quoted_not_trigger	test_task_completion_detection.py	/^def test_quoted_not_trigger():$/;"	f
+test_read_block_not_trigger	test_task_completion_detection.py	/^def test_read_block_not_trigger():$/;"	f
+test_reading_mission_md	test_mission_md_tokens.py	/^def test_reading_mission_md():$/;"	f
+test_redirects	test_tool_runner.py	/^def test_redirects():$/;"	f
+test_redirects_without_spaces	test_tool_runner_edge_cases.py	/^def test_redirects_without_spaces():$/;"	f
 test_session_rules	test_axe_improvements.py	/^def test_session_rules():$/;"	f
+test_sh_codeblock	test_xml_tool_parser.py	/^def test_sh_codeblock():$/;"	f
+test_shell_codeblock	test_xml_tool_parser.py	/^def test_shell_codeblock():$/;"	f
+test_simple_commands	test_tool_runner.py	/^def test_simple_commands():$/;"	f
+test_simple_xml_read	test_xml_tool_parser.py	/^def test_simple_xml_read():$/;"	f
+test_simple_xml_shell	test_xml_tool_parser.py	/^def test_simple_xml_shell():$/;"	f
+test_simple_xml_write	test_xml_tool_parser.py	/^def test_simple_xml_write():$/;"	f
+test_single_quoted_not_trigger	test_task_completion_detection.py	/^def test_single_quoted_not_trigger():$/;"	f
 test_sleep_system	test_axe_improvements.py	/^def test_sleep_system():$/;"	f
+test_spawn_in_result_block	test_detect_agent_token.py	/^def test_spawn_in_result_block():$/;"	f
+test_subshells	test_tool_runner_edge_cases.py	/^def test_subshells():$/;"	f
+test_supervisor_cannot_request_break	test_supervisor_protections.py	/^def test_supervisor_cannot_request_break():$/;"	f
+test_supervisor_with_boss_alias_blocked	test_supervisor_protections.py	/^def test_supervisor_with_boss_alias_blocked():$/;"	f
+test_task_complete_in_result_block	test_detect_agent_token.py	/^def test_task_complete_in_result_block():$/;"	f
+test_task_is_complete_triggers	test_task_completion_detection.py	/^def test_task_is_complete_triggers():$/;"	f
 test_titles	test_axe_improvements.py	/^def test_titles():$/;"	f
+test_token_in_code_block	test_detect_agent_token.py	/^def test_token_in_code_block():$/;"	f
+test_token_in_read_block	test_detect_agent_token.py	/^def test_token_in_read_block():$/;"	f
+test_tool_name_normalization	test_xml_tool_parser.py	/^def test_tool_name_normalization():$/;"	f
+test_write_block_empty_filename	test_write_blocks.py	/^def test_write_block_empty_filename():$/;"	f
+test_write_block_multiline	test_write_blocks.py	/^def test_write_block_multiline():$/;"	f
+test_write_block_overwrite	test_write_blocks.py	/^def test_write_block_overwrite():$/;"	f
+test_write_block_parser	test_write_blocks.py	/^def test_write_block_parser():$/;"	f
+test_write_block_permissions	test_write_blocks.py	/^def test_write_block_permissions():$/;"	f
+test_write_block_with_path	test_write_blocks.py	/^def test_write_block_with_path():$/;"	f
+test_xml_multiple_calls	manual_test_xml.py	/^def test_xml_multiple_calls():$/;"	f
+test_xml_read_call	manual_test_xml.py	/^def test_xml_read_call():$/;"	f
+test_xml_write_call	manual_test_xml.py	/^def test_xml_write_call():$/;"	f
 test_xp_calculation	test_axe_improvements.py	/^def test_xp_calculation():$/;"	f
+track_break_request	test_supervisor_protections.py	/^    def track_break_request(agent_id, alias, break_type, reason):$/;"	f	function:test_non_supervisor_can_request_break	file:
+track_break_request	test_supervisor_protections.py	/^    def track_break_request(agent_id, alias, break_type, reason):$/;"	f	function:test_supervisor_cannot_request_break	file:
+track_break_request	test_supervisor_protections.py	/^    def track_break_request(agent_id, alias, break_type, reason):$/;"	f	function:test_supervisor_with_boss_alias_blocked	file:
 update_agent_status	core/multiprocess.py	/^    def update_agent_status(self, agent_id: str, status: str) -> None:$/;"	m	class:SharedContext	typeref:typename:None
 update_token_usage	database/agent_db.py	/^    def update_token_usage(self, agent_id: str, tokens_used: int) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
 update_workspace	core/multiprocess.py	/^    def update_workspace(self, key: str, value: Any) -> None:$/;"	m	class:SharedContext	typeref:typename:None
+v1.0 (Current)	WRITE_BLOCKS_GUIDE.md	/^### v1.0 (Current)$/;"	S	section:API Documentation""Changelog
 wake_agent	database/agent_db.py	/^    def wake_agent(self, agent_id: str) -> Dict[str, Any]:$/;"	m	class:AgentDatabase	typeref:typename:Dict[str,Any]
 write_file	axe.py	/^    def write_file(self, filename: str, content: str) -> bool:$/;"	m	class:SharedWorkspace	typeref:typename:bool
+xAI (Grok)	.collab_log.md	/^### xAI (Grok)$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 xAI (Grok)	API_PROVIDERS.md	/^## xAI (Grok)$/;"	s	chapter:AXE API Provider Documentation
 xAI (Grok)	MODELS_FINAL.md	/^## xAI (Grok)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 xAI (Grok)	README.md	/^### xAI (Grok)$/;"	S	section:AXE - Agent eXecution Engine""API Providers
-✅ Phase 1: Session Rules (COMPLETE)	IMPLEMENTATION_COMPLETE.md	/^### ✅ Phase 1: Session Rules (COMPLETE)$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""What Was Implemented
-✅ Phase 2: Aliasing System (COMPLETE)	IMPLEMENTATION_COMPLETE.md	/^### ✅ Phase 2: Aliasing System (COMPLETE)$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""What Was Implemented
-✅ Phase 3: Experience & Level System (COMPLETE)	IMPLEMENTATION_COMPLETE.md	/^### ✅ Phase 3: Experience & Level System (COMPLETE)$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""What Was Implemented
-✅ Phase 4: Persistent SQLite Storage (COMPLETE)	IMPLEMENTATION_COMPLETE.md	/^### ✅ Phase 4: Persistent SQLite Storage (COMPLETE)$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""What Was Implemented
-✅ Phase 5: Resource Tracking (COMPLETE)	IMPLEMENTATION_COMPLETE.md	/^### ✅ Phase 5: Resource Tracking (COMPLETE)$/;"	S	section:AXE Multiagent AI Safety Implementation - COMPLETE""What Was Implemented
+⚠️ Known Limitation:	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### ⚠️ Known Limitation:$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Security Analysis
+✅ ALL TESTS PASSED!	XML_PARSER_IMPLEMENTATION.md	/^✅ ALL TESTS PASSED!$/;"	c
+✅ Issue 1: GPT-5 API Parameter Error (CRITICAL)	IMPLEMENTATION_SUMMARY.md	/^### ✅ Issue 1: GPT-5 API Parameter Error (CRITICAL)$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Issues Resolved
+✅ Issue 2: WRITE Blocks Not Executing (HIGH)	IMPLEMENTATION_SUMMARY.md	/^### ✅ Issue 2: WRITE Blocks Not Executing (HIGH)$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Issues Resolved
+✅ Now Allowed (Bug Fixed):	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### ✅ Now Allowed (Bug Fixed):$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Security Analysis
+✅ Still Blocked (Security Maintained):	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### ✅ Still Blocked (Security Maintained):$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Security Analysis

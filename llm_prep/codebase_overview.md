@@ -1,4 +1,4 @@
-# LLM-Ready Codebase Overview — 2026-01-01
+# LLM-Ready Codebase Overview — 2026-01-03
 
 **Project:** AXE
 
@@ -38,41 +38,75 @@
 ├── utils
 │   ├── formatting.py
 │   ├── __init__.py
-│   └── token_tracker.py
+│   ├── token_tracker.py
+│   └── xml_tool_parser.py
+├── ABSOLUTE_PATH_FIX_SUMMARY.md
 ├── API_PROVIDERS.md
 ├── axe_agents.db
-├── axe_agents.db-shm
-├── axe_agents.db-wal
+├── axe_exec.log
 ├── axe.py
 ├── axe.yaml
+├── BEFORE_AFTER_COMPARISON.md
+├── DATABASE_LOCATION_FIX_SUMMARY.md
+├── demo_absolute_path_fix.py
+├── demo_heredoc_fix.py
 ├── demo_improvements.py
+├── demo_task_completion_fix.py
+├── FIXES_SUMMARY.md
+├── HEREDOC_EXECUTION_FIX.md
+├── HEREDOC_EXECUTION_FIX_SUMMARY.md
 ├── IMPLEMENTATION_COMPLETE.md
+├── IMPLEMENTATION_SUMMARY.md
 ├── IMPROVEMENTS_FINAL.md
 ├── IMPROVEMENTS_README.md
 ├── LICENSE
+├── manual_test_write.py
+├── manual_test_xml.py
+├── MISSION.md
 ├── MODELS_FINAL.md
+├── MULTI_FORMAT_PARSER_IMPLEMENTATION.md
+├── MULTI_FORMAT_PARSER_QUICK_REFERENCE.md
 ├── QUICK_REFERENCE.md
 ├── README.md
 ├── REFACTORING_NOTES.md
 ├── requirements.txt
-└── test_axe_improvements.py
+├── SHELL_OPERATOR_SUPPORT_SUMMARY.md
+├── TASK_COMPLETION_FIX_SUMMARY.md
+├── test_absolute_path_fix.py
+├── test_axe_improvements.py
+├── test_database_location.py
+├── test_detect_agent_token.py
+├── test_exec_heredoc.py
+├── test_heredoc_execution_fix.py
+├── test_integration_bug_fix.py
+├── test_integration_database_fix.py
+├── test_mission_md_tokens.py
+├── test_supervisor_protections.py
+├── test_task_completion_detection.py
+├── test_tool_runner_edge_cases.py
+├── test_tool_runner.py
+├── test_write_blocks.py
+├── test_xml_tool_parser.py
+├── WRITE_BLOCKS_GUIDE.md
+├── XML_PARSER_IMPLEMENTATION.md
+└── XML_PARSER_QUICK_REFERENCE.md
 
-11 directories, 40 files
+11 directories, 74 files
 ```
 
 ## Code Statistics
 
 ```text
-github.com/AlDanial/cloc v 2.00  T=0.05 s (673.3 files/s, 191654.1 lines/s)
+github.com/AlDanial/cloc v 2.00  T=0.11 s (620.7 files/s, 222614.8 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Python                          18            999           1262           3338
-Markdown                        13            893              0           2662
+Markdown                        29           3237              0           9385
+Python                          38           2346           2828           6828
 YAML                             1             99             40            571
-Text                             3              2              0             96
+Text                             3              2              0            130
 -------------------------------------------------------------------------------
-SUM:                            35           1993           1302           6667
+SUM:                            71           5684           2868          16914
 -------------------------------------------------------------------------------
 ```
 

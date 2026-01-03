@@ -19,7 +19,7 @@ providers:
     enabled: true
     env_key: OPENAI_API_KEY
     models:
-      - gpt-5. 2-2025-12-11            # Latest GPT (from RetroCodeMess)
+      - gpt-5.2-2025-12-11             # Latest GPT (from RetroCodeMess)
       - gpt-4o                         # Stable multimodal
       - gpt-4-turbo                    # Fast fallback
 
@@ -27,8 +27,8 @@ providers:
     enabled: true
     env_key: HUGGINGFACE_API_KEY
     models: 
-      - meta-llama/Llama-3.1-70B-Instruct              # Stable working model
-      - meta-llama/Llama-3.1-8B-Instruct               # Fast fallback
+      - meta-llama/Llama-3.3-70B-Instruct              # Stable working model
+      - meta-llama/Llama-3.1-70B-Instruct               # Fast fallback
 
   xai: 
     enabled: true
