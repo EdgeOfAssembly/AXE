@@ -886,6 +886,28 @@ grep pattern <<< "search text"
     assert len(calls3) == 1, "Should handle here-string"
     assert '<<<' in calls3[0]['params']['command']
     
+    # Test delimiter with hyphens
+    response4 = '''```bash
+cat << END-OF-FILE
+content line 1
+content line 2
+END-OF-FILE
+```'''
+    calls4 = parse_shell_codeblocks(response4)
+    assert len(calls4) == 1, "Should handle delimiter with hyphens"
+    assert 'END-OF-FILE' in calls4[0]['params']['command']
+    
+    # Test delimiter with underscores
+    response5 = '''```bash
+cat << DATA_BLOCK
+data 1
+data 2
+DATA_BLOCK
+```'''
+    calls5 = parse_shell_codeblocks(response5)
+    assert len(calls5) == 1, "Should handle delimiter with underscores"
+    assert 'DATA_BLOCK' in calls5[0]['params']['command']
+    
     print("  ✓ Heredoc variations handled correctly")
 
 

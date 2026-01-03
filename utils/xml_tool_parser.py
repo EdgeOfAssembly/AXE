@@ -244,6 +244,7 @@ def _contains_heredoc(content: str) -> bool:
     """
     Check if content contains a heredoc marker.
     Detects: << EOF, <<- EOF, <<'EOF', <<"EOF", <<< (here-string)
+    Supports delimiters with word chars, hyphens, and underscores (e.g., END-OF-FILE, DATA_BLOCK)
     
     Args:
         content: Shell code block content
@@ -252,9 +253,10 @@ def _contains_heredoc(content: str) -> bool:
         True if heredoc is detected, False otherwise
     """
     # Pattern matches heredoc starters:
-    # << or <<- followed by optional quotes and a word (delimiter)
+    # << or <<- followed by optional quotes and a delimiter (word chars, hyphens, underscores)
     # Also matches here-strings: <<<
-    heredoc_pattern = r'<<-?\s*[\'"]?\w+[\'"]?|<<<'
+    # This matches the pattern used in _split_shell_commands() on line 192
+    heredoc_pattern = r'<<-?\s*[\'"]?[\w\-_]+[\'"]?|<<<'
     return bool(re.search(heredoc_pattern, content))
 
 
