@@ -50,3 +50,23 @@ CREATE TABLE IF NOT EXISTS alias_mappings (
 
 # WAL mode pragma for better concurrency
 WAL_MODE_PRAGMA = "PRAGMA journal_mode=WAL"
+
+WORKSHOP_ANALYSIS_TABLE = """
+CREATE TABLE IF NOT EXISTS workshop_analysis (
+    analysis_id TEXT PRIMARY KEY,
+    tool_name TEXT NOT NULL,  -- 'chisel', 'saw', 'plane', 'hammer'
+    target TEXT NOT NULL,     -- file path, code snippet, process name, etc.
+    agent_id TEXT,            -- agent that requested the analysis
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    results_json TEXT,        -- JSON results from the analysis
+    status TEXT DEFAULT 'completed',  -- 'completed', 'failed', 'running'
+    duration_seconds REAL,    -- analysis duration
+    error_message TEXT        -- error details if failed
+)
+"""
+
+WORKSHOP_ANALYSIS_INDEXES = [
+    "CREATE INDEX IF NOT EXISTS idx_workshop_tool ON workshop_analysis(tool_name)",
+    "CREATE INDEX IF NOT EXISTS idx_workshop_agent ON workshop_analysis(agent_id)",
+    "CREATE INDEX IF NOT EXISTS idx_workshop_timestamp ON workshop_analysis(timestamp)",
+]
