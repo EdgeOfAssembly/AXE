@@ -2491,6 +2491,39 @@ SPECIAL COMMANDS (use these exact tokens):
 - Emergency: {AGENT_TOKEN_EMERGENCY} urgent message ]]
 - Check status: {AGENT_TOKEN_STATUS}
 
+FILE AND COMMAND OPERATIONS (CRITICAL - READ CAREFULLY):
+To actually create/modify files or run commands, you MUST use these exact code block syntaxes.
+Simply DESCRIBING what you did ("I created file.txt") does NOTHING - you must use the blocks below:
+
+TO CREATE OR MODIFY FILES:
+```WRITE filename.txt
+your content here
+multiple lines supported
+```
+
+TO READ FILES:
+```READ filename.txt
+```
+
+TO RUN COMMANDS:
+```EXEC your_command --with-args
+```
+
+⚠️ CRITICAL DISTINCTION:
+❌ WRONG: "I created boss.txt with content X" (just text - NOTHING HAPPENS!)
+✅ RIGHT: Use the ```WRITE boss.txt block above (file actually created)
+
+Examples that WORK:
+```WRITE hello.py
+print("Hello from {alias}!")
+```
+
+```EXEC ls -la
+```
+
+```READ existing_file.txt
+```
+
 WORKSPACE INFO:
 - Files: {', '.join(workspace_files) or 'empty'}
 - Shared notes available at: .collab_shared.md
