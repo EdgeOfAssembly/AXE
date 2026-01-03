@@ -158,6 +158,15 @@ def _split_shell_commands(cmd: str) -> List[str]:
     Heredocs (<<, <<-, <<<) are kept as part of their command instead of
     being split across lines.
     
+    Supports heredoc formats:
+    - << DELIMITER or <<- DELIMITER (with word or hyphenated delimiters)
+    - << 'DELIMITER' or << "DELIMITER" (quoted delimiters)
+    - <<< "string" or <<< $var (here-strings)
+    
+    Limitations:
+    - Delimiter must be composed of word characters, hyphens, or underscores
+    - Does not handle heredocs embedded in subshells or command substitutions
+    
     Args:
         cmd: Shell code block content
     
@@ -177,9 +186,10 @@ def _split_shell_commands(cmd: str) -> List[str]:
             continue
         
         # Check if this line contains a heredoc marker
-        # Pattern matches: << EOF, <<- EOF, <<'EOF', <<"EOF", <<-'EOF', etc.
+        # Pattern matches: << EOF, <<- EOF, <<'EOF', <<"EOF", <<-'EOF', <<END-OF-FILE, etc.
+        # Updated to support: word chars, hyphens, underscores: [\\w\\-_]+
         # Also matches here-string: <<< "string" or <<< string
-        heredoc_match = re.search(r'<<-?\s*([\'"]?)(\w+)\1|<<<', line)
+        heredoc_match = re.search(r'<<-?\s*([\'"]?)([\w\-_]+)\1|<<<', line)
         
         if heredoc_match:
             # This line starts a heredoc command
@@ -192,23 +202,36 @@ def _split_shell_commands(cmd: str) -> List[str]:
                 i += 1
                 continue
             
-            # Extract the delimiter for heredoc
+            # Extract the delimiter for heredoc (group 2 contains the delimiter)
             delimiter = heredoc_match.group(2)
+            if not delimiter:
+                # Malformed heredoc - treat as regular command
+                commands.append(line)
+                i += 1
+                continue
+            
             i += 1
             
             # Find the closing delimiter
+            delimiter_found = False
             while i < len(lines):
                 command_lines.append(lines[i])
                 # Check if this line is the closing delimiter
                 # Must be on its own line (possibly with leading whitespace for <<-)
                 if re.match(rf'^\s*{re.escape(delimiter)}\s*$', lines[i]):
                     # Found closing delimiter
+                    delimiter_found = True
                     break
                 i += 1
             
-            # Add the complete heredoc command
+            # Add the complete heredoc command (even if delimiter not found)
+            # If delimiter wasn't found, we've consumed all remaining lines
             commands.append('\n'.join(command_lines))
-            i += 1
+            
+            # Only increment if we found the delimiter (already at the right position)
+            # If we didn't find it, we're already at the end (i == len(lines))
+            if delimiter_found:
+                i += 1
         else:
             # Regular command line (no heredoc)
             commands.append(line)

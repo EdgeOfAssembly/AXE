@@ -344,6 +344,150 @@ Done!"""
     print("  ✓ Integration test passed")
 
 
+def test_heredoc_with_hyphenated_delimiter():
+    """Test heredoc with hyphens in delimiter name."""
+    print("Testing heredoc with hyphenated delimiter...")
+    
+    response = """```bash
+cat << END-OF-FILE
+Content here
+END-OF-FILE
+```"""
+    
+    calls = parse_shell_codeblocks(response)
+    
+    assert len(calls) == 1, f"Expected 1 call, got {len(calls)}"
+    
+    cmd = calls[0]['params']['command']
+    assert 'END-OF-FILE' in cmd
+    assert 'Content here' in cmd
+    
+    print("  ✓ Hyphenated delimiter parsed correctly")
+
+
+def test_heredoc_with_underscore_delimiter():
+    """Test heredoc with underscores in delimiter name."""
+    print("Testing heredoc with underscore delimiter...")
+    
+    response = """```bash
+cat << _MARKER_
+Content here
+_MARKER_
+```"""
+    
+    calls = parse_shell_codeblocks(response)
+    
+    assert len(calls) == 1, f"Expected 1 call, got {len(calls)}"
+    
+    cmd = calls[0]['params']['command']
+    assert '_MARKER_' in cmd
+    assert 'Content here' in cmd
+    
+    print("  ✓ Underscore delimiter parsed correctly")
+
+
+def test_heredoc_without_closing_delimiter():
+    """Test heredoc without closing delimiter (malformed)."""
+    print("Testing heredoc without closing delimiter...")
+    
+    response = """```bash
+cat << EOF
+line 1
+line 2
+```"""
+    
+    calls = parse_shell_codeblocks(response)
+    
+    # Should still parse as one command, including all content
+    assert len(calls) == 1, f"Expected 1 call, got {len(calls)}"
+    
+    cmd = calls[0]['params']['command']
+    assert 'cat << EOF' in cmd
+    assert 'line 1' in cmd
+    assert 'line 2' in cmd
+    
+    print("  ✓ Malformed heredoc handled gracefully")
+
+
+def test_heredoc_with_similar_content():
+    """Test heredoc where content contains text similar to delimiter."""
+    print("Testing heredoc with similar content...")
+    
+    response = """```bash
+cat << EOF
+This line says EOF in the middle
+But this is not the EOF delimiter
+EOF
+```"""
+    
+    calls = parse_shell_codeblocks(response)
+    
+    assert len(calls) == 1, f"Expected 1 call, got {len(calls)}"
+    
+    cmd = calls[0]['params']['command']
+    lines = cmd.split('\n')
+    assert 'This line says EOF in the middle' in cmd
+    assert 'But this is not the EOF delimiter' in cmd
+    # The last line should be the actual delimiter
+    assert lines[-1].strip() == 'EOF'
+    
+    print("  ✓ Heredoc with similar content parsed correctly")
+
+
+def test_multiple_heredocs_different_delimiters():
+    """Test multiple heredocs with different delimiter styles."""
+    print("Testing multiple heredocs with different delimiters...")
+    
+    response = """```bash
+cat << EOF1
+Content 1
+EOF1
+cat <<- END_MARKER
+Content 2
+END_MARKER
+cat << 'QUOTED'
+Content 3
+QUOTED
+```"""
+    
+    calls = parse_shell_codeblocks(response)
+    
+    assert len(calls) == 3, f"Expected 3 calls, got {len(calls)}"
+    
+    assert 'EOF1' in calls[0]['params']['command']
+    assert 'Content 1' in calls[0]['params']['command']
+    
+    assert 'END_MARKER' in calls[1]['params']['command']
+    assert 'Content 2' in calls[1]['params']['command']
+    
+    assert 'QUOTED' in calls[2]['params']['command']
+    assert 'Content 3' in calls[2]['params']['command']
+    
+    print("  ✓ Multiple heredocs with different delimiters parsed correctly")
+
+
+def test_empty_heredoc():
+    """Test heredoc with no content between delimiters."""
+    print("Testing empty heredoc...")
+    
+    response = """```bash
+cat << EOF
+EOF
+```"""
+    
+    calls = parse_shell_codeblocks(response)
+    
+    assert len(calls) == 1, f"Expected 1 call, got {len(calls)}"
+    
+    cmd = calls[0]['params']['command']
+    lines = cmd.split('\n')
+    assert len(lines) == 2  # Start and end delimiter only
+    assert 'cat << EOF' in lines[0]
+    assert lines[1].strip() == 'EOF'
+    
+    print("  ✓ Empty heredoc parsed correctly")
+
+
 def main():
     """Run all tests."""
     print("="*70)
@@ -365,6 +509,14 @@ def main():
         test_heredoc_in_different_formats()
         test_parse_all_tool_formats_integration()
         
+        # New edge case tests
+        test_heredoc_with_hyphenated_delimiter()
+        test_heredoc_with_underscore_delimiter()
+        test_heredoc_without_closing_delimiter()
+        test_heredoc_with_similar_content()
+        test_multiple_heredocs_different_delimiters()
+        test_empty_heredoc()
+        
         print("\n" + "="*70)
         print("✅ ALL HEREDOC PARSING TESTS PASSED!")
         print("="*70)
@@ -373,6 +525,8 @@ def main():
         print("  • Content within heredocs is not split into separate commands")
         print("  • Special characters in heredoc content don't trigger errors")
         print("  • Regular multi-line commands still work correctly")
+        print("  • Edge cases like missing delimiters are handled gracefully")
+        print("  • Various delimiter formats (hyphens, underscores) are supported")
         print("="*70)
         
         return 0
