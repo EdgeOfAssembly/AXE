@@ -1247,6 +1247,27 @@ class ToolRunner:
             
             # Find first token that's not a redirect, heredoc, or env var
             for token in tokens:
+                # Strip leading/trailing parentheses (subshells)
+                # e.g., "(ls" -> "ls", "ls)" -> "ls", "(ls)" -> "ls"
+                token = token.strip('()')
+                if not token:
+                    continue
+                
+                # Handle redirects attached to commands (no space)
+                # e.g., "grep<input" -> "grep", "grep>output" -> "grep"
+                # Split on redirect operators and take the first part
+                if '<' in token or '>' in token:
+                    # Find the position of the first redirect operator
+                    redirect_pos = len(token)
+                    for redirect_op in ['<<', '<', '>>', '>', '2>>', '2>', '&>']:
+                        pos = token.find(redirect_op)
+                        if pos != -1 and pos < redirect_pos:
+                            redirect_pos = pos
+                    if redirect_pos < len(token):
+                        token = token[:redirect_pos]
+                    if not token:
+                        continue
+                
                 # Skip environment variable assignments (VAR=value)
                 # Only if it looks like a valid variable name (letters/underscore before =)
                 if '=' in token and not token.startswith(('>', '<', '2')):
