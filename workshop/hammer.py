@@ -7,11 +7,43 @@ Uses Frida for hooking into running processes and monitoring execution.
 
 import frida
 import time
-from typing import Dict, List, Any, Optional, Callable
+import re
+from typing import Dict, Any, Optional, Callable
 import logging
 import threading
 
 logger = logging.getLogger(__name__)
+
+def _sanitize_js_string(value: str) -> str:
+    """
+    Sanitize a string for safe embedding in JavaScript code.
+    
+    Escapes single quotes, double quotes, backslashes, and newlines
+    to prevent JavaScript injection attacks.
+    """
+    if not isinstance(value, str):
+        value = str(value)
+    # Escape backslashes first, then quotes and newlines
+    value = value.replace('\\', '\\\\')
+    value = value.replace("'", "\\'")
+    value = value.replace('"', '\\"')
+    value = value.replace('\n', '\\n')
+    value = value.replace('\r', '\\r')
+    return value
+
+def _validate_identifier(name: str) -> bool:
+    """
+    Validate that a name is a safe identifier (alphanumeric, underscore, dash).
+    
+    Returns True if valid, False otherwise.
+    """
+    if not name or not isinstance(name, str):
+        return False
+    # Reject strings with newlines, carriage returns, or null bytes
+    if '\n' in name or '\r' in name or '\0' in name:
+        return False
+    # Allow alphanumeric, underscore, dash, and dot (for namespaced functions)
+    return bool(re.match(r'^[a-zA-Z0-9_\.\-]+$', name))
 
 class HammerInstrumentor:
     """
@@ -185,18 +217,27 @@ class HammerInstrumentor:
         func_addr = config.get('address')
         if not func_addr:
             return
+        
+        # Validate and sanitize inputs
+        if not _validate_identifier(hook_name):
+            logger.error(f"Invalid hook name: {hook_name}")
+            return
+        
+        # Sanitize for JavaScript embedding
+        safe_hook_name = _sanitize_js_string(hook_name)
+        safe_func_addr = _sanitize_js_string(str(func_addr))
 
         script_code = f"""
-        Interceptor.attach(ptr('{func_addr}'), {{
+        Interceptor.attach(ptr('{safe_func_addr}'), {{
             onEnter: function(args) {{
-                console.log('[Hammer] Entering {hook_name}');
+                console.log('[Hammer] Entering {safe_hook_name}');
                 // Log arguments
                 for (var i = 0; i < args.length; i++) {{
                     console.log('  arg' + i + ': ' + args[i]);
                 }}
             }},
             onLeave: function(retval) {{
-                console.log('[Hammer] Leaving {hook_name}, retval: ' + retval);
+                console.log('[Hammer] Leaving {safe_hook_name}, retval: ' + retval);
             }}
         }});
         """
@@ -230,13 +271,20 @@ class HammerInstrumentor:
         syscall_name = config.get('syscall')
         if not syscall_name:
             return
+        
+        # Validate and sanitize inputs
+        if not _validate_identifier(syscall_name):
+            logger.error(f"Invalid syscall name: {syscall_name}")
+            return
+        
+        safe_syscall_name = _sanitize_js_string(syscall_name)
 
         script_code = f"""
-        var syscall = Module.findExportByName(null, '{syscall_name}');
+        var syscall = Module.findExportByName(null, '{safe_syscall_name}');
         if (syscall) {{
             Interceptor.attach(syscall, {{
                 onEnter: function(args) {{
-                    console.log('[Hammer] Syscall {syscall_name}');
+                    console.log('[Hammer] Syscall {safe_syscall_name}');
                 }}
             }});
         }}
@@ -253,13 +301,23 @@ class HammerInstrumentor:
         for hook_name, config in hooks.items():
             if config.get('type') == 'function':
                 func_name = config.get('function')
+                if not func_name:
+                    continue
+                
+                # Validate and sanitize function name
+                if not _validate_identifier(func_name):
+                    logger.error(f"Invalid function name: {func_name}")
+                    continue
+                
+                safe_func_name = _sanitize_js_string(func_name)
+                
                 script_parts.append(f"""
-                // Hook Python function {func_name}
-                var func = Module.findExportByName(null, '{func_name}');
+                // Hook Python function {safe_func_name}
+                var func = Module.findExportByName(null, '{safe_func_name}');
                 if (func) {{
                     Interceptor.attach(func, {{
                         onEnter: function(args) {{
-                            console.log('[Hammer] Python call: {func_name}');
+                            console.log('[Hammer] Python call: {safe_func_name}');
                         }}
                     }});
                 }}

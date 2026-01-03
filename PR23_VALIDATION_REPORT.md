@@ -92,7 +92,7 @@ tracker = SawTracker()
 code = """
 def vulnerable_func(user_input):
     import os
-    os.system(user_input)  # Should be flagged
+    os.system(user_input)  # This should be flagged
 """
 result = tracker.analyze_code(code)
 ✅ Returns: sources_found, sinks_found, taint_flows, vulnerabilities

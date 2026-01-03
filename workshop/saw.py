@@ -7,7 +7,7 @@ Combines static and dynamic analysis for comprehensive taint tracking.
 
 import ast
 import inspect
-from typing import Dict, List, Set, Any, Optional, Tuple
+from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 import logging
 

@@ -8,7 +8,6 @@ Built on angr framework for precise program analysis.
 import angr
 import logging
 from typing import Dict, List, Any, Optional
-from pathlib import Path
 
 logger = logging.getLogger(__name__)
 

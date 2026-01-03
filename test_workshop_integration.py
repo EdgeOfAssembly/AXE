@@ -4,7 +4,6 @@ Integration Tests for Workshop Tools - Test end-to-end functionality
 
 import unittest
 import tempfile
-from pathlib import Path
 from unittest.mock import Mock, patch
 
 class TestWorkshopIntegration(unittest.TestCase):

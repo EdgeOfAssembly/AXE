@@ -6,9 +6,8 @@ Works with static analysis to identify entry and exit points.
 """
 
 import ast
-import os
 from pathlib import Path
-from typing import Dict, List, Set, Any, Optional, Tuple
+from typing import Dict, List, Any, Optional, Tuple
 import logging
 from dataclasses import dataclass
 

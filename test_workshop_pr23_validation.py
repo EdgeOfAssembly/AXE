@@ -6,10 +6,8 @@ Tests all workshop tools, database integration, XP system, and configuration.
 
 import unittest
 import tempfile
-import os
 import sys
 from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent))
@@ -61,39 +59,32 @@ class TestWorkshopPR23Validation(unittest.TestCase):
     def test_03_database_workshop_methods(self):
         """Test database workshop analysis methods."""
         from database.agent_db import AgentDatabase
-        import tempfile
         import os
         
-        # Create temp database for isolated testing
-        temp_db = tempfile.NamedTemporaryFile(delete=False, suffix='.db')
-        temp_db.close()
+        # Create temp database path inside the per-test temporary directory
+        db_path = os.path.join(self.test_dir, "workshop_test.db")
         
-        try:
-            db = AgentDatabase(temp_db.name)
-            
-            # Test save_workshop_analysis
-            analysis_id = db.save_workshop_analysis(
-                'chisel', '/test/binary', 'agent_123',
-                {'test': 'result'}, 1.5
-            )
-            
-            self.assertIsInstance(analysis_id, str)
-            self.assertGreater(len(analysis_id), 0)
-            
-            # Test get_workshop_analyses
-            analyses = db.get_workshop_analyses(tool_name='chisel', limit=10)
-            self.assertEqual(len(analyses), 1)
-            self.assertEqual(analyses[0]['tool_name'], 'chisel')
-            self.assertEqual(analyses[0]['target'], '/test/binary')
-            
-            # Test get_workshop_stats
-            stats = db.get_workshop_stats()
-            self.assertIn('chisel', stats)
-            self.assertEqual(stats['chisel']['total_analyses'], 1)
-        finally:
-            # Cleanup
-            if os.path.exists(temp_db.name):
-                os.unlink(temp_db.name)
+        db = AgentDatabase(db_path)
+        
+        # Test save_workshop_analysis
+        analysis_id = db.save_workshop_analysis(
+            'chisel', '/test/binary', 'agent_123',
+            {'test': 'result'}, 1.5
+        )
+        
+        self.assertIsInstance(analysis_id, str)
+        self.assertGreater(len(analysis_id), 0)
+        
+        # Test get_workshop_analyses
+        analyses = db.get_workshop_analyses(tool_name='chisel', limit=10)
+        self.assertEqual(len(analyses), 1)
+        self.assertEqual(analyses[0]['tool_name'], 'chisel')
+        self.assertEqual(analyses[0]['target'], '/test/binary')
+        
+        # Test get_workshop_stats
+        stats = db.get_workshop_stats()
+        self.assertIn('chisel', stats)
+        self.assertEqual(stats['chisel']['total_analyses'], 1)
 
     def test_04_xp_system_workshop_awards(self):
         """Test XP system workshop activity awards."""
@@ -247,14 +238,20 @@ os.system(user_input)  # sink
         
         for file_path in workshop_files:
             with open(file_path, 'r') as f:
-                content = f.read().lower()
+                lines = f.readlines()
                 
-            # Check for suspicious patterns (but allow variable names)
-            for pattern in secret_patterns:
-                if f'{pattern}=' in content or f'{pattern} =' in content:
-                    # Check if it's not just a variable assignment
-                    if not ('None' in content or 'config.get' in content):
-                        self.fail(f"Potential hardcoded secret in {file_path}: {pattern}")
+            # Check for suspicious patterns (but allow safe assignments)
+            for line_number, line in enumerate(lines, start=1):
+                line_lower = line.lower()
+                for pattern in secret_patterns:
+                    pattern_lower = pattern.lower()
+                    if f'{pattern_lower}=' in line_lower or f'{pattern_lower} =' in line_lower:
+                        # Allow obviously safe assignments on the same line
+                        if 'none' in line_lower or 'config.get' in line_lower:
+                            continue
+                        self.fail(
+                            f"Potential hardcoded secret in {file_path} at line {line_number}: {pattern}"
+                        )
 
     def test_14_database_integration_end_to_end(self):
         """Test complete database integration workflow."""

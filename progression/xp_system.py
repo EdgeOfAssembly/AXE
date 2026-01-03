@@ -31,7 +31,7 @@ def calculate_xp_for_level(level: int) -> int:
 XP_AWARDS = {
     # Workshop tool usage
     'workshop_chisel': 25,      # Symbolic execution
-    'workshop_saw': 20,         # Taint analysis  
+    'workshop_saw': 20,         # Taint analysis
     'workshop_plane': 15,       # Source/sink enumeration
     'workshop_hammer': 30,      # Live instrumentation
     

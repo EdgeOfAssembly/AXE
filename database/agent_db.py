@@ -760,17 +760,23 @@ class AgentDatabase:
         Returns:
             List of analysis records
         """
-        query = "SELECT * FROM workshop_analysis WHERE 1=1"
-        params = []
+        base_query = "SELECT * FROM workshop_analysis"
+        conditions: List[str] = []
+        params: List[Any] = []
         
         if agent_id:
-            query += " AND agent_id = ?"
+            conditions.append("agent_id = ?")
             params.append(agent_id)
             
         if tool_name:
-            query += " AND tool_name = ?"
+            conditions.append("tool_name = ?")
             params.append(tool_name)
-            
+        
+        if conditions:
+            query = base_query + " WHERE " + " AND ".join(conditions)
+        else:
+            query = base_query
+        
         query += " ORDER BY timestamp DESC LIMIT ?"
         params.append(limit)
         

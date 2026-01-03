@@ -4,7 +4,6 @@ Test Workshop Tools - Unit tests for dynamic analysis tools
 
 import unittest
 import tempfile
-import os
 from pathlib import Path
 from unittest.mock import Mock, patch
 
