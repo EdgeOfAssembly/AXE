@@ -1116,15 +1116,60 @@ class AgentManager:
 
 
 class ToolRunner:
-    """Manages tool execution with safety checks."""
+    """
+    Manages tool execution with safety checks.
     
-    # Shell operators that connect commands
+    This class provides secure command execution with:
+    - Whitelist-based command validation
+    - Forbidden path checking
+    - Support for shell operators (pipes, redirects, logical operators)
+    - Heredoc content parsing
+    - Automatic detection of shell vs direct execution
+    
+    Key Features:
+    - Validates commands against a whitelist before execution
+    - Handles complex shell syntax (pipes, redirects, subshells, heredocs)
+    - Prevents access to forbidden directories
+    - Logs all command execution attempts
+    - Supports auto-approval and dry-run modes
+    """
+    
+    # Shell operators that connect commands in a pipeline or sequence
+    # These require shell=True for execution
+    # | = pipe (pass output to next command)
+    # && = logical AND (run next if previous succeeds)
+    # || = logical OR (run next if previous fails)
+    # ; = sequence (run next regardless of previous result)
     SHELL_OPERATORS = {'|', '&&', '||', ';'}
     
-    # Redirect operators (not security risks, just I/O)
+    # Redirect operators for I/O redirection
+    # These are not security risks (just control where output goes)
+    # but require shell=True for execution
+    # > = redirect stdout to file (overwrite)
+    # >> = redirect stdout to file (append)
+    # < = redirect stdin from file
+    # 2> = redirect stderr to file (overwrite)
+    # 2>> = redirect stderr to file (append)
+    # &> = redirect both stdout and stderr to file
+    # 2>&1 = redirect stderr to stdout
     REDIRECT_OPERATORS = {'>', '>>', '<', '2>', '2>>', '&>', '2>&1'}
     
     def __init__(self, config: Config, project_dir: str):
+        """
+        Initialize the ToolRunner.
+        
+        Args:
+            config: Configuration object containing tool whitelist and forbidden paths
+            project_dir: Base directory for command execution (all commands run from here)
+        
+        Instance Variables:
+            config: Configuration object
+            project_dir: Absolute path to project directory
+            whitelist: Set of allowed command names (from config)
+            exec_log: Path to execution log file
+            auto_approve: If True, skip user approval prompts (default: False)
+            dry_run: If True, validate but don't execute commands (default: False)
+        """
         self.config = config
         self.project_dir = os.path.abspath(project_dir)
         self.whitelist = config.get_tool_whitelist()
@@ -1206,28 +1251,53 @@ class ToolRunner:
     def _extract_commands_from_shell(self, cmd: str) -> List[str]:
         """
         Extract actual command names from a shell command string.
-        Handles pipes, logical operators, redirects, heredocs, etc.
+        Handles pipes, logical operators, redirects, heredocs, subshells, etc.
         
         IMPORTANT: This is a validation helper that returns command names only.
         It does NOT modify the input command - the input parameter `cmd` remains unchanged.
         Heredoc stripping happens only on a local copy for parsing purposes.
         
-        Returns list of command names (first word of each command in pipeline).
+        Algorithm:
+        1. Strip heredoc content (to avoid parsing heredoc text as commands)
+        2. Split on shell operators (|, &&, ||, ;) to separate individual commands
+        3. For each command part:
+           a. Use shlex to tokenize (handles quotes, escapes)
+           b. Strip subshell syntax (parentheses)
+           c. Handle redirects attached to commands (grep<input -> grep)
+           d. Skip environment variables, redirects, and heredoc markers
+           e. Extract the first real token as the command name
+        
+        Examples:
+            "ls -la" -> ["ls"]
+            "ls | grep test" -> ["ls", "grep"]
+            "(ls && grep test) || cat" -> ["ls", "grep", "cat"]
+            "grep<input>output" -> ["grep"]
+            "cat << EOF\\ndata\\nEOF" -> ["cat"]
+        
+        Args:
+            cmd: Complete shell command string
+            
+        Returns:
+            List of command names (e.g., ["ls", "grep", "cat"])
         """
-        # FIRST: Strip heredoc content to prevent it from being parsed as commands
+        # STEP 1: Strip heredoc content to prevent it from being parsed as commands
         # This prevents heredoc content containing operators from being split and treated as commands
+        # Example: "cat << EOF\n| pipe\nEOF" should only extract "cat", not "|" or "pipe"
         # NOTE: This creates a LOCAL variable - the original `cmd` parameter is NEVER modified
         cleaned_cmd = self._strip_heredoc_content(cmd)
         
-        # Split on shell operators while preserving them for context
+        # STEP 2: Split on shell operators while preserving them for context
         # Pattern matches: || && | ; and splits on them
+        # Example: "ls | grep && cat" -> ["ls ", "|", " grep ", "&&", " cat"]
         # Note: | inside [|;] is literal, not a regex OR operator in character class
         pattern = r'\s*(\|\||&&|[|;])\s*'
         parts = re.split(pattern, cleaned_cmd)
         
         commands = []
+        
+        # STEP 3: Process each part to extract command names
         for part in parts:
-            # Skip the operator tokens themselves
+            # Skip the operator tokens themselves (they were captured by the split pattern)
             if part in self.SHELL_OPERATORS:
                 continue
                 
@@ -1235,19 +1305,23 @@ class ToolRunner:
             if not part:
                 continue
             
+            # STEP 3a: Tokenize the command part using shlex
+            # shlex properly handles quotes, escapes, and whitespace
+            # Example: 'grep "hello world" file' -> ['grep', 'hello world', 'file']
             try:
-                # Use shlex to properly handle quotes and escapes
                 tokens = shlex.split(part)
             except ValueError:
-                # If shlex fails (e.g., unclosed quotes), try simple split
+                # If shlex fails (e.g., unclosed quotes), fall back to simple split
+                # This ensures we can still extract something even if syntax is invalid
                 tokens = part.split()
             
             if not tokens:
                 continue
             
-            # Find first token that's not a redirect, heredoc, or env var
+            # STEP 3b-e: Find the first token that's an actual command name
+            # (skip env vars, redirects, subshell syntax, etc.)
             for token in tokens:
-                # Strip leading/trailing parentheses (subshells)
+                # STEP 3b: Strip leading/trailing parentheses (subshells)
                 # Note: strip('()') removes ALL leading/trailing parens, which is correct
                 # because we want the actual command name without subshell syntax.
                 # Examples: "(ls" -> "ls", "ls)" -> "ls", "(ls)" -> "ls", "((ls))" -> "ls"
@@ -1256,60 +1330,99 @@ class ToolRunner:
                 if not token:
                     continue
                 
-                # Handle redirects attached to commands (no space)
-                # e.g., "grep<input" -> "grep", "grep>output" -> "grep"
-                # Split on redirect operators and take the first part
+                # STEP 3c: Handle redirects attached to commands (no space)
+                # Example: "grep<input" -> "grep", "grep>output" -> "grep"
+                # This happens when users write redirects without spaces (valid shell syntax)
                 if '<' in token or '>' in token:
-                    # Find the position of the first redirect operator
+                    # Find the position of the first redirect operator in the token
                     redirect_pos = len(token)
                     # Check redirect operators in order of longest first to avoid partial matches
-                    # e.g., '>>' before '>', '2>>' before '2>'
+                    # Example: check '>>' before '>' to handle "grep>>file" correctly
                     redirect_ops_sorted = sorted(self.REDIRECT_OPERATORS, key=len, reverse=True)
                     for redirect_op in redirect_ops_sorted:
                         pos = token.find(redirect_op)
                         if pos != -1 and pos < redirect_pos:
                             redirect_pos = pos
+                    # Extract everything before the redirect operator
                     if redirect_pos < len(token):
                         token = token[:redirect_pos]
                     if not token:
                         continue
                 
-                # Skip environment variable assignments (VAR=value)
-                # Only if it looks like a valid variable name (letters/underscore before =)
+                # STEP 3d: Skip environment variable assignments (VAR=value)
+                # These come before the actual command in shell syntax
+                # Only consider it an env var if it looks valid (letters/underscore before =)
+                # Example: "PATH=/usr/bin ls" -> skip "PATH=/usr/bin", extract "ls"
                 if '=' in token and not token.startswith(('>', '<', '2')):
                     eq_pos = token.index('=')
                     if eq_pos > 0 and token[:eq_pos].replace('_', '').isalnum():
-                        continue
+                        continue  # This is an env var, skip it
                 
-                # Skip redirect operators and heredoc markers
+                # Skip standalone redirect operators
+                # Example: in "grep > file", skip the ">" and "file" tokens
                 if token in self.REDIRECT_OPERATORS or token.startswith(('>', '<', '2>')):
                     continue
                 
+                # Skip heredoc markers (<<, <<-, <<<)
+                # If we encounter a heredoc marker, stop processing this command part
+                # (everything after the heredoc marker is heredoc content or delimiter)
                 if token in ('<<', '<<-', '<<<'):
                     break  # Heredoc found, stop here
                 
-                # This should be the command name
+                # STEP 3e: This token is the actual command name!
+                # Append it to our list and move to the next command part
                 commands.append(token)
-                break
+                break  # Found the command for this part, move to next part
         
         return commands
     
     def _needs_shell(self, cmd: str) -> bool:
-        """Check if command needs shell execution."""
-        # Check for shell operators
+        """
+        Check if command needs shell execution (shell=True in subprocess.run).
+        
+        Commands need shell execution when they contain shell features that
+        require interpretation by a shell (like bash or sh). Without shell=True,
+        these features would be treated as literal arguments.
+        
+        Shell features detected:
+        - Pipes (|): Pass output from one command to another
+        - Logical operators (&&, ||, ;): Command chaining with conditions
+        - Redirects (>, <, 2>&1, etc.): I/O redirection
+        - Command substitution ($(cmd), `cmd`): Execute command and use output
+        - Heredocs (<<, <<-, <<<): Multi-line input or here-strings
+        
+        Examples:
+            "ls -la" -> False (simple command, no shell needed)
+            "ls | grep test" -> True (pipe requires shell)
+            "ls && grep test" -> True (logical operator requires shell)
+            "grep pattern > output.txt" -> True (redirect requires shell)
+            "echo $(date)" -> True (command substitution requires shell)
+        
+        Args:
+            cmd: Command string to check
+            
+        Returns:
+            True if command needs shell=True, False for direct execution
+        """
+        # Check for shell operators that connect commands
+        # These require shell interpretation to work correctly
         for op in self.SHELL_OPERATORS:
             if op in cmd:
                 return True
         
         # Check for redirect operators
+        # These control I/O and require shell interpretation
         for op in self.REDIRECT_OPERATORS:
             if op in cmd:
                 return True
         
         # Check for command substitution and heredocs
+        # $() and backticks execute a command and capture its output
+        # << starts a heredoc (multi-line input)
         if '$(' in cmd or '`' in cmd or '<<' in cmd:
             return True
         
+        # No shell features detected - can use direct execution (safer and faster)
         return False
     
     def is_tool_allowed(self, cmd: str) -> Tuple[bool, str]:

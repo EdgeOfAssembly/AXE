@@ -1,7 +1,50 @@
 #!/usr/bin/env python3
 """
 Additional edge case tests for ToolRunner shell features support.
-Tests subshells, redirects without spaces, and other corner cases.
+
+This test suite covers edge cases that were discovered during comprehensive
+testing and fixed to ensure robust shell command parsing.
+
+Edge Cases Tested:
+==================
+
+1. SUBSHELLS WITH PARENTHESES
+   Problem: Parentheses were being attached to command names, causing validation failures
+   Examples:
+   - (ls) was parsed as ["(ls)"] instead of ["ls"]
+   - (ls | grep) was parsed as ["(ls", "grep"] instead of ["ls", "grep"]
+   Fix: Strip all leading/trailing parentheses from tokens
+
+2. REDIRECTS WITHOUT SPACES
+   Problem: Redirect operators attached to commands weren't being separated
+   Examples:
+   - grep<input was parsed as ["grep<input"] instead of ["grep"]
+   - cat<in>out was failing validation
+   Fix: Detect and split on redirect operators within tokens
+
+3. NESTED SUBSHELLS
+   Problem: Multiple levels of parentheses caused parsing issues
+   Examples:
+   - ((ls)) was failing validation
+   - (((ls | grep))) wasn't extracting commands correctly
+   Fix: Strip all parentheses recursively
+
+4. HERE-STRINGS
+   Problem: Here-strings (<<<) were not recognized
+   Example:
+   - grep<<<'text' was failing
+   Fix: Added here-string detection to _needs_shell()
+
+All tests verify that:
+- Valid commands are correctly allowed
+- Command names are properly extracted
+- Security checks still work (non-whitelisted commands blocked)
+- Complex combinations of edge cases work together
+
+Test Coverage:
+- 16 individual test cases across 3 test suites
+- All security features maintained
+- Integration with existing ToolRunner functionality verified
 """
 import os
 import sys
@@ -127,7 +170,13 @@ def test_redirects_without_spaces():
 
 
 def test_complex_edge_cases():
-    """Test complex combinations of edge cases."""
+    """
+    Test complex combinations of edge cases.
+    
+    These tests verify that multiple edge cases can work together correctly,
+    such as subshells with redirects without spaces, or nested subshells with pipes.
+    This ensures the parser is robust and handles real-world complex commands.
+    """
     print("\n" + "="*70)
     print("TEST: Complex Edge Cases")
     print("="*70)
@@ -137,6 +186,9 @@ def test_complex_edge_cases():
         runner = ToolRunner(config, tmpdir)
         
         # Test 1: Subshell with redirects without spaces
+        # This combines TWO edge cases:
+        # 1. Subshell syntax (parentheses)
+        # 2. Redirects without spaces (grep<input, head>output)
         print("\nTest 1: (grep<input | head>output)")
         allowed, reason = runner.is_tool_allowed("(grep<input | head>output)")
         commands = runner._extract_commands_from_shell("(grep<input | head>output)")
@@ -145,6 +197,7 @@ def test_complex_edge_cases():
         print("  ✓ Subshell with redirects without spaces allowed")
         
         # Test 2: Multiple operators mixed
+        # Tests subshells with multiple operator types (&&, ||)
         print("\nTest 2: (ls && grep test) || cat file")
         allowed, reason = runner.is_tool_allowed("(ls && grep test) || cat file")
         commands = runner._extract_commands_from_shell("(ls && grep test) || cat file")
@@ -152,6 +205,8 @@ def test_complex_edge_cases():
         print("  ✓ Complex operator mix allowed")
         
         # Test 3: Nested subshells with pipes
+        # Tests multiple levels of subshells with pipes inside
+        # This is an extreme edge case: ((command | command))
         print("\nTest 3: ((ls | grep test))")
         allowed, reason = runner.is_tool_allowed("((ls | grep test))")
         commands = runner._extract_commands_from_shell("((ls | grep test))")
@@ -160,6 +215,8 @@ def test_complex_edge_cases():
         print("  ✓ Nested subshells with pipes allowed")
         
         # Test 4: Here-string
+        # Here-strings (<<<) are a bash feature for passing string literals as stdin
+        # Example: grep<<<'text' is equivalent to echo 'text' | grep
         print("\nTest 4: grep<<<'text'")
         allowed, reason = runner.is_tool_allowed("grep<<<'text'")
         commands = runner._extract_commands_from_shell("grep<<<'text'")
