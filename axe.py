@@ -1644,9 +1644,9 @@ class ResponseProcessor:
         # - [^\n`]*? in args group prevents matching backticks (fixes inline format bug)
         # - (?:\n((?:(?!```).)*?))? makes newline+content optional (supports inline)
         # - (?!```) negative lookahead stops at first ``` (prevents wrong closing match)
-        pattern = r'```(READ|EXEC|WRITE)\s*([^\n`]*?)(?:\n((?:(?!```).)*?))?```'
+        BLOCK_PATTERN = r'```(READ|EXEC|WRITE)\s*([^\n`]*?)(?:\n((?:(?!```).)*?))?```'
         
-        matches = list(re.finditer(pattern, response, re.DOTALL))
+        matches = list(re.finditer(BLOCK_PATTERN, response, re.DOTALL))
         
         # Collect all results (both XML and markdown blocks)
         all_results = []
