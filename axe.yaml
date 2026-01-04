@@ -754,3 +754,19 @@ workshop:
       memory: true
       functions: true
       syscalls: false
+# Rate Limiting Configuration
+# Prevents API quota burnout with sliding window token tracking
+rate_limits:
+  enabled: true
+  tokens_per_minute: 10000  # Global limit for all agents
+  per_agent:
+    claude: 5000      # Anthropic Claude limits
+    gpt: 5000         # OpenAI GPT limits
+    llama: unlimited  # HuggingFace free tier (no limit)
+    grok: 5000        # xAI Grok limits
+    copilot: unlimited # GitHub Copilot (included in subscription)
+    qwen_thinking: 5000
+    qwen_coder: 5000
+    qwen_vision: 5000
+    deepseek: 5000
+    grok_code: 5000

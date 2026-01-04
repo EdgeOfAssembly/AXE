@@ -1069,8 +1069,20 @@ class AgentManager:
         
         return result
     
-    def call_agent(self, agent_name: str, prompt: str, context: str = "") -> str:
-        """Call an agent with a prompt."""
+    def call_agent(self, agent_name: str, prompt: str, context: str = "", 
+                   token_callback=None) -> str:
+        """
+        Call an agent with a prompt.
+        
+        Args:
+            agent_name: Name of the agent to call
+            prompt: User prompt
+            context: Optional context to include
+            token_callback: Optional callback function(agent_name, model, input_tokens, output_tokens)
+        
+        Returns:
+            Agent response text
+        """
         agent = self.resolve_agent(agent_name)
         if not agent:
             return f"Unknown agent: {agent_name}"
@@ -1093,6 +1105,13 @@ class AgentManager:
                     system=system_prompt,
                     messages=[{'role': 'user', 'content': full_prompt}]
                 )
+                
+                # Track tokens if callback provided
+                if token_callback and hasattr(resp, 'usage'):
+                    input_tokens = getattr(resp.usage, 'input_tokens', 0)
+                    output_tokens = getattr(resp.usage, 'output_tokens', 0)
+                    token_callback(agent_name, model, input_tokens, output_tokens)
+                
                 return resp.content[0].text
             
             elif provider in ['openai', 'xai', 'github']:
@@ -1110,6 +1129,13 @@ class AgentManager:
                     api_params['max_tokens'] = 4096
                 
                 resp = client.chat.completions.create(**api_params)
+                
+                # Track tokens if callback provided
+                if token_callback and hasattr(resp, 'usage'):
+                    input_tokens = getattr(resp.usage, 'prompt_tokens', 0)
+                    output_tokens = getattr(resp.usage, 'completion_tokens', 0)
+                    token_callback(agent_name, model, input_tokens, output_tokens)
+                
                 return resp.choices[0].message.content
             
             elif provider == 'huggingface':
@@ -1121,6 +1147,15 @@ class AgentManager:
                         {'role': 'user', 'content': full_prompt}
                     ]
                 )
+                
+                # HuggingFace free tier doesn't provide token counts
+                # Use approximation if callback provided
+                if token_callback:
+                    # Approximate tokens (text length / 4)
+                    input_tokens = len(system_prompt + full_prompt) // 4
+                    output_tokens = len(resp.choices[0].message.content) // 4
+                    token_callback(agent_name, model, input_tokens, output_tokens)
+                
                 return resp.choices[0].message.content
             
         except Exception as e:
@@ -3261,6 +3296,19 @@ class ChatSession:
         self.history: list[dict[str, Any]] = []
         self.default_agent: str = 'claude'
         
+        # Initialize token tracking
+        from utils.token_stats import TokenStats
+        self.token_stats: TokenStats = TokenStats()
+        
+        # Initialize rate limiter
+        from utils.rate_limiter import RateLimiter
+        rate_limit_config = config.get('rate_limits', default={'enabled': False})
+        self.rate_limiter: RateLimiter = RateLimiter(rate_limit_config)
+        
+        # Initialize session manager
+        from core.session_manager import SessionManager
+        self.session_manager: SessionManager = SessionManager()
+        
         # Initialize workshop tools if available
         self.workshop_chisel: Optional[Any] = None
         self.workshop_saw: Optional[Any] = None
@@ -3313,11 +3361,18 @@ Commands:
   /history          Show chat history
   /clear            Clear chat history
   /save             Save current config
+  /stats [agent]    Show token usage statistics and cost estimates
+  /session          Session management (save/load/list)
   /prep, /llmprep   Generate LLM-friendly codebase context
   /buildinfo        Analyze build system configuration
   /workshop         Workshop dynamic analysis tools
   /help             Show this help
   /quit             Exit
+
+Session Management:
+  /session save <name>   Save current session
+  /session load <name>   Load a saved session
+  /session list          List all saved sessions
 
 Analysis Tools:
   /prep [dir] [-o output_dir]         - Generate codebase overview, stats, structure
@@ -3330,9 +3385,10 @@ Workshop Tools:
   /workshop saw "<code>"              - Taint analysis
   /workshop plane <path>              - Source/sink enumeration
   /workshop hammer <process>          - Live instrumentation
+  /workshop status                    - Check tool availability and dependencies
+  /workshop help [tool]               - Get detailed help for a specific tool
   /workshop history [tool]            - View analysis history
   /workshop stats [tool]              - View usage statistics
-  /workshop help                      - Workshop help
 
 Collaborative Mode:
   /collab <agents> <workspace> <time> <task>
@@ -3434,6 +3490,13 @@ Examples:
             self.run_plane(subcmd_args)
         elif subcmd == 'hammer':
             self.run_hammer(subcmd_args)
+        elif subcmd == 'status':
+            self.show_workshop_status()
+        elif subcmd == 'help':
+            if subcmd_args:
+                self.show_workshop_tool_help(subcmd_args)
+            else:
+                self.show_workshop_help()
         elif subcmd == 'history':
             self.show_workshop_history(subcmd_args)
         elif subcmd == 'stats':
@@ -3624,6 +3687,160 @@ For detailed documentation, see: workshop_quick_reference.md
 """
         print(help_text)
     
+    def show_workshop_status(self) -> None:
+        """Display workshop tools availability status."""
+        print(c("\n" + "═" * 60, Colors.CYAN))
+        print(c("WORKSHOP STATUS", Colors.CYAN + Colors.BOLD))
+        print(c("═" * 60, Colors.CYAN))
+        
+        tools = [
+            ('Chisel', HAS_CHISEL, 'angr>=9.2.0', 'Symbolic execution for binaries'),
+            ('Saw', HAS_SAW, 'built-in', 'Taint analysis for Python code'),
+            ('Plane', HAS_PLANE, 'built-in', 'Source/sink enumeration'),
+            ('Hammer', HAS_HAMMER, 'frida-python>=16.0.0 psutil>=5.9.0', 'Live process instrumentation'),
+        ]
+        
+        for name, available, deps, description in tools:
+            status = c('✓ Ready', Colors.GREEN) if available else c('✗ Missing', Colors.RED)
+            print(f"\n  {c(name, Colors.BOLD):15} {status}")
+            print(f"    {description}")
+            if not available and deps != 'built-in':
+                print(c(f"    Install: pip install {deps}", Colors.YELLOW))
+        
+        print(c("\n" + "═" * 60, Colors.CYAN))
+        print()
+    
+    def show_workshop_tool_help(self, tool_name: str) -> None:
+        """Display detailed help for a specific workshop tool."""
+        tool_name = tool_name.lower()
+        
+        help_texts = {
+            'chisel': """
+Chisel - Symbolic Execution Tool
+
+Purpose:
+  Analyze binary executables to find vulnerabilities using symbolic execution.
+  Explores multiple execution paths to discover bugs and security issues.
+
+Usage:
+  /workshop chisel <binary_path> [function_name]
+
+Examples:
+  /workshop chisel ./vulnerable.exe main
+  /workshop chisel /path/to/program.elf
+
+Features:
+  - Path exploration with configurable limits
+  - Vulnerability detection (buffer overflows, format strings, etc.)
+  - Input generation for reaching specific code paths
+  - Support for ELF, PE, and other binary formats
+
+Configuration:
+  Edit axe.yaml under workshop.chisel section to customize:
+    - max_paths: Maximum paths to explore (default: 1000)
+    - timeout: Analysis timeout in seconds (default: 30)
+    - memory_limit: Memory limit in MB (default: 1024)
+
+Dependencies:
+  pip install angr>=9.2.0
+""",
+            'saw': """
+Saw - Taint Analysis Tool
+
+Purpose:
+  Analyze Python code for taint vulnerabilities (injection attacks).
+  Tracks data flow from untrusted sources to dangerous sinks.
+
+Usage:
+  /workshop saw "<python_code>"
+
+Examples:
+  /workshop saw "import os; os.system(input())"
+  /workshop saw "sql = 'SELECT * FROM users WHERE id=' + request.args['id']"
+
+Features:
+  - Built-in taint sources (input(), request.args, etc.)
+  - Built-in taint sinks (os.system, eval, exec, SQL, etc.)
+  - Customizable sources and sinks via configuration
+  - Confidence scoring for findings
+
+Configuration:
+  Edit axe.yaml under workshop.saw section to customize:
+    - max_depth: Maximum taint propagation depth (default: 10)
+    - confidence_threshold: Minimum confidence for reporting (default: 0.7)
+    - custom_sources: Additional taint sources
+    - custom_sinks: Additional taint sinks
+
+Dependencies:
+  Built-in (no extra dependencies required)
+""",
+            'plane': """
+Plane - Source/Sink Enumeration Tool
+
+Purpose:
+  Enumerate all potential taint sources and sinks in a codebase.
+  Useful for understanding attack surface and security-critical code paths.
+
+Usage:
+  /workshop plane <project_path>
+
+Examples:
+  /workshop plane .
+  /workshop plane /path/to/project
+
+Features:
+  - Automatic detection of input sources (files, network, user input)
+  - Automatic detection of dangerous sinks (system calls, database queries, etc.)
+  - Support for Python codebases
+  - Confidence scoring based on context
+
+Configuration:
+  Edit axe.yaml under workshop.plane section to customize:
+    - exclude_patterns: Patterns to exclude (default: node_modules, venv, etc.)
+    - max_files: Maximum files to analyze (default: 1000)
+    - confidence_threshold: Minimum confidence for reporting (default: 0.6)
+
+Dependencies:
+  Built-in (no extra dependencies required)
+""",
+            'hammer': """
+Hammer - Live Instrumentation Tool
+
+Purpose:
+  Instrument running processes to monitor behavior in real-time.
+  Uses Frida framework for dynamic analysis.
+
+Usage:
+  /workshop hammer <process_name>
+
+Examples:
+  /workshop hammer python.exe
+  /workshop hammer my_server
+
+Features:
+  - Memory read/write monitoring
+  - Function call hooking
+  - System call tracing
+  - Real-time behavior analysis
+  - Support for Windows, Linux, macOS
+
+Configuration:
+  Edit axe.yaml under workshop.hammer section to customize:
+    - monitoring_interval: Polling interval in seconds (default: 0.1)
+    - max_sessions: Maximum concurrent sessions (default: 5)
+    - default_hooks: Which hooks to attach by default
+
+Dependencies:
+  pip install frida-python>=16.0.0 psutil>=5.9.0
+"""
+        }
+        
+        if tool_name in help_texts:
+            print(c(help_texts[tool_name], Colors.CYAN))
+        else:
+            print(c(f"Unknown tool: {tool_name}", Colors.YELLOW))
+            print(c("Available tools: chisel, saw, plane, hammer", Colors.DIM))
+    
     def show_workshop_history(self, args: str) -> None:
         """Display workshop analysis history."""
         tool_name = args.strip() if args else None
@@ -3805,6 +4022,142 @@ For detailed documentation, see: workshop_quick_reference.md
         except Exception as e:
             print(c(f"Error running build_analyzer: {e}", Colors.RED))
     
+    def handle_stats_command(self, args: str) -> None:
+        """Handle /stats command to show token usage statistics."""
+        from utils.token_stats import format_cost
+        
+        # Get total stats
+        total_stats = self.token_stats.get_total_stats()
+        agent_stats = self.token_stats.get_all_stats()
+        
+        if not agent_stats:
+            print(c("No token usage data yet. Start chatting with agents to see statistics!", Colors.YELLOW))
+            return
+        
+        # Print header
+        print(c("\n" + "═" * 60, Colors.CYAN))
+        print(c("TOKEN USAGE STATISTICS", Colors.CYAN + Colors.BOLD))
+        print(c("═" * 60, Colors.CYAN))
+        
+        # Print total session stats
+        print(c(f"\nSession Total:", Colors.BOLD))
+        print(f"  Tokens: {total_stats['total']:,} " + 
+              c(f"(input: {total_stats['input']:,}, output: {total_stats['output']:,})", Colors.DIM))
+        print(f"  Cost: {format_cost(total_stats['cost'])}")
+        print(f"  Messages: {total_stats['messages']}")
+        if total_stats['messages'] > 0:
+            avg_tokens = total_stats['total'] // total_stats['messages']
+            print(f"  Avg tokens/message: {avg_tokens:,}")
+        
+        # If specific agent requested
+        if args:
+            agent_name = args.strip()
+            stats = self.token_stats.get_agent_stats(agent_name)
+            
+            if not stats:
+                print(c(f"\nNo statistics found for agent: {agent_name}", Colors.YELLOW))
+                return
+            
+            print(c(f"\nAgent: {agent_name}", Colors.BOLD))
+            print(f"  Model: {stats['model']}")
+            print(f"  Tokens: {stats['total']:,} " +
+                  c(f"(input: {stats['input']:,}, output: {stats['output']:,})", Colors.DIM))
+            cost = self.token_stats.get_all_stats()[agent_name]['cost']
+            print(f"  Cost: {format_cost(cost)}")
+            print(f"  Messages: {stats['messages']}")
+            if stats['messages'] > 0:
+                avg_tokens = stats['total'] // stats['messages']
+                print(f"  Avg tokens/message: {avg_tokens:,}")
+        else:
+            # Print per-agent breakdown
+            print(c(f"\nPer-Agent Breakdown:", Colors.BOLD))
+            for agent_name in sorted(agent_stats.keys()):
+                stats = agent_stats[agent_name]
+                print(c(f"\n  {agent_name}:", Colors.CYAN))
+                print(f"    Tokens: {stats['total']:,} (cost: {format_cost(stats['cost'])})")
+                print(f"    Messages: {stats['messages']}")
+        
+        print(c("\n" + "═" * 60, Colors.CYAN))
+        print()
+    
+    def handle_session_command(self, args: str) -> None:
+        """Handle /session command for save/load/list operations."""
+        if not args:
+            print(c("Session Management Commands:", Colors.BOLD))
+            print(c("  /session save <name>   - Save current session", Colors.DIM))
+            print(c("  /session load <name>   - Load a saved session", Colors.DIM))
+            print(c("  /session list          - List all saved sessions", Colors.DIM))
+            return
+        
+        parts = args.split(maxsplit=1)
+        subcommand = parts[0].lower()
+        session_arg = parts[1] if len(parts) > 1 else ""
+        
+        if subcommand == 'save':
+            if not session_arg:
+                print(c("Usage: /session save <name>", Colors.YELLOW))
+                return
+            
+            # Create session data
+            session_data = {
+                'conversation': self.history,
+                'workspace': self.project_dir,
+                'agents': list(self.token_stats.agent_stats.keys()),
+                'metadata': {
+                    'tokens_used': self.token_stats.get_total_stats()['total'],
+                    'messages': len(self.history)
+                }
+            }
+            
+            if self.session_manager.save_session(session_arg, session_data):
+                print(c(f"✓ Session saved as: {session_arg}", Colors.GREEN))
+            else:
+                print(c(f"✗ Failed to save session: {session_arg}", Colors.RED))
+        
+        elif subcommand == 'load':
+            if not session_arg:
+                print(c("Usage: /session load <name>", Colors.YELLOW))
+                return
+            
+            session_data = self.session_manager.load_session(session_arg)
+            
+            if not session_data:
+                print(c(f"✗ Session not found: {session_arg}", Colors.RED))
+                return
+            
+            # Restore session
+            self.history = session_data.get('conversation', [])
+            print(c(f"✓ Session loaded: {session_arg}", Colors.GREEN))
+            print(c(f"  Workspace: {session_data.get('workspace', 'Unknown')}", Colors.DIM))
+            print(c(f"  Messages: {len(self.history)}", Colors.DIM))
+            print(c(f"  Agents: {', '.join(session_data.get('agents', []))}", Colors.DIM))
+            print(c(f"  Saved: {session_data.get('timestamp', 'Unknown')}", Colors.DIM))
+        
+        elif subcommand == 'list':
+            sessions = self.session_manager.list_sessions()
+            
+            if not sessions:
+                print(c("No saved sessions found.", Colors.YELLOW))
+                return
+            
+            print(c("\nSaved Sessions:", Colors.BOLD))
+            print(c("═" * 70, Colors.CYAN))
+            
+            for session in sessions:
+                print(c(f"\n  {session['name']}", Colors.CYAN + Colors.BOLD))
+                print(f"    Saved: {session['timestamp']}")
+                print(f"    Workspace: {session['workspace']}")
+                if session['agents']:
+                    print(f"    Agents: {', '.join(session['agents'])}")
+                print(f"    Size: {session['size']} bytes")
+            
+            print(c("\n" + "═" * 70, Colors.CYAN))
+            print()
+        
+        else:
+            print(c(f"Unknown session subcommand: {subcommand}", Colors.YELLOW))
+            print(c("Use: save, load, or list", Colors.DIM))
+    
     def process_command(self, cmd: str) -> bool:
         """Process a slash command. Returns False to exit."""
         cmd = cmd.strip()
@@ -3953,6 +4306,12 @@ For detailed documentation, see: workshop_quick_reference.md
         elif command.startswith('/buildinfo'):
             self.handle_buildinfo_command(args)
         
+        elif command == '/stats':
+            self.handle_stats_command(args)
+        
+        elif command == '/session':
+            self.handle_session_command(args)
+        
         else:
             print(c(f"Unknown command: {command}. Type /help for help.", Colors.YELLOW))
         
@@ -3975,15 +4334,36 @@ For detailed documentation, see: workshop_quick_reference.md
             print(c("Please provide a task for the agent", Colors.YELLOW))
             return
         
+        # Get agent model for rate limiting
+        agent_config = self.agent_mgr.resolve_agent(agent_name)
+        if not agent_config:
+            print(c(f"Unknown agent: {agent_name}", Colors.RED))
+            return
+        
+        model = agent_config.get('model', '')
+        
+        # Check rate limit before calling (estimate based on prompt length)
+        estimated_tokens = len(prompt) // 4 + 1000  # Rough estimate including expected response
+        allowed, rate_msg = self.rate_limiter.check_limit(agent_name, estimated_tokens)
+        
+        if not allowed:
+            print(c(f"⏱️  {rate_msg}", Colors.RED))
+            return
+        
         # Get context
         context: str = self.project_ctx.get_context_summary()
         
         # Record in history
         self.history.append({'role': 'user', 'agent': agent_name, 'content': prompt})
         
-        # Call agent
+        # Define token callback for tracking
+        def token_callback(agent, model, input_tokens, output_tokens):
+            self.token_stats.add_usage(agent, model, input_tokens, output_tokens)
+            self.rate_limiter.add_tokens(agent, input_tokens + output_tokens)
+        
+        # Call agent with token tracking
         print(c(f"\n[{agent_name}] Processing...", Colors.DIM))
-        response: str = self.agent_mgr.call_agent(agent_name, prompt, context)
+        response: str = self.agent_mgr.call_agent(agent_name, prompt, context, token_callback=token_callback)
         
         # Process response for code blocks (READ, EXEC, WRITE)
         processed_response: str = self.response_processor.process_response(response, agent_name)
