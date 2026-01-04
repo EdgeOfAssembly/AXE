@@ -1044,6 +1044,173 @@ def print_results(results, output_json=False):
             print()
 
 
+def print_install_help(results):
+    """
+    Generate installation commands for detected dependencies based on build system and OS.
+    Supports Ubuntu/Debian, Fedora/RHEL/CentOS, macOS (Homebrew), and Arch Linux.
+    """
+    import platform
+    
+    projects = results.get('projects', [])
+    if not projects:
+        print("No build systems detected. No dependencies to install.")
+        return
+    
+    # Common package mappings (dependency name -> package names for different systems)
+    # Format: {dependency_name: {'apt': 'package', 'yum': 'package', 'brew': 'package', 'pacman': 'package'}}
+    package_mappings = {
+        # Build tools
+        'autoconf': {'apt': 'autoconf', 'yum': 'autoconf', 'brew': 'autoconf', 'pacman': 'autoconf'},
+        'automake': {'apt': 'automake', 'yum': 'automake', 'brew': 'automake', 'pacman': 'automake'},
+        'libtool': {'apt': 'libtool', 'yum': 'libtool', 'brew': 'libtool', 'pacman': 'libtool'},
+        'cmake': {'apt': 'cmake', 'yum': 'cmake', 'brew': 'cmake', 'pacman': 'cmake'},
+        'meson': {'apt': 'meson', 'yum': 'meson', 'brew': 'meson', 'pacman': 'meson'},
+        'ninja': {'apt': 'ninja-build', 'yum': 'ninja-build', 'brew': 'ninja', 'pacman': 'ninja'},
+        'pkg-config': {'apt': 'pkg-config', 'yum': 'pkgconfig', 'brew': 'pkg-config', 'pacman': 'pkg-config'},
+        
+        # Common libraries
+        'glib': {'apt': 'libglib2.0-dev', 'yum': 'glib2-devel', 'brew': 'glib', 'pacman': 'glib2'},
+        'gtk': {'apt': 'libgtk-3-dev', 'yum': 'gtk3-devel', 'brew': 'gtk+3', 'pacman': 'gtk3'},
+        'gtk+': {'apt': 'libgtk-3-dev', 'yum': 'gtk3-devel', 'brew': 'gtk+3', 'pacman': 'gtk3'},
+        'qt5': {'apt': 'qtbase5-dev', 'yum': 'qt5-qtbase-devel', 'brew': 'qt@5', 'pacman': 'qt5-base'},
+        'openssl': {'apt': 'libssl-dev', 'yum': 'openssl-devel', 'brew': 'openssl', 'pacman': 'openssl'},
+        'zlib': {'apt': 'zlib1g-dev', 'yum': 'zlib-devel', 'brew': 'zlib', 'pacman': 'zlib'},
+        'curl': {'apt': 'libcurl4-openssl-dev', 'yum': 'libcurl-devel', 'brew': 'curl', 'pacman': 'curl'},
+        'sqlite': {'apt': 'libsqlite3-dev', 'yum': 'sqlite-devel', 'brew': 'sqlite', 'pacman': 'sqlite'},
+        'libpng': {'apt': 'libpng-dev', 'yum': 'libpng-devel', 'brew': 'libpng', 'pacman': 'libpng'},
+        'jpeg': {'apt': 'libjpeg-dev', 'yum': 'libjpeg-turbo-devel', 'brew': 'jpeg', 'pacman': 'libjpeg-turbo'},
+        'readline': {'apt': 'libreadline-dev', 'yum': 'readline-devel', 'brew': 'readline', 'pacman': 'readline'},
+        'ncurses': {'apt': 'libncurses-dev', 'yum': 'ncurses-devel', 'brew': 'ncurses', 'pacman': 'ncurses'},
+        'pcre': {'apt': 'libpcre3-dev', 'yum': 'pcre-devel', 'brew': 'pcre', 'pacman': 'pcre'},
+        'libxml2': {'apt': 'libxml2-dev', 'yum': 'libxml2-devel', 'brew': 'libxml2', 'pacman': 'libxml2'},
+        'libxslt': {'apt': 'libxslt1-dev', 'yum': 'libxslt-devel', 'brew': 'libxslt', 'pacman': 'libxslt'},
+    }
+    
+    # Collect all dependencies
+    all_deps = set()
+    build_type = None
+    build_versions = {}
+    
+    for project in projects:
+        proj_type = project['type']
+        build_type = proj_type
+        
+        if proj_type == 'autotools':
+            all_deps.add('autoconf')
+            all_deps.add('automake')
+            all_deps.add('libtool')
+            all_deps.add('pkg-config')
+            if project.get('autoconf_version') != 'Not specified':
+                build_versions['autoconf'] = project['autoconf_version']
+            if project.get('automake_version') != 'Not specified':
+                build_versions['automake'] = project['automake_version']
+        elif proj_type == 'cmake':
+            all_deps.add('cmake')
+            all_deps.add('pkg-config')
+            if project.get('cmake_version') != 'Not specified':
+                build_versions['cmake'] = project['cmake_version']
+        elif proj_type == 'meson':
+            all_deps.add('meson')
+            all_deps.add('ninja')
+            all_deps.add('pkg-config')
+            if project.get('meson_version') != 'Not specified':
+                build_versions['meson'] = project['meson_version']
+        
+        # Add detected dependencies
+        for dep in project.get('dependencies', []):
+            # Normalize dependency name: lowercase and extract leading name chars,
+            # keeping symbols like '+' that are significant in some names (e.g., 'gtk+')
+            import re
+            raw_dep = dep.lower().strip()
+            match = re.match(r'[a-z0-9_.+\-]+', raw_dep)
+            dep_name = match.group(0) if match else raw_dep
+            all_deps.add(dep_name)
+    
+    # Print header
+    print(f"\n{'=' * 70}")
+    print("DEPENDENCY INSTALLATION HELPER")
+    print(f"{'=' * 70}\n")
+    
+    print(f"Detected: {build_type.upper() if build_type else 'Unknown'} project\n")
+    
+    if build_versions:
+        print("Minimum versions required:")
+        for tool, version in build_versions.items():
+            print(f"  - {tool} >= {version}")
+        print()
+    
+    print("Dependencies detected:")
+    for dep in sorted(all_deps):
+        print(f"  - {dep}")
+    print()
+    
+    # Generate installation commands for each package manager
+    print("Installation commands:\n")
+    
+    # Ubuntu/Debian (apt)
+    apt_packages = []
+    for dep in sorted(all_deps):
+        pkg = package_mappings.get(dep, {}).get('apt')
+        if pkg:
+            apt_packages.append(pkg)
+        else:
+            apt_packages.append(dep)  # Use dep name as fallback
+    
+    if apt_packages:
+        print("Ubuntu/Debian (APT):")
+        print(f"  sudo apt-get update")
+        print(f"  sudo apt-get install {' '.join(apt_packages)}")
+        print()
+    
+    # Fedora/RHEL/CentOS (yum/dnf)
+    yum_packages = []
+    for dep in sorted(all_deps):
+        pkg = package_mappings.get(dep, {}).get('yum')
+        if pkg:
+            yum_packages.append(pkg)
+        else:
+            # Fallback: use dep name directly without adding suffix
+            yum_packages.append(dep)
+    
+    if yum_packages:
+        print("Fedora/RHEL/CentOS (YUM/DNF):")
+        print(f"  sudo dnf install {' '.join(yum_packages)}")
+        print(f"  # or: sudo yum install {' '.join(yum_packages)}")
+        print()
+    
+    # Arch Linux (pacman)
+    pacman_packages = []
+    for dep in sorted(all_deps):
+        pkg = package_mappings.get(dep, {}).get('pacman')
+        if pkg:
+            pacman_packages.append(pkg)
+        else:
+            pacman_packages.append(dep)
+    
+    if pacman_packages:
+        print("Arch Linux (pacman):")
+        print(f"  sudo pacman -S {' '.join(pacman_packages)}")
+        print()
+    
+    # macOS (Homebrew)
+    brew_packages = []
+    for dep in sorted(all_deps):
+        pkg = package_mappings.get(dep, {}).get('brew')
+        if pkg:
+            brew_packages.append(pkg)
+        else:
+            brew_packages.append(dep)
+    
+    if brew_packages:
+        print("macOS (Homebrew):")
+        print(f"  brew install {' '.join(brew_packages)}")
+        print()
+    
+    print("Note: Package names may vary. If a package is not found, search your")
+    print("      distribution's package repository for the correct name.")
+    print(f"\n{'=' * 70}\n")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description='Analyze build systems in a directory or compressed tar archive.',
@@ -1057,11 +1224,14 @@ Examples:
   python build_analyzer.py /path/to/source
   python build_analyzer.py project-1.0.tar.xz
   python build_analyzer.py --json project-1.0.tar.gz
+  python build_analyzer.py --install-help project-1.0.tar.gz
 '''
     )
     parser.add_argument('target', help='Directory or tar archive to analyze')
     parser.add_argument('--json', action='store_true', dest='output_json',
                         help='Output results in JSON format for machine-readable output')
+    parser.add_argument('--install-help', action='store_true', dest='install_help',
+                        help='Generate installation commands for detected dependencies')
     
     args = parser.parse_args()
     
@@ -1074,7 +1244,10 @@ Examples:
     # Check if it's a tar archive
     if os.path.isfile(target) and is_tar_archive(target):
         results = analyze_archive(target)
-        print_results(results, args.output_json)
+        if args.install_help:
+            print_install_help(results)
+        else:
+            print_results(results, args.output_json)
         return
     
     # Otherwise, treat as directory
@@ -1083,7 +1256,10 @@ Examples:
         sys.exit(1)
     
     results = analyze_directory(target)
-    print_results(results, args.output_json)
+    if args.install_help:
+        print_install_help(results)
+    else:
+        print_results(results, args.output_json)
 
 
 if __name__ == "__main__":
