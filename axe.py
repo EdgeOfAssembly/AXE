@@ -3313,9 +3313,17 @@ Commands:
   /history          Show chat history
   /clear            Clear chat history
   /save             Save current config
+  /prep, /llmprep   Generate LLM-friendly codebase context
+  /buildinfo        Analyze build system configuration
   /workshop         Workshop dynamic analysis tools
   /help             Show this help
   /quit             Exit
+
+Analysis Tools:
+  /prep [dir] [-o output_dir]         - Generate codebase overview, stats, structure
+  /llmprep [dir] [-o output_dir]      - Alias for /prep
+  /buildinfo <path> [--json]          - Detect build system (Autotools, CMake, Meson, etc.)
+                                        Supports directories and .tar/.tar.gz/.tar.zst archives
 
 Workshop Tools:
   /workshop chisel <binary> [func]    - Symbolic execution
@@ -3670,6 +3678,133 @@ For detailed documentation, see: workshop_quick_reference.md
         
         print()
     
+    def handle_llmprep_command(self, args: str) -> None:
+        """Handle /prep or /llmprep command to generate LLM-friendly codebase context."""
+        # Default to current workspace directory
+        target_dir = self.project_dir
+        output_dir = "llm_prep"
+        
+        # Parse arguments if provided
+        if args:
+            parts = args.split()
+            if len(parts) >= 1:
+                target_dir = parts[0]
+            if len(parts) >= 2 and parts[1] == '-o':
+                if len(parts) >= 3:
+                    output_dir = parts[2]
+        
+        # Resolve paths
+        if not os.path.isabs(target_dir):
+            target_dir = os.path.join(self.project_dir, target_dir)
+        
+        if not os.path.isabs(output_dir):
+            output_dir = os.path.join(target_dir, output_dir)
+        
+        if not os.path.exists(target_dir):
+            print(c(f"Error: Directory not found: {target_dir}", Colors.RED))
+            return
+        
+        print(c(f"Running llmprep on {target_dir}...", Colors.CYAN))
+        print(c(f"Output directory: {output_dir}", Colors.DIM))
+        
+        # Build command
+        tools_dir = os.path.join(os.path.dirname(__file__), "tools")
+        llmprep_script = os.path.join(tools_dir, "llmprep.py")
+        
+        if not os.path.exists(llmprep_script):
+            print(c("Error: llmprep.py not found in tools directory", Colors.RED))
+            return
+        
+        cmd = [sys.executable, llmprep_script, target_dir, "-o", output_dir]
+        
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+            
+            if result.returncode == 0:
+                print(c("✓ llmprep completed successfully!", Colors.GREEN))
+                print(c(f"\nGenerated files in {output_dir}:", Colors.BOLD))
+                
+                # List generated files
+                if os.path.exists(output_dir):
+                    for filename in sorted(os.listdir(output_dir)):
+                        filepath = os.path.join(output_dir, filename)
+                        if os.path.isfile(filepath):
+                            size = os.path.getsize(filepath)
+                            print(f"  - {filename} ({size} bytes)")
+                print()
+                
+                if result.stdout:
+                    print(result.stdout)
+            else:
+                print(c(f"Error: llmprep failed with exit code {result.returncode}", Colors.RED))
+                if result.stderr:
+                    print(c("Error output:", Colors.YELLOW))
+                    print(result.stderr)
+        
+        except subprocess.TimeoutExpired:
+            print(c("Error: llmprep timed out after 5 minutes", Colors.RED))
+        except Exception as e:
+            print(c(f"Error running llmprep: {e}", Colors.RED))
+    
+    def handle_buildinfo_command(self, args: str) -> None:
+        """Handle /buildinfo command to analyze build systems."""
+        if not args:
+            print(c("Usage: /buildinfo <path_or_archive> [--json]", Colors.YELLOW))
+            print(c("  path_or_archive: directory path or .tar/.tar.gz/.tar.zst archive", Colors.DIM))
+            print(c("  --json: output results in JSON format", Colors.DIM))
+            return
+        
+        # Parse arguments
+        parts = args.split()
+        target_path = parts[0]
+        json_output = "--json" in parts
+        
+        # Resolve path
+        if not os.path.isabs(target_path):
+            target_path = os.path.join(self.project_dir, target_path)
+        
+        if not os.path.exists(target_path):
+            print(c(f"Error: Path not found: {target_path}", Colors.RED))
+            return
+        
+        print(c(f"Running build_analyzer on {target_path}...", Colors.CYAN))
+        
+        # Build command
+        tools_dir = os.path.join(os.path.dirname(__file__), "tools")
+        build_analyzer_script = os.path.join(tools_dir, "build_analyzer.py")
+        
+        if not os.path.exists(build_analyzer_script):
+            print(c("Error: build_analyzer.py not found in tools directory", Colors.RED))
+            return
+        
+        cmd = [sys.executable, build_analyzer_script, target_path]
+        if json_output:
+            cmd.append("--json")
+        
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+            
+            if result.returncode == 0:
+                if json_output:
+                    # Parse and pretty-print JSON
+                    try:
+                        data = json.loads(result.stdout)
+                        print(json.dumps(data, indent=2))
+                    except json.JSONDecodeError:
+                        print(result.stdout)
+                else:
+                    print(result.stdout)
+            else:
+                print(c(f"Error: build_analyzer failed with exit code {result.returncode}", Colors.RED))
+                if result.stderr:
+                    print(c("Error output:", Colors.YELLOW))
+                    print(result.stderr)
+        
+        except subprocess.TimeoutExpired:
+            print(c("Error: build_analyzer timed out after 2 minutes", Colors.RED))
+        except Exception as e:
+            print(c(f"Error running build_analyzer: {e}", Colors.RED))
+    
     def process_command(self, cmd: str) -> bool:
         """Process a slash command. Returns False to exit."""
         cmd = cmd.strip()
@@ -3811,6 +3946,12 @@ For detailed documentation, see: workshop_quick_reference.md
         
         elif command == '/workshop':
             self.handle_workshop_command(args)
+        
+        elif command.startswith('/prep') or command.startswith('/llmprep'):
+            self.handle_llmprep_command(args)
+        
+        elif command.startswith('/buildinfo'):
+            self.handle_buildinfo_command(args)
         
         else:
             print(c(f"Unknown command: {command}. Type /help for help.", Colors.YELLOW))

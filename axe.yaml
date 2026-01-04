@@ -546,6 +546,8 @@ tools:
     - clang-tidy
     - scan-build
     - include-what-you-use
+    - llmprep
+    - build_analyzer
 
   # Reverse Engineering (expanded)
   reveng:
