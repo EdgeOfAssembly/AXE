@@ -27,6 +27,9 @@
 - [Tool Whitelist](#tool-whitelist)
 - [Advanced Usage](#advanced-usage)
 - [Multi-Agent Collaboration](#multi-agent-collaboration)
+- [Analysis Tools](#analysis-tools)
+  - [llmprep - Codebase Preparation](#llmprep---codebase-preparation)
+  - [build_analyzer - Build System Detection](#build_analyzer---build-system-detection)
 - [Workshop - Dynamic Analysis Tools](#workshop---dynamic-analysis-tools)
 - [Troubleshooting](#troubleshooting)
 
@@ -654,6 +657,208 @@ axe> @llama help with the low-level binary parsing
 
 # Creative optimization
 axe> @grok suggest unconventional approaches to improve performance
+```
+
+---
+
+## Analysis Tools
+
+AXE integrates powerful analysis tools to reduce token usage and improve agent effectiveness when working with codebases and build systems.
+
+### llmprep - Codebase Preparation
+
+**llmprep** generates LLM-friendly context for your codebase, dramatically reducing the tokens needed for agents to understand your project structure.
+
+#### Features
+
+- **Code Statistics**: Line counts by language using `cloc`
+- **Directory Structure**: Visual tree representation of your project
+- **Documentation**: Auto-generated overview and guidance
+- **Symbol Index**: Function/class index using `ctags`
+- **Dependency Graphs**: Python class diagrams with `pyreverse` (optional)
+- **Smart Exclusions**: Automatically excludes build artifacts, dependencies, and generated files
+
+#### Usage
+
+```bash
+# Generate context for current directory
+axe> /prep
+
+# Generate context for specific directory
+axe> /prep ./src
+
+# Specify output directory
+axe> /prep ./src -o ./docs/llm_context
+
+# Agents can use it in EXEC blocks
+```EXEC
+python3 tools/llmprep.py . -o llm_prep
+```
+```
+
+#### Generated Files
+
+llmprep creates a structured directory with:
+
+- `codebase_overview.md` - High-level project summary
+- `codebase_stats.txt` - Lines of code by language
+- `codebase_structure.txt` - Directory tree visualization
+- `llm_system_prompt.md` - Suggested system prompt for LLMs
+- `project_guidance.md` - Developer guidance and conventions
+- `tags` - Symbol index (if ctags available)
+
+#### Expected Benefits
+
+- **40-60% token reduction** for codebase exploration tasks
+- Agents get pre-indexed context instead of exploring blindly
+- Faster onboarding for new coding tasks
+- Consistent project context across agent sessions
+
+#### Optional Dependencies
+
+For best results, install these tools (graceful degradation if missing):
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install cloc tree doxygen pylint
+
+# macOS
+brew install cloc tree doxygen
+
+# Python packages
+pip install pylint  # For pyreverse
+```
+
+### build_analyzer - Build System Detection
+
+**build_analyzer** automatically detects and analyzes build systems, providing instant access to compilation instructions and dependencies.
+
+#### Features
+
+- **Multi-System Support**: Autotools, CMake, Meson, Make, Cargo, npm, pip
+- **Version Detection**: Minimum required versions for build tools
+- **Dependency Analysis**: Libraries and external dependencies
+- **Configure Options**: Available build flags and features
+- **Archive Support**: Works on .tar, .tar.gz, .tar.zst archives
+- **JSON Output**: Machine-readable format for programmatic use
+
+#### Usage
+
+```bash
+# Analyze current directory
+axe> /buildinfo .
+
+# Analyze specific directory
+axe> /buildinfo ./opensource-project
+
+# Analyze an archive
+axe> /buildinfo ./downloads/package.tar.gz
+
+# Get JSON output for parsing
+axe> /buildinfo ./src --json
+
+# Agents can use it in EXEC blocks
+```EXEC
+python3 tools/build_analyzer.py ./source --json
+```
+```
+
+#### Detected Build Systems
+
+| System | Files Detected | Output Includes |
+|--------|----------------|-----------------|
+| **Autotools** | configure.ac, Makefile.am | autoconf/automake versions, configure options, environment variables |
+| **CMake** | CMakeLists.txt | cmake_minimum_required, dependencies, targets |
+| **Meson** | meson.build | meson version, dependencies, options |
+| **Make** | Makefile | targets, compiler flags, variables |
+| **Cargo** | Cargo.toml | Rust edition, dependencies, features |
+| **npm** | package.json | Node version, dependencies, scripts |
+| **Python** | setup.py, pyproject.toml | Python version, dependencies, entry points |
+
+#### Example Output
+
+```json
+{
+  "build_system": "Autotools",
+  "autoconf_version": "2.69",
+  "automake_version": "1.15",
+  "configure_options": [
+    "--enable-shared",
+    "--with-ssl",
+    "--enable-debug"
+  ],
+  "dependencies": [
+    "libssl-dev",
+    "zlib1g-dev"
+  ],
+  "environment_variables": [
+    "CC",
+    "CFLAGS",
+    "LDFLAGS"
+  ]
+}
+```
+
+#### Expected Benefits
+
+- **30-50% token reduction** for build/compile tasks
+- Build instructions available instantly
+- Agents don't need to guess configure flags
+- Faster build troubleshooting
+
+#### Dependencies
+
+```bash
+# Python 3.8+ required
+python3 --version
+
+# Optional: For .tar.zst support
+pip install zstandard
+```
+
+### Integration with Agents
+
+Both tools are whitelisted and agents can invoke them via EXEC blocks:
+
+```markdown
+To understand this codebase, I'll first prepare the context:
+
+```EXEC
+python3 tools/llmprep.py . -o llm_prep
+```
+
+Now let me check the build system:
+
+```EXEC
+python3 tools/build_analyzer.py . --json
+```
+
+Based on the analysis, I can see this is a CMake project requiring...
+```
+
+### Workflow Examples
+
+#### 1. New Codebase Exploration
+
+```bash
+axe> /prep ./new-project
+axe> /buildinfo ./new-project
+axe> @claude review the generated llm_prep/codebase_overview.md and suggest improvements
+```
+
+#### 2. Build Issue Debugging
+
+```bash
+axe> /buildinfo ./failing-build --json
+axe> @gpt The build is failing. Here's the build system info: [paste JSON]. What's wrong?
+```
+
+#### 3. Collaborative Session Pre-indexing
+
+```bash
+# Generate context before starting collaboration
+axe> /prep ./workspace
+axe> /collab claude,gpt ./workspace 60 "Refactor the authentication module"
 ```
 
 ---
