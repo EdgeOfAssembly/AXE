@@ -449,8 +449,171 @@ axe> @llama check for DOS compatibility issues in this code
 | `/history` | Show chat history | `/history` |
 | `/clear` | Clear chat history | `/clear` |
 | `/save` | Save current config | `/save` |
+| `/stats [agent]` | Show token usage and cost estimates | `/stats` or `/stats gpt` |
+| `/session save <name>` | Save current session | `/session save my-session` |
+| `/session load <name>` | Load a saved session | `/session load my-session` |
+| `/session list` | List all saved sessions | `/session list` |
+| `/prep [dir]` | Generate codebase context | `/prep` or `/prep src/` |
+| `/buildinfo <path>` | Analyze build system | `/buildinfo .` |
+| `/workshop <tool> <args>` | Run workshop tool | `/workshop chisel binary` |
+| `/workshop status` | Check workshop tool availability | `/workshop status` |
+| `/workshop help [tool]` | Get detailed workshop help | `/workshop help chisel` |
+| `/collab <agents> <ws> <time> <task>` | Start collaborative session | `/collab llama,copilot . 30 "Review code"` |
 | `/help` | Show help | `/help` |
 | `/quit` | Exit | `/quit` |
+
+### Token Usage Commands (NEW!)
+
+Track token consumption and costs across your session:
+
+```bash
+# View overall token statistics
+axe> /stats
+# Output:
+# ╔══════════════════ TOKEN USAGE STATS ══════════════════╗
+#   Session Total: 15,234 tokens (est. cost: $0.23)
+#   Per-agent breakdown:
+#     claude:  6,234 tokens ($0.12) - 12 messages
+#     gpt:     5,890 tokens ($0.08) - 8 messages
+#     llama:   3,110 tokens ($0.03) - 6 messages
+# ╚════════════════════════════════════════════════════════╝
+
+# View statistics for specific agent
+axe> /stats claude
+```
+
+**Features:**
+- Tracks input and output tokens separately
+- Estimates costs based on current API pricing
+- Shows average tokens per message
+- Supports all configured agents
+
+### Session Management (NEW!)
+
+Save and resume your work sessions:
+
+```bash
+# Save current session
+axe> /session save wadextract-review
+# Output: ✓ Session saved as: wadextract-review
+
+# List saved sessions
+axe> /session list
+# Output:
+# Saved Sessions:
+# ═══════════════════════════════════════════════════════
+#
+#   wadextract-review
+#     Saved: 2026-01-04T14:30:00
+#     Workspace: /home/user/projects/doom
+#     Agents: claude, gpt, llama
+#     Size: 15234 bytes
+
+# Load a session
+axe> /session load wadextract-review
+# Output: ✓ Session loaded: wadextract-review
+```
+
+**Features:**
+- Saves full conversation history
+- Includes workspace path and agent list
+- Stores token usage metadata
+- Sessions persist across restarts
+- Stored in `.axe_sessions/` directory
+
+### Workshop Commands (EXPANDED!)
+
+Dynamic analysis tools for security and reverse engineering:
+
+```bash
+# Check tool availability and dependencies
+axe> /workshop status
+# Output:
+# ╔════════════════ WORKSHOP STATUS ════════════════╗
+#   ✓ Chisel   - Ready (angr 9.2.78 installed)
+#   ✓ Saw      - Ready (built-in)
+#   ✓ Plane    - Ready (built-in)
+#   ✗ Hammer   - Missing dependencies
+#
+#   To enable Hammer:
+#     pip install frida-python>=16.0.0 psutil>=5.9.0
+# ╚═════════════════════════════════════════════════════╝
+
+# Get detailed help for a specific tool
+axe> /workshop help chisel
+# Shows: purpose, usage examples, configuration options, dependencies
+
+# Run workshop tools
+axe> /workshop chisel ./binary.elf main
+axe> /workshop saw "import os; os.system(input())"
+axe> /workshop plane /path/to/project
+axe> /workshop hammer process_name
+
+# View analysis history
+axe> /workshop history chisel
+
+# View usage statistics
+axe> /workshop stats
+```
+
+### Build Analysis (EXPANDED!)
+
+Analyze build systems and get installation help:
+
+```bash
+# Analyze build system
+axe> /buildinfo /path/to/project
+# Detects: Autotools, CMake, Meson, etc.
+
+# Get installation commands for dependencies
+axe> /buildinfo /path/to/project --install-help
+# Output:
+# ╔══════════════════════════════════════════════════════╗
+# DEPENDENCY INSTALLATION HELPER
+# ╚══════════════════════════════════════════════════════╝
+#
+# Detected: AUTOTOOLS project
+# Dependencies: autoconf, automake, libssl-dev, zlib1g-dev
+#
+# Ubuntu/Debian (APT):
+#   sudo apt-get install autoconf automake libssl-dev zlib1g-dev
+#
+# macOS (Homebrew):
+#   brew install autoconf automake openssl zlib
+```
+
+**Supports:**
+- Ubuntu/Debian (apt)
+- Fedora/RHEL/CentOS (dnf/yum)
+- Arch Linux (pacman)
+- macOS (Homebrew)
+
+### Rate Limiting (NEW!)
+
+Automatic rate limiting prevents API quota burnout:
+
+**Configuration in `axe.yaml`:**
+```yaml
+rate_limits:
+  enabled: true
+  tokens_per_minute: 10000  # Global limit
+  per_agent:
+    claude: 5000      # Per-agent limits
+    gpt: 5000
+    llama: unlimited  # Free tier
+```
+
+**Behavior:**
+- Sliding window token tracking (60-second window)
+- Graceful warnings when approaching limits
+- Shows time until limit resets
+- Automatically applied before each API call
+
+```bash
+# Example rate limit warning:
+axe> @gpt analyze this large file
+⏱️  Rate limit exceeded for gpt. Used 5,234 of 5,000 tokens/min. Limit resets in 42s.
+```
 
 ---
 
@@ -1098,9 +1261,13 @@ pip install huggingface_hub
 
 **"Rate limited"**
 ```bash
-# Wait a moment and try again
+# Rate limiting is now automatic in AXE
+# Check your rate limit configuration in axe.yaml
 # Or switch to a different provider
 axe> @llama instead of @gpt
+
+# View current rate limit usage
+axe> /stats
 ```
 
 **"Command not in whitelist"**
@@ -1109,6 +1276,47 @@ axe> @llama instead of @gpt
 axe> /tools
 
 # Add tools to axe.yaml if needed
+```
+
+**"Workshop tool not available"**
+```bash
+# Check tool status and missing dependencies
+axe> /workshop status
+
+# Install missing dependencies as shown
+pip install angr  # For Chisel
+pip install frida-python psutil  # For Hammer
+```
+
+**"Session failed to load"**
+```bash
+# List available sessions
+axe> /session list
+
+# Check if session file exists
+ls -la .axe_sessions/
+
+# Sessions are stored as JSON files
+cat .axe_sessions/session-name.json
+```
+
+**"Token tracking not working"**
+```bash
+# Token tracking requires API responses with usage data
+# Some providers don't return token counts (approximated instead)
+
+# View current token statistics
+axe> /stats
+```
+
+**"Rate limit too restrictive"**
+```yaml
+# Edit axe.yaml to adjust rate limits
+rate_limits:
+  enabled: true
+  tokens_per_minute: 20000  # Increase global limit
+  per_agent:
+    gpt: 10000  # Increase per-agent limit
 ```
 
 ### Testing API Connections
