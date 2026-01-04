@@ -1148,10 +1148,12 @@ class AgentManager:
                     ]
                 )
                 
-                # HuggingFace free tier doesn't provide token counts
-                # Use approximation if callback provided
+                # NOTE: The following is a very rough heuristic used only when a token
+                #       callback is provided. It estimates tokens as character_count / 4,
+                #       which can differ significantly from true model tokenization and
+                #       should not be relied on for precise billing or quota enforcement.
                 if token_callback:
-                    # Approximate tokens (text length / 4)
+                    # Approximate tokens (text length / 4) for coarse usage estimation only
                     input_tokens = len(system_prompt + full_prompt) // 4
                     output_tokens = len(resp.choices[0].message.content) // 4
                     token_callback(agent_name, model, input_tokens, output_tokens)
@@ -3297,15 +3299,23 @@ class ChatSession:
         self.default_agent: str = 'claude'
         
         # Initialize token tracking
+        # Delayed import is intentional to avoid potential circular imports and
+        # to keep module import time low; this code runs only when a session is created.
         from utils.token_stats import TokenStats
         self.token_stats: TokenStats = TokenStats()
         
         # Initialize rate limiter
+        # Imported here for the same reasons as TokenStats: to avoid circular
+        # dependencies and unnecessary work at module import time.
         from utils.rate_limiter import RateLimiter
-        rate_limit_config = config.get('rate_limits', default={'enabled': False})
+        rate_limit_config = config.get('rate_limits', default=None)
+        if rate_limit_config is None:
+            rate_limit_config = {'enabled': False}
         self.rate_limiter: RateLimiter = RateLimiter(rate_limit_config)
         
         # Initialize session manager
+        # SessionManager depends on runtime configuration and is imported lazily
+        # within __init__ to minimize top-level import graph complexity.
         from core.session_manager import SessionManager
         self.session_manager: SessionManager = SessionManager()
         
@@ -4334,15 +4344,17 @@ Dependencies:
             print(c("Please provide a task for the agent", Colors.YELLOW))
             return
         
-        # Get agent model for rate limiting
+        # Get agent config for rate limiting checks
         agent_config = self.agent_mgr.resolve_agent(agent_name)
         if not agent_config:
             print(c(f"Unknown agent: {agent_name}", Colors.RED))
             return
         
-        model = agent_config.get('model', '')
-        
         # Check rate limit before calling (estimate based on prompt length)
+        # NOTE: This is a rough heuristic estimate (chars/4 + expected response overhead).
+        # The actual token count is recorded after the API call via the callback below.
+        # There may be drift between estimated and actual usage during rate limit checks,
+        # which could allow slightly over-limit requests or reject near-limit requests.
         estimated_tokens = len(prompt) // 4 + 1000  # Rough estimate including expected response
         allowed, rate_msg = self.rate_limiter.check_limit(agent_name, estimated_tokens)
         

@@ -1056,9 +1056,6 @@ def print_install_help(results):
         print("No build systems detected. No dependencies to install.")
         return
     
-    # Detect OS (for recommendation)
-    system = platform.system().lower()
-    
     # Common package mappings (dependency name -> package names for different systems)
     # Format: {dependency_name: {'apt': 'package', 'yum': 'package', 'brew': 'package', 'pacman': 'package'}}
     package_mappings = {
@@ -1121,8 +1118,12 @@ def print_install_help(results):
         
         # Add detected dependencies
         for dep in project.get('dependencies', []):
-            # Normalize dependency name (lowercase, remove version specifiers)
-            dep_name = dep.lower().split()[0].split('>=')[0].split('==')[0].strip()
+            # Normalize dependency name: lowercase and extract leading name chars,
+            # keeping symbols like '+' that are significant in some names (e.g., 'gtk+')
+            import re
+            raw_dep = dep.lower().strip()
+            match = re.match(r'[a-z0-9_.+\-]+', raw_dep)
+            dep_name = match.group(0) if match else raw_dep
             all_deps.add(dep_name)
     
     # Print header
@@ -1168,7 +1169,8 @@ def print_install_help(results):
         if pkg:
             yum_packages.append(pkg)
         else:
-            yum_packages.append(dep + '-devel' if dep not in ['autoconf', 'automake', 'cmake', 'meson'] else dep)
+            # Fallback: use dep name directly without adding suffix
+            yum_packages.append(dep)
     
     if yum_packages:
         print("Fedora/RHEL/CentOS (YUM/DNF):")

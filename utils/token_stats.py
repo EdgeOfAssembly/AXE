@@ -22,6 +22,9 @@ MODEL_PRICING = {
     'gpt-3.5-turbo': (0.50, 1.50),                # GPT-3.5 Turbo
     
     # xAI Grok models (per 1M tokens)
+    # NOTE: These values are estimates based on initial pricing announcements.
+    #       Verify against actual xAI pricing at https://x.ai/api before relying
+    #       on these values for billing or financial calculations.
     'grok-4-1-fast': (5.00, 10.00),               # Grok 4.1 Fast (estimated)
     'grok-code-fast': (5.00, 10.00),              # Grok Code Fast
     'grok-2': (5.00, 10.00),                      # Grok 2
@@ -40,7 +43,11 @@ MODEL_PRICING = {
     # DeepSeek models (per 1M tokens)
     'deepseek-ai/DeepSeek-V3.2': (0.27, 1.10),  # Very competitive pricing
     
-    # Qwen/Dashscope models (per 1M tokens, estimated)
+    # Qwen/Dashscope models (per 1M tokens)
+    # NOTE: These values are placeholder estimates only and are not official Dashscope pricing.
+    #       Please verify current pricing against the official Qwen/Dashscope documentation
+    #       at https://www.alibabacloud.com/help/en/dashscope/ before relying on these
+    #       values for billing or financial calculations.
     'Qwen/Qwen3-VL-235B-A22B-Thinking-25700': (2.00, 6.00),
     'Qwen/Qwen3-Coder-480B-A35B-Instruct': (2.00, 6.00),
     'Qwen/Qwen3-VL-235B-A22B-Thinking': (2.00, 6.00),

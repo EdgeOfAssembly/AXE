@@ -6,7 +6,6 @@ Implements sliding window token tracking.
 import time
 from collections import deque
 from typing import Dict, Optional, Tuple
-from datetime import datetime, timedelta
 
 
 class RateLimiter:

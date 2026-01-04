@@ -7,7 +7,6 @@ import os
 import json
 from datetime import datetime
 from typing import Dict, List, Optional, Any
-from pathlib import Path
 
 
 class SessionManager:
@@ -45,6 +44,11 @@ class SessionManager:
             
             # Create filename-safe session name
             safe_name = "".join(c for c in session_name if c.isalnum() or c in ('-', '_'))
+            
+            # Warn if sanitized name differs from input
+            if safe_name != session_name:
+                print(f"Note: Session name '{session_name}' sanitized to '{safe_name}' for filesystem compatibility")
+            
             filepath = os.path.join(self.sessions_dir, f"{safe_name}.json")
             
             with open(filepath, 'w') as f:
@@ -52,7 +56,9 @@ class SessionManager:
             
             return True
         except Exception as e:
+            import traceback
             print(f"Error saving session: {e}")
+            traceback.print_exc()
             return False
     
     def load_session(self, session_name: str) -> Optional[Dict[str, Any]]:
@@ -76,7 +82,9 @@ class SessionManager:
             with open(filepath, 'r') as f:
                 return json.load(f)
         except Exception as e:
+            import traceback
             print(f"Error loading session: {e}")
+            traceback.print_exc()
             return None
     
     def list_sessions(self) -> List[Dict[str, Any]]:
@@ -112,8 +120,9 @@ class SessionManager:
                         'size': os.path.getsize(filepath),
                         'filepath': filepath
                     })
-                except Exception:
-                    # Skip corrupted session files
+                except Exception as e:
+                    # Skip corrupted session files, but warn the user about the issue
+                    print(f"Warning: Skipping corrupted or unreadable session file '{filepath}': {e}")
                     continue
             
             # Sort by timestamp (newest first)
