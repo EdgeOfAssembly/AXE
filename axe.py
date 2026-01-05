@@ -1086,7 +1086,7 @@ class AgentManager:
         return result
     
     def call_agent(self, agent_name: str, prompt: str, context: str = "", 
-                   token_callback=None) -> str:
+                   token_callback=None, system_prompt_override: str = None) -> str:
         """
         Call an agent with a prompt.
         
@@ -1095,6 +1095,7 @@ class AgentManager:
             prompt: User prompt
             context: Optional context to include
             token_callback: Optional callback function(agent_name, model, input_tokens, output_tokens)
+            system_prompt_override: Optional override for system prompt (for optimization)
         
         Returns:
             Agent response text
@@ -1109,7 +1110,7 @@ class AgentManager:
         
         client = self.clients[provider]
         model = agent.get('model', '')
-        system_prompt = agent.get('system_prompt', '')
+        system_prompt = system_prompt_override if system_prompt_override is not None else agent.get('system_prompt', '')
         
         full_prompt = f"{prompt}\n\nContext:\n{context}" if context else prompt
         
@@ -4408,9 +4409,18 @@ Dependencies:
             self.token_stats.add_usage(agent, model, input_tokens, output_tokens)
             self.rate_limiter.add_tokens(agent, input_tokens + output_tokens)
         
-        # Call agent with token tracking
+        # Get optimized system prompt if optimization enabled
+        optimized_prompt = self.get_optimized_system_prompt(agent_name)
+        
+        # Call agent with token tracking and optimized prompt
         print(c(f"\n[{agent_name}] Processing...", Colors.DIM))
-        response: str = self.agent_mgr.call_agent(agent_name, prompt, context, token_callback=token_callback)
+        response: str = self.agent_mgr.call_agent(
+            agent_name, 
+            prompt, 
+            context, 
+            token_callback=token_callback,
+            system_prompt_override=optimized_prompt if optimized_prompt else None
+        )
         
         # Process response for code blocks (READ, EXEC, WRITE)
         processed_response: str = self.response_processor.process_response(response, agent_name)

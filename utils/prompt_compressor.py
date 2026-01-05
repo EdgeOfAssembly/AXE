@@ -18,6 +18,10 @@ class PromptCompressor:
     - Preserve critical directives
     """
     
+    # Common regex pattern for matching until section breaks
+    # Matches content until: double newline, newline + capital letter, or end of string
+    SECTION_END_PATTERN = r'(?=\n\n|\n[A-Z]|\Z)'
+    
     def __init__(self):
         """Initialize the prompt compressor."""
         # Common abbreviations for instructions
@@ -31,10 +35,10 @@ class PromptCompressor:
             'Always remember to': 'Always',
         }
         
-        # Patterns for removable content
+        # Patterns for removable content (using shared pattern)
         self.removable_patterns = [
-            r'(?:For example|Example):.*?(?=\n\n|\n[A-Z]|\Z)',  # Remove examples
-            r'(?:Note|Important):.*?(?=\n\n|\n[A-Z]|\Z)',  # Remove notes
+            rf'(?:For example|Example):.*?{self.SECTION_END_PATTERN}',  # Remove examples
+            rf'(?:Note|Important):.*?{self.SECTION_END_PATTERN}',  # Remove notes
             r'\(.*?\)',  # Remove parenthetical remarks
         ]
     
@@ -129,11 +133,11 @@ class PromptCompressor:
         # Remove all parenthetical remarks
         compressed = re.sub(r'\s*\([^)]*\)', '', compressed)
         
-        # Remove examples entirely
-        compressed = re.sub(r'(?:For example|Example):.*?(?=\n\n|\n[A-Z]|\Z)', '', compressed, flags=re.DOTALL | re.IGNORECASE)
+        # Remove examples entirely (using shared pattern)
+        compressed = re.sub(rf'(?:For example|Example):.*?{self.SECTION_END_PATTERN}', '', compressed, flags=re.DOTALL | re.IGNORECASE)
         
-        # Remove notes
-        compressed = re.sub(r'(?:Note|Important):.*?(?=\n\n|\n[A-Z]|\Z)', '', compressed, flags=re.DOTALL | re.IGNORECASE)
+        # Remove notes (using shared pattern)
+        compressed = re.sub(rf'(?:Note|Important):.*?{self.SECTION_END_PATTERN}', '', compressed, flags=re.DOTALL | re.IGNORECASE)
         
         # Convert bullet lists to comma-separated
         compressed = self._condense_lists(compressed)
@@ -187,7 +191,8 @@ class PromptCompressor:
             
             return result
         
-        pattern = r'((?:Examples?|For example):)\s*(.*?)(?=\n\n|\n[A-Z]|\Z)'
+        # Use shared pattern for consistency
+        pattern = rf'((?:Examples?|For example):)\s*(.*?){self.SECTION_END_PATTERN}'
         return re.sub(pattern, shorten_section, text, flags=re.DOTALL | re.IGNORECASE)
     
     def _condense_lists(self, text: str) -> str:
@@ -278,19 +283,21 @@ class PromptCompressor:
             Compressed prompt
         """
         # Condense workshop tool descriptions
+        # Pattern matches "Workshop tools available:" followed by tool descriptions until double newline or end
         workshop_pattern = r'(Workshop tools available:)(.*?)(?=\n\n|\Z)'
         
         def condense_workshop(match):
             intro = match.group(1)
             tools = match.group(2)
             
-            # Extract tool names and purposes
+            # Extract tool names and purposes from patterns like "/workshop chisel for symbolic execution"
+            # Captures: tool name (word) and purpose (text after "for" or "to")
             tool_info = re.findall(r'/workshop\s+(\w+)[^,;.]*?(?:for|to)\s+([^,;.\n]+)', tools)
             
             if not tool_info:
                 return match.group(0)
             
-            # Create condensed list
+            # Create condensed list in format: name(purpose), name(purpose), ...
             condensed = intro + ' ' + ', '.join(f'{name}({purpose.strip()})' for name, purpose in tool_info[:4])
             if len(tool_info) > 4:
                 condensed += f' +{len(tool_info)-4} more'

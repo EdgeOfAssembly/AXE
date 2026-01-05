@@ -142,8 +142,9 @@ class ContextOptimizer:
         Returns:
             Cleaned content
         """
-        # Remove READ blocks
-        content = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\n\[(?!\[)[A-Z]|\Z)', '', content, flags=re.IGNORECASE | re.DOTALL)
+        # Remove READ blocks - simplified pattern for better reliability
+        # Matches [READ ...] followed by content until double newline or end of string
+        content = re.sub(r'\[READ[^\]]*\].*?(?=\n\n|\Z)', '', content, flags=re.IGNORECASE | re.DOTALL)
         
         # Remove excessive whitespace
         content = re.sub(r'\n{3,}', '\n\n', content)
