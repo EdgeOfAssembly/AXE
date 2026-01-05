@@ -3346,11 +3346,23 @@ class ChatSession:
             self.context_optimizer: ContextOptimizer = ContextOptimizer()
             self.prompt_compressor: PromptCompressor = PromptCompressor()
             self.optimization_mode: str = optimization_config.get('mode', 'balanced')
+            
+            # Track optimization statistics
+            self.optimization_stats: Dict[str, Any] = {
+                'context_optimizations': 0,
+                'total_tokens_saved': 0,
+                'prompt_compressions': 0,
+                'code_truncations': 0,
+                'read_blocks_removed': 0,
+                'last_optimization_savings': 0
+            }
+            
             print(c(f"✓ Token optimization enabled (mode: {self.optimization_mode})", Colors.GREEN))
         else:
             self.context_optimizer: Optional[Any] = None
             self.prompt_compressor: Optional[Any] = None
             self.optimization_mode: str = 'balanced'
+            self.optimization_stats: Dict[str, Any] = {}
         
         # Initialize workshop tools if available
         self.workshop_chisel: Optional[Any] = None
@@ -3405,6 +3417,7 @@ Commands:
   /clear            Clear chat history
   /save             Save current config
   /stats [agent]    Show token usage statistics and cost estimates
+  /tokenopt-stats   Show token optimization statistics (live reporting)
   /session          Session management (save/load/list)
   /prep, /llmprep   Generate LLM-friendly codebase context
   /buildinfo        Analyze build system configuration
@@ -4123,6 +4136,50 @@ Dependencies:
         print(c("\n" + "═" * 60, Colors.CYAN))
         print()
     
+    def handle_tokenopt_stats_command(self) -> None:
+        """Handle /tokenopt-stats command to show token optimization statistics."""
+        if not self.optimization_enabled:
+            print(c("Token optimization is not enabled. Enable it in axe.yaml to see statistics.", Colors.YELLOW))
+            print(c("Set token_optimization.enabled: true", Colors.DIM))
+            return
+        
+        stats = self.optimization_stats
+        
+        # Print header
+        print(c("\n" + "═" * 60, Colors.CYAN))
+        print(c("TOKEN OPTIMIZATION STATISTICS", Colors.CYAN + Colors.BOLD))
+        print(c("═" * 60, Colors.CYAN))
+        
+        print(c(f"\nOptimization Mode: {self.optimization_mode}", Colors.BOLD))
+        
+        # Overall statistics
+        print(c("\nOverall Performance:", Colors.BOLD))
+        total_saved = stats.get('total_tokens_saved', 0)
+        print(f"  Total tokens saved: {c(f'{total_saved:,}', Colors.GREEN)}")
+        print(f"  Context optimizations: {stats.get('context_optimizations', 0)}")
+        print(f"  Prompt compressions: {stats.get('prompt_compressions', 0)}")
+        print(f"  Code truncations: {stats.get('code_truncations', 0)}")
+        print(f"  READ blocks removed: {stats.get('read_blocks_removed', 0)}")
+        
+        if stats.get('last_optimization_savings', 0) > 0:
+            print(c(f"\nLast optimization saved: {stats['last_optimization_savings']:,} tokens", Colors.GREEN))
+        
+        # Calculate session efficiency
+        total_stats = self.token_stats.get_total_stats()
+        total_used = total_stats.get('total', 0)
+        total_saved = stats.get('total_tokens_saved', 0)
+        
+        if total_used > 0:
+            efficiency = (total_saved / (total_used + total_saved)) * 100
+            print(c(f"\nSession Efficiency:", Colors.BOLD))
+            print(f"  Tokens used: {total_used:,}")
+            print(f"  Tokens saved: {total_saved:,}")
+            print(f"  Optimization rate: {c(f'{efficiency:.1f}%', Colors.GREEN)}")
+            print(c(f"  (Without optimization, would have used {total_used + total_saved:,} tokens)", Colors.DIM))
+        
+        print(c("\n" + "═" * 60, Colors.CYAN))
+        print()
+    
     def handle_session_command(self, args: str) -> None:
         """Handle /session command for save/load/list operations."""
         if not args:
@@ -4352,6 +4409,9 @@ Dependencies:
         elif command == '/stats':
             self.handle_stats_command(args)
         
+        elif command == '/tokenopt-stats':
+            self.handle_tokenopt_stats_command()
+        
         elif command == '/session':
             self.handle_session_command(args)
         
@@ -4411,6 +4471,21 @@ Dependencies:
         
         # Get optimized system prompt if optimization enabled
         optimized_prompt = self.get_optimized_system_prompt(agent_name)
+        
+        # Warn if prompt compression is active (code minification)
+        if self.optimization_enabled and optimized_prompt:
+            optimization_config = self.config.get('token_optimization', default={})
+            prompt_config = optimization_config.get('prompt_compression', {})
+            compression_level = prompt_config.get('compression_level', 'balanced')
+            
+            # Show warning for aggressive compression
+            if compression_level == 'aggressive':
+                print(c("⚠️  Caution: Aggressive prompt compression active - system prompts are heavily minified!", Colors.YELLOW))
+            elif compression_level == 'balanced' and len(optimized_prompt) > 0:
+                # Show subtle note for balanced compression (only once per session)
+                if not hasattr(self, '_compression_warned'):
+                    print(c("ℹ️  Note: Prompt compression is active (balanced mode)", Colors.DIM))
+                    self._compression_warned = True
         
         # Call agent with token tracking and optimized prompt
         print(c(f"\n[{agent_name}] Processing...", Colors.DIM))
@@ -4491,6 +4566,13 @@ Dependencies:
             
             new_total = sum(self.context_optimizer.token_counter(m.content) for m in optimized)
             savings = total_tokens - new_total
+            
+            # Track statistics
+            if self.optimization_stats:
+                self.optimization_stats['context_optimizations'] += 1
+                self.optimization_stats['total_tokens_saved'] += savings
+                self.optimization_stats['last_optimization_savings'] = savings
+            
             print(c(f"✓ Saved {savings} tokens ({(savings/total_tokens)*100:.1f}%)", Colors.GREEN))
     
     def get_optimized_system_prompt(self, agent_name: str) -> str:
@@ -4520,6 +4602,11 @@ Dependencies:
                 
                 # Only use compressed if it actually saves tokens
                 if len(compressed) < len(original_prompt) * 0.9:  # At least 10% savings
+                    # Track statistics
+                    if self.optimization_stats:
+                        self.optimization_stats['prompt_compressions'] += 1
+                        savings = (len(original_prompt) - len(compressed)) // 4  # Rough token estimate
+                        self.optimization_stats['total_tokens_saved'] += savings
                     return compressed
         
         return original_prompt
@@ -4544,15 +4631,26 @@ Dependencies:
             return content
         
         cleaned = content
+        original_len = len(content)
         
         # Remove READ blocks if configured
         if response_config.get('remove_read_blocks', True):
+            before_clean = len(cleaned)
             cleaned = self.context_optimizer._clean_message_content(cleaned)
+            after_clean = len(cleaned)
+            if after_clean < before_clean and self.optimization_stats:
+                self.optimization_stats['read_blocks_removed'] += 1
         
         # Truncate code blocks if configured
         if response_config.get('truncate_code_blocks', True):
             max_lines = response_config.get('max_code_lines', 100)
+            before_truncate = len(cleaned)
             cleaned = self.context_optimizer._truncate_code_blocks(cleaned, max_lines=max_lines)
+            after_truncate = len(cleaned)
+            if after_truncate < before_truncate and self.optimization_stats:
+                self.optimization_stats['code_truncations'] += 1
+                savings = (before_truncate - after_truncate) // 4  # Rough token estimate
+                self.optimization_stats['total_tokens_saved'] += savings
         
         return cleaned
     
