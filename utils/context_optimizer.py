@@ -344,7 +344,14 @@ class ContextOptimizer:
         
         Returns:
             Cleaned content
+        
+        Raises:
+            ValueError: If content is None
         """
+        if content is None:
+            raise ValueError("content cannot be None")
+        if not content:
+            return ""
         return self._clean_message_content(content)
     
     def truncate_code(self, content: str, max_lines: int = 50) -> str:
@@ -357,7 +364,16 @@ class ContextOptimizer:
         
         Returns:
             Content with truncated code blocks
+        
+        Raises:
+            ValueError: If content is None or max_lines is not positive
         """
+        if content is None:
+            raise ValueError("content cannot be None")
+        if max_lines <= 0:
+            raise ValueError("max_lines must be positive")
+        if not content:
+            return ""
         return self._truncate_code_blocks(content, max_lines=max_lines)
 
 
