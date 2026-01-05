@@ -3335,6 +3335,22 @@ class ChatSession:
         from core.session_manager import SessionManager
         self.session_manager: SessionManager = SessionManager()
         
+        # Initialize token optimization
+        # Imported lazily to avoid circular dependencies
+        optimization_config = config.get('token_optimization', default={'enabled': False})
+        self.optimization_enabled: bool = optimization_config.get('enabled', False)
+        if self.optimization_enabled:
+            from utils.context_optimizer import ContextOptimizer
+            from utils.prompt_compressor import PromptCompressor
+            self.context_optimizer: ContextOptimizer = ContextOptimizer()
+            self.prompt_compressor: PromptCompressor = PromptCompressor()
+            self.optimization_mode: str = optimization_config.get('mode', 'balanced')
+            print(c(f"✓ Token optimization enabled (mode: {self.optimization_mode})", Colors.GREEN))
+        else:
+            self.context_optimizer: Optional[Any] = None
+            self.prompt_compressor: Optional[Any] = None
+            self.optimization_mode: str = 'balanced'
+        
         # Initialize workshop tools if available
         self.workshop_chisel: Optional[Any] = None
         self.workshop_saw: Optional[Any] = None
@@ -4366,6 +4382,9 @@ Dependencies:
             print(c(f"Unknown agent: {agent_name}", Colors.RED))
             return
         
+        # Apply context optimization if needed
+        self.optimize_context_if_needed(agent_name)
+        
         # Check rate limit before calling (estimate based on prompt length)
         # NOTE: This is a rough heuristic estimate (chars/4 + expected response overhead).
         # The actual token count is recorded after the API call via the callback below.
@@ -4396,13 +4415,136 @@ Dependencies:
         # Process response for code blocks (READ, EXEC, WRITE)
         processed_response: str = self.response_processor.process_response(response, agent_name)
         
-        # Record response
-        self.history.append({'role': agent_name, 'content': processed_response})
+        # Clean response for context if optimization enabled
+        cleaned_response = self.clean_message_for_context(processed_response)
         
-        # Print response
+        # Record response (use cleaned version to save context tokens)
+        self.history.append({'role': agent_name, 'content': cleaned_response})
+        
+        # Print response (use full version for user display)
         print(c(f"\n[{agent_name}]:", Colors.CYAN + Colors.BOLD))
         print(processed_response)
         print()
+    
+    def optimize_context_if_needed(self, agent_name: str) -> None:
+        """
+        Apply context optimization if enabled and needed.
+        
+        Args:
+            agent_name: Name of the agent for context limits
+        """
+        if not self.optimization_enabled or not self.context_optimizer:
+            return
+        
+        # Get agent context window
+        agent = self.agent_mgr.resolve_agent(agent_name)
+        if not agent:
+            return
+        
+        context_window = agent.get('context_window', 100000)
+        optimization_config = self.config.get('token_optimization', default={})
+        context_config = optimization_config.get('context_management', {})
+        
+        if not context_config.get('enabled', True):
+            return
+        
+        max_context = context_config.get('max_context_tokens', 100000)
+        max_context = min(max_context, int(context_window * 0.8))  # Use 80% of available
+        
+        # Convert history to Message objects
+        from utils.context_optimizer import Message
+        messages = []
+        for entry in self.history:
+            role = entry.get('role', 'user')
+            content = entry.get('content', '')
+            messages.append(Message(role=role, content=content))
+        
+        # Check if optimization is needed
+        total_tokens = sum(self.context_optimizer.token_counter(m.content) for m in messages)
+        threshold = context_config.get('summarize_threshold', 0.7)
+        
+        if total_tokens > max_context * threshold:
+            print(c(f"⚡ Optimizing context ({total_tokens} tokens -> {max_context} limit)...", Colors.YELLOW))
+            
+            keep_recent = context_config.get('keep_recent_messages', 10)
+            optimized = self.context_optimizer.optimize_conversation(
+                messages, 
+                max_tokens=max_context,
+                keep_recent=keep_recent,
+                summarize_old=True
+            )
+            
+            # Convert back to history format
+            self.history = []
+            for msg in optimized:
+                self.history.append({'role': msg.role, 'content': msg.content})
+            
+            new_total = sum(self.context_optimizer.token_counter(m.content) for m in optimized)
+            savings = total_tokens - new_total
+            print(c(f"✓ Saved {savings} tokens ({(savings/total_tokens)*100:.1f}%)", Colors.GREEN))
+    
+    def get_optimized_system_prompt(self, agent_name: str) -> str:
+        """
+        Get optimized system prompt for an agent.
+        
+        Args:
+            agent_name: Name of the agent
+        
+        Returns:
+            Optimized system prompt
+        """
+        agent = self.agent_mgr.resolve_agent(agent_name)
+        if not agent:
+            return ""
+        
+        original_prompt = agent.get('system_prompt', '')
+        
+        # Apply compression if enabled
+        if self.optimization_enabled and self.prompt_compressor:
+            optimization_config = self.config.get('token_optimization', default={})
+            prompt_config = optimization_config.get('prompt_compression', {})
+            
+            if prompt_config.get('enabled', True) and prompt_config.get('compress_system_prompts', True):
+                level = prompt_config.get('compression_level', 'balanced')
+                compressed = self.prompt_compressor.compress(original_prompt, level=level)
+                
+                # Only use compressed if it actually saves tokens
+                if len(compressed) < len(original_prompt) * 0.9:  # At least 10% savings
+                    return compressed
+        
+        return original_prompt
+    
+    def clean_message_for_context(self, content: str) -> str:
+        """
+        Clean message content for inclusion in context.
+        
+        Args:
+            content: Original message content
+        
+        Returns:
+            Cleaned content
+        """
+        if not self.optimization_enabled or not self.context_optimizer:
+            return content
+        
+        optimization_config = self.config.get('token_optimization', default={})
+        response_config = optimization_config.get('response_optimization', {})
+        
+        if not response_config.get('enabled', True):
+            return content
+        
+        cleaned = content
+        
+        # Remove READ blocks if configured
+        if response_config.get('remove_read_blocks', True):
+            cleaned = self.context_optimizer._clean_message_content(cleaned)
+        
+        # Truncate code blocks if configured
+        if response_config.get('truncate_code_blocks', True):
+            max_lines = response_config.get('max_code_lines', 100)
+            cleaned = self.context_optimizer._truncate_code_blocks(cleaned, max_lines=max_lines)
+        
+        return cleaned
     
     def run(self) -> None:
         """Run interactive chat session."""
