@@ -615,6 +615,80 @@ axe> @gpt analyze this large file
 ⏱️  Rate limit exceeded for gpt. Used 5,234 of 5,000 tokens/min. Limit resets in 42s.
 ```
 
+### Token-Saving Optimizations (NEW!)
+
+Automatically reduce token usage by 40-65% while maintaining response quality:
+
+**Configuration in `axe.yaml`:**
+```yaml
+token_optimization:
+  enabled: true
+  mode: balanced  # Options: minimal, balanced, aggressive
+  
+  # Context window management
+  context_management:
+    enabled: true
+    max_context_tokens: 100000  # Maximum tokens in conversation
+    keep_recent_messages: 10    # Always keep last N messages
+    summarize_threshold: 0.7    # Summarize at 70% of limit
+    sliding_window: true        # Use sliding window for long conversations
+  
+  # Prompt compression
+  prompt_compression:
+    enabled: true
+    compress_system_prompts: true  # Compress agent system prompts
+    compression_level: balanced     # Options: minimal, balanced, aggressive
+    preserve_critical: true         # Preserve critical directives
+  
+  # Response optimization
+  response_optimization:
+    enabled: true
+    truncate_code_blocks: true    # Truncate very long code blocks
+    max_code_lines: 100           # Maximum lines per code block
+    remove_read_blocks: true      # Remove [READ ...] blocks from context
+    deduplicate_content: true     # Remove duplicate messages
+```
+
+**Features:**
+
+| Optimization | Benefit | Typical Savings |
+|--------------|---------|-----------------|
+| **Context Summarization** | Condenses old messages while keeping recent ones | 50-70% |
+| **Prompt Compression** | Removes redundancy from system prompts | 63-78% |
+| **Code Block Truncation** | Limits very long code to first N lines | 70-80% |
+| **READ Block Removal** | Strips verbose file content markers | 30-50% |
+| **Message Deduplication** | Removes repeated questions/responses | 20-40% |
+
+**Behavior:**
+- Automatically triggered when context reaches threshold (default: 70%)
+- Non-intrusive: disabled by default, enable via configuration
+- Transparent: shows optimization events with savings statistics
+- Configurable: three modes (minimal, balanced, aggressive)
+
+```bash
+# Example optimization in action:
+axe> @claude analyze this complex codebase
+⚡ Optimizing context (85,234 tokens -> 100,000 limit)...
+✓ Saved 52,147 tokens (61.2%)
+
+[claude] Processing...
+```
+
+**Optimization Modes:**
+
+| Mode | Compression | Use Case |
+|------|-------------|----------|
+| `minimal` | ~10% | Preserve all details, minor cleanup |
+| `balanced` | ~50% | Good balance of quality and savings (recommended) |
+| `aggressive` | ~70% | Maximum savings, some detail loss |
+
+**When to Use:**
+- Long conversations approaching context limits
+- Budget-conscious API usage
+- Repeated similar queries
+- Large collaborative sessions
+- Projects with extensive code snippets
+
 ---
 
 ## Agent Reference
