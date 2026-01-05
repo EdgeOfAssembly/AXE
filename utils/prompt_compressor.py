@@ -4,7 +4,7 @@ Reduces system prompt overhead while preserving essential instructions.
 """
 
 import re
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Any
 
 
 class PromptCompressor:
@@ -307,7 +307,7 @@ class PromptCompressor:
         return re.sub(workshop_pattern, condense_workshop, prompt, flags=re.DOTALL | re.IGNORECASE)
 
 
-def calculate_compression_ratio(original: str, compressed: str) -> Dict[str, any]:
+def calculate_compression_ratio(original: str, compressed: str) -> Dict[str, Any]:
     """
     Calculate compression statistics.
     

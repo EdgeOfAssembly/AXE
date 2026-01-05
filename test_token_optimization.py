@@ -101,7 +101,7 @@ def test_code_block_truncation():
         long_code += f"line_{i} = {i}\n"
     long_code += "```"
     
-    truncated = optimizer._truncate_code_blocks(long_code, max_lines=20)
+    truncated = optimizer.truncate_code(long_code, max_lines=20)
     
     original_lines = long_code.count('\n')
     truncated_lines = truncated.count('\n')
@@ -133,7 +133,7 @@ def test_clean_message_content():
     Now I'll analyze it...
     """
     
-    cleaned = optimizer._clean_message_content(message)
+    cleaned = optimizer.clean_content(message)
     
     print(f"  Original length: {len(message)}")
     print(f"  Cleaned length: {len(cleaned)}")

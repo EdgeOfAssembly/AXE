@@ -734,7 +734,7 @@ When prompt compression is active, AXE provides clear warnings:
 ```bash
 # Aggressive mode warning (always shown)
 axe> @claude analyze this code
-⚠️  Caution: Aggressive prompt compression active - system prompts are heavily minified!
+⚠️  Caution: Aggressive prompt compression active - system prompts are heavily compressed!
 
 [claude] Processing...
 

@@ -1102,4 +1102,3 @@ token_optimization:
     cache_identical_prompts: true  # Cache identical system prompts
     deduplicate_context: true      # Remove duplicate context items
     cache_file_reads: true         # Cache file contents to avoid re-reading
-    grok_code: 5000

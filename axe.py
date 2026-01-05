@@ -4483,7 +4483,7 @@ Dependencies:
             
             # Show warning for aggressive compression
             if compression_level == 'aggressive':
-                print(c("⚠️  Caution: Aggressive prompt compression active - system prompts are heavily minified!", Colors.YELLOW))
+                print(c("⚠️  Caution: Aggressive prompt compression active - system prompts are heavily compressed!", Colors.YELLOW))
             elif compression_level == 'balanced' and len(optimized_prompt) > 0:
                 # Show subtle note for balanced compression (only once per session)
                 if not hasattr(self, '_compression_warned'):
@@ -4550,6 +4550,14 @@ Dependencies:
         # Check if optimization is needed
         total_tokens = sum(self.context_optimizer.token_counter(m.content) for m in messages)
         threshold = context_config.get('summarize_threshold', 0.7)
+        
+        # Apply deduplication if configured
+        response_config = optimization_config.get('response_optimization', {})
+        if response_config.get('deduplicate_content', True):
+            before_dedup = len(messages)
+            messages = self.context_optimizer.deduplicate_context(messages)
+            if len(messages) < before_dedup:
+                print(c(f"✓ Deduplicated {before_dedup - len(messages)} duplicate messages", Colors.GREEN))
         
         if total_tokens > max_context * threshold:
             print(c(f"⚡ Optimizing context ({total_tokens} tokens -> {max_context} limit)...", Colors.YELLOW))
@@ -4639,7 +4647,7 @@ Dependencies:
         # Remove READ blocks if configured
         if response_config.get('remove_read_blocks', True):
             before_clean = len(cleaned)
-            cleaned = self.context_optimizer._clean_message_content(cleaned)
+            cleaned = self.context_optimizer.clean_content(cleaned)
             after_clean = len(cleaned)
             if after_clean < before_clean and self.optimization_enabled:
                 self.optimization_stats['read_blocks_removed'] += 1
@@ -4648,7 +4656,7 @@ Dependencies:
         if response_config.get('truncate_code_blocks', True):
             max_lines = response_config.get('max_code_lines', 100)
             before_truncate = len(cleaned)
-            cleaned = self.context_optimizer._truncate_code_blocks(cleaned, max_lines=max_lines)
+            cleaned = self.context_optimizer.truncate_code(cleaned, max_lines=max_lines)
             after_truncate = len(cleaned)
             if after_truncate < before_truncate and self.optimization_enabled:
                 self.optimization_stats['code_truncations'] += 1

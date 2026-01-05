@@ -4,7 +4,7 @@ Reduces token usage through intelligent truncation, summarization, and compressi
 """
 
 import re
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, Any
 from dataclasses import dataclass
 
 
@@ -167,19 +167,19 @@ class ContextOptimizer:
             Content with truncated code blocks
         """
         def truncate_block(match):
-            block = match.group(0)
-            lines = block.split('\n')
-            
-            if len(lines) <= max_lines + 2:  # +2 for fence markers
-                return block
-            
             lang = match.group(1) or ''
+            code_content = match.group(2)
+            lines = code_content.split('\n')
+            
+            if len(lines) <= max_lines:
+                return match.group(0)
+            
             truncated = '\n'.join(lines[:max_lines])
             remaining = len(lines) - max_lines
             return f"```{lang}\n{truncated}\n... ({remaining} more lines omitted for token optimization)\n```"
         
-        # Match code blocks
-        pattern = r'```(\w*)\n(.*?)```'
+        # Match code blocks with proper content capture
+        pattern = r'```(\w*)\n(.*?)\n```'
         return re.sub(pattern, truncate_block, content, flags=re.DOTALL)
     
     def _truncate_to_budget(self, messages: List[Message], max_tokens: int) -> List[Message]:
@@ -334,6 +334,31 @@ class ContextOptimizer:
         
         # Use first 200 chars as fingerprint
         return normalized[:200]
+    
+    def clean_content(self, content: str) -> str:
+        """
+        Public method to clean message content.
+        
+        Args:
+            content: Original message content
+        
+        Returns:
+            Cleaned content
+        """
+        return self._clean_message_content(content)
+    
+    def truncate_code(self, content: str, max_lines: int = 50) -> str:
+        """
+        Public method to truncate code blocks.
+        
+        Args:
+            content: Content with code blocks
+            max_lines: Maximum lines per code block
+        
+        Returns:
+            Content with truncated code blocks
+        """
+        return self._truncate_code_blocks(content, max_lines=max_lines)
 
 
 def create_sliding_window(
@@ -366,7 +391,7 @@ def create_sliding_window(
     return windows
 
 
-def estimate_token_savings(original_tokens: int, optimized_tokens: int) -> Dict[str, any]:
+def estimate_token_savings(original_tokens: int, optimized_tokens: int) -> Dict[str, Any]:
     """
     Calculate token savings statistics.
     
