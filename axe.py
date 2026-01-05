@@ -140,6 +140,9 @@ USE_MAX_COMPLETION_TOKENS = {
     "openai/o4-mini", # ADD THIS
 }
 
+# Token optimization constants
+CHARS_PER_TOKEN = 4  # Rough approximation for token estimation (chars / 4 ≈ tokens)
+
 # Collaborative session constants
 COLLAB_HISTORY_LIMIT = 20      # Max messages to show in conversation history
 COLLAB_CONTENT_LIMIT = 2000    # Max chars per message in history
@@ -3340,6 +3343,17 @@ class ChatSession:
         # Imported lazily to avoid circular dependencies
         optimization_config = config.get('token_optimization', default={'enabled': False})
         self.optimization_enabled: bool = optimization_config.get('enabled', False)
+        
+        # Track optimization statistics (always initialize with consistent structure)
+        self.optimization_stats: Dict[str, Any] = {
+            'context_optimizations': 0,
+            'total_tokens_saved': 0,
+            'prompt_compressions': 0,
+            'code_truncations': 0,
+            'read_blocks_removed': 0,
+            'last_optimization_savings': 0
+        }
+        
         if self.optimization_enabled:
             from utils.context_optimizer import ContextOptimizer
             from utils.prompt_compressor import PromptCompressor
@@ -3347,22 +3361,11 @@ class ChatSession:
             self.prompt_compressor: PromptCompressor = PromptCompressor()
             self.optimization_mode: str = optimization_config.get('mode', 'balanced')
             
-            # Track optimization statistics
-            self.optimization_stats: Dict[str, Any] = {
-                'context_optimizations': 0,
-                'total_tokens_saved': 0,
-                'prompt_compressions': 0,
-                'code_truncations': 0,
-                'read_blocks_removed': 0,
-                'last_optimization_savings': 0
-            }
-            
             print(c(f"✓ Token optimization enabled (mode: {self.optimization_mode})", Colors.GREEN))
         else:
             self.context_optimizer: Optional[Any] = None
             self.prompt_compressor: Optional[Any] = None
             self.optimization_mode: str = 'balanced'
-            self.optimization_stats: Dict[str, Any] = {}
         
         # Initialize workshop tools if available
         self.workshop_chisel: Optional[Any] = None
@@ -4568,7 +4571,7 @@ Dependencies:
             savings = total_tokens - new_total
             
             # Track statistics
-            if self.optimization_stats:
+            if self.optimization_enabled:
                 self.optimization_stats['context_optimizations'] += 1
                 self.optimization_stats['total_tokens_saved'] += savings
                 self.optimization_stats['last_optimization_savings'] = savings
@@ -4603,9 +4606,9 @@ Dependencies:
                 # Only use compressed if it actually saves tokens
                 if len(compressed) < len(original_prompt) * 0.9:  # At least 10% savings
                     # Track statistics
-                    if self.optimization_stats:
+                    if self.optimization_enabled:
                         self.optimization_stats['prompt_compressions'] += 1
-                        savings = (len(original_prompt) - len(compressed)) // 4  # Rough token estimate
+                        savings = (len(original_prompt) - len(compressed)) // CHARS_PER_TOKEN
                         self.optimization_stats['total_tokens_saved'] += savings
                     return compressed
         
@@ -4638,7 +4641,7 @@ Dependencies:
             before_clean = len(cleaned)
             cleaned = self.context_optimizer._clean_message_content(cleaned)
             after_clean = len(cleaned)
-            if after_clean < before_clean and self.optimization_stats:
+            if after_clean < before_clean and self.optimization_enabled:
                 self.optimization_stats['read_blocks_removed'] += 1
         
         # Truncate code blocks if configured
@@ -4647,9 +4650,9 @@ Dependencies:
             before_truncate = len(cleaned)
             cleaned = self.context_optimizer._truncate_code_blocks(cleaned, max_lines=max_lines)
             after_truncate = len(cleaned)
-            if after_truncate < before_truncate and self.optimization_stats:
+            if after_truncate < before_truncate and self.optimization_enabled:
                 self.optimization_stats['code_truncations'] += 1
-                savings = (before_truncate - after_truncate) // 4  # Rough token estimate
+                savings = (before_truncate - after_truncate) // CHARS_PER_TOKEN
                 self.optimization_stats['total_tokens_saved'] += savings
         
         return cleaned
