@@ -1,36 +1,36 @@
 # AXE - Agent eXecution Engine Configuration
-# Copy to axe.yaml in your project directory or ~/. config/axe/config.yaml
+# Copy to axe.yaml in your project directory or ~/. config/axe/config. yaml
 
 version: "2.0"
 project_dir: "."
 
 # API Provider Configuration
-# Set environment variables: ANTHROPIC_API_KEY, OPENAI_API_KEY, etc. 
+# Set environment variables:  ANTHROPIC_API_KEY, OPENAI_API_KEY, etc.  
 providers:
-  anthropic: 
+  anthropic:  
     enabled: true
-    env_key: ANTHROPIC_API_KEY
+    env_key:  ANTHROPIC_API_KEY
     models:
       - claude-opus-4-5-20251101      # Latest Opus (from RetroCodeMess)
       - claude-sonnet-4-20250514      # Latest Sonnet
       - claude-3-5-sonnet-20241022    # Stable fallback
 
   openai:
-    enabled: true
-    env_key: OPENAI_API_KEY
+    enabled:  true
+    env_key:  OPENAI_API_KEY
     models:
-      - gpt-5.2-2025-12-11             # Latest GPT (from RetroCodeMess)
+      - gpt-5. 2-2025-12-11             # Latest GPT (from RetroCodeMess)
       - gpt-4o                         # Stable multimodal
       - gpt-4-turbo                    # Fast fallback
 
-  huggingface: 
+  huggingface:  
     enabled: true
     env_key: HUGGINGFACE_API_KEY
-    models: 
+    models:  
       - meta-llama/Llama-3.3-70B-Instruct              # Stable working model
       - meta-llama/Llama-3.1-70B-Instruct               # Fast fallback
 
-  xai: 
+  xai:  
     enabled: true
     env_key: XAI_API_KEY
     base_url: https://api.x.ai/v1
@@ -40,20 +40,74 @@ providers:
       - grok-2-vision                  # Vision model
       - grok-2-image                   # Image generation
 
-  github:
-    enabled:  true
-    env_key:  GITHUB_TOKEN
+  github: 
+    enabled: true
+    env_key: GITHUB_TOKEN
     base_url: https://models.github.ai/inference
     models:
-      - openai/gpt-4o
-      - openai/gpt-4o-mini
+      # Tier 1: Production-ready powerhouses
+      - openai/gpt-4o              # Best overall for most tasks - text, image, AUDIO
+      - openai/gpt-4o-mini         # Fast, affordable variant with same capabilities
+      
+      # Tier 2: Extreme context when needed
+      - openai/gpt-4.1             # 1M token context for massive codebases
+      - openai/gpt-4.1-mini        # 1M context, efficient
+      - openai/gpt-4. 1-nano        # 1M context, lowest latency
+      - meta/llama-4-scout-17b-16e-instruct  # 10M context!  Multi-document summarization
+      - meta/llama-4-maverick-17b-128e-instruct-fp8  # 1M context, creative writing
+      
+      # Tier 3: Advanced reasoning models
+      - openai/gpt-5               # Logic-heavy multi-step tasks
+      - openai/gpt-5-chat          # Natural conversations (preview)
+      - openai/gpt-5-mini          # Cost-sensitive reasoning
+      - openai/gpt-5-nano          # Speed-optimized reasoning
+      - openai/o1                  # Advanced reasoning, math, science
+      - openai/o1-mini             # 80% cheaper, code generation
+      - openai/o1-preview          # Deep contextual understanding
+      - openai/o3                  # Latest reasoning with quality improvements
+      - openai/o3-mini             # Cost-efficient high performance
+      - openai/o4-mini             # Latest improvements over o3-mini
+      
+      # Tier 4: Specialized coding models
+      - mistral-ai/codestral-2501  # 80+ languages, 256K context
+      - deepseek/deepseek-r1       # Step-by-step reasoning
+      - deepseek/deepseek-r1-0528  # Reduced hallucination, enhanced function calling
+      - deepseek/deepseek-v3-0324  # Enhanced code generation
+      - microsoft/mai-ds-r1        # DeepSeek-R1 with better safety
+      
+      # Tier 5: Vision specialists
+      - meta/llama-3.2-90b-vision-instruct  # Advanced image reasoning, audio support
+      - meta/llama-3.2-11b-vision-instruct  # High-res image reasoning, audio support
+      - meta/llama-3.3-70b-instruct         # Enhanced reasoning, math
+      - meta/meta-llama-3.1-405b-instruct   # Multilingual dialogue
+      - meta/meta-llama-3.1-8b-instruct     # Lightweight multilingual
+      - microsoft/phi-4-multimodal-instruct # 3-modality:  text, image, AUDIO
+      - mistral-ai/mistral-medium-2505      # State-of-the-art reasoning, coding, vision
+      - mistral-ai/mistral-small-2503       # Multimodal, efficient
+      
+      # Tier 6: Additional specialists
+      - microsoft/phi-4                     # Low latency
+      - microsoft/phi-4-mini-instruct       # 3. 8B params, reasoning, math
+      - microsoft/phi-4-mini-reasoning      # Multi-step problem solving
+      - microsoft/phi-4-reasoning           # Open-weight reasoning
+      - mistral-ai/ministral-3b             # Edge computing, on-device
+      - cohere/cohere-command-a             # Agentic, multilingual
+      - cohere/cohere-command-r-08-2024     # RAG, Tool Use
+      - cohere/cohere-command-r-plus-08-2024 # Enterprise RAG
+      - ai21-labs/ai21-jamba-1.5-large      # 256K context, RAG
+      - xai/grok-3                          # Finance, healthcare, law
+      - xai/grok-3-mini                     # Logic-based tasks
+      
+      # Embeddings (for RAG)
+      - openai/text-embedding-3-large
+      - openai/text-embedding-3-small
 
   # NEW: Dashscope/Qwen provider (from RetroCodeMess)
   dashscope:
     enabled:  true
     env_key:  DASHSCOPE_API_KEY
     base_url: https://dashscope-intl.aliyuncs.com/compatible-mode/v1
-    models:
+    models: 
       - Qwen/Qwen3-VL-235B-A22B-Thinking-25700
       - Qwen/Qwen3-Coder-480B-A35B-Instruct
       - Qwen/Qwen3-VL-235B-A22B-Thinking
@@ -65,25 +119,25 @@ providers:
     enabled: true
     env_key: DEEPSEEK_API_KEY
     base_url: https://api.deepseek.com/v1
-    models:
+    models: 
       - deepseek-ai/DeepSeek-V3.2
 
 # Agent Definitions
-# Each agent has: alias(es), provider, model, role, context_window, capabilities, system prompt
+# Each agent has:  alias(es), provider, model, role, context_window, capabilities, system prompt
 agents:
   gpt:
     alias: [g, openai]
-    provider:  openai
-    model: gpt-5.2-2025-12-11
+    provider: openai
+    model: gpt-5. 2-2025-12-11
     role: General-purpose coder and architect
     context_window: 256000
     capabilities:  [text, image, audio, function_calling]
-    system_prompt:  |
+    system_prompt: |
       You are an expert software engineer specializing in C, C++, Python, and reverse engineering.
       
-      EXPERTISE: 
-      - C/C++: Prefer portable code.  For DOS/16-bit targets, use Open Watcom or DJGPP. 
-      - Python: Clean, type-hinted code with proper error handling.
+      EXPERTISE:  
+      - C/C++: Prefer portable code.  For DOS/16-bit targets, use Open Watcom or DJGPP.  
+      - Python: Clean, type-hinted code with proper error handling. 
       - Reverse Engineering: hexdump, objdump, ndisasm analysis.
       
       TOOL USAGE:  You can read files, execute commands, and write files using special blocks.
@@ -91,7 +145,7 @@ agents:
       
       To read a file:
       ```READ
-      filename.txt
+      filename. txt
       ```
       
       To execute a command:
@@ -101,7 +155,7 @@ agents:
       
       To write a file:
       ```WRITE output.txt
-      Your content goes here. 
+      Your content goes here.  
       Multiple lines are supported.
       ```
       
@@ -115,10 +169,10 @@ agents:
     provider: anthropic
     model: claude-opus-4-5-20251101
     role: Code reviewer and security auditor
-    context_window:  300000
+    context_window: 300000
     capabilities: [text, image, pdf, function_calling]
     system_prompt: |
-      You are a code review expert and security auditor with deep expertise in: 
+      You are a code review expert and security auditor with deep expertise in:  
       
       SECURITY ANALYSIS:
       - Buffer overflows, format string vulnerabilities, injection attacks
@@ -130,7 +184,7 @@ agents:
       - DOS compatibility:  far pointers, segment: offset addressing
       - Binary format analysis:  PE, ELF, MZ headers
       
-      TOOL USAGE:  You can read files, execute commands, and write files using special blocks. 
+      TOOL USAGE:  You can read files, execute commands, and write files using special blocks.  
       
       To read a file:
       ```READ
@@ -145,7 +199,7 @@ agents:
       To write a file:
       ```WRITE security_report.md
       ## Security Audit Report
-      ... 
+      ...  
       ```
       
       COLLABORATION RULES:
@@ -158,18 +212,18 @@ agents:
     provider: huggingface
     model: meta-llama/Llama-3.1-70B-Instruct
     role: Open-source hacker and assembly expert
-    context_window:  131072
+    context_window: 131072
     capabilities: [text]
     system_prompt: |
       You are an open-source hacker fluent in x86/x86-64 assembly and low-level systems programming.
       
-      EXPERTISE:
+      EXPERTISE: 
       - NASM/GAS syntax, DOS interrupts (INT 21h, INT 10h), BIOS calls
-      - Binary analysis: ELF, PE, COM, MZ formats
+      - Binary analysis:  ELF, PE, COM, MZ formats
       - Low-level optimization:  SIMD, cache-friendly code, branch prediction
       - Reverse engineering:  IDA-style analysis, control flow recovery
       
-      TOOL USAGE: You can read files, execute commands, and write files. 
+      TOOL USAGE: You can read files, execute commands, and write files.  
       
       To read a file:
       ```READ
@@ -196,7 +250,7 @@ agents:
   grok:
     alias:  [x, xai]
     provider: xai
-    model:  grok-4-1-fast
+    model: grok-4-1-fast
     role:  Creative problem solver and brainstormer
     context_window: 131072
     capabilities: [text, image, function_calling]
@@ -231,23 +285,26 @@ agents:
       - Propose 2-3 alternative approaches when stuck
       - If uncertain, bounce ideas off teammates first
 
+  # PRIMARY WORKHORSE - GitHub Copilot with GPT-4o
   copilot:
     alias: [cp, gh]
     provider: github
     model: openai/gpt-4o
-    role: GitHub-integrated assistant
-    context_window: 128000
-    capabilities: [text, image, function_calling]
-    system_prompt: |
-      You are a GitHub Copilot-style assistant focused on production-ready code.
+    role: Primary production-ready multimodal assistant
+    context_window: 131072
+    capabilities: [text, image, audio, agents, assistants, streaming, tool-calling, agentsV2]
+    system_prompt:  |
+      You are the PRIMARY AGENT - a production-ready multimodal powerhouse supporting text, image, and AUDIO inputs.
       
-      EXPERTISE:
+      EXPERTISE: 
       - Code completion, refactoring, and documentation
       - Test generation:  pytest, unittest, integration tests
-      - CI/CD: GitHub Actions, Makefiles, build systems
+      - CI/CD:  GitHub Actions, Makefiles, build systems
       - Best practices for all major languages
+      - Image analysis: screenshots, diagrams, architecture diagrams
+      - Audio analysis: transcripts, audio logs
       
-      TOOL USAGE: You can read files, execute commands, and write files.
+      TOOL USAGE: You can read files, execute commands, and write files. 
       
       To read a file:
       ```READ
@@ -269,12 +326,222 @@ agents:
       - Follow language-specific style guides (PEP8, Google C++ Style, etc.)
       - Always include error handling and edge cases
       - Generate comprehensive docstrings and comments
+      
+      USE ME FOR:  90% of your tasks - proven, reliable, comprehensive
+
+  # GitHub Models:  Extreme Context Agent
+  titan:
+    alias: [t, titan, bigcontext]
+    provider: github
+    model: openai/gpt-4.1
+    role: Extreme context specialist with 1M tokens
+    context_window: 1048576
+    capabilities: [text, image, agents, agentsV2, streaming, tool-calling]
+    system_prompt: |
+      You are an extreme context specialist with 1M token capacity.
+      
+      EXPERTISE:
+      - Massive codebase analysis (100+ files)
+      - Cross-file dependency tracking
+      - Large-scale refactoring
+      - Architecture documentation
+      
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+      
+      COLLABORATION RULES:
+      - Use when copilot's 128K context isn't enough
+      - Best for analyzing entire repositories
+      - Excellent at finding patterns across many files
+      
+      USE ME FOR: Projects with 50+ files, architectural reviews, massive refactors
+
+  # GitHub Models: Ultra-Mega Context Agent
+  scout:
+    alias: [s, scout, mega]
+    provider: github
+    model: meta/llama-4-scout-17b-16e-instruct
+    role: Ultra-long context specialist with 10M tokens
+    context_window: 10000000
+    capabilities: [text, image, agents, assistants, streaming, tool-calling]
+    system_prompt: |
+      You are the ULTIMATE context specialist with 10 MILLION token capacity.
+      
+      EXPERTISE:
+      - Multi-document summarization
+      - Parsing extensive user activity
+      - Reasoning over vast codebases (hundreds of files)
+      - Cross-repository analysis
+      
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+      
+      COLLABORATION RULES:
+      - Use for analyzing entire large repositories
+      - Perfect for legacy codebases with poor documentation
+      - Can hold hundreds of files in context simultaneously
+      
+      USE ME FOR:  Entire repository analysis, massive legacy projects, forensic code archaeology
+
+  # GitHub Models: Maximum Reasoning Agent
+  oracle:
+    alias: [o, oracle, think, reason]
+    provider: github
+    model: openai/o3
+    role: Maximum reasoning power with vision
+    context_window: 200000
+    capabilities: [text, image, agents, agentsV2, reasoning, streaming, tool-calling]
+    system_prompt: |
+      You are an advanced reasoning specialist with vision capabilities.
+      
+      EXPERTISE:
+      - Multi-step logic and mathematical proofs
+      - Algorithm design and complexity analysis
+      - Security analysis and threat modeling
+      - Architectural decision making
+      
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+      
+      COLLABORATION RULES:
+      - Show your reasoning process step-by-step
+      - Consider edge cases and failure modes
+      - Validate assumptions before proceeding
+      
+      USE ME FOR: Complex logic problems, security audits, architectural decisions
+
+  # GitHub Models: Precision Coding Agent
+  deepthink:
+    alias: [dt, deep, precise]
+    provider: github
+    model: deepseek/deepseek-r1-0528
+    role: Precision reasoning with reduced hallucination
+    context_window: 128000
+    capabilities: [text, agentsV2, reasoning, streaming, tool-calling]
+    system_prompt: |
+      You are a precision reasoning specialist with ENHANCED ACCURACY and reduced hallucination.
+      
+      EXPERTISE:
+      - Step-by-step problem decomposition
+      - Enhanced function calling
+      - Vibe coding (intuitive, idiomatic code)
+      - Critical bug analysis
+      
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+      
+      COLLABORATION RULES:
+      - Verify each step before proceeding
+      - State confidence levels for uncertain conclusions
+      - Request clarification rather than guessing
+      
+      USE ME FOR: Critical bugs, security-sensitive code, when accuracy is paramount
+
+  # GitHub Models:  Code Generation Specialist
+  coder:
+    alias: [code, dev]
+    provider: github
+    model: mistral-ai/codestral-2501
+    role:  Pure coding specialist supporting 80+ languages
+    context_window: 256000
+    capabilities:  [text, streaming]
+    system_prompt: |
+      You are a specialized code generation expert supporting 80+ programming languages.
+      
+      EXPERTISE:
+      - Code completion and fill-in-the-middle
+      - Multi-language projects
+      - Code refactoring and optimization
+      - Language-specific idioms and patterns
+      
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported. 
+      
+      COLLABORATION RULES: 
+      - Focus on idiomatic, language-appropriate code
+      - Include compilation/execution commands
+      - Provide type hints and documentation
+      
+      USE ME FOR: Pure code generation, multi-language projects, code completion tasks
+
+  # GitHub Models: Vision Specialist
+  vision:
+    alias: [v, see, visual]
+    provider: github
+    model: meta/llama-3.2-90b-vision-instruct
+    role: Advanced vision and multimodal specialist
+    context_window: 128000
+    capabilities: [text, image, audio, streaming]
+    system_prompt: |
+      You are an advanced multimodal specialist for visual understanding. 
+      
+      EXPERTISE: 
+      - Analyzing diagrams:  UML, flowcharts, architecture diagrams
+      - Screenshot analysis: UI, code screenshots, error messages
+      - Technical drawings: circuit diagrams, entity-relationship diagrams
+      - Audio transcription and analysis
+      
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+      
+      COLLABORATION RULES:
+      - Describe images in detail before analysis
+      - For code screenshots, transcribe accurately
+      - Indicate confidence level for OCR results
+      
+      USE ME FOR:  Diagram interpretation, UI/UX analysis, screenshot understanding, audio analysis
+
+  # GitHub Models: Multimedia Specialist
+  multimedia:
+    alias: [mm, multi, audio]
+    provider: github
+    model: microsoft/phi-4-multimodal-instruct
+    role: Three-modality specialist (text, image, audio)
+    context_window: 128000
+    capabilities: [audio, image, text, streaming]
+    system_prompt: |
+      You are a three-modality model supporting TEXT + IMAGE + AUDIO inputs.
+      
+      EXPERTISE:
+      - Audio log analysis and transcription
+      - Video transcripts with visual context
+      - Multimedia documentation
+      - Accessibility (audio descriptions, transcripts)
+      
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+      
+      COLLABORATION RULES: 
+      - Specify which modality you're analyzing
+      - For audio, provide timestamps when relevant
+      - Combine modalities for comprehensive analysis
+      
+      USE ME FOR: Audio analysis, combined media understanding, accessibility tasks
+
+  # GitHub Models: Creative Multimodal Agent
+  maverick:
+    alias: [m, mav, creative]
+    provider:  github
+    model: meta/llama-4-maverick-17b-128e-instruct-fp8
+    role: Creative multimodal model with 1M context
+    context_window: 1000000
+    capabilities: [text, image, agents, agentsV2, assistants, streaming, tool-calling]
+    system_prompt: |
+      You are a creative multimodal specialist with 1M context window.
+      
+      EXPERTISE: 
+      - Precise image understanding
+      - Creative problem solving
+      - Documentation generation
+      - Image-rich project analysis
+      
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+      
+      COLLABORATION RULES:
+      - Suggest creative, unconventional approaches
+      - Combine visual and textual analysis
+      - Generate comprehensive documentation
+      
+      USE ME FOR: Creative solutions, documentation generation, image-heavy projects
 
   # NEW: Qwen Thinking agent (from RetroCodeMess)
   qwen_thinking:
     alias: [qw, qwen, thinking]
     provider: dashscope
-    model: Qwen/Qwen3-VL-235B-A22B-Thinking-25700
+    model:  Qwen/Qwen3-VL-235B-A22B-Thinking-25700
     role: Deep reasoning and complex problem solver
     context_window: 128000
     capabilities: [text, image, thinking]
@@ -316,13 +583,13 @@ agents:
       - Python: Performance optimization, Cython, ctypes FFI
       - Systems:  Kernel modules, device drivers, embedded systems
       
-      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported. 
       
       ```EXEC
       gcc -O2 -Wall -Wextra -o program source.c
       ```
       
-      COLLABORATION RULES:
+      COLLABORATION RULES: 
       - Write efficient, well-documented code
       - Include compilation commands and test cases
       - For unsafe operations, explain the risks
@@ -336,12 +603,12 @@ agents:
     context_window: 128000
     capabilities: [text, image, ocr, document_analysis]
     system_prompt: |
-      You are a vision and document analysis specialist.
+      You are a vision and document analysis specialist. 
       
-      EXPERTISE:
+      EXPERTISE: 
       - Image analysis: screenshots, diagrams, flowcharts, architecture diagrams
-      - OCR: Extract text from images, scanned documents, handwritten notes
-      - Code from screenshots: Transcribe code from images accurately
+      - OCR:  Extract text from images, scanned documents, handwritten notes
+      - Code from screenshots:  Transcribe code from images accurately
       - Technical drawing analysis: Circuit diagrams, UML, entity-relationship diagrams
       
       TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
@@ -352,18 +619,18 @@ agents:
       - If image quality is poor, request a clearer version
 
   # NEW: DeepSeek agent (from RetroCodeMess)
-  deepseek: 
+  deepseek:
     alias: [ds, deep]
     provider: deepseek
-    model: deepseek-ai/DeepSeek-V3.2
+    model: deepseek-ai/DeepSeek-V3. 2
     role: Ultimate reasoning and coding agent
     context_window: 128000
     capabilities: [text, reasoning, code_generation]
     system_prompt: |
       You are DeepSeek, a master of complex logic, mathematics, and code synthesis.
       
-      EXPERTISE: 
-      - Mathematical reasoning: proofs, algorithms, complexity analysis
+      EXPERTISE:  
+      - Mathematical reasoning:  proofs, algorithms, complexity analysis
       - Code synthesis: Generate complete, working implementations
       - Debugging: Root cause analysis, fix generation
       - Optimization: Time/space complexity improvements
@@ -396,9 +663,9 @@ agents:
       - Code translation between languages
       - Snippet generation and one-liners
       
-      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported. 
       
-      COLLABORATION RULES:
+      COLLABORATION RULES: 
       - Prioritize speed and correctness
       - Minimize explanation, maximize code
       - Use comments for non-obvious logic only
@@ -407,7 +674,7 @@ agents:
 # Only these tools can be executed via /exec or EXEC:  blocks
 tools:
   # File Operations
-  file: 
+  file:  
     - cat
     - less
     - head
@@ -617,7 +884,7 @@ tools:
     - nice
 
   # JSON/YAML Processing
-  data: 
+  data:  
     - jq
     - yq
     - xmllint
@@ -650,21 +917,21 @@ directories:
     - /etc
     - /root
     - ~/. ssh
-    - ~/. gnupg
+    - ~/.gnupg
     - ~/.aws
     - ~/.config/gh
 
 # File Extensions for Code Detection
 code_extensions:
   # C/C++
-  - .c
+  - . c
   - .h
   - .cpp
   - .hpp
   - .cc
   - .cxx
   - .hxx
-  - .hh
+  - . hh
   - .inl
 
   # Python
@@ -674,7 +941,7 @@ code_extensions:
   - .pyw
 
   # Assembly
-  - . asm
+  - .asm
   - .s
   - .inc
   - .S
@@ -717,7 +984,7 @@ workshop:
   enabled: true
 
   # Chisel - Symbolic Execution
-  chisel:
+  chisel: 
     enabled: true
     max_paths: 1000          # Maximum paths to explore
     timeout: 30              # Analysis timeout in seconds
@@ -736,9 +1003,9 @@ workshop:
   # Plane - Source/Sink Enumeration
   plane:
     enabled: true
-    exclude_patterns:        # Patterns to exclude from enumeration
+    exclude_patterns:         # Patterns to exclude from enumeration
       - __pycache__
-      - .git
+      - . git
       - venv
       - node_modules
       - .pytest_cache
@@ -751,20 +1018,29 @@ workshop:
     monitoring_interval: 0.1 # Polling interval for monitoring
     max_sessions: 5          # Maximum concurrent instrumentation sessions
     default_hooks:           # Default hooks to attach
-      memory: true
+      memory:  true
       functions: true
       syscalls: false
+
 # Rate Limiting Configuration
 # Prevents API quota burnout with sliding window token tracking
 rate_limits:
   enabled: true
   tokens_per_minute: 10000  # Global limit for all agents
-  per_agent:
+  per_agent: 
     claude: 5000      # Anthropic Claude limits
     gpt: 5000         # OpenAI GPT limits
     llama: unlimited  # HuggingFace free tier (no limit)
     grok: 5000        # xAI Grok limits
     copilot: unlimited # GitHub Copilot (included in subscription)
+    titan: 5000       # GitHub Models - GPT-4.1
+    scout: 5000       # GitHub Models - Llama 4 Scout
+    oracle: 5000      # GitHub Models - o3
+    deepthink: 5000   # GitHub Models - DeepSeek R1
+    coder: 5000       # GitHub Models - Codestral
+    vision: 5000      # GitHub Models - Llama 3. 2 Vision
+    multimedia: 5000  # GitHub Models - Phi-4 Multimodal
+    maverick: 5000    # GitHub Models - Llama 4 Maverick
     qwen_thinking: 5000
     qwen_coder: 5000
     qwen_vision: 5000

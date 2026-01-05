@@ -1,8 +1,10 @@
 openai
 anthropic
 huggingface_hub
+gnureadline
 requests
 pyyaml
 angr
-frida-python
+frida
 psutil
+zstandard

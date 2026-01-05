@@ -115,13 +115,29 @@ except ImportError:
 # GPT-5 and future models use the new parameter name
 USE_MAX_COMPLETION_TOKENS = {
     "gpt-5",
-    "gpt-5-0806", 
+    "gpt-5-0806",  
     "gpt-5.2-2025-12-11",
     "gpt-5.2",
+    "gpt-5-chat",     # ADD THIS
+    "gpt-5-mini",     # ADD THIS
+    "gpt-5-nano",     # ADD THIS
     "o1-preview",
     "o1-mini",
     "o1",
-    "o3-mini"
+    "o3",             # ADD THIS - THIS IS THE ONE CAUSING YOUR ERROR!
+    "o3-mini",
+    "o4-mini",        # ADD THIS
+    # GitHub Models variants (with openai/ prefix)
+    "openai/gpt-5",   # ADD THIS
+    "openai/gpt-5-chat",  # ADD THIS
+    "openai/gpt-5-mini",  # ADD THIS
+    "openai/gpt-5-nano",  # ADD THIS
+    "openai/o1",      # ADD THIS
+    "openai/o1-preview",  # ADD THIS
+    "openai/o1-mini", # ADD THIS
+    "openai/o3",      # ADD THIS - CRITICAL FIX!
+    "openai/o3-mini", # ADD THIS
+    "openai/o4-mini", # ADD THIS
 }
 
 # Collaborative session constants
