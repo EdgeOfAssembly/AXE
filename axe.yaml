@@ -1045,4 +1045,60 @@ rate_limits:
     qwen_coder: 5000
     qwen_vision: 5000
     deepseek: 5000
-    grok_code: 5000
+
+# Token-Saving Optimizations (NEW!)
+# Reduce token usage while maintaining quality
+token_optimization:
+  enabled: true
+  mode: balanced  # Options: minimal, balanced, aggressive
+  
+  # Context window management
+  context_management:
+    enabled: true
+    max_context_tokens: 100000  # Maximum tokens in conversation context
+    keep_recent_messages: 10    # Always keep last N messages
+    summarize_threshold: 0.7    # Summarize when reaching 70% of context limit
+    sliding_window: true        # Use sliding window for long conversations
+  
+  # Prompt compression
+  prompt_compression:
+    enabled: true
+    compress_system_prompts: true  # Compress agent system prompts
+    compression_level: balanced     # Options: minimal, balanced, aggressive
+    preserve_critical: true         # Always preserve critical directives
+  
+  # Response optimization
+  response_optimization:
+    enabled: true
+    truncate_code_blocks: true    # Truncate very long code blocks
+    max_code_lines: 100           # Maximum lines per code block before truncation
+    remove_read_blocks: true      # Remove [READ ...] blocks from context
+    deduplicate_content: true     # Remove duplicate messages
+  
+  # Collaborative session optimizations
+  collab_optimization:
+    enabled: true
+    history_limit: 15             # Maximum messages in collab history
+    content_limit: 1500           # Maximum characters per message in history
+    shared_notes_limit: 400       # Maximum characters of shared notes
+  
+  # Automatic summarization
+  auto_summarize:
+    enabled: true
+    trigger_at_percent: 70        # Trigger summarization at N% context usage
+    summary_max_tokens: 500       # Maximum tokens in summaries
+    preserve_critical_msgs: true  # Keep important messages even when summarizing
+  
+  # Token budget controls
+  budget_controls:
+    enabled: true
+    per_message_limit: 4000       # Maximum tokens per agent message
+    warn_at_percent: 80           # Warn when approaching limits
+    force_optimization_at: 90     # Force aggressive optimization at N%
+  
+  # Caching and deduplication
+  caching:
+    enabled: true
+    cache_identical_prompts: true  # Cache identical system prompts
+    deduplicate_context: true      # Remove duplicate context items
+    cache_file_reads: true         # Cache file contents to avoid re-reading
