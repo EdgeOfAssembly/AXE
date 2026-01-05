@@ -450,6 +450,7 @@ axe> @llama check for DOS compatibility issues in this code
 | `/clear` | Clear chat history | `/clear` |
 | `/save` | Save current config | `/save` |
 | `/stats [agent]` | Show token usage and cost estimates | `/stats` or `/stats gpt` |
+| `/tokenopt-stats` | Show token optimization statistics | `/tokenopt-stats` |
 | `/session save <name>` | Save current session | `/session save my-session` |
 | `/session load <name>` | Load a saved session | `/session load my-session` |
 | `/session list` | List all saved sessions | `/session list` |
@@ -688,6 +689,63 @@ axe> @claude analyze this complex codebase
 - Repeated similar queries
 - Large collaborative sessions
 - Projects with extensive code snippets
+
+#### Live Statistics & Monitoring
+
+Track optimization performance in real-time with `/tokenopt-stats`:
+
+```bash
+axe> /tokenopt-stats
+# Output:
+# ═══════════════════════════════════════════════════════════
+# TOKEN OPTIMIZATION STATISTICS
+# ═══════════════════════════════════════════════════════════
+# 
+# Optimization Mode: balanced
+# 
+# Overall Performance:
+#   Total tokens saved: 12,456
+#   Context optimizations: 3
+#   Prompt compressions: 8
+#   Code truncations: 5
+#   READ blocks removed: 2
+# 
+# Last optimization saved: 2,341 tokens
+# 
+# Session Efficiency:
+#   Tokens used: 8,234
+#   Tokens saved: 12,456
+#   Optimization rate: 60.2%
+#   (Without optimization, would have used 20,690 tokens)
+# ═══════════════════════════════════════════════════════════
+```
+
+**Monitored Operations:**
+- Context optimizations (sliding window, summarization)
+- System prompt compressions
+- Code block truncations
+- READ block removals
+- Total tokens saved across all operations
+
+#### Compression Warnings
+
+When prompt compression is active, AXE provides clear warnings:
+
+```bash
+# Aggressive mode warning (always shown)
+axe> @claude analyze this code
+⚠️  Caution: Aggressive prompt compression active - system prompts are heavily minified!
+
+[claude] Processing...
+
+# Balanced mode notification (shown once per session)
+axe> @gpt write a function
+ℹ️  Note: Prompt compression is active (balanced mode)
+
+[gpt] Processing...
+```
+
+This ensures you're always aware when code/prompts are being optimized, helping you understand agent behavior.
 
 ---
 
