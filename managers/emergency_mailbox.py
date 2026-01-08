@@ -133,19 +133,25 @@ This message was encrypted by the agent and can only be read by the human operat
                         'path': filepath
                     })
         except (OSError, PermissionError):
+            # If the mailbox directory cannot be read (missing, permission denied, etc.),
+            # we intentionally return an empty list rather than raising, so that the
+            # rest of the system continues to function even when no reports are visible.
             pass
 
         return sorted(reports, key=lambda x: x['created'], reverse=True)
 
-    def decrypt_report(self, filename: str) -> Optional[str]:
+    def decrypt_report(self, filename: str, private_key: Optional[str] = None) -> Optional[str]:
         """
         Decrypt a report (for human use only).
         
         Note: In production, this would use GPG with the human's private key.
         The current implementation returns a placeholder message since
         proper GPG decryption requires external tools and the private key.
+        
+        Args:
+            filename: Name of the report file to decrypt
+            private_key: Optional private key for GPG decryption (not yet implemented)
         """
-        # Future: Add 'private_key: Optional[str] = None' parameter for GPG decryption
         filepath = os.path.join(self.mailbox_dir, filename)
 
         try:
@@ -157,8 +163,8 @@ This message was encrypted by the agent and can only be read by the human operat
             end = content.find('-----END ENCRYPTED MESSAGE-----')
             encoded = content[start:end].strip()
 
-            # Decode (simple fallback - in production use GPG)
-            encrypted_bytes = base64.b64decode(encoded)
+            # Decode (simple fallback - in production use GPG with private_key)
+            _ = base64.b64decode(encoded)  # Validate encoding
 
             # Extract timestamp from first line to regenerate key
             # This is simplified - real implementation would use GPG

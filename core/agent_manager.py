@@ -126,7 +126,7 @@ class AgentManager:
         return result
 
     def call_agent(self, agent_name: str, prompt: str, context: str = "",
-                   token_callback: Optional[Callable] = None,
+                   token_callback: Optional[Callable[[str, str, int, int], None]] = None,
                    system_prompt_override: Optional[str] = None) -> str:
         """
         Call an agent with a prompt.

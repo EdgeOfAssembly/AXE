@@ -10,7 +10,7 @@ Manages coffee/play breaks for agents with the following rules:
 
 import uuid
 from datetime import datetime, timedelta, timezone
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 
 from core.constants import MAX_BREAK_MINUTES
 from database.agent_db import AgentDatabase

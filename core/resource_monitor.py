@@ -53,7 +53,8 @@ def resource_monitor_thread():
             try:
                 with open(RESOURCE_FILE, 'a') as f:
                     f.write(f"\n\nError in resource monitor: {e}\n")
-            except:
+            except OSError:
+                # If even the fallback logging fails, suppress to avoid cascading errors.
                 pass
 
         time.sleep(RESOURCE_UPDATE_INTERVAL)
@@ -65,8 +66,9 @@ def start_resource_monitor():
     if os.path.exists(RESOURCE_FILE):
         try:
             os.remove(RESOURCE_FILE)
-        except:
-            pass
+        except OSError as e:
+            # Log error but do not prevent the monitor from starting
+            print(f"Warning: could not remove old resource file '{RESOURCE_FILE}': {e}")
 
     thread = threading.Thread(target=resource_monitor_thread, daemon=True)
     thread.start()

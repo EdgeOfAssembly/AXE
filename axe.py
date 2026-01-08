@@ -78,34 +78,14 @@ from models.metadata import get_model_info, format_token_count
 
 # Import from core module (refactored)
 from core.constants import (
-    DEFAULT_CONFIG,
-    USE_MAX_COMPLETION_TOKENS,
     CHARS_PER_TOKEN,
     COLLAB_HISTORY_LIMIT,
     COLLAB_CONTENT_LIMIT,
     COLLAB_PASS_MULTIPLIER,
     COLLAB_SHARED_NOTES_LIMIT,
-    RESOURCE_UPDATE_INTERVAL,
-    RESOURCE_FILE,
-    MAX_WORK_HOURS,
-    MIN_SLEEP_MINUTES,
-    WORK_TIME_WARNING_HOURS,
     SLEEP_REASON_TIMEOUT,
     SLEEP_REASON_DEGRADATION,
-    SLEEP_REASON_MANUAL,
-    SLEEP_REASON_BREAK,
-    ERROR_THRESHOLD_PERCENT,
-    DIFF_HISTORY_LIMIT,
     DEGRADATION_CHECK_INTERVAL,
-    EMERGENCY_MAILBOX_DIR,
-    GPG_PUBLIC_KEY_FILE,
-    MAX_BREAK_MINUTES,
-    MAX_BREAKS_PER_HOUR,
-    MIN_WORKLOAD_FOR_BREAK,
-    MAX_WORKFORCE_ON_BREAK,
-    MIN_ACTIVE_AGENTS,
-    MAX_TOTAL_AGENTS,
-    SPAWN_COOLDOWN_SECONDS,
     AGENT_TOKEN_PASS,
     AGENT_TOKEN_TASK_COMPLETE,
     AGENT_TOKEN_BREAK_REQUEST,
@@ -117,7 +97,7 @@ from core.constants import (
 from core.config import Config
 from core.agent_manager import AgentManager
 from core.tool_runner import ToolRunner
-from core.resource_monitor import start_resource_monitor, collect_resources
+from core.resource_monitor import start_resource_monitor
 
 # Import from managers module (refactored)
 from managers.sleep_manager import SleepManager

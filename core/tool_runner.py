@@ -13,7 +13,7 @@ import os
 import re
 import shlex
 import subprocess
-from typing import List, Tuple, Set, TYPE_CHECKING
+from typing import List, Tuple, TYPE_CHECKING
 
 from utils.formatting import Colors, c
 
@@ -294,30 +294,43 @@ class ToolRunner:
                 f.write(f"[{timestamp}] [{status}] {cmd}\n")
                 if not success and output:
                     f.write(f"  Error: {output[:200]}\n")
-        except Exception:
-            pass
+        except Exception as e:
+            # Logging failures should not interrupt tool execution; report and continue.
+            try:
+                print(c(f"Warning: failed to write to execution log: {e}", Colors.YELLOW))
+            except Exception:
+                # As a last resort, ignore any errors while reporting the logging failure.
+                pass
 
-    def run(self, cmd: str) -> Tuple[bool, str]:
+    def run(self, cmd: str, auto_approve=None, dry_run=None) -> Tuple[bool, str]:
         """
         Run a command after validation.
 
         Args:
             cmd: Command to execute
+            auto_approve: Optional per-call override for auto-approval behavior.
+                If None, falls back to the instance's auto_approve setting.
+            dry_run: Optional per-call override for dry-run behavior.
+                If None, falls back to the instance's dry_run setting.
 
         Returns:
             Tuple of (success, output)
         """
+        # Determine effective flags, allowing per-call overrides
+        effective_dry_run = self.dry_run if dry_run is None else dry_run
+        effective_auto_approve = self.auto_approve if auto_approve is None else auto_approve
+
         # Validate command using is_tool_allowed
         allowed, reason = self.is_tool_allowed(cmd)
         if not allowed:
             return False, f"Command validation failed: {reason}"
 
         # Dry run mode
-        if self.dry_run:
+        if effective_dry_run:
             return True, f"[DRY RUN] Would execute: {cmd}"
 
         # Request approval if not auto-approve
-        if not self.auto_approve:
+        if not effective_auto_approve:
             print(c(f"Execute: {cmd}", Colors.YELLOW))
             try:
                 response = input(c("Approve? [y/N]: ", Colors.YELLOW))

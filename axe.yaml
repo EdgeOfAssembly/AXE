@@ -39,7 +39,7 @@ providers:
     - openai/gpt-4o-mini
     - openai/gpt-4.1
     - openai/gpt-4.1-mini
-    - openai/gpt-4. 1-nano
+    - openai/gpt-4.1-nano
     - meta/llama-4-scout-17b-16e-instruct
     - meta/llama-4-maverick-17b-128e-instruct-fp8
     - openai/gpt-5
@@ -952,7 +952,7 @@ agents:
     - ds
     - deep
     provider: deepseek
-    model: deepseek-ai/DeepSeek-V3. 2
+    model: deepseek-ai/DeepSeek-V3.2
     role: Ultimate reasoning and coding agent
     context_window: 128000
     capabilities:
@@ -1214,7 +1214,10 @@ tools:
   - timeout
   - nice
   data:
-  - jq - yq - xmllint - csvtool
+  - jq
+  - yq
+  - xmllint
+  - csvtool
   unlimited:
   - '*'
 directories:
@@ -1237,19 +1240,19 @@ directories:
   forbidden:
   - /etc
   - /root
-  - ~/. ssh
+  - ~/.ssh
   - ~/.gnupg
   - ~/.aws
   - ~/.config/gh
 code_extensions:
-- . c
+- .c
 - .h
 - .cpp
 - .hpp
 - .cc
 - .cxx
 - .hxx
-- . hh
+- .hh
 - .inl
 - .py
 - .pyx
@@ -1279,7 +1282,7 @@ code_extensions:
 - .txt
 - .rst
 - Makefile
-- . mk
+- .mk
 - CMakeLists.txt
 workshop:
   enabled: true
@@ -1300,7 +1303,7 @@ workshop:
     enabled: true
     exclude_patterns:
     - __pycache__
-    - . git
+    - .git
     - venv
     - node_modules
     - .pytest_cache
