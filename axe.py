@@ -3184,7 +3184,7 @@ def sync_agents_on_shutdown() -> None:
         pass
 
 
-def main():
+def main() -> None:
     """Main entry point."""
     parser = argparse.ArgumentParser(
         description="AXE - Agent eXecution Engine",
