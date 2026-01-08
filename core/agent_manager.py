@@ -79,7 +79,7 @@ class AgentManager:
                     # GitHub Copilot uses OpenAI-compatible API
                     self.clients[name] = OpenAI(
                         api_key=api_key,
-                        base_url=prov_config.get('base_url', 'https://models.inference.ai.azure.com')
+                        base_url=prov_config.get('base_url', 'https://models.github.ai/inference')
                     )
             except Exception as e:
                 print(c(f"Failed to init {name}: {e}", Colors.YELLOW))

@@ -137,11 +137,15 @@ This message was encrypted by the agent and can only be read by the human operat
 
         return sorted(reports, key=lambda x: x['created'], reverse=True)
 
-    def decrypt_report(self, filename: str, private_key: Optional[str] = None) -> Optional[str]:
+    def decrypt_report(self, filename: str) -> Optional[str]:
         """
         Decrypt a report (for human use only).
-        In production, this would use GPG with the human's private key.
+        
+        Note: In production, this would use GPG with the human's private key.
+        The current implementation returns a placeholder message since
+        proper GPG decryption requires external tools and the private key.
         """
+        # Future: Add 'private_key: Optional[str] = None' parameter for GPG decryption
         filepath = os.path.join(self.mailbox_dir, filename)
 
         try:

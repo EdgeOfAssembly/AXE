@@ -197,58 +197,6 @@ class ToolRunner:
 
         return True, ""
 
-    def _validate_command(self, cmd: str) -> Tuple[bool, str]:
-        """Validate a command against the whitelist."""
-        commands = self._extract_commands_from_shell(cmd)
-
-        if not commands:
-            return True, ""
-
-        unknown = []
-        for command in commands:
-            if command not in self.whitelist:
-                known_tools = ['cat', 'ls', 'head', 'tail', 'grep', 'echo', 'mkdir', 'rmdir',
-                               'rm', 'cp', 'mv', 'touch', 'chmod', 'find', 'sort', 'uniq',
-                               'wc', 'cut', 'awk', 'sed', 'tee', 'xargs', 'env', 'pwd',
-                               'which', 'file', 'stat', 'date', 'basename', 'dirname',
-                               'tr', 'true', 'false', 'yes', 'seq', 'printf', 'test',
-                               'id', 'whoami', 'hostname', 'uname', 'df', 'du', 'free',
-                               'ps', 'kill', 'killall', 'top', 'htop', 'time', 'timeout',
-                               'sleep', 'wait', 'nohup', 'nice', 'renice', 'chown', 'chgrp',
-                               'ln', 'readlink', 'tar', 'gzip', 'gunzip', 'bzip2', 'bunzip2',
-                               'xz', 'unxz', 'zip', 'unzip', '7z', 'rsync', 'scp',
-                               'ssh', 'telnet', 'ftp', 'sftp', 'nc', 'netcat',
-                               'ping', 'traceroute', 'dig', 'nslookup', 'host',
-                               'ip', 'ifconfig', 'route', 'arp', 'netstat', 'ss',
-                               'lsof', 'strace', 'ltrace', 'gdb', 'lldb', 'objdump',
-                               'nm', 'readelf', 'strings', 'hexdump', 'xxd', 'od',
-                               'base64', 'sha256sum', 'sha512sum', 'md5sum', 'openssl',
-                               'gpg', 'ssh-keygen', 'less', 'more', 'nano', 'vim', 'vi',
-                               'emacs', 'ed', 'tree', 'watch', 'clear', 'reset', 'tput',
-                               'column', 'fold', 'fmt', 'pr', 'expand', 'unexpand',
-                               'comm', 'join', 'paste', 'split', 'csplit', 'shuf',
-                               'jq', 'yq', 'xmllint', 'xsltproc', 'bc', 'dc', 'expr',
-                               'perl', 'ruby', 'php', 'node', 'npm', 'npx', 'yarn',
-                               'go', 'cargo', 'rustc', 'java', 'javac', 'jar', 'mvn',
-                               'gradle', 'ant', 'dotnet', 'mono', 'csc', 'mcs',
-                               'apt', 'apt-get', 'apt-cache', 'dpkg', 'yum', 'dnf',
-                               'rpm', 'pacman', 'brew', 'port', 'snap', 'flatpak',
-                               'pip', 'pip3', 'pipx', 'conda', 'virtualenv', 'venv',
-                               'pdm', 'poetry', 'hatch', 'pyenv', 'nvm', 'rbenv',
-                               'docker', 'docker-compose', 'podman', 'kubectl', 'helm',
-                               'terraform', 'ansible', 'vagrant', 'packer']
-                if command not in known_tools:
-                    unknown.append(command)
-
-        if unknown:
-            return False, f"Unknown command(s): {', '.join(unknown)}"
-
-        allowed, msg = self._check_forbidden_paths(cmd)
-        if not allowed:
-            return False, msg
-
-        return True, ""
-
     def is_tool_allowed(self, cmd: str) -> Tuple[bool, str]:
         """
         Check if a command (including pipelines) is allowed.
@@ -359,10 +307,10 @@ class ToolRunner:
         Returns:
             Tuple of (success, output)
         """
-        # Validate command
-        valid, error = self._validate_command(cmd)
-        if not valid:
-            return False, f"Command validation failed: {error}"
+        # Validate command using is_tool_allowed
+        allowed, reason = self.is_tool_allowed(cmd)
+        if not allowed:
+            return False, f"Command validation failed: {reason}"
 
         # Dry run mode
         if self.dry_run:
