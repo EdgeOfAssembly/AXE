@@ -144,10 +144,10 @@ USE_MAX_COMPLETION_TOKENS = {
 CHARS_PER_TOKEN = 4  # Rough approximation for token estimation (chars / 4 ≈ tokens)
 
 # Collaborative session constants
-COLLAB_HISTORY_LIMIT = 20      # Max messages to show in conversation history
-COLLAB_CONTENT_LIMIT = 2000    # Max chars per message in history
+COLLAB_HISTORY_LIMIT = 50      # Max messages to show in conversation history
+COLLAB_CONTENT_LIMIT = 50000    # Max chars per message in history
 COLLAB_PASS_MULTIPLIER = 2     # Times agents can pass before session ends
-COLLAB_SHARED_NOTES_LIMIT = 500  # Max chars of shared notes to show
+COLLAB_SHARED_NOTES_LIMIT = 10000  # Max chars of shared notes to show
 
 # Experience and level constants (now imported from progression module)
 # XP_PER_LEVEL_LINEAR = 100       # Imported from progression.xp_system
@@ -1121,7 +1121,7 @@ class AgentManager:
             if provider == 'anthropic':
                 resp = client.messages.create(
                     model=model,
-                    max_tokens=4096,
+                    max_tokens=32768,
                     system=system_prompt,
                     messages=[{'role': 'user', 'content': full_prompt}]
                 )
@@ -1144,9 +1144,9 @@ class AgentManager:
                     ]
                 }
                 if self._uses_max_completion_tokens(model):
-                    api_params['max_completion_tokens'] = 4096
+                    api_params['max_completion_tokens'] = 32768
                 else:
-                    api_params['max_tokens'] = 4096
+                    api_params['max_tokens'] = 32768
                 
                 resp = client.chat.completions.create(**api_params)
                 
@@ -1161,7 +1161,7 @@ class AgentManager:
             elif provider == 'huggingface':
                 resp = client.chat_completion(
                     model=model,
-                    max_tokens=4096,
+                    max_tokens=32768,
                     messages=[
                         {'role': 'system', 'content': system_prompt},
                         {'role': 'user', 'content': full_prompt}
@@ -1511,6 +1511,9 @@ class ToolRunner:
         Returns:
             Tuple of (allowed: bool, reason: str)
         """
+        if '*' in self.whitelist:
+            return True, "OK (wildcard allowed)"
+
         if not cmd or not cmd.strip():
             return False, "Empty command"
         
@@ -2831,7 +2834,7 @@ It's YOUR TURN. What would you like to contribute? Remember:
                     if provider == 'anthropic':
                         resp = client.messages.create(
                             model=model,
-                            max_tokens=2048,
+                            max_tokens=32768,
                             system=system_prompt,
                             messages=[{'role': 'user', 'content': prompt}]
                         )
@@ -2850,9 +2853,9 @@ It's YOUR TURN. What would you like to contribute? Remember:
                             ]
                         }
                         if self.agent_mgr._uses_max_completion_tokens(model):
-                            api_params['max_completion_tokens'] = 2048
+                            api_params['max_completion_tokens'] = 32768
                         else:
-                            api_params['max_tokens'] = 2048
+                            api_params['max_tokens'] = 32768
                         
                         resp = client.chat.completions.create(**api_params)
                         # Check for None content
@@ -2863,7 +2866,7 @@ It's YOUR TURN. What would you like to contribute? Remember:
                     elif provider == 'huggingface':
                         resp = client.chat_completion(
                             model=model,
-                            max_tokens=2048,
+                            max_tokens=32768,
                             messages=[
                                 {'role': 'system', 'content': system_prompt},
                                 {'role': 'user', 'content': prompt}

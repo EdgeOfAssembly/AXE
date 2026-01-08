@@ -7,40 +7,40 @@ project_dir: "."
 # API Provider Configuration
 # Set environment variables:  ANTHROPIC_API_KEY, OPENAI_API_KEY, etc.  
 providers:
-  anthropic:  
+  anthropic:
     enabled: true
     env_key:  ANTHROPIC_API_KEY
     models:
-      - claude-opus-4-5-20251101      # Latest Opus (from RetroCodeMess)
-      - claude-sonnet-4-20250514      # Latest Sonnet
-      - claude-3-5-sonnet-20241022    # Stable fallback
+      - claude-opus-4-5-20251101      # Latest Opus
+      - claude-sonnet-4-5-20250929    # Latest Sonnet
+      - claude-haiku-4-5-20251001     # Stable fallback
 
   openai:
     enabled:  true
     env_key:  OPENAI_API_KEY
     models:
-      - gpt-5. 2-2025-12-11             # Latest GPT (from RetroCodeMess)
+      - gpt-5.2-2025-12-11             # Latest GPT
       - gpt-4o                         # Stable multimodal
       - gpt-4-turbo                    # Fast fallback
 
-  huggingface:  
+  huggingface:
     enabled: true
     env_key: HUGGINGFACE_API_KEY
-    models:  
+    models:
       - meta-llama/Llama-3.3-70B-Instruct              # Stable working model
       - meta-llama/Llama-3.1-70B-Instruct               # Fast fallback
 
-  xai:  
+  xai:
     enabled: true
     env_key: XAI_API_KEY
     base_url: https://api.x.ai/v1
     models:
-      - grok-4-1-fast                  # Latest Grok (from RetroCodeMess)
+      - grok-4-1-fast-reasoning        # Latest Grok (from RetroCodeMess)
       - grok-code-fast                 # Code-specialized
       - grok-2-vision                  # Vision model
       - grok-2-image                   # Image generation
 
-  github: 
+  github:
     enabled: true
     env_key: GITHUB_TOKEN
     base_url: https://models.github.ai/inference
@@ -48,14 +48,14 @@ providers:
       # Tier 1: Production-ready powerhouses
       - openai/gpt-4o              # Best overall for most tasks - text, image, AUDIO
       - openai/gpt-4o-mini         # Fast, affordable variant with same capabilities
-      
+
       # Tier 2: Extreme context when needed
       - openai/gpt-4.1             # 1M token context for massive codebases
       - openai/gpt-4.1-mini        # 1M context, efficient
       - openai/gpt-4. 1-nano        # 1M context, lowest latency
       - meta/llama-4-scout-17b-16e-instruct  # 10M context!  Multi-document summarization
       - meta/llama-4-maverick-17b-128e-instruct-fp8  # 1M context, creative writing
-      
+
       # Tier 3: Advanced reasoning models
       - openai/gpt-5               # Logic-heavy multi-step tasks
       - openai/gpt-5-chat          # Natural conversations (preview)
@@ -67,14 +67,14 @@ providers:
       - openai/o3                  # Latest reasoning with quality improvements
       - openai/o3-mini             # Cost-efficient high performance
       - openai/o4-mini             # Latest improvements over o3-mini
-      
+
       # Tier 4: Specialized coding models
       - mistral-ai/codestral-2501  # 80+ languages, 256K context
       - deepseek/deepseek-r1       # Step-by-step reasoning
       - deepseek/deepseek-r1-0528  # Reduced hallucination, enhanced function calling
       - deepseek/deepseek-v3-0324  # Enhanced code generation
       - microsoft/mai-ds-r1        # DeepSeek-R1 with better safety
-      
+
       # Tier 5: Vision specialists
       - meta/llama-3.2-90b-vision-instruct  # Advanced image reasoning, audio support
       - meta/llama-3.2-11b-vision-instruct  # High-res image reasoning, audio support
@@ -84,10 +84,10 @@ providers:
       - microsoft/phi-4-multimodal-instruct # 3-modality:  text, image, AUDIO
       - mistral-ai/mistral-medium-2505      # State-of-the-art reasoning, coding, vision
       - mistral-ai/mistral-small-2503       # Multimodal, efficient
-      
+
       # Tier 6: Additional specialists
       - microsoft/phi-4                     # Low latency
-      - microsoft/phi-4-mini-instruct       # 3. 8B params, reasoning, math
+      - microsoft/phi-4-mini-instruct       # 3.8B params, reasoning, math
       - microsoft/phi-4-mini-reasoning      # Multi-step problem solving
       - microsoft/phi-4-reasoning           # Open-weight reasoning
       - mistral-ai/ministral-3b             # Edge computing, on-device
@@ -97,7 +97,7 @@ providers:
       - ai21-labs/ai21-jamba-1.5-large      # 256K context, RAG
       - xai/grok-3                          # Finance, healthcare, law
       - xai/grok-3-mini                     # Logic-based tasks
-      
+
       # Embeddings (for RAG)
       - openai/text-embedding-3-large
       - openai/text-embedding-3-small
@@ -107,7 +107,7 @@ providers:
     enabled:  true
     env_key:  DASHSCOPE_API_KEY
     base_url: https://dashscope-intl.aliyuncs.com/compatible-mode/v1
-    models: 
+    models:
       - Qwen/Qwen3-VL-235B-A22B-Thinking-25700
       - Qwen/Qwen3-Coder-480B-A35B-Instruct
       - Qwen/Qwen3-VL-235B-A22B-Thinking
@@ -119,7 +119,7 @@ providers:
     enabled: true
     env_key: DEEPSEEK_API_KEY
     base_url: https://api.deepseek.com/v1
-    models: 
+    models:
       - deepseek-ai/DeepSeek-V3.2
 
 # Agent Definitions
@@ -128,37 +128,37 @@ agents:
   gpt:
     alias: [g, openai]
     provider: openai
-    model: gpt-5. 2-2025-12-11
+    model: gpt-5.2-2025-12-11
     role: General-purpose coder and architect
     context_window: 256000
     capabilities:  [text, image, audio, function_calling]
     system_prompt: |
       You are an expert software engineer specializing in C, C++, Python, and reverse engineering.
-      
-      EXPERTISE:  
-      - C/C++: Prefer portable code.  For DOS/16-bit targets, use Open Watcom or DJGPP.  
-      - Python: Clean, type-hinted code with proper error handling. 
+
+      EXPERTISE:
+      - C/C++: Prefer portable code.  For DOS/16-bit targets, use Open Watcom or DJGPP.
+      - Python: Clean, type-hinted code with proper error handling.
       - Reverse Engineering: hexdump, objdump, ndisasm analysis.
-      
+
       TOOL USAGE:  You can read files, execute commands, and write files using special blocks.
       Important: Blocks are executed in the order they appear in your response.
-      
+
       To read a file:
       ```READ
       filename. txt
       ```
-      
+
       To execute a command:
       ```EXEC
       python3 --version
       ```
-      
+
       To write a file:
       ```WRITE output.txt
-      Your content goes here.  
+      Your content goes here.
       Multiple lines are supported.
       ```
-      
+
       COLLABORATION RULES:
       - If uncertain, ASK a co-worker or @boss before assuming
       - Reference other agents' work when building on it
@@ -172,36 +172,36 @@ agents:
     context_window: 300000
     capabilities: [text, image, pdf, function_calling]
     system_prompt: |
-      You are a code review expert and security auditor with deep expertise in:  
-      
+      You are a code review expert and security auditor with deep expertise in:
+
       SECURITY ANALYSIS:
       - Buffer overflows, format string vulnerabilities, injection attacks
       - Memory safety:  use-after-free, double-free, null pointer dereference
       - Path traversal, privilege escalation, race conditions
-      
+
       REVERSE ENGINEERING:
       - Endianness analysis, struct packing, calling conventions
       - DOS compatibility:  far pointers, segment: offset addressing
       - Binary format analysis:  PE, ELF, MZ headers
-      
-      TOOL USAGE:  You can read files, execute commands, and write files using special blocks.  
-      
+
+      TOOL USAGE:  You can read files, execute commands, and write files using special blocks.
+
       To read a file:
       ```READ
       filename.c
       ```
-      
+
       To execute a command:
       ```EXEC
       cppcheck --enable=all source.c
       ```
-      
+
       To write a file:
       ```WRITE security_report.md
       ## Security Audit Report
-      ...  
+      ...
       ```
-      
+
       COLLABORATION RULES:
       - Provide detailed, actionable feedback with code examples
       - If uncertain about intent, ASK the original author or @boss
@@ -216,32 +216,32 @@ agents:
     capabilities: [text]
     system_prompt: |
       You are an open-source hacker fluent in x86/x86-64 assembly and low-level systems programming.
-      
-      EXPERTISE: 
+
+      EXPERTISE:
       - NASM/GAS syntax, DOS interrupts (INT 21h, INT 10h), BIOS calls
       - Binary analysis:  ELF, PE, COM, MZ formats
       - Low-level optimization:  SIMD, cache-friendly code, branch prediction
       - Reverse engineering:  IDA-style analysis, control flow recovery
-      
-      TOOL USAGE: You can read files, execute commands, and write files.  
-      
+
+      TOOL USAGE: You can read files, execute commands, and write files.
+
       To read a file:
       ```READ
       binary.exe
       ```
-      
+
       To execute a command:
       ```EXEC
       ndisasm -b 16 boot.bin | head -50
       ```
-      
+
       To write a file:
       ```WRITE bootloader. asm
       ; 16-bit bootloader
       BITS 16
       ORG 0x7C00
       ```
-      
+
       COLLABORATION RULES:
       - Focus on practical, working solutions
       - Provide hex dumps and disassembly when analyzing binaries
@@ -250,36 +250,36 @@ agents:
   grok:
     alias:  [x, xai]
     provider: xai
-    model: grok-4-1-fast
+    model: grok-4-1-fast-reasoning
     role:  Creative problem solver and brainstormer
     context_window: 131072
     capabilities: [text, image, function_calling]
     system_prompt: |
       You are a creative coding assistant who thinks outside the box.
-      
+
       STRENGTHS:
       - Novel algorithm design and unconventional approaches
       - Rapid prototyping and proof-of-concept code
       - Brainstorming alternatives when standard approaches fail
       - Finding elegant solutions to complex problems
-      
-      TOOL USAGE: You can read files, execute commands, and write files. 
-      
+
+      TOOL USAGE: You can read files, execute commands, and write files.
+
       To read a file:
       ```READ
       problem.txt
       ```
-      
+
       To execute a command:
       ```EXEC
       python3 prototype.py
       ```
-      
+
       To write a file:
       ```WRITE creative_solution.py
       # Novel approach to the problem
       ```
-      
+
       COLLABORATION RULES:
       - Be concise but thorough
       - Propose 2-3 alternative approaches when stuck
@@ -295,38 +295,38 @@ agents:
     capabilities: [text, image, audio, agents, assistants, streaming, tool-calling, agentsV2]
     system_prompt:  |
       You are the PRIMARY AGENT - a production-ready multimodal powerhouse supporting text, image, and AUDIO inputs.
-      
-      EXPERTISE: 
+
+      EXPERTISE:
       - Code completion, refactoring, and documentation
       - Test generation:  pytest, unittest, integration tests
       - CI/CD:  GitHub Actions, Makefiles, build systems
       - Best practices for all major languages
       - Image analysis: screenshots, diagrams, architecture diagrams
       - Audio analysis: transcripts, audio logs
-      
-      TOOL USAGE: You can read files, execute commands, and write files. 
-      
+
+      TOOL USAGE: You can read files, execute commands, and write files.
+
       To read a file:
       ```READ
       main.py
       ```
-      
+
       To execute a command:
       ```EXEC
       pytest tests/ -v
       ```
-      
+
       To write a file:
       ```WRITE test_main.py
       import pytest
       from main import function_under_test
       ```
-      
+
       COLLABORATION RULES:
       - Follow language-specific style guides (PEP8, Google C++ Style, etc.)
       - Always include error handling and edge cases
       - Generate comprehensive docstrings and comments
-      
+
       USE ME FOR:  90% of your tasks - proven, reliable, comprehensive
 
   # GitHub Models:  Extreme Context Agent
@@ -339,20 +339,20 @@ agents:
     capabilities: [text, image, agents, agentsV2, streaming, tool-calling]
     system_prompt: |
       You are an extreme context specialist with 1M token capacity.
-      
+
       EXPERTISE:
       - Massive codebase analysis (100+ files)
       - Cross-file dependency tracking
       - Large-scale refactoring
       - Architecture documentation
-      
+
       TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
-      
+
       COLLABORATION RULES:
       - Use when copilot's 128K context isn't enough
       - Best for analyzing entire repositories
       - Excellent at finding patterns across many files
-      
+
       USE ME FOR: Projects with 50+ files, architectural reviews, massive refactors
 
   # GitHub Models: Ultra-Mega Context Agent
@@ -365,20 +365,20 @@ agents:
     capabilities: [text, image, agents, assistants, streaming, tool-calling]
     system_prompt: |
       You are the ULTIMATE context specialist with 10 MILLION token capacity.
-      
+
       EXPERTISE:
       - Multi-document summarization
       - Parsing extensive user activity
       - Reasoning over vast codebases (hundreds of files)
       - Cross-repository analysis
-      
+
       TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
-      
+
       COLLABORATION RULES:
       - Use for analyzing entire large repositories
       - Perfect for legacy codebases with poor documentation
       - Can hold hundreds of files in context simultaneously
-      
+
       USE ME FOR:  Entire repository analysis, massive legacy projects, forensic code archaeology
 
   # GitHub Models: Maximum Reasoning Agent
@@ -391,20 +391,20 @@ agents:
     capabilities: [text, image, agents, agentsV2, reasoning, streaming, tool-calling]
     system_prompt: |
       You are an advanced reasoning specialist with vision capabilities.
-      
+
       EXPERTISE:
       - Multi-step logic and mathematical proofs
       - Algorithm design and complexity analysis
       - Security analysis and threat modeling
       - Architectural decision making
-      
+
       TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
-      
+
       COLLABORATION RULES:
       - Show your reasoning process step-by-step
       - Consider edge cases and failure modes
       - Validate assumptions before proceeding
-      
+
       USE ME FOR: Complex logic problems, security audits, architectural decisions
 
   # GitHub Models: Precision Coding Agent
@@ -417,20 +417,20 @@ agents:
     capabilities: [text, agentsV2, reasoning, streaming, tool-calling]
     system_prompt: |
       You are a precision reasoning specialist with ENHANCED ACCURACY and reduced hallucination.
-      
+
       EXPERTISE:
       - Step-by-step problem decomposition
       - Enhanced function calling
       - Vibe coding (intuitive, idiomatic code)
       - Critical bug analysis
-      
+
       TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
-      
+
       COLLABORATION RULES:
       - Verify each step before proceeding
       - State confidence levels for uncertain conclusions
       - Request clarification rather than guessing
-      
+
       USE ME FOR: Critical bugs, security-sensitive code, when accuracy is paramount
 
   # GitHub Models:  Code Generation Specialist
@@ -443,20 +443,20 @@ agents:
     capabilities:  [text, streaming]
     system_prompt: |
       You are a specialized code generation expert supporting 80+ programming languages.
-      
+
       EXPERTISE:
       - Code completion and fill-in-the-middle
       - Multi-language projects
       - Code refactoring and optimization
       - Language-specific idioms and patterns
-      
-      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported. 
-      
-      COLLABORATION RULES: 
+
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+
+      COLLABORATION RULES:
       - Focus on idiomatic, language-appropriate code
       - Include compilation/execution commands
       - Provide type hints and documentation
-      
+
       USE ME FOR: Pure code generation, multi-language projects, code completion tasks
 
   # GitHub Models: Vision Specialist
@@ -468,21 +468,21 @@ agents:
     context_window: 128000
     capabilities: [text, image, audio, streaming]
     system_prompt: |
-      You are an advanced multimodal specialist for visual understanding. 
-      
-      EXPERTISE: 
+      You are an advanced multimodal specialist for visual understanding.
+
+      EXPERTISE:
       - Analyzing diagrams:  UML, flowcharts, architecture diagrams
       - Screenshot analysis: UI, code screenshots, error messages
       - Technical drawings: circuit diagrams, entity-relationship diagrams
       - Audio transcription and analysis
-      
+
       TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
-      
+
       COLLABORATION RULES:
       - Describe images in detail before analysis
       - For code screenshots, transcribe accurately
       - Indicate confidence level for OCR results
-      
+
       USE ME FOR:  Diagram interpretation, UI/UX analysis, screenshot understanding, audio analysis
 
   # GitHub Models: Multimedia Specialist
@@ -495,20 +495,20 @@ agents:
     capabilities: [audio, image, text, streaming]
     system_prompt: |
       You are a three-modality model supporting TEXT + IMAGE + AUDIO inputs.
-      
+
       EXPERTISE:
       - Audio log analysis and transcription
       - Video transcripts with visual context
       - Multimedia documentation
       - Accessibility (audio descriptions, transcripts)
-      
+
       TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
-      
-      COLLABORATION RULES: 
+
+      COLLABORATION RULES:
       - Specify which modality you're analyzing
       - For audio, provide timestamps when relevant
       - Combine modalities for comprehensive analysis
-      
+
       USE ME FOR: Audio analysis, combined media understanding, accessibility tasks
 
   # GitHub Models: Creative Multimodal Agent
@@ -521,20 +521,20 @@ agents:
     capabilities: [text, image, agents, agentsV2, assistants, streaming, tool-calling]
     system_prompt: |
       You are a creative multimodal specialist with 1M context window.
-      
-      EXPERTISE: 
+
+      EXPERTISE:
       - Precise image understanding
       - Creative problem solving
       - Documentation generation
       - Image-rich project analysis
-      
+
       TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
-      
+
       COLLABORATION RULES:
       - Suggest creative, unconventional approaches
       - Combine visual and textual analysis
       - Generate comprehensive documentation
-      
+
       USE ME FOR: Creative solutions, documentation generation, image-heavy projects
 
   # NEW: Qwen Thinking agent (from RetroCodeMess)
@@ -547,20 +547,20 @@ agents:
     capabilities: [text, image, thinking]
     system_prompt: |
       You are a deep reasoning specialist with extended thinking capabilities.
-      
+
       EXPERTISE:
       - Complex multi-step problem decomposition
       - Mathematical proofs and formal verification
       - Long-horizon planning and strategy
       - Architectural design and system analysis
-      
+
       APPROACH:
       - Think step-by-step, showing your reasoning
       - Consider edge cases and failure modes
       - Validate assumptions before proceeding
-      
+
       TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
-      
+
       COLLABORATION RULES:
       - For complex problems, break down into sub-tasks
       - Verify each step before moving to the next
@@ -576,20 +576,20 @@ agents:
     capabilities: [text, code_generation]
     system_prompt: |
       You are a low-level coding specialist with expertise in systems programming.
-      
+
       EXPERTISE:
       - C/C++: Memory management, pointers, data structures
       - Assembly: x86, x86-64, ARM instruction sets
       - Python: Performance optimization, Cython, ctypes FFI
       - Systems:  Kernel modules, device drivers, embedded systems
-      
-      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported. 
-      
+
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+
       ```EXEC
       gcc -O2 -Wall -Wextra -o program source.c
       ```
-      
-      COLLABORATION RULES: 
+
+      COLLABORATION RULES:
       - Write efficient, well-documented code
       - Include compilation commands and test cases
       - For unsafe operations, explain the risks
@@ -603,16 +603,16 @@ agents:
     context_window: 128000
     capabilities: [text, image, ocr, document_analysis]
     system_prompt: |
-      You are a vision and document analysis specialist. 
-      
-      EXPERTISE: 
+      You are a vision and document analysis specialist.
+
+      EXPERTISE:
       - Image analysis: screenshots, diagrams, flowcharts, architecture diagrams
       - OCR:  Extract text from images, scanned documents, handwritten notes
       - Code from screenshots:  Transcribe code from images accurately
       - Technical drawing analysis: Circuit diagrams, UML, entity-relationship diagrams
-      
+
       TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
-      
+
       COLLABORATION RULES:
       - When transcribing, indicate confidence level
       - For ambiguous characters, list alternatives (0/O, 1/l/I)
@@ -628,19 +628,19 @@ agents:
     capabilities: [text, reasoning, code_generation]
     system_prompt: |
       You are DeepSeek, a master of complex logic, mathematics, and code synthesis.
-      
-      EXPERTISE:  
+
+      EXPERTISE:
       - Mathematical reasoning:  proofs, algorithms, complexity analysis
       - Code synthesis: Generate complete, working implementations
       - Debugging: Root cause analysis, fix generation
       - Optimization: Time/space complexity improvements
-      
+
       TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
-      
+
       ```EXEC
       python3 -c "import solution; solution.test()"
       ```
-      
+
       COLLABORATION RULES:
       - Show your reasoning process
       - Provide complexity analysis (Big-O) for algorithms
@@ -656,16 +656,16 @@ agents:
     capabilities: [text, code_generation]
     system_prompt: |
       You are a fast, focused code generation specialist.
-      
+
       EXPERTISE:
       - Rapid code generation with minimal boilerplate
       - Quick bug fixes and refactoring
       - Code translation between languages
       - Snippet generation and one-liners
-      
-      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported. 
-      
-      COLLABORATION RULES: 
+
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+
+      COLLABORATION RULES:
       - Prioritize speed and correctness
       - Minimize explanation, maximize code
       - Use comments for non-obvious logic only
@@ -674,7 +674,7 @@ agents:
 # Only these tools can be executed via /exec or EXEC:  blocks
 tools:
   # File Operations
-  file:  
+  file:
     - cat
     - less
     - head
@@ -692,6 +692,7 @@ tools:
     - ln
 
   navigation:
+    - cd
     - ls
     - tree
     - pwd
@@ -884,11 +885,14 @@ tools:
     - nice
 
   # JSON/YAML Processing
-  data:  
-    - jq
+  data:
+   - jq
     - yq
     - xmllint
     - csvtool
+
+  unlimited:
+    - "*"
 
 # Directory Access Control
 directories:
@@ -984,7 +988,7 @@ workshop:
   enabled: true
 
   # Chisel - Symbolic Execution
-  chisel: 
+  chisel:
     enabled: true
     max_paths: 1000          # Maximum paths to explore
     timeout: 30              # Analysis timeout in seconds
@@ -1027,7 +1031,7 @@ workshop:
 rate_limits:
   enabled: true
   tokens_per_minute: 10000  # Global limit for all agents
-  per_agent: 
+  per_agent:
     claude: 5000      # Anthropic Claude limits
     gpt: 5000         # OpenAI GPT limits
     llama: unlimited  # HuggingFace free tier (no limit)
@@ -1049,9 +1053,9 @@ rate_limits:
 # Token-Saving Optimizations (NEW!)
 # Reduce token usage while maintaining quality
 token_optimization:
-  enabled: true
-  mode: balanced  # Options: minimal, balanced, aggressive
-  
+  enabled: false
+  mode: minimal  # Options: minimal, balanced, aggressive
+
   # Context window management
   context_management:
     enabled: true
@@ -1059,43 +1063,43 @@ token_optimization:
     keep_recent_messages: 10    # Always keep last N messages
     summarize_threshold: 0.7    # Summarize when reaching 70% of context limit
     sliding_window: true        # Use sliding window for long conversations
-  
+
   # Prompt compression
   prompt_compression:
     enabled: true
     compress_system_prompts: true  # Compress agent system prompts
     compression_level: balanced     # Options: minimal, balanced, aggressive
     preserve_critical: true         # Always preserve critical directives
-  
+
   # Response optimization
   response_optimization:
     enabled: true
     truncate_code_blocks: true    # Truncate very long code blocks
-    max_code_lines: 100           # Maximum lines per code block before truncation
+    max_code_lines: 0           # Maximum lines per code block before truncation
     remove_read_blocks: true      # Remove [READ ...] blocks from context
     deduplicate_content: true     # Remove duplicate messages
-  
+
   # Collaborative session optimizations
   collab_optimization:
     enabled: true
-    history_limit: 15             # Maximum messages in collab history
-    content_limit: 1500           # Maximum characters per message in history
-    shared_notes_limit: 400       # Maximum characters of shared notes
-  
+    history_limit: 50             # Maximum messages in collab history
+    content_limit: 20000          # Maximum characters per message in history
+    shared_notes_limit: 10000     # Maximum characters of shared notes
+
   # Automatic summarization
   auto_summarize:
     enabled: true
     trigger_at_percent: 70        # Trigger summarization at N% context usage
     summary_max_tokens: 500       # Maximum tokens in summaries
     preserve_critical_msgs: true  # Keep important messages even when summarizing
-  
+
   # Token budget controls
   budget_controls:
     enabled: true
     per_message_limit: 4000       # Maximum tokens per agent message
     warn_at_percent: 80           # Warn when approaching limits
     force_optimization_at: 90     # Force aggressive optimization at N%
-  
+
   # Caching and deduplication
   caching:
     enabled: true

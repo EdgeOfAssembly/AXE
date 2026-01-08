@@ -12,64 +12,113 @@ from typing import Dict, List
 # - output_modes: List of supported output modes (text, function_calling, etc.)
 
 MODEL_METADATA = {
-    # Anthropic Claude models
-    'claude-3-5-sonnet-20241022': {
+# Anthropic Claude models (updated January 2026)
+    'claude-opus-4-5-20251101': {  # Claude Opus 4.5 - flagship, most powerful
+        'context_tokens': 200000,
+        'max_output_tokens': 65536,  # Commonly 64k; supports extended outputs well
+        'input_modes': ['text', 'image'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'claude-haiku-4-5-20251001': {  # Claude Haiku 4.5 - fast & efficient
         'context_tokens': 200000,
         'max_output_tokens': 8192,
         'input_modes': ['text', 'image'],
         'output_modes': ['text', 'function_calling']
     },
-    'claude-3-opus-20240229':  {
-        'context_tokens':  200000,
+    'claude-sonnet-4-5-20250929': {  # Claude Sonnet 4.5 - best balance
+        'context_tokens': 200000,  # 1M possible in beta for some Sonnet 4.x with header & tier
+        'max_output_tokens': 65536,
+        'input_modes': ['text', 'image'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'claude-opus-4-1-20250805': {  # Claude Opus 4.1 - incremental upgrade
+        'context_tokens': 200000,
+        'max_output_tokens': 32768,
+        'input_modes': ['text', 'image'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'claude-opus-4-20250514': {  # Claude Opus 4 - original frontier
+        'context_tokens': 200000,
+        'max_output_tokens': 32768,
+        'input_modes': ['text', 'image'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'claude-sonnet-4-20250514': {  # Claude Sonnet 4
+        'context_tokens': 200000,  # 1M beta possible with header
+        'max_output_tokens': 32768,
+        'input_modes': ['text', 'image'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'claude-3-5-haiku-20241022': {  # Claude 3.5 Haiku - legacy fast model
+        'context_tokens': 200000,
+        'max_output_tokens': 8192,
+        'input_modes': ['text', 'image'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'claude-3-haiku-20240307': {  # Claude 3 Haiku - oldest/legacy
+        'context_tokens': 200000,
         'max_output_tokens': 4096,
-        'input_modes':  ['text', 'image'],
-        'output_modes': ['text', 'function_calling']
-    },
-    'claude-3-5-sonnet-20240620': {
-        'context_tokens': 200000,
-        'max_output_tokens': 8192,
-        'input_modes': ['text', 'image'],
-        'output_modes':  ['text', 'function_calling']
-    },
-    'claude-opus-4-5-20251101': {
-        'context_tokens': 300000,
-        'max_output_tokens':  16384,
-        'input_modes': ['text', 'image'],
-        'output_modes': ['text', 'function_calling']
-    },
-    'claude-sonnet-4-20250514': {
-        'context_tokens': 200000,
-        'max_output_tokens': 8192,
         'input_modes': ['text', 'image'],
         'output_modes': ['text', 'function_calling']
     },
     
     # OpenAI models (direct API)
-    'gpt-4o': {
-        'context_tokens': 128000,
-        'max_output_tokens': 16384,
-        'input_modes': ['text', 'image'],
-        'output_modes': ['text', 'function_calling']
-    },
-    'gpt-4-turbo': {
-        'context_tokens': 128000,
-        'max_output_tokens': 4096,
-        'input_modes': ['text', 'image'],
-        'output_modes': ['text', 'function_calling']
-    },
-    'gpt-3.5-turbo': {
-        'context_tokens': 16385,
-        'max_output_tokens': 4096,
-        'input_modes': ['text'],
-        'output_modes': ['text', 'function_calling']
-    },
-    'gpt-5. 2-2025-12-11': {
-        'context_tokens': 256000,
-        'max_output_tokens': 32768,
+# OpenAI models (direct API - updated January 2026, active/non-deprecated only)
+    'gpt-5.2-2025-12-11': {  # Latest flagship GPT-5.2 snapshot - most capable overall
+        'context_tokens': 400000,
+        'max_output_tokens': 128000,
         'input_modes': ['text', 'image', 'audio'],
         'output_modes': ['text', 'function_calling']
     },
-    
+    'gpt-5.2': {  # Alias for latest GPT-5.2
+        'context_tokens': 400000,
+        'max_output_tokens': 128000,
+        'input_modes': ['text', 'image', 'audio'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'gpt-5.2-pro': {  # Pro variant - even smarter/precise, higher reasoning effort
+        'context_tokens': 400000,
+        'max_output_tokens': 128000,
+        'input_modes': ['text', 'image', 'audio'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'gpt-4.1': {  # Strong non-reasoning model, huge context for docs/code
+        'context_tokens': 1000000,
+        'max_output_tokens': 65536,  # Practical high limit; supports long outputs
+        'input_modes': ['text', 'image'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'gpt-4.1-mini': {  # Fast/cheaper version of 4.1
+        'context_tokens': 1000000,
+        'max_output_tokens': 32768,
+        'input_modes': ['text', 'image'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'gpt-4o': {  # Still excellent multimodal - your "gpt-o4", balanced & fast
+        'context_tokens': 128000,
+        'max_output_tokens': 16384,
+        'input_modes': ['text', 'image', 'audio'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'gpt-4o-mini': {  # Cheap/fast multimodal alternative
+        'context_tokens': 128000,
+        'max_output_tokens': 16384,
+        'input_modes': ['text', 'image', 'audio'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'o3': {  # Top reasoning model - great for math/science/coding
+        'context_tokens': 200000,
+        'max_output_tokens': 100000,
+        'input_modes': ['text', 'image'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'o4-mini': {  # Fast reasoning - strong value for complex tasks
+        'context_tokens': 200000,
+        'max_output_tokens': 100000,
+        'input_modes': ['text', 'image'],
+        'output_modes': ['text', 'function_calling']
+    },
+
     # ==============================================================================
     # GitHub Models API - OpenAI GPT-4 series
     # ==============================================================================
@@ -97,7 +146,7 @@ MODEL_METADATA = {
         'input_modes': ['text', 'image'],
         'output_modes': ['text', 'function_calling']
     },
-    'openai/gpt-4. 1-nano': {
+    'openai/gpt-4.1-nano': {
         'context_tokens': 1048576,  # 1M tokens
         'max_output_tokens': 32768,
         'input_modes':  ['text', 'image'],
@@ -204,14 +253,14 @@ MODEL_METADATA = {
         'output_modes': ['text']
     },
     'meta/llama-4-maverick-17b-128e-instruct-fp8': {
-        'context_tokens': 1000000,  # 1M tokens! 
-        'max_output_tokens': 4096,
+        'context_tokens': 1048576,  # 1M tokens! 
+        'max_output_tokens': 8192,
         'input_modes': ['text', 'image'],
         'output_modes': ['text', 'function_calling']
     },
     'meta/llama-4-scout-17b-16e-instruct':  {
-        'context_tokens':  10000000,  # 10M tokens!
-        'max_output_tokens': 4096,
+        'context_tokens':  1048576,
+        'max_output_tokens': 8192,
         'input_modes': ['text', 'image'],
         'output_modes': ['text', 'function_calling']
     },
@@ -391,39 +440,33 @@ MODEL_METADATA = {
     # ==============================================================================
     # xAI Grok models (direct API)
     # ==============================================================================
-    'grok-beta': {
-        'context_tokens': 131072,
-        'max_output_tokens': 4096,
-        'input_modes': ['text'],
-        'output_modes': ['text', 'function_calling']
-    },
-    'grok-2': {
-        'context_tokens': 131072,
-        'max_output_tokens': 4096,
-        'input_modes': ['text'],
-        'output_modes': ['text', 'function_calling']
-    },
-    'grok-4-1-fast': {
-        'context_tokens': 131072,
-        'max_output_tokens': 4096,
-        'input_modes': ['text'],
-        'output_modes': ['text', 'function_calling']
-    },
-    'grok-code-fast': {
-        'context_tokens': 131072,
-        'max_output_tokens': 4096,
-        'input_modes': ['text'],
-        'output_modes': ['text']
-    },
-    'grok-2-vision': {
-        'context_tokens': 32768,
-        'max_output_tokens': 4096,
+    'grok-4-1-fast-reasoning': {  # Top-tier agentic/reasoning beast
+        'context_tokens': 2000000,
+        'max_output_tokens': 32768,  # Practical high limit; can go higher in tests
         'input_modes': ['text', 'image'],
-        'output_modes': ['text']
+        'output_modes': ['text', 'function_calling']
     },
-    'grok-2-image': {
-        'context_tokens': 4096,
-        'max_output_tokens': 1,  # Generates images
+    'grok-4-fast-reasoning': {  # Cost-efficient reasoning version
+        'context_tokens': 2000000,
+        'max_output_tokens': 32768,
+        'input_modes': ['text', 'image'],
+        'output_modes': ['text', 'function_calling']
+    },
+    'grok-code-fast-1': {  # Specialized for coding/agents
+        'context_tokens': 131072,  # More conservative for speed
+        'max_output_tokens': 16384,
+        'input_modes': ['text'],  # No vision mentioned for this one
+        'output_modes': ['text', 'function_calling']
+    },
+    'grok-2-vision-1212': {  # Vision understanding (analyze images/charts)
+        'context_tokens': 131072,
+        'max_output_tokens': 8192,
+        'input_modes': ['text', 'image'],
+        'output_modes': ['text']  # No tool calling specified
+    },
+    'grok-2-image-1212': {  # Image generation model
+        'context_tokens': 4096,  # Prompt-only, small context
+        'max_output_tokens': 1,   # Special: generates images, not text tokens
         'input_modes': ['text'],
         'output_modes': ['image']
     },
