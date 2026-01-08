@@ -4,7 +4,7 @@ Reduces system prompt overhead while preserving essential instructions.
 """
 
 import re
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Any
 
 
 class PromptCompressor:

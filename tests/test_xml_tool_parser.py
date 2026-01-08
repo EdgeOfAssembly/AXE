@@ -8,7 +8,6 @@ from LLM agents.
 import os
 import sys
 import tempfile
-import shutil
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +23,6 @@ from utils.xml_tool_parser import (
     parse_axe_native_blocks,
     parse_simple_xml_tags,
     parse_all_tool_formats,
-    deduplicate_calls,
     clean_tool_syntax
 )
 from axe import Config, ResponseProcessor, ToolRunner
@@ -761,7 +759,7 @@ def test_all_formats_execution():
         # Test ```READ format - now handled by ResponseProcessor, not xml_tool_parser
         # So we test via ResponseProcessor.process_response() instead
         # Note: Pattern requires newline after READ
-        response3 = f'```READ test.txt\n```'
+        response3 = '```READ test.txt\n```'
         processed3 = processor.process_response(response3, "test_agent")
         assert "Test content" in processed3 or "Execution Results" in processed3
         

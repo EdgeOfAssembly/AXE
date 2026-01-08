@@ -8,7 +8,6 @@ import os
 import sys
 import sqlite3
 import tempfile
-import shutil
 from pathlib import Path
 
 # Add parent directory to path
@@ -68,11 +67,11 @@ def test_database_location_with_different_workspace():
             
             assert not db.db_path.startswith(temp_workspace), \
                 "Database should not be in workspace directory"
-            print(f"  ✓ Database is NOT in workspace directory")
+            print("  ✓ Database is NOT in workspace directory")
             
             assert db.db_path.startswith(axe_dir), \
                 "Database should be in AXE installation directory"
-            print(f"  ✓ Database IS in AXE installation directory")
+            print("  ✓ Database IS in AXE installation directory")
             
         finally:
             os.chdir(original_cwd)
@@ -149,7 +148,7 @@ def test_database_persistence_across_workspaces():
                     xp=100,
                     level=2
                 )
-                print(f"  ✓ Saved agent state in workspace 1")
+                print("  ✓ Saved agent state in workspace 1")
                 
             finally:
                 os.chdir(original_cwd)
@@ -165,12 +164,12 @@ def test_database_persistence_across_workspaces():
                 state = db2.load_agent_state(agent_id)
                 
                 assert state is not None, "Agent state should exist"
-                print(f"  ✓ Loaded agent state in workspace 2")
+                print("  ✓ Loaded agent state in workspace 2")
                 
                 assert state['alias'] == '@test1', "Agent alias should match"
                 assert state['xp'] == 100, "Agent XP should match"
                 assert state['level'] == 2, "Agent level should match"
-                print(f"  ✓ Agent data persisted correctly")
+                print("  ✓ Agent data persisted correctly")
                 
             finally:
                 os.chdir(original_cwd)

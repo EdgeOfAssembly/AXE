@@ -1049,7 +1049,6 @@ def print_install_help(results):
     Generate installation commands for detected dependencies based on build system and OS.
     Supports Ubuntu/Debian, Fedora/RHEL/CentOS, macOS (Homebrew), and Arch Linux.
     """
-    import platform
     
     projects = results.get('projects', [])
     if not projects:
@@ -1158,7 +1157,7 @@ def print_install_help(results):
     
     if apt_packages:
         print("Ubuntu/Debian (APT):")
-        print(f"  sudo apt-get update")
+        print("  sudo apt-get update")
         print(f"  sudo apt-get install {' '.join(apt_packages)}")
         print()
     

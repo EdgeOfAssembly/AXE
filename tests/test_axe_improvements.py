@@ -6,9 +6,6 @@ Phases 1-10: Full feature test coverage.
 import os
 import sys
 import tempfile
-import shutil
-from pathlib import Path
-from datetime import datetime, timedelta
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -16,11 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from database.agent_db import AgentDatabase
 from progression.xp_system import calculate_xp_for_level
 from progression.levels import (
-    get_title_for_level,
-    LEVEL_SENIOR_WORKER,
-    LEVEL_TEAM_LEADER,
-    LEVEL_DEPUTY_SUPERVISOR,
-    LEVEL_SUPERVISOR_ELIGIBLE
+    get_title_for_level
 )
 from safety.rules import SESSION_RULES
 from managers.sleep_manager import SleepManager
@@ -28,13 +21,7 @@ from managers.break_system import BreakSystem
 from managers.emergency_mailbox import EmergencyMailbox
 from managers.dynamic_spawner import DynamicSpawner
 from core.constants import (
-    MAX_WORK_HOURS,
-    MIN_SLEEP_MINUTES,
-    ERROR_THRESHOLD_PERCENT,
     MAX_BREAK_MINUTES,
-    MAX_BREAKS_PER_HOUR,
-    MIN_ACTIVE_AGENTS,
-    MAX_TOTAL_AGENTS,
 )
 from core.config import Config
 

@@ -11,7 +11,6 @@ import sys
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from axe import CollaborativeSession
 
 
 def test_spawned_agent_system_prompt():

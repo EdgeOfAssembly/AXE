@@ -25,6 +25,7 @@ import argparse
 import subprocess
 import json
 import atexit
+import uuid
 from pathlib import Path
 from datetime import datetime
 from typing import List, Optional, Tuple, Dict, Any
@@ -192,7 +193,7 @@ class ResponseProcessor:
                     filename = args.strip().rstrip('`')
                     # Basic validation: non-empty filename
                     if not filename:
-                        results.append(f"\n[WRITE ERROR: Invalid or empty filename]")
+                        results.append("\n[WRITE ERROR: Invalid or empty filename]")
                         continue
                     # Validate path using _resolve_project_path which handles:
                     # - Absolute paths within project directory (allowed)
@@ -211,7 +212,7 @@ class ResponseProcessor:
                     # file operations, to robustly prevent symlink-based escapes.
                     resolved_path = self._resolve_project_path(filename)
                     if resolved_path is None:
-                        results.append(f"\n[WRITE ERROR: Invalid filename (path outside project directory)]")
+                        results.append("\n[WRITE ERROR: Invalid filename (path outside project directory)]")
                         continue
                     result = self._handle_write(filename, content)
                     results.append(f"\n[WRITE {filename}]\n{result}")
@@ -1352,9 +1353,9 @@ It's YOUR TURN. What would you like to contribute? Remember:
                                 
                                 # Supervisor can spawn a replacement if needed
                                 if alias == self.supervisor_alias:
-                                    print(c(f"   Note: Supervisor cannot be replaced. Continuing with reduced capacity.", Colors.YELLOW))
+                                    print(c("   Note: Supervisor cannot be replaced. Continuing with reduced capacity.", Colors.YELLOW))
                                 else:
-                                    print(c(f"   Suggestion: @boss can spawn a replacement agent if needed", Colors.CYAN))
+                                    print(c("   Suggestion: @boss can spawn a replacement agent if needed", Colors.CYAN))
                             
                             # Update error count in database
                             if state:
@@ -1511,7 +1512,7 @@ It's YOUR TURN. What would you like to contribute? Remember:
         
         # Supervisor cannot take breaks - must always be available
         if alias == self.supervisor_alias:
-            print(c(f"\n   ❌ Supervisors cannot take breaks during active sessions", Colors.YELLOW))
+            print(c("\n   ❌ Supervisors cannot take breaks during active sessions", Colors.YELLOW))
             return
         
         # Use extracted content if available, otherwise try old format
@@ -1718,7 +1719,7 @@ Focus on practical, well-tested solutions."""
         log_file = os.path.join(self.workspace.workspace_dir, '.collab_log.md')
         try:
             with open(log_file, 'w') as f:
-                f.write(f"# Collaborative Session Log\n\n")
+                f.write("# Collaborative Session Log\n\n")
                 f.write(f"**Date:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
                 f.write(f"**Agents:** {', '.join(self.agents)}\n")
                 f.write(f"**Task:** {self.task_description}\n\n")
@@ -2043,7 +2044,7 @@ Examples:
         # Remove quotes if present
         code = args.strip('"\'')
         
-        print(c(f"Running Saw taint analysis...", Colors.CYAN))
+        print(c("Running Saw taint analysis...", Colors.CYAN))
         start_time = time.time()
         
         try:
@@ -2531,7 +2532,7 @@ Dependencies:
         print(c("═" * 60, Colors.CYAN))
         
         # Print total session stats
-        print(c(f"\nSession Total:", Colors.BOLD))
+        print(c("\nSession Total:", Colors.BOLD))
         print(f"  Tokens: {total_stats['total']:,} " + 
               c(f"(input: {total_stats['input']:,}, output: {total_stats['output']:,})", Colors.DIM))
         print(f"  Cost: {format_cost(total_stats['cost'])}")
@@ -2561,7 +2562,7 @@ Dependencies:
                 print(f"  Avg tokens/message: {avg_tokens:,}")
         else:
             # Print per-agent breakdown
-            print(c(f"\nPer-Agent Breakdown:", Colors.BOLD))
+            print(c("\nPer-Agent Breakdown:", Colors.BOLD))
             for agent_name in sorted(agent_stats.keys()):
                 stats = agent_stats[agent_name]
                 print(c(f"\n  {agent_name}:", Colors.CYAN))
@@ -2606,7 +2607,7 @@ Dependencies:
         
         if total_used > 0:
             efficiency = (total_saved / (total_used + total_saved)) * 100
-            print(c(f"\nSession Efficiency:", Colors.BOLD))
+            print(c("\nSession Efficiency:", Colors.BOLD))
             print(f"  Tokens used: {total_used:,}")
             print(f"  Tokens saved: {total_saved:,}")
             print(f"  Optimization rate: {c(f'{efficiency:.1f}%', Colors.GREEN)}")
@@ -3074,7 +3075,6 @@ Dependencies:
             return content
         
         cleaned = content
-        original_len = len(content)
         
         # Remove READ blocks if configured
         if response_config.get('remove_read_blocks', True):

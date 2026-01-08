@@ -12,7 +12,7 @@ Architecture:
 """
 
 import logging
-from multiprocessing import Process, Queue, Manager, Event
+from multiprocessing import Process, Queue, Manager
 from typing import Dict, List, Optional, Any
 import time
 from datetime import datetime, timezone

@@ -4,7 +4,7 @@ Reduces token usage through intelligent truncation, summarization, and compressi
 """
 
 import re
-from typing import List, Dict, Tuple, Optional, Any
+from typing import List, Dict, Any
 from dataclasses import dataclass
 
 

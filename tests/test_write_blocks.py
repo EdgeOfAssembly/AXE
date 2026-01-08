@@ -454,15 +454,15 @@ def test_live_agent_write(agent_name: str, workspace: str):
             print(f"  File content preview:\n{content[:200]}")
         else:
             print(f"  ⚠️  WARNING: {agent_name} did not create hello.py")
-            print(f"     Response may not have contained a WRITE block")
-            print(f"     This could be a prompt interpretation issue")
+            print("     Response may not have contained a WRITE block")
+            print("     This could be a prompt interpretation issue")
             
             # List what files were created
             files = os.listdir(workspace)
             if files:
                 print(f"     Files created: {files}")
             else:
-                print(f"     No files were created in workspace")
+                print("     No files were created in workspace")
         
     except Exception as e:
         print(f"  ❌ ERROR testing {agent_name}: {e}")

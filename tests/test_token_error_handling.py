@@ -185,7 +185,7 @@ def test_token_error_vs_other_errors():
     is_token_limit = '413' in error_str or 'tokens_limit_reached' in error_str.lower()
     
     if is_token_limit:
-        response = f"[Token Limit Error: Unable to process request due to context length. Error count: 1]"
+        response = "[Token Limit Error: Unable to process request due to context length. Error count: 1]"
         special_handling = True
     else:
         response = f"[API Error: {error_str}]"
@@ -199,7 +199,7 @@ def test_token_error_vs_other_errors():
     is_token_limit = '413' in error_str or 'tokens_limit_reached' in error_str.lower()
     
     if is_token_limit:
-        response = f"[Token Limit Error: Unable to process request due to context length. Error count: 1]"
+        response = "[Token Limit Error: Unable to process request due to context length. Error count: 1]"
         special_handling = True
     else:
         response = f"[API Error: {error_str}]"

@@ -1,0 +1,37 @@
+digraph ModuleDependencies {
+  rankdir=LR;
+  node [shape=box, style=filled, fontname="Helvetica", fontsize=12];
+  label="AXE Module Dependencies";
+  labelloc=t;
+  
+  // Define modules with colors
+  axe [fillcolor="#C8E6C9", label="axe.py\n(main entry)"];
+  core [fillcolor="#BBDEFB", label="core/\nconfig, agent_manager\ntool_runner, multiprocess"];
+  database [fillcolor="#FFE0B2", label="database/\nagent_db, schema"];
+  managers [fillcolor="#E1BEE7", label="managers/\nsleep, break, spawner\nemergency_mailbox"];
+  utils [fillcolor="#B2EBF2", label="utils/\nformatting, token_stats\ncontext_optimizer"];
+  workshop [fillcolor="#FFCCBC", label="workshop/\nchisel, saw\nplane, hammer"];
+  progression [fillcolor="#DCEDC8", label="progression/\nxp_system, levels"];
+  safety [fillcolor="#FFCDD2", label="safety/\nrules"];
+  models [fillcolor="#D7CCC8", label="models/\nmetadata"];
+  tools [fillcolor="#F0F4C3", label="tools/\nllmprep, build_analyzer"];
+  
+  // Dependencies from axe.py (main entry point)
+  axe -> utils;
+  axe -> safety;
+  axe -> progression;
+  axe -> database;
+  axe -> models;
+  axe -> core;
+  axe -> managers;
+  axe -> workshop;
+  
+  // Internal module dependencies
+  core -> utils;
+  core -> models;
+  database -> progression;
+  managers -> core;
+  managers -> database;
+  managers -> utils;
+  workshop -> utils;
+}

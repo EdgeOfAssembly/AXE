@@ -1,0 +1,87 @@
+digraph UML_Class_Diagram {
+  rankdir=TB;
+  node [shape=record, fontname="Helvetica", fontsize=10];
+  edge [arrowhead=empty];
+  label="AXE Class Diagram";
+  labelloc=t;
+
+  subgraph cluster_axe {
+    label="axe (Main Module)";
+    style=filled;
+    fillcolor="#E8F5E9";
+    ResponseProcessor [label="{ResponseProcessor|+ process_response()\l+ _resolve_project_path()\l+ _handle_read()\l+ _handle_exec()\l+ _handle_write()\l}"];
+    ProjectContext [label="{ProjectContext|+ list_code_files()\l+ get_file_content()\l+ get_context_summary()\l}"];
+    SharedWorkspace [label="{SharedWorkspace|+ backup_file()\l+ read_shared_notes()\l+ append_to_shared()\l+ list_files()\l+ read_file()\l+ write_file()\l}"];
+    CollaborativeSession [label="{CollaborativeSession|+ start_session()\l+ _run_collaboration_loop()\l+ print_banner()\l}"];
+    ChatSession [label="{ChatSession|+ run()\l+ process_command()\l+ process_agent_message()\l+ list_agents()\l+ list_tools()\l}"];
+  }
+
+  subgraph cluster_core {
+    label="core (Core Components)";
+    style=filled;
+    fillcolor="#E3F2FD";
+    Config [label="{Config|+ load()\l+ save()\l+ get()\l+ get_tool_whitelist()\l}"];
+    AgentManager [label="{AgentManager|+ resolve_agent()\l+ list_agents()\l+ call_agent()\l}"];
+    ToolRunner [label="{ToolRunner|+ run()\l+ is_tool_allowed()\l+ _extract_commands()\l+ _needs_shell()\l}"];
+    SharedContext [label="{SharedContext|+ add_message()\l+ get_recent_messages()\l+ update_workspace()\l+ request_shutdown()\l}"];
+    MultiAgentCoordinator [label="{MultiAgentCoordinator|+ start()\l+ broadcast_context_update()\l+ signal_turn()\l+ shutdown()\l}"];
+    SessionManager [label="{SessionManager|+ save_session()\l+ load_session()\l+ list_sessions()\l+ delete_session()\l}"];
+  }
+
+  subgraph cluster_database {
+    label="database (Persistence)";
+    style=filled;
+    fillcolor="#FFF3E0";
+    AgentDatabase [label="{AgentDatabase|+ save_agent_state()\l+ load_agent_state()\l+ award_xp()\l+ put_agent_to_sleep()\l+ wake_agent()\l+ check_mandatory_sleep()\l+ check_degradation()\l}"];
+  }
+
+  subgraph cluster_managers {
+    label="managers (Agent Lifecycle)";
+    style=filled;
+    fillcolor="#F3E5F5";
+    SleepManager [label="{SleepManager|+ force_sleep()\l+ check_and_wake_agents()\l+ get_status_summary()\l}"];
+    BreakSystem [label="{BreakSystem|+ request_break()\l+ approve_break()\l+ check_break_endings()\l}"];
+    DynamicSpawner [label="{DynamicSpawner|+ can_spawn()\l+ spawn_agent()\l+ should_auto_spawn()\l}"];
+    EmergencyMailbox [label="{EmergencyMailbox|+ send_report()\l+ list_reports()\l+ decrypt_report()\l}"];
+  }
+
+  subgraph cluster_utils {
+    label="utils (Utilities)";
+    style=filled;
+    fillcolor="#E0F7FA";
+    ContextOptimizer [label="{ContextOptimizer|+ optimize_conversation()\l+ deduplicate_context()\l+ clean_content()\l+ truncate_code()\l}"];
+    TokenStats [label="{TokenStats|+ add_usage()\l+ get_agent_stats()\l+ get_total_stats()\l}"];
+    PromptCompressor [label="{PromptCompressor|+ compress()\l}"];
+  }
+
+  subgraph cluster_workshop {
+    label="workshop (Analysis Tools)";
+    style=filled;
+    fillcolor="#FBE9E7";
+    ChiselAnalyzer [label="{ChiselAnalyzer|+ analyze_binary()\l+ analyze_function()\l}"];
+    SawTracker [label="{SawTracker|+ analyze_code()\l+ analyze_function()\l}"];
+    PlaneEnumerator [label="{PlaneEnumerator|+ enumerate_project()\l+ enumerate_file()\l}"];
+    HammerInstrumentor [label="{HammerInstrumentor|+ instrument_process()\l+ start_monitoring()\l+ stop_monitoring()\l}"];
+  }
+
+  // Relationships
+  ChatSession -> ResponseProcessor [label="uses", arrowhead=vee, style=dashed];
+  ChatSession -> AgentManager [label="uses", arrowhead=vee, style=dashed];
+  ChatSession -> ToolRunner [label="uses", arrowhead=vee, style=dashed];
+  ChatSession -> ProjectContext [label="uses", arrowhead=vee, style=dashed];
+  
+  CollaborativeSession -> AgentManager [label="uses", arrowhead=vee, style=dashed];
+  CollaborativeSession -> SharedWorkspace [label="uses", arrowhead=vee, style=dashed];
+  CollaborativeSession -> AgentDatabase [label="uses", arrowhead=vee, style=dashed];
+  CollaborativeSession -> SleepManager [label="uses", arrowhead=vee, style=dashed];
+  CollaborativeSession -> BreakSystem [label="uses", arrowhead=vee, style=dashed];
+  CollaborativeSession -> DynamicSpawner [label="uses", arrowhead=vee, style=dashed];
+  CollaborativeSession -> EmergencyMailbox [label="uses", arrowhead=vee, style=dashed];
+  
+  SleepManager -> AgentDatabase [label="uses", arrowhead=vee, style=dashed];
+  BreakSystem -> AgentDatabase [label="uses", arrowhead=vee, style=dashed];
+  DynamicSpawner -> AgentDatabase [label="uses", arrowhead=vee, style=dashed];
+  
+  AgentManager -> Config [label="uses", arrowhead=vee, style=dashed];
+  ToolRunner -> Config [label="uses", arrowhead=vee, style=dashed];
+}

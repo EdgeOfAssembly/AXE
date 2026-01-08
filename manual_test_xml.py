@@ -104,7 +104,7 @@ File should be created now."""
         if os.path.exists(output_file):
             with open(output_file, 'r') as f:
                 content = f.read()
-            print(f"\nFile created with content:")
+            print("\nFile created with content:")
             print("-" * 70)
             print(content)
             print("-" * 70)

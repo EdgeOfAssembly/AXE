@@ -37,7 +37,7 @@ def test_agent(agent_name: str):
             print("Test 1: Create a simple text file")
             prompt = """Please create a file called 'test.txt' with the content "Hello, World!" using a WRITE block."""
             
-            print(f"  Sending request...")
+            print("  Sending request...")
             response = agent_mgr.call_agent(agent_name, prompt, "")
             
             if "API error" in response or "not available" in response:
@@ -57,8 +57,8 @@ def test_agent(agent_name: str):
                     content = f.read()
                 print(f"  ✅ SUCCESS: File created with content: {repr(content)}")
             else:
-                print(f"  ⚠️  File not created. Agent may not have used WRITE block.")
-                print(f"  Processed response:")
+                print("  ⚠️  File not created. Agent may not have used WRITE block.")
+                print("  Processed response:")
                 print(f"  {processed}")
                 return False
             
@@ -66,7 +66,7 @@ def test_agent(agent_name: str):
             print("\nTest 2: Create a Python script")
             prompt2 = """Create a Python script called 'hello.py' that prints "Hello from Python!" when run. Use a WRITE block."""
             
-            print(f"  Sending request...")
+            print("  Sending request...")
             response2 = agent_mgr.call_agent(agent_name, prompt2, "")
             processor.process_response(response2, agent_name)
             
@@ -74,10 +74,10 @@ def test_agent(agent_name: str):
             if os.path.exists(hello_file):
                 with open(hello_file, 'r') as f:
                     content = f.read()
-                print(f"  ✅ SUCCESS: Python script created")
+                print("  ✅ SUCCESS: Python script created")
                 print(f"  Preview: {content[:100]}...")
             else:
-                print(f"  ⚠️  Python script not created")
+                print("  ⚠️  Python script not created")
                 return False
             
             print(f"\n✅ {agent_name.upper()} PASSED ALL TESTS!")

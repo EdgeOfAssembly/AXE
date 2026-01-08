@@ -83,7 +83,7 @@ This previously FAILED but now WORKS!
             if os.path.exists(abs_file):
                 with open(abs_file, 'r') as f:
                     content = f.read()
-                print(f"\n   File contents:")
+                print("\n   File contents:")
                 for line in content.split('\n'):
                     print(f"   > {line}")
         else:
@@ -130,7 +130,7 @@ This should be blocked!
         
         # Test 5: Security - path traversal
         print_test(5, "Security Check: Path Traversal Attack")
-        print(f"   Attempting: ../../../etc/passwd")
+        print("   Attempting: ../../../etc/passwd")
         
         response5 = """```WRITE ../../../etc/passwd
 Path traversal attack!
