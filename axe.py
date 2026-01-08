@@ -23,11 +23,10 @@ import os
 import sys
 import argparse
 import subprocess
-import shlex
 import json
 import atexit
 from pathlib import Path
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
 from typing import List, Optional, Tuple, Dict, Any
 import time
 import shutil
@@ -63,18 +62,12 @@ except ImportError:
     print("Note: GitPython not installed. Git features disabled. Install with: pip install gitpython")
 
 # Import from new modular structure
-from utils.formatting import Colors, colorize, c
+from utils.formatting import Colors, c
 from safety.rules import SESSION_RULES
 from progression.xp_system import calculate_xp_for_level
-from progression.levels import (
-    get_title_for_level,
-    LEVEL_SENIOR_WORKER,
-    LEVEL_TEAM_LEADER,
-    LEVEL_DEPUTY_SUPERVISOR,
-    LEVEL_SUPERVISOR_ELIGIBLE
-)
+from progression.levels import get_title_for_level, LEVEL_SUPERVISOR_ELIGIBLE
 from database.agent_db import AgentDatabase, get_database_path
-from models.metadata import get_model_info, format_token_count
+from models.metadata import format_token_count
 
 # Import from core module (refactored)
 from core.constants import (
@@ -117,35 +110,9 @@ except ImportError:
     HAS_CHISEL = HAS_SAW = HAS_PLANE = HAS_HAMMER = False
     # Note: Saw and Plane are built-in tools. For full functionality: pip install angr (Chisel), frida-python psutil (Hammer)
 
-# Experience and level constants (now imported from progression module)
-# XP_PER_LEVEL_LINEAR = 100       # Imported from progression.xp_system
-# LEVEL_SENIOR_WORKER = 10        # Imported from progression.levels
-# LEVEL_TEAM_LEADER = 20          # Imported from progression.levels
-# LEVEL_DEPUTY_SUPERVISOR = 30    # Imported from progression.levels
-# LEVEL_SUPERVISOR_ELIGIBLE = 40  # Imported from progression.levels
-
-
-# XP and title functions now imported from progression module
-# def calculate_xp_for_level(level: int) -> int: ...  # See progression/xp_system.py
-# def get_title_for_level(level: int) -> str: ...     # See progression/levels.py
-
-
-# AgentDatabase class now imported from database module
-# The original AgentDatabase class has been moved to database/agent_db.py
-# All methods including award_xp, save_agent_state, load_agent_state, sleep management,
-# degradation monitoring, and break system are now in the modular structure.
-
-# Config, AgentManager, ToolRunner classes now imported from core module
-# The original classes have been moved to their respective modules:
-# - core/config.py
-# - core/agent_manager.py
-# - core/tool_runner.py
-
-# SleepManager, BreakSystem, DynamicSpawner, EmergencyMailbox now imported from managers module
-# The original classes have been moved to their respective modules in the managers directory.
-
-
-# ========== ResponseProcessor and remaining classes ==========
+# Experience/level constants, XP system, AgentDatabase, Config/AgentManager/ToolRunner,
+# and manager classes (SleepManager, BreakSystem, etc.) are now in modular structure.
+# See: progression/, database/, core/, managers/ directories.
 
 
 class ResponseProcessor:
