@@ -14,7 +14,6 @@ Run with: python3 demo_improvements.py
 import os
 import sys
 import tempfile
-import time
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -26,11 +25,7 @@ from axe import (
     get_title_for_level,
     colorize,
     Colors,
-    collect_resources,
-    LEVEL_SENIOR_WORKER,
-    LEVEL_TEAM_LEADER,
-    LEVEL_DEPUTY_SUPERVISOR,
-    LEVEL_SUPERVISOR_ELIGIBLE
+    collect_resources
 )
 
 c = colorize
@@ -267,7 +262,7 @@ def demo_persistence():
         print(colorize("Database Statistics:", Colors.BOLD))
         print(f"  Agents stored: {agent_count}")
         print(f"  Supervisor log entries: {log_count}")
-        print(f"  WAL mode: Enabled (better concurrency)")
+        print("  WAL mode: Enabled (better concurrency)")
         
     finally:
         # Cleanup
@@ -377,7 +372,7 @@ def demo_emergency_mailbox():
         
         print(c("Emergency Mailbox Configuration:", Colors.BOLD))
         print(f"  • Location: {tmp_dir}")
-        print(f"  • Access: Workers write-only, supervisor denied")
+        print("  • Access: Workers write-only, supervisor denied")
         print()
         
         # Send encrypted report
@@ -439,7 +434,7 @@ def demo_break_system():
         print(c("Break System Configuration:", Colors.BOLD))
         print(f"  • Max break duration: {MAX_BREAK_MINUTES} minutes")
         print(f"  • Max breaks per hour: {MAX_BREAKS_PER_HOUR}")
-        print(f"  • Max workforce on break: 40%")
+        print("  • Max workforce on break: 40%")
         print()
         
         # Submit break request
@@ -495,7 +490,7 @@ def demo_dynamic_spawning():
         print(c("Dynamic Spawning Configuration:", Colors.BOLD))
         print(f"  • Minimum active agents: {MIN_ACTIVE_AGENTS}")
         print(f"  • Maximum total agents: {MAX_TOTAL_AGENTS}")
-        print(f"  • Spawn cooldown: 60 seconds")
+        print("  • Spawn cooldown: 60 seconds")
         print()
         
         # Check if can spawn

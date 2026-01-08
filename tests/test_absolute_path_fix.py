@@ -37,7 +37,7 @@ def test_problem_statement_scenario():
         # Test 1: Absolute path within project (the failing case from problem statement)
         abs_path_within = os.path.join(project_dir, "copilot.txt")
         print(f"\nTest 1: Agent uses absolute path: {abs_path_within}")
-        print(f"        (This is WITHIN project directory)")
+        print("        (This is WITHIN project directory)")
         
         response = f"""```WRITE {abs_path_within}
 Hello from Copilot!
@@ -58,11 +58,11 @@ This file was created using an absolute path.
                 return False
         else:
             print("❌ FAILED: Absolute path within project was rejected!")
-            print(f"   This is the bug described in the problem statement.")
+            print("   This is the bug described in the problem statement.")
             return False
         
         # Test 2: Relative path (should still work)
-        print(f"\nTest 2: Agent uses relative path: claude.txt")
+        print("\nTest 2: Agent uses relative path: claude.txt")
         response2 = """```WRITE claude.txt
 Hello from Claude!
 This file was created using a relative path.
@@ -93,7 +93,7 @@ This should be blocked!
             return False
         
         # Test 4: Path traversal (should be blocked)
-        print(f"\nTest 4: Agent tries path traversal: ../../../etc/passwd")
+        print("\nTest 4: Agent tries path traversal: ../../../etc/passwd")
         
         response4 = """```WRITE ../../../etc/passwd
 This should be blocked!

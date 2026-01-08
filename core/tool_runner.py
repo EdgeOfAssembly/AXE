@@ -13,7 +13,7 @@ import os
 import re
 import shlex
 import subprocess
-from typing import List, Tuple, TYPE_CHECKING
+from typing import List, Tuple, Optional, TYPE_CHECKING
 
 from utils.formatting import Colors, c
 
@@ -302,7 +302,7 @@ class ToolRunner:
                 # As a last resort, ignore any errors while reporting the logging failure.
                 pass
 
-    def run(self, cmd: str, auto_approve=None, dry_run=None) -> Tuple[bool, str]:
+    def run(self, cmd: str, auto_approve: Optional[bool] = None, dry_run: Optional[bool] = None) -> Tuple[bool, str]:
         """
         Run a command after validation.
 

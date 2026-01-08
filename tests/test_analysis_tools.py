@@ -8,8 +8,6 @@ import os
 import json
 import subprocess
 import sys
-from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock
 
 
 class TestLlmprepIntegration(unittest.TestCase):
@@ -70,7 +68,7 @@ class TestLlmprepIntegration(unittest.TestCase):
             result = subprocess.run(cmd, capture_output=True, text=True, timeout=5)
             # Should either succeed with help or fail gracefully
             self.assertIsNotNone(result.stdout or result.stderr)
-        except Exception as e:
+        except Exception:
             # Script might not have --help, that's okay
             pass
 

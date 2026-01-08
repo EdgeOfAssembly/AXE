@@ -52,15 +52,15 @@ Now let me analyze the requirements...'''
     
     # Old behavior (simple string match)
     old_result = 'TASK COMPLETE' in mission_file_response.upper()
-    print(f"\n❌ OLD BEHAVIOR (simple string match):")
+    print("\n❌ OLD BEHAVIOR (simple string match):")
     print(f"   Would trigger? {old_result}")
-    print(f"   Problem: Session would END prematurely after just 1 turn!")
+    print("   Problem: Session would END prematurely after just 1 turn!")
     
     # New behavior (smart detection)
     new_result = is_genuine_task_completion(mission_file_response)
-    print(f"\n✅ NEW BEHAVIOR (smart detection):")
+    print("\n✅ NEW BEHAVIOR (smart detection):")
     print(f"   Would trigger? {new_result}")
-    print(f"   Result: Session continues normally - agent can work!")
+    print("   Result: Session continues normally - agent can work!")
     
     # Test genuine completion
     print("\n" + "=" * 70)
@@ -84,15 +84,15 @@ TASK COMPLETE: Benchmark system fully implemented and tested."""
     
     # Old behavior
     old_result = 'TASK COMPLETE' in genuine_response.upper()
-    print(f"\n✅ OLD BEHAVIOR (simple string match):")
+    print("\n✅ OLD BEHAVIOR (simple string match):")
     print(f"   Would trigger? {old_result}")
-    print(f"   Result: Session ends ✓")
+    print("   Result: Session ends ✓")
     
     # New behavior
     new_result = is_genuine_task_completion(genuine_response)
-    print(f"\n✅ NEW BEHAVIOR (smart detection):")
+    print("\n✅ NEW BEHAVIOR (smart detection):")
     print(f"   Would trigger? {new_result}")
-    print(f"   Result: Session ends ✓")
+    print("   Result: Session ends ✓")
     
     # Summary
     print("\n" + "=" * 70)

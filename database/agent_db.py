@@ -843,11 +843,3 @@ class AgentDatabase:
                 }
             
             return stats
-        
-        # Check workforce on break percentage
-        if total_agents > 0:
-            on_break_ratio = (agents_on_break + 1) / total_agents
-            if on_break_ratio > max_workforce_on_break:
-                return False, f"Too many agents on break ({on_break_ratio:.0%} > {max_workforce_on_break:.0%})"
-        
-        return True, "Break approved"

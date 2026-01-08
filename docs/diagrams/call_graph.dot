@@ -1,0 +1,112 @@
+digraph CallGraph {
+  rankdir=TB;
+  node [shape=box, style=rounded, fontname="Helvetica", fontsize=10];
+  edge [fontsize=8];
+  label="AXE Call Flow Diagram";
+  labelloc=t;
+  
+  // Entry points
+  subgraph cluster_entry {
+    label="Entry Points";
+    style=filled;
+    fillcolor="#E8F5E9";
+    main [label="main()", shape=ellipse, fillcolor="#4CAF50", fontcolor=white];
+  }
+  
+  // Command line handling
+  subgraph cluster_cli {
+    label="CLI Processing";
+    style=filled;
+    fillcolor="#E3F2FD";
+    parse_args [label="argparse.parse_args()"];
+    init_config [label="Config()"];
+  }
+  
+  // Session modes
+  subgraph cluster_modes {
+    label="Session Modes";
+    style=filled;
+    fillcolor="#FFF3E0";
+    interactive [label="ChatSession.run()"];
+    single_cmd [label="process_agent_message()"];
+    collab [label="CollaborativeSession\n.start_session()"];
+  }
+  
+  // Chat session flow
+  subgraph cluster_chat {
+    label="Interactive Mode";
+    style=filled;
+    fillcolor="#F3E5F5";
+    process_cmd [label="process_command()"];
+    agent_msg [label="process_agent_message()"];
+    call_agent [label="AgentManager.call_agent()"];
+    process_resp [label="ResponseProcessor\n.process_response()"];
+  }
+  
+  // Tool execution
+  subgraph cluster_tools {
+    label="Tool Execution";
+    style=filled;
+    fillcolor="#E0F7FA";
+    handle_read [label="_handle_read()"];
+    handle_exec [label="_handle_exec()"];
+    handle_write [label="_handle_write()"];
+    tool_run [label="ToolRunner.run()"];
+    is_allowed [label="is_tool_allowed()"];
+    subprocess_run [label="subprocess.run()"];
+  }
+  
+  // Collaborative mode flow
+  subgraph cluster_collab_flow {
+    label="Collaborative Mode";
+    style=filled;
+    fillcolor="#FBE9E7";
+    collab_loop [label="_run_collaboration_loop()"];
+    check_sleep [label="check_mandatory_sleep()"];
+    check_degrad [label="check_degradation()"];
+    get_response [label="API Call\n(Anthropic/OpenAI/etc)"];
+    handle_tokens [label="Handle Agent Tokens\n(PASS, TASK_COMPLETE, etc)"];
+  }
+  
+  // Database operations
+  subgraph cluster_db {
+    label="Persistence";
+    style=filled;
+    fillcolor="#FFCCBC";
+    save_state [label="save_agent_state()"];
+    load_state [label="load_agent_state()"];
+    award_xp [label="award_xp()"];
+  }
+  
+  // Main flow edges
+  main -> parse_args;
+  parse_args -> init_config;
+  init_config -> interactive [label="no --collab"];
+  init_config -> collab [label="--collab"];
+  init_config -> single_cmd [label="-c command"];
+  
+  // Interactive flow
+  interactive -> process_cmd [label="/ commands"];
+  interactive -> agent_msg [label="@ agent msgs"];
+  agent_msg -> call_agent;
+  call_agent -> process_resp;
+  process_resp -> handle_read [label="```READ"];
+  process_resp -> handle_exec [label="```EXEC"];
+  process_resp -> handle_write [label="```WRITE"];
+  handle_exec -> tool_run;
+  tool_run -> is_allowed;
+  is_allowed -> subprocess_run [label="if allowed"];
+  
+  // Collaborative flow
+  collab -> collab_loop;
+  collab_loop -> check_sleep;
+  collab_loop -> check_degrad;
+  collab_loop -> call_agent;
+  collab_loop -> handle_tokens;
+  handle_tokens -> award_xp [label="task complete"];
+  collab_loop -> save_state;
+  
+  // Database connections
+  check_sleep -> load_state;
+  check_degrad -> load_state;
+}

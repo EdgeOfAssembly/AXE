@@ -47,7 +47,7 @@ EOF"""
         print("\nExecuting command...")
         success, output = runner.run(cmd)
         
-        print(f"\nExecution result:")
+        print("\nExecution result:")
         print(f"  Success: {success}")
         print(f"  Output: {output}")
         

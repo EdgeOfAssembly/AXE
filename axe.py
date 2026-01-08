@@ -23,11 +23,11 @@ import os
 import sys
 import argparse
 import subprocess
-import shlex
 import json
 import atexit
+import uuid
 from pathlib import Path
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
 from typing import List, Optional, Tuple, Dict, Any
 import time
 import shutil
@@ -63,18 +63,12 @@ except ImportError:
     print("Note: GitPython not installed. Git features disabled. Install with: pip install gitpython")
 
 # Import from new modular structure
-from utils.formatting import Colors, colorize, c
+from utils.formatting import Colors, c
 from safety.rules import SESSION_RULES
 from progression.xp_system import calculate_xp_for_level
-from progression.levels import (
-    get_title_for_level,
-    LEVEL_SENIOR_WORKER,
-    LEVEL_TEAM_LEADER,
-    LEVEL_DEPUTY_SUPERVISOR,
-    LEVEL_SUPERVISOR_ELIGIBLE
-)
+from progression.levels import get_title_for_level, LEVEL_SUPERVISOR_ELIGIBLE
 from database.agent_db import AgentDatabase, get_database_path
-from models.metadata import get_model_info, format_token_count
+from models.metadata import format_token_count
 
 # Import from core module (refactored)
 from core.constants import (
@@ -117,35 +111,9 @@ except ImportError:
     HAS_CHISEL = HAS_SAW = HAS_PLANE = HAS_HAMMER = False
     # Note: Saw and Plane are built-in tools. For full functionality: pip install angr (Chisel), frida-python psutil (Hammer)
 
-# Experience and level constants (now imported from progression module)
-# XP_PER_LEVEL_LINEAR = 100       # Imported from progression.xp_system
-# LEVEL_SENIOR_WORKER = 10        # Imported from progression.levels
-# LEVEL_TEAM_LEADER = 20          # Imported from progression.levels
-# LEVEL_DEPUTY_SUPERVISOR = 30    # Imported from progression.levels
-# LEVEL_SUPERVISOR_ELIGIBLE = 40  # Imported from progression.levels
-
-
-# XP and title functions now imported from progression module
-# def calculate_xp_for_level(level: int) -> int: ...  # See progression/xp_system.py
-# def get_title_for_level(level: int) -> str: ...     # See progression/levels.py
-
-
-# AgentDatabase class now imported from database module
-# The original AgentDatabase class has been moved to database/agent_db.py
-# All methods including award_xp, save_agent_state, load_agent_state, sleep management,
-# degradation monitoring, and break system are now in the modular structure.
-
-# Config, AgentManager, ToolRunner classes now imported from core module
-# The original classes have been moved to their respective modules:
-# - core/config.py
-# - core/agent_manager.py
-# - core/tool_runner.py
-
-# SleepManager, BreakSystem, DynamicSpawner, EmergencyMailbox now imported from managers module
-# The original classes have been moved to their respective modules in the managers directory.
-
-
-# ========== ResponseProcessor and remaining classes ==========
+# Experience/level constants, XP system, AgentDatabase, Config/AgentManager/ToolRunner,
+# and manager classes (SleepManager, BreakSystem, etc.) are now in modular structure.
+# See: progression/, database/, core/, managers/ directories.
 
 
 class ResponseProcessor:
@@ -225,7 +193,7 @@ class ResponseProcessor:
                     filename = args.strip().rstrip('`')
                     # Basic validation: non-empty filename
                     if not filename:
-                        results.append(f"\n[WRITE ERROR: Invalid or empty filename]")
+                        results.append("\n[WRITE ERROR: Invalid or empty filename]")
                         continue
                     # Validate path using _resolve_project_path which handles:
                     # - Absolute paths within project directory (allowed)
@@ -244,7 +212,7 @@ class ResponseProcessor:
                     # file operations, to robustly prevent symlink-based escapes.
                     resolved_path = self._resolve_project_path(filename)
                     if resolved_path is None:
-                        results.append(f"\n[WRITE ERROR: Invalid filename (path outside project directory)]")
+                        results.append("\n[WRITE ERROR: Invalid filename (path outside project directory)]")
                         continue
                     result = self._handle_write(filename, content)
                     results.append(f"\n[WRITE {filename}]\n{result}")
@@ -1385,9 +1353,9 @@ It's YOUR TURN. What would you like to contribute? Remember:
                                 
                                 # Supervisor can spawn a replacement if needed
                                 if alias == self.supervisor_alias:
-                                    print(c(f"   Note: Supervisor cannot be replaced. Continuing with reduced capacity.", Colors.YELLOW))
+                                    print(c("   Note: Supervisor cannot be replaced. Continuing with reduced capacity.", Colors.YELLOW))
                                 else:
-                                    print(c(f"   Suggestion: @boss can spawn a replacement agent if needed", Colors.CYAN))
+                                    print(c("   Suggestion: @boss can spawn a replacement agent if needed", Colors.CYAN))
                             
                             # Update error count in database
                             if state:
@@ -1544,7 +1512,7 @@ It's YOUR TURN. What would you like to contribute? Remember:
         
         # Supervisor cannot take breaks - must always be available
         if alias == self.supervisor_alias:
-            print(c(f"\n   ❌ Supervisors cannot take breaks during active sessions", Colors.YELLOW))
+            print(c("\n   ❌ Supervisors cannot take breaks during active sessions", Colors.YELLOW))
             return
         
         # Use extracted content if available, otherwise try old format
@@ -1751,7 +1719,7 @@ Focus on practical, well-tested solutions."""
         log_file = os.path.join(self.workspace.workspace_dir, '.collab_log.md')
         try:
             with open(log_file, 'w') as f:
-                f.write(f"# Collaborative Session Log\n\n")
+                f.write("# Collaborative Session Log\n\n")
                 f.write(f"**Date:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
                 f.write(f"**Agents:** {', '.join(self.agents)}\n")
                 f.write(f"**Task:** {self.task_description}\n\n")
@@ -2076,7 +2044,7 @@ Examples:
         # Remove quotes if present
         code = args.strip('"\'')
         
-        print(c(f"Running Saw taint analysis...", Colors.CYAN))
+        print(c("Running Saw taint analysis...", Colors.CYAN))
         start_time = time.time()
         
         try:
@@ -2564,7 +2532,7 @@ Dependencies:
         print(c("═" * 60, Colors.CYAN))
         
         # Print total session stats
-        print(c(f"\nSession Total:", Colors.BOLD))
+        print(c("\nSession Total:", Colors.BOLD))
         print(f"  Tokens: {total_stats['total']:,} " + 
               c(f"(input: {total_stats['input']:,}, output: {total_stats['output']:,})", Colors.DIM))
         print(f"  Cost: {format_cost(total_stats['cost'])}")
@@ -2594,7 +2562,7 @@ Dependencies:
                 print(f"  Avg tokens/message: {avg_tokens:,}")
         else:
             # Print per-agent breakdown
-            print(c(f"\nPer-Agent Breakdown:", Colors.BOLD))
+            print(c("\nPer-Agent Breakdown:", Colors.BOLD))
             for agent_name in sorted(agent_stats.keys()):
                 stats = agent_stats[agent_name]
                 print(c(f"\n  {agent_name}:", Colors.CYAN))
@@ -2639,7 +2607,7 @@ Dependencies:
         
         if total_used > 0:
             efficiency = (total_saved / (total_used + total_saved)) * 100
-            print(c(f"\nSession Efficiency:", Colors.BOLD))
+            print(c("\nSession Efficiency:", Colors.BOLD))
             print(f"  Tokens used: {total_used:,}")
             print(f"  Tokens saved: {total_saved:,}")
             print(f"  Optimization rate: {c(f'{efficiency:.1f}%', Colors.GREEN)}")
@@ -3107,7 +3075,6 @@ Dependencies:
             return content
         
         cleaned = content
-        original_len = len(content)
         
         # Remove READ blocks if configured
         if response_config.get('remove_read_blocks', True):
@@ -3217,7 +3184,7 @@ def sync_agents_on_shutdown() -> None:
         pass
 
 
-def main():
+def main() -> None:
     """Main entry point."""
     parser = argparse.ArgumentParser(
         description="AXE - Agent eXecution Engine",

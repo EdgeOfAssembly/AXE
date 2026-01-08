@@ -185,7 +185,7 @@ def test_token_error_vs_other_errors():
     is_token_limit = '413' in error_str or 'tokens_limit_reached' in error_str.lower()
     
     if is_token_limit:
-        response = f"[Token Limit Error: Unable to process request due to context length. Error count: 1]"
+        response = "[Token Limit Error: Unable to process request due to context length. Error count: 1]"
         special_handling = True
     else:
         response = f"[API Error: {error_str}]"
@@ -194,16 +194,14 @@ def test_token_error_vs_other_errors():
     assert special_handling, "Token limit error should have special handling"
     assert "Token Limit Error" in response, "Token error response incorrect"
     
-    # Regular API error
+    # Regular API error (not a token limit error)
     error_str = "Connection timeout"
     is_token_limit = '413' in error_str or 'tokens_limit_reached' in error_str.lower()
     
-    if is_token_limit:
-        response = f"[Token Limit Error: Unable to process request due to context length. Error count: 1]"
-        special_handling = True
-    else:
-        response = f"[API Error: {error_str}]"
-        special_handling = False
+    # Since this is not a token limit error, we go to the else branch
+    assert not is_token_limit, "Connection timeout should not be detected as token limit"
+    response = f"[API Error: {error_str}]"
+    special_handling = False
     
     assert not special_handling, "Regular error should not have special handling"
     assert "API Error" in response, "Regular error response incorrect"

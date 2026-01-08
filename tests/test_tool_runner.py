@@ -309,7 +309,7 @@ def test_extract_commands():
             assert len(extracted) > 0, f"Should extract at least one command from '{cmd}'"
             # Check that the first expected command is in the extracted list
             assert expected[0] in extracted, f"Should extract '{expected[0]}' from '{cmd}'"
-            print(f"    ✓ Passed")
+            print("    ✓ Passed")
         
         print("\n✅ All _extract_commands_from_shell tests passed!")
         return True

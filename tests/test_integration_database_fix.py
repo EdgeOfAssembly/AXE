@@ -12,7 +12,7 @@ import sqlite3
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from database.agent_db import AgentDatabase, get_database_path
+from database.agent_db import AgentDatabase
 
 
 def simulate_problem_scenario():
@@ -48,11 +48,11 @@ def simulate_problem_scenario():
             # Check where the database file is located
             if db.db_path.startswith(workspace):
                 print("❌ PROBLEM: Database is in workspace directory!")
-                print(f"   This would cause 'no such table' errors when switching workspaces")
+                print("   This would cause 'no such table' errors when switching workspaces")
                 return False
             elif db.db_path.startswith(axe_dir):
                 print("✅ FIXED: Database is in AXE installation directory!")
-                print(f"   Agent data will persist across different workspace sessions")
+                print("   Agent data will persist across different workspace sessions")
             else:
                 print("⚠️  WARNING: Database is in unexpected location!")
                 return False

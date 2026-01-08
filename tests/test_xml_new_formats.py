@@ -15,7 +15,6 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from utils.xml_tool_parser import (
     parse_simple_xml_tags,
     parse_all_tool_formats,
-    execute_parsed_call,
     process_agent_response
 )
 from axe import Config, ResponseProcessor, ToolRunner
@@ -124,9 +123,9 @@ All operations completed."""
     exec_calls = [c for c in calls if c['tool'] == 'EXEC']
     write_calls = [c for c in calls if c['tool'] == 'WRITE']
     
-    assert len(read_calls) == 1, f"Expected 1 READ call"
-    assert len(exec_calls) == 1, f"Expected 1 EXEC call"
-    assert len(write_calls) == 1, f"Expected 1 WRITE call"
+    assert len(read_calls) == 1, "Expected 1 READ call"
+    assert len(exec_calls) == 1, "Expected 1 EXEC call"
+    assert len(write_calls) == 1, "Expected 1 WRITE call"
     
     print("  ✓ All new XML formats work together")
 
@@ -220,9 +219,9 @@ def test_no_conflicts_with_existing_formats():
     exec_calls = [c for c in calls if c['tool'] == 'EXEC']
     write_calls = [c for c in calls if c['tool'] == 'WRITE']
     
-    assert len(read_calls) == 2, f"Expected 2 READ calls"
-    assert len(exec_calls) == 2, f"Expected 2 EXEC calls"
-    assert len(write_calls) == 2, f"Expected 2 WRITE calls"
+    assert len(read_calls) == 2, "Expected 2 READ calls"
+    assert len(exec_calls) == 2, "Expected 2 EXEC calls"
+    assert len(write_calls) == 2, "Expected 2 WRITE calls"
     
     # Check raw names are preserved
     read_names = {c['raw_name'] for c in read_calls}
