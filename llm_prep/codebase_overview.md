@@ -1,4 +1,4 @@
-# LLM-Ready Codebase Overview — 2026-01-04
+# LLM-Ready Codebase Overview — 2026-01-10
 
 **Project:** AXE
 
@@ -7,12 +7,24 @@
 ```text
 .
 ├── core
+│   ├── agent_manager.py
+│   ├── config.py
+│   ├── constants.py
 │   ├── __init__.py
-│   └── multiprocess.py
+│   ├── multiprocess.py
+│   ├── resource_monitor.py
+│   ├── session_manager.py
+│   └── tool_runner.py
 ├── database
 │   ├── agent_db.py
 │   ├── __init__.py
 │   └── schema.py
+├── docs
+│   └── diagrams
+│       ├── call_graph.dot
+│       ├── class_diagram.dot
+│       ├── module_dependencies.dot
+│       └── README.md
 ├── llm_prep
 │   ├── dot_graphs_doxygen
 │   ├── dot_graphs_pyreverse
@@ -24,6 +36,12 @@
 │   ├── llm_system_prompt.md
 │   ├── project_guidance.md
 │   └── tags
+├── managers
+│   ├── break_system.py
+│   ├── dynamic_spawner.py
+│   ├── emergency_mailbox.py
+│   ├── __init__.py
+│   └── sleep_manager.py
 ├── models
 │   ├── __init__.py
 │   └── metadata.py
@@ -34,11 +52,46 @@
 ├── safety
 │   ├── __init__.py
 │   └── rules.py
-├── team_test
+├── tests
+│   ├── test_absolute_path_fix.py
+│   ├── test_analysis_tools.py
+│   ├── test_axe_improvements.py
+│   ├── test_collab_tool_syntax.py
+│   ├── test_database_location.py
+│   ├── test_detect_agent_token.py
+│   ├── test_double_execution.py
+│   ├── test_exec_heredoc.py
+│   ├── test_heredoc_execution_fix.py
+│   ├── test_heredoc_parsing.py
+│   ├── test_inline_exec_blocks.py
+│   ├── test_integration_bug_fix.py
+│   ├── test_integration_database_fix.py
+│   ├── test_mission_md_tokens.py
+│   ├── test_spawned_agents.py
+│   ├── test_supervisor_protections.py
+│   ├── test_task_completion_detection.py
+│   ├── test_token_error_handling.py
+│   ├── test_token_optimization.py
+│   ├── test_tool_runner_edge_cases.py
+│   ├── test_tool_runner.py
+│   ├── test_workshop_cli_integration.py
+│   ├── test_workshop_integration.py
+│   ├── test_workshop_pr23_validation.py
+│   ├── test_workshop.py
+│   ├── test_write_blocks.py
+│   ├── test_xml_new_formats.py
+│   └── test_xml_tool_parser.py
+├── tools
+│   ├── build_analyzer.py
+│   ├── __init__.py
+│   └── llmprep.py
 ├── utils
+│   ├── context_optimizer.py
 │   ├── formatting.py
 │   ├── __init__.py
-│   ├── token_tracker.py
+│   ├── prompt_compressor.py
+│   ├── rate_limiter.py
+│   ├── token_stats.py
 │   └── xml_tool_parser.py
 ├── workshop
 │   ├── chisel.py
@@ -48,6 +101,7 @@
 │   └── saw.py
 ├── ABSOLUTE_PATH_FIX_SUMMARY.md
 ├── API_PROVIDERS.md
+├── ARCHITECTURE.md
 ├── axe.py
 ├── axe.yaml
 ├── BEFORE_AFTER_COMPARISON.md
@@ -81,32 +135,6 @@
 ├── requirements.txt
 ├── SHELL_OPERATOR_SUPPORT_SUMMARY.md
 ├── TASK_COMPLETION_FIX_SUMMARY.md
-├── test_absolute_path_fix.py
-├── test_axe_improvements.py
-├── test_collab_tool_syntax.py
-├── test_database_location.py
-├── test_detect_agent_token.py
-├── test_double_execution.py
-├── test_exec_heredoc.py
-├── test_heredoc_execution_fix.py
-├── test_heredoc_parsing.py
-├── test_inline_exec_blocks.py
-├── test_integration_bug_fix.py
-├── test_integration_database_fix.py
-├── test_mission_md_tokens.py
-├── test_spawned_agents.py
-├── test_supervisor_protections.py
-├── test_task_completion_detection.py
-├── test_token_error_handling.py
-├── test_tool_runner_edge_cases.py
-├── test_tool_runner.py
-├── test_workshop_cli_integration.py
-├── test_workshop_integration.py
-├── test_workshop_pr23_validation.py
-├── test_workshop.py
-├── test_write_blocks.py
-├── test_xml_new_formats.py
-├── test_xml_tool_parser.py
 ├── workshop_benchmarks.md
 ├── workshop_dependency_validation.md
 ├── workshop_quick_reference.md
@@ -116,22 +144,22 @@
 ├── XML_PARSER_IMPLEMENTATION.md
 └── XML_PARSER_QUICK_REFERENCE.md
 
-12 directories, 98 files
+16 directories, 122 files
 ```
 
 ## Code Statistics
 
 ```text
-github.com/AlDanial/cloc v 2.00  T=0.16 s (625.8 files/s, 218647.0 lines/s)
+github.com/AlDanial/cloc v 2.00  T=0.17 s (684.0 files/s, 199523.5 lines/s)
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-Markdown                        39           4060              0          12128
-Python                          54           3374           3967           9449
-YAML                             1            104             46            604
-Text                             3              2              0            158
+Python                          73           4176           4820          12487
+Markdown                        39           2503              0           8279
+YAML                             1            369              2           1009
+Text                             3              2              0            188
 -------------------------------------------------------------------------------
-SUM:                            97           7540           4013          22339
+SUM:                           116           7050           4822          21963
 -------------------------------------------------------------------------------
 ```
 

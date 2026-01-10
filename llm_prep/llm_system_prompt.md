@@ -1,6 +1,6 @@
 You are analyzing the "AXE" codebase.
 
-Primary languages: Markdown, Python, YAML, Text
+Primary languages: Python, Markdown, YAML, Text
 
 Guidelines:
 - Provide clear, concise explanations
