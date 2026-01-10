@@ -1244,6 +1244,73 @@ directories:
   - ~/.gnupg
   - ~/.aws
   - ~/.config/gh
+
+# ============================================================================
+# Sandbox Configuration (Bubblewrap Isolation)
+# ============================================================================
+# Enable secure sandbox execution using Linux namespaces via bubblewrap.
+# When enabled, commands run inside an isolated environment with default-allow
+# model, while the host system remains protected.
+#
+# Requirements:
+#   - Linux operating system
+#   - bubblewrap (bwrap) installed: apt install bubblewrap
+#
+# To enable sandbox mode, set enabled: true below.
+# ============================================================================
+# sandbox:
+#   enabled: false  # Set to true to enable sandbox mode
+#   runtime: bubblewrap
+#   
+#   # Workspace configuration
+#   workspaces:
+#     - path: .  # Project directory (writable inside sandbox)
+#       writable: true
+#   
+#   # Host directories to expose inside sandbox
+#   host_binds:
+#     # Read-only binds (for system tools and libraries)
+#     readonly:
+#       - /usr
+#       - /lib
+#       - /lib64
+#       - /bin
+#       - /etc      # For resolv.conf, passwd, etc.
+#       - /run      # Runtime (dbus if needed)
+#       - /sys
+#     
+#     # Writable binds (rarely needed, use with caution)
+#     writable: []
+#     
+#     # Hidden paths (completely inaccessible inside sandbox)
+#     none:
+#       - ~/.ssh
+#       - ~/.gnupg
+#       - /root
+#   
+#   # Optional tool blacklist (empty = all tools allowed inside sandbox)
+#   # Example: Blacklist dangerous commands even inside sandbox
+#   tool_blacklist: []
+#   # tool_blacklist: ['rm', 'dd', 'mkfs', 'fdisk']
+#   
+#   # Namespace isolation options
+#   namespaces:
+#     user: true      # User namespace (map to root inside)
+#     mount: true     # Mount namespace (private mounts)
+#     pid: true       # PID namespace (process isolation)
+#     uts: true       # UTS namespace (hostname isolation)
+#     network: false  # Network namespace (set true for network isolation)
+#     ipc: true       # IPC namespace (process communication isolation)
+#     cgroup: true    # CGroup namespace
+#   
+#   # Additional sandbox options
+#   options:
+#     new_session: true       # Block TTY attacks
+#     die_with_parent: true   # Kill sandbox if parent dies
+#     proc: /proc             # Mount fresh /proc
+#     dev: /dev               # Full /dev (includes /dev/fuse for FUSE mounts)
+#     tmpfs: /tmp             # Writable tmp inside sandbox
+
 code_extensions:
 - .c
 - .h

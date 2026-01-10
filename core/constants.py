@@ -210,6 +210,47 @@ Focus on practical, working solutions."""
         'forbidden': ['/etc', '/root', '~/.ssh']
     },
 
+    # Sandbox configuration (bubblewrap isolation)
+    'sandbox': {
+        'enabled': False,  # Opt-in for backward compatibility
+        'runtime': 'bubblewrap',
+        
+        # Workspace configuration
+        'workspaces': [
+            {'path': '.', 'writable': True}
+        ],
+        
+        # Host directories to expose
+        'host_binds': {
+            'readonly': ['/usr', '/lib', '/lib64', '/bin', '/etc', '/run', '/sys'],
+            'writable': [],
+            'none': ['~/.ssh', '~/.gnupg', '/root']
+        },
+        
+        # Optional tool blacklist (empty = all allowed inside sandbox)
+        'tool_blacklist': [],
+        
+        # Namespace options
+        'namespaces': {
+            'user': True,
+            'mount': True,
+            'pid': True,
+            'uts': True,
+            'network': False,  # Set true for network isolation
+            'ipc': True,
+            'cgroup': True
+        },
+        
+        # Additional options
+        'options': {
+            'new_session': True,  # Block TTY attacks
+            'die_with_parent': True,  # Kill sandbox if parent dies
+            'proc': '/proc',  # Mount fresh /proc
+            'dev': '/dev',   # Full /dev (includes /dev/fuse for FUSE mounts)
+            'tmpfs': '/tmp'  # Writable tmp inside sandbox
+        }
+    },
+
     # File extensions for code detection
     'code_extensions': ['.c', '.h', '.cpp', '.hpp', '.cc', '.cxx',
                         '.py', '.pyx', '.pyi',
