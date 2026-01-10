@@ -86,10 +86,8 @@ class SandboxManager:
         # Namespace configuration
         if self.namespaces.get('user', True):
             # Try user namespace, but don't fail if unsupported
+            # Note: Mount namespace is automatically created with user namespace
             cmd.append('--unshare-user-try')
-        
-        if self.namespaces.get('mount', True):
-            cmd.append('--unshare-mount')
         
         if self.namespaces.get('pid', True):
             cmd.append('--unshare-pid')
@@ -193,6 +191,16 @@ class SandboxManager:
                 text=True,
                 timeout=timeout
             )
+            
+            # Check for common error messages that indicate sandbox can't be created
+            if result.returncode != 0:
+                error_output = result.stderr.lower()
+                if ('permission denied' in error_output or 
+                    'operation not permitted' in error_output or
+                    'failed rtm_newaddr' in error_output):
+                    # Sandbox can't be created in this environment
+                    # This is expected in some CI environments or containers
+                    return False, f"Sandbox not supported in this environment: {result.stderr}"
             
             output = result.stdout
             if result.stderr:
