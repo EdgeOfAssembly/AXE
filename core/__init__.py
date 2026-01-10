@@ -6,6 +6,7 @@ from .multiprocess import AgentWorkerProcess, MultiAgentCoordinator, SharedConte
 from .config import Config
 from .agent_manager import AgentManager
 from .tool_runner import ToolRunner
+from .sandbox import SandboxManager
 from .resource_monitor import start_resource_monitor, collect_resources
 from .constants import (
     DEFAULT_CONFIG,
@@ -56,6 +57,8 @@ __all__ = [
     'AgentManager',
     # Tool Runner
     'ToolRunner',
+    # Sandbox
+    'SandboxManager',
     # Resource Monitor
     'start_resource_monitor',
     'collect_resources',

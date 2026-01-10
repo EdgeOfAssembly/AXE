@@ -56,10 +56,25 @@ class ToolRunner:
         """
         self.config = config
         self.project_dir = os.path.abspath(project_dir)
-        self.whitelist = config.get_tool_whitelist()
         self.exec_log = os.path.join(project_dir, 'axe_exec.log')
         self.auto_approve = False
         self.dry_run = False
+        
+        # Initialize sandbox manager if enabled
+        self.sandbox_manager = None
+        if config.get('sandbox', 'enabled', default=False):
+            try:
+                from .sandbox import SandboxManager
+                self.sandbox_manager = SandboxManager(config, project_dir)
+                if not self.sandbox_manager.is_available():
+                    print(c("Warning: bubblewrap not available, falling back to whitelist mode", Colors.YELLOW))
+                    self.sandbox_manager = None
+            except ImportError as e:
+                print(c(f"Warning: Failed to import sandbox module: {e}", Colors.YELLOW))
+                self.sandbox_manager = None
+        
+        # Legacy whitelist mode (used when sandbox is disabled or unavailable)
+        self.whitelist = config.get_tool_whitelist()
 
     def _strip_heredoc_content(self, cmd: str) -> str:
         """
@@ -212,11 +227,30 @@ class ToolRunner:
         Returns:
             Tuple of (allowed: bool, reason: str)
         """
-        if '*' in self.whitelist:
-            return True, "OK (wildcard allowed)"
-
         if not cmd or not cmd.strip():
             return False, "Empty command"
+        
+        # Sandbox mode: check blacklist only
+        if self.sandbox_manager:
+            try:
+                commands = self._extract_commands_from_shell(cmd)
+            except Exception as e:
+                return False, f"Failed to parse command: {e}"
+            
+            if not commands:
+                return False, "No commands found in input"
+            
+            # Check each command against blacklist
+            for command in commands:
+                base_cmd = os.path.basename(command)
+                if self.sandbox_manager.is_tool_blacklisted(base_cmd):
+                    return False, f"Tool '{base_cmd}' is blacklisted"
+            
+            return True, "OK (sandbox mode)"
+        
+        # Legacy whitelist mode
+        if '*' in self.whitelist:
+            return True, "OK (wildcard allowed)"
 
         # Extract all command names from the shell string
         # NOTE: This uses _strip_heredoc_content() internally for parsing only
@@ -340,6 +374,17 @@ class ToolRunner:
                 return False, "Command approval cancelled"
 
         # Execute command
+        # If sandbox is enabled, delegate to sandbox manager
+        if self.sandbox_manager:
+            try:
+                success, output = self.sandbox_manager.run(cmd, timeout=300)
+                self._log_execution(cmd, success, output)
+                return success, output
+            except Exception as e:
+                self._log_execution(cmd, False, str(e))
+                return False, f"Sandbox execution error: {e}"
+        
+        # Legacy direct execution (whitelist mode)
         try:
             use_shell = self._needs_shell(cmd)
 
