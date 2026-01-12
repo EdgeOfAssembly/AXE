@@ -38,6 +38,7 @@ class ToolRunner:
     - Prevents access to forbidden directories
     - Logs all command execution attempts
     - Supports dry-run mode for testing
+    - Commands execute immediately after passing validation
     """
 
     # Shell operators that connect commands in a pipeline or sequence
