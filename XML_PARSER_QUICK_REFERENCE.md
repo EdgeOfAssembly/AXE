@@ -240,7 +240,7 @@ Both operations execute and return results in sequence.
 
 - Check tool whitelist in `axe.yaml`
 - Commands must be explicitly allowed
-- Use `auto_approve: true` for testing (in ToolRunner)
+- Commands execute immediately after passing validation
 
 ## Backward Compatibility
 

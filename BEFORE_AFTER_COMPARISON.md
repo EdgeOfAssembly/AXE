@@ -132,7 +132,7 @@ def __init__(self, config: Config, agents: List[str], workspace_dir: str,
     self.workspace = SharedWorkspace(workspace_dir)
     self.project_ctx = ProjectContext(workspace_dir, config)
     self.tool_runner = ToolRunner(config, workspace_dir)
-    # ❌ auto_approve defaults to False
+    # ❌ Manual approval prompts block execution
     self.response_processor = ResponseProcessor(config, workspace_dir, self.tool_runner)
 ```
 
@@ -156,8 +156,7 @@ def __init__(self, config: Config, agents: List[str], workspace_dir: str,
     self.workspace = SharedWorkspace(workspace_dir)
     self.project_ctx = ProjectContext(workspace_dir, config)
     self.tool_runner = ToolRunner(config, workspace_dir)
-    # Enable auto-approve in collaborative mode to avoid blocking on each EXEC
-    self.tool_runner.auto_approve = True  # ✅ ENABLED
+    # ✅ Commands execute immediately after validation (no approval prompts)
     self.response_processor = ResponseProcessor(config, workspace_dir, self.tool_runner)
 ```
 
