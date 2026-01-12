@@ -163,7 +163,6 @@ def test_integration_with_response_processor():
         # Create config and components
         config = Config(config_file)
         tool_runner = ToolRunner(config, temp_dir)
-        tool_runner.auto_approve = True  # Auto-approve for testing
         response_processor = ResponseProcessor(config, temp_dir, tool_runner)
         
         # Test response with new XML formats

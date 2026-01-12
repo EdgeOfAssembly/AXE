@@ -231,7 +231,6 @@ def test_execute_exec():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True  # Auto-approve for testing
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         # Create a parsed call
@@ -261,7 +260,6 @@ def test_execute_list_dir():
         
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True  # Auto-approve for testing
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         # Create a parsed call
@@ -367,7 +365,6 @@ def test_integration_with_response_processor():
         
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         # Simulate agent response with XML function call
@@ -401,7 +398,6 @@ def test_mixed_xml_and_markdown():
         
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         # Response with both XML and markdown
@@ -743,7 +739,6 @@ def test_all_formats_execution():
         
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         # Test <bash> format
@@ -783,7 +778,6 @@ def test_no_duplicate_execution():
         
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         # Create a response with a ```EXEC block that deletes the file

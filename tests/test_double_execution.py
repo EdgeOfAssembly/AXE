@@ -94,7 +94,6 @@ def test_response_processor_handles_native_blocks():
         # Create config and components
         config = Config(config_file)
         tool_runner = ToolRunner(config, temp_dir)
-        tool_runner.auto_approve = True
         response_processor = ResponseProcessor(config, temp_dir, tool_runner)
         
         # Test response with native block (need newline after ```READ)
@@ -140,7 +139,6 @@ def test_no_duplicate_execution_with_mixed_formats():
         
         config = Config(config_file)
         tool_runner = ToolRunner(config, temp_dir)
-        tool_runner.auto_approve = True
         response_processor = ResponseProcessor(config, temp_dir, tool_runner)
         
         # Response with both XML and native blocks

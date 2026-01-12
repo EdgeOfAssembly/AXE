@@ -133,7 +133,6 @@ def test_xml_multiple_calls():
         
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         # Simulate agent response with multiple XML calls

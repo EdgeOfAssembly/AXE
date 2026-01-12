@@ -292,7 +292,6 @@ def test_backward_compatibility():
             del config.config['tools']['unlimited']
         
         runner = ToolRunner(config, tmpdir)
-        runner.auto_approve = True  # Auto-approve for testing
         
         # Test whitelist validation
         allowed, reason = runner.is_tool_allowed("ls")
@@ -373,7 +372,6 @@ def test_integration_command_execution():
         config.config['sandbox']['enabled'] = True
         
         runner = ToolRunner(config, tmpdir)
-        runner.auto_approve = True
         
         if runner.sandbox_manager and runner.sandbox_manager.is_available():
             print("\n✓ Bubblewrap available, testing actual execution")
@@ -436,7 +434,6 @@ def test_edge_case_heredoc():
         config.config['sandbox']['enabled'] = True
         
         runner = ToolRunner(config, tmpdir)
-        runner.auto_approve = True
         
         # Test heredoc validation
         heredoc_cmd = """cat << 'EOF'
@@ -474,7 +471,6 @@ def test_edge_case_pipes():
         config.config['sandbox']['enabled'] = True
         
         runner = ToolRunner(config, tmpdir)
-        runner.auto_approve = True
         
         # Test pipe validation
         pipe_cmd = "echo 'test data' | grep 'data'"

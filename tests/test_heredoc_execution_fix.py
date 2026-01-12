@@ -25,7 +25,6 @@ def test_heredoc_execution_with_content():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         runner = ToolRunner(config, tmpdir)
-        runner.auto_approve = True  # Auto-approve for testing
         
         # Test case from problem statement
         test_file = os.path.join(tmpdir, "test.md")
@@ -122,7 +121,6 @@ def test_heredoc_with_special_markdown_content():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         runner = ToolRunner(config, tmpdir)
-        runner.auto_approve = True
         
         test_file = os.path.join(tmpdir, "notes.md")
         
@@ -190,7 +188,6 @@ def test_heredoc_followed_by_pipe():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         runner = ToolRunner(config, tmpdir)
-        runner.auto_approve = True
         
         # Heredoc content piped to grep
         cmd = """cat << EOF | grep test
@@ -230,7 +227,6 @@ def test_multiple_heredocs():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         runner = ToolRunner(config, tmpdir)
-        runner.auto_approve = True
         
         file1 = os.path.join(tmpdir, "file1.txt")
         file2 = os.path.join(tmpdir, "file2.txt")

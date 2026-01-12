@@ -30,7 +30,6 @@ def test_agent(agent_name: str):
             config = Config()
             agent_mgr = AgentManager(config)
             tool_runner = ToolRunner(config, tmpdir)
-            tool_runner.auto_approve = True
             processor = ResponseProcessor(config, tmpdir, tool_runner)
             
             # Test 1: Simple file creation
