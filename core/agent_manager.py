@@ -8,7 +8,7 @@ import os
 from typing import Optional, List, Dict, Any, Callable
 
 from .config import Config
-from models.metadata import get_model_info, uses_max_completion_tokens
+from models.metadata import get_model_info, uses_max_completion_tokens, get_max_output_tokens
 from utils.formatting import Colors, c
 
 # Optional imports - gracefully handle missing dependencies
@@ -150,22 +150,32 @@ class AgentManager:
 
         full_prompt = f"{prompt}\n\nContext:\n{context}" if context else prompt
 
+        # Get model's actual max output tokens from metadata
+        max_output = get_max_output_tokens(model, default=4096)
+
         try:
             if provider == 'anthropic':
-                resp = client.messages.create(
+                # Use streaming for Anthropic to avoid 10-minute timeout error
+                response = ""
+                final_message = None
+                with client.messages.stream(
                     model=model,
-                    max_tokens=32768,
+                    max_tokens=max_output,
                     system=system_prompt,
                     messages=[{'role': 'user', 'content': full_prompt}]
-                )
+                ) as stream:
+                    for text in stream.text_stream:
+                        response += text
+                    # Get final message to extract usage (must be inside context manager)
+                    final_message = stream.get_final_message()
 
                 # Track tokens if callback provided
-                if token_callback and hasattr(resp, 'usage'):
-                    input_tokens = getattr(resp.usage, 'input_tokens', 0)
-                    output_tokens = getattr(resp.usage, 'output_tokens', 0)
+                if token_callback and final_message and hasattr(final_message, 'usage'):
+                    input_tokens = getattr(final_message.usage, 'input_tokens', 0)
+                    output_tokens = getattr(final_message.usage, 'output_tokens', 0)
                     token_callback(agent_name, model, input_tokens, output_tokens)
 
-                return resp.content[0].text
+                return response
 
             elif provider in ['openai', 'xai', 'github']:
                 # Use max_completion_tokens for GPT-5 and newer models
@@ -177,9 +187,9 @@ class AgentManager:
                     ]
                 }
                 if self._uses_max_completion_tokens(model):
-                    api_params['max_completion_tokens'] = 32768
+                    api_params['max_completion_tokens'] = max_output
                 else:
-                    api_params['max_tokens'] = 32768
+                    api_params['max_tokens'] = max_output
 
                 resp = client.chat.completions.create(**api_params)
 
@@ -194,7 +204,7 @@ class AgentManager:
             elif provider == 'huggingface':
                 resp = client.chat_completion(
                     model=model,
-                    max_tokens=32768,
+                    max_tokens=max_output,
                     messages=[
                         {'role': 'system', 'content': system_prompt},
                         {'role': 'user', 'content': full_prompt}

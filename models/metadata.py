@@ -64,7 +64,7 @@ def get_model_info(model_name: str) -> Dict:
     Returns:
         Dictionary with model metadata, or default metadata if model not found
     """
-    return MODEL_METADATA.get(model_name, DEFAULT_METADATA. copy())
+    return MODEL_METADATA.get(model_name, DEFAULT_METADATA.copy())
 
 
 def format_token_count(tokens: int) -> str:
@@ -104,3 +104,18 @@ def format_output_modes(modes: List[str]) -> str:
         Formatted string (e.g., "text, function_calling")
     """
     return ', '.join(modes)
+
+
+def get_max_output_tokens(model_name: str, default: int = 4096) -> int:
+    """
+    Get the max output tokens for a model.
+    
+    Args:
+        model_name: Name of the model
+        default: Default value if model not found (safe default: 4096)
+    
+    Returns:
+        Max output tokens for the model
+    """
+    model_info = get_model_info(model_name)
+    return model_info.get('max_output_tokens', default)
