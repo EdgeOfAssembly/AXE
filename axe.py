@@ -68,7 +68,7 @@ from safety.rules import SESSION_RULES
 from progression.xp_system import calculate_xp_for_level
 from progression.levels import get_title_for_level, LEVEL_SUPERVISOR_ELIGIBLE
 from database.agent_db import AgentDatabase, get_database_path
-from models.metadata import format_token_count
+from models.metadata import format_token_count, get_max_output_tokens
 
 # Import from core module (refactored)
 from core.constants import (
@@ -1257,19 +1257,26 @@ It's YOUR TURN. What would you like to contribute? Remember:
                 client = self.agent_mgr.clients.get(provider)
                 model = agent_config.get('model', '')
                 
+                # Get model's actual max output tokens from metadata
+                max_output = get_max_output_tokens(model, default=4096)
+                
                 response = ""
                 try:
                     if provider == 'anthropic':
-                        resp = client.messages.create(
+                        # Use streaming for Anthropic to prevent SDK timeout enforcement
+                        # The Anthropic SDK requires streaming when max_tokens is set high
+                        # enough that generation could potentially exceed 10 minutes
+                        with client.messages.stream(
                             model=model,
-                            max_tokens=32768,
+                            max_tokens=max_output,
                             system=system_prompt,
                             messages=[{'role': 'user', 'content': prompt}]
-                        )
-                        # Check for None content
-                        if resp.content and len(resp.content) > 0 and resp.content[0].text:
-                            response = resp.content[0].text
-                        else:
+                        ) as stream:
+                            for text in stream.text_stream:
+                                response += text
+                        
+                        # Check for empty response
+                        if not response:
                             response = "[No response from model]"
                     elif provider in ['openai', 'xai', 'github']:
                         # Use max_completion_tokens for GPT-5 and newer models
@@ -1281,9 +1288,9 @@ It's YOUR TURN. What would you like to contribute? Remember:
                             ]
                         }
                         if self.agent_mgr._uses_max_completion_tokens(model):
-                            api_params['max_completion_tokens'] = 32768
+                            api_params['max_completion_tokens'] = max_output
                         else:
-                            api_params['max_tokens'] = 32768
+                            api_params['max_tokens'] = max_output
                         
                         resp = client.chat.completions.create(**api_params)
                         # Check for None content
@@ -1294,7 +1301,7 @@ It's YOUR TURN. What would you like to contribute? Remember:
                     elif provider == 'huggingface':
                         resp = client.chat_completion(
                             model=model,
-                            max_tokens=32768,
+                            max_tokens=max_output,
                             messages=[
                                 {'role': 'system', 'content': system_prompt},
                                 {'role': 'user', 'content': prompt}

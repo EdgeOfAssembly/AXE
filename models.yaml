@@ -4,7 +4,7 @@
 # Default metadata for unknown models
 default:
   context_tokens: 8000
-  max_output_tokens: 2048
+  max_output_tokens: 4096  # Safe default for unknown models
   input_modes: [text]
   output_modes: [text]
 

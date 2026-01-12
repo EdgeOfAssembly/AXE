@@ -79,7 +79,7 @@ def test_unknown_model():
     unknown_info = get_model_info('unknown-model-xyz')
     assert unknown_info == DEFAULT_METADATA.copy(), "Unknown model should return DEFAULT_METADATA"
     assert unknown_info['context_tokens'] == 8000, "Default context should be 8000"
-    assert unknown_info['max_output_tokens'] == 2048, "Default output should be 2048"
+    assert unknown_info['max_output_tokens'] == 4096, "Default output should be 4096"
     print("  ✓ Unknown model returns default metadata")
     print()
 
