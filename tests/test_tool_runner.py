@@ -324,7 +324,6 @@ def test_integration_with_execution():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         runner = ToolRunner(config, tmpdir)
-        runner.auto_approve = True  # Auto-approve for testing
         
         # Create a test file
         test_file = os.path.join(tmpdir, "test.txt")

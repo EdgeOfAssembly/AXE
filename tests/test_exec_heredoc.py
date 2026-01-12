@@ -23,7 +23,6 @@ def test_exec_block_with_heredoc():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         # Test 1: EXEC with heredoc (command on same line as EXEC)

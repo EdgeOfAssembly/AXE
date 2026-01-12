@@ -77,15 +77,19 @@ Approve? (y/n):
 
 This broke the autonomous collaboration flow.
 
-**Root Cause**: The `ToolRunner` was initialized with `auto_approve=False` by default, requiring human approval for every command execution.
+**Root Cause**: The `ToolRunner` was initialized with manual approval prompts by default, requiring human approval for every command execution.
 
-**Fix**: Set `auto_approve=True` when initializing `ToolRunner` in `CollaborativeSession.__init__`.
+**Fix**: Removed the manual approval mechanism entirely. Commands that pass whitelist/blacklist validation now execute immediately without prompting.
 
-**Code Changes** (line 1657-1658):
+**Code Changes**:
+The approval prompt logic has been removed from `ToolRunner.run()`. Tools are now auto-executed after validation:
 ```python
-self.tool_runner = ToolRunner(config, workspace_dir)
-# Enable auto-approve in collaborative mode to avoid blocking on each EXEC
-self.tool_runner.auto_approve = True
+# Validate command using is_tool_allowed
+allowed, reason = self.is_tool_allowed(cmd)
+if not allowed:
+    return False, f"Command validation failed: {reason}"
+
+# Execute command immediately (no approval prompt)
 ```
 
 ---
@@ -195,7 +199,7 @@ These fixes enable:
 All changes are backward compatible:
 - Relative paths continue to work as before
 - Absolute paths now work if they're within the project directory
-- Interactive mode (non-collab) still respects auto-approve setting
+- Commands execute immediately after validation (no approval prompts)
 - Security boundaries are maintained
 
 ---

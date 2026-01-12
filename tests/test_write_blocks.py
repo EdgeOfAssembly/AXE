@@ -121,7 +121,6 @@ def test_multiple_blocks():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True  # Auto-approve for testing
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         # Create a file to read
@@ -429,7 +428,6 @@ def test_live_agent_write(agent_name: str, workspace: str):
         config = Config()
         agent_mgr = AgentManager(config)
         tool_runner = ToolRunner(config, workspace)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, workspace, tool_runner)
         
         # Simple task: create a Python hello world file

@@ -821,8 +821,6 @@ class CollaborativeSession:
         self.workspace = SharedWorkspace(workspace_dir)
         self.project_ctx = ProjectContext(workspace_dir, config)
         self.tool_runner = ToolRunner(config, workspace_dir)
-        # Enable auto-approve in collaborative mode to avoid blocking on each EXEC
-        self.tool_runner.auto_approve = True
         self.response_processor = ResponseProcessor(config, workspace_dir, self.tool_runner)
         self.db = AgentDatabase(db_path)
         
@@ -3209,8 +3207,6 @@ Collaborative Mode:
                         help='Config file path (YAML or JSON)')
     parser.add_argument('--init', action='store_true',
                         help='Generate sample config file')
-    parser.add_argument('--auto-approve', action='store_true',
-                        help='Auto-approve tool executions')
     parser.add_argument('--dry-run', action='store_true',
                         help='Dry-run mode for tool executions')
     
@@ -3290,7 +3286,6 @@ Collaborative Mode:
     session = ChatSession(config, args.dir)
     
     # Update tool runner settings
-    session.tool_runner.auto_approve = args.auto_approve
     session.tool_runner.dry_run = args.dry_run
     
     # Single command mode

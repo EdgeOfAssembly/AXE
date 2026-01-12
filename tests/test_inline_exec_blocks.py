@@ -34,7 +34,6 @@ def test_inline_exec_blocks_bug():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         # Exact test case from the bug report
@@ -78,7 +77,6 @@ def test_multiple_inline_blocks():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         response = """Let's run some commands:
@@ -111,7 +109,6 @@ def test_mixed_inline_and_multiline():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         response = """First, inline:
@@ -152,7 +149,6 @@ def test_inline_read_blocks():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         # Create test files
@@ -187,7 +183,6 @@ def test_inline_write_blocks():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         # Inline WRITE with empty content
@@ -212,7 +207,6 @@ def test_backticks_in_markdown():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         response = """Here's a file called `patches` directory:
@@ -245,7 +239,6 @@ def test_heredoc_still_works():
     with tempfile.TemporaryDirectory() as tmpdir:
         config = Config()
         tool_runner = ToolRunner(config, tmpdir)
-        tool_runner.auto_approve = True
         processor = ResponseProcessor(config, tmpdir, tool_runner)
         
         response = """```EXEC cat > notes.md << 'EOF'
