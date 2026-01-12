@@ -149,6 +149,39 @@ def test_model_count():
     print()
 
 
+def test_error_handling():
+    """Test error handling for YAML loading."""
+    print("Testing error handling...")
+    
+    import tempfile
+    import shutil
+    
+    # Save the original _load_models_yaml function
+    from models import metadata as metadata_module
+    original_path = metadata_module._models_yaml_path
+    
+    # Test 1: Missing file
+    with tempfile.TemporaryDirectory() as tmpdir:
+        metadata_module._models_yaml_path = os.path.join(tmpdir, 'nonexistent.yaml')
+        result = metadata_module._load_models_yaml()
+        assert result == {}, "Missing file should return empty dict"
+        print("  ✓ Missing file handled gracefully")
+    
+    # Test 2: Corrupted YAML
+    with tempfile.TemporaryDirectory() as tmpdir:
+        corrupted_yaml = os.path.join(tmpdir, 'corrupted.yaml')
+        with open(corrupted_yaml, 'w') as f:
+            f.write("invalid: yaml: content:\n  - this is\n bad indentation")
+        metadata_module._models_yaml_path = corrupted_yaml
+        result = metadata_module._load_models_yaml()
+        assert result == {}, "Corrupted YAML should return empty dict"
+        print("  ✓ Corrupted YAML handled gracefully")
+    
+    # Restore original path
+    metadata_module._models_yaml_path = original_path
+    print()
+
+
 if __name__ == '__main__':
     print("=" * 60)
     print("MODELS.YAML LOADING TEST SUITE")
@@ -162,6 +195,7 @@ if __name__ == '__main__':
         test_uses_max_completion_tokens()
         test_formatting_functions()
         test_model_count()
+        test_error_handling()
         
         print("=" * 60)
         print("ALL TESTS PASSED ✓")

@@ -14,8 +14,15 @@ _models_yaml_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'mo
 
 def _load_models_yaml():
     """Load model metadata from models.yaml"""
-    with open(_models_yaml_path, 'r') as f:
-        return yaml.safe_load(f)
+    try:
+        with open(_models_yaml_path, 'r') as f:
+            return yaml.safe_load(f)
+    except FileNotFoundError:
+        print(f"Warning: models.yaml not found at {_models_yaml_path}. Using empty configuration.")
+        return {}
+    except yaml.YAMLError as e:
+        print(f"Warning: Failed to parse models.yaml: {e}. Using empty configuration.")
+        return {}
 
 _config = _load_models_yaml()
 MODEL_METADATA = _config.get('models', {})
@@ -32,6 +39,9 @@ def uses_max_completion_tokens(model_name: str) -> bool:
     """
     Check if a model requires max_completion_tokens parameter.
     
+    Uses prefix matching to support model families (e.g., "gpt-5" matches "gpt-5.2").
+    This is intentional to cover versioned models within the same family.
+    
     Args:
         model_name: Name of the model to check
     
@@ -44,7 +54,7 @@ def uses_max_completion_tokens(model_name: str) -> bool:
     return False
 
 
-def get_model_info(model_name:  str) -> Dict:
+def get_model_info(model_name: str) -> Dict:
     """
     Get metadata for a specific model.
     
