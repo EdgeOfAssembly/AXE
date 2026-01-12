@@ -1263,7 +1263,9 @@ It's YOUR TURN. What would you like to contribute? Remember:
                 response = ""
                 try:
                     if provider == 'anthropic':
-                        # Use streaming for Anthropic to avoid 10-minute timeout error
+                        # Use streaming for Anthropic to prevent SDK timeout enforcement
+                        # The Anthropic SDK requires streaming when max_tokens is set high
+                        # enough that generation could potentially exceed 10 minutes
                         with client.messages.stream(
                             model=model,
                             max_tokens=max_output,

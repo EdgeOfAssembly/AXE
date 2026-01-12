@@ -155,7 +155,9 @@ class AgentManager:
 
         try:
             if provider == 'anthropic':
-                # Use streaming for Anthropic to avoid 10-minute timeout error
+                # Use streaming for Anthropic to avoid SDK enforcement of 10-minute timeout
+                # The SDK requires streaming when max_tokens is high enough that the request
+                # could potentially take longer than 10 minutes to complete
                 response = ""
                 final_message = None
                 with client.messages.stream(

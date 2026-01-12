@@ -31,6 +31,9 @@ def test_get_max_output_tokens_helper():
     print("  ✓ GPT-5.2: 128,000 tokens")
     
     # Test unknown model - should return DEFAULT_METADATA's max_output_tokens (4096)
+    # Note: The default parameter is only used when 'max_output_tokens' key is missing
+    # from the model metadata dict. Unknown models return DEFAULT_METADATA which 
+    # contains the key, so the default parameter doesn't apply in that case.
     assert get_max_output_tokens('unknown-model-xyz') == 4096, \
         "Unknown model should return DEFAULT_METADATA's 4096"
     print("  ✓ Unknown model: 4,096 tokens (from DEFAULT_METADATA)")
