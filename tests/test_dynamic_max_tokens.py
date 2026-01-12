@@ -79,9 +79,12 @@ def test_no_hardcoded_32768():
     """Ensure we're not using hardcoded 32768 in the code."""
     print("Checking for hardcoded max_tokens values...")
     
+    # Get the repository root (parent of tests directory)
+    repo_root = os.path.join(os.path.dirname(__file__), '..')
+    
     files_to_check = [
-        '/home/runner/work/AXE/AXE/core/agent_manager.py',
-        '/home/runner/work/AXE/AXE/axe.py'
+        os.path.join(repo_root, 'core', 'agent_manager.py'),
+        os.path.join(repo_root, 'axe.py')
     ]
     
     for filepath in files_to_check:
@@ -109,8 +112,11 @@ def test_dynamic_lookup_presence():
     """Verify that dynamic lookup code is present."""
     print("Verifying dynamic token lookup implementation...")
     
+    # Get the repository root (parent of tests directory)
+    repo_root = os.path.join(os.path.dirname(__file__), '..')
+    
     # Check agent_manager.py
-    agent_manager_path = '/home/runner/work/AXE/AXE/core/agent_manager.py'
+    agent_manager_path = os.path.join(repo_root, 'core', 'agent_manager.py')
     with open(agent_manager_path, 'r') as f:
         agent_manager_content = f.read()
     
@@ -130,7 +136,7 @@ def test_dynamic_lookup_presence():
     print("  ✓ agent_manager.py uses streaming for Anthropic")
     
     # Check axe.py
-    axe_path = '/home/runner/work/AXE/AXE/axe.py'
+    axe_path = os.path.join(repo_root, 'axe.py')
     with open(axe_path, 'r') as f:
         axe_content = f.read()
     
