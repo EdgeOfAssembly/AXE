@@ -37,7 +37,7 @@ class ToolRunner:
     - Handles complex shell syntax (pipes, redirects, subshells, heredocs)
     - Prevents access to forbidden directories
     - Logs all command execution attempts
-    - Supports auto-approval and dry-run modes
+    - Supports dry-run mode for testing
     """
 
     # Shell operators that connect commands in a pipeline or sequence
@@ -57,7 +57,6 @@ class ToolRunner:
         self.config = config
         self.project_dir = os.path.abspath(project_dir)
         self.exec_log = os.path.join(project_dir, 'axe_exec.log')
-        self.auto_approve = False
         self.dry_run = False
         
         # Initialize sandbox manager if enabled
@@ -336,14 +335,12 @@ class ToolRunner:
                 # As a last resort, ignore any errors while reporting the logging failure.
                 pass
 
-    def run(self, cmd: str, auto_approve: Optional[bool] = None, dry_run: Optional[bool] = None) -> Tuple[bool, str]:
+    def run(self, cmd: str, dry_run: Optional[bool] = None) -> Tuple[bool, str]:
         """
         Run a command after validation.
 
         Args:
             cmd: Command to execute
-            auto_approve: Optional per-call override for auto-approval behavior.
-                If None, falls back to the instance's auto_approve setting.
             dry_run: Optional per-call override for dry-run behavior.
                 If None, falls back to the instance's dry_run setting.
 
@@ -352,7 +349,6 @@ class ToolRunner:
         """
         # Determine effective flags, allowing per-call overrides
         effective_dry_run = self.dry_run if dry_run is None else dry_run
-        effective_auto_approve = self.auto_approve if auto_approve is None else auto_approve
 
         # Validate command using is_tool_allowed
         allowed, reason = self.is_tool_allowed(cmd)
@@ -362,16 +358,6 @@ class ToolRunner:
         # Dry run mode
         if effective_dry_run:
             return True, f"[DRY RUN] Would execute: {cmd}"
-
-        # Request approval if not auto-approve
-        if not effective_auto_approve:
-            print(c(f"Execute: {cmd}", Colors.YELLOW))
-            try:
-                response = input(c("Approve? [y/N]: ", Colors.YELLOW))
-                if response.lower() not in ['y', 'yes']:
-                    return False, "Command not approved by user"
-            except (EOFError, KeyboardInterrupt):
-                return False, "Command approval cancelled"
 
         # Execute command
         # If sandbox is enabled, delegate to sandbox manager
