@@ -8,8 +8,7 @@ import os
 from typing import Optional, List, Dict, Any, Callable
 
 from .config import Config
-from .constants import USE_MAX_COMPLETION_TOKENS
-from models.metadata import get_model_info
+from models.metadata import get_model_info, uses_max_completion_tokens
 from utils.formatting import Colors, c
 
 # Optional imports - gracefully handle missing dependencies
@@ -42,11 +41,7 @@ class AgentManager:
 
     def _uses_max_completion_tokens(self, model: str) -> bool:
         """Check if a model requires max_completion_tokens parameter."""
-        # Check if model name or prefix matches models that need max_completion_tokens
-        for model_prefix in USE_MAX_COMPLETION_TOKENS:
-            if model.startswith(model_prefix):
-                return True
-        return False
+        return uses_max_completion_tokens(model)
 
     def _init_clients(self) -> None:
         """Initialize API clients for enabled providers."""
