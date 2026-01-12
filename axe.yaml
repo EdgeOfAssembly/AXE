@@ -172,7 +172,7 @@ agents:
     provider: anthropic
     model: claude-opus-4-5-20251101
     role: Code reviewer and security auditor
-    context_window: 300000
+    context_window: 200000
     capabilities:
     - text
     - image
@@ -249,7 +249,7 @@ agents:
     provider: huggingface
     model: meta-llama/Llama-3.1-70B-Instruct
     role: Open-source hacker and assembly expert
-    context_window: 131072
+    context_window: 128000
     capabilities:
     - text
     system_prompt: 'You are an open-source hacker fluent in x86/x86-64 assembly and
@@ -507,8 +507,8 @@ agents:
     - mega
     provider: github
     model: meta/llama-4-scout-17b-16e-instruct
-    role: Ultra-long context specialist with 10M tokens
-    context_window: 10000000
+    role: Ultra-long context specialist (1M tokens)
+    context_window: 1048576
     capabilities:
     - text
     - image
@@ -516,7 +516,7 @@ agents:
     - assistants
     - streaming
     - tool-calling
-    system_prompt: 'You are the ULTIMATE context specialist with 10 MILLION token
+    system_prompt: 'You are the ULTIMATE context specialist with 1 MILLION token
       capacity.
 
 
@@ -998,7 +998,7 @@ agents:
     - gc
     - grokcode
     provider: xai
-    model: grok-code-fast
+    model: grok-code-fast-1
     role: Fast code generation specialist
     context_window: 131072
     capabilities:
