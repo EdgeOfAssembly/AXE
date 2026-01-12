@@ -8,7 +8,7 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(__file__))
 
-from models.metadata import get_max_output_tokens, get_model_info
+from models.metadata import get_max_output_tokens
 
 
 def main():
