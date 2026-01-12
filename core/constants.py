@@ -63,35 +63,6 @@ AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
 # Note: Used with re.IGNORECASE flag, so [A-Z] matches both uppercase and lowercase letters
 READ_BLOCK_PATTERN = r'\[READ[^\]]*\].*?(?=\n\n|\n\[(?!\[)[A-Z]|\Z)'
 
-# Models that require max_completion_tokens instead of max_tokens
-# GPT-5 and future models use the new parameter name
-USE_MAX_COMPLETION_TOKENS = {
-    "gpt-5",
-    "gpt-5-0806",
-    "gpt-5.2-2025-12-11",
-    "gpt-5.2",
-    "gpt-5-chat",
-    "gpt-5-mini",
-    "gpt-5-nano",
-    "o1-preview",
-    "o1-mini",
-    "o1",
-    "o3",
-    "o3-mini",
-    "o4-mini",
-    # GitHub Models variants (with openai/ prefix)
-    "openai/gpt-5",
-    "openai/gpt-5-chat",
-    "openai/gpt-5-mini",
-    "openai/gpt-5-nano",
-    "openai/o1",
-    "openai/o1-preview",
-    "openai/o1-mini",
-    "openai/o3",
-    "openai/o3-mini",
-    "openai/o4-mini",
-}
-
 # Default configuration
 DEFAULT_CONFIG = {
     'version': '1.0',

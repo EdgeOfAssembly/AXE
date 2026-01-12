@@ -10,7 +10,6 @@ from .sandbox import SandboxManager
 from .resource_monitor import start_resource_monitor, collect_resources
 from .constants import (
     DEFAULT_CONFIG,
-    USE_MAX_COMPLETION_TOKENS,
     CHARS_PER_TOKEN,
     COLLAB_HISTORY_LIMIT,
     COLLAB_CONTENT_LIMIT,
@@ -64,7 +63,6 @@ __all__ = [
     'collect_resources',
     # Constants
     'DEFAULT_CONFIG',
-    'USE_MAX_COMPLETION_TOKENS',
     'CHARS_PER_TOKEN',
     'COLLAB_HISTORY_LIMIT',
     'COLLAB_CONTENT_LIMIT',
