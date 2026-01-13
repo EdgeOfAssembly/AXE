@@ -50,13 +50,20 @@
 !_TAG_ROLE_DESCRIPTION!Yaml!anchor	alias	/alias/
 "Agent stuck or confused"	QUICK_REFERENCE.md	/^### "Agent stuck or confused"$/;"	S	section:AXE Multiagent - Quick Reference Card""Common Scenarios
 "Agents not cooperating"	QUICK_REFERENCE.md	/^### "Agents not cooperating"$/;"	S	section:AXE Multiagent - Quick Reference Card""Common Scenarios
+"Permission denied" errors inside sandbox	SANDBOX.md	/^### "Permission denied" errors inside sandbox$/;"	S	section:Bubblewrap Sandbox Security Model""Troubleshooting
+"Sandbox execution error: ..."	SANDBOX.md	/^### "Sandbox execution error: ..."$/;"	S	section:Bubblewrap Sandbox Security Model""Troubleshooting
 "System slowing down"	QUICK_REFERENCE.md	/^### "System slowing down"$/;"	S	section:AXE Multiagent - Quick Reference Card""Common Scenarios
 "Want to resume later"	QUICK_REFERENCE.md	/^### "Want to resume later"$/;"	S	section:AXE Multiagent - Quick Reference Card""Common Scenarios
+"bubblewrap not available, falling back to whitelist mode"	SANDBOX.md	/^### "bubblewrap not available, falling back to whitelist mode"$/;"	S	section:Bubblewrap Sandbox Security Model""Troubleshooting
 $ python3 test_xml_tool_parser.py	XML_PARSER_IMPLEMENTATION.md	/^$ python3 test_xml_tool_parser.py$/;"	c
+1. **Path & File Handling** ✅ Fixed	SECURITY_REPORT.md	/^### 1. **Path & File Handling** ✅ Fixed$/;"	S	section:AXE Project Security Report""Key Findings (Post-Fix)
 1. Added `get_database_path()` Helper Function	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### 1. Added `get_database_path()` Helper Function$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Core Changes
 1. Adding New AI Providers	ARCHITECTURE.md	/^### 1. Adding New AI Providers$/;"	S	section:AXE Architecture and Extensibility Guide""Key Extension Points
+1. Anthropic SDK Error Fixed ✓	DYNAMIC_TOKENS_SUMMARY.md	/^### 1. Anthropic SDK Error Fixed ✓$/;"	S	section:Dynamic Max Output Tokens Implementation Summary""Benefits
 1. Bash XML Tags (Claude's Favorite)	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^### 1. Bash XML Tags (Claude's Favorite)$/;"	S	section:Multi-Format Tool Call Parser - Quick Reference""Supported Formats
 1. Class Constants (Lines 1121-1148)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 1. Class Constants (Lines 1121-1148)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+1. Default-Allow Execution	SANDBOX.md	/^### 1. Default-Allow Execution$/;"	S	section:Bubblewrap Sandbox Security Model""Key Features
+1. Default-Allow Security Model	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### 1. Default-Allow Security Model$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Key Features
 1. Defensive Programming in `run()` Method	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### 1. Defensive Programming in `run()` Method$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Solution Implemented
 1. Mission First – The Project / Task Is Sacred	IMPROVEMENTS_FINAL.md	/^#### 1. Mission First – The Project \/ Task Is Sacred$/;"	t	subsection:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules""Display at session start (pinned message):
 1. New Codebase Exploration	README.md	/^#### 1. New Codebase Exploration$/;"	t	subsection:AXE - Agent eXecution Engine""Analysis Tools""Workflow Examples
@@ -65,18 +72,25 @@ $ python3 test_xml_tool_parser.py	XML_PARSER_IMPLEMENTATION.md	/^$ python3 test_
 1. Subshells with Parentheses	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 1. Subshells with Parentheses$/;"	S	section:Shell Operator Support Implementation Summary""Edge Cases Fixed
 1. Test Compatibility	PR23_EXECUTIVE_SUMMARY.md	/^### 1. Test Compatibility$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Minor Issues (Non-Blocking)
 1. Token Usage Tracking UI ✅	IMPLEMENTATION_COMPLETE.md	/^### 1. Token Usage Tracking UI ✅$/;"	S	section:AXE Enhancement Implementation - Complete ✅""✅ All Features Implemented
+1. `models/metadata.py`	DYNAMIC_TOKENS_SUMMARY.md	/^### 1. `models\/metadata.py`$/;"	S	section:Dynamic Max Output Tokens Implementation Summary""Changes Made
+2. **Command Execution** ⚠️ Medium	SECURITY_REPORT.md	/^### 2. **Command Execution** ⚠️ Medium$/;"	S	section:AXE Project Security Report""Key Findings (Post-Fix)
 2. Adding Distributed Processing (Ray)	ARCHITECTURE.md	/^### 2. Adding Distributed Processing (Ray)$/;"	S	section:AXE Architecture and Extensibility Guide""Key Extension Points
 2. Build Issue Debugging	README.md	/^#### 2. Build Issue Debugging$/;"	t	subsection:AXE - Agent eXecution Engine""Analysis Tools""Workflow Examples
 2. CLI Commands Missing	PR23_EXECUTIVE_SUMMARY.md	/^### 2. CLI Commands Missing$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Minor Issues (Non-Blocking)
 2. Configuration Files	WRITE_BLOCKS_GUIDE.md	/^### 2. Configuration Files$/;"	S	section:WRITE Block Functionality - User Guide""Use Cases
 2. Enhanced Documentation	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### 2. Enhanced Documentation$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Solution Implemented
+2. Linux Namespace Isolation	SANDBOX.md	/^### 2. Linux Namespace Isolation$/;"	S	section:Bubblewrap Sandbox Security Model""Key Features
+2. Namespace Isolation	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### 2. Namespace Isolation$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Key Features
 2. Python Script	WRITE_BLOCKS_GUIDE.md	/^### 2. Python Script$/;"	S	section:WRITE Block Functionality - User Guide""Examples
 2. Redirects Without Spaces	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 2. Redirects Without Spaces$/;"	S	section:Shell Operator Support Implementation Summary""Edge Cases Fixed
 2. Respect & Well-Being – No Real Bullying	IMPROVEMENTS_FINAL.md	/^#### 2. Respect & Well-Being – No Real Bullying$/;"	t	subsection:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules""Display at session start (pinned message):
 2. Session Resume/Save ✅	IMPLEMENTATION_COMPLETE.md	/^### 2. Session Resume\/Save ✅$/;"	S	section:AXE Enhancement Implementation - Complete ✅""✅ All Features Implemented
 2. Shell Code Blocks	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^### 2. Shell Code Blocks$/;"	S	section:Multi-Format Tool Call Parser - Quick Reference""Supported Formats
+2. Token Truncation Fixed ✓	DYNAMIC_TOKENS_SUMMARY.md	/^### 2. Token Truncation Fixed ✓$/;"	S	section:Dynamic Max Output Tokens Implementation Summary""Benefits
 2. Updated `AgentDatabase.__init__()`	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### 2. Updated `AgentDatabase.__init__()`$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Core Changes
 2. `__init__(config: Config, project_dir: str)` (Lines 1150-1171)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 2. `__init__(config: Config, project_dir: str)` (Lines 1150-1171)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+2. `models.yaml`	DYNAMIC_TOKENS_SUMMARY.md	/^### 2. `models.yaml`$/;"	S	section:Dynamic Max Output Tokens Implementation Summary""Changes Made
+3. **YAML Config** ✅ Low	SECURITY_REPORT.md	/^### 3. **YAML Config** ✅ Low$/;"	S	section:AXE Project Security Report""Key Findings (Post-Fix)
 3. AXE Native Blocks	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^### 3. AXE Native Blocks$/;"	S	section:Multi-Format Tool Call Parser - Quick Reference""Supported Formats
 3. Adding New Workshop Tools	ARCHITECTURE.md	/^### 3. Adding New Workshop Tools$/;"	S	section:AXE Architecture and Extensibility Guide""Key Extension Points
 3. Agent Rate Limiting ✅	IMPLEMENTATION_COMPLETE.md	/^### 3. Agent Rate Limiting ✅$/;"	S	section:AXE Enhancement Implementation - Complete ✅""✅ All Features Implemented
@@ -85,24 +99,37 @@ $ python3 test_xml_tool_parser.py	XML_PARSER_IMPLEMENTATION.md	/^$ python3 test_
 3. Database Test Isolation	PR23_EXECUTIVE_SUMMARY.md	/^### 3. Database Test Isolation$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Minor Issues (Non-Blocking)
 3. Documentation	WRITE_BLOCKS_GUIDE.md	/^### 3. Documentation$/;"	S	section:WRITE Block Functionality - User Guide""Use Cases
 3. File in Subdirectory	WRITE_BLOCKS_GUIDE.md	/^### 3. File in Subdirectory$/;"	S	section:WRITE Block Functionality - User Guide""Examples
+3. Filesystem Access Control	SANDBOX.md	/^### 3. Filesystem Access Control$/;"	S	section:Bubblewrap Sandbox Security Model""Key Features
+3. Filesystem Access Control	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### 3. Filesystem Access Control$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Key Features
 3. Inline Comments	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### 3. Inline Comments$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Solution Implemented
 3. Nested Subshells	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 3. Nested Subshells$/;"	S	section:Shell Operator Support Implementation Summary""Edge Cases Fixed
 3. Updated Function Signatures	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### 3. Updated Function Signatures$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Core Changes
+3. Wasted Capacity Fixed ✓	DYNAMIC_TOKENS_SUMMARY.md	/^### 3. Wasted Capacity Fixed ✓$/;"	S	section:Dynamic Max Output Tokens Implementation Summary""Benefits
 3. `_strip_heredoc_content(cmd: str) -> str` (Lines 1173-1287)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 3. `_strip_heredoc_content(cmd: str) -> str` (Lines 1173-1287)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+3. `core/agent_manager.py`	DYNAMIC_TOKENS_SUMMARY.md	/^### 3. `core\/agent_manager.py`$/;"	S	section:Dynamic Max Output Tokens Implementation Summary""Changes Made
+4. **Database/Storage** ✅ Fixed	SECURITY_REPORT.md	/^### 4. **Database\/Storage** ✅ Fixed$/;"	S	section:AXE Project Security Report""Key Findings (Post-Fix)
 4. Adding New Token Optimization Strategies	ARCHITECTURE.md	/^### 4. Adding New Token Optimization Strategies$/;"	S	section:AXE Architecture and Extensibility Guide""Key Extension Points
 4. Comprehensive Test Suite	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### 4. Comprehensive Test Suite$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Solution Implemented
+4. Environment Detection	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### 4. Environment Detection$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Key Features
 4. Exported Helper Function	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### 4. Exported Helper Function$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Core Changes
 4. Multiple Files in One Response	WRITE_BLOCKS_GUIDE.md	/^### 4. Multiple Files in One Response$/;"	S	section:WRITE Block Functionality - User Guide""Examples
 4. Performance & Rewards – Good Work Gets Recognized	IMPROVEMENTS_FINAL.md	/^#### 4. Performance & Rewards – Good Work Gets Recognized$/;"	t	subsection:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules""Display at session start (pinned message):
+4. Safe Defaults ✓	DYNAMIC_TOKENS_SUMMARY.md	/^### 4. Safe Defaults ✓$/;"	S	section:Dynamic Max Output Tokens Implementation Summary""Benefits
 4. Test Files	WRITE_BLOCKS_GUIDE.md	/^### 4. Test Files$/;"	S	section:API Documentation""Endpoints
 4. Workshop Tools Status & Discovery ✅	IMPLEMENTATION_COMPLETE.md	/^### 4. Workshop Tools Status & Discovery ✅$/;"	S	section:AXE Enhancement Implementation - Complete ✅""✅ All Features Implemented
 4. `_extract_commands_from_shell(cmd: str) -> List[str]` (Lines 1289-1408)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 4. `_extract_commands_from_shell(cmd: str) -> List[str]` (Lines 1289-1408)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+4. `axe.py` (CollaborativeSession)	DYNAMIC_TOKENS_SUMMARY.md	/^### 4. `axe.py` (CollaborativeSession)$/;"	S	section:Dynamic Max Output Tokens Implementation Summary""Changes Made
+5. **Collaboration Features** ⚠️ Medium	SECURITY_REPORT.md	/^### 5. **Collaboration Features** ⚠️ Medium$/;"	S	section:AXE Project Security Report""Key Findings (Post-Fix)
 5. Build Analyzer Dependency Helper ✅	IMPLEMENTATION_COMPLETE.md	/^### 5. Build Analyzer Dependency Helper ✅$/;"	S	section:AXE Enhancement Implementation - Complete ✅""✅ All Features Implemented
 5. Build Scripts	WRITE_BLOCKS_GUIDE.md	/^### 5. Build Scripts$/;"	S	section:API Documentation""Endpoints
 5. `_needs_shell(cmd: str) -> bool` (Lines 1410-1458)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 5. `_needs_shell(cmd: str) -> bool` (Lines 1410-1458)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+5. `tests/test_models_yaml.py`	DYNAMIC_TOKENS_SUMMARY.md	/^### 5. `tests\/test_models_yaml.py`$/;"	S	section:Dynamic Max Output Tokens Implementation Summary""Changes Made
+6. **Dependencies & Git** ✅ Clean	SECURITY_REPORT.md	/^### 6. **Dependencies & Git** ✅ Clean$/;"	S	section:AXE Project Security Report""Key Findings (Post-Fix)
 6. Comprehensive Documentation ✅	IMPLEMENTATION_COMPLETE.md	/^### 6. Comprehensive Documentation ✅$/;"	S	section:AXE Enhancement Implementation - Complete ✅""✅ All Features Implemented
 6. Updated `is_tool_allowed(cmd: str)` (Lines 1460-1542)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 6. Updated `is_tool_allowed(cmd: str)` (Lines 1460-1542)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+6. `tests/test_dynamic_max_tokens.py` (NEW)	DYNAMIC_TOKENS_SUMMARY.md	/^### 6. `tests\/test_dynamic_max_tokens.py` (NEW)$/;"	S	section:Dynamic Max Output Tokens Implementation Summary""Changes Made
 7. Updated `run(cmd: str, ...)` (Lines 1544-1629)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### 7. Updated `run(cmd: str, ...)` (Lines 1544-1629)$/;"	S	section:Shell Operator Support Implementation Summary""Solution Implemented
+7. `demo_dynamic_tokens.py` (NEW)	DYNAMIC_TOKENS_SUMMARY.md	/^### 7. `demo_dynamic_tokens.py` (NEW)$/;"	S	section:Dynamic Max Output Tokens Implementation Summary""Changes Made
 AGENT_STATE_MIGRATIONS	database/schema.py	/^AGENT_STATE_MIGRATIONS = [$/;"	v
 AGENT_STATE_TABLE	database/schema.py	/^AGENT_STATE_TABLE = """$/;"	v
 AGENT_TOKEN_BREAK_REQUEST	core/constants.py	/^AGENT_TOKEN_BREAK_REQUEST = "[[AGENT_BREAK_REQUEST:"  # Followed by type, reason, ends with ]]$/;"	v
@@ -130,6 +157,7 @@ AXE Multi-Agent System - Model Configuration Reference	MODELS_FINAL.md	/^# AXE M
 AXE Multiagent - Quick Reference Card	QUICK_REFERENCE.md	/^# AXE Multiagent - Quick Reference Card$/;"	c
 AXE Multiagent Improvements - Implementation Summary	IMPROVEMENTS_README.md	/^# AXE Multiagent Improvements - Implementation Summary$/;"	c
 AXE Multiple Issues Fix Summary	FIXES_SUMMARY.md	/^# AXE Multiple Issues Fix Summary$/;"	c
+AXE Project Security Report	SECURITY_REPORT.md	/^# AXE Project Security Report$/;"	c
 AXE.PY Refactoring Notes	REFACTORING_NOTES.md	/^# AXE.PY Refactoring Notes$/;"	c
 Added to requirements.txt	PR23_EXECUTIVE_SUMMARY.md	/^### Added to requirements.txt$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Dependencies
 Advanced Usage	README.md	/^## Advanced Usage$/;"	s	chapter:AXE - Agent eXecution Engine
@@ -164,14 +192,17 @@ Anthropic (Claude)	README.md	/^### Anthropic (Claude)$/;"	S	section:AXE - Agent 
 Appendix A: Test Execution Logs	PR23_VALIDATION_REPORT.md	/^## Appendix A: Test Execution Logs$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
 Appendix B: File Changes Summary	PR23_VALIDATION_REPORT.md	/^## Appendix B: File Changes Summary$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
 Architecture	IMPROVEMENTS_FINAL.md	/^### Architecture$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
+Architecture	SANDBOX.md	/^## Architecture$/;"	s	chapter:Bubblewrap Sandbox Security Model
 Architecture Notes	IMPROVEMENTS_README.md	/^## Architecture Notes$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Architecture Overview	MISSION.md	/^## Architecture Overview$/;"	s	chapter:AXE - Agent eXecution Engine
+Attack Surface Reduction	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Attack Surface Reduction$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Security Benefits
 Audit Scope	workshop_security_audit.md	/^## Audit Scope$/;"	s	chapter:Workshop Tools Security Audit
 Author	README.md	/^## Author$/;"	s	chapter:AXE - Agent eXecution Engine
 Auto-Approve Mode (Non-Interactive)	README.md	/^### Auto-Approve Mode (Non-Interactive)$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
 Automated Installation Testing	workshop_dependency_validation.md	/^### Automated Installation Testing$/;"	S	section:Workshop Tools Dependency Validation""Installation Validation
 Autonomous Collaborative Sessions (NEW!)	README.md	/^### Autonomous Collaborative Sessions (NEW!)$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Available Agents	README.md	/^### Available Agents$/;"	S	section:AXE - Agent eXecution Engine""Agent Reference
+Available Docs	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Available Docs$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Documentation
 Available Models	MODELS_FINAL.md	/^### Available Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""GitHub Models
 BLUE	utils/formatting.py	/^    BLUE = '\\033[94m'$/;"	v	class:Colors
 BOLD	utils/formatting.py	/^    BOLD = '\\033[1m'$/;"	v	class:Colors
@@ -180,8 +211,11 @@ Background Monitor Thread	IMPROVEMENTS_FINAL.md	/^### Background Monitor Thread$
 Backward Compatibility	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Backward Compatibility$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Impact
 Backward Compatibility	BUG_FIX_SUMMARY.md	/^## Backward Compatibility$/;"	s	chapter:Bug Fix Summary - Multi-Agent Collaboration Issues
 Backward Compatibility	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Backward Compatibility$/;"	s	chapter:Database Location Fix - Implementation Summary
+Backward Compatibility	DYNAMIC_TOKENS_SUMMARY.md	/^## Backward Compatibility$/;"	s	chapter:Dynamic Max Output Tokens Implementation Summary
 Backward Compatibility	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Backward Compatibility$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Backward Compatibility	REFACTORING_NOTES.md	/^### Backward Compatibility$/;"	S	section:AXE.PY Refactoring Notes""Design Decisions
+Backward Compatibility	SANDBOX.md	/^### Backward Compatibility$/;"	S	section:Bubblewrap Sandbox Security Model""Configuration
+Backward Compatibility	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Backward Compatibility$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
 Backwards Compatibility	IMPLEMENTATION_SUMMARY.md	/^## Backwards Compatibility$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
 Basic Agent Conversations	README.md	/^### Basic Agent Conversations$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
 Batch Processing	README.md	/^### Batch Processing$/;"	S	section:AXE - Agent eXecution Engine""Advanced Usage
@@ -195,6 +229,7 @@ Before Fix	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Before Fix$/;"	S	section:Coll
 Before fix: parse_all_tool_formats would parse it, then ResponseProcessor would parse it again	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Before fix: parse_all_tool_formats would parse it, then ResponseProcessor would parse it again$/;"	c
 Before/After Comparison of Fixes	BEFORE_AFTER_COMPARISON.md	/^# Before\/After Comparison of Fixes$/;"	c
 Behavior	WRITE_BLOCKS_GUIDE.md	/^### Behavior$/;"	S	section:WRITE Block Functionality - User Guide""Security and Permissions
+Benefits	DYNAMIC_TOKENS_SUMMARY.md	/^## Benefits$/;"	s	chapter:Dynamic Max Output Tokens Implementation Summary
 Benefits	REFACTORING_NOTES.md	/^## Benefits$/;"	s	chapter:AXE.PY Refactoring Notes
 Best Practices	IMPROVEMENTS_FINAL.md	/^### Best Practices$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Persistent Storage
 Best Practices	WRITE_BLOCKS_GUIDE.md	/^## Best Practices$/;"	s	chapter:API Documentation
@@ -203,6 +238,9 @@ Break Activities	IMPROVEMENTS_FINAL.md	/^### Break Activities$/;"	S	section:AXE 
 Break System	IMPROVEMENTS_FINAL.md	/^## Break System$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Break Triggers	IMPROVEMENTS_FINAL.md	/^### Break Triggers$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Break System
 BreakSystem	managers/break_system.py	/^class BreakSystem:$/;"	c
+Bubblewrap Limitations	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Bubblewrap Limitations$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Known Limitations
+Bubblewrap Sandbox Implementation - Summary	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^# Bubblewrap Sandbox Implementation - Summary$/;"	c
+Bubblewrap Sandbox Security Model	SANDBOX.md	/^# Bubblewrap Sandbox Security Model$/;"	c
 Bug 1: Duplicate Command Execution ❌ → ✅	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^## Bug 1: Duplicate Command Execution ❌ → ✅$/;"	s	chapter:Duplicate Execution and Heredoc Parsing Bug Fixes
 Bug 1: False "TASK COMPLETE" Detection ✅	TASK_COMPLETION_FIX_SUMMARY.md	/^## Bug 1: False "TASK COMPLETE" Detection ✅$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
 Bug 1: XML Tag Formats Not Supported ✅	BUG_FIX_SUMMARY.md	/^### Bug 1: XML Tag Formats Not Supported ✅$/;"	S	section:Bug Fix Summary - Multi-Agent Collaboration Issues""Bugs Fixed
@@ -228,6 +266,7 @@ Call Graph	docs/diagrams/README.md	/^### Call Graph$/;"	S	section:AXE Architectu
 Chain of Thought	README.md	/^### Chain of Thought$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
 Changelog	WRITE_BLOCKS_GUIDE.md	/^## Changelog$/;"	s	chapter:API Documentation
 Changes Made	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Changes Made$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Solution Implemented
+Changes Made	DYNAMIC_TOKENS_SUMMARY.md	/^## Changes Made$/;"	s	chapter:Dynamic Max Output Tokens Implementation Summary
 Changes Made	TASK_COMPLETION_FIX_SUMMARY.md	/^### Changes Made$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 1: False "TASK COMPLETE" Detection ✅
 Changes Made	TASK_COMPLETION_FIX_SUMMARY.md	/^### Changes Made$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 2: Active Agents Counter ✅
 Chat Commands	QUICK_REFERENCE.md	/^### Chat Commands$/;"	S	section:AXE Multiagent - Quick Reference Card""Commands
@@ -257,13 +296,14 @@ Code Changes Summary	IMPLEMENTATION_COMPLETE.md	/^## Code Changes Summary$/;"	s	
 Code Comments Coverage	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Code Comments Coverage$/;"	S	section:Shell Operator Support Implementation Summary""Documentation & Comments
 Code Coverage Report	workshop_test_results.md	/^### Code Coverage Report$/;"	S	section:Workshop Tools Test Suite Execution Results""Overall Test Statistics
 Code Flow	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Code Flow$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Code Quality	DYNAMIC_TOKENS_SUMMARY.md	/^## Code Quality$/;"	s	chapter:Dynamic Max Output Tokens Implementation Summary
 Code Quality	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Code Quality$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Code Quality	TASK_COMPLETION_FIX_SUMMARY.md	/^### Code Quality$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Validation
 Code Review	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Code Review$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Quality Checks
 Code Review Addressed	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Code Review Addressed$/;"	s	chapter:Shell Operator Support Implementation Summary
 Code Review Issues Addressed	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Code Review Issues Addressed$/;"	S	section:Multi-Format Tool Call Parser Implementation""Code Quality
 Code Snippet Analysis	workshop_benchmarks.md	/^### Code Snippet Analysis$/;"	S	section:Workshop Tools Benchmarks""Saw - Taint Analysis Benchmarks
-Code Statistics	llm_prep/codebase_overview.md	/^## Code Statistics$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-04
+Code Statistics	llm_prep/codebase_overview.md	/^## Code Statistics$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-10
 Code Structure - EXCELLENT	PR23_VALIDATION_REPORT.md	/^### Code Structure - EXCELLENT$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 5: Code Quality Analysis
 Collaborative Mode Tool Syntax Fix - Summary	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^# Collaborative Mode Tool Syntax Fix - Summary$/;"	c
 Collaborative Problem Solving	README.md	/^### Collaborative Problem Solving$/;"	S	section:AXE - Agent eXecution Engine""Multi-Agent Collaboration
@@ -275,19 +315,23 @@ Command:	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### Command:$/;"	S	section:Heredoc E
 Commands	QUICK_REFERENCE.md	/^## Commands$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Commands Added	IMPLEMENTATION_COMPLETE.md	/^## Commands Added$/;"	s	chapter:AXE Enhancement Implementation - Complete ✅
 Commands Now Working	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Commands Now Working$/;"	s	chapter:Shell Operator Support Implementation Summary
+Commands work in whitelist mode but not sandbox mode	SANDBOX.md	/^### Commands work in whitelist mode but not sandbox mode$/;"	S	section:Bubblewrap Sandbox Security Model""Troubleshooting
 Commercial License	README.md	/^### Commercial License$/;"	S	section:AXE - Agent eXecution Engine""License
 Common Issues	API_PROVIDERS.md	/^### Common Issues$/;"	S	section:AXE API Provider Documentation""Troubleshooting
 Common Issues	README.md	/^### Common Issues$/;"	S	section:AXE - Agent eXecution Engine""Troubleshooting
 Common Scenarios	QUICK_REFERENCE.md	/^## Common Scenarios$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Comparative Analysis	workshop_benchmarks.md	/^## Comparative Analysis$/;"	s	chapter:Workshop Tools Benchmarks
+Compared to Whitelist Mode	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Compared to Whitelist Mode$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Security Benefits
 Compatibility Matrix	workshop_dependency_validation.md	/^## Compatibility Matrix$/;"	s	chapter:Workshop Tools Dependency Validation
 Compliance Assessment	workshop_security_audit.md	/^## Compliance Assessment$/;"	s	chapter:Workshop Tools Security Audit
+Component Overview	SANDBOX.md	/^### Component Overview$/;"	S	section:Bubblewrap Sandbox Security Model""Architecture
 Compression Warnings	README.md	/^#### Compression Warnings$/;"	t	subsection:AXE - Agent eXecution Engine""Chat Commands Reference""Token-Saving Optimizations (NEW!)
 Conclusion	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Conclusion$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
 Conclusion	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Conclusion$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Conclusion	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Conclusion$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
 Conclusion	IMPLEMENTATION_COMPLETE.md	/^## Conclusion$/;"	s	chapter:AXE Enhancement Implementation - Complete ✅
 Conclusion	IMPLEMENTATION_SUMMARY.md	/^## Conclusion$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
+Conclusion	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Conclusion$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
 Conclusion	workshop_dependency_validation.md	/^## Conclusion$/;"	s	chapter:Workshop Tools Dependency Validation
 Conclusion	workshop_security_audit.md	/^## Conclusion$/;"	s	chapter:Workshop Tools Security Audit
 Conclusion	workshop_test_results.md	/^## Conclusion$/;"	s	chapter:Workshop Tools Test Suite Execution Results
@@ -300,7 +344,9 @@ Configuration	MODELS_FINAL.md	/^### Configuration$/;"	S	section:AXE Multi-Agent 
 Configuration	PR23_EXECUTIVE_SUMMARY.md	/^### Configuration$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Integration Impact
 Configuration	README.md	/^## Configuration$/;"	s	chapter:AXE - Agent eXecution Engine
 Configuration	README.md	/^### Configuration$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
+Configuration	SANDBOX.md	/^## Configuration$/;"	s	chapter:Bubblewrap Sandbox Security Model
 Configuration	workshop_quick_reference.md	/^## Configuration$/;"	s	chapter:Workshop Tools Quick Reference
+Configuration Example	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Configuration Example$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
 Configuration File (axe.yaml)	README.md	/^### Configuration File (axe.yaml)$/;"	S	section:AXE - Agent eXecution Engine""Configuration
 Configuration Integration - COMPLETE	PR23_VALIDATION_REPORT.md	/^### Configuration Integration - COMPLETE$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 2: Integration Verification
 Configuration file	XML_PARSER_IMPLEMENTATION.md	/^# Configuration file$/;"	c
@@ -322,7 +368,8 @@ Custom Validation Suite	PR23_EXECUTIVE_SUMMARY.md	/^### Custom Validation Suite$
 Custom Validation Tests Created	PR23_VALIDATION_REPORT.md	/^### Custom Validation Tests Created$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 6: Test Coverage Analysis
 DEFAULT_CONFIG	core/constants.py	/^DEFAULT_CONFIG = {$/;"	v
 DEFAULT_EXCLUDES	tools/llmprep.py	/^DEFAULT_EXCLUDES = "__pycache__|build|dist|node_modules|.git|*.o|*.so|*.a|*.pyc|.venv|venv|env"$/;"	v
-DEFAULT_METADATA	models/metadata.py	/^DEFAULT_METADATA = {$/;"	v
+DEFAULT_METADATA	models/metadata.py	/^DEFAULT_METADATA = _config.get('default', {$/;"	v
+DEFAULT_OUTPUT_DIR	claude/pdfocr.py	/^DEFAULT_OUTPUT_DIR = "ocr_out"$/;"	v
 DEFAULT_PRICING	utils/token_stats.py	/^DEFAULT_PRICING = (5.00, 15.00)$/;"	v
 DEGRADATION_CHECK_INTERVAL	core/constants.py	/^DEGRADATION_CHECK_INTERVAL = 5  # Check degradation every N turns$/;"	v
 DIFF_HISTORY_LIMIT	core/constants.py	/^DIFF_HISTORY_LIMIT = 20         # Number of recent diffs to track for error analysis$/;"	v
@@ -355,7 +402,7 @@ Diagram Descriptions	docs/diagrams/README.md	/^## Diagram Descriptions$/;"	s	cha
 Diff-Based Error Detection Metrics	IMPROVEMENTS_FINAL.md	/^### Diff-Based Error Detection Metrics$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Degradation Monitoring
 Directory Access Control	IMPLEMENTATION_SUMMARY.md	/^### Directory Access Control$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Security Considerations
 Directory Access Control	WRITE_BLOCKS_GUIDE.md	/^### Directory Access Control$/;"	S	section:WRITE Block Functionality - User Guide""Security and Permissions
-Directory Structure	llm_prep/codebase_overview.md	/^## Directory Structure$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-04
+Directory Structure	llm_prep/codebase_overview.md	/^## Directory Structure$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-10
 Disassembly & Analysis	README.md	/^### Disassembly & Analysis$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Disk I/O	workshop_dependency_validation.md	/^### Disk I\/O$/;"	S	section:Workshop Tools Dependency Validation""Performance Impact Analysis
 Display at session start (pinned message):	IMPROVEMENTS_FINAL.md	/^### Display at session start (pinned message):$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Workplace Rules
@@ -370,6 +417,7 @@ Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provide
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
 Documentation	API_PROVIDERS.md	/^### Documentation$/;"	S	section:AXE API Provider Documentation""xAI (Grok)
 Documentation	README.md	/^### Documentation$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
+Documentation	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Documentation$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
 Documentation & Comments	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Documentation & Comments$/;"	s	chapter:Shell Operator Support Implementation Summary
 Documentation - COMPREHENSIVE	PR23_VALIDATION_REPORT.md	/^### Documentation - COMPREHENSIVE$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 5: Code Quality Analysis
 Documentation Tests	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Documentation Tests$/;"	S	section:Shell Operator Support Implementation Summary""Test Coverage
@@ -378,6 +426,7 @@ Documentation Updates	IMPLEMENTATION_COMPLETE.md	/^## Documentation Updates$/;"	
 Download	README.md	/^### Download$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Duplicate Execution and Heredoc Parsing Bug Fixes	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Duplicate Execution and Heredoc Parsing Bug Fixes$/;"	c
 During Session	QUICK_REFERENCE.md	/^### During Session$/;"	S	section:AXE Multiagent - Quick Reference Card""Tips for Humans
+Dynamic Max Output Tokens Implementation Summary	DYNAMIC_TOKENS_SUMMARY.md	/^# Dynamic Max Output Tokens Implementation Summary$/;"	c
 Dynamic Spawning	IMPROVEMENTS_FINAL.md	/^## Dynamic Spawning$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 DynamicSpawner	managers/dynamic_spawner.py	/^class DynamicSpawner:$/;"	c
 EMERGENCY_MAILBOX_DIR	core/constants.py	/^EMERGENCY_MAILBOX_DIR = "\/tmp\/axe_emergency_mailbox"$/;"	v
@@ -389,11 +438,14 @@ Edge Cases Fixed	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Edge Cases Fixed$/;"	s	c
 Emergency Mailbox	IMPROVEMENTS_FINAL.md	/^## Emergency Mailbox$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 EmergencyMailbox	managers/emergency_mailbox.py	/^class EmergencyMailbox:$/;"	c
 Emulation	README.md	/^### Emulation$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
+Enabling Sandbox Mode	SANDBOX.md	/^### Enabling Sandbox Mode$/;"	S	section:Bubblewrap Sandbox Security Model""Configuration
+Enabling Sandbox Mode	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Enabling Sandbox Mode$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Configuration Example
 Encouraging Good Behavior	QUICK_REFERENCE.md	/^### Encouraging Good Behavior$/;"	S	section:AXE Multiagent - Quick Reference Card""Tips for Humans
 Endpoints	WRITE_BLOCKS_GUIDE.md	/^## Endpoints$/;"	s	chapter:API Documentation
 EnumeratedSink	workshop/plane.py	/^class EnumeratedSink:$/;"	c
 EnumeratedSource	workshop/plane.py	/^class EnumeratedSource:$/;"	c
 Enumeration Coverage	workshop_benchmarks.md	/^### Enumeration Coverage$/;"	S	section:Workshop Tools Benchmarks""Plane - Source/Sink Enumeration Benchmarks
+Environment Restrictions	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Environment Restrictions$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Known Limitations
 Environment Setup	MODELS_FINAL.md	/^### Environment Setup$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Quick Start
 Environment Variable	API_PROVIDERS.md	/^### Environment Variable$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
 Environment Variable	API_PROVIDERS.md	/^### Environment Variable$/;"	S	section:AXE API Provider Documentation""GitHub Models
@@ -407,8 +459,11 @@ Error Recovery	workshop_dependency_validation.md	/^### Error Recovery$/;"	S	sect
 Evidence of the Problem	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Evidence of the Problem$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Problem Statement
 Example - Before vs After	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Example - Before vs After$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
 Example 1: Claude's Natural Format	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Example 1: Claude's Natural Format$/;"	S	section:Multi-Format Tool Call Parser Implementation""Examples
+Example 1: Default Sandbox Mode	SANDBOX.md	/^### Example 1: Default Sandbox Mode$/;"	S	section:Bubblewrap Sandbox Security Model""Usage Examples
 Example 2: Code Block Format	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Example 2: Code Block Format$/;"	S	section:Multi-Format Tool Call Parser Implementation""Examples
+Example 2: Restricted Sandbox with Blacklist	SANDBOX.md	/^### Example 2: Restricted Sandbox with Blacklist$/;"	S	section:Bubblewrap Sandbox Security Model""Usage Examples
 Example 3: Backward Compatibility	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Example 3: Backward Compatibility$/;"	S	chapter:Header
+Example 3: Network-Isolated Sandbox	SANDBOX.md	/^### Example 3: Network-Isolated Sandbox$/;"	S	section:Bubblewrap Sandbox Security Model""Usage Examples
 Example Output	README.md	/^#### Example Output$/;"	t	subsection:AXE - Agent eXecution Engine""Analysis Tools""build_analyzer - Build System Detection
 Example of Duplicate Execution (Before Fix)	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Example of Duplicate Execution (Before Fix)$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 1: Duplicate Command Execution ❌ → ✅
 Example: Multi-Agent Code Analysis	README.md	/^### Example: Multi-Agent Code Analysis$/;"	S	section:AXE - Agent eXecution Engine""Usage Examples
@@ -419,6 +474,7 @@ Executing Tools	README.md	/^### Executing Tools$/;"	S	section:AXE - Agent eXecut
 Execution (original version):	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^### Execution (original version):$/;"	S	section:Heredoc Execution Fix - Implementation Summary""Example - Before vs After
 Execution Order	WRITE_BLOCKS_GUIDE.md	/^### Execution Order$/;"	S	section:WRITE Block Functionality - User Guide""Implementation Details
 Executive Summary	PR23_VALIDATION_REPORT.md	/^## Executive Summary$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report
+Executive Summary	SECURITY_REPORT.md	/^## Executive Summary$/;"	s	chapter:AXE Project Security Report
 Executive Summary	workshop_security_audit.md	/^## Executive Summary$/;"	s	chapter:Workshop Tools Security Audit
 Existing Tests	HEREDOC_EXECUTION_FIX.md	/^### Existing Tests$/;"	S	section:Heredoc Execution Fix Summary""Testing
 Existing Tests Verified	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^### Existing Tests Verified$/;"	S	section:Collaborative Mode Tool Syntax Fix - Summary""Testing
@@ -426,6 +482,7 @@ Existing tests (verify no breakage)	XML_PARSER_QUICK_REFERENCE.md	/^# Existing t
 Expected Behavior	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Expected Behavior$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Expected Benefits	README.md	/^#### Expected Benefits$/;"	t	subsection:AXE - Agent eXecution Engine""Analysis Tools""build_analyzer - Build System Detection
 Expected Benefits	README.md	/^#### Expected Benefits$/;"	t	subsection:AXE - Agent eXecution Engine""Analysis Tools""llmprep - Codebase Preparation
+Extensibility	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Extensibility$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Future Enhancements
 Fallback Mechanisms	workshop_dependency_validation.md	/^## Fallback Mechanisms$/;"	s	chapter:Workshop Tools Dependency Validation
 Feature Details	IMPLEMENTATION_COMPLETE.md	/^## Feature Details$/;"	s	chapter:AXE Enhancement Implementation - Complete ✅
 Features	API_PROVIDERS.md	/^### Features$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
@@ -443,10 +500,13 @@ Files	docs/diagrams/README.md	/^## Files$/;"	s	chapter:AXE Architecture Diagrams
 Files Changed	BUG_FIX_SUMMARY.md	/^## Files Changed$/;"	s	chapter:Bug Fix Summary - Multi-Agent Collaboration Issues
 Files Changed	HEREDOC_EXECUTION_FIX.md	/^## Files Changed$/;"	s	chapter:Heredoc Execution Fix Summary
 Files Changed	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Files Changed$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
+Files Created	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Files Created$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Implementation Details
 Files Modified	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
 Files Modified	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Files Modified	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Database Location Fix - Implementation Summary
+Files Modified	DYNAMIC_TOKENS_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Dynamic Max Output Tokens Implementation Summary
 Files Modified	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
+Files Modified	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Files Modified$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Implementation Details
 Files Modified	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Shell Operator Support Implementation Summary
 Files Modified	TASK_COMPLETION_FIX_SUMMARY.md	/^## Files Modified$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
 Files Modified/Created	IMPLEMENTATION_SUMMARY.md	/^## Files Modified\/Created$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
@@ -463,10 +523,14 @@ For New Code	REFACTORING_NOTES.md	/^### For New Code$/;"	S	section:AXE.PY Refact
 For Production:	IMPLEMENTATION_COMPLETE.md	/^### For Production:$/;"	S	section:AXE Enhancement Implementation - Complete ✅""Next Steps
 For User:	IMPLEMENTATION_COMPLETE.md	/^### For User:$/;"	S	section:AXE Enhancement Implementation - Complete ✅""Next Steps
 Format	IMPROVEMENTS_FINAL.md	/^### Format$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Agent Aliases
+From Whitelist to Sandbox	SANDBOX.md	/^### From Whitelist to Sandbox$/;"	S	section:Bubblewrap Sandbox Security Model""Migration Guide
 Function-Level Analysis	workshop_benchmarks.md	/^### Function-Level Analysis$/;"	S	section:Workshop Tools Benchmarks""Chisel - Symbolic Execution Benchmarks
 Future Considerations	DATABASE_LOCATION_FIX_SUMMARY.md	/^## Future Considerations$/;"	s	chapter:Database Location Fix - Implementation Summary
 Future Enhancements	ARCHITECTURE.md	/^## Future Enhancements$/;"	s	chapter:AXE Architecture and Extensibility Guide
 Future Enhancements	BUG_FIX_SUMMARY.md	/^## Future Enhancements$/;"	s	chapter:Bug Fix Summary - Multi-Agent Collaboration Issues
+Future Enhancements	DYNAMIC_TOKENS_SUMMARY.md	/^## Future Enhancements$/;"	s	chapter:Dynamic Max Output Tokens Implementation Summary
+Future Enhancements	SANDBOX.md	/^## Future Enhancements$/;"	s	chapter:Bubblewrap Sandbox Security Model
+Future Enhancements	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Future Enhancements$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
 Future Enhancements	WRITE_BLOCKS_GUIDE.md	/^## Future Enhancements$/;"	s	chapter:API Documentation
 Future Enhancements	workshop_security_audit.md	/^### Future Enhancements$/;"	S	section:Workshop Tools Security Audit""Recommendations
 Future Enhancements	workshop_test_results.md	/^### Future Enhancements$/;"	S	section:Workshop Tools Test Suite Execution Results""Recommendations
@@ -485,6 +549,7 @@ GitHub Models	MODELS_FINAL.md	/^## GitHub Models$/;"	s	chapter:AXE Multi-Agent S
 GitHub Models - Free with Copilot	README.md	/^### GitHub Models - Free with Copilot$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 Graceful Degradation	PR23_VALIDATION_REPORT.md	/^### Graceful Degradation$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 7: Dependency Analysis
 Graceful Degradation	workshop_dependency_validation.md	/^### Graceful Degradation$/;"	S	section:Workshop Tools Dependency Validation""Fallback Mechanisms
+Graceful Handling	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Graceful Handling$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Known Limitations
 HAS_ANTHROPIC	core/agent_manager.py	/^    HAS_ANTHROPIC = False$/;"	v
 HAS_ANTHROPIC	core/agent_manager.py	/^    HAS_ANTHROPIC = True$/;"	v
 HAS_CHISEL	axe.py	/^    HAS_CHISEL = HAS_SAW = HAS_PLANE = HAS_HAMMER = False$/;"	v
@@ -523,7 +588,7 @@ Heredoc Execution Fix - Implementation Summary	HEREDOC_EXECUTION_FIX_SUMMARY.md	
 Heredoc Execution Fix Summary	HEREDOC_EXECUTION_FIX.md	/^# Heredoc Execution Fix Summary$/;"	c
 Historical Comparison	workshop_test_results.md	/^### Historical Comparison$/;"	S	section:Workshop Tools Test Suite Execution Results""Regression Testing
 History	workshop_quick_reference.md	/^### History$/;"	S	section:Workshop Tools Quick Reference""Management Commands
-How to Use	llm_prep/codebase_overview.md	/^## How to Use$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-04
+How to Use	llm_prep/codebase_overview.md	/^## How to Use$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-10
 HuggingFace (Llama)	API_PROVIDERS.md	/^## HuggingFace (Llama)$/;"	s	chapter:AXE API Provider Documentation
 HuggingFace (Llama)	MODELS_FINAL.md	/^## HuggingFace (Llama)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 HuggingFace (Llama) - Free Tier Available!	README.md	/^### HuggingFace (Llama) - Free Tier Available!$/;"	S	section:AXE - Agent eXecution Engine""API Providers
@@ -542,6 +607,7 @@ Implementation	IMPROVEMENTS_FINAL.md	/^### Implementation$/;"	S	section:AXE Mult
 Implementation	IMPROVEMENTS_FINAL.md	/^### Implementation$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Mandatory Sleep System
 Implementation	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Implementation$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Implementation Approach	REFACTORING_NOTES.md	/^## Implementation Approach$/;"	s	chapter:AXE.PY Refactoring Notes
+Implementation Details	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Implementation Details$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
 Implementation Details	WRITE_BLOCKS_GUIDE.md	/^## Implementation Details$/;"	s	chapter:WRITE Block Functionality - User Guide
 Implementation Notes	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Implementation Notes$/;"	s	chapter:Shell Operator Support Implementation Summary
 Implementation Priority	IMPROVEMENTS_FINAL.md	/^## Implementation Priority$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
@@ -584,15 +650,21 @@ Issues Resolved	IMPLEMENTATION_SUMMARY.md	/^## Issues Resolved$/;"	s	chapter:Imp
 Key Changes:	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Key Changes:$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Solution
 Key Extension Points	ARCHITECTURE.md	/^## Key Extension Points$/;"	s	chapter:AXE Architecture and Extensibility Guide
 Key Features	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Key Features$/;"	S	section:Multi-Format Tool Call Parser Implementation""Implementation
+Key Features	SANDBOX.md	/^## Key Features$/;"	s	chapter:Bubblewrap Sandbox Security Model
+Key Features	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Key Features$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
+Key Files	SANDBOX.md	/^### Key Files$/;"	S	section:Bubblewrap Sandbox Security Model""Architecture
+Key Findings (Post-Fix)	SECURITY_REPORT.md	/^## Key Findings (Post-Fix)$/;"	s	chapter:AXE Project Security Report
 Key Strengths	PR23_EXECUTIVE_SUMMARY.md	/^## Key Strengths$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
+Known Limitations	SANDBOX.md	/^### Known Limitations$/;"	S	section:Bubblewrap Sandbox Security Model""Security Boundaries
+Known Limitations	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Known Limitations$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
 Known Security Issues	workshop_dependency_validation.md	/^### Known Security Issues$/;"	S	section:Workshop Tools Dependency Validation""Security Validation
 LEVEL_DEPUTY_SUPERVISOR	progression/levels.py	/^LEVEL_DEPUTY_SUPERVISOR = 30    # Level 30: Deputy Supervisor (15000 XP)$/;"	v
 LEVEL_MILESTONES	progression/levels.py	/^LEVEL_MILESTONES = {$/;"	v
 LEVEL_SENIOR_WORKER	progression/levels.py	/^LEVEL_SENIOR_WORKER = 10        # Level 10: Senior Worker (1000 XP)$/;"	v
 LEVEL_SUPERVISOR_ELIGIBLE	progression/levels.py	/^LEVEL_SUPERVISOR_ELIGIBLE = 40  # Level 40: Supervisor-eligible (30000 XP)$/;"	v
 LEVEL_TEAM_LEADER	progression/levels.py	/^LEVEL_TEAM_LEADER = 20          # Level 20: Team Leader (5000 XP)$/;"	v
-LLM Context Files	llm_prep/codebase_overview.md	/^## LLM Context Files$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-04
-LLM-Ready Codebase Overview — 2026-01-04	llm_prep/codebase_overview.md	/^# LLM-Ready Codebase Overview — 2026-01-04$/;"	c
+LLM Context Files	llm_prep/codebase_overview.md	/^## LLM Context Files$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-10
+LLM-Ready Codebase Overview — 2026-01-10	llm_prep/codebase_overview.md	/^# LLM-Ready Codebase Overview — 2026-01-10$/;"	c
 Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Anthropic (Claude)
 Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""HuggingFace (Llama)
 Latest Models	MODELS_FINAL.md	/^### Latest Models$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""OpenAI (GPT)
@@ -609,18 +681,21 @@ Live Statistics & Monitoring	README.md	/^#### Live Statistics & Monitoring$/;"	t
 Low Severity Issues	workshop_security_audit.md	/^### Low Severity Issues$/;"	S	section:Workshop Tools Security Audit""Detailed Findings
 MAX_BREAKS_PER_HOUR	core/constants.py	/^MAX_BREAKS_PER_HOUR = 2         # Maximum breaks per hour$/;"	v
 MAX_BREAK_MINUTES	core/constants.py	/^MAX_BREAK_MINUTES = 15          # Maximum break duration$/;"	v
+MAX_DPI	claude/pdfocr.py	/^MAX_DPI = 600$/;"	v
 MAX_READ_SIZE	axe.py	/^    MAX_READ_SIZE = 10000  # Maximum bytes to read from a file$/;"	v	class:ResponseProcessor
 MAX_TOTAL_AGENTS	core/constants.py	/^MAX_TOTAL_AGENTS = 10           # Maximum total agents allowed$/;"	v
 MAX_WORKFORCE_ON_BREAK	core/constants.py	/^MAX_WORKFORCE_ON_BREAK = 0.4    # Never more than 40% of agents on break$/;"	v
 MAX_WORK_HOURS	core/constants.py	/^MAX_WORK_HOURS = 6              # Maximum continuous work hours before mandatory sleep$/;"	v
 MIN_ACTIVE_AGENTS	core/constants.py	/^MIN_ACTIVE_AGENTS = 2           # Minimum agents that must be active$/;"	v
+MIN_DPI	claude/pdfocr.py	/^MIN_DPI = 72$/;"	v
 MIN_SLEEP_MINUTES	core/constants.py	/^MIN_SLEEP_MINUTES = 30          # Minimum sleep duration in minutes$/;"	v
 MIN_WORKLOAD_FOR_BREAK	core/constants.py	/^MIN_WORKLOAD_FOR_BREAK = 0.3    # Break only allowed if workload < 30%$/;"	v
-MODEL_METADATA	models/metadata.py	/^MODEL_METADATA = {$/;"	v
+MODEL_METADATA	models/metadata.py	/^MODEL_METADATA = _config.get('models', {})$/;"	v
 MODEL_PRICING	utils/token_stats.py	/^MODEL_PRICING = {$/;"	v
 Management Commands	README.md	/^### Management Commands$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
 Management Commands	workshop_quick_reference.md	/^## Management Commands$/;"	s	chapter:Workshop Tools Quick Reference
 Mandatory Sleep System	IMPROVEMENTS_FINAL.md	/^## Mandatory Sleep System$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
+Manual Testing	SANDBOX.md	/^## Manual Testing$/;"	s	chapter:Bubblewrap Sandbox Security Model
 Manual Testing	WRITE_BLOCKS_GUIDE.md	/^### Manual Testing$/;"	S	section:WRITE Block Functionality - User Guide""Testing
 Manual Testing (manual_test_write.py)	IMPLEMENTATION_SUMMARY.md	/^### Manual Testing (manual_test_write.py)$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Testing
 Manual Verification	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Manual Verification$/;"	S	section:Database Location Fix - Implementation Summary""Verification
@@ -632,9 +707,13 @@ Merge Risk: ⚠️ LOW	PR23_EXECUTIVE_SUMMARY.md	/^### Merge Risk: ⚠️ LOW$/;
 Merge Risks: LOW	PR23_VALIDATION_REPORT.md	/^### Merge Risks: LOW$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 12: Risk Assessment
 Message	utils/context_optimizer.py	/^class Message:$/;"	c
 Message Format	IMPROVEMENTS_FINAL.md	/^### Message Format$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
+Methodology	SECURITY_REPORT.md	/^## Methodology$/;"	s	chapter:AXE Project Security Report
 Metrics	REFACTORING_NOTES.md	/^## Metrics$/;"	s	chapter:AXE.PY Refactoring Notes
+Migration Guide	DYNAMIC_TOKENS_SUMMARY.md	/^## Migration Guide$/;"	s	chapter:Dynamic Max Output Tokens Implementation Summary
 Migration Guide	REFACTORING_NOTES.md	/^## Migration Guide$/;"	s	chapter:AXE.PY Refactoring Notes
+Migration Guide	SANDBOX.md	/^## Migration Guide$/;"	s	chapter:Bubblewrap Sandbox Security Model
 Migration Path	IMPLEMENTATION_SUMMARY.md	/^### Migration Path$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Backwards Compatibility
+Migration Path	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Migration Path$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Backward Compatibility
 Minimal Changes	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Minimal Changes$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Minimal Overhead	IMPLEMENTATION_SUMMARY.md	/^### Minimal Overhead$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Performance Impact
 Minor Issues (Non-Blocking)	PR23_EXECUTIVE_SUMMARY.md	/^## Minor Issues (Non-Blocking)$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
@@ -643,6 +722,7 @@ Mission Statement	MISSION.md	/^## Mission Statement$/;"	s	chapter:AXE - Agent eX
 MockSession	tests/test_spawned_agents.py	/^    class MockSession:$/;"	c	function:test_spawned_agent_system_prompt	file:
 Model Capabilities Matrix	MODELS_FINAL.md	/^## Model Capabilities Matrix$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Model Communication Example	MODELS_FINAL.md	/^### Model Communication Example$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Usage Examples
+Model Examples	DYNAMIC_TOKENS_SUMMARY.md	/^## Model Examples$/;"	s	chapter:Dynamic Max Output Tokens Implementation Summary
 Model Selection Guide	API_PROVIDERS.md	/^### Model Selection Guide$/;"	S	section:AXE API Provider Documentation""Quick Reference
 Modified Files	IMPLEMENTATION_SUMMARY.md	/^### Modified Files$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Files Modified/Created
 Modified Files	PR23_VALIDATION_REPORT.md	/^### Modified Files$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Appendix B: File Changes Summary
@@ -684,18 +764,23 @@ OpenAI (GPT)	API_PROVIDERS.md	/^## OpenAI (GPT)$/;"	s	chapter:AXE API Provider D
 OpenAI (GPT)	MODELS_FINAL.md	/^## OpenAI (GPT)$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 OpenAI (GPT)	README.md	/^### OpenAI (GPT)$/;"	S	section:AXE - Agent eXecution Engine""API Providers
 Operating System Support	workshop_dependency_validation.md	/^### Operating System Support$/;"	S	section:Workshop Tools Dependency Validation""Compatibility Matrix
+Optimization	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Optimization$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Performance Impact
 Optional (Future)	PR23_EXECUTIVE_SUMMARY.md	/^### Optional (Future)$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Executive Summary""Post-Merge Actions
 Optional Dependencies	README.md	/^#### Optional Dependencies$/;"	t	subsection:AXE - Agent eXecution Engine""Analysis Tools""llmprep - Codebase Preparation
 Original Test Suite (`test_tool_runner.py`)	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Original Test Suite (`test_tool_runner.py`)$/;"	S	section:Shell Operator Support Implementation Summary""Test Coverage
 Overall Assessment	PR23_VALIDATION_REPORT.md	/^### Overall Assessment$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Executive Summary
 Overall Score: 9.4/10	PR23_VALIDATION_REPORT.md	/^### Overall Score: 9.4\/10$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 10: Validation Conclusion
 Overall Test Statistics	workshop_test_results.md	/^## Overall Test Statistics$/;"	s	chapter:Workshop Tools Test Suite Execution Results
+Overhead	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Overhead$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Performance Impact
 Overview	BUG_FIX_SUMMARY.md	/^## Overview$/;"	s	chapter:Bug Fix Summary - Multi-Agent Collaboration Issues
+Overview	DYNAMIC_TOKENS_SUMMARY.md	/^## Overview$/;"	s	chapter:Dynamic Max Output Tokens Implementation Summary
 Overview	FIXES_SUMMARY.md	/^## Overview$/;"	s	chapter:AXE Multiple Issues Fix Summary
 Overview	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^## Overview$/;"	s	chapter:Multi-Format Tool Call Parser - Quick Reference
 Overview	README.md	/^## Overview$/;"	s	chapter:AXE - Agent eXecution Engine
 Overview	README.md	/^### Overview$/;"	S	section:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools
 Overview	REFACTORING_NOTES.md	/^## Overview$/;"	s	chapter:AXE.PY Refactoring Notes
+Overview	SANDBOX.md	/^## Overview$/;"	s	chapter:Bubblewrap Sandbox Security Model
+Overview	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Overview$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
 Overview	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Overview$/;"	s	chapter:Shell Operator Support Implementation Summary
 Overview	TASK_COMPLETION_FIX_SUMMARY.md	/^## Overview$/;"	s	chapter:Fix Summary: AXE Session Termination Bugs
 Overview	WRITE_BLOCKS_GUIDE.md	/^## Overview$/;"	s	chapter:WRITE Block Functionality - User Guide
@@ -726,7 +811,9 @@ Per-Agent Workspace	IMPROVEMENTS_FINAL.md	/^### Per-Agent Workspace$/;"	S	sectio
 Performance Analysis Results	workshop_benchmarks.md	/^## Performance Analysis Results$/;"	s	chapter:Workshop Tools Benchmarks
 Performance Benchmarks	workshop_test_results.md	/^### Performance Benchmarks$/;"	S	section:Workshop Tools Test Suite Execution Results""Overall Test Statistics
 Performance Characteristics	PR23_EXECUTIVE_SUMMARY.md	/^## Performance Characteristics$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
+Performance Impact	DYNAMIC_TOKENS_SUMMARY.md	/^## Performance Impact$/;"	s	chapter:Dynamic Max Output Tokens Implementation Summary
 Performance Impact	IMPLEMENTATION_SUMMARY.md	/^## Performance Impact$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
+Performance Impact	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Performance Impact$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
 Performance Impact Analysis	workshop_dependency_validation.md	/^## Performance Impact Analysis$/;"	s	chapter:Workshop Tools Dependency Validation
 Performance Test Results (`test_workshop_performance.py`)	workshop_test_results.md	/^### Performance Test Results (`test_workshop_performance.py`)$/;"	S	section:Workshop Tools Test Suite Execution Results""Detailed Test Results
 Permission denied errors	WRITE_BLOCKS_GUIDE.md	/^### Permission denied errors$/;"	S	section:WRITE Block Functionality - User Guide""Troubleshooting
@@ -756,7 +843,9 @@ PlaneEnumerator	workshop/plane.py	/^class PlaneEnumerator:$/;"	c
 Plugin System	ARCHITECTURE.md	/^### Plugin System$/;"	S	section:AXE Architecture and Extensibility Guide""Future Enhancements
 Post-Merge Actions	PR23_EXECUTIVE_SUMMARY.md	/^## Post-Merge Actions$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
 Post-Merge Recommendations	PR23_VALIDATION_REPORT.md	/^### Post-Merge Recommendations$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 11: Merge Recommendation
+Potential Improvements	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Potential Improvements$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Future Enhancements
 Prerequisites	README.md	/^### Prerequisites$/;"	S	section:AXE - Agent eXecution Engine""Installation
+Preserved Functionality	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Preserved Functionality$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Backward Compatibility
 Previously Failing (from problem statement):	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Previously Failing (from problem statement):$/;"	S	section:Shell Operator Support Implementation Summary""Commands Now Working
 Primary Analysis Libraries	workshop_dependency_validation.md	/^### Primary Analysis Libraries$/;"	S	section:Workshop Tools Dependency Validation""Core Dependencies
 Problem	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Problem$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 1: Duplicate Command Execution ❌ → ✅
@@ -783,7 +872,7 @@ PromptCompressor	utils/prompt_compressor.py	/^class PromptCompressor:$/;"	c
 Purpose	IMPROVEMENTS_FINAL.md	/^### Purpose$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Emergency Mailbox
 Python	README.md	/^### Python$/;"	S	section:AXE - Agent eXecution Engine""Tool Whitelist
 Python Best Practices	llm_prep/project_guidance.md	/^## Python Best Practices$/;"	s	chapter:Project Guidance for AXE
-Python Class Diagrams (pyreverse)	llm_prep/codebase_overview.md	/^## Python Class Diagrams (pyreverse)$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-04
+Python Class Diagrams (pyreverse)	llm_prep/codebase_overview.md	/^## Python Class Diagrams (pyreverse)$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-10
 Python Example	API_PROVIDERS.md	/^### Python Example$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
 Python Example	API_PROVIDERS.md	/^### Python Example$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
 Python Example	API_PROVIDERS.md	/^### Python Example$/;"	S	section:AXE API Provider Documentation""OpenAI (GPT)
@@ -801,6 +890,7 @@ Quick Reference Card	README.md	/^## Quick Reference Card$/;"	s	chapter:AXE - Age
 Quick Reference Commands	IMPROVEMENTS_FINAL.md	/^## Quick Reference Commands$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Quick Start	MODELS_FINAL.md	/^## Quick Start$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Quick Start	README.md	/^## Quick Start$/;"	s	chapter:AXE - Agent eXecution Engine
+Quick Start	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Quick Start$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Documentation
 Quick verification	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^# Quick verification$/;"	c
 READ block sanitization	FIXES_SUMMARY.md	/^# READ block sanitization$/;"	c
 READ_BLOCK_PATTERN	core/constants.py	/^READ_BLOCK_PATTERN = r'\\[READ[^\\]]*\\].*?(?=\\n\\n|\\n\\[(?!\\[)[A-Z]|\\Z)'$/;"	v
@@ -820,10 +910,12 @@ Recommendations	workshop_benchmarks.md	/^## Recommendations$/;"	s	chapter:Worksh
 Recommendations	workshop_dependency_validation.md	/^## Recommendations$/;"	s	chapter:Workshop Tools Dependency Validation
 Recommendations	workshop_security_audit.md	/^## Recommendations$/;"	s	chapter:Workshop Tools Security Audit
 Recommendations	workshop_test_results.md	/^## Recommendations$/;"	s	chapter:Workshop Tools Test Suite Execution Results
+Recommendations (Prioritized)	SECURITY_REPORT.md	/^## Recommendations (Prioritized)$/;"	s	chapter:AXE Project Security Report
 Recommended Weights	IMPROVEMENTS_FINAL.md	/^### Recommended Weights$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Degradation Monitoring
 Recommended Work Duration Limits	IMPROVEMENTS_FINAL.md	/^### Recommended Work Duration Limits$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Mandatory Sleep System
 Refactoring Summary	REFACTORING_NOTES.md	/^## Refactoring Summary$/;"	s	chapter:AXE.PY Refactoring Notes
 References	REFACTORING_NOTES.md	/^## References$/;"	s	chapter:AXE.PY Refactoring Notes
+References	SANDBOX.md	/^## References$/;"	s	chapter:Bubblewrap Sandbox Security Model
 Regression Testing	workshop_test_results.md	/^## Regression Testing$/;"	s	chapter:Workshop Tools Test Suite Execution Results
 Regression Tests (test_axe_improvements.py)	IMPLEMENTATION_SUMMARY.md	/^### Regression Tests (test_axe_improvements.py)$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Testing
 Reliability Metrics	workshop_test_results.md	/^### Reliability Metrics$/;"	S	section:Workshop Tools Test Suite Execution Results""Test Quality Metrics
@@ -831,6 +923,7 @@ Request Protocol	IMPROVEMENTS_FINAL.md	/^### Request Protocol$/;"	S	section:AXE 
 Required Dependencies	PR23_VALIDATION_REPORT.md	/^### Required Dependencies$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 7: Dependency Analysis
 Requirements	API_PROVIDERS.md	/^### Requirements$/;"	S	section:AXE API Provider Documentation""GitHub Models
 Requirements	API_PROVIDERS.md	/^### Requirements$/;"	S	section:AXE API Provider Documentation""HuggingFace (Llama)
+Requirements	SANDBOX.md	/^## Requirements$/;"	s	chapter:Bubblewrap Sandbox Security Model
 Resource Controls - VERIFIED	PR23_VALIDATION_REPORT.md	/^### Resource Controls - VERIFIED$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 3: Security Validation
 Resource Monitoring	IMPROVEMENTS_FINAL.md	/^## Resource Monitoring$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
 Resource Monitoring	QUICK_REFERENCE.md	/^## Resource Monitoring$/;"	s	chapter:AXE Multiagent - Quick Reference Card
@@ -860,15 +953,24 @@ SLEEP_REASON_TIMEOUT	core/constants.py	/^SLEEP_REASON_TIMEOUT = "work_time_limit
 SPAWN_COOLDOWN_SECONDS	core/constants.py	/^SPAWN_COOLDOWN_SECONDS = 60     # Minimum time between spawns$/;"	v
 SQLite Schema	IMPROVEMENTS_FINAL.md	/^### SQLite Schema$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Persistent Storage
 SUPERVISOR_LOG_TABLE	database/schema.py	/^SUPERVISOR_LOG_TABLE = """$/;"	v
+SUPPORTED_IMAGE_EXTENSIONS	claude/pdfocr.py	/^SUPPORTED_IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".tiff", ".tif", ".bmp", ".webp"}$/;"	v
 Safe Commands for Agents	IMPROVEMENTS_FINAL.md	/^### Safe Commands for Agents$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Resource Monitoring
 Safety Considerations	workshop_quick_reference.md	/^## Safety Considerations$/;"	s	chapter:Workshop Tools Quick Reference
+SandboxManager	core/sandbox.py	/^class SandboxManager:$/;"	c
 Saw - Taint Analysis	README.md	/^#### Saw - Taint Analysis$/;"	t	subsection:AXE - Agent eXecution Engine""Workshop - Dynamic Analysis Tools""Quick Examples
 Saw - Taint Analysis	workshop_quick_reference.md	/^### Saw - Taint Analysis$/;"	S	section:Workshop Tools Quick Reference""Tools
 Saw - Taint Analysis Benchmarks	workshop_benchmarks.md	/^## Saw - Taint Analysis Benchmarks$/;"	s	chapter:Workshop Tools Benchmarks
 SawTracker	workshop/__init__.py	/^    SawTracker = _missing_tool_factory("SawTracker", "workshop.saw")$/;"	v
 SawTracker	workshop/saw.py	/^class SawTracker:$/;"	c
 Scalability	IMPLEMENTATION_SUMMARY.md	/^### Scalability$/;"	S	section:Implementation Summary: GPT-5 Fix & WRITE Blocks""Performance Impact
+Scenario 1: Development Workflow	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Scenario 1: Development Workflow$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Usage Scenarios
+Scenario 2: Code Analysis	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Scenario 2: Code Analysis$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Usage Scenarios
+Scenario 3: Network Isolated	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Scenario 3: Network Isolated$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Usage Scenarios
+Scenario 4: Legacy Mode	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Scenario 4: Legacy Mode$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Usage Scenarios
 Security Analysis	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Security Analysis$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
+Security Benefits	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Security Benefits$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
+Security Boundaries	SANDBOX.md	/^## Security Boundaries$/;"	s	chapter:Bubblewrap Sandbox Security Model
+Security Considerations	DYNAMIC_TOKENS_SUMMARY.md	/^## Security Considerations$/;"	s	chapter:Dynamic Max Output Tokens Implementation Summary
 Security Considerations	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Security Considerations$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
 Security Considerations	IMPLEMENTATION_SUMMARY.md	/^## Security Considerations$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
 Security Maintained	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Security Maintained$/;"	s	chapter:Shell Operator Support Implementation Summary
@@ -928,9 +1030,10 @@ Supported Formats	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Supported Formats$/
 Supported Formats	MULTI_FORMAT_PARSER_QUICK_REFERENCE.md	/^## Supported Formats$/;"	s	chapter:Multi-Format Tool Call Parser - Quick Reference
 Supported Formats	XML_PARSER_QUICK_REFERENCE.md	/^## Supported Formats$/;"	s	chapter:XML Function Call Support - Quick Reference
 Supported Heredoc Formats	DUPLICATE_EXECUTION_FIX_SUMMARY.md	/^### Supported Heredoc Formats$/;"	S	section:Duplicate Execution and Heredoc Parsing Bug Fixes""Bug 2: Heredoc Parsing Errors ❌ → ✅
-Symbol Index	llm_prep/codebase_overview.md	/^## Symbol Index$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-04
+Symbol Index	llm_prep/codebase_overview.md	/^## Symbol Index$/;"	s	chapter:LLM-Ready Codebase Overview — 2026-01-10
 Syntax	WRITE_BLOCKS_GUIDE.md	/^## Syntax$/;"	s	chapter:WRITE Block Functionality - User Guide
 System Resources	workshop_test_results.md	/^### System Resources$/;"	S	section:Workshop Tools Test Suite Execution Results""Test Environment Validation
+TESSERACT_TO_EASYOCR_LANG	claude/pdfocr.py	/^TESSERACT_TO_EASYOCR_LANG = {$/;"	v
 TOOL_NAME_MAPPING	utils/xml_tool_parser.py	/^TOOL_NAME_MAPPING = {$/;"	v
 Table of Contents	API_PROVIDERS.md	/^## Table of Contents$/;"	s	chapter:AXE API Provider Documentation
 Table of Contents	IMPROVEMENTS_FINAL.md	/^## Table of Contents$/;"	s	chapter:AXE Multi-Agent System - Improvement Reference Guide
@@ -947,6 +1050,7 @@ Test Categories	workshop_test_results.md	/^### Test Categories$/;"	S	section:Wor
 Test Connection	MODELS_FINAL.md	/^### Test Connection$/;"	S	section:AXE Multi-Agent System - Model Configuration Reference""Quick Start
 Test Coverage	ABSOLUTE_PATH_FIX_SUMMARY.md	/^## Test Coverage$/;"	s	chapter:WRITE Block Absolute Path Fix - Implementation Summary
 Test Coverage	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Test Coverage$/;"	S	section:Multi-Format Tool Call Parser Implementation""Testing
+Test Coverage	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^### Test Coverage$/;"	S	section:Bubblewrap Sandbox Implementation - Summary""Test Results
 Test Coverage	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^## Test Coverage$/;"	s	chapter:Shell Operator Support Implementation Summary
 Test Data Integrity	workshop_test_results.md	/^### Test Data Integrity$/;"	S	section:Workshop Tools Test Suite Execution Results""Test Environment Validation
 Test Documentation	SHELL_OPERATOR_SUPPORT_SUMMARY.md	/^### Test Documentation$/;"	S	section:Shell Operator Support Implementation Summary""Documentation & Comments
@@ -967,6 +1071,7 @@ Test Results	BUG_FIX_SUMMARY.md	/^## Test Results$/;"	s	chapter:Bug Fix Summary 
 Test Results	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Test Results$/;"	S	section:Database Location Fix - Implementation Summary""Verification
 Test Results	HEREDOC_EXECUTION_FIX_SUMMARY.md	/^## Test Results$/;"	s	chapter:Heredoc Execution Fix - Implementation Summary
 Test Results	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^### Test Results$/;"	S	section:Multi-Format Tool Call Parser Implementation""Testing
+Test Results	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Test Results$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
 Test Results	TASK_COMPLETION_FIX_SUMMARY.md	/^### Test Results$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Validation
 Test Results	workshop_security_audit.md	/^### Test Results$/;"	S	section:Workshop Tools Security Audit""Penetration Testing Results
 Test Scenarios Executed	workshop_security_audit.md	/^### Test Scenarios Executed$/;"	S	section:Workshop Tools Security Audit""Penetration Testing Results
@@ -981,12 +1086,14 @@ TestWorkshopIntegration	tests/test_workshop_integration.py	/^class TestWorkshopI
 TestWorkshopPR23Validation	tests/test_workshop_pr23_validation.py	/^class TestWorkshopPR23Validation(unittest.TestCase):$/;"	c
 Testing	COLLAB_TOOL_SYNTAX_FIX_SUMMARY.md	/^## Testing$/;"	s	chapter:Collaborative Mode Tool Syntax Fix - Summary
 Testing	DATABASE_LOCATION_FIX_SUMMARY.md	/^### Testing$/;"	S	section:Database Location Fix - Implementation Summary""Solution Implemented
+Testing	DYNAMIC_TOKENS_SUMMARY.md	/^## Testing$/;"	s	chapter:Dynamic Max Output Tokens Implementation Summary
 Testing	HEREDOC_EXECUTION_FIX.md	/^## Testing$/;"	s	chapter:Heredoc Execution Fix Summary
 Testing	IMPLEMENTATION_SUMMARY.md	/^## Testing$/;"	s	chapter:Implementation Summary: GPT-5 Fix & WRITE Blocks
 Testing	IMPROVEMENTS_README.md	/^## Testing$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Testing	MULTI_FORMAT_PARSER_IMPLEMENTATION.md	/^## Testing$/;"	s	chapter:Multi-Format Tool Call Parser Implementation
 Testing	QUICK_REFERENCE.md	/^## Testing$/;"	s	chapter:AXE Multiagent - Quick Reference Card
 Testing	REFACTORING_NOTES.md	/^## Testing$/;"	s	chapter:AXE.PY Refactoring Notes
+Testing	SANDBOX.md	/^## Testing$/;"	s	chapter:Bubblewrap Sandbox Security Model
 Testing	TASK_COMPLETION_FIX_SUMMARY.md	/^### Testing$/;"	S	section:Fix Summary: AXE Session Termination Bugs""Bug 1: False "TASK COMPLETE" Detection ✅
 Testing	WRITE_BLOCKS_GUIDE.md	/^## Testing$/;"	s	chapter:WRITE Block Functionality - User Guide
 Testing API Connections	README.md	/^### Testing API Connections$/;"	S	section:AXE - Agent eXecution Engine""Troubleshooting
@@ -1012,10 +1119,11 @@ Top Models	API_PROVIDERS.md	/^### Top Models$/;"	S	section:AXE API Provider Docu
 Troubleshooting	API_PROVIDERS.md	/^## Troubleshooting$/;"	s	chapter:AXE API Provider Documentation
 Troubleshooting	MODELS_FINAL.md	/^## Troubleshooting$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Troubleshooting	README.md	/^## Troubleshooting$/;"	s	chapter:AXE - Agent eXecution Engine
+Troubleshooting	SANDBOX.md	/^## Troubleshooting$/;"	s	chapter:Bubblewrap Sandbox Security Model
 Troubleshooting	WRITE_BLOCKS_GUIDE.md	/^## Troubleshooting$/;"	s	chapter:WRITE Block Functionality - User Guide
 Troubleshooting	workshop_dependency_validation.md	/^### Troubleshooting$/;"	S	section:Workshop Tools Dependency Validation""Recommendations
 Type Hints - GOOD	PR23_VALIDATION_REPORT.md	/^### Type Hints - GOOD$/;"	S	section:PR #23 Workshop Dynamic Analysis Framework - Comprehensive Validation Report""Part 5: Code Quality Analysis
-USE_MAX_COMPLETION_TOKENS	core/constants.py	/^USE_MAX_COMPLETION_TOKENS = {$/;"	v
+USE_MAX_COMPLETION_TOKENS	models/metadata.py	/^USE_MAX_COMPLETION_TOKENS = set(_config.get('use_max_completion_tokens', []))$/;"	v
 Unit Test Results (`test_workshop.py`)	workshop_test_results.md	/^### Unit Test Results (`test_workshop.py`)$/;"	S	section:Workshop Tools Test Suite Execution Results""Detailed Test Results
 Unit Tests	WRITE_BLOCKS_GUIDE.md	/^### Unit Tests$/;"	S	section:WRITE Block Functionality - User Guide""Testing
 Unit Tests (`test_database_location.py`)	DATABASE_LOCATION_FIX_SUMMARY.md	/^#### Unit Tests (`test_database_location.py`)$/;"	t	subsection:Database Location Fix - Implementation Summary""Solution Implemented""Testing
@@ -1037,7 +1145,9 @@ Usage - Transformers (Local)	MODELS_FINAL.md	/^### Usage - Transformers (Local)$
 Usage Examples	IMPROVEMENTS_README.md	/^## Usage Examples$/;"	s	chapter:AXE Multiagent Improvements - Implementation Summary
 Usage Examples	MODELS_FINAL.md	/^## Usage Examples$/;"	s	chapter:AXE Multi-Agent System - Model Configuration Reference
 Usage Examples	README.md	/^## Usage Examples$/;"	s	chapter:AXE - Agent eXecution Engine
+Usage Examples	SANDBOX.md	/^## Usage Examples$/;"	s	chapter:Bubblewrap Sandbox Security Model
 Usage Guidelines	MISSION.md	/^### Usage Guidelines$/;"	S	section:AXE - Agent eXecution Engine""Agent Communication Tokens
+Usage Scenarios	SANDBOX_IMPLEMENTATION_SUMMARY.md	/^## Usage Scenarios$/;"	s	chapter:Bubblewrap Sandbox Implementation - Summary
 Use Cases	WRITE_BLOCKS_GUIDE.md	/^## Use Cases$/;"	s	chapter:WRITE Block Functionality - User Guide
 Use Cases Enabled	ABSOLUTE_PATH_FIX_SUMMARY.md	/^### Use Cases Enabled$/;"	S	section:WRITE Block Absolute Path Fix - Implementation Summary""Impact
 VS Code	docs/diagrams/README.md	/^### VS Code$/;"	S	section:AXE Architecture Diagrams""Viewing Diagrams
@@ -1072,6 +1182,8 @@ WRITE Block Functionality - User Guide	WRITE_BLOCKS_GUIDE.md	/^# WRITE Block Fun
 WRITE block sanitization	FIXES_SUMMARY.md	/^# WRITE block sanitization$/;"	c
 Wake-up Triggers	IMPROVEMENTS_FINAL.md	/^### Wake-up Triggers$/;"	S	section:AXE Multi-Agent System - Improvement Reference Guide""Core Safety Features
 What Agents See	QUICK_REFERENCE.md	/^## What Agents See$/;"	s	chapter:AXE Multiagent - Quick Reference Card
+What Sandbox Doesn't Protect (by design)	SANDBOX.md	/^### What Sandbox Doesn't Protect (by design)$/;"	S	section:Bubblewrap Sandbox Security Model""Security Boundaries
+What Sandbox Protects	SANDBOX.md	/^### What Sandbox Protects$/;"	S	section:Bubblewrap Sandbox Security Model""Security Boundaries
 What Was Delivered	PR23_EXECUTIVE_SUMMARY.md	/^## What Was Delivered$/;"	s	chapter:PR #23 Workshop Dynamic Analysis Framework - Executive Summary
 What's New?	XML_PARSER_QUICK_REFERENCE.md	/^## What's New?$/;"	s	chapter:XML Function Call Support - Quick Reference
 When to Use Each Agent	README.md	/^### When to Use Each Agent$/;"	S	section:AXE - Agent eXecution Engine""Agent Reference
@@ -1109,7 +1221,10 @@ YELLOW	utils/formatting.py	/^    YELLOW = '\\033[93m'$/;"	v	class:Colors
 ZSTD_AVAILABLE	tools/build_analyzer.py	/^    ZSTD_AVAILABLE = False$/;"	v
 ZSTD_AVAILABLE	tools/build_analyzer.py	/^    ZSTD_AVAILABLE = True$/;"	v
 [... all tests ...]	XML_PARSER_IMPLEMENTATION.md	/^[... all tests ...]$/;"	c
+_HAS_TQDM	claude/pdfocr.py	/^    _HAS_TQDM = False$/;"	v
+_HAS_TQDM	claude/pdfocr.py	/^    _HAS_TQDM = True$/;"	v
 _MissingTool	workshop/__init__.py	/^    class _MissingTool:$/;"	c	function:_missing_tool_factory	file:
+_T	claude/pdfocr.py	/^_T = TypeVar("_T")$/;"	v
 __all__	core/__init__.py	/^__all__ = [$/;"	v
 __all__	database/__init__.py	/^__all__ = [$/;"	v
 __all__	managers/__init__.py	/^__all__ = [$/;"	v
@@ -1130,6 +1245,7 @@ __init__	core/config.py	/^    def __init__(self, config_path: Optional[str] = No
 __init__	core/multiprocess.py	/^    def __init__(self):$/;"	m	class:SharedContext
 __init__	core/multiprocess.py	/^    def __init__(self, agent_configs: List[Dict[str, str]]):$/;"	m	class:MultiAgentCoordinator
 __init__	core/multiprocess.py	/^    def __init__(self, agent_id: str, agent_name: str, $/;"	m	class:AgentWorkerProcess
+__init__	core/sandbox.py	/^    def __init__(self, config: 'Config', workspace_path: str):$/;"	m	class:SandboxManager
 __init__	core/session_manager.py	/^    def __init__(self, sessions_dir: str = ".axe_sessions"):$/;"	m	class:SessionManager
 __init__	core/tool_runner.py	/^    def __init__(self, config: 'Config', project_dir: str):$/;"	m	class:ToolRunner
 __init__	database/agent_db.py	/^    def __init__(self, db_path: Optional[str] = None):$/;"	m	class:AgentDatabase
@@ -1148,6 +1264,7 @@ __init__	workshop/plane.py	/^    def __init__(self, config: Optional[Dict[str, A
 __init__	workshop/plane.py	/^    def __init__(self, file_path: str, source_patterns: Dict, sink_patterns: Dict):$/;"	m	class:SourceSinkVisitor
 __init__	workshop/saw.py	/^    def __init__(self, config: Optional[Dict[str, Any]] = None):$/;"	m	class:SawTracker
 __init__	workshop/saw.py	/^    def __init__(self, sources: List[TaintSource], sinks: List[TaintSink]):$/;"	m	class:TaintAnalyzer
+__version__	claude/pdfocr.py	/^__version__ = "2.0.0"$/;"	v
 __version__	tools/__init__.py	/^__version__ = "1.0.0"$/;"	v
 __version__	tools/llmprep.py	/^__version__ = "1.0.0"$/;"	v
 _aggressive_compression	utils/prompt_compressor.py	/^    def _aggressive_compression(self, prompt: str) -> str:$/;"	m	class:PromptCompressor	typeref:typename:str
@@ -1164,13 +1281,19 @@ _classify_vulnerabilities	workshop/saw.py	/^    def _classify_vulnerabilities(se
 _clean_message_content	utils/context_optimizer.py	/^    def _clean_message_content(self, content: str) -> str:$/;"	m	class:ContextOptimizer	typeref:typename:str
 _condense_examples	utils/prompt_compressor.py	/^    def _condense_examples(self, text: str, keep: int = 2) -> str:$/;"	m	class:PromptCompressor	typeref:typename:str
 _condense_lists	utils/prompt_compressor.py	/^    def _condense_lists(self, text: str) -> str:$/;"	m	class:PromptCompressor	typeref:typename:str
+_config	models/metadata.py	/^_config = _load_models_yaml()$/;"	v
 _contains_heredoc	utils/xml_tool_parser.py	/^def _contains_heredoc(content: str) -> bool:$/;"	f	typeref:typename:bool
 _create_fingerprint	utils/context_optimizer.py	/^    def _create_fingerprint(self, content: str) -> str:$/;"	m	class:ContextOptimizer	typeref:typename:str
+_cv2	claude/pdfocr.py	/^_cv2: Any = None$/;"	v	typeref:typename:Any
+_cv2_lock	claude/pdfocr.py	/^_cv2_lock = threading.Lock()$/;"	v
 _deduplicate_sinks	workshop/plane.py	/^    def _deduplicate_sinks(self, sinks: List[EnumeratedSink]) -> List[EnumeratedSink]:$/;"	m	class:PlaneEnumerator	typeref:typename:List[EnumeratedSink]
 _deduplicate_sources	workshop/plane.py	/^    def _deduplicate_sources(self, sources: List[EnumeratedSource]) -> List[EnumeratedSource]:$/;"	m	class:PlaneEnumerator	typeref:typename:List[EnumeratedSource]
 _deep_merge	core/config.py	/^    def _deep_merge(self, base: dict, update: dict) -> None:$/;"	m	class:Config	typeref:typename:None
 _default_token_counter	utils/context_optimizer.py	/^    def _default_token_counter(self, text: str) -> int:$/;"	m	class:ContextOptimizer	typeref:typename:int
 _detect_vulnerabilities	workshop/chisel.py	/^    def _detect_vulnerabilities(self, simgr, proj) -> List[Dict[str, Any]]:$/;"	m	class:ChiselAnalyzer	typeref:typename:List[Dict[str,Any]]
+_easyocr_lock	claude/pdfocr.py	/^_easyocr_lock = threading.Lock()$/;"	v
+_easyocr_reader	claude/pdfocr.py	/^_easyocr_reader: Any = None$/;"	v	typeref:typename:Any
+_easyocr_reader_langs	claude/pdfocr.py	/^_easyocr_reader_langs: Optional[FrozenSet[str]] = None$/;"	v	typeref:typename:Optional[FrozenSet[str]]
 _encrypt_message	managers/emergency_mailbox.py	/^    def _encrypt_message(self, message: str) -> str:$/;"	m	class:EmergencyMailbox	typeref:typename:str
 _end_session	axe.py	/^    def _end_session(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 _extract_commands_from_shell	core/tool_runner.py	/^    def _extract_commands_from_shell(self, cmd: str) -> List[str]:$/;"	m	class:ToolRunner	typeref:typename:List[str]
@@ -1181,10 +1304,14 @@ _format_conversation_for_agent	axe.py	/^    def _format_conversation_for_agent(s
 _format_time	axe.py	/^    def _format_time(self, seconds: int) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
 _generate_python_hook_script	workshop/hammer.py	/^    def _generate_python_hook_script(self, hooks: Dict[str, Any]) -> str:$/;"	m	class:HammerInstrumentor	typeref:typename:str
 _get_context	workshop/plane.py	/^    def _get_context(self, node) -> str:$/;"	m	class:SourceSinkVisitor	typeref:typename:str
+_get_cv2	claude/pdfocr.py	/^def _get_cv2() -> Any:$/;"	f	typeref:typename:Any
+_get_easyocr_reader	claude/pdfocr.py	/^def _get_easyocr_reader($/;"	f	typeref:typename:Any
 _get_expr_taint	workshop/saw.py	/^    def _get_expr_taint(self, expr) -> Optional[TaintSource]:$/;"	m	class:TaintAnalyzer	typeref:typename:Optional[TaintSource]
 _get_full_attr_name	workshop/plane.py	/^    def _get_full_attr_name(self, node) -> str:$/;"	m	class:SourceSinkVisitor	typeref:typename:str
 _get_full_func_name	workshop/plane.py	/^    def _get_full_func_name(self, node) -> str:$/;"	m	class:SourceSinkVisitor	typeref:typename:str
 _get_func_name	workshop/saw.py	/^    def _get_func_name(self, node) -> str:$/;"	m	class:TaintAnalyzer	typeref:typename:str
+_get_numpy	claude/pdfocr.py	/^def _get_numpy() -> Any:$/;"	f	typeref:typename:Any
+_get_pytesseract	claude/pdfocr.py	/^def _get_pytesseract() -> Any:$/;"	f	typeref:typename:Any
 _get_spawned_agent_system_prompt	axe.py	/^    def _get_spawned_agent_system_prompt(self, model_type: str) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
 _get_spawned_agent_system_prompt	tests/test_spawned_agents.py	/^        def _get_spawned_agent_system_prompt(self, model_type: str) -> str:$/;"	m	class:test_spawned_agent_system_prompt.MockSession	typeref:typename:str
 _get_system_prompt_for_collab	axe.py	/^    def _get_system_prompt_for_collab(self, agent_name: str) -> str:$/;"	m	class:CollaborativeSession	typeref:typename:str
@@ -1204,14 +1331,20 @@ _is_path_safe	axe.py	/^    def _is_path_safe(self, filepath: str) -> bool:$/;"	m
 _is_within_dir	axe.py	/^        def _is_within_dir(path: str, directory: str) -> bool:$/;"	f	member:ResponseProcessor._check_file_access	typeref:typename:bool	file:
 _load_default_sinks	workshop/saw.py	/^    def _load_default_sinks(self) -> List[TaintSink]:$/;"	m	class:SawTracker	typeref:typename:List[TaintSink]
 _load_default_sources	workshop/saw.py	/^    def _load_default_sources(self) -> List[TaintSource]:$/;"	m	class:SawTracker	typeref:typename:List[TaintSource]
+_load_models_yaml	models/metadata.py	/^def _load_models_yaml():$/;"	f
 _load_sink_patterns	workshop/plane.py	/^    def _load_sink_patterns(self) -> Dict[str, Dict[str, Any]]:$/;"	m	class:PlaneEnumerator	typeref:typename:Dict[str,Dict[str,Any]]
 _load_source_patterns	workshop/plane.py	/^    def _load_source_patterns(self) -> Dict[str, Dict[str, Any]]:$/;"	m	class:PlaneEnumerator	typeref:typename:Dict[str,Dict[str,Any]]
 _log_execution	core/tool_runner.py	/^    def _log_execution(self, cmd: str, success: bool, output: str) -> None:$/;"	m	class:ToolRunner	typeref:typename:None
 _minimal_compression	utils/prompt_compressor.py	/^    def _minimal_compression(self, prompt: str) -> str:$/;"	m	class:PromptCompressor	typeref:typename:str
 _missing_tool_factory	workshop/__init__.py	/^def _missing_tool_factory(tool_name: str, module_name: str):$/;"	f
+_models_yaml_path	models/metadata.py	/^_models_yaml_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'models.yaml')$/;"	v
 _monitor_session	workshop/hammer.py	/^    def _monitor_session(self, session_id: str, callback: Optional[Callable]):$/;"	m	class:HammerInstrumentor
 _needs_shell	core/tool_runner.py	/^    def _needs_shell(self, cmd: str) -> bool:$/;"	m	class:ToolRunner	typeref:typename:bool
+_np	claude/pdfocr.py	/^_np: Any = None$/;"	v	typeref:typename:Any
+_numpy_lock	claude/pdfocr.py	/^_numpy_lock = threading.Lock()$/;"	v
 _print_status	axe.py	/^    def _print_status(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
+_pytesseract	claude/pdfocr.py	/^_pytesseract: Any = None$/;"	v	typeref:typename:Any
+_pytesseract_lock	claude/pdfocr.py	/^_pytesseract_lock = threading.Lock()$/;"	v
 _reduce_examples	utils/context_optimizer.py	/^    def _reduce_examples(self, text: str) -> str:$/;"	m	class:ContextOptimizer	typeref:typename:str
 _remove_redundancy	utils/context_optimizer.py	/^    def _remove_redundancy(self, text: str) -> str:$/;"	m	class:ContextOptimizer	typeref:typename:str
 _resolve_project_path	axe.py	/^    def _resolve_project_path(self, filename: str) -> Optional[str]:$/;"	m	class:ResponseProcessor	typeref:typename:Optional[str]
@@ -1255,6 +1388,7 @@ background_think	core/multiprocess.py	/^    def background_think(self) -> None:$
 backup_file	axe.py	/^    def backup_file(self, filepath: str) -> str:$/;"	m	class:SharedWorkspace	typeref:typename:str
 broadcast_context_update	core/multiprocess.py	/^    def broadcast_context_update(self, update_type: str, data: Any = None) -> None:$/;"	m	class:MultiAgentCoordinator	typeref:typename:None
 build_analyzer - Build System Detection	README.md	/^### build_analyzer - Build System Detection$/;"	S	section:AXE - Agent eXecution Engine""Analysis Tools
+build_bwrap_command	core/sandbox.py	/^    def build_bwrap_command(self) -> List[str]:$/;"	m	class:SandboxManager	typeref:typename:List[str]
 c	demo_improvements.py	/^c = colorize$/;"	v
 c	utils/formatting.py	/^c = colorize$/;"	v
 cURL Example	API_PROVIDERS.md	/^### cURL Example$/;"	S	section:AXE API Provider Documentation""Anthropic (Claude)
@@ -1274,6 +1408,7 @@ check_all_agents	managers/sleep_manager.py	/^    def check_all_agents(self) -> L
 check_and_wake_agents	managers/sleep_manager.py	/^    def check_and_wake_agents(self) -> List[Dict[str, Any]]:$/;"	m	class:SleepManager	typeref:typename:List[Dict[str,Any]]
 check_break_endings	managers/break_system.py	/^    def check_break_endings(self) -> List[Dict[str, Any]]:$/;"	m	class:BreakSystem	typeref:typename:List[Dict[str,Any]]
 check_degradation	database/agent_db.py	/^    def check_degradation(self, agent_id: str, error_threshold: int = 20) -> Tuple[bool, str]:$/;"	m	class:AgentDatabase	typeref:typename:Tuple[bool,str]
+check_engine_available	claude/pdfocr.py	/^def check_engine_available(engine: str) -> bool:$/;"	f	typeref:typename:bool
 check_limit	utils/rate_limiter.py	/^    def check_limit(self, agent_name: str, tokens_to_add: int) -> Tuple[bool, Optional[str]]:$/;"	m	class:RateLimiter	typeref:typename:Tuple[bool,Optional[str]]
 check_mandatory_sleep	database/agent_db.py	/^    def check_mandatory_sleep(self, agent_id: str, max_work_hours: int = 6, $/;"	m	class:AgentDatabase	typeref:typename:Tuple[bool,str]
 check_tool	tools/llmprep.py	/^def check_tool(name: str) -> bool:$/;"	f	typeref:typename:bool
@@ -1350,7 +1485,8 @@ get_current_usage	utils/rate_limiter.py	/^    def get_current_usage(self, agent_
 get_database_path	database/agent_db.py	/^def get_database_path() -> str:$/;"	f	typeref:typename:str
 get_error_rate	database/agent_db.py	/^    def get_error_rate(self, agent_id: str) -> float:$/;"	m	class:AgentDatabase	typeref:typename:float
 get_file_content	axe.py	/^    def get_file_content(self, filepath: str, max_bytes: int = 4096) -> str:$/;"	m	class:ProjectContext	typeref:typename:str
-get_model_info	models/metadata.py	/^def get_model_info(model_name:  str) -> Dict:$/;"	f	typeref:typename:Dict
+get_max_output_tokens	models/metadata.py	/^def get_max_output_tokens(model_name: str, default: int = 4000) -> int:$/;"	f	typeref:typename:int
+get_model_info	models/metadata.py	/^def get_model_info(model_name: str) -> Dict:$/;"	f	typeref:typename:Dict
 get_model_pricing	utils/token_stats.py	/^def get_model_pricing(model_name: str) -> Tuple[float, float]:$/;"	f	typeref:typename:Tuple[float,float]
 get_next_agent_number	database/agent_db.py	/^    def get_next_agent_number(self, model_name: str) -> int:$/;"	m	class:AgentDatabase	typeref:typename:int
 get_optimized_system_prompt	axe.py	/^    def get_optimized_system_prompt(self, agent_name: str) -> str:$/;"	m	class:ChatSession	typeref:typename:str
@@ -1384,10 +1520,12 @@ handle_workshop_command	axe.py	/^    def handle_workshop_command(self, args: str
 include	WRITE_BLOCKS_GUIDE.md	/^#include <stdio.h>$/;"	h	section:WRITE Block Functionality - User Guide""Integration with Other Blocks
 instrument_process	workshop/hammer.py	/^    def instrument_process(self, process_name: str, hooks: Dict[str, Any]) -> str:$/;"	m	class:HammerInstrumentor	typeref:typename:str
 instrument_script	workshop/hammer.py	/^    def instrument_script(self, script_path: str, hooks: Dict[str, Any]) -> str:$/;"	m	class:HammerInstrumentor	typeref:typename:str
+is_available	core/sandbox.py	/^    def is_available(self) -> bool:$/;"	m	class:SandboxManager	typeref:typename:bool
 is_genuine_task_completion	axe.py	/^def is_genuine_task_completion(response: str) -> bool:$/;"	f	typeref:typename:bool
 is_safe_tar_member	tools/build_analyzer.py	/^def is_safe_tar_member(member, base_path="."):$/;"	f
 is_tar_archive	tools/build_analyzer.py	/^def is_tar_archive(path):$/;"	f
 is_tool_allowed	core/tool_runner.py	/^    def is_tool_allowed(self, cmd: str) -> Tuple[bool, str]:$/;"	m	class:ToolRunner	typeref:typename:Tuple[bool,str]
+is_tool_blacklisted	core/sandbox.py	/^    def is_tool_blacklisted(self, tool: str) -> bool:$/;"	m	class:SandboxManager	typeref:typename:bool
 json (Data Serialization)	workshop_dependency_validation.md	/^#### json (Data Serialization)$/;"	t	subsection:Workshop Tools Dependency Validation""Core Dependencies""Standard Library Dependencies
 l1m2n3o	workshop_security_audit.md	/^**Status**: Resolved - Transaction isolation in commit #l1m2n3o$/;"	h	subsubsection:Workshop Tools Security Audit""Detailed Findings""Low Severity Issues""Issue #4: Race Condition in Database Operations
 list_agents	axe.py	/^    def list_agents(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
@@ -1408,6 +1546,8 @@ logger	workshop/hammer.py	/^logger = logging.getLogger(__name__)$/;"	v
 logger	workshop/plane.py	/^logger = logging.getLogger(__name__)$/;"	v
 logger	workshop/saw.py	/^logger = logging.getLogger(__name__)$/;"	v
 main	axe.py	/^def main() -> None:$/;"	f	typeref:typename:None
+main	claude/pdfocr.py	/^def main() -> None:$/;"	f	typeref:typename:None
+main	demo_dynamic_tokens.py	/^def main():$/;"	f
 main	demo_improvements.py	/^def main():$/;"	f
 main	manual_test_write.py	/^def main():$/;"	f
 main	manual_test_xml.py	/^def main():$/;"	f
@@ -1420,7 +1560,15 @@ main	tests/test_write_blocks.py	/^def main():$/;"	f
 main	tests/test_xml_tool_parser.py	/^def main():$/;"	f
 main	tools/build_analyzer.py	/^def main():$/;"	f
 main	tools/llmprep.py	/^def main() -> int:$/;"	f	typeref:typename:int
+metadata_module	tests/test_models_yaml.py	/^    from models import metadata as metadata_module$/;"	Y	function:test_error_handling	file:	nameref:unknown:metadata
 normalize_tool_name	utils/xml_tool_parser.py	/^def normalize_tool_name(name: str) -> Optional[str]:$/;"	f	typeref:typename:Optional[str]
+np	claude/pdfocr.py	/^                    import numpy as np$/;"	I	function:_get_cv2	file:	nameref:module:numpy
+np	claude/pdfocr.py	/^                    import numpy as np$/;"	I	function:_get_numpy	file:	nameref:module:numpy
+ocr_image	claude/pdfocr.py	/^def ocr_image($/;"	f	typeref:typename:Any
+ocr_image_file	claude/pdfocr.py	/^def ocr_image_file($/;"	f	typeref:typename:Optional[Path]
+ocr_pdf	claude/pdfocr.py	/^def ocr_pdf($/;"	f	typeref:typename:Optional[Path]
+ocr_with_easyocr	claude/pdfocr.py	/^def ocr_with_easyocr($/;"	f	typeref:typename:Any
+ocr_with_tesseract	claude/pdfocr.py	/^def ocr_with_tesseract(image: Image.Image, lang: str = "eng") -> str:$/;"	f	typeref:typename:str
 open_tar_archive	tools/build_analyzer.py	/^def open_tar_archive(path):$/;"	f
 optimize_context_if_needed	axe.py	/^    def optimize_context_if_needed(self, agent_name: str) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 optimize_conversation	utils/context_optimizer.py	/^    def optimize_conversation($/;"	m	class:ContextOptimizer	typeref:typename:List[Message]
@@ -1437,10 +1585,13 @@ parse_configure	tools/build_analyzer.py	/^def parse_configure(file_path):$/;"	f
 parse_configure_from_content	tools/build_analyzer.py	/^def parse_configure_from_content(content):$/;"	f
 parse_meson	tools/build_analyzer.py	/^def parse_meson(file_path):$/;"	f
 parse_meson_from_content	tools/build_analyzer.py	/^def parse_meson_from_content(content):$/;"	f
+parse_page_spec	claude/pdfocr.py	/^def parse_page_spec(spec: str, total_pages: int) -> List[int]:$/;"	f	typeref:typename:List[int]
 parse_shell_codeblocks	utils/xml_tool_parser.py	/^def parse_shell_codeblocks(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
 parse_simple_xml_tags	utils/xml_tool_parser.py	/^def parse_simple_xml_tags(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
 parse_xml_function_calls	utils/xml_tool_parser.py	/^def parse_xml_function_calls(response: str) -> List[Dict[str, Any]]:$/;"	f	typeref:typename:List[Dict[str,Any]]
 pathlib (Path Handling)	workshop_dependency_validation.md	/^#### pathlib (Path Handling)$/;"	t	subsection:Workshop Tools Dependency Validation""Core Dependencies""Standard Library Dependencies
+pdf_to_images	claude/pdfocr.py	/^def pdf_to_images($/;"	f	typeref:typename:List[Tuple[int,Image.Image]]
+preprocess_image_for_ocr	claude/pdfocr.py	/^def preprocess_image_for_ocr(image: Image.Image, enhance: bool = True) -> Image.Image:$/;"	f	typeref:typename:Image.Image
 print_banner	axe.py	/^    def print_banner(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 print_banner	axe.py	/^    def print_banner(self) -> None:$/;"	m	class:CollaborativeSession	typeref:typename:None
 print_header	demo_absolute_path_fix.py	/^def print_header(text):$/;"	f
@@ -1452,6 +1603,7 @@ print_test	demo_absolute_path_fix.py	/^def print_test(test_num, description):$/;
 process_agent_message	axe.py	/^    def process_agent_message(self, message: str) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 process_agent_response	utils/xml_tool_parser.py	/^def process_agent_response(response: str, workspace: str, $/;"	f	typeref:typename:Tuple[str,List[str]]
 process_command	axe.py	/^    def process_command(self, cmd: str) -> bool:$/;"	m	class:ChatSession	typeref:typename:bool
+process_inputs	claude/pdfocr.py	/^def process_inputs(inputs: List[str]) -> List[Path]:$/;"	f	typeref:typename:List[Path]
 process_response	axe.py	/^    def process_response(self, response: str, agent_name: str = "") -> str:$/;"	m	class:ResponseProcessor	typeref:typename:str
 process_xml_calls	axe.py	/^        from utils.xml_tool_parser import process_agent_response as process_xml_calls$/;"	Y	member:ResponseProcessor.process_response	file:	nameref:unknown:process_agent_response
 psutil (System Monitoring)	workshop_dependency_validation.md	/^#### psutil (System Monitoring)$/;"	t	subsection:Workshop Tools Dependency Validation""Core Dependencies""Primary Analysis Libraries
@@ -1469,11 +1621,13 @@ restore_agents_on_startup	axe.py	/^def restore_agents_on_startup(db_path: Option
 restore_all_agents	database/agent_db.py	/^    def restore_all_agents(self) -> List[Dict[str, Any]]:$/;"	m	class:AgentDatabase	typeref:typename:List[Dict[str,Any]]
 run	axe.py	/^    def run(self) -> None:$/;"	m	class:ChatSession	typeref:typename:None
 run	core/multiprocess.py	/^    def run(self) -> None:$/;"	m	class:AgentWorkerProcess	typeref:typename:None
-run	core/tool_runner.py	/^    def run(self, cmd: str, auto_approve: Optional[bool] = None, dry_run: Optional[bool] = None)/;"	m	class:ToolRunner	typeref:typename:Tuple[bool,str]
+run	core/sandbox.py	/^    def run(self, cmd: str, timeout: int = 300) -> Tuple[bool, str]:$/;"	m	class:SandboxManager	typeref:typename:Tuple[bool,str]
+run	core/tool_runner.py	/^    def run(self, cmd: str, dry_run: Optional[bool] = None) -> Tuple[bool, str]:$/;"	m	class:ToolRunner	typeref:typename:Tuple[bool,str]
 run_all_tests	tests/test_detect_agent_token.py	/^def run_all_tests():$/;"	f
 run_all_tests	tests/test_heredoc_execution_fix.py	/^def run_all_tests():$/;"	f
 run_all_tests	tests/test_integration_bug_fix.py	/^def run_all_tests():$/;"	f
 run_all_tests	tests/test_mission_md_tokens.py	/^def run_all_tests():$/;"	f
+run_all_tests	tests/test_sandbox.py	/^def run_all_tests():$/;"	f
 run_all_tests	tests/test_supervisor_protections.py	/^def run_all_tests():$/;"	f
 run_all_tests	tests/test_task_completion_detection.py	/^def run_all_tests():$/;"	f
 run_all_tests	tests/test_token_optimization.py	/^def run_all_tests():$/;"	f
@@ -1530,6 +1684,7 @@ success	tests/test_detect_agent_token.py	/^    success = run_all_tests()$/;"	v
 success	tests/test_heredoc_execution_fix.py	/^    success = run_all_tests()$/;"	v
 success	tests/test_integration_bug_fix.py	/^    success = run_all_tests()$/;"	v
 success	tests/test_mission_md_tokens.py	/^    success = run_all_tests()$/;"	v
+success	tests/test_sandbox.py	/^    success = run_all_tests()$/;"	v
 success	tests/test_supervisor_protections.py	/^    success = run_all_tests()$/;"	v
 success	tests/test_task_completion_detection.py	/^    success = run_all_tests()$/;"	v
 success	tests/test_token_optimization.py	/^    success = run_all_tests()$/;"	v
@@ -1569,6 +1724,7 @@ test_axe_exec_block	tests/test_xml_tool_parser.py	/^def test_axe_exec_block():$/
 test_axe_read_block	tests/test_xml_tool_parser.py	/^def test_axe_read_block():$/;"	f
 test_axe_write_block	tests/test_xml_tool_parser.py	/^def test_axe_write_block():$/;"	f
 test_backticks_in_markdown	tests/test_inline_exec_blocks.py	/^def test_backticks_in_markdown():$/;"	f
+test_backward_compatibility	tests/test_sandbox.py	/^def test_backward_compatibility():$/;"	f
 test_bash_codeblock	tests/test_xml_tool_parser.py	/^def test_bash_codeblock():$/;"	f
 test_bash_tags	tests/test_xml_tool_parser.py	/^def test_bash_tags():$/;"	f
 test_blockquote_not_trigger	tests/test_task_completion_detection.py	/^def test_blockquote_not_trigger():$/;"	f
@@ -1579,6 +1735,7 @@ test_build_analyzer_exec_block_syntax	tests/test_analysis_tools.py	/^    def tes
 test_build_analyzer_json_output	tests/test_analysis_tools.py	/^    def test_build_analyzer_json_output(self):$/;"	m	class:TestBuildAnalyzerIntegration
 test_build_analyzer_script_exists	tests/test_analysis_tools.py	/^    def test_build_analyzer_script_exists(self):$/;"	m	class:TestBuildAnalyzerIntegration
 test_buildinfo_command_syntax	tests/test_analysis_tools.py	/^    def test_buildinfo_command_syntax(self):$/;"	m	class:TestAXECommandIntegration
+test_bwrap_command_generation	tests/test_sandbox.py	/^def test_bwrap_command_generation():$/;"	f
 test_chisel_basic	tests/test_workshop.py	/^    def test_chisel_basic(self):$/;"	m	class:TestWorkshop
 test_clean_message_content	tests/test_token_optimization.py	/^def test_clean_message_content():$/;"	f
 test_clean_tool_syntax	tests/test_xml_tool_parser.py	/^def test_clean_tool_syntax():$/;"	f
@@ -1604,13 +1761,18 @@ test_deduplication	tests/test_token_optimization.py	/^def test_deduplication():$
 test_deduplication	tests/test_xml_tool_parser.py	/^def test_deduplication():$/;"	f
 test_degradation_monitoring	tests/test_axe_improvements.py	/^def test_degradation_monitoring():$/;"	f
 test_duplicate_execution_fix_documented	tests/test_double_execution.py	/^def test_duplicate_execution_fix_documented():$/;"	f
+test_dynamic_lookup_presence	tests/test_dynamic_max_tokens.py	/^def test_dynamic_lookup_presence():$/;"	f
 test_dynamic_spawning	tests/test_axe_improvements.py	/^def test_dynamic_spawning():$/;"	f
+test_edge_case_heredoc	tests/test_sandbox.py	/^def test_edge_case_heredoc():$/;"	f
+test_edge_case_pipes	tests/test_sandbox.py	/^def test_edge_case_pipes():$/;"	f
+test_edge_cases	tests/test_dynamic_max_tokens.py	/^def test_edge_cases():$/;"	f
 test_emergency_in_result_block	tests/test_detect_agent_token.py	/^def test_emergency_in_result_block():$/;"	f
 test_emergency_mailbox	tests/test_axe_improvements.py	/^def test_emergency_mailbox():$/;"	f
 test_empty_commands_ignored	tests/test_xml_tool_parser.py	/^def test_empty_commands_ignored():$/;"	f
 test_empty_database_file	tests/test_database_location.py	/^def test_empty_database_file():$/;"	f
 test_empty_heredoc	tests/test_heredoc_parsing.py	/^def test_empty_heredoc():$/;"	f
 test_error_count_tracking	tests/test_token_error_handling.py	/^def test_error_count_tracking():$/;"	f
+test_error_handling	tests/test_models_yaml.py	/^def test_error_handling():$/;"	f
 test_error_handling	tests/test_xml_tool_parser.py	/^def test_error_handling():$/;"	f
 test_error_logging_structure	tests/test_token_error_handling.py	/^def test_error_logging_structure():$/;"	f
 test_error_message_truncation	tests/test_token_error_handling.py	/^def test_error_message_truncation():$/;"	f
@@ -1623,9 +1785,11 @@ test_execute_read	tests/test_xml_tool_parser.py	/^def test_execute_read():$/;"	f
 test_execute_write	tests/test_xml_tool_parser.py	/^def test_execute_write():$/;"	f
 test_execution_count_tracking	tests/test_double_execution.py	/^def test_execution_count_tracking():$/;"	f
 test_extract_commands	tests/test_tool_runner.py	/^def test_extract_commands():$/;"	f
+test_fallback_to_whitelist	tests/test_sandbox.py	/^def test_fallback_to_whitelist():$/;"	f
 test_file_content_not_trigger	tests/test_task_completion_detection.py	/^def test_file_content_not_trigger():$/;"	f
 test_forbidden_paths	tests/test_tool_runner.py	/^def test_forbidden_paths():$/;"	f
 test_format_xml_result	tests/test_xml_tool_parser.py	/^def test_format_xml_result():$/;"	f
+test_formatting_functions	tests/test_models_yaml.py	/^def test_formatting_functions():$/;"	f
 test_full_workshop_workflow	tests/test_workshop_integration.py	/^    def test_full_workshop_workflow(self, mock_analyzer_class):$/;"	m	class:TestWorkshopIntegration
 test_genuine_break_request_triggers	tests/test_detect_agent_token.py	/^def test_genuine_break_request_triggers():$/;"	f
 test_genuine_declaration_triggers	tests/test_task_completion_detection.py	/^def test_genuine_declaration_triggers():$/;"	f
@@ -1637,6 +1801,7 @@ test_genuine_with_checkmark_triggers	tests/test_task_completion_detection.py	/^d
 test_genuine_with_colon_triggers	tests/test_task_completion_detection.py	/^def test_genuine_with_colon_triggers():$/;"	f
 test_genuine_with_exclamation_triggers	tests/test_task_completion_detection.py	/^def test_genuine_with_exclamation_triggers():$/;"	f
 test_get_database_path	tests/test_database_location.py	/^def test_get_database_path():$/;"	f
+test_get_max_output_tokens_helper	tests/test_dynamic_max_tokens.py	/^def test_get_max_output_tokens_helper():$/;"	f
 test_hammer_basic	tests/test_workshop.py	/^    def test_hammer_basic(self):$/;"	m	class:TestWorkshop
 test_help_includes_workshop	tests/test_workshop_cli_integration.py	/^    def test_help_includes_workshop(self):$/;"	m	class:TestWorkshopCLIIntegration
 test_here_string	tests/test_heredoc_parsing.py	/^def test_here_string():$/;"	f
@@ -1656,14 +1821,17 @@ test_heredoc_with_special_markdown_content	tests/test_heredoc_execution_fix.py	/
 test_heredoc_with_underscore_delimiter	tests/test_heredoc_parsing.py	/^def test_heredoc_with_underscore_delimiter():$/;"	f
 test_heredoc_without_closing_delimiter	tests/test_heredoc_parsing.py	/^def test_heredoc_without_closing_delimiter():$/;"	f
 test_heredocs	tests/test_tool_runner.py	/^def test_heredocs():$/;"	f
+test_host_bind_readonly	tests/test_sandbox.py	/^def test_host_bind_readonly():$/;"	f
 test_indented_heredoc	tests/test_heredoc_parsing.py	/^def test_indented_heredoc():$/;"	f
 test_inline_codeblock	tests/test_xml_tool_parser.py	/^def test_inline_codeblock():$/;"	f
 test_inline_exec_blocks_bug	tests/test_inline_exec_blocks.py	/^def test_inline_exec_blocks_bug():$/;"	f
 test_inline_read_blocks	tests/test_inline_exec_blocks.py	/^def test_inline_read_blocks():$/;"	f
 test_inline_write_blocks	tests/test_inline_exec_blocks.py	/^def test_inline_write_blocks():$/;"	f
+test_integration_command_execution	tests/test_sandbox.py	/^def test_integration_command_execution():$/;"	f
 test_integration_with_execution	tests/test_tool_runner.py	/^def test_integration_with_execution():$/;"	f
 test_integration_with_response_processor	tests/test_xml_new_formats.py	/^def test_integration_with_response_processor():$/;"	f
 test_integration_with_response_processor	tests/test_xml_tool_parser.py	/^def test_integration_with_response_processor():$/;"	f
+test_known_models	tests/test_models_yaml.py	/^def test_known_models():$/;"	f
 test_live_agent_write	tests/test_write_blocks.py	/^def test_live_agent_write(agent_name: str, workspace: str):$/;"	f
 test_live_mode_write_blocks	tests/test_write_blocks.py	/^def test_live_mode_write_blocks():$/;"	f
 test_llmprep_basic_execution	tests/test_analysis_tools.py	/^    def test_llmprep_basic_execution(self):$/;"	m	class:TestLlmprepIntegration
@@ -1674,6 +1842,7 @@ test_logical_operators	tests/test_tool_runner.py	/^def test_logical_operators():
 test_lowercase_read_block_not_trigger	tests/test_task_completion_detection.py	/^def test_lowercase_read_block_not_trigger():$/;"	f
 test_malformed_xml	tests/test_xml_tool_parser.py	/^def test_malformed_xml():$/;"	f
 test_marking_complete_triggers	tests/test_task_completion_detection.py	/^def test_marking_complete_triggers():$/;"	f
+test_metadata_consistency	tests/test_dynamic_max_tokens.py	/^def test_metadata_consistency():$/;"	f
 test_minimal_prompt_creation	tests/test_token_optimization.py	/^def test_minimal_prompt_creation():$/;"	f
 test_mission_md_without_result_blocks	tests/test_mission_md_tokens.py	/^def test_mission_md_without_result_blocks():$/;"	f
 test_mixed_commands_with_heredoc	tests/test_heredoc_parsing.py	/^def test_mixed_commands_with_heredoc():$/;"	f
@@ -1682,6 +1851,7 @@ test_mixed_formats	tests/test_xml_tool_parser.py	/^def test_mixed_formats():$/;"
 test_mixed_inline_and_multiline	tests/test_inline_exec_blocks.py	/^def test_mixed_inline_and_multiline():$/;"	f
 test_mixed_xml_and_markdown	manual_test_xml.py	/^def test_mixed_xml_and_markdown():$/;"	f
 test_mixed_xml_and_markdown	tests/test_xml_tool_parser.py	/^def test_mixed_xml_and_markdown():$/;"	f
+test_model_count	tests/test_models_yaml.py	/^def test_model_count():$/;"	f
 test_multiline_codeblock	tests/test_xml_tool_parser.py	/^def test_multiline_codeblock():$/;"	f
 test_multiline_without_heredoc	tests/test_heredoc_parsing.py	/^def test_multiline_without_heredoc():$/;"	f
 test_multiline_without_heredoc	tests/test_xml_tool_parser.py	/^def test_multiline_without_heredoc():$/;"	f
@@ -1692,6 +1862,7 @@ test_multiple_heredocs	tests/test_heredoc_execution_fix.py	/^def test_multiple_h
 test_multiple_heredocs_different_delimiters	tests/test_heredoc_parsing.py	/^def test_multiple_heredocs_different_delimiters():$/;"	f
 test_multiple_heredocs_in_sequence	tests/test_heredoc_parsing.py	/^def test_multiple_heredocs_in_sequence():$/;"	f
 test_multiple_inline_blocks	tests/test_inline_exec_blocks.py	/^def test_multiple_inline_blocks():$/;"	f
+test_namespace_options	tests/test_sandbox.py	/^def test_namespace_options():$/;"	f
 test_native_blocks_only_processed_once	tests/test_double_execution.py	/^def test_native_blocks_only_processed_once():$/;"	f
 test_needs_shell	tests/test_tool_runner.py	/^def test_needs_shell():$/;"	f
 test_nested_quotes_in_code_not_trigger	tests/test_task_completion_detection.py	/^def test_nested_quotes_in_code_not_trigger():$/;"	f
@@ -1700,6 +1871,7 @@ test_nested_xml_content	tests/test_xml_tool_parser.py	/^def test_nested_xml_cont
 test_no_conflicts_with_existing_formats	tests/test_xml_new_formats.py	/^def test_no_conflicts_with_existing_formats():$/;"	f
 test_no_duplicate_execution	tests/test_xml_tool_parser.py	/^def test_no_duplicate_execution():$/;"	f
 test_no_duplicate_execution_with_mixed_formats	tests/test_double_execution.py	/^def test_no_duplicate_execution_with_mixed_formats():$/;"	f
+test_no_hardcoded_32768	tests/test_dynamic_max_tokens.py	/^def test_no_hardcoded_32768():$/;"	f
 test_no_task_complete_returns_false	tests/test_task_completion_detection.py	/^def test_no_task_complete_returns_false():$/;"	f
 test_non_supervisor_can_request_break	tests/test_supervisor_protections.py	/^def test_non_supervisor_can_request_break():$/;"	f
 test_parse_all_tool_formats_integration	tests/test_heredoc_parsing.py	/^def test_parse_all_tool_formats_integration():$/;"	f
@@ -1725,6 +1897,11 @@ test_recovery_suggestion_message	tests/test_token_error_handling.py	/^def test_r
 test_redirects	tests/test_tool_runner.py	/^def test_redirects():$/;"	f
 test_redirects_without_spaces	tests/test_tool_runner_edge_cases.py	/^def test_redirects_without_spaces():$/;"	f
 test_response_processor_handles_native_blocks	tests/test_double_execution.py	/^def test_response_processor_handles_native_blocks():$/;"	f
+test_safe_default_fallback	tests/test_dynamic_max_tokens.py	/^def test_safe_default_fallback():$/;"	f
+test_sandbox_availability_check	tests/test_sandbox.py	/^def test_sandbox_availability_check():$/;"	f
+test_sandbox_config_parsing	tests/test_sandbox.py	/^def test_sandbox_config_parsing():$/;"	f
+test_sandbox_manager_initialization	tests/test_sandbox.py	/^def test_sandbox_manager_initialization():$/;"	f
+test_sandbox_mode_validation	tests/test_sandbox.py	/^def test_sandbox_mode_validation():$/;"	f
 test_saw_basic	tests/test_workshop.py	/^    def test_saw_basic(self):$/;"	m	class:TestWorkshop
 test_session_rules	tests/test_axe_improvements.py	/^def test_session_rules():$/;"	f
 test_sh_codeblock	tests/test_xml_tool_parser.py	/^def test_sh_codeblock():$/;"	f
@@ -1753,8 +1930,12 @@ test_token_in_code_block	tests/test_detect_agent_token.py	/^def test_token_in_co
 test_token_in_read_block	tests/test_detect_agent_token.py	/^def test_token_in_read_block():$/;"	f
 test_token_limit_error_detection	tests/test_token_error_handling.py	/^def test_token_limit_error_detection():$/;"	f
 test_token_savings_calculation	tests/test_token_optimization.py	/^def test_token_savings_calculation():$/;"	f
+test_tool_blacklist_check	tests/test_sandbox.py	/^def test_tool_blacklist_check():$/;"	f
 test_tool_name_normalization	tests/test_xml_tool_parser.py	/^def test_tool_name_normalization():$/;"	f
 test_tools_whitelist_includes_analysis_tools	tests/test_analysis_tools.py	/^    def test_tools_whitelist_includes_analysis_tools(self):$/;"	m	class:TestAXECommandIntegration
+test_unknown_model	tests/test_models_yaml.py	/^def test_unknown_model():$/;"	f
+test_uses_max_completion_tokens	tests/test_models_yaml.py	/^def test_uses_max_completion_tokens():$/;"	f
+test_various_model_limits	tests/test_dynamic_max_tokens.py	/^def test_various_model_limits():$/;"	f
 test_workshop_chisel_no_args	tests/test_workshop_cli_integration.py	/^    def test_workshop_chisel_no_args(self):$/;"	m	class:TestWorkshopCLIIntegration
 test_workshop_command_parsing	tests/test_workshop_integration.py	/^    def test_workshop_command_parsing(self):$/;"	m	class:TestWorkshopIntegration
 test_workshop_hammer_no_args	tests/test_workshop_cli_integration.py	/^    def test_workshop_hammer_no_args(self):$/;"	m	class:TestWorkshopCLIIntegration
@@ -1781,8 +1962,10 @@ test_xml_write_call	manual_test_xml.py	/^def test_xml_write_call():$/;"	f
 test_xp_bonus_calculation	tests/test_workshop_integration.py	/^    def test_xp_bonus_calculation(self):$/;"	m	class:TestWorkshopIntegration
 test_xp_calculation	tests/test_axe_improvements.py	/^def test_xp_calculation():$/;"	f
 test_xp_system_integration	tests/test_workshop.py	/^    def test_xp_system_integration(self):$/;"	m	class:TestWorkshop
+test_yaml_loading	tests/test_models_yaml.py	/^def test_yaml_loading():$/;"	f
 token_callback	axe.py	/^        def token_callback(agent, model, input_tokens, output_tokens):$/;"	f	member:ChatSession.process_agent_message	file:
 tokens	utils/context_optimizer.py	/^    tokens: int = 0$/;"	v	class:Message	typeref:typename:int
+tqdm	claude/pdfocr.py	/^    def tqdm(  # type: ignore[no-redef]$/;"	f	typeref:typename:Iterable[_T]
 track_break_request	tests/test_supervisor_protections.py	/^    def track_break_request(agent_id, alias, break_type, reason):$/;"	f	function:test_non_supervisor_can_request_break	file:
 track_break_request	tests/test_supervisor_protections.py	/^    def track_break_request(agent_id, alias, break_type, reason):$/;"	f	function:test_supervisor_cannot_request_break	file:
 track_break_request	tests/test_supervisor_protections.py	/^    def track_break_request(agent_id, alias, break_type, reason):$/;"	f	function:test_supervisor_with_boss_alias_blocked	file:
@@ -1793,7 +1976,9 @@ type_hint	workshop/saw.py	/^    type_hint: Optional[str] = None$/;"	v	class:Tain
 update_agent_status	core/multiprocess.py	/^    def update_agent_status(self, agent_id: str, status: str) -> None:$/;"	m	class:SharedContext	typeref:typename:None
 update_token_usage	database/agent_db.py	/^    def update_token_usage(self, agent_id: str, tokens_used: int) -> None:$/;"	m	class:AgentDatabase	typeref:typename:None
 update_workspace	core/multiprocess.py	/^    def update_workspace(self, key: str, value: Any) -> None:$/;"	m	class:SharedContext	typeref:typename:None
+uses_max_completion_tokens	models/metadata.py	/^def uses_max_completion_tokens(model_name: str) -> bool:$/;"	f	typeref:typename:bool
 v1.0 (Current)	WRITE_BLOCKS_GUIDE.md	/^### v1.0 (Current)$/;"	S	section:API Documentation""Changelog
+validate_dpi	claude/pdfocr.py	/^def validate_dpi(dpi: int) -> int:$/;"	f	typeref:typename:int
 version_key	tools/build_analyzer.py	/^def version_key(v):$/;"	f
 visit_Assign	workshop/saw.py	/^    def visit_Assign(self, node):$/;"	m	class:TaintAnalyzer
 visit_Attribute	workshop/plane.py	/^    def visit_Attribute(self, node):$/;"	m	class:SourceSinkVisitor
