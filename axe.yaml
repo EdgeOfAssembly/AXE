@@ -1421,15 +1421,15 @@ token_optimization:
     preserve_critical: true
   response_optimization:
     enabled: true
-    truncate_code_blocks: true
-    max_code_lines: 0
+    truncate_code_blocks: false  # DISABLED - We never truncate code
+    max_code_lines: 0  # No limit - full code preserved
     remove_read_blocks: true
     deduplicate_content: true
   collab_optimization:
     enabled: true
-    history_limit: 50
-    content_limit: 20000
-    shared_notes_limit: 10000
+    history_limit: 200  # Increased from 50 for bigger shared view
+    content_limit: 100000  # Increased from 20000 for bigger shared view
+    shared_notes_limit: 100000  # Increased from 10000 for bigger shared view
   auto_summarize:
     enabled: true
     trigger_at_percent: 70

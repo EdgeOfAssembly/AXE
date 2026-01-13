@@ -644,8 +644,8 @@ token_optimization:
   # Response optimization
   response_optimization:
     enabled: true
-    truncate_code_blocks: true    # Truncate very long code blocks
-    max_code_lines: 100           # Maximum lines per code block
+    truncate_code_blocks: false   # DISABLED - We never truncate code
+    max_code_lines: 0             # No limit - full code preserved
     remove_read_blocks: true      # Remove [READ ...] blocks from context
     deduplicate_content: true     # Remove duplicate messages
 ```
@@ -656,7 +656,7 @@ token_optimization:
 |--------------|---------|-----------------|
 | **Context Summarization** | Condenses old messages while keeping recent ones | 50-70% |
 | **Prompt Compression** | Removes redundancy from system prompts | 63-78% |
-| **Code Block Truncation** | Limits very long code to first N lines | 70-80% |
+| **Full Code Preservation** | Code is NEVER truncated - agents see full context | N/A |
 | **READ Block Removal** | Strips verbose file content markers | 30-50% |
 | **Message Deduplication** | Removes repeated questions/responses | 20-40% |
 
@@ -707,7 +707,6 @@ axe> /tokenopt-stats
 #   Total tokens saved: 12,456
 #   Context optimizations: 3
 #   Prompt compressions: 8
-#   Code truncations: 5
 #   READ blocks removed: 2
 # 
 # Last optimization saved: 2,341 tokens
@@ -723,9 +722,11 @@ axe> /tokenopt-stats
 **Monitored Operations:**
 - Context optimizations (sliding window, summarization)
 - System prompt compressions
-- Code block truncations
 - READ block removals
 - Total tokens saved across all operations
+
+**Note:** Code truncation has been disabled. Full code is always preserved
+to give agents maximum context for accurate analysis and generation.
 
 #### Compression Warnings
 

@@ -129,11 +129,11 @@ class SharedBuildStatusManager:
                 if self._last_output:
                     f.write("## Last Build Output\n\n")
                     f.write("```\n")
-                    # Show last 100 lines max
+                    # Show last 500 lines max (increased from 100 for bigger shared view)
                     lines = self._last_output.split('\n')
-                    if len(lines) > 100:
-                        f.write(f"... ({len(lines) - 100} lines omitted)\n")
-                        f.write('\n'.join(lines[-100:]))
+                    if len(lines) > 500:
+                        f.write(f"... ({len(lines) - 500} lines omitted)\n")
+                        f.write('\n'.join(lines[-500:]))
                     else:
                         f.write(self._last_output)
                     f.write("\n```\n")
@@ -341,9 +341,9 @@ class SharedBuildStatusManager:
         )
         self._patches.append(patch)
         
-        # Keep only last 20 patches to avoid file bloat
-        if len(self._patches) > 20:
-            self._patches = self._patches[-20:]
+        # Keep only last 50 patches (increased from 20 for bigger shared view)
+        if len(self._patches) > 50:
+            self._patches = self._patches[-50:]
         
         self._write_changes_file()
     
