@@ -18,7 +18,7 @@ import os
 import re
 import subprocess
 from datetime import datetime
-from typing import Dict, List, Optional, Tuple, Any
+from typing import List, Optional, Tuple
 from dataclasses import dataclass
 from enum import Enum
 
@@ -120,10 +120,16 @@ class SharedBuildStatusManager:
                     for err in self._errors:
                         claimed = err.claimed_by or "-"
                         fixed = "✓" if err.fixed else "-"
-                        # Truncate long messages for table display
-                        msg = err.message[:50] + "..." if len(err.message) > 50 else err.message
+                        # Truncate long messages for table display (120 chars for more context)
+                        msg = err.message[:120] + "..." if len(err.message) > 120 else err.message
                         f.write(f"| {err.file} | {err.line} | {err.severity} | {msg} | {claimed} | {fixed} |\n")
                     f.write("\n")
+                    
+                    # Provide full, untruncated error messages for detailed inspection
+                    f.write("## Full Error Messages\n\n")
+                    for idx, err in enumerate(self._errors):
+                        f.write(f"**[{idx}]** `{err.file}:{err.line}` ({err.severity}, {err.tool})\n")
+                        f.write(f"> {err.message}\n\n")
                 else:
                     f.write("## Errors & Warnings\n\nNo errors or warnings.\n\n")
                 

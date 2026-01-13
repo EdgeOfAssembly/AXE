@@ -348,13 +348,11 @@ class ContextOptimizer:
             Content unchanged (no truncation applied)
         
         Raises:
-            ValueError: If content is None or max_lines is not positive
-                (validation kept for backward compatibility)
+            ValueError: If content is None
         """
         if content is None:
             raise ValueError("content cannot be None")
-        if max_lines <= 0:
-            raise ValueError("max_lines must be positive")
+        # max_lines validation removed - parameter is deprecated and ignored
         if not content:
             return ""
         # NOTE: Truncation removed - return content unchanged

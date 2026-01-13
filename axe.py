@@ -125,8 +125,9 @@ class ResponseProcessor:
     MAX_READ_SIZE = 100000  # Maximum bytes to read from a file (100KB)
     
     # Build tools that should have output recorded for shared status
-    BUILD_TOOLS = {'gcc', 'g++', 'clang', 'clang++', 'make', 'cmake', 
-                   'python', 'python3', 'pytest', 'pip', 'npm', 'cargo', 'go'}
+    # Note: python/python3 excluded to avoid capturing non-build script output
+    BUILD_TOOLS = {'gcc', 'g++', 'clang', 'clang++', 'make', 'cmake',
+                   'pytest', 'pip', 'npm', 'cargo', 'go'}
     
     def __init__(self, config: Config, project_dir: str, tool_runner: 'ToolRunner',
                  workspace: 'SharedWorkspace' = None):
@@ -304,8 +305,9 @@ class ResponseProcessor:
                     if tool in self.BUILD_TOOLS:
                         exit_code = 0 if success else 1
                         self.workspace.record_build_output(tool, output or "", exit_code)
-            except Exception:
-                pass  # Don't fail if build status recording fails
+            except Exception as e:
+                # Log but don't fail - build status recording is optional
+                print(c(f"Warning: Failed to record build output: {e}", Colors.DIM))
         
         if success:
             return output if output else "[Command executed successfully]"
@@ -638,7 +640,9 @@ class SharedWorkspace:
         
         try:
             return self.build_status.get_status_summary()
-        except Exception:
+        except Exception as e:
+            # Log error so build status issues are visible during debugging
+            print(c(f"Warning: Error getting build status summary: {e}", Colors.DIM))
             return ""
     
     def record_build_output(self, tool: str, output: str, exit_code: int) -> None:
@@ -652,8 +656,9 @@ class SharedWorkspace:
         if self.build_status is not None:
             try:
                 self.build_status.record_build_output(tool, output, exit_code)
-            except Exception:
-                pass  # Don't fail if build status recording fails
+            except Exception as e:
+                # Log but don't fail - build status is optional
+                print(c(f"Warning: Failed to record build output: {e}", Colors.DIM))
     
     def claim_error_fix(self, error_index: int, agent_alias: str) -> bool:
         """Claim an error for fixing by an agent.
@@ -668,7 +673,8 @@ class SharedWorkspace:
         if self.build_status is not None:
             try:
                 return self.build_status.claim_error_fix(error_index, agent_alias)
-            except Exception:
+            except Exception as e:
+                print(c(f"Warning: Failed to claim error fix: {e}", Colors.DIM))
                 return False
         return False
     
@@ -684,7 +690,8 @@ class SharedWorkspace:
         if self.build_status is not None:
             try:
                 return self.build_status.mark_error_fixed(error_index)
-            except Exception:
+            except Exception as e:
+                print(c(f"Warning: Failed to mark error fixed: {e}", Colors.DIM))
                 return False
         return False
 

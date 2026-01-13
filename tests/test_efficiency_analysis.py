@@ -294,9 +294,8 @@ def calculate_total_efficiency():
     
     # Per-session estimates
     sessions_per_day = 5
-    agents_per_session = 3
     
-    # Token savings
+    # Token savings (hypothetical estimates for illustration)
     build_status_savings = 3500  # Per session
     diff_savings = 5000  # Per session (multiple file shares)
     context_savings = 2000  # From not re-reading truncated files
