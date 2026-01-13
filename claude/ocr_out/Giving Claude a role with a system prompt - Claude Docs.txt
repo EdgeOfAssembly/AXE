@@ -1,0 +1,172 @@
+--- Page 1 ---
+13.1.2026 klo 1.42
+Giving Claude a role with a system prompt
+Claude Docs
+Claude Docs
+Prompt engineering
+Give Claude a role (system prompts)
+=
+Giving Claudea role with a system prompt
+page
+While these tips apply broadly to all Claude models, you can find prompting tips specific to
+extended thinking models here:
+When
+Claude; you can dramatically improve its performance by using the
+system
+parameter to give it a role: This technique; known as role prompting; is the most powerful
+way to use system prompts with Claude:
+The right role can turn Claude from a general assistant into your virtual domain expert!
+System prompt tips: Use the
+system
+parameter to set Claude's role. Put everything else;
+like task-specific instructions, in the
+user
+turn instead:
+Why use role prompting?
+Enhanced accuracy: In complex scenarios like legal analysis or financial modeling;
+role prompting can significantly boost Claude's performance
+Tailored tone: Whether you need a CFOs brevity or a copywriter's flair; role
+prompting adjusts Claudes communication style:
+Improved focus: By setting the role context, Claude stays more within the bounds of
+your task's specific requirements
+How to give Claudea role
+Use the
+system parameter in the Messages API to set Claude's role:
+Ask Docs
+https:Ilplatform claude com/docslen/build-with-claudelprompt-engineeringlsystem-prompts
+1/4
+Copy "
+using
+
+--- Page 2 ---
+13.1.2026 klo 1.42
+Giving Claude a role with a system prompt
+Claude Docs
+Claude Docs
+client
+=
+anthropic. Anthropic()
+response
+=
+client.messages. create(
+model-"claude-sonnet-4-5-20250929"
+max_tokens-2048 ,
+system-"You
+are
+a
+seasoned
+data
+scientist
+at
+a
+Fortune
+500
+company ."
+# < -
+messages=[
+{"role" :
+"user"
+"content":
+"Analyze
+this
+dataset
+for
+anomalies:
+<data
+print(response.content)
+Role prompting tip: Experiment with roles! A
+data
+scientist
+might see different
+insights than a
+marketing strategist
+for the same data. A
+data
+scientist
+specializing
+in
+customer insight
+analysis
+for
+Fortune
+500 companies
+might yield different results stilll
+Examples
+Example l: Legal contract analysis
+Without a role; Claude might miss critical issues:
+Legal contract analysis without role prompting
+With a role; Claude catches critical issues that could cost millions:
+Legal contract analysis with role prompting
+Example 2: Financial analysis
+Ask Docs
+Without a role; Claude's analysis lacks depth:
+https:Ilplatform claude com/docslen/build-with-claudelprompt-engineeringlsystem-prompts
+214
+
+--- Page 3 ---
+13.1.2026 klo 1.42
+Giving Claude a role with a system prompt
+Claude Docs
+Claude Docs
+With a role; Claude delivers actionable insights:
+Financial analysis with role prompting
+Prompt library
+Get inspired by a curated selection of prompts for various tasks and use cases.
+GitHub prompting tutorial
+An
+example-filled tutorial that covers the prompt engineering concepts found in our docs.
+Google Sheets prompting tutorial
+lighter weight version of our prompt engineering tutorial via an interactive spreadsheet.
+Claude Docs
+Solutions
+Learn
+Al agents
+Code modernization
+Catalog
+Ask Docs
+Coding
+Courses
+https:Ilplatform claude com/docslen/build-with-claudelprompt-engineeringlsystem-prompts
+3/4
+Blog
+
+--- Page 4 ---
+13.1.2026 klo 1.42
+Giving Claude a role with a system prompt
+Claude Docs
+Claude Docs
+Financial services
+Customer stories
+Government
+Engineering at Anthropic
+Life sciences
+Events
+Powered by Claude
+Partners
+Service partners
+Amazon Bedrock
+Startups program
+Google Cloud's Vertex AI
+Company
+Anthropic
+Careers
+Economic Futures
+Research
+News
+Responsible Scaling Policy
+Security and compliance
+Transparency
+Help and security
+Availability
+Status
+Support
+Discord
+Terms and policies
+Privacy policy
+Responsible disclosure policy
+Terms of service: Commercial
+Terms of service: Consumer
+Usage policy
+Ask Docs
+https:Ilplatform claude com/docslen/build-with-claudelprompt-engineeringlsystem-prompts
+4/4

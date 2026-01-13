@@ -1,0 +1,426 @@
+--- Page 1 ---
+13.1.2026 klo 1.28
+Token counting
+Claude Docs
+Claude Docs
+Capabilities
+Token counting
+=
+Token counting
+page
+Token counting enables you to determine the number of tokens in a message before
+sending it to Claude; helping you make informed decisions about your prompts and usage:
+With token counting; yoU can
+Proactively manage rate limits and costs
+Make smart model routing decisions
+Optimize prompts to be a specific length
+How to count message tokens
+The token counting endpoint accepts the same structured list of inputs for creating a
+message; including support for system prompts, tools, images, and PDFs The response
+contains the total number of input tokens:
+The token count should be considered an estimate. In some cases; the actual number of
+input tokens used when creating a message may differ by a small amount;
+Token counts may include tokens added automatically by Anthropic for system
+optimizations: You are not billed for system-added tokens Billing reflects only your
+content:
+Supported models
+All active models support token counting:
+Count tokens in basic messages
+https:Ilplatform claude com/docslen/build-with-claudeltoken-counting
+1/8
+Copy "
+
+--- Page 2 ---
+13.1.2026 klo 1.28
+Token counting
+Claude Docs
+Claude Docs
+import anthropic
+client
+=
+anthropic. Anthropic()
+response
+=
+client.messages. count_tokens(
+model-"claude-sonnet-4-5"
+system="You
+are
+a
+scientist"
+messages= [ {
+"role"
+"user"
+"content"
+"Hello ,
+CZaude"
+}] ,
+print(response. json() )
+JSON
+"input_tokens" :
+14
+}
+Count tokens in messages with tools
+Server tool token counts only apply to the first sampling call:
+Python
+https:Ilplatform claude com/docslen/build-with-claudeltoken-counting
+2/8
+
+--- Page 3 ---
+13.1.2026 klo 1.28
+Token counting
+Claude Docs
+Claude Docs
+client
+=
+anthropic. Anthropic()
+response
+=
+client.messages.count_tokens(
+model="claude-sonnet-4-5"
+tools=[
+"name'
+M
+get_weather"
+"description"
+"Get
+the
+current
+weather
+in
+a
+given Location"
+"input_schema" :
+I
+type"
+"object"
+'properties" :
+{
+"location":
+"type
+"string"
+"description" :
+"The city
+and state ,
+e.9 .
+San
+Francisco
+} ,
+H
+required" :
+["Zocation"] ,
+}
+1
+messages= [ {"role" :
+I
+user"
+"content"
+"What
+S
+the
+weather
+like
+in
+San
+Fran
+print(response. json() )
+JSON
+"input_tokens" :
+403
+}
+Count tokens in messages with images
+Shell
+https:Ilplatform claude com/docslen/build-with-claudeltoken-counting
+3/8
+
+--- Page 4 ---
+13.1.2026 klo 1.28
+Token counting
+Claude Docs
+Claude Docs
+IMAGE_URL
+=
+https: / /upload
+wikimedia.org/wikipedia/commons/a/a7/Camponotus_fLav
+IMAGE_MEDIA_TYPE=
+'image/jpeg"
+IMAGE_BASE64-$(curl
+M
+'SIMAGE_URL"
+base64)
+curL https: / /api.anthropic. com/vi/messages/count_tokens
+-~header
+"x-api-key:
+SANTHROPIC_API_KEY"
+-~header
+"anthropic-version:
+2023-06-01"
+-~header "content-type:
+application/json"
+--data
+"model" :
+"claude-sonnet-4-5"
+"messages" :
+[
+{"role" :
+"user"
+"content": [
+H
+{"type" :
+image"
+"source" :
+{
+"type"
+base64"
+H
+H
+media_type" _
+SIMAGE_MEDIA_TYPE
+"data"
+"
+H
+SIMAGE
+BASE64
+}} ,
+{"type" :
+"text"
+"text"
+"Describe
+this
+image"}
+1}
+}
+JSON
+"input_tokens" :
+1551
+}
+Count tokens in messages with extended thinking
+See here for more details about how the context window is calculated with extended
+thinking
+Thinking blocks from previous assistant turns are ignored and do not count toward
+your input tokens
+Current assistant turn thinking does count toward your input tokens
+Shell
+https:Ilplatform claude com/docslen/build-with-claudeltoken-counting
+4/8
+
+--- Page 5 ---
+13.1.2026 klo 1.28
+Token counting
+Claude Docs
+Claude Docs
+--header
+"content-type: application/json"
+--header
+"anthropic-version:
+2023-06-01"
+--data
+{
+"model" :
+"claude-sonnet-4-5"
+"thinking'
+{
+"type" _
+"enabled"
+I
+budget_tokens" :
+16000
+} _
+H
+messages" :
+[
+"role" :
+"user"
+"content":
+there
+an
+infinite
+number
+of prime
+numbers
+such
+that
+} 
+{
+"role" :
+"assistant"
+"content":
+[
+"type"
+II
+thinking"
+"thinking"
+"This
+is
+a
+nice
+number
+theory question .
+Lets
+think
+a
+"signature"
+"EuYBCkQYAiJAgCslLe6/Pol5Z4/ JMomVOouGrIdhYNsH3ukzUE
+}
+{
+"type" -
+"text"
+"text"
+there
+are infinitely many prime
+numbers
+p
+such
+tha
+} ,
+{
+"role" :
+"user"
+"content":
+"Can
+YOU
+write
+a
+formal proof?"
+}
+JSON
+"input_tokens" :
+88
+}
+Count tokens in messages with PDFs
+https:Ilplatform claude com/docslen/build-with-claudeltoken-counting
+5/8
+"Are
+"Yes ,
+
+--- Page 6 ---
+13.1.2026 klo 1.28
+Token counting
+Claude Docs
+Claude Docs
+Shell
+curL https: / /api.anthropic. com/vi/messages/count_tokens
+--header
+"X-api-key:
+SANTHROPIC_API_KEY"
+-~header "content-type: application/json"
+-~header
+"anthropic-version:
+2023-06-01"
+-data
+{
+"model" :
+"cLaude-sonnet-4-5"
+"messages" :
+[{
+"role" :
+"user"
+"content" :
+[
+H
+"type" :
+document"
+"source" :
+{
+"type" -
+"base64"
+"media_type" :
+"application/pdf"
+"data"
+I !
+$ (base64
+-i
+document.
+I
+}
+}
+{
+H
+"type"
+text"
+"text"
+"PLease
+summarize
+this
+document _
+}
+}]
+}
+JSON
+"input_tokens" :
+2188
+}
+Pricingand rate limits
+Token counting is free to use but subject to requests per minute rate limits based on your
+usage tier: If yoU need higher limits, contact sales through the Claude Console
+https:Ilplatform claude com/docslen/build-with-claudeltoken-counting
+6/8
+pdf)
+
+--- Page 7 ---
+13.1.2026 klo 1.28
+Token counting
+Claude Docs
+Claude Docs
+2
+2,000
+3
+4,000
+4
+8,000
+Token counting and message creation have separate and independent rate limits
+usage of
+one does not count against the limits of the other
+FAQ
+Does token counting use prompt caching?
+Claude Docs
+Solutions
+Learn
+Al agents
+Code modernization
+Catalog
+Coding
+Courses
+Customer support
+Use cases
+Education
+Connectors
+Financial services
+Customer stories
+Government
+Engineering at Anthropic
+Life sciences
+Events
+Powered by Claude
+Partners
+Service partners
+https:Ilplatform claude com/docslen/build-with-claudeltoken-counting
+7/8
+Blog
+
+--- Page 8 ---
+13.1.2026 klo 1.28
+Token counting
+Claude Docs
+Claude Docs
+Company
+Anthropic
+Careers
+Economic Futures
+Research
+News
+Responsible Scaling Policy
+Security and compliance
+Transparency
+Help and security
+Availability
+Status
+Support
+Discord
+Terms and policies
+Privacy policy
+Responsible disclosure policy
+Terms of service: Commercial
+Terms of service: Consumer
+Usage policy
+https:Ilplatform claude com/docslen/build-with-claudeltoken-counting
+8/8

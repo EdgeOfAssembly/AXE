@@ -1,0 +1,471 @@
+--- Page 1 ---
+13.1.2026 klo 1.35
+Bash tool
+Claude Docs
+Claude Docs
+Tools
+Bash tool
+=
+Bash tool
+page
+The bash tool enables Claude to execute shell commands in a persistent bash session,
+allowing system operations, script execution, and command-line automation;
+Overview
+The bash tool provides Claude with:
+Persistent bash session that maintains state
+Ability to run any shell command
+Access to environment variables and working directory
+Command chaining and scripting capabilities
+Model compatibility
+Model
+Tool Version
+Claude 4 models and Sonnet 3.7
+(deprecated)
+bash_20250124
+Older tool versions are not guaranteed to be backwards-compatible with newer models.
+Always use the tool version that corresponds to your model version:
+Use cases
+Development workflows: Run build commands, tests, and development tools
+System automation: Execute scripts, manage files, automate tasks
+Data processing: Process files, run analysis scripts, manage datasets
+Environment setup: Install packages, configure environments
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselbash-tool
+1/9
+Copy "
+
+--- Page 2 ---
+13.1.2026 klo 1.35
+Bash tool
+Claude Docs
+Claude Docs
+Python
+import anthropic
+client
+=
+anthropic. Anthropic()
+response
+=
+client.messages.create(
+model="claude-sonnet-4-5"
+max_tokens-1024 ,
+tools=[
+"type"
+bash_20250124"
+H
+name
+H
+bash"
+] _
+messages=[
+{"role" :
+H
+user"
+"
+content" :
+"List
+all
+Python files
+in
+the
+current
+dire
+How it works
+The bash tool maintains a persistent session:
+1,
+Claude determines what command torun
+2.
+You execute the command in a bash shell
+3.
+Return the output (stdout and stderr) to Claude
+4.
+Session state persists between commands (environment variables, working
+directory)
+Parameters
+Parameter
+Required
+Description
+command
+Yes*
+The bash command to run
+restart
+No
+Set to
+true
+to restart the bash session
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselbash-tool
+2/9
+
+--- Page 3 ---
+13.1.2026 klo 1.35
+Bash tool
+Claude Docs
+Claude Docs
+Example usage
+Example: Multi-step automation
+Claude can chain commands to complete complex tasks:
+#
+User
+request
+
+Install
+the
+requests Library
+and
+create
+a
+simple
+Python script that
+fetcnes
+a
+#
+CZaude
+S
+tool
+uses :
+# 1.
+Install
+package
+{"command"
+'pip
+install requests"}
+# 2 .
+Create script
+{"command"
+"cat
+>
+fetch_joke.pY
+< <
+EOF ' |nimport requests
+nresponse
+=
+request
+# 3_
+Run
+script
+{"command"
+python
+fetch_joke.py"}
+The session maintains state between commands; so files created in step 2 are available in
+step 3_
+Implement thebash tool
+The bash tool is implemented as a schema-less tool When using this tool, YOU don't need
+to provide an input schema as with other tools; the schema is built into Claude's model
+and can't be modified,
+Set up a bash environment
+Create a
+persistent bash session that Claude can interact with:
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselbash-tool
+3/9
+
+--- Page 4 ---
+13.1.2026 klo 1.35
+Bash tool
+Claude Docs
+Claude Docs
+import
+queue
+class
+BashSession:
+def
+_init__(self):
+self.process
+=
+subprocess. Popen(
+['/bin/bash' ] ,
+stdin-subprocess.PIPE ,
+stdout-subprocess. PIPE ,
+stderr-subprocess. PIPE ,
+text-True _
+bufsize-0
+self.output_queue
+=
+queue. Queue()
+self.error_queue
+=
+queue. Queue()
+self._start_readers()
+2
+Handle command execution
+Create a function to execute commands and
+capture output:
+def
+execute_command(self ,
+command) :
+# Send
+command
+to
+bash
+self.process. stdin.write(command
++
+'In' )
+self.process. stdin. fLush()
+#
+Capture
+output
+with
+timeout
+output
+=
+self._read_output(timeout=10)
+return
+output
+3
+Process Claudets tool calls
+Extract and execute commands from Claude's responses:
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselbash-tool
+4/9
+
+--- Page 5 ---
+13.1.2026 klo 1.35
+Bash tool
+Claude Docs
+Claude Docs
+if
+content. input.get( "restart") :
+bash_session.restart()
+result
+=
+H
+Bash
+session
+restarted"
+else:
+command
+=
+content. input.get ( "command")
+result
+=
+bash_session. execute_command (command)
+#
+Return result
+to CLaude
+tool_result
+=
+"type" =
+"tool_result"
+"tool_use_id"_
+content.id ,
+"content"
+result
+4
+Implement safety measures
+Add validation and restrictions:
+def validate_command(command) :
+#
+BZock dangerous
+commands
+dangerous_patterns
+=
+[
+rm
+1'
+format'
+':(){:I:&};:' ]
+for pattern
+in
+dangerous_patterns:
+if pattern
+in
+command:
+return False ,
+f"Command contains dangerous pattern:
+{pattern;
+#
+Add
+more
+validation
+as needed
+return
+True =
+None
+Handle errors
+When implementing the bash tool, handle various error scenarios:
+Command execution timeout
+Command not found
+Permission denied
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselbash-tool
+5/9
+~rf
+
+--- Page 6 ---
+13.1.2026 klo 1.35
+Bash tool
+Claude Docs
+Claude Docs
+Use command timeouts
+Maintain session state
+Handle large outputs
+all commands
+Sanitize outputs
+Security
+The bash tool provides direct system access. Implement these essential safety measures:
+Running in isolated environments (Docker/VM)
+Implementing command filtering and allowlists
+Setting resource limits (CPU; memory; disk)
+Logging all executed commands
+Key recommendations
+Use
+Ulimit
+to set resource constraints
+Filter dangerous commands
+sudo
+rm
+-rf
+etc.)
+Run with minimal user permissions
+Monitor and
+all command execution
+Pricing
+The bash tool adds 245 input tokens to your API calls.
+Additional tokens are consumed by:
+Command outputs (stdoutlstderr)
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselbash-tool
+6/9
+Log
+log
+
+--- Page 7 ---
+13.1.2026 klo 1.35
+Bash tool
+Claude Docs
+Claude Docs
+See tool use pricing for complete pricing details.
+Common patterns
+Development workflows
+Running tests:
+pytest &&
+coverage report
+Building projects:
+npm
+install
+SC
+npm
+run
+build
+Git operations:
+git status
+S git
+add
+88 git
+commit
+-m
+I
+message'
+I
+File operations
+Processing data:
+WC
+-Z
+*.CSV
+88
+ls
+-Lh
+X
+CSV
+Searching files:
+find
+~name "x.py'
+H
+xargs
+grep
+"pattern
+H
+Creating backups:
+tar
+~czf backup.tar.gz
+:/data
+System tasks
+Checking resources:
+df
+~h
+&C free
+m
+Process management:
+ps
+aux
+grep python
+Environment setup:
+export
+PATH-SPATH: /new/path
+S
+echo
+SPATH
+Limitations
+No interactive commands: Cannot handle
+vim
+Less
+or
+password prompts
+No GUI
+applications: Command-line only
+Session scope: Persists within conversation; lost between API calls
+Output limits: Large outputs may be truncated
+No
+streaming: Results returned after completion
+Combining with other tools
+The bash tool is most powerful when combined with the text editor and other tools.
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselbash-tool
+7/9
+
+--- Page 8 ---
+13.1.2026 klo 1.35
+Bash tool
+Claude Docs
+Claude Docs
+Tool use overview
+Learn about tool use with Claude
+Text editor tool
+View and edit text files with Claude
+Claude Docs
+Solutions
+Learn
+Alagents
+Code modernization
+Catalog
+Coding
+Courses
+Customer support
+Use cases
+Education
+Connectors
+Financial services
+Customer stories
+Government
+Engineering at Anthropic
+Life sciences
+Events
+Powered by Claude
+Partners
+Service partners
+Amazon Bedrock
+Startups program
+Google Cloud's Vertex AI
+Company
+Anthropic
+Careers
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselbash-tool
+8/9
+Blog
+
+--- Page 9 ---
+13.1.2026 klo 1.35
+Bash tool
+Claude Docs
+Claude Docs
+News
+Responsible Scaling Policy
+Security and compliance
+Transparency
+Help and security
+Availability
+Status
+Support
+Discord
+Terms and policies
+Privacy policy
+Responsible disclosure policy
+Terms of service: Commercial
+Terms of service: Consumer
+Usage policy
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselbash-tool
+9/9

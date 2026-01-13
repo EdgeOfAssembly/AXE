@@ -1,0 +1,893 @@
+--- Page 1 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+Tools
+Memory tool
+=
+Memory tool
+page
+The memory tool enables Claude to store and retrieve information across conversations
+through a memory file directory: Claude can create; read; update; and delete files that
+persist between sessions, allowingit to build knowledge over time without keeping
+everything in the context window:
+The memory tool operates client-side_you control where and how the data is stored
+through your own infrastructure
+The memory tool is currently in beta: To enable it, use the beta header
+context-
+management-2025-06-27
+in your APl requests:
+Please reach out through our feedback form to share your feedback on this feature
+Use cases
+Maintain project context across multiple agent executions
+Learn from past interactions, decisions, and feedback
+Build knowledge bases over time
+Enable cross-conversation learning where Claude improves at recurring workflows
+How it works
+When enabled; Claude automatically checks its memory directory before starting tasks
+Claude can create; read; update; and delete files in the
+memories   directory to store
+what it learns while working; then reference those memories in future conversations to
+handle similar tasks more effectively or
+up where it left off:
+Since this is a client-side tool, Claude makes tool calls to perform memory operations; and
+your
+application executes those operations locally: This gives YoU complc
+where and how the memory is stored. For security YoU should restrict a
+Ask Docs
+operations to the
+Imemories  directory:
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselmemory-tool
+1/14
+Copy "
+pick
+
+--- Page 2 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+When you ask Claude to help with a task, Claude automatically checks its memory
+directory first: Here's what a typical interaction looks like:
+1. User request:
+"HeLp
+me
+respond
+to
+this
+customer
+service
+ticket _
+M
+2. Claude checks the memory directory:
+"I
+LZ help YoU
+respond
+to
+the
+customer
+service
+ticket_
+Let
+me
+check
+my
+me Q v
+Claude calls the memory tool:
+T
+"type"
+tool_use"
+H
+"id" :
+toolu_O1C4DSE6F7G8H9IOJ1KZL3MG"
+"name" :
+I
+memory
+"input" :
+{
+I
+command" _
+"view"
+"path" :
+Imemories"
+X
+3. Your
+application returns the directory contents:
+I
+"type" :
+tool_result"
+"tool_use_id"_
+toolu_O1CGDSE6F7G8H9IOJ1K2L3MG'
+"
+content":
+II
+Here
+re
+the
+files
+and
+directories
+up
+to
+2
+Levels deep
+in
+Imemori
+4. Claude reads relevant files:
+Ask Docs
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselmemory-tool
+2/14
+
+--- Page 3 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+H
+"id" :
+tooLu_O1DSE6F7G8H9IOJ1K2L3MGNS"
+"name" :
+I 
+memory"
+"input" :
+{
+"command" :
+"view"
+
+"path" :
+Imemories/customer_service_guidelines.xmZ"
+}
+X
+5. Your
+application returns the file contents:
+H
+"type" :
+tool_result"
+I
+"tool_use_id" :
+toolu_O1DSE6F7G8H9IOJ1KZLSMGNS"
+"content":
+"Here' s
+the
+content
+of /memories/customer_service_guidelines
+xml
+6. Claude uses the memory to help:
+H
+Based
+on
+your
+customer
+service guidelines ,
+I
+can help
+You
+craft
+a
+respor
+Supported models
+The memory tool is available on:
+Claude Sonnet 4.5
+claude-sonnet-4-5-20250929
+Claude Sonnet 4 (
+claude-sonnet-4-20250514 )
+Claude Haiku 4.5
+claude-haiku-4-5-20251001
+Claude Opus 4,5
+claude-opus-4-5-20251101
+Claude Opus 4.1
+cZaude-opus-4-1-20250805
+)
+Claude Opus 4 ( cZaude-opus-4-20250514 )
+Getting started
+To use the memory tool:
+Ask Docs
+1.
+Include the beta header
+context-management-2025-06-27
+in your API requests
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselmemory-tool
+3/14
+
+--- Page 4 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+To handle memory tool operations in
+application, you need to implement handlers for
+each memory command. Our SDKs provide memory tool helpers that handle the tool
+interface_VoU can subclass
+BetaAbstractMemoryTool
+(Python) or use
+betaMemoryTooL   (TypeScript) to implement your own memory backend (file-based;
+database; cloud storage; encrypted files, etc )
+For working examples, see:
+Python: examples/memorylbasic py
+TypeScript: examples/tools-helpers-memoryts
+Basic usage
+cURL
+curL https: / /api.anthropic. com/vl/messages
+--header
+"X-api-key:
+SANTHROPIC_API_KEY"
+--header
+"anthropic-version:
+2023-06-01"
+-~header
+"content-type: application/json"
+--header
+"anthropic-beta:
+context-management-2025-06-27"
+-data
+{
+"model" :
+"claude-sonnet-4-5"
+"max_tokens"
+2048 ,
+"messages" :
+[
+"role" :
+"user"
+"content" :
+"I'| '
+m
+working
+on
+a
+Python
+web
+scraper
+that keeps
+]
+"tools" :
+[{
+H
+"type"
+memory_20250818"
+H
+H
+name
+memory"
+}]
+}
+Tool commands
+Ask Docs
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselmemory-tool
+4/14
+your
+
+--- Page 5 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+WIth; yoU can modity your Implementation and return strings as needed tor your Use case.
+view
+Shows directory contents or file contents with optional line ranges:
+"command" :
+"view"
+"path" :
+I
+Imemories"
+"view_range" :
+[1,
+10]
+11
+Optional:
+view specific
+lines
+}
+Return values
+For directories: Return a listing that shows files and directories with their sizes:
+Here
+re
+the
+files
+and
+directories
+up
+to
+2
+levels
+deep
+in {path} _
+excludir
+id
+{size}
+{path}
+{size}
+{path}/ {filenamel}
+{size}
+{path}/ {filename2}
+Lists files up to 2 levels deep
+Shows human-readable sizes (e.g;,
+5.5K
+1.2M
+)
+Excludes hidden items (files starting with
+and
+node_modules
+Uses tab character between size and path
+For files: Return file contents with a header and line numbers:
+Here' s
+the
+content
+of {path}
+with
+Line
+numbers:
+{Line_numbers}{tab}{content}
+Line number
+formatting:
+Width: 6 characters, right-aligned with space padding
+Separator: Tab character between line number and content
+Ask Docs
+Indexing: 1-indexed (first line is line 1)
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselmemory-tool
+5/14
+
+--- Page 6 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+Example output:
+Here
+5
+the
+content
+0f
+Imemories/notes _
+txt
+with
+Line
+numbers:
+1
+HelZo World
+2
+This
+is
+line
+two
+10
+Line
+ten
+100
+Line
+one
+hundred
+Error handling
+Fileldirectory does not exist:
+I
+The path {path}
+does
+not
+exist
+PLease provide
+H
+a
+valid path.
+create
+Create a new file:
+"command" :
+"create"
+I
+"path" :
+Imemories/notes.txt"
+"file_text":
+'Meeting
+notes: In-
+Discussed project
+timelineln-
+Next
+steps
+def
+Return values
+Success:
+"File
+created
+successfully
+at:
+{path}"
+Error handling
+File already exists:
+"Error:
+File {path} already
+exists"
+str
+replace
+Replace text in a file:
+Ask Docs
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselmemory-tool
+6/14
+
+--- Page 7 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+H
+path" :
+Imemories/preferences.txt"
+"old_str":
+"Favorite
+color:
+bZue"
+"new_str":
+"Favorite
+color:
+green"
+}
+Return values
+Success:
+I
+The
+memory
+file
+has
+been
+edited_
+I
+followed by a snippet of the edited
+file with line numbers
+Error
+handling
+File does not exist:
+"Error:
+The path {path}
+does
+not
+exist_
+PLease provide
+a
+valid path _
+Text not found:
+replacement
+was performed ,
+old_str
+{oLd_str}
+did
+not
+I
+appear
+verbatim
+in {path} 
+Duplicate text: When
+old_str
+appears multiple times, return:
+H
+No replacement
+was
+performed .
+Multiple
+occurrences
+of old_str
+{oZd_str}
+in
+lines:
+{Zine_numbers} _
+PLease
+ensure
+it
+is Unique
+M
+Directory handling
+If the path is a directory; return a "file does not exist" error
+insert
+Insert text ata
+specific line:
+"command" :
+"insert"
+I
+'path" :
+I
+Imemories/todo.txt"
+"insert_Line" :
+2 ,
+"insert_text" :
+H
+Review memory
+tool
+documentationln"
+}
+Return values
+T
+Ask Docs
+Success:
+"The
+file {path}
+has
+been
+edited _
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselmemory-tool
+7/14
+"No
+
+--- Page 8 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+File does not exist:
+"Error:
+The
+{path}
+does
+not
+exist"
+Invalid line number:
+"Error:
+Invalid
+insert_Line
+parameter:
+{insert_Line} _
+It should
+be
+within
+the
+range
+of
+lines
+of
+the
+file:
+[0 ,
+{n_Lines}] "
+Directory handling
+If the path is a directory, return a "file does not exist" error
+delete
+Delete a file or
+directory:
+"command" :
+"delete"
+H
+'path":
+Imemories/old_file.txt"
+}
+Return values
+Success:
+"Successfully
+deleted
+{path}"
+Error
+handling
+Fileldirectory does not exist:
+"Error:
+The path {path}
+does
+not
+exist"
+Directory handling
+Deletes the directory and all its contents recursively:
+rename
+Rename or move a
+fileldirectory:
+"command" :
+"rename 
+"old_path" :
+M
+Imemories/draft.txt"
+"new_path" :
+II
+'/memories/final.txt"
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselmemory-tool
+8/14
+path
+
+--- Page 9 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+Success:
+"Successfully
+renamed {oZd_path}
+to
+{new_path}"
+
+Error
+handling
+Source does not exist:
+H
+Error:
+The path {oZd_path}
+does not exist"
+Destination already exists: Return an error (do not overwrite):
+II
+Error:
+The
+M
+destination
+{new_path} already
+exists"
+Directory handling
+Renames the directory:
+Prompting guidance
+We
+automatically include this instruction to the system prompt when the memory tool is
+included:
+IMPORTANT :
+ALWAYS
+VIEW
+YOUR
+MEMORY
+DIRECTORY
+BEFORE
+dOing
+ANYTHING
+ELSE _
+MEMORY
+PROTOCOL:
+1
+Use
+the
+view
+command
+0f
+your
+memory
+tool
+to
+check
+for
+earlier
+progress
+2
+(work
+on
+the task)
+As
+YOU
+make
+progress
+record status
+progress
+1
+thoughts
+etc
+in your
+ASSUME
+INTERRUPTION:
+Your
+context
+window might
+be
+reset
+at
+any
+moment
+S0
+YOU
+If yoU observe Claude
+creating cluttered memory files, you can include this instruction:
+Note: when editing your memory folder; always try to keep its content up-to-date;
+coherent and organized: You can rename or delete files that are no longer relevant: Do
+not create new files unless necessary:
+can also
+what Claude writes to memory; e.g;, "Only write down information
+relevant to <topic> in your memory system;'
+Security considerations
+Here are important security concerns when implementing your memory store:
+Ask Docs
+Sensitive information
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselmemory-tool
+9/14
+You
+guide
+
+--- Page 10 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+intormation:
+File storage size
+Consider tracking memory file sizes and preventing files from growing too large Consider
+adding a maximum number of characters the memory read command can return; and let
+Claude paginate through contents:
+Memory expiration
+Consider clearing out memory files periodically that haven't been accessed in an
+extended time:
+Path traversalprotection
+Malicious path inputs could attempt to access files outside the
+Imemories
+directory: Your
+implementation MUST validate all paths to prevent directory traversal attacks
+Consider these safeguards:
+Validate that all paths start with
+Imemories
+Resolve paths to their canonical form and verify they remain within the memory
+directory
+Reject paths containing sequences like
+or other traversal patterns
+Watch for URL-encoded traversal sequences
+%2e%2e%2f )
+Use your language's built-in path security utilities (e.g, Pythons
+pathlib.Path
+resoLve()
+and
+relative_to() )
+Error
+handling
+The memory tool uses similar error
+handling patterns to the text editor tool. See the
+individual tool command sections above for detailed error messages and behaviors:
+Common errors include file not found; permission errors, invalid paths, and duplicate text
+matches.
+Using with Context Editing
+Ask Docs
+httpsIlplatform.claude comldocslenlagents-and-toolsltool-uselmemory-tool
+10/14
+
+--- Page 11 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+combination enables Iong-running agentic worktiows that WoUId otherwise exceed
+context limits;
+How they work together
+When context editing is enabled and your conversation approaches the clearing
+threshold; Claude automatically receives a warning notification. This prompts Claude to
+preserve any important information from tool results into memory files before those
+results are cleared from the context window.
+After tool results are cleared, Claude can retrieve the stored information from memory
+files whenever needed, effectively treating memory as an extension of its working
+context; This allows Claude to:
+Continue complex; multi-step workflows without
+critical information
+Reference past work and decisions even after tool results are removed
+Maintain coherent context across conversations that would exceed typical context
+limits
+Build up aknowledge base over time while keeping the active context window
+manageable
+Example workflow
+Consider a code refactoring project with many file operations:
+1.
+Claude makes numerous edits to files, generating many tool results
+2.
+As the context grows and approaches your threshold; Claude receives a warning
+3.
+Claude summarizes the changes made so far to a memory file (e.g;,
+Imemories/refactoring_progress.xmZ
+4.
+Context editing clears the older tool results automatically
+5
+Claude continues working; referencing the memory file when it needs to recall what
+changes were already completed
+6.
+The workflow can continue
+indefinitely, with Claude managing both active context
+and persistent memory
+Configuration
+To use both features together:
+Ask Docs
+httpsIlplatform.claude comldocslenlagents-and-toolsltool-uselmemory-tool
+11/14
+losing
+
+--- Page 12 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+response
+=
+client.beta.messages.create(
+model="cZaude-sonnet-4-5"
+max_tokens-4096 ,
+messages=[ .
+._
+tools=[
+"type'
+memory_20250818"
+H
+H
+name
+memory
+} [
+#
+Your
+other
+tools
+] ,
+betas=["context-management-2025-06-27"] ,
+context_management={
+"edits" :
+[
+"type" :
+"clear_tool_uses_20250919"
+"trigger" :
+{
+H
+type" :
+"input_tokens
+"value"
+100000
+}
+"keep" : {
+H
+II
+type":
+tool_uses'
+"value" :
+3
+You can also exclude memory tool calls from being cleared to ensure Claude always has
+access to recent
+memory operations:
+Python
+Ask Docs
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselmemory-tool
+12/14
+
+--- Page 13 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+"type" :
+"clear_tool_uses_20250919"
+"exclude_tools" :
+["memory" ]
+1
+Claude Docs
+Solutions
+Learn
+AI
+agents
+Blog
+Code modernization
+Catalog
+Coding
+Courses
+Customer support
+Use cases
+Education
+Connectors
+Financial services
+Customer stories
+Government
+Engineering at Anthropic
+Life sciences
+Events
+Powered by Claude
+Partners
+Service partners
+Amazon Bedrock
+Startups program
+Google Cloud's Vertex Al
+Company
+Anthropic
+Careers
+Economic Futures
+Research
+News
+Responsible Scaling Policy
+Security and compliance
+Ask Docs
+Transparency
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselmemory-tool
+13/14
+
+--- Page 14 ---
+13.1.2026 klo 1.38
+Memory tool
+Claude Docs
+Claude Docs
+Avallauilly
+Status
+Support
+Discord
+Terms and policies
+policy
+Responsible disclosure policy
+Terms of service: Commercial
+Terms of service: Consumer
+Usage policy
+Ask Docs
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselmemory-tool
+14/14
+Privacy

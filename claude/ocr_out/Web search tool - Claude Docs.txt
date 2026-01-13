@@ -1,0 +1,839 @@
+--- Page 1 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+Tools
+Web search tool
+=
+Web search tool
+page
+The web search tool gives Claude direct access to real-time web content; allowing it to
+answer
+questions with up-to-date information beyond its knowledge cutoff Claude
+automatically cites sources from search results as part of its answer
+Please reach
+through our feedback form to share your experience with the web search
+tool;
+3
+Supported models
+Web search is available on:
+Claude Sonnet 4.5
+claude-sonnet-4-5-20250929
+Claude Sonnet 4
+claude-sonnet-4-20250514 )
+Claude Sonnet 3.7 (deprecated)
+claude-3-7-sonnet-20250219 )
+Claude Haiku 4.5
+claude-haiku-4-5-20251001
+)
+Claude Haiku 3.5 (deprecated)
+claude-3-5-haiku-Latest )
+Claude Opus 4.5
+claude-opus-4-5-20251101
+Claude Opus 4.1
+claude-opus-4-1-20250805
+)
+Claude Opus 4 ( cZaude-opus-4-20250514 )
+How web search works
+When you add the web search tool to your API request:
+1.
+Claude decides when to search based on the prompt
+2.
+The API executes the searches and provides Claude with the results This process
+repeat multiple times throughout a single request;
+Ask Docs
+3
+At the end of its turn; Claude provides a final response with cited sc
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+1/13
+Copy "
+out
+may
+
+--- Page 2 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+Your organization's administrator must enable web search in Console:
+Provide the web search tool in your API request:
+Shell
+curl https: / /api.anthropic. com/v1/messages
+-~header
+"x-api-key:
+SANTHROPIC_API_KEY"
+-~header
+"anthropic-version:
+2023-06-01"
+~~header "content-type: application/json"
+-data
+{
+"model" :
+"cLaude-sonnet-4-5"
+I
+max_tokens"
+1024 ,
+"messages" :
+[
+"role" :
+"user"
+"content"
+"What
+is
+the
+weather
+in
+NYC?"
+}
+] _
+"tools" :
+[{
+"type"
+"web_search_20250305"
+"name
+"web_search"
+T
+max_Uses" :
+5
+}]
+}
+Tool definition
+The web search tool supports the following parameters:
+JSON
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+2/13
+
+--- Page 3 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+T
+"name"
+web_search
+1/ Optional:
+Limit
+the
+number
+of
+searches
+per request
+I
+max_uses" :
+5 ,
+11 Optional:
+Only
+include
+results
+from
+these
+domains
+
+"allowed_domains" :
+["example.com"
+"trusteddomain.org" ] ,
+1/ Optional:
+Never
+include
+results
+from
+these
+domains
+"bZocked_domains" :
+["untrustedsource.com" ] ,
+1/ Optional:
+Localize
+search
+results
+"user_location" :
+{
+"type'
+"approximate"
+"city"
+"San
+Francisco"
+"region" =
+"California"
+"country" :
+"US"
+"timezone" :
+H
+America/ Los_Angeles
+X
+Max uses
+The
+max_uses   parameter limits the number of searches performed: If Claude attempts
+more searches than allowed; the
+web_search_tool_result
+will be an error with the
+max_uses_exceeded
+error code:
+Domain filtering
+When using domain filters:
+Domains should not include the HTTPIHTTPS scheme (use
+example. com
+instead of
+https:
+IexampLe
+com
+Subdomains are automatically included
+example.com
+covers
+docs. example. com
+Specific subdomains restrict results to only that subdomain
+docs. example. com
+returns only results from that subdomain, not from
+exampZe. com
+or
+example _
+com
+Subpaths are supported and match anything after thepath ( exampZe.com/bZog
+matches
+example.com/blog/post-1
+)
+You can use either
+allowed_domains
+or
+bZocked_domains
+but not
+bothinthe siame
+request;
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+3/13
+api_
+
+--- Page 4 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+domain part (in the path)
+Valid:
+example. com/ *
+example. com/*/articles
+Invalid:
+*
+exampe . com
+ex*
+com
+example . com/*/news/ *
+Invalid domain formats will return an
+invalid_tool_input
+tool error;
+Request-level domain restrictions must be compatible with organization-level domain
+restrictions configured in the Console Request-level domains can only further restrict
+domains, not override or expand beyond the organization-level list: If your request includes
+domains that conflict with organization settings; the API will return a validation error
+Localization
+The
+user_Zocation parameter allows YoU to localize search results based on a User's
+location;
+type
+The type of location (must be
+approximate
+)
+city
+The city name
+region
+The region or state
+country
+The country
+timezone
+The IANA timezone ID
+Response
+Here's an example response structure:
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+4/13
+
+--- Page 5 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+5/13
+
+--- Page 6 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+1.
+CZaude
+S
+decision
+to
+search
+"type" :
+"text"
+"text":
+"I
+1Z
+search
+for
+when
+CZaude
+Shannon
+was
+born.
+I
+}
+1|
+2 .
+The
+search
+query
+used
+{
+"type"
+"server_tool_use"
+"id" :
+"srvtoolu_O1WYG3ziw53XMcoyKL4XcZmE"
+"name"
+"web_search"
+"input" :
+{
+"query"
+"claude
+shannon
+birth
+date"
+}
+} _
+1[
+3 .
+Search
+results
+{
+"type" :
+"web_search_tool_result"
+"tool_use_id":
+"srvtoolu_O1WYG3ziw53XMcoyKL4XcZmE"
+"content":
+[
+"type" :
+"web_search_result"
+"url":
+"https: / /en.Wikipedia.org/wiki/cLaude_Shannon
+"title" :
+"CLaude Shannon
+Wikipedia"
+"encrypted_content"
+"EqgfCioIARgBIiQ3YTAwMjYIMilmZjMSLTQLNGUtODgxNC
+'page_age" :
+"April
+30 _
+2025"
+}
+{
+"text" :
+"Based
+on
+the
+search
+results,
+"type" :
+"text"
+} _
+1|
+4_
+CZaude
+5
+response
+with
+citations
+{
+"text"_
+"CLaude
+Shannon
+was
+born
+on
+April 30 ,
+1916 ,
+in Petoskey , Michiga
+"type"
+"text"
+"citations" :
+[
+"type" :
+"web_search_result_Zocation"
+"url" -
+"https: / /en.wikipedia.org/wiki/claude_Shannon'
+"title" :
+"CLaude
+Shannon
+Wikipedia"
+"encrypted_index"
+"Eo8BCiolAhgBIiQyYjQOOWJmZilLNm .
+"cited_text"
+M
+CZaude
+Elwood
+Shannon
+(April
+30 _
+1916
+February
+24 _
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+6/13
+
+--- Page 7 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+L"pU L_cunciio
+Joo / |
+"output_tokens" :
+931 ,
+"server_tool_use" :
+{
+"web_search_requests" :
+1
+}
+} ,
+"stop_reason" :
+"end_turn"
+Search results
+Search results include:
+url
+The URL of the source page
+title
+The title of the source page
+page_age
+When the site was last
+updated
+encrypted_content
+Encrypted content that must be passed back in multi-turn
+conversations for citations
+Citations
+Citations are always enabled for web search; and each
+web_search_result_location
+includes:
+url
+The URL of the cited source
+title
+The title of the cited source
+encrypted_index
+A reference that must be passed back for multi-turn
+conversations:
+cited_text
+Up to 150 characters of the cited content
+The web search citation fields
+cited_text
+title
+and
+url
+do not count towards
+input or output token usage
+When displaying API outputs directly to end users, citations must be included to the original
+source: If YOU are
+making modifications to API outputs, including by reprocessing andlor
+combining them with your own material before displaying them to end users, display
+citations as appropriate based on consultation with your legal team:
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+7/13
+
+--- Page 8 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+When the web search tool encounters an error (such as hitting rate limits), the Claude API
+still returns a 200 (success) response: The error is represented within the response body
+using the following structure:
+"type" :
+"web_search_tool_result"
+"tool_use_id" :
+"servertoolu_a93jad"
+"content":
+{
+"type" :
+web_search_tool_result_error"
+"error_code" :
+"max_uses_exceeded"
+}
+These are the possible error codes:
+too_many_requests
+Rate limit exceeded
+invalid_input
+Invalid search query parameter
+max_uses_exceeded
+Maximum web search tool uses exceeded
+query_too_Zong
+Query exceeds maximum length
+unavailable
+An internal error occurred
+pause_turn
+stop reason
+The response may include a
+pause_turn
+reason; which indicates that the API
+paused a long-running turn; You may provide the response back as-is in a subsequent
+request to let Claude continue its turn, or modify the content if yoU wish to interrupt the
+conversation:
+Prompt caching
+Web search works with prompt caching: To enable prompt caching; add at least one
+cache_control
+breakpoint in your request: The system will automatically cache up until
+the last
+web_search_tool_result
+block when executing the tool:
+For multi-turn conversations, set a
+cache_control
+breakpoint on or after the last
+web_search_tool_result
+block to reuse cached content;
+For example; to use prompt caching with web search for a multi-turn conversation:
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+8/13
+stop
+
+--- Page 9 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+9/13
+
+--- Page 10 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+#
+First
+request
+with
+web
+search
+and
+cache
+breakpoint
+messages
+5
+"role" :
+"user"
+"content"
+"What' s
+the
+current
+weather
+in
+San
+Francisco
+today?"
+responsel
+=
+client.messages.create(
+model-"claude-sonnet-4-5"
+max_tokens-1024 ,
+messages-messages ,
+tools=[ {
+"type" :
+web_search_20250305"
+H
+"name
+web_search"
+"user_location" :
+{
+H
+type" :
+"approximate"
+"city"
+"San
+Francisco"
+"region"
+"California"
+"country"
+"US"
+"timezone"
+"
+America/ Los_Angeles"
+}]
+#
+Add
+Caude
+S
+response
+to
+the
+conversation
+messages. append( {
+"role" :
+"assistant"
+"content":
+responsel.content
+})
+#
+Second
+request
+with
+cache breakpoint
+after
+the
+search
+results
+messages. append( {
+I
+"role"
+"user"
+"content"
+"Should
+I
+expect rain
+Later
+this
+week?"
+"cache_control":
+{"type" :
+"ephemeral"}
+#
+Cache
+up
+to
+this point
+})
+response2
+=
+client.messages.create(
+model="claude-sonnet-4-5"
+max_tokens-1024 ,
+messages-messages _
+tools=[ {
+H
+H
+type" :
+web_search_20250305"
+Ask Docs
+H
+"name
+web_search"
+H
+user_location" :
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+10/13
+
+--- Page 11 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+LJ+Un'
+0u
+CIT 0!
+I.u
+H
+country'
+"US"
+H
+II
+timezone
+America/ Los_Angeles"
+}]
+)
+#
+The
+second
+response
+will
+benefit
+from
+cached
+search
+results
+#
+while
+still being able
+to perform
+new searches
+if
+needed
+printe
+f"Cache
+read
+tokens:
+{response2. usage.get ( ' cache_read_input_tokens'
+0) }
+Streaming
+With streaming enabled, yoU'Il receive search events as part of the stream: There will be a
+pause while the search executes:
+event:
+message_start
+data:
+{"type" :
+I
+message_start"
+I
+message" :
+{"id" :
+I
+msg_abc123"
+"type" :
+"messa
+event:
+content_block_start
+data:
+{"type"
+"content_block_start"
+"index" :
+0 _
+"content_bZock" :
+{"type" :
+"t
+1 [
+Caude
+S
+decision
+to
+search
+event:
+content_bZock_start
+data:
+{"type" :
+H
+content_bZock_start"
+"index" :
+1 ,
+"content_block" :
+{"type" :
+"s
+1I
+Search
+query
+streamed
+event:
+content_bZock_delta
+data:
+{"type" :
+"content_bZock_delta"
+"index" :
+1 ,
+"delta" :
+{"type":
+"input_jso
+I[
+Pause
+while
+search
+executes
+1 I
+Search results streamed
+event:
+content_bZock_start
+data:
+{"type" :
+"content_block_start"
+"index"
+2 ,
+"content_bZock":
+{"type" :
+"m
+11
+Claude
+5
+response
+with
+citations
+(omitted
+in
+this example)
+Batch requests
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+11/13
+
+--- Page 12 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+requests.
+Usage and pricing
+Web search usage is charged in addition to token Usage:
+"usage" :
+"input_tokens" :
+105 ,
+"output_tokens" :
+6039 _
+"cache_read_input_tokens" :
+7123 _
+"cache_creation_input_tokens" :
+7345 _
+"server_tool_use" :
+{
+"web_search_requests" :
+1
+X
+Web search is available on the Claude API for $10 per 1,000 searches, plus standard token
+costs for search-generated content; Web search results retrieved throughout a
+conversation are counted as input tokens, in search iterations executed during a single
+turn and in subsequent conversation turns;
+Each web search counts as one Use,
+regardless of the number of results returned: If an
+error occurs during web search; the web search will not be billed:
+Claude Docs
+Solutions
+Learn
+Al agents
+Code modernization
+Catalog
+Coding
+Courses
+Customer support
+Use cases
+Education
+Connectors
+Financial services
+Customer stories
+Ask Docs
+Government
+Engineering at Anthropic
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+12/13
+Blog
+
+--- Page 13 ---
+13.1.2026 klo 1.37
+Web search tool
+Claude Docs
+Claude Docs
+Partners
+Service partners
+Amazon Bedrock
+Startups program
+Google Cloud's Vertex Al
+Company
+Anthropic
+Careers
+Economic Futures
+Research
+News
+Responsible Scaling Policy
+Security and compliance
+Transparency
+Help and security
+Availability
+Status
+Support
+Discord
+Terms and policies
+Privacy policy
+Responsible disclosure policy
+Terms of service: Commercial
+Terms of service: Consumer
+Usage policy
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselweb-search-tool
+13/13

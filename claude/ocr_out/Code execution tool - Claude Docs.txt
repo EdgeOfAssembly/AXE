@@ -1,0 +1,1211 @@
+--- Page 1 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+Tools
+Code execution tool
+=
+Code execution tool
+page
+Claude can analyze data, create visualizations, perform complex calculations, run system
+commands, create and edit files,and process uploaded files directly within the API
+conversation: The code execution tool allows Claude to run Bash commands and
+manipulate files, including writing code; in a secure, sandboxed environment.
+The code execution tool is currently in public beta.
+To use this feature; add the
+I
+code-execution-2025-08-25"
+beta header to your API
+requests.
+Please reach out through our feedback form to share your feedback on this feature:
+Model compatibility
+The code execution tool is available on the following models:
+Model
+Tool Version
+Claude Opus 4.5
+claude-opus-4-5-20251101
+)
+code_execution_20250825
+Claude Opus 4.1 ( cZaude-opus-4-1-20250805
+code_execution_20250825
+Claude Opus 4 ( cZaude-opus-4-20250514
+)
+code_execution_20250825
+Claude Sonnet 4.5
+claude-sonnet-4-5-20250929 )
+code_execution_20250825
+Claude Sonnet 4
+claude-sonnet-4-20250514
+)
+code_execution_20250825
+Claude Sonnet 3.7
+claude-3-7-sonnet-20250219
+)
+code_execution_20250825
+(deprecated)
+Claude Haiku 4.5
+claude-haiku-4-5-20251001
+code_execution_20250825
+Claude Haiku 3.5
+claude-3-5-haiku-latest
+) (deprecated)
+code
+exf
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+1/17
+Copy "
+
+--- Page 2 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+See Upgrade to latest tool version for migration details
+Older tool versions are not guaranteed to be backwards-compatible with newer models:
+Always use the tool version that corresponds to your model version:
+Quick start
+Here's a simple example that asks Claude to perform a calculation:
+Shell
+curL https: / /api.anthropic. com/vl/messages
+--header
+"X-api-key:
+SANTHROPIC_API_KEY"
+-~header "anthropic-Version:
+2023-06-01"
+~~header "anthropic-beta:
+code-execution-2025-08 - 25"
+-~header "content-type: application/json"
+-data
+{
+M
+model":
+"claude-sonnet-4-5"
+M
+max_tokens"
+4096 ,
+"
+messages" :
+[
+role" :
+"user"
+"content"
+"Calculate
+the
+mean
+and
+standard
+deviation
+of
+[1,
+2
+]
+"tools" :
+[{
+"type" :
+"code_execution_20250825"
+I
+name" :
+"code_execution"
+}]
+}
+How code execution works
+When you add the code execution tool to your API request:
+1.
+Claude evaluates whether code execution would help answer your question
+2.
+The tool automatically provides Claude with the following capabilities:
+Bash commands: Execute shell commands for system operations and package
+management
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+2/17
+
+--- Page 3 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+4,
+All operations run in a secure sandbox environment
+5.
+Claude provides results with any generated charts, calculations; or analysis
+How to use the tool
+Execute Bash commands
+Ask Claude to check system information and install packages:
+Shell
+curL https: / /api.anthropic. com/v1/messages
+--header
+"X-api-key:
+SANTHROPIC_API_KEY"
+--header
+"anthropic-Version:
+2023-06-01"
+-~header "anthropic-beta:
+code-execution-2025-08- 25"
+-~header "content-type: application/json"
+-data
+{
+I
+model":
+"claude-sonnet-4-5"
+H
+max_tokens"
+4096 ,
+M
+messages" :
+[{
+role" :
+"user"
+I
+content" :
+"Check
+the
+Python
+version
+and
+list
+installed
+packages
+}] _
+"tools" :
+[{
+I
+"
+type"
+code_execution_20250825"
+"
+II
+name"
+code_execution 
+}]
+}
+Create and edit files directly
+Claude can create; view; and edit files directly in the sandbox using the file manipulation
+capabilities:
+Shell
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+3/17
+
+--- Page 4 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+--header
+"anthropic-version:
+2023-06-01"
+--header
+"anthropic-beta:
+code-execution- 2025-08-25"
+~~header "content-type: application/json"
+-data
+{
+"model" :
+"claude-sonnet-4-5"
+IF
+max_tokens"
+4096 ,
+I
+messages" :
+[{
+
+role" :
+"user"
+"content"
+"Create
+a
+config. yaml
+file
+with
+database settings ,
+then
+}] ,
+"tools" =
+[{
+H
+"type"
+code_execution_20250825"
+I
+"
+name
+code_execution"
+}]
+}
+Upload and analyze your own files
+To analyze your own data files (CSV; Excel, images, etc ), upload them via the Files API and
+reference them in your request:
+Using the Files API with Code Execution requires two beta headers:
+"anthropic-beta" :
+"
+code-execution-2025-08-25 ,files-api-2025-04-14"
+The Python environment can process various file types
+uploaded via the Files
+including:
+CSV
+Excel ( xlsx, xls)
+JSON
+XML
+Images (JPEG, PNG, GIF; WebP)
+Text files (txt,.md; pV; etc)
+Upload and analyze files
+1,
+Upload your file using the Files API
+2.
+Reference the file in your message Using a
+container_upload
+content block
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+4/17
+API,
+
+--- Page 5 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+Shell
+#
+First ,
+upZoad
+a
+file
+curL https: / /api.anthropic. com/v1/files
+--header
+"x-api-key:
+SANTHROPIC_API_KEY"
+-~header
+"anthropic-Version:
+2023-06-01"
+-~header "anthropic-beta:
+files-api-2025-04-14"
+-form
+file-@"data.CSv"
+#
+Then
+Use
+the file_id
+with
+code
+execution
+curL https: / /api.anthropic _
+com/v1/messages
+-~header
+"x-api-key:
+SANTHROPIC_API_KEY"
+--header
+"anthropic-version:
+2023-06-01"
+-~header "anthropic-beta:
+code-execution-2025-08-25 , files-api-2025-04-14"
+-~header "content-type: application/json"
+-data
+{
+I
+model":
+"claude-sonnet-4-5"
+M
+max_tokens"
+4096 ,
+H
+messages" :
+[{
+"role" :
+"user"
+"content":
+[
+{"type" :
+"text"
+"text" =
+"Analyze
+this
+CSV
+data"} ,
+{"type" :
+"container_upload"
+"file_id" :
+"file_abc123"}
+}] ,
+"tools" :
+[{
+"type" :
+"code_execution_20250825"
+name
+"code_execution"
+}]
+}
+Retrieve generated files
+When Claude creates files during code execution, YoU can retrieve these files Using the
+Files API:
+Python
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+5/17
+
+--- Page 6 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+#
+Initialize
+the
+client
+client
+=
+Anthropic()
+# Request
+code execution
+that
+creates
+files
+response
+=
+client.beta.messages.create(
+model="cLaude-sonnet-4-5"
+betas=[ "code-execution-2025-08-25"
+"files-api-2025-04-14"] ,
+max_tokens-4096 ,
+messages= [ {
+"role" :
+"user"
+"content"
+"Create
+a
+matplotlib
+visualization
+and
+save
+it
+as
+output.pn
+}] =
+tools=[ {
+H
+"
+type" :
+code_execution_20250825"
+"name"
+"
+code_execution"
+}]
+#
+Extract
+file
+IDs   from
+the
+response
+def
+extract_file_ids(response) :
+file_ids
+=
+[]
+for
+item
+in
+response. content:
+if
+item.type
+C5
+bash_code_execution_tool_result
+content_item
+=
+item.content
+if
+content_item.type
+==
+bash_code_execution_result'
+for
+file
+in
+content_item. content:
+if
+hasattr(file _
+file_id' ) :
+file_ids.append(file.file_id)
+return file_ids
+#
+Download
+the
+created
+files
+for
+file_id
+in
+extract_file_ids(response) :
+file_metadata
+=
+client.beta.files.retrieve_metadata(file_id)
+file_content
+=
+client.beta. files. download ( file_id)
+file_content.Write_to_file(file_metadata. filename)
+print(f"DownZoaded:
+{file_metadata. filename}")
+Combine operations
+A
+complex workflow using all capabilities:
+Shell
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+6/17
+
+--- Page 7 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+--header
+"x-api-key:
+SANTHROPIC_API_KEY"
+--header
+"anthropic-Version:
+2023-06-01"
+-~header "anthropic-beta:
+files-api-2025-04-14"
+-form
+file-@"data.CSv"
+file_response.json
+#
+Extract file_id (using jq)
+FILE_ID-$(jq
+-
+.id
+file_response. json)
+#
+Then
+Use
+it
+with
+code
+execution
+curl https: / /api.anthropic. com/vl/messages
+-~header
+"x-api-key:
+SANTHROPIC_API_KEY"
+~~header "anthropic-Version:
+2023-06-01"
+-~header "anthropic-beta:
+code-execution-2025-08-25 , files-api-2025-04-14"
+~~header "content-type: application/json"
+-data
+{
+I
+model":
+"claude-sonnet-4-5"
+H
+max_tokens"
+4096 ,
+H
+messages" :
+[{
+role" :
+"user"
+"content" :
+[
+I
+type"
+"text"
+"text"
+I
+Analyze
+this
+CSV
+data:
+create
+a
+summary report ,
+S
+}
+{
+H
+H
+type"
+container_upload"
+I !
+H
+"file_id":
+SFILE_ID
+}] ,
+"tools" :
+[{
+"type" :
+"code_execution_20250825"
+H
+name" :
+"code_execution"
+}]
+}
+Tool definition
+The code execution tool requires no additional parameters:
+JSON
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+7/17
+
+--- Page 8 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+"name"
+"code_execution"
+When this tool is provided; Claude automatically gains access to two sub-tools:
+bash_code_execution
+Run shell commands
+text_editor_code_execution
+View; create; and edit files, including writing code
+Response format
+The code execution tool can return two types of results depending on the operation:
+Bash command response
+"type"
+"server_tool_Use"
+"id" :
+"srvtoolu_O1B3CGDSE6F7G8H9IOJ1K2L3"
+"name" :
+"bash_code_execution"
+"input": {
+"
+command"
+"ls
+-La
+head
+-5"
+}
+} _
+{
+"type" :
+"bash_code_execution_tool_result"
+"tool_use_id":
+"srvtoolu_O1B3CGDSE6F7G8H9IOJ1K2L3"
+"content":
+{
+"type" :
+bash_code_execution_result"
+"stdout":
+"total
+24lndrwxr-Xr-X
+2
+user
+user
+4096
+Jan
+1
+12:00
+Indrwxr-Xr-X
+M"
+"stderr":
+"return_code" :
+0
+File operation responses
+View file:
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+8/17
+
+--- Page 9 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+"id" :
+"srvtoolu_O1C4DSE6F7G8H9IOJ1KZL3MG"
+II
+"name" :
+text_editor_code_execution"
+"input" :
+{
+"command" :
+"view"
+"path" :
+"config. json"
+}
+} ,
+{
+"type" :
+"text_editor_code_execution_tool_result"
+I
+"tool_use_id":
+"srvtoolu_O1C4DSE6F7G8H9IOJ1K2L3MG"
+"content" :
+{
+"type" :
+"text_editor_code_execution_result"
+"file_type":
+"text"
+"content" :
+"{In
+| "setting|
+value 
+In
+| "debug
+true In}"
+"numLines" :
+4 ,
+"startLine" :
+1 ,
+"totalLines" :
+4
+}
+Create file:
+"type" :
+"server_tool_Use"
+"id" :
+"srvtoolu_O1DSE6F7G8H9IOJ1KZL3MGNS"
+"name" :
+I
+text_editor_code_execution"
+"input" :
+{
+"command" :
+"create"
+"path" :
+"new_file.txt"
+I
+"file_text"
+"HeLLo ,
+World !
+}
+} _
+{
+"type" :
+"text_editor_code_execution_tool_result"
+"tool_use_id":
+"srvtoolu_O1DSE6F7G8H9IOJ1K2L3MGNS"
+"content":
+{
+"type" :
+"text_editor_code_execution_result"
+"is_file_update" :
+false
+}
+Edit file (str_replace):
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+9/17
+
+--- Page 10 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+"id" :
+"srvtoolu_O1E6F7G8H9IOJ1K2L3MGNS06"
+II
+"name" :
+text_editor_code_execution"
+"input" :
+{
+"command" :
+"str_replace"
+"path" :
+"config. json"
+"old_str":
+'| "debug
+true"
+"new_str" :
+'|"debug
+false"
+}
+}
+{
+H
+"type" :
+text_editor_code_execution_tool_result"
+"tool_use_id":
+"srvtoolu_O1EBF7G8H9IOJ1K2L3MGN506"
+"content" :
+{
+"type" :
+"text_editor_code_execution_result"
+"oldStart":
+3 ,
+"oldLines" :
+1 ,
+"newStart":
+3 ,
+"newLines" :
+1 ,
+"Lines" :
+["_
+| "debug
+true"
+"+
+| "debug
+false" ]
+X
+Results
+All execution results include:
+stdout
+Output from successful execution
+stderr
+Error messages if execution fails
+return_code
+0 for success, non-zero for failure
+Additional fields for file operations:
+View:
+file_type
+content
+numLines
+startLine
+totalLines
+Create:
+is_file_update
+(whether file already existed)
+Edit:
+oldStart
+oldLines
+newStart
+newLines
+Lines
+(diff format)
+Errors
+Each tool type can return
+specific errors:
+Common errors (all tools):
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+10/17
+
+--- Page 11 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+"tool_use_id":
+"srvtoolu_0lVfmxgZG6TiHbmXgy928hQR"
+"content":
+{
+"type" :
+bash_code_execution_tool_result_error"
+"error_code" :
+"unavailable"
+}
+8
+Error codes by tool type:
+Tool
+Error Code
+Description
+All tools
+unavailable
+The tool is temporarily unavailable
+All tools
+execution_time_exceeded
+Execution exceeded maximum time limit
+All tools
+container_expired
+Container expired and is no longer available
+All tools
+invalid_tooL_input
+Invalid parameters provided to the tool
+All tools
+too_many_requests
+Rate limit exceeded for tool usage
+text_editor
+file_not_found
+File doesn't exist (for viewledit operations)
+text_editor
+string_not_found
+The
+oZd_str
+not found in file (for str_replace)
+pause_turn
+stop reason
+The response may include a
+pause_turn   stop reason, which indicates that the API
+paused a long-running turn: You may provide the response back as-is in a subsequent
+request to let Claude continue its turn; or modify the content if you wish to interrupt the
+conversation;
+Containers
+The code execution tool runs in a secure; containerized environment designed
+specifically for code execution, with a higher focus on Python:
+Runtime environment
+Python version: 3.11.12
+Operating system: Linux-based container
+Architecture: x86_64 (AMD6A)
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+11/17
+
+--- Page 12 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+Memory: 5GiB RAM
+Disk space: 5GiB workspace storage
+CPU: 1 CPU
+Networking and security
+Internet access: Completely disabled for security
+External connections: No outbound network requests permitted
+Sandbox isolation: Full isolation from host system and other containers
+File access: Limited to workspace directory only
+Workspace scoping: Like Files, containers are scoped to the workspace of the API
+Expiration: Containers expire 30 days after creation
+Pre-installed libraries
+The sandboxed Python environment includes these commonly used libraries:
+Data Science: pandas, numpy scipy, scikit-learn, statsmodels
+Visualization: matplotlib, seaborn
+File Processing: pyarrow; openpyxl, xlsxwriter; xlrd, pillow; python-pptx, python-docx,
+pypdf; pdfplumber; pypdfium2, pdfzimage; pdfkit; tabula-py, reportlab[pycairo];
+Img2pdf
+Math & Computing: sympy, mpmath
+Utilities: tqdm, python-dateutil, pytz, joblib; unzip, unrar; Zzip, bc, rg (ripgrep), fd,
+Container reuse
+You can reuse an existing container across multiple API requests by providing the
+container ID from a previous response This allows you to maintain created files between
+requests:
+Example
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+12/17
+key
+sqlite
+
+--- Page 13 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+import
+0s
+from anthropic
+import
+Anthropic
+#
+Initialize
+the
+client
+client
+=
+Anthropic(
+api_key-0s.getenv ( "ANTHROPIC_API_KEY")
+J
+#
+First request:
+Create
+a
+file
+with
+a
+random
+number
+responsel
+=
+client.beta.messages. create(
+model-"claude-sonnet-4-5"
+betas=[ "code-execution-2025-08-25"] [
+max_tokens-4096 ,
+messages=[ {
+"role"
+"user"
+"content"
+"Write
+a
+file
+with
+a
+random
+number
+and
+save
+it
+to
+[tmp/num
+}] _
+tools=[ {
+"type" :
+"code_execution_20250825"
+"name"
+:
+"code_execution"
+}]
+#
+Extract
+the
+container
+ID
+from
+the
+first
+response
+container_id
+=
+responsel.container.id
+#
+Second
+request:
+Reuse
+the
+container
+to
+read
+the
+file
+response?
+=
+client.beta.messages. create(
+container-container_id ,
+#
+Reuse
+the
+same
+container
+model-"claude-sonnet-4-5"
+betas=[ "code-execution-2025-08-25"] =
+max_tokens-4096 ,
+messages= [ {
+M
+role"
+"
+user"
+"content"
+"Read
+the
+number
+from
+[tmp/number.txt
+and
+calculate
+its
+S
+}] _
+tools=[ {
+"type" :
+"code_execution_20250825"
+"name"
+"
+code_execution"
+}]
+Streaming
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+13/17
+
+--- Page 14 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+event:
+content_bZock_start
+data:
+{"type" :
+"content_bZock_start"
+"index" :
+1 ,
+"content_bZock" :
+{"type":
+"s
+1 I
+Code
+execution
+streamed
+event:
+content_bZock_delta
+data:
+{"type"
+"content_bZock_delta"
+"index" :
+1 ,
+"delta":
+{"type":
+"input_jso
+1 I
+Pause
+while
+code
+executes
+0 [
+Execution
+results
+streamed
+event:
+content_block_start
+data:
+{"type'
+"content_block_start"
+"index"
+2 ,
+"content_block" :
+{"type" :
+M
+C
+Batch requests
+You can include the code execution tool in the Messages Batches API; Code execution
+tool calls through the Messages Batches API are priced the same as those in regular
+Messages API requests:
+Usage and pricing
+Code execution tool usage is tracked separately from token usage. Execution time has a
+minimum of 5 minutes If files are included in the request; execution time is billed even if
+the tool is not used due to files
+being preloaded onto the container:
+Each organization receives 1,550 free hours of usage with the code execution tool per
+month: Additional usage beyond the first 1,550 hours is billed at $0.05 per hour; per
+container
+Upgrade to latest tool version
+By upgrading to
+code-execution-2025-08-25
+you get access to file manipulation and
+Bash capabilities, including code in multiple languages. There is no price difference
+What's changed
+Component
+Legacy
+Current
+Beta header
+code-execution-2025-05 -
+code-execution-2025-08- 25
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+14/17
+
+--- Page 15 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+Tool type
+code_execution_20250522
+code_execution_20250825
+Capabilities
+Python only
+Bash commands, file operations
+Response
+bash_code_execution_result
+code_execution_result
+types
+text_editor_code_execution_result
+Backward compatibility
+All existing Python code execution continues to work exactly as before
+No changes required to existing Python-only workflows
+Upgrade steps
+To upgrade; you need to make the following changes in your API requests:
+1,
+Update the beta header:
+"anthropic-beta" :
+M
+code-execution-2025-05-22"
++
+"anthropic-beta" :
+
+code-execution-2025-08-25"
+2.
+Update the tool type:
+"type"
+code_execution_20250522"
+"type" :
+I
+code_execution_20250825"
+3
+Review response handling (if parsing responses programmatically):
+The previous blocks for Python execution responses will no longer be sent
+Instead; new response types for Bash and file operations will be sent (see
+Response Format section)
+Programmatic tool calling
+The code execution tool powers programmatic tool calling; which allows Claude to write
+code that calls your custom tools programmatically within the execution container: This
+enables efficient multi-tool workflows, data filtering before reaching Claude's context;
+and complex conditional logic;
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+15/17
+
+--- Page 16 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+#
+Enable programmatic calling
+for
+your
+tools
+response
+=
+client.beta.messages . create(
+model="cLaude-sonnet-4-5"
+betas=[ "advanced-tool-use-2025-11-20"] ,
+max_tokens-4096 ,
+messages= [ {
+"role"
+"user"
+"content":
+"Get
+weather
+for
+5
+cities
+and
+find
+the warmest"
+}] ,
+tools=[
+"type" :
+"code_execution_20250825"
+"name"
+I
+code_execution"
+M
+} [
+{
+"name"
+M
+get_weather"
+"description"
+"Get
+weather
+for
+a
+city"
+"input_schema" :
+{..}e
+"allowed_callers" :
+["code_execution_20250825" ]
+#
+Enable programma
+Learn more in the Programmatic tool calling documentation:
+Using code execution with Agent Skills
+The code execution tool enables Claude to use Agent Skills: Skills are modular
+capabilities
+consisting of instructions, scripts, and resources that extend Claude's functionality:
+Learn more in the Agent Skills documentation and Agent Skills API guide:
+Claude Docs
+Solutions
+Learn
+AI
+agents
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+16/17
+Blog
+
+--- Page 17 ---
+13.1.2026 klo 1.36
+Code execution tool
+Claude Docs
+Claude Docs
+Customer support
+Use cases
+Education
+Connectors
+Financial services
+Customer stories
+Government
+Engineering at Anthropic
+Life sciences
+Events
+Powered by Claude
+Partners
+Service partners
+Amazon Bedrock
+Startups program
+Google Cloud's Vertex Al
+Company
+Anthropic
+Careers
+Economic Futures
+Research
+News
+Responsible Scaling Policy
+Security and compliance
+Transparency
+Help and security
+Availability
+Status
+Support
+Discord
+Terms and policies
+Privacy policy
+Responsible disclosure policy
+Terms of service: Commercial
+Terms of service: Consumer
+Usage policy
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselcode-execution-tool
+17/17

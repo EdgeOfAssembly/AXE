@@ -1,0 +1,1153 @@
+--- Page 1 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+Tools
+Programmatic tool calling
+=
+Programmatic tool calling
+Copy page
+Programmatic tool calling allows Claude to write code that calls your tools
+programmatically within a code execution container; rather than requiring round trips
+through the model for each tool invocation: This reduces latency for multi-tool workflows
+and decreases token consumption by allowing Claude to filter or process data before it
+reaches the model's context window;
+Programmatic tool calling is currently in public beta.
+To use this feature; add the
+"advanced-tool-use-2025-11-20
+M
+beta header to your API
+requests;
+This feature requires the code execution tool to be enabled:
+Please reach out through our feedback form to share your feedback on this feature:
+Model compatibility
+Programmatic tool calling is available on the following models:
+Model
+Tool Version
+Claude Opus 4.5
+claude-opus-4-5-20251101
+)
+code_execution_20250825
+Claude Sonnet 4.5
+claude-sonnet-4-5-20250929
+)
+code_execution_20250825
+Programmatic tool calling is available via the Claude API and Microsoft Foundry:
+Quick start
+Here's a simple example where Claude programmatically queries a data"
+times and aggregates results:
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+1/20
+
+--- Page 2 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+curl https: / /api.anthropic. com/v1/messages
+--header
+"x-api-key:
+SANTHROPIC_API_KEY"
+~~header "anthropic-version:
+2023-06-01"
+~~header "anthropic-beta:
+advanced-tool-use-2025-11-20"
+--header
+"content-type: application/json"
+-data
+{
+"model" :
+"claude-sonnet-4-5"
+"max_tokens"
+4096 ,
+"messages" :
+[
+"role" :
+"user"
+"content"
+"Query
+sales
+data
+for
+the
+West _
+East ,
+and
+Central
+] c
+"tools" :
+[
+"type"
+"code_execution_20250825"
+"name
+"code_execution
+}
+{
+"name
+M
+query_database"
+"description" :
+"Execute
+a
+SQL
+query against
+the
+sales
+database
+I
+"input_schema'
+H
+type" :
+"object"
+'properties":
+{
+"sql" :
+{
+"type": "string'
+"description" :
+"SQL
+query
+to
+execute"
+}
+H
+required" :
+["sql" ]
+H
+alZowed_callers" :
+["code_execution_20250825" ]
+}
+How programmatic tool calling works
+When you configure a tool to be callable from code execution and Claude decides to use
+that tool:
+1,
+Claude writes Python code that invokes the toolas a function; potentially including
+multiple tool calls and prelpost-processing logic
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+2/20
+
+--- Page 3 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+tool_use
+block
+4.
+You provide the tool result; and code execution continues (intermediate results are
+not loaded into Claudes context window)
+5.
+Once all code execution completes; Claude receives the final output and continues
+working on the task
+This approach is particularly useful for:
+Large data processing: Filter or aggregate tool results before
+reach Claudes
+context
+Multi-step workflows: Save tokens and latency by calling tools serially or in a loop
+without sampling Claude in-between tool calls
+Conditional logic: Make decisions based on intermediate tool results
+Custom tools are converted to async Python functions to support parallel tool calling: When
+Claude writes code that calls your tools, it uses
+await
+(e.g;,
+result
+5
+await
+query_database("<sql>")
+and automatically includes the appropriate async wrapper
+function:
+The async wrapper is omitted from code examples in this documentation for clarity:
+Core concepts
+The
+allowed_callers
+field
+The
+allowed_callers
+field specifies which contexts can invoke a tool:
+"name"
+"query_database"
+"description"
+"Execute
+a
+SQL
+query against
+the
+database"
+"input_schema" :
+{J
+.}e
+"allowed_callers" :
+["code_execution_20250825"]
+}
+Possible values:
+["direct"]
+Only Claude can call this tool directly (default if omitted)
+["code_execution_20250825" ]
+Only callable from within code execution
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+3/20
+they
+
+--- Page 4 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+We recommend choosing either
+["direct"]
+or
+["code_execution_20250825"]
+for
+each tool rather than enabling both, as this provides clearer guidance to Claude for how best
+to use the tool:
+The
+caller
+field in responses
+Every tool use block includes a
+caller
+field indicating how it was invoked:
+Direct invocation (traditional tool use):
+I
+"type" :
+tool_use"
+"id" :
+H
+toolu_abc123"
+"name" :
+"query_database"
+"input" 
+{"sql" :
+"<sql>"} ,
+"caller" :
+{"type" :
+"direct"}
+Programmatic invocation:
+I
+"type" :
+tool_use"
+"id" :
+H
+toolu_xyz789"
+"name" :
+"query_database"
+"input"
+{"sql" :
+"<sql>"} ,
+"caller" :
+{
+"type" :
+"code_execution_20250825"
+"tool_id":
+"srvtoolu_abc123"
+}
+The
+tool_id
+references the code execution tool that made the programmatic call;
+Container lifecycle
+Programmatic tool calling uses the same containers as code execution:
+Container creation: A new container is created for each session unless YoU reuse an
+existing one
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+4/20
+
+--- Page 5 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+Container ID: Returned in responses via the
+container
+field
+Reuse: Pass the container ID to maintain state across requests
+When a tool is called programmatically and the container is waiting for your toolresult, YoU
+must respond before the container expires Monitor the
+expires_at
+field: If the
+container expires, Claude may treat the tool callas timed out and retry it;
+Example workflow
+Heres how a complete programmatic tool calling flow works:
+Step 1: Initial request
+Send a request with code execution anda tool that allows programmatic calling: To enable
+programmatic calling, add the
+allowed_callers
+field to your tool definition:
+Provide detailed descriptions of your tool's output format in the tool description. If you
+specify that the tool returns JSON; Claude will attempt to deserialize and process the result
+in code: The more detail you provide about the output schema, the better Claude can handle
+the response programmatically:
+Python
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+5/20
+
+--- Page 6 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+betas=[ "advanced-tool-use-2025-11-20"] ,
+max_tokens-4096 ,
+messages=[ {
+I
+"role" :
+user"
+"content":
+"Query
+customer purchase history
+from
+the
+Last quarter
+and
+}] ,
+tools=[
+"
+"type'
+code_execution_20250825"
+H
+"
+name
+code_execution 
+} 
+{
+"name'
+query_database"
+"description"
+"Execute
+a
+SQL
+query against
+the
+sales
+database _
+Re
+"input_schema" :
+{
+:}a
+"allowed_callers" :
+["code_execution_20250825"]
+Step 2: APIresponse with tool call
+Claude writes code that calls your tool The API pauses and returns:
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+6/20
+
+--- Page 7 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+"content":
+[
+"type" :
+"text"
+"text":
+"I
+1Z
+query
+the purchase history
+and analyze
+the
+results_
+},
+{
+"type"
+"server_tool_use"
+"id" :
+srvtoolu_abc123"
+"name"
+"code_execution"
+"input" :
+{
+"code" :
+results
+=
+await query_database( ' <sql> ' ) Intop_customers
+=
+sort
+}
+} 
+{
+"type" :
+"tool_use"
+"id" :
+I
+toolu_def456"
+"name" :
+"query_database"
+"input" : {"sql" :
+"<sql>"}
+"caller":
+{
+"type" :
+"code_execution_20250825"
+"tool_id":
+"srvtoolu_abc123"
+}
+] _
+"container" :
+{
+"id" :
+"container_Xyz789"
+"expires_at" :
+"2025-01-15T14:30:00z"
+} _
+"stop_reason" :
+"tool_use"
+Step 3: Provide tool result
+Include the full conversation history plus your tool result:
+Python
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+7/20
+
+--- Page 8 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+betas=[ "advanced-tool-use-2025-11-20"] ,
+max_tokens-4096 ,
+container="container_Xyz789"
+#
+Reuse
+the
+container
+messages= [
+{"role" :
+"user"
+"content":
+"Query
+customer purchase history from
+the
+role" :
+"assistant"
+"content" :
+[
+{"type"
+"text"
+"text":
+"I
+1z
+query
+the purchase history
+and
+I
+type" :
+"server_tool_use"
+"id" :
+"srvtoolu_abc123"
+"name"
+"code_execution"
+"input" :
+{"code" :
+} _
+{
+I
+I
+type
+tool_use 
+"id" :
+"toolu_def456"
+"name 
+"
+query_database"
+"input"
+{"sql":
+"<sql>"},
+I
+caller":
+{
+"type" -
+"code_execution_20250825"
+"tool_id":
+"srvtoolu_abc123"
+} [
+{
+"role" :
+"user"
+"content":
+[
+M
+type" :
+"tool_result"
+H
+tool_use_id":
+"toolu_def456"
+"content":
+"[{I "customer_id|
+"C1 |
+revenue
+45000}
+]
+tools=[ .
+]
+Step 4: Next tool call or completion
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+8/20
+" :
+
+--- Page 9 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+Step 5: Final response
+Once the code execution completes, Claude provides the final response:
+"content":
+[
+"type":
+"code_execution_tool_result"
+"tool_use_id":
+"srvtoolu_abc123"
+"content":
+{
+"type" :
+"code_execution_result"
+"stdout" :
+5
+customers
+by
+revenue: In1 .
+Customer
+C1: $45,000|n2.
+Cu
+I
+"stderr":
+"return_code" :
+0 ,
+"content" :
+[J
+}
+}
+{
+"type" :
+"text"
+"text" :
+"I
+ve analyzed
+the purchase history
+from
+Last quarter _
+Your
+top
+X
+] ,
+"stop_reason" :
+"end_turn"
+}
+Advanced patterns
+Batch processing with loops
+Claude can write code that processes multiple items efficiently:
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+9/20
+"Top
+
+--- Page 10 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+results
+=
+{}
+for
+in regions:
+data
+=
+await query_database(f"<sql
+for {region}>")
+results[region]
+=
+sum (row [ "revenue"]
+for
+row
+in
+data)
+#
+Process
+results programmatically
+top_region
+=
+max(results.items ()
+key=Lambda
+X:
+x[1])
+print(f"Top region: {top_region[0]}
+With ${top_region[1]: ,}
+in
+revenue")
+This pattern:
+Reduces model round-trips from N (one per region) to1
+Processes large result sets programmatically before returning to Claude
+Saves tokens by only returning aggregated conclusions instead of raw data
+Early termination
+Claude can
+processing as soon as success criteria are met:
+#
+async wrapper
+omitted
+for clarity
+endpoints
+=
+["us-east"
+"eU-west"
+apac" ]
+for endpoint
+in endpoints:
+status
+=
+await check_health(endpoint)
+if status
+F=
+"healthy"
+print(f"Found healthy endpoint: {endpoint}")
+break
+# Stop early ,
+don
+t
+check remaining
+Conditional tool selection
+#
+async wrapper
+omitted
+for clarity
+file_info
+=
+await
+get_file_info(path)
+if file_info[ "size" ]
+10000 :
+content
+=
+await read_fulL_file(path)
+else:
+content
+=
+await read_file_summary (path)
+print(content)
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+10/20
+region
+stop
+
+--- Page 11 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+#
+async
+wrapper
+omitted
+for clarity
+Zogs
+=
+await fetch_Zogs(server_id)
+errors
+=
+[Zog
+for
+Zog
+in
+Zogs
+if
+I
+ERROR"
+in Log]
+print(f"Found {Len(errors)}
+errors")
+for
+error
+in
+errors[ -
+10: ] :
+# Only
+return
+Last
+10
+errors
+print(error)
+Response format
+Programmatic tool call
+When code execution calls a tool:
+T
+"type"
+tool_use"
+H
+"id" :
+toolu_abc123"
+I
+name" :
+"query_database"
+"input"
+{"sql" :
+"<sql>"} ,
+"caller" :
+{
+"type" :
+code_execution_20250825"
+"tool_id" :
+"srvtoolu_Xyz789"
+}
+Tool result
+handling
+Your tool result is passed back to the running code:
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+11/20
+
+--- Page 12 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+"content":
+[
+"type" :
+"tool_result"
+"tool_use_id":
+"toolu_abc123"
+"content":
+"[{I "customer_id 
+1"c1 | "
+revenue
+45000 ,
+"orders"
+2
+X
+}
+Code execution
+completion
+When all tool calls are satisfied and code completes:
+"type" :
+"code_execution_tool_result"
+"tool_use_id":
+"srvtoolu_Xyz789"
+"content":
+{
+"type" :
+"code_execution_result"
+"stdout":
+H
+Analysis
+complete_
+Top
+5
+customers
+identified
+from
+847
+total
+re
+I
+"stderr":
+"return_code" :
+0 ,
+"content" :
+[]
+X
+Error
+handling
+Common errors
+Error
+Description
+Solution
+Tool input doesn't match
+invalid_tool_input
+Validate your tool's input_schema
+schema
+Tool doesn't allow the
+Check
+allowed_callers
+includes
+tool_not_allowed
+requested caller type
+the right contexts
+PTC beta header not
+missing_beta_header
+Add both beta headers to your request
+provided
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+12/20
+
+--- Page 13 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+If your tool takes too long to respond; the code execution will receive a
+TimeoutError
+Claude sees this in stderr and will typically retry:
+"type" :
+"code_execution_tool_result"
+"tool_use_id" =
+"srvtoolu_abc123"
+"content":
+{
+"type" :
+H
+code_execution_result"
+I
+"stdout":
+"stderr":
+"TimeoutError: Calling
+tool
+['query_database' ]
+timed
+out.
+"return_code" :
+0 ,
+"content" :
+[]
+To prevent timeouts:
+Monitor the
+expires_at
+field in responses
+Implement timeouts for your tool execution
+Consider breaking long operations into smaller chunks
+Tool execution errors
+If your tool returns an error:
+#
+Provide
+error
+information
+in
+the
+tool
+result
+"type" :
+tool_result"
+"tool_use_id"
+"toolu_abc123"
+"content":
+"Error:
+Query
+timeout
+table
+Zock
+exceeded
+30
+seconds"
+Claude's code will receive this error and can handle it appropriately:
+Constraints and limitations
+Feature incompatibilities
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+13/20
+
+--- Page 14 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+Tool choice: You cannot force programmatic calling of a specific tool via
+tooL_choice
+Parallel tool use:
+disable_parallel_tool_Use:
+true
+is not
+supported with
+programmatic calling
+Tool restrictions
+The
+following tools cannot currently be called programmatically, but support may be
+added in future releases:
+Web search
+Web fetch
+Tools provided by an MCP connector
+Message formatting restrictions
+When responding to programmatic tool calls, there are strict formatting requirements:
+Toolresult only responses: If there are pending programmatic tool calls waiting for
+results, your response message must contain only
+tool_result
+blocks; You cannot
+include any text content; even after the tool results.
+INVALID
+Cannot
+include
+text
+when responding
+to programmatic
+tool
+(
+0
+5
+I
+role":
+"user"
+"content":
+[
+I
+{"type" :
+"tool_result"
+"tool_use_id":
+toolu_01"
+"content" :
+"[{I "custome
+{"type" :
+"text"
+"text":
+"What
+should
+I
+do
+next?"}
+11
+This
+will
+cause
+an
+VALID
+Only
+tool
+results
+when
+responding
+to programmatic
+tool
+calls
+"role" :
+"user"
+"content":
+L
+I
+{"type":
+"tool_result"
+"tool_use_id" :
+toolu_01"
+"content" :
+"[{I "custome
+This restriction only applies when responding to programmatic (code execution) tool
+calls. For regular client-side tool calls, YoU can include text content after tool results
+https:Ilplatform claude.comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+14/20
+
+--- Page 15 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+Programmatic tool calls are subject to the same rate limits as regular tool calls. Each tool
+call from code execution counts as a separate invocation;
+Validate tool results before use
+When implementing custom tools that will be called programmatically:
+Tool results are returned as strings:
+can contain any content; including code
+snippets or executable commands that may be processed by the execution
+environment.
+Validate external tool results: If your tool returns data from external sources or
+accepts user input; be aware of code injection risks if the output will be interpreted
+or
+executed as code;
+Token
+efficiency
+Programmatic tool calling can significantly reduce token consumption:
+Tool results from programmatic calls are not added to Claude's context
+only the
+final code output is
+Intermediate processing happens in code - filtering, aggregation; etc. don't consume
+model tokens
+Multiple tool calls in one code execution
+reduces overhead compared to separate
+model turns
+For example; calling 10 tools directly uses ~1Ox the tokens of calling them
+programmatically and returning a summary:
+Usage and pricing
+Programmatic tool calling uses the same pricing as code execution  See the code
+execution pricing for details
+Token counting for programmatic tool calls: Tool results from programmatic invocations do
+not count toward your inputloutput token usage. Only the final code execution result and
+Claudes response count;
+Best practices
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+15/20
+They
+
+--- Page 16 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+Provide detailed output descriptions: Since Claude deserializes tool results in code,
+clearly document the format (JSON structure; field types; etc )
+Return structured data: JSON or other easily parseable formats work best for
+programmatic processing
+Keep responses concise: Return only necessary data to minimize processing
+overhead
+When to use programmatic calling
+Good use cases:
+Processing large datasets where you only need aggregates or summaries
+Multi-step workflows with 3+ dependent tool calls
+Operations requiring filtering; sorting; or transformation of tool results
+Tasks where intermediate data shouldn't influence Claude's reasoning
+Parallel operations across many items (e:g,, checking 50 endpoints)
+Less ideal use cases:
+Single tool calls with simple responses
+Tools that need immediate user feedback
+Very fast operations where code execution overhead would outweigh the benefit
+Performance optimization
+Reuse containers when making multiple related requests to maintain state
+Batch similar operations in a single code execution when possible
+Troubleshooting
+Common issues
+"Tool not allowed" error
+Verify your tool definition includes
+"
+allowed_callers"
+["code_execution_20250825" ]
+Check that yoUre using the correct beta headers
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+16/20
+
+--- Page 17 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+Monitor the
+expires_at
+field in responses
+Consider implementing faster tool execution
+Beta header issues
+You need the header:
+"advanced-tool-use-2025-11-20"
+Tool result not
+parsed correctly
+Ensure your tool returns
+data that Claude can deserialize
+Provide clear output format documentation in your tool description
+Debugging tips
+1,
+Log all tool calls and results to track the flow
+2.
+Check the
+caller
+field to confirm programmatic invocation
+3
+Monitor container IDs to ensure proper reuse
+4.
+Test tools independently before enabling programmatic calling
+Why programmatic tool calling works
+Claudes training includes extensive exposure to code; making it effective at reasoning
+through and chaining function calls. When tools are presented as callable functions
+within a code execution environment; Claude can leverage this strength to:
+Reason naturally about tool composition: Chain operations and handle
+dependencies as naturally as writing any Python code
+Process large results efficiently: Filter down large tool outputs, extract only relevant
+data, or write intermediate results to files before returning summaries to the context
+window
+Reduce latency significantly: Eliminate the overhead of re-sampling Claude between
+each tool call in multi-step workflows
+This approach enables workflows that would be impractical with traditional tool use _
+such as processing files over IM tokens--by allowing Claude to work with data
+programmatically rather than loading everything into the conversation context;
+Alternative implementations
+https:Ilplatform.claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+17/20
+string
+
+--- Page 18 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+Client-side direct execution
+Provide Claude with a code execution tool and describe what functions are available in
+that environment; When Claude invokes the tool with code; your
+application executes it
+locally where those functions are defined:
+Advantages:
+Simple to implement with minimal re-architecting
+Full control over the environment and instructions
+Disadvantages:
+Executes untrusted code outside of a sandbox
+Tool invocations can be vectors for code injection
+Use when: Your
+application can safely execute arbitrary code; you want a simple solution;
+and Anthropic's managed offering doesn't fit your needs,
+Self-managed sandboxed execution
+Same approach from Claude's perspective; but code runs in a sandboxed container with
+security restrictions (e.g, no network egress) If your tools require external resources,
+'Il need a
+protocol for executing tool calls outside the sandbox:
+Advantages:
+Safe programmatic tool calling on your own infrastructure
+Full control over the execution environment
+Disadvantages:
+Complex to build and maintain
+Requires managing both infrastructure and inter-process communication
+Use when: Security is critical and Anthropic's managed solution doesn't fit your
+requirements
+Anthropic-managed execution
+Anthropic's programmatic tool calling is a managed version of sandboxed execution with
+an opinionated Python environment tuned for Claude: Anthropic handles container
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+18/20
+you'|
+
+--- Page 19 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+Safe and secure by default
+Easy to enable with minimal configuration
+Environment and instructions optimized for Claude
+We recommend using Anthropic's managed solution if youre using the Claude API
+Related features
+Code Execution Tool
+Learn about the
+underlying code execution capability that powers programmatic tool calling:
+Tool Use Overview
+Understand the fundamentals of tool use with Claude:
+Implement Tool Use
+Step-by-step
+for implementing tools.
+Claude Docs
+Solutions
+Learn
+Alagents
+Blog
+Code modernization
+Catalog
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+19/20
+guide
+
+--- Page 20 ---
+13.1.2026 klo 1.36
+Programmatic tool calling
+Claude Docs
+Claude Docs
+Education
+Connectors
+Financial services
+Customer stories
+Government
+Engineering at Anthropic
+Life sciences
+Events
+Powered by Claude
+Partners
+Service partners
+Amazon Bedrock
+Startups program
+Google Clouds Vertex Al
+Company
+Anthropic
+Careers
+Economic Futures
+Research
+News
+Responsible Scaling Policy
+Security and compliance
+Transparency
+Help and security
+Availability
+Status
+Support
+Discord
+Terms and policies
+Privacy policy
+Responsible disclosure policy
+Terms of service: Commercial
+Terms of service: Consumer
+Usage policy
+https:Ilplatform claude comldocslenlagents-and-toolsltool-uselprogrammatic-tool-calling
+20/20

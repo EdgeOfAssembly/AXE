@@ -1,0 +1,134 @@
+--- Page 1 ---
+13.1.2026 klo 1.40
+Prompt engineering overview
+Claude Docs
+Claude Docs
+Prompt engineering
+Overview
+=
+Prompt engineering overview
+page
+While these tips apply broadly to all Claude models, you can find prompting tips specific to
+extended thinking models here:
+Before prompt engineering
+This guide assumes that you have:
+1,
+A clear definition of the success criteria for your Use case
+2.
+Some ways to empirically test against those criteria
+3
+A first draft prompt you want to improve
+If not; we highly suggest you spend time establishing that first: Check out Define your
+success criteria and Create strong empirical evaluations for tips and guidance
+Prompt generator
+Don'thave a first draft prompt? Try the prompt generator in the Claude Consolel
+When to prompt engineer
+This
+focuses on success criteria that are controllable through prompt engineering:
+Not every success criteria or failing eval is best solved by prompt engineering: For
+example; latency and cost can be sometimes more easily improved by selecting a
+different model:
+https:Ilplatform.claude comldocslen/build-with-claudelprompt-engineeringloverview
+1/4
+Copy-
+guide
+
+--- Page 2 ---
+13.1.2026 klo 1.40
+Prompt engineering overview
+Claude Docs
+Claude Docs
+How to prompt engineer
+The prompt engineering pages in this section have been organized from most broadly
+effective techniques to more
+specialized techniques. When troubleshooting
+performance; we suggest you try these techniques in order; although the actual impact of
+each
+technique will depend on your use case.
+1.
+Prompt generator
+2.
+Be clear and direct
+3
+Use examples (multishot)
+4,
+Let Claude think (chain of thought)
+5.
+Use XML tags
+6.
+Give Claude a role
+(system prompts)
+7
+Prefill Claudes response
+8.
+Chain complex prompts
+9.
+Long context tips
+Prompt engineering tutorial
+If yoUre an interactive learner; yoU can dive into our interactive tutorials insteadl
+GitHub prompting tutorial
+An example-filled tutorial that covers the prompt engineering concepts found in our docs
+Google Sheets prompting tutorial
+httpsIlplatform.claude comldocslen/build-with-claudelprompt-engineeringloverview
+214
+
+--- Page 3 ---
+13.1.2026 klo 1.40
+Prompt engineering overview
+Claude Docs
+Claude Docs
+Claude Docs
+Solutions
+Learn
+Al
+agents
+Blog
+Code modernization
+Catalog
+Coding
+Courses
+Customer support
+Use cases
+Education
+Connectors
+Financial services
+Customer stories
+Government
+Engineering at Anthropic
+Life sciences
+Events
+Powered by Claude
+Partners
+Service partners
+Amazon Bedrock
+Startups program
+Google Cloud's Vertex Al
+Company
+Anthropic
+Careers
+Economic Futures
+Research
+News
+Responsible Scaling Policy
+Security and compliance
+Transparency
+Help and security
+Availability
+Status
+Support
+httpsIlplatform.claude comldocslen/build-with-claudelprompt-engineeringloverview
+3/4
+
+--- Page 4 ---
+13.1.2026 klo 1.40
+Prompt engineering overview
+Claude Docs
+Claude Docs
+Terms and policies
+Privacy policy
+Responsible disclosure policy
+Terms of service: Commercial
+Terms of service: Consumer
+Usage policy
+https:Ilplatform.claude comldocslen/build-with-claudelprompt-engineeringloverview
+4/4

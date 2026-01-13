@@ -1,0 +1,229 @@
+--- Page 1 ---
+13.1.2026 klo 1.29
+Multilingual support
+Claude Docs
+Claude Docs
+Capabilities
+Multilingual support
+Multilingual support
+Claude excels at tasks across multiple languages, maintaining strong cross-
+lingual performance relative to English.
+page
+Overview
+Claude demonstrates robust multilingual capabilities, with particularly strong
+performance in zero-shot tasks across languages. The model maintains consistent
+relative performance across both widely-spoken and lower-resource languages, making it
+a reliable choice for multilingual
+applications.
+Note that Claude is capable in many languages beyond those benchmarked below: We
+encourage testing with any languages relevant to your specific use cases,
+Performance data
+Below are the zero-shot chain-of-thought evaluation scores for Claude models across
+different languages, shown as a percent relative to English performance (100F):
+Claude
+Claude
+Claude
+Claude
+Claude
+Language
+Opus 4.11
+Opus 41
+Sonnet 4.51
+Sonnet 41
+Haiku 4.51
+English (baseline; fixed
+1009
+1009
+1009
+1009
+1009
+to 1009)
+Spanish
+98.19
+98.09
+98.29
+97.59
+96.49
+Portuguese (Brazil)
+97.89
+97.39
+97.89
+97.29
+96.19
+Italian
+97.7%
+97.59
+97.99
+97.39
+96.09
+French
+97.99
+97.7%
+97.59
+97.19
+95.79
+Indonesian
+97.39
+97.29
+97.39
+96.29
+94.29
+German
+97.79
+97.19
+97.09
+94.79
+https:Ilplatform claude com/docslen/build-with-claudelmultilingual-support
+1/4
+Copy
+
+--- Page 2 ---
+13.1.2026 klo 1.29
+Multilingual support
+Claude Docs
+Claude Docs
+Arabic
+97.1%
+96.99
+97.29
+96.19
+92.59
+Chinese (Simplified)
+97.19
+96.79
+96.99
+95.99
+94.29
+Korean
+96.6%
+96.49
+96.79
+95.99
+93.39
+Japanese
+96.99
+96.29
+96.89
+95.69
+93.59
+Hindi
+96.89
+96.79
+96.79
+95.89
+92.49
+Bengali
+95.79
+95.29
+95.4%
+94.4%
+90.49
+Swahili
+89.89
+89.59
+91.19
+87.19
+78.39
+Yoruba
+80.39
+78.99
+79.79
+76.4%
+52.79
+With extended thinking:
+These metrics are based on MMLU (Massive Multitask Language Understanding) English
+test sets that were translated into 14 additional languages by
+professional human
+translators, as documented in OpenAI's simple-evals repository: The use of human
+translators for this evaluation ensures high-quality translations, particularly important for
+languages with fewer digital resources.
+Best practices
+When working with multilingual content:
+1,
+Provide clear language context: While Claude can detect the target language
+automatically, explicitly stating the desired inputloutput language improves
+reliability: For enhanced fluency, you can prompt Claude to use "idiomatic speech as
+if it were a native
+speaker:"
+2
+Use native scripts: Submit text in its native script rather than transliteration for
+optimal results
+3
+Consider cultural context: Effective communication often requires cultural and
+regional awareness beyond pure translation
+We also suggest following our general prompt engineering guidelines to better improve
+Claude's performance:
+https:Ilplatform claude com/docslen/build-with-claudelmultilingual-support
+214
+
+--- Page 3 ---
+13.1.2026 klo 1.29
+Multilingual support
+Claude Docs
+Claude Docs
+Language support considerations
+Claude processes input and generates output in most world languages that use
+standard Unicode characters
+Performance varies by language; with particularly strong capabilities in widely-
+spoken languages
+Even in languages with fewer digital resources, Claude maintains meaningful
+capabilities
+Prompt Engineering Guide
+Master the art of prompt crafting to
+the most out of Claude:
+Prompt Library
+Find a wide range of pre-crafted prompts for various tasks and industries. Perfect for inspiration
+or quick starts:
+Claude Docs
+Solutions
+Learn
+Al agents
+Code modernization
+Catalog
+Coding
+Courses
+Customer support
+Use cases
+Education
+Connectors
+Financial services
+Customer stories
+Government
+Engineering at Anthropic
+https:Ilplatform claude com/docslen/build-with-claudelmultilingual-support
+3/4
+get
+Blog
+
+--- Page 4 ---
+13.1.2026 klo 1.29
+Multilingual support
+Claude Docs
+Claude Docs
+Partners
+Service partners
+Amazon Bedrock
+Startups program
+Google Cloud's Vertex Al
+Company
+Anthropic
+Careers
+Economic Futures
+Research
+News
+Responsible Scaling Policy
+Security and compliance
+Transparency
+Help and security
+Availability
+Status
+Support
+Discord
+Terms and policies
+Privacy policy
+Responsible disclosure policy
+Terms of service: Commercial
+Terms of service: Consumer
+Usage policy
+https:Ilplatform claude com/docslen/build-with-claudelmultilingual-support
+4/4

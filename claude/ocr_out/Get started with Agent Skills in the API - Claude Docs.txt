@@ -1,0 +1,467 @@
+--- Page 1 ---
+13.1.2026 klo 1.38
+Get started with Agent Skills in the API
+Claude Docs
+Claude Docs
+Agent Skills
+Quickstart
+=
+Get started with Agent Skills in the API
+Learn how to use Agent Skills to create documents with the Claude API in under
+10 minutes;
+page
+This tutorial shows YoU how to use Agent Skills to create a PowerPoint presentation: You'Il
+learn how to enable Skills, make a simple request; and access the generated file:
+Prerequisites
+Anthropic API
+Python 3.7+ or curl installed
+Basic familiarity with making APl requests
+What are Agent Skills?
+Pre-built Agent Skills extend Claude's capabilities with specialized expertise for tasks like
+creating documents, analyzing data; and processing files Anthropic provides the
+following pre-built Agent Skills in the API:
+PowerPoint (pptx): Create and edit presentations
+Excel (xlsx): Create and analyze spreadsheets
+Word (docx): Create and edit documents
+PDF (pdf): Generate PDF documents
+Want to create custom Skills? See the Agent Skills Cookbook for examples of building your
+own Skills with domain-specific expertise:
+Step 1:List available Skills
+First; let's see what Skills are available: We'Il use the Skills API to list all A
+Ask Docs
+managed Skills:
+https:Ilplatform.claude comldocslenlagents-and-toolslagent-skillslquickstart
+1/9
+Copy
+key
+
+--- Page 2 ---
+13.1.2026 klo 1.38
+Get started with Agent Skills in the API
+Claude Docs
+Claude Docs
+import anthropic
+client
+=
+anthropic. Anthropic()
+#
+List
+Anthropic-managed
+Skills
+skills
+=
+client.beta. skills.list(
+source-"anthropic"
+betas=[ "skills-2025-10-02" ]
+for
+skil
+in
+skills.data:
+print(f"{skill.id}:
+{skil.display_title}")
+You see the
+following Skills:
+xlsx
+docx
+and
+pdf
+This API returns each Skill's metadata: its name and description. Claude loads this
+metadata at startup to know what Skills are available This is the first level of progressive
+disclosure; where Claude discovers Skills without loading their full instructions
+Step 2: Create a presentation
+Now we'Il use the PowerPoint Skill to create a presentation about renewable energy: We
+specify Skills using the
+container
+parameter in the Messages API:
+Python
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolslagent-skillslquickstart
+2/9
+pptx
+yet.
+
+--- Page 3 ---
+13.1.2026 klo 1.38
+Get started with Agent Skills in the API
+Claude Docs
+Claude Docs
+client
+=
+anthropic. Anthropic()
+#
+Create
+a
+message
+with
+the
+PowerPoint
+Skill
+response
+=
+client
+beta.messages.create(
+model-"claude-sonnet-4-5-20250929"
+max_tokens-4096 ,
+betas=[ "code-execution-2025-08-25"
+"skills-2025-10-02"] ,
+container={
+"skills" :
+[
+"type"
+"anthropic"
+"skill_id":
+pptx
+M _
+version"
+"Latest"
+}
+messages=[ {
+"role" :
+"user"
+"content"
+"Create
+a
+presentation
+about
+renewable
+energy
+with
+5
+slides
+}] ,
+tools=[ {
+"
+"type" :
+code_execution_20250825"
+I
+"
+name
+code_execution"
+}]
+print(response.content)
+Let's break down what each part does:
+container.skills
+Specifies which Skills Claude can use
+type:
+"anthropic"
+Indicates this is an Anthropic-managed Skill
+skil_id:
+II
+pptx"
+The PowerPoint Skill identifier
+version:
+"Latest"
+The Skill version set to the most recently published
+tools
+Enables code execution (required for Skills)
+Beta headers:
+code-execution-2025-08-25
+and
+skills-2025-10-02
+When you make this request; Claude automatically matches your task to the relevant
+Skill: Since you asked for a presentation; Claude determines the PowerPoint Skill is
+relevant and loads its full instructions: the second level of progressive disclosure. Then
+Claude executes the Skill's code to create your presentation:
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolslagent-skillslquickstart
+3/9
+
+--- Page 4 ---
+13.1.2026 klo 1.38
+Get started with Agent Skills in the API
+Claude Docs
+Claude Docs
+The presentation was created in the code execution container and saved as a file. The
+response includes a file reference with a file ID. Extract the file ID and download it
+the Files API:
+Python
+#
+Extract
+file
+ID
+from response
+file_id
+=
+None
+for
+bZock
+in
+response
+content:
+if
+bZock.type
+C5
+tool_use
+and
+bZock.name
+==
+code_execution' :
+#
+File
+ID
+is
+in
+the
+tool
+result
+for
+result_bZock
+in bZock.content:
+if
+hasattr(result_bZock ,
+'file_id' ) :
+file_id
+=
+result_block.file_id
+break
+if
+file_id:
+#
+Download
+the
+file
+file_content
+=
+client.beta. files. download (
+file_id-file_id _
+betas=["files-api-2025-04-14" ]
+# Save
+to
+disk
+with
+open ( "renewable_energy
+"wb")
+as
+f:
+file_content.write_to_file(f.name)
+print(f"Presentation
+saved
+to
+renewabLe_energy. pptx")
+For complete details on working with generated files, see the code execution tool
+documentation:
+more
+examples
+Now that YoU've created your first document with Skills,
+these variations:
+Create a
+spreadsheet
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolslagent-skillslquickstart
+4/9
+using
+pptx"
+Try -
+try
+
+--- Page 5 ---
+13.1.2026 klo 1.38
+Get started with Agent Skills in the API
+Claude Docs
+Claude Docs
+response
+=
+client
+beta.messages.create(
+model-"claude-sonnet-4-5-20250929"
+max_tokens-4096 ,
+betas=[ "code-execution-2025-08-25"
+"skills-2025-10-02"] ,
+container={
+"skills" :
+[
+"type"
+"anthropic"
+H
+"skill_id":
+"xlsx
+"version" :
+"Latest"
+} _
+messages=[ {
+"role" :
+"
+user"
+"content"
+"Create
+a
+quarterly
+sales tracking spreadsheet
+with
+sample
+}] _
+tools=[ {
+"type" :
+"code_execution_20250825"
+"name"
+:
+"code_execution"
+}]
+Create a Word document
+Python
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolslagent-skillslquickstart
+5/9
+
+--- Page 6 ---
+13.1.2026 klo 1.38
+Get started with Agent Skills in the API
+Claude Docs
+Claude Docs
+max_tokens-4096 ,
+betas=[ "code-execution-2025-08-25"
+"skills-2025-10-02"] ,
+container={
+"skills" :
+[
+"type"
+"anthropic"
+"skill_id":
+"docx"
+I
+version'
+"Latest"
+}
+messages= [ {
+"role"
+"user"
+"content"
+"Write
+a
+2-page report
+on
+the
+benefits
+of
+renewable
+energy
+}] _
+tools=[ {
+"type" :
+"
+code_execution_20250825"
+"name'
+"code_execution"
+}]
+Generate a PDF
+Python
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolslagent-skillslquickstart
+6/9
+
+--- Page 7 ---
+13.1.2026 klo 1.38
+Get started with Agent Skills in the API
+Claude Docs
+Claude Docs
+max_tokens-4096 ,
+betas=[ "code-execution-2025-08-25"
+"skills-2025-10-02"] ,
+container={
+"skills" :
+[
+"type"
+"anthropic"
+"skill_id":
+pdf"
+I
+version'
+"Latest"
+}
+messages= [ {
+"role"
+"user"
+"content"
+"Generate
+a
+PDF
+invoice
+template"
+}] _
+tools=[ {
+"type" :
+"
+code_execution_20250825"
+"
+"name'
+code_execution"
+}]
+Next steps
+Now that you've used pre-built Agent Skills, YoU can:
+API Guide
+Use Skills with the Claude API
+Create Custom Skills
+Upload your own Skills for specialized tasks
+Authoring Guide
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolslagent-skillslquickstart
+7/9
+
+--- Page 8 ---
+13.1.2026 klo 1.38
+Get started with Agent Skills in the API
+Claude Docs
+Claude Docs
+Use Skills in Claude Code
+Learn about Skills in Claude Code
+Use Skills in the Agent SDK
+Use Skills programmatically in TypeScript and Python
+Agent Skills Cookbook
+7
+Explore example Skills and implementation patterns
+Claude Docs
+Solutions
+Learn
+AI
+agents
+Blog
+Code modernization
+Catalog
+Coding
+Courses
+Customer support
+Use cases
+Education
+Connectors
+Financial services
+Customer stories
+Government
+Engineering at Anthropic
+Life sciences
+Events
+Powered by Claude
+Partners
+Service partners
+Ask Docs
+Amazon Bedrock
+Startups program
+https:Ilplatform.claude comldocslenlagents-and-toolslagent-skillslquickstart
+8/9
+
+--- Page 9 ---
+13.1.2026 klo 1.38
+Get started with Agent Skills in the API
+Claude Docs
+Claude Docs
+Antnropic
+Careers
+Economic Futures
+Research
+News
+Responsible Scaling Policy
+Security and compliance
+Transparency
+Help and security
+Availability
+Status
+Support
+Discord
+Terms and policies
+Privacy policy
+Responsible disclosure policy
+Terms of service: Commercial
+Terms of service: Consumer
+Usage policy
+Ask Docs
+https:Ilplatform.claude comldocslenlagents-and-toolslagent-skillslquickstart
+9/9

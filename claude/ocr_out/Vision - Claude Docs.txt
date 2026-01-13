@@ -1,0 +1,503 @@
+--- Page 1 ---
+13.1.2026 klo 1.27
+Vision
+Claude Docs
+Claude Docs
+Capabilities
+Vision
+Vision
+Claude's vision capabilities allow it to understand and analyze images, opening
+up exciting possibilities for multimodal interaction:
+page
+This
+describes how to work with images in Claude; including best practices; code
+examples, and limitations to keep in mind;
+How to use vision
+Use Claudes vision capabilities via:
+claudeai; Upload an image like you would a file; or
+and
+an image directly
+into the chat window:
+The Console Workbench: A button to add images appears at the
+right of every
+User message block:
+API request; See the examples in this
+Before you upload
+Basics and Limits
+You can include multiple images in a single request (up to 20 for claude.ai and 100 for API
+requests). Claude will analyze all provided images when formulating its response: This can
+be helpful for comparing or contrasting images:
+If you submit an image larger than 8000x8000 px, it will be rejected: If yo'-
+than 20 images in one API request; this limit is 2000x2000 pX
+https:Ilplatform.claude comldocslenlbuild-with-claudelvision
+1/11
+Copy
+guide
+drag
+drop
+top
+guide.
+
+--- Page 2 ---
+13.1.2026 klo 1.27
+Vision
+Claude Docs
+Claude Docs
+Evaluate image size
+For optimal performance; we recommend resizing images before uploading if they are too
+large. If your images long edge is more than 1568 pixels, or your image is more than ~1,600
+tokens; it will first be scaled down; preserving aspect ratio, until it's within the size limits:
+If your input image is too large and needs to be resized; it will increase latency of time-to-
+first-token, without giving You any additional model performance. Very small images
+under 200 pixels on any given edge may degrade performance
+To improve time-to-first-token, we recommend resizing images to no more than 1.15
+megapixels (and within 1568 pixels in both dimensions)
+Here is a table of maximum image sizes accepted by our API that will not be resized for
+common aspect ratios With Claude Sonnet 4.5,these images use approximately 1,600
+tokens and around s4.80/1K images.
+Aspect ratio
+Image size
+11
+1092x1092 px
+34
+951x1268 pX
+23
+896x1344 pX
+9:16
+819x1456 pX
+122
+784x1568 pX
+Calculate image costs
+Each image you include in a request to Claude counts towards your token usage: To
+calculate the approximate cost, multiply the approximate number of image tokens by the
+per-token price of the model youre using:
+If your image does not need to be resized, YoU can estimate the number of tokens used
+through this algorithm:
+tokens
+=
+(width
+pX
+X
+height px) /750
+Here are examples of approximate tokenization and costs for different image sizes within
+our API's size constraints based on Claude Sonnet 4.5 per-token price of $3 per million
+httpsIlplatform.claude comldocslen/build-with-claudelvision
+2/11
+
+--- Page 3 ---
+13.1.2026 klo 1.27
+Vision
+Claude Docs
+Claude Docs
+Image size
+#OT IOKens
+COST
+Image
+COST
+IK Images
+200x200 px(0.04 megapixels)
+~54
+s0.00016
+~
+S0.16
+1OOOx1OO0 px(1 megapixel)
+~1334
+s0.004
+S4.00
+1092x1092 px(1.19 megapixels)
+~1590
+~S0.0048
+~S4.80
+Ensuring image quality
+When providing images to Claude; keep the following in mind for best results:
+Image format: Use a supported image format: JPEG, PNG, GIF; or WebP
+Image clarity: Ensure images are clear and not too blurry or pixelated;
+Text: If the image contains important text, make sure it's legible and not too small;
+Avoid cropping out
+visual contextjust to enlarge the text;
+Prompt examples
+of the prompting techniques that work well for text-based interactions with Claude
+can also be
+applied to image-based prompts
+These examples demonstrate best practice prompt structures involving images
+Just as with
+document-query placement; Claude works best when images come before text;
+Images placed after text or interpolated with text will still perform well; but if your use case
+allows it, we recommend an image-then-text structure:
+About the prompt examples
+The
+following examples demonstrate how to use Claude's vision capabilities Using various
+programming languages and approaches You can provide images to Claude in three ways:
+1,
+As a base64-encoded image in
+image
+content blocks
+2.
+As a URL reference to an image hosted online
+3.
+Using the Files API (upload once; use multiple times)
+The base64 example prompts use these variables:
+https:Ilplatform.claude comldocslenlbuild-with-claudelvision
+3/11
+key
+Many
+
+--- Page 4 ---
+13.1.2026 klo 1.27
+Vision
+Claude Docs
+Claude Docs
+#
+For
+URL-based images ,
+YOU
+can
+Use
+the
+URL directly
+in your
+JSON
+request
+#
+For
+base64-encoded images ,
+YOu
+need
+to
+first
+encode
+the image
+# Example
+of
+how
+to
+encode
+an
+image
+to
+base64
+in
+bash:
+BASE64_IMAGE_DATA-$(curl
+~S
+'https: //upload.Wikimedia.org/wikipedia/common
+#
+The
+encoded
+data
+can
+now
+be
+used
+in your
+API
+calls
+Below are examples of how to include images in a Messages API request using base64-
+encoded images and URL references:
+Base64-encoded image example
+Shell
+https:Ilplatform.claude comldocslenlbuild-with-claudelvision
+4/11
+
+--- Page 5 ---
+13.1.2026 klo 1.27
+Vision
+Claude Docs
+Claude Docs
+~H
+"anthropic-version:
+2023-06-01"
+~H
+"content-type: application/json"
+-d
+'{
+"model" :
+"claude-sonnet-4-5"
+"max_tokens"
+1024 ,
+"messages" :
+[
+"role" :
+user"
+"content" :
+[
+"type'
+"image"
+"source" :
+{
+"type"
+"base64"
+"media_type"
+"imageljpeg"
+H
+II
+M ! "
+"data"
+SBASE64_IMAGE_DATA"
+}
+}
+{
+H
+"type"
+text"
+
+"text"
+"Describe
+this image .
+}
+URL-based image example
+Shell
+https:Ilplatform.claude comldocslenlbuild-with-claudelvision
+5/11
+
+--- Page 6 ---
+13.1.2026 klo 1.27
+Vision
+Claude Docs
+Claude Docs
+~H
+"anthropic-version:
+2023-06-01"
+~H
+"content-type: application/json"
+-d
+'{
+"model" :
+"claude-sonnet-4-5"
+"max_tokens"
+1024 ,
+"messages" :
+[
+"role" :
+user"
+"content" :
+[
+"type'
+"image"
+"source" :
+{
+"type"
+"url" ,
+"url":
+"https : / /upZoad. Wikimedia.org/wikipedia/ commons /a/a7 / Camp
+}
+}
+{
+H
+"type"
+text"
+"text"
+"Describe
+this image .
+}
+Files API image example
+For images YoU'Il use repeatedly or when you want
+avoid encoding overhead; use the
+Files API:
+Shell
+https:Ilplatform.claude comldocslenlbuild-with-claudelvision
+6/11
+to
+
+--- Page 7 ---
+13.1.2026 klo 1.27
+Vision
+Claude Docs
+Claude Docs
+~H
+"x-api-key:
+SANTHROPIC_API_KEY"
+~H
+"anthropic-version:
+2023-06-01"
+-H
+"anthropic-beta:
+files-api-2025-04-14"
+~F
+"file-@image. jpg"
+M
+#
+Then
+Use
+the
+returned
+file_id
+in your
+message
+curL https: / /api.anthropic. com/vl/messages
+-H
+"x-api-key:
+SANTHROPIC_API_KEY"
+~H "anthropic-version:
+2023-06-01"
+~H
+"anthropic-beta:
+files-api-2025-04-14"
+~H
+"content-type: application/json"
+-d
+'{
+"model" :
+"cLaude-sonnet-4-5"
+"max_tokens
+1024 ,
+"
+messages
+[
+"role" :
+"
+user"
+"content"
+[
+"type" :
+"image"
+"source" :
+{
+"type" -
+"file"
+"file_id":
+"file_abc123"
+X
+}
+{
+I
+"type"
+text"
+"text"
+"Describe
+this image .
+}
+See Messages API examples for more example code and parameter details;
+Example: One image
+Example: Multiple images
+Example: Multiple images with a system prompt
+https:Ilplatform.claude comldocslen/build-with-claudelvision
+7/11
+
+--- Page 8 ---
+13.1.2026 klo 1.27
+Vision
+Claude Docs
+Claude Docs
+Limitations
+While Claude's image understanding capabilities are cutting-edge; there are some
+limitations to be aware of:
+People identification: Claude cannot be used to identify (i.e,, name) people in images
+and will refuse to do so.
+Accuracy: Claude may hallucinate or make mistakes when interpreting loW-quality,
+rotated; or very small images under 200 pixels:
+Spatial reasoning: Claude's spatial reasoning abilities are limited It may struggle with
+tasks requiring precise localization or layouts, like reading an analog clock face or
+describing exact positions of chess pieces.
+Counting: Claude can give approximate counts of objects in an image but may not
+always be precisely accurate; especially with large numbers of small objects.
+AI
+generated images: Claude does not know if an image is Al-generated and may be
+incorrect if asked: Do not rely on it to detect fake or synthetic images
+Inappropriate content: Claude will not process inappropriate or explicit images that
+violate our Acceptable Use Policy:
+Healthcare applications: While Claude can analyze general medical images, it is not
+designed to interpret complex diagnostic scans such as CTs or MRIs. Claudes
+outputs should not be considered a substitute for professional medical advice or
+diagnosis.
+Always carefully review and verify Claude's image interpretations, especially for high-
+stakes use cases. Do not use Claude for tasks requiring perfect precision or sensitive
+image analysis without human oversight,
+3
+FAQ
+What image file types does Claude support?
+https:Ilplatform.claude comldocslenlbuild-with-claudelvision
+8/11
+
+--- Page 9 ---
+13.1.2026 klo 1.27
+Vision
+Claude Docs
+Claude Docs
+Is there a limit to the image file size / can upload?
+How many images can
+include in one request?
+Does Claude read image metadata?
+Can [ delete images /"ve
+uploaded?
+Where can
+find details on data privacy for image uploads?
+What if Claude's image interpretation seems wrong?
+Can Claude generate or edit images?
+Dive deeper into vision
+Ready to start building with images Using Claude? Here are a few helpful resources:
+Multimodal cookbook: This cookbook has tips on getting started with images and
+best practice techniques to ensure the highest quality performance with images. See
+how YoU can effectively prompt Claude with images to carry out tasks such as
+interpreting and analyzing charts or extracting content from forms:
+API reference: Visit our documentation for the Messages API,; including example API
+calls involving images.
+If you have any other questions, feel free to reach out to our support team: YoU can also
+join our developer community to connect with other creators and
+help from Anthropic
+experts:
+Claude Docs
+https:Ilplatform.claude comldocslenlbuild-with-claudelvision
+9/11
+get
+
+--- Page 10 ---
+13.1.2026 klo 1.27
+Vision
+Claude Docs
+Claude Docs
+ouiuliuiis
+Lcan
+AI
+agents
+Code modernization
+Catalog
+Coding
+Courses
+Customer support
+Use cases
+Education
+Connectors
+Financial services
+Customer stories
+Government
+Engineering at Anthropic
+Life sciences
+Events
+Powered by Claude
+Partners
+Service partners
+Amazon Bedrock
+Startups program
+Google Cloud's Vertex AI
+Company
+Anthropic
+Careers
+Economic Futures
+Research
+News
+Responsible Scaling Policy
+Security and compliance
+Transparency
+Help and security
+Availability
+Status
+Support
+Discord
+Terms and policies
+Privacy policy
+Responsible disclosure policy
+Terms of service: Commercial
+Terms of service: Consumer
+Usage policy
+https:Ilplatform.claude comldocslenlbuild-with-claudelvision
+10/11
+Blog
+
+--- Page 11 ---
+13.1.2026 klo 1.27
+Vision
+Claude Docs
+Claude Docs
+https:Ilplatform.claude comldocslenlbuild-with-claudelvision
+11/11

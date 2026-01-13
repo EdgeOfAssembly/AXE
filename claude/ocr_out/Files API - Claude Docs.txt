@@ -1,0 +1,499 @@
+--- Page 1 ---
+13.1.2026 klo 1.23
+Files API
+Claude Docs
+Claude Docs
+Capabilities
+Files API
+=
+Files API
+page
+The Files API lets yoU upload and manage files to use with the Claude API without re-
+uploading content with each request, This is particularly useful when using the code
+execution tool to provide inputs (e.g: datasets and documents) and then download
+outputs (e-g: charts) You can also use the Files API to prevent having to continually re-
+upload frequently used documents and images across multiple API calls. You can explore
+the API reference directly; in addition to this
+The Files API is currently in beta. Please reach out through our feedback form to share your
+experience with the Files API;
+Supported models
+Referencing a
+file_id
+in a
+Messages request is supported in all models that support
+the given file type For example; images are supported in all Claude 3+ models, PDFs in all
+Claude 3.5+ models, and various other file types for the code execution tool in Claude
+Haiku 4.5 plus all Claude 3.7+ models:
+The Files API is currently not supported on Amazon Bedrock or Google Vertex AI;
+How the Files APIworks
+The Files API provides a simple create-once; use-many-times approach for working with
+files:
+Upload files to our secure storage and receive a unique
+file_id
+Download files that are created from skills or the code execution tool
+Reference files in Messages requests using the
+file_id
+instead of re-uploading
+content
+Manage your files with list; retrieve, and delete operations
+httpsIlplatform.claude comldocslen/build-with-claudelfiles
+1/9
+Copy "
+guide
+
+--- Page 2 ---
+13.1.2026 klo 1.23
+Files API
+Claude Docs
+Claude Docs
+To use the Files API;
+need to include the beta feature header:
+anthropic-beta:
+files-api-2025-04-14
+Uploading a file
+Upload a file to be referenced in future API calls:
+Shell
+curl
+-X POST https: / /api.anthropic. com/v1/files
+~H
+"x-api-key:
+SANTHROPIC_API_KEY"
+~H
+"anthropic-version:
+2023-06-01"
+~H
+"anthropic-beta:
+files-api-2025-04-14"
+~F
+"file-@/path/to/document . pdf"
+The response from uploading a file will include:
+"id" :
+"file_O1lCNha8iCJcUlWXNR6q4V8w
+"type" :
+"file"
+"filename":
+"document.pdf"
+"mime_type" : "application/pdf"
+"size_bytes" :
+1024000 _
+"created_at":
+"2025-01-01t00:00:00z"
+"downloadable" :
+false
+X
+Using a file in messages
+Once uploaded, reference the file usingits
+file_id
+Shell
+httpsIlplatform.claude comldocslen/build-with-claudelfiles
+2/9
+you'Il
+
+--- Page 3 ---
+13.1.2026 klo 1.23
+Files API
+Claude Docs
+Claude Docs
+~H
+"anthropic-version:
+2023-06-01"
+~H
+"anthropic-beta:
+files-api-2025-04-14"
+-H
+"content-type: application/json"
+-d
+'{
+"model" :
+"claude-sonnet-4-5"
+"max_tokens"
+1024 ,
+"messages" :
+[
+"role" :
+"user"
+"content" :
+[
+
+"type"
+text"
+"text"
+"Please
+summarize
+this
+document
+for
+me _
+}
+{
+"type" :
+H
+document"
+"source" :
+{
+"type" -
+"file"
+"file_id" :
+"file_O1lCNha8iCJcUlwXNR6q4V8w"
+}
+}
+File types and content blocks
+The Files API supports different file types that correspond to different content block
+types:
+File Type
+MIME Type
+Content Block Type
+Use Case
+Text analysis,
+PDF
+application/pdf
+document
+document processing
+Text analysis,
+Plain text
+text/plain
+document
+processing
+image/jpeg
+image/png
+Image analysis, visual
+Images
+image/gif
+image/webp
+image
+tasks
+Datasets,
+Analyze data, create
+Varies
+container_upload
+others
+visualizations
+httpsIlplatform.claude comldocslen/build-with-claudelfiles
+3/9
+
+--- Page 4 ---
+13.1.2026 klo 1.23
+Files API
+Claude Docs
+Claude Docs
+For file types that are not supported as
+document
+blocks (.CSV; txt,.md;.docx; xlsx),
+convert the files to plain text; and include the content directly in your message:
+Shell
+#
+ExampLe: Reading
+a
+text
+file
+and sending
+it
+as
+pZain
+text
+#
+Note:
+For files
+with special
+characters _
+consider
+base64 encoding
+TEXT_CONTENT=$(cat
+document.txt
+jq
+~Rs
+)
+curL https: / /api.anthropic. com/vl/messages
+~H
+"content-type: application/json"
+~H
+"X-api-key:
+SANTHROPIC_API_KEY"
+~H
+"anthropic-version:
+2023-06-01"
+-d
+@-
+<<EOF
+"model" :
+"claude-sonnet-4-5"
+"max_tokens"
+1024 ,
+H
+messages" :
+L
+"role" :
+"user"
+"content" :
+[
+"
+type" :
+"text"
+"text" :
+"Here' s
+the
+document
+content: InIns{TEXT_
+CONTENT}InlnPlease
+S
+EOF
+For .docx files
+containing images; convert them to PDF format first; then use PDF support to
+take advantage of the built-in image parsing: This allows using citations from the PDF
+document:
+Document blocks
+For PDFs and text files, use the
+document
+content block:
+httpsIlplatform.claude comldocslen/build-with-claudelfiles
+4/9
+
+--- Page 5 ---
+13.1.2026 klo 1.23
+Files API
+Claude Docs
+Claude Docs
+"source" :
+{
+"type" :
+"file"
+H
+"file_id" :
+"file_O11CNha8iCJcUlwXNR6q4V8w '
+}
+"title" :
+"Document
+Title"
+11
+Optional
+"context" :
+"Context
+about
+the
+document"
+1/ Optional
+"citations" :
+{"enabled" :
+true}
+1[
+Optional ,
+enables
+citations
+X
+Image blocks
+For images, use the
+image
+content block:
+"type" :
+"image"
+"source" :
+{
+"type" :
+"file"
+H
+"file_id" :
+"file_O11CPMxVD3fHLUhvTqtsQASw'
+}
+Managing files
+List files
+Retrieve a list of your
+uploaded files:
+Shell
+curL https: / /api.anthropic. com/vl/files
+~H
+"X-api-key:
+SANTHROPIC_API_KEY"
+~H
+"anthropic-version:
+2023-06-01"
+~H
+"anthropic-beta:
+files-api-2025-04-14"
+Get file metadata
+Retrieve information about a specific file:
+httpsIlplatform.claude comldocslen/build-with-claudelfiles
+5/9
+
+--- Page 6 ---
+13.1.2026 klo 1.23
+Files API
+Claude Docs
+Claude Docs
+curl
+https: / /api.anthropic. com/vl/files/file_O11CNha8iCJcUlwXNR6qGV8w
+~H
+"x-api-key:
+SANTHROPIC_API_KEY"
+~H "anthropic-version:
+2023-06-01"
+-H
+"anthropic-beta:
+files-api-2025-04-14"
+Delete a file
+Remove a file from your workspace:
+Shell
+curl
+-X
+DELETE
+https: / /api.anthropic . com/vl/files/file_O11CNha8iCJcUlWXNR6q4V8
+~H
+"x-api-key:
+SANTHROPIC_API_KEY"
+~H
+"anthropic-version:
+2023-06-01"
+~H
+"anthropic-beta:
+files-api-2025-04-14"
+Downloading a file
+Download files that have been created by skills or the code execution tool:
+Shell
+curl
+-X
+GET
+https: / /api.anthropic. com/v1/files/file_O11CNha8iCJcUlWXNR6q4V8w_
+~H
+"x-api-key:
+SANTHROPIC_API_KEY"
+~H
+"anthropic-version:
+2023-06-01"
+~H
+"anthropic-beta:
+files-api-2025-04-14"
+-output
+downloaded_file.txt
+YoU can only download files that were created by skills or the code execution tool. Files that
+YOU
+uploaded cannot be downloaded:
+File storage and limits
+httpsIlplatform.claude comldocslen/build-with-claudelfiles
+6/9
+
+--- Page 7 ---
+13.1.2026 klo 1.23
+Files API
+Claude Docs
+Claude Docs
+Maximum file size: 500 MB per file
+Total storage: 100 GB per organization
+File lifecycle
+Files are
+scoped to the workspace of the API
+Other API keys can use files created
+by any other API
+associated with the same workspace
+Files persist until you delete them
+Deleted files cannot be recovered
+Files are inaccessible via the API shortly after deletion; but
+may persist in active
+Messages
+API calls and associated tool uses
+Files that users delete will be deleted in accordance with our data retention policy:
+Error
+handling
+Common errors when using the Files API include:
+File not found (404): The specified
+file_id
+doesn't exist or YoU don't have access
+to it
+Invalid file type (400): The file type doesn't match the content block type (e.g,, uUsing
+an
+image file in a document block)
+Exceeds context window size (400): The file is larger than the context window size
+(e.g; using a 500 MB plaintext file in a
+Ivi/messages   request)
+Invalid filename (400): Filename doesn't meet the length requirements (1-255
+characters) or contains forbidden characters
+* , | , /
+or unicode characters 0-31)
+File too large (413): File exceeds the 500 MB limit
+Storage limit exceeded (403): Your organization has reached the 100 GB storage limit
+httpsIlplatform.claude comldocslen/build-with-claudelfiles
+7/9
+key:
+key
+they
+
+--- Page 8 ---
+13.1.2026 klo 1.23
+Files API
+Claude Docs
+Claude Docs
+"error" :
+{
+II
+"type" :
+invalid_request_error"
+H
+"message" :
+"File
+not
+found: file_O11CNha8iCJcUlWXNR6q4V8w 
+}
+X
+Usage and billing
+File API operations are free:
+Uploading files
+Downloading files
+Listing files
+Getting file metadata
+Deleting files
+File content used in
+Messages   requests are priced as input tokens You can only
+download files created by skills or the code execution tool:
+Rate limits
+During the beta period:
+File-related API calls are limited to approximately 100 requests per minute
+Contact us if yoU need higher limits for your Use case
+Claude Docs
+Solutions
+Learn
+Alagents
+Code modernization
+Catalog
+Courses
+Customer support
+Use cases
+httpsIlplatform.claude comldocslen/build-with-claudelfiles
+8/9
+Blog
+Coding
+
+--- Page 9 ---
+13.1.2026 klo 1.23
+Files API
+Claude Docs
+Claude Docs
+Government
+Engineering at Anthropic
+Life sciences
+Events
+Powered by Claude
+Partners
+Service partners
+Amazon Bedrock
+Startups program
+Google Cloud's Vertex Al
+Company
+Anthropic
+Careers
+Economic Futures
+Research
+News
+Responsible Scaling Policy
+Security and compliance
+Transparency
+Help and security
+Availability
+Status
+Support
+Discord
+Terms and policies
+Privacy policy
+Responsible disclosure policy
+Terms of service: Commercial
+Terms of service: Consumer
+Usage policy
+httpsIlplatform.claude comldocslen/build-with-claudelfiles
+9/9
