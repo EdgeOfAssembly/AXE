@@ -89,9 +89,13 @@ def test_prompt_compression():
     print("  ✓ Prompt compression passed\n")
 
 
-def test_code_block_truncation():
-    """Test code block truncation."""
-    print("Testing code block truncation...")
+def test_code_block_no_truncation():
+    """Test that code blocks are NOT truncated (truncation disabled).
+    
+    We never truncate code. This test verifies that the truncate_code()
+    method returns content unchanged, preserving full code for agents.
+    """
+    print("Testing code block NO truncation (truncation disabled)...")
     
     optimizer = ContextOptimizer()
     
@@ -101,18 +105,21 @@ def test_code_block_truncation():
         long_code += f"line_{i} = {i}\n"
     long_code += "```"
     
-    truncated = optimizer.truncate_code(long_code, max_lines=20)
+    # Truncation should NOT happen - content returned unchanged
+    result = optimizer.truncate_code(long_code, max_lines=20)
     
     original_lines = long_code.count('\n')
-    truncated_lines = truncated.count('\n')
+    result_lines = result.count('\n')
     
     print(f"  Original lines: {original_lines}")
-    print(f"  Truncated lines: {truncated_lines}")
-    print(f"  Reduction: {original_lines - truncated_lines} lines")
+    print(f"  Result lines: {result_lines}")
+    print(f"  Content preserved: {original_lines == result_lines}")
     
-    assert truncated_lines < original_lines, "Truncation failed"
-    assert '... (' in truncated, "Truncation marker not found"
-    print("  ✓ Code block truncation passed\n")
+    # Verify NO truncation occurred
+    assert result == long_code, "Code was truncated when it should have been preserved"
+    assert result_lines == original_lines, "Line count changed when it should stay the same"
+    assert '... (' not in result, "Truncation marker found when there should be none"
+    print("  ✓ Code block NO truncation passed (full code preserved)\n")
 
 
 def test_clean_message_content():
@@ -235,7 +242,7 @@ def run_all_tests():
     tests = [
         test_context_optimization,
         test_prompt_compression,
-        test_code_block_truncation,
+        test_code_block_no_truncation,
         test_clean_message_content,
         test_deduplication,
         test_minimal_prompt_creation,

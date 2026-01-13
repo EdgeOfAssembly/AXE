@@ -8,10 +8,11 @@ Central location for all configuration constants used throughout AXE.
 CHARS_PER_TOKEN = 4  # Rough approximation for token estimation (chars / 4 ≈ tokens)
 
 # Collaborative session constants
-COLLAB_HISTORY_LIMIT = 50       # Max messages to show in conversation history
-COLLAB_CONTENT_LIMIT = 50000    # Max chars per message in history
+# Limits increased for bigger shared view between agents
+COLLAB_HISTORY_LIMIT = 200      # Max messages to show in conversation history (increased from 50)
+COLLAB_CONTENT_LIMIT = 100000   # Max chars per message in history (increased from 50000)
 COLLAB_PASS_MULTIPLIER = 2      # Times agents can pass before session ends
-COLLAB_SHARED_NOTES_LIMIT = 10000  # Max chars of shared notes to show
+COLLAB_SHARED_NOTES_LIMIT = 100000  # Max chars of shared notes to show (increased from 10000)
 
 # Resource monitoring constants
 RESOURCE_UPDATE_INTERVAL = 60   # Seconds between resource snapshots

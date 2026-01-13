@@ -136,6 +136,10 @@ class ContextOptimizer:
         """
         Remove verbose or redundant content from messages.
         
+        NOTE: Code truncation has been removed. We never truncate code.
+        Instead, agents use the shared diff-patch system to track changes
+        efficiently without losing code context.
+        
         Args:
             content: Original message content
         
@@ -150,37 +154,10 @@ class ContextOptimizer:
         content = re.sub(r'\n{3,}', '\n\n', content)
         content = re.sub(r' {2,}', ' ', content)
         
-        # Remove very long code blocks (keep first 50 lines)
-        content = self._truncate_code_blocks(content, max_lines=50)
+        # NOTE: Code blocks are NO LONGER truncated. Full code is preserved.
+        # Agents should use .collab_changes.md for diff-based sharing instead.
         
         return content.strip()
-    
-    def _truncate_code_blocks(self, content: str, max_lines: int = 50) -> str:
-        """
-        Truncate long code blocks to save tokens.
-        
-        Args:
-            content: Content with code blocks
-            max_lines: Maximum lines per code block
-        
-        Returns:
-            Content with truncated code blocks
-        """
-        def truncate_block(match):
-            lang = match.group(1) or ''
-            code_content = match.group(2)
-            lines = code_content.split('\n')
-            
-            if len(lines) <= max_lines:
-                return match.group(0)
-            
-            truncated = '\n'.join(lines[:max_lines])
-            remaining = len(lines) - max_lines
-            return f"```{lang}\n{truncated}\n... ({remaining} more lines omitted for token optimization)\n```"
-        
-        # Match code blocks with proper content capture
-        pattern = r'```(\w*)\n(.*?)\n```'
-        return re.sub(pattern, truncate_block, content, flags=re.DOTALL)
     
     def _truncate_to_budget(self, messages: List[Message], max_tokens: int) -> List[Message]:
         """
@@ -356,25 +333,30 @@ class ContextOptimizer:
     
     def truncate_code(self, content: str, max_lines: int = 50) -> str:
         """
-        Public method to truncate code blocks.
+        DEPRECATED: Code truncation has been removed.
+        
+        This method now returns content unchanged. We never truncate code.
+        Instead, agents should use the shared diff-patch system 
+        (.collab_changes.md) to track changes efficiently.
         
         Args:
             content: Content with code blocks
-            max_lines: Maximum lines per code block
+            max_lines: DEPRECATED - This parameter is ignored. Kept for
+                backward compatibility but has no effect.
         
         Returns:
-            Content with truncated code blocks
+            Content unchanged (no truncation applied)
         
         Raises:
-            ValueError: If content is None or max_lines is not positive
+            ValueError: If content is None
         """
         if content is None:
             raise ValueError("content cannot be None")
-        if max_lines <= 0:
-            raise ValueError("max_lines must be positive")
+        # max_lines validation removed - parameter is deprecated and ignored
         if not content:
             return ""
-        return self._truncate_code_blocks(content, max_lines=max_lines)
+        # NOTE: Truncation removed - return content unchanged
+        return content
 
 
 def create_sliding_window(

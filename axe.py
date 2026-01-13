@@ -121,12 +121,20 @@ class ResponseProcessor:
     """Processes agent responses and executes code blocks (READ, EXEC, WRITE)."""
     
     # Constants for file operations
-    MAX_READ_SIZE = 10000  # Maximum bytes to read from a file
+    # Increased from 10KB to 100KB to handle large code files without truncation
+    MAX_READ_SIZE = 100000  # Maximum bytes to read from a file (100KB)
     
-    def __init__(self, config: Config, project_dir: str, tool_runner: 'ToolRunner'):
+    # Build tools that should have output recorded for shared status
+    # Note: python/python3 excluded to avoid capturing non-build script output
+    BUILD_TOOLS = {'gcc', 'g++', 'clang', 'clang++', 'make', 'cmake',
+                   'pytest', 'pip', 'npm', 'cargo', 'go'}
+    
+    def __init__(self, config: Config, project_dir: str, tool_runner: 'ToolRunner',
+                 workspace: 'SharedWorkspace' = None):
         self.config = config
         self.project_dir = os.path.abspath(project_dir)
         self.tool_runner = tool_runner
+        self.workspace = workspace  # Optional: for recording build status
     
     def process_response(self, response: str, agent_name: str = "") -> str:
         """
@@ -280,8 +288,27 @@ class ResponseProcessor:
             return f"ERROR reading file: {e}"
     
     def _handle_exec(self, command: str) -> str:
-        """Handle EXEC block - execute command via ToolRunner."""
+        """Handle EXEC block - execute command via ToolRunner.
+        
+        If the command is a build tool (gcc, make, python, etc.), the output
+        is recorded to the shared build status file for other agents to see.
+        """
         success, output = self.tool_runner.run(command)
+        
+        # Record build output to shared status if it's a build tool
+        if self.workspace is not None:
+            try:
+                # Extract the tool name from the command
+                parts = command.strip().split()
+                if parts:
+                    tool = parts[0].split('/')[-1]  # Handle paths like /usr/bin/gcc
+                    if tool in self.BUILD_TOOLS:
+                        exit_code = 0 if success else 1
+                        self.workspace.record_build_output(tool, output or "", exit_code)
+            except Exception as e:
+                # Log but don't fail - build status recording is optional
+                print(c(f"Warning: Failed to record build output: {e}", Colors.DIM))
+        
         if success:
             return output if output else "[Command executed successfully]"
         else:
@@ -440,7 +467,13 @@ class ProjectContext:
 
 
 class SharedWorkspace:
-    """Shared workspace for multi-agent collaboration."""
+    """Shared workspace for multi-agent collaboration.
+    
+    Provides shared files for agent coordination:
+    - .collab_shared.md: General notes and communication
+    - .collab_build_status.md: Build output, errors, warnings
+    - .collab_changes.md: Diff patches for code changes
+    """
     
     def __init__(self, workspace_dir: str):
         self.workspace_dir = os.path.abspath(workspace_dir)
@@ -456,6 +489,17 @@ class SharedWorkspace:
             self._init_error = f"Failed to create workspace directories: {e}"
             print(c(self._init_error, Colors.RED))
         
+        # Initialize shared build status manager
+        self.build_status = None
+        if self._init_error is None:
+            try:
+                from managers.shared_build_status import SharedBuildStatusManager
+                self.build_status = SharedBuildStatusManager(workspace_dir)
+            except ImportError as e:
+                # Log warning - build status sharing won't work without this
+                print(c(f"Warning: SharedBuildStatusManager not available: {e}", Colors.YELLOW))
+                print(c("  Build errors/warnings won't be shared automatically.", Colors.DIM))
+        
         # Initialize shared notes file
         if not os.path.exists(self.shared_file) and self._init_error is None:
             try:
@@ -465,6 +509,9 @@ class SharedWorkspace:
                     f.write("- Share code snippets\n")
                     f.write("- Leave notes for other agents\n")
                     f.write("- Track progress on tasks\n\n")
+                    f.write("**Related collaboration files:**\n")
+                    f.write("- `.collab_build_status.md` - Build errors/warnings\n")
+                    f.write("- `.collab_changes.md` - Diff patches for code changes\n\n")
                     f.write("---\n\n")
             except (OSError, PermissionError) as e:
                 self._init_error = f"Failed to create shared notes file: {e}"
@@ -579,6 +626,74 @@ class SharedWorkspace:
         except (OSError, IOError) as e:
             print(c(f"Failed to write file: {e}", Colors.RED))
             return False
+    
+    def get_build_status_summary(self) -> str:
+        """Get a summary of build status for agents to see.
+        
+        Returns a formatted string with:
+        - Current build status (success/failed/warning)
+        - List of unclaimed errors/warnings agents can fix
+        - Brief summary of recent build output
+        """
+        if self.build_status is None:
+            return ""
+        
+        try:
+            return self.build_status.get_status_summary()
+        except Exception as e:
+            # Log error so build status issues are visible during debugging
+            print(c(f"Warning: Error getting build status summary: {e}", Colors.DIM))
+            return ""
+    
+    def record_build_output(self, tool: str, output: str, exit_code: int) -> None:
+        """Record build output from a command execution.
+        
+        Args:
+            tool: Build tool name (gcc, make, python, etc.)
+            output: Full output from the command
+            exit_code: Exit code from the command
+        """
+        if self.build_status is not None:
+            try:
+                self.build_status.record_build_output(tool, output, exit_code)
+            except Exception as e:
+                # Log but don't fail - build status is optional
+                print(c(f"Warning: Failed to record build output: {e}", Colors.DIM))
+    
+    def claim_error_fix(self, error_index: int, agent_alias: str) -> bool:
+        """Claim an error for fixing by an agent.
+        
+        Args:
+            error_index: Index of the error to claim
+            agent_alias: Alias of the agent claiming the fix
+        
+        Returns:
+            True if successfully claimed
+        """
+        if self.build_status is not None:
+            try:
+                return self.build_status.claim_error_fix(error_index, agent_alias)
+            except Exception as e:
+                print(c(f"Warning: Failed to claim error fix: {e}", Colors.DIM))
+                return False
+        return False
+    
+    def mark_error_fixed(self, error_index: int) -> bool:
+        """Mark an error as fixed.
+        
+        Args:
+            error_index: Index of the error to mark as fixed
+        
+        Returns:
+            True if successfully marked
+        """
+        if self.build_status is not None:
+            try:
+                return self.build_status.mark_error_fixed(error_index)
+            except Exception as e:
+                print(c(f"Warning: Failed to mark error fixed: {e}", Colors.DIM))
+                return False
+        return False
 
 
 def is_genuine_task_completion(response: str) -> bool:
@@ -823,7 +938,8 @@ class CollaborativeSession:
         self.workspace = SharedWorkspace(workspace_dir)
         self.project_ctx = ProjectContext(workspace_dir, config)
         self.tool_runner = ToolRunner(config, workspace_dir)
-        self.response_processor = ResponseProcessor(config, workspace_dir, self.tool_runner)
+        # Pass workspace to ResponseProcessor for build output recording
+        self.response_processor = ResponseProcessor(config, workspace_dir, self.tool_runner, self.workspace)
         self.db = AgentDatabase(db_path)
         
         # Initialize Phase 6-10 systems
@@ -1223,6 +1339,15 @@ Follow the session rules to keep work productive and enjoyable for all agents.""
                 workspace_context = f"\nWorkspace files: {self.workspace.list_files()}"
                 shared_notes = self.workspace.read_shared_notes()
                 
+                # Get build status summary for agents to see and act upon
+                build_status_summary = self.workspace.get_build_status_summary()
+                build_status_section = ""
+                if build_status_summary:
+                    build_status_section = f"""
+=== BUILD STATUS (shared - fix unclaimed errors!) ===
+{build_status_summary}
+"""
+                
                 # Add Phase 6-10 specific instructions
                 phase_instructions = f"""
 ADVANCED COMMANDS (use exact tokens):
@@ -1240,13 +1365,14 @@ Time remaining: {self._format_time(self._time_remaining())}
 
 Shared Notes Summary (last {COLLAB_SHARED_NOTES_LIMIT} chars):
 {shared_notes[-COLLAB_SHARED_NOTES_LIMIT:] if len(shared_notes) > COLLAB_SHARED_NOTES_LIMIT else shared_notes}
-
+{build_status_section}
 {workspace_context}
 {phase_instructions}
 
 It's YOUR TURN. What would you like to contribute? Remember:
 - Be concise and actionable
 - Reference other agents' work
+- If you see unclaimed build errors above, volunteer to fix them!
 - Use {AGENT_TOKEN_PASS} if you have nothing to add right now
 - Use {AGENT_TOKEN_TASK_COMPLETE} summary ]] if the task is done
 """
