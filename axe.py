@@ -440,7 +440,13 @@ class ProjectContext:
 
 
 class SharedWorkspace:
-    """Shared workspace for multi-agent collaboration."""
+    """Shared workspace for multi-agent collaboration.
+    
+    Provides shared files for agent coordination:
+    - .collab_shared.md: General notes and communication
+    - .collab_build_status.md: Build output, errors, warnings
+    - .collab_changes.md: Diff patches for code changes
+    """
     
     def __init__(self, workspace_dir: str):
         self.workspace_dir = os.path.abspath(workspace_dir)
@@ -456,6 +462,15 @@ class SharedWorkspace:
             self._init_error = f"Failed to create workspace directories: {e}"
             print(c(self._init_error, Colors.RED))
         
+        # Initialize shared build status manager
+        self.build_status = None
+        if self._init_error is None:
+            try:
+                from managers.shared_build_status import SharedBuildStatusManager
+                self.build_status = SharedBuildStatusManager(workspace_dir)
+            except ImportError:
+                pass  # Build status manager not available
+        
         # Initialize shared notes file
         if not os.path.exists(self.shared_file) and self._init_error is None:
             try:
@@ -465,6 +480,9 @@ class SharedWorkspace:
                     f.write("- Share code snippets\n")
                     f.write("- Leave notes for other agents\n")
                     f.write("- Track progress on tasks\n\n")
+                    f.write("**Related collaboration files:**\n")
+                    f.write("- `.collab_build_status.md` - Build errors/warnings\n")
+                    f.write("- `.collab_changes.md` - Diff patches for code changes\n\n")
                     f.write("---\n\n")
             except (OSError, PermissionError) as e:
                 self._init_error = f"Failed to create shared notes file: {e}"
