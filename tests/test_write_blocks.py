@@ -425,6 +425,12 @@ def _run_live_agent_write_test(agent_name: str, workspace: str):
     
     Note: This is a helper function, not a pytest test. The underscore prefix
     prevents pytest from collecting it as a test since it requires parameters.
+    
+    Args:
+        agent_name: Name of the agent to test ('claude', 'gpt', etc.)
+        workspace: Path to the workspace directory for file operations
+        
+    Called from run_live_agent_tests() which provides the required parameters.
     """
     from axe import Config, AgentManager, ResponseProcessor, ToolRunner
     

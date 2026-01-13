@@ -144,6 +144,8 @@ echo "Done"
     # When a heredoc is detected anywhere in the block, the entire block is
     # treated as a single command to preserve heredoc integrity.
     # This is intentional behavior to prevent breaking heredoc content.
+    # See: utils/xml_tool_parser.py, parse_shell_codeblocks(), lines 281-298
+    #      where _contains_heredoc() triggers single-command treatment.
     assert len(calls) == 1, f"Expected 1 call (whole block as heredoc), got {len(calls)}"
     
     cmd = calls[0]['params']['command']

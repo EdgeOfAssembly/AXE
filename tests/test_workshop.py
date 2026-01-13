@@ -84,12 +84,14 @@ os.system(user_input)  # sink
         import tempfile
         import os
         
-        # Use isolated temp database to avoid state contamination
-        temp_db = tempfile.NamedTemporaryFile(delete=False, suffix='.db')
-        temp_db.close()
-        
+        # Use isolated temp database with proper cleanup via context manager
+        # This ensures cleanup even if test assertions fail
+        temp_db_path = None
         try:
-            db = AgentDatabase(temp_db.name)
+            temp_db_fd, temp_db_path = tempfile.mkstemp(suffix='.db')
+            os.close(temp_db_fd)  # Close file descriptor, we just need the path
+            
+            db = AgentDatabase(temp_db_path)
             
             # We can test database functionality without requiring chisel to be available
             # Just save a mock workshop analysis result
@@ -106,8 +108,8 @@ os.system(user_input)  # sink
             self.assertEqual(len(analyses), 1)
             self.assertEqual(analyses[0]['tool_name'], 'chisel')
         finally:
-            if os.path.exists(temp_db.name):
-                os.unlink(temp_db.name)
+            if temp_db_path and os.path.exists(temp_db_path):
+                os.unlink(temp_db_path)
 
     def test_xp_system_integration(self):
         """Test XP system integration with workshop tools."""
@@ -141,12 +143,14 @@ os.system(user_input)  # sink
         import tempfile
         import os
         
-        # Use isolated temp database to avoid state contamination
-        temp_db = tempfile.NamedTemporaryFile(delete=False, suffix='.db')
-        temp_db.close()
-        
+        # Use isolated temp database with proper cleanup via context manager
+        # This ensures cleanup even if test assertions fail
+        temp_db_path = None
         try:
-            db = AgentDatabase(temp_db.name)
+            temp_db_fd, temp_db_path = tempfile.mkstemp(suffix='.db')
+            os.close(temp_db_fd)  # Close file descriptor, we just need the path
+            
+            db = AgentDatabase(temp_db_path)
             
             # Add some test data to fresh database
             db.save_workshop_analysis('chisel', 'test1', 'agent1', {'result': 'ok'}, 1.0)
@@ -161,8 +165,8 @@ os.system(user_input)  # sink
             self.assertEqual(stats['chisel']['total_analyses'], 2)
             self.assertEqual(stats['saw']['total_analyses'], 1)
         finally:
-            if os.path.exists(temp_db.name):
-                os.unlink(temp_db.name)
+            if temp_db_path and os.path.exists(temp_db_path):
+                os.unlink(temp_db_path)
 
 if __name__ == '__main__':
     unittest.main()
