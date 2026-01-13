@@ -32,7 +32,9 @@ def test_get_database_path():
     print("  ✓ Path ends with axe_agents.db")
     
     # Verify it's in the AXE installation directory
-    axe_dir = os.path.dirname(os.path.abspath(__file__))
+    # The database module is in database/, so AXE root is one level up
+    database_module_dir = os.path.dirname(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "database", "agent_db.py")))
+    axe_dir = os.path.dirname(database_module_dir)
     expected_path = os.path.join(axe_dir, "axe_agents.db")
     assert db_path == expected_path, f"Expected {expected_path}, got {db_path}"
     print(f"  ✓ Path is in AXE installation directory: {axe_dir}")
@@ -44,7 +46,9 @@ def test_database_location_with_different_workspace():
     """Test that database is in AXE dir even when working in different directory."""
     print("Testing database location with different workspace...")
     
-    axe_dir = os.path.dirname(os.path.abspath(__file__))
+    # The database module is in database/, so AXE root is one level up
+    database_module_dir = os.path.dirname(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "database", "agent_db.py")))
+    axe_dir = os.path.dirname(database_module_dir)
     expected_db_path = os.path.join(axe_dir, "axe_agents.db")
     
     # Create temporary workspace directory

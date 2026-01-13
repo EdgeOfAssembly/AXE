@@ -412,16 +412,20 @@ def test_live_mode_write_blocks():
         # Test with Anthropic (Claude)
         if has_anthropic:
             print("\n--- Testing with Claude ---")
-            test_live_agent_write("claude", tmpdir)
+            _run_live_agent_write_test("claude", tmpdir)
         
         # Test with OpenAI (GPT)
         if has_openai:
             print("\n--- Testing with GPT ---")
-            test_live_agent_write("gpt", tmpdir)
+            _run_live_agent_write_test("gpt", tmpdir)
 
 
-def test_live_agent_write(agent_name: str, workspace: str):
-    """Test a specific agent's ability to use WRITE blocks."""
+def _run_live_agent_write_test(agent_name: str, workspace: str):
+    """Helper to test a specific agent's ability to use WRITE blocks.
+    
+    Note: This is a helper function, not a pytest test. The underscore prefix
+    prevents pytest from collecting it as a test since it requires parameters.
+    """
     from axe import Config, AgentManager, ResponseProcessor, ToolRunner
     
     try:
