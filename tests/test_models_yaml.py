@@ -47,7 +47,7 @@ def test_known_models():
     # Test Claude model
     claude_info = get_model_info('claude-opus-4-5-20251101')
     assert claude_info['context_tokens'] == 200000, "Claude Opus 4.5 should have 200k context"
-    assert claude_info['max_output_tokens'] == 65536, "Claude Opus 4.5 should have 64k output"
+    assert claude_info['max_output_tokens'] == 64000, "Claude Opus 4.5 should have 64k output"
     assert 'text' in claude_info['input_modes'], "Claude should support text input"
     assert 'image' in claude_info['input_modes'], "Claude should support image input"
     print("  ✓ claude-opus-4-5-20251101 metadata correct")
@@ -60,7 +60,7 @@ def test_known_models():
     
     # Test GitHub models
     github_gpt4o = get_model_info('openai/gpt-4o')
-    assert github_gpt4o['context_tokens'] == 131072, "openai/gpt-4o should have 131k context"
+    assert github_gpt4o['context_tokens'] == 128000, "openai/gpt-4o should have 128k context"
     assert 'audio' in github_gpt4o['input_modes'], "openai/gpt-4o should support audio"
     print("  ✓ openai/gpt-4o metadata correct")
     
@@ -79,7 +79,7 @@ def test_unknown_model():
     unknown_info = get_model_info('unknown-model-xyz')
     assert unknown_info == DEFAULT_METADATA.copy(), "Unknown model should return DEFAULT_METADATA"
     assert unknown_info['context_tokens'] == 8000, "Default context should be 8000"
-    assert unknown_info['max_output_tokens'] == 4096, "Default output should be 4096"
+    assert unknown_info['max_output_tokens'] == 4000, "Default output should be 4000"
     print("  ✓ Unknown model returns default metadata")
     print()
 

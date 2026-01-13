@@ -28,7 +28,7 @@ _config = _load_models_yaml()
 MODEL_METADATA = _config.get('models', {})
 DEFAULT_METADATA = _config.get('default', {
     'context_tokens': 8000,
-    'max_output_tokens': 2048,
+    'max_output_tokens': 4000,
     'input_modes': ['text'],
     'output_modes': ['text']
 })
@@ -106,13 +106,13 @@ def format_output_modes(modes: List[str]) -> str:
     return ', '.join(modes)
 
 
-def get_max_output_tokens(model_name: str, default: int = 4096) -> int:
+def get_max_output_tokens(model_name: str, default: int = 4000) -> int:
     """
     Get the max output tokens for a model.
     
     Args:
         model_name: Name of the model
-        default: Default value if model not found (safe default: 4096)
+        default: Default value if model not found (safe default: 4000)
     
     Returns:
         Max output tokens for the model

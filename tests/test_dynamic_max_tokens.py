@@ -15,35 +15,35 @@ def test_get_max_output_tokens_helper():
     """Test the new get_max_output_tokens helper function."""
     print("Testing get_max_output_tokens helper...")
     
-    # Test Claude Opus 4.5 - should return 65536
-    assert get_max_output_tokens('claude-opus-4-5-20251101') == 65536, \
-        "Claude Opus 4.5 should return 65536 tokens"
-    print("  ✓ Claude Opus 4.5: 65,536 tokens")
+    # Test Claude Opus 4.5 - should return 64000
+    assert get_max_output_tokens('claude-opus-4-5-20251101') == 64000, \
+        "Claude Opus 4.5 should return 64000 tokens"
+    print("  ✓ Claude Opus 4.5: 64,000 tokens")
     
-    # Test GPT-4o - should return 16384
-    assert get_max_output_tokens('gpt-4o') == 16384, \
-        "GPT-4o should return 16384 tokens"
-    print("  ✓ GPT-4o: 16,384 tokens")
+    # Test GPT-4o - should return 16000
+    assert get_max_output_tokens('gpt-4o') == 16000, \
+        "GPT-4o should return 16000 tokens"
+    print("  ✓ GPT-4o: 16,000 tokens")
     
     # Test GPT-5.2 - should return 128000
     assert get_max_output_tokens('gpt-5.2') == 128000, \
         "GPT-5.2 should return 128000 tokens"
     print("  ✓ GPT-5.2: 128,000 tokens")
     
-    # Test unknown model - should return DEFAULT_METADATA's max_output_tokens (4096)
+    # Test unknown model - should return DEFAULT_METADATA's max_output_tokens (4000)
     # Note: The default parameter is only used when 'max_output_tokens' key is missing
     # from the model metadata dict. Unknown models return DEFAULT_METADATA which 
     # contains the key, so the default parameter doesn't apply in that case.
-    assert get_max_output_tokens('unknown-model-xyz') == 4096, \
-        "Unknown model should return DEFAULT_METADATA's 4096"
-    print("  ✓ Unknown model: 4,096 tokens (from DEFAULT_METADATA)")
+    assert get_max_output_tokens('unknown-model-xyz') == 4000, \
+        "Unknown model should return DEFAULT_METADATA's 4000"
+    print("  ✓ Unknown model: 4,000 tokens (from DEFAULT_METADATA)")
     
     # Test with different default parameter - doesn't affect result since 
     # unknown models get DEFAULT_METADATA which has max_output_tokens
     result = get_max_output_tokens('unknown-model', default=8192)
-    assert result == 4096, \
-        "Unknown model still returns DEFAULT_METADATA's 4096 (default param only used if key missing)"
-    print("  ✓ Unknown model with default=8192: 4,096 tokens (DEFAULT_METADATA takes precedence)")
+    assert result == 4000, \
+        "Unknown model still returns DEFAULT_METADATA's 4000 (default param only used if key missing)"
+    print("  ✓ Unknown model with default=8192: 4,000 tokens (DEFAULT_METADATA takes precedence)")
     
     print()
 
@@ -53,20 +53,20 @@ def test_various_model_limits():
     print("Testing various model token limits...")
     
     test_cases = [
-        ('claude-haiku-4-5-20251001', 8192, "Claude Haiku 4.5"),
-        ('claude-sonnet-4-5-20250929', 65536, "Claude Sonnet 4.5"),
-        ('gpt-4.1', 65536, "GPT-4.1"),
-        ('gpt-4.1-mini', 32768, "GPT-4.1 Mini"),
-        ('gpt-4o-mini', 16384, "GPT-4o Mini"),
+        ('claude-haiku-4-5-20251001', 8000, "Claude Haiku 4.5"),
+        ('claude-sonnet-4-5-20250929', 64000, "Claude Sonnet 4.5"),
+        ('gpt-4.1', 64000, "GPT-4.1"),
+        ('gpt-4.1-mini', 32000, "GPT-4.1 Mini"),
+        ('gpt-4o-mini', 16000, "GPT-4o Mini"),
         ('o3', 100000, "o3"),
         ('o4-mini', 100000, "o4-mini"),
-        ('openai/gpt-4o', 16384, "GitHub OpenAI GPT-4o"),
-        ('openai/gpt-4o-mini', 4096, "GitHub OpenAI GPT-4o Mini"),
+        ('openai/gpt-4o', 16000, "GitHub OpenAI GPT-4o"),
+        ('openai/gpt-4o-mini', 4000, "GitHub OpenAI GPT-4o Mini"),
         ('openai/gpt-5', 100000, "GitHub OpenAI GPT-5"),
-        ('grok-4-1-fast-reasoning', 32768, "Grok 4.1 Fast Reasoning"),
-        ('grok-code-fast-1', 16384, "Grok Code Fast"),
-        ('meta/llama-3.2-11b-vision-instruct', 4096, "Llama 3.2 11B Vision"),
-        ('deepseek-ai/DeepSeek-V3.2', 4096, "DeepSeek V3.2"),
+        ('grok-4-1-fast-reasoning', 32000, "Grok 4.1 Fast Reasoning"),
+        ('grok-code-fast-1', 16000, "Grok Code Fast"),
+        ('meta/llama-3.2-11b-vision-instruct', 4000, "Llama 3.2 11B Vision"),
+        ('deepseek-ai/DeepSeek-V3.2', 4000, "DeepSeek V3.2"),
     ]
     
     for model, expected_tokens, display_name in test_cases:
@@ -175,10 +175,10 @@ def test_safe_default_fallback():
     
     for model in unknown_models:
         max_tokens = get_max_output_tokens(model)
-        assert max_tokens == 4096, \
-            f"Unknown model '{model}' should default to 4096, got {max_tokens}"
+        assert max_tokens == 4000, \
+            f"Unknown model '{model}' should default to 4000, got {max_tokens}"
     
-    print(f"  ✓ All unknown models default to 4,096 tokens")
+    print(f"  ✓ All unknown models default to 4,000 tokens")
     print()
 
 
@@ -187,18 +187,18 @@ def test_edge_cases():
     print("Testing edge cases...")
     
     # Empty string model name
-    assert get_max_output_tokens('') == 4096, \
+    assert get_max_output_tokens('') == 4000, \
         "Empty model name should return default"
     print("  ✓ Empty model name returns default")
     
     # Model with special characters (shouldn't exist, but shouldn't crash)
-    assert get_max_output_tokens('model-with-@#$%') == 4096, \
+    assert get_max_output_tokens('model-with-@#$%') == 4000, \
         "Model with special chars should return default"
     print("  ✓ Model with special characters returns default")
     
     # Very long model name
     long_name = 'x' * 1000
-    assert get_max_output_tokens(long_name) == 4096, \
+    assert get_max_output_tokens(long_name) == 4000, \
         "Very long model name should return default"
     print("  ✓ Very long model name returns default")
     
@@ -223,7 +223,7 @@ def test_metadata_consistency():
         
         # Get via get_model_info
         model_info = get_model_info(model)
-        via_direct = model_info.get('max_output_tokens', 4096)
+        via_direct = model_info.get('max_output_tokens', 4000)
         
         assert via_helper == via_direct, \
             f"Inconsistent results for {model}: helper={via_helper}, direct={via_direct}"

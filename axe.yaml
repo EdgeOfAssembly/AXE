@@ -317,7 +317,7 @@ agents:
     provider: xai
     model: grok-4-1-fast-reasoning
     role: Creative problem solver and brainstormer
-    context_window: 131072
+    context_window: 128000
     capabilities:
     - text
     - image
@@ -382,7 +382,7 @@ agents:
     provider: github
     model: openai/gpt-4o
     role: Primary production-ready multimodal assistant
-    context_window: 131072
+    context_window: 128000
     capabilities:
     - text
     - image
@@ -463,7 +463,7 @@ agents:
     provider: github
     model: openai/gpt-4.1
     role: Extreme context specialist with 1M tokens
-    context_window: 1048576
+    context_window: 1000000
     capabilities:
     - text
     - image
@@ -508,7 +508,7 @@ agents:
     provider: github
     model: meta/llama-4-scout-17b-16e-instruct
     role: Ultra-long context specialist (1M tokens)
-    context_window: 1048576
+    context_window: 1000000
     capabilities:
     - text
     - image
@@ -1000,7 +1000,7 @@ agents:
     provider: xai
     model: grok-code-fast-1
     role: Fast code generation specialist
-    context_window: 131072
+    context_window: 128000
     capabilities:
     - text
     - code_generation

@@ -41,12 +41,12 @@ def main():
         formatted = f"{max_tokens:,}"
         
         # Show old vs new behavior
-        old_value = "32,768"
-        if max_tokens == 4096:
+        old_value = "32,000"
+        if max_tokens == 4000:
             status = "✓ Safe default"
-        elif max_tokens < 32768:
+        elif max_tokens < 32000:
             status = f"✓ Avoided over-requesting ({old_value} → {formatted})"
-        elif max_tokens > 32768:
+        elif max_tokens > 32000:
             status = f"✓ Utilizing full capacity ({old_value} → {formatted})"
         else:
             status = f"= Same as before"
@@ -62,14 +62,14 @@ def main():
     print("   - Now uses streaming to avoid 10-minute timeout check")
     print()
     print("2. ✓ Token Truncation FIXED")
-    print("   - GPT-4o uses 16,384 (not 32,768) - matches actual limit")
+    print("   - GPT-4o uses 16,000 (not 32,000) - matches actual limit")
     print()
     print("3. ✓ Wasted Capacity FIXED")
-    print("   - Claude Opus 4.5 uses 65,536 (not 32,768) - 2x more output!")
-    print("   - GPT-5.2 uses 128,000 (not 32,768) - 4x more output!")
+    print("   - Claude Opus 4.5 uses 64,000 (not 32,000) - 2x more output!")
+    print("   - GPT-5.2 uses 128,000 (not 32,000) - 4x more output!")
     print()
     print("4. ✓ Safe Defaults")
-    print("   - Unknown models default to 4,096 tokens (safe, widely supported)")
+    print("   - Unknown models default to 4,000 tokens (safe, widely supported)")
     print()
     print("=" * 70)
 
