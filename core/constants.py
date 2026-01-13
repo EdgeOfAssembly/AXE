@@ -54,6 +54,7 @@ AGENT_TOKEN_BREAK_REQUEST = "[[AGENT_BREAK_REQUEST:"  # Followed by type, reason
 AGENT_TOKEN_EMERGENCY = "[[AGENT_EMERGENCY:"  # Followed by message, ends with ]]
 AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"  # Followed by model, role, ends with ]]
 AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
+AGENT_TOKEN_GITHUB_READY = "[[GITHUB_READY:"  # Agent signals ready to push to GitHub
 
 # Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives
 # Matches: [READ ...] (case-insensitive) followed by content until:
