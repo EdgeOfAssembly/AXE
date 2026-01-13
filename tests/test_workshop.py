@@ -77,33 +77,39 @@ os.system(user_input)  # sink
         except ImportError:
             self.skipTest("frida not available")
 
-    @patch('workshop.chisel.ChiselAnalyzer')
-    def test_database_integration_chisel(self, mock_analyzer_class):
-        """Test chisel with database integration."""
+    def test_database_integration_chisel(self):
+        """Test database integration with workshop analysis."""
         from database.agent_db import AgentDatabase
+        from workshop import HAS_CHISEL
+        import tempfile
+        import os
         
-        # Mock the analyzer
-        mock_analyzer = Mock()
-        mock_analyzer.analyze_binary.return_value = {
-            'found_paths': 5,
-            'vulnerabilities': [{'type': 'buffer_overflow'}]
-        }
-        mock_analyzer_class.return_value = mock_analyzer
-        
-        # Test database save
-        db = AgentDatabase()
-        analysis_id = db.save_workshop_analysis(
-            'chisel', '/test/binary', 'agent_123',
-            {'test': 'result'}, 1.5
-        )
-        
-        self.assertIsInstance(analysis_id, str)
-        self.assertGreater(len(analysis_id), 0)
-        
-        # Test retrieval
-        analyses = db.get_workshop_analyses(tool_name='chisel', limit=1)
-        self.assertEqual(len(analyses), 1)
-        self.assertEqual(analyses[0]['tool_name'], 'chisel')
+        # Use isolated temp database with proper cleanup via context manager
+        # This ensures cleanup even if test assertions fail
+        temp_db_path = None
+        try:
+            temp_db_fd, temp_db_path = tempfile.mkstemp(suffix='.db')
+            os.close(temp_db_fd)  # Close file descriptor, we just need the path
+            
+            db = AgentDatabase(temp_db_path)
+            
+            # We can test database functionality without requiring chisel to be available
+            # Just save a mock workshop analysis result
+            analysis_id = db.save_workshop_analysis(
+                'chisel', '/test/binary', 'agent_123',
+                {'test': 'result', 'found_paths': 5, 'vulnerabilities': []}, 1.5
+            )
+            
+            self.assertIsInstance(analysis_id, str)
+            self.assertGreater(len(analysis_id), 0)
+            
+            # Test retrieval
+            analyses = db.get_workshop_analyses(tool_name='chisel', limit=1)
+            self.assertEqual(len(analyses), 1)
+            self.assertEqual(analyses[0]['tool_name'], 'chisel')
+        finally:
+            if temp_db_path and os.path.exists(temp_db_path):
+                os.unlink(temp_db_path)
 
     def test_xp_system_integration(self):
         """Test XP system integration with workshop tools."""
@@ -134,21 +140,33 @@ os.system(user_input)  # sink
     def test_workshop_stats(self):
         """Test workshop statistics retrieval."""
         from database.agent_db import AgentDatabase
+        import tempfile
+        import os
         
-        db = AgentDatabase()
-        
-        # Add some test data
-        db.save_workshop_analysis('chisel', 'test1', 'agent1', {'result': 'ok'}, 1.0)
-        db.save_workshop_analysis('saw', 'test2', 'agent1', {'result': 'ok'}, 2.0)
-        db.save_workshop_analysis('chisel', 'test3', 'agent1', {'error': 'fail'}, 0.5, 'Failed')
-        
-        # Get stats
-        stats = db.get_workshop_stats('agent1')
-        
-        self.assertIn('chisel', stats)
-        self.assertIn('saw', stats)
-        self.assertEqual(stats['chisel']['total_analyses'], 2)
-        self.assertEqual(stats['saw']['total_analyses'], 1)
+        # Use isolated temp database with proper cleanup via context manager
+        # This ensures cleanup even if test assertions fail
+        temp_db_path = None
+        try:
+            temp_db_fd, temp_db_path = tempfile.mkstemp(suffix='.db')
+            os.close(temp_db_fd)  # Close file descriptor, we just need the path
+            
+            db = AgentDatabase(temp_db_path)
+            
+            # Add some test data to fresh database
+            db.save_workshop_analysis('chisel', 'test1', 'agent1', {'result': 'ok'}, 1.0)
+            db.save_workshop_analysis('saw', 'test2', 'agent1', {'result': 'ok'}, 2.0)
+            db.save_workshop_analysis('chisel', 'test3', 'agent1', {'error': 'fail'}, 0.5, 'Failed')
+            
+            # Get stats
+            stats = db.get_workshop_stats('agent1')
+            
+            self.assertIn('chisel', stats)
+            self.assertIn('saw', stats)
+            self.assertEqual(stats['chisel']['total_analyses'], 2)
+            self.assertEqual(stats['saw']['total_analyses'], 1)
+        finally:
+            if temp_db_path and os.path.exists(temp_db_path):
+                os.unlink(temp_db_path)
 
 if __name__ == '__main__':
     unittest.main()

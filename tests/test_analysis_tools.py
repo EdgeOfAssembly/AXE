@@ -16,7 +16,8 @@ class TestLlmprepIntegration(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures."""
         self.test_dir = tempfile.mkdtemp()
-        self.tools_dir = os.path.join(os.path.dirname(__file__), "tools")
+        # tools directory is at the project root, not in tests/
+        self.tools_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "tools")
         self.llmprep_script = os.path.join(self.tools_dir, "llmprep.py")
 
     def tearDown(self):
@@ -79,7 +80,8 @@ class TestBuildAnalyzerIntegration(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures."""
         self.test_dir = tempfile.mkdtemp()
-        self.tools_dir = os.path.join(os.path.dirname(__file__), "tools")
+        # tools directory is at the project root, not in tests/
+        self.tools_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "tools")
         self.build_analyzer_script = os.path.join(self.tools_dir, "build_analyzer.py")
 
     def tearDown(self):
@@ -214,7 +216,8 @@ class TestExecBlockSupport(unittest.TestCase):
     def setUp(self):
         """Set up test fixtures."""
         self.test_dir = tempfile.mkdtemp()
-        self.tools_dir = os.path.join(os.path.dirname(__file__), "tools")
+        # tools directory is at the project root, not in tests/
+        self.tools_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "tools")
 
     def tearDown(self):
         """Clean up test fixtures."""

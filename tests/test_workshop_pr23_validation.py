@@ -204,13 +204,15 @@ os.system(user_input)  # sink
             requirements = f.read()
         
         self.assertIn('angr', requirements)
-        self.assertIn('frida-python', requirements)
+        # Package name on PyPI is 'frida', not 'frida-python'
+        self.assertIn('frida', requirements)
         self.assertIn('psutil', requirements)
 
     def test_11_workshop_test_files_present(self):
         """Test that workshop test files are present."""
-        self.assertTrue(Path('test_workshop.py').exists())
-        self.assertTrue(Path('test_workshop_integration.py').exists())
+        # Test files are in tests/ directory
+        self.assertTrue(Path('tests/test_workshop.py').exists())
+        self.assertTrue(Path('tests/test_workshop_integration.py').exists())
 
     def test_12_workshop_documentation_present(self):
         """Test that workshop documentation files are present."""
