@@ -8,7 +8,11 @@ import os
 from typing import Optional, List, Dict, Any, Callable
 
 from .config import Config
-from models.metadata import get_model_info, uses_max_completion_tokens, get_max_output_tokens
+from models.metadata import (
+    get_model_info, uses_max_completion_tokens, get_max_output_tokens,
+    supports_extended_thinking, get_extended_thinking_budget, 
+    is_anthropic_model, get_anthropic_config
+)
 from utils.formatting import Colors, c
 
 # Optional imports - gracefully handle missing dependencies
@@ -37,6 +41,7 @@ class AgentManager:
     def __init__(self, config: Config):
         self.config = config
         self.clients: Dict[str, Any] = {}
+        self.anthropic_features = None  # Will be initialized if Anthropic is available
         self._init_clients()
 
     def _uses_max_completion_tokens(self, model: str) -> bool:
@@ -60,6 +65,13 @@ class AgentManager:
             try:
                 if name == 'anthropic' and HAS_ANTHROPIC:
                     self.clients[name] = Anthropic(api_key=api_key)
+                    # Initialize Anthropic features
+                    from core.anthropic_features import get_anthropic_features
+                    anthropic_config = get_anthropic_config()
+                    self.anthropic_features = get_anthropic_features(
+                        client=self.clients[name],
+                        config=anthropic_config
+                    )
                 elif name == 'openai' and HAS_OPENAI:
                     self.clients[name] = OpenAI(api_key=api_key)
                 elif name == 'huggingface' and HAS_HUGGINGFACE:
@@ -155,17 +167,48 @@ class AgentManager:
 
         try:
             if provider == 'anthropic':
+                # Build system prompt - can be string or list for caching
+                system_content = system_prompt
+                
+                # Apply prompt caching if enabled
+                if self.anthropic_features and self.anthropic_features.is_prompt_caching_enabled():
+                    # Convert system prompt to cacheable format
+                    if isinstance(system_prompt, str) and system_prompt:
+                        system_content = [
+                            {
+                                'type': 'text',
+                                'text': system_prompt,
+                                'cache_control': {'type': 'ephemeral'}
+                            }
+                        ]
+                
+                # Build API parameters
+                api_params = {
+                    'model': model,
+                    'max_tokens': max_output,
+                    'messages': [{'role': 'user', 'content': full_prompt}]
+                }
+                
+                # Add system prompt if provided
+                if system_content:
+                    api_params['system'] = system_content
+                
+                # Add extended thinking if supported
+                if supports_extended_thinking(model):
+                    budget = get_extended_thinking_budget(model)
+                    if budget > 0:
+                        api_params['thinking'] = {
+                            'type': 'enabled',
+                            'budget_tokens': budget
+                        }
+                        print(c(f"Extended thinking enabled with budget: {budget} tokens", Colors.CYAN))
+                
                 # Use streaming for Anthropic to avoid SDK enforcement of 10-minute timeout
                 # The SDK requires streaming when max_tokens is high enough that the request
                 # could potentially take longer than 10 minutes to complete
                 response = ""
                 final_message = None
-                with client.messages.stream(
-                    model=model,
-                    max_tokens=max_output,
-                    system=system_prompt,
-                    messages=[{'role': 'user', 'content': full_prompt}]
-                ) as stream:
+                with client.messages.stream(**api_params) as stream:
                     for text in stream.text_stream:
                         response += text
                     # Get final message to extract usage (must be inside context manager)
@@ -175,7 +218,27 @@ class AgentManager:
                 if token_callback and final_message and hasattr(final_message, 'usage'):
                     input_tokens = getattr(final_message.usage, 'input_tokens', 0)
                     output_tokens = getattr(final_message.usage, 'output_tokens', 0)
-                    token_callback(agent_name, model, input_tokens, output_tokens)
+                    
+                    # Extract cache statistics if available
+                    cache_creation = getattr(final_message.usage, 'cache_creation_input_tokens', 0)
+                    cache_read = getattr(final_message.usage, 'cache_read_input_tokens', 0)
+                    
+                    # Log cache performance
+                    if cache_creation > 0:
+                        print(c(f"Cache created: {cache_creation} tokens", Colors.GREEN))
+                    if cache_read > 0:
+                        savings_pct = (cache_read / (input_tokens + cache_read)) * 100 if (input_tokens + cache_read) > 0 else 0
+                        print(c(f"Cache hit: {cache_read} tokens read ({savings_pct:.1f}% of input)", Colors.GREEN))
+                    
+                    # Call the callback with cache stats
+                    # Note: We need to update the callback signature to accept cache params
+                    # For now, we'll call with standard params
+                    if hasattr(token_callback, '__code__') and token_callback.__code__.co_argcount >= 6:
+                        # Enhanced callback with cache stats
+                        token_callback(agent_name, model, input_tokens, output_tokens, cache_creation, cache_read)
+                    else:
+                        # Standard callback
+                        token_callback(agent_name, model, input_tokens, output_tokens)
 
                 return response
 
@@ -229,3 +292,22 @@ class AgentManager:
             return f"API error ({provider}): {e}"
 
         return "No response"
+
+    def count_tokens_anthropic(self, model: str, messages: List[Dict], 
+                               system: str = "", tools: List[Dict] = None) -> Optional[int]:
+        """
+        Get precise token count from Anthropic API.
+        
+        Args:
+            model: Model name
+            messages: List of message dictionaries
+            system: System prompt string
+            tools: Optional list of tool definitions
+        
+        Returns:
+            Token count, or None if unavailable
+        """
+        if not self.anthropic_features:
+            return None
+        
+        return self.anthropic_features.count_tokens(model, messages, system, tools)

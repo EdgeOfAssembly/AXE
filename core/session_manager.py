@@ -33,6 +33,7 @@ class SessionManager:
                 - workspace: Current workspace path
                 - agents: List of active agent names
                 - metadata: Additional metadata (tokens_used, duration, etc.)
+                - file_ids: Optional dict of file IDs from Files API (Anthropic)
         
         Returns:
             True if saved successfully, False otherwise

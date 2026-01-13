@@ -119,3 +119,56 @@ def get_max_output_tokens(model_name: str, default: int = 4000) -> int:
     """
     model_info = get_model_info(model_name)
     return model_info.get('max_output_tokens', default)
+
+
+def supports_extended_thinking(model_name: str) -> bool:
+    """
+    Check if a model supports extended thinking.
+    
+    Args:
+        model_name: Name of the model
+    
+    Returns:
+        True if model supports extended thinking
+    """
+    model_info = get_model_info(model_name)
+    return 'extended_thinking' in model_info and model_info['extended_thinking'].get('enabled', False)
+
+
+def get_extended_thinking_budget(model_name: str) -> int:
+    """
+    Get the extended thinking token budget for a model.
+    
+    Args:
+        model_name: Name of the model
+    
+    Returns:
+        Token budget for extended thinking, or 0 if not supported
+    """
+    model_info = get_model_info(model_name)
+    if 'extended_thinking' in model_info:
+        return model_info['extended_thinking'].get('budget_tokens', 0)
+    return 0
+
+
+def is_anthropic_model(model_name: str) -> bool:
+    """
+    Check if a model is an Anthropic Claude model.
+    
+    Args:
+        model_name: Name of the model
+    
+    Returns:
+        True if model is from Anthropic
+    """
+    return model_name.startswith('claude-')
+
+
+def get_anthropic_config() -> Dict:
+    """
+    Get Anthropic-specific configuration from models.yaml.
+    
+    Returns:
+        Dictionary with Anthropic configuration
+    """
+    return _config.get('anthropic', {})

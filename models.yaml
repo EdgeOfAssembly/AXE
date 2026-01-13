@@ -8,6 +8,25 @@ default:
   input_modes: [text]
   output_modes: [text]
 
+# Anthropic-specific configuration
+anthropic:
+  # Prompt caching configuration - reduces costs for repetitive prompts
+  prompt_caching:
+    enabled: true
+    cache_breakpoints: ["system", "tools"]  # Cache system prompt and tool definitions
+    default_ttl: "5m"  # Options: "5m" (default, free refresh) or "1h" (premium)
+  
+  # Files API configuration - upload large files once, reference multiple times
+  files_api:
+    enabled: false  # Beta feature, disabled by default
+    upload_threshold_kb: 50  # Upload files larger than 50KB
+    supported_types: ["application/pdf", "text/plain", "image/jpeg", "image/png"]
+  
+  # Token counting configuration - use precise API counts for large prompts
+  token_counting:
+    enabled: true
+    threshold_estimated_tokens: 10000  # Use precise counting above this threshold
+
 # Models requiring max_completion_tokens instead of max_tokens
 # GPT-5 and future models use the new parameter name
 use_max_completion_tokens:
@@ -50,36 +69,54 @@ models:
     max_output_tokens: 64000  # Commonly 64k; supports extended outputs well
     input_modes: [text, image]
     output_modes: [text, function_calling]
+    extended_thinking:
+      enabled: true
+      budget_tokens: 32000  # Large budget for complex reasoning
   
   claude-haiku-4-5-20251001:  # Claude Haiku 4.5 - fast & efficient
     context_tokens: 200000
     max_output_tokens: 8000
     input_modes: [text, image]
     output_modes: [text, function_calling]
+    extended_thinking:
+      enabled: true
+      budget_tokens: 10000  # Smaller budget for efficiency
   
   claude-sonnet-4-5-20250929:  # Claude Sonnet 4.5 - best balance
     context_tokens: 200000  # 1M possible in beta for some Sonnet 4.x with header & tier
     max_output_tokens: 64000
     input_modes: [text, image]
     output_modes: [text, function_calling]
+    extended_thinking:
+      enabled: true
+      budget_tokens: 16000  # Balanced budget for most tasks
   
   claude-opus-4-1-20250805:  # Claude Opus 4.1 - incremental upgrade
     context_tokens: 200000
     max_output_tokens: 32000
     input_modes: [text, image]
     output_modes: [text, function_calling]
+    extended_thinking:
+      enabled: true
+      budget_tokens: 24000
   
   claude-opus-4-20250514:  # Claude Opus 4 - original frontier
     context_tokens: 200000
     max_output_tokens: 32000
     input_modes: [text, image]
     output_modes: [text, function_calling]
+    extended_thinking:
+      enabled: true
+      budget_tokens: 24000
   
   claude-sonnet-4-20250514:  # Claude Sonnet 4
     context_tokens: 200000  # 1M beta possible with header
     max_output_tokens: 32000
     input_modes: [text, image]
     output_modes: [text, function_calling]
+    extended_thinking:
+      enabled: true
+      budget_tokens: 16000
   
   claude-3-5-haiku-20241022:  # Claude 3.5 Haiku - legacy fast model
     context_tokens: 200000
