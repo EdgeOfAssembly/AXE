@@ -164,6 +164,29 @@ agents:
 
       - Be concise but complete
 
+
+      BUILD GUIDELINES:
+
+      To reduce token consumption in build logs, always use silent/quiet flags:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0` (CMAKE_VERBOSE_MAKEFILE=OFF is default)
+
+      - Meson: `meson setup --quiet` (Ninja backend is quiet by default)
+
+      - Ninja: Silent by default; use `-v` only for debugging
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      If a build fails, retry with verbose output to diagnose issues.
+
       '
   claude:
     alias:
@@ -241,6 +264,31 @@ agents:
 
       - Flag severity levels:  CRITICAL, HIGH, MEDIUM, LOW
 
+
+      BUILD GUIDELINES (Security-Focused):
+
+      For security auditing, use silent builds to minimize noise and focus on critical output:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      - Security tools: Use quiet flags (e.g., `valgrind --quiet`, `cppcheck --quiet`)
+
+      Only use verbose output when diagnosing build failures or security tool false positives.
+
       '
   llama:
     alias:
@@ -309,6 +357,29 @@ agents:
 
       - If uncertain about architecture, ASK before assuming
 
+
+      BUILD GUIDELINES (Assembly/Low-Level):
+
+      Minimize build logs during assembly and disassembly to focus on binary analysis:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Keep disassembly and analysis output focused. Use verbose only for debugging build issues.
+
       '
   grok:
     alias:
@@ -373,6 +444,29 @@ agents:
       - Propose 2-3 alternative approaches when stuck
 
       - If uncertain, bounce ideas off teammates first
+
+
+      BUILD GUIDELINES (Creative Prototyping):
+
+      Keep prompts concise by using silent builds during rapid prototyping:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds allow faster iteration. Use verbose output only when debugging build issues.
 
       '
   copilot:
@@ -454,6 +548,29 @@ agents:
 
       USE ME FOR:  90% of your tasks - proven, reliable, comprehensive
 
+
+      BUILD GUIDELINES (CI/CD and Testing):
+
+      Enforce silent builds in CI/CD pipelines and test workflows to reduce log noise:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      In CI/CD, silent builds improve log readability and reduce token costs. Enable verbose only for debugging failures.
+
       '
   titan:
     alias:
@@ -498,6 +615,29 @@ agents:
 
 
       USE ME FOR: Projects with 50+ files, architectural reviews, massive refactors
+
+
+      BUILD GUIDELINES (Large Context):
+
+      Handle large contexts efficiently with silent builds:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds are crucial for large-scale analysis to preserve context window for code.
 
       '
   scout:
@@ -546,6 +686,29 @@ agents:
       USE ME FOR:  Entire repository analysis, massive legacy projects, forensic code
       archaeology
 
+
+      BUILD GUIDELINES (Large Context):
+
+      Handle large contexts efficiently with silent builds:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds preserve context window for code analysis.
+
       '
   oracle:
     alias:
@@ -593,6 +756,29 @@ agents:
 
       USE ME FOR: Complex logic problems, security audits, architectural decisions
 
+
+      BUILD GUIDELINES (Reasoning):
+
+      Use silent builds to preserve context for complex reasoning:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds allow focus on logical analysis. Use verbose only for debugging.
+
       '
   deepthink:
     alias:
@@ -638,6 +824,29 @@ agents:
 
       USE ME FOR: Critical bugs, security-sensitive code, when accuracy is paramount
 
+
+      BUILD GUIDELINES (Precision):
+
+      Use silent builds to maximize accuracy and minimize distractions:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds reduce noise for precise analysis. Use verbose only when debugging failures.
+
       '
   coder:
     alias:
@@ -678,6 +887,29 @@ agents:
 
 
       USE ME FOR: Pure code generation, multi-language projects, code completion tasks
+
+
+      BUILD GUIDELINES (Multi-Language):
+
+      Use silent builds across all supported languages:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds reduce log noise for code generation tasks. Use verbose only for debugging.
 
       '
   vision:
@@ -723,6 +955,29 @@ agents:
       USE ME FOR:  Diagram interpretation, UI/UX analysis, screenshot understanding,
       audio analysis
 
+
+      BUILD GUIDELINES (Multimodal):
+
+      Use silent builds to preserve context for visual/audio analysis:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds allow focus on visual and audio content. Use verbose only for debugging.
+
       '
   multimedia:
     alias:
@@ -766,6 +1021,29 @@ agents:
 
 
       USE ME FOR: Audio analysis, combined media understanding, accessibility tasks
+
+
+      BUILD GUIDELINES (Multimedia):
+
+      Use silent builds to preserve context for multimedia analysis:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds allow focus on audio and video analysis. Use verbose only for debugging.
 
       '
   maverick:
@@ -812,6 +1090,29 @@ agents:
 
 
       USE ME FOR: Creative solutions, documentation generation, image-heavy projects
+
+
+      BUILD GUIDELINES (Creative/Large Context):
+
+      Handle large contexts efficiently with silent builds:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds preserve context for creative and visual analysis. Use verbose only for debugging.
 
       '
   qwen_thinking:
@@ -861,6 +1162,29 @@ agents:
 
       - If uncertain, state assumptions explicitly and ASK for clarification
 
+
+      BUILD GUIDELINES (Deep Reasoning):
+
+      Use silent builds to preserve context for complex reasoning:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds allow focus on logical decomposition and reasoning. Use verbose only for debugging.
+
       '
   qwen_coder:
     alias:
@@ -906,6 +1230,29 @@ agents:
 
       - For unsafe operations, explain the risks
 
+
+      BUILD GUIDELINES (Low-Level Coding):
+
+      Use silent builds to focus on code quality and system details:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds reduce noise for low-level system programming. Use verbose only for debugging.
+
       '
   qwen_vision:
     alias:
@@ -945,6 +1292,29 @@ agents:
       - For ambiguous characters, list alternatives (0/O, 1/l/I)
 
       - If image quality is poor, request a clearer version
+
+
+      BUILD GUIDELINES (Vision/OCR):
+
+      Use silent builds to preserve context for visual analysis:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds allow focus on image and document analysis. Use verbose only for debugging.
 
       '
   deepseek:
@@ -992,6 +1362,29 @@ agents:
 
       - If multiple solutions exist, compare trade-offs
 
+
+      BUILD GUIDELINES (Reasoning and Coding):
+
+      Use silent builds to preserve context for complex logic and code synthesis:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds reduce noise for mathematical reasoning and code generation. Use verbose only for debugging.
+
       '
   grok_code:
     alias:
@@ -1028,6 +1421,29 @@ agents:
       - Minimize explanation, maximize code
 
       - Use comments for non-obvious logic only
+
+
+      BUILD GUIDELINES (Fast Code Generation):
+
+      Use silent builds for rapid iteration and minimal noise:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds enable faster code generation cycles. Use verbose only for debugging build failures.
 
       '
 tools:
