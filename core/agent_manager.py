@@ -231,13 +231,19 @@ class AgentManager:
                         print(c(f"Cache hit: {cache_read} tokens read ({savings_pct:.1f}% of input)", Colors.GREEN))
                     
                     # Call the callback with cache stats
-                    # Note: We need to update the callback signature to accept cache params
-                    # For now, we'll call with standard params
-                    if hasattr(token_callback, '__code__') and token_callback.__code__.co_argcount >= 6:
-                        # Enhanced callback with cache stats
-                        token_callback(agent_name, model, input_tokens, output_tokens, cache_creation, cache_read)
-                    else:
-                        # Standard callback
+                    # Check callback signature for backward compatibility:
+                    # - Old signature: callback(agent_name, model, input_tokens, output_tokens)
+                    # - New signature: callback(..., cache_creation, cache_read)
+                    # We use reflection to maintain backward compatibility
+                    try:
+                        if hasattr(token_callback, '__code__') and token_callback.__code__.co_argcount >= 6:
+                            # Enhanced callback with cache stats
+                            token_callback(agent_name, model, input_tokens, output_tokens, cache_creation, cache_read)
+                        else:
+                            # Standard callback (backward compatible)
+                            token_callback(agent_name, model, input_tokens, output_tokens)
+                    except TypeError:
+                        # Fallback: try standard signature if enhanced fails
                         token_callback(agent_name, model, input_tokens, output_tokens)
 
                 return response

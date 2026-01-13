@@ -14,7 +14,7 @@ anthropic:
   prompt_caching:
     enabled: true
     cache_breakpoints: ["system", "tools"]  # Cache system prompt and tool definitions
-    default_ttl: "5m"  # Options: "5m" (default, free refresh) or "1h" (premium)
+    default_ttl: "5m"  # Options: "5m" (default, free cache refresh) or "1h" (longer duration, additional cost per MTok cache write)
   
   # Files API configuration - upload large files once, reference multiple times
   files_api:

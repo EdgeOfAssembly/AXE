@@ -121,8 +121,18 @@ class AnthropicFeatures:
             response = self.client.messages.count_tokens(**params)
             return response.input_tokens
         
+        except AttributeError as e:
+            print(c(f"Token counting API not available in SDK: {e}", Colors.YELLOW))
+            return None
         except Exception as e:
-            print(c(f"Token counting failed: {e}", Colors.YELLOW))
+            # Provide more specific error guidance
+            error_msg = str(e).lower()
+            if 'auth' in error_msg or 'key' in error_msg:
+                print(c(f"Token counting failed - check API key: {e}", Colors.YELLOW))
+            elif 'rate' in error_msg or 'limit' in error_msg:
+                print(c(f"Token counting failed - rate limit reached: {e}", Colors.YELLOW))
+            else:
+                print(c(f"Token counting failed: {e}", Colors.YELLOW))
             return None
     
     def estimate_tokens(self, text: str) -> int:
@@ -196,19 +206,21 @@ class FilesAPIManager:
         
         Returns:
             File metadata dict with 'id', 'filename', etc., or None if failed
+        
+        Note:
+            This feature requires Anthropic SDK Files API support which is
+            not yet available in the current SDK version. This is a placeholder
+            implementation that will be activated when the SDK is updated.
         """
         if not self.is_enabled() or not self.client:
             return None
         
-        try:
-            # Note: This is a placeholder - actual implementation would use
-            # the Anthropic SDK's files API once it's available
-            print(c(f"Note: Files API upload not yet implemented in SDK", Colors.YELLOW))
-            return None
-        
-        except Exception as e:
-            print(c(f"File upload failed: {e}", Colors.YELLOW))
-            return None
+        # Feature not yet available in SDK
+        raise NotImplementedError(
+            "Files API is not yet available in the Anthropic Python SDK. "
+            "This feature will be enabled when SDK support is added. "
+            "See https://docs.anthropic.com/en/docs/build-with-claude/files for details."
+        )
     
     def delete_file(self, file_id: str) -> bool:
         """
@@ -219,18 +231,17 @@ class FilesAPIManager:
         
         Returns:
             True if successful
+        
+        Raises:
+            NotImplementedError: Files API not yet available in SDK
         """
         if not self.is_enabled() or not self.client:
             return False
         
-        try:
-            # Note: Placeholder for actual implementation
-            print(c(f"Note: Files API delete not yet implemented in SDK", Colors.YELLOW))
-            return False
-        
-        except Exception as e:
-            print(c(f"File delete failed: {e}", Colors.YELLOW))
-            return False
+        raise NotImplementedError(
+            "Files API is not yet available in the Anthropic Python SDK. "
+            "This feature will be enabled when SDK support is added."
+        )
     
     def list_files(self) -> List[Dict[str, Any]]:
         """
@@ -238,17 +249,17 @@ class FilesAPIManager:
         
         Returns:
             List of file metadata dicts
+        
+        Raises:
+            NotImplementedError: Files API not yet available in SDK
         """
         if not self.is_enabled() or not self.client:
             return []
         
-        try:
-            # Note: Placeholder for actual implementation
-            return []
-        
-        except Exception as e:
-            print(c(f"File list failed: {e}", Colors.YELLOW))
-            return []
+        raise NotImplementedError(
+            "Files API is not yet available in the Anthropic Python SDK. "
+            "This feature will be enabled when SDK support is added."
+        )
 
 
 def get_anthropic_features(client: Any, config: Dict[str, Any]) -> AnthropicFeatures:

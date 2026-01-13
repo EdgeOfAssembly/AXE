@@ -127,8 +127,13 @@ class TokenStats:
             model: Model name used
             input_tokens: Number of input tokens (excluding cache)
             output_tokens: Number of output tokens
-            cache_creation_tokens: Tokens used to create cache
-            cache_read_tokens: Tokens read from cache
+            cache_creation_tokens: Tokens used to create cache (default: 0)
+            cache_read_tokens: Tokens read from cache (default: 0)
+            
+        Note: 
+            This method is backward compatible. Existing code that calls
+            add_usage() with 4 arguments will continue to work. The new
+            cache parameters are optional keyword arguments.
         """
         if agent_name not in self.agent_stats:
             self.agent_stats[agent_name] = {
@@ -144,6 +149,9 @@ class TokenStats:
         self.agent_stats[agent_name]['model'] = model  # Update to latest model used
         
         # Track cache statistics
+        # Note: 'hits' represents the number of API calls that successfully
+        # used cached content (cache_read_tokens > 0), not the total number
+        # of cached tokens. This provides a message-level cache hit rate.
         if cache_creation_tokens > 0 or cache_read_tokens > 0:
             if agent_name not in self.cache_stats:
                 self.cache_stats[agent_name] = {
@@ -154,6 +162,7 @@ class TokenStats:
             
             self.cache_stats[agent_name]['creation'] += cache_creation_tokens
             self.cache_stats[agent_name]['read'] += cache_read_tokens
+            # Increment hit counter only if cache was read (not created)
             if cache_read_tokens > 0:
                 self.cache_stats[agent_name]['hits'] += 1
     
