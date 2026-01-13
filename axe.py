@@ -493,8 +493,10 @@ class SharedWorkspace:
             try:
                 from managers.shared_build_status import SharedBuildStatusManager
                 self.build_status = SharedBuildStatusManager(workspace_dir)
-            except ImportError:
-                pass  # Build status manager not available
+            except ImportError as e:
+                # Log warning - build status sharing won't work without this
+                print(c(f"Warning: SharedBuildStatusManager not available: {e}", Colors.YELLOW))
+                print(c("  Build errors/warnings won't be shared automatically.", Colors.DIM))
         
         # Initialize shared notes file
         if not os.path.exists(self.shared_file) and self._init_error is None:

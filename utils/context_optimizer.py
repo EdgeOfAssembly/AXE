@@ -341,13 +341,15 @@ class ContextOptimizer:
         
         Args:
             content: Content with code blocks
-            max_lines: Maximum lines per code block (ignored)
+            max_lines: DEPRECATED - This parameter is ignored. Kept for
+                backward compatibility but has no effect.
         
         Returns:
             Content unchanged (no truncation applied)
         
         Raises:
             ValueError: If content is None or max_lines is not positive
+                (validation kept for backward compatibility)
         """
         if content is None:
             raise ValueError("content cannot be None")

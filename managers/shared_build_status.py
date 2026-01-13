@@ -13,6 +13,7 @@ This reduces token usage by:
 - Allowing agents to claim and coordinate error fixes
 """
 
+import difflib
 import os
 import re
 import subprocess
@@ -372,8 +373,6 @@ class SharedBuildStatusManager:
         Returns:
             Unified diff string
         """
-        import difflib
-        
         original_lines = original_content.splitlines(keepends=True)
         modified_lines = modified_content.splitlines(keepends=True)
         
