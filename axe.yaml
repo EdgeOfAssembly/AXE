@@ -1445,3 +1445,19 @@ token_optimization:
     cache_identical_prompts: true
     deduplicate_context: true
     cache_file_reads: true
+
+# GitHub Agent Integration (OPTIONAL - disabled by default)
+# Allows agents to autonomously push code with human review gates
+github_integration:
+  # Enable autonomous GitHub operations
+  enabled: false  # MUST be explicitly enabled
+  
+  # Always require human review before push
+  require_review: true  # Cannot be disabled (safety)
+  
+  # Default branch prefix for agent branches
+  branch_prefix: agent/  # Creates "agent/feature-name"
+  
+  # SSH key path (optional, auto-detect by default)
+  ssh_key_path: null  # null = use default SSH setup
+

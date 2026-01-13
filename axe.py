@@ -86,6 +86,7 @@ from core.constants import (
     AGENT_TOKEN_EMERGENCY,
     AGENT_TOKEN_SPAWN,
     AGENT_TOKEN_STATUS,
+    AGENT_TOKEN_GITHUB_READY,
     READ_BLOCK_PATTERN,
 )
 from core.config import Config
@@ -815,7 +816,8 @@ class CollaborativeSession:
     """
     
     def __init__(self, config: Config, agents: List[str], workspace_dir: str, 
-                 time_limit_minutes: int = 30, db_path: Optional[str] = None):
+                 time_limit_minutes: int = 30, db_path: Optional[str] = None,
+                 github_enabled: bool = False):
         self.config = config
         self.agent_mgr = AgentManager(config)
         self.workspace = SharedWorkspace(workspace_dir)
@@ -829,6 +831,22 @@ class CollaborativeSession:
         self.break_system = BreakSystem(self.db)
         self.emergency_mailbox = EmergencyMailbox()
         self.spawner = DynamicSpawner(self.db, config)
+        
+        # NEW: GitHub agent integration (completely optional)
+        self.github_enabled = github_enabled
+        self.github_agent = None
+        if github_enabled:
+            try:
+                from core.github_agent import GitHubAgent
+                self.github_agent = GitHubAgent(workspace_dir, enabled=True)
+                if self.github_agent.repo_detected:
+                    print(c("✓ GitHub agent mode enabled", Colors.GREEN))
+                else:
+                    print(c("⚠️  GitHub mode enabled but no git repo detected", Colors.YELLOW))
+                    self.github_enabled = False
+            except ImportError as e:
+                print(c(f"⚠️  GitHub agent unavailable: {e}", Colors.YELLOW))
+                self.github_enabled = False
         
         # Validate and set up agents with unique IDs and aliases
         self.agents = []
@@ -1456,6 +1474,12 @@ It's YOUR TURN. What would you like to contribute? Remember:
                     self.is_running = False
                     break
                 
+                # NEW: GitHub push request check (only if enabled)
+                if self.github_enabled and self.github_agent:
+                    github_ready, push_info = check_agent_command(processed_response, AGENT_TOKEN_GITHUB_READY)
+                    if github_ready:
+                        self._handle_github_review_pause(push_info)
+                
                 if is_pass:
                     consecutive_passes += 1
                     print(c(f"  ({alias} passed, {consecutive_passes}/{max_passes})", Colors.DIM))
@@ -1706,6 +1730,144 @@ Focus on practical, well-tested solutions."""
         for report in reports:
             print(c(f"  [{report['created']}] {report['filename']} ({report['size']} bytes)", Colors.CYAN))
             print(c(f"    Path: {report['path']}", Colors.DIM))
+    
+    def _handle_github_review_pause(self, push_info: str) -> None:
+        """
+        Pause session for human to review GitHub push request.
+        Reuses existing Ctrl+C pause mechanism.
+        """
+        # Parse push info from agent
+        parts = push_info.split(',', 1)
+        branch = parts[0].strip() if parts else 'agent-changes'
+        commit_msg = parts[1].strip() if len(parts) > 1 else 'Agent changes'
+        
+        # Get changed files from workspace
+        changed_files = self._get_changed_files()
+        
+        # Request push (prepares review)
+        review_data = self.github_agent.agent_request_push(branch, commit_msg, changed_files)
+        
+        if not review_data:
+            return  # Silently no-op if github disabled
+        
+        # Display review interface
+        print(c("\n" + "═" * 70, Colors.YELLOW + Colors.BOLD))
+        print(c("🚨 AGENTS READY TO PUSH TO GITHUB", Colors.YELLOW + Colors.BOLD))
+        print(c("═" * 70, Colors.YELLOW))
+        print()
+        
+        print(c(f"Branch: {review_data['branch']}", Colors.CYAN))
+        print(c(f"Commit: {review_data['commit_message']}", Colors.CYAN))
+        print()
+        
+        print(c("Files changed:", Colors.BOLD))
+        for f in review_data['files_changed'][:10]:  # Limit display
+            print(f"  M {f}")
+        if len(review_data['files_changed']) > 10:
+            print(f"  ... and {len(review_data['files_changed']) - 10} more")
+        print()
+        
+        # Review options
+        self._github_review_prompt(review_data)
+    
+    def _github_review_prompt(self, review_data: Dict) -> None:
+        """Handle human review prompts."""
+        print(c("Options:", Colors.BOLD))
+        print(c("  'a' - Approve and push to GitHub", Colors.GREEN))
+        print(c("  'r' - Reject and provide feedback to agents", Colors.YELLOW))
+        print(c("  'd' - Show full diff", Colors.CYAN))
+        print(c("  's' - Skip, end session", Colors.DIM))
+        print()
+        
+        while True:
+            try:
+                choice = input(c("Choice: ", Colors.GREEN)).strip().lower()
+                
+                if choice == 'a':
+                    self._approve_and_push(review_data)
+                    break
+                elif choice == 'r':
+                    self._reject_and_continue(review_data)
+                    break
+                elif choice == 'd':
+                    print(review_data['diff'])
+                elif choice == 's':
+                    self.is_running = False
+                    break
+            except (EOFError, KeyboardInterrupt):
+                self.is_running = False
+                break
+    
+    def _approve_and_push(self, review_data: Dict) -> None:
+        """Execute approved push."""
+        print(c("\n✓ Pushing to GitHub...", Colors.GREEN))
+        
+        result = self.github_agent.execute_push(
+            review_data['branch'],
+            review_data['commit_message'],
+            review_data['files_changed']
+        )
+        
+        if result['success']:
+            print(c(f"✓ Pushed to branch: {result['branch']}", Colors.GREEN))
+            
+            # Optionally create PR
+            create_pr = input(c("Create PR? (y/n): ", Colors.GREEN)).lower() == 'y'
+            if create_pr:
+                pr_url = self._create_pr_with_gh_cli(result['branch'])
+                if pr_url:
+                    print(c(f"✓ PR created: {pr_url}", Colors.GREEN))
+            
+            self.is_running = False
+        else:
+            print(c(f"✗ Push failed: {result.get('error', 'Unknown error')}", Colors.RED))
+    
+    def _reject_and_continue(self, review_data: Dict) -> None:
+        """Reject and send feedback to agents."""
+        feedback = input(c("\nFeedback for agents: ", Colors.GREEN))
+        
+        if feedback:
+            self.conversation_history.append({
+                'role': 'user',
+                'content': f"[HUMAN REVIEW FEEDBACK]: {feedback}\n\nPlease address this and signal [[GITHUB_READY: ...]] when ready.",
+                'timestamp': datetime.now().strftime("%H:%M:%S")
+            })
+            print(c("\n✓ Feedback sent. Resuming session...\n", Colors.GREEN))
+    
+    def _get_changed_files(self) -> List[str]:
+        """Get list of changed files in workspace."""
+        try:
+            result = subprocess.run(
+                ['git', 'status', '--porcelain'],
+                cwd=self.workspace.workspace_dir,
+                capture_output=True,
+                text=True
+            )
+            if result.returncode == 0:
+                files = []
+                for line in result.stdout.splitlines():
+                    if line.strip():
+                        # Parse git status format: " M file.txt"
+                        files.append(line[3:].strip())
+                return files
+        except Exception:
+            pass
+        return []
+    
+    def _create_pr_with_gh_cli(self, branch: str) -> Optional[str]:
+        """Create PR using gh CLI."""
+        try:
+            result = subprocess.run(
+                ['gh', 'pr', 'create', '--head', branch, '--fill'],
+                cwd=self.workspace.workspace_dir,
+                capture_output=True,
+                text=True
+            )
+            if result.returncode == 0:
+                return result.stdout.strip()
+        except Exception:
+            pass
+        return None
     
     def _end_session(self) -> None:
         """Clean up and summarize the session."""
@@ -3226,6 +3388,8 @@ Collaborative Mode:
                         help='Time limit in minutes for collaborative session (default: 30)')
     parser.add_argument('--task',
                         help='Task description for collaborative session')
+    parser.add_argument('--enable-github', action='store_true',
+                        help='Enable autonomous GitHub operations (disabled by default)')
     
     args = parser.parse_args()
     
@@ -3280,7 +3444,8 @@ Collaborative Mode:
                 config=config,
                 agents=agents,
                 workspace_dir=workspace,
-                time_limit_minutes=args.time
+                time_limit_minutes=args.time,
+                github_enabled=args.enable_github
             )
             collab.start_session(args.task)
         except ValueError as e:
