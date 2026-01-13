@@ -151,7 +151,7 @@ class AgentManager:
         full_prompt = f"{prompt}\n\nContext:\n{context}" if context else prompt
 
         # Get model's actual max output tokens from metadata
-        max_output = get_max_output_tokens(model, default=4096)
+        max_output = get_max_output_tokens(model, default=4000)
 
         try:
             if provider == 'anthropic':

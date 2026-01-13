@@ -11,9 +11,9 @@ This implementation fixes three critical issues with AXE's hardcoded `max_tokens
 
 ### 1. `models/metadata.py`
 **Added:**
-- `get_max_output_tokens(model_name: str, default: int = 4096) -> int` helper function
+- `get_max_output_tokens(model_name: str, default: int = 4000) -> int` helper function
   - Looks up max output tokens from model metadata
-  - Returns safe default (4096) if model not found
+  - Returns safe default (4000) if model not found
 
 **Fixed:**
 - Removed extra space in `DEFAULT_METADATA.copy()` (typo fix)

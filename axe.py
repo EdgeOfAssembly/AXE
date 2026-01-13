@@ -1258,7 +1258,7 @@ It's YOUR TURN. What would you like to contribute? Remember:
                 model = agent_config.get('model', '')
                 
                 # Get model's actual max output tokens from metadata
-                max_output = get_max_output_tokens(model, default=4096)
+                max_output = get_max_output_tokens(model, default=4000)
                 
                 response = ""
                 try:
