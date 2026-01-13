@@ -115,16 +115,25 @@ class TokenStats:
     def __init__(self):
         """Initialize token statistics tracker."""
         self.agent_stats = {}  # {agent_name: {'input': N, 'output': N, 'messages': N, 'model': str}}
+        self.cache_stats = {}  # {agent_name: {'creation': N, 'read': N, 'hits': N}}
     
-    def add_usage(self, agent_name: str, model: str, input_tokens: int, output_tokens: int) -> None:
+    def add_usage(self, agent_name: str, model: str, input_tokens: int, output_tokens: int,
+                  cache_creation_tokens: int = 0, cache_read_tokens: int = 0) -> None:
         """
         Record token usage for an agent.
         
         Args:
             agent_name: Name of the agent
             model: Model name used
-            input_tokens: Number of input tokens
+            input_tokens: Number of input tokens (excluding cache)
             output_tokens: Number of output tokens
+            cache_creation_tokens: Tokens used to create cache (default: 0)
+            cache_read_tokens: Tokens read from cache (default: 0)
+            
+        Note: 
+            This method is backward compatible. Existing code that calls
+            add_usage() with 4 arguments will continue to work. The new
+            cache parameters are optional keyword arguments.
         """
         if agent_name not in self.agent_stats:
             self.agent_stats[agent_name] = {
@@ -138,6 +147,24 @@ class TokenStats:
         self.agent_stats[agent_name]['output'] += output_tokens
         self.agent_stats[agent_name]['messages'] += 1
         self.agent_stats[agent_name]['model'] = model  # Update to latest model used
+        
+        # Track cache statistics
+        # Note: 'hits' represents the number of API calls that successfully
+        # used cached content (cache_read_tokens > 0), not the total number
+        # of cached tokens. This provides a message-level cache hit rate.
+        if cache_creation_tokens > 0 or cache_read_tokens > 0:
+            if agent_name not in self.cache_stats:
+                self.cache_stats[agent_name] = {
+                    'creation': 0,
+                    'read': 0,
+                    'hits': 0
+                }
+            
+            self.cache_stats[agent_name]['creation'] += cache_creation_tokens
+            self.cache_stats[agent_name]['read'] += cache_read_tokens
+            # Increment hit counter only if cache was read (not created)
+            if cache_read_tokens > 0:
+                self.cache_stats[agent_name]['hits'] += 1
     
     def get_agent_stats(self, agent_name: str) -> Optional[Dict]:
         """
@@ -149,14 +176,18 @@ class TokenStats:
         Returns:
             Dictionary with stats, or None if agent not found
         """
-        return self.agent_stats.get(agent_name)
+        stats = self.agent_stats.get(agent_name)
+        if stats and agent_name in self.cache_stats:
+            stats = stats.copy()
+            stats['cache'] = self.cache_stats[agent_name]
+        return stats
     
     def get_total_stats(self) -> Dict:
         """
         Get total statistics across all agents.
         
         Returns:
-            Dictionary with total input, output, messages, and cost
+            Dictionary with total input, output, messages, cost, and cache stats
         """
         total_input = sum(stats['input'] for stats in self.agent_stats.values())
         total_output = sum(stats['output'] for stats in self.agent_stats.values())
@@ -168,27 +199,52 @@ class TokenStats:
             cost = estimate_cost(stats['model'], stats['input'], stats['output'])
             total_cost += cost
         
-        return {
+        # Calculate total cache stats
+        total_cache_creation = sum(stats['creation'] for stats in self.cache_stats.values())
+        total_cache_read = sum(stats['read'] for stats in self.cache_stats.values())
+        total_cache_hits = sum(stats['hits'] for stats in self.cache_stats.values())
+        
+        result = {
             'input': total_input,
             'output': total_output,
             'total': total_input + total_output,
             'messages': total_messages,
             'cost': total_cost
         }
+        
+        if total_cache_creation > 0 or total_cache_read > 0:
+            result['cache'] = {
+                'creation': total_cache_creation,
+                'read': total_cache_read,
+                'hits': total_cache_hits,
+                'hit_rate': total_cache_hits / total_messages if total_messages > 0 else 0.0
+            }
+        
+        return result
     
     def get_all_stats(self) -> Dict:
         """
         Get statistics for all agents.
         
         Returns:
-            Dictionary mapping agent_name to stats with cost
+            Dictionary mapping agent_name to stats with cost and cache info
         """
         result = {}
         for agent_name, stats in self.agent_stats.items():
             cost = estimate_cost(stats['model'], stats['input'], stats['output'])
-            result[agent_name] = {
+            agent_result = {
                 **stats,
                 'total': stats['input'] + stats['output'],
                 'cost': cost
             }
+            
+            # Add cache stats if available
+            if agent_name in self.cache_stats:
+                agent_result['cache'] = self.cache_stats[agent_name]
+                cache_stats = self.cache_stats[agent_name]
+                agent_result['cache']['hit_rate'] = (
+                    cache_stats['hits'] / stats['messages'] if stats['messages'] > 0 else 0.0
+                )
+            
+            result[agent_name] = agent_result
         return result
