@@ -81,18 +81,17 @@ def test_build_guidelines_contain_required_flags(config):
         
         if 'BUILD GUIDELINES' in system_prompt:
             # Extract BUILD GUIDELINES section
-            if 'BUILD GUIDELINES' in system_prompt:
-                build_section = system_prompt.split('BUILD GUIDELINES')[1]
-                
-                # Check for at least some of the required flags
-                # (not all agents need all flags, but they should have the core ones)
-                core_flags = ['make', 'cmake', 'gradle', 'maven']
-                found_flags = sum(1 for flag in core_flags if flag.lower() in build_section.lower())
-                
-                assert found_flags >= 2, \
-                    f"Agent {agent_name} BUILD GUIDELINES should mention at least 2 core build systems"
-                
-                print(f"  ✓ {agent_name}: Contains appropriate build system flags")
+            build_section = system_prompt.split('BUILD GUIDELINES')[1]
+            
+            # Check for at least some of the required flags
+            # (not all agents need all flags, but they should have the core ones)
+            core_flags = ['make', 'cmake', 'gradle', 'maven']
+            found_flags = sum(1 for flag in core_flags if flag.lower() in build_section.lower())
+            
+            assert found_flags >= 2, \
+                f"Agent {agent_name} BUILD GUIDELINES should mention at least 2 core build systems"
+            
+            print(f"  ✓ {agent_name}: Contains appropriate build system flags")
     
     print("✓ BUILD GUIDELINES contain required build system flags")
 
@@ -220,9 +219,11 @@ def test_build_guidelines_format_consistency(config):
         if 'BUILD GUIDELINES' in system_prompt:
             build_guideline_agents.append(agent_name)
     
-    # Should have BUILD GUIDELINES for all main agents
-    assert len(build_guideline_agents) >= 18, \
-        f"Should have BUILD GUIDELINES for at least 18 agents, found {len(build_guideline_agents)}"
+    # Should have BUILD GUIDELINES for all agents in the config
+    # Calculate expected minimum based on known agents
+    expected_agents = len(agents)
+    assert len(build_guideline_agents) >= expected_agents, \
+        f"Should have BUILD GUIDELINES for all {expected_agents} agents, found {len(build_guideline_agents)}"
     
     print(f"  ✓ Found BUILD GUIDELINES in {len(build_guideline_agents)} agents")
     
