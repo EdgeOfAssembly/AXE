@@ -1,20 +1,27 @@
 name: "Copilot Setup Steps"
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:  
   push:
   pull_request:
 
-jobs: 
+jobs:  
   copilot-setup-steps:
-    runs-on:  ubuntu-latest
+    runs-on: ubuntu-latest
+    
+    # Reference the copilot environment to access its secrets
+    environment: copilot
     
     permissions:
       contents: read
     
-    env:
-      ANTHROPIC_API_KEY: ${{ secrets. ANTHROPIC_API_KEY }}
-    
     steps:
       - name: Checkout code
         uses:  actions/checkout@v5
+      
+      - name: Export secrets to environment
+        run: |
+          # This makes the secret available in subsequent steps
+          echo "ANTHROPIC_API_KEY=${{ secrets. ANTHROPIC_API_KEY }}" >> $GITHUB_ENV
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets. ANTHROPIC_API_KEY }}
