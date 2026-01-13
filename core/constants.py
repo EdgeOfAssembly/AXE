@@ -142,7 +142,7 @@ Workshop tools available: /workshop chisel for symbolic execution of binaries, /
             'provider': 'xai',
             'model': 'grok-beta',
             'role': 'Creative problem solver',
-            'context_window': 131072,
+            'context_window': 128000,
             'capabilities': ['text', 'vision', 'function_calling'],
             'system_prompt': """You are a creative coding assistant.
 Think outside the box for novel solutions.
