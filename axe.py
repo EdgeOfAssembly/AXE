@@ -3566,11 +3566,21 @@ Collaborative Mode:
             print(c(f"Creating workspace: {workspace}", Colors.YELLOW))
             os.makedirs(workspace, exist_ok=True)
         
-        # Run preprocessing if enabled (minifier and/or llmprep)
+        # Run preprocessing if enabled (environment_probe, minifier and/or llmprep)
         preprocessor = SessionPreprocessor(config, workspace)
         if preprocessor.is_enabled():
             print(c("Running session preprocessing...", Colors.CYAN))
             preprocessing_results = preprocessor.run()
+            
+            # Display environment probe results
+            if preprocessing_results['environment_probe']['enabled']:
+                env_result = preprocessing_results['environment_probe']
+                if env_result.get('success'):
+                    output_file = env_result.get('output_file', '.collab_env.md')
+                    print(c(f"✓ Environment Probe: System info captured in {os.path.basename(output_file)}", Colors.GREEN))
+                else:
+                    error = env_result.get('error', 'Unknown error')
+                    print(c(f"✗ Environment Probe failed: {error}", Colors.YELLOW))
             
             # Display minifier results
             if preprocessing_results['minifier']['enabled']:
@@ -3619,11 +3629,21 @@ Collaborative Mode:
     # Create session
     session = ChatSession(config, args.dir)
     
-    # Run preprocessing if enabled (minifier and/or llmprep)
+    # Run preprocessing if enabled (environment_probe, minifier and/or llmprep)
     preprocessor = SessionPreprocessor(config, args.dir)
     if preprocessor.is_enabled():
         print(c("Running session preprocessing...", Colors.CYAN))
         preprocessing_results = preprocessor.run()
+        
+        # Display environment probe results
+        if preprocessing_results['environment_probe']['enabled']:
+            env_result = preprocessing_results['environment_probe']
+            if env_result.get('success'):
+                output_file = env_result.get('output_file', '.collab_env.md')
+                print(c(f"✓ Environment Probe: System info captured in {os.path.basename(output_file)}", Colors.GREEN))
+            else:
+                error = env_result.get('error', 'Unknown error')
+                print(c(f"✗ Environment Probe failed: {error}", Colors.YELLOW))
         
         # Display minifier results
         if preprocessing_results['minifier']['enabled']:

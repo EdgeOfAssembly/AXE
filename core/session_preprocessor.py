@@ -5,9 +5,10 @@ Orchestrates workspace preprocessing at the start of each AXE session.
 
 Workflow:
 1. Check if preprocessing is enabled in config
-2. If minifier enabled: minify supported source files (keeping comments)
-3. If llmprep enabled: run llmprep to generate LLM context files
-4. Report statistics to user
+2. If environment_probe enabled: generate .collab_env.md with system info (zero agent tokens)
+3. If minifier enabled: minify supported source files (keeping comments)
+4. If llmprep enabled: run llmprep to generate LLM context files
+5. Report statistics to user
 
 Author: EdgeOfAssembly
 License: GPLv3 / Commercial
@@ -27,7 +28,7 @@ class SessionPreprocessor:
     """
     Orchestrates workspace preprocessing at the start of each AXE session.
     
-    Handles minification and llmprep execution based on configuration.
+    Handles environment probing, minification, and llmprep execution based on configuration.
     """
     
     def __init__(self, config, workspace_path: str):
@@ -43,6 +44,7 @@ class SessionPreprocessor:
         
         # Get preprocessing configuration
         self.preprocessing_config = config.get('preprocessing', default={})
+        self.environment_probe_config = self.preprocessing_config.get('environment_probe', {})
         self.minifier_config = self.preprocessing_config.get('minifier', {})
         self.llmprep_config = self.preprocessing_config.get('llmprep', {})
     
@@ -51,11 +53,12 @@ class SessionPreprocessor:
         Check if any preprocessing is enabled.
         
         Returns:
-            True if minifier or llmprep is enabled
+            True if environment_probe, minifier, or llmprep is enabled
         """
+        environment_probe_enabled = self.environment_probe_config.get('enabled', True)
         minifier_enabled = self.minifier_config.get('enabled', False)
         llmprep_enabled = self.llmprep_config.get('enabled', False)
-        return minifier_enabled or llmprep_enabled
+        return environment_probe_enabled or minifier_enabled or llmprep_enabled
     
     def run(self) -> Dict[str, Any]:
         """
@@ -64,14 +67,23 @@ class SessionPreprocessor:
         Returns:
             Dictionary with results:
             {
+                'environment_probe': {'success': bool, 'output_file': str, 'enabled': bool},
                 'minifier': {'files_processed': int, 'bytes_saved': int, 'enabled': bool},
                 'llmprep': {'success': bool, 'output_dir': str, 'enabled': bool}
             }
         """
         results = {
+            'environment_probe': {'enabled': False, 'success': False, 'output_file': None},
             'minifier': {'enabled': False, 'files_processed': 0, 'bytes_saved': 0},
             'llmprep': {'enabled': False, 'success': False, 'output_dir': None}
         }
+        
+        # Run environment probe if enabled (enabled by default)
+        if self.environment_probe_config.get('enabled', True):
+            logger.info("Running environment probe...")
+            environment_probe_results = self.run_environment_probe()
+            results['environment_probe'] = environment_probe_results
+            results['environment_probe']['enabled'] = True
         
         # Run minifier if enabled
         if self.minifier_config.get('enabled', False):
@@ -88,6 +100,46 @@ class SessionPreprocessor:
             results['llmprep']['enabled'] = True
         
         return results
+    
+    def run_environment_probe(self) -> Dict[str, Any]:
+        """
+        Run environment probe to generate .collab_env.md
+        
+        Returns:
+            Dictionary with keys:
+            - success: True if probe succeeded
+            - output_file: Path to output file
+            - error: Error message if failed (optional)
+        """
+        try:
+            # Import here to avoid circular dependencies
+            from core.environment_probe import EnvironmentProbe
+            
+            # Create probe
+            probe = EnvironmentProbe(self.workspace_path, self.environment_probe_config)
+            
+            # Run probe
+            output_file = probe.run()
+            
+            if output_file:
+                return {
+                    'success': True,
+                    'output_file': output_file
+                }
+            else:
+                return {
+                    'success': False,
+                    'output_file': None,
+                    'error': 'Probe disabled or failed'
+                }
+        
+        except Exception as e:
+            logger.error(f"Environment probe failed: {e}")
+            return {
+                'success': False,
+                'output_file': None,
+                'error': str(e)
+            }
     
     def run_minifier(self) -> Dict[str, int]:
         """
