@@ -8,6 +8,7 @@ from .agent_manager import AgentManager
 from .tool_runner import ToolRunner
 from .sandbox import SandboxManager
 from .resource_monitor import start_resource_monitor, collect_resources
+from .skills_manager import SkillsManager, Skill, create_skills_manager
 from .constants import (
     DEFAULT_CONFIG,
     CHARS_PER_TOKEN,
@@ -55,6 +56,10 @@ __all__ = [
     'Config',
     # Agent Management
     'AgentManager',
+    # Skills Management
+    'SkillsManager',
+    'Skill',
+    'create_skills_manager',
     # Tool Runner
     'ToolRunner',
     # Sandbox

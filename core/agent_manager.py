@@ -42,7 +42,9 @@ class AgentManager:
         self.config = config
         self.clients: Dict[str, Any] = {}
         self.anthropic_features = None  # Will be initialized if Anthropic is available
+        self.skills_manager = None  # Will be initialized if skills are available
         self._init_clients()
+        self._init_skills()
 
     def _uses_max_completion_tokens(self, model: str) -> bool:
         """Check if a model requires max_completion_tokens parameter."""
@@ -90,6 +92,38 @@ class AgentManager:
                     )
             except Exception as e:
                 print(c(f"Failed to init {name}: {e}", Colors.YELLOW))
+    
+    def _init_skills(self) -> None:
+        """Initialize skills manager if skills are enabled."""
+        try:
+            from .skills_manager import SkillsManager
+            import os
+            
+            # Get skills configuration from models.yaml (loaded via config)
+            # The config object loads from axe.yaml by default, but we need models.yaml
+            import yaml
+            models_yaml_path = os.path.join(os.path.dirname(self.config.config_path), 'models.yaml')
+            
+            if not os.path.exists(models_yaml_path):
+                # Try alternate path
+                models_yaml_path = 'models.yaml'
+            
+            with open(models_yaml_path, 'r') as f:
+                models_config = yaml.safe_load(f)
+            
+            # Get skills configuration
+            anthropic_config = models_config.get('anthropic', {})
+            skills_config = anthropic_config.get('agent_skills', {})
+            
+            # Check if skills are enabled (default to True if not specified)
+            if skills_config.get('enabled', True):
+                # Initialize skills manager
+                skills_dir = os.path.join(os.getcwd(), 'skills')
+                self.skills_manager = SkillsManager(skills_dir=skills_dir, config=skills_config)
+                print(c(f"Skills system initialized: {len(self.skills_manager.skills_cache)} skills loaded", Colors.GREEN))
+        except Exception as e:
+            print(c(f"Warning: Failed to initialize skills system: {e}", Colors.YELLOW))
+            self.skills_manager = None
 
     def resolve_agent(self, name: str) -> Optional[dict]:
         """Resolve agent name or alias to agent config."""
@@ -159,6 +193,27 @@ class AgentManager:
         client = self.clients[provider]
         model = agent.get('model', '')
         system_prompt = system_prompt_override if system_prompt_override is not None else agent.get('system_prompt', '')
+        
+        # Auto-attach skills based on task and agent configuration
+        if self.skills_manager and not system_prompt_override:
+            # Get default skills for this agent
+            default_skills = agent.get('default_skills', [])
+            
+            # Get skills that match keywords in the prompt
+            keyword_skills = self.skills_manager.get_skills_for_task(prompt, provider=provider)
+            
+            # Get default skills by name
+            default_skill_objs = self.skills_manager.get_skills_by_names(default_skills, provider=provider)
+            
+            # Combine and deduplicate skills
+            all_skills = {skill.name: skill for skill in default_skill_objs + keyword_skills}
+            skills_to_inject = list(all_skills.values())
+            
+            # Inject skills into system prompt if any match
+            if skills_to_inject:
+                skill_names = [s.name for s in skills_to_inject]
+                print(c(f"Activating skills: {', '.join(skill_names)}", Colors.CYAN))
+                system_prompt = self.skills_manager.inject_skills_to_prompt(system_prompt, skills_to_inject)
 
         full_prompt = f"{prompt}\n\nContext:\n{context}" if context else prompt
 

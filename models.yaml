@@ -26,6 +26,21 @@ anthropic:
   token_counting:
     enabled: true
     threshold_estimated_tokens: 10000  # Use precise counting above this threshold
+  
+  # Agent Skills configuration (Claude-specific)
+  agent_skills:
+    enabled: true
+    auto_discovery: true  # Auto-discover skills from skills/ directory
+    activation_keywords:
+      reverse_engineering_expert: ["binary", "disassembly", "vuln", "hook", "symbolic", "frida", "angr", "RE"]
+      cpp_refactoring_expert: ["refactor", "cleanup", "modernize", "c++", "cpp"]
+      ida_pro_analysis_patterns: ["IDA", "ghidra", "decompiler", "pseudocode", "vtable"]
+      c_modernization_expert: ["legacy c", "c11", "c17", "c23", "modernize c"]
+      cpp_modernization_expert: ["c++98", "c++11", "c++17", "c++20", "c++23", "boost"]
+      python_agent_expert: ["python", "pep8", "pytest", "async", "typing"]
+      x86_assembly_expert: ["asm", "assembly", "x86", "x64", "disasm", "opcodes"]
+      build: ["make", "cmake", "build", "compile", "ninja"]
+      claude_build: ["security audit", "valgrind", "sanitizer", "static analysis"]
 
 # Models requiring max_completion_tokens instead of max_tokens
 # GPT-5 and future models use the new parameter name

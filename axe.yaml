@@ -201,6 +201,11 @@ agents:
     - image
     - pdf
     - function_calling
+    default_skills:
+    - reverse_engineering_expert
+    - cpp_refactoring_expert
+    - x86_assembly_expert
+    - claude_build
     system_prompt: 'You are a code review expert and security auditor with deep expertise
       in:
 

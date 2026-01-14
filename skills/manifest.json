@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "skills": {
+    "reverse_engineering_expert": {
+      "name": "Reverse Engineering Expert",
+      "description": "Binary analysis, decompilation, symbolic execution with angr, dynamic tracing with frida",
+      "keywords": ["binary", "disassembly", "vuln", "hook", "symbolic", "frida", "angr", "RE"],
+      "providers": ["anthropic"],
+      "tools_integration": ["chisel_angr", "hammer_frida"]
+    },
+    "cpp_refactoring_expert": {
+      "name": "C++ Refactoring Expert",
+      "description": "Modernizing C++ codebases with best practices from C++11 to C++26",
+      "keywords": ["refactor", "cleanup", "modernize", "c++"],
+      "providers": ["all"]
+    },
+    "ida_pro_analysis_patterns": {
+      "name": "IDA Pro Analysis Patterns",
+      "description": "Expert patterns for interpreting decompiler output",
+      "keywords": ["IDA", "ghidra", "decompiler", "pseudocode"],
+      "providers": ["all"]
+    },
+    "c_modernization_expert": {
+      "name": "C Modernization Expert",
+      "description": "Upgrading legacy C to modern C11/C17/C23",
+      "keywords": ["legacy c", "c11", "c17", "c23"],
+      "providers": ["all"]
+    },
+    "cpp_modernization_expert": {
+      "name": "C++ Modernization Expert",
+      "description": "Migrating old C++ to modern C++20/23/26",
+      "keywords": ["c++98", "c++11", "c++17", "c++20", "boost"],
+      "providers": ["all"]
+    },
+    "python_agent_expert": {
+      "name": "Python Agent Expert",
+      "description": "Clean, production-grade Python development",
+      "keywords": ["python", "pep8", "pytest", "async"],
+      "providers": ["all"]
+    },
+    "x86_assembly_expert": {
+      "name": "x86 Assembly Analysis Expert",
+      "description": "Deep x86/x64 assembly analysis and optimization",
+      "keywords": ["asm", "assembly", "x86", "x64", "disasm"],
+      "providers": ["all"],
+      "tools_integration": ["hammer_frida", "code_execution"]
+    },
+    "build": {
+      "name": "Silent Builds",
+      "description": "Token-efficient silent build guidelines",
+      "keywords": ["make", "cmake", "build"],
+      "providers": ["all"]
+    },
+    "claude_build": {
+      "name": "Claude Security Build",
+      "description": "Security-focused build guidelines for Claude",
+      "keywords": ["security", "valgrind", "sanitizer"],
+      "providers": ["anthropic"]
+    }
+  }
+}
