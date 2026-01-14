@@ -44,6 +44,7 @@ class TestSessionPreprocessorInit(unittest.TestCase):
         """Test is_enabled when both minifier and llmprep are disabled."""
         config = Mock()
         config.get.return_value = {
+            'environment_probe': {'enabled': False},
             'minifier': {'enabled': False},
             'llmprep': {'enabled': False}
         }
@@ -440,6 +441,65 @@ class TestFullWorkflow(unittest.TestCase):
         self.assertTrue(results['llmprep']['success'])
 
 
+class TestEnvironmentProbePreprocessing(unittest.TestCase):
+    """Test environment probe preprocessing functionality."""
+    
+    def setUp(self):
+        """Set up test fixtures."""
+        self.test_dir = tempfile.mkdtemp()
+    
+    def tearDown(self):
+        """Clean up test fixtures."""
+        shutil.rmtree(self.test_dir, ignore_errors=True)
+    
+    def test_run_environment_probe_success(self):
+        """Test successful environment probe execution."""
+        config = Mock()
+        config.get.return_value = {
+            'environment_probe': {
+                'enabled': True,
+                'output_file': '.collab_env.md'
+            }
+        }
+        
+        preprocessor = SessionPreprocessor(config, self.test_dir)
+        preprocessor.preprocessing_config = config.get.return_value
+        preprocessor.environment_probe_config = preprocessor.preprocessing_config['environment_probe']
+        
+        result = preprocessor.run_environment_probe()
+        
+        self.assertTrue(result['success'])
+        self.assertIsNotNone(result['output_file'])
+        
+        # Verify file was created
+        output_file = result['output_file']
+        self.assertTrue(os.path.exists(output_file))
+        
+        # Verify file has content
+        with open(output_file, 'r') as f:
+            content = f.read()
+        self.assertGreater(len(content), 0)
+        self.assertIn('# Environment Summary', content)
+    
+    def test_run_environment_probe_disabled(self):
+        """Test environment probe when disabled."""
+        config = Mock()
+        config.get.return_value = {
+            'environment_probe': {
+                'enabled': False
+            }
+        }
+        
+        preprocessor = SessionPreprocessor(config, self.test_dir)
+        preprocessor.preprocessing_config = config.get.return_value
+        preprocessor.environment_probe_config = preprocessor.preprocessing_config['environment_probe']
+        
+        result = preprocessor.run_environment_probe()
+        
+        self.assertFalse(result['success'])
+        self.assertIsNone(result['output_file'])
+
+
 class TestFactoryFunction(unittest.TestCase):
     """Test factory function."""
     
@@ -466,6 +526,7 @@ def run_tests():
     
     # Add all test classes
     suite.addTests(loader.loadTestsFromTestCase(TestSessionPreprocessorInit))
+    suite.addTests(loader.loadTestsFromTestCase(TestEnvironmentProbePreprocessing))
     suite.addTests(loader.loadTestsFromTestCase(TestMinifierPreprocessing))
     suite.addTests(loader.loadTestsFromTestCase(TestLlmprepPreprocessing))
     suite.addTests(loader.loadTestsFromTestCase(TestFullWorkflow))
