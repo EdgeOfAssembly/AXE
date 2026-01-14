@@ -1867,6 +1867,43 @@ token_optimization:
     deduplicate_context: true
     cache_file_reads: true
 
+# Session preprocessing configuration
+# Runs at the start of each AXE session to prepare the workspace
+preprocessing:
+  # Source code minification before llmprep
+  minifier:
+    enabled: false  # Opt-in, disabled by default
+    keep_comments: true  # Keep comments for context (recommended for AXE)
+    exclude_dirs:
+      - tests
+      - __pycache__
+      - .git
+      - venv
+      - .venv
+      - node_modules
+      - build
+      - dist
+    supported_extensions:
+      - .c
+      - .cpp
+      - .cc
+      - .h
+      - .hpp
+      - .py
+      - .asm
+      - .s
+    output_mode: in_place  # Options: in_place, separate_dir
+    output_dir: .minified  # Only used if output_mode is separate_dir
+  
+  # Automatic llmprep after minification
+  llmprep:
+    enabled: false  # Opt-in, disabled by default
+    output_dir: llm_prep
+    depth: 4
+    skip_doxygen: false
+    skip_pyreverse: false
+    skip_ctags: false
+
 # GitHub Agent Integration (OPTIONAL - disabled by default)
 # Allows agents to autonomously push code with human review gates
 github_integration:
