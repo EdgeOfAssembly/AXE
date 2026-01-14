@@ -1870,6 +1870,28 @@ token_optimization:
 # Session preprocessing configuration
 # Runs at the start of each AXE session to prepare the workspace
 preprocessing:
+  # Environment probe - auto-generates .collab_env.md with static system info
+  # This runs BEFORE any agent is invoked, reducing token waste from duplicate probes
+  environment_probe:
+    enabled: true  # Enabled by default (zero agent token cost)
+    output_file: .collab_env.md  # Where to write environment summary
+    probe_timeout: 5  # Timeout in seconds for each probe command
+    
+    # Optional: Add custom probes (bash commands)
+    custom_probes: {}
+    # Example:
+    # custom_probes:
+    #   docker: "docker --version 2>/dev/null || echo 'not available'"
+    #   java: "java -version 2>/dev/null || echo 'not available'"
+    
+    # Optional: Disable specific probes
+    disabled_probes: []
+    # Example:
+    # disabled_probes:
+    #   - rustc
+    #   - cargo
+    #   - go
+  
   # Source code minification before llmprep
   minifier:
     enabled: false  # Opt-in, disabled by default

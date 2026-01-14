@@ -8,3 +8,4 @@ venv/
 *.db-wal*.minified
 .minified/
 minified/
+.collab_env.md
