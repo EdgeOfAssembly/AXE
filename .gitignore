@@ -5,4 +5,5 @@ __pycache__/
 venv/
 *.db
 *.db-shm
-*.db-wal
+*.db-wal*.minified
+.minified/
