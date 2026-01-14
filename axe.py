@@ -93,6 +93,7 @@ from core.config import Config
 from core.agent_manager import AgentManager
 from core.tool_runner import ToolRunner
 from core.resource_monitor import start_resource_monitor
+from core.session_preprocessor import SessionPreprocessor
 
 # Import from managers module (refactored)
 from managers.sleep_manager import SleepManager
@@ -3565,6 +3566,41 @@ Collaborative Mode:
             print(c(f"Creating workspace: {workspace}", Colors.YELLOW))
             os.makedirs(workspace, exist_ok=True)
         
+        # Run preprocessing if enabled (minifier and/or llmprep)
+        preprocessor = SessionPreprocessor(config, workspace)
+        if preprocessor.is_enabled():
+            print(c("Running session preprocessing...", Colors.CYAN))
+            preprocessing_results = preprocessor.run()
+            
+            # Display minifier results
+            if preprocessing_results['minifier']['enabled']:
+                minifier_result = preprocessing_results['minifier']
+                if minifier_result.get('success'):
+                    files_processed = minifier_result.get('files_processed', 0)
+                    bytes_saved = minifier_result.get('bytes_saved', 0)
+                    bytes_original = minifier_result.get('bytes_original', 0)
+                    
+                    if files_processed > 0:
+                        reduction_pct = (bytes_saved / bytes_original * 100) if bytes_original > 0 else 0
+                        print(c(f"✓ Minifier: Processed {files_processed} file(s), saved {bytes_saved:,} bytes ({reduction_pct:.1f}% reduction)", Colors.GREEN))
+                    else:
+                        print(c("✓ Minifier: No files to process", Colors.DIM))
+                else:
+                    error = minifier_result.get('error', 'Unknown error')
+                    print(c(f"✗ Minifier failed: {error}", Colors.YELLOW))
+            
+            # Display llmprep results
+            if preprocessing_results['llmprep']['enabled']:
+                llmprep_result = preprocessing_results['llmprep']
+                if llmprep_result.get('success'):
+                    output_dir = llmprep_result.get('output_dir', 'llm_prep')
+                    print(c(f"✓ llmprep: Context files generated in {output_dir}/", Colors.GREEN))
+                else:
+                    error = llmprep_result.get('error', 'Unknown error')
+                    print(c(f"✗ llmprep failed: {error}", Colors.YELLOW))
+            
+            print()  # Blank line after preprocessing
+        
         try:
             collab = CollaborativeSession(
                 config=config,
@@ -3582,6 +3618,41 @@ Collaborative Mode:
     
     # Create session
     session = ChatSession(config, args.dir)
+    
+    # Run preprocessing if enabled (minifier and/or llmprep)
+    preprocessor = SessionPreprocessor(config, args.dir)
+    if preprocessor.is_enabled():
+        print(c("Running session preprocessing...", Colors.CYAN))
+        preprocessing_results = preprocessor.run()
+        
+        # Display minifier results
+        if preprocessing_results['minifier']['enabled']:
+            minifier_result = preprocessing_results['minifier']
+            if minifier_result.get('success'):
+                files_processed = minifier_result.get('files_processed', 0)
+                bytes_saved = minifier_result.get('bytes_saved', 0)
+                bytes_original = minifier_result.get('bytes_original', 0)
+                
+                if files_processed > 0:
+                    reduction_pct = (bytes_saved / bytes_original * 100) if bytes_original > 0 else 0
+                    print(c(f"✓ Minifier: Processed {files_processed} file(s), saved {bytes_saved:,} bytes ({reduction_pct:.1f}% reduction)", Colors.GREEN))
+                else:
+                    print(c("✓ Minifier: No files to process", Colors.DIM))
+            else:
+                error = minifier_result.get('error', 'Unknown error')
+                print(c(f"✗ Minifier failed: {error}", Colors.YELLOW))
+        
+        # Display llmprep results
+        if preprocessing_results['llmprep']['enabled']:
+            llmprep_result = preprocessing_results['llmprep']
+            if llmprep_result.get('success'):
+                output_dir = llmprep_result.get('output_dir', 'llm_prep')
+                print(c(f"✓ llmprep: Context files generated in {output_dir}/", Colors.GREEN))
+            else:
+                error = llmprep_result.get('error', 'Unknown error')
+                print(c(f"✗ llmprep failed: {error}", Colors.YELLOW))
+        
+        print()  # Blank line after preprocessing
     
     # Update tool runner settings
     session.tool_runner.dry_run = args.dry_run
