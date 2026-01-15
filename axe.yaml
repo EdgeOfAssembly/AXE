@@ -1,5 +1,9 @@
 version: '2.0'
 project_dir: .
+agent_protocol:
+  enabled: false
+  expand_for_human: true
+  custom_abbreviations: {}
 providers:
   anthropic:
     enabled: true
