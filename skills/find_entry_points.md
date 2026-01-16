@@ -1,0 +1,8 @@
+Skill: find_entry_points
+Category: Legacy Code Archaeology / Reverse Engineering
+Recommended agents: gpt, grok, llama
+Purpose: Locate real program entry points in source projects or binaries (main/WinMain/_start/DOS PSP+entry/interrupt vectors/exports/overlay handlers)
+
+Typical inputs: binary path, project directory, disassembly listing, strings output
+Outputs: Ranked list of candidate entry points + confidence (0-10) + explanation
+AXE focus: MS-DOS .exe/.com, early Windows, firmware, TSRs
