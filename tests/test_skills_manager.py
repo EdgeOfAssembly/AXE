@@ -612,6 +612,389 @@ def test_create_skills_manager_factory():
     print()
 
 
+def test_none_skills_dir():
+    """Test handling of None skills_dir parameter"""
+    print("Testing None skills_dir parameter...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        # Change to temp directory
+        original_cwd = os.getcwd()
+        try:
+            os.chdir(tmpdir)
+            
+            # Create skills directory in current directory
+            os.makedirs("skills")
+            with open("skills/test_skill.md", 'w') as f:
+                f.write("# Test Skill\nContent")
+            
+            # Initialize with None - should default to "skills"
+            manager = SkillsManager(skills_dir=None)
+            
+            assert len(manager.skills_cache) == 1, "Should find skills in default location"
+            assert "test_skill" in manager.skills_cache, "Should load test_skill"
+            
+            print("  ✓ None skills_dir handled correctly")
+        finally:
+            os.chdir(original_cwd)
+    print()
+
+
+def test_empty_string_skills_dir():
+    """Test handling of empty string skills_dir parameter"""
+    print("Testing empty string skills_dir parameter...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        original_cwd = os.getcwd()
+        try:
+            os.chdir(tmpdir)
+            
+            # Create skills directory in current directory
+            os.makedirs("skills")
+            with open("skills/test_skill.md", 'w') as f:
+                f.write("# Test Skill\nContent")
+            
+            # Initialize with empty string - should default to "skills"
+            manager = SkillsManager(skills_dir="")
+            
+            assert len(manager.skills_cache) == 1, "Should find skills in default location"
+            
+            print("  ✓ Empty string skills_dir handled correctly")
+        finally:
+            os.chdir(original_cwd)
+    print()
+
+
+def test_nonexistent_skills_directory():
+    """Test handling when skills directory doesn't exist"""
+    print("Testing nonexistent skills directory...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        nonexistent_dir = os.path.join(tmpdir, "nonexistent_skills")
+        
+        # Should not crash, just return empty skills
+        manager = SkillsManager(skills_dir=nonexistent_dir)
+        
+        assert len(manager.skills_cache) == 0, "Should have no skills"
+        assert manager.get_all_skills() == [], "get_all_skills should return empty list"
+        
+        print("  ✓ Nonexistent directory handled gracefully")
+    print()
+
+
+def test_missing_manifest_json():
+    """Test handling when manifest.json is missing"""
+    print("Testing missing manifest.json...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        skills_dir = os.path.join(tmpdir, "skills")
+        os.makedirs(skills_dir)
+        
+        # Create skill file but no manifest
+        with open(os.path.join(skills_dir, "test_skill.md"), 'w') as f:
+            f.write("# Test Skill\nContent")
+        
+        # Should work with default metadata
+        manager = SkillsManager(skills_dir=skills_dir)
+        
+        assert len(manager.skills_cache) == 1, "Should discover skill without manifest"
+        skill = manager.get_skill("test_skill")
+        assert skill is not None, "Should load skill"
+        assert skill.keywords == ["test_skill"], "Should use default keyword (skill name)"
+        
+        print("  ✓ Missing manifest handled correctly")
+    print()
+
+
+def test_skill_file_missing_referenced_in_manifest():
+    """Test when manifest references a skill file that doesn't exist"""
+    print("Testing skill file missing but referenced in manifest...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        skills_dir = os.path.join(tmpdir, "skills")
+        os.makedirs(skills_dir)
+        
+        # Create manifest with reference to nonexistent skill
+        manifest = {
+            "version": "1.0.0",
+            "skills": {
+                "nonexistent_skill": {
+                    "keywords": ["test"],
+                    "providers": ["all"]
+                }
+            }
+        }
+        
+        with open(os.path.join(skills_dir, "manifest.json"), 'w') as f:
+            json.dump(manifest, f)
+        
+        # Should not crash, just not load the missing skill
+        manager = SkillsManager(skills_dir=skills_dir)
+        
+        assert len(manager.skills_cache) == 0, "Should have no skills (file doesn't exist)"
+        assert manager.get_skill("nonexistent_skill") is None, "Should not find nonexistent skill"
+        
+        print("  ✓ Missing skill file handled gracefully")
+    print()
+
+
+def test_empty_skill_file():
+    """Test handling of empty skill file"""
+    print("Testing empty skill file...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        skills_dir = os.path.join(tmpdir, "skills")
+        os.makedirs(skills_dir)
+        
+        # Create empty skill file
+        with open(os.path.join(skills_dir, "empty_skill.md"), 'w') as f:
+            f.write("")
+        
+        # Should load but have empty content
+        manager = SkillsManager(skills_dir=skills_dir)
+        
+        assert "empty_skill" in manager.skills_cache, "Should discover empty skill file"
+        skill = manager.get_skill("empty_skill")
+        assert skill is not None, "Should load empty skill"
+        assert skill.content == "", "Content should be empty string"
+        
+        print("  ✓ Empty skill file handled correctly")
+    print()
+
+
+def test_no_skills_match_provider():
+    """Test when no skills match the given provider"""
+    print("Testing no skills match provider...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        skills_dir = os.path.join(tmpdir, "skills")
+        os.makedirs(skills_dir)
+        
+        # Create skill that only works with anthropic
+        manifest = {
+            "version": "1.0.0",
+            "skills": {
+                "anthropic_only": {
+                    "keywords": ["test"],
+                    "providers": ["anthropic"]
+                }
+            }
+        }
+        
+        with open(os.path.join(skills_dir, "manifest.json"), 'w') as f:
+            json.dump(manifest, f)
+        
+        with open(os.path.join(skills_dir, "anthropic_only.md"), 'w') as f:
+            f.write("# Anthropic Only\nContent")
+        
+        manager = SkillsManager(skills_dir=skills_dir)
+        
+        # OpenAI provider should not match
+        skills = manager.get_skills_for_task("test task", provider="openai")
+        assert len(skills) == 0, "Should not match skills for different provider"
+        
+        # Anthropic should match
+        skills = manager.get_skills_for_task("test task", provider="anthropic")
+        assert len(skills) == 1, "Should match skill for correct provider"
+        
+        print("  ✓ Provider filtering works correctly")
+    print()
+
+
+def test_no_skills_match_keywords():
+    """Test when no skills match the given keywords"""
+    print("Testing no skills match keywords...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        skills_dir = os.path.join(tmpdir, "skills")
+        os.makedirs(skills_dir)
+        
+        manifest = {
+            "version": "1.0.0",
+            "skills": {
+                "python_skill": {
+                    "keywords": ["python", "pytest"],
+                    "providers": ["all"]
+                }
+            }
+        }
+        
+        with open(os.path.join(skills_dir, "manifest.json"), 'w') as f:
+            json.dump(manifest, f)
+        
+        with open(os.path.join(skills_dir, "python_skill.md"), 'w') as f:
+            f.write("# Python Skill\nContent")
+        
+        manager = SkillsManager(skills_dir=skills_dir)
+        
+        # Task with no matching keywords
+        skills = manager.get_skills_for_task("write java code")
+        assert len(skills) == 0, "Should not match skills with no keyword overlap"
+        
+        print("  ✓ Keyword matching works correctly")
+    print()
+
+
+def test_relative_path_skills_dir():
+    """Test handling of relative path for skills_dir"""
+    print("Testing relative path for skills_dir...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        original_cwd = os.getcwd()
+        try:
+            os.chdir(tmpdir)
+            
+            # Create skills directory
+            os.makedirs("my_skills")
+            with open("my_skills/test_skill.md", 'w') as f:
+                f.write("# Test Skill\nContent")
+            
+            # Use relative path
+            manager = SkillsManager(skills_dir="my_skills")
+            
+            assert len(manager.skills_cache) == 1, "Should find skills with relative path"
+            # Verify it was converted to absolute
+            assert os.path.isabs(manager.skills_dir), "Should convert to absolute path"
+            
+            print("  ✓ Relative path handled correctly")
+        finally:
+            os.chdir(original_cwd)
+    print()
+
+
+def test_absolute_path_skills_dir():
+    """Test handling of absolute path for skills_dir"""
+    print("Testing absolute path for skills_dir...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        skills_dir = os.path.join(tmpdir, "skills")
+        os.makedirs(skills_dir)
+        
+        with open(os.path.join(skills_dir, "test_skill.md"), 'w') as f:
+            f.write("# Test Skill\nContent")
+        
+        # Use absolute path
+        manager = SkillsManager(skills_dir=skills_dir)
+        
+        assert len(manager.skills_cache) == 1, "Should find skills with absolute path"
+        assert manager.skills_dir == skills_dir, "Should preserve absolute path"
+        
+        print("  ✓ Absolute path handled correctly")
+    print()
+
+
+def test_skills_with_empty_keywords():
+    """Test skills with empty keywords list"""
+    print("Testing skills with empty keywords...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        skills_dir = os.path.join(tmpdir, "skills")
+        os.makedirs(skills_dir)
+        
+        manifest = {
+            "version": "1.0.0",
+            "skills": {
+                "no_keywords_skill": {
+                    "keywords": [],
+                    "providers": ["all"]
+                }
+            }
+        }
+        
+        with open(os.path.join(skills_dir, "manifest.json"), 'w') as f:
+            json.dump(manifest, f)
+        
+        with open(os.path.join(skills_dir, "no_keywords_skill.md"), 'w') as f:
+            f.write("# No Keywords Skill\nContent")
+        
+        manager = SkillsManager(skills_dir=skills_dir)
+        
+        # Should load but not match any tasks
+        assert "no_keywords_skill" in manager.skills_cache, "Should load skill"
+        skills = manager.get_skills_for_task("any task")
+        assert len(skills) == 0, "Should not match tasks without keywords"
+        
+        print("  ✓ Empty keywords handled correctly")
+    print()
+
+
+def test_skills_with_empty_providers():
+    """Test skills with empty providers list"""
+    print("Testing skills with empty providers...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        skills_dir = os.path.join(tmpdir, "skills")
+        os.makedirs(skills_dir)
+        
+        manifest = {
+            "version": "1.0.0",
+            "skills": {
+                "no_providers_skill": {
+                    "keywords": ["test"],
+                    "providers": []
+                }
+            }
+        }
+        
+        with open(os.path.join(skills_dir, "manifest.json"), 'w') as f:
+            json.dump(manifest, f)
+        
+        with open(os.path.join(skills_dir, "no_providers_skill.md"), 'w') as f:
+            f.write("# No Providers Skill\nContent")
+        
+        manager = SkillsManager(skills_dir=skills_dir)
+        
+        # Should load but not match any provider
+        assert "no_providers_skill" in manager.skills_cache, "Should load skill"
+        skills = manager.get_skills_for_task("test task", provider="anthropic")
+        assert len(skills) == 0, "Should not match any provider with empty list"
+        
+        print("  ✓ Empty providers handled correctly")
+    print()
+
+
+def test_duplicate_skill_names():
+    """Test handling of duplicate skill names (shouldn't happen, but test robustness)"""
+    print("Testing duplicate skill names...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        skills_dir = os.path.join(tmpdir, "skills")
+        os.makedirs(skills_dir)
+        
+        # Create two files with same content (one overwrites the other in cache)
+        with open(os.path.join(skills_dir, "skill.md"), 'w') as f:
+            f.write("# Skill 1\nFirst content")
+        
+        manager = SkillsManager(skills_dir=skills_dir)
+        
+        # Should have only one skill (the later one overwrites)
+        assert len(manager.skills_cache) == 1, "Should have one skill entry"
+        assert "skill" in manager.skills_cache, "Should have skill in cache"
+        
+        print("  ✓ Duplicate handling works correctly")
+    print()
+
+
+def test_config_with_none_skills_config():
+    """Test SkillsManager with None config parameter"""
+    print("Testing None config parameter...")
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        skills_dir = os.path.join(tmpdir, "skills")
+        os.makedirs(skills_dir)
+        
+        with open(os.path.join(skills_dir, "test_skill.md"), 'w') as f:
+            f.write("# Test Skill\nContent")
+        
+        # None config should work
+        manager = SkillsManager(skills_dir=skills_dir, config=None)
+        
+        assert len(manager.skills_cache) == 1, "Should work with None config"
+        assert manager.config == {}, "Config should default to empty dict"
+        
+        print("  ✓ None config handled correctly")
+    print()
+
+
 def run_all_tests():
     """Run all tests."""
     print("=" * 60)
@@ -632,7 +1015,31 @@ def run_all_tests():
     test_malformed_manifest()
     test_empty_skills_dir()
     
+    # Edge case tests
+    print("=" * 60)
+    print("EDGE CASE TESTS")
+    print("=" * 60)
+    print()
+    test_none_skills_dir()
+    test_empty_string_skills_dir()
+    test_nonexistent_skills_directory()
+    test_missing_manifest_json()
+    test_skill_file_missing_referenced_in_manifest()
+    test_empty_skill_file()
+    test_no_skills_match_provider()
+    test_no_skills_match_keywords()
+    test_relative_path_skills_dir()
+    test_absolute_path_skills_dir()
+    test_skills_with_empty_keywords()
+    test_skills_with_empty_providers()
+    test_duplicate_skill_names()
+    test_config_with_none_skills_config()
+    
     # Integration tests with real files
+    print("=" * 60)
+    print("INTEGRATION TESTS")
+    print("=" * 60)
+    print()
     test_all_skill_files_exist()
     test_skill_file_format()
     test_skill_content_not_empty()

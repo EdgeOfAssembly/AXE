@@ -35,14 +35,19 @@ class Skill:
 class SkillsManager:
     """Manager for Agent Skills system."""
     
-    def __init__(self, skills_dir: str = "skills", config: Optional[Dict] = None):
+    def __init__(self, skills_dir: Optional[str] = None, config: Optional[Dict] = None):
         """
         Initialize the Skills Manager.
         
         Args:
-            skills_dir: Path to skills directory (relative or absolute)
+            skills_dir: Path to skills directory (relative or absolute). 
+                       Defaults to "skills" in current directory if None or empty.
             config: Optional configuration dictionary for skills
         """
+        # Handle None or empty skills_dir with proper default
+        if skills_dir is None or skills_dir == '':
+            skills_dir = "skills"
+        
         self.skills_dir = skills_dir
         self.config = config or {}
         self.skills_cache: Dict[str, Skill] = {}
@@ -231,12 +236,12 @@ class SkillsManager:
         }
 
 
-def create_skills_manager(skills_dir: str = "skills", config: Optional[Dict] = None) -> SkillsManager:
+def create_skills_manager(skills_dir: Optional[str] = None, config: Optional[Dict] = None) -> SkillsManager:
     """
     Factory function to create a SkillsManager instance.
     
     Args:
-        skills_dir: Path to skills directory
+        skills_dir: Path to skills directory. Defaults to "skills" if None or empty.
         config: Optional configuration dictionary
         
     Returns:

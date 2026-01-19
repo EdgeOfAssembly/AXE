@@ -46,6 +46,8 @@ class Config:
 
                 # Deep merge with defaults
                 self._deep_merge(self.config, loaded)
+                # Track the loaded config path
+                self.config_path = path
                 print(c(f"Loaded config: {path}", Colors.DIM))
         except Exception as e:
             print(c(f"Config load error: {e}", Colors.RED))
