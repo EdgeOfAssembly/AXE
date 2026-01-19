@@ -45,7 +45,7 @@ class SkillsManager:
             config: Optional configuration dictionary for skills
         """
         # Handle None or empty skills_dir with proper default
-        if not skills_dir:
+        if skills_dir is None or skills_dir == '':
             skills_dir = "skills"
         
         self.skills_dir = skills_dir

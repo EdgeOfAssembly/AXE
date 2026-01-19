@@ -106,12 +106,11 @@ class AgentManager:
             # Determine models.yaml path - handle None config_path gracefully
             if self.config.config_path:
                 models_yaml_path = os.path.join(os.path.dirname(self.config.config_path), 'models.yaml')
+                if not os.path.exists(models_yaml_path):
+                    # Fall back to current directory
+                    models_yaml_path = 'models.yaml'
             else:
                 # Config was loaded from default location, try current directory
-                models_yaml_path = 'models.yaml'
-            
-            if not os.path.exists(models_yaml_path):
-                # Try alternate path in current directory
                 models_yaml_path = 'models.yaml'
             
             if not os.path.exists(models_yaml_path):
