@@ -1,0 +1,79 @@
+\doxysection{core.\+skills\+\_\+manager.\+Skill Class Reference}
+\hypertarget{classcore_1_1skills__manager_1_1Skill}{}\label{classcore_1_1skills__manager_1_1Skill}\index{core.skills\_manager.Skill@{core.skills\_manager.Skill}}
+
+
+Collaboration diagram for core.\+skills\+\_\+manager.\+Skill\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{classcore_1_1skills__manager_1_1Skill__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classcore_1_1skills__manager_1_1Skill_a4496ceb96b9daac77230970a754e903e}{matches\+\_\+keyword}} (self, str text)
+\item 
+bool \mbox{\hyperlink{classcore_1_1skills__manager_1_1Skill_a0a139054f37702e6617c608ca88f4609}{supports\+\_\+provider}} (self, str provider)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Dict \mbox{\hyperlink{classcore_1_1skills__manager_1_1Skill_a2ec603f99464ed34958c3e616ab50589}{metadata}} = field(default\+\_\+factory=dict)
+\item 
+List \mbox{\hyperlink{classcore_1_1skills__manager_1_1Skill_acb0c12eebb3248aa8a22f85b9ec17fb6}{keywords}} = field(default\+\_\+factory=list)
+\item 
+List \mbox{\hyperlink{classcore_1_1skills__manager_1_1Skill_a62f898f0c4b21b985305b80e92d9e255}{providers}} = field(default\+\_\+factory=lambda\+: \mbox{[}"{}all"{}\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Represents a single agent skill.\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1skills__manager_1_1Skill_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1skills__manager_1_1Skill_a4496ceb96b9daac77230970a754e903e}\index{core.skills\_manager.Skill@{core.skills\_manager.Skill}!matches\_keyword@{matches\_keyword}}
+\index{matches\_keyword@{matches\_keyword}!core.skills\_manager.Skill@{core.skills\_manager.Skill}}
+\doxysubsubsection{\texorpdfstring{matches\_keyword()}{matches\_keyword()}}
+{\footnotesize\ttfamily \label{classcore_1_1skills__manager_1_1Skill_a4496ceb96b9daac77230970a754e903e} 
+ bool core.\+skills\+\_\+manager.\+Skill.\+matches\+\_\+keyword (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{text}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if any keyword matches the given text (case-insensitive).\end{DoxyVerb}
+ \Hypertarget{classcore_1_1skills__manager_1_1Skill_a0a139054f37702e6617c608ca88f4609}\index{core.skills\_manager.Skill@{core.skills\_manager.Skill}!supports\_provider@{supports\_provider}}
+\index{supports\_provider@{supports\_provider}!core.skills\_manager.Skill@{core.skills\_manager.Skill}}
+\doxysubsubsection{\texorpdfstring{supports\_provider()}{supports\_provider()}}
+{\footnotesize\ttfamily \label{classcore_1_1skills__manager_1_1Skill_a0a139054f37702e6617c608ca88f4609} 
+ bool core.\+skills\+\_\+manager.\+Skill.\+supports\+\_\+provider (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{provider}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if skill supports the given provider.\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1skills__manager_1_1Skill_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1skills__manager_1_1Skill_acb0c12eebb3248aa8a22f85b9ec17fb6}\index{core.skills\_manager.Skill@{core.skills\_manager.Skill}!keywords@{keywords}}
+\index{keywords@{keywords}!core.skills\_manager.Skill@{core.skills\_manager.Skill}}
+\doxysubsubsection{\texorpdfstring{keywords}{keywords}}
+{\footnotesize\ttfamily \label{classcore_1_1skills__manager_1_1Skill_acb0c12eebb3248aa8a22f85b9ec17fb6} 
+core.\+skills\+\_\+manager.\+Skill.\+keywords = field(default\+\_\+factory=list)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classcore_1_1skills__manager_1_1Skill_a2ec603f99464ed34958c3e616ab50589}\index{core.skills\_manager.Skill@{core.skills\_manager.Skill}!metadata@{metadata}}
+\index{metadata@{metadata}!core.skills\_manager.Skill@{core.skills\_manager.Skill}}
+\doxysubsubsection{\texorpdfstring{metadata}{metadata}}
+{\footnotesize\ttfamily \label{classcore_1_1skills__manager_1_1Skill_a2ec603f99464ed34958c3e616ab50589} 
+Dict core.\+skills\+\_\+manager.\+Skill.\+metadata = field(default\+\_\+factory=dict)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classcore_1_1skills__manager_1_1Skill_a62f898f0c4b21b985305b80e92d9e255}\index{core.skills\_manager.Skill@{core.skills\_manager.Skill}!providers@{providers}}
+\index{providers@{providers}!core.skills\_manager.Skill@{core.skills\_manager.Skill}}
+\doxysubsubsection{\texorpdfstring{providers}{providers}}
+{\footnotesize\ttfamily \label{classcore_1_1skills__manager_1_1Skill_a62f898f0c4b21b985305b80e92d9e255} 
+List core.\+skills\+\_\+manager.\+Skill.\+providers = field(default\+\_\+factory=lambda\+: \mbox{[}"{}all"{}\mbox{]})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{skills__manager_8py}{skills\+\_\+manager.\+py}}\end{DoxyCompactItemize}

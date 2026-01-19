@@ -1,0 +1,350 @@
+\doxysection{tools.\+minifier Namespace Reference}
+\hypertarget{namespacetools_1_1minifier}{}\label{namespacetools_1_1minifier}\index{tools.minifier@{tools.minifier}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classtools_1_1minifier_1_1Minifier}{Minifier}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_a1630a58d0997c2a2b5a3ce016724addf}{comment\+\_\+remover\+\_\+c\+\_\+cpp}} (str text)
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_acbce42ca8e81d30a52cf2ea48e9f1055}{minify\+\_\+c\+\_\+cpp}} (str code, bool keep\+\_\+comments=False)
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_a90c1982b6a18089fdd441a06d159838e}{remove\+\_\+comments\+\_\+and\+\_\+docstrings}} (str source)
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_a1891c0e16ec30fddff99c105a8c937b2}{minify\+\_\+python}} (str code, bool keep\+\_\+comments=False)
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_a6518e5a9a554ade99baa729734a1bc32}{minify\+\_\+asm}} (str code, bool keep\+\_\+comments=False)
+\item 
+Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{namespacetools_1_1minifier_a25b99dc57972f81c283eb4f4785fbb34}{detect\+\_\+language}} (str file\+\_\+path, str content)
+\item 
+List\mbox{[}Tuple\mbox{[}str, str\mbox{]}\mbox{]} \mbox{\hyperlink{namespacetools_1_1minifier_ae166d4d8a8bc0833f94cf2d7609e69b3}{collect\+\_\+files}} (List\mbox{[}str\mbox{]} inputs, bool recursive=False, Optional\mbox{[}Set\mbox{[}str\mbox{]}\mbox{]} exclude\+\_\+dirs=None)
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_aacdb1f82a46ba895c204735c699c0a16}{minify\+\_\+file}} (str file\+\_\+path, bool keep\+\_\+comments=True)
+\item 
+Dict\mbox{[}str, str\mbox{]} \mbox{\hyperlink{namespacetools_1_1minifier_ae494be5ae54eab91cda8dcd6d775bf99}{minify\+\_\+directory}} (str dir\+\_\+path, bool recursive=True, bool keep\+\_\+comments=True, Optional\mbox{[}Set\mbox{[}str\mbox{]}\mbox{]} exclude\+\_\+dirs=None)
+\item 
+\mbox{\hyperlink{namespacetools_1_1minifier_abfc117aec684ce9f71f3bc2b62816ff2}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_a0092e4e02242c93f713c2419fe534dd6}{\+\_\+\+\_\+version\+\_\+\+\_\+}} = "{}1.\+0.\+0"{}
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1minifier_a24fa4331460d1986a2e1f53a6bb39158}{HAS\+\_\+\+GUESSLANG}} = True
+\item 
+list \mbox{\hyperlink{namespacetools_1_1minifier_aaab97537de846c0fca4f366b804b8eb8}{SUPPORTED\+\_\+\+EXTS}} = \mbox{[}\textquotesingle{}.c\textquotesingle{}, \textquotesingle{}.cpp\textquotesingle{}, \textquotesingle{}.cc\textquotesingle{}, \textquotesingle{}.cxx\textquotesingle{}, \textquotesingle{}.h\textquotesingle{}, \textquotesingle{}.hpp\textquotesingle{}, \textquotesingle{}.hxx\textquotesingle{}, \textquotesingle{}.py\textquotesingle{}, \textquotesingle{}.asm\textquotesingle{}, \textquotesingle{}.s\textquotesingle{}, \textquotesingle{}.S\textquotesingle{}\mbox{]}
+\item 
+dict \mbox{\hyperlink{namespacetools_1_1minifier_a943a0d78498a28ad2ffc352915df9fb2}{DEFAULT\+\_\+\+EXCLUDE\+\_\+\+DIRS}}
+\item 
+\mbox{\hyperlink{namespacetools_1_1minifier_a2efc62051245a18dad2393b987e55608}{logger}} = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Source Code Minifier for AXE
+
+Minifies C, C++, Python, and Assembly source code to reduce token usage
+when feeding code to LLMs while preserving compilability.
+
+Features:
+- Remove comments and docstrings (configurable)
+- Strip whitespace and blank lines
+- Preserve Python indentation
+- Support recursive directory processing
+- Language detection via guesslang or file extension
+- Exclude common directories (tests, __pycache__, .git, venv, etc.)
+
+Author: EdgeOfAssembly
+License: GPLv3 / Commercial
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacetools_1_1minifier_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetools_1_1minifier_ae166d4d8a8bc0833f94cf2d7609e69b3}\index{tools.minifier@{tools.minifier}!collect\_files@{collect\_files}}
+\index{collect\_files@{collect\_files}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{collect\_files()}{collect\_files()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_ae166d4d8a8bc0833f94cf2d7609e69b3} 
+ List\mbox{[}Tuple\mbox{[}str, str\mbox{]}\mbox{]} tools.\+minifier.\+collect\+\_\+files (\begin{DoxyParamCaption}\item[{List\mbox{[}str\mbox{]}}]{inputs}{, }\item[{bool }]{recursive}{ = {\ttfamily False}, }\item[{Optional\mbox{[}Set\mbox{[}str\mbox{]}\mbox{]} }]{exclude\+\_\+dirs}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Collect all supported source files from input paths.
+
+Args:
+    inputs: List of file or directory paths
+    recursive: If True, recurse into subdirectories
+    exclude_dirs: Set of directory names to exclude
+    
+Returns:
+    List of tuples (full_path, relative_path)
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1minifier_ae166d4d8a8bc0833f94cf2d7609e69b3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1minifier_a1630a58d0997c2a2b5a3ce016724addf}\index{tools.minifier@{tools.minifier}!comment\_remover\_c\_cpp@{comment\_remover\_c\_cpp}}
+\index{comment\_remover\_c\_cpp@{comment\_remover\_c\_cpp}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{comment\_remover\_c\_cpp()}{comment\_remover\_c\_cpp()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_a1630a58d0997c2a2b5a3ce016724addf} 
+ str tools.\+minifier.\+comment\+\_\+remover\+\_\+c\+\_\+cpp (\begin{DoxyParamCaption}\item[{str}]{text}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Remove C/C++ comments from source code.
+
+Preserves strings and character literals.
+
+Args:
+    text: Source code text
+    
+Returns:
+    Text with comments removed
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1minifier_a1630a58d0997c2a2b5a3ce016724addf_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1minifier_a25b99dc57972f81c283eb4f4785fbb34}\index{tools.minifier@{tools.minifier}!detect\_language@{detect\_language}}
+\index{detect\_language@{detect\_language}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{detect\_language()}{detect\_language()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_a25b99dc57972f81c283eb4f4785fbb34} 
+ Optional\mbox{[}str\mbox{]} tools.\+minifier.\+detect\+\_\+language (\begin{DoxyParamCaption}\item[{str}]{file\+\_\+path}{, }\item[{str}]{content}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Detect the programming language of a file.
+
+Uses guesslang if available, otherwise falls back to extension-based detection.
+
+Args:
+    file_path: Path to the file
+    content: File content
+    
+Returns:
+    Language identifier ('c_cpp', 'python', 'asm') or None if unsupported
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1minifier_a25b99dc57972f81c283eb4f4785fbb34_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1minifier_abfc117aec684ce9f71f3bc2b62816ff2}\index{tools.minifier@{tools.minifier}!main@{main}}
+\index{main@{main}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_abfc117aec684ce9f71f3bc2b62816ff2} 
+tools.\+minifier.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Command-line interface for minifier.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{namespacetools_1_1minifier_abfc117aec684ce9f71f3bc2b62816ff2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{namespacetools_1_1minifier_abfc117aec684ce9f71f3bc2b62816ff2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1minifier_a6518e5a9a554ade99baa729734a1bc32}\index{tools.minifier@{tools.minifier}!minify\_asm@{minify\_asm}}
+\index{minify\_asm@{minify\_asm}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{minify\_asm()}{minify\_asm()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_a6518e5a9a554ade99baa729734a1bc32} 
+ str tools.\+minifier.\+minify\+\_\+asm (\begin{DoxyParamCaption}\item[{str}]{code}{, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Minify Assembly source code.
+
+Args:
+    code: Assembly source code
+    keep_comments: If True, preserve comments
+    
+Returns:
+    Minified assembly code
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1minifier_a6518e5a9a554ade99baa729734a1bc32_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1minifier_acbce42ca8e81d30a52cf2ea48e9f1055}\index{tools.minifier@{tools.minifier}!minify\_c\_cpp@{minify\_c\_cpp}}
+\index{minify\_c\_cpp@{minify\_c\_cpp}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{minify\_c\_cpp()}{minify\_c\_cpp()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_acbce42ca8e81d30a52cf2ea48e9f1055} 
+ str tools.\+minifier.\+minify\+\_\+c\+\_\+cpp (\begin{DoxyParamCaption}\item[{str}]{code}{, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Minify C/C++ source code.
+
+Args:
+    code: Source code to minify
+    keep_comments: If True, preserve comments
+    
+Returns:
+    Minified code
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1minifier_acbce42ca8e81d30a52cf2ea48e9f1055_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1minifier_acbce42ca8e81d30a52cf2ea48e9f1055_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1minifier_ae494be5ae54eab91cda8dcd6d775bf99}\index{tools.minifier@{tools.minifier}!minify\_directory@{minify\_directory}}
+\index{minify\_directory@{minify\_directory}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{minify\_directory()}{minify\_directory()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_ae494be5ae54eab91cda8dcd6d775bf99} 
+ Dict\mbox{[}str, str\mbox{]} tools.\+minifier.\+minify\+\_\+directory (\begin{DoxyParamCaption}\item[{str}]{dir\+\_\+path}{, }\item[{bool }]{recursive}{ = {\ttfamily True}, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily True}, }\item[{Optional\mbox{[}Set\mbox{[}str\mbox{]}\mbox{]} }]{exclude\+\_\+dirs}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Convenience function to minify a directory.
+
+Args:
+    dir_path: Path to directory
+    recursive: If True, recurse into subdirectories
+    keep_comments: If True, preserve comments
+    exclude_dirs: Set of directory names to exclude
+    
+Returns:
+    Dictionary mapping file paths to minified content
+\end{DoxyVerb}
+ \Hypertarget{namespacetools_1_1minifier_aacdb1f82a46ba895c204735c699c0a16}\index{tools.minifier@{tools.minifier}!minify\_file@{minify\_file}}
+\index{minify\_file@{minify\_file}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{minify\_file()}{minify\_file()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_aacdb1f82a46ba895c204735c699c0a16} 
+ str tools.\+minifier.\+minify\+\_\+file (\begin{DoxyParamCaption}\item[{str}]{file\+\_\+path}{, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily True}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Convenience function to minify a single file.
+
+Args:
+    file_path: Path to file
+    keep_comments: If True, preserve comments
+    
+Returns:
+    Minified source code
+\end{DoxyVerb}
+ \Hypertarget{namespacetools_1_1minifier_a1891c0e16ec30fddff99c105a8c937b2}\index{tools.minifier@{tools.minifier}!minify\_python@{minify\_python}}
+\index{minify\_python@{minify\_python}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{minify\_python()}{minify\_python()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_a1891c0e16ec30fddff99c105a8c937b2} 
+ str tools.\+minifier.\+minify\+\_\+python (\begin{DoxyParamCaption}\item[{str}]{code}{, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Minify Python source code.
+
+IMPORTANT: Preserves indentation to maintain Python syntax correctness.
+
+Args:
+    code: Source code to minify
+    keep_comments: If True, preserve comments
+    
+Returns:
+    Minified code with proper indentation
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1minifier_a1891c0e16ec30fddff99c105a8c937b2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1minifier_a1891c0e16ec30fddff99c105a8c937b2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1minifier_a90c1982b6a18089fdd441a06d159838e}\index{tools.minifier@{tools.minifier}!remove\_comments\_and\_docstrings@{remove\_comments\_and\_docstrings}}
+\index{remove\_comments\_and\_docstrings@{remove\_comments\_and\_docstrings}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{remove\_comments\_and\_docstrings()}{remove\_comments\_and\_docstrings()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_a90c1982b6a18089fdd441a06d159838e} 
+ str tools.\+minifier.\+remove\+\_\+comments\+\_\+and\+\_\+docstrings (\begin{DoxyParamCaption}\item[{str}]{source}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Remove Python comments and docstrings from source code.
+
+Preserves regular strings and code structure.
+
+Args:
+    source: Python source code
+    
+Returns:
+    Code with comments and docstrings removed
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1minifier_a90c1982b6a18089fdd441a06d159838e_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{namespacetools_1_1minifier_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacetools_1_1minifier_a0092e4e02242c93f713c2419fe534dd6}\index{tools.minifier@{tools.minifier}!\_\_version\_\_@{\_\_version\_\_}}
+\index{\_\_version\_\_@{\_\_version\_\_}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{\_\_version\_\_}{\_\_version\_\_}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_a0092e4e02242c93f713c2419fe534dd6} 
+str tools.\+minifier.\+\_\+\+\_\+version\+\_\+\+\_\+ = "{}1.\+0.\+0"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{namespacetools_1_1minifier_a943a0d78498a28ad2ffc352915df9fb2}\index{tools.minifier@{tools.minifier}!DEFAULT\_EXCLUDE\_DIRS@{DEFAULT\_EXCLUDE\_DIRS}}
+\index{DEFAULT\_EXCLUDE\_DIRS@{DEFAULT\_EXCLUDE\_DIRS}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_EXCLUDE\_DIRS}{DEFAULT\_EXCLUDE\_DIRS}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_a943a0d78498a28ad2ffc352915df9fb2} 
+dict tools.\+minifier.\+DEFAULT\+\_\+\+EXCLUDE\+\_\+\+DIRS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{'tests'},\ \textcolor{stringliteral}{'\_\_pycache\_\_'},\ \textcolor{stringliteral}{'.git'},\ \textcolor{stringliteral}{'venv'},\ \textcolor{stringliteral}{'.venv'},\ \textcolor{stringliteral}{'env'},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{'node\_modules'},\ \textcolor{stringliteral}{'build'},\ \textcolor{stringliteral}{'dist'},\ \textcolor{stringliteral}{'.pytest\_cache'},\ \textcolor{stringliteral}{'.tox'},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{'eggs'},\ \textcolor{stringliteral}{'.eggs'},\ \textcolor{stringliteral}{'htmlcov'},\ \textcolor{stringliteral}{'.mypy\_cache'},\ \textcolor{stringliteral}{'.ruff\_cache'}}
+\DoxyCodeLine{00005\ \}}
+
+\end{DoxyCode}
+\Hypertarget{namespacetools_1_1minifier_a24fa4331460d1986a2e1f53a6bb39158}\index{tools.minifier@{tools.minifier}!HAS\_GUESSLANG@{HAS\_GUESSLANG}}
+\index{HAS\_GUESSLANG@{HAS\_GUESSLANG}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{HAS\_GUESSLANG}{HAS\_GUESSLANG}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_a24fa4331460d1986a2e1f53a6bb39158} 
+bool tools.\+minifier.\+HAS\+\_\+\+GUESSLANG = True}
+
+\Hypertarget{namespacetools_1_1minifier_a2efc62051245a18dad2393b987e55608}\index{tools.minifier@{tools.minifier}!logger@{logger}}
+\index{logger@{logger}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{logger}{logger}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_a2efc62051245a18dad2393b987e55608} 
+tools.\+minifier.\+logger = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)}
+
+\Hypertarget{namespacetools_1_1minifier_aaab97537de846c0fca4f366b804b8eb8}\index{tools.minifier@{tools.minifier}!SUPPORTED\_EXTS@{SUPPORTED\_EXTS}}
+\index{SUPPORTED\_EXTS@{SUPPORTED\_EXTS}!tools.minifier@{tools.minifier}}
+\doxysubsubsection{\texorpdfstring{SUPPORTED\_EXTS}{SUPPORTED\_EXTS}}
+{\footnotesize\ttfamily \label{namespacetools_1_1minifier_aaab97537de846c0fca4f366b804b8eb8} 
+list tools.\+minifier.\+SUPPORTED\+\_\+\+EXTS = \mbox{[}\textquotesingle{}.c\textquotesingle{}, \textquotesingle{}.cpp\textquotesingle{}, \textquotesingle{}.cc\textquotesingle{}, \textquotesingle{}.cxx\textquotesingle{}, \textquotesingle{}.h\textquotesingle{}, \textquotesingle{}.hpp\textquotesingle{}, \textquotesingle{}.hxx\textquotesingle{}, \textquotesingle{}.py\textquotesingle{}, \textquotesingle{}.asm\textquotesingle{}, \textquotesingle{}.s\textquotesingle{}, \textquotesingle{}.S\textquotesingle{}\mbox{]}}
+

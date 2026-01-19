@@ -1,0 +1,238 @@
+\doxysection{workshop.\+chisel.\+Chisel\+Analyzer Class Reference}
+\hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer}{}\label{classworkshop_1_1chisel_1_1ChiselAnalyzer}\index{workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}}
+
+
+Collaboration diagram for workshop.\+chisel.\+Chisel\+Analyzer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{classworkshop_1_1chisel_1_1ChiselAnalyzer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer_ab81f57b7cb61710e15e5519310436dc4}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer_a8e657b88c2f618845ea3f156f6d303bc}{config}}=None)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer_a08898a342ce3b5f527cc5ec8e235ffdb}{analyze\+\_\+binary}} (self, str binary\+\_\+path, Optional\mbox{[}int\mbox{]} start\+\_\+addr=None)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer_a27aee86cdc5318fc86c52a95b4148b50}{analyze\+\_\+function}} (self, str binary\+\_\+path, str func\+\_\+name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer_a8e657b88c2f618845ea3f156f6d303bc}{config}} = config or \{\}
+\item 
+dict \mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer_a01ea4625cb5b5b2086163b443cb33137}{project\+\_\+cache}} = \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List\mbox{[}int\mbox{]} \mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer_a6c1d01c7d9e55006508411fd8b092dc1}{\+\_\+find\+\_\+targets}} (self)
+\item 
+List\mbox{[}int\mbox{]} \mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer_a5d8e0664b65831068788dde5dba89e0f}{\+\_\+avoid\+\_\+targets}} (self)
+\item 
+\mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer_a2bb4b175d37b7c5f3abe66368371ac8f}{\+\_\+step\+\_\+callback}} (self, simgr)
+\item 
+List\mbox{[}str\mbox{]} \mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer_abb8d63f59e4a6e219caaddfa8cf5ad33}{\+\_\+extract\+\_\+constraints}} (self, simgr)
+\item 
+List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer_af0743f86826a48c14eea6d2ffdf961c9}{\+\_\+detect\+\_\+vulnerabilities}} (self, simgr, proj)
+\item 
+bool \mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer_a4f5c6efc6a0dd95fb7b71fb1fd7d6a4c}{\+\_\+has\+\_\+unconstrained\+\_\+access}} (self, state)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Symbolic execution analyzer for carving out execution paths and constraints.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_ab81f57b7cb61710e15e5519310436dc4}\index{workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1chisel_1_1ChiselAnalyzer_ab81f57b7cb61710e15e5519310436dc4} 
+workshop.\+chisel.\+Chisel\+Analyzer.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_a5d8e0664b65831068788dde5dba89e0f}\index{workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}!\_avoid\_targets@{\_avoid\_targets}}
+\index{\_avoid\_targets@{\_avoid\_targets}!workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}}
+\doxysubsubsection{\texorpdfstring{\_avoid\_targets()}{\_avoid\_targets()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1chisel_1_1ChiselAnalyzer_a5d8e0664b65831068788dde5dba89e0f} 
+ List\mbox{[}int\mbox{]} workshop.\+chisel.\+Chisel\+Analyzer.\+\_\+avoid\+\_\+targets (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Define addresses to avoid during exploration.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1chisel_1_1ChiselAnalyzer_a5d8e0664b65831068788dde5dba89e0f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_af0743f86826a48c14eea6d2ffdf961c9}\index{workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}!\_detect\_vulnerabilities@{\_detect\_vulnerabilities}}
+\index{\_detect\_vulnerabilities@{\_detect\_vulnerabilities}!workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}}
+\doxysubsubsection{\texorpdfstring{\_detect\_vulnerabilities()}{\_detect\_vulnerabilities()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1chisel_1_1ChiselAnalyzer_af0743f86826a48c14eea6d2ffdf961c9} 
+ List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} workshop.\+chisel.\+Chisel\+Analyzer.\+\_\+detect\+\_\+vulnerabilities (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{simgr}{, }\item[{}]{proj}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Detect potential vulnerabilities in explored paths.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1chisel_1_1ChiselAnalyzer_af0743f86826a48c14eea6d2ffdf961c9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1chisel_1_1ChiselAnalyzer_af0743f86826a48c14eea6d2ffdf961c9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_abb8d63f59e4a6e219caaddfa8cf5ad33}\index{workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}!\_extract\_constraints@{\_extract\_constraints}}
+\index{\_extract\_constraints@{\_extract\_constraints}!workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}}
+\doxysubsubsection{\texorpdfstring{\_extract\_constraints()}{\_extract\_constraints()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1chisel_1_1ChiselAnalyzer_abb8d63f59e4a6e219caaddfa8cf5ad33} 
+ List\mbox{[}str\mbox{]} workshop.\+chisel.\+Chisel\+Analyzer.\+\_\+extract\+\_\+constraints (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{simgr}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Extract path constraints from simulation manager.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1chisel_1_1ChiselAnalyzer_abb8d63f59e4a6e219caaddfa8cf5ad33_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_a6c1d01c7d9e55006508411fd8b092dc1}\index{workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}!\_find\_targets@{\_find\_targets}}
+\index{\_find\_targets@{\_find\_targets}!workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}}
+\doxysubsubsection{\texorpdfstring{\_find\_targets()}{\_find\_targets()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1chisel_1_1ChiselAnalyzer_a6c1d01c7d9e55006508411fd8b092dc1} 
+ List\mbox{[}int\mbox{]} workshop.\+chisel.\+Chisel\+Analyzer.\+\_\+find\+\_\+targets (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Define target addresses to find during exploration.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1chisel_1_1ChiselAnalyzer_a6c1d01c7d9e55006508411fd8b092dc1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_a4f5c6efc6a0dd95fb7b71fb1fd7d6a4c}\index{workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}!\_has\_unconstrained\_access@{\_has\_unconstrained\_access}}
+\index{\_has\_unconstrained\_access@{\_has\_unconstrained\_access}!workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}}
+\doxysubsubsection{\texorpdfstring{\_has\_unconstrained\_access()}{\_has\_unconstrained\_access()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1chisel_1_1ChiselAnalyzer_a4f5c6efc6a0dd95fb7b71fb1fd7d6a4c} 
+ bool workshop.\+chisel.\+Chisel\+Analyzer.\+\_\+has\+\_\+unconstrained\+\_\+access (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Check if state has unconstrained memory access.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1chisel_1_1ChiselAnalyzer_a4f5c6efc6a0dd95fb7b71fb1fd7d6a4c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_a2bb4b175d37b7c5f3abe66368371ac8f}\index{workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}!\_step\_callback@{\_step\_callback}}
+\index{\_step\_callback@{\_step\_callback}!workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}}
+\doxysubsubsection{\texorpdfstring{\_step\_callback()}{\_step\_callback()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1chisel_1_1ChiselAnalyzer_a2bb4b175d37b7c5f3abe66368371ac8f} 
+workshop.\+chisel.\+Chisel\+Analyzer.\+\_\+step\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{simgr}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Callback for each step in symbolic execution.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1chisel_1_1ChiselAnalyzer_a2bb4b175d37b7c5f3abe66368371ac8f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_a08898a342ce3b5f527cc5ec8e235ffdb}\index{workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}!analyze\_binary@{analyze\_binary}}
+\index{analyze\_binary@{analyze\_binary}!workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}}
+\doxysubsubsection{\texorpdfstring{analyze\_binary()}{analyze\_binary()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1chisel_1_1ChiselAnalyzer_a08898a342ce3b5f527cc5ec8e235ffdb} 
+ Dict\mbox{[}str, Any\mbox{]} workshop.\+chisel.\+Chisel\+Analyzer.\+analyze\+\_\+binary (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{binary\+\_\+path}{, }\item[{Optional\mbox{[}int\mbox{]} }]{start\+\_\+addr}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Perform symbolic execution on a binary file.
+
+Args:
+    binary_path: Path to the binary to analyze
+    start_addr: Optional starting address for analysis
+
+Returns:
+    Dict containing analysis results: paths, constraints, vulnerabilities
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1chisel_1_1ChiselAnalyzer_a08898a342ce3b5f527cc5ec8e235ffdb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1chisel_1_1ChiselAnalyzer_a08898a342ce3b5f527cc5ec8e235ffdb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_a27aee86cdc5318fc86c52a95b4148b50}\index{workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}!analyze\_function@{analyze\_function}}
+\index{analyze\_function@{analyze\_function}!workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}}
+\doxysubsubsection{\texorpdfstring{analyze\_function()}{analyze\_function()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1chisel_1_1ChiselAnalyzer_a27aee86cdc5318fc86c52a95b4148b50} 
+ Dict\mbox{[}str, Any\mbox{]} workshop.\+chisel.\+Chisel\+Analyzer.\+analyze\+\_\+function (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{binary\+\_\+path}{, }\item[{str}]{func\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Analyze a specific function symbolically.
+
+Args:
+    binary_path: Path to binary
+    func_name: Function name to analyze
+
+Returns:
+    Analysis results for the function
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1chisel_1_1ChiselAnalyzer_a27aee86cdc5318fc86c52a95b4148b50_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_a8e657b88c2f618845ea3f156f6d303bc}\index{workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}!config@{config}}
+\index{config@{config}!workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classworkshop_1_1chisel_1_1ChiselAnalyzer_a8e657b88c2f618845ea3f156f6d303bc} 
+workshop.\+chisel.\+Chisel\+Analyzer.\+config = config or \{\}}
+
+\Hypertarget{classworkshop_1_1chisel_1_1ChiselAnalyzer_a01ea4625cb5b5b2086163b443cb33137}\index{workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}!project\_cache@{project\_cache}}
+\index{project\_cache@{project\_cache}!workshop.chisel.ChiselAnalyzer@{workshop.chisel.ChiselAnalyzer}}
+\doxysubsubsection{\texorpdfstring{project\_cache}{project\_cache}}
+{\footnotesize\ttfamily \label{classworkshop_1_1chisel_1_1ChiselAnalyzer_a01ea4625cb5b5b2086163b443cb33137} 
+dict workshop.\+chisel.\+Chisel\+Analyzer.\+project\+\_\+cache = \{\}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+workshop/\mbox{\hyperlink{chisel_8py}{chisel.\+py}}\end{DoxyCompactItemize}

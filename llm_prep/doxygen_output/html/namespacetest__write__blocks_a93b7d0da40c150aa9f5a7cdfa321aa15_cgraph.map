@@ -1,0 +1,28 @@
+<map id="test_write_blocks.main" name="test_write_blocks.main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,377,178,405"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="50,377,43,368,49,358,65,352,92,350,120,353,137,360,132,363,119,358,91,356,66,358,52,362,49,368,55,376"/>
+<area shape="rect" id="Node000002" href="$namespacetest__write__blocks.html#a4522e57578ea1ba596d6b7c49a274c65" title=" " alt="" coords="247,5,421,67"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="92,376,103,321,127,242,144,198,166,155,192,114,224,77,236,69,233,74,228,81,196,117,170,157,149,200,132,244,109,323,98,377"/>
+<area shape="rect" id="Node000003" href="$namespacetest__write__blocks.html#a84f018c25f8bb77ccf86173ae0cb14c9" title=" " alt="" coords="241,91,426,136"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="94,376,108,331,134,270,172,204,196,173,224,146,232,142,229,146,227,150,200,177,177,207,139,272,113,333,99,377"/>
+<area shape="rect" id="Node000005" href="$namespacetest__write__blocks.html#add4bb907173efd0dda523b2b5e91acf0" title=" " alt="" coords="252,160,416,205"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="98,375,116,342,144,299,180,254,224,215,239,208,236,212,227,220,184,258,148,303,120,345,102,377"/>
+<area shape="rect" id="Node000006" href="$namespacetest__write__blocks.html#a77c816038348e6403b7d1cb87bf1b49e" title=" " alt="" coords="242,230,426,274"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="105,375,156,331,189,306,224,284,239,279,236,283,227,289,192,311,159,335,110,378"/>
+<area shape="rect" id="Node000007" href="$namespacetest__write__blocks.html#afc0956b20195927c54ffcacd8c921a10" title=" " alt="" coords="245,299,422,344"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="141,374,241,347,237,351,144,379"/>
+<area shape="rect" id="Node000008" href="$namespacetest__write__blocks.html#a11f17425c3946c4a2c50bcb56852f52e" title=" " alt="" coords="226,368,442,413"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="177,388,212,389,208,392,179,393"/>
+<area shape="rect" id="Node000009" href="$namespacetest__write__blocks.html#a3a8c1433d19bbd15c9d507d494b4c49f" title=" " alt="" coords="250,438,418,482"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="142,403,241,432,237,435,143,408"/>
+<area shape="rect" id="Node000010" href="$namespacetest__write__blocks.html#a58a84116cbfdda538a612e23621e4a84" title=" " alt="" coords="248,507,420,552"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="107,403,159,447,192,471,227,492,240,500,235,501,224,497,189,476,156,451,108,408"/>
+<area shape="rect" id="Node000011" href="$namespacetest__write__blocks.html#a868f02f0bc6cbcf85f5598312caeda49" title=" " alt="" coords="252,576,416,621"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="100,403,120,437,148,479,184,524,227,562,240,571,235,572,224,566,180,527,144,482,116,439,100,408"/>
+<area shape="rect" id="Node000012" href="$namespacetest__write__blocks.html#a669bacf194a0c36da43e44f1c3d3b8f3" title=" " alt="" coords="239,646,428,690"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="97,403,113,449,139,510,177,575,200,605,227,631,234,638,228,637,224,636,196,609,172,578,134,512,108,450,96,408"/>
+<area shape="rect" id="Node000013" href="$namespacetest__write__blocks.html#abc2ed9d023ae22219a7bc9f314e36ca5" title=" " alt="" coords="247,715,421,760"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="95,402,108,459,130,539,147,583,169,626,195,666,227,701,236,710,231,709,224,705,191,669,164,628,142,585,125,541,102,461,94,408"/>
+<area shape="rect" id="Node000004" href="$namespacetest__write__blocks.html#a62ca47969e7ca35ac9678021312a59c3" title=" " alt="" coords="490,91,686,136"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="426,111,477,112,472,115,428,116"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="tools.minifier.collect_files" name="tools.minifier.collect_files">
+<area shape="rect" id="Node000001" title=" " alt="" coords="508,52,661,96"/>
+<area shape="rect" id="Node000002" href="$namespacetools_1_1minifier.html#abfc117aec684ce9f71f3bc2b62816ff2" title=" " alt="" coords="287,29,430,57"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="490,62,430,56,430,50,495,61"/>
+<area shape="rect" id="Node000003" href="$classtools_1_1minifier_1_1Minifier.html#aef10b8bbbe845f198d5f739278cf596d" title=" " alt="" coords="257,81,460,126"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="495,85,461,93,460,87,490,86"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="395,14,384,10,358,8,335,10,322,15,319,20,324,30,319,28,313,20,318,11,334,5,358,3,385,5,401,14"/>
+<area shape="rect" id="Node000004" href="$classtools_1_1minifier_1_1Minifier.html#a316d3dbf2526c91794276c888391c8a7" title=" " alt="" coords="5,81,209,126"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="239,103,209,106,209,101,244,103"/>
+</map>

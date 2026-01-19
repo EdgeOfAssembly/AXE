@@ -1,0 +1,15 @@
+\chapter{boot\+\_\+flow\+\_\+reconstruction }
+\hypertarget{md_skills_2boot__flow__reconstruction}{}\label{md_skills_2boot__flow__reconstruction}\index{boot\_flow\_reconstruction@{boot\_flow\_reconstruction}}
+Skill\+: boot\+\_\+flow\+\_\+reconstruction Category\+: Firmware Architecture Recommended agents\+: llama + claude (review) Purpose\+: Rebuild the boot sequence and initialization flow of embedded firmware
+
+Typical stages to map\+:
+\begin{DoxyItemize}
+\item Reset vector / vector table
+\item Early assembly init (stack, .bss zeroing, relocation)
+\item Clock/power/peripheral basic init
+\item Secondary bootloader / stage 2
+\item Kernel loading / jump to C code
+\item RTOS startup (Free\+RTOS, Zephyr, ThreadX patterns)
+\end{DoxyItemize}
+
+Typical inputs\+: Reset handler address + disassembly + binwalk results Outputs\+: Markdown boot timeline + simple ASCII flow diagram + key functions/addresses 

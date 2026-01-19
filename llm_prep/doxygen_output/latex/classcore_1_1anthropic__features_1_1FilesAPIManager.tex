@@ -1,0 +1,218 @@
+\doxysection{core.\+anthropic\+\_\+features.\+Files\+APIManager Class Reference}
+\hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager}{}\label{classcore_1_1anthropic__features_1_1FilesAPIManager}\index{core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}}
+
+
+Collaboration diagram for core.\+anthropic\+\_\+features.\+Files\+APIManager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{classcore_1_1anthropic__features_1_1FilesAPIManager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_a765eb5595c3275a0e2e769f6496a0ce2}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Any \mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_abd8e00550d81702a792e0c9bd0e53b9a}{client}}=None, Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_a290158fc037a54cabbde466b7c998d7a}{config}}=None)
+\item 
+bool \mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_ab869a3faaad1f8aeb4943f5d1d72134d}{is\+\_\+enabled}} (self)
+\item 
+int \mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_af92bb5475aa459712466b6ad8f7bd409}{get\+\_\+upload\+\_\+threshold\+\_\+kb}} (self)
+\item 
+bool \mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_a99c82d41328c99549d39fc0553df97ff}{should\+\_\+upload\+\_\+file}} (self, int file\+\_\+size\+\_\+bytes)
+\item 
+Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_a382ed85a0a1e80116c9e9b66e8f32aa7}{upload\+\_\+file}} (self, str file\+\_\+path)
+\item 
+bool \mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_ac508bbb6766908b219a3f3a599eb5869}{delete\+\_\+file}} (self, str file\+\_\+id)
+\item 
+List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_a152fe4d5284b0154eb3ed2127660f000}{list\+\_\+files}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_abd8e00550d81702a792e0c9bd0e53b9a}{client}} = client
+\item 
+\mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_a290158fc037a54cabbde466b7c998d7a}{config}} = config or \{\}
+\item 
+str \mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_ac2db3a4abfa989d97523aaab42e86381}{beta\+\_\+header}} = \textquotesingle{}files-\/api-\/2025-\/04-\/14\textquotesingle{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Manager for Anthropic Files API operations.\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_a765eb5595c3275a0e2e769f6496a0ce2}\index{core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1FilesAPIManager_a765eb5595c3275a0e2e769f6496a0ce2} 
+core.\+anthropic\+\_\+features.\+Files\+APIManager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Any }]{client}{ = {\ttfamily None}, }\item[{Dict\mbox{[}str, Any\mbox{]} }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize Files API manager.
+
+Args:
+    client: Anthropic API client instance
+    config: Configuration dictionary
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_ac508bbb6766908b219a3f3a599eb5869}\index{core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}!delete\_file@{delete\_file}}
+\index{delete\_file@{delete\_file}!core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}}
+\doxysubsubsection{\texorpdfstring{delete\_file()}{delete\_file()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1FilesAPIManager_ac508bbb6766908b219a3f3a599eb5869} 
+ bool core.\+anthropic\+\_\+features.\+Files\+APIManager.\+delete\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{file\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Delete a file from Anthropic.
+
+Args:
+    file_id: File ID to delete
+
+Returns:
+    True if successful
+
+Raises:
+    NotImplementedError: Files API not yet available in SDK
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1anthropic__features_1_1FilesAPIManager_ac508bbb6766908b219a3f3a599eb5869_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_af92bb5475aa459712466b6ad8f7bd409}\index{core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}!get\_upload\_threshold\_kb@{get\_upload\_threshold\_kb}}
+\index{get\_upload\_threshold\_kb@{get\_upload\_threshold\_kb}!core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}}
+\doxysubsubsection{\texorpdfstring{get\_upload\_threshold\_kb()}{get\_upload\_threshold\_kb()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1FilesAPIManager_af92bb5475aa459712466b6ad8f7bd409} 
+ int core.\+anthropic\+\_\+features.\+Files\+APIManager.\+get\+\_\+upload\+\_\+threshold\+\_\+kb (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get file upload threshold in KB.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1anthropic__features_1_1FilesAPIManager_af92bb5475aa459712466b6ad8f7bd409_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_ab869a3faaad1f8aeb4943f5d1d72134d}\index{core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}!is\_enabled@{is\_enabled}}
+\index{is\_enabled@{is\_enabled}!core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}}
+\doxysubsubsection{\texorpdfstring{is\_enabled()}{is\_enabled()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1FilesAPIManager_ab869a3faaad1f8aeb4943f5d1d72134d} 
+ bool core.\+anthropic\+\_\+features.\+Files\+APIManager.\+is\+\_\+enabled (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if Files API is enabled.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1anthropic__features_1_1FilesAPIManager_ab869a3faaad1f8aeb4943f5d1d72134d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_a152fe4d5284b0154eb3ed2127660f000}\index{core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}!list\_files@{list\_files}}
+\index{list\_files@{list\_files}!core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}}
+\doxysubsubsection{\texorpdfstring{list\_files()}{list\_files()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1FilesAPIManager_a152fe4d5284b0154eb3ed2127660f000} 
+ List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+anthropic\+\_\+features.\+Files\+APIManager.\+list\+\_\+files (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}List all uploaded files.
+
+Returns:
+    List of file metadata dicts
+
+Raises:
+    NotImplementedError: Files API not yet available in SDK
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1anthropic__features_1_1FilesAPIManager_a152fe4d5284b0154eb3ed2127660f000_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_a99c82d41328c99549d39fc0553df97ff}\index{core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}!should\_upload\_file@{should\_upload\_file}}
+\index{should\_upload\_file@{should\_upload\_file}!core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}}
+\doxysubsubsection{\texorpdfstring{should\_upload\_file()}{should\_upload\_file()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1FilesAPIManager_a99c82d41328c99549d39fc0553df97ff} 
+ bool core.\+anthropic\+\_\+features.\+Files\+APIManager.\+should\+\_\+upload\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{file\+\_\+size\+\_\+bytes}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if a file should be uploaded based on size threshold.
+
+Args:
+    file_size_bytes: File size in bytes
+
+Returns:
+    True if file should be uploaded
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1anthropic__features_1_1FilesAPIManager_a99c82d41328c99549d39fc0553df97ff_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_a382ed85a0a1e80116c9e9b66e8f32aa7}\index{core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}!upload\_file@{upload\_file}}
+\index{upload\_file@{upload\_file}!core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}}
+\doxysubsubsection{\texorpdfstring{upload\_file()}{upload\_file()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1FilesAPIManager_a382ed85a0a1e80116c9e9b66e8f32aa7} 
+ Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+anthropic\+\_\+features.\+Files\+APIManager.\+upload\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{file\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Upload a file to Anthropic.
+
+Args:
+    file_path: Path to file to upload
+
+Returns:
+    File metadata dict with 'id', 'filename', etc., or None if failed
+
+Note:
+    This feature requires Anthropic SDK Files API support which is
+    not yet available in the current SDK version. This is a placeholder
+    implementation that will be activated when the SDK is updated.
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1anthropic__features_1_1FilesAPIManager_a382ed85a0a1e80116c9e9b66e8f32aa7_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_ac2db3a4abfa989d97523aaab42e86381}\index{core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}!beta\_header@{beta\_header}}
+\index{beta\_header@{beta\_header}!core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}}
+\doxysubsubsection{\texorpdfstring{beta\_header}{beta\_header}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1FilesAPIManager_ac2db3a4abfa989d97523aaab42e86381} 
+str core.\+anthropic\+\_\+features.\+Files\+APIManager.\+beta\+\_\+header = \textquotesingle{}files-\/api-\/2025-\/04-\/14\textquotesingle{}}
+
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_abd8e00550d81702a792e0c9bd0e53b9a}\index{core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}!client@{client}}
+\index{client@{client}!core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1FilesAPIManager_abd8e00550d81702a792e0c9bd0e53b9a} 
+core.\+anthropic\+\_\+features.\+Files\+APIManager.\+client = client}
+
+\Hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager_a290158fc037a54cabbde466b7c998d7a}\index{core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}!config@{config}}
+\index{config@{config}!core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1FilesAPIManager_a290158fc037a54cabbde466b7c998d7a} 
+core.\+anthropic\+\_\+features.\+Files\+APIManager.\+config = config or \{\}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{anthropic__features_8py}{anthropic\+\_\+features.\+py}}\end{DoxyCompactItemize}

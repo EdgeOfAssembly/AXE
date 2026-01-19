@@ -1,0 +1,278 @@
+\doxysection{models.\+metadata Namespace Reference}
+\hypertarget{namespacemodels_1_1metadata}{}\label{namespacemodels_1_1metadata}\index{models.metadata@{models.metadata}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacemodels_1_1metadata_a5a7932024f8760351863db28e01e8bbd}{\+\_\+load\+\_\+models\+\_\+yaml}} ()
+\item 
+bool \mbox{\hyperlink{namespacemodels_1_1metadata_a6f87fca809c78c14ab877d4526d80e1f}{uses\+\_\+max\+\_\+completion\+\_\+tokens}} (str model\+\_\+name)
+\item 
+Dict \mbox{\hyperlink{namespacemodels_1_1metadata_af1deaacdde9b07ed1e1839b504b05c03}{get\+\_\+model\+\_\+info}} (str model\+\_\+name)
+\item 
+str \mbox{\hyperlink{namespacemodels_1_1metadata_ab6ab0f84d1398bf8ca3ea3619c414fd9}{format\+\_\+token\+\_\+count}} (int tokens)
+\item 
+str \mbox{\hyperlink{namespacemodels_1_1metadata_a6b6eea40b2ea7d4a925a2f34d7f17ca4}{format\+\_\+input\+\_\+modes}} (List\mbox{[}str\mbox{]} modes)
+\item 
+str \mbox{\hyperlink{namespacemodels_1_1metadata_a959bd8a8f487f3c829e22b33879b288b}{format\+\_\+output\+\_\+modes}} (List\mbox{[}str\mbox{]} modes)
+\item 
+int \mbox{\hyperlink{namespacemodels_1_1metadata_a74979497137366bcbefb76bfc2bcb555}{get\+\_\+max\+\_\+output\+\_\+tokens}} (str model\+\_\+name, int default=4000)
+\item 
+bool \mbox{\hyperlink{namespacemodels_1_1metadata_a28d1646da3a97c054cd49e96f17c69df}{supports\+\_\+extended\+\_\+thinking}} (str model\+\_\+name)
+\item 
+int \mbox{\hyperlink{namespacemodels_1_1metadata_ad02c6726cf2ee370a30c9dd7f6e11386}{get\+\_\+extended\+\_\+thinking\+\_\+budget}} (str model\+\_\+name)
+\item 
+bool \mbox{\hyperlink{namespacemodels_1_1metadata_a2c5be0de038b417bd4c9c156fca253b1}{is\+\_\+anthropic\+\_\+model}} (str model\+\_\+name)
+\item 
+Dict \mbox{\hyperlink{namespacemodels_1_1metadata_a357094a54eb97a4e66bb8867f735f872}{get\+\_\+anthropic\+\_\+config}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacemodels_1_1metadata_ab91dd5420de9abbf2f22a03f4f19b080}{\+\_\+models\+\_\+yaml\+\_\+path}} = os.\+path.\+join(os.\+path.\+dirname(os.\+path.\+dirname(\+\_\+\+\_\+file\+\_\+\+\_\+)), \textquotesingle{}models.\+yaml\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespacemodels_1_1metadata_acf145ea659d5a3b2dd29a16eff11e432}{\+\_\+config}} = \mbox{\hyperlink{namespacemodels_1_1metadata_a5a7932024f8760351863db28e01e8bbd}{\+\_\+load\+\_\+models\+\_\+yaml}}()
+\item 
+\mbox{\hyperlink{namespacemodels_1_1metadata_a9ff02032d18dc45aeb46e750edad4f71}{MODEL\+\_\+\+METADATA}} = \+\_\+config.\+get(\textquotesingle{}\mbox{\hyperlink{namespacemodels}{models}}\textquotesingle{}, \{\})
+\item 
+\mbox{\hyperlink{namespacemodels_1_1metadata_a353840d4c08eb121d31aa051d119dba1}{DEFAULT\+\_\+\+METADATA}}
+\item 
+\mbox{\hyperlink{namespacemodels_1_1metadata_a7640cbfe4367f4161e97e813a8803fe6}{USE\+\_\+\+MAX\+\_\+\+COMPLETION\+\_\+\+TOKENS}} = set(\+\_\+config.\+get(\textquotesingle{}use\+\_\+max\+\_\+completion\+\_\+tokens\textquotesingle{}, \mbox{[}$\,$\mbox{]}))
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Model metadata for AXE - specifications for different LLM models. 
+Includes context window size, max output tokens, and supported modes. 
+
+This module loads model metadata from models.yaml at the project root.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacemodels_1_1metadata_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacemodels_1_1metadata_a5a7932024f8760351863db28e01e8bbd}\index{models.metadata@{models.metadata}!\_load\_models\_yaml@{\_load\_models\_yaml}}
+\index{\_load\_models\_yaml@{\_load\_models\_yaml}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{\_load\_models\_yaml()}{\_load\_models\_yaml()}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_a5a7932024f8760351863db28e01e8bbd} 
+models.\+metadata.\+\_\+load\+\_\+models\+\_\+yaml (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Load model metadata from models.yaml\end{DoxyVerb}
+ \Hypertarget{namespacemodels_1_1metadata_a6b6eea40b2ea7d4a925a2f34d7f17ca4}\index{models.metadata@{models.metadata}!format\_input\_modes@{format\_input\_modes}}
+\index{format\_input\_modes@{format\_input\_modes}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{format\_input\_modes()}{format\_input\_modes()}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_a6b6eea40b2ea7d4a925a2f34d7f17ca4} 
+ str models.\+metadata.\+format\+\_\+input\+\_\+modes (\begin{DoxyParamCaption}\item[{List\mbox{[}str\mbox{]}}]{modes}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Format input modes for display. 
+
+Args:
+    modes: List of input modes (e.g., ['text', 'image'])
+
+Returns:
+    Formatted string (e.g., "text, image")
+\end{DoxyVerb}
+ \Hypertarget{namespacemodels_1_1metadata_a959bd8a8f487f3c829e22b33879b288b}\index{models.metadata@{models.metadata}!format\_output\_modes@{format\_output\_modes}}
+\index{format\_output\_modes@{format\_output\_modes}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{format\_output\_modes()}{format\_output\_modes()}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_a959bd8a8f487f3c829e22b33879b288b} 
+ str models.\+metadata.\+format\+\_\+output\+\_\+modes (\begin{DoxyParamCaption}\item[{List\mbox{[}str\mbox{]}}]{modes}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Format output modes for display.
+
+Args:
+    modes: List of output modes (e.g., ['text', 'function_calling'])
+
+Returns:
+    Formatted string (e.g., "text, function_calling")
+\end{DoxyVerb}
+ \Hypertarget{namespacemodels_1_1metadata_ab6ab0f84d1398bf8ca3ea3619c414fd9}\index{models.metadata@{models.metadata}!format\_token\_count@{format\_token\_count}}
+\index{format\_token\_count@{format\_token\_count}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{format\_token\_count()}{format\_token\_count()}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_ab6ab0f84d1398bf8ca3ea3619c414fd9} 
+ str models.\+metadata.\+format\+\_\+token\+\_\+count (\begin{DoxyParamCaption}\item[{int}]{tokens}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Format token count for display (e.g., 200000 -> "200,000").
+
+Args:
+    tokens: Number of tokens
+
+Returns:
+    Formatted string with commas
+\end{DoxyVerb}
+ \Hypertarget{namespacemodels_1_1metadata_a357094a54eb97a4e66bb8867f735f872}\index{models.metadata@{models.metadata}!get\_anthropic\_config@{get\_anthropic\_config}}
+\index{get\_anthropic\_config@{get\_anthropic\_config}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{get\_anthropic\_config()}{get\_anthropic\_config()}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_a357094a54eb97a4e66bb8867f735f872} 
+ Dict models.\+metadata.\+get\+\_\+anthropic\+\_\+config (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get Anthropic-specific configuration from models.yaml.
+
+Returns:
+    Dictionary with Anthropic configuration
+\end{DoxyVerb}
+ \Hypertarget{namespacemodels_1_1metadata_ad02c6726cf2ee370a30c9dd7f6e11386}\index{models.metadata@{models.metadata}!get\_extended\_thinking\_budget@{get\_extended\_thinking\_budget}}
+\index{get\_extended\_thinking\_budget@{get\_extended\_thinking\_budget}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{get\_extended\_thinking\_budget()}{get\_extended\_thinking\_budget()}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_ad02c6726cf2ee370a30c9dd7f6e11386} 
+ int models.\+metadata.\+get\+\_\+extended\+\_\+thinking\+\_\+budget (\begin{DoxyParamCaption}\item[{str}]{model\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the extended thinking token budget for a model.
+
+Args:
+    model_name: Name of the model
+
+Returns:
+    Token budget for extended thinking, or 0 if not supported
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacemodels_1_1metadata_ad02c6726cf2ee370a30c9dd7f6e11386_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemodels_1_1metadata_a74979497137366bcbefb76bfc2bcb555}\index{models.metadata@{models.metadata}!get\_max\_output\_tokens@{get\_max\_output\_tokens}}
+\index{get\_max\_output\_tokens@{get\_max\_output\_tokens}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{get\_max\_output\_tokens()}{get\_max\_output\_tokens()}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_a74979497137366bcbefb76bfc2bcb555} 
+ int models.\+metadata.\+get\+\_\+max\+\_\+output\+\_\+tokens (\begin{DoxyParamCaption}\item[{str}]{model\+\_\+name}{, }\item[{int }]{default}{ = {\ttfamily 4000}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the max output tokens for a model.
+
+Args:
+    model_name: Name of the model
+    default: Default value if model not found (safe default: 4000)
+
+Returns:
+    Max output tokens for the model
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacemodels_1_1metadata_a74979497137366bcbefb76bfc2bcb555_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemodels_1_1metadata_af1deaacdde9b07ed1e1839b504b05c03}\index{models.metadata@{models.metadata}!get\_model\_info@{get\_model\_info}}
+\index{get\_model\_info@{get\_model\_info}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{get\_model\_info()}{get\_model\_info()}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_af1deaacdde9b07ed1e1839b504b05c03} 
+ Dict models.\+metadata.\+get\+\_\+model\+\_\+info (\begin{DoxyParamCaption}\item[{str}]{model\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get metadata for a specific model.
+
+Args:
+    model_name: Name of the model (e.g., 'claude-3-opus-20240229')
+
+Returns:
+    Dictionary with model metadata, or default metadata if model not found
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacemodels_1_1metadata_af1deaacdde9b07ed1e1839b504b05c03_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemodels_1_1metadata_a2c5be0de038b417bd4c9c156fca253b1}\index{models.metadata@{models.metadata}!is\_anthropic\_model@{is\_anthropic\_model}}
+\index{is\_anthropic\_model@{is\_anthropic\_model}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{is\_anthropic\_model()}{is\_anthropic\_model()}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_a2c5be0de038b417bd4c9c156fca253b1} 
+ bool models.\+metadata.\+is\+\_\+anthropic\+\_\+model (\begin{DoxyParamCaption}\item[{str}]{model\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if a model is an Anthropic Claude model.
+
+Args:
+    model_name: Name of the model
+
+Returns:
+    True if model is from Anthropic
+\end{DoxyVerb}
+ \Hypertarget{namespacemodels_1_1metadata_a28d1646da3a97c054cd49e96f17c69df}\index{models.metadata@{models.metadata}!supports\_extended\_thinking@{supports\_extended\_thinking}}
+\index{supports\_extended\_thinking@{supports\_extended\_thinking}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{supports\_extended\_thinking()}{supports\_extended\_thinking()}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_a28d1646da3a97c054cd49e96f17c69df} 
+ bool models.\+metadata.\+supports\+\_\+extended\+\_\+thinking (\begin{DoxyParamCaption}\item[{str}]{model\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if a model supports extended thinking.
+
+Args:
+    model_name: Name of the model
+
+Returns:
+    True if model supports extended thinking
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacemodels_1_1metadata_a28d1646da3a97c054cd49e96f17c69df_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacemodels_1_1metadata_a6f87fca809c78c14ab877d4526d80e1f}\index{models.metadata@{models.metadata}!uses\_max\_completion\_tokens@{uses\_max\_completion\_tokens}}
+\index{uses\_max\_completion\_tokens@{uses\_max\_completion\_tokens}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{uses\_max\_completion\_tokens()}{uses\_max\_completion\_tokens()}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_a6f87fca809c78c14ab877d4526d80e1f} 
+ bool models.\+metadata.\+uses\+\_\+max\+\_\+completion\+\_\+tokens (\begin{DoxyParamCaption}\item[{str}]{model\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if a model requires max_completion_tokens parameter.
+
+Uses prefix matching to support model families (e.g., "gpt-5" matches "gpt-5.2").
+This is intentional to cover versioned models within the same family.
+
+Args:
+    model_name: Name of the model to check
+
+Returns:
+    True if model requires max_completion_tokens, False otherwise
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacemodels_1_1metadata_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacemodels_1_1metadata_acf145ea659d5a3b2dd29a16eff11e432}\index{models.metadata@{models.metadata}!\_config@{\_config}}
+\index{\_config@{\_config}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{\_config}{\_config}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_acf145ea659d5a3b2dd29a16eff11e432} 
+models.\+metadata.\+\_\+config = \mbox{\hyperlink{namespacemodels_1_1metadata_a5a7932024f8760351863db28e01e8bbd}{\+\_\+load\+\_\+models\+\_\+yaml}}()\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacemodels_1_1metadata_ab91dd5420de9abbf2f22a03f4f19b080}\index{models.metadata@{models.metadata}!\_models\_yaml\_path@{\_models\_yaml\_path}}
+\index{\_models\_yaml\_path@{\_models\_yaml\_path}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{\_models\_yaml\_path}{\_models\_yaml\_path}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_ab91dd5420de9abbf2f22a03f4f19b080} 
+models.\+metadata.\+\_\+models\+\_\+yaml\+\_\+path = os.\+path.\+join(os.\+path.\+dirname(os.\+path.\+dirname(\+\_\+\+\_\+file\+\_\+\+\_\+)), \textquotesingle{}models.\+yaml\textquotesingle{})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacemodels_1_1metadata_a353840d4c08eb121d31aa051d119dba1}\index{models.metadata@{models.metadata}!DEFAULT\_METADATA@{DEFAULT\_METADATA}}
+\index{DEFAULT\_METADATA@{DEFAULT\_METADATA}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_METADATA}{DEFAULT\_METADATA}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_a353840d4c08eb121d31aa051d119dba1} 
+models.\+metadata.\+DEFAULT\+\_\+\+METADATA}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \_config.get(\textcolor{stringliteral}{'default'},\ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{'context\_tokens'}:\ 8000,}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{'max\_output\_tokens'}:\ 4000,}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{'input\_modes'}:\ [\textcolor{stringliteral}{'text'}],}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{'output\_modes'}:\ [\textcolor{stringliteral}{'text'}]}
+\DoxyCodeLine{00006\ \})}
+
+\end{DoxyCode}
+\Hypertarget{namespacemodels_1_1metadata_a9ff02032d18dc45aeb46e750edad4f71}\index{models.metadata@{models.metadata}!MODEL\_METADATA@{MODEL\_METADATA}}
+\index{MODEL\_METADATA@{MODEL\_METADATA}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{MODEL\_METADATA}{MODEL\_METADATA}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_a9ff02032d18dc45aeb46e750edad4f71} 
+models.\+metadata.\+MODEL\+\_\+\+METADATA = \+\_\+config.\+get(\textquotesingle{}\mbox{\hyperlink{namespacemodels}{models}}\textquotesingle{}, \{\})}
+
+\Hypertarget{namespacemodels_1_1metadata_a7640cbfe4367f4161e97e813a8803fe6}\index{models.metadata@{models.metadata}!USE\_MAX\_COMPLETION\_TOKENS@{USE\_MAX\_COMPLETION\_TOKENS}}
+\index{USE\_MAX\_COMPLETION\_TOKENS@{USE\_MAX\_COMPLETION\_TOKENS}!models.metadata@{models.metadata}}
+\doxysubsubsection{\texorpdfstring{USE\_MAX\_COMPLETION\_TOKENS}{USE\_MAX\_COMPLETION\_TOKENS}}
+{\footnotesize\ttfamily \label{namespacemodels_1_1metadata_a7640cbfe4367f4161e97e813a8803fe6} 
+models.\+metadata.\+USE\+\_\+\+MAX\+\_\+\+COMPLETION\+\_\+\+TOKENS = set(\+\_\+config.\+get(\textquotesingle{}use\+\_\+max\+\_\+completion\+\_\+tokens\textquotesingle{}, \mbox{[}$\,$\mbox{]}))}
+

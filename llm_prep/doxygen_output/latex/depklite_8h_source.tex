@@ -1,0 +1,36 @@
+\doxysection{depklite.\+h}
+\hypertarget{depklite_8h_source}{}\label{depklite_8h_source}\index{tools/dos\_unpackers/depklite.h@{tools/dos\_unpackers/depklite.h}}
+\mbox{\hyperlink{depklite_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DEPKLITE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DEPKLITE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ Data\ structure\ for\ getNextByte()\ lambda.}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t\ *\mbox{\hyperlink{structGetNextByte__Data_a75cfc5f583617f0a48b69da22904fb46}{compressedStart}};}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structGetNextByte__Data_a0081d1f9b11654e1097820b74de5309f}{byteIndex}};}
+\DoxyCodeLine{00013\ \}\ \mbox{\hyperlink{structGetNextByte__Data}{GetNextByte\_Data}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ Data\ structure\ for\ getNextBit()\ lambda.}}
+\DoxyCodeLine{00016\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structGetNextBit__Data_a10e18692595f6810acd13784cfa0bb38}{bitArray}};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structGetNextBit__Data_a8bbe6c1e02bb05cd57ae1e3f566d7fee}{bitsRead}};}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{structGetNextByte__Data}{GetNextByte\_Data}}\ \mbox{\hyperlink{structGetNextBit__Data_a278df3c85e77366e70202ec7e692b2a0}{getNextByteDat}};}
+\DoxyCodeLine{00021\ \}\ \mbox{\hyperlink{structGetNextBit__Data}{GetNextBit\_Data}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ depklite,\ a\ derivative\ of\ OpenTESArena's\ ExeUnpacker.}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ Used\ for\ decompressing\ DOS\ executables\ compressed\ with\ PKLITE.}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ int32\_t\ \ \mbox{\hyperlink{depklite_8h_abc34a005998258ced922ca2e5df70ad0}{depklite\_unpack}}(FILE\ *fp,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *decompBuff,\ \textcolor{keywordtype}{int}\ buffsize,\ \textcolor{keywordtype}{int}\ compressedDataOffset,\ \textcolor{keywordtype}{bool}\ useDecryption);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{depklite_8h_a6c8292606a6eb2aa9759b31df768e40d}{printBitData}}(\textcolor{keywordtype}{int}\ byteIndex,\ \mbox{\hyperlink{structGetNextBit__Data}{GetNextBit\_Data}}\ data);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,25 @@
+digraph "utils.xml_tool_parser.parse_all_tool_formats"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="utils.xml_tool_parser.parse\l_all_tool_formats",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge9_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="utils.xml_tool_parser.deduplicate\l_calls",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespaceutils_1_1xml__tool__parser.html#aa45118f6c9307ce9543f0222b42894ec",tooltip=" "];
+  Node1 -> Node3 [id="edge10_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="utils.xml_tool_parser.parse\l_bash_tags",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespaceutils_1_1xml__tool__parser.html#ac718012cbdfe70444dea3d2646aba8bf",tooltip=" "];
+  Node1 -> Node4 [id="edge11_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="utils.xml_tool_parser.parse\l_shell_codeblocks",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespaceutils_1_1xml__tool__parser.html#a2cf71ce78b5013e106a63952168e63b6",tooltip=" "];
+  Node4 -> Node5 [id="edge12_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="utils.xml_tool_parser.\l_contains_heredoc",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespaceutils_1_1xml__tool__parser.html#af0031b06895650625c760d44404c838b",tooltip=" "];
+  Node4 -> Node6 [id="edge13_Node000004_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="utils.xml_tool_parser.\l_split_shell_commands",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespaceutils_1_1xml__tool__parser.html#ad87245f63393791b038eb9fa6908a882",tooltip=" "];
+  Node1 -> Node7 [id="edge14_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="utils.xml_tool_parser.parse\l_simple_xml_tags",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespaceutils_1_1xml__tool__parser.html#aa1de87a85f19c603d85018f0300dd820",tooltip=" "];
+  Node1 -> Node8 [id="edge15_Node000001_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="utils.xml_tool_parser.parse\l_xml_function_calls",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespaceutils_1_1xml__tool__parser.html#aaca276344ac9dc2942732d2979bba627",tooltip=" "];
+  Node8 -> Node9 [id="edge16_Node000008_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="utils.xml_tool_parser.normalize\l_tool_name",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespaceutils_1_1xml__tool__parser.html#acd18e34b8713011c876e3ae157a4fb6c",tooltip=" "];
+}

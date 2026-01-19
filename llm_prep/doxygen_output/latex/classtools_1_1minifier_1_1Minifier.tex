@@ -1,0 +1,187 @@
+\doxysection{tools.\+minifier.\+Minifier Class Reference}
+\hypertarget{classtools_1_1minifier_1_1Minifier}{}\label{classtools_1_1minifier_1_1Minifier}\index{tools.minifier.Minifier@{tools.minifier.Minifier}}
+
+
+Collaboration diagram for tools.\+minifier.\+Minifier\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classtools_1_1minifier_1_1Minifier__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtools_1_1minifier_1_1Minifier_affbd32ef6ed1400caa2c1a4956cad78c}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Optional\mbox{[}Set\mbox{[}str\mbox{]}\mbox{]} \mbox{\hyperlink{classtools_1_1minifier_1_1Minifier_a2a7936ca1c128718218998425616af4e}{exclude\+\_\+dirs}}=None)
+\item 
+str \mbox{\hyperlink{classtools_1_1minifier_1_1Minifier_af4e76beb46588676e9f30dedfc7bba67}{minify\+\_\+file}} (self, str file\+\_\+path, bool keep\+\_\+comments=True)
+\item 
+Dict\mbox{[}str, str\mbox{]} \mbox{\hyperlink{classtools_1_1minifier_1_1Minifier_aef10b8bbbe845f198d5f739278cf596d}{minify\+\_\+directory}} (self, str dir\+\_\+path, bool recursive=True, bool keep\+\_\+comments=True, Optional\mbox{[}Set\mbox{[}str\mbox{]}\mbox{]} \mbox{\hyperlink{classtools_1_1minifier_1_1Minifier_a2a7936ca1c128718218998425616af4e}{exclude\+\_\+dirs}}=None)
+\item 
+Dict\mbox{[}str, int\mbox{]} \mbox{\hyperlink{classtools_1_1minifier_1_1Minifier_a316d3dbf2526c91794276c888391c8a7}{minify\+\_\+workspace}} (self, str workspace\+\_\+path, bool keep\+\_\+comments=True, str output\+\_\+mode=\textquotesingle{}in\+\_\+place\textquotesingle{}, Optional\mbox{[}str\mbox{]} output\+\_\+dir=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtools_1_1minifier_1_1Minifier_a2a7936ca1c128718218998425616af4e}{exclude\+\_\+dirs}} = exclude\+\_\+dirs or \mbox{\hyperlink{namespacetools_1_1minifier_a943a0d78498a28ad2ffc352915df9fb2}{DEFAULT\+\_\+\+EXCLUDE\+\_\+\+DIRS}}
+\item 
+dict \mbox{\hyperlink{classtools_1_1minifier_1_1Minifier_a6eabcc8977bf5896498ade5b9bfa2cd8}{stats}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Source code minifier for AXE.
+
+Minifies C, C++, Python, and Assembly source code to reduce token usage
+while preserving compilability.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classtools_1_1minifier_1_1Minifier_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classtools_1_1minifier_1_1Minifier_affbd32ef6ed1400caa2c1a4956cad78c}\index{tools.minifier.Minifier@{tools.minifier.Minifier}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!tools.minifier.Minifier@{tools.minifier.Minifier}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classtools_1_1minifier_1_1Minifier_affbd32ef6ed1400caa2c1a4956cad78c} 
+tools.\+minifier.\+Minifier.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}Set\mbox{[}str\mbox{]}\mbox{]} }]{exclude\+\_\+dirs}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize the minifier.
+
+Args:
+    exclude_dirs: Set of directory names to exclude from processing
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classtools_1_1minifier_1_1Minifier_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classtools_1_1minifier_1_1Minifier_aef10b8bbbe845f198d5f739278cf596d}\index{tools.minifier.Minifier@{tools.minifier.Minifier}!minify\_directory@{minify\_directory}}
+\index{minify\_directory@{minify\_directory}!tools.minifier.Minifier@{tools.minifier.Minifier}}
+\doxysubsubsection{\texorpdfstring{minify\_directory()}{minify\_directory()}}
+{\footnotesize\ttfamily \label{classtools_1_1minifier_1_1Minifier_aef10b8bbbe845f198d5f739278cf596d} 
+ Dict\mbox{[}str, str\mbox{]} tools.\+minifier.\+Minifier.\+minify\+\_\+directory (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{dir\+\_\+path}{, }\item[{bool }]{recursive}{ = {\ttfamily True}, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily True}, }\item[{Optional\mbox{[}Set\mbox{[}str\mbox{]}\mbox{]} }]{exclude\+\_\+dirs}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Minify all supported files in a directory.
+
+Args:
+    dir_path: Path to directory
+    recursive: If True, recurse into subdirectories
+    keep_comments: If True, preserve comments
+    exclude_dirs: Additional directories to exclude
+    
+Returns:
+    Dictionary mapping file paths to minified content
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classtools_1_1minifier_1_1Minifier_aef10b8bbbe845f198d5f739278cf596d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classtools_1_1minifier_1_1Minifier_aef10b8bbbe845f198d5f739278cf596d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classtools_1_1minifier_1_1Minifier_af4e76beb46588676e9f30dedfc7bba67}\index{tools.minifier.Minifier@{tools.minifier.Minifier}!minify\_file@{minify\_file}}
+\index{minify\_file@{minify\_file}!tools.minifier.Minifier@{tools.minifier.Minifier}}
+\doxysubsubsection{\texorpdfstring{minify\_file()}{minify\_file()}}
+{\footnotesize\ttfamily \label{classtools_1_1minifier_1_1Minifier_af4e76beb46588676e9f30dedfc7bba67} 
+ str tools.\+minifier.\+Minifier.\+minify\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{file\+\_\+path}{, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily True}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Minify a single source file.
+
+Args:
+    file_path: Path to the file to minify
+    keep_comments: If True, preserve comments (default for AXE)
+    
+Returns:
+    Minified source code
+    
+Raises:
+    FileNotFoundError: If file doesn't exist
+    ValueError: If file type is not supported
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classtools_1_1minifier_1_1Minifier_af4e76beb46588676e9f30dedfc7bba67_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classtools_1_1minifier_1_1Minifier_af4e76beb46588676e9f30dedfc7bba67_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classtools_1_1minifier_1_1Minifier_a316d3dbf2526c91794276c888391c8a7}\index{tools.minifier.Minifier@{tools.minifier.Minifier}!minify\_workspace@{minify\_workspace}}
+\index{minify\_workspace@{minify\_workspace}!tools.minifier.Minifier@{tools.minifier.Minifier}}
+\doxysubsubsection{\texorpdfstring{minify\_workspace()}{minify\_workspace()}}
+{\footnotesize\ttfamily \label{classtools_1_1minifier_1_1Minifier_a316d3dbf2526c91794276c888391c8a7} 
+ Dict\mbox{[}str, int\mbox{]} tools.\+minifier.\+Minifier.\+minify\+\_\+workspace (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{workspace\+\_\+path}{, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily True}, }\item[{str }]{output\+\_\+mode}{ = {\ttfamily \textquotesingle{}in\+\_\+place\textquotesingle{}}, }\item[{Optional\mbox{[}str\mbox{]} }]{output\+\_\+dir}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Minify entire workspace.
+
+Args:
+    workspace_path: Root directory of workspace
+    keep_comments: If True, preserve comments
+    output_mode: 'in_place' or 'separate_dir'
+    output_dir: Output directory (only used if output_mode is 'separate_dir')
+    
+Returns:
+    Statistics dictionary with keys:
+    - files_processed: Number of files minified
+    - bytes_saved: Bytes saved by minification
+    - bytes_original: Original total size
+    - bytes_minified: Minified total size
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classtools_1_1minifier_1_1Minifier_a316d3dbf2526c91794276c888391c8a7_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classtools_1_1minifier_1_1Minifier_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classtools_1_1minifier_1_1Minifier_a2a7936ca1c128718218998425616af4e}\index{tools.minifier.Minifier@{tools.minifier.Minifier}!exclude\_dirs@{exclude\_dirs}}
+\index{exclude\_dirs@{exclude\_dirs}!tools.minifier.Minifier@{tools.minifier.Minifier}}
+\doxysubsubsection{\texorpdfstring{exclude\_dirs}{exclude\_dirs}}
+{\footnotesize\ttfamily \label{classtools_1_1minifier_1_1Minifier_a2a7936ca1c128718218998425616af4e} 
+tools.\+minifier.\+Minifier.\+exclude\+\_\+dirs = exclude\+\_\+dirs or \mbox{\hyperlink{namespacetools_1_1minifier_a943a0d78498a28ad2ffc352915df9fb2}{DEFAULT\+\_\+\+EXCLUDE\+\_\+\+DIRS}}}
+
+\Hypertarget{classtools_1_1minifier_1_1Minifier_a6eabcc8977bf5896498ade5b9bfa2cd8}\index{tools.minifier.Minifier@{tools.minifier.Minifier}!stats@{stats}}
+\index{stats@{stats}!tools.minifier.Minifier@{tools.minifier.Minifier}}
+\doxysubsubsection{\texorpdfstring{stats}{stats}}
+{\footnotesize\ttfamily \label{classtools_1_1minifier_1_1Minifier_a6eabcc8977bf5896498ade5b9bfa2cd8} 
+dict tools.\+minifier.\+Minifier.\+stats}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'files\_processed'}:\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'bytes\_original'}:\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'bytes\_minified'}:\ 0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+tools/\mbox{\hyperlink{minifier_8py}{minifier.\+py}}\end{DoxyCompactItemize}

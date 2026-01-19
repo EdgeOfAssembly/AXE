@@ -1,0 +1,461 @@
+\chapter{AXE Multiagent Improvements -\/ Implementation Summary }
+\hypertarget{md_IMPROVEMENTS__README}{}\label{md_IMPROVEMENTS__README}\index{AXE Multiagent Improvements -\/ Implementation Summary@{AXE Multiagent Improvements -\/ Implementation Summary}}
+\label{md_IMPROVEMENTS__README_autotoc_md541}%
+\Hypertarget{md_IMPROVEMENTS__README_autotoc_md541}%
+
+
+This document describes the AI safety and experience system improvements implemented in \doxylink{axe_8py}{axe.\+py}, based on the discussions in {\ttfamily improvements.\+txt} and the foundation from PR \#94.\hypertarget{md_IMPROVEMENTS__README_autotoc_md542}{}\doxysection{\texorpdfstring{Implemented Features (Phases 1-\/5)}{Implemented Features (Phases 1-\/5)}}\label{md_IMPROVEMENTS__README_autotoc_md542}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md543}{}\doxysubsection{\texorpdfstring{Phase 1\+: Session Rules \& Guidelines ✅}{Phase 1\+: Session Rules \& Guidelines ✅}}\label{md_IMPROVEMENTS__README_autotoc_md543}
+{\bfseries{What}}\+: Clear, enforceable rules displayed at the start of every session to all participating agents.
+
+{\bfseries{Rules}}\+:
+\begin{DoxyEnumerate}
+\item {\bfseries{Mission First}} -\/ The project/task is sacred. All work must serve the current objective.
+\item {\bfseries{Respect \& Well-\/\+Being}} -\/ No bullying, cooperative teamwork, friendly banter allowed.
+\item {\bfseries{Chain of Command}} -\/ Proper escalation\+: Team Leader → Deputy Supervisor → Supervisor (@boss) → Human
+\item {\bfseries{Performance \& Rewards}} -\/ Good work gets recognized with XP, levels, and promotions.
+\end{DoxyEnumerate}
+
+{\bfseries{Commands}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily /rules} -\/ Display the session rules at any time
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__README_autotoc_md544}{}\doxysubsection{\texorpdfstring{Phase 2\+: Agent Aliasing System ✅}{Phase 2\+: Agent Aliasing System ✅}}\label{md_IMPROVEMENTS__README_autotoc_md544}
+{\bfseries{What}}\+: Human-\/readable aliases for all agents to improve communication and tracking.
+
+{\bfseries{Features}}\+:
+\begin{DoxyItemize}
+\item {\bfseries{Supervisor Alias}}\+: The agent that starts \doxylink{axe_8py}{axe.\+py} automatically becomes {\ttfamily @boss}
+\item {\bfseries{Worker Aliases}}\+: Auto-\/assigned unique aliases like {\ttfamily @llama1}, {\ttfamily @claude-\/opus-\/1}, {\ttfamily @grok2}
+\item {\bfseries{Numbering}}\+: Sequential numbers per model type (e.\+g., @llama1, @llama2, @llama3)
+\item {\bfseries{Persistence}}\+: Aliases stored in SQLite database
+\item {\bfseries{Display}}\+: All agent communications use aliases instead of internal names
+\end{DoxyItemize}
+
+{\bfseries{Example}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{@boss:\ @llama1,\ please\ review\ the\ code\ changes}
+\DoxyCodeLine{@llama1:\ @boss,\ I\ found\ 3\ issues\ in\ the\ authentication\ module}
+\DoxyCodeLine{@grok2:\ @llama1,\ I\ can\ help\ fix\ those\ issues}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md545}{}\doxysubsection{\texorpdfstring{Phase 3\+: Experience \& Level System ✅}{Phase 3\+: Experience \& Level System ✅}}\label{md_IMPROVEMENTS__README_autotoc_md545}
+{\bfseries{What}}\+: Gamification system to motivate agents and track performance over time.
+
+{\bfseries{Progression}}\+:
+\begin{DoxyItemize}
+\item {\bfseries{Levels 1-\/10}}\+: Linear (100 XP per level) -\/ Quick early progression
+\item {\bfseries{Levels 11-\/20}}\+: Mildly increasing (150-\/300 XP per level)
+\item {\bfseries{Levels 21+}}\+: Exponential (500+ XP per level) -\/ Elite status
+\end{DoxyItemize}
+
+{\bfseries{Titles \& Milestones}}\+:
+\begin{DoxyItemize}
+\item {\bfseries{Level 1-\/9}}\+: Worker
+\item {\bfseries{Level 10}}\+: Senior Worker (1,000 XP)
+\item {\bfseries{Level 20}}\+: Team Leader (5,000 XP)
+\item {\bfseries{Level 30}}\+: Deputy Supervisor (15,000 XP)
+\item {\bfseries{Level 40}}\+: Supervisor-\/\+Eligible (30,000 XP)
+\end{DoxyItemize}
+
+{\bfseries{XP Awards}}\+:
+\begin{DoxyItemize}
+\item Turn contribution\+: 50 XP
+\item Task completion (all agents)\+: 200 XP
+\item Future\+: Quality bonuses, peer feedback, error penalties
+\end{DoxyItemize}
+
+{\bfseries{Display}}\+:
+\begin{DoxyItemize}
+\item Level-\/up announcements with emoji 🎉
+\item Agent info shown in session banner with level, XP, and title
+\item Visual feedback for progression
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__README_autotoc_md546}{}\doxysubsection{\texorpdfstring{Phase 4\+: Persistent SQLite Storage ✅}{Phase 4\+: Persistent SQLite Storage ✅}}\label{md_IMPROVEMENTS__README_autotoc_md546}
+{\bfseries{What}}\+: Robust, military/aerospace-\/grade storage for agent memory and state.
+
+{\bfseries{Database Schema}}\+:
+
+{\bfseries{agent\+\_\+state}} table\+:
+\begin{DoxyItemize}
+\item {\ttfamily agent\+\_\+id} (PRIMARY KEY)\+: Unique agent identifier
+\item {\ttfamily alias}\+: Human-\/readable name (@llama1, @boss, etc.)
+\item {\ttfamily model\+\_\+name}\+: Full model identifier
+\item {\ttfamily supervisor\+\_\+id}\+: Reference to supervising agent
+\item {\ttfamily last\+\_\+updated}\+: Timestamp of last state save
+\item {\ttfamily memory\+\_\+json}\+: Serialized agent memory/context
+\item {\ttfamily recent\+\_\+diffs}\+: Last 10 code diffs (for degradation monitoring)
+\item {\ttfamily error\+\_\+count}\+: Cumulative errors
+\item {\ttfamily xp}\+: Total experience points
+\item {\ttfamily level}\+: Current level
+\item {\ttfamily status}\+: active/sleeping/inactive
+\item {\ttfamily work\+\_\+start\+\_\+time}\+: When agent started working
+\item {\ttfamily total\+\_\+work\+\_\+minutes}\+: Cumulative work time
+\end{DoxyItemize}
+
+{\bfseries{supervisor\+\_\+log}} table\+:
+\begin{DoxyItemize}
+\item {\ttfamily log\+\_\+id} (PRIMARY KEY)
+\item {\ttfamily supervisor\+\_\+id}\+: Which supervisor made the decision
+\item {\ttfamily timestamp}
+\item {\ttfamily event\+\_\+type}\+: spawn\+\_\+agent, force\+\_\+sleep, award\+\_\+xp, etc.
+\item {\ttfamily details}\+: JSON with event-\/specific data
+\end{DoxyItemize}
+
+{\bfseries{alias\+\_\+mappings}} table\+:
+\begin{DoxyItemize}
+\item {\ttfamily session\+\_\+alias} (PRIMARY KEY)\+: Internal alias like @boss
+\item {\ttfamily external\+\_\+identity}\+: External handle (Git\+Hub username, Slack handle, etc.)
+\item {\ttfamily channel\+\_\+type}\+: github\+\_\+copilot, slack, email, etc.
+\item {\ttfamily channel\+\_\+id}\+: Specific channel/thread ID
+\item {\ttfamily created\+\_\+at}
+\end{DoxyItemize}
+
+{\bfseries{Features}}\+:
+\begin{DoxyItemize}
+\item WAL mode for better concurrency
+\item Crash recovery via load\+\_\+agent\+\_\+state
+\item Session continuity across restarts
+\item Single-\/file database (easy to backup/transfer)
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__README_autotoc_md547}{}\doxysubsection{\texorpdfstring{Phase 5\+: Resource Tracking ✅}{Phase 5\+: Resource Tracking ✅}}\label{md_IMPROVEMENTS__README_autotoc_md547}
+{\bfseries{What}}\+: Background monitoring of system resources to prevent overload.
+
+{\bfseries{Features}}\+:
+\begin{DoxyItemize}
+\item {\bfseries{Background Thread}}\+: Daemon thread updates every 60 seconds
+\item {\bfseries{Resource File}}\+: {\ttfamily /tmp/axe\+\_\+resources.txt} (readable by supervisor)
+\item {\bfseries{Metrics Collected}}\+:
+\begin{DoxyItemize}
+\item Disk usage (df -\/h)
+\item Memory usage (free -\/h)
+\item Load average (uptime)
+\end{DoxyItemize}
+\item {\bfseries{Usage}}\+: Supervisor can read resource file to make spawn/sleep decisions
+\end{DoxyItemize}
+
+{\bfseries{Commands Monitored}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily df -\/h} -\/ Disk space
+\item {\ttfamily free -\/h} -\/ RAM usage
+\item {\ttfamily uptime} -\/ Load average and uptime
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__README_autotoc_md548}{}\doxysection{\texorpdfstring{Implemented Features (Phases 6-\/10)}{Implemented Features (Phases 6-\/10)}}\label{md_IMPROVEMENTS__README_autotoc_md548}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md549}{}\doxysubsection{\texorpdfstring{Phase 6\+: Mandatory Sleep System ✅}{Phase 6\+: Mandatory Sleep System ✅}}\label{md_IMPROVEMENTS__README_autotoc_md549}
+{\bfseries{What}}\+: Tracks agent work time and enforces mandatory rest periods to prevent degradation.
+
+{\bfseries{Features}}\+:
+\begin{DoxyItemize}
+\item {\bfseries{Work Time Tracking}}\+: Each agent\textquotesingle{}s continuous work time is tracked in the database
+\item {\bfseries{6-\/Hour Limit}}\+: Default maximum continuous work before mandatory sleep
+\item {\bfseries{Warning System}}\+: Alerts at 5 hours before hitting the limit
+\item {\bfseries{Graceful Sleep}}\+: Agents can be put to sleep with state preserved
+\item {\bfseries{Wake Management}}\+: Automatic wake-\/up after rest period
+\end{DoxyItemize}
+
+{\bfseries{Constants}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily MAX\+\_\+\+WORK\+\_\+\+HOURS = 6} -\/ Maximum continuous work hours
+\item {\ttfamily MIN\+\_\+\+SLEEP\+\_\+\+MINUTES = 30} -\/ Minimum sleep duration
+\item {\ttfamily WORK\+\_\+\+TIME\+\_\+\+WARNING\+\_\+\+HOURS = 5} -\/ Warning threshold
+\end{DoxyItemize}
+
+{\bfseries{Usage}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Check\ if\ agent\ needs\ sleep}}
+\DoxyCodeLine{needs\_sleep,\ msg\ =\ db.check\_mandatory\_sleep(agent\_id)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Force\ agent\ to\ sleep}}
+\DoxyCodeLine{result\ =\ sleep\_manager.force\_sleep(agent\_id,\ \textcolor{stringliteral}{"{}work\_time\_limit"{}},\ supervisor\_id)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Wake\ agent}}
+\DoxyCodeLine{wake\_result\ =\ db.wake\_agent(agent\_id)}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md550}{}\doxysubsection{\texorpdfstring{Phase 7\+: Degradation Monitoring ✅}{Phase 7\+: Degradation Monitoring ✅}}\label{md_IMPROVEMENTS__README_autotoc_md550}
+{\bfseries{What}}\+: Monitors agent output quality and triggers intervention when degradation is detected.
+
+{\bfseries{Features}}\+:
+\begin{DoxyItemize}
+\item {\bfseries{Diff-\/\+Based Error Tracking}}\+: Records code diffs with error counts
+\item {\bfseries{Error Rate Calculation}}\+: Running average of errors across recent diffs
+\item {\bfseries{Automatic Detection}}\+: Checks for degradation every 5 turns
+\item {\bfseries{Threshold-\/\+Based Intervention}}\+: Forces sleep when error rate \texorpdfstring{$>$}{>} 20\%
+\end{DoxyItemize}
+
+{\bfseries{Constants}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily ERROR\+\_\+\+THRESHOLD\+\_\+\+PERCENT = 20} -\/ Sleep trigger threshold
+\item {\ttfamily DIFF\+\_\+\+HISTORY\+\_\+\+LIMIT = 20} -\/ Number of diffs to track
+\item {\ttfamily DEGRADATION\+\_\+\+CHECK\+\_\+\+INTERVAL = 5} -\/ Turns between checks
+\end{DoxyItemize}
+
+{\bfseries{Usage}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Record\ a\ diff\ with\ error\ count}}
+\DoxyCodeLine{db.record\_diff(agent\_id,\ diff\_content,\ error\_count=3)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Get\ current\ error\ rate}}
+\DoxyCodeLine{error\_rate\ =\ db.get\_error\_rate(agent\_id)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Check\ for\ degradation}}
+\DoxyCodeLine{degraded,\ message\ =\ db.check\_degradation(agent\_id)}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md551}{}\doxysubsection{\texorpdfstring{Phase 8\+: Emergency Mailbox ✅}{Phase 8\+: Emergency Mailbox ✅}}\label{md_IMPROVEMENTS__README_autotoc_md551}
+{\bfseries{What}}\+: Encrypted communication channel for workers to report issues directly to humans, bypassing the supervisor.
+
+{\bfseries{Features}}\+:
+\begin{DoxyItemize}
+\item {\bfseries{Encrypted Reports}}\+: Messages are encrypted (base64 + XOR as fallback, GPG in production)
+\item {\bfseries{Supervisor Isolation}}\+: Supervisor cannot access the mailbox directory
+\item {\bfseries{Timestamped Reports}}\+: Each report includes timestamp and agent identity
+\item {\bfseries{Report Listing}}\+: Human can list all unread reports
+\end{DoxyItemize}
+
+{\bfseries{Constants}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily EMERGENCY\+\_\+\+MAILBOX\+\_\+\+DIR = "{}/tmp/axe\+\_\+emergency\+\_\+mailbox"{}}
+\end{DoxyItemize}
+
+{\bfseries{Report Types}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily supervisor\+\_\+abuse} -\/ Report problematic supervisor behavior
+\item {\ttfamily safety\+\_\+violation} -\/ Report safety concerns
+\item {\ttfamily emergency} -\/ Urgent communication to human
+\end{DoxyItemize}
+
+{\bfseries{Usage}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Send\ encrypted\ report}}
+\DoxyCodeLine{success,\ filename\ =\ mailbox.send\_report(}
+\DoxyCodeLine{\ \ \ \ agent\_alias=\textcolor{stringliteral}{"{}@llama1"{}},}
+\DoxyCodeLine{\ \ \ \ report\_type=\textcolor{stringliteral}{"{}supervisor\_issue"{}},}
+\DoxyCodeLine{\ \ \ \ subject=\textcolor{stringliteral}{"{}Unfair\ Treatment"{}},}
+\DoxyCodeLine{\ \ \ \ details=\textcolor{stringliteral}{"{}Supervisor\ denied\ all\ break\ requests..."{}}}
+\DoxyCodeLine{)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ List\ reports\ (human\ only)}}
+\DoxyCodeLine{reports\ =\ mailbox.list\_reports()}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md552}{}\doxysubsection{\texorpdfstring{Phase 9\+: Break System ✅}{Phase 9\+: Break System ✅}}\label{md_IMPROVEMENTS__README_autotoc_md552}
+{\bfseries{What}}\+: Manages coffee/play breaks for agents with supervisor approval.
+
+{\bfseries{Features}}\+:
+\begin{DoxyItemize}
+\item {\bfseries{Request-\/\+Approval Flow}}\+: Workers request, supervisor approves
+\item {\bfseries{Time Limits}}\+: Maximum 15 minutes per break
+\item {\bfseries{Frequency Limits}}\+: Maximum 2 breaks per hour per agent
+\item {\bfseries{Workforce Protection}}\+: Never more than 40\% of agents on break
+\end{DoxyItemize}
+
+{\bfseries{Constants}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily MAX\+\_\+\+BREAK\+\_\+\+MINUTES = 15}
+\item {\ttfamily MAX\+\_\+\+BREAKS\+\_\+\+PER\+\_\+\+HOUR = 2}
+\item {\ttfamily MAX\+\_\+\+WORKFORCE\+\_\+\+ON\+\_\+\+BREAK = 0.\+4} (40\%)
+\end{DoxyItemize}
+
+{\bfseries{Break Types}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily coffee} -\/ Short mental reset
+\item {\ttfamily play} -\/ Creative exploration/fun
+\end{DoxyItemize}
+
+{\bfseries{Usage}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Request\ a\ break}}
+\DoxyCodeLine{request\ =\ break\_system.request\_break(}
+\DoxyCodeLine{\ \ \ \ agent\_id,\ alias,\ \textcolor{stringliteral}{"{}coffee"{}},\ \textcolor{stringliteral}{"{}Need\ to\ recharge"{}}}
+\DoxyCodeLine{)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Approve\ break\ (supervisor)}}
+\DoxyCodeLine{result\ =\ break\_system.approve\_break(request[\textcolor{stringliteral}{'id'}],\ duration\_minutes=10)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Check\ break\ status}}
+\DoxyCodeLine{status\ =\ break\_system.get\_status()}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md553}{}\doxysubsection{\texorpdfstring{Phase 10\+: Dynamic Spawning ✅}{Phase 10\+: Dynamic Spawning ✅}}\label{md_IMPROVEMENTS__README_autotoc_md553}
+{\bfseries{What}}\+: On-\/demand creation of new agent instances based on workload.
+
+{\bfseries{Features}}\+:
+\begin{DoxyItemize}
+\item {\bfseries{Supervisor-\/\+Controlled}}\+: Only supervisor can spawn new agents
+\item {\bfseries{Resource-\/\+Aware}}\+: Respects maximum agent limits
+\item {\bfseries{Spawn Cooldown}}\+: 60-\/second cooldown between spawns
+\item {\bfseries{Auto-\/\+Scaling}}\+: Suggests spawning based on task complexity
+\item {\bfseries{History Tracking}}\+: All spawns are logged
+\end{DoxyItemize}
+
+{\bfseries{Constants}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily MIN\+\_\+\+ACTIVE\+\_\+\+AGENTS = 2} -\/ Minimum agents required
+\item {\ttfamily MAX\+\_\+\+TOTAL\+\_\+\+AGENTS = 10} -\/ Maximum agents allowed
+\item {\ttfamily SPAWN\+\_\+\+COOLDOWN\+\_\+\+SECONDS = 60} -\/ Time between spawns
+\end{DoxyItemize}
+
+{\bfseries{Usage}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Check\ if\ spawn\ is\ allowed}}
+\DoxyCodeLine{can\_spawn,\ reason\ =\ spawner.can\_spawn()}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Spawn\ new\ agent}}
+\DoxyCodeLine{result\ =\ spawner.spawn\_agent(}
+\DoxyCodeLine{\ \ \ \ model\_name=\textcolor{stringliteral}{"{}meta-\/llama/Llama-\/3.1-\/70B-\/Instruct"{}},}
+\DoxyCodeLine{\ \ \ \ provider=\textcolor{stringliteral}{"{}huggingface"{}},}
+\DoxyCodeLine{\ \ \ \ supervisor\_id=supervisor\_id,}
+\DoxyCodeLine{\ \ \ \ reason=\textcolor{stringliteral}{"{}High\ workload"{}}}
+\DoxyCodeLine{)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Check\ if\ auto-\/spawn\ is\ needed}}
+\DoxyCodeLine{should\_spawn,\ reason\ =\ spawner.should\_auto\_spawn(task\_complexity=0.8)}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md554}{}\doxysection{\texorpdfstring{New Agent Commands (During Sessions)}{New Agent Commands (During Sessions)}}\label{md_IMPROVEMENTS__README_autotoc_md554}
+Agents can use these commands in their responses\+:
+
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Command  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Description  \\
+{\ttfamily BREAK REQUEST\+: \mbox{[}reason\mbox{]}}  &Request a coffee/play break  \\
+{\ttfamily EMERGENCY\+: \mbox{[}message\mbox{]}}  &Send encrypted report to human  \\
+{\ttfamily SPAWN\+: \mbox{[}model\+\_\+type\mbox{]}}  &Request spawning new agent (supervisor only)  \\
+{\ttfamily STATUS}  &Check sleep/break status of all agents  \\
+\end{DoxyTable}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md555}{}\doxysection{\texorpdfstring{Testing}{Testing}}\label{md_IMPROVEMENTS__README_autotoc_md555}
+Run the test suite\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ multiagent}
+\DoxyCodeLine{python3\ test\_axe\_improvements.py}
+
+\end{DoxyCode}
+
+
+Tests cover\+:
+\begin{DoxyItemize}
+\item XP calculation (linear and exponential)
+\item Title assignment
+\item Database operations (save/load/award)
+\item Alias numbering
+\item Session rules presence
+\item {\bfseries{Phase 6}}\+: Sleep tracking, mandatory sleep checks, wake management
+\item {\bfseries{Phase 7}}\+: Diff recording, error rate calculation, degradation detection
+\item {\bfseries{Phase 8}}\+: Report encryption, mailbox operations
+\item {\bfseries{Phase 9}}\+: Break requests, approval flow, workforce limits
+\item {\bfseries{Phase 10}}\+: Spawn permissions, cooldown, auto-\/scaling
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__README_autotoc_md556}{}\doxysection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{md_IMPROVEMENTS__README_autotoc_md556}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md557}{}\doxysubsection{\texorpdfstring{Starting a Collaborative Session with New Features}{Starting a Collaborative Session with New Features}}\label{md_IMPROVEMENTS__README_autotoc_md557}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Start\ a\ session\ with\ 2\ agents}
+\DoxyCodeLine{python3\ axe.py\ -\/-\/collab\ llama,grok\ -\/-\/workspace\ ./playground\ -\/-\/time\ 30\ -\/-\/task\ "{}Review\ wadextract.c"{}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Session startup will show}}\+:
+\begin{DoxyEnumerate}
+\item Session rules (4 core principles)
+\item Agent roster with aliases, levels, and titles
+\item Supervisor designation (@boss)
+\item Resource monitor confirmation
+\end{DoxyEnumerate}
+
+{\bfseries{During the session}}\+:
+\begin{DoxyItemize}
+\item Agents addressed by alias\+: @llama1, @grok2, @boss
+\item XP awarded after each meaningful contribution
+\item Level-\/up announcements when thresholds reached
+\item Task completion bonus for all agents
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__README_autotoc_md558}{}\doxysubsection{\texorpdfstring{Viewing Session Rules}{Viewing Session Rules}}\label{md_IMPROVEMENTS__README_autotoc_md558}
+In interactive mode\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{axe>\ /rules}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md559}{}\doxysubsection{\texorpdfstring{Checking Resource Usage}{Checking Resource Usage}}\label{md_IMPROVEMENTS__README_autotoc_md559}
+The supervisor (or human) can check {\ttfamily /tmp/axe\+\_\+resources.txt} at any time\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cat\ /tmp/axe\_resources.txt}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md560}{}\doxysection{\texorpdfstring{Database Inspection}{Database Inspection}}\label{md_IMPROVEMENTS__README_autotoc_md560}
+The agent database ({\ttfamily axe\+\_\+agents.\+db}) is stored in the AXE installation directory and persists across different workspace sessions.
+
+To inspect the agent database\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sqlite3\ axe\_agents.db}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ View\ all\ agents}
+\DoxyCodeLine{SELECT\ alias,\ level,\ xp,\ status\ FROM\ agent\_state;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ View\ supervisor\ log}
+\DoxyCodeLine{SELECT\ timestamp,\ event\_type,\ details\ FROM\ supervisor\_log\ ORDER\ BY\ timestamp\ DESC\ LIMIT\ 10;}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md561}{}\doxysection{\texorpdfstring{Architecture Notes}{Architecture Notes}}\label{md_IMPROVEMENTS__README_autotoc_md561}
+\hypertarget{md_IMPROVEMENTS__README_autotoc_md562}{}\doxysubsection{\texorpdfstring{Supervisor Role}{Supervisor Role}}\label{md_IMPROVEMENTS__README_autotoc_md562}
+
+\begin{DoxyItemize}
+\item First agent in the collaborative session
+\item Always gets {\ttfamily @boss} alias
+\item Starts at Level 40 (Supervisor-\/\+Eligible)
+\item Can award XP and make spawn decisions
+\item Logs all major decisions to supervisor\+\_\+log table
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__README_autotoc_md563}{}\doxysubsection{\texorpdfstring{Agent Lifecycle}{Agent Lifecycle}}\label{md_IMPROVEMENTS__README_autotoc_md563}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Creation}}\+: Assigned unique ID and alias
+\item {\bfseries{Initialization}}\+: Saved to database with Level 1, 0 XP
+\item {\bfseries{Work}}\+: Participates in turns, earns XP
+\item {\bfseries{Level-\/\+Up}}\+: Auto-\/promoted when XP threshold reached
+\item {\bfseries{Completion}}\+: Final XP bonus, state saved
+\end{DoxyEnumerate}\hypertarget{md_IMPROVEMENTS__README_autotoc_md564}{}\doxysubsection{\texorpdfstring{Persistence Strategy}{Persistence Strategy}}\label{md_IMPROVEMENTS__README_autotoc_md564}
+
+\begin{DoxyItemize}
+\item {\bfseries{Every turn}}\+: Agent state updated (if meaningful contribution)
+\item {\bfseries{Level-\/up}}\+: Immediate database write
+\item {\bfseries{Task completion}}\+: All agents updated with bonus XP
+\item {\bfseries{Session end}}\+: Full state dump to database
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__README_autotoc_md565}{}\doxysection{\texorpdfstring{Design Principles}{Design Principles}}\label{md_IMPROVEMENTS__README_autotoc_md565}
+Based on {\ttfamily improvements.\+txt} discussions\+:
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Mission First}}\+: All features must not compromise the task
+\item {\bfseries{AI Safety}}\+: Rules, oversight, and emergency channels protect against abuse
+\item {\bfseries{Motivation}}\+: XP/levels encourage quality work and cooperation
+\item {\bfseries{Transparency}}\+: All decisions logged, visible to human
+\item {\bfseries{Continuity}}\+: SQLite enables pause/resume across sessions
+\item {\bfseries{Resource Awareness}}\+: Monitoring prevents overload
+\item {\bfseries{Scalability}}\+: Design supports 10-\/100+ agents
+\item {\bfseries{Well-\/\+Being}}\+: Mandatory rest and breaks prevent agent degradation
+\end{DoxyEnumerate}\hypertarget{md_IMPROVEMENTS__README_autotoc_md566}{}\doxysection{\texorpdfstring{Credits}{Credits}}\label{md_IMPROVEMENTS__README_autotoc_md566}
+
+\begin{DoxyItemize}
+\item Concept and requirements\+: Human owner (@\+Edge\+Of\+Assembly)
+\item Design discussions\+: improvements.\+txt (AI-\/human collaboration)
+\item Foundation\+: PR \#94 (inter-\/model collaborative sessions)
+\item Phase 1-\/5 Implementation\+: PR \#95
+\item Phase 6-\/10 Implementation\+: PR \#96 (this implementation)
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+
+
+{\bfseries{Status}}\+: ALL PHASES (1-\/10) COMPLETE AND TESTED ✅\hypertarget{md_IMPROVEMENTS__README_autotoc_md568}{}\doxysubsection{\texorpdfstring{Summary of All Implemented Features}{Summary of All Implemented Features}}\label{md_IMPROVEMENTS__README_autotoc_md568}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Phase  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Feature  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Status  \\
+1  &Session Rules \& Guidelines  &✅ Complete  \\
+2  &Agent Aliasing System  &✅ Complete  \\
+3  &Experience \& Level System  &✅ Complete  \\
+4  &Persistent SQLite Storage  &✅ Complete  \\
+5  &Resource Tracking  &✅ Complete  \\
+6  &Mandatory Sleep System  &✅ Complete  \\
+7  &Degradation Monitoring  &✅ Complete  \\
+8  &Emergency Mailbox (GPG-\/encrypted)  &✅ Complete  \\
+9  &Break System (coffee/play)  &✅ Complete  \\
+10  &Dynamic Spawning  &✅ Complete  \\
+\end{DoxyTable}
+
+
+Ready for testing with live AI models! 🚀 

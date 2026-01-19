@@ -1,0 +1,9 @@
+<map id="utils.token_stats.get_model_pricing" name="utils.token_stats.get_model_pricing">
+<area shape="rect" id="Node000001" title=" " alt="" coords="553,40,706,85"/>
+<area shape="rect" id="Node000002" href="$namespaceutils_1_1token__stats.html#a54a42760c488a25025c244562ac9500b" title=" " alt="" coords="281,48,505,76"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="535,62,506,65,506,60,540,62"/>
+<area shape="rect" id="Node000003" href="$classutils_1_1token__stats_1_1TokenStats.html#a9ce688e0ff3d85f0a5cc2371301d90e0" title=" " alt="" coords="5,5,233,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="262,47,233,45,233,39,268,46"/>
+<area shape="rect" id="Node000004" href="$classutils_1_1token__stats_1_1TokenStats.html#a6276a11210640470b7397871f93084bf" title=" " alt="" coords="5,75,233,119"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="262,79,233,85,233,80,268,78"/>
+</map>

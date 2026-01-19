@@ -1,0 +1,146 @@
+	#!/usr/bin/env bash
+#
+# mkpyenv — create relocatable, movable python virtual environment
+#           with classic activate/deactivate + optional unattended package install
+#
+# Usage examples:
+#     mkpyenv my-project
+#     mkpyenv ~/cool-env-312
+#     mkpyenv --python 3.11 experiments/env
+#     mkpyenv my-project --install "fastapi uvicorn sqlalchemy pydantic>=2.0"
+#     mkpyenv api-server -i requirements.txt
+#     mkpyenv bot --install "requests beautifulsoup4 'pandas>=2.0,<3' numpy"
+#
+
+set -euo pipefail
+
+# ─── Config ────────────────────────────────────────────────────────────────
+
+DEFAULT_PYTHON="python3"
+VENV_NAME="venv"  # we create folder named what user wants, this is just internal
+
+# ─── Colors ────────────────────────────────────────────────────────────────
+red()    { printf '\033[31m%s\033[0m\n' "$*"; }
+green()  { printf '\033[32m%s\033[0m\n' "$*"; }
+yellow() { printf '\033[33m%s\033[0m\n' "$*"; }
+
+# ─── Argument parsing ──────────────────────────────────────────────────────
+PYTHON_CMD="$DEFAULT_PYTHON"
+TARGET=""
+INSTALL_PKGS=""
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --python)
+            PYTHON_CMD="$2"
+            shift 2
+            ;;
+        --install|-i)
+            shift
+            if [[ $# -eq 0 ]]; then
+                red "Error: --install requires a value (packages or requirements.txt path)"
+                exit 1
+            fi
+            INSTALL_PKGS="$1"
+            shift
+            ;;
+        *)
+            if [[ -n "$TARGET" ]]; then
+                red "Error: Too many positional arguments. Only one target path allowed."
+                exit 1
+            fi
+            TARGET="$1"
+            shift
+            ;;
+    esac
+done
+
+if [[ -z "$TARGET" ]]; then
+    red "Error: You must specify target directory"
+    echo "Usage: $0 [options] <target>"
+    echo "Options:"
+    echo "  --python <version>         e.g. python3.11 or 3.12"
+    echo "  --install|-i <packages>    Space separated (quote the whole thing!)"
+    echo "                             or path to requirements.txt"
+    exit 1
+fi
+
+# Make target relative if it looks like a simple name
+if [[ "$TARGET" != /* && "$TARGET" != ./* && "$TARGET" != ../* ]]; then
+    TARGET="./$TARGET"
+fi
+
+# ─── Create venv ───────────────────────────────────────────────────────────
+
+echo
+green "Creating relocatable python environment → $TARGET"
+echo
+
+"$PYTHON_CMD" -m venv --copies "$TARGET" || {
+    red "Failed to create venv with $PYTHON_CMD"
+    exit 1
+}
+
+# ─── Make it relocatable ───────────────────────────────────────────────────
+
+ACTIVATE="$TARGET/bin/activate"
+
+# Fix VIRTUAL_ENV to be relative
+sed -i.bak '
+    s|^VIRTUAL_ENV=.*|VIRTUAL_ENV="$( cd "$( dirname "${BASH_SOURCE[0]}" )" \&\& pwd )/.."|' \
+    "$ACTIVATE" 2>/dev/null || true
+
+# Fix shebangs → use env
+find "$TARGET/bin" -type f -print0 2>/dev/null | xargs -0 sed -i.bak '
+    1s|^#!.*python.*|#!/usr/bin/env python3|' 2>/dev/null || true
+
+# Clean backups
+find "$TARGET" -name '*.bak' -delete 2>/dev/null || true
+
+# ─── Optional package installation ─────────────────────────────────────────
+
+if [[ -n "$INSTALL_PKGS" ]]; then
+    echo
+    green "Installing packages..."
+
+    ENV_PYTHON="$TARGET/bin/python3"
+    ENV_PIP="$TARGET/bin/pip"
+
+    # Upgrade pip first (almost always good idea)
+    "$ENV_PYTHON" -m pip install --upgrade pip setuptools wheel >/dev/null 2>&1 || true
+
+    if [[ -f "$INSTALL_PKGS" ]]; then
+        # It's a file → treat as requirements.txt
+        yellow "Detected file → installing from requirements: $INSTALL_PKGS"
+        "$ENV_PIP" install -r "$INSTALL_PKGS"
+    else
+        # Treat as space-separated package list (already one argument)
+        yellow "Installing packages: $INSTALL_PKGS"
+        # shellcheck disable=SC2086  # we want word splitting here on purpose
+        "$ENV_PIP" install $INSTALL_PKGS
+    fi
+
+    if [[ $? -eq 0 ]]; then
+        green "Packages installed successfully!"
+    else
+        yellow "Some packages failed to install – check the output above"
+    fi
+fi
+
+# ─── Summary ───────────────────────────────────────────────────────────────
+
+echo
+green "Done! Your relocatable python sandbox is ready"
+echo
+echo "    source $TARGET/bin/activate"
+echo "    # ... do your thing ..."
+echo "    deactivate"
+echo
+echo "You can move the whole folder anywhere (even to another similar machine):"
+yellow "    mv $TARGET /new/place/my-perfect-env"
+echo
+echo "Pro tip: always quote the install part like this:"
+echo "    $0 my-project --install \"fastapi 'uvicorn[standard]' sqlalchemy>=2.0\""
+echo
+echo "Have fun coding!"
+echo

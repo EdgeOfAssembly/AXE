@@ -1,0 +1,14 @@
+<map id="test_xml_new_formats.test_no_conflicts_with_existing_formats" name="test_xml_new_formats.test_no_conflicts_with_existing_formats">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,144,205,205"/>
+<area shape="poly" id="edge4_Node000001_Node000001" title=" " alt="" coords="56,143,57,133,66,124,82,119,105,117,131,120,149,128,144,130,130,125,105,122,83,124,69,129,62,135,61,144"/>
+<area shape="rect" id="Node000002" href="$namespacetest__xml__new__formats.html#aa5ff845df27054fbf897b8df1a708381" title=" " alt="" coords="256,5,456,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,141,190,100,251,60,266,55,262,58,254,65,193,104,142,145"/>
+<area shape="rect" id="Node000003" href="$namespacetest__xml__new__formats.html#a85bfc4b8035093404ca9c401ed627baa" title=" " alt="" coords="256,75,456,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="204,141,269,123,264,126,206,146"/>
+<area shape="rect" id="Node000004" href="$namespacetest__xml__new__formats.html#ab3afbf3a719b2ceed675659db545d33c" title=" " alt="" coords="256,144,456,205"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="204,172,242,173,238,175,206,177"/>
+<area shape="rect" id="Node000005" href="$namespacetest__xml__new__formats.html#aa36a28c04af39fa05921068c87c52ba4" title=" " alt="" coords="256,229,456,274"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="205,202,269,224,264,225,205,208"/>
+<area shape="rect" id="Node000006" href="$namespacetest__xml__new__formats.html#a2119efffc15a8e209e2ba0e3b4f6ece8" title=" " alt="" coords="253,299,459,343"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="141,203,193,245,254,284,267,292,262,292,251,289,190,249,140,208"/>
+</map>

@@ -1,0 +1,16 @@
+<map id="axe.detect_agent_token" name="axe.detect_agent_token">
+<area shape="rect" id="Node000001" title=" " alt="" coords="760,56,937,83"/>
+<area shape="rect" id="Node000002" href="$classaxe_1_1CollaborativeSession.html#a2c0fb59b4465a4f8514630602fa942f8" title=" " alt="" coords="273,47,462,92"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="803,48,760,33,712,20,656,11,611,8,567,11,511,20,463,32,419,49,417,44,461,27,509,15,566,6,611,3,656,6,713,15,762,28,808,49"/>
+<area shape="rect" id="Node000004" href="$namespaceaxe.html#a557557e18d17b8fa824f16fd344efdcf" title=" " alt="" coords="510,29,712,57"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="742,58,713,57,713,52,747,58"/>
+<area shape="rect" id="Node000005" href="$namespaceaxe.html#a24106f38d1e2278a094b572012ed4760" title=" " alt="" coords="528,81,695,109"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="742,81,696,89,695,83,747,80"/>
+<area shape="rect" id="Node000006" href="$namespaceaxe.html#a6219e4e9c2c63cebb97122848b591a70" title=" " alt="" coords="528,132,694,177"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="798,89,713,123,680,135,679,129,711,118,793,90"/>
+<area shape="rect" id="Node000003" href="$classaxe_1_1CollaborativeSession.html#af4ab55de0d7b895c6002cd691b36a9be" title=" " alt="" coords="5,47,225,92"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="254,70,226,72,225,67,260,69"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="492,56,463,62,462,56,497,55"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="509,85,463,82,463,77,515,84"/>
+<area shape="poly" id="edge8_Node000006_Node000002" title=" " alt="" coords="527,127,509,123,432,95,433,90,511,118,532,127"/>
+</map>

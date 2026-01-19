@@ -1,0 +1,11 @@
+digraph "utils.context_optimizer.ContextOptimizer._summarize_messages"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="utils.context_optimizer.\lContextOptimizer._summarize\l_messages",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge2_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="utils.context_optimizer.\lContextOptimizer.optimize\l_conversation",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classutils_1_1context__optimizer_1_1ContextOptimizer.html#affd6588756f9f8e69a0da458e57b43ff",tooltip=" "];
+}

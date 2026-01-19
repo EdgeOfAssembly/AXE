@@ -1,0 +1,110 @@
+\doxysection{progression.\+xp\+\_\+system Namespace Reference}
+\hypertarget{namespaceprogression_1_1xp__system}{}\label{namespaceprogression_1_1xp__system}\index{progression.xp\_system@{progression.xp\_system}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{namespaceprogression_1_1xp__system_a10448e378ebb2891eb7e10b269d492d6}{calculate\+\_\+xp\+\_\+for\+\_\+level}} (int level)
+\item 
+int \mbox{\hyperlink{namespaceprogression_1_1xp__system_a6981e4eb92d958095f443501eead4979}{award\+\_\+xp\+\_\+for\+\_\+activity}} (str activity, float quality\+\_\+multiplier=1.\+0)
+\item 
+int \mbox{\hyperlink{namespaceprogression_1_1xp__system_a9bcd04a17d35f7dda5933940c8e744e9}{get\+\_\+workshop\+\_\+xp\+\_\+bonus}} (dict results, str tool\+\_\+name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{namespaceprogression_1_1xp__system_a7367a4e7f7849104c274564f22f3b7af}{XP\+\_\+\+PER\+\_\+\+LEVEL\+\_\+\+LINEAR}} = 100
+\item 
+dict \mbox{\hyperlink{namespaceprogression_1_1xp__system_a07cf2acc18ba5e59270281632126f931}{XP\+\_\+\+AWARDS}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Experience point (XP) calculation and award system.
+Implements hybrid linear/exponential progression curve.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespaceprogression_1_1xp__system_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceprogression_1_1xp__system_a6981e4eb92d958095f443501eead4979}\index{progression.xp\_system@{progression.xp\_system}!award\_xp\_for\_activity@{award\_xp\_for\_activity}}
+\index{award\_xp\_for\_activity@{award\_xp\_for\_activity}!progression.xp\_system@{progression.xp\_system}}
+\doxysubsubsection{\texorpdfstring{award\_xp\_for\_activity()}{award\_xp\_for\_activity()}}
+{\footnotesize\ttfamily \label{namespaceprogression_1_1xp__system_a6981e4eb92d958095f443501eead4979} 
+ int progression.\+xp\+\_\+system.\+award\+\_\+xp\+\_\+for\+\_\+activity (\begin{DoxyParamCaption}\item[{str}]{activity}{, }\item[{float }]{quality\+\_\+multiplier}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculate XP award for a specific activity.
+
+Args:
+    activity: Activity name (key from XP_AWARDS)
+    quality_multiplier: Multiplier for analysis quality (0.5 to 2.0)
+    
+Returns:
+    XP points to award
+\end{DoxyVerb}
+ \Hypertarget{namespaceprogression_1_1xp__system_a10448e378ebb2891eb7e10b269d492d6}\index{progression.xp\_system@{progression.xp\_system}!calculate\_xp\_for\_level@{calculate\_xp\_for\_level}}
+\index{calculate\_xp\_for\_level@{calculate\_xp\_for\_level}!progression.xp\_system@{progression.xp\_system}}
+\doxysubsubsection{\texorpdfstring{calculate\_xp\_for\_level()}{calculate\_xp\_for\_level()}}
+{\footnotesize\ttfamily \label{namespaceprogression_1_1xp__system_a10448e378ebb2891eb7e10b269d492d6} 
+ int progression.\+xp\+\_\+system.\+calculate\+\_\+xp\+\_\+for\+\_\+level (\begin{DoxyParamCaption}\item[{int}]{level}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculate total XP required to reach a given level.\end{DoxyVerb}
+ \Hypertarget{namespaceprogression_1_1xp__system_a9bcd04a17d35f7dda5933940c8e744e9}\index{progression.xp\_system@{progression.xp\_system}!get\_workshop\_xp\_bonus@{get\_workshop\_xp\_bonus}}
+\index{get\_workshop\_xp\_bonus@{get\_workshop\_xp\_bonus}!progression.xp\_system@{progression.xp\_system}}
+\doxysubsubsection{\texorpdfstring{get\_workshop\_xp\_bonus()}{get\_workshop\_xp\_bonus()}}
+{\footnotesize\ttfamily \label{namespaceprogression_1_1xp__system_a9bcd04a17d35f7dda5933940c8e744e9} 
+ int progression.\+xp\+\_\+system.\+get\+\_\+workshop\+\_\+xp\+\_\+bonus (\begin{DoxyParamCaption}\item[{dict}]{results}{, }\item[{str}]{tool\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculate XP bonus based on workshop analysis results.
+
+Args:
+    results: Analysis results dictionary
+    tool_name: Name of the workshop tool
+    
+Returns:
+    Bonus XP points
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespaceprogression_1_1xp__system_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceprogression_1_1xp__system_a07cf2acc18ba5e59270281632126f931}\index{progression.xp\_system@{progression.xp\_system}!XP\_AWARDS@{XP\_AWARDS}}
+\index{XP\_AWARDS@{XP\_AWARDS}!progression.xp\_system@{progression.xp\_system}}
+\doxysubsubsection{\texorpdfstring{XP\_AWARDS}{XP\_AWARDS}}
+{\footnotesize\ttfamily \label{namespaceprogression_1_1xp__system_a07cf2acc18ba5e59270281632126f931} 
+dict progression.\+xp\+\_\+system.\+XP\+\_\+\+AWARDS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{comment}{\#\ Workshop\ tool\ usage}}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{'workshop\_chisel'}:\ 25,\ \ \ \ \ \ \textcolor{comment}{\#\ Symbolic\ execution}}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{'workshop\_saw'}:\ 20,\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Taint\ analysis}}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{'workshop\_plane'}:\ 15,\ \ \ \ \ \ \ \textcolor{comment}{\#\ Source/sink\ enumeration}}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{stringliteral}{'workshop\_hammer'}:\ 30,\ \ \ \ \ \ \textcolor{comment}{\#\ Live\ instrumentation}}
+\DoxyCodeLine{00007\ \ \ \ \ }
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{comment}{\#\ Analysis\ quality\ bonuses}}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{stringliteral}{'workshop\_vulnerability\_found'}:\ 50,\ \ \textcolor{comment}{\#\ Finding\ a\ real\ vulnerability}}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{stringliteral}{'workshop\_clean\_analysis'}:\ 10,\ \ \ \ \ \ \ \textcolor{comment}{\#\ Successful\ analysis\ with\ no\ errors}}
+\DoxyCodeLine{00011\ \ \ \ \ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{comment}{\#\ Multi-\/agent\ collaboration}}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{stringliteral}{'agent\_collaboration'}:\ 15,}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{stringliteral}{'task\_completion'}:\ 20,}
+\DoxyCodeLine{00015\ \ \ \ \ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{\#\ Code\ quality}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{stringliteral}{'code\_review'}:\ 10,}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{stringliteral}{'bug\_fix'}:\ 25,}
+\DoxyCodeLine{00019\ \ \ \ \ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{\#\ Default\ awards}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{stringliteral}{'message\_processed'}:\ 1,}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{stringliteral}{'command\_executed'}:\ 5,}
+\DoxyCodeLine{00023\ \}}
+
+\end{DoxyCode}
+\Hypertarget{namespaceprogression_1_1xp__system_a7367a4e7f7849104c274564f22f3b7af}\index{progression.xp\_system@{progression.xp\_system}!XP\_PER\_LEVEL\_LINEAR@{XP\_PER\_LEVEL\_LINEAR}}
+\index{XP\_PER\_LEVEL\_LINEAR@{XP\_PER\_LEVEL\_LINEAR}!progression.xp\_system@{progression.xp\_system}}
+\doxysubsubsection{\texorpdfstring{XP\_PER\_LEVEL\_LINEAR}{XP\_PER\_LEVEL\_LINEAR}}
+{\footnotesize\ttfamily \label{namespaceprogression_1_1xp__system_a7367a4e7f7849104c274564f22f3b7af} 
+int progression.\+xp\+\_\+system.\+XP\+\_\+\+PER\+\_\+\+LEVEL\+\_\+\+LINEAR = 100}
+

@@ -1,0 +1,255 @@
+\doxysection{core.\+acp\+\_\+validator.\+ACPValidator Class Reference}
+\hypertarget{classcore_1_1acp__validator_1_1ACPValidator}{}\label{classcore_1_1acp__validator_1_1ACPValidator}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
+
+
+Collaboration diagram for core.\+acp\+\_\+validator.\+ACPValidator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classcore_1_1acp__validator_1_1ACPValidator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1acp__validator_1_1ACPValidator_ac127c93cd23bdc08fe9905c4c32f534c}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{classcore_1_1acp__validator_1_1ACPValidator_a46fe08d854cfaa213713494099d69b1b}{db\+\_\+path}}=None)
+\item 
+bool \mbox{\hyperlink{classcore_1_1acp__validator_1_1ACPValidator_a4cba6fd9f33d0fc17e50901afaf9c848}{conflicts\+\_\+with\+\_\+standard}} (self, str abbrev)
+\item 
+Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{classcore_1_1acp__validator_1_1ACPValidator_aa00c64b4245c4cc8fd7cbd5dedd343b2}{get\+\_\+standard\+\_\+meaning}} (self, str abbrev)
+\item 
+List\mbox{[}str\mbox{]} \mbox{\hyperlink{classcore_1_1acp__validator_1_1ACPValidator_a948b52fa82a4a216404331d08f9d964e}{validate\+\_\+custom\+\_\+abbreviations}} (self, Dict\mbox{[}str, str\mbox{]} custom)
+\item 
+Dict\mbox{[}str, str\mbox{]} \mbox{\hyperlink{classcore_1_1acp__validator_1_1ACPValidator_a02a900319014a43dfa5082012f2dcba8}{get\+\_\+all\+\_\+standard\+\_\+abbreviations}} (self)
+\item 
+\mbox{\hyperlink{classcore_1_1acp__validator_1_1ACPValidator_ad3086273f5a53c8cd4bd89705cd5ef8b}{close}} (self)
+\item 
+\mbox{\hyperlink{classcore_1_1acp__validator_1_1ACPValidator_a708092d81ab093520684f3a29501899d}{\+\_\+\+\_\+enter\+\_\+\+\_\+}} (self)
+\item 
+\mbox{\hyperlink{classcore_1_1acp__validator_1_1ACPValidator_af93405c93975a939c3df79141d9b956f}{\+\_\+\+\_\+exit\+\_\+\+\_\+}} (self, exc\+\_\+type, exc\+\_\+val, exc\+\_\+tb)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1acp__validator_1_1ACPValidator_a46fe08d854cfaa213713494099d69b1b}{db\+\_\+path}} = str(db\+\_\+path)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+sqlite3.\+Connection \mbox{\hyperlink{classcore_1_1acp__validator_1_1ACPValidator_a327d2e974d6665eaf207bb47b2e81c83}{\+\_\+get\+\_\+connection}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Optional\mbox{[}sqlite3.\+Connection\mbox{]} \mbox{\hyperlink{classcore_1_1acp__validator_1_1ACPValidator_acbf2dbedd13bf2a6a829b45e1bea763a}{\+\_\+conn}} = None
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Validates custom abbreviations against IT standards database.\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_ac127c93cd23bdc08fe9905c4c32f534c}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1acp__validator_1_1ACPValidator_ac127c93cd23bdc08fe9905c4c32f534c} 
+core.\+acp\+\_\+validator.\+ACPValidator.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}str\mbox{]} }]{db\+\_\+path}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize the ACP Validator.
+
+Args:
+    db_path: Path to IT abbreviations database. 
+            Defaults to data/it_abbreviations.db relative to project root.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_a708092d81ab093520684f3a29501899d}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}!\_\_enter\_\_@{\_\_enter\_\_}}
+\index{\_\_enter\_\_@{\_\_enter\_\_}!core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
+\doxysubsubsection{\texorpdfstring{\_\_enter\_\_()}{\_\_enter\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1acp__validator_1_1ACPValidator_a708092d81ab093520684f3a29501899d} 
+core.\+acp\+\_\+validator.\+ACPValidator.\+\_\+\+\_\+enter\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Context manager entry.\end{DoxyVerb}
+ \Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_af93405c93975a939c3df79141d9b956f}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}!\_\_exit\_\_@{\_\_exit\_\_}}
+\index{\_\_exit\_\_@{\_\_exit\_\_}!core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
+\doxysubsubsection{\texorpdfstring{\_\_exit\_\_()}{\_\_exit\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1acp__validator_1_1ACPValidator_af93405c93975a939c3df79141d9b956f} 
+core.\+acp\+\_\+validator.\+ACPValidator.\+\_\+\+\_\+exit\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{exc\+\_\+type}{, }\item[{}]{exc\+\_\+val}{, }\item[{}]{exc\+\_\+tb}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Context manager exit - close connection.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1acp__validator_1_1ACPValidator_af93405c93975a939c3df79141d9b956f_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_a327d2e974d6665eaf207bb47b2e81c83}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}!\_get\_connection@{\_get\_connection}}
+\index{\_get\_connection@{\_get\_connection}!core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
+\doxysubsubsection{\texorpdfstring{\_get\_connection()}{\_get\_connection()}}
+{\footnotesize\ttfamily \label{classcore_1_1acp__validator_1_1ACPValidator_a327d2e974d6665eaf207bb47b2e81c83} 
+ sqlite3.\+Connection core.\+acp\+\_\+validator.\+ACPValidator.\+\_\+get\+\_\+connection (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Lazy load database connection.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1acp__validator_1_1ACPValidator_a327d2e974d6665eaf207bb47b2e81c83_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_ad3086273f5a53c8cd4bd89705cd5ef8b}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}!close@{close}}
+\index{close@{close}!core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily \label{classcore_1_1acp__validator_1_1ACPValidator_ad3086273f5a53c8cd4bd89705cd5ef8b} 
+core.\+acp\+\_\+validator.\+ACPValidator.\+close (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Close the database connection.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{classcore_1_1acp__validator_1_1ACPValidator_ad3086273f5a53c8cd4bd89705cd5ef8b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1acp__validator_1_1ACPValidator_ad3086273f5a53c8cd4bd89705cd5ef8b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_a4cba6fd9f33d0fc17e50901afaf9c848}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}!conflicts\_with\_standard@{conflicts\_with\_standard}}
+\index{conflicts\_with\_standard@{conflicts\_with\_standard}!core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
+\doxysubsubsection{\texorpdfstring{conflicts\_with\_standard()}{conflicts\_with\_standard()}}
+{\footnotesize\ttfamily \label{classcore_1_1acp__validator_1_1ACPValidator_a4cba6fd9f33d0fc17e50901afaf9c848} 
+ bool core.\+acp\+\_\+validator.\+ACPValidator.\+conflicts\+\_\+with\+\_\+standard (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{abbrev}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if abbreviation conflicts with any IT standard.
+
+Args:
+    abbrev: Abbreviation to check (case-insensitive)
+    
+Returns:
+    True if abbreviation conflicts with a standard term, False otherwise
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1acp__validator_1_1ACPValidator_a4cba6fd9f33d0fc17e50901afaf9c848_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1acp__validator_1_1ACPValidator_a4cba6fd9f33d0fc17e50901afaf9c848_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_a02a900319014a43dfa5082012f2dcba8}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}!get\_all\_standard\_abbreviations@{get\_all\_standard\_abbreviations}}
+\index{get\_all\_standard\_abbreviations@{get\_all\_standard\_abbreviations}!core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
+\doxysubsubsection{\texorpdfstring{get\_all\_standard\_abbreviations()}{get\_all\_standard\_abbreviations()}}
+{\footnotesize\ttfamily \label{classcore_1_1acp__validator_1_1ACPValidator_a02a900319014a43dfa5082012f2dcba8} 
+ Dict\mbox{[}str, str\mbox{]} core.\+acp\+\_\+validator.\+ACPValidator.\+get\+\_\+all\+\_\+standard\+\_\+abbreviations (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get all standard abbreviations from the database.
+
+Returns:
+    Dictionary mapping abbreviations to their full forms
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1acp__validator_1_1ACPValidator_a02a900319014a43dfa5082012f2dcba8_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_aa00c64b4245c4cc8fd7cbd5dedd343b2}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}!get\_standard\_meaning@{get\_standard\_meaning}}
+\index{get\_standard\_meaning@{get\_standard\_meaning}!core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
+\doxysubsubsection{\texorpdfstring{get\_standard\_meaning()}{get\_standard\_meaning()}}
+{\footnotesize\ttfamily \label{classcore_1_1acp__validator_1_1ACPValidator_aa00c64b4245c4cc8fd7cbd5dedd343b2} 
+ Optional\mbox{[}str\mbox{]} core.\+acp\+\_\+validator.\+ACPValidator.\+get\+\_\+standard\+\_\+meaning (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{abbrev}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the standard meaning of an abbreviation if it exists.
+
+Args:
+    abbrev: Abbreviation to lookup
+    
+Returns:
+    Full form of the abbreviation, or None if not found
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1acp__validator_1_1ACPValidator_aa00c64b4245c4cc8fd7cbd5dedd343b2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1acp__validator_1_1ACPValidator_aa00c64b4245c4cc8fd7cbd5dedd343b2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_a948b52fa82a4a216404331d08f9d964e}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}!validate\_custom\_abbreviations@{validate\_custom\_abbreviations}}
+\index{validate\_custom\_abbreviations@{validate\_custom\_abbreviations}!core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
+\doxysubsubsection{\texorpdfstring{validate\_custom\_abbreviations()}{validate\_custom\_abbreviations()}}
+{\footnotesize\ttfamily \label{classcore_1_1acp__validator_1_1ACPValidator_a948b52fa82a4a216404331d08f9d964e} 
+ List\mbox{[}str\mbox{]} core.\+acp\+\_\+validator.\+ACPValidator.\+validate\+\_\+custom\+\_\+abbreviations (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict\mbox{[}str, str\mbox{]}}]{custom}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Validate custom abbreviations against standard IT terms.
+
+Args:
+    custom: Dictionary mapping custom abbreviations to their meanings
+    
+Returns:
+    List of conflicting abbreviations (those that conflict with standards)
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1acp__validator_1_1ACPValidator_a948b52fa82a4a216404331d08f9d964e_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_acbf2dbedd13bf2a6a829b45e1bea763a}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}!\_conn@{\_conn}}
+\index{\_conn@{\_conn}!core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
+\doxysubsubsection{\texorpdfstring{\_conn}{\_conn}}
+{\footnotesize\ttfamily \label{classcore_1_1acp__validator_1_1ACPValidator_acbf2dbedd13bf2a6a829b45e1bea763a} 
+Optional\mbox{[}sqlite3.\+Connection\mbox{]} core.\+acp\+\_\+validator.\+ACPValidator.\+\_\+conn = None\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classcore_1_1acp__validator_1_1ACPValidator_a46fe08d854cfaa213713494099d69b1b}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}!db\_path@{db\_path}}
+\index{db\_path@{db\_path}!core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
+\doxysubsubsection{\texorpdfstring{db\_path}{db\_path}}
+{\footnotesize\ttfamily \label{classcore_1_1acp__validator_1_1ACPValidator_a46fe08d854cfaa213713494099d69b1b} 
+core.\+acp\+\_\+validator.\+ACPValidator.\+db\+\_\+path = str(db\+\_\+path)}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{acp__validator_8py}{acp\+\_\+validator.\+py}}\end{DoxyCompactItemize}

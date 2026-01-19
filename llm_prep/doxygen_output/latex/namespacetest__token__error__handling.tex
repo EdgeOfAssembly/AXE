@@ -1,0 +1,162 @@
+\doxysection{test\+\_\+token\+\_\+error\+\_\+handling Namespace Reference}
+\hypertarget{namespacetest__token__error__handling}{}\label{namespacetest__token__error__handling}\index{test\_token\_error\_handling@{test\_token\_error\_handling}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetest__token__error__handling_a7a1a12825cf845d4de80e18cf972a35d}{test\+\_\+token\+\_\+limit\+\_\+error\+\_\+detection}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__error__handling_a87c83c23d69fed7487f32dd6a9280877}{test\+\_\+error\+\_\+count\+\_\+tracking}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__error__handling_a52d64b7049e5f80ba9ea15b63a0f22d6}{test\+\_\+token\+\_\+error\+\_\+response\+\_\+format}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__error__handling_aff60ebebd09e9608822f5fb57d344ed4}{test\+\_\+supervisor\+\_\+cannot\+\_\+be\+\_\+slept}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__error__handling_aebe5ae49936eccebdca7d0a8706296b6}{test\+\_\+error\+\_\+logging\+\_\+structure}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__error__handling_aab6090d95d2686c8a07056ba484799a1}{test\+\_\+error\+\_\+message\+\_\+truncation}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__error__handling_aa29ac843592b157dadd5184f2810627c}{test\+\_\+recovery\+\_\+suggestion\+\_\+message}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__error__handling_a5abcef20a7866734557d4b9316b5ec47}{test\+\_\+token\+\_\+error\+\_\+vs\+\_\+other\+\_\+errors}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Test suite for token limit error handling (Bug #3).
+
+Tests the fix for 413 token limit errors not being properly handled,
+including detection, logging, and automatic recovery.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacetest__token__error__handling_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetest__token__error__handling_a87c83c23d69fed7487f32dd6a9280877}\index{test\_token\_error\_handling@{test\_token\_error\_handling}!test\_error\_count\_tracking@{test\_error\_count\_tracking}}
+\index{test\_error\_count\_tracking@{test\_error\_count\_tracking}!test\_token\_error\_handling@{test\_token\_error\_handling}}
+\doxysubsubsection{\texorpdfstring{test\_error\_count\_tracking()}{test\_error\_count\_tracking()}}
+{\footnotesize\ttfamily \label{namespacetest__token__error__handling_a87c83c23d69fed7487f32dd6a9280877} 
+test\+\_\+token\+\_\+error\+\_\+handling.\+test\+\_\+error\+\_\+count\+\_\+tracking (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that error counts are properly incremented.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__token__error__handling_a87c83c23d69fed7487f32dd6a9280877_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__token__error__handling_aebe5ae49936eccebdca7d0a8706296b6}\index{test\_token\_error\_handling@{test\_token\_error\_handling}!test\_error\_logging\_structure@{test\_error\_logging\_structure}}
+\index{test\_error\_logging\_structure@{test\_error\_logging\_structure}!test\_token\_error\_handling@{test\_token\_error\_handling}}
+\doxysubsubsection{\texorpdfstring{test\_error\_logging\_structure()}{test\_error\_logging\_structure()}}
+{\footnotesize\ttfamily \label{namespacetest__token__error__handling_aebe5ae49936eccebdca7d0a8706296b6} 
+test\+\_\+token\+\_\+error\+\_\+handling.\+test\+\_\+error\+\_\+logging\+\_\+structure (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that error logging contains required fields.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__token__error__handling_aebe5ae49936eccebdca7d0a8706296b6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__token__error__handling_aab6090d95d2686c8a07056ba484799a1}\index{test\_token\_error\_handling@{test\_token\_error\_handling}!test\_error\_message\_truncation@{test\_error\_message\_truncation}}
+\index{test\_error\_message\_truncation@{test\_error\_message\_truncation}!test\_token\_error\_handling@{test\_token\_error\_handling}}
+\doxysubsubsection{\texorpdfstring{test\_error\_message\_truncation()}{test\_error\_message\_truncation()}}
+{\footnotesize\ttfamily \label{namespacetest__token__error__handling_aab6090d95d2686c8a07056ba484799a1} 
+test\+\_\+token\+\_\+error\+\_\+handling.\+test\+\_\+error\+\_\+message\+\_\+truncation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that long error messages are truncated appropriately.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__token__error__handling_aab6090d95d2686c8a07056ba484799a1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__token__error__handling_aa29ac843592b157dadd5184f2810627c}\index{test\_token\_error\_handling@{test\_token\_error\_handling}!test\_recovery\_suggestion\_message@{test\_recovery\_suggestion\_message}}
+\index{test\_recovery\_suggestion\_message@{test\_recovery\_suggestion\_message}!test\_token\_error\_handling@{test\_token\_error\_handling}}
+\doxysubsubsection{\texorpdfstring{test\_recovery\_suggestion\_message()}{test\_recovery\_suggestion\_message()}}
+{\footnotesize\ttfamily \label{namespacetest__token__error__handling_aa29ac843592b157dadd5184f2810627c} 
+test\+\_\+token\+\_\+error\+\_\+handling.\+test\+\_\+recovery\+\_\+suggestion\+\_\+message (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that recovery suggestions are provided.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__token__error__handling_aa29ac843592b157dadd5184f2810627c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__token__error__handling_aff60ebebd09e9608822f5fb57d344ed4}\index{test\_token\_error\_handling@{test\_token\_error\_handling}!test\_supervisor\_cannot\_be\_slept@{test\_supervisor\_cannot\_be\_slept}}
+\index{test\_supervisor\_cannot\_be\_slept@{test\_supervisor\_cannot\_be\_slept}!test\_token\_error\_handling@{test\_token\_error\_handling}}
+\doxysubsubsection{\texorpdfstring{test\_supervisor\_cannot\_be\_slept()}{test\_supervisor\_cannot\_be\_slept()}}
+{\footnotesize\ttfamily \label{namespacetest__token__error__handling_aff60ebebd09e9608822f5fb57d344ed4} 
+test\+\_\+token\+\_\+error\+\_\+handling.\+test\+\_\+supervisor\+\_\+cannot\+\_\+be\+\_\+slept (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that supervisors are not put to sleep even on token errors.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__token__error__handling_aff60ebebd09e9608822f5fb57d344ed4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__token__error__handling_a52d64b7049e5f80ba9ea15b63a0f22d6}\index{test\_token\_error\_handling@{test\_token\_error\_handling}!test\_token\_error\_response\_format@{test\_token\_error\_response\_format}}
+\index{test\_token\_error\_response\_format@{test\_token\_error\_response\_format}!test\_token\_error\_handling@{test\_token\_error\_handling}}
+\doxysubsubsection{\texorpdfstring{test\_token\_error\_response\_format()}{test\_token\_error\_response\_format()}}
+{\footnotesize\ttfamily \label{namespacetest__token__error__handling_a52d64b7049e5f80ba9ea15b63a0f22d6} 
+test\+\_\+token\+\_\+error\+\_\+handling.\+test\+\_\+token\+\_\+error\+\_\+response\+\_\+format (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that token error responses are properly formatted.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__token__error__handling_a52d64b7049e5f80ba9ea15b63a0f22d6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__token__error__handling_a5abcef20a7866734557d4b9316b5ec47}\index{test\_token\_error\_handling@{test\_token\_error\_handling}!test\_token\_error\_vs\_other\_errors@{test\_token\_error\_vs\_other\_errors}}
+\index{test\_token\_error\_vs\_other\_errors@{test\_token\_error\_vs\_other\_errors}!test\_token\_error\_handling@{test\_token\_error\_handling}}
+\doxysubsubsection{\texorpdfstring{test\_token\_error\_vs\_other\_errors()}{test\_token\_error\_vs\_other\_errors()}}
+{\footnotesize\ttfamily \label{namespacetest__token__error__handling_a5abcef20a7866734557d4b9316b5ec47} 
+test\+\_\+token\+\_\+error\+\_\+handling.\+test\+\_\+token\+\_\+error\+\_\+vs\+\_\+other\+\_\+errors (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that token errors are handled differently from other errors.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__token__error__handling_a5abcef20a7866734557d4b9316b5ec47_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{namespacetest__token__error__handling_a5abcef20a7866734557d4b9316b5ec47_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__token__error__handling_a7a1a12825cf845d4de80e18cf972a35d}\index{test\_token\_error\_handling@{test\_token\_error\_handling}!test\_token\_limit\_error\_detection@{test\_token\_limit\_error\_detection}}
+\index{test\_token\_limit\_error\_detection@{test\_token\_limit\_error\_detection}!test\_token\_error\_handling@{test\_token\_error\_handling}}
+\doxysubsubsection{\texorpdfstring{test\_token\_limit\_error\_detection()}{test\_token\_limit\_error\_detection()}}
+{\footnotesize\ttfamily \label{namespacetest__token__error__handling_a7a1a12825cf845d4de80e18cf972a35d} 
+test\+\_\+token\+\_\+error\+\_\+handling.\+test\+\_\+token\+\_\+limit\+\_\+error\+\_\+detection (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that token limit errors are properly detected.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__token__error__handling_a7a1a12825cf845d4de80e18cf972a35d_icgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,18 @@
+<map id="test_anthropic_integration.test_complete_workflow_simulation" name="test_anthropic_integration.test_complete_workflow_simulation">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,213,237,258"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="63,213,61,203,71,194,91,189,121,187,154,189,175,197,170,199,153,194,121,192,92,194,74,199,67,205,69,213"/>
+<area shape="rect" id="Node000002" href="$namespacetest__anthropic__integration.html#a4f47dbe5fdc7a971217926475ae38867" title=" " alt="" coords="285,5,571,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,212,159,178,193,137,235,95,283,60,297,55,293,59,286,65,239,99,197,140,163,181,139,215"/>
+<area shape="rect" id="Node000003" href="$namespacetest__anthropic__integration.html#aa47b57fd1e94e74501a3c092d9ae8305" title=" " alt="" coords="317,75,538,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="149,211,209,169,284,129,305,123,300,126,286,134,212,174,153,215"/>
+<area shape="rect" id="Node000004" href="$namespacetest__anthropic__integration.html#a2c8b5e5073e055ab7894b5661d68a41c" title=" " alt="" coords="307,144,548,189"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="222,210,313,191,309,194,224,215"/>
+<area shape="rect" id="Node000005" href="$namespacetest__anthropic__integration.html#a4264b9b5a52cd6cc33525879cc6e5def" title=" " alt="" coords="317,213,538,258"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="237,233,304,234,299,237,238,238"/>
+<area shape="rect" id="Node000006" href="$namespacetest__anthropic__integration.html#afda01d90142522037da3377ead1906b1" title=" " alt="" coords="316,283,540,327"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="223,256,313,278,309,280,223,261"/>
+<area shape="rect" id="Node000007" href="$namespacetest__anthropic__integration.html#a516ff6fd06ddcc43cadee4644f9fc09e" title=" " alt="" coords="317,352,538,397"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="151,256,212,298,286,337,305,346,300,347,284,342,209,302,151,261"/>
+<area shape="rect" id="Node000008" href="$namespacetest__anthropic__integration.html#ab7a6d91e04bae89f3b4363ab084ba4b3" title=" " alt="" coords="317,421,538,466"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="137,256,163,290,197,331,239,372,286,407,305,418,300,418,283,411,235,376,193,335,159,294,136,261"/>
+</map>

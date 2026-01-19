@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['add_5fcache_5fcontrol_0',['add_cache_control',['../classcore_1_1anthropic__features_1_1AnthropicFeatures.html#ac5875c33c281908713873f9268e32fca',1,'core::anthropic_features::AnthropicFeatures']]],
+  ['add_5fdiff_5fpatch_1',['add_diff_patch',['../classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager.html#a7f6c6ee3e48111e5f78e9c56158fc779',1,'managers::shared_build_status::SharedBuildStatusManager']]],
+  ['add_5fmessage_2',['add_message',['../classcore_1_1multiprocess_1_1SharedContext.html#a7a1d9fb1459e1506f6df6b9eaca0d3bc',1,'core::multiprocess::SharedContext']]],
+  ['add_5fshared_5fnote_3',['add_shared_note',['../classcore_1_1multiprocess_1_1SharedContext.html#a54bcd5f913c7059848f1f4939207a4f3',1,'core::multiprocess::SharedContext']]],
+  ['add_5ftokens_4',['add_tokens',['../classutils_1_1rate__limiter_1_1RateLimiter.html#a52259d2a83257b6d2682c6e9beb61c29',1,'utils::rate_limiter::RateLimiter']]],
+  ['add_5fusage_5',['add_usage',['../classutils_1_1token__stats_1_1TokenStats.html#a45a527585073694eaaa7c1cfe9e8b928',1,'utils::token_stats::TokenStats']]],
+  ['agent_5frequest_5fpush_6',['agent_request_push',['../classcore_1_1github__agent_1_1GitHubAgent.html#a304a9df6d3a2226cc3c8d7cc29894a9c',1,'core::github_agent::GitHubAgent']]],
+  ['alias_5fexists_7',['alias_exists',['../classdatabase_1_1agent__db_1_1AgentDatabase.html#abfdbfe1b8aea2627d8d17c2fc7ba74f6',1,'database::agent_db::AgentDatabase']]],
+  ['analyze_5farchive_8',['analyze_archive',['../namespacetools_1_1build__analyzer.html#a9508c930f379c7a1a86cfcbce4656aa6',1,'tools::build_analyzer']]],
+  ['analyze_5fbinary_9',['analyze_binary',['../classworkshop_1_1chisel_1_1ChiselAnalyzer.html#a08898a342ce3b5f527cc5ec8e235ffdb',1,'workshop::chisel::ChiselAnalyzer']]],
+  ['analyze_5fbuild_5fstatus_5fefficiency_10',['analyze_build_status_efficiency',['../namespacetest__efficiency__analysis.html#a238b3c8c07dc1d001ddaf9a57d05d719',1,'test_efficiency_analysis']]],
+  ['analyze_5fcode_11',['analyze_code',['../classworkshop_1_1saw_1_1SawTracker.html#a879cdc1cb42bceaff7f1ce6f2578c2bb',1,'workshop::saw::SawTracker']]],
+  ['analyze_5fcollaboration_5fimprovements_12',['analyze_collaboration_improvements',['../namespacetest__efficiency__analysis.html#ac8d56aba10c1ef9afeba7929b99d56dd',1,'test_efficiency_analysis']]],
+  ['analyze_5fcorpus_5ffile_13',['analyze_corpus_file',['../namespacebenchmark__acp.html#aa43f698f5f9ae95cf20fa9d98224edbc',1,'benchmark_acp']]],
+  ['analyze_5fdiff_5fpatch_5fefficiency_14',['analyze_diff_patch_efficiency',['../namespacetest__efficiency__analysis.html#a8eeb792c37aa1f4c73b5e6151ac6d538',1,'test_efficiency_analysis']]],
+  ['analyze_5fdirectory_15',['analyze_directory',['../namespacetools_1_1build__analyzer.html#adb11a626c64e923dfc5853158f9791fa',1,'tools::build_analyzer']]],
+  ['analyze_5ffunction_16',['analyze_function',['../classworkshop_1_1chisel_1_1ChiselAnalyzer.html#a27aee86cdc5318fc86c52a95b4148b50',1,'workshop.chisel.ChiselAnalyzer.analyze_function()'],['../classworkshop_1_1saw_1_1SawTracker.html#a7ff782d2c81dd58f0af9bbca73d2caf9',1,'workshop.saw.SawTracker.analyze_function()']]],
+  ['analyze_5flimit_5fchanges_17',['analyze_limit_changes',['../namespacetest__efficiency__analysis.html#ae66ff1876f3298ef19606bb494653fa8',1,'test_efficiency_analysis']]],
+  ['analyze_5ftruncation_5fsavings_18',['analyze_truncation_savings',['../namespacetest__efficiency__analysis.html#a7933bfeaad467bd549a2b93625c1571c',1,'test_efficiency_analysis']]],
+  ['append_5fto_5fshared_19',['append_to_shared',['../classaxe_1_1SharedWorkspace.html#a2bc73dc80bbc403c5171caf656937cb2',1,'axe::SharedWorkspace']]],
+  ['approve_5fbreak_20',['approve_break',['../classmanagers_1_1break__system_1_1BreakSystem.html#a320c4885461546fbe14f59f4ea29ed0b',1,'managers::break_system::BreakSystem']]],
+  ['award_5fxp_21',['award_xp',['../classdatabase_1_1agent__db_1_1AgentDatabase.html#a296bb2622baac11158a1d47114fc1507',1,'database::agent_db::AgentDatabase']]],
+  ['award_5fxp_5ffor_5factivity_22',['award_xp_for_activity',['../namespaceprogression_1_1xp__system.html#a6981e4eb92d958095f443501eead4979',1,'progression::xp_system']]]
+];

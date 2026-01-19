@@ -1,0 +1,42 @@
+\doxysection{core.\+environment\+\_\+probe Namespace Reference}
+\hypertarget{namespacecore_1_1environment__probe}{}\label{namespacecore_1_1environment__probe}\index{core.environment\_probe@{core.environment\_probe}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classcore_1_1environment__probe_1_1EnvironmentProbe}{Environment\+Probe}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1environment__probe_1_1EnvironmentProbe}{Environment\+Probe}} \mbox{\hyperlink{namespacecore_1_1environment__probe_a044985d8f771a68f56fe9570f38b0a43}{create\+\_\+environment\+\_\+probe}} (str workspace\+\_\+dir, dict \mbox{\hyperlink{namespacecore_1_1config}{config}}=None)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Environment Probe - Auto-generates static environment info at session start.
+Zero agent token cost - AXE runs this, not the agents.
+
+Author: EdgeOfAssembly
+License: GPLv3 / Commercial
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacecore_1_1environment__probe_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacecore_1_1environment__probe_a044985d8f771a68f56fe9570f38b0a43}\index{core.environment\_probe@{core.environment\_probe}!create\_environment\_probe@{create\_environment\_probe}}
+\index{create\_environment\_probe@{create\_environment\_probe}!core.environment\_probe@{core.environment\_probe}}
+\doxysubsubsection{\texorpdfstring{create\_environment\_probe()}{create\_environment\_probe()}}
+{\footnotesize\ttfamily \label{namespacecore_1_1environment__probe_a044985d8f771a68f56fe9570f38b0a43} 
+ \mbox{\hyperlink{classcore_1_1environment__probe_1_1EnvironmentProbe}{Environment\+Probe}} core.\+environment\+\_\+probe.\+create\+\_\+environment\+\_\+probe (\begin{DoxyParamCaption}\item[{str}]{workspace\+\_\+dir}{, }\item[{dict }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Factory function to create an EnvironmentProbe.
+
+Args:
+    workspace_dir: Path to workspace directory
+    config: Optional config dict from axe.yaml preprocessing.environment_probe section
+    
+Returns:
+    EnvironmentProbe instance
+\end{DoxyVerb}
+ 

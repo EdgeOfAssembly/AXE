@@ -1,0 +1,129 @@
+\doxysection{docs/diagrams Directory Reference}
+\hypertarget{dir_185e1be576cc3aab87068787be53911a}{}\label{dir_185e1be576cc3aab87068787be53911a}\index{docs/diagrams Directory Reference@{docs/diagrams Directory Reference}}
+Directory dependency graph for diagrams\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{dir_185e1be576cc3aab87068787be53911a_dep}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_185e1be576cc3aab87068787be53911a_autotoc_md279}{}\doxysubsection{\texorpdfstring{AXE Architecture Diagrams}{AXE Architecture Diagrams}}\label{dir_185e1be576cc3aab87068787be53911a_autotoc_md279}
+This directory contains architecture diagrams for the AXE codebase in Graph\+Viz DOT format.\hypertarget{dir_185e1be576cc3aab87068787be53911a_autotoc_md280}{}\doxysubsection{\texorpdfstring{Files}{Files}}\label{dir_185e1be576cc3aab87068787be53911a_autotoc_md280}
+
+\begin{DoxyItemize}
+\item {\ttfamily class\+\_\+diagram.\+dot} -\/ UML class diagram showing main classes and their relationships
+\item {\ttfamily module\+\_\+dependencies.\+dot} -\/ Module dependency graph showing how packages depend on each other
+\item {\ttfamily call\+\_\+graph.\+dot} -\/ Call flow diagram showing execution paths through the system
+\end{DoxyItemize}\hypertarget{dir_185e1be576cc3aab87068787be53911a_autotoc_md281}{}\doxysubsection{\texorpdfstring{Viewing Diagrams}{Viewing Diagrams}}\label{dir_185e1be576cc3aab87068787be53911a_autotoc_md281}
+\hypertarget{dir_185e1be576cc3aab87068787be53911a_autotoc_md282}{}\doxysubsubsection{\texorpdfstring{Online (No installation required)}{Online (No installation required)}}\label{dir_185e1be576cc3aab87068787be53911a_autotoc_md282}
+
+\begin{DoxyEnumerate}
+\item Copy the contents of a {\ttfamily .dot} file
+\item Visit \href{https://dreampuf.github.io/GraphvizOnline/}{\texttt{Graph\+Viz Online}}
+\item Paste the DOT content to see the rendered diagram
+\end{DoxyEnumerate}\hypertarget{dir_185e1be576cc3aab87068787be53911a_autotoc_md283}{}\doxysubsubsection{\texorpdfstring{Command Line (Requires Graph\+Viz)}{Command Line (Requires Graph\+Viz)}}\label{dir_185e1be576cc3aab87068787be53911a_autotoc_md283}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Install\ GraphViz}
+\DoxyCodeLine{\#\ Ubuntu/Debian}
+\DoxyCodeLine{sudo\ apt-\/get\ install\ graphviz}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ macOS}
+\DoxyCodeLine{brew\ install\ graphviz}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Generate\ PNG\ images}
+\DoxyCodeLine{dot\ -\/Tpng\ class\_diagram.dot\ -\/o\ class\_diagram.png}
+\DoxyCodeLine{dot\ -\/Tpng\ module\_dependencies.dot\ -\/o\ module\_dependencies.png}
+\DoxyCodeLine{dot\ -\/Tpng\ call\_graph.dot\ -\/o\ call\_graph.png}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Generate\ SVG\ (better\ quality)}
+\DoxyCodeLine{dot\ -\/Tsvg\ class\_diagram.dot\ -\/o\ class\_diagram.svg}
+
+\end{DoxyCode}
+\hypertarget{dir_185e1be576cc3aab87068787be53911a_autotoc_md284}{}\doxysubsubsection{\texorpdfstring{VS Code}{VS Code}}\label{dir_185e1be576cc3aab87068787be53911a_autotoc_md284}
+Install the "{}\+Graphviz (dot) language support for Visual Studio Code"{} extension to preview DOT files.\hypertarget{dir_185e1be576cc3aab87068787be53911a_autotoc_md285}{}\doxysubsection{\texorpdfstring{Diagram Descriptions}{Diagram Descriptions}}\label{dir_185e1be576cc3aab87068787be53911a_autotoc_md285}
+\hypertarget{dir_185e1be576cc3aab87068787be53911a_autotoc_md286}{}\doxysubsubsection{\texorpdfstring{Class Diagram}{Class Diagram}}\label{dir_185e1be576cc3aab87068787be53911a_autotoc_md286}
+Shows the main classes organized by package\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{axe}} (green)\+: Main entry point classes
+\begin{DoxyItemize}
+\item {\ttfamily Response\+Processor} -\/ Processes agent responses and executes code blocks
+\item {\ttfamily Project\+Context} -\/ Manages project context for agents
+\item {\ttfamily Shared\+Workspace} -\/ Shared workspace for multi-\/agent collaboration
+\item {\ttfamily Collaborative\+Session} -\/ Multi-\/agent collaborative sessions
+\item {\ttfamily Chat\+Session} -\/ Interactive chat session
+\end{DoxyItemize}
+\item {\bfseries{core}} (blue)\+: Core components
+\begin{DoxyItemize}
+\item {\ttfamily Config} -\/ Configuration management
+\item {\ttfamily Agent\+Manager} -\/ Agent connections and API calls
+\item {\ttfamily Tool\+Runner} -\/ Command execution with safety checks
+\item {\ttfamily Shared\+Context} -\/ Thread-\/safe shared state
+\item {\ttfamily Multi\+Agent\+Coordinator} -\/ Parallel agent orchestration
+\end{DoxyItemize}
+\item {\bfseries{database}} (orange)\+: Persistence layer
+\begin{DoxyItemize}
+\item {\ttfamily Agent\+Database} -\/ SQLite database operations
+\end{DoxyItemize}
+\item {\bfseries{managers}} (purple)\+: Agent lifecycle
+\begin{DoxyItemize}
+\item {\ttfamily Sleep\+Manager} -\/ Mandatory sleep system
+\item {\ttfamily Break\+System} -\/ Agent break management
+\item {\ttfamily Dynamic\+Spawner} -\/ Dynamic agent spawning
+\item {\ttfamily Emergency\+Mailbox} -\/ Encrypted human communication
+\end{DoxyItemize}
+\item {\bfseries{utils}} (cyan)\+: Utility classes
+\begin{DoxyItemize}
+\item {\ttfamily Context\+Optimizer} -\/ Context window optimization
+\item {\ttfamily Token\+Stats} -\/ Token usage statistics
+\item {\ttfamily Prompt\+Compressor} -\/ Prompt compression
+\end{DoxyItemize}
+\item {\bfseries{workshop}} (peach)\+: Analysis tools
+\begin{DoxyItemize}
+\item {\ttfamily Chisel\+Analyzer} -\/ Symbolic execution
+\item {\ttfamily Saw\+Tracker} -\/ Taint analysis
+\item {\ttfamily Plane\+Enumerator} -\/ Source/sink enumeration
+\item {\ttfamily Hammer\+Instrumentor} -\/ Live instrumentation
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{dir_185e1be576cc3aab87068787be53911a_autotoc_md287}{}\doxysubsubsection{\texorpdfstring{Module Dependencies}{Module Dependencies}}\label{dir_185e1be576cc3aab87068787be53911a_autotoc_md287}
+Shows how the main packages depend on each other\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{axe_8py}{axe.\+py}} depends on all other packages (entry point)
+\item {\ttfamily \doxylink{namespacecore}{core}} depends on {\ttfamily \doxylink{namespaceutils}{utils}} and {\ttfamily \doxylink{namespacemodels}{models}}
+\item {\ttfamily \doxylink{namespacemanagers}{managers}} depends on {\ttfamily \doxylink{namespacecore}{core}}, {\ttfamily \doxylink{namespacedatabase}{database}}, and {\ttfamily \doxylink{namespaceutils}{utils}}
+\item {\ttfamily \doxylink{namespacedatabase}{database}} depends on {\ttfamily \doxylink{namespaceprogression}{progression}}
+\item {\ttfamily \doxylink{namespaceworkshop}{workshop}} depends on {\ttfamily \doxylink{namespaceutils}{utils}}
+\end{DoxyItemize}\hypertarget{dir_185e1be576cc3aab87068787be53911a_autotoc_md288}{}\doxysubsubsection{\texorpdfstring{Call Graph}{Call Graph}}\label{dir_185e1be576cc3aab87068787be53911a_autotoc_md288}
+Shows the execution flow\+:
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Entry}}\+: {\ttfamily \doxylink{depklite_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main()}} parses arguments and loads config
+\item {\bfseries{Mode Selection}}\+:
+\begin{DoxyItemize}
+\item Interactive mode → {\ttfamily Chat\+Session.\+run()}
+\item Collaborative mode → {\ttfamily Collaborative\+Session.\+start\+\_\+session()}
+\item Single command → {\ttfamily process\+\_\+agent\+\_\+message()}
+\end{DoxyItemize}
+\item {\bfseries{Processing}}\+: Commands and messages are processed
+\item {\bfseries{Tool Execution}}\+: READ/\+EXEC/\+WRITE blocks are executed via {\ttfamily Tool\+Runner}
+\item {\bfseries{Persistence}}\+: Agent state is saved to database
+\end{DoxyEnumerate}\hypertarget{dir_185e1be576cc3aab87068787be53911a_autotoc_md289}{}\doxysubsection{\texorpdfstring{Updating Diagrams}{Updating Diagrams}}\label{dir_185e1be576cc3aab87068787be53911a_autotoc_md289}
+When the codebase structure changes, update these diagrams to reflect\+:
+
+
+\begin{DoxyEnumerate}
+\item New classes and their relationships
+\item Changed module dependencies
+\item Modified execution flows
+\end{DoxyEnumerate}
+
+The diagrams use standard DOT syntax. See \href{https://graphviz.org/documentation/}{\texttt{Graph\+Viz documentation}} for syntax reference. 

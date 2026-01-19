@@ -1,0 +1,19 @@
+\chapter{firmware\+\_\+binwalk\+\_\+scan }
+\hypertarget{md_skills_2firmware__binwalk__scan}{}\label{md_skills_2firmware__binwalk__scan}\index{firmware\_binwalk\_scan@{firmware\_binwalk\_scan}}
+Skill\+: firmware\+\_\+binwalk\+\_\+scan Category\+: Firmware Analysis / Extraction Recommended agents\+: llama, grok Purpose\+: Perform initial signature scan and structure analysis of firmware images using binwalk
+
+Key commands to use\+:
+\begin{DoxyItemize}
+\item binwalk -\/B $<$file$>$ → basic scan with signatures
+\item binwalk -\/E $<$file$>$ → generate entropy graph (save as .gnuplot or .png)
+\item binwalk -\/M -\/v $<$file$>$ → recursive/matryoshka scan (very useful for nested images)
+\end{DoxyItemize}
+
+Typical inputs\+: firmware binary path (.bin, .img, .trx, router update file…) Outputs\+:
+\begin{DoxyItemize}
+\item Summary of detected signatures, offsets and types
+\item List of probable embedded components (compressed data, filesystems, headers…)
+\item Entropy assessment (high entropy = likely encrypted/compressed code)
+\end{DoxyItemize}
+
+Usage tip\+: Always start almost every firmware task with this skill 

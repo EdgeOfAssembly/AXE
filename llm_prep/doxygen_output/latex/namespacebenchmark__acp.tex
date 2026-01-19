@@ -1,0 +1,267 @@
+\doxysection{benchmark\+\_\+acp Namespace Reference}
+\hypertarget{namespacebenchmark__acp}{}\label{namespacebenchmark__acp}\index{benchmark\_acp@{benchmark\_acp}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{namespacebenchmark__acp_a0d2edd8caa4f70efabefa35938f79e35}{estimate\+\_\+tokens}} (str text)
+\item 
+str \mbox{\hyperlink{namespacebenchmark__acp_a619f91db5b5151d760a75022ceeeaf36}{create\+\_\+verbose\+\_\+message}} (str agent, str action, str target, str details, str next\+\_\+action="{}"{})
+\item 
+str \mbox{\hyperlink{namespacebenchmark__acp_a5234978d085f61ca35dab78600d38129}{create\+\_\+compact\+\_\+message}} (str agent\+\_\+abbrev, str action\+\_\+abbrev, str target, str details, str next\+\_\+action\+\_\+abbrev="{}"{})
+\item 
+Tuple\mbox{[}int, int\mbox{]} \mbox{\hyperlink{namespacebenchmark__acp_aeda14e93f5d44e64563223f33d6aa911}{benchmark\+\_\+message\+\_\+formats}} ()
+\item 
+Tuple\mbox{[}int, int\mbox{]} \mbox{\hyperlink{namespacebenchmark__acp_aa43f698f5f9ae95cf20fa9d98224edbc}{analyze\+\_\+corpus\+\_\+file}} (str filepath)
+\item 
+Dict\mbox{[}str, any\mbox{]} \mbox{\hyperlink{namespacebenchmark__acp_ab2ae429afc267d7dbde7698eec1e5087}{run\+\_\+benchmark}} (Optional\mbox{[}str\mbox{]} corpus\+\_\+file=None)
+\item 
+\mbox{\hyperlink{namespacebenchmark__acp_addc5f8554094cc37a9d0932816b175d5}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{namespacebenchmark__acp_a4ae0710ae5c1c6bc0dc5187d421eb073}{ACP\+\_\+\+ACTIONS}}
+\item 
+dict \mbox{\hyperlink{namespacebenchmark__acp_a5001408d35bc1fea7887cef4c9c6caf2}{AGENT\+\_\+\+ABBREVS}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Benchmark script for ACP (Agent Communication Protocol) token savings.
+
+Analyzes verbose vs compact message formats and calculates token savings percentage.
+Uses real corpus files from agent collaboration sessions to provide realistic metrics.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacebenchmark__acp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacebenchmark__acp_aa43f698f5f9ae95cf20fa9d98224edbc}\index{benchmark\_acp@{benchmark\_acp}!analyze\_corpus\_file@{analyze\_corpus\_file}}
+\index{analyze\_corpus\_file@{analyze\_corpus\_file}!benchmark\_acp@{benchmark\_acp}}
+\doxysubsubsection{\texorpdfstring{analyze\_corpus\_file()}{analyze\_corpus\_file()}}
+{\footnotesize\ttfamily \label{namespacebenchmark__acp_aa43f698f5f9ae95cf20fa9d98224edbc} 
+ Tuple\mbox{[}int, int\mbox{]} benchmark\+\_\+acp.\+analyze\+\_\+corpus\+\_\+file (\begin{DoxyParamCaption}\item[{str}]{filepath}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Analyze a real corpus file and estimate token savings.
+
+Args:
+    filepath: Path to corpus file (e.g., .collab_log.md)
+    
+Returns:
+    Tuple of (estimated_verbose_tokens, estimated_compact_tokens)
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacebenchmark__acp_aa43f698f5f9ae95cf20fa9d98224edbc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacebenchmark__acp_aa43f698f5f9ae95cf20fa9d98224edbc_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacebenchmark__acp_aeda14e93f5d44e64563223f33d6aa911}\index{benchmark\_acp@{benchmark\_acp}!benchmark\_message\_formats@{benchmark\_message\_formats}}
+\index{benchmark\_message\_formats@{benchmark\_message\_formats}!benchmark\_acp@{benchmark\_acp}}
+\doxysubsubsection{\texorpdfstring{benchmark\_message\_formats()}{benchmark\_message\_formats()}}
+{\footnotesize\ttfamily \label{namespacebenchmark__acp_aeda14e93f5d44e64563223f33d6aa911} 
+ Tuple\mbox{[}int, int\mbox{]} benchmark\+\_\+acp.\+benchmark\+\_\+message\+\_\+formats (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Benchmark realistic agent communication scenarios.
+
+Returns:
+    Tuple of (verbose_tokens, compact_tokens)
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacebenchmark__acp_aeda14e93f5d44e64563223f33d6aa911_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacebenchmark__acp_aeda14e93f5d44e64563223f33d6aa911_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacebenchmark__acp_a5234978d085f61ca35dab78600d38129}\index{benchmark\_acp@{benchmark\_acp}!create\_compact\_message@{create\_compact\_message}}
+\index{create\_compact\_message@{create\_compact\_message}!benchmark\_acp@{benchmark\_acp}}
+\doxysubsubsection{\texorpdfstring{create\_compact\_message()}{create\_compact\_message()}}
+{\footnotesize\ttfamily \label{namespacebenchmark__acp_a5234978d085f61ca35dab78600d38129} 
+ str benchmark\+\_\+acp.\+create\+\_\+compact\+\_\+message (\begin{DoxyParamCaption}\item[{str}]{agent\+\_\+abbrev}{, }\item[{str}]{action\+\_\+abbrev}{, }\item[{str}]{target}{, }\item[{str}]{details}{, }\item[{str }]{next\+\_\+action\+\_\+abbrev}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Create compact ACP format message.
+
+Args:
+    agent_abbrev: Agent abbreviation (e.g., "C")
+    action_abbrev: Action abbreviation (e.g., "ANA")
+    target: Target location
+    details: Issue details (using standard abbreviations)
+    next_action_abbrev: Next action abbreviation
+    
+Returns:
+    Compact format message
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacebenchmark__acp_a5234978d085f61ca35dab78600d38129_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacebenchmark__acp_a619f91db5b5151d760a75022ceeeaf36}\index{benchmark\_acp@{benchmark\_acp}!create\_verbose\_message@{create\_verbose\_message}}
+\index{create\_verbose\_message@{create\_verbose\_message}!benchmark\_acp@{benchmark\_acp}}
+\doxysubsubsection{\texorpdfstring{create\_verbose\_message()}{create\_verbose\_message()}}
+{\footnotesize\ttfamily \label{namespacebenchmark__acp_a619f91db5b5151d760a75022ceeeaf36} 
+ str benchmark\+\_\+acp.\+create\+\_\+verbose\+\_\+message (\begin{DoxyParamCaption}\item[{str}]{agent}{, }\item[{str}]{action}{, }\item[{str}]{target}{, }\item[{str}]{details}{, }\item[{str }]{next\+\_\+action}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Create verbose format message.
+
+Args:
+    agent: Full agent name (e.g., "Claude")
+    action: Full action name (e.g., "Analyze")
+    target: Target location (file:line or address)
+    details: Issue details
+    next_action: Next action to take
+    
+Returns:
+    Verbose format message
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacebenchmark__acp_a619f91db5b5151d760a75022ceeeaf36_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacebenchmark__acp_a0d2edd8caa4f70efabefa35938f79e35}\index{benchmark\_acp@{benchmark\_acp}!estimate\_tokens@{estimate\_tokens}}
+\index{estimate\_tokens@{estimate\_tokens}!benchmark\_acp@{benchmark\_acp}}
+\doxysubsubsection{\texorpdfstring{estimate\_tokens()}{estimate\_tokens()}}
+{\footnotesize\ttfamily \label{namespacebenchmark__acp_a0d2edd8caa4f70efabefa35938f79e35} 
+ int benchmark\+\_\+acp.\+estimate\+\_\+tokens (\begin{DoxyParamCaption}\item[{str}]{text}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Rough token estimation (1 token ≈ 4 characters).
+This is a simplified estimation for benchmarking purposes.
+
+Args:
+    text: Text to estimate tokens for
+    
+Returns:
+    Estimated token count
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacebenchmark__acp_a0d2edd8caa4f70efabefa35938f79e35_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacebenchmark__acp_addc5f8554094cc37a9d0932816b175d5}\index{benchmark\_acp@{benchmark\_acp}!main@{main}}
+\index{main@{main}!benchmark\_acp@{benchmark\_acp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespacebenchmark__acp_addc5f8554094cc37a9d0932816b175d5} 
+benchmark\+\_\+acp.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Main entry point.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacebenchmark__acp_addc5f8554094cc37a9d0932816b175d5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{namespacebenchmark__acp_addc5f8554094cc37a9d0932816b175d5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacebenchmark__acp_ab2ae429afc267d7dbde7698eec1e5087}\index{benchmark\_acp@{benchmark\_acp}!run\_benchmark@{run\_benchmark}}
+\index{run\_benchmark@{run\_benchmark}!benchmark\_acp@{benchmark\_acp}}
+\doxysubsubsection{\texorpdfstring{run\_benchmark()}{run\_benchmark()}}
+{\footnotesize\ttfamily \label{namespacebenchmark__acp_ab2ae429afc267d7dbde7698eec1e5087} 
+ Dict\mbox{[}str, any\mbox{]} benchmark\+\_\+acp.\+run\+\_\+benchmark (\begin{DoxyParamCaption}\item[{Optional\mbox{[}str\mbox{]} }]{corpus\+\_\+file}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run the complete ACP benchmark.
+
+Args:
+    corpus_file: Optional path to real corpus file
+    
+Returns:
+    Dictionary with benchmark results
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacebenchmark__acp_ab2ae429afc267d7dbde7698eec1e5087_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacebenchmark__acp_ab2ae429afc267d7dbde7698eec1e5087_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{namespacebenchmark__acp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacebenchmark__acp_a4ae0710ae5c1c6bc0dc5187d421eb073}\index{benchmark\_acp@{benchmark\_acp}!ACP\_ACTIONS@{ACP\_ACTIONS}}
+\index{ACP\_ACTIONS@{ACP\_ACTIONS}!benchmark\_acp@{benchmark\_acp}}
+\doxysubsubsection{\texorpdfstring{ACP\_ACTIONS}{ACP\_ACTIONS}}
+{\footnotesize\ttfamily \label{namespacebenchmark__acp_a4ae0710ae5c1c6bc0dc5187d421eb073} 
+dict benchmark\+\_\+acp.\+ACP\+\_\+\+ACTIONS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}ANA"{}}:\ \textcolor{stringliteral}{"{}Analyze"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}FIX"{}}:\ \textcolor{stringliteral}{"{}Fix"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}TST"{}}:\ \textcolor{stringliteral}{"{}Test"{}},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{"{}VFY"{}}:\ \textcolor{stringliteral}{"{}Verify"{}},}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{stringliteral}{"{}REV"{}}:\ \textcolor{stringliteral}{"{}Review"{}},}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{stringliteral}{"{}REF"{}}:\ \textcolor{stringliteral}{"{}Refactor"{}},}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{stringliteral}{"{}DOC"{}}:\ \textcolor{stringliteral}{"{}Document"{}},}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{stringliteral}{"{}DPL"{}}:\ \textcolor{stringliteral}{"{}Deploy"{}},}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{stringliteral}{"{}DBG"{}}:\ \textcolor{stringliteral}{"{}Debug"{}},}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{stringliteral}{"{}OPT"{}}:\ \textcolor{stringliteral}{"{}Optimize"{}},}
+\DoxyCodeLine{00012\ \}}
+
+\end{DoxyCode}
+\Hypertarget{namespacebenchmark__acp_a5001408d35bc1fea7887cef4c9c6caf2}\index{benchmark\_acp@{benchmark\_acp}!AGENT\_ABBREVS@{AGENT\_ABBREVS}}
+\index{AGENT\_ABBREVS@{AGENT\_ABBREVS}!benchmark\_acp@{benchmark\_acp}}
+\doxysubsubsection{\texorpdfstring{AGENT\_ABBREVS}{AGENT\_ABBREVS}}
+{\footnotesize\ttfamily \label{namespacebenchmark__acp_a5001408d35bc1fea7887cef4c9c6caf2} 
+dict benchmark\+\_\+acp.\+AGENT\+\_\+\+ABBREVS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}C"{}}:\ \textcolor{stringliteral}{"{}Claude"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}G"{}}:\ \textcolor{stringliteral}{"{}GPT"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}L"{}}:\ \textcolor{stringliteral}{"{}Llama"{}},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{"{}X"{}}:\ \textcolor{stringliteral}{"{}Grok"{}},}
+\DoxyCodeLine{00006\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,457 @@
+\chapter{AXE API Provider Documentation }
+\hypertarget{md_API__PROVIDERS}{}\label{md_API__PROVIDERS}\index{AXE API Provider Documentation@{AXE API Provider Documentation}}
+\label{md_API__PROVIDERS_autotoc_md104}%
+\Hypertarget{md_API__PROVIDERS_autotoc_md104}%
+
+
+Comprehensive documentation for all supported API providers in AXE (Agent e\+Xecution Engine).\hypertarget{md_API__PROVIDERS_autotoc_md105}{}\doxysection{\texorpdfstring{Table of Contents}{Table of Contents}}\label{md_API__PROVIDERS_autotoc_md105}
+
+\begin{DoxyEnumerate}
+\item Anthropic (Claude)
+\item Open\+AI (GPT)
+\item Hugging\+Face (Llama)
+\item x\+AI (Grok)
+\item Git\+Hub Models
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md_API__PROVIDERS_autotoc_md107}{}\doxysection{\texorpdfstring{Anthropic (Claude)}{Anthropic (Claude)}}\label{md_API__PROVIDERS_autotoc_md107}
+\hypertarget{md_API__PROVIDERS_autotoc_md108}{}\doxysubsection{\texorpdfstring{Top Models}{Top Models}}\label{md_API__PROVIDERS_autotoc_md108}
+
+\begin{DoxyTable}{5}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Context Window  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Input Price  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Output Price  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Best For  \\
+{\bfseries{claude-\/3-\/5-\/sonnet-\/20241022}}  &200K tokens  &\$3/M  &\$15/M  &Coding, agents, vision, artifacts  \\
+{\bfseries{claude-\/3-\/opus-\/20240229}}  &200K tokens  &\$15/M  &\$75/M  &Deep reasoning, research  \\
+{\bfseries{claude-\/3-\/5-\/haiku-\/20241022}}  &200K tokens  &\$1/M  &\$5/M  &Fast chat, bulk tasks  \\
+\end{DoxyTable}
+\hypertarget{md_API__PROVIDERS_autotoc_md109}{}\doxysubsection{\texorpdfstring{Features}{Features}}\label{md_API__PROVIDERS_autotoc_md109}
+
+\begin{DoxyItemize}
+\item {\bfseries{Vision}}\+: Best-\/in-\/class image, graph, and chart understanding
+\item {\bfseries{Coding}}\+: Superior code writing, bug tracking, refactoring
+\item {\bfseries{Agentic}}\+: Multi-\/step workflows, tool use
+\item {\bfseries{200K context}}\+: \texorpdfstring{$\sim$}{\string~}150,000 words or 500 pages
+\end{DoxyItemize}\hypertarget{md_API__PROVIDERS_autotoc_md110}{}\doxysubsection{\texorpdfstring{Environment Variable}{Environment Variable}}\label{md_API__PROVIDERS_autotoc_md110}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export\ ANTHROPIC\_API\_KEY="{}sk-\/ant-\/..."{}}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md111}{}\doxysubsection{\texorpdfstring{c\+URL Example}{c\+URL Example}}\label{md_API__PROVIDERS_autotoc_md111}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{curl\ https://api.anthropic.com/v1/messages\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}x-\/api-\/key:\ \$ANTHROPIC\_API\_KEY"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}anthropic-\/version:\ 2023-\/06-\/01"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/d\ '\{}
+\DoxyCodeLine{\ \ \ \ "{}model"{}:\ "{}claude-\/3-\/5-\/sonnet-\/20241022"{},}
+\DoxyCodeLine{\ \ \ \ "{}max\_tokens"{}:\ 4096,}
+\DoxyCodeLine{\ \ \ \ "{}system"{}:\ "{}You\ are\ a\ helpful\ coding\ assistant."{},}
+\DoxyCodeLine{\ \ \ \ "{}messages"{}:\ [}
+\DoxyCodeLine{\ \ \ \ \ \ \{"{}role"{}:\ "{}user"{},\ "{}content"{}:\ "{}Write\ a\ C\ function\ to\ parse\ WAD\ files"{}\}}
+\DoxyCodeLine{\ \ \ \ ]}
+\DoxyCodeLine{\ \ \}'}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md112}{}\doxysubsection{\texorpdfstring{Python Example}{Python Example}}\label{md_API__PROVIDERS_autotoc_md112}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ anthropic\ \textcolor{keyword}{import}\ Anthropic}
+\DoxyCodeLine{}
+\DoxyCodeLine{client\ =\ Anthropic(api\_key=os.getenv(\textcolor{stringliteral}{"{}ANTHROPIC\_API\_KEY"{}}))}
+\DoxyCodeLine{response\ =\ client.messages.create(}
+\DoxyCodeLine{\ \ \ \ model=\textcolor{stringliteral}{"{}claude-\/3-\/5-\/sonnet-\/20241022"{}},}
+\DoxyCodeLine{\ \ \ \ max\_tokens=4096,}
+\DoxyCodeLine{\ \ \ \ system=\textcolor{stringliteral}{"{}You\ are\ a\ helpful\ coding\ assistant."{}},}
+\DoxyCodeLine{\ \ \ \ messages=[\{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}user"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}Analyze\ this\ binary..."{}}\}]}
+\DoxyCodeLine{)}
+\DoxyCodeLine{print(response.content[0].text)}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md113}{}\doxysubsection{\texorpdfstring{Documentation}{Documentation}}\label{md_API__PROVIDERS_autotoc_md113}
+
+\begin{DoxyItemize}
+\item Official\+: \href{https://docs.anthropic.com/}{\texttt{https\+://docs.\+anthropic.\+com/}}
+\item Models\+: \href{https://docs.anthropic.com/en/docs/about-claude/models}{\texttt{https\+://docs.\+anthropic.\+com/en/docs/about-\/claude/models}}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_API__PROVIDERS_autotoc_md115}{}\doxysection{\texorpdfstring{Open\+AI (GPT)}{Open\+AI (GPT)}}\label{md_API__PROVIDERS_autotoc_md115}
+\hypertarget{md_API__PROVIDERS_autotoc_md116}{}\doxysubsection{\texorpdfstring{Top Models}{Top Models}}\label{md_API__PROVIDERS_autotoc_md116}
+
+\begin{DoxyTable}{5}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Context Window  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Input Price  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Output Price  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Best For  \\
+{\bfseries{gpt-\/4o}}  &128K tokens  &\$2.50/M  &\$10/M  &Multimodal, fast, cost-\/effective  \\
+{\bfseries{gpt-\/4-\/turbo}}  &128K tokens  &\$10/M  &\$30/M  &Long documents, text focus  \\
+{\bfseries{gpt-\/4o-\/mini}}  &128K tokens  &\$0.15/M  &\$0.60/M  &Simple tasks, high volume  \\
+\end{DoxyTable}
+\hypertarget{md_API__PROVIDERS_autotoc_md117}{}\doxysubsection{\texorpdfstring{Features}{Features}}\label{md_API__PROVIDERS_autotoc_md117}
+
+\begin{DoxyItemize}
+\item {\bfseries{Multimodal}}\+: Text, images, audio (GPT-\/4o)
+\item {\bfseries{Speed}}\+: GPT-\/4o is 2x faster than GPT-\/4-\/turbo
+\item {\bfseries{Vision}}\+: High-\/performance image understanding
+\item {\bfseries{128K context}}\+: \texorpdfstring{$\sim$}{\string~}96,000 words or 300 pages
+\end{DoxyItemize}\hypertarget{md_API__PROVIDERS_autotoc_md118}{}\doxysubsection{\texorpdfstring{Environment Variable}{Environment Variable}}\label{md_API__PROVIDERS_autotoc_md118}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export\ OPENAI\_API\_KEY="{}sk-\/..."{}}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md119}{}\doxysubsection{\texorpdfstring{c\+URL Example}{c\+URL Example}}\label{md_API__PROVIDERS_autotoc_md119}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{curl\ https://api.openai.com/v1/chat/completions\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Authorization:\ Bearer\ \$OPENAI\_API\_KEY"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/d\ '\{}
+\DoxyCodeLine{\ \ \ \ "{}model"{}:\ "{}gpt-\/4o"{},}
+\DoxyCodeLine{\ \ \ \ "{}max\_tokens"{}:\ 4096,}
+\DoxyCodeLine{\ \ \ \ "{}messages"{}:\ [}
+\DoxyCodeLine{\ \ \ \ \ \ \{"{}role"{}:\ "{}system"{},\ "{}content"{}:\ "{}You\ are\ a\ helpful\ assistant."{}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \{"{}role"{}:\ "{}user"{},\ "{}content"{}:\ "{}Explain\ x86\ assembly\ calling\ conventions"{}\}}
+\DoxyCodeLine{\ \ \ \ ]}
+\DoxyCodeLine{\ \ \}'}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md120}{}\doxysubsection{\texorpdfstring{Python Example}{Python Example}}\label{md_API__PROVIDERS_autotoc_md120}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ openai\ \textcolor{keyword}{import}\ OpenAI}
+\DoxyCodeLine{}
+\DoxyCodeLine{client\ =\ OpenAI(api\_key=os.getenv(\textcolor{stringliteral}{"{}OPENAI\_API\_KEY"{}}))}
+\DoxyCodeLine{response\ =\ client.chat.completions.create(}
+\DoxyCodeLine{\ \ \ \ model=\textcolor{stringliteral}{"{}gpt-\/4o"{}},}
+\DoxyCodeLine{\ \ \ \ max\_tokens=4096,}
+\DoxyCodeLine{\ \ \ \ messages=[}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}system"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}You\ are\ a\ helpful\ assistant."{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}user"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}Analyze\ this\ code..."{}}\}}
+\DoxyCodeLine{\ \ \ \ ]}
+\DoxyCodeLine{)}
+\DoxyCodeLine{print(response.choices[0].message.content)}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md121}{}\doxysubsection{\texorpdfstring{Vision Example (Images)}{Vision Example (Images)}}\label{md_API__PROVIDERS_autotoc_md121}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{curl\ https://api.openai.com/v1/chat/completions\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Authorization:\ Bearer\ \$OPENAI\_API\_KEY"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/d\ '\{}
+\DoxyCodeLine{\ \ \ \ "{}model"{}:\ "{}gpt-\/4o"{},}
+\DoxyCodeLine{\ \ \ \ "{}messages"{}:\ [}
+\DoxyCodeLine{\ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}role"{}:\ "{}user"{},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ "{}content"{}:\ [}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{"{}type"{}:\ "{}text"{},\ "{}text"{}:\ "{}Describe\ this\ image"{}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \{"{}type"{}:\ "{}image\_url"{},\ "{}image\_url"{}:\ \{"{}url"{}:\ "{}https://example.com/image.jpg"{}\}\}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ]}
+\DoxyCodeLine{\ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ ]}
+\DoxyCodeLine{\ \ \}'}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md122}{}\doxysubsection{\texorpdfstring{Documentation}{Documentation}}\label{md_API__PROVIDERS_autotoc_md122}
+
+\begin{DoxyItemize}
+\item Official\+: \href{https://platform.openai.com/docs}{\texttt{https\+://platform.\+openai.\+com/docs}}
+\item Models\+: \href{https://platform.openai.com/docs/models}{\texttt{https\+://platform.\+openai.\+com/docs/models}}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_API__PROVIDERS_autotoc_md124}{}\doxysection{\texorpdfstring{Hugging\+Face (Llama)}{Hugging\+Face (Llama)}}\label{md_API__PROVIDERS_autotoc_md124}
+\hypertarget{md_API__PROVIDERS_autotoc_md125}{}\doxysubsection{\texorpdfstring{Top Models}{Top Models}}\label{md_API__PROVIDERS_autotoc_md125}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Context Window  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Pricing  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Best For  \\
+{\bfseries{meta-\/llama/\+Llama-\/3.\+1-\/70B-\/\+Instruct}}  &128K tokens  &Free tier / Pro  &Complex reasoning, coding  \\
+{\bfseries{meta-\/llama/\+Llama-\/3.\+1-\/8B-\/\+Instruct}}  &128K tokens  &Free tier  &Fast inference, simple tasks  \\
+{\bfseries{meta-\/llama/\+Llama-\/3.\+2-\/90B-\/\+Vision}}  &128K tokens  &Pro tier  &Multimodal (text + images)  \\
+\end{DoxyTable}
+\hypertarget{md_API__PROVIDERS_autotoc_md126}{}\doxysubsection{\texorpdfstring{Features}{Features}}\label{md_API__PROVIDERS_autotoc_md126}
+
+\begin{DoxyItemize}
+\item {\bfseries{Open Source}}\+: Full model weights available
+\item {\bfseries{Instruction-\/tuned}}\+: Optimized for chat and dialogue
+\item {\bfseries{Free Tier}}\+: Limited compute per month
+\item {\bfseries{128K context}}\+: Extended context for long documents
+\end{DoxyItemize}\hypertarget{md_API__PROVIDERS_autotoc_md127}{}\doxysubsection{\texorpdfstring{Requirements}{Requirements}}\label{md_API__PROVIDERS_autotoc_md127}
+
+\begin{DoxyEnumerate}
+\item Create Hugging\+Face account
+\item Request access to Meta Llama models (community license)
+\item Generate API token from account settings
+\end{DoxyEnumerate}\hypertarget{md_API__PROVIDERS_autotoc_md128}{}\doxysubsection{\texorpdfstring{Environment Variable}{Environment Variable}}\label{md_API__PROVIDERS_autotoc_md128}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export\ HUGGINGFACE\_API\_KEY="{}hf\_..."{}}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md129}{}\doxysubsection{\texorpdfstring{c\+URL Example}{c\+URL Example}}\label{md_API__PROVIDERS_autotoc_md129}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{curl\ -\/X\ POST\ https://api-\/inference.huggingface.co/models/meta-\/llama/Llama-\/3.1-\/70B-\/Instruct\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Authorization:\ Bearer\ \$HUGGINGFACE\_API\_KEY"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/d\ '\{}
+\DoxyCodeLine{\ \ \ \ "{}inputs"{}:\ "{}What\ is\ the\ purpose\ of\ the\ DOS\ interrupt\ 21h?"{}}
+\DoxyCodeLine{\ \ \}'}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md130}{}\doxysubsection{\texorpdfstring{Chat-\/style c\+URL Example}{Chat-\/style c\+URL Example}}\label{md_API__PROVIDERS_autotoc_md130}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{curl\ -\/X\ POST\ https://api-\/inference.huggingface.co/models/meta-\/llama/Llama-\/3.1-\/70B-\/Instruct/v1/chat/completions\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Authorization:\ Bearer\ \$HUGGINGFACE\_API\_KEY"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/d\ '\{}
+\DoxyCodeLine{\ \ \ \ "{}model"{}:\ "{}meta-\/llama/Llama-\/3.1-\/70B-\/Instruct"{},}
+\DoxyCodeLine{\ \ \ \ "{}messages"{}:\ [}
+\DoxyCodeLine{\ \ \ \ \ \ \{"{}role"{}:\ "{}system"{},\ "{}content"{}:\ "{}You\ are\ a\ helpful\ assistant."{}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \{"{}role"{}:\ "{}user"{},\ "{}content"{}:\ "{}Explain\ far\ pointers\ in\ 16-\/bit\ DOS"{}\}}
+\DoxyCodeLine{\ \ \ \ ],}
+\DoxyCodeLine{\ \ \ \ "{}max\_tokens"{}:\ 1024}
+\DoxyCodeLine{\ \ \}'}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md131}{}\doxysubsection{\texorpdfstring{Python Example}{Python Example}}\label{md_API__PROVIDERS_autotoc_md131}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ huggingface\_hub\ \textcolor{keyword}{import}\ InferenceClient}
+\DoxyCodeLine{}
+\DoxyCodeLine{client\ =\ InferenceClient(token=os.getenv(\textcolor{stringliteral}{"{}HUGGINGFACE\_API\_KEY"{}}))}
+\DoxyCodeLine{response\ =\ client.chat\_completion(}
+\DoxyCodeLine{\ \ \ \ model=\textcolor{stringliteral}{"{}meta-\/llama/Llama-\/3.1-\/70B-\/Instruct"{}},}
+\DoxyCodeLine{\ \ \ \ max\_tokens=4096,}
+\DoxyCodeLine{\ \ \ \ messages=[}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}system"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}You\ are\ a\ helpful\ assistant."{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}user"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}Analyze\ this\ assembly..."{}}\}}
+\DoxyCodeLine{\ \ \ \ ]}
+\DoxyCodeLine{)}
+\DoxyCodeLine{print(response.choices[0].message.content)}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md132}{}\doxysubsection{\texorpdfstring{Documentation}{Documentation}}\label{md_API__PROVIDERS_autotoc_md132}
+
+\begin{DoxyItemize}
+\item Official\+: \href{https://huggingface.co/docs/api-inference}{\texttt{https\+://huggingface.\+co/docs/api-\/inference}}
+\item Model Card\+: \href{https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct}{\texttt{https\+://huggingface.\+co/meta-\/llama/\+Llama-\/3.\+1-\/70\+B-\/\+Instruct}}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_API__PROVIDERS_autotoc_md134}{}\doxysection{\texorpdfstring{x\+AI (Grok)}{x\+AI (Grok)}}\label{md_API__PROVIDERS_autotoc_md134}
+\hypertarget{md_API__PROVIDERS_autotoc_md135}{}\doxysubsection{\texorpdfstring{Top Models}{Top Models}}\label{md_API__PROVIDERS_autotoc_md135}
+
+\begin{DoxyTable}{5}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Context Window  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Input Price  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Output Price  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Best For  \\
+{\bfseries{grok-\/2}}  &131K tokens  &\$2/M  &\$10/M  &General purpose, chat  \\
+{\bfseries{grok-\/beta}}  &131K tokens  &\$5/M  &\$15/M  &Advanced reasoning  \\
+{\bfseries{grok-\/2-\/vision}}  &131K tokens  &\$2/M  &\$10/M  &Image understanding  \\
+\end{DoxyTable}
+\hypertarget{md_API__PROVIDERS_autotoc_md136}{}\doxysubsection{\texorpdfstring{Features}{Features}}\label{md_API__PROVIDERS_autotoc_md136}
+
+\begin{DoxyItemize}
+\item {\bfseries{Open\+AI-\/compatible API}}\+: Easy integration
+\item {\bfseries{Tool calling}}\+: Function/tool execution support
+\item {\bfseries{Real-\/time knowledge}}\+: Access to X (Twitter) data
+\item {\bfseries{131K context}}\+: \texorpdfstring{$\sim$}{\string~}100,000 words or 300 pages
+\end{DoxyItemize}\hypertarget{md_API__PROVIDERS_autotoc_md137}{}\doxysubsection{\texorpdfstring{Environment Variable}{Environment Variable}}\label{md_API__PROVIDERS_autotoc_md137}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export\ XAI\_API\_KEY="{}xai-\/..."{}}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md138}{}\doxysubsection{\texorpdfstring{c\+URL Example}{c\+URL Example}}\label{md_API__PROVIDERS_autotoc_md138}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{curl\ -\/X\ POST\ "{}https://api.x.ai/v1/chat/completions"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Authorization:\ Bearer\ \$XAI\_API\_KEY"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/d\ '\{}
+\DoxyCodeLine{\ \ \ \ "{}model"{}:\ "{}grok-\/2"{},}
+\DoxyCodeLine{\ \ \ \ "{}messages"{}:\ [}
+\DoxyCodeLine{\ \ \ \ \ \ \{"{}role"{}:\ "{}system"{},\ "{}content"{}:\ "{}You\ are\ a\ helpful\ assistant."{}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \{"{}role"{}:\ "{}user"{},\ "{}content"{}:\ "{}Explain\ DOS\ memory\ models"{}\}}
+\DoxyCodeLine{\ \ \ \ ],}
+\DoxyCodeLine{\ \ \ \ "{}max\_tokens"{}:\ 1024}
+\DoxyCodeLine{\ \ \}'}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md139}{}\doxysubsection{\texorpdfstring{Python Example (Open\+AI SDK)}{Python Example (Open\+AI SDK)}}\label{md_API__PROVIDERS_autotoc_md139}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ openai\ \textcolor{keyword}{import}\ OpenAI}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ xAI\ uses\ OpenAI-\/compatible\ API}}
+\DoxyCodeLine{client\ =\ OpenAI(}
+\DoxyCodeLine{\ \ \ \ api\_key=os.getenv(\textcolor{stringliteral}{"{}XAI\_API\_KEY"{}}),}
+\DoxyCodeLine{\ \ \ \ base\_url=\textcolor{stringliteral}{"{}https://api.x.ai/v1"{}}}
+\DoxyCodeLine{)}
+\DoxyCodeLine{response\ =\ client.chat.completions.create(}
+\DoxyCodeLine{\ \ \ \ model=\textcolor{stringliteral}{"{}grok-\/2"{}},}
+\DoxyCodeLine{\ \ \ \ max\_tokens=4096,}
+\DoxyCodeLine{\ \ \ \ messages=[}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}system"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}You\ are\ a\ helpful\ assistant."{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}user"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}What's\ the\ best\ approach\ to..."{}}\}}
+\DoxyCodeLine{\ \ \ \ ]}
+\DoxyCodeLine{)}
+\DoxyCodeLine{print(response.choices[0].message.content)}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md140}{}\doxysubsection{\texorpdfstring{Documentation}{Documentation}}\label{md_API__PROVIDERS_autotoc_md140}
+
+\begin{DoxyItemize}
+\item Official\+: \href{https://docs.x.ai/}{\texttt{https\+://docs.\+x.\+ai/}}
+\item Models\+: \href{https://docs.x.ai/docs/models}{\texttt{https\+://docs.\+x.\+ai/docs/models}}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_API__PROVIDERS_autotoc_md142}{}\doxysection{\texorpdfstring{Git\+Hub Models}{Git\+Hub Models}}\label{md_API__PROVIDERS_autotoc_md142}
+\hypertarget{md_API__PROVIDERS_autotoc_md143}{}\doxysubsection{\texorpdfstring{Top Models}{Top Models}}\label{md_API__PROVIDERS_autotoc_md143}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Context Window  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Cost  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Best For  \\
+{\bfseries{openai/gpt-\/4o}}  &128K tokens  &Higher  &Best accuracy, multimodal  \\
+{\bfseries{openai/gpt-\/4o-\/mini}}  &128K tokens  &Lower  &Fast, cost-\/effective  \\
+{\bfseries{openai/gpt-\/4.\+1}}  &128K tokens  &Higher  &Latest capabilities  \\
+\end{DoxyTable}
+\hypertarget{md_API__PROVIDERS_autotoc_md144}{}\doxysubsection{\texorpdfstring{Features}{Features}}\label{md_API__PROVIDERS_autotoc_md144}
+
+\begin{DoxyItemize}
+\item {\bfseries{Git\+Hub Integration}}\+: Native for Copilot workflows
+\item {\bfseries{Multiple providers}}\+: Access Open\+AI, Microsoft, Meta models
+\item {\bfseries{Token-\/based}}\+: Uses Git\+Hub PAT for authentication
+\end{DoxyItemize}\hypertarget{md_API__PROVIDERS_autotoc_md145}{}\doxysubsection{\texorpdfstring{Requirements}{Requirements}}\label{md_API__PROVIDERS_autotoc_md145}
+
+\begin{DoxyEnumerate}
+\item Git\+Hub account with Copilot subscription
+\item Personal Access Token with {\ttfamily \doxylink{namespacemodels}{models}\+:read} permission
+\end{DoxyEnumerate}\hypertarget{md_API__PROVIDERS_autotoc_md146}{}\doxysubsection{\texorpdfstring{Environment Variable}{Environment Variable}}\label{md_API__PROVIDERS_autotoc_md146}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export\ GITHUB\_TOKEN="{}ghp\_..."{}}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md147}{}\doxysubsection{\texorpdfstring{c\+URL Example}{c\+URL Example}}\label{md_API__PROVIDERS_autotoc_md147}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{curl\ -\/X\ POST\ "{}https://models.github.ai/inference"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Authorization:\ Bearer\ \$GITHUB\_TOKEN"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/d\ '\{}
+\DoxyCodeLine{\ \ \ \ "{}model"{}:\ "{}openai/gpt-\/4o"{},}
+\DoxyCodeLine{\ \ \ \ "{}messages"{}:\ [}
+\DoxyCodeLine{\ \ \ \ \ \ \{"{}role"{}:\ "{}system"{},\ "{}content"{}:\ "{}You\ are\ a\ helpful\ assistant."{}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \{"{}role"{}:\ "{}user"{},\ "{}content"{}:\ "{}Explain\ GitHub\ Actions\ workflows"{}\}}
+\DoxyCodeLine{\ \ \ \ ]}
+\DoxyCodeLine{\ \ \}'}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md148}{}\doxysubsection{\texorpdfstring{Python Example (Open\+AI SDK)}{Python Example (Open\+AI SDK)}}\label{md_API__PROVIDERS_autotoc_md148}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ openai\ \textcolor{keyword}{import}\ OpenAI}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ GitHub\ Models\ uses\ OpenAI-\/compatible\ API}}
+\DoxyCodeLine{client\ =\ OpenAI(}
+\DoxyCodeLine{\ \ \ \ api\_key=os.getenv(\textcolor{stringliteral}{"{}GITHUB\_TOKEN"{}}),}
+\DoxyCodeLine{\ \ \ \ base\_url=\textcolor{stringliteral}{"{}https://models.github.ai/inference"{}}}
+\DoxyCodeLine{)}
+\DoxyCodeLine{response\ =\ client.chat.completions.create(}
+\DoxyCodeLine{\ \ \ \ model=\textcolor{stringliteral}{"{}openai/gpt-\/4o"{}},}
+\DoxyCodeLine{\ \ \ \ max\_tokens=4096,}
+\DoxyCodeLine{\ \ \ \ messages=[}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}system"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}You\ are\ a\ helpful\ assistant."{}}\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}user"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}Review\ this\ pull\ request..."{}}\}}
+\DoxyCodeLine{\ \ \ \ ]}
+\DoxyCodeLine{)}
+\DoxyCodeLine{print(response.choices[0].message.content)}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md149}{}\doxysubsection{\texorpdfstring{Documentation}{Documentation}}\label{md_API__PROVIDERS_autotoc_md149}
+
+\begin{DoxyItemize}
+\item Official\+: \href{https://docs.github.com/en/rest/models/inference}{\texttt{https\+://docs.\+github.\+com/en/rest/models/inference}}
+\item Model Comparison\+: \href{https://docs.github.com/en/copilot/reference/ai-models/model-comparison}{\texttt{https\+://docs.\+github.\+com/en/copilot/reference/ai-\/models/model-\/comparison}}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_API__PROVIDERS_autotoc_md151}{}\doxysection{\texorpdfstring{Quick Reference}{Quick Reference}}\label{md_API__PROVIDERS_autotoc_md151}
+\hypertarget{md_API__PROVIDERS_autotoc_md152}{}\doxysubsection{\texorpdfstring{Environment Variables Summary}{Environment Variables Summary}}\label{md_API__PROVIDERS_autotoc_md152}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Anthropic\ (Claude)}
+\DoxyCodeLine{export\ ANTHROPIC\_API\_KEY="{}sk-\/ant-\/..."{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ OpenAI\ (GPT)}
+\DoxyCodeLine{export\ OPENAI\_API\_KEY="{}sk-\/..."{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ HuggingFace\ (Llama)}
+\DoxyCodeLine{export\ HUGGINGFACE\_API\_KEY="{}hf\_..."{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ xAI\ (Grok)}
+\DoxyCodeLine{export\ XAI\_API\_KEY="{}xai-\/..."{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ GitHub\ Models}
+\DoxyCodeLine{export\ GITHUB\_TOKEN="{}ghp\_..."{}}
+
+\end{DoxyCode}
+\hypertarget{md_API__PROVIDERS_autotoc_md153}{}\doxysubsection{\texorpdfstring{API Endpoints Summary}{API Endpoints Summary}}\label{md_API__PROVIDERS_autotoc_md153}
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Provider  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Endpoint  \\
+Anthropic  &{\ttfamily \href{https://api.anthropic.com/v1/messages}{\texttt{https\+://api.\+anthropic.\+com/v1/messages}}}  \\
+Open\+AI  &{\ttfamily \href{https://api.openai.com/v1/chat/completions}{\texttt{https\+://api.\+openai.\+com/v1/chat/completions}}}  \\
+Hugging\+Face  &{\ttfamily \href{https://api-inference.huggingface.co/models/{model}}{\texttt{https\+://api-\/inference.\+huggingface.\+co/models/\{model\}}}}  \\
+x\+AI  &{\ttfamily \href{https://api.x.ai/v1/chat/completions}{\texttt{https\+://api.\+x.\+ai/v1/chat/completions}}}  \\
+Git\+Hub  &{\ttfamily \href{https://models.github.ai/inference}{\texttt{https\+://models.\+github.\+ai/inference}}}  \\
+\end{DoxyTable}
+\hypertarget{md_API__PROVIDERS_autotoc_md154}{}\doxysubsection{\texorpdfstring{Model Selection Guide}{Model Selection Guide}}\label{md_API__PROVIDERS_autotoc_md154}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Use Case  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Recommended Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Provider  \\
+Code review \& security  &claude-\/3-\/5-\/sonnet-\/20241022  &Anthropic  \\
+General coding  &gpt-\/4o  &Open\+AI  \\
+Open-\/source preference  &Llama-\/3.\+1-\/70B-\/\+Instruct  &Hugging\+Face  \\
+Creative brainstorming  &grok-\/2  &x\+AI  \\
+Git\+Hub integration  &openai/gpt-\/4o  &Git\+Hub  \\
+Budget-\/conscious  &gpt-\/4o-\/mini  &Open\+AI  \\
+Deep reasoning  &claude-\/3-\/opus-\/20240229  &Anthropic  \\
+Fast responses  &claude-\/3-\/5-\/haiku-\/20241022  &Anthropic  \\
+\end{DoxyTable}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_API__PROVIDERS_autotoc_md156}{}\doxysection{\texorpdfstring{Troubleshooting}{Troubleshooting}}\label{md_API__PROVIDERS_autotoc_md156}
+\hypertarget{md_API__PROVIDERS_autotoc_md157}{}\doxysubsection{\texorpdfstring{Common Issues}{Common Issues}}\label{md_API__PROVIDERS_autotoc_md157}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{401 Unauthorized}}\+: Check API key is set correctly
+\item {\bfseries{429 Rate Limited}}\+: Reduce request frequency or upgrade plan
+\item {\bfseries{Model not found}}\+: Verify exact model name spelling
+\item {\bfseries{Context too long}}\+: Reduce input size or use model with larger context
+\end{DoxyEnumerate}\hypertarget{md_API__PROVIDERS_autotoc_md158}{}\doxysubsection{\texorpdfstring{Testing API Keys}{Testing API Keys}}\label{md_API__PROVIDERS_autotoc_md158}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Test\ Anthropic}
+\DoxyCodeLine{curl\ -\/s\ https://api.anthropic.com/v1/messages\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}x-\/api-\/key:\ \$ANTHROPIC\_API\_KEY"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}anthropic-\/version:\ 2023-\/06-\/01"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/d\ '\{"{}model"{}:"{}claude-\/3-\/5-\/sonnet-\/20241022"{},"{}max\_tokens"{}:10,"{}messages"{}:[\{"{}role"{}:"{}user"{},"{}content"{}:"{}Hi"{}\}]\}'}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Test\ OpenAI}
+\DoxyCodeLine{curl\ -\/s\ https://api.openai.com/v1/chat/completions\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Authorization:\ Bearer\ \$OPENAI\_API\_KEY"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/d\ '\{"{}model"{}:"{}gpt-\/4o-\/mini"{},"{}max\_tokens"{}:10,"{}messages"{}:[\{"{}role"{}:"{}user"{},"{}content"{}:"{}Hi"{}\}]\}'}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Test\ xAI}
+\DoxyCodeLine{curl\ -\/s\ https://api.x.ai/v1/chat/completions\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Authorization:\ Bearer\ \$XAI\_API\_KEY"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/d\ '\{"{}model"{}:"{}grok-\/2"{},"{}max\_tokens"{}:10,"{}messages"{}:[\{"{}role"{}:"{}user"{},"{}content"{}:"{}Hi"{}\}]\}'}
+
+\end{DoxyCode}
+ 

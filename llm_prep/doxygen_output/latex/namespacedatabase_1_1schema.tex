@@ -1,0 +1,154 @@
+\doxysection{database.\+schema Namespace Reference}
+\hypertarget{namespacedatabase_1_1schema}{}\label{namespacedatabase_1_1schema}\index{database.schema@{database.schema}}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacedatabase_1_1schema_a361887f9cac360a4974f4396a8615717}{AGENT\+\_\+\+STATE\+\_\+\+TABLE}}
+\item 
+list \mbox{\hyperlink{namespacedatabase_1_1schema_abb008a4c84e15fa5ae3b0b98473ba98b}{AGENT\+\_\+\+STATE\+\_\+\+MIGRATIONS}}
+\item 
+str \mbox{\hyperlink{namespacedatabase_1_1schema_aff82f87b6ec8392d58cb0db832d5f1b3}{SUPERVISOR\+\_\+\+LOG\+\_\+\+TABLE}}
+\item 
+str \mbox{\hyperlink{namespacedatabase_1_1schema_afeebb21e25b7e572011b80fac5833190}{ALIAS\+\_\+\+MAPPINGS\+\_\+\+TABLE}}
+\item 
+str \mbox{\hyperlink{namespacedatabase_1_1schema_ade29f7d5fc90b289fb302bcdaac49e2a}{WAL\+\_\+\+MODE\+\_\+\+PRAGMA}} = "{}PRAGMA journal\+\_\+mode=WAL"{}
+\item 
+str \mbox{\hyperlink{namespacedatabase_1_1schema_a0a12c5c310213a884f6272fe501d77ad}{WORKSHOP\+\_\+\+ANALYSIS\+\_\+\+TABLE}}
+\item 
+list \mbox{\hyperlink{namespacedatabase_1_1schema_a0eb7fa418deaa7c73fcced8423c08c33}{WORKSHOP\+\_\+\+ANALYSIS\+\_\+\+INDEXES}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}SQLite database schema definitions for AXE agent system.
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacedatabase_1_1schema_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacedatabase_1_1schema_abb008a4c84e15fa5ae3b0b98473ba98b}\index{database.schema@{database.schema}!AGENT\_STATE\_MIGRATIONS@{AGENT\_STATE\_MIGRATIONS}}
+\index{AGENT\_STATE\_MIGRATIONS@{AGENT\_STATE\_MIGRATIONS}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{AGENT\_STATE\_MIGRATIONS}{AGENT\_STATE\_MIGRATIONS}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_abb008a4c84e15fa5ae3b0b98473ba98b} 
+list database.\+schema.\+AGENT\+\_\+\+STATE\+\_\+\+MIGRATIONS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}ALTER\ TABLE\ agent\_state\ ADD\ COLUMN\ tokens\_used\ INTEGER\ DEFAULT\ 0"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}ALTER\ TABLE\ agent\_state\ ADD\ COLUMN\ context\_summary\ TEXT"{}},}
+\DoxyCodeLine{00004\ ]}
+
+\end{DoxyCode}
+\Hypertarget{namespacedatabase_1_1schema_a361887f9cac360a4974f4396a8615717}\index{database.schema@{database.schema}!AGENT\_STATE\_TABLE@{AGENT\_STATE\_TABLE}}
+\index{AGENT\_STATE\_TABLE@{AGENT\_STATE\_TABLE}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{AGENT\_STATE\_TABLE}{AGENT\_STATE\_TABLE}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_a361887f9cac360a4974f4396a8615717} 
+str database.\+schema.\+AGENT\+\_\+\+STATE\+\_\+\+TABLE}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00002\ \textcolor{stringliteral}{CREATE\ TABLE\ IF\ NOT\ EXISTS\ agent\_state\ (}}
+\DoxyCodeLine{00003\ \textcolor{stringliteral}{\ \ \ \ agent\_id\ TEXT\ PRIMARY\ KEY,}}
+\DoxyCodeLine{00004\ \textcolor{stringliteral}{\ \ \ \ alias\ TEXT\ UNIQUE,}}
+\DoxyCodeLine{00005\ \textcolor{stringliteral}{\ \ \ \ model\_name\ TEXT,}}
+\DoxyCodeLine{00006\ \textcolor{stringliteral}{\ \ \ \ supervisor\_id\ TEXT,}}
+\DoxyCodeLine{00007\ \textcolor{stringliteral}{\ \ \ \ last\_updated\ TIMESTAMP,}}
+\DoxyCodeLine{00008\ \textcolor{stringliteral}{\ \ \ \ memory\_json\ TEXT,}}
+\DoxyCodeLine{00009\ \textcolor{stringliteral}{\ \ \ \ recent\_diffs\ TEXT,}}
+\DoxyCodeLine{00010\ \textcolor{stringliteral}{\ \ \ \ error\_count\ INTEGER\ DEFAULT\ 0,}}
+\DoxyCodeLine{00011\ \textcolor{stringliteral}{\ \ \ \ xp\ INTEGER\ DEFAULT\ 0,}}
+\DoxyCodeLine{00012\ \textcolor{stringliteral}{\ \ \ \ level\ INTEGER\ DEFAULT\ 1,}}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{\ \ \ \ status\ TEXT\ DEFAULT\ 'active',}}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{\ \ \ \ work\_start\_time\ TIMESTAMP,}}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{\ \ \ \ total\_work\_minutes\ INTEGER\ DEFAULT\ 0,}}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{\ \ \ \ tokens\_used\ INTEGER\ DEFAULT\ 0,}}
+\DoxyCodeLine{00017\ \textcolor{stringliteral}{\ \ \ \ context\_summary\ TEXT}}
+\DoxyCodeLine{00018\ \textcolor{stringliteral}{)}}
+\DoxyCodeLine{00019\ \textcolor{stringliteral}{"{}"{}"{}}}
+
+\end{DoxyCode}
+\Hypertarget{namespacedatabase_1_1schema_afeebb21e25b7e572011b80fac5833190}\index{database.schema@{database.schema}!ALIAS\_MAPPINGS\_TABLE@{ALIAS\_MAPPINGS\_TABLE}}
+\index{ALIAS\_MAPPINGS\_TABLE@{ALIAS\_MAPPINGS\_TABLE}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{ALIAS\_MAPPINGS\_TABLE}{ALIAS\_MAPPINGS\_TABLE}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_afeebb21e25b7e572011b80fac5833190} 
+str database.\+schema.\+ALIAS\+\_\+\+MAPPINGS\+\_\+\+TABLE}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00002\ \textcolor{stringliteral}{CREATE\ TABLE\ IF\ NOT\ EXISTS\ alias\_mappings\ (}}
+\DoxyCodeLine{00003\ \textcolor{stringliteral}{\ \ \ \ session\_alias\ TEXT\ PRIMARY\ KEY,}}
+\DoxyCodeLine{00004\ \textcolor{stringliteral}{\ \ \ \ external\_identity\ TEXT,}}
+\DoxyCodeLine{00005\ \textcolor{stringliteral}{\ \ \ \ channel\_type\ TEXT,}}
+\DoxyCodeLine{00006\ \textcolor{stringliteral}{\ \ \ \ channel\_id\ TEXT,}}
+\DoxyCodeLine{00007\ \textcolor{stringliteral}{\ \ \ \ created\_at\ TIMESTAMP}}
+\DoxyCodeLine{00008\ \textcolor{stringliteral}{)}}
+\DoxyCodeLine{00009\ \textcolor{stringliteral}{"{}"{}"{}}}
+
+\end{DoxyCode}
+\Hypertarget{namespacedatabase_1_1schema_aff82f87b6ec8392d58cb0db832d5f1b3}\index{database.schema@{database.schema}!SUPERVISOR\_LOG\_TABLE@{SUPERVISOR\_LOG\_TABLE}}
+\index{SUPERVISOR\_LOG\_TABLE@{SUPERVISOR\_LOG\_TABLE}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{SUPERVISOR\_LOG\_TABLE}{SUPERVISOR\_LOG\_TABLE}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_aff82f87b6ec8392d58cb0db832d5f1b3} 
+str database.\+schema.\+SUPERVISOR\+\_\+\+LOG\+\_\+\+TABLE}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00002\ \textcolor{stringliteral}{CREATE\ TABLE\ IF\ NOT\ EXISTS\ supervisor\_log\ (}}
+\DoxyCodeLine{00003\ \textcolor{stringliteral}{\ \ \ \ log\_id\ TEXT\ PRIMARY\ KEY,}}
+\DoxyCodeLine{00004\ \textcolor{stringliteral}{\ \ \ \ supervisor\_id\ TEXT,}}
+\DoxyCodeLine{00005\ \textcolor{stringliteral}{\ \ \ \ timestamp\ TIMESTAMP,}}
+\DoxyCodeLine{00006\ \textcolor{stringliteral}{\ \ \ \ event\_type\ TEXT,}}
+\DoxyCodeLine{00007\ \textcolor{stringliteral}{\ \ \ \ details\ TEXT}}
+\DoxyCodeLine{00008\ \textcolor{stringliteral}{)}}
+\DoxyCodeLine{00009\ \textcolor{stringliteral}{"{}"{}"{}}}
+
+\end{DoxyCode}
+\Hypertarget{namespacedatabase_1_1schema_ade29f7d5fc90b289fb302bcdaac49e2a}\index{database.schema@{database.schema}!WAL\_MODE\_PRAGMA@{WAL\_MODE\_PRAGMA}}
+\index{WAL\_MODE\_PRAGMA@{WAL\_MODE\_PRAGMA}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{WAL\_MODE\_PRAGMA}{WAL\_MODE\_PRAGMA}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_ade29f7d5fc90b289fb302bcdaac49e2a} 
+str database.\+schema.\+WAL\+\_\+\+MODE\+\_\+\+PRAGMA = "{}PRAGMA journal\+\_\+mode=WAL"{}}
+
+\Hypertarget{namespacedatabase_1_1schema_a0eb7fa418deaa7c73fcced8423c08c33}\index{database.schema@{database.schema}!WORKSHOP\_ANALYSIS\_INDEXES@{WORKSHOP\_ANALYSIS\_INDEXES}}
+\index{WORKSHOP\_ANALYSIS\_INDEXES@{WORKSHOP\_ANALYSIS\_INDEXES}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{WORKSHOP\_ANALYSIS\_INDEXES}{WORKSHOP\_ANALYSIS\_INDEXES}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_a0eb7fa418deaa7c73fcced8423c08c33} 
+list database.\+schema.\+WORKSHOP\+\_\+\+ANALYSIS\+\_\+\+INDEXES}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}CREATE\ INDEX\ IF\ NOT\ EXISTS\ idx\_workshop\_tool\ ON\ workshop\_analysis(tool\_name)"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}CREATE\ INDEX\ IF\ NOT\ EXISTS\ idx\_workshop\_agent\ ON\ workshop\_analysis(agent\_id)"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}CREATE\ INDEX\ IF\ NOT\ EXISTS\ idx\_workshop\_timestamp\ ON\ workshop\_analysis(timestamp)"{}},}
+\DoxyCodeLine{00005\ ]}
+
+\end{DoxyCode}
+\Hypertarget{namespacedatabase_1_1schema_a0a12c5c310213a884f6272fe501d77ad}\index{database.schema@{database.schema}!WORKSHOP\_ANALYSIS\_TABLE@{WORKSHOP\_ANALYSIS\_TABLE}}
+\index{WORKSHOP\_ANALYSIS\_TABLE@{WORKSHOP\_ANALYSIS\_TABLE}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{WORKSHOP\_ANALYSIS\_TABLE}{WORKSHOP\_ANALYSIS\_TABLE}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_a0a12c5c310213a884f6272fe501d77ad} 
+str database.\+schema.\+WORKSHOP\+\_\+\+ANALYSIS\+\_\+\+TABLE}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00002\ \textcolor{stringliteral}{CREATE\ TABLE\ IF\ NOT\ EXISTS\ workshop\_analysis\ (}}
+\DoxyCodeLine{00003\ \textcolor{stringliteral}{\ \ \ \ analysis\_id\ TEXT\ PRIMARY\ KEY,}}
+\DoxyCodeLine{00004\ \textcolor{stringliteral}{\ \ \ \ tool\_name\ TEXT\ NOT\ NULL,\ \ -\/-\/\ 'chisel',\ 'saw',\ 'plane',\ 'hammer'}}
+\DoxyCodeLine{00005\ \textcolor{stringliteral}{\ \ \ \ target\ TEXT\ NOT\ NULL,\ \ \ \ \ -\/-\/\ file\ path,\ code\ snippet,\ process\ name,\ etc.}}
+\DoxyCodeLine{00006\ \textcolor{stringliteral}{\ \ \ \ agent\_id\ TEXT,\ \ \ \ \ \ \ \ \ \ \ \ -\/-\/\ agent\ that\ requested\ the\ analysis}}
+\DoxyCodeLine{00007\ \textcolor{stringliteral}{\ \ \ \ timestamp\ TIMESTAMP\ DEFAULT\ CURRENT\_TIMESTAMP,}}
+\DoxyCodeLine{00008\ \textcolor{stringliteral}{\ \ \ \ results\_json\ TEXT,\ \ \ \ \ \ \ \ -\/-\/\ JSON\ results\ from\ the\ analysis}}
+\DoxyCodeLine{00009\ \textcolor{stringliteral}{\ \ \ \ status\ TEXT\ DEFAULT\ 'completed',\ \ -\/-\/\ 'completed',\ 'failed',\ 'running'}}
+\DoxyCodeLine{00010\ \textcolor{stringliteral}{\ \ \ \ duration\_seconds\ REAL,\ \ \ \ -\/-\/\ analysis\ duration}}
+\DoxyCodeLine{00011\ \textcolor{stringliteral}{\ \ \ \ error\_message\ TEXT\ \ \ \ \ \ \ \ -\/-\/\ error\ details\ if\ failed}}
+\DoxyCodeLine{00012\ \textcolor{stringliteral}{)}}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{"{}"{}"{}}}
+
+\end{DoxyCode}

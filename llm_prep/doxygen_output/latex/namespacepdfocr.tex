@@ -1,0 +1,695 @@
+\doxysection{pdfocr Namespace Reference}
+\hypertarget{namespacepdfocr}{}\label{namespacepdfocr}\index{pdfocr@{pdfocr}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Iterable\mbox{[}\mbox{\hyperlink{namespacepdfocr_a7c25b0b55b00a5fd54db53d554e42b0d}{\+\_\+T}}\mbox{]} \mbox{\hyperlink{namespacepdfocr_ad8298da323ae5f1a1630b7c8e278e1fb}{tqdm}} (Iterable\mbox{[}\mbox{\hyperlink{namespacepdfocr_a7c25b0b55b00a5fd54db53d554e42b0d}{\+\_\+T}}\mbox{]} iterable, \texorpdfstring{$\ast$}{*}Any args, \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}Any kwargs)
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_a5693f39c769fd1fcd9ec603497d3acfd}{\+\_\+get\+\_\+numpy}} ()
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_a7b52493a1b64d3386a4925cbaa3e82cf}{\+\_\+get\+\_\+pytesseract}} ()
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_aeeef62cce7a050c3d64bc38595fce6ba}{\+\_\+get\+\_\+easyocr\+\_\+reader}} (Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} langs=None, bool gpu=False)
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_a42dc9f3b338729bee1d8c6ab01d8666f}{\+\_\+get\+\_\+cv2}} ()
+\item 
+Image.\+Image \mbox{\hyperlink{namespacepdfocr_ac731da60c6eeccf59b74b31bdb947e53}{preprocess\+\_\+image\+\_\+for\+\_\+ocr}} (Image.\+Image image, bool enhance=True)
+\item 
+str \mbox{\hyperlink{namespacepdfocr_ac179521a93537a816beca0f185027d82}{ocr\+\_\+with\+\_\+tesseract}} (Image.\+Image image, str lang="{}eng"{})
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_ad27e899ac4d3719ac2771d6737ebab30}{ocr\+\_\+with\+\_\+easyocr}} (Image.\+Image image, Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} langs=None, bool gpu=False, bool return\+\_\+boxes=False)
+\item 
+List\mbox{[}Tuple\mbox{[}int, Image.\+Image\mbox{]}\mbox{]} \mbox{\hyperlink{namespacepdfocr_a0350b44b7fe5a464ec4d7eb5d96c4329}{pdf\+\_\+to\+\_\+images}} (Path pdf\+\_\+path, int dpi=300, Optional\mbox{[}List\mbox{[}int\mbox{]}\mbox{]} pages=None)
+\item 
+List\mbox{[}int\mbox{]} \mbox{\hyperlink{namespacepdfocr_a396c2e32c75389b6d5604dec60a3dd00}{parse\+\_\+page\+\_\+spec}} (str spec, int total\+\_\+pages)
+\item 
+int \mbox{\hyperlink{namespacepdfocr_abfb3d61192e485a1e34e0fe83935043d}{validate\+\_\+dpi}} (int dpi)
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_a81b1c455180a0a207040985e551a88db}{ocr\+\_\+image}} (Image.\+Image image, str engine="{}tesseract"{}, str lang="{}eng"{}, bool enhance=True, bool gpu=False, bool return\+\_\+boxes=False)
+\item 
+Optional\mbox{[}Path\mbox{]} \mbox{\hyperlink{namespacepdfocr_ac7f53dae8b4a44d22b069d65f97240c4}{ocr\+\_\+pdf}} (Path pdf\+\_\+path, Path output\+\_\+dir, str engine="{}tesseract"{}, str lang="{}eng"{}, int dpi=300, bool enhance=True, bool save\+\_\+images=False, bool force=False, bool quiet=False, Optional\mbox{[}List\mbox{[}int\mbox{]}\mbox{]} pages=None, str output\+\_\+format="{}text"{}, bool gpu=False)
+\item 
+Optional\mbox{[}Path\mbox{]} \mbox{\hyperlink{namespacepdfocr_a099154a3f8d734ab6f18654cd5e5f6e5}{ocr\+\_\+image\+\_\+file}} (Path image\+\_\+path, Path output\+\_\+dir, str engine="{}tesseract"{}, str lang="{}eng"{}, bool enhance=True, bool force=False, bool quiet=False, str output\+\_\+format="{}text"{}, bool gpu=False)
+\item 
+List\mbox{[}Path\mbox{]} \mbox{\hyperlink{namespacepdfocr_ab2a132de0991ecfc1920d46139077101}{process\+\_\+inputs}} (List\mbox{[}str\mbox{]} inputs)
+\item 
+bool \mbox{\hyperlink{namespacepdfocr_a69dd0035c18ba7bd000e635b3041e1cf}{check\+\_\+engine\+\_\+available}} (str engine)
+\item 
+None \mbox{\hyperlink{namespacepdfocr_ae40f3e496d2e1a1d103e6dfa71895128}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacepdfocr_a7c25b0b55b00a5fd54db53d554e42b0d}{\+\_\+T}} = Type\+Var("{}\+\_\+\+T"{})
+\item 
+bool \mbox{\hyperlink{namespacepdfocr_a548d4e7d3d14f2097a1992e87bae296e}{\+\_\+\+HAS\+\_\+\+TQDM}} = True
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_aefbbbb370c7bdbae3e17a66b7c6c8e77}{\+\_\+pytesseract}} = None
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_ae681664d8e4ac2d5836e94c512847982}{\+\_\+easyocr\+\_\+reader}} = None
+\item 
+Optional \mbox{\hyperlink{namespacepdfocr_a58285c26ea9bf1772627ec8cb6ae7e52}{\+\_\+easyocr\+\_\+reader\+\_\+langs}} = None
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_ae10b4b3e3924e83537d24f4e96475bf8}{\+\_\+cv2}} = None
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_a0f93dcf60b166aa21764a2652884be3c}{\+\_\+np}} = None
+\item 
+\mbox{\hyperlink{namespacepdfocr_a93def8225eb409561d091202348606da}{\+\_\+easyocr\+\_\+lock}} = threading.\+Lock()
+\item 
+\mbox{\hyperlink{namespacepdfocr_afcdc896dc13bb8f4bb801510b2eb4af6}{\+\_\+pytesseract\+\_\+lock}} = threading.\+Lock()
+\item 
+\mbox{\hyperlink{namespacepdfocr_a461dc2b1e6e38b091179e252b8885ff8}{\+\_\+cv2\+\_\+lock}} = threading.\+Lock()
+\item 
+\mbox{\hyperlink{namespacepdfocr_a19b794722766018f8deae9f626c78696}{\+\_\+numpy\+\_\+lock}} = threading.\+Lock()
+\item 
+str \mbox{\hyperlink{namespacepdfocr_ad03abc393ed4348aad17dcfa3668fc3a}{\+\_\+\+\_\+version\+\_\+\+\_\+}} = "{}2.\+0.\+0"{}
+\item 
+str \mbox{\hyperlink{namespacepdfocr_a7d8bd8cc67fdb31b2ef7cbabd205dc11}{DEFAULT\+\_\+\+OUTPUT\+\_\+\+DIR}} = "{}ocr\+\_\+out"{}
+\item 
+dict \mbox{\hyperlink{namespacepdfocr_afcc5321bb1cdfbb051b1fcde64a6e47d}{SUPPORTED\+\_\+\+IMAGE\+\_\+\+EXTENSIONS}} = \{"{}.png"{}, "{}.jpg"{}, "{}.jpeg"{}, "{}.tiff"{}, "{}.tif"{}, "{}.bmp"{}, "{}.webp"{}\}
+\item 
+int \mbox{\hyperlink{namespacepdfocr_a8fc9bf9454c59b0c7ab824fc26b45436}{MIN\+\_\+\+DPI}} = 72
+\item 
+int \mbox{\hyperlink{namespacepdfocr_ae18145d1a5ecd1b9ee6b262d9cbc8213}{MAX\+\_\+\+DPI}} = 600
+\item 
+dict \mbox{\hyperlink{namespacepdfocr_aaf4dc3b4a82cc37c55ba4a049944d3a2}{TESSERACT\+\_\+\+TO\+\_\+\+EASYOCR\+\_\+\+LANG}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}pdfocr - OCR tool for extracting text from PDFs and images.
+
+Features:
+- Extract text from scanned PDFs and images using OCR
+- Support multiple OCR engines: tesseract (fast, default), easyocr (higher accuracy)
+- Multiple input files and batch directory processing
+- Image preprocessing for better OCR accuracy
+- Page selection for OCR (e.g., only first 5 pages)
+- Output to configurable directory
+- JSON output format with bounding boxes
+- Searchable PDF output
+
+Author: EdgeOfAssembly
+Date: 2025-12-19
+
+License: GPLv3 / Commercial dual-license
+
+Dependencies:
+- pytesseract (default engine): pip install pytesseract
+  Also requires tesseract binary: apt install tesseract-ocr (Ubuntu)
+- easyocr (higher accuracy engine): pip install easyocr
+- pdf2image: pip install pdf2image
+  Also requires poppler: apt install poppler-utils (Ubuntu)
+- opencv-python-headless: pip install opencv-python-headless
+- pillow: pip install pillow
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacepdfocr_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacepdfocr_a42dc9f3b338729bee1d8c6ab01d8666f}\index{pdfocr@{pdfocr}!\_get\_cv2@{\_get\_cv2}}
+\index{\_get\_cv2@{\_get\_cv2}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_get\_cv2()}{\_get\_cv2()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a42dc9f3b338729bee1d8c6ab01d8666f} 
+ Any pdfocr.\+\_\+get\+\_\+cv2 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Lazy import OpenCV (thread-safe).
+
+Returns:
+    The cv2 (OpenCV) module if available, otherwise None.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_a42dc9f3b338729bee1d8c6ab01d8666f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_aeeef62cce7a050c3d64bc38595fce6ba}\index{pdfocr@{pdfocr}!\_get\_easyocr\_reader@{\_get\_easyocr\_reader}}
+\index{\_get\_easyocr\_reader@{\_get\_easyocr\_reader}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_get\_easyocr\_reader()}{\_get\_easyocr\_reader()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_aeeef62cce7a050c3d64bc38595fce6ba} 
+ Any pdfocr.\+\_\+get\+\_\+easyocr\+\_\+reader (\begin{DoxyParamCaption}\item[{Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} }]{langs}{ = {\ttfamily None}, }\item[{bool }]{gpu}{ = {\ttfamily False}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Lazy import and initialize easyocr reader (thread-safe).
+
+Note: Creates a new reader if languages differ from the cached one.
+
+Args:
+    langs: List of language codes (default: ['en']).
+    gpu: Whether to use GPU acceleration (default: False).
+
+Returns:
+    EasyOCR Reader instance, or None if not available.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_aeeef62cce7a050c3d64bc38595fce6ba_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_a5693f39c769fd1fcd9ec603497d3acfd}\index{pdfocr@{pdfocr}!\_get\_numpy@{\_get\_numpy}}
+\index{\_get\_numpy@{\_get\_numpy}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_get\_numpy()}{\_get\_numpy()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a5693f39c769fd1fcd9ec603497d3acfd} 
+ Any pdfocr.\+\_\+get\+\_\+numpy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Lazy import numpy (thread-safe).
+
+Returns:
+    The numpy module if available, otherwise None.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_a5693f39c769fd1fcd9ec603497d3acfd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_a7b52493a1b64d3386a4925cbaa3e82cf}\index{pdfocr@{pdfocr}!\_get\_pytesseract@{\_get\_pytesseract}}
+\index{\_get\_pytesseract@{\_get\_pytesseract}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_get\_pytesseract()}{\_get\_pytesseract()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a7b52493a1b64d3386a4925cbaa3e82cf} 
+ Any pdfocr.\+\_\+get\+\_\+pytesseract (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Lazy import pytesseract (thread-safe).
+
+Returns:
+    The pytesseract module if available, otherwise None.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_a7b52493a1b64d3386a4925cbaa3e82cf_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_a69dd0035c18ba7bd000e635b3041e1cf}\index{pdfocr@{pdfocr}!check\_engine\_available@{check\_engine\_available}}
+\index{check\_engine\_available@{check\_engine\_available}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{check\_engine\_available()}{check\_engine\_available()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a69dd0035c18ba7bd000e635b3041e1cf} 
+ bool pdfocr.\+check\+\_\+engine\+\_\+available (\begin{DoxyParamCaption}\item[{str}]{engine}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if OCR engine is available.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{namespacepdfocr_a69dd0035c18ba7bd000e635b3041e1cf_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_ae40f3e496d2e1a1d103e6dfa71895128}\index{pdfocr@{pdfocr}!main@{main}}
+\index{main@{main}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_ae40f3e496d2e1a1d103e6dfa71895128} 
+ None pdfocr.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Main entry point for pdfocr.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_ae40f3e496d2e1a1d103e6dfa71895128_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=154pt]{namespacepdfocr_ae40f3e496d2e1a1d103e6dfa71895128_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_a81b1c455180a0a207040985e551a88db}\index{pdfocr@{pdfocr}!ocr\_image@{ocr\_image}}
+\index{ocr\_image@{ocr\_image}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{ocr\_image()}{ocr\_image()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a81b1c455180a0a207040985e551a88db} 
+ Any pdfocr.\+ocr\+\_\+image (\begin{DoxyParamCaption}\item[{Image.\+Image}]{image}{, }\item[{str }]{engine}{ = {\ttfamily "{}tesseract"{}}, }\item[{str }]{lang}{ = {\ttfamily "{}eng"{}}, }\item[{bool }]{enhance}{ = {\ttfamily True}, }\item[{bool }]{gpu}{ = {\ttfamily False}, }\item[{bool }]{return\+\_\+boxes}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}OCR a single image.
+
+Args:
+    image: PIL Image to OCR.
+    engine: OCR engine ('tesseract' or 'easyocr').
+    lang: Language code(s).
+    enhance: Apply preprocessing.
+    gpu: Use GPU acceleration for EasyOCR.
+    return_boxes: Return structured data with bounding boxes (EasyOCR only).
+
+Returns:
+    Extracted text (str), or list of dicts with boxes if return_boxes=True.
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_a81b1c455180a0a207040985e551a88db_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_a81b1c455180a0a207040985e551a88db_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_a099154a3f8d734ab6f18654cd5e5f6e5}\index{pdfocr@{pdfocr}!ocr\_image\_file@{ocr\_image\_file}}
+\index{ocr\_image\_file@{ocr\_image\_file}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{ocr\_image\_file()}{ocr\_image\_file()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a099154a3f8d734ab6f18654cd5e5f6e5} 
+ Optional\mbox{[}Path\mbox{]} pdfocr.\+ocr\+\_\+image\+\_\+file (\begin{DoxyParamCaption}\item[{Path}]{image\+\_\+path}{, }\item[{Path}]{output\+\_\+dir}{, }\item[{str }]{engine}{ = {\ttfamily "{}tesseract"{}}, }\item[{str }]{lang}{ = {\ttfamily "{}eng"{}}, }\item[{bool }]{enhance}{ = {\ttfamily True}, }\item[{bool }]{force}{ = {\ttfamily False}, }\item[{bool }]{quiet}{ = {\ttfamily False}, }\item[{str }]{output\+\_\+format}{ = {\ttfamily "{}text"{}}, }\item[{bool }]{gpu}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}OCR an image file and save the extracted text.
+
+Args:
+    image_path: Path to image file.
+    output_dir: Output directory.
+    engine: OCR engine to use.
+    lang: Language code.
+    enhance: Apply image preprocessing.
+    force: Force overwrite.
+    quiet: Suppress output.
+    output_format: Output format ('text' or 'json').
+    gpu: Use GPU acceleration for EasyOCR.
+
+Returns:
+    Path to output text file, or None if failed.
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_a099154a3f8d734ab6f18654cd5e5f6e5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{namespacepdfocr_a099154a3f8d734ab6f18654cd5e5f6e5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_ac7f53dae8b4a44d22b069d65f97240c4}\index{pdfocr@{pdfocr}!ocr\_pdf@{ocr\_pdf}}
+\index{ocr\_pdf@{ocr\_pdf}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{ocr\_pdf()}{ocr\_pdf()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_ac7f53dae8b4a44d22b069d65f97240c4} 
+ Optional\mbox{[}Path\mbox{]} pdfocr.\+ocr\+\_\+pdf (\begin{DoxyParamCaption}\item[{Path}]{pdf\+\_\+path}{, }\item[{Path}]{output\+\_\+dir}{, }\item[{str }]{engine}{ = {\ttfamily "{}tesseract"{}}, }\item[{str }]{lang}{ = {\ttfamily "{}eng"{}}, }\item[{int }]{dpi}{ = {\ttfamily 300}, }\item[{bool }]{enhance}{ = {\ttfamily True}, }\item[{bool }]{save\+\_\+images}{ = {\ttfamily False}, }\item[{bool }]{force}{ = {\ttfamily False}, }\item[{bool }]{quiet}{ = {\ttfamily False}, }\item[{Optional\mbox{[}List\mbox{[}int\mbox{]}\mbox{]} }]{pages}{ = {\ttfamily None}, }\item[{str }]{output\+\_\+format}{ = {\ttfamily "{}text"{}}, }\item[{bool }]{gpu}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}OCR a PDF file and save the extracted text.
+
+Args:
+    pdf_path: Path to PDF file.
+    output_dir: Output directory.
+    engine: OCR engine to use.
+    lang: Language code.
+    dpi: DPI for rendering.
+    enhance: Apply image preprocessing.
+    save_images: Also save page images.
+    force: Force overwrite.
+    quiet: Suppress output.
+    pages: Optional list of 1-indexed page numbers to OCR.
+    output_format: Output format ('text' or 'json').
+    gpu: Use GPU acceleration for EasyOCR.
+
+Returns:
+    Path to output text file, or None if failed.
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_ac7f53dae8b4a44d22b069d65f97240c4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{namespacepdfocr_ac7f53dae8b4a44d22b069d65f97240c4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_ad27e899ac4d3719ac2771d6737ebab30}\index{pdfocr@{pdfocr}!ocr\_with\_easyocr@{ocr\_with\_easyocr}}
+\index{ocr\_with\_easyocr@{ocr\_with\_easyocr}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{ocr\_with\_easyocr()}{ocr\_with\_easyocr()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_ad27e899ac4d3719ac2771d6737ebab30} 
+ Any pdfocr.\+ocr\+\_\+with\+\_\+easyocr (\begin{DoxyParamCaption}\item[{Image.\+Image}]{image}{, }\item[{Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} }]{langs}{ = {\ttfamily None}, }\item[{bool }]{gpu}{ = {\ttfamily False}, }\item[{bool }]{return\+\_\+boxes}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Perform OCR using EasyOCR.
+
+Args:
+    image: PIL Image to OCR.
+    langs: List of language codes (default: ['en']).
+    gpu: Whether to use GPU acceleration.
+    return_boxes: If True, return list of dicts with text and bounding boxes.
+
+Returns:
+    Extracted text (str), or list of dicts with boxes if return_boxes=True.
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_ad27e899ac4d3719ac2771d6737ebab30_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_ad27e899ac4d3719ac2771d6737ebab30_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_ac179521a93537a816beca0f185027d82}\index{pdfocr@{pdfocr}!ocr\_with\_tesseract@{ocr\_with\_tesseract}}
+\index{ocr\_with\_tesseract@{ocr\_with\_tesseract}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{ocr\_with\_tesseract()}{ocr\_with\_tesseract()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_ac179521a93537a816beca0f185027d82} 
+ str pdfocr.\+ocr\+\_\+with\+\_\+tesseract (\begin{DoxyParamCaption}\item[{Image.\+Image}]{image}{, }\item[{str }]{lang}{ = {\ttfamily "{}eng"{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Perform OCR using Tesseract.
+
+Args:
+    image: PIL Image to OCR.
+    lang: Tesseract language code (default: 'eng').
+
+Returns:
+    Extracted text.
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_ac179521a93537a816beca0f185027d82_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_ac179521a93537a816beca0f185027d82_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_a396c2e32c75389b6d5604dec60a3dd00}\index{pdfocr@{pdfocr}!parse\_page\_spec@{parse\_page\_spec}}
+\index{parse\_page\_spec@{parse\_page\_spec}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{parse\_page\_spec()}{parse\_page\_spec()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a396c2e32c75389b6d5604dec60a3dd00} 
+ List\mbox{[}int\mbox{]} pdfocr.\+parse\+\_\+page\+\_\+spec (\begin{DoxyParamCaption}\item[{str}]{spec}{, }\item[{int}]{total\+\_\+pages}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Parse page specification string into list of page numbers.
+
+Supports formats like:
+- "1,7,67" - individual pages
+- "1-10" - page range
+- "56-" - from page 56 to end
+- "-10" - from page 1 to 10
+- "1-5,10,20-25" - combined
+
+Args:
+    spec: Page specification string.
+    total_pages: Total number of pages in the PDF.
+
+Returns:
+    List of 1-indexed page numbers.
+
+Raises:
+    ValueError: If specification is invalid.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=323pt]{namespacepdfocr_a396c2e32c75389b6d5604dec60a3dd00_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_a0350b44b7fe5a464ec4d7eb5d96c4329}\index{pdfocr@{pdfocr}!pdf\_to\_images@{pdf\_to\_images}}
+\index{pdf\_to\_images@{pdf\_to\_images}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{pdf\_to\_images()}{pdf\_to\_images()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a0350b44b7fe5a464ec4d7eb5d96c4329} 
+ List\mbox{[}Tuple\mbox{[}int, Image.\+Image\mbox{]}\mbox{]} pdfocr.\+pdf\+\_\+to\+\_\+images (\begin{DoxyParamCaption}\item[{Path}]{pdf\+\_\+path}{, }\item[{int }]{dpi}{ = {\ttfamily 300}, }\item[{Optional\mbox{[}List\mbox{[}int\mbox{]}\mbox{]} }]{pages}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Convert PDF pages to PIL Images.
+
+Args:
+    pdf_path: Path to PDF file.
+    dpi: DPI for rendering (default 300).
+    pages: Optional list of 1-indexed page numbers to convert.
+           If None, converts all pages.
+
+Returns:
+    List of (page_number, PIL Image) tuples.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_a0350b44b7fe5a464ec4d7eb5d96c4329_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_ac731da60c6eeccf59b74b31bdb947e53}\index{pdfocr@{pdfocr}!preprocess\_image\_for\_ocr@{preprocess\_image\_for\_ocr}}
+\index{preprocess\_image\_for\_ocr@{preprocess\_image\_for\_ocr}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{preprocess\_image\_for\_ocr()}{preprocess\_image\_for\_ocr()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_ac731da60c6eeccf59b74b31bdb947e53} 
+ Image.\+Image pdfocr.\+preprocess\+\_\+image\+\_\+for\+\_\+ocr (\begin{DoxyParamCaption}\item[{Image.\+Image}]{image}{, }\item[{bool }]{enhance}{ = {\ttfamily True}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Preprocess image to improve OCR accuracy.
+
+Applies CLAHE (Contrast Limited Adaptive Histogram Equalization)
+and optional denoising.
+
+Args:
+    image: PIL Image to preprocess.
+    enhance: Whether to apply enhancement (default True).
+
+Returns:
+    Preprocessed PIL Image.
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=347pt]{namespacepdfocr_ac731da60c6eeccf59b74b31bdb947e53_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_ac731da60c6eeccf59b74b31bdb947e53_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_ab2a132de0991ecfc1920d46139077101}\index{pdfocr@{pdfocr}!process\_inputs@{process\_inputs}}
+\index{process\_inputs@{process\_inputs}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{process\_inputs()}{process\_inputs()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_ab2a132de0991ecfc1920d46139077101} 
+ List\mbox{[}Path\mbox{]} pdfocr.\+process\+\_\+inputs (\begin{DoxyParamCaption}\item[{List\mbox{[}str\mbox{]}}]{inputs}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Process input arguments - can be files or directories.
+
+Args:
+    inputs: List of input paths.
+
+Returns:
+    List of file paths to process.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=312pt]{namespacepdfocr_ab2a132de0991ecfc1920d46139077101_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_ad8298da323ae5f1a1630b7c8e278e1fb}\index{pdfocr@{pdfocr}!tqdm@{tqdm}}
+\index{tqdm@{tqdm}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{tqdm()}{tqdm()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_ad8298da323ae5f1a1630b7c8e278e1fb} 
+ Iterable\mbox{[}\mbox{\hyperlink{namespacepdfocr_a7c25b0b55b00a5fd54db53d554e42b0d}{\+\_\+T}}\mbox{]} pdfocr.\+tqdm (\begin{DoxyParamCaption}\item[{Iterable\mbox{[}\mbox{\hyperlink{namespacepdfocr_a7c25b0b55b00a5fd54db53d554e42b0d}{\+\_\+T}}\mbox{]}}]{iterable}{, }\item[{\texorpdfstring{$\ast$}{*}Any}]{args}{, }\item[{\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}Any     }]{kwargs}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fallback tqdm that passes through the iterable unchanged.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepdfocr_ad8298da323ae5f1a1630b7c8e278e1fb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacepdfocr_abfb3d61192e485a1e34e0fe83935043d}\index{pdfocr@{pdfocr}!validate\_dpi@{validate\_dpi}}
+\index{validate\_dpi@{validate\_dpi}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{validate\_dpi()}{validate\_dpi()}}
+{\footnotesize\ttfamily \label{namespacepdfocr_abfb3d61192e485a1e34e0fe83935043d} 
+ int pdfocr.\+validate\+\_\+dpi (\begin{DoxyParamCaption}\item[{int}]{dpi}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Validate DPI value and return a valid value.
+
+Args:
+    dpi: DPI value to validate.
+
+Returns:
+    Valid DPI value (clamped to MIN_DPI-MAX_DPI range).
+
+Raises:
+    ValueError: If DPI is invalid (zero or negative).
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{namespacepdfocr_abfb3d61192e485a1e34e0fe83935043d_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{namespacepdfocr_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacepdfocr_ad03abc393ed4348aad17dcfa3668fc3a}\index{pdfocr@{pdfocr}!\_\_version\_\_@{\_\_version\_\_}}
+\index{\_\_version\_\_@{\_\_version\_\_}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_\_version\_\_}{\_\_version\_\_}}
+{\footnotesize\ttfamily \label{namespacepdfocr_ad03abc393ed4348aad17dcfa3668fc3a} 
+str pdfocr.\+\_\+\+\_\+version\+\_\+\+\_\+ = "{}2.\+0.\+0"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{namespacepdfocr_ae10b4b3e3924e83537d24f4e96475bf8}\index{pdfocr@{pdfocr}!\_cv2@{\_cv2}}
+\index{\_cv2@{\_cv2}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_cv2}{\_cv2}}
+{\footnotesize\ttfamily \label{namespacepdfocr_ae10b4b3e3924e83537d24f4e96475bf8} 
+Any pdfocr.\+\_\+cv2 = None\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacepdfocr_a461dc2b1e6e38b091179e252b8885ff8}\index{pdfocr@{pdfocr}!\_cv2\_lock@{\_cv2\_lock}}
+\index{\_cv2\_lock@{\_cv2\_lock}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_cv2\_lock}{\_cv2\_lock}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a461dc2b1e6e38b091179e252b8885ff8} 
+pdfocr.\+\_\+cv2\+\_\+lock = threading.\+Lock()\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacepdfocr_a93def8225eb409561d091202348606da}\index{pdfocr@{pdfocr}!\_easyocr\_lock@{\_easyocr\_lock}}
+\index{\_easyocr\_lock@{\_easyocr\_lock}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_easyocr\_lock}{\_easyocr\_lock}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a93def8225eb409561d091202348606da} 
+pdfocr.\+\_\+easyocr\+\_\+lock = threading.\+Lock()\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacepdfocr_ae681664d8e4ac2d5836e94c512847982}\index{pdfocr@{pdfocr}!\_easyocr\_reader@{\_easyocr\_reader}}
+\index{\_easyocr\_reader@{\_easyocr\_reader}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_easyocr\_reader}{\_easyocr\_reader}}
+{\footnotesize\ttfamily \label{namespacepdfocr_ae681664d8e4ac2d5836e94c512847982} 
+Any pdfocr.\+\_\+easyocr\+\_\+reader = None\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacepdfocr_a58285c26ea9bf1772627ec8cb6ae7e52}\index{pdfocr@{pdfocr}!\_easyocr\_reader\_langs@{\_easyocr\_reader\_langs}}
+\index{\_easyocr\_reader\_langs@{\_easyocr\_reader\_langs}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_easyocr\_reader\_langs}{\_easyocr\_reader\_langs}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a58285c26ea9bf1772627ec8cb6ae7e52} 
+Optional pdfocr.\+\_\+easyocr\+\_\+reader\+\_\+langs = None\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacepdfocr_a548d4e7d3d14f2097a1992e87bae296e}\index{pdfocr@{pdfocr}!\_HAS\_TQDM@{\_HAS\_TQDM}}
+\index{\_HAS\_TQDM@{\_HAS\_TQDM}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_HAS\_TQDM}{\_HAS\_TQDM}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a548d4e7d3d14f2097a1992e87bae296e} 
+bool pdfocr.\+\_\+\+HAS\+\_\+\+TQDM = True\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacepdfocr_a0f93dcf60b166aa21764a2652884be3c}\index{pdfocr@{pdfocr}!\_np@{\_np}}
+\index{\_np@{\_np}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_np}{\_np}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a0f93dcf60b166aa21764a2652884be3c} 
+Any pdfocr.\+\_\+np = None\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacepdfocr_a19b794722766018f8deae9f626c78696}\index{pdfocr@{pdfocr}!\_numpy\_lock@{\_numpy\_lock}}
+\index{\_numpy\_lock@{\_numpy\_lock}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_numpy\_lock}{\_numpy\_lock}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a19b794722766018f8deae9f626c78696} 
+pdfocr.\+\_\+numpy\+\_\+lock = threading.\+Lock()\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacepdfocr_aefbbbb370c7bdbae3e17a66b7c6c8e77}\index{pdfocr@{pdfocr}!\_pytesseract@{\_pytesseract}}
+\index{\_pytesseract@{\_pytesseract}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_pytesseract}{\_pytesseract}}
+{\footnotesize\ttfamily \label{namespacepdfocr_aefbbbb370c7bdbae3e17a66b7c6c8e77} 
+Any pdfocr.\+\_\+pytesseract = None\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacepdfocr_afcdc896dc13bb8f4bb801510b2eb4af6}\index{pdfocr@{pdfocr}!\_pytesseract\_lock@{\_pytesseract\_lock}}
+\index{\_pytesseract\_lock@{\_pytesseract\_lock}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_pytesseract\_lock}{\_pytesseract\_lock}}
+{\footnotesize\ttfamily \label{namespacepdfocr_afcdc896dc13bb8f4bb801510b2eb4af6} 
+pdfocr.\+\_\+pytesseract\+\_\+lock = threading.\+Lock()\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacepdfocr_a7c25b0b55b00a5fd54db53d554e42b0d}\index{pdfocr@{pdfocr}!\_T@{\_T}}
+\index{\_T@{\_T}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{\_T}{\_T}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a7c25b0b55b00a5fd54db53d554e42b0d} 
+pdfocr.\+\_\+T = Type\+Var("{}\+\_\+\+T"{})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespacepdfocr_a7d8bd8cc67fdb31b2ef7cbabd205dc11}\index{pdfocr@{pdfocr}!DEFAULT\_OUTPUT\_DIR@{DEFAULT\_OUTPUT\_DIR}}
+\index{DEFAULT\_OUTPUT\_DIR@{DEFAULT\_OUTPUT\_DIR}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_OUTPUT\_DIR}{DEFAULT\_OUTPUT\_DIR}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a7d8bd8cc67fdb31b2ef7cbabd205dc11} 
+str pdfocr.\+DEFAULT\+\_\+\+OUTPUT\+\_\+\+DIR = "{}ocr\+\_\+out"{}}
+
+\Hypertarget{namespacepdfocr_ae18145d1a5ecd1b9ee6b262d9cbc8213}\index{pdfocr@{pdfocr}!MAX\_DPI@{MAX\_DPI}}
+\index{MAX\_DPI@{MAX\_DPI}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{MAX\_DPI}{MAX\_DPI}}
+{\footnotesize\ttfamily \label{namespacepdfocr_ae18145d1a5ecd1b9ee6b262d9cbc8213} 
+int pdfocr.\+MAX\+\_\+\+DPI = 600}
+
+\Hypertarget{namespacepdfocr_a8fc9bf9454c59b0c7ab824fc26b45436}\index{pdfocr@{pdfocr}!MIN\_DPI@{MIN\_DPI}}
+\index{MIN\_DPI@{MIN\_DPI}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{MIN\_DPI}{MIN\_DPI}}
+{\footnotesize\ttfamily \label{namespacepdfocr_a8fc9bf9454c59b0c7ab824fc26b45436} 
+int pdfocr.\+MIN\+\_\+\+DPI = 72}
+
+\Hypertarget{namespacepdfocr_afcc5321bb1cdfbb051b1fcde64a6e47d}\index{pdfocr@{pdfocr}!SUPPORTED\_IMAGE\_EXTENSIONS@{SUPPORTED\_IMAGE\_EXTENSIONS}}
+\index{SUPPORTED\_IMAGE\_EXTENSIONS@{SUPPORTED\_IMAGE\_EXTENSIONS}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{SUPPORTED\_IMAGE\_EXTENSIONS}{SUPPORTED\_IMAGE\_EXTENSIONS}}
+{\footnotesize\ttfamily \label{namespacepdfocr_afcc5321bb1cdfbb051b1fcde64a6e47d} 
+dict pdfocr.\+SUPPORTED\+\_\+\+IMAGE\+\_\+\+EXTENSIONS = \{"{}.png"{}, "{}.jpg"{}, "{}.jpeg"{}, "{}.tiff"{}, "{}.tif"{}, "{}.bmp"{}, "{}.webp"{}\}}
+
+\Hypertarget{namespacepdfocr_aaf4dc3b4a82cc37c55ba4a049944d3a2}\index{pdfocr@{pdfocr}!TESSERACT\_TO\_EASYOCR\_LANG@{TESSERACT\_TO\_EASYOCR\_LANG}}
+\index{TESSERACT\_TO\_EASYOCR\_LANG@{TESSERACT\_TO\_EASYOCR\_LANG}!pdfocr@{pdfocr}}
+\doxysubsubsection{\texorpdfstring{TESSERACT\_TO\_EASYOCR\_LANG}{TESSERACT\_TO\_EASYOCR\_LANG}}
+{\footnotesize\ttfamily \label{namespacepdfocr_aaf4dc3b4a82cc37c55ba4a049944d3a2} 
+dict pdfocr.\+TESSERACT\+\_\+\+TO\+\_\+\+EASYOCR\+\_\+\+LANG}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}eng"{}}:\ \textcolor{stringliteral}{"{}en"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}deu"{}}:\ \textcolor{stringliteral}{"{}de"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}fra"{}}:\ \textcolor{stringliteral}{"{}fr"{}},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{"{}spa"{}}:\ \textcolor{stringliteral}{"{}es"{}},}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{stringliteral}{"{}ita"{}}:\ \textcolor{stringliteral}{"{}it"{}},}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{stringliteral}{"{}por"{}}:\ \textcolor{stringliteral}{"{}pt"{}},}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{stringliteral}{"{}nld"{}}:\ \textcolor{stringliteral}{"{}nl"{}},}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{stringliteral}{"{}pol"{}}:\ \textcolor{stringliteral}{"{}pl"{}},}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{stringliteral}{"{}rus"{}}:\ \textcolor{stringliteral}{"{}ru"{}},}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{stringliteral}{"{}ukr"{}}:\ \textcolor{stringliteral}{"{}uk"{}},}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{stringliteral}{"{}chi\_sim"{}}:\ \textcolor{stringliteral}{"{}ch\_sim"{}},}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{stringliteral}{"{}chi\_tra"{}}:\ \textcolor{stringliteral}{"{}ch\_tra"{}},}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{stringliteral}{"{}jpn"{}}:\ \textcolor{stringliteral}{"{}ja"{}},}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{stringliteral}{"{}kor"{}}:\ \textcolor{stringliteral}{"{}ko"{}},}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{stringliteral}{"{}ara"{}}:\ \textcolor{stringliteral}{"{}ar"{}},}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{stringliteral}{"{}hin"{}}:\ \textcolor{stringliteral}{"{}hi"{}},}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{stringliteral}{"{}tha"{}}:\ \textcolor{stringliteral}{"{}th"{}},}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{stringliteral}{"{}vie"{}}:\ \textcolor{stringliteral}{"{}vi"{}},}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{stringliteral}{"{}tur"{}}:\ \textcolor{stringliteral}{"{}tr"{}},}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{stringliteral}{"{}heb"{}}:\ \textcolor{stringliteral}{"{}he"{}},}
+\DoxyCodeLine{00022\ \}}
+
+\end{DoxyCode}

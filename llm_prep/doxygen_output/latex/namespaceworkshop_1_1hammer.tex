@@ -1,0 +1,80 @@
+\doxysection{workshop.\+hammer Namespace Reference}
+\hypertarget{namespaceworkshop_1_1hammer}{}\label{namespaceworkshop_1_1hammer}\index{workshop.hammer@{workshop.hammer}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor}{Hammer\+Instrumentor}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespaceworkshop_1_1hammer_a8c5ece0b4daa963e748911ada0b7f8f2}{\+\_\+sanitize\+\_\+js\+\_\+string}} (str value)
+\item 
+bool \mbox{\hyperlink{namespaceworkshop_1_1hammer_a1c7a907566cb3ef4ac6a0d0376399573}{\+\_\+validate\+\_\+identifier}} (str name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceworkshop_1_1hammer_a12cd971875af960fd500991064504eae}{logger}} = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Hammer - Live Instrumentation Tool
+
+Provides runtime instrumentation and monitoring capabilities for dynamic analysis.
+Uses Frida for hooking into running processes and monitoring execution.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespaceworkshop_1_1hammer_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceworkshop_1_1hammer_a8c5ece0b4daa963e748911ada0b7f8f2}\index{workshop.hammer@{workshop.hammer}!\_sanitize\_js\_string@{\_sanitize\_js\_string}}
+\index{\_sanitize\_js\_string@{\_sanitize\_js\_string}!workshop.hammer@{workshop.hammer}}
+\doxysubsubsection{\texorpdfstring{\_sanitize\_js\_string()}{\_sanitize\_js\_string()}}
+{\footnotesize\ttfamily \label{namespaceworkshop_1_1hammer_a8c5ece0b4daa963e748911ada0b7f8f2} 
+ str workshop.\+hammer.\+\_\+sanitize\+\_\+js\+\_\+string (\begin{DoxyParamCaption}\item[{str}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Sanitize a string for safe embedding in JavaScript code.
+
+Escapes single quotes, double quotes, backslashes, and newlines
+to prevent JavaScript injection attacks.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceworkshop_1_1hammer_a8c5ece0b4daa963e748911ada0b7f8f2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceworkshop_1_1hammer_a1c7a907566cb3ef4ac6a0d0376399573}\index{workshop.hammer@{workshop.hammer}!\_validate\_identifier@{\_validate\_identifier}}
+\index{\_validate\_identifier@{\_validate\_identifier}!workshop.hammer@{workshop.hammer}}
+\doxysubsubsection{\texorpdfstring{\_validate\_identifier()}{\_validate\_identifier()}}
+{\footnotesize\ttfamily \label{namespaceworkshop_1_1hammer_a1c7a907566cb3ef4ac6a0d0376399573} 
+ bool workshop.\+hammer.\+\_\+validate\+\_\+identifier (\begin{DoxyParamCaption}\item[{str}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Validate that a name is a safe identifier (alphanumeric, underscore, dash).
+
+Returns True if valid, False otherwise.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceworkshop_1_1hammer_a1c7a907566cb3ef4ac6a0d0376399573_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{namespaceworkshop_1_1hammer_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceworkshop_1_1hammer_a12cd971875af960fd500991064504eae}\index{workshop.hammer@{workshop.hammer}!logger@{logger}}
+\index{logger@{logger}!workshop.hammer@{workshop.hammer}}
+\doxysubsubsection{\texorpdfstring{logger}{logger}}
+{\footnotesize\ttfamily \label{namespaceworkshop_1_1hammer_a12cd971875af960fd500991064504eae} 
+workshop.\+hammer.\+logger = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)}
+

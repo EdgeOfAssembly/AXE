@@ -1,0 +1,19 @@
+<map id="pdfocr.ocr_image_file" name="pdfocr.ocr_image_file">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,126,166,154"/>
+<area shape="rect" id="Node000002" href="$namespacepdfocr.html#a81b1c455180a0a207040985e551a88db" title=" " alt="" coords="214,126,347,154"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,137,201,139,196,140,167,142"/>
+<area shape="rect" id="Node000003" href="$namespacepdfocr.html#ad27e899ac4d3719ac2771d6737ebab30" title=" " alt="" coords="400,74,578,102"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="338,123,418,105,413,107,340,128"/>
+<area shape="rect" id="Node000006" href="$namespacepdfocr.html#ac179521a93537a816beca0f185027d82" title=" " alt="" coords="395,126,582,154"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="347,137,382,139,377,140,348,142"/>
+<area shape="rect" id="Node000008" href="$namespacepdfocr.html#ac731da60c6eeccf59b74b31bdb947e53" title=" " alt="" coords="396,177,581,222"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="331,151,397,173,392,173,331,157"/>
+<area shape="rect" id="Node000004" href="$namespacepdfocr.html#aeeef62cce7a050c3d64bc38595fce6ba" title=" " alt="" coords="643,5,794,50"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="544,71,631,51,625,52,545,76"/>
+<area shape="rect" id="Node000005" href="$namespacepdfocr.html#a5693f39c769fd1fcd9ec603497d3acfd" title=" " alt="" coords="646,74,791,102"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="578,85,633,87,628,88,579,90"/>
+<area shape="rect" id="Node000007" href="$namespacepdfocr.html#a7b52493a1b64d3386a4925cbaa3e82cf" title=" " alt="" coords="630,126,807,154"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="582,137,617,139,612,140,583,142"/>
+<area shape="rect" id="Node000009" href="$namespacepdfocr.html#a42dc9f3b338729bee1d8c6ab01d8666f" title=" " alt="" coords="657,186,780,214"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="581,197,644,200,639,200,581,202"/>
+</map>

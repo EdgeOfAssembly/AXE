@@ -1,0 +1,26 @@
+\doxysection{core.\+multiprocess Namespace Reference}
+\hypertarget{namespacecore_1_1multiprocess}{}\label{namespacecore_1_1multiprocess}\index{core.multiprocess@{core.multiprocess}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext}{Shared\+Context}}
+\item 
+class \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess}{Agent\+Worker\+Process}}
+\item 
+class \mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator}{Multi\+Agent\+Coordinator}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Multiprocessing architecture for parallel agent thinking.
+
+This module implements a system where each agent has its own private process
+for background thinking. While one agent responds, others can prepare responses,
+analyze context, and plan ahead.
+
+Architecture:
+- AgentWorkerProcess: Individual agent background process
+- SharedContext: Thread-safe shared state between agents
+- MultiAgentCoordinator: Orchestrates all agent processes
+\end{DoxyVerb}
+ 

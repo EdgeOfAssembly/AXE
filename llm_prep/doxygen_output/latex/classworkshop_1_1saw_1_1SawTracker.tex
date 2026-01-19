@@ -1,0 +1,178 @@
+\doxysection{workshop.\+saw.\+Saw\+Tracker Class Reference}
+\hypertarget{classworkshop_1_1saw_1_1SawTracker}{}\label{classworkshop_1_1saw_1_1SawTracker}\index{workshop.saw.SawTracker@{workshop.saw.SawTracker}}
+
+
+Collaboration diagram for workshop.\+saw.\+Saw\+Tracker\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1saw_1_1SawTracker__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classworkshop_1_1saw_1_1SawTracker_a8aae610e0520e54dfd90ea07e1983b31}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classworkshop_1_1saw_1_1SawTracker_a98a105b7a105c01f26ccfdedc53ac832}{config}}=None)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classworkshop_1_1saw_1_1SawTracker_a879cdc1cb42bceaff7f1ce6f2578c2bb}{analyze\+\_\+code}} (self, str code, str filename="{}$<$string$>$"{})
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classworkshop_1_1saw_1_1SawTracker_a7ff782d2c81dd58f0af9bbca73d2caf9}{analyze\+\_\+function}} (self, func)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classworkshop_1_1saw_1_1SawTracker_a98a105b7a105c01f26ccfdedc53ac832}{config}} = config or \{\}
+\item 
+List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSource}{Taint\+Source}}\mbox{]} \mbox{\hyperlink{classworkshop_1_1saw_1_1SawTracker_ad588942899e706e2d5e4767dc3449b06}{sources}} = self.\+\_\+load\+\_\+default\+\_\+sources()
+\item 
+List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSink}{Taint\+Sink}}\mbox{]} \mbox{\hyperlink{classworkshop_1_1saw_1_1SawTracker_a406640a1ad6eaad5abfa6b1d8bf6c927}{sinks}} = self.\+\_\+load\+\_\+default\+\_\+sinks()
+\item 
+dict \mbox{\hyperlink{classworkshop_1_1saw_1_1SawTracker_adccd4c2ee5c2fe68aaa0f5498f1a404e}{taint\+\_\+graph}} = \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSource}{Taint\+Source}}\mbox{]} \mbox{\hyperlink{classworkshop_1_1saw_1_1SawTracker_aaece424a7ea2d865088679c3bdeaa192}{\+\_\+load\+\_\+default\+\_\+sources}} (self)
+\item 
+List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSink}{Taint\+Sink}}\mbox{]} \mbox{\hyperlink{classworkshop_1_1saw_1_1SawTracker_ad5b2e515cbecaff8bdc4782cb1e14314}{\+\_\+load\+\_\+default\+\_\+sinks}} (self)
+\item 
+List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classworkshop_1_1saw_1_1SawTracker_a7b854041a44b07a96d3002a1913df1fb}{\+\_\+classify\+\_\+vulnerabilities}} (self, List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintFlow}{Taint\+Flow}}\mbox{]} flows)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Taint analysis tracker for cutting through data flows.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classworkshop_1_1saw_1_1SawTracker_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classworkshop_1_1saw_1_1SawTracker_a8aae610e0520e54dfd90ea07e1983b31}\index{workshop.saw.SawTracker@{workshop.saw.SawTracker}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!workshop.saw.SawTracker@{workshop.saw.SawTracker}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1SawTracker_a8aae610e0520e54dfd90ea07e1983b31} 
+workshop.\+saw.\+Saw\+Tracker.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classworkshop_1_1saw_1_1SawTracker_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classworkshop_1_1saw_1_1SawTracker_a7b854041a44b07a96d3002a1913df1fb}\index{workshop.saw.SawTracker@{workshop.saw.SawTracker}!\_classify\_vulnerabilities@{\_classify\_vulnerabilities}}
+\index{\_classify\_vulnerabilities@{\_classify\_vulnerabilities}!workshop.saw.SawTracker@{workshop.saw.SawTracker}}
+\doxysubsubsection{\texorpdfstring{\_classify\_vulnerabilities()}{\_classify\_vulnerabilities()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1SawTracker_a7b854041a44b07a96d3002a1913df1fb} 
+ List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} workshop.\+saw.\+Saw\+Tracker.\+\_\+classify\+\_\+vulnerabilities (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintFlow}{Taint\+Flow}}\mbox{]}}]{flows}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Classify taint flows as vulnerabilities.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1saw_1_1SawTracker_a7b854041a44b07a96d3002a1913df1fb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1saw_1_1SawTracker_ad5b2e515cbecaff8bdc4782cb1e14314}\index{workshop.saw.SawTracker@{workshop.saw.SawTracker}!\_load\_default\_sinks@{\_load\_default\_sinks}}
+\index{\_load\_default\_sinks@{\_load\_default\_sinks}!workshop.saw.SawTracker@{workshop.saw.SawTracker}}
+\doxysubsubsection{\texorpdfstring{\_load\_default\_sinks()}{\_load\_default\_sinks()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1SawTracker_ad5b2e515cbecaff8bdc4782cb1e14314} 
+ List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSink}{Taint\+Sink}}\mbox{]} workshop.\+saw.\+Saw\+Tracker.\+\_\+load\+\_\+default\+\_\+sinks (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Load default taint sinks.\end{DoxyVerb}
+ \Hypertarget{classworkshop_1_1saw_1_1SawTracker_aaece424a7ea2d865088679c3bdeaa192}\index{workshop.saw.SawTracker@{workshop.saw.SawTracker}!\_load\_default\_sources@{\_load\_default\_sources}}
+\index{\_load\_default\_sources@{\_load\_default\_sources}!workshop.saw.SawTracker@{workshop.saw.SawTracker}}
+\doxysubsubsection{\texorpdfstring{\_load\_default\_sources()}{\_load\_default\_sources()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1SawTracker_aaece424a7ea2d865088679c3bdeaa192} 
+ List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSource}{Taint\+Source}}\mbox{]} workshop.\+saw.\+Saw\+Tracker.\+\_\+load\+\_\+default\+\_\+sources (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Load default taint sources.\end{DoxyVerb}
+ \Hypertarget{classworkshop_1_1saw_1_1SawTracker_a879cdc1cb42bceaff7f1ce6f2578c2bb}\index{workshop.saw.SawTracker@{workshop.saw.SawTracker}!analyze\_code@{analyze\_code}}
+\index{analyze\_code@{analyze\_code}!workshop.saw.SawTracker@{workshop.saw.SawTracker}}
+\doxysubsubsection{\texorpdfstring{analyze\_code()}{analyze\_code()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1SawTracker_a879cdc1cb42bceaff7f1ce6f2578c2bb} 
+ Dict\mbox{[}str, Any\mbox{]} workshop.\+saw.\+Saw\+Tracker.\+analyze\+\_\+code (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{code}{, }\item[{str }]{filename}{ = {\ttfamily "{}$<$string$>$"{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Analyze Python code for taint flows.
+
+Args:
+    code: Python source code to analyze
+    filename: Filename for error reporting
+
+Returns:
+    Dict containing taint flows, sources, and sinks found
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1saw_1_1SawTracker_a879cdc1cb42bceaff7f1ce6f2578c2bb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1saw_1_1SawTracker_a879cdc1cb42bceaff7f1ce6f2578c2bb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1saw_1_1SawTracker_a7ff782d2c81dd58f0af9bbca73d2caf9}\index{workshop.saw.SawTracker@{workshop.saw.SawTracker}!analyze\_function@{analyze\_function}}
+\index{analyze\_function@{analyze\_function}!workshop.saw.SawTracker@{workshop.saw.SawTracker}}
+\doxysubsubsection{\texorpdfstring{analyze\_function()}{analyze\_function()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1SawTracker_a7ff782d2c81dd58f0af9bbca73d2caf9} 
+ Dict\mbox{[}str, Any\mbox{]} workshop.\+saw.\+Saw\+Tracker.\+analyze\+\_\+function (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{func}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Analyze a Python function object for taint.
+
+Args:
+    func: Function to analyze
+
+Returns:
+    Taint analysis results
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1saw_1_1SawTracker_a7ff782d2c81dd58f0af9bbca73d2caf9_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classworkshop_1_1saw_1_1SawTracker_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classworkshop_1_1saw_1_1SawTracker_a98a105b7a105c01f26ccfdedc53ac832}\index{workshop.saw.SawTracker@{workshop.saw.SawTracker}!config@{config}}
+\index{config@{config}!workshop.saw.SawTracker@{workshop.saw.SawTracker}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1SawTracker_a98a105b7a105c01f26ccfdedc53ac832} 
+workshop.\+saw.\+Saw\+Tracker.\+config = config or \{\}}
+
+\Hypertarget{classworkshop_1_1saw_1_1SawTracker_a406640a1ad6eaad5abfa6b1d8bf6c927}\index{workshop.saw.SawTracker@{workshop.saw.SawTracker}!sinks@{sinks}}
+\index{sinks@{sinks}!workshop.saw.SawTracker@{workshop.saw.SawTracker}}
+\doxysubsubsection{\texorpdfstring{sinks}{sinks}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1SawTracker_a406640a1ad6eaad5abfa6b1d8bf6c927} 
+List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSink}{Taint\+Sink}}\mbox{]} workshop.\+saw.\+Saw\+Tracker.\+sinks = self.\+\_\+load\+\_\+default\+\_\+sinks()}
+
+\Hypertarget{classworkshop_1_1saw_1_1SawTracker_ad588942899e706e2d5e4767dc3449b06}\index{workshop.saw.SawTracker@{workshop.saw.SawTracker}!sources@{sources}}
+\index{sources@{sources}!workshop.saw.SawTracker@{workshop.saw.SawTracker}}
+\doxysubsubsection{\texorpdfstring{sources}{sources}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1SawTracker_ad588942899e706e2d5e4767dc3449b06} 
+List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSource}{Taint\+Source}}\mbox{]} workshop.\+saw.\+Saw\+Tracker.\+sources = self.\+\_\+load\+\_\+default\+\_\+sources()}
+
+\Hypertarget{classworkshop_1_1saw_1_1SawTracker_adccd4c2ee5c2fe68aaa0f5498f1a404e}\index{workshop.saw.SawTracker@{workshop.saw.SawTracker}!taint\_graph@{taint\_graph}}
+\index{taint\_graph@{taint\_graph}!workshop.saw.SawTracker@{workshop.saw.SawTracker}}
+\doxysubsubsection{\texorpdfstring{taint\_graph}{taint\_graph}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1SawTracker_adccd4c2ee5c2fe68aaa0f5498f1a404e} 
+dict workshop.\+saw.\+Saw\+Tracker.\+taint\+\_\+graph = \{\}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+workshop/\mbox{\hyperlink{saw_8py}{saw.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,17 @@
+<map id="pdfocr.ocr_image" name="pdfocr.ocr_image">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,126,139,154"/>
+<area shape="rect" id="Node000002" href="$namespacepdfocr.html#ad27e899ac4d3719ac2771d6737ebab30" title=" " alt="" coords="191,74,370,102"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,123,209,104,205,107,132,128"/>
+<area shape="rect" id="Node000005" href="$namespacepdfocr.html#ac179521a93537a816beca0f185027d82" title=" " alt="" coords="187,126,374,154"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="138,137,174,139,169,141,139,142"/>
+<area shape="rect" id="Node000007" href="$namespacepdfocr.html#ac731da60c6eeccf59b74b31bdb947e53" title=" " alt="" coords="188,177,372,222"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="123,151,189,172,184,174,122,157"/>
+<area shape="rect" id="Node000003" href="$namespacepdfocr.html#aeeef62cce7a050c3d64bc38595fce6ba" title=" " alt="" coords="434,5,586,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="335,71,422,50,417,52,337,76"/>
+<area shape="rect" id="Node000004" href="$namespacepdfocr.html#a5693f39c769fd1fcd9ec603497d3acfd" title=" " alt="" coords="438,74,583,102"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="370,85,424,87,419,88,371,90"/>
+<area shape="rect" id="Node000006" href="$namespacepdfocr.html#a7b52493a1b64d3386a4925cbaa3e82cf" title=" " alt="" coords="422,126,598,154"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="374,137,409,139,404,140,374,142"/>
+<area shape="rect" id="Node000008" href="$namespacepdfocr.html#a42dc9f3b338729bee1d8c6ab01d8666f" title=" " alt="" coords="448,186,572,214"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="373,197,436,200,430,200,373,202"/>
+</map>

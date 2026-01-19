@@ -1,0 +1,56 @@
+\doxysection{axe.\+py File Reference}
+\hypertarget{axe_8py}{}\label{axe_8py}\index{axe.py@{axe.py}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classaxe_1_1ResponseProcessor}{axe.\+Response\+Processor}}
+\item 
+class \mbox{\hyperlink{classaxe_1_1ProjectContext}{axe.\+Project\+Context}}
+\item 
+class \mbox{\hyperlink{classaxe_1_1SharedWorkspace}{axe.\+Shared\+Workspace}}
+\item 
+class \mbox{\hyperlink{classaxe_1_1CollaborativeSession}{axe.\+Collaborative\+Session}}
+\item 
+class \mbox{\hyperlink{classaxe_1_1ChatSession}{axe.\+Chat\+Session}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceaxe}{axe}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespaceaxe_aed941049819dac642905b812e754e2fa}{axe.\+is\+\_\+genuine\+\_\+task\+\_\+completion}} (str response)
+\item 
+tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{namespaceaxe_a5387f652eb28eecb3bec22654aa3e40d}{axe.\+detect\+\_\+agent\+\_\+token}} (str response, str token)
+\item 
+bool \mbox{\hyperlink{namespaceaxe_a24106f38d1e2278a094b572012ed4760}{axe.\+check\+\_\+agent\+\_\+pass}} (str response)
+\item 
+tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{namespaceaxe_a6219e4e9c2c63cebb97122848b591a70}{axe.\+check\+\_\+agent\+\_\+task\+\_\+complete}} (str response)
+\item 
+tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{namespaceaxe_a557557e18d17b8fa824f16fd344efdcf}{axe.\+check\+\_\+agent\+\_\+command}} (str response, str token)
+\item 
+None \mbox{\hyperlink{namespaceaxe_abb23f0d8329e501eb234daeb5a11ac9a}{axe.\+generate\+\_\+sample\+\_\+config}} (str path=\textquotesingle{}axe.\+yaml\textquotesingle{})
+\item 
+None \mbox{\hyperlink{namespaceaxe_ae18887cd1aba7d83578d18397fe0cd63}{axe.\+restore\+\_\+agents\+\_\+on\+\_\+startup}} (Optional\mbox{[}str\mbox{]} db\+\_\+path=None)
+\item 
+None \mbox{\hyperlink{namespaceaxe_ae792b8af7b454e5f2e685ef5aa9c5207}{axe.\+sync\+\_\+agents\+\_\+on\+\_\+shutdown}} ()
+\item 
+None \mbox{\hyperlink{namespaceaxe_ac2811818e423281b1abace5155de35d2}{axe.\+main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespaceaxe_a5fe64db9e0bd9702879e7765ad74e0e6}{axe.\+HAS\+\_\+\+READLINE}} = True
+\item 
+bool \mbox{\hyperlink{namespaceaxe_af421429727240fc6e6c4f590ddbc4f83}{axe.\+HAS\+\_\+\+YAML}} = True
+\item 
+bool \mbox{\hyperlink{namespaceaxe_acec3e08a64234809ed190c12d64ad726}{axe.\+HAS\+\_\+\+GIT}} = True
+\item 
+bool \mbox{\hyperlink{namespaceaxe_a83300a7c32303a1eacfcc6d392c5929b}{axe.\+HAS\+\_\+\+WORKSHOP}} = True
+\item 
+bool \mbox{\hyperlink{namespaceaxe_a443d6ea5ad17499a058f5018e9704123}{axe.\+HAS\+\_\+\+CHISEL}} = False
+\item 
+\mbox{\hyperlink{namespaceaxe_a1231a95d9da8d332f1cb87feca5d4953}{axe.\+\_\+global\+\_\+db}} = None
+\end{DoxyCompactItemize}

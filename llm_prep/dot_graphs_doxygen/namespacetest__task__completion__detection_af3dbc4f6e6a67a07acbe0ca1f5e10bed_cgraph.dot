@@ -1,0 +1,43 @@
+digraph "test_task_completion_detection.run_all_tests"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="test_task_completion\l_detection.run_all_tests",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="test_task_completion\l_detection.test_ambiguous\l_mention_not_trigger",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#a79d15d85cffcdd769e6124608e0e4c25",tooltip=" "];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="test_task_completion\l_detection.test_blockquote\l_not_trigger",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#a585c45ca9bebd2014da6ce51333d4318",tooltip=" "];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="test_task_completion\l_detection.test_codeblock\l_not_trigger",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#afa82e2ff5961f204c7240346db03d561",tooltip=" "];
+  Node1 -> Node5 [id="edge4_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="test_task_completion\l_detection.test_complex\l_scenario_with_file_and\l_genuine",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#afa3a05cccd0f8be7a45ee1718378975b",tooltip=" "];
+  Node1 -> Node6 [id="edge5_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="test_task_completion\l_detection.test_file\l_content_not_trigger",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#a320ce8329e56e5231bb676d3a8631147",tooltip=" "];
+  Node1 -> Node7 [id="edge6_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="test_task_completion\l_detection.test_genuine\l_declaration_triggers",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#af9e90bb6fa556b2d1e2c16db6527cabb",tooltip=" "];
+  Node1 -> Node8 [id="edge7_Node000001_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="test_task_completion\l_detection.test_genuine\l_with_checkmark_triggers",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#ad78af8bf27f604116064d4872e9f2681",tooltip=" "];
+  Node1 -> Node9 [id="edge8_Node000001_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="test_task_completion\l_detection.test_genuine\l_with_colon_triggers",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#a30bfaead8fee85f8afe96436bc087670",tooltip=" "];
+  Node1 -> Node10 [id="edge9_Node000001_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="test_task_completion\l_detection.test_genuine\l_with_exclamation_triggers",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#af70efc1e7fcefb6ff8c7c601c402cc0e",tooltip=" "];
+  Node1 -> Node11 [id="edge10_Node000001_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="test_task_completion\l_detection.test_lowercase\l_read_block_not_trigger",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#aa8f2b022cb47c4033f4bc90ed42e16ac",tooltip=" "];
+  Node1 -> Node12 [id="edge11_Node000001_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="test_task_completion\l_detection.test_marking\l_complete_triggers",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#a8d35a5ff7786b799ab327fb49cd49ef8",tooltip=" "];
+  Node1 -> Node13 [id="edge12_Node000001_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="test_task_completion\l_detection.test_nested\l_quotes_in_code_not_trigger",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#adafad825e82f81c901f94736322ccfce",tooltip=" "];
+  Node1 -> Node14 [id="edge13_Node000001_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="test_task_completion\l_detection.test_no_task\l_complete_returns_false",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#a7904e6a2684bb10b760f666c3bd1c379",tooltip=" "];
+  Node1 -> Node15 [id="edge14_Node000001_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="test_task_completion\l_detection.test_quoted\l_not_trigger",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#a683421951a27cc37d5998776b4610324",tooltip=" "];
+  Node1 -> Node16 [id="edge15_Node000001_Node000016",color="steelblue1",style="solid",tooltip=" "];
+  Node16 [id="Node000016",label="test_task_completion\l_detection.test_read\l_block_not_trigger",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#a0142468c1a5ad1c750c47f4140b8ff77",tooltip=" "];
+  Node1 -> Node17 [id="edge16_Node000001_Node000017",color="steelblue1",style="solid",tooltip=" "];
+  Node17 [id="Node000017",label="test_task_completion\l_detection.test_single\l_quoted_not_trigger",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#ae1aa5643896cdd04e5862fcd87df5e8d",tooltip=" "];
+  Node1 -> Node18 [id="edge17_Node000001_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node18 [id="Node000018",label="test_task_completion\l_detection.test_task\l_is_complete_triggers",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__task__completion__detection.html#a2ed677a464fa9724e13c93f53aa18995",tooltip=" "];
+}

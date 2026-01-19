@@ -1,0 +1,462 @@
+\doxysection{tools/dos\+\_\+unpackers/unpack.c File Reference}
+\hypertarget{unpack_8c}{}\label{unpack_8c}\index{tools/dos\_unpackers/unpack.c@{tools/dos\_unpackers/unpack.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+Include dependency graph for unpack.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unpack_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmemstream}{memstream}}
+\item 
+struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}}
+\item 
+struct \mbox{\hyperlink{structexepack__header}{exepack\+\_\+header}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{unpack_8c_a36fa9b2e726512bc17a7a6d3e39002be}{O\+\_\+\+BINARY}}~0
+\item 
+\#define \mbox{\hyperlink{unpack_8c_a4505e8a046c1cd9de111fc5076cf9b57}{DOS\+\_\+\+SIGNATURE}}~0x5\+A4D
+\item 
+\#define \mbox{\hyperlink{unpack_8c_afa2e9a07eba95966b1bac5907b834905}{EXEPACK\+\_\+\+SIGNATURE}}~0x4252
+\item 
+\#define \mbox{\hyperlink{unpack_8c_a18d295a837ac71add5578860b55e5502}{STR}}(x)
+\item 
+\#define \mbox{\hyperlink{unpack_8c_abe87b341f562fd1cf40b7672e4d759da}{XSTR}}(x)
+\item 
+\#define \mbox{\hyperlink{unpack_8c_a5257c397934b207e5c9b1912bd39c643}{XPERROR}}(fname)
+\item 
+\#define \mbox{\hyperlink{unpack_8c_a876015b420ccc2ed0b54c5bf2c30e859}{PERROR}}(fname)
+\item 
+\#define \mbox{\hyperlink{unpack_8c_acde0363ca83b480e60aeda66cec00568}{XERROR}}(Format, ...)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{unpack_8c_acf701ccde86ffd36a6237db2dda542b0}{reverse}} (unsigned char \texorpdfstring{$\ast$}{*}s, size\+\_\+t length)
+\item 
+void \mbox{\hyperlink{unpack_8c_ab948b8e984a81faa144a40843c3d66fd}{unpack\+\_\+data}} (unsigned char \texorpdfstring{$\ast$}{*}unpacked\+\_\+data, unsigned char \texorpdfstring{$\ast$}{*}buf, unsigned int \texorpdfstring{$\ast$}{*}unpacked\+\_\+data\+\_\+size, unsigned int packed\+\_\+data\+\_\+len)
+\item 
+void \mbox{\hyperlink{unpack_8c_a885224d332365560cd88c8b3d1b3eb07}{unpack}} (struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}ms)
+\item 
+unsigned char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{unpack_8c_ae7b3092ac9489d8d18f03866a3bc6c5b}{create\+\_\+reloc\+\_\+table}} (struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}ms, struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}} \texorpdfstring{$\ast$}{*}dh, struct \mbox{\hyperlink{structexepack__header}{exepack\+\_\+header}} \texorpdfstring{$\ast$}{*}eh, unsigned int \texorpdfstring{$\ast$}{*}reloc\+\_\+table\+\_\+size)
+\item 
+void \mbox{\hyperlink{unpack_8c_ae34b7b1297a5c90355c0211bfcdf0f9e}{writeexe}} (struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}} \texorpdfstring{$\ast$}{*}dh, unsigned char \texorpdfstring{$\ast$}{*}unpacked\+\_\+data, unsigned int unpacked\+\_\+data\+\_\+size, unsigned char \texorpdfstring{$\ast$}{*}reloc, size\+\_\+t reloc\+\_\+size, size\+\_\+t padding)
+\item 
+void \mbox{\hyperlink{unpack_8c_a69d5dabed1fb8c2f4a1e18b77b53e5e7}{craftexec}} (struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}} \texorpdfstring{$\ast$}{*}dh, struct \mbox{\hyperlink{structexepack__header}{exepack\+\_\+header}} \texorpdfstring{$\ast$}{*}eh, unsigned char \texorpdfstring{$\ast$}{*}unpacked\+\_\+data, unsigned int unpacked\+\_\+data\+\_\+size, unsigned char \texorpdfstring{$\ast$}{*}reloc, unsigned int reloc\+\_\+size)
+\item 
+int \mbox{\hyperlink{unpack_8c_aab7c23393b181e27f2f911fe1af86bf9}{test\+\_\+dos\+\_\+header}} (struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}ms)
+\item 
+void \mbox{\hyperlink{unpack_8c_a0491863eefc3a0bff4f05873a06be10b}{msopen}} (const char \texorpdfstring{$\ast$}{*}filename, struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}ms)
+\item 
+unsigned int \mbox{\hyperlink{unpack_8c_ab566dc664a4e4d4f3ba1426886b6fa87}{msread}} (struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}ms, void \texorpdfstring{$\ast$}{*}buf, unsigned int count)
+\item 
+int \mbox{\hyperlink{unpack_8c_a0dfa67fb32ccf515fe1d0bcbad6baaad}{mscanread}} (struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}ms, unsigned int count)
+\item 
+unsigned int \mbox{\hyperlink{unpack_8c_a60ebdc495a048f2a3952b84afc1c83a4}{msgetavailable}} (struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}ms)
+\item 
+void \mbox{\hyperlink{unpack_8c_aef3edf80d855356b2674782f3a083f68}{msseek}} (struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}ms, unsigned int offset)
+\item 
+void \mbox{\hyperlink{unpack_8c_ace86dc31fa6f3fbad700399aff95d798}{msclose}} (struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}ms)
+\item 
+void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{unpack_8c_ab166129a9f12c6e49a637c9f1f97c223}{memmem}} (const void \texorpdfstring{$\ast$}{*}l, size\+\_\+t l\+\_\+len, const void \texorpdfstring{$\ast$}{*}s, size\+\_\+t s\+\_\+len)
+\item 
+void \mbox{\hyperlink{unpack_8c_aa6267701d3a325bc54c2611cb312ee87}{hexdump}} (void \texorpdfstring{$\ast$}{*}data, int size)
+\item 
+void \mbox{\hyperlink{unpack_8c_a4f32bb963042b237f521b9041e51b657}{print\+\_\+dos\+\_\+header}} (struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}} \texorpdfstring{$\ast$}{*}dh)
+\item 
+void \mbox{\hyperlink{unpack_8c_aeea3f163bc06617cab408be25494545f}{print\+\_\+exepack\+\_\+header}} (struct \mbox{\hyperlink{structexepack__header}{exepack\+\_\+header}} \texorpdfstring{$\ast$}{*}eh)
+\item 
+int \mbox{\hyperlink{unpack_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{unpack_8c_a4d59733effad59b54bbd4e5d6016c538}{output\+\_\+file}} = NULL
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{unpack_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{unpack_8c_a4505e8a046c1cd9de111fc5076cf9b57}\index{unpack.c@{unpack.c}!DOS\_SIGNATURE@{DOS\_SIGNATURE}}
+\index{DOS\_SIGNATURE@{DOS\_SIGNATURE}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{DOS\_SIGNATURE}{DOS\_SIGNATURE}}
+{\footnotesize\ttfamily \label{unpack_8c_a4505e8a046c1cd9de111fc5076cf9b57} 
+\#define DOS\+\_\+\+SIGNATURE~0x5\+A4D}
+
+\Hypertarget{unpack_8c_afa2e9a07eba95966b1bac5907b834905}\index{unpack.c@{unpack.c}!EXEPACK\_SIGNATURE@{EXEPACK\_SIGNATURE}}
+\index{EXEPACK\_SIGNATURE@{EXEPACK\_SIGNATURE}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{EXEPACK\_SIGNATURE}{EXEPACK\_SIGNATURE}}
+{\footnotesize\ttfamily \label{unpack_8c_afa2e9a07eba95966b1bac5907b834905} 
+\#define EXEPACK\+\_\+\+SIGNATURE~0x4252}
+
+\Hypertarget{unpack_8c_a36fa9b2e726512bc17a7a6d3e39002be}\index{unpack.c@{unpack.c}!O\_BINARY@{O\_BINARY}}
+\index{O\_BINARY@{O\_BINARY}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{O\_BINARY}{O\_BINARY}}
+{\footnotesize\ttfamily \label{unpack_8c_a36fa9b2e726512bc17a7a6d3e39002be} 
+\#define O\+\_\+\+BINARY~0}
+
+\Hypertarget{unpack_8c_a876015b420ccc2ed0b54c5bf2c30e859}\index{unpack.c@{unpack.c}!PERROR@{PERROR}}
+\index{PERROR@{PERROR}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{PERROR}{PERROR}}
+{\footnotesize\ttfamily \label{unpack_8c_a876015b420ccc2ed0b54c5bf2c30e859} 
+\#define PERROR(\begin{DoxyParamCaption}\item[{}]{fname}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ perror(\mbox{\hyperlink{unpack_8c_abe87b341f562fd1cf40b7672e4d759da}{XSTR}}(\_\_FUNCTION\_\_)\ \textcolor{stringliteral}{"{}\ -\/\ "{}}\ fname\ \textcolor{stringliteral}{"{}()\ "{}});}
+
+\end{DoxyCode}
+\Hypertarget{unpack_8c_a18d295a837ac71add5578860b55e5502}\index{unpack.c@{unpack.c}!STR@{STR}}
+\index{STR@{STR}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{STR}{STR}}
+{\footnotesize\ttfamily \label{unpack_8c_a18d295a837ac71add5578860b55e5502} 
+\#define STR(\begin{DoxyParamCaption}\item[{}]{x}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#x}}
+
+\end{DoxyCode}
+\Hypertarget{unpack_8c_acde0363ca83b480e60aeda66cec00568}\index{unpack.c@{unpack.c}!XERROR@{XERROR}}
+\index{XERROR@{XERROR}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{XERROR}{XERROR}}
+{\footnotesize\ttfamily \label{unpack_8c_acde0363ca83b480e60aeda66cec00568} 
+\#define XERROR(\begin{DoxyParamCaption}\item[{}]{Format}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ fprintf\ (stderr,\ \textcolor{stringliteral}{"{}\%s\ -\/\ "{}}\ Format\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\ \_\_FUNCTION\_\_,\ \#\#\_\_VA\_ARGS\_\_);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ exit(EXIT\_FAILURE);}
+
+\end{DoxyCode}
+\Hypertarget{unpack_8c_a5257c397934b207e5c9b1912bd39c643}\index{unpack.c@{unpack.c}!XPERROR@{XPERROR}}
+\index{XPERROR@{XPERROR}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{XPERROR}{XPERROR}}
+{\footnotesize\ttfamily \label{unpack_8c_a5257c397934b207e5c9b1912bd39c643} 
+\#define XPERROR(\begin{DoxyParamCaption}\item[{}]{fname}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ perror(\mbox{\hyperlink{unpack_8c_abe87b341f562fd1cf40b7672e4d759da}{XSTR}}(\_\_FUNCTION\_\_)\ \textcolor{stringliteral}{"{}\ -\/\ "{}}\ fname\ \textcolor{stringliteral}{"{}()\ "{}});\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ exit(EXIT\_FAILURE);}
+
+\end{DoxyCode}
+\Hypertarget{unpack_8c_abe87b341f562fd1cf40b7672e4d759da}\index{unpack.c@{unpack.c}!XSTR@{XSTR}}
+\index{XSTR@{XSTR}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{XSTR}{XSTR}}
+{\footnotesize\ttfamily \label{unpack_8c_abe87b341f562fd1cf40b7672e4d759da} 
+\#define XSTR(\begin{DoxyParamCaption}\item[{}]{x}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{unpack_8c_a18d295a837ac71add5578860b55e5502}{STR}}(x)}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{unpack_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{unpack_8c_a69d5dabed1fb8c2f4a1e18b77b53e5e7}\index{unpack.c@{unpack.c}!craftexec@{craftexec}}
+\index{craftexec@{craftexec}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{craftexec()}{craftexec()}}
+{\footnotesize\ttfamily \label{unpack_8c_a69d5dabed1fb8c2f4a1e18b77b53e5e7} 
+void craftexec (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{dh}{, }\item[{struct \mbox{\hyperlink{structexepack__header}{exepack\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{eh}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{unpacked\+\_\+data}{, }\item[{unsigned int}]{unpacked\+\_\+data\+\_\+size}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{reloc}{, }\item[{unsigned int}]{reloc\+\_\+size}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{unpack_8c_a69d5dabed1fb8c2f4a1e18b77b53e5e7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{unpack_8c_a69d5dabed1fb8c2f4a1e18b77b53e5e7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_ae7b3092ac9489d8d18f03866a3bc6c5b}\index{unpack.c@{unpack.c}!create\_reloc\_table@{create\_reloc\_table}}
+\index{create\_reloc\_table@{create\_reloc\_table}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{create\_reloc\_table()}{create\_reloc\_table()}}
+{\footnotesize\ttfamily \label{unpack_8c_ae7b3092ac9489d8d18f03866a3bc6c5b} 
+unsigned char \texorpdfstring{$\ast$}{*} create\+\_\+reloc\+\_\+table (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{, }\item[{struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{dh}{, }\item[{struct \mbox{\hyperlink{structexepack__header}{exepack\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{eh}{, }\item[{unsigned int \texorpdfstring{$\ast$}{*}}]{reloc\+\_\+table\+\_\+size}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{unpack_8c_ae7b3092ac9489d8d18f03866a3bc6c5b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unpack_8c_ae7b3092ac9489d8d18f03866a3bc6c5b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_aa6267701d3a325bc54c2611cb312ee87}\index{unpack.c@{unpack.c}!hexdump@{hexdump}}
+\index{hexdump@{hexdump}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{hexdump()}{hexdump()}}
+{\footnotesize\ttfamily \label{unpack_8c_aa6267701d3a325bc54c2611cb312ee87} 
+void hexdump (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{int}]{size}{}\end{DoxyParamCaption})}
+
+\Hypertarget{unpack_8c_a0ddf1224851353fc92bfbff6f499fa97}\index{unpack.c@{unpack.c}!main@{main}}
+\index{main@{main}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{unpack_8c_a0ddf1224851353fc92bfbff6f499fa97} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unpack_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_ab166129a9f12c6e49a637c9f1f97c223}\index{unpack.c@{unpack.c}!memmem@{memmem}}
+\index{memmem@{memmem}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{memmem()}{memmem()}}
+{\footnotesize\ttfamily \label{unpack_8c_ab166129a9f12c6e49a637c9f1f97c223} 
+void \texorpdfstring{$\ast$}{*} memmem (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{l}{, }\item[{size\+\_\+t}]{l\+\_\+len}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{s}{, }\item[{size\+\_\+t}]{s\+\_\+len}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unpack_8c_ab166129a9f12c6e49a637c9f1f97c223_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_a0dfa67fb32ccf515fe1d0bcbad6baaad}\index{unpack.c@{unpack.c}!mscanread@{mscanread}}
+\index{mscanread@{mscanread}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{mscanread()}{mscanread()}}
+{\footnotesize\ttfamily \label{unpack_8c_a0dfa67fb32ccf515fe1d0bcbad6baaad} 
+int mscanread (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{, }\item[{unsigned int}]{count}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{unpack_8c_a0dfa67fb32ccf515fe1d0bcbad6baaad_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_ace86dc31fa6f3fbad700399aff95d798}\index{unpack.c@{unpack.c}!msclose@{msclose}}
+\index{msclose@{msclose}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{msclose()}{msclose()}}
+{\footnotesize\ttfamily \label{unpack_8c_ace86dc31fa6f3fbad700399aff95d798} 
+void msclose (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{unpack_8c_ace86dc31fa6f3fbad700399aff95d798_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_a60ebdc495a048f2a3952b84afc1c83a4}\index{unpack.c@{unpack.c}!msgetavailable@{msgetavailable}}
+\index{msgetavailable@{msgetavailable}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{msgetavailable()}{msgetavailable()}}
+{\footnotesize\ttfamily \label{unpack_8c_a60ebdc495a048f2a3952b84afc1c83a4} 
+unsigned int msgetavailable (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unpack_8c_a60ebdc495a048f2a3952b84afc1c83a4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_a0491863eefc3a0bff4f05873a06be10b}\index{unpack.c@{unpack.c}!msopen@{msopen}}
+\index{msopen@{msopen}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{msopen()}{msopen()}}
+{\footnotesize\ttfamily \label{unpack_8c_a0491863eefc3a0bff4f05873a06be10b} 
+void msopen (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename}{, }\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{unpack_8c_a0491863eefc3a0bff4f05873a06be10b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_ab566dc664a4e4d4f3ba1426886b6fa87}\index{unpack.c@{unpack.c}!msread@{msread}}
+\index{msread@{msread}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{msread()}{msread()}}
+{\footnotesize\ttfamily \label{unpack_8c_ab566dc664a4e4d4f3ba1426886b6fa87} 
+unsigned int msread (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{unsigned int}]{count}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unpack_8c_ab566dc664a4e4d4f3ba1426886b6fa87_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_aef3edf80d855356b2674782f3a083f68}\index{unpack.c@{unpack.c}!msseek@{msseek}}
+\index{msseek@{msseek}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{msseek()}{msseek()}}
+{\footnotesize\ttfamily \label{unpack_8c_aef3edf80d855356b2674782f3a083f68} 
+void msseek (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{, }\item[{unsigned int}]{offset}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unpack_8c_aef3edf80d855356b2674782f3a083f68_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_a4f32bb963042b237f521b9041e51b657}\index{unpack.c@{unpack.c}!print\_dos\_header@{print\_dos\_header}}
+\index{print\_dos\_header@{print\_dos\_header}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{print\_dos\_header()}{print\_dos\_header()}}
+{\footnotesize\ttfamily \label{unpack_8c_a4f32bb963042b237f521b9041e51b657} 
+void print\+\_\+dos\+\_\+header (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{dh}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unpack_8c_a4f32bb963042b237f521b9041e51b657_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_aeea3f163bc06617cab408be25494545f}\index{unpack.c@{unpack.c}!print\_exepack\_header@{print\_exepack\_header}}
+\index{print\_exepack\_header@{print\_exepack\_header}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{print\_exepack\_header()}{print\_exepack\_header()}}
+{\footnotesize\ttfamily \label{unpack_8c_aeea3f163bc06617cab408be25494545f} 
+void print\+\_\+exepack\+\_\+header (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structexepack__header}{exepack\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{eh}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unpack_8c_aeea3f163bc06617cab408be25494545f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_acf701ccde86ffd36a6237db2dda542b0}\index{unpack.c@{unpack.c}!reverse@{reverse}}
+\index{reverse@{reverse}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{reverse()}{reverse()}}
+{\footnotesize\ttfamily \label{unpack_8c_acf701ccde86ffd36a6237db2dda542b0} 
+void reverse (\begin{DoxyParamCaption}\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{s}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{unpack_8c_acf701ccde86ffd36a6237db2dda542b0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_aab7c23393b181e27f2f911fe1af86bf9}\index{unpack.c@{unpack.c}!test\_dos\_header@{test\_dos\_header}}
+\index{test\_dos\_header@{test\_dos\_header}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{test\_dos\_header()}{test\_dos\_header()}}
+{\footnotesize\ttfamily \label{unpack_8c_aab7c23393b181e27f2f911fe1af86bf9} 
+int test\+\_\+dos\+\_\+header (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{unpack_8c_aab7c23393b181e27f2f911fe1af86bf9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{unpack_8c_aab7c23393b181e27f2f911fe1af86bf9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_a885224d332365560cd88c8b3d1b3eb07}\index{unpack.c@{unpack.c}!unpack@{unpack}}
+\index{unpack@{unpack}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{unpack()}{unpack()}}
+{\footnotesize\ttfamily \label{unpack_8c_a885224d332365560cd88c8b3d1b3eb07} 
+void unpack (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unpack_8c_a885224d332365560cd88c8b3d1b3eb07_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{unpack_8c_a885224d332365560cd88c8b3d1b3eb07_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_ab948b8e984a81faa144a40843c3d66fd}\index{unpack.c@{unpack.c}!unpack\_data@{unpack\_data}}
+\index{unpack\_data@{unpack\_data}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{unpack\_data()}{unpack\_data()}}
+{\footnotesize\ttfamily \label{unpack_8c_ab948b8e984a81faa144a40843c3d66fd} 
+void unpack\+\_\+data (\begin{DoxyParamCaption}\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{unpacked\+\_\+data}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{unsigned int \texorpdfstring{$\ast$}{*}}]{unpacked\+\_\+data\+\_\+size}{, }\item[{unsigned int}]{packed\+\_\+data\+\_\+len}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{unpack_8c_ab948b8e984a81faa144a40843c3d66fd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unpack_8c_ae34b7b1297a5c90355c0211bfcdf0f9e}\index{unpack.c@{unpack.c}!writeexe@{writeexe}}
+\index{writeexe@{writeexe}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{writeexe()}{writeexe()}}
+{\footnotesize\ttfamily \label{unpack_8c_ae34b7b1297a5c90355c0211bfcdf0f9e} 
+void writeexe (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{dh}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{unpacked\+\_\+data}{, }\item[{unsigned int}]{unpacked\+\_\+data\+\_\+size}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{reloc}{, }\item[{size\+\_\+t}]{reloc\+\_\+size}{, }\item[{size\+\_\+t}]{padding}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unpack_8c_ae34b7b1297a5c90355c0211bfcdf0f9e_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{unpack_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{unpack_8c_a4d59733effad59b54bbd4e5d6016c538}\index{unpack.c@{unpack.c}!output\_file@{output\_file}}
+\index{output\_file@{output\_file}!unpack.c@{unpack.c}}
+\doxysubsubsection{\texorpdfstring{output\_file}{output\_file}}
+{\footnotesize\ttfamily \label{unpack_8c_a4d59733effad59b54bbd4e5d6016c538} 
+char\texorpdfstring{$\ast$}{*} output\+\_\+file = NULL}
+

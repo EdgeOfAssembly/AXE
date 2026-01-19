@@ -1,0 +1,98 @@
+\chapter{dosbox\+\_\+emulation\+\_\+setup }
+\hypertarget{md_skills_2dosbox__emulation__setup}{}\label{md_skills_2dosbox__emulation__setup}\index{dosbox\_emulation\_setup@{dosbox\_emulation\_setup}}
+Skill\+: dosbox\+\_\+emulation\+\_\+setup Category\+: DOS-\/specific Reverse Engineering / Emulation Recommended agents\+: llama (primary, low-\/level expert), grok (scripting/coordination)
+
+Purpose\+: Self-\/contained DOSBox-\/X session for reverse engineering. Generates optimized config or symlinks to era presets, mounts workspace as C\+:, runs target binary (or prompt), supports automated headless fast runs OR interactive video mode for manual debugging/memory dumps/screenshots. Captures logs, enables clean exits, produces artifacts for chaining (log.\+txt, \texorpdfstring{$\ast$}{*}.bin from manual dumps, \texorpdfstring{$\ast$}{*}.png screenshots).
+
+Typical inputs\+:
+\begin{DoxyItemize}
+\item Path to DOS .exe/.com (relative to workspace, optional)
+\item Flags\+: --interactive (or --dump-\/low-\/memory / --dump-\/full-\/conventional to auto-\/enable interactive) --run-\/and-\/exit, --brief-\/run, --cycles $<$n$>$ --preset $<$name$>$ (cga-\/8086, ega-\/286, vga-\/386, svga-\/pentium, headless) → symlinks to preset --log-\/int21, --log-\/fileio → enable DOSBox-\/X internal logging
+\end{DoxyItemize}
+
+Outputs\+:
+\begin{DoxyItemize}
+\item Paths to artifacts (dosbox-\/re.\+conf symlink or generated, log.\+txt / int21.\+log, manual \texorpdfstring{$\ast$}{*}.bin dumps, \texorpdfstring{$\ast$}{*}.png screenshots)
+\item Markdown report\+: config/commands used, run summary, key observations
+\item Ready next steps (e.\+g., "{}@llama use dos\+\_\+memory\+\_\+arena\+\_\+analyzer on lowmem.\+bin"{})
+\end{DoxyItemize}
+
+AXE-\/specific notes\+:
+\begin{DoxyItemize}
+\item Workspace = current dir (sandboxed via bwrap).
+\item Presets live in /tools/dosbox-\/presets/ (use symlinks for speed/reuse).
+\item DOSBox-\/X in PATH.
+\item Automated = headless by default (fast, no video/sound).
+\item Interactive = video window + sound + debugger access.
+\end{DoxyItemize}
+
+Step-\/by-\/step workflow (follow precisely)\+:
+
+
+\begin{DoxyEnumerate}
+\item Determine mode\+:
+\begin{DoxyItemize}
+\item interactive\+\_\+mode = true if --interactive or any --dump\texorpdfstring{$\ast$}{*} flag or no --headless explicit
+\item automated\+\_\+mode = else (headless)
+\end{DoxyItemize}
+\item Config handling\+:
+\begin{DoxyItemize}
+\item If --preset $<$name$>$ provided\+: ln -\/sf /tools/dosbox-\/presets/\$\{name\}.conf dosbox-\/re.\+conf echo "{}\+Symlinked preset\+: \$\{name\}"{}
+\item Else if automated\+\_\+mode\+: ln -\/sf /tools/dosbox-\/presets/headless-\/re.conf dosbox-\/re.\+conf echo "{}\+Defaulted to headless preset"{}
+\item Else (interactive, no preset)\+: Generate fresh dosbox-\/re.\+conf with full modern settings\+: \mbox{[}dosbox\mbox{]} machine=svga\+\_\+s3 memsize=64 vmemsize=8 cycles=max
+
+\mbox{[}cpu\mbox{]} core=dynamic cputype=pentium
+
+\mbox{[}dos\mbox{]} xms=true ems=true umb=true
+
+\mbox{[}sdl\mbox{]} output=surface fullscreen=false
+
+\mbox{[}mixer\mbox{]} nosound=false rate=49716
+
+\mbox{[}sblaster\mbox{]} sbtype=sb16 oplmode=auto
+
+\mbox{[}render\mbox{]} aspect=true
+
+\mbox{[}speaker\mbox{]} pcspeaker=true
+
+\mbox{[}autoexec\mbox{]} (see below)
+\end{DoxyItemize}
+\item \mbox{[}autoexec\mbox{]} section (always added/overwritten)\+: mount c . c\+: cls echo DOSBox-\/X RE session ready.
+
+If interactive\+\_\+mode\+: echo === INTERACTIVE MODE === echo Press debugger hotkey (common\+: Ctrl+\+Alt+\+F9, Alt+\+Pause, or check mapper.\+txt) for console. echo Memory dump commands\+: echo MEMDUMPBIN 0 A0000 lowmem.\+bin (\texorpdfstring{$\sim$}{\string~}640\+KB conventional) echo MEMDUMPBIN 0 100000 fullmem.\+bin (full 1MB) echo SCREENSHOT\+: Host hotkey Ctrl+\+F5 → saves screenshot\+XXXX.\+png in workspace echo After actions\+: type C to continue, or exit DOSBox when done.
+
+If custom --cycles $<$n$>$\+: Add to autoexec\+: CYCLES $<$n$>$
+\item Build command\+: base\+: dosbox-\/x -\/conf dosbox-\/re.\+conf -\/fastlaunch
+
+If --log-\/int21\+: append -\/log-\/int21 If --log-\/fileio\+: append -\/log-\/fileio
+
+If target.\+exe provided\+: append -\/c "{}target.\+exe"{}
+
+If --brief-\/run\+: append -\/c "{}target.\+exe"{} -\/c "{}echo Brief run complete -\/ open debugger now for post-\/load dump/state"{}
+
+If automated\+\_\+mode\+: append -\/exit
+
+Redirect\+: \texorpdfstring{$>$}{>} log.\+txt 2\texorpdfstring{$>$}{>}\&1 (If heavy logging\+: \texorpdfstring{$>$}{>} int21\+\_\+trace.\+log 2\texorpdfstring{$>$}{>}\&1)
+\item Execute the full command.
+\item Post-\/run\+:
+\begin{DoxyItemize}
+\item Grep log.\+txt for errors/startup info.
+\item List new artifacts (ls \texorpdfstring{$\ast$}{*}.bin \texorpdfstring{$\ast$}{*}.png log.\+txt).
+\item If interactive\+: remind manual actions needed for dumps/screenshots.
+\end{DoxyItemize}
+\item Final report (Markdown)\+:
+\begin{DoxyItemize}
+\item Mode used (automated/headless or interactive)
+\item Preset used (or "{}generated fresh"{})
+\item Full command and key config sections
+\item Artifacts list
+\item Observations from log.\+txt
+\item Next steps\+: Automated → "{}\+Check log.\+txt; if INT21 logged → grep for file opens"{} Interactive → "{}\+Manual dumps/screenshots ready → @llama use dos\+\_\+memory\+\_\+arena\+\_\+analyzer on lowmem.\+bin"{}
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+Example chains\+: @llama use dosbox\+\_\+emulation\+\_\+setup --preset ega-\/286 --interactive AR/\+AR.\+EXE → Era-\/accurate interactive run with screenshots/debugger
+
+@llama use dosbox\+\_\+emulation\+\_\+setup --preset headless --log-\/int21 --run-\/and-\/exit AR/\+AR.\+EXE → Fast headless INT21 trace for file I/O
+
+@llama use dosbox\+\_\+emulation\+\_\+setup --dump-\/low-\/memory → Interactive clean memory dump (no preset, full video) 

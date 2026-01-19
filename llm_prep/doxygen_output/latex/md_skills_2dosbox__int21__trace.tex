@@ -1,0 +1,17 @@
+\chapter{dosbox\+\_\+int21\+\_\+trace }
+\hypertarget{md_skills_2dosbox__int21__trace}{}\label{md_skills_2dosbox__int21__trace}\index{dosbox\_int21\_trace@{dosbox\_int21\_trace}}
+Skill\+: dosbox\+\_\+int21\+\_\+trace Category\+: DOS-\/specific Reverse Engineering / Emulation Recommended agent\+: llama
+
+Purpose\+: Trace INT 21h / file I/O during program run to map resource loading (e.\+g., which .DTX for what).
+
+Inputs\+: target.\+exe (e.\+g., AR.\+EXE), --brief-\/run or --full-\/play
+
+Workflow\+:
+\begin{DoxyEnumerate}
+\item @llama use dosbox\+\_\+emulation\+\_\+setup --headless --preset headless --log-\/int21 --log-\/fileio target.\+exe --run-\/and-\/exit (Or --brief-\/run\+: add pause/echo for early exit)
+\item Run → produces log.\+txt with lines like\+: INT21\+: AH=3Fh BX=filehandle ... (reads) INT21\+: AH=3Dh ... Open file\+: MAPDES.\+DTX
+\item Post-\/process\+: grep log.\+txt -\/i "{}open\textbackslash{}\texorpdfstring{$\vert$}{|}read\textbackslash{}\texorpdfstring{$\vert$}{|}3d\textbackslash{}\texorpdfstring{$\vert$}{|}3f"{} \texorpdfstring{$>$}{>} fileio\+\_\+trace.\+txt Or feed full log to analysis skill.
+\item Report\+: Key files accessed in order, any errors.
+\end{DoxyEnumerate}
+
+Example for Airborne Ranger\+: @llama use dosbox\+\_\+int21\+\_\+trace AR/\+AR.\+EXE → Reveals startup loads TTLCHR.\+DTX, MSCHR.\+DTX etc. for title/menu. 

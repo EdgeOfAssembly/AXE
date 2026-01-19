@@ -1,0 +1,154 @@
+\chapter{Heredoc Execution Fix -\/ Implementation Summary }
+\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY}{}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY}\index{Heredoc Execution Fix -\/ Implementation Summary@{Heredoc Execution Fix -\/ Implementation Summary}}
+\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md400}%
+\Hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md400}%
+\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md401}{}\doxysection{\texorpdfstring{Problem Statement}{Problem Statement}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md401}
+After PR \#12, there was a potential risk that heredoc commands could fail with\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ERROR:\ Exit\ code\ 2:\ /bin/sh:\ -\/c:\ line\ 1:\ syntax\ error\ near\ unexpected\ token\ \`{}newline'}
+
+\end{DoxyCode}
+
+
+This error would occur if the {\ttfamily \+\_\+strip\+\_\+heredoc\+\_\+content()} function\textquotesingle{}s output (which removes heredoc content for validation purposes) was accidentally used for execution instead of the original command.\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md402}{}\doxysection{\texorpdfstring{Root Cause Analysis}{Root Cause Analysis}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md402}
+The {\ttfamily \+\_\+strip\+\_\+heredoc\+\_\+content()} function correctly strips heredoc content to prevent it from being incorrectly parsed as commands during whitelist validation. However, there was a risk that\+:
+
+
+\begin{DoxyEnumerate}
+\item The stripped command could accidentally be used for execution
+\item This would cause the shell to receive {\ttfamily cat \texorpdfstring{$>$}{>}\texorpdfstring{$>$}{>} file.\+md \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} \textquotesingle{}EOF\textquotesingle{}} WITHOUT the heredoc content
+\item The shell would error with "{}syntax error near unexpected token \textquotesingle{}newline\textquotesingle{}"{} because it expects content after the heredoc marker
+\end{DoxyEnumerate}\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md403}{}\doxysection{\texorpdfstring{Code Flow}{Code Flow}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md403}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{run(cmd)\ }
+\DoxyCodeLine{\ \ →\ is\_tool\_allowed(cmd)}
+\DoxyCodeLine{\ \ \ \ →\ \_extract\_commands\_from\_shell(cmd)}
+\DoxyCodeLine{\ \ \ \ \ \ →\ \_strip\_heredoc\_content(cmd)\ \ //\ Creates\ LOCAL\ copy,\ strips\ content}
+\DoxyCodeLine{\ \ \ \ \ \ →\ Returns\ command\ names\ (e.g.,\ ['cat'])}
+\DoxyCodeLine{\ \ \ \ →\ Validates\ command\ names\ against\ whitelist}
+\DoxyCodeLine{\ \ \ \ →\ Returns\ (allowed,\ reason)}
+\DoxyCodeLine{\ \ →\ subprocess.run(cmd)\ \ //\ MUST\ use\ ORIGINAL\ cmd,\ not\ stripped\ version}
+
+\end{DoxyCode}
+\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md404}{}\doxysection{\texorpdfstring{Solution Implemented}{Solution Implemented}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md404}
+\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md405}{}\doxysubsection{\texorpdfstring{1. Defensive Programming in {\ttfamily run()} Method}{1. Defensive Programming in {\ttfamily run()} Method}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md405}
+Added explicit {\ttfamily original\+\_\+cmd} variable to make it crystal clear that we\textquotesingle{}re preserving and using the original command\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{def\ }run(self,\ cmd:\ str,\ ...):}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ CRITICAL:\ Store\ original\ command\ to\ ensure\ we\ execute\ it,\ not\ a\ stripped\ version}}
+\DoxyCodeLine{\ \ \ \ original\_cmd\ =\ cmd}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ allowed,\ reason\ =\ self.is\_tool\_allowed(original\_cmd)}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ ...\ validation\ ...}}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ CRITICAL:\ Execute\ original\_cmd\ with\ heredoc\ content\ intact!}}
+\DoxyCodeLine{\ \ \ \ result\ =\ subprocess.run(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ original\_cmd,\ \ \textcolor{comment}{\#\ <-\/\ MUST\ be\ original\ command,\ not\ stripped}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ shell=\textcolor{keyword}{True},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ...}
+\DoxyCodeLine{\ \ \ \ )}
+
+\end{DoxyCode}
+\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md406}{}\doxysubsection{\texorpdfstring{2. Enhanced Documentation}{2. Enhanced Documentation}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md406}
+Added comprehensive docstrings warning about the purpose of each function\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily \+\_\+strip\+\_\+heredoc\+\_\+content()}}}\+: Marked with ⚠️ CRITICAL warning that output is FOR VALIDATION ONLY
+\item {\bfseries{{\ttfamily \+\_\+extract\+\_\+commands\+\_\+from\+\_\+shell()}}}\+: Documents that it creates a LOCAL copy and never modifies input
+\item {\bfseries{{\ttfamily is\+\_\+tool\+\_\+allowed()}}}\+: Explains that it validates but doesn\textquotesingle{}t modify the input command
+\item {\bfseries{{\ttfamily run()}}}\+: Documents that it MUST ALWAYS execute the original command parameter
+\end{DoxyItemize}\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md407}{}\doxysubsection{\texorpdfstring{3. Inline Comments}{3. Inline Comments}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md407}
+Added critical comments at execution points\+:
+\begin{DoxyItemize}
+\item Where {\ttfamily original\+\_\+cmd} is stored
+\item Where validation happens
+\item Where execution happens
+\item Emphasizing separation of concerns
+\end{DoxyItemize}\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md408}{}\doxysubsection{\texorpdfstring{4. Comprehensive Test Suite}{4. Comprehensive Test Suite}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md408}
+Created {\ttfamily \doxylink{test__heredoc__execution__fix_8py}{test\+\_\+heredoc\+\_\+execution\+\_\+fix.\+py}} with 5 test cases\+:
+\begin{DoxyEnumerate}
+\item Basic heredoc execution with content
+\item Heredoc stripping for validation only (verifies original is unchanged)
+\item Heredoc with markdown content (potential false positives)
+\item Heredoc followed by pipe operator
+\item Multiple heredocs in one command
+\end{DoxyEnumerate}\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md409}{}\doxysection{\texorpdfstring{Test Results}{Test Results}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md409}
+All tests pass\+:
+\begin{DoxyItemize}
+\item ✅ New test suite\+: 5/5 tests passed
+\item ✅ Existing tool runner tests\+: 10/10 tests passed ~\newline
+
+\item ✅ Demo script works correctly
+\item ✅ Manual verification with exact problem statement scenario
+\end{DoxyItemize}\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md410}{}\doxysection{\texorpdfstring{Verification}{Verification}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md410}
+The fix ensures\+:
+\begin{DoxyItemize}
+\item ✅ Heredoc content is stripped ONLY for validation (whitelist checking)
+\item ✅ Original commands with heredocs are executed intact with full content
+\item ✅ No false positives from heredoc content containing operators like {\ttfamily \texorpdfstring{$\vert$}{|}}, {\ttfamily \&\&}, {\ttfamily \texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}}, {\ttfamily ;}
+\item ✅ Files are created with all expected content
+\item ✅ No "{}syntax error near unexpected token"{} errors occur
+\item ✅ Documentation clearly separates validation from execution
+\end{DoxyItemize}\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md411}{}\doxysection{\texorpdfstring{Example -\/ Before vs After}{Example -\/ Before vs After}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md411}
+\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md412}{}\doxysubsection{\texorpdfstring{Command\+:}{Command\+:}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md412}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cat\ >>\ /tmp/test.md\ <<\ 'EOF'}
+\DoxyCodeLine{-\/\ Item\ 1}
+\DoxyCodeLine{-\/\ Item\ 2}
+\DoxyCodeLine{1.\ First\ priority}
+\DoxyCodeLine{-\/-\/-\/}
+\DoxyCodeLine{EOF}
+
+\end{DoxyCode}
+\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md413}{}\doxysubsection{\texorpdfstring{Validation (internal, stripped version)\+:}{Validation (internal, stripped version)\+:}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md413}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cat\ >>\ /tmp/test.md\ <<\ 'EOF'}
+
+\end{DoxyCode}
+ This stripped version is used ONLY to extract command names and check whitelist.\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md414}{}\doxysubsection{\texorpdfstring{Execution (original version)\+:}{Execution (original version)\+:}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md414}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cat\ >>\ /tmp/test.md\ <<\ 'EOF'}
+\DoxyCodeLine{-\/\ Item\ 1}
+\DoxyCodeLine{-\/\ Item\ 2}
+\DoxyCodeLine{1.\ First\ priority}
+\DoxyCodeLine{-\/-\/-\/}
+\DoxyCodeLine{EOF}
+
+\end{DoxyCode}
+ The FULL original command with all content is executed.\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md415}{}\doxysubsection{\texorpdfstring{Result\+:}{Result\+:}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md415}
+File {\ttfamily /tmp/test.md} is created with all 4 lines of content intact.\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md416}{}\doxysection{\texorpdfstring{Files Modified}{Files Modified}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md416}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{\doxylink{axe_8py}{axe.\+py}}}\+:
+\begin{DoxyItemize}
+\item Enhanced {\ttfamily run()} method with defensive {\ttfamily original\+\_\+cmd} variable
+\item Added comprehensive documentation to {\ttfamily \+\_\+strip\+\_\+heredoc\+\_\+content()}
+\item Added documentation to {\ttfamily \+\_\+extract\+\_\+commands\+\_\+from\+\_\+shell()}
+\item Added documentation to {\ttfamily is\+\_\+tool\+\_\+allowed()}
+\item Added critical inline comments
+\end{DoxyItemize}
+\item {\bfseries{\doxylink{test__heredoc__execution__fix_8py}{test\+\_\+heredoc\+\_\+execution\+\_\+fix.\+py}}} (new)\+:
+\begin{DoxyItemize}
+\item Comprehensive test suite with 5 test cases
+\item Tests validation, execution, and edge cases
+\item Verifies content preservation
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md417}{}\doxysection{\texorpdfstring{Security Considerations}{Security Considerations}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md417}
+This fix maintains the security posture\+:
+\begin{DoxyItemize}
+\item Heredoc content is still stripped for validation to prevent injection attacks
+\item Whitelist validation still works correctly
+\item Forbidden path checking still works correctly
+\item The original command is only executed after passing all security checks
+\end{DoxyItemize}\hypertarget{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md418}{}\doxysection{\texorpdfstring{Conclusion}{Conclusion}}\label{md_HEREDOC__EXECUTION__FIX__SUMMARY_autotoc_md418}
+The implementation adds defensive programming and clear documentation to ensure that heredoc commands work correctly. While the code was already functionally correct, these changes make the intent explicit and prevent future regressions.
+
+The fix is minimal, focused, and surgical -\/ adding only necessary safeguards and documentation without changing the underlying logic or breaking existing functionality. 

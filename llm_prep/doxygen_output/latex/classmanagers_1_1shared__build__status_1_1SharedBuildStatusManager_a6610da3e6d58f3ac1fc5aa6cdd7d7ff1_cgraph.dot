@@ -1,0 +1,11 @@
+digraph "managers.shared_build_status.SharedBuildStatusManager.get_status_summary"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="managers.shared_build\l_status.SharedBuildStatusManager.get\l_status_summary",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge2_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="managers.shared_build\l_status.SharedBuildStatusManager.get\l_unclaimed_errors",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager.html#a64ddd06916b6c28a14142ac7a93e76bc",tooltip=" "];
+}

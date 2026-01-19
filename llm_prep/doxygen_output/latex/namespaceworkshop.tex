@@ -1,0 +1,142 @@
+\doxysection{workshop Namespace Reference}
+\hypertarget{namespaceworkshop}{}\label{namespaceworkshop}\index{workshop@{workshop}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceworkshop_1_1chisel}{chisel}}
+\item 
+namespace \mbox{\hyperlink{namespaceworkshop_1_1hammer}{hammer}}
+\item 
+namespace \mbox{\hyperlink{namespaceworkshop_1_1plane}{plane}}
+\item 
+namespace \mbox{\hyperlink{namespaceworkshop_1_1saw}{saw}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceworkshop_acf70cad6b05aa268f7b1723cd1c5e6c9}{\+\_\+missing\+\_\+tool\+\_\+factory}} (str tool\+\_\+name, str module\+\_\+name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespaceworkshop_a4e9b2bd2c04e875db9a854142a4fc66b}{HAS\+\_\+\+CHISEL}} = True
+\item 
+\mbox{\hyperlink{namespaceworkshop_a8a24123b8457a3f905754752344c3b77}{Chisel\+Analyzer}} = \mbox{\hyperlink{namespaceworkshop_acf70cad6b05aa268f7b1723cd1c5e6c9}{\+\_\+missing\+\_\+tool\+\_\+factory}}("{}Chisel\+Analyzer"{}, "{}workshop.\+chisel"{})
+\item 
+bool \mbox{\hyperlink{namespaceworkshop_ac78e743f29df9e1b8c8a34bd264b7a18}{HAS\+\_\+\+SAW}} = True
+\item 
+\mbox{\hyperlink{namespaceworkshop_abcaa7b5bfe8740c7580a6c0498d8bc3b}{Saw\+Tracker}} = \mbox{\hyperlink{namespaceworkshop_acf70cad6b05aa268f7b1723cd1c5e6c9}{\+\_\+missing\+\_\+tool\+\_\+factory}}("{}Saw\+Tracker"{}, "{}workshop.\+saw"{})
+\item 
+bool \mbox{\hyperlink{namespaceworkshop_aff905369f64ba2745bd9d35eee9e1f4b}{HAS\+\_\+\+PLANE}} = True
+\item 
+\mbox{\hyperlink{namespaceworkshop_afe94da17984e41211d93310527b2f6dd}{Plane\+Enumerator}} = \mbox{\hyperlink{namespaceworkshop_acf70cad6b05aa268f7b1723cd1c5e6c9}{\+\_\+missing\+\_\+tool\+\_\+factory}}("{}Plane\+Enumerator"{}, "{}workshop.\+plane"{})
+\item 
+bool \mbox{\hyperlink{namespaceworkshop_a56dbf5a65738dab80d8d946c223f5183}{HAS\+\_\+\+HAMMER}} = True
+\item 
+\mbox{\hyperlink{namespaceworkshop_afc5f0e6475830fdc5e72b6510483c3c0}{Hammer\+Instrumentor}} = \mbox{\hyperlink{namespaceworkshop_acf70cad6b05aa268f7b1723cd1c5e6c9}{\+\_\+missing\+\_\+tool\+\_\+factory}}("{}Hammer\+Instrumentor"{}, "{}workshop.\+hammer"{})
+\item 
+list \mbox{\hyperlink{namespaceworkshop_a836d0b8a78500803b744360fa58c3724}{\+\_\+\+\_\+all\+\_\+\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Workshop Module - Dynamic Analysis Tools for AXE
+
+This module provides woodworking-themed dynamic analysis tools:
+- Chisel: Symbolic execution for precise path analysis
+- Saw: Taint analysis for data flow tracking
+- Plane: Source/sink enumeration for entry/exit point cataloging
+- Hammer: Live instrumentation for runtime monitoring
+
+All tools integrate with AXE's safety and execution frameworks.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespaceworkshop_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceworkshop_acf70cad6b05aa268f7b1723cd1c5e6c9}\index{workshop@{workshop}!\_missing\_tool\_factory@{\_missing\_tool\_factory}}
+\index{\_missing\_tool\_factory@{\_missing\_tool\_factory}!workshop@{workshop}}
+\doxysubsubsection{\texorpdfstring{\_missing\_tool\_factory()}{\_missing\_tool\_factory()}}
+{\footnotesize\ttfamily \label{namespaceworkshop_acf70cad6b05aa268f7b1723cd1c5e6c9} 
+workshop.\+\_\+missing\+\_\+tool\+\_\+factory (\begin{DoxyParamCaption}\item[{str}]{tool\+\_\+name}{, }\item[{str}]{module\+\_\+name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Create a stub class for an unavailable analysis tool.
+
+The stub raises an ImportError as soon as it is instantiated,
+providing a clear and informative error message instead of
+failing later with an AttributeError on `None`.
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespaceworkshop_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceworkshop_a836d0b8a78500803b744360fa58c3724}\index{workshop@{workshop}!\_\_all\_\_@{\_\_all\_\_}}
+\index{\_\_all\_\_@{\_\_all\_\_}!workshop@{workshop}}
+\doxysubsubsection{\texorpdfstring{\_\_all\_\_}{\_\_all\_\_}}
+{\footnotesize\ttfamily \label{namespaceworkshop_a836d0b8a78500803b744360fa58c3724} 
+list workshop.\+\_\+\+\_\+all\+\_\+\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{'ChiselAnalyzer'},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{'SawTracker'},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{'PlaneEnumerator'},}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{'HammerInstrumentor'},}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{stringliteral}{'HAS\_CHISEL'},}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{stringliteral}{'HAS\_SAW'},}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{stringliteral}{'HAS\_PLANE'},}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{stringliteral}{'HAS\_HAMMER'}}
+\DoxyCodeLine{00010\ ]}
+
+\end{DoxyCode}
+\Hypertarget{namespaceworkshop_a8a24123b8457a3f905754752344c3b77}\index{workshop@{workshop}!ChiselAnalyzer@{ChiselAnalyzer}}
+\index{ChiselAnalyzer@{ChiselAnalyzer}!workshop@{workshop}}
+\doxysubsubsection{\texorpdfstring{ChiselAnalyzer}{ChiselAnalyzer}}
+{\footnotesize\ttfamily \label{namespaceworkshop_a8a24123b8457a3f905754752344c3b77} 
+\mbox{\hyperlink{classworkshop_1_1chisel_1_1ChiselAnalyzer}{workshop.\+Chisel\+Analyzer}} = \mbox{\hyperlink{namespaceworkshop_acf70cad6b05aa268f7b1723cd1c5e6c9}{\+\_\+missing\+\_\+tool\+\_\+factory}}("{}Chisel\+Analyzer"{}, "{}workshop.\+chisel"{})}
+
+\Hypertarget{namespaceworkshop_afc5f0e6475830fdc5e72b6510483c3c0}\index{workshop@{workshop}!HammerInstrumentor@{HammerInstrumentor}}
+\index{HammerInstrumentor@{HammerInstrumentor}!workshop@{workshop}}
+\doxysubsubsection{\texorpdfstring{HammerInstrumentor}{HammerInstrumentor}}
+{\footnotesize\ttfamily \label{namespaceworkshop_afc5f0e6475830fdc5e72b6510483c3c0} 
+\mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor}{workshop.\+Hammer\+Instrumentor}} = \mbox{\hyperlink{namespaceworkshop_acf70cad6b05aa268f7b1723cd1c5e6c9}{\+\_\+missing\+\_\+tool\+\_\+factory}}("{}Hammer\+Instrumentor"{}, "{}workshop.\+hammer"{})}
+
+\Hypertarget{namespaceworkshop_a4e9b2bd2c04e875db9a854142a4fc66b}\index{workshop@{workshop}!HAS\_CHISEL@{HAS\_CHISEL}}
+\index{HAS\_CHISEL@{HAS\_CHISEL}!workshop@{workshop}}
+\doxysubsubsection{\texorpdfstring{HAS\_CHISEL}{HAS\_CHISEL}}
+{\footnotesize\ttfamily \label{namespaceworkshop_a4e9b2bd2c04e875db9a854142a4fc66b} 
+bool workshop.\+HAS\+\_\+\+CHISEL = True}
+
+\Hypertarget{namespaceworkshop_a56dbf5a65738dab80d8d946c223f5183}\index{workshop@{workshop}!HAS\_HAMMER@{HAS\_HAMMER}}
+\index{HAS\_HAMMER@{HAS\_HAMMER}!workshop@{workshop}}
+\doxysubsubsection{\texorpdfstring{HAS\_HAMMER}{HAS\_HAMMER}}
+{\footnotesize\ttfamily \label{namespaceworkshop_a56dbf5a65738dab80d8d946c223f5183} 
+bool workshop.\+HAS\+\_\+\+HAMMER = True}
+
+\Hypertarget{namespaceworkshop_aff905369f64ba2745bd9d35eee9e1f4b}\index{workshop@{workshop}!HAS\_PLANE@{HAS\_PLANE}}
+\index{HAS\_PLANE@{HAS\_PLANE}!workshop@{workshop}}
+\doxysubsubsection{\texorpdfstring{HAS\_PLANE}{HAS\_PLANE}}
+{\footnotesize\ttfamily \label{namespaceworkshop_aff905369f64ba2745bd9d35eee9e1f4b} 
+bool workshop.\+HAS\+\_\+\+PLANE = True}
+
+\Hypertarget{namespaceworkshop_ac78e743f29df9e1b8c8a34bd264b7a18}\index{workshop@{workshop}!HAS\_SAW@{HAS\_SAW}}
+\index{HAS\_SAW@{HAS\_SAW}!workshop@{workshop}}
+\doxysubsubsection{\texorpdfstring{HAS\_SAW}{HAS\_SAW}}
+{\footnotesize\ttfamily \label{namespaceworkshop_ac78e743f29df9e1b8c8a34bd264b7a18} 
+bool workshop.\+HAS\+\_\+\+SAW = True}
+
+\Hypertarget{namespaceworkshop_afe94da17984e41211d93310527b2f6dd}\index{workshop@{workshop}!PlaneEnumerator@{PlaneEnumerator}}
+\index{PlaneEnumerator@{PlaneEnumerator}!workshop@{workshop}}
+\doxysubsubsection{\texorpdfstring{PlaneEnumerator}{PlaneEnumerator}}
+{\footnotesize\ttfamily \label{namespaceworkshop_afe94da17984e41211d93310527b2f6dd} 
+\mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator}{workshop.\+Plane\+Enumerator}} = \mbox{\hyperlink{namespaceworkshop_acf70cad6b05aa268f7b1723cd1c5e6c9}{\+\_\+missing\+\_\+tool\+\_\+factory}}("{}Plane\+Enumerator"{}, "{}workshop.\+plane"{})}
+
+\Hypertarget{namespaceworkshop_abcaa7b5bfe8740c7580a6c0498d8bc3b}\index{workshop@{workshop}!SawTracker@{SawTracker}}
+\index{SawTracker@{SawTracker}!workshop@{workshop}}
+\doxysubsubsection{\texorpdfstring{SawTracker}{SawTracker}}
+{\footnotesize\ttfamily \label{namespaceworkshop_abcaa7b5bfe8740c7580a6c0498d8bc3b} 
+\mbox{\hyperlink{classworkshop_1_1saw_1_1SawTracker}{workshop.\+Saw\+Tracker}} = \mbox{\hyperlink{namespaceworkshop_acf70cad6b05aa268f7b1723cd1c5e6c9}{\+\_\+missing\+\_\+tool\+\_\+factory}}("{}Saw\+Tracker"{}, "{}workshop.\+saw"{})}
+

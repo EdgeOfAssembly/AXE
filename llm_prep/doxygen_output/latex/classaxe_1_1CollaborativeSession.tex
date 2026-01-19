@@ -1,0 +1,664 @@
+\doxysection{axe.\+Collaborative\+Session Class Reference}
+\hypertarget{classaxe_1_1CollaborativeSession}{}\label{classaxe_1_1CollaborativeSession}\index{axe.CollaborativeSession@{axe.CollaborativeSession}}
+
+
+Collaboration diagram for axe.\+Collaborative\+Session\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classaxe_1_1CollaborativeSession__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a277e28479a3ce663c28e28a79b0fa179}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}} \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}}, List\mbox{[}str\mbox{]} \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a92644ec2213903477715a66705bd4eed}{agents}}, str workspace\+\_\+dir, int time\+\_\+limit\+\_\+minutes=30, Optional\mbox{[}str\mbox{]} db\+\_\+path=None, bool \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a3ef7cbcd10fe137c9769822e72b5c87a}{github\+\_\+enabled}}=False)
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a501edaa48b72d90cc3af128953133578}{print\+\_\+banner}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_af4ab55de0d7b895c6002cd691b36a9be}{start\+\_\+session}} (self, str task)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}} = config
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_ab931398b863c755ac1cfda96f01cc320}{agent\+\_\+mgr}} = \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager}{Agent\+Manager}}(\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}})
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_ab7c3f130204869b9cd3fda1695d663db}{workspace}} = \mbox{\hyperlink{classaxe_1_1SharedWorkspace}{Shared\+Workspace}}(workspace\+\_\+dir)
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a826fb2877e32b1367361367002147ced}{project\+\_\+ctx}} = \mbox{\hyperlink{classaxe_1_1ProjectContext}{Project\+Context}}(workspace\+\_\+dir, \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}})
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a01d559caead539214a65cd29bd02c301}{tool\+\_\+runner}} = \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}(\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}}, workspace\+\_\+dir)
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a8a690e944cb108907b08c387df13c03b}{response\+\_\+processor}} = \mbox{\hyperlink{classaxe_1_1ResponseProcessor}{Response\+Processor}}(\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}}, workspace\+\_\+dir, self.\+tool\+\_\+runner, self.\+workspace)
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a9cc136ec23ba1cef9c8804ad6c74d49c}{db}} = \mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase}{Agent\+Database}}(db\+\_\+path)
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a531b3b74f19c30d5b9f679c7edc37fae}{sleep\+\_\+manager}} = \mbox{\hyperlink{classmanagers_1_1sleep__manager_1_1SleepManager}{Sleep\+Manager}}(self.\+db)
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_aa0e3798df96749e8f367dbde2ac247a9}{break\+\_\+system}} = \mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem}{Break\+System}}(self.\+db)
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a0dd9ab753e3e615c9ac6599ddd0b7858}{emergency\+\_\+mailbox}} = \mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox}{Emergency\+Mailbox}}()
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_ac5ccd2b2265cf373d3614156806d728f}{spawner}} = \mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner}{Dynamic\+Spawner}}(self.\+db, \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}})
+\item 
+bool \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a3ef7cbcd10fe137c9769822e72b5c87a}{github\+\_\+enabled}} = github\+\_\+enabled
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a06d058aeee98971d05504bb5594bb76c}{github\+\_\+agent}} = None
+\item 
+list \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a92644ec2213903477715a66705bd4eed}{agents}} = \mbox{[}$\,$\mbox{]}
+\item 
+dict \mbox{\hyperlink{classaxe_1_1CollaborativeSession_ac380ead9bbca25a5579dbd99a5f1f1f7}{agent\+\_\+ids}} = \{\}
+\item 
+dict \mbox{\hyperlink{classaxe_1_1CollaborativeSession_ab96c4604ab89c35f01d78a9133584ee0}{agent\+\_\+aliases}} = \{\}
+\item 
+dict \mbox{\hyperlink{classaxe_1_1CollaborativeSession_aa713788aea1d3dcc73ddff3ce1f8753c}{spawned\+\_\+agents}} = \{\}
+\item 
+list \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a4e87ab5b3d7717d0f5f3c9d8f68ccff6}{supervisor\+\_\+name}} = self.\+agents\mbox{[}0\mbox{]}
+\item 
+str \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a7d5eede8e6f645dc2f0201f04bf0c8a5}{supervisor\+\_\+alias}} = "{}@boss"{}
+\item 
+int \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a3cad46df51b64ebab691d5d053dfe6eb}{time\+\_\+limit}} = time\+\_\+limit\+\_\+minutes \texorpdfstring{$\ast$}{*} 60
+\item 
+Optional\mbox{[}datetime\mbox{]} \mbox{\hyperlink{classaxe_1_1CollaborativeSession_aa9f65ac73b173d9d13cdf9cfab4e588b}{start\+\_\+time}} = None
+\item 
+list \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a0dff1afb87c9108881f0530c97662dff}{conversation\+\_\+history}} = \mbox{[}$\,$\mbox{]}
+\item 
+int \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a8ac27d45287bcd33e1d3024be867b9f2}{current\+\_\+turn}} = 0
+\item 
+str \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a3d74603f0d884ab93bf04c4b67fd7923}{task\+\_\+description}} = "{}"{}
+\item 
+bool \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a17613664271470a880ce760a7a8ae835}{is\+\_\+running}} = False
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classaxe_1_1CollaborativeSession_ac268af6bc8cdd91f1868a817b5c5de1b}{\+\_\+format\+\_\+conversation\+\_\+for\+\_\+agent}} (self, str agent\+\_\+name)
+\item 
+str \mbox{\hyperlink{classaxe_1_1CollaborativeSession_ae5b0476285af0c83e3e1910c1a60e5f6}{\+\_\+get\+\_\+system\+\_\+prompt\+\_\+for\+\_\+collab}} (self, str agent\+\_\+name)
+\item 
+int \mbox{\hyperlink{classaxe_1_1CollaborativeSession_ab9a5670ebe43be16b93f2fc7cad0108e}{\+\_\+time\+\_\+remaining}} (self)
+\item 
+str \mbox{\hyperlink{classaxe_1_1CollaborativeSession_abd5fca02151254751149d77e23e16fe8}{\+\_\+format\+\_\+time}} (self, int seconds)
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a2c0fb59b4465a4f8514630602fa942f8}{\+\_\+run\+\_\+collaboration\+\_\+loop}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a64377593b620e4449351bb066f04456d}{\+\_\+handle\+\_\+break\+\_\+request}} (self, str agent\+\_\+name, str response, str content="{}"{})
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_adfdeaf4031f6e214d05e21a96d24755a}{\+\_\+handle\+\_\+emergency\+\_\+message}} (self, str agent\+\_\+name, str response, str content="{}"{})
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_af1293714188297ae8b5cbb4bbba7af67}{\+\_\+handle\+\_\+spawn\+\_\+request}} (self, str agent\+\_\+name, str response, str content="{}"{})
+\item 
+str \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a38db2f20ab1aba56ecbe35c99c7ccfd2}{\+\_\+get\+\_\+spawned\+\_\+agent\+\_\+system\+\_\+prompt}} (self, str model\+\_\+type)
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_af7d2acc6e00abc418359198dfe4b019a}{\+\_\+print\+\_\+status}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a041ba9ec847ef00ec022b44ad2c5fd88}{\+\_\+show\+\_\+break\+\_\+requests}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a3e34c26c0de8010ad5878ed3886ee1c9}{\+\_\+show\+\_\+emergency\+\_\+mailbox}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_afb29c1f9e386b7501a35b18e4d4a57cd}{\+\_\+handle\+\_\+github\+\_\+review\+\_\+pause}} (self, str push\+\_\+info)
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_ad62f87765c49218f37f833f403a9d5e2}{\+\_\+github\+\_\+review\+\_\+prompt}} (self, Dict review\+\_\+data)
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a909e359216e70f696e6a51f60a24be7d}{\+\_\+approve\+\_\+and\+\_\+push}} (self, Dict review\+\_\+data)
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_ab23535e0d366c892f663caf9b9929bed}{\+\_\+reject\+\_\+and\+\_\+continue}} (self, Dict review\+\_\+data)
+\item 
+List\mbox{[}str\mbox{]} \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a05dff6155ae4caa7d185d656765b2245}{\+\_\+get\+\_\+changed\+\_\+files}} (self)
+\item 
+Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{classaxe_1_1CollaborativeSession_ad553b84eeef4e00b661e60f07e20ea1f}{\+\_\+create\+\_\+pr\+\_\+with\+\_\+gh\+\_\+cli}} (self, str branch)
+\item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_ab9b4446c5f6869de5d98eb51d3ab44ef}{\+\_\+end\+\_\+session}} (self)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Multi-agent collaborative session where models communicate and cooperate.
+
+Features:
+- Turn-based coordination (models take turns to avoid talking over each other)
+- Shared workspace for code and notes
+- Time limits/deadlines for tasks
+- Full conversation history visible to all agents
+- Phase 6: Mandatory sleep system
+- Phase 7: Degradation monitoring
+- Phase 8: Emergency mailbox
+- Phase 9: Break system
+- Phase 10: Dynamic spawning
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classaxe_1_1CollaborativeSession_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classaxe_1_1CollaborativeSession_a277e28479a3ce663c28e28a79b0fa179}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a277e28479a3ce663c28e28a79b0fa179} 
+axe.\+Collaborative\+Session.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}}]{config}{, }\item[{List\mbox{[}str\mbox{]}}]{agents}{, }\item[{str}]{workspace\+\_\+dir}{, }\item[{int }]{time\+\_\+limit\+\_\+minutes}{ = {\ttfamily 30}, }\item[{Optional\mbox{[}str\mbox{]} }]{db\+\_\+path}{ = {\ttfamily None}, }\item[{bool }]{github\+\_\+enabled}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classaxe_1_1CollaborativeSession_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classaxe_1_1CollaborativeSession_a909e359216e70f696e6a51f60a24be7d}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_approve\_and\_push@{\_approve\_and\_push}}
+\index{\_approve\_and\_push@{\_approve\_and\_push}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_approve\_and\_push()}{\_approve\_and\_push()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a909e359216e70f696e6a51f60a24be7d} 
+ None axe.\+Collaborative\+Session.\+\_\+approve\+\_\+and\+\_\+push (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict}]{review\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Execute approved push.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a909e359216e70f696e6a51f60a24be7d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a909e359216e70f696e6a51f60a24be7d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_ad553b84eeef4e00b661e60f07e20ea1f}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_create\_pr\_with\_gh\_cli@{\_create\_pr\_with\_gh\_cli}}
+\index{\_create\_pr\_with\_gh\_cli@{\_create\_pr\_with\_gh\_cli}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_create\_pr\_with\_gh\_cli()}{\_create\_pr\_with\_gh\_cli()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ad553b84eeef4e00b661e60f07e20ea1f} 
+ Optional\mbox{[}str\mbox{]} axe.\+Collaborative\+Session.\+\_\+create\+\_\+pr\+\_\+with\+\_\+gh\+\_\+cli (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{branch}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Create PR using gh CLI.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_ad553b84eeef4e00b661e60f07e20ea1f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_ab9b4446c5f6869de5d98eb51d3ab44ef}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_end\_session@{\_end\_session}}
+\index{\_end\_session@{\_end\_session}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_end\_session()}{\_end\_session()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ab9b4446c5f6869de5d98eb51d3ab44ef} 
+ None axe.\+Collaborative\+Session.\+\_\+end\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Clean up and summarize the session.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_ab9b4446c5f6869de5d98eb51d3ab44ef_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_ab9b4446c5f6869de5d98eb51d3ab44ef_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_ac268af6bc8cdd91f1868a817b5c5de1b}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_format\_conversation\_for\_agent@{\_format\_conversation\_for\_agent}}
+\index{\_format\_conversation\_for\_agent@{\_format\_conversation\_for\_agent}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_format\_conversation\_for\_agent()}{\_format\_conversation\_for\_agent()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ac268af6bc8cdd91f1868a817b5c5de1b} 
+ str axe.\+Collaborative\+Session.\+\_\+format\+\_\+conversation\+\_\+for\+\_\+agent (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Format conversation history for an agent to read.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_ac268af6bc8cdd91f1868a817b5c5de1b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_abd5fca02151254751149d77e23e16fe8}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_format\_time@{\_format\_time}}
+\index{\_format\_time@{\_format\_time}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_format\_time()}{\_format\_time()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_abd5fca02151254751149d77e23e16fe8} 
+ str axe.\+Collaborative\+Session.\+\_\+format\+\_\+time (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{seconds}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Format seconds as MM:SS.\end{DoxyVerb}
+ \Hypertarget{classaxe_1_1CollaborativeSession_a05dff6155ae4caa7d185d656765b2245}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_get\_changed\_files@{\_get\_changed\_files}}
+\index{\_get\_changed\_files@{\_get\_changed\_files}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_get\_changed\_files()}{\_get\_changed\_files()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a05dff6155ae4caa7d185d656765b2245} 
+ List\mbox{[}str\mbox{]} axe.\+Collaborative\+Session.\+\_\+get\+\_\+changed\+\_\+files (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Get list of changed files in workspace.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a05dff6155ae4caa7d185d656765b2245_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_a38db2f20ab1aba56ecbe35c99c7ccfd2}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_get\_spawned\_agent\_system\_prompt@{\_get\_spawned\_agent\_system\_prompt}}
+\index{\_get\_spawned\_agent\_system\_prompt@{\_get\_spawned\_agent\_system\_prompt}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_get\_spawned\_agent\_system\_prompt()}{\_get\_spawned\_agent\_system\_prompt()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a38db2f20ab1aba56ecbe35c99c7ccfd2} 
+ str axe.\+Collaborative\+Session.\+\_\+get\+\_\+spawned\+\_\+agent\+\_\+system\+\_\+prompt (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{model\+\_\+type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Get appropriate system prompt for a spawned agent based on model type.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a38db2f20ab1aba56ecbe35c99c7ccfd2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_ae5b0476285af0c83e3e1910c1a60e5f6}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_get\_system\_prompt\_for\_collab@{\_get\_system\_prompt\_for\_collab}}
+\index{\_get\_system\_prompt\_for\_collab@{\_get\_system\_prompt\_for\_collab}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_get\_system\_prompt\_for\_collab()}{\_get\_system\_prompt\_for\_collab()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ae5b0476285af0c83e3e1910c1a60e5f6} 
+ str axe.\+Collaborative\+Session.\+\_\+get\+\_\+system\+\_\+prompt\+\_\+for\+\_\+collab (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Generate collaborative system prompt for an agent.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_ae5b0476285af0c83e3e1910c1a60e5f6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_ad62f87765c49218f37f833f403a9d5e2}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_github\_review\_prompt@{\_github\_review\_prompt}}
+\index{\_github\_review\_prompt@{\_github\_review\_prompt}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_github\_review\_prompt()}{\_github\_review\_prompt()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ad62f87765c49218f37f833f403a9d5e2} 
+ None axe.\+Collaborative\+Session.\+\_\+github\+\_\+review\+\_\+prompt (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict}]{review\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Handle human review prompts.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_ad62f87765c49218f37f833f403a9d5e2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_ad62f87765c49218f37f833f403a9d5e2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_a64377593b620e4449351bb066f04456d}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_handle\_break\_request@{\_handle\_break\_request}}
+\index{\_handle\_break\_request@{\_handle\_break\_request}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_handle\_break\_request()}{\_handle\_break\_request()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a64377593b620e4449351bb066f04456d} 
+ None axe.\+Collaborative\+Session.\+\_\+handle\+\_\+break\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{str}]{response}{, }\item[{str }]{content}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Handle a break request from an agent.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a64377593b620e4449351bb066f04456d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_adfdeaf4031f6e214d05e21a96d24755a}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_handle\_emergency\_message@{\_handle\_emergency\_message}}
+\index{\_handle\_emergency\_message@{\_handle\_emergency\_message}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_handle\_emergency\_message()}{\_handle\_emergency\_message()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_adfdeaf4031f6e214d05e21a96d24755a} 
+ None axe.\+Collaborative\+Session.\+\_\+handle\+\_\+emergency\+\_\+message (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{str}]{response}{, }\item[{str }]{content}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Handle an emergency message from an agent.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_adfdeaf4031f6e214d05e21a96d24755a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_afb29c1f9e386b7501a35b18e4d4a57cd}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_handle\_github\_review\_pause@{\_handle\_github\_review\_pause}}
+\index{\_handle\_github\_review\_pause@{\_handle\_github\_review\_pause}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_handle\_github\_review\_pause()}{\_handle\_github\_review\_pause()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_afb29c1f9e386b7501a35b18e4d4a57cd} 
+ None axe.\+Collaborative\+Session.\+\_\+handle\+\_\+github\+\_\+review\+\_\+pause (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{push\+\_\+info}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Pause session for human to review GitHub push request.
+Reuses existing Ctrl+C pause mechanism.
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_afb29c1f9e386b7501a35b18e4d4a57cd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_afb29c1f9e386b7501a35b18e4d4a57cd_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_af1293714188297ae8b5cbb4bbba7af67}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_handle\_spawn\_request@{\_handle\_spawn\_request}}
+\index{\_handle\_spawn\_request@{\_handle\_spawn\_request}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_handle\_spawn\_request()}{\_handle\_spawn\_request()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_af1293714188297ae8b5cbb4bbba7af67} 
+ None axe.\+Collaborative\+Session.\+\_\+handle\+\_\+spawn\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{str}]{response}{, }\item[{str }]{content}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Handle a spawn request from the supervisor.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_af1293714188297ae8b5cbb4bbba7af67_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_af1293714188297ae8b5cbb4bbba7af67_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_af7d2acc6e00abc418359198dfe4b019a}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_print\_status@{\_print\_status}}
+\index{\_print\_status@{\_print\_status}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_print\_status()}{\_print\_status()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_af7d2acc6e00abc418359198dfe4b019a} 
+ None axe.\+Collaborative\+Session.\+\_\+print\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Print current status of all agents and systems.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_af7d2acc6e00abc418359198dfe4b019a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_ab23535e0d366c892f663caf9b9929bed}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_reject\_and\_continue@{\_reject\_and\_continue}}
+\index{\_reject\_and\_continue@{\_reject\_and\_continue}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_reject\_and\_continue()}{\_reject\_and\_continue()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ab23535e0d366c892f663caf9b9929bed} 
+ None axe.\+Collaborative\+Session.\+\_\+reject\+\_\+and\+\_\+continue (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict}]{review\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Reject and send feedback to agents.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_ab23535e0d366c892f663caf9b9929bed_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_a2c0fb59b4465a4f8514630602fa942f8}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_run\_collaboration\_loop@{\_run\_collaboration\_loop}}
+\index{\_run\_collaboration\_loop@{\_run\_collaboration\_loop}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_run\_collaboration\_loop()}{\_run\_collaboration\_loop()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a2c0fb59b4465a4f8514630602fa942f8} 
+ None axe.\+Collaborative\+Session.\+\_\+run\+\_\+collaboration\+\_\+loop (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Main loop for agent collaboration.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a2c0fb59b4465a4f8514630602fa942f8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a2c0fb59b4465a4f8514630602fa942f8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_a041ba9ec847ef00ec022b44ad2c5fd88}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_show\_break\_requests@{\_show\_break\_requests}}
+\index{\_show\_break\_requests@{\_show\_break\_requests}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_show\_break\_requests()}{\_show\_break\_requests()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a041ba9ec847ef00ec022b44ad2c5fd88} 
+ None axe.\+Collaborative\+Session.\+\_\+show\+\_\+break\+\_\+requests (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Show pending break requests for human review.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a041ba9ec847ef00ec022b44ad2c5fd88_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_a3e34c26c0de8010ad5878ed3886ee1c9}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_show\_emergency\_mailbox@{\_show\_emergency\_mailbox}}
+\index{\_show\_emergency\_mailbox@{\_show\_emergency\_mailbox}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_show\_emergency\_mailbox()}{\_show\_emergency\_mailbox()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a3e34c26c0de8010ad5878ed3886ee1c9} 
+ None axe.\+Collaborative\+Session.\+\_\+show\+\_\+emergency\+\_\+mailbox (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Show emergency mailbox contents for human review.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a3e34c26c0de8010ad5878ed3886ee1c9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_ab9a5670ebe43be16b93f2fc7cad0108e}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_time\_remaining@{\_time\_remaining}}
+\index{\_time\_remaining@{\_time\_remaining}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_time\_remaining()}{\_time\_remaining()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ab9a5670ebe43be16b93f2fc7cad0108e} 
+ int axe.\+Collaborative\+Session.\+\_\+time\+\_\+remaining (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Get remaining time in seconds.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_ab9a5670ebe43be16b93f2fc7cad0108e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_a501edaa48b72d90cc3af128953133578}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!print\_banner@{print\_banner}}
+\index{print\_banner@{print\_banner}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{print\_banner()}{print\_banner()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a501edaa48b72d90cc3af128953133578} 
+ None axe.\+Collaborative\+Session.\+print\+\_\+banner (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Print collaborative session banner with rules and agent info.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a501edaa48b72d90cc3af128953133578_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_af4ab55de0d7b895c6002cd691b36a9be}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!start\_session@{start\_session}}
+\index{start\_session@{start\_session}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{start\_session()}{start\_session()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_af4ab55de0d7b895c6002cd691b36a9be} 
+ None axe.\+Collaborative\+Session.\+start\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{task}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Start a collaborative session with a task.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_af4ab55de0d7b895c6002cd691b36a9be_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classaxe_1_1CollaborativeSession_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classaxe_1_1CollaborativeSession_ab96c4604ab89c35f01d78a9133584ee0}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!agent\_aliases@{agent\_aliases}}
+\index{agent\_aliases@{agent\_aliases}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{agent\_aliases}{agent\_aliases}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ab96c4604ab89c35f01d78a9133584ee0} 
+dict axe.\+Collaborative\+Session.\+agent\+\_\+aliases = \{\}}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_ac380ead9bbca25a5579dbd99a5f1f1f7}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!agent\_ids@{agent\_ids}}
+\index{agent\_ids@{agent\_ids}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{agent\_ids}{agent\_ids}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ac380ead9bbca25a5579dbd99a5f1f1f7} 
+dict axe.\+Collaborative\+Session.\+agent\+\_\+ids = \{\}}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_ab931398b863c755ac1cfda96f01cc320}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!agent\_mgr@{agent\_mgr}}
+\index{agent\_mgr@{agent\_mgr}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{agent\_mgr}{agent\_mgr}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ab931398b863c755ac1cfda96f01cc320} 
+axe.\+Collaborative\+Session.\+agent\+\_\+mgr = \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager}{Agent\+Manager}}(\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}})}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a92644ec2213903477715a66705bd4eed}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!agents@{agents}}
+\index{agents@{agents}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{agents}{agents}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a92644ec2213903477715a66705bd4eed} 
+axe.\+Collaborative\+Session.\+agents = \mbox{[}$\,$\mbox{]}}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_aa0e3798df96749e8f367dbde2ac247a9}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!break\_system@{break\_system}}
+\index{break\_system@{break\_system}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{break\_system}{break\_system}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_aa0e3798df96749e8f367dbde2ac247a9} 
+axe.\+Collaborative\+Session.\+break\+\_\+system = \mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem}{Break\+System}}(self.\+db)}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!config@{config}}
+\index{config@{config}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af} 
+axe.\+Collaborative\+Session.\+config = config}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a0dff1afb87c9108881f0530c97662dff}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!conversation\_history@{conversation\_history}}
+\index{conversation\_history@{conversation\_history}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{conversation\_history}{conversation\_history}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a0dff1afb87c9108881f0530c97662dff} 
+list axe.\+Collaborative\+Session.\+conversation\+\_\+history = \mbox{[}$\,$\mbox{]}}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a8ac27d45287bcd33e1d3024be867b9f2}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!current\_turn@{current\_turn}}
+\index{current\_turn@{current\_turn}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{current\_turn}{current\_turn}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a8ac27d45287bcd33e1d3024be867b9f2} 
+int axe.\+Collaborative\+Session.\+current\+\_\+turn = 0}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a9cc136ec23ba1cef9c8804ad6c74d49c}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!db@{db}}
+\index{db@{db}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{db}{db}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a9cc136ec23ba1cef9c8804ad6c74d49c} 
+axe.\+Collaborative\+Session.\+db = \mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase}{Agent\+Database}}(db\+\_\+path)}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a0dd9ab753e3e615c9ac6599ddd0b7858}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!emergency\_mailbox@{emergency\_mailbox}}
+\index{emergency\_mailbox@{emergency\_mailbox}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{emergency\_mailbox}{emergency\_mailbox}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a0dd9ab753e3e615c9ac6599ddd0b7858} 
+axe.\+Collaborative\+Session.\+emergency\+\_\+mailbox = \mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox}{Emergency\+Mailbox}}()}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a06d058aeee98971d05504bb5594bb76c}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!github\_agent@{github\_agent}}
+\index{github\_agent@{github\_agent}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{github\_agent}{github\_agent}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a06d058aeee98971d05504bb5594bb76c} 
+axe.\+Collaborative\+Session.\+github\+\_\+agent = None}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a3ef7cbcd10fe137c9769822e72b5c87a}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!github\_enabled@{github\_enabled}}
+\index{github\_enabled@{github\_enabled}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{github\_enabled}{github\_enabled}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a3ef7cbcd10fe137c9769822e72b5c87a} 
+bool axe.\+Collaborative\+Session.\+github\+\_\+enabled = github\+\_\+enabled}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a17613664271470a880ce760a7a8ae835}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!is\_running@{is\_running}}
+\index{is\_running@{is\_running}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{is\_running}{is\_running}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a17613664271470a880ce760a7a8ae835} 
+bool axe.\+Collaborative\+Session.\+is\+\_\+running = False}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a826fb2877e32b1367361367002147ced}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!project\_ctx@{project\_ctx}}
+\index{project\_ctx@{project\_ctx}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{project\_ctx}{project\_ctx}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a826fb2877e32b1367361367002147ced} 
+axe.\+Collaborative\+Session.\+project\+\_\+ctx = \mbox{\hyperlink{classaxe_1_1ProjectContext}{Project\+Context}}(workspace\+\_\+dir, \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}})}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a8a690e944cb108907b08c387df13c03b}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!response\_processor@{response\_processor}}
+\index{response\_processor@{response\_processor}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{response\_processor}{response\_processor}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a8a690e944cb108907b08c387df13c03b} 
+axe.\+Collaborative\+Session.\+response\+\_\+processor = \mbox{\hyperlink{classaxe_1_1ResponseProcessor}{Response\+Processor}}(\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}}, workspace\+\_\+dir, self.\+tool\+\_\+runner, self.\+workspace)}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a531b3b74f19c30d5b9f679c7edc37fae}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!sleep\_manager@{sleep\_manager}}
+\index{sleep\_manager@{sleep\_manager}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{sleep\_manager}{sleep\_manager}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a531b3b74f19c30d5b9f679c7edc37fae} 
+axe.\+Collaborative\+Session.\+sleep\+\_\+manager = \mbox{\hyperlink{classmanagers_1_1sleep__manager_1_1SleepManager}{Sleep\+Manager}}(self.\+db)}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_aa713788aea1d3dcc73ddff3ce1f8753c}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!spawned\_agents@{spawned\_agents}}
+\index{spawned\_agents@{spawned\_agents}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{spawned\_agents}{spawned\_agents}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_aa713788aea1d3dcc73ddff3ce1f8753c} 
+dict axe.\+Collaborative\+Session.\+spawned\+\_\+agents = \{\}}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_ac5ccd2b2265cf373d3614156806d728f}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!spawner@{spawner}}
+\index{spawner@{spawner}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{spawner}{spawner}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ac5ccd2b2265cf373d3614156806d728f} 
+axe.\+Collaborative\+Session.\+spawner = \mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner}{Dynamic\+Spawner}}(self.\+db, \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}})}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_aa9f65ac73b173d9d13cdf9cfab4e588b}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!start\_time@{start\_time}}
+\index{start\_time@{start\_time}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{start\_time}{start\_time}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_aa9f65ac73b173d9d13cdf9cfab4e588b} 
+Optional\mbox{[}datetime\mbox{]} axe.\+Collaborative\+Session.\+start\+\_\+time = None}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a7d5eede8e6f645dc2f0201f04bf0c8a5}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!supervisor\_alias@{supervisor\_alias}}
+\index{supervisor\_alias@{supervisor\_alias}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{supervisor\_alias}{supervisor\_alias}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a7d5eede8e6f645dc2f0201f04bf0c8a5} 
+str axe.\+Collaborative\+Session.\+supervisor\+\_\+alias = "{}@boss"{}}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a4e87ab5b3d7717d0f5f3c9d8f68ccff6}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!supervisor\_name@{supervisor\_name}}
+\index{supervisor\_name@{supervisor\_name}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{supervisor\_name}{supervisor\_name}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a4e87ab5b3d7717d0f5f3c9d8f68ccff6} 
+axe.\+Collaborative\+Session.\+supervisor\+\_\+name = self.\+agents\mbox{[}0\mbox{]}}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a3d74603f0d884ab93bf04c4b67fd7923}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!task\_description@{task\_description}}
+\index{task\_description@{task\_description}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{task\_description}{task\_description}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a3d74603f0d884ab93bf04c4b67fd7923} 
+str axe.\+Collaborative\+Session.\+task\+\_\+description = "{}"{}}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a3cad46df51b64ebab691d5d053dfe6eb}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!time\_limit@{time\_limit}}
+\index{time\_limit@{time\_limit}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{time\_limit}{time\_limit}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a3cad46df51b64ebab691d5d053dfe6eb} 
+int axe.\+Collaborative\+Session.\+time\+\_\+limit = time\+\_\+limit\+\_\+minutes \texorpdfstring{$\ast$}{*} 60}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a01d559caead539214a65cd29bd02c301}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!tool\_runner@{tool\_runner}}
+\index{tool\_runner@{tool\_runner}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{tool\_runner}{tool\_runner}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a01d559caead539214a65cd29bd02c301} 
+axe.\+Collaborative\+Session.\+tool\+\_\+runner = \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}(\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}}, workspace\+\_\+dir)}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_ab7c3f130204869b9cd3fda1695d663db}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!workspace@{workspace}}
+\index{workspace@{workspace}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{workspace}{workspace}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ab7c3f130204869b9cd3fda1695d663db} 
+axe.\+Collaborative\+Session.\+workspace = \mbox{\hyperlink{classaxe_1_1SharedWorkspace}{Shared\+Workspace}}(workspace\+\_\+dir)}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{axe_8py}{axe.\+py}}\end{DoxyCompactItemize}

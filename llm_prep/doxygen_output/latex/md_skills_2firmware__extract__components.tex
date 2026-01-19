@@ -1,0 +1,19 @@
+\chapter{firmware\+\_\+extract\+\_\+components }
+\hypertarget{md_skills_2firmware__extract__components}{}\label{md_skills_2firmware__extract__components}\index{firmware\_extract\_components@{firmware\_extract\_components}}
+Skill\+: firmware\+\_\+extract\+\_\+components Category\+: Firmware Extraction Recommended agents\+: llama (execution), claude (verification) Purpose\+: Automatically extract embedded filesystems, compressed sections, kernels and other components using binwalk
+
+Key commands\+:
+\begin{DoxyItemize}
+\item binwalk -\/e $<$file$>$ → extract everything to \+\_\+$<$filename$>$.\+extracted/
+\item binwalk --dd=\textquotesingle{}.\texorpdfstring{$\ast$}{*}\textquotesingle{} $<$file$>$ → extract all detected file types
+\item binwalk -\/r -\/e $<$file$>$ → recursive extraction
+\end{DoxyItemize}
+
+Post-\/extraction steps to consider\+:
+\begin{DoxyItemize}
+\item Check for squashfs-\/root, jffs2, ubifs, cramfs, etc.
+\item Try mounting extracted filesystems (squashfs-\/tools, jefferson, etc.)
+\item Look for interesting files\+: /etc/passwd, web UI files, scripts, certificates
+\end{DoxyItemize}
+
+Typical inputs\+: firmware file path Outputs\+: Path to extraction directory + summary of extracted items + quick interesting findings report Note\+: Very often the first big win in firmware reversing 

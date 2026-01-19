@@ -1,0 +1,16 @@
+<map id="test_efficiency_analysis.main" name="test_efficiency_analysis.main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,187,220,215"/>
+<area shape="poly" id="edge7_Node000001_Node000001" title=" " alt="" coords="66,187,58,178,64,168,83,163,113,161,145,163,163,171,158,173,143,168,112,166,84,168,68,173,64,178,71,186"/>
+<area shape="rect" id="Node000002" href="$namespacetest__efficiency__analysis.html#a238b3c8c07dc1d001ddaf9a57d05d719" title=" " alt="" coords="272,5,504,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,185,181,125,222,90,266,60,281,55,277,58,269,65,225,94,185,129,128,188"/>
+<area shape="rect" id="Node000003" href="$namespacetest__efficiency__analysis.html#ac8d56aba10c1ef9afeba7929b99d56dd" title=" " alt="" coords="272,75,504,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,185,199,157,267,129,290,123,286,126,269,134,201,162,144,189"/>
+<area shape="rect" id="Node000004" href="$namespacetest__efficiency__analysis.html#a8eeb792c37aa1f4c73b5e6151ac6d538" title=" " alt="" coords="272,144,504,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="219,185,258,182,254,184,221,190"/>
+<area shape="rect" id="Node000005" href="$namespacetest__efficiency__analysis.html#ae66ff1876f3298ef19606bb494653fa8" title=" " alt="" coords="272,213,504,258"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="219,212,258,218,253,220,221,217"/>
+<area shape="rect" id="Node000006" href="$namespacetest__efficiency__analysis.html#a7933bfeaad467bd549a2b93625c1571c" title=" " alt="" coords="272,283,504,327"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="142,213,201,240,269,268,291,277,285,278,267,273,199,245,142,218"/>
+<area shape="rect" id="Node000007" href="$namespacetest__efficiency__analysis.html#a82828f315442e9d80275261f052a7cc9" title=" " alt="" coords="268,352,508,397"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="127,213,185,273,225,308,269,337,281,346,276,345,266,342,222,312,181,277,125,218"/>
+</map>

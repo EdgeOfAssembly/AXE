@@ -1,0 +1,9 @@
+<map id="workshop.saw.TaintAnalyzer.visit_Assign" name="workshop.saw.TaintAnalyzer.visit_Assign">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,40,242,85"/>
+<area shape="rect" id="Node000002" href="$classworkshop_1_1saw_1_1TaintAnalyzer.html#a9342169b911115a76ab6b5f9c422401f" title=" " alt="" coords="290,5,498,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="242,45,277,42,272,44,243,50"/>
+<area shape="rect" id="Node000003" href="$classworkshop_1_1saw_1_1TaintAnalyzer.html#a018909a0b2cb4d0175cbb8f7566c45bb" title=" " alt="" coords="290,75,498,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="242,75,277,82,272,82,242,80"/>
+<area shape="rect" id="Node000004" href="$classworkshop_1_1saw_1_1TaintAnalyzer.html#a3cd13e2d2cd36cfd16c8781eb8fe44f3" title=" " alt="" coords="546,75,754,119"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="498,94,533,97,528,97,498,100"/>
+</map>

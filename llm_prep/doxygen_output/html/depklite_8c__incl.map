@@ -1,0 +1,23 @@
+<map id="tools/dos_unpackers/depklite.c" name="tools/dos_unpackers/depklite.c">
+<area shape="rect" id="Node000001" title=" " alt="" coords="231,5,385,50"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,98,75,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="236,53,91,98,89,93,238,48"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="62,174,127,201"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="228,48,183,70,139,100,118,129,104,161,100,158,113,126,135,96,180,65,233,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="309,98,379,126"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="319,48,335,84,330,83,316,53"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="257,174,327,201"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="306,48,300,98,295,160,291,157,295,98,302,52"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="404,98,476,126"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="344,48,409,90,404,90,342,53"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="500,98,575,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="369,48,489,92,484,93,369,53"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="599,98,673,126"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="385,45,586,97,581,98,385,51"/>
+<area shape="rect" id="Node000009" href="$depklite_8h.html" title=" " alt="" coords="149,98,235,126"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="280,49,225,91,222,86,275,52"/>
+<area shape="poly" id="edge10_Node000009_Node000003" title=" " alt="" coords="177,125,125,167,122,162,172,127"/>
+<area shape="poly" id="edge11_Node000009_Node000005" title=" " alt="" coords="211,124,265,164,259,164,209,129"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="151,174,233,201"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="194,124,194,159,190,157,190,128"/>
+</map>

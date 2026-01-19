@@ -1,0 +1,76 @@
+\chapter{dos\+\_\+packer\+\_\+detector }
+\hypertarget{md_skills_2dos__packer__detector}{}\label{md_skills_2dos__packer__detector}\index{dos\_packer\_detector@{dos\_packer\_detector}}
+Skill\+: dos\+\_\+packer\+\_\+detector Category\+: DOS-\/specific Reverse Engineering Recommended agents\+: llama (primary, low-\/level analysis), grok (coordination/scripting)
+
+Purpose\+: Detect common DOS executable packers/compressors (LZEXE, PKLITE, EXEPACK, DIET, etc.) on a target .EXE/.COM file. Uses signature checks and safe trial runs with the unpackers from /tools/dos\+\_\+unpackers/. Reports packer type (or "{}plain/unpacked MZ executable"{}) and suggests the appropriate unpack command. Essential prep step before static disassembly or memory analysis, as packed exes hide code/strings.
+
+Typical inputs\+:
+\begin{DoxyItemize}
+\item Path to DOS executable (e.\+g., AR/\+AR.\+EXE, relative to workspace)
+\item Optional flags\+: --unpack (auto-\/unpack if detected, outputs unpacked.\+exe), --verbose (show raw tool output)
+\end{DoxyItemize}
+
+Outputs\+:
+\begin{DoxyItemize}
+\item Markdown report\+: detected packer (or none), confidence, key evidence (signatures/output)
+\item If --unpack\+: path to unpacked file (e.\+g., AR\+\_\+unpacked.\+exe)
+\item Ready next steps (e.\+g., "{}@llama disassemble unpacked.\+exe"{} or "{}\+No packer → feed directly to ida\+\_\+pro\+\_\+analysis\+\_\+patterns"{})
+\end{DoxyItemize}
+
+AXE-\/specific notes\+:
+\begin{DoxyItemize}
+\item Requires unpackers built in /tools/dos\+\_\+unpackers/ (runs {\ttfamily make} automatically if binaries missing)
+\item Works on copy of file to avoid modifying original
+\item Sandbox-\/safe (all ops in workspace)
+\item Focuses on classic 80s/90s packers (LZEXE v0.\+9x, PKLITE 1.\+x/2.x, Microsoft EXEPACK); modern ones like UPX not expected in old DOS games
+\end{DoxyItemize}
+
+Step-\/by-\/step workflow (follow precisely)\+:
+
+
+\begin{DoxyEnumerate}
+\item Build unpackers if needed\+: if \mbox{[} ! -\/f /tools/dos\+\_\+unpackers/unlzexe \mbox{]} \texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|} \mbox{[} ! -\/f /tools/dos\+\_\+unpackers/depklite \mbox{]} \texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|} \mbox{[} ! -\/f /tools/dos\+\_\+unpackers/unexepack \mbox{]}; then make -\/C /tools/dos\+\_\+unpackers/ echo "{}\+Built DOS unpackers"{} fi
+\item Validate target\+:
+\begin{DoxyItemize}
+\item File exists and is MZ executable\+: head -\/c 2 "{}\$target"{} \texorpdfstring{$\vert$}{|} grep -\/q "{}\+MZ"{} \texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|} error "{}\+Not a valid DOS MZ executable"{}
+\end{DoxyItemize}
+\item Make safe working copy\+: cp "{}\$target"{} temp\+\_\+packed.\+exe
+\item Detection (try tools in order of commonality, capture output)\+: packer="{}none"{} evidence="{}"{}
+\end{DoxyEnumerate}\hypertarget{md_skills_2dos__packer__detector_autotoc_md1268}{}\doxysection{\texorpdfstring{Try unlzexe first (very common)}{Try unlzexe first (very common)}}\label{md_skills_2dos__packer__detector_autotoc_md1268}
+/tools/dos\+\_\+unpackers/unlzexe -\/t temp\+\_\+packed.\+exe \texorpdfstring{$>$}{>} detect\+\_\+log.\+txt 2\texorpdfstring{$>$}{>}\&1 if grep -\/qi "{}packed.\texorpdfstring{$\ast$}{*}lzexe"{} detect\+\_\+log.\+txt; then packer="{}\+LZEXE"{} evidence=\$(grep -\/i "{}lzexe"{} detect\+\_\+log.\+txt)\hypertarget{md_skills_2dos__packer__detector_autotoc_md1269}{}\doxysection{\texorpdfstring{Then PKLITE}{Then PKLITE}}\label{md_skills_2dos__packer__detector_autotoc_md1269}
+elif /tools/dos\+\_\+unpackers/depklite temp\+\_\+packed.\+exe \texorpdfstring{$>$}{>} detect\+\_\+log.\+txt 2\texorpdfstring{$>$}{>}\&1 \&\& grep -\/q "{}\+PKLITE"{} detect\+\_\+log.\+txt; then packer="{}\+PKLITE"{} evidence=\$(grep -\/i "{}pklite"{} detect\+\_\+log.\+txt)\hypertarget{md_skills_2dos__packer__detector_autotoc_md1270}{}\doxysection{\texorpdfstring{Then EXEPACK}{Then EXEPACK}}\label{md_skills_2dos__packer__detector_autotoc_md1270}
+elif /tools/dos\+\_\+unpackers/unexepack temp\+\_\+packed.\+exe \texorpdfstring{$>$}{>} detect\+\_\+log.\+txt 2\texorpdfstring{$>$}{>}\&1 \&\& grep -\/q "{}\+EXEPACK"{} detect\+\_\+log.\+txt; then packer="{}\+Microsoft EXEPACK"{} evidence=\$(grep -\/i "{}exepack"{} detect\+\_\+log.\+txt)\hypertarget{md_skills_2dos__packer__detector_autotoc_md1271}{}\doxysection{\texorpdfstring{Optional\+: add more (DIET, etc.) if tools expand}{Optional\+: add more (DIET, etc.) if tools expand}}\label{md_skills_2dos__packer__detector_autotoc_md1271}
+fi\hypertarget{md_skills_2dos__packer__detector_autotoc_md1272}{}\doxysection{\texorpdfstring{Fallback signature quick-\/check if all trials fail}{Fallback signature quick-\/check if all trials fail}}\label{md_skills_2dos__packer__detector_autotoc_md1272}
+if \mbox{[} "{}\$packer"{} = "{}none"{} \mbox{]}; then if strings temp\+\_\+packed.\+exe \texorpdfstring{$\vert$}{|} grep -\/qi "{}pklite"{}; then packer="{}\+PKLITE (signature only)"{} elif hexdump -\/C temp\+\_\+packed.\+exe \texorpdfstring{$\vert$}{|} grep -\/qi "{}lz09\textbackslash{}\texorpdfstring{$\vert$}{|}lz91"{}; then packer="{}\+LZEXE (signature only)"{} fi fi
+
+rm temp\+\_\+packed.\+exe
+
+
+\begin{DoxyEnumerate}
+\item Optional auto-\/unpack\+: if \mbox{[} "{}-\/-\/unpack"{} provided \mbox{]} \&\& \mbox{[} "{}\$packer"{} != "{}none"{} \mbox{]}; then cp "{}\$target"{} temp\+\_\+packed.\+exe case \$packer in "{}\+LZEXE"{}\texorpdfstring{$\ast$}{*}) /tools/dos\+\_\+unpackers/unlzexe temp\+\_\+packed.\+exe ;; "{}\+PKLITE"{}\texorpdfstring{$\ast$}{*}) /tools/dos\+\_\+unpackers/depklite temp\+\_\+packed.\+exe ;; "{}\+Microsoft EXEPACK"{}\texorpdfstring{$\ast$}{*}) /tools/dos\+\_\+unpackers/unexepack temp\+\_\+packed.\+exe ;; esac mv temp\+\_\+packed.\+exe "{}\$\{target\%.\texorpdfstring{$\ast$}{*}\}\+\_\+unpacked.\+exe"{} unpacked\+\_\+path="{}\$\{target\%.\texorpdfstring{$\ast$}{*}\}\+\_\+unpacked.\+exe"{} fi
+\item Final report (Markdown)\+: 
+\end{DoxyEnumerate}\hypertarget{md_skills_2dos__packer__detector_autotoc_md1273}{}\doxysection{\texorpdfstring{DOS Packer Detection Report}{DOS Packer Detection Report}}\label{md_skills_2dos__packer__detector_autotoc_md1273}
+{\bfseries{Target\+:}} \$target ~\newline
+ {\bfseries{Detected packer\+:}} \$packer ~\newline
+
+
+{\bfseries{Evidence\+:}} \$evidence (or full detect\+\_\+log.\+txt if --verbose)
+
+{\bfseries{Artifacts\+:}}
+\begin{DoxyItemize}
+\item detect\+\_\+log.\+txt (raw tool output)
+\item \$unpacked\+\_\+path (if --unpack used)
+\end{DoxyItemize}
+
+{\bfseries{Next steps\+:}}
+\begin{DoxyItemize}
+\item If packed and unpacked\+: "{}@llama use x86\+\_\+assembly\+\_\+expert on unpacked.\+exe"{} or feed to IDA
+\item If none\+: "{}\+Proceed with original → strings, disassembly, or dosbox dynamic analysis"{}
+\item If uncertain\+: "{}\+Manual check with hex editor for other packers"{}
+\end{DoxyItemize}
+
+Example chains\+: @llama use dos\+\_\+packer\+\_\+detector AR/\+AR.\+EXE → Likely "{}none"{} for Airborne Ranger
+
+@llama use dos\+\_\+packer\+\_\+detector somegame.\+exe --unpack → Auto-\/unpacks if LZEXE/\+PKLITE/\+EXEPACK, ready for deeper RE
+
+@llama use dos\+\_\+packer\+\_\+detector oldshareware.\+exe --verbose → Full diagnostic output for tricky cases 

@@ -1,0 +1,217 @@
+\chapter{Dynamic Max Output Tokens Implementation Summary }
+\hypertarget{md_DYNAMIC__TOKENS__SUMMARY}{}\label{md_DYNAMIC__TOKENS__SUMMARY}\index{Dynamic Max Output Tokens Implementation Summary@{Dynamic Max Output Tokens Implementation Summary}}
+\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md336}%
+\Hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md336}%
+\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md337}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md337}
+This implementation fixes three critical issues with AXE\textquotesingle{}s hardcoded {\ttfamily max\+\_\+tokens=32768} approach\+:
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Anthropic SDK Error}} -\/ The SDK requires streaming for operations that may take \texorpdfstring{$>$}{>}10 minutes
+\item {\bfseries{Token Truncation}} -\/ Some models (like GPT-\/4o) only support 16,384 max output tokens, not 32,768
+\item {\bfseries{Wasted Capacity}} -\/ Some models (like Claude Opus 4.\+5, GPT-\/5.\+2) support much more than 32,768 tokens
+\end{DoxyEnumerate}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md338}{}\doxysection{\texorpdfstring{Changes Made}{Changes Made}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md338}
+\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md339}{}\doxysubsection{\texorpdfstring{1. {\ttfamily models/metadata.\+py}}{1. {\ttfamily models/metadata.\+py}}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md339}
+{\bfseries{Added\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily get\+\_\+max\+\_\+output\+\_\+tokens(model\+\_\+name\+: str, default\+: int = 4000) -\/\texorpdfstring{$>$}{>} int} helper function
+\begin{DoxyItemize}
+\item Looks up max output tokens from model metadata
+\item Returns safe default (4000) if model not found
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+{\bfseries{Fixed\+:}}
+\begin{DoxyItemize}
+\item Removed extra space in {\ttfamily DEFAULT\+\_\+\+METADATA.\+copy()} (typo fix)
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md340}{}\doxysubsection{\texorpdfstring{2. {\ttfamily models.\+yaml}}{2. {\ttfamily models.\+yaml}}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md340}
+{\bfseries{Updated\+:}}
+\begin{DoxyItemize}
+\item Default {\ttfamily max\+\_\+output\+\_\+tokens} from 2048 → 4000 (safer default for unknown models)
+\item Added comment explaining it\textquotesingle{}s a safe default
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md341}{}\doxysubsection{\texorpdfstring{3. {\ttfamily core/agent\+\_\+manager.\+py}}{3. {\ttfamily core/agent\+\_\+manager.\+py}}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md341}
+{\bfseries{Updated {\ttfamily call\+\_\+agent()} method\+:}}
+\begin{DoxyItemize}
+\item Added import\+: {\ttfamily get\+\_\+max\+\_\+output\+\_\+tokens}
+\item Replaced all hardcoded {\ttfamily max\+\_\+tokens=32000} with dynamic lookups\+:
+\begin{DoxyItemize}
+\item {\ttfamily max\+\_\+output = get\+\_\+max\+\_\+output\+\_\+tokens(model, default=4000)}
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+{\bfseries{Anthropic Provider\+:}}
+\begin{DoxyItemize}
+\item Changed from {\ttfamily client.\+messages.\+create()} to {\ttfamily client.\+messages.\+stream()}
+\item Implemented proper streaming with text accumulation
+\item Fixed token tracking to work with streaming API
+\item This prevents the "{}\+Streaming is required for operations $>$10 minutes"{} error
+\end{DoxyItemize}
+
+{\bfseries{Open\+AI/x\+AI/\+Git\+Hub Providers\+:}}
+\begin{DoxyItemize}
+\item Uses dynamic {\ttfamily max\+\_\+output} instead of hardcoded 32000
+\item Maintains {\ttfamily max\+\_\+completion\+\_\+tokens} vs {\ttfamily max\+\_\+tokens} logic for GPT-\/5+
+\end{DoxyItemize}
+
+{\bfseries{Hugging\+Face Provider\+:}}
+\begin{DoxyItemize}
+\item Uses dynamic {\ttfamily max\+\_\+output} instead of hardcoded 32000
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md342}{}\doxysubsection{\texorpdfstring{4. {\ttfamily axe.\+py} (Collaborative\+Session)}{4. {\ttfamily axe.\+py} (Collaborative\+Session)}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md342}
+{\bfseries{Updated {\ttfamily \+\_\+run\+\_\+collaboration\+\_\+loop()} method\+:}}
+\begin{DoxyItemize}
+\item Added import\+: {\ttfamily get\+\_\+max\+\_\+output\+\_\+tokens}
+\item Added dynamic token lookup\+: {\ttfamily max\+\_\+output = get\+\_\+max\+\_\+output\+\_\+tokens(model, default=4000)}
+\end{DoxyItemize}
+
+{\bfseries{Anthropic Provider\+:}}
+\begin{DoxyItemize}
+\item Changed to streaming API\+: {\ttfamily client.\+messages.\+stream()}
+\item Simplified response handling (no need to check resp.\+content)
+\end{DoxyItemize}
+
+{\bfseries{Open\+AI/x\+AI/\+Git\+Hub Providers\+:}}
+\begin{DoxyItemize}
+\item Uses dynamic {\ttfamily max\+\_\+output} instead of hardcoded 32000
+\item Maintains proper parameter naming logic
+\end{DoxyItemize}
+
+{\bfseries{Hugging\+Face Provider\+:}}
+\begin{DoxyItemize}
+\item Uses dynamic {\ttfamily max\+\_\+output} instead of hardcoded 32000
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md343}{}\doxysubsection{\texorpdfstring{5. {\ttfamily tests/test\+\_\+models\+\_\+yaml.\+py}}{5. {\ttfamily tests/test\+\_\+models\+\_\+yaml.\+py}}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md343}
+{\bfseries{Updated\+:}}
+\begin{DoxyItemize}
+\item Changed expected default from 2048 → 4000 to match new default
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md344}{}\doxysubsection{\texorpdfstring{6. {\ttfamily tests/test\+\_\+dynamic\+\_\+max\+\_\+tokens.\+py} (NEW)}{6. {\ttfamily tests/test\+\_\+dynamic\+\_\+max\+\_\+tokens.\+py} (NEW)}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md344}
+{\bfseries{Comprehensive test suite covering\+:}}
+\begin{DoxyItemize}
+\item Helper function behavior
+\item Various model token limits (14 different models tested)
+\item Verification that no hardcoded values remain
+\item Dynamic lookup implementation presence
+\item Safe default fallback behavior
+\item Edge cases (empty names, special chars, long names)
+\item Consistency between helper and direct lookup
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md345}{}\doxysubsection{\texorpdfstring{7. {\ttfamily demo\+\_\+dynamic\+\_\+tokens.\+py} (NEW)}{7. {\ttfamily demo\+\_\+dynamic\+\_\+tokens.\+py} (NEW)}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md345}
+{\bfseries{Demonstration script showing\+:}}
+\begin{DoxyItemize}
+\item Token limits for 10 different model types
+\item Comparison\+: old (32,768) vs new (dynamic) behavior
+\item Visual summary of key benefits
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md346}{}\doxysection{\texorpdfstring{Benefits}{Benefits}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md346}
+\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md347}{}\doxysubsection{\texorpdfstring{1. Anthropic SDK Error Fixed ✓}{1. Anthropic SDK Error Fixed ✓}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md347}
+
+\begin{DoxyItemize}
+\item Now uses streaming API
+\item Prevents "{}\+Streaming is required for operations that may take longer than 10 minutes"{} error
+\item Maintains token usage tracking for billing/monitoring
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md348}{}\doxysubsection{\texorpdfstring{2. Token Truncation Fixed ✓}{2. Token Truncation Fixed ✓}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md348}
+
+\begin{DoxyItemize}
+\item {\bfseries{GPT-\/4o}}\+: Now uses 16,000 (its actual limit) instead of 32,000
+\item {\bfseries{GPT-\/4o Mini}}\+: Now uses 16,000 instead of 32,000
+\item {\bfseries{Claude Haiku 4.\+5}}\+: Now uses 8,000 instead of 32,000
+\item Prevents API errors or silent truncation
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md349}{}\doxysubsection{\texorpdfstring{3. Wasted Capacity Fixed ✓}{3. Wasted Capacity Fixed ✓}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md349}
+
+\begin{DoxyItemize}
+\item {\bfseries{Claude Opus 4.\+5}}\+: Now uses 64,000 instead of 32,000 (2x capacity!)
+\item {\bfseries{GPT-\/5.\+2}}\+: Now uses 128,000 instead of 32,000 (4x capacity!)
+\item {\bfseries{GPT-\/4.\+1}}\+: Now uses 64,000 instead of 32,000 (2x capacity!)
+\item {\bfseries{o3/o4-\/mini}}\+: Now uses 100,000 instead of 32,000 (3x capacity!)
+\item {\bfseries{openai/gpt-\/5}}\+: Now uses 100,000 instead of 32,000 (3x capacity!)
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md350}{}\doxysubsection{\texorpdfstring{4. Safe Defaults ✓}{4. Safe Defaults ✓}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md350}
+
+\begin{DoxyItemize}
+\item Unknown models default to 4,000 tokens (widely supported)
+\item Prevents over-\/requesting from unknown/new models
+\item Easy to override with custom default parameter
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md351}{}\doxysection{\texorpdfstring{Testing}{Testing}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md351}
+All tests pass\+:
+\begin{DoxyItemize}
+\item ✅ {\ttfamily \doxylink{test__models__yaml_8py}{test\+\_\+models\+\_\+yaml.\+py}} -\/ Model metadata loading
+\item ✅ {\ttfamily \doxylink{test__dynamic__max__tokens_8py}{test\+\_\+dynamic\+\_\+max\+\_\+tokens.\+py}} -\/ Dynamic token limits (NEW)
+\item ✅ {\ttfamily \doxylink{test__token__error__handling_8py}{test\+\_\+token\+\_\+error\+\_\+handling.\+py}} -\/ Error handling
+\item ✅ {\ttfamily \doxylink{test__token__optimization_8py}{test\+\_\+token\+\_\+optimization.\+py}} -\/ Token optimization
+\item ✅ Manual verification with Agent\+Manager initialization
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md352}{}\doxysection{\texorpdfstring{Model Examples}{Model Examples}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md352}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Old Limit  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}New Limit  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Change  \\
+claude-\/opus-\/4-\/5-\/20251101  &32,000  &{\bfseries{64,000}}  &+100\% 🚀  \\
+claude-\/haiku-\/4-\/5-\/20251001  &32,000  &{\bfseries{8,000}}  &-\/75\% ✓  \\
+gpt-\/5.\+2  &32,000  &{\bfseries{128,000}}  &+300\% 🚀  \\
+gpt-\/4o  &32,000  &{\bfseries{16,000}}  &-\/50\% ✓  \\
+gpt-\/4.\+1  &32,000  &{\bfseries{64,000}}  &+100\% 🚀  \\
+o3  &32,000  &{\bfseries{100,000}}  &+212\% 🚀  \\
+openai/gpt-\/5  &32,000  &{\bfseries{100,000}}  &+212\% 🚀  \\
+grok-\/4-\/1-\/fast-\/reasoning  &32,000  &{\bfseries{32,000}}  &Same  \\
+unknown-\/model  &32,000  &{\bfseries{4,000}}  &-\/87\% ✓  \\
+\end{DoxyTable}
+\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md353}{}\doxysection{\texorpdfstring{Backward Compatibility}{Backward Compatibility}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md353}
+✅ {\bfseries{Fully backward compatible}}
+\begin{DoxyItemize}
+\item No API changes to public functions
+\item Existing code continues to work
+\item Only internal implementation changed
+\item All existing tests pass
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md354}{}\doxysection{\texorpdfstring{Code Quality}{Code Quality}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md354}
+✅ {\bfseries{Follows existing patterns}}
+\begin{DoxyItemize}
+\item Uses existing {\ttfamily get\+\_\+model\+\_\+info()} infrastructure
+\item Maintains {\ttfamily uses\+\_\+max\+\_\+completion\+\_\+tokens()} logic
+\item Consistent error handling
+\item Proper token tracking for billing
+\end{DoxyItemize}
+
+✅ {\bfseries{Well tested}}
+\begin{DoxyItemize}
+\item 100+ test cases across all test files
+\item Edge cases covered
+\item Integration tested
+\end{DoxyItemize}
+
+✅ {\bfseries{Documented}}
+\begin{DoxyItemize}
+\item Clear docstrings
+\item Inline comments explaining key changes
+\item Comprehensive test documentation
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md355}{}\doxysection{\texorpdfstring{Future Enhancements}{Future Enhancements}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md355}
+Potential improvements (not included in this PR)\+:
+\begin{DoxyEnumerate}
+\item Add rate limiting based on model-\/specific limits
+\item Add warnings when approaching token limits
+\item Add auto-\/retry with reduced tokens on failure
+\item Add telemetry for actual token usage vs limits
+\end{DoxyEnumerate}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md356}{}\doxysection{\texorpdfstring{Migration Guide}{Migration Guide}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md356}
+{\bfseries{No migration needed!}} This is a transparent internal improvement.
+
+For developers adding new models\+:
+\begin{DoxyEnumerate}
+\item Add model to {\ttfamily models.\+yaml} with correct {\ttfamily max\+\_\+output\+\_\+tokens}
+\item New model automatically uses correct limits
+\item No code changes required
+\end{DoxyEnumerate}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md357}{}\doxysection{\texorpdfstring{Files Modified}{Files Modified}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md357}
+
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{metadata_8py}{models/metadata.\+py}} -\/ Added helper function
+\item {\ttfamily models.\+yaml} -\/ Updated default
+\item {\ttfamily \doxylink{agent__manager_8py}{core/agent\+\_\+manager.\+py}} -\/ Dynamic lookups + Anthropic streaming
+\item {\ttfamily \doxylink{axe_8py}{axe.\+py}} -\/ Dynamic lookups + Anthropic streaming
+\item {\ttfamily \doxylink{test__models__yaml_8py}{tests/test\+\_\+models\+\_\+yaml.\+py}} -\/ Updated test expectations
+\item {\ttfamily \doxylink{test__dynamic__max__tokens_8py}{tests/test\+\_\+dynamic\+\_\+max\+\_\+tokens.\+py}} -\/ NEW comprehensive tests
+\item {\ttfamily \doxylink{demo__dynamic__tokens_8py}{demo\+\_\+dynamic\+\_\+tokens.\+py}} -\/ NEW demonstration script
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md358}{}\doxysection{\texorpdfstring{Security Considerations}{Security Considerations}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md358}
+✅ {\bfseries{No security impact}}
+\begin{DoxyItemize}
+\item Reduces risk of over-\/requesting tokens
+\item Maintains existing error handling
+\item Safe defaults prevent potential DoS
+\item Token tracking unchanged
+\end{DoxyItemize}\hypertarget{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md359}{}\doxysection{\texorpdfstring{Performance Impact}{Performance Impact}}\label{md_DYNAMIC__TOKENS__SUMMARY_autotoc_md359}
+✅ {\bfseries{Negligible performance impact}}
+\begin{DoxyItemize}
+\item One dictionary lookup per API call
+\item Metadata cached in memory
+\item Streaming may be slightly slower for small responses but prevents timeouts for large ones 
+\end{DoxyItemize}

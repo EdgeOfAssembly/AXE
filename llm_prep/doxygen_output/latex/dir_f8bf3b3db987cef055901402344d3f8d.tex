@@ -1,0 +1,55 @@
+\doxysection{tools/dos\+\_\+unpackers Directory Reference}
+\hypertarget{dir_f8bf3b3db987cef055901402344d3f8d}{}\label{dir_f8bf3b3db987cef055901402344d3f8d}\index{tools/dos\_unpackers Directory Reference@{tools/dos\_unpackers Directory Reference}}
+Directory dependency graph for dos\+\_\+unpackers\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=200pt]{dir_f8bf3b3db987cef055901402344d3f8d_dep}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \mbox{\hyperlink{depklite_8c}{depklite.\+c}}
+\item 
+file \mbox{\hyperlink{depklite_8h}{depklite.\+h}}
+\item 
+file \mbox{\hyperlink{unlzexe_8c}{unlzexe.\+c}}
+\item 
+file \mbox{\hyperlink{unpack_8c}{unpack.\+c}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_f8bf3b3db987cef055901402344d3f8d_autotoc_md1339}{}\doxysubsection{\texorpdfstring{DOS EXE Unpackers}{DOS EXE Unpackers}}\label{dir_f8bf3b3db987cef055901402344d3f8d_autotoc_md1339}
+Collection of simple tools for unpacking common DOS executable packers (LZEXE, EXEPACK, PKLITE). These are useful for reverse engineering old MS-\/\+DOS games and tools before disassembly/analysis.
+
+These are integrated as source code so the repo stays self-\/contained.\hypertarget{dir_f8bf3b3db987cef055901402344d3f8d_autotoc_md1340}{}\doxysubsubsection{\texorpdfstring{Build Instructions}{Build Instructions}}\label{dir_f8bf3b3db987cef055901402344d3f8d_autotoc_md1340}
+You need gcc (standard on most Linux distros).
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ tools/dos\_unpackers}
+\DoxyCodeLine{make\ \ \ \ \ \ \ \ \ \ \#\ builds\ unlzexe,\ unexepack,\ depklite}
+
+\end{DoxyCode}
+
+
+Binaries will appear in this directory. Add it to your PATH or call them with relative paths from AXE agents/scripts.\hypertarget{dir_f8bf3b3db987cef055901402344d3f8d_autotoc_md1341}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{dir_f8bf3b3db987cef055901402344d3f8d_autotoc_md1341}
+
+\begin{DoxyItemize}
+\item ./unlzexe packed.\+exe → creates unpacked version (usually with -\/unlzexe suffix)
+\item ./unexepack packed.\+exe → creates "{}unpacked"{} by default
+\item ./depklite packed.\+exe → creates packed.\+exe.\+dep (extracted data)
+\end{DoxyItemize}\hypertarget{dir_f8bf3b3db987cef055901402344d3f8d_autotoc_md1342}{}\doxysubsubsection{\texorpdfstring{Attributions \& Credits}{Attributions \& Credits}}\label{dir_f8bf3b3db987cef055901402344d3f8d_autotoc_md1342}
+These tools are ports/adaptations of classic unpackers. Big thanks to the original authors and maintainers\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{unlzexe}}\+: Based on work by Fabrice Bellard and Mitugu Kurizono. Linux port by mywave82\mbox{[}\mbox{]}(\href{https://github.com/mywave82/unlzexe}{\texttt{https\+://github.\+com/mywave82/unlzexe}}).
+\item {\bfseries{unexepack}}\+: By w4kfu\mbox{[}\mbox{]}(\href{https://github.com/w4kfu/unEXEPACK}{\texttt{https\+://github.\+com/w4kfu/un\+EXEPACK}}). Handles Microsoft EXEPACK.
+\item {\bfseries{depklite}}\+: By hackerb9\mbox{[}\mbox{]}(\href{https://github.com/hackerb9/depklite}{\texttt{https\+://github.\+com/hackerb9/depklite}}). MIT licensed. Extracts PKLITE-\/compressed data—great for RE.
+\end{DoxyItemize}
+
+Huge respect to these folks and the retro RE community for keeping old DOS stuff accessible! 

@@ -1,0 +1,30 @@
+digraph "test_silent_builds.run_all_tests"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="test_silent_builds.run\l_all_tests",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node1 [id="edge12_Node000001_Node000001",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node2 [id="edge13_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="test_silent_builds.test\l_all_agents_have_build\l_guidelines",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__silent__builds.html#a69ab5f227ac98865545ee3ab98cf88a4",tooltip=" "];
+  Node1 -> Node3 [id="edge14_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="test_silent_builds.test\l_axe_yaml_is_valid",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__silent__builds.html#afa53f6802edd1e9894ee93ed24211520",tooltip=" "];
+  Node1 -> Node4 [id="edge15_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="test_silent_builds.test\l_build_guidelines_contain\l_required_flags",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__silent__builds.html#a0b97a3be42797f5f5ab85a93bba7c0a4",tooltip=" "];
+  Node1 -> Node5 [id="edge16_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="test_silent_builds.test\l_build_guidelines_format\l_consistency",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__silent__builds.html#a0c204884c148d8b5eb4f628c4313d40f",tooltip=" "];
+  Node1 -> Node6 [id="edge17_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="test_silent_builds.test\l_build_md_exists_and_valid",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__silent__builds.html#ab56f793f6906f4dbb319aee4211c61b6",tooltip=" "];
+  Node1 -> Node7 [id="edge18_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="test_silent_builds.test\l_claude_build_md_exists\l_and_valid",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__silent__builds.html#a45cd5ed1af80b0256a2b0687138267d4",tooltip=" "];
+  Node1 -> Node8 [id="edge19_Node000001_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="test_silent_builds.test\l_claude_has_security_specific\l_guidelines",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__silent__builds.html#a18cf69530455ab1948852b9f814903b7",tooltip=" "];
+  Node1 -> Node9 [id="edge20_Node000001_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="test_silent_builds.test\l_no_breaking_changes_to\l_existing_prompts",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__silent__builds.html#aef7cf3f447ea468df34a43a96fa7ba3d",tooltip=" "];
+  Node1 -> Node10 [id="edge21_Node000001_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="test_silent_builds.test\l_skills_directory_exists",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__silent__builds.html#a9383a3202b91979a12fb65e0e10a669d",tooltip=" "];
+  Node1 -> Node11 [id="edge22_Node000001_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="test_silent_builds.test\l_token_savings_documentation",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__silent__builds.html#abfefe9c728dcd7aaff79a8e2a0e21dac",tooltip=" "];
+}

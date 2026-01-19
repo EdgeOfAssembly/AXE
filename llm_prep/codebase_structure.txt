@@ -1,6 +1,37 @@
 .
 ├── claude
 │   ├── ocr_out
+│   │   ├── Agent Skills - Claude Docs.txt
+│   │   ├── Bash tool - Claude Docs.txt
+│   │   ├── Batch processing - Claude Docs.txt
+│   │   ├── Building with extended thinking - Claude Docs.txt
+│   │   ├── Chain complex prompts for stronger performance - Claude Docs.txt
+│   │   ├── Code execution tool - Claude Docs.txt
+│   │   ├── Computer use tool - Claude Docs.txt
+│   │   ├── Context editing - Claude Docs.txt
+│   │   ├── Extended thinking tips - Claude Docs.txt
+│   │   ├── Files API - Claude Docs.txt
+│   │   ├── Get started with Agent Skills in the API - Claude Docs.txt
+│   │   ├── Giving Claude a role with a system prompt - Claude Docs.txt
+│   │   ├── How to implement tool use - Claude Docs.txt
+│   │   ├── Let Claude think (chain of thought prompting) to increase performance - Claude Docs.txt
+│   │   ├── Long context prompting tips - Claude Docs.txt
+│   │   ├── Memory tool - Claude Docs.txt
+│   │   ├── Multilingual support - Claude Docs.txt
+│   │   ├── PDF support - Claude Docs.txt
+│   │   ├── Pricing - Claude Docs.txt
+│   │   ├── Programmatic tool calling - Claude Docs.txt
+│   │   ├── Prompt caching - Claude Docs.txt
+│   │   ├── Prompt engineering overview - Claude Docs.txt
+│   │   ├── Skill authoring best practices - Claude Docs.txt
+│   │   ├── Text editor tool - Claude Docs.txt
+│   │   ├── Token counting - Claude Docs.txt
+│   │   ├── Tool search tool - Claude Docs.txt
+│   │   ├── Use XML tags to structure your prompts - Claude Docs.txt
+│   │   ├── Using Agent Skills with the API - Claude Docs.txt
+│   │   ├── Vision - Claude Docs.txt
+│   │   ├── Web fetch tool - Claude Docs.txt
+│   │   └── Web search tool - Claude Docs.txt
 │   ├── Agent Skills - Claude Docs.pdf
 │   ├── Bash tool - Claude Docs.pdf
 │   ├── Batch processing - Claude Docs.pdf
@@ -34,25 +65,38 @@
 │   ├── Web fetch tool - Claude Docs.pdf
 │   └── Web search tool - Claude Docs.pdf
 ├── core
+│   ├── acp_validator.py
 │   ├── agent_manager.py
+│   ├── anthropic_features.py
 │   ├── config.py
 │   ├── constants.py
+│   ├── environment_probe.py
+│   ├── github_agent.py
 │   ├── __init__.py
 │   ├── multiprocess.py
 │   ├── resource_monitor.py
 │   ├── sandbox.py
 │   ├── session_manager.py
+│   ├── session_preprocessor.py
+│   ├── skills_manager.py
 │   └── tool_runner.py
+├── data
+│   ├── create_abbreviations_db.py
+│   └── it_abbreviations.db
 ├── database
 │   ├── agent_db.py
 │   ├── __init__.py
 │   └── schema.py
 ├── docs
-│   └── diagrams
-│       ├── call_graph.dot
-│       ├── class_diagram.dot
-│       ├── module_dependencies.dot
-│       └── README.md
+│   ├── diagrams
+│   │   ├── call_graph.dot
+│   │   ├── class_diagram.dot
+│   │   ├── module_dependencies.dot
+│   │   └── README.md
+│   ├── ANTHROPIC_FEATURES.md
+│   └── GITHUB_AGENT_INTEGRATION.md
+├── examples
+│   └── anthropic_features_demo.py
 ├── llm_prep
 │   ├── dot_graphs_doxygen
 │   ├── dot_graphs_pyreverse
@@ -69,6 +113,7 @@
 │   ├── dynamic_spawner.py
 │   ├── emergency_mailbox.py
 │   ├── __init__.py
+│   ├── shared_build_status.py
 │   └── sleep_manager.py
 ├── models
 │   ├── __init__.py
@@ -80,24 +125,69 @@
 ├── safety
 │   ├── __init__.py
 │   └── rules.py
+├── scripts
+│   └── benchmark_acp.py
+├── skills
+│   ├── boot_flow_reconstruction.md
+│   ├── build.md
+│   ├── claude_build.md
+│   ├── c_modernization_expert.md
+│   ├── cpp_modernization_expert.md
+│   ├── cpp_refactoring_expert.md
+│   ├── deep_dive_function.md
+│   ├── dosbox_emulation_setup.md
+│   ├── dosbox_int21_trace.md
+│   ├── dosbox_memory_dump.md
+│   ├── dosbox_screenshot.md
+│   ├── dos_exe_unpack.md
+│   ├── dos_memory_arena_analyzer.md
+│   ├── dos_packer_detector.md
+│   ├── find_entry_points.md
+│   ├── firmware_binwalk_scan.md
+│   ├── firmware_entropy_analyzer.md
+│   ├── firmware_extract_components.md
+│   ├── firmware_header_identify.md
+│   ├── ida_pro_analysis_patterns.md
+│   ├── indirect_flow_hunter.md
+│   ├── manifest.json
+│   ├── map_data_flows.md
+│   ├── peripheral_register_patterns.md
+│   ├── python_agent_expert.md
+│   ├── recover_high_level_model.md
+│   ├── reverse_engineering_expert.md
+│   ├── trace_execution_path.md
+│   └── x86_assembly_expert.md
 ├── tests
+│   ├── MISSION.md
 │   ├── test_absolute_path_fix.py
+│   ├── test_acp_benchmark.py
 │   ├── test_analysis_tools.py
+│   ├── test_anthropic_features.py
+│   ├── test_anthropic_integration.py
 │   ├── test_axe_improvements.py
 │   ├── test_collab_tool_syntax.py
 │   ├── test_database_location.py
 │   ├── test_detect_agent_token.py
 │   ├── test_double_execution.py
 │   ├── test_dynamic_max_tokens.py
+│   ├── test_efficiency_analysis.py
+│   ├── test_environment_probe.py
 │   ├── test_exec_heredoc.py
+│   ├── test_github_agent.py
 │   ├── test_heredoc_execution_fix.py
 │   ├── test_heredoc_parsing.py
 │   ├── test_inline_exec_blocks.py
 │   ├── test_integration_bug_fix.py
 │   ├── test_integration_database_fix.py
+│   ├── test_large_code_files.py
+│   ├── test_minifier.py
 │   ├── test_mission_md_tokens.py
 │   ├── test_models_yaml.py
 │   ├── test_sandbox.py
+│   ├── test_session_preprocessor.py
+│   ├── test_shared_build_status.py
+│   ├── test_silent_builds.py
+│   ├── test_skills_manager.py
 │   ├── test_spawned_agents.py
 │   ├── test_supervisor_protections.py
 │   ├── test_task_completion_detection.py
@@ -113,9 +203,28 @@
 │   ├── test_xml_new_formats.py
 │   └── test_xml_tool_parser.py
 ├── tools
+│   ├── dosbox-presets
+│   │   ├── cga-8086.conf
+│   │   ├── ega-286.conf
+│   │   ├── headless-re.conf
+│   │   ├── re-base.conf
+│   │   ├── svga-pentium.conf
+│   │   └── vga-386.conf
+│   ├── dosbox-scripts
+│   │   ├── run_airborne_interactive.sh
+│   │   └── trace_airborne_io.sh
+│   ├── dos_unpackers
+│   │   ├── depklite.c
+│   │   ├── depklite.h
+│   │   ├── Makefile
+│   │   ├── README.md
+│   │   ├── unlzexe.c
+│   │   └── unpack.c
 │   ├── build_analyzer.py
 │   ├── __init__.py
-│   └── llmprep.py
+│   ├── llmprep.py
+│   ├── minifier.py
+│   └── mkpyenv
 ├── utils
 │   ├── context_optimizer.py
 │   ├── formatting.py
@@ -131,8 +240,11 @@
 │   ├── plane.py
 │   └── saw.py
 ├── ABSOLUTE_PATH_FIX_SUMMARY.md
+├── AGENTS.md
+├── ANTHROPIC_IMPLEMENTATION_SUMMARY.md
 ├── API_PROVIDERS.md
 ├── ARCHITECTURE.md
+├── axe_agents.db
 ├── axe.py
 ├── axe.yaml
 ├── BEFORE_AFTER_COMPARISON.md
@@ -143,6 +255,8 @@
 ├── demo_dynamic_tokens.py
 ├── demo_heredoc_fix.py
 ├── demo_improvements.py
+├── demo_minifier.py
+├── demo_skills_system.py
 ├── demo_task_completion_fix.py
 ├── DUPLICATE_EXECUTION_FIX_SUMMARY.md
 ├── DYNAMIC_TOKENS_SUMMARY.md
@@ -156,6 +270,7 @@
 ├── LICENSE
 ├── manual_test_write.py
 ├── manual_test_xml.py
+├── MINIFIER_IMPLEMENTATION_SUMMARY.md
 ├── MISSION.md
 ├── MODELS_FINAL.md
 ├── models.yaml
@@ -171,6 +286,8 @@
 ├── SANDBOX.md
 ├── SECURITY_REPORT.md
 ├── SHELL_OPERATOR_SUPPORT_SUMMARY.md
+├── SILENT_BUILDS_IMPLEMENTATION.md
+├── SKILLS_SYSTEM_IMPLEMENTATION_SUMMARY.md
 ├── TASK_COMPLETION_FIX_SUMMARY.md
 ├── workshop_benchmarks.md
 ├── workshop_dependency_validation.md
@@ -181,4 +298,4 @@
 ├── XML_PARSER_IMPLEMENTATION.md
 └── XML_PARSER_QUICK_REFERENCE.md
 
-18 directories, 164 files
+25 directories, 274 files

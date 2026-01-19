@@ -1,0 +1,190 @@
+\doxysection{core.\+multiprocess.\+Multi\+Agent\+Coordinator Class Reference}
+\hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator}{}\label{classcore_1_1multiprocess_1_1MultiAgentCoordinator}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+
+
+Collaboration diagram for core.\+multiprocess.\+Multi\+Agent\+Coordinator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classcore_1_1multiprocess_1_1MultiAgentCoordinator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a8c102010fa03159cb322f9ab7818b2ba}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, List\mbox{[}Dict\mbox{[}str, str\mbox{]}\mbox{]} \mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a3f96caf551ff9006459a6995d5d265d2}{agent\+\_\+configs}})
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a9e2c9418a0d53dbd5a5b2f345cbf4101}{start}} (self)
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a7b433e0205bfead8ea415279a93c953d}{broadcast\+\_\+context\+\_\+update}} (self, str update\+\_\+type, Any data=None)
+\item 
+Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a49c8ccc05d1a3108c76d8a6db1fbce1b}{signal\+\_\+turn}} (self, str agent\+\_\+id, str prompt, str context="{}"{})
+\item 
+Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a3c35e80866e317fc554302ff3689b392}{get\+\_\+agent\+\_\+status}} (self)
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a0ab3566ef9dc52214a490a8839a18807}{shutdown}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a3f96caf551ff9006459a6995d5d265d2}{agent\+\_\+configs}} = agent\+\_\+configs
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a2c4fb1273d711a2689d330e9178f6ca6}{shared\+\_\+context}} = \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext}{Shared\+Context}}()
+\item 
+dict \mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_aa3fef487d983b808666aab37098accb6}{workers}} = \{\}
+\item 
+dict \mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_ada2308f0e83c5f8c26401cfdf992d6ec}{processes}} = \{\}
+\item 
+dict \mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a61e5ea0f40f3827471dccafab1c09261}{input\+\_\+queues}} = \{\}
+\item 
+dict \mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a59f868a21d3ffbe1afd938e850b15d69}{output\+\_\+queues}} = \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Orchestrates all agent processes.
+
+Responsibilities:
+- Spawn worker processes for each agent
+- Broadcast context updates to all agents
+- Signal agents when it's their turn
+- Collect prepared responses
+- Handle graceful shutdown
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a8c102010fa03159cb322f9ab7818b2ba}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a8c102010fa03159cb322f9ab7818b2ba} 
+core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}Dict\mbox{[}str, str\mbox{]}\mbox{]}}]{agent\+\_\+configs}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize coordinator.
+
+Args:
+    agent_configs: List of agent configuration dicts with 'agent_id' and 'name'
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a7b433e0205bfead8ea415279a93c953d}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}!broadcast\_context\_update@{broadcast\_context\_update}}
+\index{broadcast\_context\_update@{broadcast\_context\_update}!core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+\doxysubsubsection{\texorpdfstring{broadcast\_context\_update()}{broadcast\_context\_update()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a7b433e0205bfead8ea415279a93c953d} 
+ None core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+broadcast\+\_\+context\+\_\+update (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{update\+\_\+type}{, }\item[{Any }]{data}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Broadcast a context update to all agents.
+
+Args:
+    update_type: Type of update
+    data: Optional update data
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a3c35e80866e317fc554302ff3689b392}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}!get\_agent\_status@{get\_agent\_status}}
+\index{get\_agent\_status@{get\_agent\_status}!core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+\doxysubsubsection{\texorpdfstring{get\_agent\_status()}{get\_agent\_status()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a3c35e80866e317fc554302ff3689b392} 
+ Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+get\+\_\+agent\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get status of all agents.
+
+Returns:
+    Dictionary mapping agent_id to status info
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a3c35e80866e317fc554302ff3689b392_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a3c35e80866e317fc554302ff3689b392_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a0ab3566ef9dc52214a490a8839a18807}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}!shutdown@{shutdown}}
+\index{shutdown@{shutdown}!core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+\doxysubsubsection{\texorpdfstring{shutdown()}{shutdown()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a0ab3566ef9dc52214a490a8839a18807} 
+ None core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+shutdown (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Shutdown all worker processes gracefully.\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a49c8ccc05d1a3108c76d8a6db1fbce1b}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}!signal\_turn@{signal\_turn}}
+\index{signal\_turn@{signal\_turn}!core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+\doxysubsubsection{\texorpdfstring{signal\_turn()}{signal\_turn()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a49c8ccc05d1a3108c76d8a6db1fbce1b} 
+ Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+signal\+\_\+turn (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{str}]{prompt}{, }\item[{str }]{context}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Signal an agent that it's their turn to respond.
+
+Args:
+    agent_id: Agent to signal
+    prompt: The prompt/question
+    context: Additional context
+
+Returns:
+    Agent's response dictionary or None if timeout
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a9e2c9418a0d53dbd5a5b2f345cbf4101}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}!start@{start}}
+\index{start@{start}!core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a9e2c9418a0d53dbd5a5b2f345cbf4101} 
+ None core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+start (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Start all agent worker processes.\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a3f96caf551ff9006459a6995d5d265d2}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}!agent\_configs@{agent\_configs}}
+\index{agent\_configs@{agent\_configs}!core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+\doxysubsubsection{\texorpdfstring{agent\_configs}{agent\_configs}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a3f96caf551ff9006459a6995d5d265d2} 
+core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+agent\+\_\+configs = agent\+\_\+configs}
+
+\Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a61e5ea0f40f3827471dccafab1c09261}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}!input\_queues@{input\_queues}}
+\index{input\_queues@{input\_queues}!core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+\doxysubsubsection{\texorpdfstring{input\_queues}{input\_queues}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a61e5ea0f40f3827471dccafab1c09261} 
+dict core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+input\+\_\+queues = \{\}}
+
+\Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a59f868a21d3ffbe1afd938e850b15d69}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}!output\_queues@{output\_queues}}
+\index{output\_queues@{output\_queues}!core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+\doxysubsubsection{\texorpdfstring{output\_queues}{output\_queues}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a59f868a21d3ffbe1afd938e850b15d69} 
+dict core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+output\+\_\+queues = \{\}}
+
+\Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_ada2308f0e83c5f8c26401cfdf992d6ec}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}!processes@{processes}}
+\index{processes@{processes}!core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+\doxysubsubsection{\texorpdfstring{processes}{processes}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1MultiAgentCoordinator_ada2308f0e83c5f8c26401cfdf992d6ec} 
+dict core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+processes = \{\}}
+
+\Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a2c4fb1273d711a2689d330e9178f6ca6}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}!shared\_context@{shared\_context}}
+\index{shared\_context@{shared\_context}!core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+\doxysubsubsection{\texorpdfstring{shared\_context}{shared\_context}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a2c4fb1273d711a2689d330e9178f6ca6} 
+core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+shared\+\_\+context = \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext}{Shared\+Context}}()}
+
+\Hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator_aa3fef487d983b808666aab37098accb6}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}!workers@{workers}}
+\index{workers@{workers}!core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
+\doxysubsubsection{\texorpdfstring{workers}{workers}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1MultiAgentCoordinator_aa3fef487d983b808666aab37098accb6} 
+dict core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+workers = \{\}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{multiprocess_8py}{multiprocess.\+py}}\end{DoxyCompactItemize}

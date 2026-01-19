@@ -1,0 +1,198 @@
+\chapter{Workshop Tools Quick Reference }
+\hypertarget{md_workshop__quick__reference}{}\label{md_workshop__quick__reference}\index{Workshop Tools Quick Reference@{Workshop Tools Quick Reference}}
+\label{md_workshop__quick__reference_autotoc_md1399}%
+\Hypertarget{md_workshop__quick__reference_autotoc_md1399}%
+\hypertarget{md_workshop__quick__reference_autotoc_md1400}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_workshop__quick__reference_autotoc_md1400}
+The Workshop module provides dynamic analysis tools for AXE, themed after woodworking implements. These tools enable advanced code analysis, vulnerability detection, and runtime monitoring.\hypertarget{md_workshop__quick__reference_autotoc_md1401}{}\doxysection{\texorpdfstring{Tools}{Tools}}\label{md_workshop__quick__reference_autotoc_md1401}
+\hypertarget{md_workshop__quick__reference_autotoc_md1402}{}\doxysubsection{\texorpdfstring{Chisel -\/ Symbolic Execution}{Chisel -\/ Symbolic Execution}}\label{md_workshop__quick__reference_autotoc_md1402}
+{\bfseries{Purpose}}\+: Analyze program paths symbolically to find constraints, branches, and vulnerabilities.
+
+{\bfseries{Usage}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/workshop\ chisel\ <binary\_path>\ [function\_name]}
+
+\end{DoxyCode}
+
+
+{\bfseries{Example}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/workshop\ chisel\ ./vulnerable.exe\ main}
+
+\end{DoxyCode}
+
+
+{\bfseries{Output}}\+: JSON with paths explored, constraints found, and potential vulnerabilities.\hypertarget{md_workshop__quick__reference_autotoc_md1403}{}\doxysubsection{\texorpdfstring{Saw -\/ Taint Analysis}{Saw -\/ Taint Analysis}}\label{md_workshop__quick__reference_autotoc_md1403}
+{\bfseries{Purpose}}\+: Track tainted data flow through code to identify injection vulnerabilities.
+
+{\bfseries{Usage}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/workshop\ saw\ "{}<python\_code>"{}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Example}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/workshop\ saw\ "{}import\ os;\ os.system(input())"{}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Output}}\+: JSON with taint sources, sinks, flows, and vulnerability classifications.\hypertarget{md_workshop__quick__reference_autotoc_md1404}{}\doxysubsection{\texorpdfstring{Plane -\/ Source/\+Sink Enumeration}{Plane -\/ Source/\+Sink Enumeration}}\label{md_workshop__quick__reference_autotoc_md1404}
+{\bfseries{Purpose}}\+: Catalog all data sources and sinks in a codebase.
+
+{\bfseries{Usage}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/workshop\ plane\ <project\_path>}
+
+\end{DoxyCode}
+
+
+{\bfseries{Example}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/workshop\ plane\ .}
+
+\end{DoxyCode}
+
+
+{\bfseries{Output}}\+: JSON with enumerated sources, sinks, and summary statistics.\hypertarget{md_workshop__quick__reference_autotoc_md1405}{}\doxysubsection{\texorpdfstring{Hammer -\/ Live Instrumentation}{Hammer -\/ Live Instrumentation}}\label{md_workshop__quick__reference_autotoc_md1405}
+{\bfseries{Purpose}}\+: Instrument running processes for real-\/time monitoring and analysis.
+
+{\bfseries{Usage}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/workshop\ hammer\ <process\_name>}
+
+\end{DoxyCode}
+
+
+{\bfseries{Example}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/workshop\ hammer\ python.exe}
+
+\end{DoxyCode}
+
+
+{\bfseries{Output}}\+: Session ID for monitoring. Use Ctrl+C to stop.\hypertarget{md_workshop__quick__reference_autotoc_md1406}{}\doxysection{\texorpdfstring{Management Commands}{Management Commands}}\label{md_workshop__quick__reference_autotoc_md1406}
+\hypertarget{md_workshop__quick__reference_autotoc_md1407}{}\doxysubsection{\texorpdfstring{History}{History}}\label{md_workshop__quick__reference_autotoc_md1407}
+View analysis history and past results.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/workshop\ history\ [tool\_name]}
+
+\end{DoxyCode}
+
+
+{\bfseries{Examples}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/workshop\ history\ \ \ \ \ \ \ \ \ \ \#\ All\ analyses}
+\DoxyCodeLine{/workshop\ history\ chisel\ \ \ \#\ Chisel\ analyses\ only}
+
+\end{DoxyCode}
+\hypertarget{md_workshop__quick__reference_autotoc_md1408}{}\doxysubsection{\texorpdfstring{Statistics}{Statistics}}\label{md_workshop__quick__reference_autotoc_md1408}
+View usage statistics and performance metrics.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/workshop\ stats\ [tool\_name]}
+
+\end{DoxyCode}
+
+
+{\bfseries{Examples}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/workshop\ stats\ \ \ \ \ \ \ \ \ \ \ \#\ All\ tools}
+\DoxyCodeLine{/workshop\ stats\ saw\ \ \ \ \ \ \ \#\ Saw\ statistics\ only}
+
+\end{DoxyCode}
+\hypertarget{md_workshop__quick__reference_autotoc_md1409}{}\doxysection{\texorpdfstring{Configuration}{Configuration}}\label{md_workshop__quick__reference_autotoc_md1409}
+Workshop tools are configured in {\ttfamily axe.\+yaml} under the {\ttfamily \doxylink{namespaceworkshop}{workshop}} section\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{workshop:}
+\DoxyCodeLine{\ \ enabled:\ true}
+\DoxyCodeLine{\ \ chisel:}
+\DoxyCodeLine{\ \ \ \ max\_paths:\ 1000\ \ \ \ \ \ \ \ \ \ \#\ Maximum\ paths\ to\ explore}
+\DoxyCodeLine{\ \ \ \ timeout:\ 30\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Analysis\ timeout\ in\ seconds}
+\DoxyCodeLine{\ \ \ \ find\_targets:\ []\ \ \ \ \ \ \ \ \ \#\ Addresses\ to\ find\ (empty\ =\ auto-\/detect)}
+\DoxyCodeLine{\ \ \ \ avoid\_targets:\ []\ \ \ \ \ \ \ \ \#\ Addresses\ to\ avoid}
+\DoxyCodeLine{\ \ \ \ memory\_limit:\ 1024\ \ \ \ \ \ \ \#\ Memory\ limit\ in\ MB}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ saw:}
+\DoxyCodeLine{\ \ \ \ max\_depth:\ 10\ \ \ \ \ \ \ \ \ \ \ \ \#\ Maximum\ taint\ propagation\ depth}
+\DoxyCodeLine{\ \ \ \ confidence\_threshold:\ 0.7\ \#\ Minimum\ confidence\ for\ reporting}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ plane:}
+\DoxyCodeLine{\ \ \ \ exclude\_patterns:\ \ \ \ \ \ \ \ \#\ Patterns\ to\ exclude\ from\ enumeration}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ \_\_pycache\_\_}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ .git}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ venv}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ node\_modules}
+\DoxyCodeLine{\ \ \ \ max\_files:\ 1000\ \ \ \ \ \ \ \ \ \ \#\ Maximum\ files\ to\ analyze}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ hammer:}
+\DoxyCodeLine{\ \ \ \ monitoring\_interval:\ 0.1\ \#\ Polling\ interval\ for\ monitoring}
+\DoxyCodeLine{\ \ \ \ max\_sessions:\ 5\ \ \ \ \ \ \ \ \ \ \#\ Maximum\ concurrent\ instrumentation\ sessions}
+
+\end{DoxyCode}
+\hypertarget{md_workshop__quick__reference_autotoc_md1410}{}\doxysection{\texorpdfstring{Database Integration}{Database Integration}}\label{md_workshop__quick__reference_autotoc_md1410}
+All workshop analyses are automatically saved to the AXE database with\+:
+\begin{DoxyItemize}
+\item Analysis results and metadata
+\item Performance metrics (duration, success/failure)
+\item XP awards for agent progression
+\item Historical tracking for analysis improvement
+\end{DoxyItemize}\hypertarget{md_workshop__quick__reference_autotoc_md1411}{}\doxysection{\texorpdfstring{XP System}{XP System}}\label{md_workshop__quick__reference_autotoc_md1411}
+Workshop tools award XP to agents based on\+:
+\begin{DoxyItemize}
+\item {\bfseries{Base XP}}\+: Fixed amount per tool usage
+\item {\bfseries{Quality Bonuses}}\+: Additional XP for finding vulnerabilities, exploring paths, etc.
+\item {\bfseries{Performance}}\+: Bonuses for successful analyses and comprehensive results
+\end{DoxyItemize}\hypertarget{md_workshop__quick__reference_autotoc_md1412}{}\doxysubsection{\texorpdfstring{XP Awards}{XP Awards}}\label{md_workshop__quick__reference_autotoc_md1412}
+
+\begin{DoxyItemize}
+\item Chisel\+: 25 XP base + path/vulnerability bonuses
+\item Saw\+: 20 XP base + taint flow/vulnerability bonuses
+\item Plane\+: 15 XP base + enumeration coverage bonuses
+\item Hammer\+: 30 XP base + instrumentation success bonuses
+\end{DoxyItemize}\hypertarget{md_workshop__quick__reference_autotoc_md1413}{}\doxysection{\texorpdfstring{Dependencies}{Dependencies}}\label{md_workshop__quick__reference_autotoc_md1413}
+Install required packages\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pip\ install\ angr\ frida-\/python\ psutil}
+
+\end{DoxyCode}
+\hypertarget{md_workshop__quick__reference_autotoc_md1414}{}\doxysection{\texorpdfstring{Integration with Agents}{Integration with Agents}}\label{md_workshop__quick__reference_autotoc_md1414}
+Agents can use workshop tools programmatically\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ workshop\ \textcolor{keyword}{import}\ ChiselAnalyzer,\ SawTracker}
+\DoxyCodeLine{}
+\DoxyCodeLine{analyzer\ =\ ChiselAnalyzer()}
+\DoxyCodeLine{result\ =\ analyzer.analyze\_binary(\textcolor{stringliteral}{"{}target.exe"{}})}
+\DoxyCodeLine{}
+\DoxyCodeLine{tracker\ =\ SawTracker()}
+\DoxyCodeLine{result\ =\ tracker.analyze\_code(\textcolor{stringliteral}{"{}code\_here"{}})}
+
+\end{DoxyCode}
+\hypertarget{md_workshop__quick__reference_autotoc_md1415}{}\doxysection{\texorpdfstring{Safety Considerations}{Safety Considerations}}\label{md_workshop__quick__reference_autotoc_md1415}
+
+\begin{DoxyItemize}
+\item Workshop tools respect AXE\textquotesingle{}s directory access controls
+\item Instrumentation requires appropriate permissions
+\item Symbolic execution may be resource-\/intensive
+\item Always review tool outputs before acting on findings
+\item Database persistence ensures analysis history is maintained across sessions
+\end{DoxyItemize}\hypertarget{md_workshop__quick__reference_autotoc_md1416}{}\doxysection{\texorpdfstring{Validation \& Quality Assurance}{Validation \& Quality Assurance}}\label{md_workshop__quick__reference_autotoc_md1416}
+The Workshop module has undergone comprehensive validation\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{\doxysectlink{md_workshop__benchmarks}{Performance Benchmarks}{0}}}\+: Detailed performance analysis and optimization recommendations
+\item {\bfseries{\doxysectlink{md_workshop__security__audit}{Security Audit}{0}}}\+: Complete security assessment with all findings resolved
+\item {\bfseries{\doxysectlink{md_workshop__dependency__validation}{Dependency Validation}{0}}}\+: Compatibility testing and integration verification
+\item {\bfseries{\doxysectlink{md_workshop__test__results}{Test Results}{0}}}\+: Full test suite execution with 93\% code coverage
+\end{DoxyItemize}
+
+All validation documents confirm the Workshop tools are production-\/ready with enterprise-\/grade security and performance characteristics. 

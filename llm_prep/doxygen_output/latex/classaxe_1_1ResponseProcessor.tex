@@ -1,0 +1,239 @@
+\doxysection{axe.\+Response\+Processor Class Reference}
+\hypertarget{classaxe_1_1ResponseProcessor}{}\label{classaxe_1_1ResponseProcessor}\index{axe.ResponseProcessor@{axe.ResponseProcessor}}
+
+
+Collaboration diagram for axe.\+Response\+Processor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{classaxe_1_1ResponseProcessor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classaxe_1_1ResponseProcessor_a11f31a8b1cc38febfa89dd3378b03389}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}} \mbox{\hyperlink{classaxe_1_1ResponseProcessor_a1ffedc31bcec7ffc6fe1f5cbeda9ca7f}{config}}, str \mbox{\hyperlink{classaxe_1_1ResponseProcessor_a91204efd0cd452e95fa26135a1a1360f}{project\+\_\+dir}}, \textquotesingle{}\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}\textquotesingle{} \mbox{\hyperlink{classaxe_1_1ResponseProcessor_a70768ce243d0a8d36564ae0704b1e448}{tool\+\_\+runner}}, \textquotesingle{}\mbox{\hyperlink{classaxe_1_1SharedWorkspace}{Shared\+Workspace}}\textquotesingle{} \mbox{\hyperlink{classaxe_1_1ResponseProcessor_adf4fc040731c64179d19b3f9a8dc71ee}{workspace}}=None)
+\item 
+str \mbox{\hyperlink{classaxe_1_1ResponseProcessor_aec0d8b41863aebd4e6700db31bd9a88a}{process\+\_\+response}} (self, str response, str agent\+\_\+name="{}"{})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classaxe_1_1ResponseProcessor_a1ffedc31bcec7ffc6fe1f5cbeda9ca7f}{config}} = config
+\item 
+\mbox{\hyperlink{classaxe_1_1ResponseProcessor_a91204efd0cd452e95fa26135a1a1360f}{project\+\_\+dir}} = os.\+path.\+abspath(project\+\_\+dir)
+\item 
+\mbox{\hyperlink{classaxe_1_1ResponseProcessor_a70768ce243d0a8d36564ae0704b1e448}{tool\+\_\+runner}} = tool\+\_\+runner
+\item 
+\mbox{\hyperlink{classaxe_1_1ResponseProcessor_adf4fc040731c64179d19b3f9a8dc71ee}{workspace}} = workspace
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classaxe_1_1ResponseProcessor_a48bcf7e6556339ef56b5a3e7f601cdd0}{MAX\+\_\+\+READ\+\_\+\+SIZE}} = 100000
+\item 
+dict \mbox{\hyperlink{classaxe_1_1ResponseProcessor_aa83336c1074c8362720e9b8a637115e2}{BUILD\+\_\+\+TOOLS}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{classaxe_1_1ResponseProcessor_acc32cd3a592012b0f063495b1daa6057}{\+\_\+resolve\+\_\+project\+\_\+path}} (self, str filename)
+\item 
+str \mbox{\hyperlink{classaxe_1_1ResponseProcessor_aaeacf7e56873f97fea7ea129228f6f6b}{\+\_\+handle\+\_\+read}} (self, str filename)
+\item 
+str \mbox{\hyperlink{classaxe_1_1ResponseProcessor_a3c4cd5b5979bb788ced72a4fd5506c7a}{\+\_\+handle\+\_\+exec}} (self, str command)
+\item 
+str \mbox{\hyperlink{classaxe_1_1ResponseProcessor_a2160dda3d5ede0cf1488d89d8d54f4ba}{\+\_\+handle\+\_\+write}} (self, str filename, str content)
+\item 
+bool \mbox{\hyperlink{classaxe_1_1ResponseProcessor_ac1a806aa420d789d964a94a1a5d04219}{\+\_\+check\+\_\+file\+\_\+access}} (self, str filepath, list allowed, list forbidden)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Processes agent responses and executes code blocks (READ, EXEC, WRITE).\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classaxe_1_1ResponseProcessor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classaxe_1_1ResponseProcessor_a11f31a8b1cc38febfa89dd3378b03389}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_a11f31a8b1cc38febfa89dd3378b03389} 
+axe.\+Response\+Processor.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}}]{config}{, }\item[{str}]{project\+\_\+dir}{, }\item[{\textquotesingle{}\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}\textquotesingle{}}]{tool\+\_\+runner}{, }\item[{\textquotesingle{}\mbox{\hyperlink{classaxe_1_1SharedWorkspace}{Shared\+Workspace}}\textquotesingle{} }]{workspace}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classaxe_1_1ResponseProcessor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classaxe_1_1ResponseProcessor_ac1a806aa420d789d964a94a1a5d04219}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!\_check\_file\_access@{\_check\_file\_access}}
+\index{\_check\_file\_access@{\_check\_file\_access}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{\_check\_file\_access()}{\_check\_file\_access()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_ac1a806aa420d789d964a94a1a5d04219} 
+ bool axe.\+Response\+Processor.\+\_\+check\+\_\+file\+\_\+access (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filepath}{, }\item[{list}]{allowed}{, }\item[{list}]{forbidden}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Check if file access is allowed based on directory rules.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ResponseProcessor_ac1a806aa420d789d964a94a1a5d04219_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ResponseProcessor_a3c4cd5b5979bb788ced72a4fd5506c7a}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!\_handle\_exec@{\_handle\_exec}}
+\index{\_handle\_exec@{\_handle\_exec}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{\_handle\_exec()}{\_handle\_exec()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_a3c4cd5b5979bb788ced72a4fd5506c7a} 
+ str axe.\+Response\+Processor.\+\_\+handle\+\_\+exec (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{command}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Handle EXEC block - execute command via ToolRunner.
+
+If the command is a build tool (gcc, make, python, etc.), the output
+is recorded to the shared build status file for other agents to see.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ResponseProcessor_a3c4cd5b5979bb788ced72a4fd5506c7a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ResponseProcessor_aaeacf7e56873f97fea7ea129228f6f6b}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!\_handle\_read@{\_handle\_read}}
+\index{\_handle\_read@{\_handle\_read}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{\_handle\_read()}{\_handle\_read()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_aaeacf7e56873f97fea7ea129228f6f6b} 
+ str axe.\+Response\+Processor.\+\_\+handle\+\_\+read (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filename}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Handle READ block - read and return file content.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ResponseProcessor_aaeacf7e56873f97fea7ea129228f6f6b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ResponseProcessor_aaeacf7e56873f97fea7ea129228f6f6b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ResponseProcessor_a2160dda3d5ede0cf1488d89d8d54f4ba}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!\_handle\_write@{\_handle\_write}}
+\index{\_handle\_write@{\_handle\_write}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{\_handle\_write()}{\_handle\_write()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_a2160dda3d5ede0cf1488d89d8d54f4ba} 
+ str axe.\+Response\+Processor.\+\_\+handle\+\_\+write (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filename}{, }\item[{str}]{content}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Handle WRITE block - write content to file.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ResponseProcessor_a2160dda3d5ede0cf1488d89d8d54f4ba_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ResponseProcessor_a2160dda3d5ede0cf1488d89d8d54f4ba_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ResponseProcessor_acc32cd3a592012b0f063495b1daa6057}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!\_resolve\_project\_path@{\_resolve\_project\_path}}
+\index{\_resolve\_project\_path@{\_resolve\_project\_path}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{\_resolve\_project\_path()}{\_resolve\_project\_path()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_acc32cd3a592012b0f063495b1daa6057} 
+ Optional\mbox{[}str\mbox{]} axe.\+Response\+Processor.\+\_\+resolve\+\_\+project\+\_\+path (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filename}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Resolve a filename against the project directory and ensure it
+does not escape the project directory.
+Returns the absolute path if valid, otherwise None.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ResponseProcessor_acc32cd3a592012b0f063495b1daa6057_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ResponseProcessor_aec0d8b41863aebd4e6700db31bd9a88a}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!process\_response@{process\_response}}
+\index{process\_response@{process\_response}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{process\_response()}{process\_response()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_aec0d8b41863aebd4e6700db31bd9a88a} 
+ str axe.\+Response\+Processor.\+process\+\_\+response (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{response}{, }\item[{str }]{agent\+\_\+name}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Process agent response and execute any code blocks.
+Returns the response with execution results appended.
+
+Supports both XML function calls and markdown code blocks.
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ResponseProcessor_aec0d8b41863aebd4e6700db31bd9a88a_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classaxe_1_1ResponseProcessor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classaxe_1_1ResponseProcessor_aa83336c1074c8362720e9b8a637115e2}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!BUILD\_TOOLS@{BUILD\_TOOLS}}
+\index{BUILD\_TOOLS@{BUILD\_TOOLS}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{BUILD\_TOOLS}{BUILD\_TOOLS}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_aa83336c1074c8362720e9b8a637115e2} 
+dict axe.\+Response\+Processor.\+BUILD\+\_\+\+TOOLS\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{\textcolor{stringliteral}{'gcc'},\ \textcolor{stringliteral}{'g++'},\ \textcolor{stringliteral}{'clang'},\ \textcolor{stringliteral}{'clang++'},\ \textcolor{stringliteral}{'make'},\ \textcolor{stringliteral}{'cmake'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'pytest'},\ \textcolor{stringliteral}{'pip'},\ \textcolor{stringliteral}{'npm'},\ \textcolor{stringliteral}{'cargo'},\ \textcolor{stringliteral}{'go'}\}}
+
+\end{DoxyCode}
+\Hypertarget{classaxe_1_1ResponseProcessor_a1ffedc31bcec7ffc6fe1f5cbeda9ca7f}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!config@{config}}
+\index{config@{config}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_a1ffedc31bcec7ffc6fe1f5cbeda9ca7f} 
+axe.\+Response\+Processor.\+config = config}
+
+\Hypertarget{classaxe_1_1ResponseProcessor_a48bcf7e6556339ef56b5a3e7f601cdd0}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!MAX\_READ\_SIZE@{MAX\_READ\_SIZE}}
+\index{MAX\_READ\_SIZE@{MAX\_READ\_SIZE}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{MAX\_READ\_SIZE}{MAX\_READ\_SIZE}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_a48bcf7e6556339ef56b5a3e7f601cdd0} 
+int axe.\+Response\+Processor.\+MAX\+\_\+\+READ\+\_\+\+SIZE = 100000\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classaxe_1_1ResponseProcessor_a91204efd0cd452e95fa26135a1a1360f}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!project\_dir@{project\_dir}}
+\index{project\_dir@{project\_dir}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{project\_dir}{project\_dir}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_a91204efd0cd452e95fa26135a1a1360f} 
+axe.\+Response\+Processor.\+project\+\_\+dir = os.\+path.\+abspath(project\+\_\+dir)}
+
+\Hypertarget{classaxe_1_1ResponseProcessor_a70768ce243d0a8d36564ae0704b1e448}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!tool\_runner@{tool\_runner}}
+\index{tool\_runner@{tool\_runner}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{tool\_runner}{tool\_runner}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_a70768ce243d0a8d36564ae0704b1e448} 
+axe.\+Response\+Processor.\+tool\+\_\+runner = tool\+\_\+runner}
+
+\Hypertarget{classaxe_1_1ResponseProcessor_adf4fc040731c64179d19b3f9a8dc71ee}\index{axe.ResponseProcessor@{axe.ResponseProcessor}!workspace@{workspace}}
+\index{workspace@{workspace}!axe.ResponseProcessor@{axe.ResponseProcessor}}
+\doxysubsubsection{\texorpdfstring{workspace}{workspace}}
+{\footnotesize\ttfamily \label{classaxe_1_1ResponseProcessor_adf4fc040731c64179d19b3f9a8dc71ee} 
+axe.\+Response\+Processor.\+workspace = workspace}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{axe_8py}{axe.\+py}}\end{DoxyCompactItemize}

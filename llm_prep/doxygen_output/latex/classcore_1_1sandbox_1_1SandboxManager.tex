@@ -1,0 +1,226 @@
+\doxysection{core.\+sandbox.\+Sandbox\+Manager Class Reference}
+\hypertarget{classcore_1_1sandbox_1_1SandboxManager}{}\label{classcore_1_1sandbox_1_1SandboxManager}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+
+
+Collaboration diagram for core.\+sandbox.\+Sandbox\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{classcore_1_1sandbox_1_1SandboxManager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a4d61e3883dbd99cda85da5e1df39f0e1}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \textquotesingle{}\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}\textquotesingle{} \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a2cc125123a6108cb7dd25f656de3df40}{config}}, str \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a32d7021e7aa5de07790f562adf36bc21}{workspace\+\_\+path}})
+\item 
+bool \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_ae0139e54ec4099aafd66e88ad6a2306f}{is\+\_\+available}} (self)
+\item 
+List\mbox{[}str\mbox{]} \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_ac935b8aa94fa41939daa96a1866d21aa}{build\+\_\+bwrap\+\_\+command}} (self)
+\item 
+Tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_ae2afdf199a31e056780d21e8442d9ddf}{run}} (self, str cmd, int timeout=300)
+\item 
+bool \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a2d7dce26ef10f64fb3e7b1c38ded9ae2}{is\+\_\+tool\+\_\+blacklisted}} (self, str tool)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a2cc125123a6108cb7dd25f656de3df40}{config}} = config
+\item 
+\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a32d7021e7aa5de07790f562adf36bc21}{workspace\+\_\+path}} = os.\+path.\+abspath(workspace\+\_\+path)
+\item 
+\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_adb6f12475447e54e65f567841afe62d9}{sandbox\+\_\+config}} = config.\+get(\textquotesingle{}\mbox{\hyperlink{namespacecore_1_1sandbox}{sandbox}}\textquotesingle{}, default=\{\})
+\item 
+\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a40c23ba39bac5884be01fc4b0a12d470}{enabled}} = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}enabled\textquotesingle{}, False)
+\item 
+\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a4339efb482cddbc1fd59a04acfd50353}{runtime}} = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}runtime\textquotesingle{}, \textquotesingle{}bubblewrap\textquotesingle{})
+\item 
+\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_ac8d824a4030c235919e3c9cfc1996ceb}{tool\+\_\+blacklist}} = set(self.\+sandbox\+\_\+config.\+get(\textquotesingle{}tool\+\_\+blacklist\textquotesingle{}, \mbox{[}$\,$\mbox{]}))
+\item 
+\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a8db40d2ec58d885009d8be2e6465d195}{namespaces}} = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}namespaces\textquotesingle{}, \{\})
+\item 
+\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a8674b97d5133424de82c95d13815b1e2}{options}} = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}options\textquotesingle{}, \{\})
+\item 
+\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_ac66e73d6799767d77e17aedf76d1a61b}{host\+\_\+binds}} = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}host\+\_\+binds\textquotesingle{}, \{\})
+\item 
+\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a045bdc7fe32f7186e1ab5017d305ef30}{workspaces}} = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}workspaces\textquotesingle{}, \mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Manages bubblewrap sandbox lifecycle and command execution.
+
+Key responsibilities:
+- Build bwrap command line from config
+- Execute commands inside sandbox
+- Handle sandbox lifecycle (setup/teardown)
+- Support multiple concurrent workspaces (future)
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a4d61e3883dbd99cda85da5e1df39f0e1}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a4d61e3883dbd99cda85da5e1df39f0e1} 
+core.\+sandbox.\+Sandbox\+Manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\textquotesingle{}\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}\textquotesingle{}}]{config}{, }\item[{str}]{workspace\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize sandbox manager.
+
+Args:
+    config: Configuration object containing sandbox settings
+    workspace_path: Path to workspace directory (project root)
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_ac935b8aa94fa41939daa96a1866d21aa}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!build\_bwrap\_command@{build\_bwrap\_command}}
+\index{build\_bwrap\_command@{build\_bwrap\_command}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{build\_bwrap\_command()}{build\_bwrap\_command()}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_ac935b8aa94fa41939daa96a1866d21aa} 
+ List\mbox{[}str\mbox{]} core.\+sandbox.\+Sandbox\+Manager.\+build\+\_\+bwrap\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Build the bwrap command line from configuration.
+
+Returns:
+    List of command arguments for bwrap
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1sandbox_1_1SandboxManager_ac935b8aa94fa41939daa96a1866d21aa_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_ae0139e54ec4099aafd66e88ad6a2306f}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!is\_available@{is\_available}}
+\index{is\_available@{is\_available}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{is\_available()}{is\_available()}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_ae0139e54ec4099aafd66e88ad6a2306f} 
+ bool core.\+sandbox.\+Sandbox\+Manager.\+is\+\_\+available (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if bubblewrap is installed and usable.
+
+Returns:
+    True if bwrap is available, False otherwise
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1sandbox_1_1SandboxManager_ae0139e54ec4099aafd66e88ad6a2306f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a2d7dce26ef10f64fb3e7b1c38ded9ae2}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!is\_tool\_blacklisted@{is\_tool\_blacklisted}}
+\index{is\_tool\_blacklisted@{is\_tool\_blacklisted}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{is\_tool\_blacklisted()}{is\_tool\_blacklisted()}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a2d7dce26ef10f64fb3e7b1c38ded9ae2} 
+ bool core.\+sandbox.\+Sandbox\+Manager.\+is\+\_\+tool\+\_\+blacklisted (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{tool}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if tool is in the blacklist.
+
+Args:
+    tool: Tool name to check (base command name)
+
+Returns:
+    True if tool is blacklisted, False otherwise
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1sandbox_1_1SandboxManager_ae2afdf199a31e056780d21e8442d9ddf}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!run@{run}}
+\index{run@{run}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_ae2afdf199a31e056780d21e8442d9ddf} 
+ Tuple\mbox{[}bool, str\mbox{]} core.\+sandbox.\+Sandbox\+Manager.\+run (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{cmd}{, }\item[{int }]{timeout}{ = {\ttfamily 300}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Execute command inside sandbox.
+
+Args:
+    cmd: Shell command to execute
+    timeout: Maximum execution time in seconds (default: 300)
+
+Returns:
+    Tuple of (success: bool, output: str)
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1sandbox_1_1SandboxManager_ae2afdf199a31e056780d21e8442d9ddf_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a2cc125123a6108cb7dd25f656de3df40}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!config@{config}}
+\index{config@{config}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a2cc125123a6108cb7dd25f656de3df40} 
+core.\+sandbox.\+Sandbox\+Manager.\+config = config}
+
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a40c23ba39bac5884be01fc4b0a12d470}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!enabled@{enabled}}
+\index{enabled@{enabled}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{enabled}{enabled}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a40c23ba39bac5884be01fc4b0a12d470} 
+core.\+sandbox.\+Sandbox\+Manager.\+enabled = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}enabled\textquotesingle{}, False)}
+
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_ac66e73d6799767d77e17aedf76d1a61b}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!host\_binds@{host\_binds}}
+\index{host\_binds@{host\_binds}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{host\_binds}{host\_binds}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_ac66e73d6799767d77e17aedf76d1a61b} 
+core.\+sandbox.\+Sandbox\+Manager.\+host\+\_\+binds = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}host\+\_\+binds\textquotesingle{}, \{\})}
+
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a8db40d2ec58d885009d8be2e6465d195}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!namespaces@{namespaces}}
+\index{namespaces@{namespaces}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{namespaces}{namespaces}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a8db40d2ec58d885009d8be2e6465d195} 
+core.\+sandbox.\+Sandbox\+Manager.\+namespaces = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}namespaces\textquotesingle{}, \{\})}
+
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a8674b97d5133424de82c95d13815b1e2}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!options@{options}}
+\index{options@{options}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{options}{options}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a8674b97d5133424de82c95d13815b1e2} 
+core.\+sandbox.\+Sandbox\+Manager.\+options = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}options\textquotesingle{}, \{\})}
+
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a4339efb482cddbc1fd59a04acfd50353}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!runtime@{runtime}}
+\index{runtime@{runtime}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{runtime}{runtime}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a4339efb482cddbc1fd59a04acfd50353} 
+core.\+sandbox.\+Sandbox\+Manager.\+runtime = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}runtime\textquotesingle{}, \textquotesingle{}bubblewrap\textquotesingle{})}
+
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_adb6f12475447e54e65f567841afe62d9}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!sandbox\_config@{sandbox\_config}}
+\index{sandbox\_config@{sandbox\_config}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{sandbox\_config}{sandbox\_config}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_adb6f12475447e54e65f567841afe62d9} 
+core.\+sandbox.\+Sandbox\+Manager.\+sandbox\+\_\+config = config.\+get(\textquotesingle{}\mbox{\hyperlink{namespacecore_1_1sandbox}{sandbox}}\textquotesingle{}, default=\{\})}
+
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_ac8d824a4030c235919e3c9cfc1996ceb}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!tool\_blacklist@{tool\_blacklist}}
+\index{tool\_blacklist@{tool\_blacklist}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{tool\_blacklist}{tool\_blacklist}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_ac8d824a4030c235919e3c9cfc1996ceb} 
+core.\+sandbox.\+Sandbox\+Manager.\+tool\+\_\+blacklist = set(self.\+sandbox\+\_\+config.\+get(\textquotesingle{}tool\+\_\+blacklist\textquotesingle{}, \mbox{[}$\,$\mbox{]}))}
+
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a32d7021e7aa5de07790f562adf36bc21}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!workspace\_path@{workspace\_path}}
+\index{workspace\_path@{workspace\_path}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{workspace\_path}{workspace\_path}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a32d7021e7aa5de07790f562adf36bc21} 
+core.\+sandbox.\+Sandbox\+Manager.\+workspace\+\_\+path = os.\+path.\+abspath(workspace\+\_\+path)}
+
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a045bdc7fe32f7186e1ab5017d305ef30}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!workspaces@{workspaces}}
+\index{workspaces@{workspaces}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{workspaces}{workspaces}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a045bdc7fe32f7186e1ab5017d305ef30} 
+core.\+sandbox.\+Sandbox\+Manager.\+workspaces = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}workspaces\textquotesingle{}, \mbox{[}$\,$\mbox{]})}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{sandbox_8py}{sandbox.\+py}}\end{DoxyCompactItemize}

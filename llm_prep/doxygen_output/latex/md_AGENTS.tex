@@ -1,0 +1,225 @@
+\chapter{AGENTS.\+md for AXE }
+\hypertarget{md_AGENTS}{}\label{md_AGENTS}\index{AGENTS.md for AXE@{AGENTS.md for AXE}}
+\label{md_AGENTS_autotoc_md40}%
+\Hypertarget{md_AGENTS_autotoc_md40}%
+\hypertarget{md_AGENTS_autotoc_md41}{}\doxysection{\texorpdfstring{Project Overview}{Project Overview}}\label{md_AGENTS_autotoc_md41}
+{\bfseries{AXE (Agent e\+Xecution Engine)}} is a terminal-\/based multiagent coding assistant designed for C, C++, Python, and reverse engineering tasks. It orchestrates multiple specialized AI agents (Claude, GPT, Llama, Grok, etc.) to collaborate on complex coding, debugging, security auditing, and binary analysis tasks.\hypertarget{md_AGENTS_autotoc_md42}{}\doxysection{\texorpdfstring{Development Environment}{Development Environment}}\label{md_AGENTS_autotoc_md42}
+\hypertarget{md_AGENTS_autotoc_md43}{}\doxysubsection{\texorpdfstring{Requirements}{Requirements}}\label{md_AGENTS_autotoc_md43}
+
+\begin{DoxyItemize}
+\item {\bfseries{Python 3.\+9+}} (tested on Python 3.\+12)
+\item See {\ttfamily requirements.\+txt} for dependencies
+\end{DoxyItemize}\hypertarget{md_AGENTS_autotoc_md44}{}\doxysubsection{\texorpdfstring{Installation}{Installation}}\label{md_AGENTS_autotoc_md44}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Clone\ the\ repository}
+\DoxyCodeLine{git\ clone\ https://github.com/EdgeOfAssembly/AXE.git}
+\DoxyCodeLine{cd\ AXE}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Install\ dependencies}
+\DoxyCodeLine{pip\ install\ -\/r\ requirements.txt}
+
+\end{DoxyCode}
+\hypertarget{md_AGENTS_autotoc_md45}{}\doxysubsection{\texorpdfstring{Running AXE}{Running AXE}}\label{md_AGENTS_autotoc_md45}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Basic\ usage}
+\DoxyCodeLine{python\ axe.py}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ With\ specific\ agent}
+\DoxyCodeLine{python\ axe.py\ -\/-\/agent\ claude}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Multi-\/agent\ collaboration}
+\DoxyCodeLine{python\ axe.py\ -\/-\/collab}
+
+\end{DoxyCode}
+\hypertarget{md_AGENTS_autotoc_md46}{}\doxysection{\texorpdfstring{Testing}{Testing}}\label{md_AGENTS_autotoc_md46}
+\hypertarget{md_AGENTS_autotoc_md47}{}\doxysubsection{\texorpdfstring{Running Tests}{Running Tests}}\label{md_AGENTS_autotoc_md47}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Run\ all\ tests}
+\DoxyCodeLine{python3\ tests/test\_<module\_name>.py}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Example:\ Test\ skills\ manager}
+\DoxyCodeLine{python3\ tests/test\_skills\_manager.py}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Example:\ Test\ Anthropic\ features}
+\DoxyCodeLine{python3\ tests/test\_anthropic\_features.py}
+
+\end{DoxyCode}
+\hypertarget{md_AGENTS_autotoc_md48}{}\doxysubsection{\texorpdfstring{Test Requirements}{Test Requirements}}\label{md_AGENTS_autotoc_md48}
+
+\begin{DoxyItemize}
+\item All tests must pass before PR submission
+\item New features must include corresponding tests
+\item Target 90\%+ coverage for new code
+\end{DoxyItemize}\hypertarget{md_AGENTS_autotoc_md49}{}\doxysection{\texorpdfstring{Coding Conventions}{Coding Conventions}}\label{md_AGENTS_autotoc_md49}
+\hypertarget{md_AGENTS_autotoc_md50}{}\doxysubsection{\texorpdfstring{Python Style}{Python Style}}\label{md_AGENTS_autotoc_md50}
+
+\begin{DoxyItemize}
+\item {\bfseries{Follow PEP 8}} for Python code style
+\item {\bfseries{Use type hints}} for all function signatures
+\item {\bfseries{Extensive docstrings}} required (Google or Num\+Py style)
+\item {\bfseries{All new code must have tests}}
+\end{DoxyItemize}\hypertarget{md_AGENTS_autotoc_md51}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{md_AGENTS_autotoc_md51}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{def\ }process\_skill(name:\ str,\ content:\ str)\ -\/>\ Dict[str,\ Any]:}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ Process\ a\ skill\ file\ and\ extract\ metadata.}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ Args:}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ name:\ The\ skill\ name\ (without\ extension)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ content:\ The\ raw\ skill\ content\ from\ markdown\ file}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ Returns:}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ Dictionary\ containing\ skill\ metadata\ and\ content}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ Implementation\ here}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{pass}}
+
+\end{DoxyCode}
+\hypertarget{md_AGENTS_autotoc_md52}{}\doxysubsection{\texorpdfstring{File Naming}{File Naming}}\label{md_AGENTS_autotoc_md52}
+
+\begin{DoxyItemize}
+\item Use {\bfseries{lowercase\+\_\+snake\+\_\+case}} for all Python modules and skill files
+\item Examples\+: {\ttfamily \doxylink{skills__manager_8py}{skills\+\_\+manager.\+py}}, {\ttfamily \doxylink{reverse__engineering__expert_8md}{reverse\+\_\+engineering\+\_\+expert.\+md}}
+\end{DoxyItemize}\hypertarget{md_AGENTS_autotoc_md53}{}\doxysection{\texorpdfstring{Skills System}{Skills System}}\label{md_AGENTS_autotoc_md53}
+AXE features a comprehensive Agent Skills system that provides domain-\/specific expertise without prompt bloat.\hypertarget{md_AGENTS_autotoc_md54}{}\doxysubsection{\texorpdfstring{Skills Directory Structure}{Skills Directory Structure}}\label{md_AGENTS_autotoc_md54}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{skills/}
+\DoxyCodeLine{├──\ manifest.json\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Central\ skill\ registry}
+\DoxyCodeLine{├──\ build.md\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Silent\ build\ guidelines}
+\DoxyCodeLine{├──\ claude\_build.md\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Security-\/focused\ build\ guidelines}
+\DoxyCodeLine{├──\ reverse\_engineering\_expert.md\ \ \ \#\ Binary\ analysis\ \&\ RE\ patterns}
+\DoxyCodeLine{├──\ cpp\_refactoring\_expert.md\ \ \ \ \ \ \ \#\ C++\ refactoring\ patterns}
+\DoxyCodeLine{├──\ ida\_pro\_analysis\_patterns.md\ \ \ \ \#\ Decompiler\ output\ analysis}
+\DoxyCodeLine{├──\ c\_modernization\_expert.md\ \ \ \ \ \ \ \#\ Modern\ C\ standards\ (C11/C17/C23)}
+\DoxyCodeLine{├──\ cpp\_modernization\_expert.md\ \ \ \ \ \#\ Modern\ C++\ (C++20/23/26)}
+\DoxyCodeLine{├──\ python\_agent\_expert.md\ \ \ \ \ \ \ \ \ \ \#\ Python\ best\ practices}
+\DoxyCodeLine{└──\ x86\_assembly\_expert.md\ \ \ \ \ \ \ \ \ \ \#\ x86/x64\ assembly\ analysis}
+
+\end{DoxyCode}
+\hypertarget{md_AGENTS_autotoc_md55}{}\doxysubsection{\texorpdfstring{Creating New Skills}{Creating New Skills}}\label{md_AGENTS_autotoc_md55}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Use lowercase\+\_\+snake\+\_\+case}} for filenames
+\item Each skill needs\+:
+\begin{DoxyItemize}
+\item {\ttfamily SKILL\+\_\+\+NAME.\+md} -\/ The skill content (instructions, patterns, workflows)
+\item Entry in {\ttfamily skills/manifest.\+json} with metadata
+\end{DoxyItemize}
+\item Include in manifest\+:
+\begin{DoxyItemize}
+\item Skill name and description
+\item Keywords for auto-\/activation
+\item Provider compatibility (anthropic, all, etc.)
+\item Optional\+: tool integrations
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md_AGENTS_autotoc_md56}{}\doxysubsection{\texorpdfstring{Example Skill Template}{Example Skill Template}}\label{md_AGENTS_autotoc_md56}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Skill\ Name}
+\DoxyCodeLine{}
+\DoxyCodeLine{Brief\ description\ of\ the\ skill's\ expertise.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Core\ Principles}
+\DoxyCodeLine{-\/\ Key\ principle\ 1}
+\DoxyCodeLine{-\/\ Key\ principle\ 2}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Workflow\ Template}
+\DoxyCodeLine{1.\ Step\ 1}
+\DoxyCodeLine{2.\ Step\ 2}
+\DoxyCodeLine{3.\ Step\ 3}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Best\ Practices}
+\DoxyCodeLine{-\/\ Best\ practice\ 1}
+\DoxyCodeLine{-\/\ Best\ practice\ 2}
+
+\end{DoxyCode}
+\hypertarget{md_AGENTS_autotoc_md57}{}\doxysection{\texorpdfstring{Build Guidelines}{Build Guidelines}}\label{md_AGENTS_autotoc_md57}
+AXE emphasizes {\bfseries{silent builds}} to reduce token consumption and improve log readability.\hypertarget{md_AGENTS_autotoc_md58}{}\doxysubsection{\texorpdfstring{Default Build Approach}{Default Build Approach}}\label{md_AGENTS_autotoc_md58}
+Use silent/quiet flags for all build systems\+:
+\begin{DoxyItemize}
+\item {\bfseries{Make}}\+: {\ttfamily make -\/s V=0} or {\ttfamily make -\/-\/silent}
+\item {\bfseries{CMake}}\+: {\ttfamily cmake -\/-\/build . -\/-\/ VERBOSE=0}
+\item {\bfseries{Ninja}}\+: Silent by default; use {\ttfamily -\/v} only for debugging
+\item {\bfseries{Gradle}}\+: {\ttfamily gradle -\/-\/quiet} or {\ttfamily gradle -\/q}
+\item {\bfseries{Maven}}\+: {\ttfamily mvn -\/q} or {\ttfamily mvn -\/-\/quiet}
+\end{DoxyItemize}\hypertarget{md_AGENTS_autotoc_md59}{}\doxysubsection{\texorpdfstring{When to Use Verbose Output}{When to Use Verbose Output}}\label{md_AGENTS_autotoc_md59}
+
+\begin{DoxyItemize}
+\item Build fails and you need diagnostic information
+\item Debugging build configuration issues
+\item Security tool generates false positives
+\end{DoxyItemize}
+
+See {\ttfamily \doxylink{build_8md}{skills/build.\+md}} for comprehensive build system guidelines.\hypertarget{md_AGENTS_autotoc_md60}{}\doxysection{\texorpdfstring{Architecture}{Architecture}}\label{md_AGENTS_autotoc_md60}
+\hypertarget{md_AGENTS_autotoc_md61}{}\doxysubsection{\texorpdfstring{Core Components}{Core Components}}\label{md_AGENTS_autotoc_md61}
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily \doxylink{agent__manager_8py}{core/agent\+\_\+manager.\+py}}}}\+: Manages LLM provider connections and API calls
+\item {\bfseries{{\ttfamily \doxylink{skills__manager_8py}{core/skills\+\_\+manager.\+py}}}}\+: Loads, discovers, and injects agent skills
+\item {\bfseries{{\ttfamily \doxylink{multiprocess_8py}{core/multiprocess.\+py}}}}\+: Multi-\/agent coordination and communication
+\item {\bfseries{{\ttfamily \doxylink{tool__runner_8py}{core/tool\+\_\+runner.\+py}}}}\+: Executes READ/\+EXEC/\+WRITE blocks from agent responses
+\item {\bfseries{{\ttfamily \doxylink{sandbox_8py}{core/sandbox.\+py}}}}\+: Bubblewrap-\/based sandboxed command execution
+\end{DoxyItemize}\hypertarget{md_AGENTS_autotoc_md62}{}\doxysubsection{\texorpdfstring{Configuration Files}{Configuration Files}}\label{md_AGENTS_autotoc_md62}
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily axe.\+yaml}}}\+: Agent definitions, system prompts, tools, directories
+\item {\bfseries{{\ttfamily models.\+yaml}}}\+: Model metadata, token limits, capabilities
+\item {\bfseries{{\ttfamily skills/manifest.\+json}}}\+: Skill registry and metadata
+\end{DoxyItemize}\hypertarget{md_AGENTS_autotoc_md63}{}\doxysection{\texorpdfstring{Contributing}{Contributing}}\label{md_AGENTS_autotoc_md63}
+\hypertarget{md_AGENTS_autotoc_md64}{}\doxysubsection{\texorpdfstring{Pull Request Process}{Pull Request Process}}\label{md_AGENTS_autotoc_md64}
+
+\begin{DoxyEnumerate}
+\item Create feature branch\+: {\ttfamily git checkout -\/b feature/my-\/feature}
+\item Implement changes with tests
+\item Run all tests to ensure they pass
+\item Submit PR with clear description of changes
+\item Address code review feedback
+\end{DoxyEnumerate}\hypertarget{md_AGENTS_autotoc_md65}{}\doxysubsection{\texorpdfstring{Code Review Checklist}{Code Review Checklist}}\label{md_AGENTS_autotoc_md65}
+
+\begin{DoxyItemize}
+\item[\DoxyUnchecked] All tests pass
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item[\DoxyUnchecked] New features have tests
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item[\DoxyUnchecked] Code follows PEP 8
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item[\DoxyUnchecked] Type hints present
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item[\DoxyUnchecked] Docstrings added
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item[\DoxyUnchecked] No breaking changes (or documented if necessary)
+\end{DoxyItemize}\hypertarget{md_AGENTS_autotoc_md66}{}\doxysection{\texorpdfstring{Security Considerations}{Security Considerations}}\label{md_AGENTS_autotoc_md66}
+
+\begin{DoxyItemize}
+\item {\bfseries{Sandbox Mode}}\+: Enable in {\ttfamily axe.\+yaml} for isolated command execution
+\item {\bfseries{Input Validation}}\+: All user inputs and LLM outputs are validated
+\item {\bfseries{Tool Restrictions}}\+: Configurable tool blacklists and directory restrictions
+\item {\bfseries{API Key Management}}\+: Never commit API keys; use environment variables
+\end{DoxyItemize}\hypertarget{md_AGENTS_autotoc_md67}{}\doxysection{\texorpdfstring{Additional Resources}{Additional Resources}}\label{md_AGENTS_autotoc_md67}
+
+\begin{DoxyItemize}
+\item {\bfseries{Architecture}}\+: See {\ttfamily \doxylink{ARCHITECTURE_8md}{ARCHITECTURE.\+md}} for system design
+\item {\bfseries{API Providers}}\+: See {\ttfamily \doxylink{API__PROVIDERS_8md}{API\+\_\+\+PROVIDERS.\+md}} for LLM provider details
+\item {\bfseries{Workshop Tools}}\+: See {\ttfamily \doxylink{workshop__quick__reference_8md}{workshop\+\_\+quick\+\_\+reference.\+md}} for Chisel, Hammer, Saw, Plane
+\end{DoxyItemize}\hypertarget{md_AGENTS_autotoc_md68}{}\doxysection{\texorpdfstring{Contact \& Support}{Contact \& Support}}\label{md_AGENTS_autotoc_md68}
+
+\begin{DoxyItemize}
+\item {\bfseries{Git\+Hub Issues}}\+: \href{https://github.com/EdgeOfAssembly/AXE/issues}{\texttt{https\+://github.\+com/\+Edge\+Of\+Assembly/\+AXE/issues}}
+\item {\bfseries{Documentation}}\+: See {\ttfamily docs/} directory
+\item {\bfseries{Quick Reference}}\+: See {\ttfamily \doxylink{QUICK__REFERENCE_8md}{QUICK\+\_\+\+REFERENCE.\+md}}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+
+
+{\itshape This file follows the \href{https://agents.md/}{\texttt{agents.\+md}} standard for AI agent collaboration.} 

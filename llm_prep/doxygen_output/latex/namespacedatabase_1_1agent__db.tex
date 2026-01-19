@@ -1,0 +1,45 @@
+\doxysection{database.\+agent\+\_\+db Namespace Reference}
+\hypertarget{namespacedatabase_1_1agent__db}{}\label{namespacedatabase_1_1agent__db}\index{database.agent\_db@{database.agent\_db}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase}{Agent\+Database}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacedatabase_1_1agent__db_ab6c241f90eed44318868b0b99a957232}{get\+\_\+database\+\_\+path}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Database operations for agent state persistence.
+Thread-safe SQLite operations with WAL mode.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacedatabase_1_1agent__db_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacedatabase_1_1agent__db_ab6c241f90eed44318868b0b99a957232}\index{database.agent\_db@{database.agent\_db}!get\_database\_path@{get\_database\_path}}
+\index{get\_database\_path@{get\_database\_path}!database.agent\_db@{database.agent\_db}}
+\doxysubsubsection{\texorpdfstring{get\_database\_path()}{get\_database\_path()}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1agent__db_ab6c241f90eed44318868b0b99a957232} 
+ str database.\+agent\+\_\+db.\+get\+\_\+database\+\_\+path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the path to the AXE database file.
+
+Always uses the AXE installation directory, NOT the workspace.
+This ensures agent XP, levels, and history persist across sessions.
+
+Returns:
+    Absolute path to axe_agents.db in the AXE installation directory
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacedatabase_1_1agent__db_ab6c241f90eed44318868b0b99a957232_icgraph}
+\end{center}
+\end{figure}

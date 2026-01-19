@@ -1,0 +1,321 @@
+\doxysection{tools.\+llmprep Namespace Reference}
+\hypertarget{namespacetools_1_1llmprep}{}\label{namespacetools_1_1llmprep}\index{tools.llmprep@{tools.llmprep}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_afaf3dd9e542148d869654fe84b5a2c1b}{run\+\_\+command}} (List\mbox{[}str\mbox{]} cmd, Optional\mbox{[}Path\mbox{]} stdout\+\_\+file=None, bool check=False, bool quiet=False)
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_a3f552e87da06945cef10f68ce045c2fc}{check\+\_\+tool}} (str name)
+\item 
+Dict\mbox{[}str, int\mbox{]} \mbox{\hyperlink{namespacetools_1_1llmprep_a980ccd4bf3e21443fbfed35710f895c3}{parse\+\_\+cloc\+\_\+output}} (Path stats\+\_\+file)
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_a20b859872059debb1575e62e5e08c610}{generate\+\_\+tree}} (Path project\+\_\+dir, Path \mbox{\hyperlink{unpack_8c_a4d59733effad59b54bbd4e5d6016c538}{output\+\_\+file}}, int depth, str excludes, bool \mbox{\hyperlink{depklite_8c_ab46784744f0c75c40a5591adc24f2dea}{verbose}})
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_a2c49d26631d8d1206df8393dad232cdf}{generate\+\_\+cloc}} (Path project\+\_\+dir, Path \mbox{\hyperlink{unpack_8c_a4d59733effad59b54bbd4e5d6016c538}{output\+\_\+file}}, bool \mbox{\hyperlink{depklite_8c_ab46784744f0c75c40a5591adc24f2dea}{verbose}})
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_aea869e372d5ebe1bd4bb60ff65eef5b7}{run\+\_\+doxygen}} (Path project\+\_\+dir, Path prep\+\_\+dir, bool \mbox{\hyperlink{depklite_8c_ab46784744f0c75c40a5591adc24f2dea}{verbose}})
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_aa319b2f21e97e10a16d320311f94ec68}{run\+\_\+pyreverse}} (Path project\+\_\+dir, Path prep\+\_\+dir, bool \mbox{\hyperlink{depklite_8c_ab46784744f0c75c40a5591adc24f2dea}{verbose}})
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_a014831525cb97488090bd375260dbbc0}{run\+\_\+ctags}} (Path project\+\_\+dir, Path prep\+\_\+dir, bool \mbox{\hyperlink{depklite_8c_ab46784744f0c75c40a5591adc24f2dea}{verbose}})
+\item 
+str \mbox{\hyperlink{namespacetools_1_1llmprep_a929070bf51c742d3c582757de10f50f5}{generate\+\_\+system\+\_\+prompt}} (str project\+\_\+name, List\mbox{[}str\mbox{]} languages)
+\item 
+str \mbox{\hyperlink{namespacetools_1_1llmprep_af6c0514c69d00c17a6679713530e0e7d}{generate\+\_\+guidance}} (str project\+\_\+name, List\mbox{[}str\mbox{]} languages)
+\item 
+None \mbox{\hyperlink{namespacetools_1_1llmprep_adc453a8004d55d963611856fb9fae055}{generate\+\_\+overview}} (Path prep\+\_\+dir, str project\+\_\+name, Dict\mbox{[}str, int\mbox{]} lang\+\_\+lines, bool has\+\_\+doxygen, bool has\+\_\+pyreverse, bool has\+\_\+ctags)
+\item 
+int \mbox{\hyperlink{namespacetools_1_1llmprep_abcd0488f00dd4447d9894ca8428fc09f}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacetools_1_1llmprep_a08f9c546c44378df8b1c58af2fc9b174}{\+\_\+\+\_\+version\+\_\+\+\_\+}} = "{}1.\+0.\+0"{}
+\item 
+dict \mbox{\hyperlink{namespacetools_1_1llmprep_a9f9e95e5872ad010cbf89dbe46c6dd7d}{C\+\_\+\+LANGUAGES}} = \{"{}C"{}, "{}C++"{}, "{}C/C++ Header"{}, "{}Objective-\/C"{}, "{}CUDA"{}, "{}Assembly"{}\}
+\item 
+dict \mbox{\hyperlink{namespacetools_1_1llmprep_a3028fbceb80ceef587c4022d9965612f}{PYTHON\+\_\+\+LANGUAGES}} = \{"{}Python"{}\}
+\item 
+str \mbox{\hyperlink{namespacetools_1_1llmprep_a2b14d66c188b02714889d474c519e9a7}{DEFAULT\+\_\+\+EXCLUDES}} = "{}\+\_\+\+\_\+pycache\+\_\+\+\_\+\texorpdfstring{$\vert$}{|}build\texorpdfstring{$\vert$}{|}dist\texorpdfstring{$\vert$}{|}node\+\_\+modules\texorpdfstring{$\vert$}{|}.git\texorpdfstring{$\vert$}{|}\texorpdfstring{$\ast$}{*}.o\texorpdfstring{$\vert$}{|}\texorpdfstring{$\ast$}{*}.so\texorpdfstring{$\vert$}{|}\texorpdfstring{$\ast$}{*}.a\texorpdfstring{$\vert$}{|}\texorpdfstring{$\ast$}{*}.pyc\texorpdfstring{$\vert$}{|}.venv\texorpdfstring{$\vert$}{|}venv\texorpdfstring{$\vert$}{|}env"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}llmprep - Prepare a codebase for LLM analysis
+
+Generates documentation, code statistics, dependency graphs, and LLM-ready
+context files for a software project.
+
+Author: EdgeOfAssembly
+Email: haxbox2000@gmail.com
+License: GPLv3 / Commercial
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacetools_1_1llmprep_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetools_1_1llmprep_a3f552e87da06945cef10f68ce045c2fc}\index{tools.llmprep@{tools.llmprep}!check\_tool@{check\_tool}}
+\index{check\_tool@{check\_tool}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{check\_tool()}{check\_tool()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_a3f552e87da06945cef10f68ce045c2fc} 
+ bool tools.\+llmprep.\+check\+\_\+tool (\begin{DoxyParamCaption}\item[{str}]{name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if a tool is available in PATH.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_a3f552e87da06945cef10f68ce045c2fc_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1llmprep_a2c49d26631d8d1206df8393dad232cdf}\index{tools.llmprep@{tools.llmprep}!generate\_cloc@{generate\_cloc}}
+\index{generate\_cloc@{generate\_cloc}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{generate\_cloc()}{generate\_cloc()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_a2c49d26631d8d1206df8393dad232cdf} 
+ bool tools.\+llmprep.\+generate\+\_\+cloc (\begin{DoxyParamCaption}\item[{Path}]{project\+\_\+dir}{, }\item[{Path}]{output\+\_\+file}{, }\item[{bool}]{verbose}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate code statistics with cloc.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_a2c49d26631d8d1206df8393dad232cdf_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_a2c49d26631d8d1206df8393dad232cdf_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1llmprep_af6c0514c69d00c17a6679713530e0e7d}\index{tools.llmprep@{tools.llmprep}!generate\_guidance@{generate\_guidance}}
+\index{generate\_guidance@{generate\_guidance}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{generate\_guidance()}{generate\_guidance()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_af6c0514c69d00c17a6679713530e0e7d} 
+ str tools.\+llmprep.\+generate\+\_\+guidance (\begin{DoxyParamCaption}\item[{str}]{project\+\_\+name}{, }\item[{List\mbox{[}str\mbox{]}}]{languages}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate project guidance documentation.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_af6c0514c69d00c17a6679713530e0e7d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1llmprep_adc453a8004d55d963611856fb9fae055}\index{tools.llmprep@{tools.llmprep}!generate\_overview@{generate\_overview}}
+\index{generate\_overview@{generate\_overview}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{generate\_overview()}{generate\_overview()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_adc453a8004d55d963611856fb9fae055} 
+ None tools.\+llmprep.\+generate\+\_\+overview (\begin{DoxyParamCaption}\item[{Path}]{prep\+\_\+dir}{, }\item[{str}]{project\+\_\+name}{, }\item[{Dict\mbox{[}str, int\mbox{]}}]{lang\+\_\+lines}{, }\item[{bool}]{has\+\_\+doxygen}{, }\item[{bool}]{has\+\_\+pyreverse}{, }\item[{bool}]{has\+\_\+ctags}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate the main overview markdown file.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_adc453a8004d55d963611856fb9fae055_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1llmprep_a929070bf51c742d3c582757de10f50f5}\index{tools.llmprep@{tools.llmprep}!generate\_system\_prompt@{generate\_system\_prompt}}
+\index{generate\_system\_prompt@{generate\_system\_prompt}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{generate\_system\_prompt()}{generate\_system\_prompt()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_a929070bf51c742d3c582757de10f50f5} 
+ str tools.\+llmprep.\+generate\+\_\+system\+\_\+prompt (\begin{DoxyParamCaption}\item[{str}]{project\+\_\+name}{, }\item[{List\mbox{[}str\mbox{]}}]{languages}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate an LLM system prompt tailored to the project.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_a929070bf51c742d3c582757de10f50f5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1llmprep_a20b859872059debb1575e62e5e08c610}\index{tools.llmprep@{tools.llmprep}!generate\_tree@{generate\_tree}}
+\index{generate\_tree@{generate\_tree}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{generate\_tree()}{generate\_tree()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_a20b859872059debb1575e62e5e08c610} 
+ bool tools.\+llmprep.\+generate\+\_\+tree (\begin{DoxyParamCaption}\item[{Path}]{project\+\_\+dir}{, }\item[{Path}]{output\+\_\+file}{, }\item[{int}]{depth}{, }\item[{str}]{excludes}{, }\item[{bool}]{verbose}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate directory tree structure.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_a20b859872059debb1575e62e5e08c610_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_a20b859872059debb1575e62e5e08c610_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1llmprep_abcd0488f00dd4447d9894ca8428fc09f}\index{tools.llmprep@{tools.llmprep}!main@{main}}
+\index{main@{main}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_abcd0488f00dd4447d9894ca8428fc09f} 
+ int tools.\+llmprep.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Main entry point.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_abcd0488f00dd4447d9894ca8428fc09f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{namespacetools_1_1llmprep_abcd0488f00dd4447d9894ca8428fc09f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1llmprep_a980ccd4bf3e21443fbfed35710f895c3}\index{tools.llmprep@{tools.llmprep}!parse\_cloc\_output@{parse\_cloc\_output}}
+\index{parse\_cloc\_output@{parse\_cloc\_output}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{parse\_cloc\_output()}{parse\_cloc\_output()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_a980ccd4bf3e21443fbfed35710f895c3} 
+ Dict\mbox{[}str, int\mbox{]} tools.\+llmprep.\+parse\+\_\+cloc\+\_\+output (\begin{DoxyParamCaption}\item[{Path}]{stats\+\_\+file}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Parse cloc output to get lines of code per language.
+
+Args:
+    stats_file: Path to the cloc output file.
+
+Returns:
+    Dictionary mapping language names to lines of code.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=335pt]{namespacetools_1_1llmprep_a980ccd4bf3e21443fbfed35710f895c3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1llmprep_afaf3dd9e542148d869654fe84b5a2c1b}\index{tools.llmprep@{tools.llmprep}!run\_command@{run\_command}}
+\index{run\_command@{run\_command}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{run\_command()}{run\_command()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_afaf3dd9e542148d869654fe84b5a2c1b} 
+ bool tools.\+llmprep.\+run\+\_\+command (\begin{DoxyParamCaption}\item[{List\mbox{[}str\mbox{]}}]{cmd}{, }\item[{Optional\mbox{[}Path\mbox{]} }]{stdout\+\_\+file}{ = {\ttfamily None}, }\item[{bool }]{check}{ = {\ttfamily False}, }\item[{bool }]{quiet}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run a command, optionally capturing stdout to a file.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_afaf3dd9e542148d869654fe84b5a2c1b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1llmprep_a014831525cb97488090bd375260dbbc0}\index{tools.llmprep@{tools.llmprep}!run\_ctags@{run\_ctags}}
+\index{run\_ctags@{run\_ctags}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{run\_ctags()}{run\_ctags()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_a014831525cb97488090bd375260dbbc0} 
+ bool tools.\+llmprep.\+run\+\_\+ctags (\begin{DoxyParamCaption}\item[{Path}]{project\+\_\+dir}{, }\item[{Path}]{prep\+\_\+dir}{, }\item[{bool}]{verbose}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate ctags for symbol navigation.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_a014831525cb97488090bd375260dbbc0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_a014831525cb97488090bd375260dbbc0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1llmprep_aea869e372d5ebe1bd4bb60ff65eef5b7}\index{tools.llmprep@{tools.llmprep}!run\_doxygen@{run\_doxygen}}
+\index{run\_doxygen@{run\_doxygen}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{run\_doxygen()}{run\_doxygen()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_aea869e372d5ebe1bd4bb60ff65eef5b7} 
+ bool tools.\+llmprep.\+run\+\_\+doxygen (\begin{DoxyParamCaption}\item[{Path}]{project\+\_\+dir}{, }\item[{Path}]{prep\+\_\+dir}{, }\item[{bool}]{verbose}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run Doxygen for C/C++ documentation.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_aea869e372d5ebe1bd4bb60ff65eef5b7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_aea869e372d5ebe1bd4bb60ff65eef5b7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetools_1_1llmprep_aa319b2f21e97e10a16d320311f94ec68}\index{tools.llmprep@{tools.llmprep}!run\_pyreverse@{run\_pyreverse}}
+\index{run\_pyreverse@{run\_pyreverse}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{run\_pyreverse()}{run\_pyreverse()}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_aa319b2f21e97e10a16d320311f94ec68} 
+ bool tools.\+llmprep.\+run\+\_\+pyreverse (\begin{DoxyParamCaption}\item[{Path}]{project\+\_\+dir}{, }\item[{Path}]{prep\+\_\+dir}{, }\item[{bool}]{verbose}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run pyreverse for Python UML diagrams.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_aa319b2f21e97e10a16d320311f94ec68_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetools_1_1llmprep_aa319b2f21e97e10a16d320311f94ec68_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{namespacetools_1_1llmprep_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacetools_1_1llmprep_a08f9c546c44378df8b1c58af2fc9b174}\index{tools.llmprep@{tools.llmprep}!\_\_version\_\_@{\_\_version\_\_}}
+\index{\_\_version\_\_@{\_\_version\_\_}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{\_\_version\_\_}{\_\_version\_\_}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_a08f9c546c44378df8b1c58af2fc9b174} 
+str tools.\+llmprep.\+\_\+\+\_\+version\+\_\+\+\_\+ = "{}1.\+0.\+0"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{namespacetools_1_1llmprep_a9f9e95e5872ad010cbf89dbe46c6dd7d}\index{tools.llmprep@{tools.llmprep}!C\_LANGUAGES@{C\_LANGUAGES}}
+\index{C\_LANGUAGES@{C\_LANGUAGES}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{C\_LANGUAGES}{C\_LANGUAGES}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_a9f9e95e5872ad010cbf89dbe46c6dd7d} 
+dict tools.\+llmprep.\+C\+\_\+\+LANGUAGES = \{"{}C"{}, "{}C++"{}, "{}C/C++ Header"{}, "{}Objective-\/C"{}, "{}CUDA"{}, "{}Assembly"{}\}}
+
+\Hypertarget{namespacetools_1_1llmprep_a2b14d66c188b02714889d474c519e9a7}\index{tools.llmprep@{tools.llmprep}!DEFAULT\_EXCLUDES@{DEFAULT\_EXCLUDES}}
+\index{DEFAULT\_EXCLUDES@{DEFAULT\_EXCLUDES}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_EXCLUDES}{DEFAULT\_EXCLUDES}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_a2b14d66c188b02714889d474c519e9a7} 
+str tools.\+llmprep.\+DEFAULT\+\_\+\+EXCLUDES = "{}\+\_\+\+\_\+pycache\+\_\+\+\_\+\texorpdfstring{$\vert$}{|}build\texorpdfstring{$\vert$}{|}dist\texorpdfstring{$\vert$}{|}node\+\_\+modules\texorpdfstring{$\vert$}{|}.git\texorpdfstring{$\vert$}{|}\texorpdfstring{$\ast$}{*}.o\texorpdfstring{$\vert$}{|}\texorpdfstring{$\ast$}{*}.so\texorpdfstring{$\vert$}{|}\texorpdfstring{$\ast$}{*}.a\texorpdfstring{$\vert$}{|}\texorpdfstring{$\ast$}{*}.pyc\texorpdfstring{$\vert$}{|}.venv\texorpdfstring{$\vert$}{|}venv\texorpdfstring{$\vert$}{|}env"{}}
+
+\Hypertarget{namespacetools_1_1llmprep_a3028fbceb80ceef587c4022d9965612f}\index{tools.llmprep@{tools.llmprep}!PYTHON\_LANGUAGES@{PYTHON\_LANGUAGES}}
+\index{PYTHON\_LANGUAGES@{PYTHON\_LANGUAGES}!tools.llmprep@{tools.llmprep}}
+\doxysubsubsection{\texorpdfstring{PYTHON\_LANGUAGES}{PYTHON\_LANGUAGES}}
+{\footnotesize\ttfamily \label{namespacetools_1_1llmprep_a3028fbceb80ceef587c4022d9965612f} 
+dict tools.\+llmprep.\+PYTHON\+\_\+\+LANGUAGES = \{"{}Python"{}\}}
+

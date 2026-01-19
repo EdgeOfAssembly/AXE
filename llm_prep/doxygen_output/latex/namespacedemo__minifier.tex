@@ -1,0 +1,130 @@
+\doxysection{demo\+\_\+minifier Namespace Reference}
+\hypertarget{namespacedemo__minifier}{}\label{namespacedemo__minifier}\index{demo\_minifier@{demo\_minifier}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacedemo__minifier_a7ee1603133e69bf421a3fe23455d6c89}{demo\+\_\+standalone\+\_\+minifier}} ()
+\item 
+\mbox{\hyperlink{namespacedemo__minifier_a9ada130677be44ad1ae9895f760cd48f}{demo\+\_\+workspace\+\_\+minification}} ()
+\item 
+\mbox{\hyperlink{namespacedemo__minifier_aa0a2c0a7e89ad6d45baa05620b1dcae3}{demo\+\_\+session\+\_\+preprocessing}} ()
+\item 
+\mbox{\hyperlink{namespacedemo__minifier_a92ad425e02ff235b3ba82c3494006d45}{demo\+\_\+configuration}} ()
+\item 
+\mbox{\hyperlink{namespacedemo__minifier_a9a876c9be28d0db5047c327492d93c64}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Demo: Source Code Minifier Integration
+
+This demo shows how to use the new source code minifier feature in AXE
+to reduce token usage when feeding code to LLMs.
+
+The minifier supports:
+- C, C++, Python, Assembly
+- Comment removal (configurable)
+- Whitespace optimization
+- Python indentation preservation
+- Directory exclusions (tests, __pycache__, etc.)
+
+Usage:
+    1. Enable in axe.yaml:
+       preprocessing:
+         minifier:
+           enabled: true
+           keep_comments: true  # or false for max reduction
+    
+    2. Start AXE session - minification runs automatically
+    
+    3. Or use the CLI tool directly:
+       python3 tools/minifier.py <file_or_dir> --remove-comments
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacedemo__minifier_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacedemo__minifier_a92ad425e02ff235b3ba82c3494006d45}\index{demo\_minifier@{demo\_minifier}!demo\_configuration@{demo\_configuration}}
+\index{demo\_configuration@{demo\_configuration}!demo\_minifier@{demo\_minifier}}
+\doxysubsubsection{\texorpdfstring{demo\_configuration()}{demo\_configuration()}}
+{\footnotesize\ttfamily \label{namespacedemo__minifier_a92ad425e02ff235b3ba82c3494006d45} 
+demo\+\_\+minifier.\+demo\+\_\+configuration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Show configuration options.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{namespacedemo__minifier_a92ad425e02ff235b3ba82c3494006d45_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacedemo__minifier_aa0a2c0a7e89ad6d45baa05620b1dcae3}\index{demo\_minifier@{demo\_minifier}!demo\_session\_preprocessing@{demo\_session\_preprocessing}}
+\index{demo\_session\_preprocessing@{demo\_session\_preprocessing}!demo\_minifier@{demo\_minifier}}
+\doxysubsubsection{\texorpdfstring{demo\_session\_preprocessing()}{demo\_session\_preprocessing()}}
+{\footnotesize\ttfamily \label{namespacedemo__minifier_aa0a2c0a7e89ad6d45baa05620b1dcae3} 
+demo\+\_\+minifier.\+demo\+\_\+session\+\_\+preprocessing (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Demonstrate automatic session preprocessing.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacedemo__minifier_aa0a2c0a7e89ad6d45baa05620b1dcae3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacedemo__minifier_a7ee1603133e69bf421a3fe23455d6c89}\index{demo\_minifier@{demo\_minifier}!demo\_standalone\_minifier@{demo\_standalone\_minifier}}
+\index{demo\_standalone\_minifier@{demo\_standalone\_minifier}!demo\_minifier@{demo\_minifier}}
+\doxysubsubsection{\texorpdfstring{demo\_standalone\_minifier()}{demo\_standalone\_minifier()}}
+{\footnotesize\ttfamily \label{namespacedemo__minifier_a7ee1603133e69bf421a3fe23455d6c89} 
+demo\+\_\+minifier.\+demo\+\_\+standalone\+\_\+minifier (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Demonstrate using the minifier as a standalone tool.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{namespacedemo__minifier_a7ee1603133e69bf421a3fe23455d6c89_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacedemo__minifier_a9ada130677be44ad1ae9895f760cd48f}\index{demo\_minifier@{demo\_minifier}!demo\_workspace\_minification@{demo\_workspace\_minification}}
+\index{demo\_workspace\_minification@{demo\_workspace\_minification}!demo\_minifier@{demo\_minifier}}
+\doxysubsubsection{\texorpdfstring{demo\_workspace\_minification()}{demo\_workspace\_minification()}}
+{\footnotesize\ttfamily \label{namespacedemo__minifier_a9ada130677be44ad1ae9895f760cd48f} 
+demo\+\_\+minifier.\+demo\+\_\+workspace\+\_\+minification (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Demonstrate minifying an entire workspace.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacedemo__minifier_a9ada130677be44ad1ae9895f760cd48f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacedemo__minifier_a9a876c9be28d0db5047c327492d93c64}\index{demo\_minifier@{demo\_minifier}!main@{main}}
+\index{main@{main}!demo\_minifier@{demo\_minifier}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespacedemo__minifier_a9a876c9be28d0db5047c327492d93c64} 
+demo\+\_\+minifier.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run all demonstrations.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacedemo__minifier_a9a876c9be28d0db5047c327492d93c64_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{namespacedemo__minifier_a9a876c9be28d0db5047c327492d93c64_icgraph}
+\end{center}
+\end{figure}

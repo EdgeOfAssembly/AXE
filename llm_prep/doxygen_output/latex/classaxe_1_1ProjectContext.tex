@@ -1,0 +1,125 @@
+\doxysection{axe.\+Project\+Context Class Reference}
+\hypertarget{classaxe_1_1ProjectContext}{}\label{classaxe_1_1ProjectContext}\index{axe.ProjectContext@{axe.ProjectContext}}
+
+
+Collaboration diagram for axe.\+Project\+Context\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{classaxe_1_1ProjectContext__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classaxe_1_1ProjectContext_a116fd5da0d71ced61692f315d9d28860}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str \mbox{\hyperlink{classaxe_1_1ProjectContext_ac6d8a443d89590ff72d78f789692c855}{project\+\_\+dir}}, \mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}} \mbox{\hyperlink{classaxe_1_1ProjectContext_af84497eedbde7e7d1c0410bb2e371ad9}{config}})
+\item 
+Tuple\mbox{[}List\mbox{[}str\mbox{]}, int\mbox{]} \mbox{\hyperlink{classaxe_1_1ProjectContext_af40ec46de4b7f707ed7f845b7569d9c3}{list\+\_\+code\+\_\+files}} (self, int limit=50)
+\item 
+str \mbox{\hyperlink{classaxe_1_1ProjectContext_a36cd9ccddaa65bb9b7f2f7ee047e7e4b}{get\+\_\+file\+\_\+content}} (self, str filepath, int max\+\_\+bytes=4096)
+\item 
+str \mbox{\hyperlink{classaxe_1_1ProjectContext_a7f490ff391a06f9a5a91a8804d7c4233}{get\+\_\+context\+\_\+summary}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classaxe_1_1ProjectContext_ac6d8a443d89590ff72d78f789692c855}{project\+\_\+dir}} = os.\+path.\+abspath(project\+\_\+dir)
+\item 
+\mbox{\hyperlink{classaxe_1_1ProjectContext_af84497eedbde7e7d1c0410bb2e371ad9}{config}} = config
+\item 
+\mbox{\hyperlink{classaxe_1_1ProjectContext_ac5c5832f33934d640b6b337a8c42e697}{extensions}} = config.\+get(\textquotesingle{}code\+\_\+extensions\textquotesingle{}, default=\mbox{[}$\,$\mbox{]})
+\item 
+\mbox{\hyperlink{classaxe_1_1ProjectContext_a9d60a321bf562eb779ec787c1f4f3427}{repo}} = git.\+Repo(\mbox{\hyperlink{classaxe_1_1ProjectContext_ac6d8a443d89590ff72d78f789692c855}{project\+\_\+dir}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Manages project context for agents.\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classaxe_1_1ProjectContext_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classaxe_1_1ProjectContext_a116fd5da0d71ced61692f315d9d28860}\index{axe.ProjectContext@{axe.ProjectContext}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!axe.ProjectContext@{axe.ProjectContext}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ProjectContext_a116fd5da0d71ced61692f315d9d28860} 
+axe.\+Project\+Context.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{project\+\_\+dir}{, }\item[{\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classaxe_1_1ProjectContext_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classaxe_1_1ProjectContext_a7f490ff391a06f9a5a91a8804d7c4233}\index{axe.ProjectContext@{axe.ProjectContext}!get\_context\_summary@{get\_context\_summary}}
+\index{get\_context\_summary@{get\_context\_summary}!axe.ProjectContext@{axe.ProjectContext}}
+\doxysubsubsection{\texorpdfstring{get\_context\_summary()}{get\_context\_summary()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ProjectContext_a7f490ff391a06f9a5a91a8804d7c4233} 
+ str axe.\+Project\+Context.\+get\+\_\+context\+\_\+summary (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get project context summary for agents.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ProjectContext_a7f490ff391a06f9a5a91a8804d7c4233_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ProjectContext_a36cd9ccddaa65bb9b7f2f7ee047e7e4b}\index{axe.ProjectContext@{axe.ProjectContext}!get\_file\_content@{get\_file\_content}}
+\index{get\_file\_content@{get\_file\_content}!axe.ProjectContext@{axe.ProjectContext}}
+\doxysubsubsection{\texorpdfstring{get\_file\_content()}{get\_file\_content()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ProjectContext_a36cd9ccddaa65bb9b7f2f7ee047e7e4b} 
+ str axe.\+Project\+Context.\+get\+\_\+file\+\_\+content (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filepath}{, }\item[{int }]{max\+\_\+bytes}{ = {\ttfamily 4096}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get file content with size limit.\end{DoxyVerb}
+ \Hypertarget{classaxe_1_1ProjectContext_af40ec46de4b7f707ed7f845b7569d9c3}\index{axe.ProjectContext@{axe.ProjectContext}!list\_code\_files@{list\_code\_files}}
+\index{list\_code\_files@{list\_code\_files}!axe.ProjectContext@{axe.ProjectContext}}
+\doxysubsubsection{\texorpdfstring{list\_code\_files()}{list\_code\_files()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ProjectContext_af40ec46de4b7f707ed7f845b7569d9c3} 
+ Tuple\mbox{[}List\mbox{[}str\mbox{]}, int\mbox{]} axe.\+Project\+Context.\+list\+\_\+code\+\_\+files (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int }]{limit}{ = {\ttfamily 50}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}List code files in project. Returns (files, total_count).\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ProjectContext_af40ec46de4b7f707ed7f845b7569d9c3_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classaxe_1_1ProjectContext_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classaxe_1_1ProjectContext_af84497eedbde7e7d1c0410bb2e371ad9}\index{axe.ProjectContext@{axe.ProjectContext}!config@{config}}
+\index{config@{config}!axe.ProjectContext@{axe.ProjectContext}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classaxe_1_1ProjectContext_af84497eedbde7e7d1c0410bb2e371ad9} 
+axe.\+Project\+Context.\+config = config}
+
+\Hypertarget{classaxe_1_1ProjectContext_ac5c5832f33934d640b6b337a8c42e697}\index{axe.ProjectContext@{axe.ProjectContext}!extensions@{extensions}}
+\index{extensions@{extensions}!axe.ProjectContext@{axe.ProjectContext}}
+\doxysubsubsection{\texorpdfstring{extensions}{extensions}}
+{\footnotesize\ttfamily \label{classaxe_1_1ProjectContext_ac5c5832f33934d640b6b337a8c42e697} 
+axe.\+Project\+Context.\+extensions = config.\+get(\textquotesingle{}code\+\_\+extensions\textquotesingle{}, default=\mbox{[}$\,$\mbox{]})}
+
+\Hypertarget{classaxe_1_1ProjectContext_ac6d8a443d89590ff72d78f789692c855}\index{axe.ProjectContext@{axe.ProjectContext}!project\_dir@{project\_dir}}
+\index{project\_dir@{project\_dir}!axe.ProjectContext@{axe.ProjectContext}}
+\doxysubsubsection{\texorpdfstring{project\_dir}{project\_dir}}
+{\footnotesize\ttfamily \label{classaxe_1_1ProjectContext_ac6d8a443d89590ff72d78f789692c855} 
+axe.\+Project\+Context.\+project\+\_\+dir = os.\+path.\+abspath(project\+\_\+dir)}
+
+\Hypertarget{classaxe_1_1ProjectContext_a9d60a321bf562eb779ec787c1f4f3427}\index{axe.ProjectContext@{axe.ProjectContext}!repo@{repo}}
+\index{repo@{repo}!axe.ProjectContext@{axe.ProjectContext}}
+\doxysubsubsection{\texorpdfstring{repo}{repo}}
+{\footnotesize\ttfamily \label{classaxe_1_1ProjectContext_a9d60a321bf562eb779ec787c1f4f3427} 
+axe.\+Project\+Context.\+repo = git.\+Repo(\mbox{\hyperlink{classaxe_1_1ProjectContext_ac6d8a443d89590ff72d78f789692c855}{project\+\_\+dir}})}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{axe_8py}{axe.\+py}}\end{DoxyCompactItemize}

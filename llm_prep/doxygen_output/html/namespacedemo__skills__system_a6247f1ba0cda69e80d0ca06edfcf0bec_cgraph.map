@@ -1,0 +1,16 @@
+<map id="demo_skills_system.main" name="demo_skills_system.main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,187,197,215"/>
+<area shape="poly" id="edge7_Node000001_Node000001" title=" " alt="" coords="60,187,53,178,58,169,75,163,101,161,129,163,146,171,141,173,128,168,101,166,76,168,62,173,58,178,65,186"/>
+<area shape="rect" id="Node000002" href="$namespacedemo__skills__system.html#ac30c9359dc876acbe3265479356b036e" title=" " alt="" coords="245,5,440,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,185,164,126,202,91,243,60,255,55,251,59,246,65,205,95,168,129,115,188"/>
+<area shape="rect" id="Node000003" href="$namespacedemo__skills__system.html#a2efbacedbdff6b41135a09ebc648e1a6" title=" " alt="" coords="245,75,440,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="128,184,244,129,262,124,258,127,246,134,131,189"/>
+<area shape="rect" id="Node000004" href="$namespacedemo__skills__system.html#a10e0dd4e3d92432537b67fc7e18bc5b5" title=" " alt="" coords="245,144,440,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="196,185,231,181,227,184,198,190"/>
+<area shape="rect" id="Node000005" href="$namespacedemo__skills__system.html#a7119ee2b559ba2584ab8a6cb4922c2de" title=" " alt="" coords="245,213,440,258"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="196,212,232,218,227,220,198,217"/>
+<area shape="rect" id="Node000006" href="$namespacedemo__skills__system.html#ac210ddb775d78e0a593c7b807b86daec" title=" " alt="" coords="245,283,440,327"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="130,213,246,268,263,276,258,277,244,273,129,218"/>
+<area shape="rect" id="Node000007" href="$namespacedemo__skills__system.html#ad54dcb724d73881461267caf96325936" title=" " alt="" coords="245,352,440,397"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="114,213,168,273,205,307,246,337,256,345,251,344,243,342,202,311,164,276,113,218"/>
+</map>

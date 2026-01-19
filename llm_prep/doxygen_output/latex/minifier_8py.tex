@@ -1,0 +1,50 @@
+\doxysection{tools/minifier.py File Reference}
+\hypertarget{minifier_8py}{}\label{minifier_8py}\index{tools/minifier.py@{tools/minifier.py}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classtools_1_1minifier_1_1Minifier}{tools.\+minifier.\+Minifier}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacetools}{tools}}
+\item 
+namespace \mbox{\hyperlink{namespacetools_1_1minifier}{tools.\+minifier}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_a1630a58d0997c2a2b5a3ce016724addf}{tools.\+minifier.\+comment\+\_\+remover\+\_\+c\+\_\+cpp}} (str text)
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_acbce42ca8e81d30a52cf2ea48e9f1055}{tools.\+minifier.\+minify\+\_\+c\+\_\+cpp}} (str code, bool keep\+\_\+comments=False)
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_a90c1982b6a18089fdd441a06d159838e}{tools.\+minifier.\+remove\+\_\+comments\+\_\+and\+\_\+docstrings}} (str source)
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_a1891c0e16ec30fddff99c105a8c937b2}{tools.\+minifier.\+minify\+\_\+python}} (str code, bool keep\+\_\+comments=False)
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_a6518e5a9a554ade99baa729734a1bc32}{tools.\+minifier.\+minify\+\_\+asm}} (str code, bool keep\+\_\+comments=False)
+\item 
+Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{namespacetools_1_1minifier_a25b99dc57972f81c283eb4f4785fbb34}{tools.\+minifier.\+detect\+\_\+language}} (str file\+\_\+path, str content)
+\item 
+List\mbox{[}Tuple\mbox{[}str, str\mbox{]}\mbox{]} \mbox{\hyperlink{namespacetools_1_1minifier_ae166d4d8a8bc0833f94cf2d7609e69b3}{tools.\+minifier.\+collect\+\_\+files}} (List\mbox{[}str\mbox{]} inputs, bool recursive=False, Optional\mbox{[}Set\mbox{[}str\mbox{]}\mbox{]} exclude\+\_\+dirs=None)
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_aacdb1f82a46ba895c204735c699c0a16}{tools.\+minifier.\+minify\+\_\+file}} (str file\+\_\+path, bool keep\+\_\+comments=True)
+\item 
+Dict\mbox{[}str, str\mbox{]} \mbox{\hyperlink{namespacetools_1_1minifier_ae494be5ae54eab91cda8dcd6d775bf99}{tools.\+minifier.\+minify\+\_\+directory}} (str dir\+\_\+path, bool recursive=True, bool keep\+\_\+comments=True, Optional\mbox{[}Set\mbox{[}str\mbox{]}\mbox{]} exclude\+\_\+dirs=None)
+\item 
+\mbox{\hyperlink{namespacetools_1_1minifier_abfc117aec684ce9f71f3bc2b62816ff2}{tools.\+minifier.\+main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacetools_1_1minifier_a0092e4e02242c93f713c2419fe534dd6}{tools.\+minifier.\+\_\+\+\_\+version\+\_\+\+\_\+}} = "{}1.\+0.\+0"{}
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1minifier_a24fa4331460d1986a2e1f53a6bb39158}{tools.\+minifier.\+HAS\+\_\+\+GUESSLANG}} = True
+\item 
+list \mbox{\hyperlink{namespacetools_1_1minifier_aaab97537de846c0fca4f366b804b8eb8}{tools.\+minifier.\+SUPPORTED\+\_\+\+EXTS}} = \mbox{[}\textquotesingle{}.c\textquotesingle{}, \textquotesingle{}.cpp\textquotesingle{}, \textquotesingle{}.cc\textquotesingle{}, \textquotesingle{}.cxx\textquotesingle{}, \textquotesingle{}.h\textquotesingle{}, \textquotesingle{}.hpp\textquotesingle{}, \textquotesingle{}.hxx\textquotesingle{}, \textquotesingle{}.py\textquotesingle{}, \textquotesingle{}.asm\textquotesingle{}, \textquotesingle{}.s\textquotesingle{}, \textquotesingle{}.S\textquotesingle{}\mbox{]}
+\item 
+dict \mbox{\hyperlink{namespacetools_1_1minifier_a943a0d78498a28ad2ffc352915df9fb2}{tools.\+minifier.\+DEFAULT\+\_\+\+EXCLUDE\+\_\+\+DIRS}}
+\item 
+\mbox{\hyperlink{namespacetools_1_1minifier_a2efc62051245a18dad2393b987e55608}{tools.\+minifier.\+logger}} = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)
+\end{DoxyCompactItemize}

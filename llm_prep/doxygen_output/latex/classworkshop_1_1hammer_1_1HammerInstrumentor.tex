@@ -1,0 +1,328 @@
+\doxysection{workshop.\+hammer.\+Hammer\+Instrumentor Class Reference}
+\hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor}{}\label{classworkshop_1_1hammer_1_1HammerInstrumentor}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+
+
+Collaboration diagram for workshop.\+hammer.\+Hammer\+Instrumentor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{classworkshop_1_1hammer_1_1HammerInstrumentor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_a7eb886aa00f94562395b36365ee547ed}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_af21bfe1c7ed1cb1007c9904ebb220473}{config}}=None)
+\item 
+str \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_acb37c7042f0b40915e6b0e19610b994c}{instrument\+\_\+process}} (self, str process\+\_\+name, Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_ac3524141dbaff739419c86ee9eb3667b}{hooks}})
+\item 
+str \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_acbb48087ecc8ff4ed7dfc5895661c6de}{instrument\+\_\+script}} (self, str script\+\_\+path, Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_ac3524141dbaff739419c86ee9eb3667b}{hooks}})
+\item 
+bool \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_a883da6cc68ccb313c4c9d619778ca9ed}{start\+\_\+monitoring}} (self, str session\+\_\+id, Optional\mbox{[}Callable\mbox{]} callback=None)
+\item 
+bool \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_aeb813982d4b97af2a3bfde70d2f3d17e}{stop\+\_\+monitoring}} (self, str session\+\_\+id)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_af21bfe1c7ed1cb1007c9904ebb220473}{config}} = config or \{\}
+\item 
+dict \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_adc77244980f0dfc771a7d3b50a764c21}{sessions}} = \{\}
+\item 
+dict \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_ac3524141dbaff739419c86ee9eb3667b}{hooks}} = \{\}
+\item 
+bool \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_a22671423dddb14de0d8da67a445b70f7}{monitoring}} = False
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Optional\mbox{[}int\mbox{]} \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_aa795218d5d2fc4fda11367deab2f0b6f}{\+\_\+find\+\_\+process\+\_\+pid}} (self, str process\+\_\+name)
+\item 
+\mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_a9159cd3e79ed6dcd93ae27ee9cde2589}{\+\_\+attach\+\_\+hook}} (self, session, str session\+\_\+id, str hook\+\_\+name, Dict\mbox{[}str, Any\mbox{]} hook\+\_\+config)
+\item 
+\mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_a152c957853243eb31b32fb9156dfe118}{\+\_\+attach\+\_\+function\+\_\+hook}} (self, session, str session\+\_\+id, str hook\+\_\+name, Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_af21bfe1c7ed1cb1007c9904ebb220473}{config}})
+\item 
+\mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_a1d2d3680010ad50738f75699694eddae}{\+\_\+attach\+\_\+memory\+\_\+hook}} (self, session, str session\+\_\+id, str hook\+\_\+name, Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_af21bfe1c7ed1cb1007c9904ebb220473}{config}})
+\item 
+\mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_a337d0e7e376218896d4f6c916bb5a28b}{\+\_\+attach\+\_\+syscall\+\_\+hook}} (self, session, str session\+\_\+id, str hook\+\_\+name, Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_af21bfe1c7ed1cb1007c9904ebb220473}{config}})
+\item 
+str \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_a362f26d8c133ee5fbefc358915b2e633}{\+\_\+generate\+\_\+python\+\_\+hook\+\_\+script}} (self, Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_ac3524141dbaff739419c86ee9eb3667b}{hooks}})
+\item 
+\mbox{\hyperlink{classworkshop_1_1hammer_1_1HammerInstrumentor_ad6c32528352dedebb0141e06981664b7}{\+\_\+monitor\+\_\+session}} (self, str session\+\_\+id, Optional\mbox{[}Callable\mbox{]} callback)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Live instrumentation tool for hammering in runtime hooks and monitoring.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_a7eb886aa00f94562395b36365ee547ed}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_a7eb886aa00f94562395b36365ee547ed} 
+workshop.\+hammer.\+Hammer\+Instrumentor.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_a152c957853243eb31b32fb9156dfe118}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!\_attach\_function\_hook@{\_attach\_function\_hook}}
+\index{\_attach\_function\_hook@{\_attach\_function\_hook}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{\_attach\_function\_hook()}{\_attach\_function\_hook()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_a152c957853243eb31b32fb9156dfe118} 
+workshop.\+hammer.\+Hammer\+Instrumentor.\+\_\+attach\+\_\+function\+\_\+hook (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{session}{, }\item[{str}]{session\+\_\+id}{, }\item[{str}]{hook\+\_\+name}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Attach a function hook.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_a152c957853243eb31b32fb9156dfe118_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_a152c957853243eb31b32fb9156dfe118_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_a9159cd3e79ed6dcd93ae27ee9cde2589}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!\_attach\_hook@{\_attach\_hook}}
+\index{\_attach\_hook@{\_attach\_hook}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{\_attach\_hook()}{\_attach\_hook()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_a9159cd3e79ed6dcd93ae27ee9cde2589} 
+workshop.\+hammer.\+Hammer\+Instrumentor.\+\_\+attach\+\_\+hook (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{session}{, }\item[{str}]{session\+\_\+id}{, }\item[{str}]{hook\+\_\+name}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{hook\+\_\+config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Attach a specific hook to the session.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_a9159cd3e79ed6dcd93ae27ee9cde2589_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_a9159cd3e79ed6dcd93ae27ee9cde2589_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_a1d2d3680010ad50738f75699694eddae}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!\_attach\_memory\_hook@{\_attach\_memory\_hook}}
+\index{\_attach\_memory\_hook@{\_attach\_memory\_hook}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{\_attach\_memory\_hook()}{\_attach\_memory\_hook()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_a1d2d3680010ad50738f75699694eddae} 
+workshop.\+hammer.\+Hammer\+Instrumentor.\+\_\+attach\+\_\+memory\+\_\+hook (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{session}{, }\item[{str}]{session\+\_\+id}{, }\item[{str}]{hook\+\_\+name}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Attach a memory access hook.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_a1d2d3680010ad50738f75699694eddae_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_a337d0e7e376218896d4f6c916bb5a28b}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!\_attach\_syscall\_hook@{\_attach\_syscall\_hook}}
+\index{\_attach\_syscall\_hook@{\_attach\_syscall\_hook}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{\_attach\_syscall\_hook()}{\_attach\_syscall\_hook()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_a337d0e7e376218896d4f6c916bb5a28b} 
+workshop.\+hammer.\+Hammer\+Instrumentor.\+\_\+attach\+\_\+syscall\+\_\+hook (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{session}{, }\item[{str}]{session\+\_\+id}{, }\item[{str}]{hook\+\_\+name}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Attach a syscall hook.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_a337d0e7e376218896d4f6c916bb5a28b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_a337d0e7e376218896d4f6c916bb5a28b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_aa795218d5d2fc4fda11367deab2f0b6f}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!\_find\_process\_pid@{\_find\_process\_pid}}
+\index{\_find\_process\_pid@{\_find\_process\_pid}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{\_find\_process\_pid()}{\_find\_process\_pid()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_aa795218d5d2fc4fda11367deab2f0b6f} 
+ Optional\mbox{[}int\mbox{]} workshop.\+hammer.\+Hammer\+Instrumentor.\+\_\+find\+\_\+process\+\_\+pid (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{process\+\_\+name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Find PID of a process by name.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_aa795218d5d2fc4fda11367deab2f0b6f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_a362f26d8c133ee5fbefc358915b2e633}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!\_generate\_python\_hook\_script@{\_generate\_python\_hook\_script}}
+\index{\_generate\_python\_hook\_script@{\_generate\_python\_hook\_script}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{\_generate\_python\_hook\_script()}{\_generate\_python\_hook\_script()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_a362f26d8c133ee5fbefc358915b2e633} 
+ str workshop.\+hammer.\+Hammer\+Instrumentor.\+\_\+generate\+\_\+python\+\_\+hook\+\_\+script (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{hooks}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Generate Frida script for Python instrumentation.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_a362f26d8c133ee5fbefc358915b2e633_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_a362f26d8c133ee5fbefc358915b2e633_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_ad6c32528352dedebb0141e06981664b7}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!\_monitor\_session@{\_monitor\_session}}
+\index{\_monitor\_session@{\_monitor\_session}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{\_monitor\_session()}{\_monitor\_session()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_ad6c32528352dedebb0141e06981664b7} 
+workshop.\+hammer.\+Hammer\+Instrumentor.\+\_\+monitor\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{session\+\_\+id}{, }\item[{Optional\mbox{[}Callable\mbox{]}}]{callback}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Monitor a session for events.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_ad6c32528352dedebb0141e06981664b7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_acb37c7042f0b40915e6b0e19610b994c}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!instrument\_process@{instrument\_process}}
+\index{instrument\_process@{instrument\_process}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{instrument\_process()}{instrument\_process()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_acb37c7042f0b40915e6b0e19610b994c} 
+ str workshop.\+hammer.\+Hammer\+Instrumentor.\+instrument\+\_\+process (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{process\+\_\+name}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{hooks}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Instrument a running process with the specified hooks.
+
+Args:
+    process_name: Name of the process to instrument
+    hooks: Dictionary of hooks to attach
+
+Returns:
+    Session ID for the instrumentation session
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_acb37c7042f0b40915e6b0e19610b994c_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_acbb48087ecc8ff4ed7dfc5895661c6de}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!instrument\_script@{instrument\_script}}
+\index{instrument\_script@{instrument\_script}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{instrument\_script()}{instrument\_script()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_acbb48087ecc8ff4ed7dfc5895661c6de} 
+ str workshop.\+hammer.\+Hammer\+Instrumentor.\+instrument\+\_\+script (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{script\+\_\+path}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{hooks}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Instrument a Python script execution.
+
+Args:
+    script_path: Path to the Python script
+    hooks: Hooks to attach
+
+Returns:
+    Session ID
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_acbb48087ecc8ff4ed7dfc5895661c6de_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_a883da6cc68ccb313c4c9d619778ca9ed}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!start\_monitoring@{start\_monitoring}}
+\index{start\_monitoring@{start\_monitoring}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{start\_monitoring()}{start\_monitoring()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_a883da6cc68ccb313c4c9d619778ca9ed} 
+ bool workshop.\+hammer.\+Hammer\+Instrumentor.\+start\+\_\+monitoring (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{session\+\_\+id}{, }\item[{Optional\mbox{[}Callable\mbox{]} }]{callback}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Start monitoring an instrumented session.
+
+Args:
+    session_id: Session to monitor
+    callback: Optional callback for monitoring events
+
+Returns:
+    True if monitoring started successfully
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1hammer_1_1HammerInstrumentor_a883da6cc68ccb313c4c9d619778ca9ed_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_aeb813982d4b97af2a3bfde70d2f3d17e}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!stop\_monitoring@{stop\_monitoring}}
+\index{stop\_monitoring@{stop\_monitoring}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{stop\_monitoring()}{stop\_monitoring()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_aeb813982d4b97af2a3bfde70d2f3d17e} 
+ bool workshop.\+hammer.\+Hammer\+Instrumentor.\+stop\+\_\+monitoring (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{session\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Stop monitoring a session.
+
+Args:
+    session_id: Session to stop monitoring
+
+Returns:
+    True if stopped successfully
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_af21bfe1c7ed1cb1007c9904ebb220473}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!config@{config}}
+\index{config@{config}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_af21bfe1c7ed1cb1007c9904ebb220473} 
+workshop.\+hammer.\+Hammer\+Instrumentor.\+config = config or \{\}}
+
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_ac3524141dbaff739419c86ee9eb3667b}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!hooks@{hooks}}
+\index{hooks@{hooks}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{hooks}{hooks}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_ac3524141dbaff739419c86ee9eb3667b} 
+dict workshop.\+hammer.\+Hammer\+Instrumentor.\+hooks = \{\}}
+
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_a22671423dddb14de0d8da67a445b70f7}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!monitoring@{monitoring}}
+\index{monitoring@{monitoring}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{monitoring}{monitoring}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_a22671423dddb14de0d8da67a445b70f7} 
+bool workshop.\+hammer.\+Hammer\+Instrumentor.\+monitoring = False}
+
+\Hypertarget{classworkshop_1_1hammer_1_1HammerInstrumentor_adc77244980f0dfc771a7d3b50a764c21}\index{workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}!sessions@{sessions}}
+\index{sessions@{sessions}!workshop.hammer.HammerInstrumentor@{workshop.hammer.HammerInstrumentor}}
+\doxysubsubsection{\texorpdfstring{sessions}{sessions}}
+{\footnotesize\ttfamily \label{classworkshop_1_1hammer_1_1HammerInstrumentor_adc77244980f0dfc771a7d3b50a764c21} 
+dict workshop.\+hammer.\+Hammer\+Instrumentor.\+sessions = \{\}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+workshop/\mbox{\hyperlink{hammer_8py}{hammer.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,445 @@
+\chapter{Silent Builds Skill }
+\hypertarget{md_skills_2build}{}\label{md_skills_2build}\index{Silent Builds Skill@{Silent Builds Skill}}
+\label{md_skills_2build_autotoc_md1165}%
+\Hypertarget{md_skills_2build_autotoc_md1165}%
+\hypertarget{md_skills_2build_autotoc_md1166}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_skills_2build_autotoc_md1166}
+This skill provides guidelines for using silent/quiet compilation and configuration flags across multiple build systems. By defaulting to silent builds, agents can achieve {\bfseries{50-\/90\% token savings}} in log-\/related output while preserving build functionality.\hypertarget{md_skills_2build_autotoc_md1167}{}\doxysection{\texorpdfstring{Why Silent Builds?}{Why Silent Builds?}}\label{md_skills_2build_autotoc_md1167}
+Build systems can generate verbose output that consumes hundreds or thousands of tokens per invocation. When build logs are included in LLM prompts or agent collaborations, this verbosity\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Wastes tokens}}\+: Verbose compiler output rarely contains actionable information
+\item {\bfseries{Obscures errors}}\+: Critical error messages get lost in noise
+\item {\bfseries{Slows iteration}}\+: More output means slower agent processing
+\item {\bfseries{Costs money}}\+: Every token sent to an LLM has a cost
+\end{DoxyItemize}
+
+Silent builds solve this by\+:
+\begin{DoxyItemize}
+\item Showing only warnings, errors, and critical output
+\item Preserving the ability to re-\/run with verbose output when debugging
+\item Reducing log size by 50-\/90\% in typical projects
+\end{DoxyItemize}\hypertarget{md_skills_2build_autotoc_md1168}{}\doxysection{\texorpdfstring{Token Savings Estimates}{Token Savings Estimates}}\label{md_skills_2build_autotoc_md1168}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Build System  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Typical Verbose Output  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Silent Output  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Savings  \\
+Make (large)  &5000-\/10000 tokens  &500-\/1000 tokens  &80-\/90\%  \\
+CMake  &2000-\/4000 tokens  &200-\/500 tokens  &75-\/87\%  \\
+Maven  &3000-\/6000 tokens  &300-\/800 tokens  &73-\/90\%  \\
+Gradle  &2500-\/5000 tokens  &300-\/700 tokens  &76-\/88\%  \\
+\end{DoxyTable}
+\hypertarget{md_skills_2build_autotoc_md1169}{}\doxysection{\texorpdfstring{Supported Build Systems}{Supported Build Systems}}\label{md_skills_2build_autotoc_md1169}
+\hypertarget{md_skills_2build_autotoc_md1170}{}\doxysubsection{\texorpdfstring{Make}{Make}}\label{md_skills_2build_autotoc_md1170}
+{\bfseries{Silent flags\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ -\/s\ \ \ \ \ \ \ \ \ \ \#\ Short\ form:\ silent}
+\DoxyCodeLine{make\ -\/-\/silent\ \ \ \ \#\ Long\ form:\ silent}
+\DoxyCodeLine{make\ V=0\ \ \ \ \ \ \ \ \ \#\ Verbose\ level\ 0\ (common\ in\ kernel\ builds)}
+\DoxyCodeLine{make\ -\/s\ V=0\ \ \ \ \ \ \#\ Combine\ both\ for\ maximum\ silence}
+
+\end{DoxyCode}
+
+
+{\bfseries{Usage in EXEC blocks\+:}} 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC make -\/s all 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+
+{\bfseries{When to use verbose\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ V=1\ \ \ \ \ \ \ \ \ \#\ When\ build\ fails,\ retry\ with\ verbose\ output}
+\DoxyCodeLine{make\ VERBOSE=1\ \ \ \#\ Alternative\ verbose\ flag\ in\ some\ projects}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1171}{}\doxysubsection{\texorpdfstring{Autoconf/\+Configure}{Autoconf/\+Configure}}\label{md_skills_2build_autotoc_md1171}
+{\bfseries{Silent flags\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./configure\ -\/-\/quiet\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Suppress\ most\ output}
+\DoxyCodeLine{./configure\ -\/-\/enable-\/silent-\/rules\ \ \ \ \ \ \#\ Enable\ silent\ make\ rules}
+\DoxyCodeLine{./configure\ -\/-\/quiet\ -\/-\/enable-\/silent-\/rules\ \ \#\ Recommended\ combination}
+
+\end{DoxyCode}
+
+
+{\bfseries{Usage in EXEC blocks\+:}} 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC ./configure --quiet --enable-\/silent-\/rules --prefix=/usr/local 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+
+{\bfseries{When to use verbose\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./configure\ -\/-\/verbose\ \ \ \ \#\ When\ configure\ fails,\ retry\ with\ verbose}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1172}{}\doxysubsection{\texorpdfstring{CMake}{CMake}}\label{md_skills_2build_autotoc_md1172}
+{\bfseries{Silent flags\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ -\/S\ .\ -\/B\ build\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ CMAKE\_VERBOSE\_MAKEFILE=OFF\ (default)}
+\DoxyCodeLine{cmake\ -\/-\/build\ build\ -\/-\/\ VERBOSE=0\ \ \ \ \ \ \ \#\ Explicit\ silent\ build}
+\DoxyCodeLine{cmake\ -\/-\/build\ build\ -\/-\/quiet\ \ \ \ \ \ \ \ \ \ \ \ \#\ Quiet\ mode\ (CMake\ 3.x+)}
+
+\end{DoxyCode}
+
+
+{\bfseries{Usage in EXEC blocks\+:}} 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC cmake -\/S . -\/B build -\/DCMAKE\+\_\+\+BUILD\+\_\+\+TYPE=Release cmake --build build -- VERBOSE=0 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+
+{\bfseries{When to use verbose\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ -\/-\/build\ build\ -\/-\/\ VERBOSE=1\ \ \ \ \ \ \ \#\ When\ build\ fails}
+\DoxyCodeLine{make\ -\/C\ build\ VERBOSE=1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Alternative\ verbose\ syntax}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1173}{}\doxysubsection{\texorpdfstring{Meson}{Meson}}\label{md_skills_2build_autotoc_md1173}
+{\bfseries{Silent flags\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{meson\ setup\ -\/-\/quiet\ builddir\ \ \ \ \ \ \ \ \ \ \ \#\ Quiet\ setup}
+\DoxyCodeLine{meson\ compile\ -\/C\ builddir\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Ninja\ is\ quiet\ by\ default}
+
+\end{DoxyCode}
+
+
+{\bfseries{Usage in EXEC blocks\+:}} 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC meson setup --quiet builddir meson compile -\/C builddir 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+
+{\bfseries{When to use verbose\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{meson\ setup\ builddir\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Normal\ output\ for\ debugging}
+\DoxyCodeLine{meson\ compile\ -\/C\ builddir\ -\/v\ \ \ \ \ \ \ \ \ \ \ \#\ Verbose\ compilation}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1174}{}\doxysubsection{\texorpdfstring{Ninja}{Ninja}}\label{md_skills_2build_autotoc_md1174}
+{\bfseries{Default behavior\+:}} Ninja is {\bfseries{silent by default}}, showing only errors and warnings.
+
+{\bfseries{Usage in EXEC blocks\+:}} 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC ninja -\/C build 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+
+{\bfseries{When to use verbose\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ninja\ -\/v\ -\/C\ build\ \ \ \ \#\ Verbose\ output\ for\ debugging}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1175}{}\doxysubsection{\texorpdfstring{Gradle}{Gradle}}\label{md_skills_2build_autotoc_md1175}
+{\bfseries{Silent flags\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gradle\ -\/-\/quiet\ build\ \ \ \ \ \ \ \#\ Short\ form}
+\DoxyCodeLine{gradle\ -\/q\ build\ \ \ \ \ \ \ \ \ \ \ \ \#\ Even\ shorter}
+\DoxyCodeLine{gradle\ -\/q\ test\ \ \ \ \ \ \ \ \ \ \ \ \#\ Quiet\ tests}
+
+\end{DoxyCode}
+
+
+{\bfseries{Usage in EXEC blocks\+:}} 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC gradle --quiet build 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+
+{\bfseries{When to use verbose\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gradle\ build\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Normal\ output}
+\DoxyCodeLine{gradle\ -\/-\/info\ build\ \ \ \ \ \ \ \#\ More\ detailed\ output}
+\DoxyCodeLine{gradle\ -\/-\/debug\ build\ \ \ \ \ \ \#\ Maximum\ verbosity\ for\ debugging}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1176}{}\doxysubsection{\texorpdfstring{Maven}{Maven}}\label{md_skills_2build_autotoc_md1176}
+{\bfseries{Silent flags\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mvn\ -\/-\/quiet\ package\ \ \ \ \ \ \ \ \#\ Long\ form}
+\DoxyCodeLine{mvn\ -\/q\ package\ \ \ \ \ \ \ \ \ \ \ \ \#\ Short\ form}
+\DoxyCodeLine{mvn\ -\/q\ clean\ install\ \ \ \ \ \ \#\ Quiet\ clean\ +\ install}
+
+\end{DoxyCode}
+
+
+{\bfseries{Usage in EXEC blocks\+:}} 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC mvn -\/q clean package 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+
+{\bfseries{When to use verbose\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mvn\ package\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Normal\ output}
+\DoxyCodeLine{mvn\ -\/X\ package\ \ \ \ \ \ \ \ \ \ \ \ \#\ Debug\ output\ when\ build\ fails}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1177}{}\doxysubsection{\texorpdfstring{SCons}{SCons}}\label{md_skills_2build_autotoc_md1177}
+{\bfseries{Silent flags\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{scons\ -\/Q\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Quiet\ mode\ (suppress\ "{}scons:\ Reading/Building"{}\ messages)}
+\DoxyCodeLine{scons\ -\/s\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Silent\ mode\ (even\ quieter)}
+
+\end{DoxyCode}
+
+
+{\bfseries{Usage in EXEC blocks\+:}} 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC scons -\/Q 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+
+{\bfseries{When to use verbose\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{scons\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Normal\ output}
+\DoxyCodeLine{scons\ -\/-\/debug=explain\ \ \ \ \ \#\ Explain\ why\ targets\ are\ rebuilt}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1178}{}\doxysection{\texorpdfstring{Integration with axe.\+yaml}{Integration with axe.\+yaml}}\label{md_skills_2build_autotoc_md1178}
+All agents in AXE have been configured with BUILD GUIDELINES in their system prompts. These guidelines instruct agents to\+:
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Default to silent builds}} in all EXEC blocks
+\item {\bfseries{Retry with verbose output}} if a build fails and diagnostics are needed
+\item {\bfseries{Preserve context}} by minimizing log noise
+\end{DoxyEnumerate}
+
+Example from agent system prompt\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{BUILD\ GUIDELINES:}
+\DoxyCodeLine{}
+\DoxyCodeLine{To\ reduce\ token\ consumption\ in\ build\ logs,\ always\ use\ silent/quiet\ flags:}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ Make:\ \`{}make\ -\/s\ V=0`\ or\ \`{}make\ -\/-\/silent`}
+\DoxyCodeLine{-\/\ CMake:\ \`{}cmake\ -\/-\/build\ .\ -\/-\/\ VERBOSE=0`}
+\DoxyCodeLine{-\/\ Maven:\ \`{}mvn\ -\/q`\ or\ \`{}mvn\ -\/-\/quiet`}
+\DoxyCodeLine{-\/\ Gradle:\ \`{}gradle\ -\/-\/quiet`\ or\ \`{}gradle\ -\/q`}
+\DoxyCodeLine{}
+\DoxyCodeLine{If\ a\ build\ fails,\ retry\ with\ verbose\ output\ to\ diagnose\ issues.}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1179}{}\doxysection{\texorpdfstring{Integration with Collaborations}{Integration with Collaborations}}\label{md_skills_2build_autotoc_md1179}
+When multiple agents collaborate on a project, silent builds are especially important\+:
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Shared context}}\+: Build logs appear in the shared collaboration notes
+\item {\bfseries{Token budget}}\+: Collaborations have a combined token limit across all agents
+\item {\bfseries{Clarity}}\+: Silent builds make it easier for agents to see what others have done
+\end{DoxyEnumerate}
+
+Example collaboration workflow\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Start\ collaboration\ with\ silent\ builds\ enabled}
+\DoxyCodeLine{/collab\ gpt,claude\ ./project\ 30\ "{}Refactor\ build\ system"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Agent\ GPT:}
+
+\end{DoxyCode}
+ EXEC cmake --build build -- VERBOSE=0 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Agent\ Claude\ reviews\ the\ (minimal)\ output\ and\ continues}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1180}{}\doxysection{\texorpdfstring{Best Practices}{Best Practices}}\label{md_skills_2build_autotoc_md1180}
+\hypertarget{md_skills_2build_autotoc_md1181}{}\doxysubsection{\texorpdfstring{1. Always Use Silent Flags First}{1. Always Use Silent Flags First}}\label{md_skills_2build_autotoc_md1181}
+When building code in an EXEC block, always use silent flags\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{✓\ GOOD:}
+
+\end{DoxyCode}
+ EXEC make -\/s all 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{✗\ BAD:}
+
+\end{DoxyCode}
+ EXEC make all 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1182}{}\doxysubsection{\texorpdfstring{2. Retry with Verbose on Failure}{2. Retry with Verbose on Failure}}\label{md_skills_2build_autotoc_md1182}
+If a build fails, explain that you\textquotesingle{}re retrying with verbose output\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{The\ build\ failed.\ Let\ me\ retry\ with\ verbose\ output\ to\ diagnose:}
+
+\end{DoxyCode}
+ EXEC make V=1 all 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1183}{}\doxysubsection{\texorpdfstring{3. Document Your Choices}{3. Document Your Choices}}\label{md_skills_2build_autotoc_md1183}
+When choosing build flags, briefly explain why\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{I'll\ use\ silent\ builds\ to\ minimize\ log\ output:}
+
+\end{DoxyCode}
+ EXEC gradle -\/q build 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1184}{}\doxysubsection{\texorpdfstring{4. Combine Multiple Silent Flags}{4. Combine Multiple Silent Flags}}\label{md_skills_2build_autotoc_md1184}
+When unsure, combine multiple silent flags for maximum quietness\+: 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC make -\/s V=0 --no-\/print-\/directory 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1185}{}\doxysubsection{\texorpdfstring{5. Test Silently, Debug Verbosely}{5. Test Silently, Debug Verbosely}}\label{md_skills_2build_autotoc_md1185}
+Run tests silently by default, but add verbosity when diagnosing failures\+: 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC pytest -\/q \# Quiet tests 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ If\ tests\ fail:}
+
+\end{DoxyCode}
+ EXEC pytest -\/v \# Verbose test output 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1186}{}\doxysection{\texorpdfstring{Common Pitfalls}{Common Pitfalls}}\label{md_skills_2build_autotoc_md1186}
+\hypertarget{md_skills_2build_autotoc_md1187}{}\doxysubsection{\texorpdfstring{❌ Don\textquotesingle{}t Remove All Output}{❌ Don\textquotesingle{}t Remove All Output}}\label{md_skills_2build_autotoc_md1187}
+Silent builds should still show\+:
+\begin{DoxyItemize}
+\item {\bfseries{Errors}}\+: Critical failures that stop the build
+\item {\bfseries{Warnings}}\+: Potential issues in the code
+\item {\bfseries{Progress}}\+: High-\/level status (e.\+g., "{}\+Building target X"{})
+\end{DoxyItemize}\hypertarget{md_skills_2build_autotoc_md1188}{}\doxysubsection{\texorpdfstring{❌ Don\textquotesingle{}t Assume Silence Means Success}{❌ Don\textquotesingle{}t Assume Silence Means Success}}\label{md_skills_2build_autotoc_md1188}
+Always check the exit code\+: 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC make -\/s all \&\& echo "{}\+Build succeeded"{} \texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|} echo "{}\+Build failed"{} 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1189}{}\doxysubsection{\texorpdfstring{❌ Don\textquotesingle{}t Use Verbose by Default}{❌ Don\textquotesingle{}t Use Verbose by Default}}\label{md_skills_2build_autotoc_md1189}
+Verbose output should be the exception, not the rule. Only use it when\+:
+\begin{DoxyItemize}
+\item A build has failed and you need diagnostics
+\item The user specifically requested detailed output
+\item You\textquotesingle{}re debugging a build system configuration issue
+\end{DoxyItemize}\hypertarget{md_skills_2build_autotoc_md1190}{}\doxysection{\texorpdfstring{Examples}{Examples}}\label{md_skills_2build_autotoc_md1190}
+\hypertarget{md_skills_2build_autotoc_md1191}{}\doxysubsection{\texorpdfstring{Example 1\+: C++ Project with CMake}{Example 1\+: C++ Project with CMake}}\label{md_skills_2build_autotoc_md1191}
+
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC \hypertarget{md_skills_2build_autotoc_md1192}{}\doxysection{\texorpdfstring{Configure with quiet flags}{Configure with quiet flags}}\label{md_skills_2build_autotoc_md1192}
+cmake -\/S . -\/B build -\/DCMAKE\+\_\+\+BUILD\+\_\+\+TYPE=Release\hypertarget{md_skills_2build_autotoc_md1193}{}\doxysection{\texorpdfstring{Build silently}{Build silently}}\label{md_skills_2build_autotoc_md1193}
+cmake --build build -- VERBOSE=0 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ If\ build\ fails,\ retry\ with\ verbose:}
+
+\end{DoxyCode}
+ EXEC cmake --build build -- VERBOSE=1 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1194}{}\doxysubsubsection{\texorpdfstring{Example 2\+: Java Project with Maven}{Example 2\+: Java Project with Maven}}\label{md_skills_2build_autotoc_md1194}
+
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC \hypertarget{md_skills_2build_autotoc_md1195}{}\doxysection{\texorpdfstring{Clean and build quietly}{Clean and build quietly}}\label{md_skills_2build_autotoc_md1195}
+mvn -\/q clean package\hypertarget{md_skills_2build_autotoc_md1196}{}\doxysection{\texorpdfstring{Run tests quietly}{Run tests quietly}}\label{md_skills_2build_autotoc_md1196}
+mvn -\/q test 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ If\ tests\ fail:}
+
+\end{DoxyCode}
+ EXEC mvn test 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1197}{}\doxysubsubsection{\texorpdfstring{Example 3\+: Python Project with Make}{Example 3\+: Python Project with Make}}\label{md_skills_2build_autotoc_md1197}
+
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC \hypertarget{md_skills_2build_autotoc_md1198}{}\doxysection{\texorpdfstring{Install dependencies silently}{Install dependencies silently}}\label{md_skills_2build_autotoc_md1198}
+make -\/s install-\/deps\hypertarget{md_skills_2build_autotoc_md1199}{}\doxysection{\texorpdfstring{Run tests silently}{Run tests silently}}\label{md_skills_2build_autotoc_md1199}
+make -\/s test 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ If\ tests\ fail:}
+
+\end{DoxyCode}
+ EXEC make test V=1 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1200}{}\doxysubsubsection{\texorpdfstring{Example 4\+: Multi-\/\+Agent Collaboration}{Example 4\+: Multi-\/\+Agent Collaboration}}\label{md_skills_2build_autotoc_md1200}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{@boss:\ "{}Team,\ refactor\ the\ build\ system\ to\ use\ CMake"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{@gpt:}
+\DoxyCodeLine{I'll\ set\ up\ the\ CMake\ build\ with\ silent\ flags\ to\ minimize\ log\ noise:}
+
+\end{DoxyCode}
+ EXEC cmake -\/S . -\/B build -\/DCMAKE\+\_\+\+BUILD\+\_\+\+TYPE=Release cmake --build build -- VERBOSE=0 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Build\ succeeded.\ The\ new\ CMake\ configuration\ is\ ready\ for\ review.}
+\DoxyCodeLine{}
+\DoxyCodeLine{@claude:}
+\DoxyCodeLine{Reviewing\ @gpt's\ work.\ I'll\ run\ a\ security-\/focused\ build\ check:}
+
+\end{DoxyCode}
+ EXEC cmake --build build --target security-\/check -- VERBOSE=0 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{All\ security\ checks\ passed.\ The\ refactoring\ looks\ good.}
+
+\end{DoxyCode}
+\hypertarget{md_skills_2build_autotoc_md1201}{}\doxysubsection{\texorpdfstring{Summary}{Summary}}\label{md_skills_2build_autotoc_md1201}
+Silent builds are a best practice for\+:
+\begin{DoxyItemize}
+\item {\bfseries{Token efficiency}}\+: Save 50-\/90\% on build log tokens
+\item {\bfseries{Clarity}}\+: Focus on errors and warnings, not noise
+\item {\bfseries{Collaboration}}\+: Keep shared context clean and readable
+\item {\bfseries{Cost}}\+: Reduce API costs by minimizing log verbosity
+\end{DoxyItemize}
+
+Remember\+: {\bfseries{Silent by default, verbose when debugging.}}\hypertarget{md_skills_2build_autotoc_md1202}{}\doxysubsection{\texorpdfstring{References}{References}}\label{md_skills_2build_autotoc_md1202}
+
+\begin{DoxyItemize}
+\item {\bfseries{axe.\+yaml}}\+: All agents configured with BUILD GUIDELINES
+\item {\bfseries{\doxylink{claude__build_8md}{skills/claude\+\_\+build.\+md}}}\+: Claude-\/specific security-\/focused build guidelines
+\item {\bfseries{\doxylink{AGENTS_8md}{AGENTS.\+md}}} (if exists)\+: Integration notes for multi-\/agent workflows 
+\end{DoxyItemize}

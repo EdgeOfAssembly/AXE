@@ -1,0 +1,148 @@
+\doxysection{utils.\+token\+\_\+stats.\+Token\+Stats Class Reference}
+\hypertarget{classutils_1_1token__stats_1_1TokenStats}{}\label{classutils_1_1token__stats_1_1TokenStats}\index{utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}}
+
+
+Collaboration diagram for utils.\+token\+\_\+stats.\+Token\+Stats\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{classutils_1_1token__stats_1_1TokenStats__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classutils_1_1token__stats_1_1TokenStats_ad63fbccc0c02c2ab02773722f63f215c}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+None \mbox{\hyperlink{classutils_1_1token__stats_1_1TokenStats_a45a527585073694eaaa7c1cfe9e8b928}{add\+\_\+usage}} (self, str agent\+\_\+name, str model, int input\+\_\+tokens, int output\+\_\+tokens, int cache\+\_\+creation\+\_\+tokens=0, int cache\+\_\+read\+\_\+tokens=0)
+\item 
+Optional\mbox{[}Dict\mbox{]} \mbox{\hyperlink{classutils_1_1token__stats_1_1TokenStats_a4a643ae9eb477cb6a6bd4039fce40bf2}{get\+\_\+agent\+\_\+stats}} (self, str agent\+\_\+name)
+\item 
+Dict \mbox{\hyperlink{classutils_1_1token__stats_1_1TokenStats_a6276a11210640470b7397871f93084bf}{get\+\_\+total\+\_\+stats}} (self)
+\item 
+Dict \mbox{\hyperlink{classutils_1_1token__stats_1_1TokenStats_a9ce688e0ff3d85f0a5cc2371301d90e0}{get\+\_\+all\+\_\+stats}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{classutils_1_1token__stats_1_1TokenStats_a2dc0fcf256c5cfc0377272a0b982c809}{agent\+\_\+stats}} = \{\}
+\item 
+dict \mbox{\hyperlink{classutils_1_1token__stats_1_1TokenStats_a334eb598b87f51de090b3e83fdf54e7c}{cache\+\_\+stats}} = \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Track and calculate token usage statistics.\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classutils_1_1token__stats_1_1TokenStats_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classutils_1_1token__stats_1_1TokenStats_ad63fbccc0c02c2ab02773722f63f215c}\index{utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classutils_1_1token__stats_1_1TokenStats_ad63fbccc0c02c2ab02773722f63f215c} 
+utils.\+token\+\_\+stats.\+Token\+Stats.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize token statistics tracker.\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classutils_1_1token__stats_1_1TokenStats_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classutils_1_1token__stats_1_1TokenStats_a45a527585073694eaaa7c1cfe9e8b928}\index{utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}!add\_usage@{add\_usage}}
+\index{add\_usage@{add\_usage}!utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}}
+\doxysubsubsection{\texorpdfstring{add\_usage()}{add\_usage()}}
+{\footnotesize\ttfamily \label{classutils_1_1token__stats_1_1TokenStats_a45a527585073694eaaa7c1cfe9e8b928} 
+ None utils.\+token\+\_\+stats.\+Token\+Stats.\+add\+\_\+usage (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{str}]{model}{, }\item[{int}]{input\+\_\+tokens}{, }\item[{int}]{output\+\_\+tokens}{, }\item[{int }]{cache\+\_\+creation\+\_\+tokens}{ = {\ttfamily 0}, }\item[{int }]{cache\+\_\+read\+\_\+tokens}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Record token usage for an agent.
+
+Args:
+    agent_name: Name of the agent
+    model: Model name used
+    input_tokens: Number of input tokens (excluding cache)
+    output_tokens: Number of output tokens
+    cache_creation_tokens: Tokens used to create cache (default: 0)
+    cache_read_tokens: Tokens read from cache (default: 0)
+    
+Note: 
+    This method is backward compatible. Existing code that calls
+    add_usage() with 4 arguments will continue to work. The new
+    cache parameters are optional keyword arguments.
+\end{DoxyVerb}
+ \Hypertarget{classutils_1_1token__stats_1_1TokenStats_a4a643ae9eb477cb6a6bd4039fce40bf2}\index{utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}!get\_agent\_stats@{get\_agent\_stats}}
+\index{get\_agent\_stats@{get\_agent\_stats}!utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}}
+\doxysubsubsection{\texorpdfstring{get\_agent\_stats()}{get\_agent\_stats()}}
+{\footnotesize\ttfamily \label{classutils_1_1token__stats_1_1TokenStats_a4a643ae9eb477cb6a6bd4039fce40bf2} 
+ Optional\mbox{[}Dict\mbox{]} utils.\+token\+\_\+stats.\+Token\+Stats.\+get\+\_\+agent\+\_\+stats (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get statistics for a specific agent.
+
+Args:
+    agent_name: Name of the agent
+
+Returns:
+    Dictionary with stats, or None if agent not found
+\end{DoxyVerb}
+ \Hypertarget{classutils_1_1token__stats_1_1TokenStats_a9ce688e0ff3d85f0a5cc2371301d90e0}\index{utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}!get\_all\_stats@{get\_all\_stats}}
+\index{get\_all\_stats@{get\_all\_stats}!utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}}
+\doxysubsubsection{\texorpdfstring{get\_all\_stats()}{get\_all\_stats()}}
+{\footnotesize\ttfamily \label{classutils_1_1token__stats_1_1TokenStats_a9ce688e0ff3d85f0a5cc2371301d90e0} 
+ Dict utils.\+token\+\_\+stats.\+Token\+Stats.\+get\+\_\+all\+\_\+stats (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get statistics for all agents.
+
+Returns:
+    Dictionary mapping agent_name to stats with cost and cache info
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1token__stats_1_1TokenStats_a9ce688e0ff3d85f0a5cc2371301d90e0_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1token__stats_1_1TokenStats_a6276a11210640470b7397871f93084bf}\index{utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}!get\_total\_stats@{get\_total\_stats}}
+\index{get\_total\_stats@{get\_total\_stats}!utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}}
+\doxysubsubsection{\texorpdfstring{get\_total\_stats()}{get\_total\_stats()}}
+{\footnotesize\ttfamily \label{classutils_1_1token__stats_1_1TokenStats_a6276a11210640470b7397871f93084bf} 
+ Dict utils.\+token\+\_\+stats.\+Token\+Stats.\+get\+\_\+total\+\_\+stats (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get total statistics across all agents.
+
+Returns:
+    Dictionary with total input, output, messages, cost, and cache stats
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1token__stats_1_1TokenStats_a6276a11210640470b7397871f93084bf_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classutils_1_1token__stats_1_1TokenStats_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classutils_1_1token__stats_1_1TokenStats_a2dc0fcf256c5cfc0377272a0b982c809}\index{utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}!agent\_stats@{agent\_stats}}
+\index{agent\_stats@{agent\_stats}!utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}}
+\doxysubsubsection{\texorpdfstring{agent\_stats}{agent\_stats}}
+{\footnotesize\ttfamily \label{classutils_1_1token__stats_1_1TokenStats_a2dc0fcf256c5cfc0377272a0b982c809} 
+dict utils.\+token\+\_\+stats.\+Token\+Stats.\+agent\+\_\+stats = \{\}}
+
+\Hypertarget{classutils_1_1token__stats_1_1TokenStats_a334eb598b87f51de090b3e83fdf54e7c}\index{utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}!cache\_stats@{cache\_stats}}
+\index{cache\_stats@{cache\_stats}!utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}}
+\doxysubsubsection{\texorpdfstring{cache\_stats}{cache\_stats}}
+{\footnotesize\ttfamily \label{classutils_1_1token__stats_1_1TokenStats_a334eb598b87f51de090b3e83fdf54e7c} 
+dict utils.\+token\+\_\+stats.\+Token\+Stats.\+cache\+\_\+stats = \{\}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+utils/\mbox{\hyperlink{token__stats_8py}{token\+\_\+stats.\+py}}\end{DoxyCompactItemize}

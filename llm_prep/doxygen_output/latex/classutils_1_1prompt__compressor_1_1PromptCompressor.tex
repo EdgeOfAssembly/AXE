@@ -1,0 +1,321 @@
+\doxysection{utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor Class Reference}
+\hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor}{}\label{classutils_1_1prompt__compressor_1_1PromptCompressor}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+
+
+Collaboration diagram for utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{classutils_1_1prompt__compressor_1_1PromptCompressor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_ac362107cb2343cc29ff313e5d742342d}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+str \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_a3c619d552358929453ff38705d6b7b37}{compress}} (self, str prompt, str level=\textquotesingle{}balanced\textquotesingle{})
+\item 
+List\mbox{[}str\mbox{]} \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_a68496fd700eeaac8a761decfb9fbeffd}{extract\+\_\+critical\+\_\+directives}} (self, str prompt)
+\item 
+str \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_ab94eb6e8cd65773e4ece8b54d6a478e2}{create\+\_\+minimal\+\_\+prompt}} (self, str role, bool critical\+\_\+only=False)
+\item 
+str \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_a6d0295d44a438a369e0cb53e59983f0c}{compress\+\_\+workshop\+\_\+instructions}} (self, str prompt)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_a18b97b105bdb848033d21a6910080da7}{abbreviations}}
+\item 
+list \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_a88e636ed02e2dad413de539c17d86f38}{removable\+\_\+patterns}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_a63f2fd30cf2e7f0d34e0d46d8308a378}{SECTION\+\_\+\+END\+\_\+\+PATTERN}} = r\textquotesingle{}(?=\textbackslash{}n\textbackslash{}n\texorpdfstring{$\vert$}{|}\textbackslash{}n\mbox{[}A-\/Z\mbox{]}\texorpdfstring{$\vert$}{|}\textbackslash{}Z)\textquotesingle{}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_a7febd48ac42a8fbedf779015b5b5d4ce}{\+\_\+minimal\+\_\+compression}} (self, str prompt)
+\item 
+str \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_a33e854a082c8a8ef6c18cd8bd78469c0}{\+\_\+balanced\+\_\+compression}} (self, str prompt)
+\item 
+str \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_a3dcdabd9e980fc632396b2047db32f23}{\+\_\+aggressive\+\_\+compression}} (self, str prompt)
+\item 
+str \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_abdad9849e060f6d137222f99e6fcb4f3}{\+\_\+condense\+\_\+examples}} (self, str text, int keep=2)
+\item 
+str \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_a412cd77b24d44c2b4c3fae9eb3f0824c}{\+\_\+condense\+\_\+lists}} (self, str text)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Compresses system prompts to reduce token usage.
+
+Features:
+- Remove verbose explanations
+- Condense examples
+- Abbreviate common instructions
+- Preserve critical directives
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_ac362107cb2343cc29ff313e5d742342d}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_ac362107cb2343cc29ff313e5d742342d} 
+utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize the prompt compressor.\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_a3dcdabd9e980fc632396b2047db32f23}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!\_aggressive\_compression@{\_aggressive\_compression}}
+\index{\_aggressive\_compression@{\_aggressive\_compression}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{\_aggressive\_compression()}{\_aggressive\_compression()}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_a3dcdabd9e980fc632396b2047db32f23} 
+ str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+\_\+aggressive\+\_\+compression (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Aggressive compression - maximum reduction while preserving meaning.
+
+Args:
+    prompt: Original prompt
+
+Returns:
+    Aggressively compressed prompt
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1prompt__compressor_1_1PromptCompressor_a3dcdabd9e980fc632396b2047db32f23_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1prompt__compressor_1_1PromptCompressor_a3dcdabd9e980fc632396b2047db32f23_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_a33e854a082c8a8ef6c18cd8bd78469c0}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!\_balanced\_compression@{\_balanced\_compression}}
+\index{\_balanced\_compression@{\_balanced\_compression}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{\_balanced\_compression()}{\_balanced\_compression()}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_a33e854a082c8a8ef6c18cd8bd78469c0} 
+ str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+\_\+balanced\+\_\+compression (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Balanced compression - remove redundancy and some examples.
+
+Args:
+    prompt: Original prompt
+
+Returns:
+    Balanced compressed prompt
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1prompt__compressor_1_1PromptCompressor_a33e854a082c8a8ef6c18cd8bd78469c0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1prompt__compressor_1_1PromptCompressor_a33e854a082c8a8ef6c18cd8bd78469c0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_abdad9849e060f6d137222f99e6fcb4f3}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!\_condense\_examples@{\_condense\_examples}}
+\index{\_condense\_examples@{\_condense\_examples}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{\_condense\_examples()}{\_condense\_examples()}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_abdad9849e060f6d137222f99e6fcb4f3} 
+ str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+\_\+condense\+\_\+examples (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{text}{, }\item[{int }]{keep}{ = {\ttfamily 2}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Reduce number of examples in text.
+
+Args:
+    text: Text with examples
+    keep: Number of examples to keep
+
+Returns:
+    Text with condensed examples
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1prompt__compressor_1_1PromptCompressor_abdad9849e060f6d137222f99e6fcb4f3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_a412cd77b24d44c2b4c3fae9eb3f0824c}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!\_condense\_lists@{\_condense\_lists}}
+\index{\_condense\_lists@{\_condense\_lists}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{\_condense\_lists()}{\_condense\_lists()}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_a412cd77b24d44c2b4c3fae9eb3f0824c} 
+ str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+\_\+condense\+\_\+lists (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{text}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Convert bullet lists to comma-separated format where appropriate.
+
+Args:
+    text: Text with bullet lists
+
+Returns:
+    Text with condensed lists
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1prompt__compressor_1_1PromptCompressor_a412cd77b24d44c2b4c3fae9eb3f0824c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_a7febd48ac42a8fbedf779015b5b5d4ce}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!\_minimal\_compression@{\_minimal\_compression}}
+\index{\_minimal\_compression@{\_minimal\_compression}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{\_minimal\_compression()}{\_minimal\_compression()}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_a7febd48ac42a8fbedf779015b5b5d4ce} 
+ str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+\_\+minimal\+\_\+compression (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Minimal compression - only remove obvious redundancy.
+
+Args:
+    prompt: Original prompt
+
+Returns:
+    Minimally compressed prompt
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1prompt__compressor_1_1PromptCompressor_a7febd48ac42a8fbedf779015b5b5d4ce_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_a3c619d552358929453ff38705d6b7b37}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!compress@{compress}}
+\index{compress@{compress}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{compress()}{compress()}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_a3c619d552358929453ff38705d6b7b37} 
+ str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+compress (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{, }\item[{str }]{level}{ = {\ttfamily \textquotesingle{}balanced\textquotesingle{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Compress a system prompt.
+
+Args:
+    prompt: Original system prompt
+    level: Compression level ('minimal', 'balanced', 'aggressive')
+
+Returns:
+    Compressed prompt
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1prompt__compressor_1_1PromptCompressor_a3c619d552358929453ff38705d6b7b37_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_a6d0295d44a438a369e0cb53e59983f0c}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!compress\_workshop\_instructions@{compress\_workshop\_instructions}}
+\index{compress\_workshop\_instructions@{compress\_workshop\_instructions}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{compress\_workshop\_instructions()}{compress\_workshop\_instructions()}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_a6d0295d44a438a369e0cb53e59983f0c} 
+ str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+compress\+\_\+workshop\+\_\+instructions (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Compress workshop tool instructions in prompts.
+
+Args:
+    prompt: Prompt with workshop instructions
+
+Returns:
+    Compressed prompt
+\end{DoxyVerb}
+ \Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_ab94eb6e8cd65773e4ece8b54d6a478e2}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!create\_minimal\_prompt@{create\_minimal\_prompt}}
+\index{create\_minimal\_prompt@{create\_minimal\_prompt}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{create\_minimal\_prompt()}{create\_minimal\_prompt()}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_ab94eb6e8cd65773e4ece8b54d6a478e2} 
+ str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+create\+\_\+minimal\+\_\+prompt (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{role}{, }\item[{bool }]{critical\+\_\+only}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Create a minimal prompt for an agent role.
+
+Args:
+    role: Agent role description
+    critical_only: If True, only include critical directives
+
+Returns:
+    Minimal prompt
+\end{DoxyVerb}
+ \Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_a68496fd700eeaac8a761decfb9fbeffd}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!extract\_critical\_directives@{extract\_critical\_directives}}
+\index{extract\_critical\_directives@{extract\_critical\_directives}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{extract\_critical\_directives()}{extract\_critical\_directives()}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_a68496fd700eeaac8a761decfb9fbeffd} 
+ List\mbox{[}str\mbox{]} utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+extract\+\_\+critical\+\_\+directives (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Extract critical directives from a prompt.
+
+Args:
+    prompt: System prompt
+
+Returns:
+    List of critical directives
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_a18b97b105bdb848033d21a6910080da7}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!abbreviations@{abbreviations}}
+\index{abbreviations@{abbreviations}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{abbreviations}{abbreviations}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_a18b97b105bdb848033d21a6910080da7} 
+dict utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+abbreviations}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'You\ are\ an\ expert'}:\ \textcolor{stringliteral}{'Expert'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'You\ are\ a'}:\ \textcolor{stringliteral}{''},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Please\ provide'}:\ \textcolor{stringliteral}{'Provide'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Make\ sure\ to'}:\ \textcolor{stringliteral}{'Ensure'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'You\ should'}:\ \textcolor{stringliteral}{''},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'It\ is\ important\ to'}:\ \textcolor{stringliteral}{'Must'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'Always\ remember\ to'}:\ \textcolor{stringliteral}{'Always'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_a88e636ed02e2dad413de539c17d86f38}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!removable\_patterns@{removable\_patterns}}
+\index{removable\_patterns@{removable\_patterns}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{removable\_patterns}{removable\_patterns}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_a88e636ed02e2dad413de539c17d86f38} 
+list utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+removable\+\_\+patterns}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ [}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ rf\textcolor{stringliteral}{'(?:For\ example|Example):.*?\{self.SECTION\_END\_PATTERN\}'},\ \ \textcolor{comment}{\#\ Remove\ examples}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ rf\textcolor{stringliteral}{'(?:Note|Important):.*?\{self.SECTION\_END\_PATTERN\}'},\ \ \textcolor{comment}{\#\ Remove\ notes}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{r'\(\backslash\)(.*?\(\backslash\))'},\ \ \textcolor{comment}{\#\ Remove\ parenthetical\ remarks}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ]}
+
+\end{DoxyCode}
+\Hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor_a63f2fd30cf2e7f0d34e0d46d8308a378}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}!SECTION\_END\_PATTERN@{SECTION\_END\_PATTERN}}
+\index{SECTION\_END\_PATTERN@{SECTION\_END\_PATTERN}!utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
+\doxysubsubsection{\texorpdfstring{SECTION\_END\_PATTERN}{SECTION\_END\_PATTERN}}
+{\footnotesize\ttfamily \label{classutils_1_1prompt__compressor_1_1PromptCompressor_a63f2fd30cf2e7f0d34e0d46d8308a378} 
+str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+SECTION\+\_\+\+END\+\_\+\+PATTERN = r\textquotesingle{}(?=\textbackslash{}n\textbackslash{}n\texorpdfstring{$\vert$}{|}\textbackslash{}n\mbox{[}A-\/Z\mbox{]}\texorpdfstring{$\vert$}{|}\textbackslash{}Z)\textquotesingle{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+utils/\mbox{\hyperlink{prompt__compressor_8py}{prompt\+\_\+compressor.\+py}}\end{DoxyCompactItemize}

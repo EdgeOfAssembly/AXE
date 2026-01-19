@@ -1,0 +1,15 @@
+<map id="tools.build_analyzer.version_key" name="tools.build_analyzer.version_key">
+<area shape="rect" id="Node000001" title=" " alt="" coords="735,48,969,76"/>
+<area shape="rect" id="Node000002" href="$namespacetools_1_1build__analyzer.html#a5ac10ab2b3b30b6e0064795179d7a36c" title=" " alt="" coords="496,5,687,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="725,46,688,43,688,38,731,46"/>
+<area shape="rect" id="Node000005" href="$namespacetools_1_1build__analyzer.html#ada540ddd4288231265da6cef5eea9e4a" title=" " alt="" coords="496,75,687,119"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="731,79,688,87,688,82,725,79"/>
+<area shape="rect" id="Node000003" href="$namespacetools_1_1build__analyzer.html#adb11a626c64e923dfc5853158f9791fa" title=" " alt="" coords="242,5,448,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="478,28,449,30,448,25,483,27"/>
+<area shape="rect" id="Node000004" href="$namespacetools_1_1build__analyzer.html#a47b835433d2e313fbdcb3c1350ab8fe0" title=" " alt="" coords="5,48,194,76"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="224,45,195,52,193,46,229,44"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="140,34,127,30,99,27,74,29,60,34,56,39,63,48,57,48,51,40,56,30,73,24,100,22,128,24,145,33"/>
+<area shape="rect" id="Node000006" href="$namespacetools_1_1build__analyzer.html#a9508c930f379c7a1a86cfcbce4656aa6" title=" " alt="" coords="242,75,448,119"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="478,97,449,100,448,94,483,97"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="223,80,194,78,194,73,229,80"/>
+</map>

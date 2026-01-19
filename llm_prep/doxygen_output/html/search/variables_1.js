@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['abbreviations_0',['abbreviations',['../classutils_1_1prompt__compressor_1_1PromptCompressor.html#a18b97b105bdb848033d21a6910080da7',1,'utils::prompt_compressor::PromptCompressor']]],
+  ['acp_5factions_1',['ACP_ACTIONS',['../namespacebenchmark__acp.html#a4ae0710ae5c1c6bc0dc5187d421eb073',1,'benchmark_acp']]],
+  ['agent_5fabbrevs_2',['AGENT_ABBREVS',['../namespacebenchmark__acp.html#a5001408d35bc1fea7887cef4c9c6caf2',1,'benchmark_acp']]],
+  ['agent_5faliases_3',['agent_aliases',['../classaxe_1_1CollaborativeSession.html#ab96c4604ab89c35f01d78a9133584ee0',1,'axe::CollaborativeSession']]],
+  ['agent_5fconfigs_4',['agent_configs',['../classcore_1_1multiprocess_1_1MultiAgentCoordinator.html#a3f96caf551ff9006459a6995d5d265d2',1,'core::multiprocess::MultiAgentCoordinator']]],
+  ['agent_5fid_5',['agent_id',['../classcore_1_1multiprocess_1_1AgentWorkerProcess.html#a8548f8b171f5b85099f8a836f60ed7ba',1,'core::multiprocess::AgentWorkerProcess']]],
+  ['agent_5fids_6',['agent_ids',['../classaxe_1_1CollaborativeSession.html#ac380ead9bbca25a5579dbd99a5f1f1f7',1,'axe::CollaborativeSession']]],
+  ['agent_5fmgr_7',['agent_mgr',['../classaxe_1_1CollaborativeSession.html#ab931398b863c755ac1cfda96f01cc320',1,'axe.CollaborativeSession.agent_mgr'],['../classaxe_1_1ChatSession.html#ae5266ac3557ae29c4bc51d1117c47918',1,'axe.ChatSession.agent_mgr']]],
+  ['agent_5fname_8',['agent_name',['../classcore_1_1multiprocess_1_1AgentWorkerProcess.html#a30eeb225977669759867e300e3f8857a',1,'core::multiprocess::AgentWorkerProcess']]],
+  ['agent_5fstate_5fmigrations_9',['AGENT_STATE_MIGRATIONS',['../namespacedatabase_1_1schema.html#abb008a4c84e15fa5ae3b0b98473ba98b',1,'database::schema']]],
+  ['agent_5fstate_5ftable_10',['AGENT_STATE_TABLE',['../namespacedatabase_1_1schema.html#a361887f9cac360a4974f4396a8615717',1,'database::schema']]],
+  ['agent_5fstats_11',['agent_stats',['../classutils_1_1token__stats_1_1TokenStats.html#a2dc0fcf256c5cfc0377272a0b982c809',1,'utils::token_stats::TokenStats']]],
+  ['agent_5fstatus_12',['agent_status',['../classcore_1_1multiprocess_1_1SharedContext.html#a6e2e9ea4621f680426d28eefcf5c47bd',1,'core::multiprocess::SharedContext']]],
+  ['agent_5ftoken_5fbreak_5frequest_13',['AGENT_TOKEN_BREAK_REQUEST',['../namespacecore_1_1constants.html#ae77a3f2ff99cb86ef3e6edb025668d5e',1,'core::constants']]],
+  ['agent_5ftoken_5femergency_14',['AGENT_TOKEN_EMERGENCY',['../namespacecore_1_1constants.html#a472a8a978e957c7045853ec469c7e012',1,'core::constants']]],
+  ['agent_5ftoken_5fgithub_5fready_15',['AGENT_TOKEN_GITHUB_READY',['../namespacecore_1_1constants.html#af2d3f8f391c2c51fb60376b2cffa67cb',1,'core::constants']]],
+  ['agent_5ftoken_5fpass_16',['AGENT_TOKEN_PASS',['../namespacecore_1_1constants.html#a26f73e2e79eecaf06c38f035fb0aff1e',1,'core::constants']]],
+  ['agent_5ftoken_5fspawn_17',['AGENT_TOKEN_SPAWN',['../namespacecore_1_1constants.html#a1c38858bf4fac9bbb8766cdbebb55911',1,'core::constants']]],
+  ['agent_5ftoken_5fstatus_18',['AGENT_TOKEN_STATUS',['../namespacecore_1_1constants.html#ad6a4a88a8da17b21ca78e98a88e32395',1,'core::constants']]],
+  ['agent_5ftoken_5ftask_5fcomplete_19',['AGENT_TOKEN_TASK_COMPLETE',['../namespacecore_1_1constants.html#a8dfdca2464b7ef53a688c534323208f5',1,'core::constants']]],
+  ['agents_20',['agents',['../classaxe_1_1CollaborativeSession.html#a92644ec2213903477715a66705bd4eed',1,'axe::CollaborativeSession']]],
+  ['alias_5fmappings_5ftable_21',['ALIAS_MAPPINGS_TABLE',['../namespacedatabase_1_1schema.html#afeebb21e25b7e572011b80fac5833190',1,'database::schema']]],
+  ['anthropic_5ffeatures_22',['anthropic_features',['../classcore_1_1agent__manager_1_1AgentManager.html#ab9e7169142475363dde711cae91b47f4',1,'core::agent_manager::AgentManager']]],
+  ['automake_5fpatterns_23',['AUTOMAKE_PATTERNS',['../namespacetools_1_1build__analyzer.html#a1736fdaf188ae783fd3ef47eee47a661',1,'tools::build_analyzer']]]
+];

@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['initbits_0',['initbits',['../unlzexe_8c.html#a88a8845e0edb63f4a80a773bb60d1a29',1,'unlzexe.c']]],
+  ['inject_5fskills_5fto_5fprompt_1',['inject_skills_to_prompt',['../classcore_1_1skills__manager_1_1SkillsManager.html#a2173e7aed8615ebd15767803aeda17f8',1,'core::skills_manager::SkillsManager']]],
+  ['instrument_5fprocess_2',['instrument_process',['../classworkshop_1_1hammer_1_1HammerInstrumentor.html#acb37c7042f0b40915e6b0e19610b994c',1,'workshop::hammer::HammerInstrumentor']]],
+  ['instrument_5fscript_3',['instrument_script',['../classworkshop_1_1hammer_1_1HammerInstrumentor.html#acbb48087ecc8ff4ed7dfc5895661c6de',1,'workshop::hammer::HammerInstrumentor']]],
+  ['is_5fanthropic_5fmodel_4',['is_anthropic_model',['../namespacemodels_1_1metadata.html#a2c5be0de038b417bd4c9c156fca253b1',1,'models::metadata']]],
+  ['is_5favailable_5',['is_available',['../classcore_1_1sandbox_1_1SandboxManager.html#ae0139e54ec4099aafd66e88ad6a2306f',1,'core::sandbox::SandboxManager']]],
+  ['is_5fenabled_6',['is_enabled',['../classcore_1_1anthropic__features_1_1FilesAPIManager.html#ab869a3faaad1f8aeb4943f5d1d72134d',1,'core.anthropic_features.FilesAPIManager.is_enabled()'],['../classcore_1_1session__preprocessor_1_1SessionPreprocessor.html#ad00de885732a8826585771f29d25eeda',1,'core.session_preprocessor.SessionPreprocessor.is_enabled()']]],
+  ['is_5ffiles_5fapi_5fenabled_7',['is_files_api_enabled',['../classcore_1_1anthropic__features_1_1AnthropicFeatures.html#a9f391e07bb747b23ee1f490a5ceca240',1,'core::anthropic_features::AnthropicFeatures']]],
+  ['is_5fgenuine_5ftask_5fcompletion_8',['is_genuine_task_completion',['../namespaceaxe.html#aed941049819dac642905b812e754e2fa',1,'axe']]],
+  ['is_5fprompt_5fcaching_5fenabled_9',['is_prompt_caching_enabled',['../classcore_1_1anthropic__features_1_1AnthropicFeatures.html#ae4cd2fc680f6eee97b78bf22a249bb50',1,'core::anthropic_features::AnthropicFeatures']]],
+  ['is_5fsafe_5ftar_5fmember_10',['is_safe_tar_member',['../namespacetools_1_1build__analyzer.html#a41726c547bb435a3ff3dccb41fc6e5d3',1,'tools::build_analyzer']]],
+  ['is_5ftar_5farchive_11',['is_tar_archive',['../namespacetools_1_1build__analyzer.html#ad3c492d6e19c78b5a075cf2d226bcbd0',1,'tools::build_analyzer']]],
+  ['is_5ftoken_5fcounting_5fenabled_12',['is_token_counting_enabled',['../classcore_1_1anthropic__features_1_1AnthropicFeatures.html#a264f65c13464b92c1ee4945375adb5f9',1,'core::anthropic_features::AnthropicFeatures']]],
+  ['is_5ftool_5fallowed_13',['is_tool_allowed',['../classcore_1_1tool__runner_1_1ToolRunner.html#abd254d33291077274c09bef339b4c6c2',1,'core::tool_runner::ToolRunner']]],
+  ['is_5ftool_5fblacklisted_14',['is_tool_blacklisted',['../classcore_1_1sandbox_1_1SandboxManager.html#a2d7dce26ef10f64fb3e7b1c38ded9ae2',1,'core::sandbox::SandboxManager']]],
+  ['isjapan_15',['isjapan',['../unlzexe_8c.html#ac31e4a877b09226400b2ca4aa48987c0',1,'unlzexe.c']]],
+  ['itob_16',['itob',['../depklite_8c.html#a746cee407a9dac3b866f8da6600581c5',1,'depklite.c']]]
+];

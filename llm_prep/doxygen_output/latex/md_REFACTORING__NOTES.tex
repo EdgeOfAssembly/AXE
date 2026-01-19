@@ -1,0 +1,212 @@
+\chapter{AXE.\+PY Refactoring Notes }
+\hypertarget{md_REFACTORING__NOTES}{}\label{md_REFACTORING__NOTES}\index{AXE.PY Refactoring Notes@{AXE.PY Refactoring Notes}}
+\label{md_REFACTORING__NOTES_autotoc_md991}%
+\Hypertarget{md_REFACTORING__NOTES_autotoc_md991}%
+\hypertarget{md_REFACTORING__NOTES_autotoc_md992}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_REFACTORING__NOTES_autotoc_md992}
+This document describes the refactoring of the monolithic {\ttfamily \doxylink{axe_8py}{axe.\+py}} (124KB, 3115 lines) into a modular architecture. This is {\bfseries{PR \#1 of 3}} in the gradual refactoring strategy following {\bfseries{Option A\+: Gradual Refactor}} from the implementation plan.\hypertarget{md_REFACTORING__NOTES_autotoc_md993}{}\doxysection{\texorpdfstring{Motivation}{Motivation}}\label{md_REFACTORING__NOTES_autotoc_md993}
+Before implementing Phases 6-\/10 improvements (mandatory sleep, degradation monitoring, GPG mailbox, breaks, dynamic spawning), we needed to refactor the monolithic structure into maintainable modules.\hypertarget{md_REFACTORING__NOTES_autotoc_md994}{}\doxysection{\texorpdfstring{Refactoring Summary}{Refactoring Summary}}\label{md_REFACTORING__NOTES_autotoc_md994}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md995}{}\doxysubsection{\texorpdfstring{Before}{Before}}\label{md_REFACTORING__NOTES_autotoc_md995}
+
+\begin{DoxyItemize}
+\item {\bfseries{File}}\+: {\ttfamily \doxylink{axe_8py}{axe.\+py}} -\/ 124KB, 3115 lines
+\item {\bfseries{Structure}}\+: Monolithic file with all functionality
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md996}{}\doxysubsection{\texorpdfstring{After}{After}}\label{md_REFACTORING__NOTES_autotoc_md996}
+
+\begin{DoxyItemize}
+\item {\bfseries{File}}\+: {\ttfamily \doxylink{axe_8py}{axe.\+py}} -\/ 103KB, 2572 lines (17\% reduction)
+\item {\bfseries{New Modules}}\+: 692 lines across 4 module directories
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md997}{}\doxysection{\texorpdfstring{New Module Structure}{New Module Structure}}\label{md_REFACTORING__NOTES_autotoc_md997}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md998}{}\doxysubsection{\texorpdfstring{{\ttfamily utils/} (33 lines)}{{\ttfamily utils/} (33 lines)}}\label{md_REFACTORING__NOTES_autotoc_md998}
+Terminal formatting and display utilities.
+\begin{DoxyItemize}
+\item {\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+.\+py} (8 lines) -\/ Module initialization and exports
+\item {\ttfamily \doxylink{formatting_8py}{formatting.\+py}} (25 lines) -\/ Colors class, colorize function, \textquotesingle{}c\textquotesingle{} alias
+\end{DoxyItemize}
+
+{\bfseries{Key Functions\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily colorize(text\+: str, color\+: str) -\/\texorpdfstring{$>$}{>} str} -\/ Apply ANSI colors to text
+\item {\ttfamily Colors} class -\/ ANSI color code constants
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md999}{}\doxysubsection{\texorpdfstring{{\ttfamily progression/} (67 lines)}{{\ttfamily progression/} (67 lines)}}\label{md_REFACTORING__NOTES_autotoc_md999}
+Agent XP and leveling system.
+\begin{DoxyItemize}
+\item {\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+.\+py} (9 lines) -\/ Module initialization and exports
+\item {\ttfamily \doxylink{xp__system_8py}{xp\+\_\+system.\+py}} (27 lines) -\/ XP calculation logic
+\item {\ttfamily \doxylink{levels_8py}{levels.\+py}} (31 lines) -\/ Level titles and milestone definitions
+\end{DoxyItemize}
+
+{\bfseries{Key Functions\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily calculate\+\_\+xp\+\_\+for\+\_\+level(level\+: int) -\/\texorpdfstring{$>$}{>} int} -\/ Calculate XP thresholds
+\item {\ttfamily get\+\_\+title\+\_\+for\+\_\+level(level\+: int) -\/\texorpdfstring{$>$}{>} str} -\/ Get agent title for level
+\end{DoxyItemize}
+
+{\bfseries{Constants\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily LEVEL\+\_\+\+SENIOR\+\_\+\+WORKER = 10} -\/ Level 10 milestone
+\item {\ttfamily LEVEL\+\_\+\+TEAM\+\_\+\+LEADER = 20} -\/ Level 20 milestone
+\item {\ttfamily LEVEL\+\_\+\+DEPUTY\+\_\+\+SUPERVISOR = 30} -\/ Level 30 milestone
+\item {\ttfamily LEVEL\+\_\+\+SUPERVISOR\+\_\+\+ELIGIBLE = 40} -\/ Level 40 milestone
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md1000}{}\doxysubsection{\texorpdfstring{{\ttfamily database/} (542 lines)}{{\ttfamily database/} (542 lines)}}\label{md_REFACTORING__NOTES_autotoc_md1000}
+SQLite database operations and schema definitions.
+\begin{DoxyItemize}
+\item {\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+.\+py} (13 lines) -\/ Module initialization and exports
+\item {\ttfamily \doxylink{schema_8py}{schema.\+py}} (44 lines) -\/ SQL table definitions and constants
+\item {\ttfamily \doxylink{agent__db_8py}{agent\+\_\+db.\+py}} (485 lines) -\/ Complete Agent\+Database class
+\end{DoxyItemize}
+
+{\bfseries{Key Components\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily Agent\+Database} class -\/ All database operations
+\item Table schemas\+: {\ttfamily agent\+\_\+state}, {\ttfamily supervisor\+\_\+log}, {\ttfamily alias\+\_\+mappings}
+\item Methods for XP awards, sleep tracking, degradation monitoring, breaks
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md1001}{}\doxysubsection{\texorpdfstring{{\ttfamily safety/} (50 lines)}{{\ttfamily safety/} (50 lines)}}\label{md_REFACTORING__NOTES_autotoc_md1001}
+Session rules and workplace guidelines.
+\begin{DoxyItemize}
+\item {\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+.\+py} (8 lines) -\/ Module initialization and exports
+\item {\ttfamily \doxylink{rules_8py}{rules.\+py}} (42 lines) -\/ SESSION\+\_\+\+RULES constant
+\end{DoxyItemize}
+
+{\bfseries{Key Constants\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily SESSION\+\_\+\+RULES} -\/ Multi-\/line string with 4 core principles
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md1002}{}\doxysection{\texorpdfstring{Implementation Approach}{Implementation Approach}}\label{md_REFACTORING__NOTES_autotoc_md1002}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md1003}{}\doxysubsection{\texorpdfstring{Phase 1\+: Create Directory Structure ✅}{Phase 1\+: Create Directory Structure ✅}}\label{md_REFACTORING__NOTES_autotoc_md1003}
+Created four module directories with {\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+.\+py} files.\hypertarget{md_REFACTORING__NOTES_autotoc_md1004}{}\doxysubsection{\texorpdfstring{Phase 2\+: Extract Functions ✅}{Phase 2\+: Extract Functions ✅}}\label{md_REFACTORING__NOTES_autotoc_md1004}
+Copied functions to new modules while keeping originals in {\ttfamily \doxylink{axe_8py}{axe.\+py}}.\hypertarget{md_REFACTORING__NOTES_autotoc_md1005}{}\doxysubsection{\texorpdfstring{Phase 3\+: Update Imports ✅}{Phase 3\+: Update Imports ✅}}\label{md_REFACTORING__NOTES_autotoc_md1005}
+Added imports from new modules to {\ttfamily \doxylink{axe_8py}{axe.\+py}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ \mbox{\hyperlink{namespaceutils_1_1formatting}{utils.formatting}}\ \textcolor{keyword}{import}\ Colors,\ colorize,\ c}
+\DoxyCodeLine{\textcolor{keyword}{from}\ \mbox{\hyperlink{namespacesafety_1_1rules}{safety.rules}}\ \textcolor{keyword}{import}\ SESSION\_RULES}
+\DoxyCodeLine{\textcolor{keyword}{from}\ \mbox{\hyperlink{namespaceprogression_1_1xp__system}{progression.xp\_system}}\ \textcolor{keyword}{import}\ calculate\_xp\_for\_level}
+\DoxyCodeLine{\textcolor{keyword}{from}\ \mbox{\hyperlink{namespaceprogression_1_1levels}{progression.levels}}\ \textcolor{keyword}{import}\ get\_title\_for\_level,\ LEVEL\_*}
+\DoxyCodeLine{\textcolor{keyword}{from}\ \mbox{\hyperlink{namespacedatabase_1_1agent__db}{database.agent\_db}}\ \textcolor{keyword}{import}\ AgentDatabase}
+
+\end{DoxyCode}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md1006}{}\doxysubsection{\texorpdfstring{Phase 4\+: Testing ✅}{Phase 4\+: Testing ✅}}\label{md_REFACTORING__NOTES_autotoc_md1006}
+
+\begin{DoxyItemize}
+\item All tests pass\+: {\ttfamily \doxylink{test__axe__improvements_8py}{test\+\_\+axe\+\_\+improvements.\+py}}
+\item Demo works\+: {\ttfamily \doxylink{demo__improvements_8py}{demo\+\_\+improvements.\+py}}
+\item Independent module imports verified
+\item Backward compatibility maintained
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md1007}{}\doxysubsection{\texorpdfstring{Phase 5\+: Cleanup ✅}{Phase 5\+: Cleanup ✅}}\label{md_REFACTORING__NOTES_autotoc_md1007}
+Removed duplicated code from {\ttfamily \doxylink{axe_8py}{axe.\+py}} while maintaining functionality.\hypertarget{md_REFACTORING__NOTES_autotoc_md1008}{}\doxysection{\texorpdfstring{Design Decisions}{Design Decisions}}\label{md_REFACTORING__NOTES_autotoc_md1008}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md1009}{}\doxysubsection{\texorpdfstring{Why These Modules First?}{Why These Modules First?}}\label{md_REFACTORING__NOTES_autotoc_md1009}
+Extracted "{}low-\/hanging fruit"{} with minimal dependencies\+:
+\begin{DoxyItemize}
+\item {\bfseries{Utils}}\+: Pure utility functions, no dependencies
+\item {\bfseries{Progression}}\+: Simple calculations, no external dependencies
+\item {\bfseries{Database}}\+: Self-\/contained persistence layer
+\item {\bfseries{Safety}}\+: Simple constants
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md1010}{}\doxysubsection{\texorpdfstring{Backward Compatibility}{Backward Compatibility}}\label{md_REFACTORING__NOTES_autotoc_md1010}
+All existing imports continue to work\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ axe\ \textcolor{keyword}{import}\ AgentDatabase,\ calculate\_xp\_for\_level,\ SESSION\_RULES}
+
+\end{DoxyCode}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md1011}{}\doxysubsection{\texorpdfstring{Module Independence}{Module Independence}}\label{md_REFACTORING__NOTES_autotoc_md1011}
+Each module can be imported independently\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ \mbox{\hyperlink{namespaceprogression_1_1xp__system}{progression.xp\_system}}\ \textcolor{keyword}{import}\ calculate\_xp\_for\_level}
+\DoxyCodeLine{\textcolor{keyword}{from}\ \mbox{\hyperlink{namespacedatabase_1_1agent__db}{database.agent\_db}}\ \textcolor{keyword}{import}\ AgentDatabase}
+
+\end{DoxyCode}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md1012}{}\doxysection{\texorpdfstring{Testing}{Testing}}\label{md_REFACTORING__NOTES_autotoc_md1012}
+All existing tests pass without modification\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$\ python3\ test\_axe\_improvements.py}
+\DoxyCodeLine{======================================================================}
+\DoxyCodeLine{ALL\ TESTS\ PASSED!\ ✓\ (Phases\ 1-\/10)}
+\DoxyCodeLine{======================================================================}
+
+\end{DoxyCode}
+
+
+Verification includes\+:
+\begin{DoxyItemize}
+\item XP calculation tests
+\item Title system tests ~\newline
+
+\item Database operations tests
+\item Session rules tests
+\item Mandatory sleep system (Phase 6)
+\item Degradation monitoring (Phase 7)
+\item Emergency mailbox (Phase 8)
+\item Break system (Phase 9)
+\item Dynamic spawning (Phase 10)
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md1013}{}\doxysection{\texorpdfstring{Metrics}{Metrics}}\label{md_REFACTORING__NOTES_autotoc_md1013}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md1014}{}\doxysubsection{\texorpdfstring{Line Count}{Line Count}}\label{md_REFACTORING__NOTES_autotoc_md1014}
+
+\begin{DoxyItemize}
+\item {\bfseries{\doxylink{axe_8py}{axe.\+py}}}\+: 3115 → 2572 lines (543 lines removed, 17\% reduction)
+\item {\bfseries{New modules}}\+: 692 lines total
+\item {\bfseries{Net change}}\+: +149 lines (due to module structure overhead)
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md1015}{}\doxysubsection{\texorpdfstring{File Size}{File Size}}\label{md_REFACTORING__NOTES_autotoc_md1015}
+
+\begin{DoxyItemize}
+\item {\bfseries{\doxylink{axe_8py}{axe.\+py}}}\+: 124KB → 103KB (21KB reduction, 17\%)
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md1016}{}\doxysubsection{\texorpdfstring{Module Breakdown}{Module Breakdown}}\label{md_REFACTORING__NOTES_autotoc_md1016}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Module  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Lines  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Purpose  \\
+utils/  &33  &Terminal formatting  \\
+progression/  &67  &XP and level system  \\
+database/  &542  &Persistence layer  \\
+safety/  &50  &Session rules  \\
+{\bfseries{Total}}  &{\bfseries{692}}  &\\
+\end{DoxyTable}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md1017}{}\doxysection{\texorpdfstring{Benefits}{Benefits}}\label{md_REFACTORING__NOTES_autotoc_md1017}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Improved Maintainability}} -\/ Related code is now grouped together
+\item {\bfseries{Better Testing}} -\/ Modules can be tested independently
+\item {\bfseries{Clear Responsibilities}} -\/ Each module has a single purpose
+\item {\bfseries{Easier Extensions}} -\/ New features can be added as new modules
+\item {\bfseries{Foundation for Future Work}} -\/ Prepared for Phases 6-\/10 enhancements
+\end{DoxyEnumerate}\hypertarget{md_REFACTORING__NOTES_autotoc_md1018}{}\doxysection{\texorpdfstring{Future Refactoring (PRs \#2 \& \#3)}{Future Refactoring (PRs \#2 \& \#3)}}\label{md_REFACTORING__NOTES_autotoc_md1018}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md1019}{}\doxysubsection{\texorpdfstring{PR \#2\+: Extract Large Classes}{PR \#2\+: Extract Large Classes}}\label{md_REFACTORING__NOTES_autotoc_md1019}
+
+\begin{DoxyItemize}
+\item {\ttfamily Config} class and configuration management
+\item {\ttfamily Agent\+Manager} class and agent lifecycle
+\item {\ttfamily Tool\+Runner} class and command execution
+\item {\ttfamily Project\+Context} class and context gathering
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md1020}{}\doxysubsection{\texorpdfstring{PR \#3\+: Extract Session Management}{PR \#3\+: Extract Session Management}}\label{md_REFACTORING__NOTES_autotoc_md1020}
+
+\begin{DoxyItemize}
+\item {\ttfamily Collaborative\+Session} class
+\item {\ttfamily Chat\+Session} class
+\item Session-\/related utilities and helpers
+\end{DoxyItemize}\hypertarget{md_REFACTORING__NOTES_autotoc_md1021}{}\doxysection{\texorpdfstring{Migration Guide}{Migration Guide}}\label{md_REFACTORING__NOTES_autotoc_md1021}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md1022}{}\doxysubsection{\texorpdfstring{For Existing Code}{For Existing Code}}\label{md_REFACTORING__NOTES_autotoc_md1022}
+No changes needed! All imports continue to work\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ axe\ \textcolor{keyword}{import}\ AgentDatabase,\ calculate\_xp\_for\_level}
+
+\end{DoxyCode}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md1023}{}\doxysubsection{\texorpdfstring{For New Code}{For New Code}}\label{md_REFACTORING__NOTES_autotoc_md1023}
+Can use either style\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Import\ from\ axe.py\ (recommended\ for\ backward\ compatibility)}}
+\DoxyCodeLine{\textcolor{keyword}{from}\ axe\ \textcolor{keyword}{import}\ AgentDatabase}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Import\ from\ module\ directly\ (recommended\ for\ new\ code)}}
+\DoxyCodeLine{\textcolor{keyword}{from}\ \mbox{\hyperlink{namespacedatabase_1_1agent__db}{database.agent\_db}}\ \textcolor{keyword}{import}\ AgentDatabase}
+
+\end{DoxyCode}
+\hypertarget{md_REFACTORING__NOTES_autotoc_md1024}{}\doxysection{\texorpdfstring{Lessons Learned}{Lessons Learned}}\label{md_REFACTORING__NOTES_autotoc_md1024}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Gradual refactoring works}} -\/ Small, incremental changes are safer
+\item {\bfseries{Tests are essential}} -\/ Comprehensive tests caught issues early
+\item {\bfseries{Module overhead is acceptable}} -\/ +149 lines for better structure
+\item {\bfseries{Backward compatibility matters}} -\/ No disruption to existing code
+\end{DoxyEnumerate}\hypertarget{md_REFACTORING__NOTES_autotoc_md1025}{}\doxysection{\texorpdfstring{References}{References}}\label{md_REFACTORING__NOTES_autotoc_md1025}
+
+\begin{DoxyItemize}
+\item Original discussion\+: \href{https://github.com/copilot/c/1a621389-bc7f-4abd-9d22-2de704bc95e2}{\texttt{https\+://github.\+com/copilot/c/1a621389-\/bc7f-\/4abd-\/9d22-\/2de704bc95e2}}
+\item Implementation plan\+: Option A (Gradual Refactor)
+\item Tests\+: {\ttfamily \doxylink{test__axe__improvements_8py}{test\+\_\+axe\+\_\+improvements.\+py}}
+\item Demo\+: {\ttfamily \doxylink{demo__improvements_8py}{demo\+\_\+improvements.\+py}} 
+\end{DoxyItemize}

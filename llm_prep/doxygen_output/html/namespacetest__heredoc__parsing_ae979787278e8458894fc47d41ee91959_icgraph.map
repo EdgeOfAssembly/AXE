@@ -1,0 +1,6 @@
+<map id="test_heredoc_parsing.test_empty_heredoc" name="test_heredoc_parsing.test_empty_heredoc">
+<area shape="rect" id="Node000001" title=" " alt="" coords="251,21,440,66"/>
+<area shape="rect" id="Node000002" href="$namespacetest__heredoc__parsing.html#a63f186264c534b96eeca9548edab7590" title=" " alt="" coords="5,29,203,57"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,43,203,46,203,41,237,43"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="144,14,131,10,104,8,79,10,65,15,61,20,68,29,62,29,56,20,61,11,78,5,104,3,132,5,149,14"/>
+</map>

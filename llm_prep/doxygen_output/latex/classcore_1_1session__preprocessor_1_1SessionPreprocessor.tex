@@ -1,0 +1,218 @@
+\doxysection{core.\+session\+\_\+preprocessor.\+Session\+Preprocessor Class Reference}
+\hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor}{}\label{classcore_1_1session__preprocessor_1_1SessionPreprocessor}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+
+
+Collaboration diagram for core.\+session\+\_\+preprocessor.\+Session\+Preprocessor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{classcore_1_1session__preprocessor_1_1SessionPreprocessor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a23a54867c7933504de45d301676ae946}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a60a17980a1a967d7987a43ab66102142}{config}}, str \mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a0e02deea72d9c67d00e727fba3496e6e}{workspace\+\_\+path}})
+\item 
+bool \mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_ad00de885732a8826585771f29d25eeda}{is\+\_\+enabled}} (self)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a8e9a5917743dda14acd6185af58b796f}{run}} (self)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a63cf0df8e90c608845ec1823a23ef796}{run\+\_\+environment\+\_\+probe}} (self)
+\item 
+Dict\mbox{[}str, int\mbox{]} \mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a2f65f5c2c1c8efe4d8277ddc8bccc558}{run\+\_\+minifier}} (self)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a239c7c4102d4a17aa3ee623771e704a9}{run\+\_\+llmprep}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a60a17980a1a967d7987a43ab66102142}{config}} = config
+\item 
+\mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a0e02deea72d9c67d00e727fba3496e6e}{workspace\+\_\+path}} = os.\+path.\+abspath(workspace\+\_\+path)
+\item 
+\mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a36e02f43bc381d8a357bbb7e913cde44}{preprocessing\+\_\+config}} = config.\+get(\textquotesingle{}preprocessing\textquotesingle{}, default=\{\})
+\item 
+\mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a176dab18fe842a0a09b8cb17c196ce96}{environment\+\_\+probe\+\_\+config}} = self.\+preprocessing\+\_\+config.\+get(\textquotesingle{}\mbox{\hyperlink{namespacecore_1_1environment__probe}{environment\+\_\+probe}}\textquotesingle{}, \{\})
+\item 
+\mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a70e5d45eb2495f649f4d634bb73869ce}{minifier\+\_\+config}} = self.\+preprocessing\+\_\+config.\+get(\textquotesingle{}minifier\textquotesingle{}, \{\})
+\item 
+\mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor_aaa7cfd9211083880203ba93e24cc41b2}{llmprep\+\_\+config}} = self.\+preprocessing\+\_\+config.\+get(\textquotesingle{}llmprep\textquotesingle{}, \{\})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Orchestrates workspace preprocessing at the start of each AXE session.
+
+Handles environment probing, minification, and llmprep execution based on configuration.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a23a54867c7933504de45d301676ae946}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a23a54867c7933504de45d301676ae946} 
+core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{config}{, }\item[{str}]{workspace\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize the session preprocessor.
+
+Args:
+    config: AXE Config object
+    workspace_path: Path to the workspace directory
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_ad00de885732a8826585771f29d25eeda}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}!is\_enabled@{is\_enabled}}
+\index{is\_enabled@{is\_enabled}!core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+\doxysubsubsection{\texorpdfstring{is\_enabled()}{is\_enabled()}}
+{\footnotesize\ttfamily \label{classcore_1_1session__preprocessor_1_1SessionPreprocessor_ad00de885732a8826585771f29d25eeda} 
+ bool core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+is\+\_\+enabled (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if any preprocessing is enabled.
+
+Returns:
+    True if environment_probe, minifier, or llmprep is enabled
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a8e9a5917743dda14acd6185af58b796f}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}!run@{run}}
+\index{run@{run}!core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily \label{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a8e9a5917743dda14acd6185af58b796f} 
+ Dict\mbox{[}str, Any\mbox{]} core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+run (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run all enabled preprocessing steps.
+
+Returns:
+    Dictionary with results:
+    {
+        'environment_probe': {'success': bool, 'output_file': str, 'enabled': bool},
+        'minifier': {'files_processed': int, 'bytes_saved': int, 'enabled': bool},
+        'llmprep': {'success': bool, 'output_dir': str, 'enabled': bool}
+    }
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a8e9a5917743dda14acd6185af58b796f_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a63cf0df8e90c608845ec1823a23ef796}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}!run\_environment\_probe@{run\_environment\_probe}}
+\index{run\_environment\_probe@{run\_environment\_probe}!core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+\doxysubsubsection{\texorpdfstring{run\_environment\_probe()}{run\_environment\_probe()}}
+{\footnotesize\ttfamily \label{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a63cf0df8e90c608845ec1823a23ef796} 
+ Dict\mbox{[}str, Any\mbox{]} core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+run\+\_\+environment\+\_\+probe (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run environment probe to generate .collab_env.md
+
+Returns:
+    Dictionary with keys:
+    - success: True if probe succeeded
+    - output_file: Path to output file
+    - error: Error message if failed (optional)
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a63cf0df8e90c608845ec1823a23ef796_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a239c7c4102d4a17aa3ee623771e704a9}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}!run\_llmprep@{run\_llmprep}}
+\index{run\_llmprep@{run\_llmprep}!core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+\doxysubsubsection{\texorpdfstring{run\_llmprep()}{run\_llmprep()}}
+{\footnotesize\ttfamily \label{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a239c7c4102d4a17aa3ee623771e704a9} 
+ Dict\mbox{[}str, Any\mbox{]} core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+run\+\_\+llmprep (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run llmprep to generate context files.
+
+Returns:
+    Dictionary with keys:
+    - success: True if llmprep succeeded
+    - output_dir: Path to output directory
+    - error: Error message if failed (optional)
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a239c7c4102d4a17aa3ee623771e704a9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a2f65f5c2c1c8efe4d8277ddc8bccc558}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}!run\_minifier@{run\_minifier}}
+\index{run\_minifier@{run\_minifier}!core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+\doxysubsubsection{\texorpdfstring{run\_minifier()}{run\_minifier()}}
+{\footnotesize\ttfamily \label{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a2f65f5c2c1c8efe4d8277ddc8bccc558} 
+ Dict\mbox{[}str, int\mbox{]} core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+run\+\_\+minifier (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run minification on workspace.
+
+Returns:
+    Dictionary with keys:
+    - files_processed: Number of files minified
+    - bytes_saved: Bytes saved by minification
+    - success: True if minification succeeded
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a2f65f5c2c1c8efe4d8277ddc8bccc558_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a60a17980a1a967d7987a43ab66102142}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}!config@{config}}
+\index{config@{config}!core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a60a17980a1a967d7987a43ab66102142} 
+core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+config = config}
+
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a176dab18fe842a0a09b8cb17c196ce96}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}!environment\_probe\_config@{environment\_probe\_config}}
+\index{environment\_probe\_config@{environment\_probe\_config}!core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+\doxysubsubsection{\texorpdfstring{environment\_probe\_config}{environment\_probe\_config}}
+{\footnotesize\ttfamily \label{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a176dab18fe842a0a09b8cb17c196ce96} 
+core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+environment\+\_\+probe\+\_\+config = self.\+preprocessing\+\_\+config.\+get(\textquotesingle{}\mbox{\hyperlink{namespacecore_1_1environment__probe}{environment\+\_\+probe}}\textquotesingle{}, \{\})}
+
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_aaa7cfd9211083880203ba93e24cc41b2}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}!llmprep\_config@{llmprep\_config}}
+\index{llmprep\_config@{llmprep\_config}!core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+\doxysubsubsection{\texorpdfstring{llmprep\_config}{llmprep\_config}}
+{\footnotesize\ttfamily \label{classcore_1_1session__preprocessor_1_1SessionPreprocessor_aaa7cfd9211083880203ba93e24cc41b2} 
+core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+llmprep\+\_\+config = self.\+preprocessing\+\_\+config.\+get(\textquotesingle{}llmprep\textquotesingle{}, \{\})}
+
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a70e5d45eb2495f649f4d634bb73869ce}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}!minifier\_config@{minifier\_config}}
+\index{minifier\_config@{minifier\_config}!core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+\doxysubsubsection{\texorpdfstring{minifier\_config}{minifier\_config}}
+{\footnotesize\ttfamily \label{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a70e5d45eb2495f649f4d634bb73869ce} 
+core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+minifier\+\_\+config = self.\+preprocessing\+\_\+config.\+get(\textquotesingle{}minifier\textquotesingle{}, \{\})}
+
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a36e02f43bc381d8a357bbb7e913cde44}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}!preprocessing\_config@{preprocessing\_config}}
+\index{preprocessing\_config@{preprocessing\_config}!core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+\doxysubsubsection{\texorpdfstring{preprocessing\_config}{preprocessing\_config}}
+{\footnotesize\ttfamily \label{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a36e02f43bc381d8a357bbb7e913cde44} 
+core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+preprocessing\+\_\+config = config.\+get(\textquotesingle{}preprocessing\textquotesingle{}, default=\{\})}
+
+\Hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a0e02deea72d9c67d00e727fba3496e6e}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}!workspace\_path@{workspace\_path}}
+\index{workspace\_path@{workspace\_path}!core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
+\doxysubsubsection{\texorpdfstring{workspace\_path}{workspace\_path}}
+{\footnotesize\ttfamily \label{classcore_1_1session__preprocessor_1_1SessionPreprocessor_a0e02deea72d9c67d00e727fba3496e6e} 
+core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+workspace\+\_\+path = os.\+path.\+abspath(workspace\+\_\+path)}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{session__preprocessor_8py}{session\+\_\+preprocessor.\+py}}\end{DoxyCompactItemize}

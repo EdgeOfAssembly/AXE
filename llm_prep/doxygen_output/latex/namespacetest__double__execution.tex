@@ -1,0 +1,146 @@
+\doxysection{test\+\_\+double\+\_\+execution Namespace Reference}
+\hypertarget{namespacetest__double__execution}{}\label{namespacetest__double__execution}\index{test\_double\_execution@{test\_double\_execution}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetest__double__execution_af386013c5a4266e320b3deb66e26c598}{test\+\_\+parse\+\_\+axe\+\_\+native\+\_\+blocks\+\_\+not\+\_\+called}} ()
+\item 
+\mbox{\hyperlink{namespacetest__double__execution_a1c9f11f03b42a63b11ef071067464011}{test\+\_\+native\+\_\+blocks\+\_\+only\+\_\+processed\+\_\+once}} ()
+\item 
+\mbox{\hyperlink{namespacetest__double__execution_afad032aefd65108bdad810a2351da390}{test\+\_\+response\+\_\+processor\+\_\+handles\+\_\+native\+\_\+blocks}} ()
+\item 
+\mbox{\hyperlink{namespacetest__double__execution_ad1bc40aba1f233228bfecd8b163c5fa6}{test\+\_\+no\+\_\+duplicate\+\_\+execution\+\_\+with\+\_\+mixed\+\_\+formats}} ()
+\item 
+\mbox{\hyperlink{namespacetest__double__execution_af14292f1e8d06e7a28c36b35f034e535}{test\+\_\+parse\+\_\+axe\+\_\+native\+\_\+blocks\+\_\+function\+\_\+exists}} ()
+\item 
+\mbox{\hyperlink{namespacetest__double__execution_a83a7e7d6862f3a58911d5fb991fe7364}{test\+\_\+duplicate\+\_\+execution\+\_\+fix\+\_\+documented}} ()
+\item 
+\mbox{\hyperlink{namespacetest__double__execution_a0f0075e8c68b419c6e53c2fcae7162d0}{test\+\_\+execution\+\_\+count\+\_\+tracking}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Test suite for double execution bug (Bug #4).
+
+Verifies that commands are executed only once, not twice,
+by ensuring parse_all_tool_formats() does not duplicate
+the work of ResponseProcessor.process_response().
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacetest__double__execution_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetest__double__execution_a83a7e7d6862f3a58911d5fb991fe7364}\index{test\_double\_execution@{test\_double\_execution}!test\_duplicate\_execution\_fix\_documented@{test\_duplicate\_execution\_fix\_documented}}
+\index{test\_duplicate\_execution\_fix\_documented@{test\_duplicate\_execution\_fix\_documented}!test\_double\_execution@{test\_double\_execution}}
+\doxysubsubsection{\texorpdfstring{test\_duplicate\_execution\_fix\_documented()}{test\_duplicate\_execution\_fix\_documented()}}
+{\footnotesize\ttfamily \label{namespacetest__double__execution_a83a7e7d6862f3a58911d5fb991fe7364} 
+test\+\_\+double\+\_\+execution.\+test\+\_\+duplicate\+\_\+execution\+\_\+fix\+\_\+documented (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that the duplicate execution fix is documented in code.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__double__execution_a83a7e7d6862f3a58911d5fb991fe7364_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__double__execution_a0f0075e8c68b419c6e53c2fcae7162d0}\index{test\_double\_execution@{test\_double\_execution}!test\_execution\_count\_tracking@{test\_execution\_count\_tracking}}
+\index{test\_execution\_count\_tracking@{test\_execution\_count\_tracking}!test\_double\_execution@{test\_double\_execution}}
+\doxysubsubsection{\texorpdfstring{test\_execution\_count\_tracking()}{test\_execution\_count\_tracking()}}
+{\footnotesize\ttfamily \label{namespacetest__double__execution_a0f0075e8c68b419c6e53c2fcae7162d0} 
+test\+\_\+double\+\_\+execution.\+test\+\_\+execution\+\_\+count\+\_\+tracking (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that we can track execution counts to verify single execution.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__double__execution_a0f0075e8c68b419c6e53c2fcae7162d0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{namespacetest__double__execution_a0f0075e8c68b419c6e53c2fcae7162d0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__double__execution_a1c9f11f03b42a63b11ef071067464011}\index{test\_double\_execution@{test\_double\_execution}!test\_native\_blocks\_only\_processed\_once@{test\_native\_blocks\_only\_processed\_once}}
+\index{test\_native\_blocks\_only\_processed\_once@{test\_native\_blocks\_only\_processed\_once}!test\_double\_execution@{test\_double\_execution}}
+\doxysubsubsection{\texorpdfstring{test\_native\_blocks\_only\_processed\_once()}{test\_native\_blocks\_only\_processed\_once()}}
+{\footnotesize\ttfamily \label{namespacetest__double__execution_a1c9f11f03b42a63b11ef071067464011} 
+test\+\_\+double\+\_\+execution.\+test\+\_\+native\+\_\+blocks\+\_\+only\+\_\+processed\+\_\+once (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that ```READ/WRITE/EXEC blocks are only processed once.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__double__execution_a1c9f11f03b42a63b11ef071067464011_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__double__execution_ad1bc40aba1f233228bfecd8b163c5fa6}\index{test\_double\_execution@{test\_double\_execution}!test\_no\_duplicate\_execution\_with\_mixed\_formats@{test\_no\_duplicate\_execution\_with\_mixed\_formats}}
+\index{test\_no\_duplicate\_execution\_with\_mixed\_formats@{test\_no\_duplicate\_execution\_with\_mixed\_formats}!test\_double\_execution@{test\_double\_execution}}
+\doxysubsubsection{\texorpdfstring{test\_no\_duplicate\_execution\_with\_mixed\_formats()}{test\_no\_duplicate\_execution\_with\_mixed\_formats()}}
+{\footnotesize\ttfamily \label{namespacetest__double__execution_ad1bc40aba1f233228bfecd8b163c5fa6} 
+test\+\_\+double\+\_\+execution.\+test\+\_\+no\+\_\+duplicate\+\_\+execution\+\_\+with\+\_\+mixed\+\_\+formats (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that mixed XML and native formats don't cause duplicate execution.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__double__execution_ad1bc40aba1f233228bfecd8b163c5fa6_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__double__execution_af14292f1e8d06e7a28c36b35f034e535}\index{test\_double\_execution@{test\_double\_execution}!test\_parse\_axe\_native\_blocks\_function\_exists@{test\_parse\_axe\_native\_blocks\_function\_exists}}
+\index{test\_parse\_axe\_native\_blocks\_function\_exists@{test\_parse\_axe\_native\_blocks\_function\_exists}!test\_double\_execution@{test\_double\_execution}}
+\doxysubsubsection{\texorpdfstring{test\_parse\_axe\_native\_blocks\_function\_exists()}{test\_parse\_axe\_native\_blocks\_function\_exists()}}
+{\footnotesize\ttfamily \label{namespacetest__double__execution_af14292f1e8d06e7a28c36b35f034e535} 
+test\+\_\+double\+\_\+execution.\+test\+\_\+parse\+\_\+axe\+\_\+native\+\_\+blocks\+\_\+function\+\_\+exists (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that parse_axe_native_blocks function still exists for future use.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__double__execution_af14292f1e8d06e7a28c36b35f034e535_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__double__execution_af386013c5a4266e320b3deb66e26c598}\index{test\_double\_execution@{test\_double\_execution}!test\_parse\_axe\_native\_blocks\_not\_called@{test\_parse\_axe\_native\_blocks\_not\_called}}
+\index{test\_parse\_axe\_native\_blocks\_not\_called@{test\_parse\_axe\_native\_blocks\_not\_called}!test\_double\_execution@{test\_double\_execution}}
+\doxysubsubsection{\texorpdfstring{test\_parse\_axe\_native\_blocks\_not\_called()}{test\_parse\_axe\_native\_blocks\_not\_called()}}
+{\footnotesize\ttfamily \label{namespacetest__double__execution_af386013c5a4266e320b3deb66e26c598} 
+test\+\_\+double\+\_\+execution.\+test\+\_\+parse\+\_\+axe\+\_\+native\+\_\+blocks\+\_\+not\+\_\+called (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that parse_all_tool_formats does not call parse_axe_native_blocks.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__double__execution_af386013c5a4266e320b3deb66e26c598_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__double__execution_afad032aefd65108bdad810a2351da390}\index{test\_double\_execution@{test\_double\_execution}!test\_response\_processor\_handles\_native\_blocks@{test\_response\_processor\_handles\_native\_blocks}}
+\index{test\_response\_processor\_handles\_native\_blocks@{test\_response\_processor\_handles\_native\_blocks}!test\_double\_execution@{test\_double\_execution}}
+\doxysubsubsection{\texorpdfstring{test\_response\_processor\_handles\_native\_blocks()}{test\_response\_processor\_handles\_native\_blocks()}}
+{\footnotesize\ttfamily \label{namespacetest__double__execution_afad032aefd65108bdad810a2351da390} 
+test\+\_\+double\+\_\+execution.\+test\+\_\+response\+\_\+processor\+\_\+handles\+\_\+native\+\_\+blocks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that ResponseProcessor handles native blocks correctly.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__double__execution_afad032aefd65108bdad810a2351da390_icgraph}
+\end{center}
+\end{figure}

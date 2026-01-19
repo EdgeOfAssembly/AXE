@@ -1,0 +1,6 @@
+<map id="test_integration_database_fix.simulate_problem_scenario" name="test_integration_database_fix.simulate_problem_scenario">
+<area shape="rect" id="Node000001" title=" " alt="" coords="245,29,473,74"/>
+<area shape="rect" id="Node000002" href="$namespacetest__integration__database__fix.html#a8f88ac4584a4ca11b728db9d4d654e0f" title=" " alt="" coords="5,29,197,74"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="226,52,197,54,197,49,232,51"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="142,14,128,10,101,8,77,10,62,15,56,21,57,29,52,28,51,19,59,10,76,5,101,3,129,5,147,14"/>
+</map>

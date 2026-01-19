@@ -1,0 +1,55 @@
+\doxysection{utils.\+prompt\+\_\+compressor Namespace Reference}
+\hypertarget{namespaceutils_1_1prompt__compressor}{}\label{namespaceutils_1_1prompt__compressor}\index{utils.prompt\_compressor@{utils.prompt\_compressor}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor}{Prompt\+Compressor}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{namespaceutils_1_1prompt__compressor_aaa987209207178900085799d352932af}{calculate\+\_\+compression\+\_\+ratio}} (str original, str compressed)
+\item 
+Dict \mbox{\hyperlink{namespaceutils_1_1prompt__compressor_a190cd010bd8d8f460d61cea90cc0cee0}{compress\+\_\+system\+\_\+prompts}} (Dict config)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Prompt compression utilities for AXE.
+Reduces system prompt overhead while preserving essential instructions.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespaceutils_1_1prompt__compressor_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceutils_1_1prompt__compressor_aaa987209207178900085799d352932af}\index{utils.prompt\_compressor@{utils.prompt\_compressor}!calculate\_compression\_ratio@{calculate\_compression\_ratio}}
+\index{calculate\_compression\_ratio@{calculate\_compression\_ratio}!utils.prompt\_compressor@{utils.prompt\_compressor}}
+\doxysubsubsection{\texorpdfstring{calculate\_compression\_ratio()}{calculate\_compression\_ratio()}}
+{\footnotesize\ttfamily \label{namespaceutils_1_1prompt__compressor_aaa987209207178900085799d352932af} 
+ Dict\mbox{[}str, Any\mbox{]} utils.\+prompt\+\_\+compressor.\+calculate\+\_\+compression\+\_\+ratio (\begin{DoxyParamCaption}\item[{str}]{original}{, }\item[{str}]{compressed}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculate compression statistics.
+
+Args:
+    original: Original prompt
+    compressed: Compressed prompt
+
+Returns:
+    Dictionary with compression statistics
+\end{DoxyVerb}
+ \Hypertarget{namespaceutils_1_1prompt__compressor_a190cd010bd8d8f460d61cea90cc0cee0}\index{utils.prompt\_compressor@{utils.prompt\_compressor}!compress\_system\_prompts@{compress\_system\_prompts}}
+\index{compress\_system\_prompts@{compress\_system\_prompts}!utils.prompt\_compressor@{utils.prompt\_compressor}}
+\doxysubsubsection{\texorpdfstring{compress\_system\_prompts()}{compress\_system\_prompts()}}
+{\footnotesize\ttfamily \label{namespaceutils_1_1prompt__compressor_a190cd010bd8d8f460d61cea90cc0cee0} 
+ Dict utils.\+prompt\+\_\+compressor.\+compress\+\_\+system\+\_\+prompts (\begin{DoxyParamCaption}\item[{Dict}]{config}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Compress all system prompts in a configuration.
+
+Args:
+    config: AXE configuration dictionary
+
+Returns:
+    Configuration with compressed prompts
+\end{DoxyVerb}
+ 

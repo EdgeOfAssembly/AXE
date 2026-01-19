@@ -1,0 +1,21 @@
+\chapter{AXE Test Mission }
+\hypertarget{md_tests_2MISSION}{}\label{md_tests_2MISSION}\index{AXE Test Mission@{AXE Test Mission}}
+\label{md_tests_2MISSION_autotoc_md1335}%
+\Hypertarget{md_tests_2MISSION_autotoc_md1335}%
+
+
+This is a test mission file used for token detection tests.\hypertarget{md_tests_2MISSION_autotoc_md1336}{}\doxysection{\texorpdfstring{Purpose}{Purpose}}\label{md_tests_2MISSION_autotoc_md1336}
+This file is used to verify that reading documentation files does not trigger false positive token detection in the AXE system.\hypertarget{md_tests_2MISSION_autotoc_md1337}{}\doxysection{\texorpdfstring{Test Scenarios}{Test Scenarios}}\label{md_tests_2MISSION_autotoc_md1337}
+
+\begin{DoxyEnumerate}
+\item File reading should not trigger break request detection
+\item File reading should not trigger emergency detection
+\item File reading should not trigger spawn detection
+\item File reading should not trigger task complete detection
+\end{DoxyEnumerate}\hypertarget{md_tests_2MISSION_autotoc_md1338}{}\doxysection{\texorpdfstring{Notes}{Notes}}\label{md_tests_2MISSION_autotoc_md1338}
+
+\begin{DoxyItemize}
+\item All tokens mentioned in documentation should be safe
+\item Result blocks protect against false positives
+\item This file intentionally contains no action tokens 
+\end{DoxyItemize}

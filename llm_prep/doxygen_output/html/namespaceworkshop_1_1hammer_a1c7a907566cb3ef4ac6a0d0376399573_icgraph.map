@@ -1,0 +1,16 @@
+<map id="workshop.hammer._validate_identifier" name="workshop.hammer._validate_identifier">
+<area shape="rect" id="Node000001" title=" " alt="" coords="1162,75,1369,119"/>
+<area shape="rect" id="Node000002" href="$classworkshop_1_1hammer_1_1HammerInstrumentor.html#a152c957853243eb31b32fb9156dfe118" title=" " alt="" coords="824,5,1114,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1149,70,1067,53,1068,48,1155,71"/>
+<area shape="rect" id="Node000005" href="$classworkshop_1_1hammer_1_1HammerInstrumentor.html#a337d0e7e376218896d4f6c916bb5a28b" title=" " alt="" coords="824,75,1114,119"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1144,97,1115,100,1115,94,1149,97"/>
+<area shape="rect" id="Node000006" href="$classworkshop_1_1hammer_1_1HammerInstrumentor.html#a362f26d8c133ee5fbefc358915b2e633" title=" " alt="" coords="824,144,1114,189"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="1155,123,1068,146,1067,141,1149,124"/>
+<area shape="rect" id="Node000003" href="$classworkshop_1_1hammer_1_1HammerInstrumentor.html#a9159cd3e79ed6dcd93ae27ee9cde2589" title=" " alt="" coords="450,40,740,85"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="806,43,741,52,740,46,812,42"/>
+<area shape="rect" id="Node000004" href="$classworkshop_1_1hammer_1_1HammerInstrumentor.html#acb37c7042f0b40915e6b0e19610b994c" title=" " alt="" coords="5,40,367,85"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="432,63,367,65,367,60,437,62"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="806,82,741,78,741,73,812,82"/>
+<area shape="rect" id="Node000007" href="$classworkshop_1_1hammer_1_1HammerInstrumentor.html#acbb48087ecc8ff4ed7dfc5895661c6de" title=" " alt="" coords="415,144,776,189"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="806,166,777,169,777,164,811,166"/>
+</map>

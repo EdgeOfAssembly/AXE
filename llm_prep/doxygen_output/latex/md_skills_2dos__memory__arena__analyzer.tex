@@ -1,0 +1,7 @@
+\chapter{dos\+\_\+memory\+\_\+arena\+\_\+analyzer }
+\hypertarget{md_skills_2dos__memory__arena__analyzer}{}\label{md_skills_2dos__memory__arena__analyzer}\index{dos\_memory\_arena\_analyzer@{dos\_memory\_arena\_analyzer}}
+Skill\+: dos\+\_\+memory\+\_\+arena\+\_\+analyzer Category\+: DOS-\/specific Reverse Engineering Recommended agent\+: llama Purpose\+: Analyze DOS memory layout — MCB chain, conventional/\+UMB/high memory, PSP, resident programs, free blocks, overlays
+
+Typical inputs\+: Low memory hexdump, PSP segment, dosbox-\/x memory state Outputs\+: Readable memory map + resident program inference Note\+: Critical foundation skill for most real DOS-\/era reverse engineering tasks
+
+Optional automation\+: If no hexdump/\+PSP provided, first use dosbox\+\_\+emulation\+\_\+setup to generate low memory dump\+: @llama use dosbox\+\_\+emulation\+\_\+setup target.\+exe --dump-\/low-\/memory Then feed the resulting .bin to this skill for MCB chain walking, resident TSR inference, free block map, etc. 

@@ -1,0 +1,58 @@
+\chapter{AXE -\/ Agent e\+Xecution Engine }
+\hypertarget{md_MISSION}{}\label{md_MISSION}\index{AXE -\/ Agent eXecution Engine@{AXE -\/ Agent eXecution Engine}}
+\label{md_MISSION_autotoc_md602}%
+\Hypertarget{md_MISSION_autotoc_md602}%
+\hypertarget{md_MISSION_autotoc_md603}{}\doxysection{\texorpdfstring{Mission Statement}{Mission Statement}}\label{md_MISSION_autotoc_md603}
+AXE is a lightweight, modular execution engine designed to orchestrate AI agent workflows with precision and reliability. Our goal is to provide developers with a robust framework for building, testing, and deploying agent-\/based systems.\hypertarget{md_MISSION_autotoc_md604}{}\doxysection{\texorpdfstring{Core Principles}{Core Principles}}\label{md_MISSION_autotoc_md604}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Simplicity}} -\/ Clean interfaces that are easy to understand and extend
+\item {\bfseries{Reliability}} -\/ Predictable behavior with comprehensive error handling
+\item {\bfseries{Modularity}} -\/ Components that can be mixed and matched as needed
+\item {\bfseries{Observability}} -\/ Full visibility into agent execution and state
+\end{DoxyEnumerate}\hypertarget{md_MISSION_autotoc_md605}{}\doxysection{\texorpdfstring{Agent Communication Tokens}{Agent Communication Tokens}}\label{md_MISSION_autotoc_md605}
+AXE uses special control tokens to coordinate multi-\/agent interactions. These tokens are defined in {\ttfamily \doxylink{axe_8py}{axe.\+py}} and should NEVER be written literally in files, as they trigger detection.\hypertarget{md_MISSION_autotoc_md606}{}\doxysubsection{\texorpdfstring{Token Reference}{Token Reference}}\label{md_MISSION_autotoc_md606}
+To see the current token definitions, run\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{grep\ "{}AGENT\_TOKEN"{}\ axe.py\ |\ head\ -\/6}
+
+\end{DoxyCode}
+
+
+{\bfseries{Important}}\+: Do not copy or paste these tokens into any documentation or files. While the token detection system now properly filters out file content and code blocks, it\textquotesingle{}s still best practice to avoid literal tokens in documentation.\hypertarget{md_MISSION_autotoc_md607}{}\doxysubsection{\texorpdfstring{Token Purpose}{Token Purpose}}\label{md_MISSION_autotoc_md607}
+The tokens enable agents to\+:
+\begin{DoxyItemize}
+\item {\bfseries{Pass control}} to the next agent in sequence
+\item {\bfseries{Request breaks}} when needing rest
+\item {\bfseries{Report task completion}} with a summary
+\item {\bfseries{Signal emergencies}} that need immediate attention ~\newline
+
+\item {\bfseries{Spawn new agents}} (supervisor only)
+\item {\bfseries{Check status}} of the collaboration
+\end{DoxyItemize}\hypertarget{md_MISSION_autotoc_md608}{}\doxysubsection{\texorpdfstring{Usage Guidelines}{Usage Guidelines}}\label{md_MISSION_autotoc_md608}
+
+\begin{DoxyItemize}
+\item Tokens are automatically detected in agent responses
+\item Only use tokens when you genuinely intend to trigger that action
+\item Reading files that contain token definitions will NOT trigger false positives (the engine strips file content)
+\item Tokens work whether in old format or new format
+\end{DoxyItemize}\hypertarget{md_MISSION_autotoc_md609}{}\doxysection{\texorpdfstring{Architecture Overview}{Architecture Overview}}\label{md_MISSION_autotoc_md609}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{┌─────────────────────────────────────────┐}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ AXE\ Orchestrator\ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{├─────────────────────────────────────────┤}
+\DoxyCodeLine{│\ \ ┌─────────┐\ ┌─────────┐\ ┌─────────┐\ \ \ │}
+\DoxyCodeLine{│\ \ │\ Agent\ 1\ │\ │\ Agent\ 2\ │\ │\ Agent\ N\ │\ \ \ │}
+\DoxyCodeLine{│\ \ └─────────┘\ └─────────┘\ └─────────┘\ \ \ │}
+\DoxyCodeLine{├─────────────────────────────────────────┤}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ Token\ Parser\ Layer\ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{├─────────────────────────────────────────┤}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ State\ Management\ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{└─────────────────────────────────────────┘}
+
+\end{DoxyCode}
+\hypertarget{md_MISSION_autotoc_md610}{}\doxysection{\texorpdfstring{Getting Started}{Getting Started}}\label{md_MISSION_autotoc_md610}
+See QUICKSTART.md for installation and setup instructions.\hypertarget{md_MISSION_autotoc_md611}{}\doxysection{\texorpdfstring{Contributing}{Contributing}}\label{md_MISSION_autotoc_md611}
+We welcome contributions! Please read CONTRIBUTING.md before submitting pull requests.\hypertarget{md_MISSION_autotoc_md612}{}\doxysection{\texorpdfstring{License}{License}}\label{md_MISSION_autotoc_md612}
+MIT License -\/ See \href{./LICENSE}{\texttt{LICENSE}} for details. 

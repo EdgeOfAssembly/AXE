@@ -1,0 +1,135 @@
+\doxysection{core.\+session\+\_\+manager.\+Session\+Manager Class Reference}
+\hypertarget{classcore_1_1session__manager_1_1SessionManager}{}\label{classcore_1_1session__manager_1_1SessionManager}\index{core.session\_manager.SessionManager@{core.session\_manager.SessionManager}}
+
+
+Collaboration diagram for core.\+session\+\_\+manager.\+Session\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classcore_1_1session__manager_1_1SessionManager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1session__manager_1_1SessionManager_a93985e8bc942a0380765e7130a4cb93c}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str \mbox{\hyperlink{classcore_1_1session__manager_1_1SessionManager_a54cf66630ca310ba330b357e6969aa04}{sessions\+\_\+dir}}="{}.axe\+\_\+sessions"{})
+\item 
+bool \mbox{\hyperlink{classcore_1_1session__manager_1_1SessionManager_a893554893fb1f220a7f6bca9edf9fd66}{save\+\_\+session}} (self, str session\+\_\+name, Dict\mbox{[}str, Any\mbox{]} session\+\_\+data)
+\item 
+Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classcore_1_1session__manager_1_1SessionManager_a6fdf650cd4c220383725db08f2cf0f03}{load\+\_\+session}} (self, str session\+\_\+name)
+\item 
+List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classcore_1_1session__manager_1_1SessionManager_a07a619a478c60dca4255576e218f5111}{list\+\_\+sessions}} (self)
+\item 
+bool \mbox{\hyperlink{classcore_1_1session__manager_1_1SessionManager_a2dcc64e57f8030319becba49e0c38b7c}{delete\+\_\+session}} (self, str session\+\_\+name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1session__manager_1_1SessionManager_a54cf66630ca310ba330b357e6969aa04}{sessions\+\_\+dir}} = os.\+path.\+abspath(sessions\+\_\+dir)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Manages session save/load/list operations.\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1session__manager_1_1SessionManager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1session__manager_1_1SessionManager_a93985e8bc942a0380765e7130a4cb93c}\index{core.session\_manager.SessionManager@{core.session\_manager.SessionManager}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!core.session\_manager.SessionManager@{core.session\_manager.SessionManager}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1session__manager_1_1SessionManager_a93985e8bc942a0380765e7130a4cb93c} 
+core.\+session\+\_\+manager.\+Session\+Manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str }]{sessions\+\_\+dir}{ = {\ttfamily "{}.axe\+\_\+sessions"{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize session manager.
+
+Args:
+    sessions_dir: Directory to store session files (default: .axe_sessions)
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1session__manager_1_1SessionManager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1session__manager_1_1SessionManager_a2dcc64e57f8030319becba49e0c38b7c}\index{core.session\_manager.SessionManager@{core.session\_manager.SessionManager}!delete\_session@{delete\_session}}
+\index{delete\_session@{delete\_session}!core.session\_manager.SessionManager@{core.session\_manager.SessionManager}}
+\doxysubsubsection{\texorpdfstring{delete\_session()}{delete\_session()}}
+{\footnotesize\ttfamily \label{classcore_1_1session__manager_1_1SessionManager_a2dcc64e57f8030319becba49e0c38b7c} 
+ bool core.\+session\+\_\+manager.\+Session\+Manager.\+delete\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{session\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Delete a saved session.
+
+Args:
+    session_name: Name of the session to delete
+
+Returns:
+    True if deleted successfully, False otherwise
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1session__manager_1_1SessionManager_a07a619a478c60dca4255576e218f5111}\index{core.session\_manager.SessionManager@{core.session\_manager.SessionManager}!list\_sessions@{list\_sessions}}
+\index{list\_sessions@{list\_sessions}!core.session\_manager.SessionManager@{core.session\_manager.SessionManager}}
+\doxysubsubsection{\texorpdfstring{list\_sessions()}{list\_sessions()}}
+{\footnotesize\ttfamily \label{classcore_1_1session__manager_1_1SessionManager_a07a619a478c60dca4255576e218f5111} 
+ List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+session\+\_\+manager.\+Session\+Manager.\+list\+\_\+sessions (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}List all available saved sessions.
+
+Returns:
+    List of dictionaries with session info:
+        - name: Session name
+        - timestamp: When session was saved
+        - workspace: Workspace path
+        - agents: List of agents
+        - size: File size in bytes
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1session__manager_1_1SessionManager_a6fdf650cd4c220383725db08f2cf0f03}\index{core.session\_manager.SessionManager@{core.session\_manager.SessionManager}!load\_session@{load\_session}}
+\index{load\_session@{load\_session}!core.session\_manager.SessionManager@{core.session\_manager.SessionManager}}
+\doxysubsubsection{\texorpdfstring{load\_session()}{load\_session()}}
+{\footnotesize\ttfamily \label{classcore_1_1session__manager_1_1SessionManager_a6fdf650cd4c220383725db08f2cf0f03} 
+ Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+session\+\_\+manager.\+Session\+Manager.\+load\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{session\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Load a session from a JSON file.
+
+Args:
+    session_name: Name of the session to load
+
+Returns:
+    Dictionary with session data, or None if not found/error
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1session__manager_1_1SessionManager_a893554893fb1f220a7f6bca9edf9fd66}\index{core.session\_manager.SessionManager@{core.session\_manager.SessionManager}!save\_session@{save\_session}}
+\index{save\_session@{save\_session}!core.session\_manager.SessionManager@{core.session\_manager.SessionManager}}
+\doxysubsubsection{\texorpdfstring{save\_session()}{save\_session()}}
+{\footnotesize\ttfamily \label{classcore_1_1session__manager_1_1SessionManager_a893554893fb1f220a7f6bca9edf9fd66} 
+ bool core.\+session\+\_\+manager.\+Session\+Manager.\+save\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{session\+\_\+name}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{session\+\_\+data}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Save a session to a JSON file.
+
+Args:
+    session_name: Name of the session
+    session_data: Dictionary containing:
+        - conversation: List of conversation history
+        - workspace: Current workspace path
+        - agents: List of active agent names
+        - metadata: Additional metadata (tokens_used, duration, etc.)
+        - file_ids: Optional dict of file IDs from Files API (Anthropic)
+
+Returns:
+    True if saved successfully, False otherwise
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1session__manager_1_1SessionManager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1session__manager_1_1SessionManager_a54cf66630ca310ba330b357e6969aa04}\index{core.session\_manager.SessionManager@{core.session\_manager.SessionManager}!sessions\_dir@{sessions\_dir}}
+\index{sessions\_dir@{sessions\_dir}!core.session\_manager.SessionManager@{core.session\_manager.SessionManager}}
+\doxysubsubsection{\texorpdfstring{sessions\_dir}{sessions\_dir}}
+{\footnotesize\ttfamily \label{classcore_1_1session__manager_1_1SessionManager_a54cf66630ca310ba330b357e6969aa04} 
+core.\+session\+\_\+manager.\+Session\+Manager.\+sessions\+\_\+dir = os.\+path.\+abspath(sessions\+\_\+dir)}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{session__manager_8py}{session\+\_\+manager.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,11 @@
+digraph "core.anthropic_features.AnthropicFeatures.should_use_precise_counting"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="core.anthropic_features.\lAnthropicFeatures.should\l_use_precise_counting",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="core.anthropic_features.\lAnthropicFeatures.is_token\l_counting_enabled",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classcore_1_1anthropic__features_1_1AnthropicFeatures.html#a264f65c13464b92c1ee4945375adb5f9",tooltip=" "];
+}

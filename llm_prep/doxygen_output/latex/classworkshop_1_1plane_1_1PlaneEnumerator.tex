@@ -1,0 +1,195 @@
+\doxysection{workshop.\+plane.\+Plane\+Enumerator Class Reference}
+\hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator}{}\label{classworkshop_1_1plane_1_1PlaneEnumerator}\index{workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}}
+
+
+Collaboration diagram for workshop.\+plane.\+Plane\+Enumerator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{classworkshop_1_1plane_1_1PlaneEnumerator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator_a1e51586812244c4e0922ed27055b9515}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator_a62a7d0840f49705c496a1b0ef25391ef}{config}}=None)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator_ac3fcd149453031fc5c03323e9fedfde8}{enumerate\+\_\+project}} (self, str project\+\_\+path)
+\item 
+Tuple\mbox{[}List\mbox{[}\mbox{\hyperlink{classworkshop_1_1plane_1_1EnumeratedSource}{Enumerated\+Source}}\mbox{]}, List\mbox{[}\mbox{\hyperlink{classworkshop_1_1plane_1_1EnumeratedSink}{Enumerated\+Sink}}\mbox{]}\mbox{]} \mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator_a5b59f8b59266e8e020af58011ba17320}{enumerate\+\_\+file}} (self, str file\+\_\+path)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator_a62a7d0840f49705c496a1b0ef25391ef}{config}} = config or \{\}
+\item 
+Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator_a4125a49902702454ead11e0a67ae425a}{source\+\_\+patterns}} = self.\+\_\+load\+\_\+source\+\_\+patterns()
+\item 
+Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator_a1fccbf091b4bd780975ac4d93af8a7a3}{sink\+\_\+patterns}} = self.\+\_\+load\+\_\+sink\+\_\+patterns()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator_aa342e2ae26e98c4864723c19a37fa56e}{\+\_\+should\+\_\+analyze\+\_\+file}} (self, Path file\+\_\+path)
+\item 
+Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator_af6b45b0cd867cef771990228061b6190}{\+\_\+load\+\_\+source\+\_\+patterns}} (self)
+\item 
+Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator_aabd686d5e8ce5af4eacfb6c26a4d9c4e}{\+\_\+load\+\_\+sink\+\_\+patterns}} (self)
+\item 
+List\mbox{[}\mbox{\hyperlink{classworkshop_1_1plane_1_1EnumeratedSource}{Enumerated\+Source}}\mbox{]} \mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator_af741eec88de2e681fe359100445c8d92}{\+\_\+deduplicate\+\_\+sources}} (self, List\mbox{[}\mbox{\hyperlink{classworkshop_1_1plane_1_1EnumeratedSource}{Enumerated\+Source}}\mbox{]} sources)
+\item 
+List\mbox{[}\mbox{\hyperlink{classworkshop_1_1plane_1_1EnumeratedSink}{Enumerated\+Sink}}\mbox{]} \mbox{\hyperlink{classworkshop_1_1plane_1_1PlaneEnumerator_ab5db32ffa4e1b525e1199f0d9e3489ba}{\+\_\+deduplicate\+\_\+sinks}} (self, List\mbox{[}\mbox{\hyperlink{classworkshop_1_1plane_1_1EnumeratedSink}{Enumerated\+Sink}}\mbox{]} sinks)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Source/sink enumerator for smoothing out entry and exit points in code.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_a1e51586812244c4e0922ed27055b9515}\index{workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1PlaneEnumerator_a1e51586812244c4e0922ed27055b9515} 
+workshop.\+plane.\+Plane\+Enumerator.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_ab5db32ffa4e1b525e1199f0d9e3489ba}\index{workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}!\_deduplicate\_sinks@{\_deduplicate\_sinks}}
+\index{\_deduplicate\_sinks@{\_deduplicate\_sinks}!workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}}
+\doxysubsubsection{\texorpdfstring{\_deduplicate\_sinks()}{\_deduplicate\_sinks()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1PlaneEnumerator_ab5db32ffa4e1b525e1199f0d9e3489ba} 
+ List\mbox{[}\mbox{\hyperlink{classworkshop_1_1plane_1_1EnumeratedSink}{Enumerated\+Sink}}\mbox{]} workshop.\+plane.\+Plane\+Enumerator.\+\_\+deduplicate\+\_\+sinks (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}\mbox{\hyperlink{classworkshop_1_1plane_1_1EnumeratedSink}{Enumerated\+Sink}}\mbox{]}}]{sinks}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Remove duplicate sinks.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1plane_1_1PlaneEnumerator_ab5db32ffa4e1b525e1199f0d9e3489ba_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_af741eec88de2e681fe359100445c8d92}\index{workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}!\_deduplicate\_sources@{\_deduplicate\_sources}}
+\index{\_deduplicate\_sources@{\_deduplicate\_sources}!workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}}
+\doxysubsubsection{\texorpdfstring{\_deduplicate\_sources()}{\_deduplicate\_sources()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1PlaneEnumerator_af741eec88de2e681fe359100445c8d92} 
+ List\mbox{[}\mbox{\hyperlink{classworkshop_1_1plane_1_1EnumeratedSource}{Enumerated\+Source}}\mbox{]} workshop.\+plane.\+Plane\+Enumerator.\+\_\+deduplicate\+\_\+sources (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}\mbox{\hyperlink{classworkshop_1_1plane_1_1EnumeratedSource}{Enumerated\+Source}}\mbox{]}}]{sources}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Remove duplicate sources.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1plane_1_1PlaneEnumerator_af741eec88de2e681fe359100445c8d92_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_aabd686d5e8ce5af4eacfb6c26a4d9c4e}\index{workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}!\_load\_sink\_patterns@{\_load\_sink\_patterns}}
+\index{\_load\_sink\_patterns@{\_load\_sink\_patterns}!workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}}
+\doxysubsubsection{\texorpdfstring{\_load\_sink\_patterns()}{\_load\_sink\_patterns()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1PlaneEnumerator_aabd686d5e8ce5af4eacfb6c26a4d9c4e} 
+ Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} workshop.\+plane.\+Plane\+Enumerator.\+\_\+load\+\_\+sink\+\_\+patterns (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Load patterns for identifying sinks.\end{DoxyVerb}
+ \Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_af6b45b0cd867cef771990228061b6190}\index{workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}!\_load\_source\_patterns@{\_load\_source\_patterns}}
+\index{\_load\_source\_patterns@{\_load\_source\_patterns}!workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}}
+\doxysubsubsection{\texorpdfstring{\_load\_source\_patterns()}{\_load\_source\_patterns()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1PlaneEnumerator_af6b45b0cd867cef771990228061b6190} 
+ Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} workshop.\+plane.\+Plane\+Enumerator.\+\_\+load\+\_\+source\+\_\+patterns (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Load patterns for identifying sources.\end{DoxyVerb}
+ \Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_aa342e2ae26e98c4864723c19a37fa56e}\index{workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}!\_should\_analyze\_file@{\_should\_analyze\_file}}
+\index{\_should\_analyze\_file@{\_should\_analyze\_file}!workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}}
+\doxysubsubsection{\texorpdfstring{\_should\_analyze\_file()}{\_should\_analyze\_file()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1PlaneEnumerator_aa342e2ae26e98c4864723c19a37fa56e} 
+ bool workshop.\+plane.\+Plane\+Enumerator.\+\_\+should\+\_\+analyze\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Path}]{file\+\_\+path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Determine if a file should be analyzed.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1plane_1_1PlaneEnumerator_aa342e2ae26e98c4864723c19a37fa56e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_a5b59f8b59266e8e020af58011ba17320}\index{workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}!enumerate\_file@{enumerate\_file}}
+\index{enumerate\_file@{enumerate\_file}!workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}}
+\doxysubsubsection{\texorpdfstring{enumerate\_file()}{enumerate\_file()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1PlaneEnumerator_a5b59f8b59266e8e020af58011ba17320} 
+ Tuple\mbox{[}List\mbox{[}\mbox{\hyperlink{classworkshop_1_1plane_1_1EnumeratedSource}{Enumerated\+Source}}\mbox{]}, List\mbox{[}\mbox{\hyperlink{classworkshop_1_1plane_1_1EnumeratedSink}{Enumerated\+Sink}}\mbox{]}\mbox{]} workshop.\+plane.\+Plane\+Enumerator.\+enumerate\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{file\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Enumerate sources and sinks in a single file.
+
+Args:
+    file_path: Path to the file to analyze
+
+Returns:
+    Tuple of (sources, sinks) lists
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1plane_1_1PlaneEnumerator_a5b59f8b59266e8e020af58011ba17320_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_ac3fcd149453031fc5c03323e9fedfde8}\index{workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}!enumerate\_project@{enumerate\_project}}
+\index{enumerate\_project@{enumerate\_project}!workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}}
+\doxysubsubsection{\texorpdfstring{enumerate\_project()}{enumerate\_project()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1PlaneEnumerator_ac3fcd149453031fc5c03323e9fedfde8} 
+ Dict\mbox{[}str, Any\mbox{]} workshop.\+plane.\+Plane\+Enumerator.\+enumerate\+\_\+project (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{project\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Enumerate sources and sinks across an entire project.
+
+Args:
+    project_path: Root path of the project to analyze
+
+Returns:
+    Dict containing enumerated sources and sinks
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1plane_1_1PlaneEnumerator_ac3fcd149453031fc5c03323e9fedfde8_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_a62a7d0840f49705c496a1b0ef25391ef}\index{workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}!config@{config}}
+\index{config@{config}!workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1PlaneEnumerator_a62a7d0840f49705c496a1b0ef25391ef} 
+workshop.\+plane.\+Plane\+Enumerator.\+config = config or \{\}}
+
+\Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_a1fccbf091b4bd780975ac4d93af8a7a3}\index{workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}!sink\_patterns@{sink\_patterns}}
+\index{sink\_patterns@{sink\_patterns}!workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}}
+\doxysubsubsection{\texorpdfstring{sink\_patterns}{sink\_patterns}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1PlaneEnumerator_a1fccbf091b4bd780975ac4d93af8a7a3} 
+Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} workshop.\+plane.\+Plane\+Enumerator.\+sink\+\_\+patterns = self.\+\_\+load\+\_\+sink\+\_\+patterns()}
+
+\Hypertarget{classworkshop_1_1plane_1_1PlaneEnumerator_a4125a49902702454ead11e0a67ae425a}\index{workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}!source\_patterns@{source\_patterns}}
+\index{source\_patterns@{source\_patterns}!workshop.plane.PlaneEnumerator@{workshop.plane.PlaneEnumerator}}
+\doxysubsubsection{\texorpdfstring{source\_patterns}{source\_patterns}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1PlaneEnumerator_a4125a49902702454ead11e0a67ae425a} 
+Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} workshop.\+plane.\+Plane\+Enumerator.\+source\+\_\+patterns = self.\+\_\+load\+\_\+source\+\_\+patterns()}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+workshop/\mbox{\hyperlink{plane_8py}{plane.\+py}}\end{DoxyCompactItemize}

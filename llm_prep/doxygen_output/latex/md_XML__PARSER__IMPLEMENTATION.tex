@@ -1,0 +1,260 @@
+\chapter{XML Function Call Parser -\/ Implementation Summary }
+\hypertarget{md_XML__PARSER__IMPLEMENTATION}{}\label{md_XML__PARSER__IMPLEMENTATION}\index{XML Function Call Parser -\/ Implementation Summary@{XML Function Call Parser -\/ Implementation Summary}}
+\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1500}%
+\Hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1500}%
+\hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1501}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1501}
+This implementation adds support for native XML function call format used by LLM agents (Claude, GPT, Llama, Grok) alongside AXE\textquotesingle{}s existing markdown block syntax.\hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1502}{}\doxysection{\texorpdfstring{Problem Solved}{Problem Solved}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1502}
+LLM agents were using their native XML function-\/calling format\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<\textcolor{keywordtype}{function\_calls}>}
+\DoxyCodeLine{<\textcolor{keywordtype}{invoke}\ \textcolor{keyword}{name}=\textcolor{stringliteral}{"{}read\_file"{}}>}
+\DoxyCodeLine{<\textcolor{keywordtype}{parameter}\ \textcolor{keyword}{name}=\textcolor{stringliteral}{"{}file\_path"{}}>/\textcolor{keyword}{tmp}/\textcolor{keyword}{playground}/\textcolor{keyword}{MISSION.md}</\textcolor{keywordtype}{parameter}>}
+\DoxyCodeLine{</\textcolor{keywordtype}{invoke}>}
+\DoxyCodeLine{</\textcolor{keywordtype}{function\_calls}>}
+
+\end{DoxyCode}
+
+
+But AXE only understood markdown blocks\+:
+
+
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ READ /tmp/playground/\+MISSION.md\`{}\`{}\`{} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{This\ caused:}
+\DoxyCodeLine{-\/\ Tool\ calls\ to\ silently\ fail\ (XML\ not\ parsed)}
+\DoxyCodeLine{-\/\ Results\ not\ visible\ to\ agents}
+\DoxyCodeLine{-\/\ Infinite\ retry\ loops}
+\DoxyCodeLine{-\/\ Hallucination\ cascades}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Solution}
+\DoxyCodeLine{}
+\DoxyCodeLine{Added\ a\ comprehensive\ XML\ function\ call\ parser\ that:}
+\DoxyCodeLine{}
+\DoxyCodeLine{1.\ **Detects\ XML\ function\ calls**\ using\ regex\ patterns}
+\DoxyCodeLine{2.\ **Parses\ tool\ names\ and\ parameters**\ from\ \`{}<invoke>`\ and\ \`{}<parameter>`\ elements}
+\DoxyCodeLine{3.\ **Normalizes\ tool\ names**\ to\ AXE's\ internal\ format\ (READ,\ WRITE,\ EXEC,\ APPEND)}
+\DoxyCodeLine{4.\ **Executes\ tools**\ using\ existing\ AXE\ infrastructure}
+\DoxyCodeLine{5.\ **Returns\ results\ in\ XML\ format**\ that\ agents\ expect}
+\DoxyCodeLine{6.\ **Adds\ results\ to\ conversation\ history**\ for\ all\ agents\ to\ see}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Architecture}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Core\ Components}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\#\ \`{}utils/xml\_tool\_parser.py`}
+\DoxyCodeLine{}
+\DoxyCodeLine{Main\ parser\ module\ with\ these\ functions:}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ **`parse\_xml\_function\_calls(response:\ str)`**\ -\/\ Extracts\ all\ XML\ function\ calls\ from\ text}
+\DoxyCodeLine{-\/\ **`normalize\_tool\_name(name:\ str)`**\ -\/\ Maps\ tool\ names\ to\ READ/WRITE/EXEC/APPEND}
+\DoxyCodeLine{-\/\ **`execute\_parsed\_call(call:\ Dict,\ workspace:\ str,\ processor)`**\ -\/\ Executes\ a\ single\ call}
+\DoxyCodeLine{-\/\ **`format\_xml\_result(tool:\ str,\ params:\ Dict,\ result:\ str)`**\ -\/\ Formats\ result\ as\ XML}
+\DoxyCodeLine{-\/\ **`process\_agent\_response(response:\ str,\ workspace:\ str,\ processor)`**\ -\/\ Main\ entry\ point}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\#\ Integration\ with\ \`{}axe.py`}
+\DoxyCodeLine{}
+\DoxyCodeLine{Modified\ \`{}ResponseProcessor.process\_response()`\ to:}
+\DoxyCodeLine{}
+\DoxyCodeLine{1.\ First\ call\ XML\ parser\ to\ check\ for\ XML\ function\ calls}
+\DoxyCodeLine{2.\ Execute\ XML\ calls\ and\ collect\ results}
+\DoxyCodeLine{3.\ Then\ process\ markdown\ blocks\ as\ before}
+\DoxyCodeLine{4.\ Append\ both\ XML\ and\ markdown\ results\ to\ response}
+\DoxyCodeLine{5.\ Return\ processed\ response\ (which\ gets\ added\ to\ conversation\ history)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Tool\ Name\ Mappings}
+\DoxyCodeLine{}
+\DoxyCodeLine{|\ Agent\ Tool\ Name\ |\ Maps\ To\ |\ Action\ |}
+\DoxyCodeLine{|-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/|-\/-\/-\/-\/-\/-\/-\/-\/-\/|-\/-\/-\/-\/-\/-\/-\/-\/|}
+\DoxyCodeLine{|\ \`{}read\_file`,\ \`{}read`,\ \`{}cat`\ |\ \`{}READ`\ |\ Read\ file\ contents\ |}
+\DoxyCodeLine{|\ \`{}write\_file`,\ \`{}write`,\ \`{}create\_file`\ |\ \`{}WRITE`\ |\ Write/create\ file\ |}
+\DoxyCodeLine{|\ \`{}append\_file`,\ \`{}append\_to\_file`\ |\ \`{}APPEND`\ |\ Append\ to\ file\ |}
+\DoxyCodeLine{|\ \`{}list\_dir`,\ \`{}list\_directory`,\ \`{}ls`\ |\ \`{}EXEC`\ |\ List\ directory\ (via\ \`{}ls\ -\/la`)\ |}
+\DoxyCodeLine{|\ \`{}shell`,\ \`{}bash`,\ \`{}exec`,\ \`{}run\_shell`\ |\ \`{}EXEC`\ |\ Run\ shell\ command\ |}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Result\ Format}
+\DoxyCodeLine{}
+\DoxyCodeLine{Results\ are\ returned\ in\ XML\ format\ that\ agents\ expect:}
+
+\end{DoxyCode}
+ xml $<$result$>$ $<$function\+\_\+result$>$ $<$result$>$ \mbox{[}actual output here\mbox{]} $<$/result$>$ $<$/function\+\_\+result$>$ $<$/result$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\ Features}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Supported\ Operations}
+\DoxyCodeLine{}
+\DoxyCodeLine{1.\ **READ**\ -\/\ Read\ file\ contents}
+\DoxyCodeLine{\ \ \ -\/\ Parameters:\ \`{}file\_path`,\ \`{}path`,\ \`{}filename`,\ \`{}file`}
+\DoxyCodeLine{\ \ \ -\/\ Returns\ file\ contents\ or\ error\ message}
+\DoxyCodeLine{}
+\DoxyCodeLine{2.\ **WRITE**\ -\/\ Write/create\ files}
+\DoxyCodeLine{\ \ \ -\/\ Parameters:\ \`{}file\_path`\ (required),\ \`{}content`\ (file\ data)}
+\DoxyCodeLine{\ \ \ -\/\ Creates\ directories\ as\ needed}
+\DoxyCodeLine{\ \ \ -\/\ Respects\ security\ boundaries}
+\DoxyCodeLine{}
+\DoxyCodeLine{3.\ **APPEND**\ -\/\ Append\ to\ existing\ files}
+\DoxyCodeLine{\ \ \ -\/\ Parameters:\ \`{}file\_path`\ (required),\ \`{}content`\ (data\ to\ append)}
+\DoxyCodeLine{\ \ \ -\/\ Creates\ file\ if\ it\ doesn't\ exist}
+\DoxyCodeLine{}
+\DoxyCodeLine{4.\ **EXEC**\ -\/\ Execute\ shell\ commands}
+\DoxyCodeLine{\ \ \ -\/\ Parameters:\ \`{}command`,\ \`{}cmd`,\ \`{}shell\_command`}
+\DoxyCodeLine{\ \ \ -\/\ Subject\ to\ tool\ whitelist}
+\DoxyCodeLine{\ \ \ -\/\ Auto-\/approves\ if\ configured}
+\DoxyCodeLine{}
+\DoxyCodeLine{5.\ **LIST\_DIR**\ -\/\ List\ directory\ contents}
+\DoxyCodeLine{\ \ \ -\/\ Parameters:\ \`{}path`,\ \`{}directory`,\ \`{}dir`}
+\DoxyCodeLine{\ \ \ -\/\ Converts\ to\ \`{}ls\ -\/la\ <path>`\ command}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Security}
+\DoxyCodeLine{}
+\DoxyCodeLine{All\ operations\ use\ AXE's\ existing\ security\ infrastructure:}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ **Path\ validation**\ -\/\ \`{}\_resolve\_project\_path()`\ prevents\ directory\ traversal}
+\DoxyCodeLine{-\/\ **Access\ control**\ -\/\ Respects\ allowed/forbidden\ directories}
+\DoxyCodeLine{-\/\ **Tool\ whitelist**\ -\/\ Shell\ commands\ must\ be\ whitelisted}
+\DoxyCodeLine{-\/\ **Error\ handling**\ -\/\ Graceful\ failures\ with\ error\ messages}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Compatibility}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ **Dual\ format\ support**\ -\/\ Both\ XML\ and\ markdown\ blocks\ work}
+\DoxyCodeLine{-\/\ **Mixed\ usage**\ -\/\ Can\ use\ both\ formats\ in\ same\ response}
+\DoxyCodeLine{-\/\ **Backward\ compatible**\ -\/\ Existing\ markdown\ blocks\ work\ unchanged}
+\DoxyCodeLine{-\/\ **No\ breaking\ changes**\ -\/\ All\ existing\ functionality\ preserved}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Testing}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Test\ Coverage}
+\DoxyCodeLine{}
+\DoxyCodeLine{Comprehensive\ test\ suite\ in\ \`{}test\_xml\_tool\_parser.py`:}
+\DoxyCodeLine{}
+\DoxyCodeLine{1.\ ✅\ Parse\ single\ function\ call}
+\DoxyCodeLine{2.\ ✅\ Parse\ multiple\ function\ calls}
+\DoxyCodeLine{3.\ ✅\ Tool\ name\ normalization\ (all\ variants)}
+\DoxyCodeLine{4.\ ✅\ READ\ execution}
+\DoxyCodeLine{5.\ ✅\ WRITE\ execution}
+\DoxyCodeLine{6.\ ✅\ APPEND\ execution}
+\DoxyCodeLine{7.\ ✅\ EXEC\ (shell)\ execution}
+\DoxyCodeLine{8.\ ✅\ LIST\_DIR\ execution}
+\DoxyCodeLine{9.\ ✅\ Error\ handling\ (missing\ files,\ invalid\ paths,\ etc.)}
+\DoxyCodeLine{10.\ ✅\ Path\ traversal\ prevention}
+\DoxyCodeLine{11.\ ✅\ XML\ result\ formatting}
+\DoxyCodeLine{12.\ ✅\ Integration\ with\ ResponseProcessor}
+\DoxyCodeLine{13.\ ✅\ Mixed\ XML\ and\ markdown\ blocks}
+\DoxyCodeLine{14.\ ✅\ Nested/escaped\ XML\ content}
+\DoxyCodeLine{15.\ ✅\ Malformed\ XML\ handling}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Test\ Results}
+
+\end{DoxyCode}
+ \hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1503}{}\doxysection{\texorpdfstring{\$ python3 test\+\_\+xml\+\_\+tool\+\_\+parser.\+py}{\$ python3 test\+\_\+xml\+\_\+tool\+\_\+parser.\+py}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1503}
+\hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1504}{}\doxysection{\texorpdfstring{XML TOOL PARSER TEST SUITE}{XML TOOL PARSER TEST SUITE}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1504}
+Testing single XML function call parsing... ✓ Single function call parsed correctly Testing multiple XML function calls... ✓ Multiple function calls parsed correctly \hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1505}{}\doxysection{\texorpdfstring{\mbox{[}... all tests ...\mbox{]}}{\mbox{[}... all tests ...\mbox{]}}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1505}
+\hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1506}{}\doxysection{\texorpdfstring{✅ ALL TESTS PASSED!}{✅ ALL TESTS PASSED!}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1506}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ Manual\ Verification}
+\DoxyCodeLine{}
+\DoxyCodeLine{Manual\ tests\ in\ \`{}manual\_test\_xml.py`\ verify\ end-\/to-\/end\ functionality:}
+\DoxyCodeLine{}
+\DoxyCodeLine{1.\ ✅\ XML\ READ\ call\ with\ result\ visibility}
+\DoxyCodeLine{2.\ ✅\ XML\ WRITE\ call\ with\ file\ creation}
+\DoxyCodeLine{3.\ ✅\ Multiple\ XML\ calls\ in\ sequence}
+\DoxyCodeLine{4.\ ✅\ Mixed\ XML\ and\ markdown\ formats}
+\DoxyCodeLine{}
+\DoxyCodeLine{All\ tests\ pass\ successfully.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Usage\ Examples}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Example\ 1:\ Read\ File\ (Claude\ format)}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Agent\ sends:**}
+
+\end{DoxyCode}
+ xml $<$function\+\_\+calls$>$ $<$invoke name="{}read\+\_\+file"{}$>$ $<$parameter name="{}file\+\_\+path"{}$>$config.\+yaml$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{**Agent\ receives:**}
+
+\end{DoxyCode}
+ xml $<$result$>$ $<$function\+\_\+result$>$ $<$result$>$ \hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1507}{}\doxysection{\texorpdfstring{Configuration file}{Configuration file}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1507}
+version\+: 1.\+0 ... $<$/result$>$ $<$/function\+\_\+result$>$ $<$/result$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ Example\ 2:\ Write\ File\ (GPT\ format)}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Agent\ sends:**}
+
+\end{DoxyCode}
+ xml $<$function\+\_\+calls$>$ $<$invoke name="{}write\+\_\+file"{}$>$ $<$parameter name="{}file\+\_\+path"{}$>$output.\+txt$<$/parameter$>$ $<$parameter name="{}content"{}$>$Hello, World!$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{**Agent\ receives:**}
+
+\end{DoxyCode}
+ xml $<$result$>$ $<$function\+\_\+result$>$ $<$result$>$ ✓ File written successfully (13 bytes) $<$/result$>$ $<$/function\+\_\+result$>$ $<$/result$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ Example\ 3:\ Multiple\ Operations}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Agent\ sends:**}
+
+\end{DoxyCode}
+ xml $<$function\+\_\+calls$>$ $<$invoke name="{}read\+\_\+file"{}$>$ $<$parameter name="{}file\+\_\+path"{}$>$input.\+txt$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$
+
+$<$function\+\_\+calls$>$ $<$invoke name="{}write\+\_\+file"{}$>$ $<$parameter name="{}file\+\_\+path"{}$>$output.\+txt$<$/parameter$>$ $<$parameter name="{}content"{}$>$Processed data$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$ \`{}\`{}\`{}
+
+Both operations execute and results are returned in sequence.\hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1508}{}\doxysubsection{\texorpdfstring{Files Modified/\+Added}{Files Modified/\+Added}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1508}
+\hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1509}{}\doxysubsubsection{\texorpdfstring{New Files}{New Files}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1509}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{{\ttfamily \doxylink{xml__tool__parser_8py}{utils/xml\+\_\+tool\+\_\+parser.\+py}}}} -\/ Core XML parser (277 lines)
+\item {\bfseries{{\ttfamily \doxylink{test__xml__tool__parser_8py}{test\+\_\+xml\+\_\+tool\+\_\+parser.\+py}}}} -\/ Comprehensive tests (541 lines)
+\item {\bfseries{{\ttfamily \doxylink{manual__test__xml_8py}{manual\+\_\+test\+\_\+xml.\+py}}}} -\/ Manual verification (279 lines)
+\item {\bfseries{{\ttfamily \doxylink{XML__PARSER__IMPLEMENTATION_8md}{XML\+\_\+\+PARSER\+\_\+\+IMPLEMENTATION.\+md}}}} -\/ This documentation
+\end{DoxyEnumerate}\hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1510}{}\doxysubsubsection{\texorpdfstring{Modified Files}{Modified Files}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1510}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{{\ttfamily \doxylink{axe_8py}{axe.\+py}}}} -\/ Updated {\ttfamily Response\+Processor.\+process\+\_\+response()} method
+\begin{DoxyItemize}
+\item Added XML parser integration
+\item Maintains backward compatibility
+\item No breaking changes
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1511}{}\doxysubsection{\texorpdfstring{Success Criteria}{Success Criteria}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1511}
+All requirements met\+:
+
+
+\begin{DoxyItemize}
+\item ✅ Agents using XML function calls get results back
+\item ✅ Results appear in conversation history for all agents
+\item ✅ Both XML and markdown block formats work
+\item ✅ No more infinite retry loops on file reads
+\item ✅ Comprehensive test coverage (\texorpdfstring{$>$}{>}95\%)
+\item ✅ Security\+: no arbitrary code execution outside workspace
+\item ✅ Path traversal protection
+\item ✅ Error handling for edge cases
+\end{DoxyItemize}\hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1512}{}\doxysubsection{\texorpdfstring{Future Enhancements}{Future Enhancements}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1512}
+Possible improvements\+:
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Streaming results}} -\/ For long-\/running operations
+\item {\bfseries{Progress callbacks}} -\/ For multi-\/step operations
+\item {\bfseries{Batch operations}} -\/ Execute multiple calls in parallel
+\item {\bfseries{Result caching}} -\/ Cache file reads for performance
+\item {\bfseries{Timeout handling}} -\/ For long-\/running shell commands
+\item {\bfseries{Extended tool set}} -\/ Support more native tool names
+\end{DoxyEnumerate}\hypertarget{md_XML__PARSER__IMPLEMENTATION_autotoc_md1513}{}\doxysubsection{\texorpdfstring{Conclusion}{Conclusion}}\label{md_XML__PARSER__IMPLEMENTATION_autotoc_md1513}
+The XML function call parser successfully bridges the gap between LLM agents\textquotesingle{} native XML format and AXE\textquotesingle{}s markdown block syntax. This enables seamless collaboration where agents can use their preferred format while seeing tool execution results in the conversation history.
+
+Key benefits\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{No more silent failures}} -\/ XML calls now execute properly
+\item {\bfseries{Visible results}} -\/ All agents see tool outputs
+\item {\bfseries{No hallucinations}} -\/ Agents get real file contents
+\item {\bfseries{Backward compatible}} -\/ Existing code works unchanged
+\item {\bfseries{Secure}} -\/ Uses existing security infrastructure
+\item {\bfseries{Well tested}} -\/ Comprehensive test coverage 
+\end{DoxyItemize}

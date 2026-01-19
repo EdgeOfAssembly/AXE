@@ -1,0 +1,193 @@
+\doxysection{core.\+agent\+\_\+manager.\+Agent\+Manager Class Reference}
+\hypertarget{classcore_1_1agent__manager_1_1AgentManager}{}\label{classcore_1_1agent__manager_1_1AgentManager}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+
+
+Collaboration diagram for core.\+agent\+\_\+manager.\+Agent\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classcore_1_1agent__manager_1_1AgentManager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_a8bfe1887169cdc96596c08d0e29fbc89}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}} \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_a1f12b377f7aa4e35d889b1b30c1a4770}{config}})
+\item 
+Optional\mbox{[}dict\mbox{]} \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_aff75497cb51ce30997d46f1d2a5ac5e6}{resolve\+\_\+agent}} (self, str name)
+\item 
+List\mbox{[}dict\mbox{]} \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_a260638b04e00d37e06a4163beff20f21}{list\+\_\+agents}} (self)
+\item 
+str \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_a07fed5fbe9d58078779a04b917ab5f23}{call\+\_\+agent}} (self, str agent\+\_\+name, str prompt, str context="{}"{}, Optional\mbox{[}Callable\mbox{[}\mbox{[}str, str, int, int\mbox{]}, None\mbox{]}\mbox{]} token\+\_\+callback=None, Optional\mbox{[}str\mbox{]} system\+\_\+prompt\+\_\+override=None)
+\item 
+Optional\mbox{[}int\mbox{]} \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_a208055a0f83c2d071f7315611e2cad15}{count\+\_\+tokens\+\_\+anthropic}} (self, str model, List\mbox{[}Dict\mbox{]} messages, str system="{}"{}, List\mbox{[}Dict\mbox{]} \mbox{\hyperlink{namespacetools}{tools}}=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_a1f12b377f7aa4e35d889b1b30c1a4770}{config}} = config
+\item 
+dict \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_a6e42aac643b873c4b58e76406e52a7c0}{clients}} = \{\}
+\item 
+\mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_ab9e7169142475363dde711cae91b47f4}{anthropic\+\_\+features}} = None
+\item 
+\mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_abab52489807bc7973791037ece856a44}{skills\+\_\+manager}} = None
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_a9723ad2b71e0f7645dfa3903728e8b0c}{\+\_\+uses\+\_\+max\+\_\+completion\+\_\+tokens}} (self, str model)
+\item 
+None \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_a0700fe11df7d779035268c89fc9c3b1f}{\+\_\+init\+\_\+clients}} (self)
+\item 
+None \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager_aa111631680cd726c04d31e535f2896b1}{\+\_\+init\+\_\+skills}} (self)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Manages agent connections and API calls.\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1agent__manager_1_1AgentManager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1agent__manager_1_1AgentManager_a8bfe1887169cdc96596c08d0e29fbc89}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1agent__manager_1_1AgentManager_a8bfe1887169cdc96596c08d0e29fbc89} 
+core.\+agent\+\_\+manager.\+Agent\+Manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1agent__manager_1_1AgentManager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1agent__manager_1_1AgentManager_a0700fe11df7d779035268c89fc9c3b1f}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}!\_init\_clients@{\_init\_clients}}
+\index{\_init\_clients@{\_init\_clients}!core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+\doxysubsubsection{\texorpdfstring{\_init\_clients()}{\_init\_clients()}}
+{\footnotesize\ttfamily \label{classcore_1_1agent__manager_1_1AgentManager_a0700fe11df7d779035268c89fc9c3b1f} 
+ None core.\+agent\+\_\+manager.\+Agent\+Manager.\+\_\+init\+\_\+clients (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Initialize API clients for enabled providers.\end{DoxyVerb}
+ \Hypertarget{classcore_1_1agent__manager_1_1AgentManager_aa111631680cd726c04d31e535f2896b1}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}!\_init\_skills@{\_init\_skills}}
+\index{\_init\_skills@{\_init\_skills}!core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+\doxysubsubsection{\texorpdfstring{\_init\_skills()}{\_init\_skills()}}
+{\footnotesize\ttfamily \label{classcore_1_1agent__manager_1_1AgentManager_aa111631680cd726c04d31e535f2896b1} 
+ None core.\+agent\+\_\+manager.\+Agent\+Manager.\+\_\+init\+\_\+skills (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Initialize skills manager if skills are enabled.\end{DoxyVerb}
+ \Hypertarget{classcore_1_1agent__manager_1_1AgentManager_a9723ad2b71e0f7645dfa3903728e8b0c}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}!\_uses\_max\_completion\_tokens@{\_uses\_max\_completion\_tokens}}
+\index{\_uses\_max\_completion\_tokens@{\_uses\_max\_completion\_tokens}!core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+\doxysubsubsection{\texorpdfstring{\_uses\_max\_completion\_tokens()}{\_uses\_max\_completion\_tokens()}}
+{\footnotesize\ttfamily \label{classcore_1_1agent__manager_1_1AgentManager_a9723ad2b71e0f7645dfa3903728e8b0c} 
+ bool core.\+agent\+\_\+manager.\+Agent\+Manager.\+\_\+uses\+\_\+max\+\_\+completion\+\_\+tokens (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{model}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Check if a model requires max_completion_tokens parameter.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1agent__manager_1_1AgentManager_a9723ad2b71e0f7645dfa3903728e8b0c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1agent__manager_1_1AgentManager_a07fed5fbe9d58078779a04b917ab5f23}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}!call\_agent@{call\_agent}}
+\index{call\_agent@{call\_agent}!core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+\doxysubsubsection{\texorpdfstring{call\_agent()}{call\_agent()}}
+{\footnotesize\ttfamily \label{classcore_1_1agent__manager_1_1AgentManager_a07fed5fbe9d58078779a04b917ab5f23} 
+ str core.\+agent\+\_\+manager.\+Agent\+Manager.\+call\+\_\+agent (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{str}]{prompt}{, }\item[{str }]{context}{ = {\ttfamily "{}"{}}, }\item[{Optional\mbox{[}Callable\mbox{[}\mbox{[}str, str, int, int\mbox{]}, None\mbox{]}\mbox{]} }]{token\+\_\+callback}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{system\+\_\+prompt\+\_\+override}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Call an agent with a prompt.
+
+Args:
+    agent_name: Name of the agent to call
+    prompt: User prompt
+    context: Optional context to include
+    token_callback: Optional callback function(agent_name, model, input_tokens, output_tokens)
+    system_prompt_override: Optional override for system prompt (for optimization)
+
+Returns:
+    Agent response text
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1agent__manager_1_1AgentManager_a07fed5fbe9d58078779a04b917ab5f23_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1agent__manager_1_1AgentManager_a208055a0f83c2d071f7315611e2cad15}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}!count\_tokens\_anthropic@{count\_tokens\_anthropic}}
+\index{count\_tokens\_anthropic@{count\_tokens\_anthropic}!core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+\doxysubsubsection{\texorpdfstring{count\_tokens\_anthropic()}{count\_tokens\_anthropic()}}
+{\footnotesize\ttfamily \label{classcore_1_1agent__manager_1_1AgentManager_a208055a0f83c2d071f7315611e2cad15} 
+ Optional\mbox{[}int\mbox{]} core.\+agent\+\_\+manager.\+Agent\+Manager.\+count\+\_\+tokens\+\_\+anthropic (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{model}{, }\item[{List\mbox{[}Dict\mbox{]}}]{messages}{, }\item[{str }]{system}{ = {\ttfamily "{}"{}}, }\item[{List\mbox{[}Dict\mbox{]} }]{tools}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get precise token count from Anthropic API.
+
+Args:
+    model: Model name
+    messages: List of message dictionaries
+    system: System prompt string
+    tools: Optional list of tool definitions
+
+Returns:
+    Token count, or None if unavailable
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1agent__manager_1_1AgentManager_a260638b04e00d37e06a4163beff20f21}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}!list\_agents@{list\_agents}}
+\index{list\_agents@{list\_agents}!core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+\doxysubsubsection{\texorpdfstring{list\_agents()}{list\_agents()}}
+{\footnotesize\ttfamily \label{classcore_1_1agent__manager_1_1AgentManager_a260638b04e00d37e06a4163beff20f21} 
+ List\mbox{[}dict\mbox{]} core.\+agent\+\_\+manager.\+Agent\+Manager.\+list\+\_\+agents (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}List all available agents with status and metadata.\end{DoxyVerb}
+ \Hypertarget{classcore_1_1agent__manager_1_1AgentManager_aff75497cb51ce30997d46f1d2a5ac5e6}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}!resolve\_agent@{resolve\_agent}}
+\index{resolve\_agent@{resolve\_agent}!core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+\doxysubsubsection{\texorpdfstring{resolve\_agent()}{resolve\_agent()}}
+{\footnotesize\ttfamily \label{classcore_1_1agent__manager_1_1AgentManager_aff75497cb51ce30997d46f1d2a5ac5e6} 
+ Optional\mbox{[}dict\mbox{]} core.\+agent\+\_\+manager.\+Agent\+Manager.\+resolve\+\_\+agent (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Resolve agent name or alias to agent config.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1agent__manager_1_1AgentManager_aff75497cb51ce30997d46f1d2a5ac5e6_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1agent__manager_1_1AgentManager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1agent__manager_1_1AgentManager_ab9e7169142475363dde711cae91b47f4}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}!anthropic\_features@{anthropic\_features}}
+\index{anthropic\_features@{anthropic\_features}!core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+\doxysubsubsection{\texorpdfstring{anthropic\_features}{anthropic\_features}}
+{\footnotesize\ttfamily \label{classcore_1_1agent__manager_1_1AgentManager_ab9e7169142475363dde711cae91b47f4} 
+core.\+agent\+\_\+manager.\+Agent\+Manager.\+anthropic\+\_\+features = None}
+
+\Hypertarget{classcore_1_1agent__manager_1_1AgentManager_a6e42aac643b873c4b58e76406e52a7c0}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}!clients@{clients}}
+\index{clients@{clients}!core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+\doxysubsubsection{\texorpdfstring{clients}{clients}}
+{\footnotesize\ttfamily \label{classcore_1_1agent__manager_1_1AgentManager_a6e42aac643b873c4b58e76406e52a7c0} 
+dict core.\+agent\+\_\+manager.\+Agent\+Manager.\+clients = \{\}}
+
+\Hypertarget{classcore_1_1agent__manager_1_1AgentManager_a1f12b377f7aa4e35d889b1b30c1a4770}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}!config@{config}}
+\index{config@{config}!core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classcore_1_1agent__manager_1_1AgentManager_a1f12b377f7aa4e35d889b1b30c1a4770} 
+core.\+agent\+\_\+manager.\+Agent\+Manager.\+config = config}
+
+\Hypertarget{classcore_1_1agent__manager_1_1AgentManager_abab52489807bc7973791037ece856a44}\index{core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}!skills\_manager@{skills\_manager}}
+\index{skills\_manager@{skills\_manager}!core.agent\_manager.AgentManager@{core.agent\_manager.AgentManager}}
+\doxysubsubsection{\texorpdfstring{skills\_manager}{skills\_manager}}
+{\footnotesize\ttfamily \label{classcore_1_1agent__manager_1_1AgentManager_abab52489807bc7973791037ece856a44} 
+core.\+agent\+\_\+manager.\+Agent\+Manager.\+skills\+\_\+manager = None}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{agent__manager_8py}{agent\+\_\+manager.\+py}}\end{DoxyCompactItemize}

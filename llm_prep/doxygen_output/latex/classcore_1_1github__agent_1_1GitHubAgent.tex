@@ -1,0 +1,213 @@
+\doxysection{core.\+github\+\_\+agent.\+Git\+Hub\+Agent Class Reference}
+\hypertarget{classcore_1_1github__agent_1_1GitHubAgent}{}\label{classcore_1_1github__agent_1_1GitHubAgent}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
+
+
+Collaboration diagram for core.\+github\+\_\+agent.\+Git\+Hub\+Agent\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=213pt]{classcore_1_1github__agent_1_1GitHubAgent__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_a414a5e9edf4ccc1e74bc5b6479b6b9bb}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str \mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_a526898ac95e495bdc0439d983756103e}{workspace\+\_\+dir}}, bool \mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_a168eb32e18fb2b942f219e047f178a5f}{enabled}}=False)
+\item 
+Optional\mbox{[}Dict\mbox{]} \mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_a304a9df6d3a2226cc3c8d7cc29894a9c}{agent\+\_\+request\+\_\+push}} (self, str branch, str commit\+\_\+msg, List\mbox{[}str\mbox{]} files)
+\item 
+Dict \mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_a63c00b98acb12c898c52b54b98dcfade}{execute\+\_\+push}} (self, str branch, str commit\+\_\+msg, List\mbox{[}str\mbox{]} files)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_a168eb32e18fb2b942f219e047f178a5f}{enabled}} = enabled
+\item 
+\mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_a526898ac95e495bdc0439d983756103e}{workspace\+\_\+dir}} = workspace\+\_\+dir
+\item 
+bool \mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_a24c13d7b7fe472776820c1c9a9b2a1f3}{repo\+\_\+detected}} = self.\+\_\+detect\+\_\+git\+\_\+repo()
+\item 
+bool \mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_a2c5939af15f3da42596ef8a7e747ec5e}{ssh\+\_\+configured}} = self.\+\_\+check\+\_\+ssh\+\_\+setup()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_a8cb100d9456ee7941934da0471466c34}{\+\_\+detect\+\_\+git\+\_\+repo}} (self)
+\item 
+bool \mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_affc136668263e3a703176f239be1758c}{\+\_\+check\+\_\+ssh\+\_\+setup}} (self)
+\item 
+str \mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_af3f737af59b8e897b33d680eb5e20e94}{\+\_\+get\+\_\+diff}} (self, List\mbox{[}str\mbox{]} files)
+\item 
+Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{classcore_1_1github__agent_1_1GitHubAgent_a483a160b7d34753fdaceef1d31976897}{\+\_\+get\+\_\+test\+\_\+results}} (self)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Manages autonomous GitHub operations with human review gates.
+
+Safety:
+- Disabled by default
+- All operations require human approval
+- Uses SSH (existing credentials)
+- Never auto-merges
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_a414a5e9edf4ccc1e74bc5b6479b6b9bb}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1github__agent_1_1GitHubAgent_a414a5e9edf4ccc1e74bc5b6479b6b9bb} 
+core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{workspace\+\_\+dir}{, }\item[{bool }]{enabled}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize GitHub agent.
+
+Args:
+    workspace_dir: Path to git repository
+    enabled: If False, all methods return immediately (no-op)
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_affc136668263e3a703176f239be1758c}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}!\_check\_ssh\_setup@{\_check\_ssh\_setup}}
+\index{\_check\_ssh\_setup@{\_check\_ssh\_setup}!core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
+\doxysubsubsection{\texorpdfstring{\_check\_ssh\_setup()}{\_check\_ssh\_setup()}}
+{\footnotesize\ttfamily \label{classcore_1_1github__agent_1_1GitHubAgent_affc136668263e3a703176f239be1758c} 
+ bool core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+\_\+check\+\_\+ssh\+\_\+setup (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Verify SSH key and remote configured.
+
+Returns:
+    True if SSH appears configured
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_a8cb100d9456ee7941934da0471466c34}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}!\_detect\_git\_repo@{\_detect\_git\_repo}}
+\index{\_detect\_git\_repo@{\_detect\_git\_repo}!core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
+\doxysubsubsection{\texorpdfstring{\_detect\_git\_repo()}{\_detect\_git\_repo()}}
+{\footnotesize\ttfamily \label{classcore_1_1github__agent_1_1GitHubAgent_a8cb100d9456ee7941934da0471466c34} 
+ bool core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+\_\+detect\+\_\+git\+\_\+repo (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Check if workspace is a git repo.
+
+Returns:
+    True if git repository detected
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_af3f737af59b8e897b33d680eb5e20e94}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}!\_get\_diff@{\_get\_diff}}
+\index{\_get\_diff@{\_get\_diff}!core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
+\doxysubsubsection{\texorpdfstring{\_get\_diff()}{\_get\_diff()}}
+{\footnotesize\ttfamily \label{classcore_1_1github__agent_1_1GitHubAgent_af3f737af59b8e897b33d680eb5e20e94} 
+ str core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+\_\+get\+\_\+diff (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}str\mbox{]}}]{files}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Get git diff for review.
+
+Args:
+    files: List of files to get diff for
+
+Returns:
+    Git diff output
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1github__agent_1_1GitHubAgent_af3f737af59b8e897b33d680eb5e20e94_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_a483a160b7d34753fdaceef1d31976897}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}!\_get\_test\_results@{\_get\_test\_results}}
+\index{\_get\_test\_results@{\_get\_test\_results}!core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
+\doxysubsubsection{\texorpdfstring{\_get\_test\_results()}{\_get\_test\_results()}}
+{\footnotesize\ttfamily \label{classcore_1_1github__agent_1_1GitHubAgent_a483a160b7d34753fdaceef1d31976897} 
+ Optional\mbox{[}str\mbox{]} core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+\_\+get\+\_\+test\+\_\+results (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Get recent test output if available.
+
+Returns:
+    Test results or None
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1github__agent_1_1GitHubAgent_a483a160b7d34753fdaceef1d31976897_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_a304a9df6d3a2226cc3c8d7cc29894a9c}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}!agent\_request\_push@{agent\_request\_push}}
+\index{agent\_request\_push@{agent\_request\_push}!core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
+\doxysubsubsection{\texorpdfstring{agent\_request\_push()}{agent\_request\_push()}}
+{\footnotesize\ttfamily \label{classcore_1_1github__agent_1_1GitHubAgent_a304a9df6d3a2226cc3c8d7cc29894a9c} 
+ Optional\mbox{[}Dict\mbox{]} core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+agent\+\_\+request\+\_\+push (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{branch}{, }\item[{str}]{commit\+\_\+msg}{, }\item[{List\mbox{[}str\mbox{]}}]{files}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Agent requests to push changes. Returns None if disabled.
+
+Args:
+    branch: Target branch name
+    commit_msg: Commit message
+    files: List of files changed
+
+Returns:
+    Dict with review info, or None if feature disabled
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1github__agent_1_1GitHubAgent_a304a9df6d3a2226cc3c8d7cc29894a9c_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_a63c00b98acb12c898c52b54b98dcfade}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}!execute\_push@{execute\_push}}
+\index{execute\_push@{execute\_push}!core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
+\doxysubsubsection{\texorpdfstring{execute\_push()}{execute\_push()}}
+{\footnotesize\ttfamily \label{classcore_1_1github__agent_1_1GitHubAgent_a63c00b98acb12c898c52b54b98dcfade} 
+ Dict core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+execute\+\_\+push (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{branch}{, }\item[{str}]{commit\+\_\+msg}{, }\item[{List\mbox{[}str\mbox{]}}]{files}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Execute push after human approval.
+
+Args:
+    branch: Target branch name
+    commit_msg: Commit message
+    files: List of files to commit
+
+Returns:
+    Dict with success status and details
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_a168eb32e18fb2b942f219e047f178a5f}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}!enabled@{enabled}}
+\index{enabled@{enabled}!core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
+\doxysubsubsection{\texorpdfstring{enabled}{enabled}}
+{\footnotesize\ttfamily \label{classcore_1_1github__agent_1_1GitHubAgent_a168eb32e18fb2b942f219e047f178a5f} 
+core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+enabled = enabled}
+
+\Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_a24c13d7b7fe472776820c1c9a9b2a1f3}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}!repo\_detected@{repo\_detected}}
+\index{repo\_detected@{repo\_detected}!core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
+\doxysubsubsection{\texorpdfstring{repo\_detected}{repo\_detected}}
+{\footnotesize\ttfamily \label{classcore_1_1github__agent_1_1GitHubAgent_a24c13d7b7fe472776820c1c9a9b2a1f3} 
+bool core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+repo\+\_\+detected = self.\+\_\+detect\+\_\+git\+\_\+repo()}
+
+\Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_a2c5939af15f3da42596ef8a7e747ec5e}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}!ssh\_configured@{ssh\_configured}}
+\index{ssh\_configured@{ssh\_configured}!core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
+\doxysubsubsection{\texorpdfstring{ssh\_configured}{ssh\_configured}}
+{\footnotesize\ttfamily \label{classcore_1_1github__agent_1_1GitHubAgent_a2c5939af15f3da42596ef8a7e747ec5e} 
+bool core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+ssh\+\_\+configured = self.\+\_\+check\+\_\+ssh\+\_\+setup()}
+
+\Hypertarget{classcore_1_1github__agent_1_1GitHubAgent_a526898ac95e495bdc0439d983756103e}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}!workspace\_dir@{workspace\_dir}}
+\index{workspace\_dir@{workspace\_dir}!core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
+\doxysubsubsection{\texorpdfstring{workspace\_dir}{workspace\_dir}}
+{\footnotesize\ttfamily \label{classcore_1_1github__agent_1_1GitHubAgent_a526898ac95e495bdc0439d983756103e} 
+core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+workspace\+\_\+dir = workspace\+\_\+dir}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{github__agent_8py}{github\+\_\+agent.\+py}}\end{DoxyCompactItemize}

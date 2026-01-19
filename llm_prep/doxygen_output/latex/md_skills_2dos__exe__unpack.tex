@@ -1,0 +1,82 @@
+\chapter{dos\+\_\+exe\+\_\+unpack }
+\hypertarget{md_skills_2dos__exe__unpack}{}\label{md_skills_2dos__exe__unpack}\index{dos\_exe\_unpack@{dos\_exe\_unpack}}
+Skill\+: dos\+\_\+exe\+\_\+unpack Category\+: Legacy Code Archaeology / DOS Preprocessing Recommended agents\+: llama (primary, good at low-\/level), grok (coordination), claude (review)
+
+Purpose\+: Detect and unpack common DOS executable packers (LZEXE, EXEPACK, PKLITE) to get a clean binary for further reverse engineering. This is often the critical first step for 1980s–1990s MS-\/\+DOS games/tools.
+
+Typical inputs\+: Path to DOS .exe/.com file (relative or absolute)
+
+Outputs\+:
+\begin{DoxyItemize}
+\item Path to unpacked binary (or original if no packer detected)
+\item Short report\+: detected packer (or "{}none"{}), unpacker used, success/failure notes
+\item Markdown summary with next recommended steps
+\end{DoxyItemize}
+
+AXE-\/specific notes\+:
+\begin{DoxyItemize}
+\item Unpacker tools are in ../../tools/dos\+\_\+unpackers/ (relative from repo root)
+\item Binaries\+: unlzexe, unexepack, depklite
+\item If a binary is missing, first run\+: cd ../../tools/dos\+\_\+unpackers \&\& make
+\item Always verify unpack success (e.\+g., check file size increase, MZ header, strings)
+\end{DoxyItemize}
+
+Step-\/by-\/step workflow (follow exactly)\+:
+
+
+\begin{DoxyEnumerate}
+\item Build check\+:
+\begin{DoxyItemize}
+\item Run\+: ls ../../tools/dos\+\_\+unpackers/unlzexe ../../tools/dos\+\_\+unpackers/unexepack ../../tools/dos\+\_\+unpackers/depklite
+\item If any missing → run\+: cd ../../tools/dos\+\_\+unpackers \&\& make \&\& cd ../../..
+\item Confirm all three binaries now exist.
+\end{DoxyItemize}
+\item Packer detection (run these commands)\+:
+\begin{DoxyItemize}
+\item strings $<$input\+\_\+file$>$ \texorpdfstring{$\vert$}{|} grep -\/i "{}\+LZ91\textbackslash{}\texorpdfstring{$\vert$}{|}lzexe"{} → if match, packer = LZEXE
+\item strings $<$input\+\_\+file$>$ \texorpdfstring{$\vert$}{|} grep -\/i "{}\+Packed file is corrupt"{} → if match, packer = EXEPACK ~\newline
+
+\item strings $<$input\+\_\+file$>$ \texorpdfstring{$\vert$}{|} grep -\/i "{}\+PKLITE"{} → if match, packer = PKLITE
+\item Prioritize in order above (some files might have overlapping strings).
+\end{DoxyItemize}
+\item If no packer detected\+:
+\begin{DoxyItemize}
+\item Report "{}\+No common packer detected"{} and return original file path.
+\end{DoxyItemize}
+\item Unpacking\+:
+\begin{DoxyItemize}
+\item LZEXE\+: ../../tools/dos\+\_\+unpackers/unlzexe $<$input\+\_\+file$>$
+\begin{DoxyItemize}
+\item Unpacked file usually gets -\/unlzexe suffix or specify output.
+\end{DoxyItemize}
+\item EXEPACK\+: ../../tools/dos\+\_\+unpackers/unexepack $<$input\+\_\+file$>$
+\begin{DoxyItemize}
+\item Default output\+: "{}unpacked"{} (rename to something sensible like original\+\_\+unpacked.\+exe)
+\end{DoxyItemize}
+\item PKLITE\+: ../../tools/dos\+\_\+unpackers/depklite $<$input\+\_\+file$>$
+\begin{DoxyItemize}
+\item Output\+: $<$input\+\_\+file$>$.dep (good for RE even if not perfect EXE)
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item Verify\+:
+\begin{DoxyItemize}
+\item Check new file has valid MZ header (hexdump -\/C first 32 bytes, look for "{}\+MZ"{})
+\item Size should be larger than original
+\item Quick strings check for cleaner output
+\end{DoxyItemize}
+\item Final output\+:
+\begin{DoxyItemize}
+\item Markdown report with\+:
+\begin{DoxyItemize}
+\item Original file
+\item Detected packer
+\item Unpacked path
+\item Any warnings/errors
+\item Suggestion\+: "{}@llama use find\+\_\+entry\+\_\+points on $<$unpacked\+\_\+path$>$"{}
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+Usage example in chain\+: @llama use dos\+\_\+exe\+\_\+unpack game.\+exe → then feed unpacked output to find\+\_\+entry\+\_\+points, trace\+\_\+execution\+\_\+path, etc.
+
+This skill dramatically improves disassembly quality on packed DOS binaries—many old games become way more readable after this step. 

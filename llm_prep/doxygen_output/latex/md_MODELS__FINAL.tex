@@ -1,0 +1,345 @@
+\chapter{AXE Multi-\/\+Agent System -\/ Model Configuration Reference }
+\hypertarget{md_MODELS__FINAL}{}\label{md_MODELS__FINAL}\index{AXE Multi-\/Agent System -\/ Model Configuration Reference@{AXE Multi-\/Agent System -\/ Model Configuration Reference}}
+\label{md_MODELS__FINAL_autotoc_md613}%
+\Hypertarget{md_MODELS__FINAL_autotoc_md613}%
+
+
+\begin{quote}
+{\bfseries{Version}}\+: 1.\+0 ~\newline
+ {\bfseries{Last Updated}}\+: December 2025 ~\newline
+ \end{quote}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_MODELS__FINAL_autotoc_md615}{}\doxysection{\texorpdfstring{Table of Contents}{Table of Contents}}\label{md_MODELS__FINAL_autotoc_md615}
+
+\begin{DoxyEnumerate}
+\item Quick Start
+\item Anthropic (Claude)
+\item Hugging\+Face (Llama)
+\item Open\+AI (GPT)
+\item x\+AI (Grok)
+\item Git\+Hub Models
+\item Model Capabilities Matrix
+\item Usage Examples
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md_MODELS__FINAL_autotoc_md617}{}\doxysection{\texorpdfstring{Quick Start}{Quick Start}}\label{md_MODELS__FINAL_autotoc_md617}
+\hypertarget{md_MODELS__FINAL_autotoc_md618}{}\doxysubsection{\texorpdfstring{Environment Setup}{Environment Setup}}\label{md_MODELS__FINAL_autotoc_md618}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Load\ all\ API\ keys\ at\ once}
+\DoxyCodeLine{source\ /path/to/models\_env.sh}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Or\ set\ individually}
+\DoxyCodeLine{export\ ANTHROPIC\_API\_KEY='your-\/key'}
+\DoxyCodeLine{export\ HUGGINGFACE\_API\_KEY='your-\/key'}
+\DoxyCodeLine{export\ OPENAI\_API\_KEY='your-\/key'}
+\DoxyCodeLine{export\ XAI\_API\_KEY='your-\/key'}
+\DoxyCodeLine{export\ GITHUB\_TOKEN='your-\/key'}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md619}{}\doxysubsection{\texorpdfstring{Test Connection}{Test Connection}}\label{md_MODELS__FINAL_autotoc_md619}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ axe\ \textcolor{keyword}{import}\ test\_model\_connection}
+\DoxyCodeLine{test\_model\_connection(\textcolor{stringliteral}{"{}llama"{}})\ \ \textcolor{comment}{\#\ Test\ HuggingFace\ Llama}}
+\DoxyCodeLine{test\_model\_connection(\textcolor{stringliteral}{"{}claude"{}})\ \textcolor{comment}{\#\ Test\ Anthropic\ Claude}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_MODELS__FINAL_autotoc_md621}{}\doxysection{\texorpdfstring{Anthropic (Claude)}{Anthropic (Claude)}}\label{md_MODELS__FINAL_autotoc_md621}
+\hypertarget{md_MODELS__FINAL_autotoc_md622}{}\doxysubsection{\texorpdfstring{Configuration}{Configuration}}\label{md_MODELS__FINAL_autotoc_md622}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export\ ANTHROPIC\_API\_KEY='sk-\/ant-\/api03-\/...'}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md623}{}\doxysubsection{\texorpdfstring{Latest Models}{Latest Models}}\label{md_MODELS__FINAL_autotoc_md623}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Type  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Context  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Best For  \\
+{\ttfamily claude-\/opus-\/4-\/5}  &General  &200K tokens  &Complex reasoning, coding, analysis  \\
+\end{DoxyTable}
+\hypertarget{md_MODELS__FINAL_autotoc_md624}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{md_MODELS__FINAL_autotoc_md624}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ anthropic\ \textcolor{keyword}{import}\ Anthropic}
+\DoxyCodeLine{}
+\DoxyCodeLine{client\ =\ Anthropic(api\_key=os.environ[\textcolor{stringliteral}{"{}ANTHROPIC\_API\_KEY"{}}])}
+\DoxyCodeLine{}
+\DoxyCodeLine{response\ =\ client.messages.create(}
+\DoxyCodeLine{\ \ \ \ model=\textcolor{stringliteral}{"{}claude-\/opus-\/4-\/5"{}},}
+\DoxyCodeLine{\ \ \ \ max\_tokens=4096,}
+\DoxyCodeLine{\ \ \ \ messages=[\{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}user"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}Your\ prompt"{}}\}]}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md625}{}\doxysubsection{\texorpdfstring{Notes}{Notes}}\label{md_MODELS__FINAL_autotoc_md625}
+
+\begin{DoxyItemize}
+\item Highest quality reasoning
+\item Best for supervisor/coordinator roles
+\item Credit-\/based billing
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_MODELS__FINAL_autotoc_md627}{}\doxysection{\texorpdfstring{Hugging\+Face (Llama)}{Hugging\+Face (Llama)}}\label{md_MODELS__FINAL_autotoc_md627}
+\hypertarget{md_MODELS__FINAL_autotoc_md628}{}\doxysubsection{\texorpdfstring{Configuration}{Configuration}}\label{md_MODELS__FINAL_autotoc_md628}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export\ HUGGINGFACE\_API\_KEY="{}hf\_..."{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Or\ using\ HuggingFace\ CLI}
+\DoxyCodeLine{hf\ auth\ login}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md629}{}\doxysubsection{\texorpdfstring{Latest Models}{Latest Models}}\label{md_MODELS__FINAL_autotoc_md629}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Type  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Context  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Best For  \\
+{\ttfamily meta-\/llama/\+Llama-\/4-\/\+Maverick-\/17\+B-\/128\+E-\/\+Instruct}  &General/\+Coding/\+Vision  &Large  &Multi-\/modal tasks  \\
+{\ttfamily meta-\/llama/\+Llama-\/3.\+1-\/405B-\/\+Instruct}  &General/\+Coding  &Large  &High-\/quality reasoning  \\
+{\ttfamily meta-\/llama/\+Llama-\/4-\/\+Scout-\/17\+B-\/16\+E-\/\+Instruct}  &Vision  &Large  &Image understanding  \\
+\end{DoxyTable}
+\hypertarget{md_MODELS__FINAL_autotoc_md630}{}\doxysubsection{\texorpdfstring{Usage -\/ Open\+AI-\/\+Compatible API}{Usage -\/ Open\+AI-\/\+Compatible API}}\label{md_MODELS__FINAL_autotoc_md630}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{import}\ os}
+\DoxyCodeLine{\textcolor{keyword}{from}\ openai\ \textcolor{keyword}{import}\ OpenAI}
+\DoxyCodeLine{}
+\DoxyCodeLine{client\ =\ OpenAI(}
+\DoxyCodeLine{\ \ \ \ base\_url=\textcolor{stringliteral}{"{}https://router.huggingface.co/v1"{}},}
+\DoxyCodeLine{\ \ \ \ api\_key=os.environ[\textcolor{stringliteral}{"{}HUGGINGFACE\_API\_KEY"{}}],}
+\DoxyCodeLine{)}
+\DoxyCodeLine{}
+\DoxyCodeLine{completion\ =\ client.chat.completions.create(}
+\DoxyCodeLine{\ \ \ \ model=\textcolor{stringliteral}{"{}meta-\/llama/Llama-\/3.1-\/405B-\/Instruct:sambanova"{}},}
+\DoxyCodeLine{\ \ \ \ messages=[}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}user"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}What\ is\ the\ capital\ of\ France?"{}}\}}
+\DoxyCodeLine{\ \ \ \ ],}
+\DoxyCodeLine{)}
+\DoxyCodeLine{print(completion.choices[0].message)}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md631}{}\doxysubsection{\texorpdfstring{Usage -\/ Transformers (Local)}{Usage -\/ Transformers (Local)}}\label{md_MODELS__FINAL_autotoc_md631}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ transformers\ \textcolor{keyword}{import}\ AutoProcessor,\ AutoModelForMultimodalLM}
+\DoxyCodeLine{}
+\DoxyCodeLine{processor\ =\ AutoProcessor.from\_pretrained(}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}meta-\/llama/Llama-\/4-\/Scout-\/17B-\/16E-\/Instruct"{}}}
+\DoxyCodeLine{)}
+\DoxyCodeLine{model\ =\ AutoModelForMultimodalLM.from\_pretrained(}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}meta-\/llama/Llama-\/4-\/Scout-\/17B-\/16E-\/Instruct"{}}}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md632}{}\doxysubsection{\texorpdfstring{Notes}{Notes}}\label{md_MODELS__FINAL_autotoc_md632}
+
+\begin{DoxyItemize}
+\item {\bfseries{WORKING}} -\/ Verified with Hugging\+Face Inference API
+\item Good for worker agents
+\item Free tier available with quotas
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_MODELS__FINAL_autotoc_md634}{}\doxysection{\texorpdfstring{Open\+AI (GPT)}{Open\+AI (GPT)}}\label{md_MODELS__FINAL_autotoc_md634}
+\hypertarget{md_MODELS__FINAL_autotoc_md635}{}\doxysubsection{\texorpdfstring{Configuration}{Configuration}}\label{md_MODELS__FINAL_autotoc_md635}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export\ OPENAI\_API\_KEY="{}sk-\/proj-\/..."{}}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md636}{}\doxysubsection{\texorpdfstring{Latest Models}{Latest Models}}\label{md_MODELS__FINAL_autotoc_md636}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Type  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Context  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Best For  \\
+{\ttfamily gpt-\/5.\+2-\/2025-\/12-\/11}  &General  &Large  &Latest capabilities  \\
+\end{DoxyTable}
+\hypertarget{md_MODELS__FINAL_autotoc_md637}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{md_MODELS__FINAL_autotoc_md637}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ openai\ \textcolor{keyword}{import}\ OpenAI}
+\DoxyCodeLine{}
+\DoxyCodeLine{client\ =\ OpenAI(api\_key=os.environ[\textcolor{stringliteral}{"{}OPENAI\_API\_KEY"{}}])}
+\DoxyCodeLine{}
+\DoxyCodeLine{response\ =\ client.chat.completions.create(}
+\DoxyCodeLine{\ \ \ \ model=\textcolor{stringliteral}{"{}gpt-\/5.2-\/2025-\/12-\/11"{}},}
+\DoxyCodeLine{\ \ \ \ messages=[\{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}user"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}Your\ prompt"{}}\}]}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md638}{}\doxysubsection{\texorpdfstring{Notes}{Notes}}\label{md_MODELS__FINAL_autotoc_md638}
+
+\begin{DoxyItemize}
+\item Credit-\/based billing
+\item Extensive function calling support
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_MODELS__FINAL_autotoc_md640}{}\doxysection{\texorpdfstring{x\+AI (Grok)}{x\+AI (Grok)}}\label{md_MODELS__FINAL_autotoc_md640}
+\hypertarget{md_MODELS__FINAL_autotoc_md641}{}\doxysubsection{\texorpdfstring{Configuration}{Configuration}}\label{md_MODELS__FINAL_autotoc_md641}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export\ XAI\_API\_KEY="{}xai-\/..."{}}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md642}{}\doxysubsection{\texorpdfstring{Latest Models}{Latest Models}}\label{md_MODELS__FINAL_autotoc_md642}
+
+\begin{DoxyTable}{6}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Input  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Output  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Context  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Rate Limit  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Capabilities  \\
+{\ttfamily grok-\/4-\/1-\/fast}  &Text  &Text  &2M tokens  &4M tokens/min  &Function calling, structured outputs  \\
+{\ttfamily grok-\/code-\/fast}  &Text  &Text  &256K tokens  &2M tokens/min  &Function calling, structured outputs  \\
+{\ttfamily grok-\/2-\/vision}  &Image+\+Text  &Text  &32K tokens  &-\/  &Function calling, structured outputs  \\
+{\ttfamily grok-\/2-\/image}  &Text  &Image  &-\/  &-\/  &Image generation  \\
+\end{DoxyTable}
+\hypertarget{md_MODELS__FINAL_autotoc_md643}{}\doxysubsection{\texorpdfstring{Usage -\/ Text Generation}{Usage -\/ Text Generation}}\label{md_MODELS__FINAL_autotoc_md643}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ xai\_sdk\ \textcolor{keyword}{import}\ Client}
+\DoxyCodeLine{}
+\DoxyCodeLine{client\ =\ Client(api\_key=os.environ[\textcolor{stringliteral}{"{}XAI\_API\_KEY"{}}])}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Text\ completion}}
+\DoxyCodeLine{response\ =\ client.chat.completions.create(}
+\DoxyCodeLine{\ \ \ \ model=\textcolor{stringliteral}{"{}grok-\/4-\/1-\/fast"{}},}
+\DoxyCodeLine{\ \ \ \ messages=[\{\textcolor{stringliteral}{"{}role"{}}:\ \textcolor{stringliteral}{"{}user"{}},\ \textcolor{stringliteral}{"{}content"{}}:\ \textcolor{stringliteral}{"{}Your\ prompt"{}}\}]}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md644}{}\doxysubsection{\texorpdfstring{Usage -\/ Image Generation}{Usage -\/ Image Generation}}\label{md_MODELS__FINAL_autotoc_md644}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ xai\_sdk\ \textcolor{keyword}{import}\ Client}
+\DoxyCodeLine{}
+\DoxyCodeLine{client\ =\ Client(api\_key=os.environ[\textcolor{stringliteral}{"{}XAI\_API\_KEY"{}}])}
+\DoxyCodeLine{}
+\DoxyCodeLine{response\ =\ client.image.sample(}
+\DoxyCodeLine{\ \ \ \ model=\textcolor{stringliteral}{"{}grok-\/2-\/image"{}},}
+\DoxyCodeLine{\ \ \ \ prompt=\textcolor{stringliteral}{"{}A\ cat\ in\ a\ tree"{}},}
+\DoxyCodeLine{\ \ \ \ image\_format=\textcolor{stringliteral}{"{}url"{}}}
+\DoxyCodeLine{)}
+\DoxyCodeLine{print(response.url)}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md645}{}\doxysubsection{\texorpdfstring{Notes}{Notes}}\label{md_MODELS__FINAL_autotoc_md645}
+
+\begin{DoxyItemize}
+\item Very generous rate limits
+\item Good for high-\/throughput tasks
+\item Premium+ tier recommended
+\item Docs\+: \href{https://docs.x.ai/docs/models}{\texttt{https\+://docs.\+x.\+ai/docs/models}}
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_MODELS__FINAL_autotoc_md647}{}\doxysection{\texorpdfstring{Git\+Hub Models}{Git\+Hub Models}}\label{md_MODELS__FINAL_autotoc_md647}
+\hypertarget{md_MODELS__FINAL_autotoc_md648}{}\doxysubsection{\texorpdfstring{Configuration}{Configuration}}\label{md_MODELS__FINAL_autotoc_md648}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{export\ GITHUB\_TOKEN="{}github\_pat\_..."{}}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md649}{}\doxysubsection{\texorpdfstring{Available Models}{Available Models}}\label{md_MODELS__FINAL_autotoc_md649}
+Same top models as Anthropic and Open\+AI are available through Git\+Hub Copilot\+:
+\begin{DoxyItemize}
+\item {\ttfamily claude-\/opus-\/4-\/5} (Anthropic)
+\item {\ttfamily gpt-\/5.\+1} (Open\+AI)
+\end{DoxyItemize}\hypertarget{md_MODELS__FINAL_autotoc_md650}{}\doxysubsection{\texorpdfstring{Usage}{Usage}}\label{md_MODELS__FINAL_autotoc_md650}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Via\ GitHub\ Copilot\ API\ (enterprise)}}
+\DoxyCodeLine{\textcolor{comment}{\#\ Configuration\ depends\ on\ your\ GitHub\ setup}}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md651}{}\doxysubsection{\texorpdfstring{Notes}{Notes}}\label{md_MODELS__FINAL_autotoc_md651}
+
+\begin{DoxyItemize}
+\item {\bfseries{WORKING}} -\/ Verified with Git\+Hub Copilot models
+\item Requires Git\+Hub Copilot subscription
+\item Per-\/seat or usage-\/based billing
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_MODELS__FINAL_autotoc_md653}{}\doxysection{\texorpdfstring{Model Capabilities Matrix}{Model Capabilities Matrix}}\label{md_MODELS__FINAL_autotoc_md653}
+
+\begin{DoxyTable}{8}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Provider  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Text  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Vision  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Code  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Function Calling  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Context  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Status  \\
+Anthropic  &claude-\/opus-\/4-\/5  &✅  &✅  &✅  &✅  &200K  &🔴 No credits  \\
+Hugging\+Face  &Llama-\/4-\/\+Maverick-\/17B  &✅  &✅  &✅  &✅  &Large  &✅ Working  \\
+Hugging\+Face  &Llama-\/3.\+1-\/405B  &✅  &❌  &✅  &✅  &Large  &✅ Working  \\
+Open\+AI  &gpt-\/5.\+2  &✅  &✅  &✅  &✅  &Large  &🔴 No credits  \\
+x\+AI  &grok-\/4-\/1-\/fast  &✅  &❌  &✅  &✅  &2M  &🔴 No credits  \\
+x\+AI  &grok-\/code-\/fast  &✅  &❌  &✅  &✅  &256K  &🔴 No credits  \\
+x\+AI  &grok-\/2-\/vision  &✅  &✅  &✅  &✅  &32K  &🔴 No credits  \\
+Git\+Hub  &claude-\/opus-\/4-\/5  &✅  &✅  &✅  &✅  &200K  &✅ Working  \\
+Git\+Hub  &gpt-\/5.\+1  &✅  &✅  &✅  &✅  &Large  &✅ Working  \\
+\end{DoxyTable}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_MODELS__FINAL_autotoc_md655}{}\doxysection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{md_MODELS__FINAL_autotoc_md655}
+\hypertarget{md_MODELS__FINAL_autotoc_md656}{}\doxysubsection{\texorpdfstring{Multi-\/\+Agent Collaboration}{Multi-\/\+Agent Collaboration}}\label{md_MODELS__FINAL_autotoc_md656}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Start\ a\ collaboration\ session\ with\ multiple\ models}
+\DoxyCodeLine{python3\ axe.py\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ -\/-\/collab\ llama,grok\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ -\/-\/workspace\ ../playground\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ -\/-\/time\ 30\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ -\/-\/task\ "{}Analyze\ the\ wadextract\ code\ in\ doom/wadextract"{}}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md657}{}\doxysubsection{\texorpdfstring{Model Communication Example}{Model Communication Example}}\label{md_MODELS__FINAL_autotoc_md657}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{@llama1:\ I\ found\ an\ issue\ in\ the\ sprite\ rendering\ code.\ @grok2,\ can\ you\ verify?}
+\DoxyCodeLine{@grok2:\ Checking\ now...\ confirmed.\ The\ HERETIC\ sprite\ enum\ values\ are\ offset.}
+\DoxyCodeLine{@boss:\ Good\ catch\ team.\ @llama1\ please\ fix\ and\ @grok2\ write\ tests.}
+
+\end{DoxyCode}
+\hypertarget{md_MODELS__FINAL_autotoc_md658}{}\doxysubsection{\texorpdfstring{Test Projects for Multi-\/\+Agent Work}{Test Projects for Multi-\/\+Agent Work}}\label{md_MODELS__FINAL_autotoc_md658}
+
+\begin{DoxyItemize}
+\item {\ttfamily doom/wadextract} -\/ WAD file extraction utilities
+\item {\ttfamily doom/dmspec16.\+txt} -\/ DOOM specifications document
+\item {\ttfamily Chaos\+Forge\+Hash} -\/ Hash utilities
+\item {\ttfamily brain3d\+\_\+v2} -\/ 3D brain visualization
+\end{DoxyItemize}\hypertarget{md_MODELS__FINAL_autotoc_md659}{}\doxysubsection{\texorpdfstring{Supervisor Role Assignment}{Supervisor Role Assignment}}\label{md_MODELS__FINAL_autotoc_md659}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ The\ model\ that\ starts\ axe.py\ becomes\ @boss}
+\DoxyCodeLine{python3\ axe.py\ -\/-\/task\ "{}Your\ task"{}}
+\DoxyCodeLine{\#\ This\ model\ is\ now\ @boss,\ workers\ will\ be\ @llama1,\ @grok1,\ etc.}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_MODELS__FINAL_autotoc_md661}{}\doxysection{\texorpdfstring{Troubleshooting}{Troubleshooting}}\label{md_MODELS__FINAL_autotoc_md661}
+\hypertarget{md_MODELS__FINAL_autotoc_md662}{}\doxysubsection{\texorpdfstring{No Credits Error}{No Credits Error}}\label{md_MODELS__FINAL_autotoc_md662}
+If you see "{}no credits"{} errors for Anthropic, Open\+AI, or Grok\+:
+\begin{DoxyItemize}
+\item Use Hugging\+Face Llama models (free tier available)
+\item Use Git\+Hub Copilot models (included with subscription)
+\end{DoxyItemize}\hypertarget{md_MODELS__FINAL_autotoc_md663}{}\doxysubsection{\texorpdfstring{Rate Limiting}{Rate Limiting}}\label{md_MODELS__FINAL_autotoc_md663}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{import}\ time}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{def\ }call\_with\_retry(func,\ *args,\ max\_retries=3,\ **kwargs):}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{for}\ i\ \textcolor{keywordflow}{in}\ range(max\_retries):}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ func(*args,\ **kwargs)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{except}\ RateLimitError:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ time.sleep(2\ **\ i)\ \ \textcolor{comment}{\#\ Exponential\ backoff}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{raise}\ Exception(\textcolor{stringliteral}{"{}Max\ retries\ exceeded"{}})}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+ 

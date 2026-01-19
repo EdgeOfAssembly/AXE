@@ -1,0 +1,189 @@
+\doxysection{workshop.\+plane.\+Source\+Sink\+Visitor Class Reference}
+\hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor}{}\label{classworkshop_1_1plane_1_1SourceSinkVisitor}\index{workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}}
+
+
+Inheritance diagram for workshop.\+plane.\+Source\+Sink\+Visitor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classworkshop_1_1plane_1_1SourceSinkVisitor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for workshop.\+plane.\+Source\+Sink\+Visitor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classworkshop_1_1plane_1_1SourceSinkVisitor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_abedfdf5c00a2a8a7b631cad8c22c94a4}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str \mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_a4007befb20677ad30cef1a8405aeb55c}{file\+\_\+path}}, Dict \mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_ab0413e3ab4ee3d845210daebd08380cc}{source\+\_\+patterns}}, Dict \mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_a063cb5f500d922eb1d690dda27e635e3}{sink\+\_\+patterns}})
+\item 
+\mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_ac1dc92f8690ddc76a55f1a71115b48bc}{visit\+\_\+\+Call}} (self, node)
+\item 
+\mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_a269bdc8ac096e820b482aa7534dec102}{visit\+\_\+\+Attribute}} (self, node)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_a4007befb20677ad30cef1a8405aeb55c}{file\+\_\+path}} = file\+\_\+path
+\item 
+\mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_ab0413e3ab4ee3d845210daebd08380cc}{source\+\_\+patterns}} = source\+\_\+patterns
+\item 
+\mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_a063cb5f500d922eb1d690dda27e635e3}{sink\+\_\+patterns}} = sink\+\_\+patterns
+\item 
+list \mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_a54b2dcaaa0315be699bacad4038813f8}{sources}} = \mbox{[}$\,$\mbox{]}
+\item 
+list \mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_ae6a9ad90d91ed8352a16486b798bbdee}{sinks}} = \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_aa551e6624dfcc01865d63ce5db8f319a}{\+\_\+get\+\_\+full\+\_\+func\+\_\+name}} (self, node)
+\item 
+str \mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_adbc3eb382434b3d70c9c77ada24e9a57}{\+\_\+get\+\_\+full\+\_\+attr\+\_\+name}} (self, node)
+\item 
+str \mbox{\hyperlink{classworkshop_1_1plane_1_1SourceSinkVisitor_adcf903fec9b1fd3c10c05227bfb854c4}{\+\_\+get\+\_\+context}} (self, node)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}AST visitor for enumerating sources and sinks.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_abedfdf5c00a2a8a7b631cad8c22c94a4}\index{workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1SourceSinkVisitor_abedfdf5c00a2a8a7b631cad8c22c94a4} 
+workshop.\+plane.\+Source\+Sink\+Visitor.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{file\+\_\+path}{, }\item[{Dict}]{source\+\_\+patterns}{, }\item[{Dict}]{sink\+\_\+patterns}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_adcf903fec9b1fd3c10c05227bfb854c4}\index{workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}!\_get\_context@{\_get\_context}}
+\index{\_get\_context@{\_get\_context}!workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}}
+\doxysubsubsection{\texorpdfstring{\_get\_context()}{\_get\_context()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1SourceSinkVisitor_adcf903fec9b1fd3c10c05227bfb854c4} 
+ str workshop.\+plane.\+Source\+Sink\+Visitor.\+\_\+get\+\_\+context (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Get code context around the node.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1plane_1_1SourceSinkVisitor_adcf903fec9b1fd3c10c05227bfb854c4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_adbc3eb382434b3d70c9c77ada24e9a57}\index{workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}!\_get\_full\_attr\_name@{\_get\_full\_attr\_name}}
+\index{\_get\_full\_attr\_name@{\_get\_full\_attr\_name}!workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}}
+\doxysubsubsection{\texorpdfstring{\_get\_full\_attr\_name()}{\_get\_full\_attr\_name()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1SourceSinkVisitor_adbc3eb382434b3d70c9c77ada24e9a57} 
+ str workshop.\+plane.\+Source\+Sink\+Visitor.\+\_\+get\+\_\+full\+\_\+attr\+\_\+name (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Get full attribute name.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1plane_1_1SourceSinkVisitor_adbc3eb382434b3d70c9c77ada24e9a57_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_aa551e6624dfcc01865d63ce5db8f319a}\index{workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}!\_get\_full\_func\_name@{\_get\_full\_func\_name}}
+\index{\_get\_full\_func\_name@{\_get\_full\_func\_name}!workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}}
+\doxysubsubsection{\texorpdfstring{\_get\_full\_func\_name()}{\_get\_full\_func\_name()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1SourceSinkVisitor_aa551e6624dfcc01865d63ce5db8f319a} 
+ str workshop.\+plane.\+Source\+Sink\+Visitor.\+\_\+get\+\_\+full\+\_\+func\+\_\+name (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Get full function name from call node.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1plane_1_1SourceSinkVisitor_aa551e6624dfcc01865d63ce5db8f319a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_a269bdc8ac096e820b482aa7534dec102}\index{workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}!visit\_Attribute@{visit\_Attribute}}
+\index{visit\_Attribute@{visit\_Attribute}!workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}}
+\doxysubsubsection{\texorpdfstring{visit\_Attribute()}{visit\_Attribute()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1SourceSinkVisitor_a269bdc8ac096e820b482aa7534dec102} 
+workshop.\+plane.\+Source\+Sink\+Visitor.\+visit\+\_\+\+Attribute (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{node}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Visit attribute access.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1plane_1_1SourceSinkVisitor_a269bdc8ac096e820b482aa7534dec102_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_ac1dc92f8690ddc76a55f1a71115b48bc}\index{workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}!visit\_Call@{visit\_Call}}
+\index{visit\_Call@{visit\_Call}!workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}}
+\doxysubsubsection{\texorpdfstring{visit\_Call()}{visit\_Call()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1SourceSinkVisitor_ac1dc92f8690ddc76a55f1a71115b48bc} 
+workshop.\+plane.\+Source\+Sink\+Visitor.\+visit\+\_\+\+Call (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{node}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Visit function calls.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1plane_1_1SourceSinkVisitor_ac1dc92f8690ddc76a55f1a71115b48bc_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_a4007befb20677ad30cef1a8405aeb55c}\index{workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}!file\_path@{file\_path}}
+\index{file\_path@{file\_path}!workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}}
+\doxysubsubsection{\texorpdfstring{file\_path}{file\_path}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1SourceSinkVisitor_a4007befb20677ad30cef1a8405aeb55c} 
+workshop.\+plane.\+Source\+Sink\+Visitor.\+file\+\_\+path = file\+\_\+path}
+
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_a063cb5f500d922eb1d690dda27e635e3}\index{workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}!sink\_patterns@{sink\_patterns}}
+\index{sink\_patterns@{sink\_patterns}!workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}}
+\doxysubsubsection{\texorpdfstring{sink\_patterns}{sink\_patterns}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1SourceSinkVisitor_a063cb5f500d922eb1d690dda27e635e3} 
+workshop.\+plane.\+Source\+Sink\+Visitor.\+sink\+\_\+patterns = sink\+\_\+patterns}
+
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_ae6a9ad90d91ed8352a16486b798bbdee}\index{workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}!sinks@{sinks}}
+\index{sinks@{sinks}!workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}}
+\doxysubsubsection{\texorpdfstring{sinks}{sinks}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1SourceSinkVisitor_ae6a9ad90d91ed8352a16486b798bbdee} 
+list workshop.\+plane.\+Source\+Sink\+Visitor.\+sinks = \mbox{[}$\,$\mbox{]}}
+
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_ab0413e3ab4ee3d845210daebd08380cc}\index{workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}!source\_patterns@{source\_patterns}}
+\index{source\_patterns@{source\_patterns}!workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}}
+\doxysubsubsection{\texorpdfstring{source\_patterns}{source\_patterns}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1SourceSinkVisitor_ab0413e3ab4ee3d845210daebd08380cc} 
+workshop.\+plane.\+Source\+Sink\+Visitor.\+source\+\_\+patterns = source\+\_\+patterns}
+
+\Hypertarget{classworkshop_1_1plane_1_1SourceSinkVisitor_a54b2dcaaa0315be699bacad4038813f8}\index{workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}!sources@{sources}}
+\index{sources@{sources}!workshop.plane.SourceSinkVisitor@{workshop.plane.SourceSinkVisitor}}
+\doxysubsubsection{\texorpdfstring{sources}{sources}}
+{\footnotesize\ttfamily \label{classworkshop_1_1plane_1_1SourceSinkVisitor_a54b2dcaaa0315be699bacad4038813f8} 
+list workshop.\+plane.\+Source\+Sink\+Visitor.\+sources = \mbox{[}$\,$\mbox{]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+workshop/\mbox{\hyperlink{plane_8py}{plane.\+py}}\end{DoxyCompactItemize}

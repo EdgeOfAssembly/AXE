@@ -1,0 +1,317 @@
+\chapter{Bubblewrap Sandbox Security Model }
+\hypertarget{md_SANDBOX}{}\label{md_SANDBOX}\index{Bubblewrap Sandbox Security Model@{Bubblewrap Sandbox Security Model}}
+\label{md_SANDBOX_autotoc_md1026}%
+\Hypertarget{md_SANDBOX_autotoc_md1026}%
+\hypertarget{md_SANDBOX_autotoc_md1027}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_SANDBOX_autotoc_md1027}
+AXE now supports a {\bfseries{bubblewrap-\/based sandbox}} that provides secure, isolated command execution. This replaces the traditional whitelist-\/based security model with a {\bfseries{default-\/allow}} approach inside a hardened sandbox environment.\hypertarget{md_SANDBOX_autotoc_md1028}{}\doxysection{\texorpdfstring{Key Features}{Key Features}}\label{md_SANDBOX_autotoc_md1028}
+\hypertarget{md_SANDBOX_autotoc_md1029}{}\doxysubsection{\texorpdfstring{1. Default-\/\+Allow Execution}{1. Default-\/\+Allow Execution}}\label{md_SANDBOX_autotoc_md1029}
+
+\begin{DoxyItemize}
+\item {\bfseries{Inside sandbox}}\+: All tools are allowed by default
+\item {\bfseries{Optional blacklist}}\+: Block specific dangerous commands if needed
+\item {\bfseries{Host protection}}\+: Host filesystem remains protected via namespace isolation
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1030}{}\doxysubsection{\texorpdfstring{2. Linux Namespace Isolation}{2. Linux Namespace Isolation}}\label{md_SANDBOX_autotoc_md1030}
+
+\begin{DoxyItemize}
+\item {\bfseries{User namespace}}\+: Commands run as root inside sandbox, unprivileged outside
+\item {\bfseries{Mount namespace}}\+: Private filesystem view, only explicitly bound paths visible
+\item {\bfseries{PID namespace}}\+: Process isolation -\/ sandbox can\textquotesingle{}t see host processes
+\item {\bfseries{Network namespace}}\+: Optional network isolation (disabled by default for convenience)
+\item {\bfseries{IPC/\+UTS/\+CGroup namespaces}}\+: Additional isolation layers
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1031}{}\doxysubsection{\texorpdfstring{3. Filesystem Access Control}{3. Filesystem Access Control}}\label{md_SANDBOX_autotoc_md1031}
+
+\begin{DoxyItemize}
+\item {\bfseries{Workspace writable}}\+: Project directory is read-\/write inside sandbox
+\item {\bfseries{System paths read-\/only}}\+: {\ttfamily /usr}, {\ttfamily /lib}, {\ttfamily /bin}, {\ttfamily /etc} exposed read-\/only for tools
+\item {\bfseries{Hidden paths}}\+: {\ttfamily \texorpdfstring{$\sim$}{\string~}/.ssh}, {\ttfamily /root}, etc. completely inaccessible from sandbox
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1032}{}\doxysection{\texorpdfstring{Requirements}{Requirements}}\label{md_SANDBOX_autotoc_md1032}
+
+\begin{DoxyItemize}
+\item {\bfseries{Linux operating system}} (bubblewrap uses Linux-\/specific features)
+\item {\bfseries{bubblewrap package}} installed\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Ubuntu/Debian}
+\DoxyCodeLine{sudo\ apt\ install\ bubblewrap}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Fedora/RHEL}
+\DoxyCodeLine{sudo\ dnf\ install\ bubblewrap}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Arch\ Linux}
+\DoxyCodeLine{sudo\ pacman\ -\/S\ bubblewrap}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1033}{}\doxysection{\texorpdfstring{Configuration}{Configuration}}\label{md_SANDBOX_autotoc_md1033}
+\hypertarget{md_SANDBOX_autotoc_md1034}{}\doxysubsection{\texorpdfstring{Enabling Sandbox Mode}{Enabling Sandbox Mode}}\label{md_SANDBOX_autotoc_md1034}
+Edit {\ttfamily axe.\+yaml} and set {\ttfamily sandbox.\+enabled\+: true}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sandbox:}
+\DoxyCodeLine{\ \ enabled:\ true\ \ \#\ Enable\ sandbox\ mode}
+\DoxyCodeLine{\ \ runtime:\ bubblewrap}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Workspace\ configuration}
+\DoxyCodeLine{\ \ workspaces:}
+\DoxyCodeLine{\ \ \ \ -\/\ path:\ .\ \ \#\ Project\ directory\ (writable)}
+\DoxyCodeLine{\ \ \ \ \ \ writable:\ true}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Host\ directories\ to\ expose}
+\DoxyCodeLine{\ \ host\_binds:}
+\DoxyCodeLine{\ \ \ \ readonly:}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ /usr}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ /lib}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ /lib64}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ /bin}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ /etc}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ /run}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ /sys}
+\DoxyCodeLine{\ \ \ \ writable:\ []\ \ \#\ Rarely\ needed}
+\DoxyCodeLine{\ \ \ \ none:\ \ \#\ Completely\ hidden\ from\ sandbox}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ \string~/.ssh}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ \string~/.gnupg}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ /root}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Optional\ tool\ blacklist}
+\DoxyCodeLine{\ \ tool\_blacklist:\ []}
+\DoxyCodeLine{\ \ \#\ Example:\ ['rm',\ 'dd',\ 'mkfs',\ 'fdisk']}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Namespace\ isolation}
+\DoxyCodeLine{\ \ namespaces:}
+\DoxyCodeLine{\ \ \ \ user:\ true}
+\DoxyCodeLine{\ \ \ \ mount:\ true}
+\DoxyCodeLine{\ \ \ \ pid:\ true}
+\DoxyCodeLine{\ \ \ \ uts:\ true}
+\DoxyCodeLine{\ \ \ \ network:\ false\ \ \#\ Set\ true\ for\ network\ isolation}
+\DoxyCodeLine{\ \ \ \ ipc:\ true}
+\DoxyCodeLine{\ \ \ \ cgroup:\ true}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Additional\ options}
+\DoxyCodeLine{\ \ options:}
+\DoxyCodeLine{\ \ \ \ new\_session:\ true}
+\DoxyCodeLine{\ \ \ \ die\_with\_parent:\ true}
+\DoxyCodeLine{\ \ \ \ proc:\ /proc}
+\DoxyCodeLine{\ \ \ \ dev:\ /dev}
+\DoxyCodeLine{\ \ \ \ tmpfs:\ /tmp}
+
+\end{DoxyCode}
+\hypertarget{md_SANDBOX_autotoc_md1035}{}\doxysubsection{\texorpdfstring{Backward Compatibility}{Backward Compatibility}}\label{md_SANDBOX_autotoc_md1035}
+If {\ttfamily sandbox.\+enabled\+: false} or bubblewrap is not installed, AXE falls back to the legacy {\bfseries{whitelist mode}}. Existing configurations continue to work without changes.\hypertarget{md_SANDBOX_autotoc_md1036}{}\doxysection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{md_SANDBOX_autotoc_md1036}
+\hypertarget{md_SANDBOX_autotoc_md1037}{}\doxysubsection{\texorpdfstring{Example 1\+: Default Sandbox Mode}{Example 1\+: Default Sandbox Mode}}\label{md_SANDBOX_autotoc_md1037}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sandbox:}
+\DoxyCodeLine{\ \ enabled:\ true}
+\DoxyCodeLine{\ \ \#\ Default\ configuration\ allows\ most\ operations\ safely}
+
+\end{DoxyCode}
+
+
+This configuration\+:
+\begin{DoxyItemize}
+\item ✅ Allows all tools inside sandbox
+\item ✅ Protects host filesystem (read-\/only)
+\item ✅ Workspace is writable
+\item ✅ System paths available for tools
+\item ❌ Cannot access {\ttfamily \texorpdfstring{$\sim$}{\string~}/.ssh}, {\ttfamily /root}, etc.
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1038}{}\doxysubsection{\texorpdfstring{Example 2\+: Restricted Sandbox with Blacklist}{Example 2\+: Restricted Sandbox with Blacklist}}\label{md_SANDBOX_autotoc_md1038}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sandbox:}
+\DoxyCodeLine{\ \ enabled:\ true}
+\DoxyCodeLine{\ \ tool\_blacklist:}
+\DoxyCodeLine{\ \ \ \ -\/\ rm\ \ \ \ \ \ \#\ Block\ file\ deletion}
+\DoxyCodeLine{\ \ \ \ -\/\ dd\ \ \ \ \ \ \#\ Block\ disk\ operations}
+\DoxyCodeLine{\ \ \ \ -\/\ mkfs\ \ \ \ \#\ Block\ filesystem\ creation}
+\DoxyCodeLine{\ \ \ \ -\/\ fdisk\ \ \ \#\ Block\ partition\ editing}
+
+\end{DoxyCode}
+
+
+This configuration\+:
+\begin{DoxyItemize}
+\item ✅ Most tools allowed
+\item ❌ Dangerous commands blocked even inside sandbox
+\item Useful for untrusted code execution
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1039}{}\doxysubsection{\texorpdfstring{Example 3\+: Network-\/\+Isolated Sandbox}{Example 3\+: Network-\/\+Isolated Sandbox}}\label{md_SANDBOX_autotoc_md1039}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sandbox:}
+\DoxyCodeLine{\ \ enabled:\ true}
+\DoxyCodeLine{\ \ namespaces:}
+\DoxyCodeLine{\ \ \ \ network:\ true\ \ \#\ Enable\ network\ isolation}
+
+\end{DoxyCode}
+
+
+This configuration\+:
+\begin{DoxyItemize}
+\item ✅ Full isolation including network
+\item ❌ No network access (only loopback)
+\item Useful for analyzing potentially malicious code
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1040}{}\doxysection{\texorpdfstring{Security Boundaries}{Security Boundaries}}\label{md_SANDBOX_autotoc_md1040}
+\hypertarget{md_SANDBOX_autotoc_md1041}{}\doxysubsection{\texorpdfstring{What Sandbox Protects}{What Sandbox Protects}}\label{md_SANDBOX_autotoc_md1041}
+✅ {\bfseries{Host filesystem}} -\/ Only bound paths accessible, rest hidden ~\newline
+ ✅ {\bfseries{System processes}} -\/ PID isolation prevents process enumeration ~\newline
+ ✅ {\bfseries{User credentials}} -\/ {\ttfamily \texorpdfstring{$\sim$}{\string~}/.ssh}, {\ttfamily \texorpdfstring{$\sim$}{\string~}/.gnupg} completely hidden ~\newline
+ ✅ {\bfseries{Root access}} -\/ Commands run unprivileged despite appearing as root inside ~\newline
+ ✅ {\bfseries{TTY attacks}} -\/ {\ttfamily new\+\_\+session} prevents terminal control escape ~\newline
+\hypertarget{md_SANDBOX_autotoc_md1042}{}\doxysubsection{\texorpdfstring{What Sandbox Doesn\textquotesingle{}t Protect (by design)}{What Sandbox Doesn\textquotesingle{}t Protect (by design)}}\label{md_SANDBOX_autotoc_md1042}
+⚠️ {\bfseries{Workspace contents}} -\/ Workspace is writable, code can modify project files ~\newline
+ ⚠️ {\bfseries{Network access}} -\/ Default config allows network (set {\ttfamily network\+: true} to isolate) ~\newline
+ ⚠️ {\bfseries{CPU/memory}} -\/ No resource limits (use cgroups separately if needed) ~\newline
+\hypertarget{md_SANDBOX_autotoc_md1043}{}\doxysubsection{\texorpdfstring{Known Limitations}{Known Limitations}}\label{md_SANDBOX_autotoc_md1043}
+
+\begin{DoxyItemize}
+\item {\bfseries{Linux-\/only}}\+: Requires Linux kernel with namespace support
+\item {\bfseries{No block devices}}\+: Cannot mount ext4/ntfs images (bubblewrap restriction)
+\item {\bfseries{FUSE supported}}\+: FUSE filesystems work via {\ttfamily /dev/fuse}
+\item {\bfseries{Requires bubblewrap}}\+: Fallback to whitelist mode if not installed
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1044}{}\doxysection{\texorpdfstring{Testing}{Testing}}\label{md_SANDBOX_autotoc_md1044}
+Run the test suite\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ /home/runner/work/AXE/AXE}
+\DoxyCodeLine{python3\ tests/test\_sandbox.py}
+
+\end{DoxyCode}
+
+
+All tests should pass\+:
+\begin{DoxyItemize}
+\item Config parsing tests
+\item Command generation tests ~\newline
+
+\item Blacklist validation tests
+\item Integration tests (if bwrap installed)
+\item Backward compatibility tests
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1045}{}\doxysection{\texorpdfstring{Architecture}{Architecture}}\label{md_SANDBOX_autotoc_md1045}
+\hypertarget{md_SANDBOX_autotoc_md1046}{}\doxysubsection{\texorpdfstring{Component Overview}{Component Overview}}\label{md_SANDBOX_autotoc_md1046}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{┌─────────────────────────────────────────────┐}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ ToolRunner\ (tool\_runner.py)\ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ ┌─────────────────────────────────────┐\ \ \ │}
+\DoxyCodeLine{│\ \ │\ Sandbox\ Mode\ \ \ \ \ \ \ \ \ \ Whitelist\ Mode│\ \ \ │}
+\DoxyCodeLine{│\ \ │\ (default-\/allow)\ \ \ \ \ \ \ (default-\/deny)│\ \ \ │}
+\DoxyCodeLine{│\ \ └──────┬─────────────────────┬─────────┘\ \ \ │}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ v\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ v\ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ ┌─────────────┐\ \ \ \ \ \ ┌─────────────┐\ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ │\ SandboxMgr\ \ │\ \ \ \ \ \ │\ \ Whitelist\ \ │\ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ │\ \ (sandbox)\ \ │\ \ \ \ \ \ │\ \ \ Check\ \ \ \ \ │\ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ └──────┬──────┘\ \ \ \ \ \ └─────────────┘\ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{└─────────┼────────────────────────────────────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ v}
+\DoxyCodeLine{\ \ \ ┌──────────────┐}
+\DoxyCodeLine{\ \ \ │\ \ bubblewrap\ \ │}
+\DoxyCodeLine{\ \ \ │\ \ \ \ (bwrap)\ \ \ │}
+\DoxyCodeLine{\ \ \ └──────┬───────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ v}
+\DoxyCodeLine{\ \ \ ┌──────────────────┐}
+\DoxyCodeLine{\ \ \ │\ Isolated\ Sandbox\ │}
+\DoxyCodeLine{\ \ \ │\ \ -\/\ Namespaces\ \ \ \ │}
+\DoxyCodeLine{\ \ \ │\ \ -\/\ Bind\ mounts\ \ \ │}
+\DoxyCodeLine{\ \ \ │\ \ -\/\ Process\ isol.\ │}
+\DoxyCodeLine{\ \ \ └──────────────────┘}
+
+\end{DoxyCode}
+\hypertarget{md_SANDBOX_autotoc_md1047}{}\doxysubsection{\texorpdfstring{Key Files}{Key Files}}\label{md_SANDBOX_autotoc_md1047}
+
+\begin{DoxyItemize}
+\item {\bfseries{{\ttfamily \doxylink{sandbox_8py}{core/sandbox.\+py}}}}\+: Sandbox\+Manager implementation
+\item {\bfseries{{\ttfamily \doxylink{tool__runner_8py}{core/tool\+\_\+runner.\+py}}}}\+: Integration with Tool\+Runner
+\item {\bfseries{{\ttfamily \doxylink{constants_8py}{core/constants.\+py}}}}\+: Default sandbox configuration
+\item {\bfseries{{\ttfamily axe.\+yaml}}}\+: User configuration
+\item {\bfseries{{\ttfamily \doxylink{test__sandbox_8py}{tests/test\+\_\+sandbox.\+py}}}}\+: Test suite
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1048}{}\doxysection{\texorpdfstring{Migration Guide}{Migration Guide}}\label{md_SANDBOX_autotoc_md1048}
+\hypertarget{md_SANDBOX_autotoc_md1049}{}\doxysubsection{\texorpdfstring{From Whitelist to Sandbox}{From Whitelist to Sandbox}}\label{md_SANDBOX_autotoc_md1049}
+{\bfseries{Before (whitelist mode)\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{tools:}
+\DoxyCodeLine{\ \ build:\ [gcc,\ make,\ cmake]}
+\DoxyCodeLine{\ \ python:\ [python3,\ pip]}
+\DoxyCodeLine{\ \ \#\ Must\ list\ every\ tool\ explicitly}
+
+\end{DoxyCode}
+
+
+{\bfseries{After (sandbox mode)\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sandbox:}
+\DoxyCodeLine{\ \ enabled:\ true}
+\DoxyCodeLine{\ \ \#\ All\ tools\ available,\ optionally\ blacklist\ dangerous\ ones}
+\DoxyCodeLine{\ \ tool\_blacklist:\ [rm,\ dd]}
+
+\end{DoxyCode}
+
+
+Benefits\+:
+\begin{DoxyItemize}
+\item ✅ No more approval prompts for unlisted tools
+\item ✅ Better agent autonomy
+\item ✅ Same or better security (namespace isolation)
+\item ✅ Easier configuration
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1050}{}\doxysection{\texorpdfstring{Troubleshooting}{Troubleshooting}}\label{md_SANDBOX_autotoc_md1050}
+\hypertarget{md_SANDBOX_autotoc_md1051}{}\doxysubsection{\texorpdfstring{"{}bubblewrap not available, falling back to whitelist mode"{}}{"{}bubblewrap not available, falling back to whitelist mode"{}}}\label{md_SANDBOX_autotoc_md1051}
+{\bfseries{Cause}}\+: bubblewrap not installed ~\newline
+ {\bfseries{Fix}}\+: Install bubblewrap package (see Requirements section)\hypertarget{md_SANDBOX_autotoc_md1052}{}\doxysubsection{\texorpdfstring{"{}\+Sandbox execution error\+: ..."{}}{"{}\+Sandbox execution error\+: ..."{}}}\label{md_SANDBOX_autotoc_md1052}
+{\bfseries{Cause}}\+: Permission issue or invalid configuration ~\newline
+ {\bfseries{Fix}}\+: Check that workspace path exists and is accessible\hypertarget{md_SANDBOX_autotoc_md1053}{}\doxysubsection{\texorpdfstring{Commands work in whitelist mode but not sandbox mode}{Commands work in whitelist mode but not sandbox mode}}\label{md_SANDBOX_autotoc_md1053}
+{\bfseries{Cause}}\+: Tool might be blacklisted or path not bound ~\newline
+ {\bfseries{Fix}}\+:
+\begin{DoxyItemize}
+\item Check {\ttfamily tool\+\_\+blacklist} in config
+\item Ensure required system paths in {\ttfamily host\+\_\+binds.\+readonly}
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1054}{}\doxysubsection{\texorpdfstring{"{}\+Permission denied"{} errors inside sandbox}{"{}\+Permission denied"{} errors inside sandbox}}\label{md_SANDBOX_autotoc_md1054}
+{\bfseries{Cause}}\+: Path not bound or bound as read-\/only ~\newline
+ {\bfseries{Fix}}\+: Add path to {\ttfamily host\+\_\+binds.\+writable} or ensure workspace contains needed files\hypertarget{md_SANDBOX_autotoc_md1055}{}\doxysection{\texorpdfstring{Manual Testing}{Manual Testing}}\label{md_SANDBOX_autotoc_md1055}
+On a system with bubblewrap installed\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Run\ manual\ test\ script}
+\DoxyCodeLine{bash\ /tmp/test\_sandbox\_manual.sh}
+
+\end{DoxyCode}
+
+
+This script tests\+:
+\begin{DoxyEnumerate}
+\item Echo command execution
+\item File operations in workspace
+\item Pipe commands
+\item Isolation verification (cannot access /root)
+\item Workspace writability
+\end{DoxyEnumerate}\hypertarget{md_SANDBOX_autotoc_md1056}{}\doxysection{\texorpdfstring{References}{References}}\label{md_SANDBOX_autotoc_md1056}
+
+\begin{DoxyItemize}
+\item {\bfseries{Bubblewrap Git\+Hub}}\+: \href{https://github.com/containers/bubblewrap}{\texttt{https\+://github.\+com/containers/bubblewrap}}
+\item {\bfseries{Linux Namespaces}}\+: {\ttfamily man 7 namespaces}
+\item {\bfseries{Bubblewrap Manual}}\+: {\ttfamily man 1 bwrap}
+\end{DoxyItemize}\hypertarget{md_SANDBOX_autotoc_md1057}{}\doxysection{\texorpdfstring{Future Enhancements}{Future Enhancements}}\label{md_SANDBOX_autotoc_md1057}
+Potential improvements for future versions\+:
+
+
+\begin{DoxyItemize}
+\item[\DoxyUnchecked] Resource limits (CPU, memory) via cgroups
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item[\DoxyUnchecked] Multiple concurrent sandboxes
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item[\DoxyUnchecked] Sandbox profiles (restrictive, standard, permissive)
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item[\DoxyUnchecked] Audit logging of sandbox operations
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item[\DoxyUnchecked] Docker/\+Podman backend support
+\end{DoxyItemize}
+\begin{DoxyItemize}
+\item[\DoxyUnchecked] Windows sandbox support (separate implementation) 
+\end{DoxyItemize}

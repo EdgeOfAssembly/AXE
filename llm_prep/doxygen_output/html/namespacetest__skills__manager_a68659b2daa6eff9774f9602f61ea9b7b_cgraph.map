@@ -1,0 +1,42 @@
+<map id="test_skills_manager.run_all_tests" name="test_skills_manager.run_all_tests">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,645,182,690"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="46,645,45,635,53,626,69,621,94,619,120,621,137,629,133,631,119,626,93,624,70,626,56,631,50,637,52,645"/>
+<area shape="rect" id="Node000002" href="$namespacetest__skills__manager.html#a40422333f3eb2a94f787cd56b1045158" title=" " alt="" coords="251,5,431,50"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="94,645,108,524,134,349,152,259,173,176,199,108,213,81,228,61,239,52,237,57,232,64,217,84,203,110,179,178,157,260,139,350,113,525,100,645"/>
+<area shape="rect" id="Node000003" href="$namespacetest__skills__manager.html#ae7e526e524e9ca72fc9705903ab93ca3" title=" " alt="" coords="230,75,452,119"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="95,644,110,536,138,382,156,303,177,231,201,171,228,130,233,127,231,132,232,133,206,173,183,232,162,304,143,383,116,537,100,645"/>
+<area shape="rect" id="Node000004" href="$namespacetest__skills__manager.html#a298ae66d106237b30935b01ca560381c" title=" " alt="" coords="251,144,431,189"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="92,645,95,562,101,506,112,443,129,378,153,313,185,253,228,199,239,191,237,196,232,203,190,256,158,316,134,380,117,444,106,506,100,563,97,645"/>
+<area shape="rect" id="Node000005" href="$namespacetest__skills__manager.html#a32c432bd8a8cf3361349f8206e26f425" title=" " alt="" coords="251,213,431,274"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="94,645,103,576,124,480,142,428,164,377,193,328,228,285,239,276,237,281,232,288,197,331,169,379,147,430,129,482,108,577,99,645"/>
+<area shape="rect" id="Node000006" href="$namespacetest__skills__manager.html#ace43b2d352f716d48e0a40758e0ef02d" title=" " alt="" coords="247,299,434,343"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="96,644,107,586,131,508,149,466,170,425,197,387,228,354,236,350,233,354,232,358,201,391,175,428,154,469,136,510,113,587,101,645"/>
+<area shape="rect" id="Node000007" href="$namespacetest__skills__manager.html#ae0411d14a6a613cef252ecda764a0590" title=" " alt="" coords="251,368,431,413"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="99,644,115,598,141,538,178,476,202,448,228,423,238,417,235,422,231,427,206,452,183,480,146,541,120,600,104,646"/>
+<area shape="rect" id="Node000008" href="$namespacetest__skills__manager.html#a66809d2e5ae59b629bd4a6561544cb35" title=" " alt="" coords="251,437,431,482"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="104,644,152,569,187,528,228,492,239,487,236,492,231,496,191,532,156,573,109,646"/>
+<area shape="rect" id="Node000009" href="$namespacetest__skills__manager.html#a663bbfbcf40faf39f23058ce3d5d1727" title=" " alt="" coords="251,507,431,551"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="117,643,166,602,228,561,244,556,240,560,231,566,170,606,121,646"/>
+<area shape="rect" id="Node000010" href="$namespacetest__skills__manager.html#aaee7d74995fe0750100245ba590e9e61" title=" " alt="" coords="251,576,431,621"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="174,643,246,623,242,627,178,647"/>
+<area shape="rect" id="Node000011" href="$namespacetest__skills__manager.html#aa0f79a4d11afee7cf7f124072509e44c" title=" " alt="" coords="251,645,431,690"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="181,665,237,666,233,669,184,670"/>
+<area shape="rect" id="Node000012" href="$namespacetest__skills__manager.html#a69ff6e7884bf20bd3a31f5811c89d0a0" title=" " alt="" coords="251,715,431,759"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="175,688,246,709,242,711,177,693"/>
+<area shape="rect" id="Node000013" href="$namespacetest__skills__manager.html#af646f63246579ef15faf833c9c564401" title=" " alt="" coords="251,784,431,829"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="118,688,170,729,231,769,245,777,240,779,228,774,166,734,120,693"/>
+<area shape="rect" id="Node000014" href="$namespacetest__skills__manager.html#a950a3f069f87b99131e6f9f2b41b751e" title=" " alt="" coords="251,853,431,898"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="106,688,156,763,191,804,231,839,240,845,235,847,228,843,187,807,152,766,107,693"/>
+<area shape="rect" id="Node000015" href="$namespacetest__skills__manager.html#a290f350f19c2e476150be9b126a9c522" title=" " alt="" coords="247,923,435,967"/>
+<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="101,688,120,736,146,795,183,856,206,884,231,908,238,914,232,915,228,912,202,887,178,859,141,797,115,738,101,693"/>
+<area shape="rect" id="Node000016" href="$namespacetest__skills__manager.html#a2d841d1abd82159568a2f1b6032d5646" title=" " alt="" coords="251,992,431,1037"/>
+<area shape="poly" id="edge16_Node000001_Node000016" title=" " alt="" coords="98,688,113,748,136,825,154,867,175,907,201,945,231,978,240,986,235,986,228,982,197,948,170,910,149,869,131,827,107,749,98,693"/>
+<area shape="rect" id="Node000017" href="$namespacetest__skills__manager.html#a46036dcbf4333cd9ce11e41854fee8a6" title=" " alt="" coords="251,1061,431,1106"/>
+<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="96,688,107,759,127,855,145,907,167,958,196,1005,232,1047,240,1055,235,1056,228,1051,192,1008,162,960,140,909,122,856,101,760,96,693"/>
+<area shape="rect" id="Node000018" href="$namespacetest__skills__manager.html#a145d7d40e16eb6963f81b53de2ed3816" title=" " alt="" coords="251,1131,431,1175"/>
+<area shape="poly" id="edge18_Node000001_Node000018" title=" " alt="" coords="95,688,101,771,108,825,119,885,136,947,159,1008,191,1066,232,1116,241,1126,235,1126,228,1120,187,1069,155,1010,131,948,114,886,103,826,96,771,94,693"/>
+<area shape="rect" id="Node000019" href="$namespacetest__skills__manager.html#ae3511f78feb1683ccd2af910ae4a2cab" title=" " alt="" coords="251,1200,431,1245"/>
+<area shape="poly" id="edge19_Node000001_Node000019" title=" " alt="" coords="98,688,116,796,144,945,163,1021,183,1090,207,1147,232,1186,241,1195,235,1195,228,1189,202,1150,178,1092,157,1022,139,946,111,796,98,693"/>
+<area shape="rect" id="Node000020" href="$namespacetest__skills__manager.html#a3918438a938bfb7610783fa8db659f67" title=" " alt="" coords="251,1269,431,1314"/>
+<area shape="poly" id="edge20_Node000001_Node000020" title=" " alt="" coords="97,688,113,807,140,977,158,1065,179,1145,204,1211,217,1236,232,1255,241,1265,235,1264,228,1259,213,1239,199,1213,174,1147,153,1066,135,978,108,808,97,693"/>
+</map>

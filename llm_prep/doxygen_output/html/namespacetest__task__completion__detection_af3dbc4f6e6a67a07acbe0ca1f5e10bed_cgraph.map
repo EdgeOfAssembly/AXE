@@ -1,0 +1,37 @@
+<map id="test_task_completion_detection.run_all_tests" name="test_task_completion_detection.run_all_tests">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,715,182,760"/>
+<area shape="rect" id="Node000002" href="$namespacetest__task__completion__detection.html#a79d15d85cffcdd769e6124608e0e4c25" title=" " alt="" coords="235,5,432,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,714,107,585,133,395,151,296,172,205,198,130,212,100,228,77,231,76,229,80,232,80,217,103,203,132,178,207,156,297,138,396,112,586,99,715"/>
+<area shape="rect" id="Node000003" href="$namespacetest__task__completion__detection.html#a585c45ca9bebd2014da6ce51333d4318" title=" " alt="" coords="235,91,432,152"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="95,715,110,601,138,436,156,351,177,273,201,208,227,163,231,161,229,166,232,166,206,210,182,274,161,352,143,437,115,601,100,715"/>
+<area shape="rect" id="Node000004" href="$namespacetest__task__completion__detection.html#afa82e2ff5961f204c7240346db03d561" title=" " alt="" coords="238,176,429,238"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="92,715,95,630,102,571,113,506,129,438,153,370,186,306,228,248,232,246,230,251,232,251,190,308,158,372,135,440,118,507,107,572,101,630,97,715"/>
+<area shape="rect" id="Node000005" href="$namespacetest__task__completion__detection.html#afa3a05cccd0f8be7a45ee1718378975b" title=" " alt="" coords="243,262,424,341"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="94,714,104,646,127,551,144,499,166,447,194,397,228,352,232,350,230,354,232,355,199,400,171,449,149,501,132,552,110,647,100,715"/>
+<area shape="rect" id="Node000006" href="$namespacetest__task__completion__detection.html#a320ce8329e56e5231bb676d3a8631147" title=" " alt="" coords="253,365,414,427"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="97,714,110,659,135,585,174,507,199,470,228,437,241,428,238,433,232,441,203,473,178,510,140,587,115,661,102,715"/>
+<area shape="rect" id="Node000007" href="$namespacetest__task__completion__detection.html#af9e90bb6fa556b2d1e2c16db6527cabb" title=" " alt="" coords="245,451,422,512"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="101,714,119,674,147,623,183,569,228,522,234,519,231,524,231,526,187,573,151,625,124,676,106,716"/>
+<area shape="rect" id="Node000008" href="$namespacetest__task__completion__detection.html#ad78af8bf27f604116064d4872e9f2681" title=" " alt="" coords="237,536,430,598"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="111,714,162,661,194,633,228,607,238,603,235,608,231,612,197,637,165,665,116,716"/>
+<area shape="rect" id="Node000009" href="$namespacetest__task__completion__detection.html#a30bfaead8fee85f8afe96436bc087670" title=" " alt="" coords="245,621,422,683"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="157,713,232,687,229,691,160,717"/>
+<area shape="rect" id="Node000010" href="$namespacetest__task__completion__detection.html#af70efc1e7fcefb6ff8c7c601c402cc0e" title=" " alt="" coords="233,707,434,768"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="181,735,219,736,215,739,184,740"/>
+<area shape="rect" id="Node000011" href="$namespacetest__task__completion__detection.html#aa8f2b022cb47c4033f4bc90ed42e16ac" title=" " alt="" coords="238,792,429,854"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="157,758,233,785,228,788,159,763"/>
+<area shape="rect" id="Node000012" href="$namespacetest__task__completion__detection.html#a8d35a5ff7786b799ab327fb49cd49ef8" title=" " alt="" coords="244,877,423,939"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="113,757,165,810,197,838,231,863,239,869,234,870,228,868,194,842,162,814,114,763"/>
+<area shape="rect" id="Node000013" href="$namespacetest__task__completion__detection.html#adafad825e82f81c901f94736322ccfce" title=" " alt="" coords="230,963,437,1024"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="103,757,124,799,151,850,187,902,231,949,236,953,230,954,228,953,183,906,147,852,119,801,104,763"/>
+<area shape="rect" id="Node000014" href="$namespacetest__task__completion__detection.html#a7904e6a2684bb10b760f666c3bd1c379" title=" " alt="" coords="243,1048,424,1110"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="99,758,115,814,140,888,178,965,203,1002,232,1034,234,1038,229,1039,228,1038,199,1005,174,968,135,890,110,816,99,763"/>
+<area shape="rect" id="Node000015" href="$namespacetest__task__completion__detection.html#a683421951a27cc37d5998776b4610324" title=" " alt="" coords="248,1133,418,1195"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="97,758,108,829,130,924,147,976,169,1028,197,1076,232,1120,239,1127,233,1128,228,1123,193,1079,164,1030,142,978,125,926,103,829,96,763"/>
+<area shape="rect" id="Node000016" href="$namespacetest__task__completion__detection.html#a0142468c1a5ad1c750c47f4140b8ff77" title=" " alt="" coords="253,1219,414,1280"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="95,758,102,842,109,898,120,960,137,1025,160,1089,192,1150,232,1205,243,1216,237,1217,228,1209,187,1153,155,1091,132,1026,115,961,103,899,97,843,95,763"/>
+<area shape="rect" id="Node000017" href="$namespacetest__task__completion__detection.html#ae1aa5643896cdd04e5862fcd87df5e8d" title=" " alt="" coords="251,1304,416,1366"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="98,758,116,871,144,1030,162,1111,183,1186,206,1248,232,1291,242,1301,236,1301,228,1294,202,1250,178,1188,157,1113,139,1031,111,872,97,763"/>
+<area shape="rect" id="Node000018" href="$namespacetest__task__completion__detection.html#a2ed677a464fa9724e13c93f53aa18995" title=" " alt="" coords="251,1389,416,1451"/>
+<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="97,758,113,886,139,1070,157,1166,179,1253,204,1326,217,1354,232,1376,241,1387,236,1386,228,1379,213,1357,199,1328,173,1255,152,1167,134,1071,107,887,97,763"/>
+</map>

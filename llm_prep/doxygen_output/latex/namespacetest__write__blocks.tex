@@ -1,0 +1,265 @@
+\doxysection{test\+\_\+write\+\_\+blocks Namespace Reference}
+\hypertarget{namespacetest__write__blocks}{}\label{namespacetest__write__blocks}\index{test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_a868f02f0bc6cbcf85f5598312caeda49}{test\+\_\+write\+\_\+block\+\_\+parser}} ()
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_a3a8c1433d19bbd15c9d507d494b4c49f}{test\+\_\+write\+\_\+block\+\_\+multiline}} ()
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_abc2ed9d023ae22219a7bc9f314e36ca5}{test\+\_\+write\+\_\+block\+\_\+with\+\_\+path}} ()
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_add4bb907173efd0dda523b2b5e91acf0}{test\+\_\+multiple\+\_\+blocks}} ()
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_a669bacf194a0c36da43e44f1c3d3b8f3}{test\+\_\+write\+\_\+block\+\_\+permissions}} ()
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_a11f17425c3946c4a2c50bcb56852f52e}{test\+\_\+write\+\_\+block\+\_\+empty\+\_\+filename}} ()
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_a58a84116cbfdda538a612e23621e4a84}{test\+\_\+write\+\_\+block\+\_\+overwrite}} ()
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_afc0956b20195927c54ffcacd8c921a10}{test\+\_\+path\+\_\+traversal\+\_\+attacks}} ()
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_a4522e57578ea1ba596d6b7c49a274c65}{test\+\_\+absolute\+\_\+paths\+\_\+within\+\_\+project}} ()
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_a77c816038348e6403b7d1cb87bf1b49e}{test\+\_\+path\+\_\+prefix\+\_\+edge\+\_\+cases}} ()
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_a84f018c25f8bb77ccf86173ae0cb14c9}{test\+\_\+live\+\_\+mode\+\_\+write\+\_\+blocks}} ()
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_a62ca47969e7ca35ac9678021312a59c3}{\+\_\+run\+\_\+live\+\_\+agent\+\_\+write\+\_\+test}} (str agent\+\_\+name, str workspace)
+\item 
+\mbox{\hyperlink{namespacetest__write__blocks_a93b7d0da40c150aa9f5a7cdfa321aa15}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Comprehensive test suite for WRITE block functionality in AXE.
+Tests both unit-level parsing and live integration with real LLM APIs.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacetest__write__blocks_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetest__write__blocks_a62ca47969e7ca35ac9678021312a59c3}\index{test\_write\_blocks@{test\_write\_blocks}!\_run\_live\_agent\_write\_test@{\_run\_live\_agent\_write\_test}}
+\index{\_run\_live\_agent\_write\_test@{\_run\_live\_agent\_write\_test}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{\_run\_live\_agent\_write\_test()}{\_run\_live\_agent\_write\_test()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_a62ca47969e7ca35ac9678021312a59c3} 
+test\+\_\+write\+\_\+blocks.\+\_\+run\+\_\+live\+\_\+agent\+\_\+write\+\_\+test (\begin{DoxyParamCaption}\item[{str}]{agent\+\_\+name}{, }\item[{str}]{workspace}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Helper to test a specific agent's ability to use WRITE blocks.
+
+Note: This is a helper function, not a pytest test. The underscore prefix
+prevents pytest from collecting it as a test since it requires parameters.
+
+Args:
+    agent_name: Name of the agent to test ('claude', 'gpt', etc.)
+    workspace: Path to the workspace directory for file operations
+    
+Called from run_live_agent_tests() which provides the required parameters.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_a62ca47969e7ca35ac9678021312a59c3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__write__blocks_a93b7d0da40c150aa9f5a7cdfa321aa15}\index{test\_write\_blocks@{test\_write\_blocks}!main@{main}}
+\index{main@{main}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_a93b7d0da40c150aa9f5a7cdfa321aa15} 
+test\+\_\+write\+\_\+blocks.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run all tests.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_a93b7d0da40c150aa9f5a7cdfa321aa15_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{namespacetest__write__blocks_a93b7d0da40c150aa9f5a7cdfa321aa15_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__write__blocks_a4522e57578ea1ba596d6b7c49a274c65}\index{test\_write\_blocks@{test\_write\_blocks}!test\_absolute\_paths\_within\_project@{test\_absolute\_paths\_within\_project}}
+\index{test\_absolute\_paths\_within\_project@{test\_absolute\_paths\_within\_project}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_absolute\_paths\_within\_project()}{test\_absolute\_paths\_within\_project()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_a4522e57578ea1ba596d6b7c49a274c65} 
+test\+\_\+write\+\_\+blocks.\+test\+\_\+absolute\+\_\+paths\+\_\+within\+\_\+project (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that absolute paths WITHIN the project directory are allowed.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_a4522e57578ea1ba596d6b7c49a274c65_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__write__blocks_a84f018c25f8bb77ccf86173ae0cb14c9}\index{test\_write\_blocks@{test\_write\_blocks}!test\_live\_mode\_write\_blocks@{test\_live\_mode\_write\_blocks}}
+\index{test\_live\_mode\_write\_blocks@{test\_live\_mode\_write\_blocks}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_live\_mode\_write\_blocks()}{test\_live\_mode\_write\_blocks()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_a84f018c25f8bb77ccf86173ae0cb14c9} 
+test\+\_\+write\+\_\+blocks.\+test\+\_\+live\+\_\+mode\+\_\+write\+\_\+blocks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Live integration test with real LLM API.
+Tests that agents can actually create files using WRITE blocks.
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_a84f018c25f8bb77ccf86173ae0cb14c9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_a84f018c25f8bb77ccf86173ae0cb14c9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__write__blocks_add4bb907173efd0dda523b2b5e91acf0}\index{test\_write\_blocks@{test\_write\_blocks}!test\_multiple\_blocks@{test\_multiple\_blocks}}
+\index{test\_multiple\_blocks@{test\_multiple\_blocks}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_multiple\_blocks()}{test\_multiple\_blocks()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_add4bb907173efd0dda523b2b5e91acf0} 
+test\+\_\+write\+\_\+blocks.\+test\+\_\+multiple\+\_\+blocks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test multiple code blocks (READ, EXEC, WRITE) in one response.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_add4bb907173efd0dda523b2b5e91acf0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__write__blocks_a77c816038348e6403b7d1cb87bf1b49e}\index{test\_write\_blocks@{test\_write\_blocks}!test\_path\_prefix\_edge\_cases@{test\_path\_prefix\_edge\_cases}}
+\index{test\_path\_prefix\_edge\_cases@{test\_path\_prefix\_edge\_cases}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_path\_prefix\_edge\_cases()}{test\_path\_prefix\_edge\_cases()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_a77c816038348e6403b7d1cb87bf1b49e} 
+test\+\_\+write\+\_\+blocks.\+test\+\_\+path\+\_\+prefix\+\_\+edge\+\_\+cases (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that path prefix matching correctly distinguishes similar directory names.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_a77c816038348e6403b7d1cb87bf1b49e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__write__blocks_afc0956b20195927c54ffcacd8c921a10}\index{test\_write\_blocks@{test\_write\_blocks}!test\_path\_traversal\_attacks@{test\_path\_traversal\_attacks}}
+\index{test\_path\_traversal\_attacks@{test\_path\_traversal\_attacks}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_path\_traversal\_attacks()}{test\_path\_traversal\_attacks()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_afc0956b20195927c54ffcacd8c921a10} 
+test\+\_\+write\+\_\+blocks.\+test\+\_\+path\+\_\+traversal\+\_\+attacks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that path traversal attacks are blocked.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_afc0956b20195927c54ffcacd8c921a10_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__write__blocks_a11f17425c3946c4a2c50bcb56852f52e}\index{test\_write\_blocks@{test\_write\_blocks}!test\_write\_block\_empty\_filename@{test\_write\_block\_empty\_filename}}
+\index{test\_write\_block\_empty\_filename@{test\_write\_block\_empty\_filename}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_write\_block\_empty\_filename()}{test\_write\_block\_empty\_filename()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_a11f17425c3946c4a2c50bcb56852f52e} 
+test\+\_\+write\+\_\+blocks.\+test\+\_\+write\+\_\+block\+\_\+empty\+\_\+filename (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test WRITE block with missing or invalid filename.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_a11f17425c3946c4a2c50bcb56852f52e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__write__blocks_a3a8c1433d19bbd15c9d507d494b4c49f}\index{test\_write\_blocks@{test\_write\_blocks}!test\_write\_block\_multiline@{test\_write\_block\_multiline}}
+\index{test\_write\_block\_multiline@{test\_write\_block\_multiline}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_write\_block\_multiline()}{test\_write\_block\_multiline()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_a3a8c1433d19bbd15c9d507d494b4c49f} 
+test\+\_\+write\+\_\+blocks.\+test\+\_\+write\+\_\+block\+\_\+multiline (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test WRITE block with complex multiline content.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_a3a8c1433d19bbd15c9d507d494b4c49f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__write__blocks_a58a84116cbfdda538a612e23621e4a84}\index{test\_write\_blocks@{test\_write\_blocks}!test\_write\_block\_overwrite@{test\_write\_block\_overwrite}}
+\index{test\_write\_block\_overwrite@{test\_write\_block\_overwrite}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_write\_block\_overwrite()}{test\_write\_block\_overwrite()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_a58a84116cbfdda538a612e23621e4a84} 
+test\+\_\+write\+\_\+blocks.\+test\+\_\+write\+\_\+block\+\_\+overwrite (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test WRITE block overwrites existing files.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_a58a84116cbfdda538a612e23621e4a84_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__write__blocks_a868f02f0bc6cbcf85f5598312caeda49}\index{test\_write\_blocks@{test\_write\_blocks}!test\_write\_block\_parser@{test\_write\_block\_parser}}
+\index{test\_write\_block\_parser@{test\_write\_block\_parser}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_write\_block\_parser()}{test\_write\_block\_parser()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_a868f02f0bc6cbcf85f5598312caeda49} 
+test\+\_\+write\+\_\+blocks.\+test\+\_\+write\+\_\+block\+\_\+parser (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test the WRITE block parser extracts filename and content correctly.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_a868f02f0bc6cbcf85f5598312caeda49_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__write__blocks_a669bacf194a0c36da43e44f1c3d3b8f3}\index{test\_write\_blocks@{test\_write\_blocks}!test\_write\_block\_permissions@{test\_write\_block\_permissions}}
+\index{test\_write\_block\_permissions@{test\_write\_block\_permissions}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_write\_block\_permissions()}{test\_write\_block\_permissions()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_a669bacf194a0c36da43e44f1c3d3b8f3} 
+test\+\_\+write\+\_\+blocks.\+test\+\_\+write\+\_\+block\+\_\+permissions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test WRITE block respects directory access control.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_a669bacf194a0c36da43e44f1c3d3b8f3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__write__blocks_abc2ed9d023ae22219a7bc9f314e36ca5}\index{test\_write\_blocks@{test\_write\_blocks}!test\_write\_block\_with\_path@{test\_write\_block\_with\_path}}
+\index{test\_write\_block\_with\_path@{test\_write\_block\_with\_path}!test\_write\_blocks@{test\_write\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_write\_block\_with\_path()}{test\_write\_block\_with\_path()}}
+{\footnotesize\ttfamily \label{namespacetest__write__blocks_abc2ed9d023ae22219a7bc9f314e36ca5} 
+test\+\_\+write\+\_\+blocks.\+test\+\_\+write\+\_\+block\+\_\+with\+\_\+path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test WRITE block with subdirectory path.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__write__blocks_abc2ed9d023ae22219a7bc9f314e36ca5_icgraph}
+\end{center}
+\end{figure}

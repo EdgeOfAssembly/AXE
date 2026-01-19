@@ -1,0 +1,372 @@
+\doxysection{utils.\+context\+\_\+optimizer.\+Context\+Optimizer Class Reference}
+\hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer}{}\label{classutils_1_1context__optimizer_1_1ContextOptimizer}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+
+
+Collaboration diagram for utils.\+context\+\_\+optimizer.\+Context\+Optimizer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{classutils_1_1context__optimizer_1_1ContextOptimizer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_a52563ec76e46bcb758b568048fdc2ec1}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_af673c512407e5cebdf0430f890a154b6}{token\+\_\+counter}}=None)
+\item 
+List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]} \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_affd6588756f9f8e69a0da458e57b43ff}{optimize\+\_\+conversation}} (self, List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]} messages, int max\+\_\+tokens, int keep\+\_\+recent=5, bool summarize\+\_\+old=True)
+\item 
+str \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_a479da7823a17036223762dda9a8b93aa}{compress\+\_\+prompt}} (self, str prompt)
+\item 
+List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]} \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_a201ebbd84b52fdab128451f3d4bcaa52}{deduplicate\+\_\+context}} (self, List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]} messages)
+\item 
+str \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_a8f03bd5d6f4a60a5d04cab20047e623b}{clean\+\_\+content}} (self, str content)
+\item 
+str \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_a65528a6c8d2a90b68f35f4f2e9c6bee2}{truncate\+\_\+code}} (self, str content, int max\+\_\+lines=50)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_af673c512407e5cebdf0430f890a154b6}{token\+\_\+counter}} = token\+\_\+counter or self.\+\_\+default\+\_\+token\+\_\+counter
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_ae14d9f25663c99cf8459c7201c9f1a0d}{\+\_\+default\+\_\+token\+\_\+counter}} (self, str text)
+\item 
+str \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_a3f4a938f1eea8500fc24ef790908569c}{\+\_\+summarize\+\_\+messages}} (self, List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]} messages)
+\item 
+str \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_a5a8bcae7cfde8579b1228f781d8098fb}{\+\_\+clean\+\_\+message\+\_\+content}} (self, str content)
+\item 
+List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]} \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_a3575d60d796e301c85a19bf49657bd04}{\+\_\+truncate\+\_\+to\+\_\+budget}} (self, List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]} messages, int max\+\_\+tokens)
+\item 
+str \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_a3383ac2d67bd3f1195407188178b94ac}{\+\_\+reduce\+\_\+examples}} (self, str text)
+\item 
+str \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_acb7b06b82aa405ceb52ef15cfdcaeac5}{\+\_\+remove\+\_\+redundancy}} (self, str text)
+\item 
+str \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer_a3bee9ecda151e64652078984987409eb}{\+\_\+create\+\_\+fingerprint}} (self, str content)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Optimizes conversation context to reduce token usage.
+
+Features:
+- Sliding window context management
+- Intelligent message truncation
+- Conversation summarization
+- Duplicate content detection
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_a52563ec76e46bcb758b568048fdc2ec1}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_a52563ec76e46bcb758b568048fdc2ec1} 
+utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{token\+\_\+counter}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize the context optimizer.
+
+Args:
+    token_counter: Function to count tokens (defaults to char/4 approximation)
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_a5a8bcae7cfde8579b1228f781d8098fb}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!\_clean\_message\_content@{\_clean\_message\_content}}
+\index{\_clean\_message\_content@{\_clean\_message\_content}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{\_clean\_message\_content()}{\_clean\_message\_content()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_a5a8bcae7cfde8579b1228f781d8098fb} 
+ str utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+\_\+clean\+\_\+message\+\_\+content (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{content}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Remove verbose or redundant content from messages.
+
+NOTE: Code truncation has been removed. We never truncate code.
+Instead, agents use the shared diff-patch system to track changes
+efficiently without losing code context.
+
+Args:
+    content: Original message content
+
+Returns:
+    Cleaned content
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1context__optimizer_1_1ContextOptimizer_a5a8bcae7cfde8579b1228f781d8098fb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_a3bee9ecda151e64652078984987409eb}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!\_create\_fingerprint@{\_create\_fingerprint}}
+\index{\_create\_fingerprint@{\_create\_fingerprint}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{\_create\_fingerprint()}{\_create\_fingerprint()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_a3bee9ecda151e64652078984987409eb} 
+ str utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+\_\+create\+\_\+fingerprint (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{content}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Create a fingerprint for content deduplication.
+
+Args:
+    content: Message content
+
+Returns:
+    Fingerprint string
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1context__optimizer_1_1ContextOptimizer_a3bee9ecda151e64652078984987409eb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_ae14d9f25663c99cf8459c7201c9f1a0d}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!\_default\_token\_counter@{\_default\_token\_counter}}
+\index{\_default\_token\_counter@{\_default\_token\_counter}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{\_default\_token\_counter()}{\_default\_token\_counter()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_ae14d9f25663c99cf8459c7201c9f1a0d} 
+ int utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+\_\+default\+\_\+token\+\_\+counter (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{text}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Default token counter using char/4 approximation.\end{DoxyVerb}
+ \Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_a3383ac2d67bd3f1195407188178b94ac}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!\_reduce\_examples@{\_reduce\_examples}}
+\index{\_reduce\_examples@{\_reduce\_examples}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{\_reduce\_examples()}{\_reduce\_examples()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_a3383ac2d67bd3f1195407188178b94ac} 
+ str utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+\_\+reduce\+\_\+examples (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{text}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Reduce number of examples in text.
+
+Args:
+    text: Text with examples
+
+Returns:
+    Text with fewer examples
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1context__optimizer_1_1ContextOptimizer_a3383ac2d67bd3f1195407188178b94ac_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_acb7b06b82aa405ceb52ef15cfdcaeac5}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!\_remove\_redundancy@{\_remove\_redundancy}}
+\index{\_remove\_redundancy@{\_remove\_redundancy}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{\_remove\_redundancy()}{\_remove\_redundancy()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_acb7b06b82aa405ceb52ef15cfdcaeac5} 
+ str utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+\_\+remove\+\_\+redundancy (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{text}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Remove redundant phrases and repetition.
+
+Args:
+    text: Text to process
+
+Returns:
+    Text with reduced redundancy
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1context__optimizer_1_1ContextOptimizer_acb7b06b82aa405ceb52ef15cfdcaeac5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_a3f4a938f1eea8500fc24ef790908569c}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!\_summarize\_messages@{\_summarize\_messages}}
+\index{\_summarize\_messages@{\_summarize\_messages}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{\_summarize\_messages()}{\_summarize\_messages()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_a3f4a938f1eea8500fc24ef790908569c} 
+ str utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+\_\+summarize\+\_\+messages (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]}}]{messages}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Create a summary of older messages.
+
+Args:
+    messages: Messages to summarize
+
+Returns:
+    Summary text
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1context__optimizer_1_1ContextOptimizer_a3f4a938f1eea8500fc24ef790908569c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1context__optimizer_1_1ContextOptimizer_a3f4a938f1eea8500fc24ef790908569c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_a3575d60d796e301c85a19bf49657bd04}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!\_truncate\_to\_budget@{\_truncate\_to\_budget}}
+\index{\_truncate\_to\_budget@{\_truncate\_to\_budget}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{\_truncate\_to\_budget()}{\_truncate\_to\_budget()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_a3575d60d796e301c85a19bf49657bd04} 
+ List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]} utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+\_\+truncate\+\_\+to\+\_\+budget (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]}}]{messages}{, }\item[{int}]{max\+\_\+tokens}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Aggressively truncate messages to fit budget.
+
+Args:
+    messages: Messages to truncate
+    max_tokens: Maximum token budget
+
+Returns:
+    Truncated messages within budget
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1context__optimizer_1_1ContextOptimizer_a3575d60d796e301c85a19bf49657bd04_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_a8f03bd5d6f4a60a5d04cab20047e623b}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!clean\_content@{clean\_content}}
+\index{clean\_content@{clean\_content}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{clean\_content()}{clean\_content()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_a8f03bd5d6f4a60a5d04cab20047e623b} 
+ str utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+clean\+\_\+content (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{content}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Public method to clean message content.
+
+Args:
+    content: Original message content
+
+Returns:
+    Cleaned content
+
+Raises:
+    ValueError: If content is None
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1context__optimizer_1_1ContextOptimizer_a8f03bd5d6f4a60a5d04cab20047e623b_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_a479da7823a17036223762dda9a8b93aa}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!compress\_prompt@{compress\_prompt}}
+\index{compress\_prompt@{compress\_prompt}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{compress\_prompt()}{compress\_prompt()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_a479da7823a17036223762dda9a8b93aa} 
+ str utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+compress\+\_\+prompt (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Compress a prompt by removing redundancy and verbosity.
+
+Args:
+    prompt: Original prompt
+
+Returns:
+    Compressed prompt
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1context__optimizer_1_1ContextOptimizer_a479da7823a17036223762dda9a8b93aa_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_a201ebbd84b52fdab128451f3d4bcaa52}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!deduplicate\_context@{deduplicate\_context}}
+\index{deduplicate\_context@{deduplicate\_context}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{deduplicate\_context()}{deduplicate\_context()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_a201ebbd84b52fdab128451f3d4bcaa52} 
+ List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]} utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+deduplicate\+\_\+context (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]}}]{messages}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Remove duplicate or near-duplicate messages.
+
+Args:
+    messages: List of messages
+
+Returns:
+    Deduplicated messages
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1context__optimizer_1_1ContextOptimizer_a201ebbd84b52fdab128451f3d4bcaa52_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_affd6588756f9f8e69a0da458e57b43ff}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!optimize\_conversation@{optimize\_conversation}}
+\index{optimize\_conversation@{optimize\_conversation}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{optimize\_conversation()}{optimize\_conversation()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_affd6588756f9f8e69a0da458e57b43ff} 
+ List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]} utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+optimize\+\_\+conversation (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}\mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}\mbox{]}}]{messages}{, }\item[{int}]{max\+\_\+tokens}{, }\item[{int }]{keep\+\_\+recent}{ = {\ttfamily 5}, }\item[{bool }]{summarize\+\_\+old}{ = {\ttfamily True}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Optimize a conversation history to fit within token budget.
+
+Strategy:
+1. Keep system message (first)
+2. Keep last N messages (keep_recent)
+3. Summarize older messages if enabled
+4. Truncate if still over budget
+
+Args:
+    messages: List of conversation messages
+    max_tokens: Maximum token budget
+    keep_recent: Number of recent messages to always keep
+    summarize_old: Whether to summarize old messages
+
+Returns:
+    Optimized list of messages within token budget
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1context__optimizer_1_1ContextOptimizer_affd6588756f9f8e69a0da458e57b43ff_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_a65528a6c8d2a90b68f35f4f2e9c6bee2}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!truncate\_code@{truncate\_code}}
+\index{truncate\_code@{truncate\_code}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{truncate\_code()}{truncate\_code()}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_a65528a6c8d2a90b68f35f4f2e9c6bee2} 
+ str utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+truncate\+\_\+code (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{content}{, }\item[{int }]{max\+\_\+lines}{ = {\ttfamily 50}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}DEPRECATED: Code truncation has been removed.
+
+This method now returns content unchanged. We never truncate code.
+Instead, agents should use the shared diff-patch system 
+(.collab_changes.md) to track changes efficiently.
+
+Args:
+    content: Content with code blocks
+    max_lines: DEPRECATED - This parameter is ignored. Kept for
+        backward compatibility but has no effect.
+
+Returns:
+    Content unchanged (no truncation applied)
+
+Raises:
+    ValueError: If content is None
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classutils_1_1context__optimizer_1_1ContextOptimizer_af673c512407e5cebdf0430f890a154b6}\index{utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}!token\_counter@{token\_counter}}
+\index{token\_counter@{token\_counter}!utils.context\_optimizer.ContextOptimizer@{utils.context\_optimizer.ContextOptimizer}}
+\doxysubsubsection{\texorpdfstring{token\_counter}{token\_counter}}
+{\footnotesize\ttfamily \label{classutils_1_1context__optimizer_1_1ContextOptimizer_af673c512407e5cebdf0430f890a154b6} 
+int utils.\+context\+\_\+optimizer.\+Context\+Optimizer.\+token\+\_\+counter = token\+\_\+counter or self.\+\_\+default\+\_\+token\+\_\+counter}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+utils/\mbox{\hyperlink{context__optimizer_8py}{context\+\_\+optimizer.\+py}}\end{DoxyCompactItemize}

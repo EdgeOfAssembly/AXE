@@ -1,0 +1,11 @@
+digraph "utils.prompt_compressor.PromptCompressor._balanced_compression"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="utils.prompt_compressor.\lPromptCompressor._balanced\l_compression",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="utils.prompt_compressor.\lPromptCompressor._condense\l_examples",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classutils_1_1prompt__compressor_1_1PromptCompressor.html#abdad9849e060f6d137222f99e6fcb4f3",tooltip=" "];
+}

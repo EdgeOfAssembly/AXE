@@ -1,0 +1,316 @@
+\doxysection{axe.\+Shared\+Workspace Class Reference}
+\hypertarget{classaxe_1_1SharedWorkspace}{}\label{classaxe_1_1SharedWorkspace}\index{axe.SharedWorkspace@{axe.SharedWorkspace}}
+
+
+Collaboration diagram for axe.\+Shared\+Workspace\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{classaxe_1_1SharedWorkspace__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classaxe_1_1SharedWorkspace_a42eac5d0e3372d15954be4ff88a9b694}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str \mbox{\hyperlink{classaxe_1_1SharedWorkspace_a94fb46517c10f8d8e440562541a15c2b}{workspace\+\_\+dir}})
+\item 
+str \mbox{\hyperlink{classaxe_1_1SharedWorkspace_ab5e70300394328ef57e127c7dd59cace}{backup\+\_\+file}} (self, str filepath)
+\item 
+str \mbox{\hyperlink{classaxe_1_1SharedWorkspace_a1532bfac5f86676c201349c5e8d3edac}{read\+\_\+shared\+\_\+notes}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1SharedWorkspace_a2bc73dc80bbc403c5171caf656937cb2}{append\+\_\+to\+\_\+shared}} (self, str agent\+\_\+name, str content)
+\item 
+List\mbox{[}str\mbox{]} \mbox{\hyperlink{classaxe_1_1SharedWorkspace_aaed258c8ca73b1ba48e546443fb567c0}{list\+\_\+files}} (self)
+\item 
+str \mbox{\hyperlink{classaxe_1_1SharedWorkspace_a9010c0a1932f79c76127a0bb238edf7e}{read\+\_\+file}} (self, str filename, int max\+\_\+bytes=8192)
+\item 
+bool \mbox{\hyperlink{classaxe_1_1SharedWorkspace_acef354c98f13dad05822d5f0f0a1d8d5}{write\+\_\+file}} (self, str filename, str content)
+\item 
+str \mbox{\hyperlink{classaxe_1_1SharedWorkspace_adbf3e249496be34f5c084d1d53546e3f}{get\+\_\+build\+\_\+status\+\_\+summary}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1SharedWorkspace_a70f689883ed3ece23e4304410c51ee54}{record\+\_\+build\+\_\+output}} (self, str tool, str output, int exit\+\_\+code)
+\item 
+bool \mbox{\hyperlink{classaxe_1_1SharedWorkspace_aa80b49ba9c0eb5e692d3898310dfb55e}{claim\+\_\+error\+\_\+fix}} (self, int error\+\_\+index, str agent\+\_\+alias)
+\item 
+bool \mbox{\hyperlink{classaxe_1_1SharedWorkspace_a958844453419f8d9064d52a166875152}{mark\+\_\+error\+\_\+fixed}} (self, int error\+\_\+index)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classaxe_1_1SharedWorkspace_a94fb46517c10f8d8e440562541a15c2b}{workspace\+\_\+dir}} = os.\+path.\+abspath(workspace\+\_\+dir)
+\item 
+\mbox{\hyperlink{classaxe_1_1SharedWorkspace_ad46b66fe977a9e009876888a8b5221a8}{shared\+\_\+file}} = os.\+path.\+join(self.\+workspace\+\_\+dir, \textquotesingle{}.collab\+\_\+shared.\+md\textquotesingle{})
+\item 
+\mbox{\hyperlink{classaxe_1_1SharedWorkspace_a49f6696341ece335965eebfa767af646}{backup\+\_\+dir}} = os.\+path.\+join(self.\+workspace\+\_\+dir, \textquotesingle{}.collab\+\_\+backups\textquotesingle{})
+\item 
+\mbox{\hyperlink{classaxe_1_1SharedWorkspace_a8cca1c9f37d3e77bf7f0046b59658c55}{build\+\_\+status}} = None
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classaxe_1_1SharedWorkspace_a3c9dac32f363c049807b783eb4e698ae}{\+\_\+is\+\_\+path\+\_\+safe}} (self, str filepath)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classaxe_1_1SharedWorkspace_ad6682022c66de933b8c8a836dfb578e7}{\+\_\+init\+\_\+error}} = None
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Shared workspace for multi-agent collaboration.
+
+Provides shared files for agent coordination:
+- .collab_shared.md: General notes and communication
+- .collab_build_status.md: Build output, errors, warnings
+- .collab_changes.md: Diff patches for code changes
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classaxe_1_1SharedWorkspace_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classaxe_1_1SharedWorkspace_a42eac5d0e3372d15954be4ff88a9b694}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_a42eac5d0e3372d15954be4ff88a9b694} 
+axe.\+Shared\+Workspace.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{workspace\+\_\+dir}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classaxe_1_1SharedWorkspace_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classaxe_1_1SharedWorkspace_a3c9dac32f363c049807b783eb4e698ae}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!\_is\_path\_safe@{\_is\_path\_safe}}
+\index{\_is\_path\_safe@{\_is\_path\_safe}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{\_is\_path\_safe()}{\_is\_path\_safe()}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_a3c9dac32f363c049807b783eb4e698ae} 
+ bool axe.\+Shared\+Workspace.\+\_\+is\+\_\+path\+\_\+safe (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filepath}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Check if filepath is within the workspace directory (prevent path traversal).\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1SharedWorkspace_a3c9dac32f363c049807b783eb4e698ae_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1SharedWorkspace_a2bc73dc80bbc403c5171caf656937cb2}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!append\_to\_shared@{append\_to\_shared}}
+\index{append\_to\_shared@{append\_to\_shared}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{append\_to\_shared()}{append\_to\_shared()}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_a2bc73dc80bbc403c5171caf656937cb2} 
+ None axe.\+Shared\+Workspace.\+append\+\_\+to\+\_\+shared (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{str}]{content}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Append content to shared notes.\end{DoxyVerb}
+ \Hypertarget{classaxe_1_1SharedWorkspace_ab5e70300394328ef57e127c7dd59cace}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!backup\_file@{backup\_file}}
+\index{backup\_file@{backup\_file}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{backup\_file()}{backup\_file()}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_ab5e70300394328ef57e127c7dd59cace} 
+ str axe.\+Shared\+Workspace.\+backup\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filepath}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Create a backup of a file before modification.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1SharedWorkspace_ab5e70300394328ef57e127c7dd59cace_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1SharedWorkspace_ab5e70300394328ef57e127c7dd59cace_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1SharedWorkspace_aa80b49ba9c0eb5e692d3898310dfb55e}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!claim\_error\_fix@{claim\_error\_fix}}
+\index{claim\_error\_fix@{claim\_error\_fix}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{claim\_error\_fix()}{claim\_error\_fix()}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_aa80b49ba9c0eb5e692d3898310dfb55e} 
+ bool axe.\+Shared\+Workspace.\+claim\+\_\+error\+\_\+fix (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{error\+\_\+index}{, }\item[{str}]{agent\+\_\+alias}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Claim an error for fixing by an agent.
+
+Args:
+    error_index: Index of the error to claim
+    agent_alias: Alias of the agent claiming the fix
+
+Returns:
+    True if successfully claimed
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{classaxe_1_1SharedWorkspace_aa80b49ba9c0eb5e692d3898310dfb55e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{classaxe_1_1SharedWorkspace_aa80b49ba9c0eb5e692d3898310dfb55e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1SharedWorkspace_adbf3e249496be34f5c084d1d53546e3f}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!get\_build\_status\_summary@{get\_build\_status\_summary}}
+\index{get\_build\_status\_summary@{get\_build\_status\_summary}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{get\_build\_status\_summary()}{get\_build\_status\_summary()}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_adbf3e249496be34f5c084d1d53546e3f} 
+ str axe.\+Shared\+Workspace.\+get\+\_\+build\+\_\+status\+\_\+summary (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get a summary of build status for agents to see.
+
+Returns a formatted string with:
+- Current build status (success/failed/warning)
+- List of unclaimed errors/warnings agents can fix
+- Brief summary of recent build output
+\end{DoxyVerb}
+ \Hypertarget{classaxe_1_1SharedWorkspace_aaed258c8ca73b1ba48e546443fb567c0}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!list\_files@{list\_files}}
+\index{list\_files@{list\_files}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{list\_files()}{list\_files()}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_aaed258c8ca73b1ba48e546443fb567c0} 
+ List\mbox{[}str\mbox{]} axe.\+Shared\+Workspace.\+list\+\_\+files (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}List all files in workspace.\end{DoxyVerb}
+ \Hypertarget{classaxe_1_1SharedWorkspace_a958844453419f8d9064d52a166875152}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!mark\_error\_fixed@{mark\_error\_fixed}}
+\index{mark\_error\_fixed@{mark\_error\_fixed}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{mark\_error\_fixed()}{mark\_error\_fixed()}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_a958844453419f8d9064d52a166875152} 
+ bool axe.\+Shared\+Workspace.\+mark\+\_\+error\+\_\+fixed (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{error\+\_\+index}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Mark an error as fixed.
+
+Args:
+    error_index: Index of the error to mark as fixed
+
+Returns:
+    True if successfully marked
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classaxe_1_1SharedWorkspace_a958844453419f8d9064d52a166875152_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classaxe_1_1SharedWorkspace_a958844453419f8d9064d52a166875152_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1SharedWorkspace_a9010c0a1932f79c76127a0bb238edf7e}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!read\_file@{read\_file}}
+\index{read\_file@{read\_file}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{read\_file()}{read\_file()}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_a9010c0a1932f79c76127a0bb238edf7e} 
+ str axe.\+Shared\+Workspace.\+read\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filename}{, }\item[{int }]{max\+\_\+bytes}{ = {\ttfamily 8192}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Read a file from workspace.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1SharedWorkspace_a9010c0a1932f79c76127a0bb238edf7e_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1SharedWorkspace_a1532bfac5f86676c201349c5e8d3edac}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!read\_shared\_notes@{read\_shared\_notes}}
+\index{read\_shared\_notes@{read\_shared\_notes}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{read\_shared\_notes()}{read\_shared\_notes()}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_a1532bfac5f86676c201349c5e8d3edac} 
+ str axe.\+Shared\+Workspace.\+read\+\_\+shared\+\_\+notes (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Read the shared notes file.\end{DoxyVerb}
+ \Hypertarget{classaxe_1_1SharedWorkspace_a70f689883ed3ece23e4304410c51ee54}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!record\_build\_output@{record\_build\_output}}
+\index{record\_build\_output@{record\_build\_output}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{record\_build\_output()}{record\_build\_output()}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_a70f689883ed3ece23e4304410c51ee54} 
+ None axe.\+Shared\+Workspace.\+record\+\_\+build\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{tool}{, }\item[{str}]{output}{, }\item[{int}]{exit\+\_\+code}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Record build output from a command execution.
+
+Args:
+    tool: Build tool name (gcc, make, python, etc.)
+    output: Full output from the command
+    exit_code: Exit code from the command
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classaxe_1_1SharedWorkspace_a70f689883ed3ece23e4304410c51ee54_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{classaxe_1_1SharedWorkspace_a70f689883ed3ece23e4304410c51ee54_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1SharedWorkspace_acef354c98f13dad05822d5f0f0a1d8d5}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!write\_file@{write\_file}}
+\index{write\_file@{write\_file}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{write\_file()}{write\_file()}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_acef354c98f13dad05822d5f0f0a1d8d5} 
+ bool axe.\+Shared\+Workspace.\+write\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filename}{, }\item[{str}]{content}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Write content to a file in workspace.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1SharedWorkspace_acef354c98f13dad05822d5f0f0a1d8d5_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classaxe_1_1SharedWorkspace_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classaxe_1_1SharedWorkspace_ad6682022c66de933b8c8a836dfb578e7}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!\_init\_error@{\_init\_error}}
+\index{\_init\_error@{\_init\_error}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{\_init\_error}{\_init\_error}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_ad6682022c66de933b8c8a836dfb578e7} 
+axe.\+Shared\+Workspace.\+\_\+init\+\_\+error = None\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classaxe_1_1SharedWorkspace_a49f6696341ece335965eebfa767af646}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!backup\_dir@{backup\_dir}}
+\index{backup\_dir@{backup\_dir}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{backup\_dir}{backup\_dir}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_a49f6696341ece335965eebfa767af646} 
+axe.\+Shared\+Workspace.\+backup\+\_\+dir = os.\+path.\+join(self.\+workspace\+\_\+dir, \textquotesingle{}.collab\+\_\+backups\textquotesingle{})}
+
+\Hypertarget{classaxe_1_1SharedWorkspace_a8cca1c9f37d3e77bf7f0046b59658c55}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!build\_status@{build\_status}}
+\index{build\_status@{build\_status}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{build\_status}{build\_status}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_a8cca1c9f37d3e77bf7f0046b59658c55} 
+axe.\+Shared\+Workspace.\+build\+\_\+status = None}
+
+\Hypertarget{classaxe_1_1SharedWorkspace_ad46b66fe977a9e009876888a8b5221a8}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!shared\_file@{shared\_file}}
+\index{shared\_file@{shared\_file}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{shared\_file}{shared\_file}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_ad46b66fe977a9e009876888a8b5221a8} 
+axe.\+Shared\+Workspace.\+shared\+\_\+file = os.\+path.\+join(self.\+workspace\+\_\+dir, \textquotesingle{}.collab\+\_\+shared.\+md\textquotesingle{})}
+
+\Hypertarget{classaxe_1_1SharedWorkspace_a94fb46517c10f8d8e440562541a15c2b}\index{axe.SharedWorkspace@{axe.SharedWorkspace}!workspace\_dir@{workspace\_dir}}
+\index{workspace\_dir@{workspace\_dir}!axe.SharedWorkspace@{axe.SharedWorkspace}}
+\doxysubsubsection{\texorpdfstring{workspace\_dir}{workspace\_dir}}
+{\footnotesize\ttfamily \label{classaxe_1_1SharedWorkspace_a94fb46517c10f8d8e440562541a15c2b} 
+axe.\+Shared\+Workspace.\+workspace\+\_\+dir = os.\+path.\+abspath(workspace\+\_\+dir)}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{axe_8py}{axe.\+py}}\end{DoxyCompactItemize}

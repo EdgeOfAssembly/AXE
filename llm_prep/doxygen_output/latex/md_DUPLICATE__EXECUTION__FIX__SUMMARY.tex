@@ -1,0 +1,257 @@
+\chapter{Duplicate Execution and Heredoc Parsing Bug Fixes }
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY}{}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY}\index{Duplicate Execution and Heredoc Parsing Bug Fixes@{Duplicate Execution and Heredoc Parsing Bug Fixes}}
+\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md308}%
+\Hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md308}%
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md309}{}\doxysection{\texorpdfstring{Summary}{Summary}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md309}
+This document describes the fixes implemented for two critical bugs in the AXE tool execution system that affected both interactive mode ({\ttfamily @agent} commands) and collaborative mode ({\ttfamily /collab}).\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md310}{}\doxysection{\texorpdfstring{Bug 1\+: Duplicate Command Execution ❌ → ✅}{Bug 1\+: Duplicate Command Execution ❌ → ✅}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md310}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md311}{}\doxysubsection{\texorpdfstring{Problem}{Problem}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md311}
+Commands in agent responses were being executed {\bfseries{twice}}, causing\+:
+\begin{DoxyItemize}
+\item Double execution of side-\/effect commands (e.\+g., {\ttfamily rm} deleting a file, then failing on second attempt)
+\item Duplicate output with confusing XML tags showing
+\item Wasted resources and potential data corruption
+\end{DoxyItemize}\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md312}{}\doxysubsection{\texorpdfstring{Root Cause}{Root Cause}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md312}
+Both {\ttfamily \doxylink{xml__tool__parser_8py}{xml\+\_\+tool\+\_\+parser.\+py}} and {\ttfamily \doxylink{axe_8py}{axe.\+py}} were parsing the same code blocks\+:
+\begin{DoxyEnumerate}
+\item {\ttfamily xml\+\_\+tool\+\_\+parser.\+parse\+\_\+axe\+\_\+native\+\_\+blocks()} parsed {\ttfamily  \`{}\`{}}EXEC{\ttfamily , } {\ttfamily READ\`{}, \`{} }WRITE{\ttfamily  blocks}
+\item {\ttfamily }\doxylink{axe_8py}{axe.\+py}{\ttfamily  }Response\+Processor.\+process\+\_\+response()\`{} ALSO parsed the same blocks with regex
+\end{DoxyEnumerate}\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md313}{}\doxysubsection{\texorpdfstring{Example of Duplicate Execution (Before Fix)}{Example of Duplicate Execution (Before Fix)}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md313}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/-\/\ Execution\ Results\ -\/-\/-\/}
+\DoxyCodeLine{<result>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ←\ XML\ parser\ execution}
+\DoxyCodeLine{<function\_result>}
+\DoxyCodeLine{<result>}
+\DoxyCodeLine{[Command\ executed\ successfully]}
+\DoxyCodeLine{</result>}
+\DoxyCodeLine{</function\_result>}
+\DoxyCodeLine{</result>}
+\DoxyCodeLine{[EXEC:\ rm\ /tmp/AXE/gpt.txt]\ \ \ \ \ \ \ \ \ \ \ ←\ Markdown\ parser\ execution\ (FAILS!)}
+\DoxyCodeLine{ERROR:\ Exit\ code\ 1:\ rm:\ cannot\ remove\ '/tmp/AXE/gpt.txt':\ No\ such\ file}
+
+\end{DoxyCode}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md314}{}\doxysubsection{\texorpdfstring{Solution}{Solution}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md314}
+{\bfseries{Removed {\ttfamily parse\+\_\+axe\+\_\+native\+\_\+blocks()} from {\ttfamily parse\+\_\+all\+\_\+tool\+\_\+formats()}}}
+
+The native {\ttfamily  \`{}\`{}}READ{\ttfamily , } {\ttfamily EXEC\`{}, \`{} }WRITE{\ttfamily  blocks are now handled exclusively by }\doxylink{axe_8py}{axe.\+py}{\ttfamily \textquotesingle{}s }Response\+Processor\`{}, which is the original and more robust handler with full heredoc support.
+
+{\bfseries{Changes in {\ttfamily \doxylink{xml__tool__parser_8py}{utils/xml\+\_\+tool\+\_\+parser.\+py}}\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{def\ }parse\_all\_tool\_formats(response:\ str)\ -\/>\ List[Dict[str,\ Any]]:}
+\DoxyCodeLine{\ \ \ \ calls\ =\ []}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ 1.\ XML\ function\_calls\ format}}
+\DoxyCodeLine{\ \ \ \ calls.extend(parse\_xml\_function\_calls(response))}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ 2.\ <bash>\ format}}
+\DoxyCodeLine{\ \ \ \ calls.extend(parse\_bash\_tags(response))}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ 3.\ }}
+
+\end{DoxyCode}
+ bash / {\ttfamily shell / }sh code blocks calls.\+extend(parse\+\_\+shell\+\_\+codeblocks(response))\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md315}{}\doxysection{\texorpdfstring{4. REMOVED\+: AXE native {\ttfamily READ/\+WRITE/\+EXEC} blocks}{4. REMOVED\+: AXE native {\ttfamily READ/\+WRITE/\+EXEC} blocks}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md315}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md316}{}\doxysection{\texorpdfstring{These are now handled EXCLUSIVELY by axe.\+py Response\+Processor}{These are now handled EXCLUSIVELY by axe.\+py Response\+Processor}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md316}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md317}{}\doxysection{\texorpdfstring{to prevent duplicate execution}{to prevent duplicate execution}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md317}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md318}{}\doxysection{\texorpdfstring{calls.\+extend(parse\+\_\+axe\+\_\+native\+\_\+blocks(response)) \# COMMENTED OUT}{calls.\+extend(parse\+\_\+axe\+\_\+native\+\_\+blocks(response)) \# COMMENTED OUT}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md318}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md319}{}\doxysection{\texorpdfstring{5. Simple XML tags like $<$read\+\_\+file$>$, $<$shell$>$}{5. Simple XML tags like $<$read\+\_\+file$>$, $<$shell$>$}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md319}
+calls.\+extend(parse\+\_\+simple\+\_\+xml\+\_\+tags(response))
+
+return deduplicate\+\_\+calls(calls) 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ After\ Fix}
+\DoxyCodeLine{Commands\ are\ executed\ only\ once:}
+
+\end{DoxyCode}
+ --- Execution Results --- \mbox{[}EXEC\+: rm /tmp/\+AXE/gpt.txt\mbox{]} \mbox{[}Command executed successfully\mbox{]} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\ Bug\ 2:\ Heredoc\ Parsing\ Errors\ ❌\ →\ ✅}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Problem}
+\DoxyCodeLine{When\ agents\ used\ heredocs\ in\ shell\ code\ blocks,\ content\ lines\ were\ incorrectly\ parsed\ as\ separate\ commands:}
+
+\end{DoxyCode}
+ bash cat \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} EOF \texorpdfstring{$>$}{>} file.\+md
+\begin{DoxyItemize}
+\item Item 1
+\item Item 2 ~\newline
+
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item First step EOF 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Caused\ errors\ like:}
+
+\end{DoxyCode}
+ ERROR\+: Tool \textquotesingle{}-\/\textquotesingle{} not in whitelist ERROR\+: Tool \textquotesingle{}1.\textquotesingle{} not in whitelist ERROR\+: Tool \textquotesingle{}EOF\textquotesingle{} not in whitelist 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ Root\ Cause}
+\DoxyCodeLine{\`{}parse\_shell\_codeblocks()`\ in\ \`{}xml\_tool\_parser.py`\ split\ on\ newlines\ without\ detecting\ heredocs.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Solution}
+\DoxyCodeLine{**Added\ heredoc\ detection\ and\ proper\ handling**}
+\DoxyCodeLine{}
+\DoxyCodeLine{**New\ helper\ function:**}
+
+\end{DoxyCode}
+ python def \+\_\+contains\+\_\+heredoc(content\+: str) -\/\texorpdfstring{$>$}{>} bool\+: "{}"{}"{}     Check if content contains a heredoc marker.     Detects\+: $<$$<$ EOF, $<$$<$-\/ EOF, $<$$<$\textquotesingle{}\+EOF\textquotesingle{}, $<$$<$"{}EOF"{}, $<$$<$$<$ (here-\/string)     "{}"{}"{} heredoc\+\_\+pattern = r\textquotesingle{}\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}-\/?\textbackslash{}s\texorpdfstring{$\ast$}{*}\mbox{[}\textbackslash{}\textquotesingle{}"{}\mbox{]}?\textbackslash{}w+\mbox{[}\textbackslash{}\textquotesingle{}"{}\mbox{]}?\texorpdfstring{$\vert$}{|}\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}\textquotesingle{} return bool(re.\+search(heredoc\+\_\+pattern, content)) 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{**Modified\ \`{}parse\_shell\_codeblocks()`:**}
+
+\end{DoxyCode}
+ python def parse\+\_\+shell\+\_\+codeblocks(response\+: str) -\/\texorpdfstring{$>$}{>} List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]}\+: pattern = r\textquotesingle{}{\ttfamily (?\+:bash\texorpdfstring{$\vert$}{|}shell\texorpdfstring{$\vert$}{|}sh)\textbackslash{}n?(.\texorpdfstring{$\ast$}{*}?)}\textquotesingle{} calls = \mbox{[}\mbox{]} for match in re.\+findall(pattern, response, re.\+DOTALL)\+: cmd = match.\+strip() if cmd\+: 
+\end{DoxyEnumerate}\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md320}{}\doxysection{\texorpdfstring{Check if the entire block contains a heredoc}{Check if the entire block contains a heredoc}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md320}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md321}{}\doxysection{\texorpdfstring{If so, treat the whole block as a single command}{If so, treat the whole block as a single command}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md321}
+if \+\_\+contains\+\_\+heredoc(cmd)\+: calls.\+append(\{ \textquotesingle{}tool\textquotesingle{}\+: \textquotesingle{}EXEC\textquotesingle{}, \textquotesingle{}params\textquotesingle{}\+: \{\textquotesingle{}command\textquotesingle{}\+: cmd\}, \textquotesingle{}raw\+\_\+name\textquotesingle{}\+: \textquotesingle{}shell\textquotesingle{} \}) else\+: \hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md322}{}\doxysection{\texorpdfstring{No heredoc -\/ process line by line as before}{No heredoc -\/ process line by line as before}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md322}
+for command in \+\_\+split\+\_\+shell\+\_\+commands(cmd)\+: if command and not command.\+startswith(\textquotesingle{}\#\textquotesingle{})\+: calls.\+append(\{ \textquotesingle{}tool\textquotesingle{}\+: \textquotesingle{}EXEC\textquotesingle{}, \textquotesingle{}params\textquotesingle{}\+: \{\textquotesingle{}command\textquotesingle{}\+: command\}, \textquotesingle{}raw\+\_\+name\textquotesingle{}\+: \textquotesingle{}shell\textquotesingle{} \}) return calls 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ Supported\ Heredoc\ Formats}
+\DoxyCodeLine{-\/\ \`{}<<\ EOF`\ -\/\ Standard\ heredoc}
+\DoxyCodeLine{-\/\ \`{}<<-\/\ EOF`\ -\/\ Indented\ heredoc\ (strips\ leading\ tabs)}
+\DoxyCodeLine{-\/\ \`{}<<\ 'EOF'`\ -\/\ Quoted\ delimiter\ (no\ variable\ expansion)}
+\DoxyCodeLine{-\/\ \`{}<<\ "{}EOF"{}`\ -\/\ Quoted\ delimiter\ (with\ variable\ expansion)}
+\DoxyCodeLine{-\/\ \`{}<<<\ "{}string"{}`\ -\/\ Here-\/string}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ After\ Fix}
+\DoxyCodeLine{Heredocs\ are\ preserved\ as\ single\ commands:}
+
+\end{DoxyCode}
+ python \hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md323}{}\doxysection{\texorpdfstring{Input\+:}{Input\+:}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md323}
+"{}"{}"{}\`{}\`{}\`{}bash cat $<$$<$ EOF $>$ notes.\+md -\/ Item 1 -\/ Item 2 \+EOF @icode "{}"{}"{}
+
+\# Parsed as\+: \mbox{[} \{ \textquotesingle{}tool\textquotesingle{}\+: \textquotesingle{}EXEC\textquotesingle{}, \textquotesingle{}params\textquotesingle{}\+: \{ \textquotesingle{}command\textquotesingle{}\+: \textquotesingle{}cat \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} EOF \texorpdfstring{$>$}{>} notes.\+md~\newline
+-\/ Item 1~\newline
+-\/ Item 2\textbackslash{}n\+EOF\textquotesingle{} \}, \textquotesingle{}raw\+\_\+name\textquotesingle{}\+: \textquotesingle{}shell\textquotesingle{} \} \mbox{]} \hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md324}{}\doxysubsection{\texorpdfstring{Test Coverage}{Test Coverage}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md324}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md325}{}\doxysubsubsection{\texorpdfstring{New Tests Added}{New Tests Added}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md325}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{{\ttfamily test\+\_\+no\+\_\+duplicate\+\_\+execution()}}} -\/ Verifies commands are only parsed once
+\item {\bfseries{{\ttfamily test\+\_\+heredoc\+\_\+in\+\_\+shell\+\_\+block()}}} -\/ Verifies heredocs are preserved as single commands
+\item {\bfseries{{\ttfamily test\+\_\+multiline\+\_\+without\+\_\+heredoc()}}} -\/ Ensures regular multi-\/line commands still work
+\item {\bfseries{{\ttfamily test\+\_\+heredoc\+\_\+variations()}}} -\/ Tests various heredoc formats (\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}, \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}-\/, \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<})
+\end{DoxyEnumerate}\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md326}{}\doxysubsubsection{\texorpdfstring{Test Results}{Test Results}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md326}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{======================================================================}
+\DoxyCodeLine{✅\ ALL\ TESTS\ PASSED!\ (43/43)}
+\DoxyCodeLine{======================================================================}
+
+\end{DoxyCode}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md327}{}\doxysubsection{\texorpdfstring{Examples}{Examples}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md327}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md328}{}\doxysubsubsection{\texorpdfstring{Example 1\+: No Duplicate Execution}{Example 1\+: No Duplicate Execution}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md328}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Agent\ response\ with\ EXEC\ block}}
+\DoxyCodeLine{response\ =\ \textcolor{stringliteral}{"{}"{}"{}I'll\ delete\ the\ file:}}
+
+\end{DoxyCode}
+ EXEC rm test.\+txt 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Done!"{}"{}"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Before\ fix:\ parse\_all\_tool\_formats\ would\ parse\ it,\ then\ ResponseProcessor\ would\ parse\ it\ again}
+\DoxyCodeLine{\#\ After\ fix:\ Only\ ResponseProcessor\ handles\ it}
+\DoxyCodeLine{calls\ =\ parse\_all\_tool\_formats(response)}
+\DoxyCodeLine{assert\ len(calls)\ ==\ 0\ \ \#\ ✅\ Not\ parsed\ by\ xml\_tool\_parser\ anymore}
+
+\end{DoxyCode}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md329}{}\doxysubsubsection{\texorpdfstring{Example 2\+: Heredoc Preserved}{Example 2\+: Heredoc Preserved}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md329}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Agent\ response\ with\ heredoc}
+\DoxyCodeLine{response\ =\ "{}"{}"{}}
+
+\end{DoxyCode}
+ bash cat \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} EOF \texorpdfstring{$>$}{>} output.\+md \hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md330}{}\doxysection{\texorpdfstring{Header}{Header}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md330}
+
+\begin{DoxyItemize}
+\item Item 1
+\item Item 2 EOF 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ "{}"{}"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Before\ fix:\ Would\ create\ 4\ separate\ commands\ (cat,\ "{}\#\ Header"{},\ "{}-\/\ Item\ 1"{},\ "{}-\/\ Item\ 2"{})}
+\DoxyCodeLine{\#\ After\ fix:\ Creates\ 1\ command\ with\ entire\ heredoc}
+\DoxyCodeLine{calls\ =\ parse\_shell\_codeblocks(response)}
+\DoxyCodeLine{assert\ len(calls)\ ==\ 1\ \ \#\ ✅\ Single\ command}
+\DoxyCodeLine{assert\ '-\/\ Item\ 1'\ in\ calls[0]['params']['command']\ \ \#\ ✅\ Content\ preserved}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md331}{}\doxysubsubsection{\texorpdfstring{Example 3\+: Backward Compatibility}{Example 3\+: Backward Compatibility}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md331}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Regular\ multi-\/line\ commands\ still\ work}}
+\DoxyCodeLine{response\ =\ \textcolor{stringliteral}{"{}"{}"{}}}
+
+\end{DoxyCode}
+ bash echo "{}line 1"{} echo "{}line 2"{} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ "{}"{}"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Still\ creates\ 2\ separate\ commands\ (no\ heredoc\ detected)}
+\DoxyCodeLine{calls\ =\ parse\_shell\_codeblocks(response)}
+\DoxyCodeLine{assert\ len(calls)\ ==\ 2\ \ \#\ ✅\ Backward\ compatible}
+
+\end{DoxyCode}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md332}{}\doxysubsection{\texorpdfstring{Impact}{Impact}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md332}
+
+\begin{DoxyItemize}
+\item ✅ \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\+Interactive mode ({\ttfamily @agent})\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\+: Fixed -\/ no more duplicate executions
+\item ✅ {\bfseries{Collaborative mode ({\ttfamily /collab})}}\+: Fixed -\/ no more duplicate executions ~\newline
+
+\item ✅ {\bfseries{Backward compatibility}}\+: Maintained -\/ all existing functionality works
+\item ✅ {\bfseries{Performance}}\+: Slightly improved (no duplicate executions)
+\item ✅ {\bfseries{Heredoc support}}\+: Now properly handled in shell blocks
+\item ✅ {\bfseries{Error reduction}}\+: No more "{}tool not in whitelist"{} errors for heredoc content
+\end{DoxyItemize}\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md333}{}\doxysubsection{\texorpdfstring{Files Modified}{Files Modified}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md333}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{{\ttfamily \doxylink{xml__tool__parser_8py}{utils/xml\+\_\+tool\+\_\+parser.\+py}}}}\+:
+\begin{DoxyItemize}
+\item Commented out {\ttfamily parse\+\_\+axe\+\_\+native\+\_\+blocks()} call in {\ttfamily parse\+\_\+all\+\_\+tool\+\_\+formats()}
+\item Added {\ttfamily \+\_\+contains\+\_\+heredoc()} helper function
+\item Modified {\ttfamily parse\+\_\+shell\+\_\+codeblocks()} to handle heredocs
+\item Added documentation explaining the changes
+\end{DoxyItemize}
+\item {\bfseries{{\ttfamily \doxylink{test__xml__tool__parser_8py}{test\+\_\+xml\+\_\+tool\+\_\+parser.\+py}}}}\+:
+\begin{DoxyItemize}
+\item Updated {\ttfamily test\+\_\+mixed\+\_\+formats()} to reflect changes
+\item Added 4 new test functions for bug fixes
+\item All 43 tests pass
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md334}{}\doxysubsection{\texorpdfstring{Verification}{Verification}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md334}
+To verify the fixes work\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Run\ the\ test\ suite}
+\DoxyCodeLine{python3\ test\_xml\_tool\_parser.py}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Quick\ verification}
+\DoxyCodeLine{python3\ -\/c\ "{}}
+\DoxyCodeLine{from\ utils.xml\_tool\_parser\ import\ parse\_all\_tool\_formats,\ parse\_shell\_codeblocks}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Test\ 1:\ No\ duplicate\ parsing}
+\DoxyCodeLine{response1\ =\ '\(\backslash\)`\(\backslash\)`\(\backslash\)`EXEC\ ls\(\backslash\)n\(\backslash\)`\(\backslash\)`\(\backslash\)`'}
+\DoxyCodeLine{calls1\ =\ parse\_all\_tool\_formats(response1)}
+\DoxyCodeLine{assert\ len(calls1)\ ==\ 0,\ 'Native\ blocks\ should\ not\ be\ parsed'}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Test\ 2:\ Heredoc\ preserved}
+\DoxyCodeLine{response2\ =\ '\(\backslash\)`\(\backslash\)`\(\backslash\)`bash\(\backslash\)ncat\ <<\ EOF\(\backslash\)nline1\(\backslash\)nEOF\(\backslash\)n\(\backslash\)`\(\backslash\)`\(\backslash\)`'}
+\DoxyCodeLine{calls2\ =\ parse\_shell\_codeblocks(response2)}
+\DoxyCodeLine{assert\ len(calls2)\ ==\ 1,\ 'Heredoc\ should\ be\ single\ command'}
+\DoxyCodeLine{assert\ '<<\ EOF'\ in\ calls2[0]['params']['command'],\ 'Heredoc\ marker\ preserved'}
+\DoxyCodeLine{}
+\DoxyCodeLine{print('✅\ All\ verifications\ passed!')}
+\DoxyCodeLine{"{}}
+
+\end{DoxyCode}
+\hypertarget{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md335}{}\doxysubsection{\texorpdfstring{Conclusion}{Conclusion}}\label{md_DUPLICATE__EXECUTION__FIX__SUMMARY_autotoc_md335}
+Both bugs have been successfully fixed\+:
+\begin{DoxyEnumerate}
+\item ✅ Commands are no longer executed twice
+\item ✅ Heredocs are properly handled in shell blocks
+\item ✅ All existing tests pass
+\item ✅ New tests verify the fixes
+\item ✅ Backward compatibility maintained 
+\end{DoxyEnumerate}

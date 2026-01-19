@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['database_5flocation_5ffix_5fsummary_2emd_0',['DATABASE_LOCATION_FIX_SUMMARY.md',['../DATABASE__LOCATION__FIX__SUMMARY_8md.html',1,'']]],
+  ['deep_5fdive_5ffunction_2emd_1',['deep_dive_function.md',['../deep__dive__function_8md.html',1,'']]],
+  ['demo_5fabsolute_5fpath_5ffix_2epy_2',['demo_absolute_path_fix.py',['../demo__absolute__path__fix_8py.html',1,'']]],
+  ['demo_5fdynamic_5ftokens_2epy_3',['demo_dynamic_tokens.py',['../demo__dynamic__tokens_8py.html',1,'']]],
+  ['demo_5fheredoc_5ffix_2epy_4',['demo_heredoc_fix.py',['../demo__heredoc__fix_8py.html',1,'']]],
+  ['demo_5fimprovements_2epy_5',['demo_improvements.py',['../demo__improvements_8py.html',1,'']]],
+  ['demo_5fminifier_2epy_6',['demo_minifier.py',['../demo__minifier_8py.html',1,'']]],
+  ['demo_5fskills_5fsystem_2epy_7',['demo_skills_system.py',['../demo__skills__system_8py.html',1,'']]],
+  ['demo_5ftask_5fcompletion_5ffix_2epy_8',['demo_task_completion_fix.py',['../demo__task__completion__fix_8py.html',1,'']]],
+  ['depklite_2ec_9',['depklite.c',['../depklite_8c.html',1,'']]],
+  ['depklite_2eh_10',['depklite.h',['../depklite_8h.html',1,'']]],
+  ['dos_5fexe_5funpack_2emd_11',['dos_exe_unpack.md',['../dos__exe__unpack_8md.html',1,'']]],
+  ['dos_5fmemory_5farena_5fanalyzer_2emd_12',['dos_memory_arena_analyzer.md',['../dos__memory__arena__analyzer_8md.html',1,'']]],
+  ['dos_5fpacker_5fdetector_2emd_13',['dos_packer_detector.md',['../dos__packer__detector_8md.html',1,'']]],
+  ['dosbox_5femulation_5fsetup_2emd_14',['dosbox_emulation_setup.md',['../dosbox__emulation__setup_8md.html',1,'']]],
+  ['dosbox_5fint21_5ftrace_2emd_15',['dosbox_int21_trace.md',['../dosbox__int21__trace_8md.html',1,'']]],
+  ['dosbox_5fmemory_5fdump_2emd_16',['dosbox_memory_dump.md',['../dosbox__memory__dump_8md.html',1,'']]],
+  ['dosbox_5fscreenshot_2emd_17',['dosbox_screenshot.md',['../dosbox__screenshot_8md.html',1,'']]],
+  ['duplicate_5fexecution_5ffix_5fsummary_2emd_18',['DUPLICATE_EXECUTION_FIX_SUMMARY.md',['../DUPLICATE__EXECUTION__FIX__SUMMARY_8md.html',1,'']]],
+  ['dynamic_5fspawner_2epy_19',['dynamic_spawner.py',['../dynamic__spawner_8py.html',1,'']]],
+  ['dynamic_5ftokens_5fsummary_2emd_20',['DYNAMIC_TOKENS_SUMMARY.md',['../DYNAMIC__TOKENS__SUMMARY_8md.html',1,'']]]
+];

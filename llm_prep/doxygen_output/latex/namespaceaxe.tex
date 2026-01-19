@@ -1,0 +1,321 @@
+\doxysection{axe Namespace Reference}
+\hypertarget{namespaceaxe}{}\label{namespaceaxe}\index{axe@{axe}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classaxe_1_1ResponseProcessor}{Response\+Processor}}
+\item 
+class \mbox{\hyperlink{classaxe_1_1ProjectContext}{Project\+Context}}
+\item 
+class \mbox{\hyperlink{classaxe_1_1SharedWorkspace}{Shared\+Workspace}}
+\item 
+class \mbox{\hyperlink{classaxe_1_1CollaborativeSession}{Collaborative\+Session}}
+\item 
+class \mbox{\hyperlink{classaxe_1_1ChatSession}{Chat\+Session}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespaceaxe_aed941049819dac642905b812e754e2fa}{is\+\_\+genuine\+\_\+task\+\_\+completion}} (str response)
+\item 
+tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{namespaceaxe_a5387f652eb28eecb3bec22654aa3e40d}{detect\+\_\+agent\+\_\+token}} (str response, str token)
+\item 
+bool \mbox{\hyperlink{namespaceaxe_a24106f38d1e2278a094b572012ed4760}{check\+\_\+agent\+\_\+pass}} (str response)
+\item 
+tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{namespaceaxe_a6219e4e9c2c63cebb97122848b591a70}{check\+\_\+agent\+\_\+task\+\_\+complete}} (str response)
+\item 
+tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{namespaceaxe_a557557e18d17b8fa824f16fd344efdcf}{check\+\_\+agent\+\_\+command}} (str response, str token)
+\item 
+None \mbox{\hyperlink{namespaceaxe_abb23f0d8329e501eb234daeb5a11ac9a}{generate\+\_\+sample\+\_\+config}} (str path=\textquotesingle{}axe.\+yaml\textquotesingle{})
+\item 
+None \mbox{\hyperlink{namespaceaxe_ae18887cd1aba7d83578d18397fe0cd63}{restore\+\_\+agents\+\_\+on\+\_\+startup}} (Optional\mbox{[}str\mbox{]} db\+\_\+path=None)
+\item 
+None \mbox{\hyperlink{namespaceaxe_ae792b8af7b454e5f2e685ef5aa9c5207}{sync\+\_\+agents\+\_\+on\+\_\+shutdown}} ()
+\item 
+None \mbox{\hyperlink{namespaceaxe_ac2811818e423281b1abace5155de35d2}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespaceaxe_a5fe64db9e0bd9702879e7765ad74e0e6}{HAS\+\_\+\+READLINE}} = True
+\item 
+bool \mbox{\hyperlink{namespaceaxe_af421429727240fc6e6c4f590ddbc4f83}{HAS\+\_\+\+YAML}} = True
+\item 
+bool \mbox{\hyperlink{namespaceaxe_acec3e08a64234809ed190c12d64ad726}{HAS\+\_\+\+GIT}} = True
+\item 
+bool \mbox{\hyperlink{namespaceaxe_a83300a7c32303a1eacfcc6d392c5929b}{HAS\+\_\+\+WORKSHOP}} = True
+\item 
+bool \mbox{\hyperlink{namespaceaxe_a443d6ea5ad17499a058f5018e9704123}{HAS\+\_\+\+CHISEL}} = False
+\item 
+\mbox{\hyperlink{namespaceaxe_a1231a95d9da8d332f1cb87feca5d4953}{\+\_\+global\+\_\+db}} = None
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}AXE - Agent eXecution Engine
+A terminal-based multiagent coding assistant for C, C++, Python, and reverse-engineering.
+
+Usage:
+    axe.py                      # Interactive chat mode
+    axe.py -c "task"            # Single command mode
+    axe.py --config config.yaml # Custom config file
+    
+Chat commands:
+    @agent task          - Send task to specific agent (e.g., @gpt analyze this)
+    /agents              - List available agents
+    /tools               - List available tools
+    /dirs                - List accessible directories
+    /config              - Show current config
+    /history             - Show chat history
+    /clear               - Clear chat history
+    /help                - Show help
+    /quit                - Exit
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespaceaxe_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceaxe_a557557e18d17b8fa824f16fd344efdcf}\index{axe@{axe}!check\_agent\_command@{check\_agent\_command}}
+\index{check\_agent\_command@{check\_agent\_command}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{check\_agent\_command()}{check\_agent\_command()}}
+{\footnotesize\ttfamily \label{namespaceaxe_a557557e18d17b8fa824f16fd344efdcf} 
+ tuple\mbox{[}bool, str\mbox{]} axe.\+check\+\_\+agent\+\_\+command (\begin{DoxyParamCaption}\item[{str}]{response}{, }\item[{str}]{token}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check for agent commands that include content (BREAK REQUEST, EMERGENCY, SPAWN).
+
+Returns:
+    Tuple of (found: bool, content: str)
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_a557557e18d17b8fa824f16fd344efdcf_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_a557557e18d17b8fa824f16fd344efdcf_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceaxe_a24106f38d1e2278a094b572012ed4760}\index{axe@{axe}!check\_agent\_pass@{check\_agent\_pass}}
+\index{check\_agent\_pass@{check\_agent\_pass}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{check\_agent\_pass()}{check\_agent\_pass()}}
+{\footnotesize\ttfamily \label{namespaceaxe_a24106f38d1e2278a094b572012ed4760} 
+ bool axe.\+check\+\_\+agent\+\_\+pass (\begin{DoxyParamCaption}\item[{str}]{response}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if agent is passing their turn using unique token.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_a24106f38d1e2278a094b572012ed4760_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_a24106f38d1e2278a094b572012ed4760_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceaxe_a6219e4e9c2c63cebb97122848b591a70}\index{axe@{axe}!check\_agent\_task\_complete@{check\_agent\_task\_complete}}
+\index{check\_agent\_task\_complete@{check\_agent\_task\_complete}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{check\_agent\_task\_complete()}{check\_agent\_task\_complete()}}
+{\footnotesize\ttfamily \label{namespaceaxe_a6219e4e9c2c63cebb97122848b591a70} 
+ tuple\mbox{[}bool, str\mbox{]} axe.\+check\+\_\+agent\+\_\+task\+\_\+complete (\begin{DoxyParamCaption}\item[{str}]{response}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if agent is declaring task complete using unique token.
+
+Returns:
+    Tuple of (is_complete: bool, summary: str)
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_a6219e4e9c2c63cebb97122848b591a70_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_a6219e4e9c2c63cebb97122848b591a70_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceaxe_a5387f652eb28eecb3bec22654aa3e40d}\index{axe@{axe}!detect\_agent\_token@{detect\_agent\_token}}
+\index{detect\_agent\_token@{detect\_agent\_token}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{detect\_agent\_token()}{detect\_agent\_token()}}
+{\footnotesize\ttfamily \label{namespaceaxe_a5387f652eb28eecb3bec22654aa3e40d} 
+ tuple\mbox{[}bool, str\mbox{]} axe.\+detect\+\_\+agent\+\_\+token (\begin{DoxyParamCaption}\item[{str}]{response}{, }\item[{str}]{token}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Detect unique agent communication tokens in response.
+
+Args:
+    response: The agent's response text
+    token: The token to search for (e.g., AGENT_TOKEN_PASS)
+
+Returns:
+    Tuple of (found: bool, content: str)
+    - found: Whether the token was detected
+    - content: Extracted content after the token (empty for simple tokens)
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_a5387f652eb28eecb3bec22654aa3e40d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceaxe_abb23f0d8329e501eb234daeb5a11ac9a}\index{axe@{axe}!generate\_sample\_config@{generate\_sample\_config}}
+\index{generate\_sample\_config@{generate\_sample\_config}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{generate\_sample\_config()}{generate\_sample\_config()}}
+{\footnotesize\ttfamily \label{namespaceaxe_abb23f0d8329e501eb234daeb5a11ac9a} 
+ None axe.\+generate\+\_\+sample\+\_\+config (\begin{DoxyParamCaption}\item[{str }]{path}{ = {\ttfamily \textquotesingle{}axe.yaml\textquotesingle{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate a sample configuration file.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{namespaceaxe_abb23f0d8329e501eb234daeb5a11ac9a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceaxe_aed941049819dac642905b812e754e2fa}\index{axe@{axe}!is\_genuine\_task\_completion@{is\_genuine\_task\_completion}}
+\index{is\_genuine\_task\_completion@{is\_genuine\_task\_completion}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{is\_genuine\_task\_completion()}{is\_genuine\_task\_completion()}}
+{\footnotesize\ttfamily \label{namespaceaxe_aed941049819dac642905b812e754e2fa} 
+ bool axe.\+is\+\_\+genuine\+\_\+task\+\_\+completion (\begin{DoxyParamCaption}\item[{str}]{response}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if agent is genuinely declaring task complete.
+
+Returns False for:
+- "TASK COMPLETE" inside <result> blocks (file content)
+- "TASK COMPLETE" inside quoted text
+- "TASK COMPLETE" in warnings/instructions
+- "TASK COMPLETE" inside [READ ...] blocks
+
+Returns True only for genuine declarations like:
+- "TASK COMPLETE: Here's what we accomplished..."
+- "✅ TASK COMPLETE"
+- "I declare TASK COMPLETE"
+- "THE TASK IS COMPLETE"
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_aed941049819dac642905b812e754e2fa_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceaxe_ac2811818e423281b1abace5155de35d2}\index{axe@{axe}!main@{main}}
+\index{main@{main}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespaceaxe_ac2811818e423281b1abace5155de35d2} 
+ None axe.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Main entry point.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{namespaceaxe_ac2811818e423281b1abace5155de35d2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=141pt]{namespaceaxe_ac2811818e423281b1abace5155de35d2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceaxe_ae18887cd1aba7d83578d18397fe0cd63}\index{axe@{axe}!restore\_agents\_on\_startup@{restore\_agents\_on\_startup}}
+\index{restore\_agents\_on\_startup@{restore\_agents\_on\_startup}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{restore\_agents\_on\_startup()}{restore\_agents\_on\_startup()}}
+{\footnotesize\ttfamily \label{namespaceaxe_ae18887cd1aba7d83578d18397fe0cd63} 
+ None axe.\+restore\+\_\+agents\+\_\+on\+\_\+startup (\begin{DoxyParamCaption}\item[{Optional\mbox{[}str\mbox{]} }]{db\+\_\+path}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Display agents from database on startup (informational only).
+
+Note: This function displays agent information from previous sessions
+but does not automatically recreate them in the current session.
+Agents must be explicitly spawned via collaborative sessions or
+other mechanisms. This is informational to show what agents
+existed in previous sessions.
+
+Args:
+    db_path: Optional path to SQLite database. If None, uses AXE installation directory.
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{namespaceaxe_ae18887cd1aba7d83578d18397fe0cd63_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceaxe_ae792b8af7b454e5f2e685ef5aa9c5207}\index{axe@{axe}!sync\_agents\_on\_shutdown@{sync\_agents\_on\_shutdown}}
+\index{sync\_agents\_on\_shutdown@{sync\_agents\_on\_shutdown}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{sync\_agents\_on\_shutdown()}{sync\_agents\_on\_shutdown()}}
+{\footnotesize\ttfamily \label{namespaceaxe_ae792b8af7b454e5f2e685ef5aa9c5207} 
+ None axe.\+sync\+\_\+agents\+\_\+on\+\_\+shutdown (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sync agent state to database on shutdown.
+This is called automatically via atexit.
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespaceaxe_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceaxe_a1231a95d9da8d332f1cb87feca5d4953}\index{axe@{axe}!\_global\_db@{\_global\_db}}
+\index{\_global\_db@{\_global\_db}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{\_global\_db}{\_global\_db}}
+{\footnotesize\ttfamily \label{namespaceaxe_a1231a95d9da8d332f1cb87feca5d4953} 
+axe.\+\_\+global\+\_\+db = None\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespaceaxe_a443d6ea5ad17499a058f5018e9704123}\index{axe@{axe}!HAS\_CHISEL@{HAS\_CHISEL}}
+\index{HAS\_CHISEL@{HAS\_CHISEL}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{HAS\_CHISEL}{HAS\_CHISEL}}
+{\footnotesize\ttfamily \label{namespaceaxe_a443d6ea5ad17499a058f5018e9704123} 
+bool axe.\+HAS\+\_\+\+CHISEL = False}
+
+\Hypertarget{namespaceaxe_acec3e08a64234809ed190c12d64ad726}\index{axe@{axe}!HAS\_GIT@{HAS\_GIT}}
+\index{HAS\_GIT@{HAS\_GIT}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{HAS\_GIT}{HAS\_GIT}}
+{\footnotesize\ttfamily \label{namespaceaxe_acec3e08a64234809ed190c12d64ad726} 
+bool axe.\+HAS\+\_\+\+GIT = True}
+
+\Hypertarget{namespaceaxe_a5fe64db9e0bd9702879e7765ad74e0e6}\index{axe@{axe}!HAS\_READLINE@{HAS\_READLINE}}
+\index{HAS\_READLINE@{HAS\_READLINE}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{HAS\_READLINE}{HAS\_READLINE}}
+{\footnotesize\ttfamily \label{namespaceaxe_a5fe64db9e0bd9702879e7765ad74e0e6} 
+bool axe.\+HAS\+\_\+\+READLINE = True}
+
+\Hypertarget{namespaceaxe_a83300a7c32303a1eacfcc6d392c5929b}\index{axe@{axe}!HAS\_WORKSHOP@{HAS\_WORKSHOP}}
+\index{HAS\_WORKSHOP@{HAS\_WORKSHOP}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{HAS\_WORKSHOP}{HAS\_WORKSHOP}}
+{\footnotesize\ttfamily \label{namespaceaxe_a83300a7c32303a1eacfcc6d392c5929b} 
+bool axe.\+HAS\+\_\+\+WORKSHOP = True}
+
+\Hypertarget{namespaceaxe_af421429727240fc6e6c4f590ddbc4f83}\index{axe@{axe}!HAS\_YAML@{HAS\_YAML}}
+\index{HAS\_YAML@{HAS\_YAML}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{HAS\_YAML}{HAS\_YAML}}
+{\footnotesize\ttfamily \label{namespaceaxe_af421429727240fc6e6c4f590ddbc4f83} 
+bool axe.\+HAS\+\_\+\+YAML = True}
+

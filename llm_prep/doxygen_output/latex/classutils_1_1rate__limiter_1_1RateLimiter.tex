@@ -1,0 +1,170 @@
+\doxysection{utils.\+rate\+\_\+limiter.\+Rate\+Limiter Class Reference}
+\hypertarget{classutils_1_1rate__limiter_1_1RateLimiter}{}\label{classutils_1_1rate__limiter_1_1RateLimiter}\index{utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}}
+
+
+Collaboration diagram for utils.\+rate\+\_\+limiter.\+Rate\+Limiter\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{classutils_1_1rate__limiter_1_1RateLimiter__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classutils_1_1rate__limiter_1_1RateLimiter_a884e7935539a5c8c653351a0311c030c}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Dict config)
+\item 
+Tuple\mbox{[}bool, Optional\mbox{[}str\mbox{]}\mbox{]} \mbox{\hyperlink{classutils_1_1rate__limiter_1_1RateLimiter_a80a9e5f75c2cd0535057930c4a6a5c0c}{check\+\_\+limit}} (self, str agent\+\_\+name, int tokens\+\_\+to\+\_\+add)
+\item 
+None \mbox{\hyperlink{classutils_1_1rate__limiter_1_1RateLimiter_a52259d2a83257b6d2682c6e9beb61c29}{add\+\_\+tokens}} (self, str agent\+\_\+name, int token\+\_\+count)
+\item 
+Tuple\mbox{[}int, int\mbox{]} \mbox{\hyperlink{classutils_1_1rate__limiter_1_1RateLimiter_ad4f56b6cf0d52c1de326eafeb0b75590}{get\+\_\+current\+\_\+usage}} (self, str agent\+\_\+name)
+\item 
+Dict\mbox{[}str, Tuple\mbox{[}int, int\mbox{]}\mbox{]} \mbox{\hyperlink{classutils_1_1rate__limiter_1_1RateLimiter_aa8feb9cb1f0ad7257995d840c59d5c85}{get\+\_\+all\+\_\+usage}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classutils_1_1rate__limiter_1_1RateLimiter_aef7fb7add502ec52347a9ec8f20b696c}{enabled}} = config.\+get(\textquotesingle{}enabled\textquotesingle{}, False)
+\item 
+\mbox{\hyperlink{classutils_1_1rate__limiter_1_1RateLimiter_ad5980757d9d74dfd66b97d7f1a698291}{global\+\_\+limit}} = config.\+get(\textquotesingle{}tokens\+\_\+per\+\_\+minute\textquotesingle{}, 10000)
+\item 
+\mbox{\hyperlink{classutils_1_1rate__limiter_1_1RateLimiter_aaca01304b3b6a0c933d9c7b753596f71}{per\+\_\+agent\+\_\+limits}} = config.\+get(\textquotesingle{}per\+\_\+agent\textquotesingle{}, \{\})
+\item 
+dict \mbox{\hyperlink{classutils_1_1rate__limiter_1_1RateLimiter_a84511d1faa16b7f030bba5854a0196a3}{usage\+\_\+history}} = \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Rate limiter with sliding window token tracking.
+Prevents API quota burnout by limiting tokens per minute per agent.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classutils_1_1rate__limiter_1_1RateLimiter_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classutils_1_1rate__limiter_1_1RateLimiter_a884e7935539a5c8c653351a0311c030c}\index{utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classutils_1_1rate__limiter_1_1RateLimiter_a884e7935539a5c8c653351a0311c030c} 
+utils.\+rate\+\_\+limiter.\+Rate\+Limiter.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict}]{config}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize rate limiter with configuration.
+
+Args:
+    config: Dictionary with rate limit configuration:
+        - enabled: Whether rate limiting is enabled
+        - tokens_per_minute: Global token limit per minute
+        - per_agent: Dict of per-agent limits
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classutils_1_1rate__limiter_1_1RateLimiter_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classutils_1_1rate__limiter_1_1RateLimiter_a52259d2a83257b6d2682c6e9beb61c29}\index{utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}!add\_tokens@{add\_tokens}}
+\index{add\_tokens@{add\_tokens}!utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}}
+\doxysubsubsection{\texorpdfstring{add\_tokens()}{add\_tokens()}}
+{\footnotesize\ttfamily \label{classutils_1_1rate__limiter_1_1RateLimiter_a52259d2a83257b6d2682c6e9beb61c29} 
+ None utils.\+rate\+\_\+limiter.\+Rate\+Limiter.\+add\+\_\+tokens (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{int}]{token\+\_\+count}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Record token usage for an agent.
+
+Args:
+    agent_name: Name of the agent
+    token_count: Number of tokens used
+\end{DoxyVerb}
+ \Hypertarget{classutils_1_1rate__limiter_1_1RateLimiter_a80a9e5f75c2cd0535057930c4a6a5c0c}\index{utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}!check\_limit@{check\_limit}}
+\index{check\_limit@{check\_limit}!utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}}
+\doxysubsubsection{\texorpdfstring{check\_limit()}{check\_limit()}}
+{\footnotesize\ttfamily \label{classutils_1_1rate__limiter_1_1RateLimiter_a80a9e5f75c2cd0535057930c4a6a5c0c} 
+ Tuple\mbox{[}bool, Optional\mbox{[}str\mbox{]}\mbox{]} utils.\+rate\+\_\+limiter.\+Rate\+Limiter.\+check\+\_\+limit (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{int}]{tokens\+\_\+to\+\_\+add}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if adding tokens would exceed rate limit.
+
+Args:
+    agent_name: Name of the agent
+    tokens_to_add: Number of tokens to add
+
+Returns:
+    Tuple of (allowed: bool, message: Optional[str])
+    - If allowed, message is None
+    - If not allowed, message explains why and when limit resets
+\end{DoxyVerb}
+ \Hypertarget{classutils_1_1rate__limiter_1_1RateLimiter_aa8feb9cb1f0ad7257995d840c59d5c85}\index{utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}!get\_all\_usage@{get\_all\_usage}}
+\index{get\_all\_usage@{get\_all\_usage}!utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}}
+\doxysubsubsection{\texorpdfstring{get\_all\_usage()}{get\_all\_usage()}}
+{\footnotesize\ttfamily \label{classutils_1_1rate__limiter_1_1RateLimiter_aa8feb9cb1f0ad7257995d840c59d5c85} 
+ Dict\mbox{[}str, Tuple\mbox{[}int, int\mbox{]}\mbox{]} utils.\+rate\+\_\+limiter.\+Rate\+Limiter.\+get\+\_\+all\+\_\+usage (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get current usage for all tracked agents.
+
+Returns:
+    Dictionary mapping agent_name to (current_usage, limit)
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1rate__limiter_1_1RateLimiter_aa8feb9cb1f0ad7257995d840c59d5c85_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classutils_1_1rate__limiter_1_1RateLimiter_ad4f56b6cf0d52c1de326eafeb0b75590}\index{utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}!get\_current\_usage@{get\_current\_usage}}
+\index{get\_current\_usage@{get\_current\_usage}!utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}}
+\doxysubsubsection{\texorpdfstring{get\_current\_usage()}{get\_current\_usage()}}
+{\footnotesize\ttfamily \label{classutils_1_1rate__limiter_1_1RateLimiter_ad4f56b6cf0d52c1de326eafeb0b75590} 
+ Tuple\mbox{[}int, int\mbox{]} utils.\+rate\+\_\+limiter.\+Rate\+Limiter.\+get\+\_\+current\+\_\+usage (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get current token usage for an agent in the last minute.
+
+Args:
+    agent_name: Name of the agent
+
+Returns:
+    Tuple of (current_usage, limit)
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classutils_1_1rate__limiter_1_1RateLimiter_ad4f56b6cf0d52c1de326eafeb0b75590_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classutils_1_1rate__limiter_1_1RateLimiter_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classutils_1_1rate__limiter_1_1RateLimiter_aef7fb7add502ec52347a9ec8f20b696c}\index{utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}!enabled@{enabled}}
+\index{enabled@{enabled}!utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}}
+\doxysubsubsection{\texorpdfstring{enabled}{enabled}}
+{\footnotesize\ttfamily \label{classutils_1_1rate__limiter_1_1RateLimiter_aef7fb7add502ec52347a9ec8f20b696c} 
+utils.\+rate\+\_\+limiter.\+Rate\+Limiter.\+enabled = config.\+get(\textquotesingle{}enabled\textquotesingle{}, False)}
+
+\Hypertarget{classutils_1_1rate__limiter_1_1RateLimiter_ad5980757d9d74dfd66b97d7f1a698291}\index{utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}!global\_limit@{global\_limit}}
+\index{global\_limit@{global\_limit}!utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}}
+\doxysubsubsection{\texorpdfstring{global\_limit}{global\_limit}}
+{\footnotesize\ttfamily \label{classutils_1_1rate__limiter_1_1RateLimiter_ad5980757d9d74dfd66b97d7f1a698291} 
+utils.\+rate\+\_\+limiter.\+Rate\+Limiter.\+global\+\_\+limit = config.\+get(\textquotesingle{}tokens\+\_\+per\+\_\+minute\textquotesingle{}, 10000)}
+
+\Hypertarget{classutils_1_1rate__limiter_1_1RateLimiter_aaca01304b3b6a0c933d9c7b753596f71}\index{utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}!per\_agent\_limits@{per\_agent\_limits}}
+\index{per\_agent\_limits@{per\_agent\_limits}!utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}}
+\doxysubsubsection{\texorpdfstring{per\_agent\_limits}{per\_agent\_limits}}
+{\footnotesize\ttfamily \label{classutils_1_1rate__limiter_1_1RateLimiter_aaca01304b3b6a0c933d9c7b753596f71} 
+utils.\+rate\+\_\+limiter.\+Rate\+Limiter.\+per\+\_\+agent\+\_\+limits = config.\+get(\textquotesingle{}per\+\_\+agent\textquotesingle{}, \{\})}
+
+\Hypertarget{classutils_1_1rate__limiter_1_1RateLimiter_a84511d1faa16b7f030bba5854a0196a3}\index{utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}!usage\_history@{usage\_history}}
+\index{usage\_history@{usage\_history}!utils.rate\_limiter.RateLimiter@{utils.rate\_limiter.RateLimiter}}
+\doxysubsubsection{\texorpdfstring{usage\_history}{usage\_history}}
+{\footnotesize\ttfamily \label{classutils_1_1rate__limiter_1_1RateLimiter_a84511d1faa16b7f030bba5854a0196a3} 
+dict utils.\+rate\+\_\+limiter.\+Rate\+Limiter.\+usage\+\_\+history = \{\}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+utils/\mbox{\hyperlink{rate__limiter_8py}{rate\+\_\+limiter.\+py}}\end{DoxyCompactItemize}

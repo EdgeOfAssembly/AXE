@@ -1,0 +1,215 @@
+\chapter{Git\+Hub Agent Integration }
+\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION}{}\label{md_docs_2GITHUB__AGENT__INTEGRATION}\index{GitHub Agent Integration@{GitHub Agent Integration}}
+\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md290}%
+\Hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md290}%
+\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md291}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md291}
+Allows agents in collaborative sessions to autonomously push code to Git\+Hub with {\bfseries{mandatory human review}}.\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md292}{}\doxysection{\texorpdfstring{Safety Features}{Safety Features}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md292}
+
+\begin{DoxyItemize}
+\item ✅ {\bfseries{Disabled by default}} -\/ Must explicitly enable
+\item ✅ {\bfseries{Human review required}} -\/ Cannot be bypassed
+\item ✅ {\bfseries{SSH-\/based}} -\/ Uses existing credentials
+\item ✅ {\bfseries{No auto-\/merge}} -\/ Human controls PR merging
+\item ✅ {\bfseries{Easy to disable}} -\/ Single flag
+\end{DoxyItemize}\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md293}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md293}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Enable\ GitHub\ mode}
+\DoxyCodeLine{python\ axe.py\ -\/-\/collab\ llama,claude\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/-\/workspace\ .\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/-\/time\ 60\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/-\/task\ "{}Add\ error\ handling"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/-\/enable-\/github}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md294}{}\doxysection{\texorpdfstring{Agent Usage}{Agent Usage}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md294}
+Agents signal they\textquotesingle{}re ready to push\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[claude]\ All\ tests\ pass.\ Ready\ to\ push.}
+\DoxyCodeLine{[claude]\ [[GITHUB\_READY:\ agent/add-\/error-\/handling,\ Add\ comprehensive\ error\ handling]]}
+
+\end{DoxyCode}
+
+
+This triggers an {\bfseries{automatic pause}} for human review.\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md295}{}\doxysection{\texorpdfstring{Review Interface}{Review Interface}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md295}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{🚨\ AGENTS\ READY\ TO\ PUSH\ TO\ GITHUB}
+\DoxyCodeLine{════════════════════════════════════════════}
+\DoxyCodeLine{}
+\DoxyCodeLine{Branch:\ agent/add-\/error-\/handling}
+\DoxyCodeLine{Commit:\ Add\ comprehensive\ error\ handling}
+\DoxyCodeLine{}
+\DoxyCodeLine{Files\ changed:}
+\DoxyCodeLine{\ \ M\ src/parser.c}
+\DoxyCodeLine{\ \ M\ tests/test\_parser.c}
+\DoxyCodeLine{}
+\DoxyCodeLine{Options:}
+\DoxyCodeLine{\ \ 'a'\ -\/\ Approve\ and\ push}
+\DoxyCodeLine{\ \ 'r'\ -\/\ Reject\ and\ give\ feedback}
+\DoxyCodeLine{\ \ 'd'\ -\/\ Show\ full\ diff}
+\DoxyCodeLine{\ \ 's'\ -\/\ Skip,\ end\ session}
+\DoxyCodeLine{}
+\DoxyCodeLine{Choice:\ }
+
+\end{DoxyCode}
+\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md296}{}\doxysection{\texorpdfstring{Configuration}{Configuration}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md296}
+In {\ttfamily axe.\+yaml}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{github\_integration:}
+\DoxyCodeLine{\ \ enabled:\ false\ \ \#\ Must\ explicitly\ enable}
+\DoxyCodeLine{\ \ require\_review:\ true\ \ \#\ Cannot\ be\ disabled\ (safety)}
+\DoxyCodeLine{\ \ branch\_prefix:\ agent/}
+\DoxyCodeLine{\ \ ssh\_key\_path:\ null\ \ \#\ Auto-\/detect}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md297}{}\doxysection{\texorpdfstring{Command Line Option}{Command Line Option}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md297}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/enable-\/github\ \ \ \ \ Enable\ autonomous\ GitHub\ operations\ (disabled\ by\ default)}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md298}{}\doxysection{\texorpdfstring{Token Format}{Token Format}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md298}
+Agents use the following token to signal readiness\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[[GITHUB\_READY:\ branch-\/name,\ commit\ message]]}
+
+\end{DoxyCode}
+
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[[GITHUB\_READY:\ agent/fix-\/bug,\ Fix\ memory\ leak\ in\ parser]]}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md299}{}\doxysection{\texorpdfstring{Review Flow}{Review Flow}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md299}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Agent signals ready}}\+: Uses {\ttfamily \mbox{[}\mbox{[}GITHUB\+\_\+\+READY\+: ...\mbox{]}\mbox{]}} token
+\item {\bfseries{Session pauses}}\+: Review interface appears
+\item {\bfseries{Human reviews}}\+: Can view diff, approve, or reject
+\item {\bfseries{If approved}}\+: Code is pushed to specified branch
+\item {\bfseries{Optional PR creation}}\+: Human can create PR via {\ttfamily gh} CLI
+\item {\bfseries{If rejected}}\+: Feedback is sent back to agents
+\end{DoxyEnumerate}\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md300}{}\doxysection{\texorpdfstring{Rejection and Feedback}{Rejection and Feedback}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md300}
+When rejecting a push request\+:
+
+
+\begin{DoxyEnumerate}
+\item Enter \textquotesingle{}r\textquotesingle{} at the review prompt
+\item Provide feedback explaining why (e.\+g., "{}\+Need more tests"{})
+\item Session resumes with feedback injected
+\item Agents can address feedback and signal ready again
+\end{DoxyEnumerate}\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md301}{}\doxysection{\texorpdfstring{Requirements}{Requirements}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md301}
+
+\begin{DoxyItemize}
+\item Git repository initialized in workspace
+\item SSH authentication configured for remote
+\item (Optional) {\ttfamily gh} CLI for PR creation
+\end{DoxyItemize}\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md302}{}\doxysection{\texorpdfstring{Safety Guarantees}{Safety Guarantees}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md302}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Disabled by default}}\+: Must use {\ttfamily -\/-\/enable-\/github} flag
+\item {\bfseries{Human review required}}\+: Every push reviewed before execution
+\item {\bfseries{No auto-\/merge}}\+: PRs must be manually merged
+\item {\bfseries{SSH-\/only}}\+: Uses existing SSH credentials, no token storage
+\item {\bfseries{Clear warnings}}\+: Visual indicators when enabled
+\end{DoxyEnumerate}\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md303}{}\doxysection{\texorpdfstring{Removal}{Removal}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md303}
+To completely remove this feature\+:
+
+
+\begin{DoxyEnumerate}
+\item Delete {\ttfamily \doxylink{github__agent_8py}{core/github\+\_\+agent.\+py}}
+\item Remove {\ttfamily github\+\_\+enabled} parameter from {\ttfamily Collaborative\+Session.\+\_\+\+\_\+init\+\_\+\+\_\+}
+\item Remove the Git\+Hub check in {\ttfamily \+\_\+run\+\_\+collaboration\+\_\+loop}
+\item Remove {\ttfamily -\/-\/enable-\/github} argument from \doxylink{depklite_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main()}
+\item Remove Git\+Hub methods from Collaborative\+Session
+\end{DoxyEnumerate}
+
+{\bfseries{Zero impact on existing functionality when disabled.}}\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md304}{}\doxysection{\texorpdfstring{Example Session}{Example Session}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md304}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$\ python\ axe.py\ -\/-\/collab\ llama,claude\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ -\/-\/workspace\ \string~/myproject\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ -\/-\/task\ "{}Add\ logging"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ -\/-\/enable-\/github}
+\DoxyCodeLine{}
+\DoxyCodeLine{✓\ GitHub\ agent\ mode\ enabled}
+\DoxyCodeLine{}
+\DoxyCodeLine{[Starting\ collaborative\ session...]}
+\DoxyCodeLine{}
+\DoxyCodeLine{[llama]\ I'll\ add\ a\ logging\ module...}
+\DoxyCodeLine{[EXEC:\ touch\ logger.py]}
+\DoxyCodeLine{[WRITE:\ logger.py]}
+\DoxyCodeLine{}
+\DoxyCodeLine{[claude]\ Looks\ good.\ Tests\ pass.\ Ready\ to\ commit.}
+\DoxyCodeLine{[claude]\ [[GITHUB\_READY:\ agent/add-\/logging,\ Add\ structured\ logging\ module]]}
+\DoxyCodeLine{}
+\DoxyCodeLine{🚨\ AGENTS\ READY\ TO\ PUSH\ TO\ GITHUB}
+\DoxyCodeLine{════════════════════════════════════════════}
+\DoxyCodeLine{}
+\DoxyCodeLine{Branch:\ agent/add-\/logging}
+\DoxyCodeLine{Commit:\ Add\ structured\ logging\ module}
+\DoxyCodeLine{}
+\DoxyCodeLine{Files\ changed:}
+\DoxyCodeLine{\ \ M\ logger.py}
+\DoxyCodeLine{\ \ M\ tests/test\_logger.py}
+\DoxyCodeLine{}
+\DoxyCodeLine{Options:}
+\DoxyCodeLine{\ \ 'a'\ -\/\ Approve\ and\ push}
+\DoxyCodeLine{\ \ 'r'\ -\/\ Reject\ and\ give\ feedback}
+\DoxyCodeLine{\ \ 'd'\ -\/\ Show\ full\ diff}
+\DoxyCodeLine{\ \ 's'\ -\/\ Skip,\ end\ session}
+\DoxyCodeLine{}
+\DoxyCodeLine{Choice:\ a}
+\DoxyCodeLine{}
+\DoxyCodeLine{✓\ Pushing\ to\ GitHub...}
+\DoxyCodeLine{✓\ Pushed\ to\ branch:\ agent/add-\/logging}
+\DoxyCodeLine{Create\ PR?\ (y/n):\ y}
+\DoxyCodeLine{✓\ PR\ created:\ https://github.com/user/repo/pull/123}
+\DoxyCodeLine{}
+\DoxyCodeLine{SESSION\ ENDED}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md305}{}\doxysection{\texorpdfstring{Error Handling}{Error Handling}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md305}
+The Git\+Hub agent handles errors gracefully\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{No git repo}}\+: Warning displayed, feature disabled
+\item {\bfseries{SSH not configured}}\+: Push fails with clear error
+\item {\bfseries{No changes}}\+: Commit fails with "{}nothing to commit"{} message
+\item {\bfseries{Push fails}}\+: Error displayed, session can continue
+\end{DoxyItemize}\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md306}{}\doxysection{\texorpdfstring{Security Considerations}{Security Considerations}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md306}
+
+\begin{DoxyItemize}
+\item Uses existing SSH credentials (no token storage)
+\item Never bypasses human review
+\item No automatic PR merging
+\item Clear visual indicators when enabled
+\item Can be completely disabled
+\end{DoxyItemize}\hypertarget{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md307}{}\doxysection{\texorpdfstring{Testing}{Testing}}\label{md_docs_2GITHUB__AGENT__INTEGRATION_autotoc_md307}
+Run tests with\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ tests/test\_github\_agent.py}
+
+\end{DoxyCode}
+
+
+Tests cover\+:
+\begin{DoxyItemize}
+\item Disabled by default behavior
+\item Git repository detection
+\item Token detection and parsing
+\item No-\/op behavior when disabled
+\item Diff generation
+\item Error handling 
+\end{DoxyItemize}

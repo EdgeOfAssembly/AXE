@@ -1,0 +1,47 @@
+\doxysection{models/metadata.py File Reference}
+\hypertarget{metadata_8py}{}\label{metadata_8py}\index{models/metadata.py@{models/metadata.py}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacemodels}{models}}
+\item 
+namespace \mbox{\hyperlink{namespacemodels_1_1metadata}{models.\+metadata}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacemodels_1_1metadata_a5a7932024f8760351863db28e01e8bbd}{models.\+metadata.\+\_\+load\+\_\+models\+\_\+yaml}} ()
+\item 
+bool \mbox{\hyperlink{namespacemodels_1_1metadata_a6f87fca809c78c14ab877d4526d80e1f}{models.\+metadata.\+uses\+\_\+max\+\_\+completion\+\_\+tokens}} (str model\+\_\+name)
+\item 
+Dict \mbox{\hyperlink{namespacemodels_1_1metadata_af1deaacdde9b07ed1e1839b504b05c03}{models.\+metadata.\+get\+\_\+model\+\_\+info}} (str model\+\_\+name)
+\item 
+str \mbox{\hyperlink{namespacemodels_1_1metadata_ab6ab0f84d1398bf8ca3ea3619c414fd9}{models.\+metadata.\+format\+\_\+token\+\_\+count}} (int tokens)
+\item 
+str \mbox{\hyperlink{namespacemodels_1_1metadata_a6b6eea40b2ea7d4a925a2f34d7f17ca4}{models.\+metadata.\+format\+\_\+input\+\_\+modes}} (List\mbox{[}str\mbox{]} modes)
+\item 
+str \mbox{\hyperlink{namespacemodels_1_1metadata_a959bd8a8f487f3c829e22b33879b288b}{models.\+metadata.\+format\+\_\+output\+\_\+modes}} (List\mbox{[}str\mbox{]} modes)
+\item 
+int \mbox{\hyperlink{namespacemodels_1_1metadata_a74979497137366bcbefb76bfc2bcb555}{models.\+metadata.\+get\+\_\+max\+\_\+output\+\_\+tokens}} (str model\+\_\+name, int default=4000)
+\item 
+bool \mbox{\hyperlink{namespacemodels_1_1metadata_a28d1646da3a97c054cd49e96f17c69df}{models.\+metadata.\+supports\+\_\+extended\+\_\+thinking}} (str model\+\_\+name)
+\item 
+int \mbox{\hyperlink{namespacemodels_1_1metadata_ad02c6726cf2ee370a30c9dd7f6e11386}{models.\+metadata.\+get\+\_\+extended\+\_\+thinking\+\_\+budget}} (str model\+\_\+name)
+\item 
+bool \mbox{\hyperlink{namespacemodels_1_1metadata_a2c5be0de038b417bd4c9c156fca253b1}{models.\+metadata.\+is\+\_\+anthropic\+\_\+model}} (str model\+\_\+name)
+\item 
+Dict \mbox{\hyperlink{namespacemodels_1_1metadata_a357094a54eb97a4e66bb8867f735f872}{models.\+metadata.\+get\+\_\+anthropic\+\_\+config}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacemodels_1_1metadata_ab91dd5420de9abbf2f22a03f4f19b080}{models.\+metadata.\+\_\+models\+\_\+yaml\+\_\+path}} = os.\+path.\+join(os.\+path.\+dirname(os.\+path.\+dirname(\+\_\+\+\_\+file\+\_\+\+\_\+)), \textquotesingle{}models.\+yaml\textquotesingle{})
+\item 
+\mbox{\hyperlink{namespacemodels_1_1metadata_acf145ea659d5a3b2dd29a16eff11e432}{models.\+metadata.\+\_\+config}} = \mbox{\hyperlink{namespacemodels_1_1metadata_a5a7932024f8760351863db28e01e8bbd}{\+\_\+load\+\_\+models\+\_\+yaml}}()
+\item 
+\mbox{\hyperlink{namespacemodels_1_1metadata_a9ff02032d18dc45aeb46e750edad4f71}{models.\+metadata.\+MODEL\+\_\+\+METADATA}} = \+\_\+config.\+get(\textquotesingle{}\mbox{\hyperlink{namespacemodels}{models}}\textquotesingle{}, \{\})
+\item 
+\mbox{\hyperlink{namespacemodels_1_1metadata_a353840d4c08eb121d31aa051d119dba1}{models.\+metadata.\+DEFAULT\+\_\+\+METADATA}}
+\item 
+\mbox{\hyperlink{namespacemodels_1_1metadata_a7640cbfe4367f4161e97e813a8803fe6}{models.\+metadata.\+USE\+\_\+\+MAX\+\_\+\+COMPLETION\+\_\+\+TOKENS}} = set(\+\_\+config.\+get(\textquotesingle{}use\+\_\+max\+\_\+completion\+\_\+tokens\textquotesingle{}, \mbox{[}$\,$\mbox{]}))
+\end{DoxyCompactItemize}

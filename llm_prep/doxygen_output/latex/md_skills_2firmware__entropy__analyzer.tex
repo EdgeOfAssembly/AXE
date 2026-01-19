@@ -1,0 +1,12 @@
+\chapter{firmware\+\_\+entropy\+\_\+analyzer }
+\hypertarget{md_skills_2firmware__entropy__analyzer}{}\label{md_skills_2firmware__entropy__analyzer}\index{firmware\_entropy\_analyzer@{firmware\_entropy\_analyzer}}
+Skill\+: firmware\+\_\+entropy\+\_\+analyzer Category\+: Firmware Analysis / Encryption Detection Recommended agents\+: grok, llama Purpose\+: Use entropy analysis to detect compressed, encrypted or plaintext sections
+
+Key approach\+:
+\begin{DoxyItemize}
+\item binwalk -\/E $<$file$>$ → generate entropy plot
+\item High entropy regions → likely encrypted or compressed code/data
+\item Low entropy regions → usually strings, headers, config, compressed sections
+\end{DoxyItemize}
+
+Typical inputs\+: firmware file Outputs\+: Entropy graph interpretation + regions classification (plaintext / compressed / encrypted / random) + suggestions where to look for keys or unpackers 

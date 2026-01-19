@@ -1,0 +1,59 @@
+\doxysection{utils.\+context\+\_\+optimizer Namespace Reference}
+\hypertarget{namespaceutils_1_1context__optimizer}{}\label{namespaceutils_1_1context__optimizer}\index{utils.context\_optimizer@{utils.context\_optimizer}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1context__optimizer_1_1Message}{Message}}
+\item 
+class \mbox{\hyperlink{classutils_1_1context__optimizer_1_1ContextOptimizer}{Context\+Optimizer}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+List\mbox{[}List\mbox{[}Dict\mbox{]}\mbox{]} \mbox{\hyperlink{namespaceutils_1_1context__optimizer_aa769cb7102777da8f0ceb44749af2de1}{create\+\_\+sliding\+\_\+window}} (List\mbox{[}Dict\mbox{]} messages, int window\+\_\+size, int overlap=0)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{namespaceutils_1_1context__optimizer_ac536fec2687fa7bfe77048815fcf5107}{estimate\+\_\+token\+\_\+savings}} (int original\+\_\+tokens, int optimized\+\_\+tokens)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Context optimization utilities for AXE.
+Reduces token usage through intelligent truncation, summarization, and compression.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespaceutils_1_1context__optimizer_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceutils_1_1context__optimizer_aa769cb7102777da8f0ceb44749af2de1}\index{utils.context\_optimizer@{utils.context\_optimizer}!create\_sliding\_window@{create\_sliding\_window}}
+\index{create\_sliding\_window@{create\_sliding\_window}!utils.context\_optimizer@{utils.context\_optimizer}}
+\doxysubsubsection{\texorpdfstring{create\_sliding\_window()}{create\_sliding\_window()}}
+{\footnotesize\ttfamily \label{namespaceutils_1_1context__optimizer_aa769cb7102777da8f0ceb44749af2de1} 
+ List\mbox{[}List\mbox{[}Dict\mbox{]}\mbox{]} utils.\+context\+\_\+optimizer.\+create\+\_\+sliding\+\_\+window (\begin{DoxyParamCaption}\item[{List\mbox{[}Dict\mbox{]}}]{messages}{, }\item[{int}]{window\+\_\+size}{, }\item[{int }]{overlap}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Create sliding windows over messages for processing in chunks.
+
+Args:
+    messages: List of messages
+    window_size: Size of each window
+    overlap: Number of messages to overlap between windows
+
+Returns:
+    List of message windows
+\end{DoxyVerb}
+ \Hypertarget{namespaceutils_1_1context__optimizer_ac536fec2687fa7bfe77048815fcf5107}\index{utils.context\_optimizer@{utils.context\_optimizer}!estimate\_token\_savings@{estimate\_token\_savings}}
+\index{estimate\_token\_savings@{estimate\_token\_savings}!utils.context\_optimizer@{utils.context\_optimizer}}
+\doxysubsubsection{\texorpdfstring{estimate\_token\_savings()}{estimate\_token\_savings()}}
+{\footnotesize\ttfamily \label{namespaceutils_1_1context__optimizer_ac536fec2687fa7bfe77048815fcf5107} 
+ Dict\mbox{[}str, Any\mbox{]} utils.\+context\+\_\+optimizer.\+estimate\+\_\+token\+\_\+savings (\begin{DoxyParamCaption}\item[{int}]{original\+\_\+tokens}{, }\item[{int}]{optimized\+\_\+tokens}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculate token savings statistics.
+
+Args:
+    original_tokens: Original token count
+    optimized_tokens: Optimized token count
+
+Returns:
+    Dictionary with savings statistics
+\end{DoxyVerb}
+ 

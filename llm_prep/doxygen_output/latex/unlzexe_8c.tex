@@ -1,0 +1,456 @@
+\doxysection{tools/dos\+\_\+unpackers/unlzexe.c File Reference}
+\hypertarget{unlzexe_8c}{}\label{unlzexe_8c}\index{tools/dos\_unpackers/unlzexe.c@{tools/dos\_unpackers/unlzexe.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for unlzexe.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{unlzexe_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structbitstream}{bitstream}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{unlzexe_8c_a1c6d5de492ac61ad29aec7aa9a436bbf}{VERSION}}~"{}0.\+9"{}
+\item 
+\#define \mbox{\hyperlink{unlzexe_8c_a4e0be90a3757e352f42612d09a7d1aa5}{stricmp}}~strcasecmp /\texorpdfstring{$\ast$}{*} v0.\+9 \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{unlzexe_8c_a6d58f9ac447476b4e084d7ca383f5183}{FAILURE}}~1
+\item 
+\#define \mbox{\hyperlink{unlzexe_8c_aa90cac659d18e8ef6294c7ae337f6b58}{SUCCESS}}~0
+\item 
+\#define \mbox{\hyperlink{unlzexe_8c_adb31912976d1b01a9e2575a9fde9d4d2}{iskanji}}(c)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef uint16\+\_\+t \mbox{\hyperlink{unlzexe_8c_ab24077addd3b7b13e086987ff296552c}{WORD}}
+\item 
+typedef uint8\+\_\+t \mbox{\hyperlink{unlzexe_8c_aae9749d96e15ccb4f482dd5f55d98f9b}{BYTE}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{unlzexe_8c_ac31e4a877b09226400b2ca4aa48987c0}{isjapan}} (void)
+\item 
+int \mbox{\hyperlink{unlzexe_8c_a38648f3d653a7637c80328a81f21fa31}{fnamechk}} (char \texorpdfstring{$\ast$}{*}, char \texorpdfstring{$\ast$}{*}, char \texorpdfstring{$\ast$}{*}, int, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*})
+\item 
+int \mbox{\hyperlink{unlzexe_8c_a019eabe66c4e1eb74dee48f721fce3a7}{fnamechg}} (char \texorpdfstring{$\ast$}{*}, char \texorpdfstring{$\ast$}{*}, char \texorpdfstring{$\ast$}{*}, int)
+\item 
+int \mbox{\hyperlink{unlzexe_8c_a81ee635bcd730cb2fe1a19fd1339e4f1}{rdhead}} (FILE \texorpdfstring{$\ast$}{*}, int \texorpdfstring{$\ast$}{*})
+\item 
+int \mbox{\hyperlink{unlzexe_8c_aaf416b3f984609e62a7dbbca9ec6c80a}{mkreltbl}} (FILE \texorpdfstring{$\ast$}{*}, FILE \texorpdfstring{$\ast$}{*}, int)
+\item 
+int \mbox{\hyperlink{unlzexe_8c_a006f22989de2042e481f380685a4bf55}{unpack}} (FILE \texorpdfstring{$\ast$}{*}, FILE \texorpdfstring{$\ast$}{*})
+\item 
+void \mbox{\hyperlink{unlzexe_8c_a3af47884cdb4a016fbee50af94b883ff}{wrhead}} (FILE \texorpdfstring{$\ast$}{*})
+\item 
+int \mbox{\hyperlink{unlzexe_8c_a64935c62813a7915e3a5db04d23290d9}{reloc90}} (FILE \texorpdfstring{$\ast$}{*}ifile, FILE \texorpdfstring{$\ast$}{*}ofile, long fpos)
+\item 
+int \mbox{\hyperlink{unlzexe_8c_af8e30b9dd84d20734e79ef24efe86422}{reloc91}} (FILE \texorpdfstring{$\ast$}{*}ifile, FILE \texorpdfstring{$\ast$}{*}ofile, long fpos)
+\item 
+int \mbox{\hyperlink{unlzexe_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+void \mbox{\hyperlink{unlzexe_8c_aca838a1cf52850e61f6014cdaef73c33}{parsepath}} (char \texorpdfstring{$\ast$}{*}pathname, int \texorpdfstring{$\ast$}{*}fname, int \texorpdfstring{$\ast$}{*}ext)
+\item 
+void \mbox{\hyperlink{unlzexe_8c_a88a8845e0edb63f4a80a773bb60d1a29}{initbits}} (\mbox{\hyperlink{structbitstream}{bitstream}} \texorpdfstring{$\ast$}{*}, FILE \texorpdfstring{$\ast$}{*})
+\item 
+int \mbox{\hyperlink{unlzexe_8c_ae673e158bc0bb8344206036a1e2884b5}{getbit}} (\mbox{\hyperlink{structbitstream}{bitstream}} \texorpdfstring{$\ast$}{*})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{unlzexe_8c_a4f947a8695c3b3d935d824ba323c9056}{japan\+\_\+f}}
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{unlzexe_8c_abac87d72dc2f3c6b1faa3c99f9499be7}{tmpfname}} = "{}\$tmpfil\$.\+exe"{}
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{unlzexe_8c_a86abd9de8d139455a66ff49f843534cc}{backup\+\_\+ext}} = "{}.olz"{}
+\item 
+char \mbox{\hyperlink{unlzexe_8c_a863e2897ee772ec6d99baca957496865}{ipath}} \mbox{[}FILENAME\+\_\+\+MAX\mbox{]}
+\item 
+char \mbox{\hyperlink{unlzexe_8c_a4fdbcf72cd55f5b000ce2035b2db07f1}{opath}} \mbox{[}FILENAME\+\_\+\+MAX\mbox{]}
+\item 
+char \mbox{\hyperlink{unlzexe_8c_a381c7c9940b1d32bf81d86982070e61f}{ofname}} \mbox{[}13\mbox{]}
+\item 
+static \mbox{\hyperlink{unlzexe_8c_ab24077addd3b7b13e086987ff296552c}{WORD}} \mbox{\hyperlink{unlzexe_8c_ab6d1fca4cbd607c7359331a9e5032fd4}{ihead}} \mbox{[}0x10\mbox{]}
+\item 
+static \mbox{\hyperlink{unlzexe_8c_ab24077addd3b7b13e086987ff296552c}{WORD}} \mbox{\hyperlink{unlzexe_8c_af2f8923200c5779b213006e666e56c14}{ohead}} \mbox{[}0x10\mbox{]}
+\item 
+static \mbox{\hyperlink{unlzexe_8c_ab24077addd3b7b13e086987ff296552c}{WORD}} \mbox{\hyperlink{unlzexe_8c_a71234cf87d5b69e75361edd77e1cfb13}{inf}} \mbox{[}8\mbox{]}
+\item 
+static long \mbox{\hyperlink{unlzexe_8c_aa9bae4d66a39e3aa93931967cd56f75c}{loadsize}}
+\item 
+static \mbox{\hyperlink{unlzexe_8c_aae9749d96e15ccb4f482dd5f55d98f9b}{BYTE}} \mbox{\hyperlink{unlzexe_8c_a6edf93bdd835a8e45a78ec2ce7cfb938}{sig90}} \mbox{[}$\,$\mbox{]}
+\item 
+static \mbox{\hyperlink{unlzexe_8c_aae9749d96e15ccb4f482dd5f55d98f9b}{BYTE}} \mbox{\hyperlink{unlzexe_8c_a07213517834adb7b3ccbcf42afdd561a}{sig91}} \mbox{[}$\,$\mbox{]}
+\item 
+static \mbox{\hyperlink{unlzexe_8c_aae9749d96e15ccb4f482dd5f55d98f9b}{BYTE}} \mbox{\hyperlink{unlzexe_8c_a6725f3f4a867bce7fec9bb9bc6e48a2b}{sigbuf}} \mbox{[}sizeof \mbox{\hyperlink{unlzexe_8c_a6edf93bdd835a8e45a78ec2ce7cfb938}{sig90}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{unlzexe_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{unlzexe_8c_a6d58f9ac447476b4e084d7ca383f5183}\index{unlzexe.c@{unlzexe.c}!FAILURE@{FAILURE}}
+\index{FAILURE@{FAILURE}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{FAILURE}{FAILURE}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a6d58f9ac447476b4e084d7ca383f5183} 
+\#define FAILURE~1}
+
+\Hypertarget{unlzexe_8c_adb31912976d1b01a9e2575a9fde9d4d2}\index{unlzexe.c@{unlzexe.c}!iskanji@{iskanji}}
+\index{iskanji@{iskanji}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{iskanji}{iskanji}}
+{\footnotesize\ttfamily \label{unlzexe_8c_adb31912976d1b01a9e2575a9fde9d4d2} 
+\#define iskanji(\begin{DoxyParamCaption}\item[{}]{c}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\textcolor{stringliteral}{'\(\backslash\)x81'}<=(c)\&\&(c)<=\textcolor{stringliteral}{'\(\backslash\)x9f'}\ ||\ \textcolor{stringliteral}{'\(\backslash\)xe0'}<=(c)\&\&(c)<=\textcolor{stringliteral}{'\(\backslash\)xfc'})}
+
+\end{DoxyCode}
+\Hypertarget{unlzexe_8c_a4e0be90a3757e352f42612d09a7d1aa5}\index{unlzexe.c@{unlzexe.c}!stricmp@{stricmp}}
+\index{stricmp@{stricmp}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{stricmp}{stricmp}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a4e0be90a3757e352f42612d09a7d1aa5} 
+\#define stricmp~strcasecmp /\texorpdfstring{$\ast$}{*} v0.\+9 \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{unlzexe_8c_aa90cac659d18e8ef6294c7ae337f6b58}\index{unlzexe.c@{unlzexe.c}!SUCCESS@{SUCCESS}}
+\index{SUCCESS@{SUCCESS}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{SUCCESS}{SUCCESS}}
+{\footnotesize\ttfamily \label{unlzexe_8c_aa90cac659d18e8ef6294c7ae337f6b58} 
+\#define SUCCESS~0}
+
+\Hypertarget{unlzexe_8c_a1c6d5de492ac61ad29aec7aa9a436bbf}\index{unlzexe.c@{unlzexe.c}!VERSION@{VERSION}}
+\index{VERSION@{VERSION}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{VERSION}{VERSION}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a1c6d5de492ac61ad29aec7aa9a436bbf} 
+\#define VERSION~"{}0.\+9"{}}
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{unlzexe_8c_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{unlzexe_8c_aae9749d96e15ccb4f482dd5f55d98f9b}\index{unlzexe.c@{unlzexe.c}!BYTE@{BYTE}}
+\index{BYTE@{BYTE}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{BYTE}{BYTE}}
+{\footnotesize\ttfamily \label{unlzexe_8c_aae9749d96e15ccb4f482dd5f55d98f9b} 
+typedef uint8\+\_\+t \mbox{\hyperlink{unlzexe_8c_aae9749d96e15ccb4f482dd5f55d98f9b}{BYTE}}}
+
+\Hypertarget{unlzexe_8c_ab24077addd3b7b13e086987ff296552c}\index{unlzexe.c@{unlzexe.c}!WORD@{WORD}}
+\index{WORD@{WORD}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{WORD}{WORD}}
+{\footnotesize\ttfamily \label{unlzexe_8c_ab24077addd3b7b13e086987ff296552c} 
+typedef uint16\+\_\+t \mbox{\hyperlink{unlzexe_8c_ab24077addd3b7b13e086987ff296552c}{WORD}}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{unlzexe_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{unlzexe_8c_a019eabe66c4e1eb74dee48f721fce3a7}\index{unlzexe.c@{unlzexe.c}!fnamechg@{fnamechg}}
+\index{fnamechg@{fnamechg}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{fnamechg()}{fnamechg()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a019eabe66c4e1eb74dee48f721fce3a7} 
+int fnamechg (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{ipath}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{opath}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{ofname}{, }\item[{int}]{rename\+\_\+sw}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{unlzexe_8c_a019eabe66c4e1eb74dee48f721fce3a7_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{unlzexe_8c_a019eabe66c4e1eb74dee48f721fce3a7_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unlzexe_8c_a38648f3d653a7637c80328a81f21fa31}\index{unlzexe.c@{unlzexe.c}!fnamechk@{fnamechk}}
+\index{fnamechk@{fnamechk}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{fnamechk()}{fnamechk()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a38648f3d653a7637c80328a81f21fa31} 
+int fnamechk (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{ipath}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{opath}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{ofname}{, }\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{unlzexe_8c_a38648f3d653a7637c80328a81f21fa31_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{unlzexe_8c_a38648f3d653a7637c80328a81f21fa31_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unlzexe_8c_ae673e158bc0bb8344206036a1e2884b5}\index{unlzexe.c@{unlzexe.c}!getbit@{getbit}}
+\index{getbit@{getbit}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{getbit()}{getbit()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_ae673e158bc0bb8344206036a1e2884b5} 
+int getbit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbitstream}{bitstream}} \texorpdfstring{$\ast$}{*}}]{p}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{unlzexe_8c_ae673e158bc0bb8344206036a1e2884b5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unlzexe_8c_a88a8845e0edb63f4a80a773bb60d1a29}\index{unlzexe.c@{unlzexe.c}!initbits@{initbits}}
+\index{initbits@{initbits}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{initbits()}{initbits()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a88a8845e0edb63f4a80a773bb60d1a29} 
+void initbits (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbitstream}{bitstream}} \texorpdfstring{$\ast$}{*}}]{p}{, }\item[{FILE \texorpdfstring{$\ast$}{*}}]{filep}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{unlzexe_8c_a88a8845e0edb63f4a80a773bb60d1a29_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unlzexe_8c_ac31e4a877b09226400b2ca4aa48987c0}\index{unlzexe.c@{unlzexe.c}!isjapan@{isjapan}}
+\index{isjapan@{isjapan}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{isjapan()}{isjapan()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_ac31e4a877b09226400b2ca4aa48987c0} 
+int isjapan (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{unlzexe_8c_ac31e4a877b09226400b2ca4aa48987c0_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unlzexe_8c_a3c04138a5bfe5d72780bb7e82a18e627}\index{unlzexe.c@{unlzexe.c}!main@{main}}
+\index{main@{main}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a3c04138a5bfe5d72780bb7e82a18e627} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{unlzexe_8c_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unlzexe_8c_aaf416b3f984609e62a7dbbca9ec6c80a}\index{unlzexe.c@{unlzexe.c}!mkreltbl@{mkreltbl}}
+\index{mkreltbl@{mkreltbl}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{mkreltbl()}{mkreltbl()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_aaf416b3f984609e62a7dbbca9ec6c80a} 
+int mkreltbl (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{ifile}{, }\item[{FILE \texorpdfstring{$\ast$}{*}}]{ofile}{, }\item[{int}]{ver}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{unlzexe_8c_aaf416b3f984609e62a7dbbca9ec6c80a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{unlzexe_8c_aaf416b3f984609e62a7dbbca9ec6c80a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unlzexe_8c_aca838a1cf52850e61f6014cdaef73c33}\index{unlzexe.c@{unlzexe.c}!parsepath@{parsepath}}
+\index{parsepath@{parsepath}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{parsepath()}{parsepath()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_aca838a1cf52850e61f6014cdaef73c33} 
+void parsepath (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{pathname}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{fname}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{ext}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{unlzexe_8c_aca838a1cf52850e61f6014cdaef73c33_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unlzexe_8c_a81ee635bcd730cb2fe1a19fd1339e4f1}\index{unlzexe.c@{unlzexe.c}!rdhead@{rdhead}}
+\index{rdhead@{rdhead}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{rdhead()}{rdhead()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a81ee635bcd730cb2fe1a19fd1339e4f1} 
+int rdhead (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{ifile}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{ver}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{unlzexe_8c_a81ee635bcd730cb2fe1a19fd1339e4f1_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unlzexe_8c_a64935c62813a7915e3a5db04d23290d9}\index{unlzexe.c@{unlzexe.c}!reloc90@{reloc90}}
+\index{reloc90@{reloc90}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{reloc90()}{reloc90()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a64935c62813a7915e3a5db04d23290d9} 
+int reloc90 (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{ifile}{, }\item[{FILE \texorpdfstring{$\ast$}{*}}]{ofile}{, }\item[{long}]{fpos}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{unlzexe_8c_a64935c62813a7915e3a5db04d23290d9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unlzexe_8c_af8e30b9dd84d20734e79ef24efe86422}\index{unlzexe.c@{unlzexe.c}!reloc91@{reloc91}}
+\index{reloc91@{reloc91}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{reloc91()}{reloc91()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_af8e30b9dd84d20734e79ef24efe86422} 
+int reloc91 (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{ifile}{, }\item[{FILE \texorpdfstring{$\ast$}{*}}]{ofile}{, }\item[{long}]{fpos}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{unlzexe_8c_af8e30b9dd84d20734e79ef24efe86422_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unlzexe_8c_a006f22989de2042e481f380685a4bf55}\index{unlzexe.c@{unlzexe.c}!unpack@{unpack}}
+\index{unpack@{unpack}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{unpack()}{unpack()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a006f22989de2042e481f380685a4bf55} 
+int unpack (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{ifile}{, }\item[{FILE \texorpdfstring{$\ast$}{*}}]{ofile}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{unlzexe_8c_a006f22989de2042e481f380685a4bf55_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{unlzexe_8c_a006f22989de2042e481f380685a4bf55_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{unlzexe_8c_a3af47884cdb4a016fbee50af94b883ff}\index{unlzexe.c@{unlzexe.c}!wrhead@{wrhead}}
+\index{wrhead@{wrhead}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{wrhead()}{wrhead()}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a3af47884cdb4a016fbee50af94b883ff} 
+void wrhead (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{ofile}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{unlzexe_8c_a3af47884cdb4a016fbee50af94b883ff_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{unlzexe_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{unlzexe_8c_a86abd9de8d139455a66ff49f843534cc}\index{unlzexe.c@{unlzexe.c}!backup\_ext@{backup\_ext}}
+\index{backup\_ext@{backup\_ext}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{backup\_ext}{backup\_ext}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a86abd9de8d139455a66ff49f843534cc} 
+char\texorpdfstring{$\ast$}{*} backup\+\_\+ext = "{}.olz"{}}
+
+\Hypertarget{unlzexe_8c_ab6d1fca4cbd607c7359331a9e5032fd4}\index{unlzexe.c@{unlzexe.c}!ihead@{ihead}}
+\index{ihead@{ihead}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{ihead}{ihead}}
+{\footnotesize\ttfamily \label{unlzexe_8c_ab6d1fca4cbd607c7359331a9e5032fd4} 
+\mbox{\hyperlink{unlzexe_8c_ab24077addd3b7b13e086987ff296552c}{WORD}} ihead\mbox{[}0x10\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{unlzexe_8c_a71234cf87d5b69e75361edd77e1cfb13}\index{unlzexe.c@{unlzexe.c}!inf@{inf}}
+\index{inf@{inf}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{inf}{inf}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a71234cf87d5b69e75361edd77e1cfb13} 
+\mbox{\hyperlink{unlzexe_8c_ab24077addd3b7b13e086987ff296552c}{WORD}} inf\mbox{[}8\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{unlzexe_8c_a863e2897ee772ec6d99baca957496865}\index{unlzexe.c@{unlzexe.c}!ipath@{ipath}}
+\index{ipath@{ipath}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{ipath}{ipath}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a863e2897ee772ec6d99baca957496865} 
+char ipath\mbox{[}FILENAME\+\_\+\+MAX\mbox{]}}
+
+\Hypertarget{unlzexe_8c_a4f947a8695c3b3d935d824ba323c9056}\index{unlzexe.c@{unlzexe.c}!japan\_f@{japan\_f}}
+\index{japan\_f@{japan\_f}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{japan\_f}{japan\_f}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a4f947a8695c3b3d935d824ba323c9056} 
+int japan\+\_\+f}
+
+\Hypertarget{unlzexe_8c_aa9bae4d66a39e3aa93931967cd56f75c}\index{unlzexe.c@{unlzexe.c}!loadsize@{loadsize}}
+\index{loadsize@{loadsize}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{loadsize}{loadsize}}
+{\footnotesize\ttfamily \label{unlzexe_8c_aa9bae4d66a39e3aa93931967cd56f75c} 
+long loadsize\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{unlzexe_8c_a381c7c9940b1d32bf81d86982070e61f}\index{unlzexe.c@{unlzexe.c}!ofname@{ofname}}
+\index{ofname@{ofname}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{ofname}{ofname}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a381c7c9940b1d32bf81d86982070e61f} 
+char ofname\mbox{[}13\mbox{]}}
+
+\Hypertarget{unlzexe_8c_af2f8923200c5779b213006e666e56c14}\index{unlzexe.c@{unlzexe.c}!ohead@{ohead}}
+\index{ohead@{ohead}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{ohead}{ohead}}
+{\footnotesize\ttfamily \label{unlzexe_8c_af2f8923200c5779b213006e666e56c14} 
+\mbox{\hyperlink{unlzexe_8c_ab24077addd3b7b13e086987ff296552c}{WORD}} ohead\mbox{[}0x10\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{unlzexe_8c_a4fdbcf72cd55f5b000ce2035b2db07f1}\index{unlzexe.c@{unlzexe.c}!opath@{opath}}
+\index{opath@{opath}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{opath}{opath}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a4fdbcf72cd55f5b000ce2035b2db07f1} 
+char opath\mbox{[}FILENAME\+\_\+\+MAX\mbox{]}}
+
+\Hypertarget{unlzexe_8c_a6edf93bdd835a8e45a78ec2ce7cfb938}\index{unlzexe.c@{unlzexe.c}!sig90@{sig90}}
+\index{sig90@{sig90}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{sig90}{sig90}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a6edf93bdd835a8e45a78ec2ce7cfb938} 
+\mbox{\hyperlink{unlzexe_8c_aae9749d96e15ccb4f482dd5f55d98f9b}{BYTE}} sig90\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{unlzexe_8c_a07213517834adb7b3ccbcf42afdd561a}\index{unlzexe.c@{unlzexe.c}!sig91@{sig91}}
+\index{sig91@{sig91}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{sig91}{sig91}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a07213517834adb7b3ccbcf42afdd561a} 
+\mbox{\hyperlink{unlzexe_8c_aae9749d96e15ccb4f482dd5f55d98f9b}{BYTE}} sig91\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{unlzexe_8c_a6725f3f4a867bce7fec9bb9bc6e48a2b}\index{unlzexe.c@{unlzexe.c}!sigbuf@{sigbuf}}
+\index{sigbuf@{sigbuf}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{sigbuf}{sigbuf}}
+{\footnotesize\ttfamily \label{unlzexe_8c_a6725f3f4a867bce7fec9bb9bc6e48a2b} 
+\mbox{\hyperlink{unlzexe_8c_aae9749d96e15ccb4f482dd5f55d98f9b}{BYTE}} sigbuf\mbox{[}sizeof \mbox{\hyperlink{unlzexe_8c_a6edf93bdd835a8e45a78ec2ce7cfb938}{sig90}}\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{unlzexe_8c_abac87d72dc2f3c6b1faa3c99f9499be7}\index{unlzexe.c@{unlzexe.c}!tmpfname@{tmpfname}}
+\index{tmpfname@{tmpfname}!unlzexe.c@{unlzexe.c}}
+\doxysubsubsection{\texorpdfstring{tmpfname}{tmpfname}}
+{\footnotesize\ttfamily \label{unlzexe_8c_abac87d72dc2f3c6b1faa3c99f9499be7} 
+char\texorpdfstring{$\ast$}{*} tmpfname = "{}\$tmpfil\$.\+exe"{}}
+

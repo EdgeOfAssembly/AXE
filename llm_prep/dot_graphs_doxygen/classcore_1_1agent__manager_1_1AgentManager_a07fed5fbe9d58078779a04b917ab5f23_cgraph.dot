@@ -1,0 +1,13 @@
+digraph "core.agent_manager.AgentManager.call_agent"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="core.agent_manager.Agent\lManager.call_agent",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="core.agent_manager.Agent\lManager._uses_max_completion\l_tokens",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classcore_1_1agent__manager_1_1AgentManager.html#a9723ad2b71e0f7645dfa3903728e8b0c",tooltip=" "];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="core.agent_manager.Agent\lManager.resolve_agent",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classcore_1_1agent__manager_1_1AgentManager.html#aff75497cb51ce30997d46f1d2a5ac5e6",tooltip=" "];
+}

@@ -1,0 +1,474 @@
+\doxysection{managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager Class Reference}
+\hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager}{}\label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+
+
+Collaboration diagram for managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a478fdd72d0f202f0d6b470de747e0c59}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a798ca91fbb126b4c46fbc93ce9b31b7f}{workspace\+\_\+dir}})
+\item 
+\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1BuildStatus}{Build\+Status}} \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a4616f493f92c2921eed73335504ad7b7}{record\+\_\+build\+\_\+output}} (self, str tool, str output, int exit\+\_\+code)
+\item 
+List\mbox{[}\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1BuildError}{Build\+Error}}\mbox{]} \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a64ddd06916b6c28a14142ac7a93e76bc}{get\+\_\+unclaimed\+\_\+errors}} (self)
+\item 
+bool \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a07256b0a1294090e17b3c447c7190b16}{claim\+\_\+error\+\_\+fix}} (self, int error\+\_\+index, str agent\+\_\+alias)
+\item 
+bool \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a55cff883bff3cce6259d8f56c0efbc95}{mark\+\_\+error\+\_\+fixed}} (self, int error\+\_\+index)
+\item 
+None \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a7f6c6ee3e48111e5f78e9c56158fc779}{add\+\_\+diff\+\_\+patch}} (self, str file, str author, str diff\+\_\+content, str description)
+\item 
+List\mbox{[}\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1DiffPatch}{Diff\+Patch}}\mbox{]} \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a7062199d438ff9bdc2ad96b4bdb4618d}{get\+\_\+recent\+\_\+patches}} (self, int limit=10)
+\item 
+str \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a8fac305f8c097255c2ced954866beaa7}{generate\+\_\+diff}} (self, str original\+\_\+content, str modified\+\_\+content, str filename)
+\item 
+str \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a6610da3e6d58f3ac1fc5aa6cdd7d7ff1}{get\+\_\+status\+\_\+summary}} (self)
+\item 
+str \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a319515a43e219a7a9c926224df63b581}{read\+\_\+status\+\_\+file}} (self)
+\item 
+str \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_abad895a90a818b227b5323d3f9625c4c}{read\+\_\+changes\+\_\+file}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a798ca91fbb126b4c46fbc93ce9b31b7f}{workspace\+\_\+dir}} = os.\+path.\+abspath(workspace\+\_\+dir)
+\item 
+\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a813ca9adfc2c778cc45da712d6feca37}{status\+\_\+file}} = os.\+path.\+join(self.\+workspace\+\_\+dir, \textquotesingle{}.collab\+\_\+build\+\_\+status.\+md\textquotesingle{})
+\item 
+\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a0a2efef842523472adc16ba20df0633b}{changes\+\_\+file}} = os.\+path.\+join(self.\+workspace\+\_\+dir, \textquotesingle{}.collab\+\_\+changes.\+md\textquotesingle{})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_abdc026d10854de83094e3cb8a7e00b72}{GCC\+\_\+\+ERROR\+\_\+\+PATTERN}}
+\item 
+\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_ab0bda62e92d10a8573452e1add61159f}{PYTHON\+\_\+\+ERROR\+\_\+\+PATTERN}}
+\item 
+\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a384783e38ac7bef496808223ce2a5115}{MAKE\+\_\+\+ERROR\+\_\+\+PATTERN}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_af01a4c34826896477c52cbbf4d2b8900}{\+\_\+init\+\_\+files}} (self)
+\item 
+None \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_aa69c8bc08d2e3811cc2fa370bece8359}{\+\_\+write\+\_\+status\+\_\+file}} (self)
+\item 
+None \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a0497404448f8f821f09718ba8f71e194}{\+\_\+write\+\_\+changes\+\_\+file}} (self)
+\item 
+None \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_aa4c88d726a2fd0dd4f773f67f645ad8c}{\+\_\+parse\+\_\+gcc\+\_\+output}} (self, str output, str tool)
+\item 
+None \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a6ec648f1f2e9b1d4b1ecebe88a30767b}{\+\_\+parse\+\_\+make\+\_\+output}} (self, str output, str tool)
+\item 
+None \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a757bbb7d30a5f3f49ff5c841d39e44b8}{\+\_\+parse\+\_\+python\+\_\+output}} (self, str output, str tool)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+list \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a8357cfd9022be1061bc1dbf5948e9276}{\+\_\+errors}} = \mbox{[}$\,$\mbox{]}
+\item 
+list \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_adf08d7dd36e6c4b44e0cb6ff8801b3d0}{\+\_\+patches}} = \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_abb0f27074148421ba2a2c4728967ceea}{\+\_\+last\+\_\+status}} = \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1BuildStatus_a4366c65856f02165602af2901845e85d}{Build\+Status.\+UNKNOWN}}
+\item 
+str \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a91982ebeefc0a3070587616b498467c4}{\+\_\+last\+\_\+output}} = "{}"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Manages shared build status file for multi-agent collaboration.
+
+Creates and maintains `.collab_build_status.md` in the workspace.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a478fdd72d0f202f0d6b470de747e0c59}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a478fdd72d0f202f0d6b470de747e0c59} 
+managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{workspace\+\_\+dir}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize the shared build status manager.
+
+Args:
+    workspace_dir: Path to the workspace directory
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_af01a4c34826896477c52cbbf4d2b8900}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!\_init\_files@{\_init\_files}}
+\index{\_init\_files@{\_init\_files}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{\_init\_files()}{\_init\_files()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_af01a4c34826896477c52cbbf4d2b8900} 
+ None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+init\+\_\+files (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Initialize the shared status and changes files.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_af01a4c34826896477c52cbbf4d2b8900_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_aa4c88d726a2fd0dd4f773f67f645ad8c}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!\_parse\_gcc\_output@{\_parse\_gcc\_output}}
+\index{\_parse\_gcc\_output@{\_parse\_gcc\_output}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{\_parse\_gcc\_output()}{\_parse\_gcc\_output()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_aa4c88d726a2fd0dd4f773f67f645ad8c} 
+ None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+parse\+\_\+gcc\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{output}{, }\item[{str}]{tool}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Parse GCC/Clang output for errors and warnings.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_aa4c88d726a2fd0dd4f773f67f645ad8c_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a6ec648f1f2e9b1d4b1ecebe88a30767b}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!\_parse\_make\_output@{\_parse\_make\_output}}
+\index{\_parse\_make\_output@{\_parse\_make\_output}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{\_parse\_make\_output()}{\_parse\_make\_output()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a6ec648f1f2e9b1d4b1ecebe88a30767b} 
+ None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+parse\+\_\+make\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{output}{, }\item[{str}]{tool}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Parse Make output for errors.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a6ec648f1f2e9b1d4b1ecebe88a30767b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a6ec648f1f2e9b1d4b1ecebe88a30767b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a757bbb7d30a5f3f49ff5c841d39e44b8}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!\_parse\_python\_output@{\_parse\_python\_output}}
+\index{\_parse\_python\_output@{\_parse\_python\_output}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{\_parse\_python\_output()}{\_parse\_python\_output()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a757bbb7d30a5f3f49ff5c841d39e44b8} 
+ None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+parse\+\_\+python\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{output}{, }\item[{str}]{tool}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Parse Python/pytest output for errors.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a757bbb7d30a5f3f49ff5c841d39e44b8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a0497404448f8f821f09718ba8f71e194}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!\_write\_changes\_file@{\_write\_changes\_file}}
+\index{\_write\_changes\_file@{\_write\_changes\_file}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{\_write\_changes\_file()}{\_write\_changes\_file()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a0497404448f8f821f09718ba8f71e194} 
+ None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+write\+\_\+changes\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Write the changes/diff file.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a0497404448f8f821f09718ba8f71e194_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_aa69c8bc08d2e3811cc2fa370bece8359}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!\_write\_status\_file@{\_write\_status\_file}}
+\index{\_write\_status\_file@{\_write\_status\_file}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{\_write\_status\_file()}{\_write\_status\_file()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_aa69c8bc08d2e3811cc2fa370bece8359} 
+ None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+write\+\_\+status\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Write the build status file.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_aa69c8bc08d2e3811cc2fa370bece8359_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a7f6c6ee3e48111e5f78e9c56158fc779}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!add\_diff\_patch@{add\_diff\_patch}}
+\index{add\_diff\_patch@{add\_diff\_patch}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{add\_diff\_patch()}{add\_diff\_patch()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a7f6c6ee3e48111e5f78e9c56158fc779} 
+ None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+add\+\_\+diff\+\_\+patch (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{file}{, }\item[{str}]{author}{, }\item[{str}]{diff\+\_\+content}{, }\item[{str}]{description}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Add a diff patch to the shared changes file.
+
+Args:
+    file: File that was changed
+    author: Agent alias that made the change
+    diff_content: Unified diff content
+    description: Brief description of the change
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a7f6c6ee3e48111e5f78e9c56158fc779_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a07256b0a1294090e17b3c447c7190b16}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!claim\_error\_fix@{claim\_error\_fix}}
+\index{claim\_error\_fix@{claim\_error\_fix}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{claim\_error\_fix()}{claim\_error\_fix()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a07256b0a1294090e17b3c447c7190b16} 
+ bool managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+claim\+\_\+error\+\_\+fix (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{error\+\_\+index}{, }\item[{str}]{agent\+\_\+alias}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Claim an error for fixing by an agent.
+
+Args:
+    error_index: Index of the error in the errors list
+    agent_alias: Alias of the agent claiming the fix
+
+Returns:
+    True if successfully claimed, False otherwise
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a07256b0a1294090e17b3c447c7190b16_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a8fac305f8c097255c2ced954866beaa7}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!generate\_diff@{generate\_diff}}
+\index{generate\_diff@{generate\_diff}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{generate\_diff()}{generate\_diff()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a8fac305f8c097255c2ced954866beaa7} 
+ str managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+generate\+\_\+diff (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{original\+\_\+content}{, }\item[{str}]{modified\+\_\+content}{, }\item[{str}]{filename}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate a unified diff between two versions of content.
+
+Args:
+    original_content: Original file content
+    modified_content: Modified file content
+    filename: Name of the file for the diff header
+
+Returns:
+    Unified diff string
+\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a7062199d438ff9bdc2ad96b4bdb4618d}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!get\_recent\_patches@{get\_recent\_patches}}
+\index{get\_recent\_patches@{get\_recent\_patches}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{get\_recent\_patches()}{get\_recent\_patches()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a7062199d438ff9bdc2ad96b4bdb4618d} 
+ List\mbox{[}\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1DiffPatch}{Diff\+Patch}}\mbox{]} managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+get\+\_\+recent\+\_\+patches (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int }]{limit}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get recent diff patches.
+
+Args:
+    limit: Maximum number of patches to return
+
+Returns:
+    List of recent DiffPatch objects
+\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a6610da3e6d58f3ac1fc5aa6cdd7d7ff1}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!get\_status\_summary@{get\_status\_summary}}
+\index{get\_status\_summary@{get\_status\_summary}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{get\_status\_summary()}{get\_status\_summary()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a6610da3e6d58f3ac1fc5aa6cdd7d7ff1} 
+ str managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+get\+\_\+status\+\_\+summary (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get a brief summary of build status for agents.
+
+Returns:
+    Summary string for inclusion in agent prompts
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a6610da3e6d58f3ac1fc5aa6cdd7d7ff1_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a64ddd06916b6c28a14142ac7a93e76bc}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!get\_unclaimed\_errors@{get\_unclaimed\_errors}}
+\index{get\_unclaimed\_errors@{get\_unclaimed\_errors}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{get\_unclaimed\_errors()}{get\_unclaimed\_errors()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a64ddd06916b6c28a14142ac7a93e76bc} 
+ List\mbox{[}\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1BuildError}{Build\+Error}}\mbox{]} managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+get\+\_\+unclaimed\+\_\+errors (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get list of errors/warnings not yet claimed by any agent.
+
+Returns:
+    List of unclaimed BuildError objects
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a64ddd06916b6c28a14142ac7a93e76bc_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a55cff883bff3cce6259d8f56c0efbc95}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!mark\_error\_fixed@{mark\_error\_fixed}}
+\index{mark\_error\_fixed@{mark\_error\_fixed}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{mark\_error\_fixed()}{mark\_error\_fixed()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a55cff883bff3cce6259d8f56c0efbc95} 
+ bool managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+mark\+\_\+error\+\_\+fixed (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{error\+\_\+index}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Mark an error as fixed.
+
+Args:
+    error_index: Index of the error in the errors list
+
+Returns:
+    True if successfully marked, False otherwise
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a55cff883bff3cce6259d8f56c0efbc95_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_abad895a90a818b227b5323d3f9625c4c}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!read\_changes\_file@{read\_changes\_file}}
+\index{read\_changes\_file@{read\_changes\_file}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{read\_changes\_file()}{read\_changes\_file()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_abad895a90a818b227b5323d3f9625c4c} 
+ str managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+read\+\_\+changes\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Read the current changes file content.\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a319515a43e219a7a9c926224df63b581}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!read\_status\_file@{read\_status\_file}}
+\index{read\_status\_file@{read\_status\_file}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{read\_status\_file()}{read\_status\_file()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a319515a43e219a7a9c926224df63b581} 
+ str managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+read\+\_\+status\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Read the current build status file content.\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a4616f493f92c2921eed73335504ad7b7}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!record\_build\_output@{record\_build\_output}}
+\index{record\_build\_output@{record\_build\_output}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{record\_build\_output()}{record\_build\_output()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a4616f493f92c2921eed73335504ad7b7} 
+ \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1BuildStatus}{Build\+Status}} managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+record\+\_\+build\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{tool}{, }\item[{str}]{output}{, }\item[{int}]{exit\+\_\+code}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Record build output and extract errors/warnings.
+
+Args:
+    tool: Build tool name ('gcc', 'make', 'python', etc.)
+    output: Full output from the build command
+    exit_code: Exit code from the build command
+
+Returns:
+    BuildStatus indicating success/failure
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a4616f493f92c2921eed73335504ad7b7_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a8357cfd9022be1061bc1dbf5948e9276}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!\_errors@{\_errors}}
+\index{\_errors@{\_errors}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{\_errors}{\_errors}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a8357cfd9022be1061bc1dbf5948e9276} 
+managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+errors = \mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a91982ebeefc0a3070587616b498467c4}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!\_last\_output@{\_last\_output}}
+\index{\_last\_output@{\_last\_output}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{\_last\_output}{\_last\_output}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a91982ebeefc0a3070587616b498467c4} 
+managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+last\+\_\+output = "{}"{}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_abb0f27074148421ba2a2c4728967ceea}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!\_last\_status@{\_last\_status}}
+\index{\_last\_status@{\_last\_status}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{\_last\_status}{\_last\_status}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_abb0f27074148421ba2a2c4728967ceea} 
+managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+last\+\_\+status = \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1BuildStatus_a4366c65856f02165602af2901845e85d}{Build\+Status.\+UNKNOWN}}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_adf08d7dd36e6c4b44e0cb6ff8801b3d0}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!\_patches@{\_patches}}
+\index{\_patches@{\_patches}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{\_patches}{\_patches}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_adf08d7dd36e6c4b44e0cb6ff8801b3d0} 
+managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+patches = \mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a0a2efef842523472adc16ba20df0633b}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!changes\_file@{changes\_file}}
+\index{changes\_file@{changes\_file}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{changes\_file}{changes\_file}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a0a2efef842523472adc16ba20df0633b} 
+managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+changes\+\_\+file = os.\+path.\+join(self.\+workspace\+\_\+dir, \textquotesingle{}.collab\+\_\+changes.\+md\textquotesingle{})}
+
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_abdc026d10854de83094e3cb8a7e00b72}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!GCC\_ERROR\_PATTERN@{GCC\_ERROR\_PATTERN}}
+\index{GCC\_ERROR\_PATTERN@{GCC\_ERROR\_PATTERN}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{GCC\_ERROR\_PATTERN}{GCC\_ERROR\_PATTERN}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_abdc026d10854de83094e3cb8a7e00b72} 
+managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+GCC\+\_\+\+ERROR\+\_\+\+PATTERN\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ re.compile(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{r'\string^(?P<file>[\string^:]+):(?P<line>\(\backslash\)d+):(?P<col>\(\backslash\)d+):\(\backslash\)s*(?P<severity>error|warning|note):\(\backslash\)s*(?P<msg>.+)\$'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ re.MULTILINE}
+\DoxyCodeLine{\ \ \ \ )}
+
+\end{DoxyCode}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a384783e38ac7bef496808223ce2a5115}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!MAKE\_ERROR\_PATTERN@{MAKE\_ERROR\_PATTERN}}
+\index{MAKE\_ERROR\_PATTERN@{MAKE\_ERROR\_PATTERN}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{MAKE\_ERROR\_PATTERN}{MAKE\_ERROR\_PATTERN}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a384783e38ac7bef496808223ce2a5115} 
+managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+MAKE\+\_\+\+ERROR\+\_\+\+PATTERN\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ re.compile(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{r'\string^make(?:\(\backslash\)[\(\backslash\)d+\(\backslash\)])?:\ \(\backslash\)*\(\backslash\)*\(\backslash\)*\ \(\backslash\)[(?P<target>[\string^\(\backslash\)]]+)\(\backslash\)]\ Error\ (?P<code>\(\backslash\)d+)'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ re.MULTILINE}
+\DoxyCodeLine{\ \ \ \ )}
+
+\end{DoxyCode}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_ab0bda62e92d10a8573452e1add61159f}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!PYTHON\_ERROR\_PATTERN@{PYTHON\_ERROR\_PATTERN}}
+\index{PYTHON\_ERROR\_PATTERN@{PYTHON\_ERROR\_PATTERN}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{PYTHON\_ERROR\_PATTERN}{PYTHON\_ERROR\_PATTERN}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_ab0bda62e92d10a8573452e1add61159f} 
+managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+PYTHON\+\_\+\+ERROR\+\_\+\+PATTERN\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ re.compile(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{r'\string^(?P<file>[\string^:]+):(?P<line>\(\backslash\)d+):\(\backslash\)s*(?P<msg>.+)\$'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ re.MULTILINE}
+\DoxyCodeLine{\ \ \ \ )}
+
+\end{DoxyCode}
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a813ca9adfc2c778cc45da712d6feca37}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!status\_file@{status\_file}}
+\index{status\_file@{status\_file}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{status\_file}{status\_file}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a813ca9adfc2c778cc45da712d6feca37} 
+managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+status\+\_\+file = os.\+path.\+join(self.\+workspace\+\_\+dir, \textquotesingle{}.collab\+\_\+build\+\_\+status.\+md\textquotesingle{})}
+
+\Hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a798ca91fbb126b4c46fbc93ce9b31b7f}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}!workspace\_dir@{workspace\_dir}}
+\index{workspace\_dir@{workspace\_dir}!managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
+\doxysubsubsection{\texorpdfstring{workspace\_dir}{workspace\_dir}}
+{\footnotesize\ttfamily \label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a798ca91fbb126b4c46fbc93ce9b31b7f} 
+managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+workspace\+\_\+dir = os.\+path.\+abspath(workspace\+\_\+dir)}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+managers/\mbox{\hyperlink{shared__build__status_8py}{shared\+\_\+build\+\_\+status.\+py}}\end{DoxyCompactItemize}

@@ -1,0 +1,367 @@
+\chapter{Anthropic Claude-\/\+Specific Features in AXE }
+\hypertarget{md_docs_2ANTHROPIC__FEATURES}{}\label{md_docs_2ANTHROPIC__FEATURES}\index{Anthropic Claude-\/Specific Features in AXE@{Anthropic Claude-\/Specific Features in AXE}}
+\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md243}%
+\Hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md243}%
+
+
+This document describes the Anthropic Claude-\/specific optimizations implemented in AXE to enable handling large codebases more efficiently with minimal token count and cost.\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md244}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md244}
+AXE now includes four major Anthropic-\/specific features\+:
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Prompt Caching}} (Highest Priority) -\/ Significantly reduces processing time and costs for repetitive tasks
+\item {\bfseries{Extended Thinking}} -\/ Enhanced reasoning capabilities for complex tasks
+\item {\bfseries{Token Counting}} -\/ Precise token counts from Anthropic API
+\item {\bfseries{Files API}} (Beta) -\/ Upload large files once, reference multiple times
+\end{DoxyEnumerate}
+
+All features are {\bfseries{opt-\/in}} and maintain {\bfseries{full backward compatibility}} with other providers (Open\+AI, x\+AI, Hugging\+Face, Git\+Hub).\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md245}{}\doxysection{\texorpdfstring{Features}{Features}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md245}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md246}{}\doxysubsection{\texorpdfstring{1. Prompt Caching}{1. Prompt Caching}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md246}
+Prompt caching reduces costs by reusing previously processed content. The cache has a 5-\/minute lifetime by default and is automatically refreshed when used.\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md247}{}\doxysubsubsection{\texorpdfstring{Configuration}{Configuration}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md247}
+In {\ttfamily models.\+yaml}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{anthropic:}
+\DoxyCodeLine{\ \ prompt\_caching:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Enable\ prompt\ caching}
+\DoxyCodeLine{\ \ \ \ cache\_breakpoints:\ ["{}system"{},\ "{}tools"{}]\ \ \ \ \ \#\ What\ to\ cache}
+\DoxyCodeLine{\ \ \ \ default\_ttl:\ "{}5m"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Cache\ lifetime:\ "{}5m"{}\ or\ "{}1h"{}}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md248}{}\doxysubsubsection{\texorpdfstring{How It Works}{How It Works}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md248}
+
+\begin{DoxyItemize}
+\item Static content (system prompts, tool definitions) is automatically cached
+\item Cache is created on first use (costs normal rate)
+\item Subsequent uses read from cache (90\% cost reduction)
+\item Cache refreshes automatically when accessed within TTL
+\end{DoxyItemize}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md249}{}\doxysubsubsection{\texorpdfstring{Token Savings Example}{Token Savings Example}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md249}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{First\ call:\ \ 10,000\ input\ tokens\ →\ Normal\ cost}
+\DoxyCodeLine{Second\ call:\ 9,500\ cached\ +\ 500\ new\ →\ \string~90\%\ savings}
+\DoxyCodeLine{Third\ call:\ \ 9,500\ cached\ +\ 500\ new\ →\ \string~90\%\ savings}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md250}{}\doxysubsubsection{\texorpdfstring{Automatic Features}{Automatic Features}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md250}
+
+\begin{DoxyItemize}
+\item AXE automatically converts system prompts to cacheable format
+\item Cache statistics are tracked and logged\+:
+\begin{DoxyItemize}
+\item {\ttfamily cache\+\_\+creation\+\_\+input\+\_\+tokens} -\/ Tokens used to create cache
+\item {\ttfamily cache\+\_\+read\+\_\+input\+\_\+tokens} -\/ Tokens read from cache
+\item Cache hit rate and savings percentage
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md251}{}\doxysubsubsection{\texorpdfstring{Example Output}{Example Output}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md251}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Cache\ created:\ 2000\ tokens}
+\DoxyCodeLine{Cache\ hit:\ 1800\ tokens\ read\ (90.0\%\ of\ input)}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md252}{}\doxysubsection{\texorpdfstring{2. Extended Thinking}{2. Extended Thinking}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md252}
+Extended thinking gives Claude enhanced reasoning capabilities for complex tasks, with step-\/by-\/step thought process.\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md253}{}\doxysubsubsection{\texorpdfstring{Configuration}{Configuration}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md253}
+Extended thinking is configured per model in {\ttfamily models.\+yaml}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{models:}
+\DoxyCodeLine{\ \ claude-\/opus-\/4-\/5-\/20251101:}
+\DoxyCodeLine{\ \ \ \ extended\_thinking:}
+\DoxyCodeLine{\ \ \ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ \ \ budget\_tokens:\ 32000\ \ \ \ \ \#\ Maximum\ tokens\ for\ reasoning}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ claude-\/sonnet-\/4-\/5-\/20250929:}
+\DoxyCodeLine{\ \ \ \ extended\_thinking:}
+\DoxyCodeLine{\ \ \ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ \ \ budget\_tokens:\ 16000}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ claude-\/haiku-\/4-\/5-\/20251001:}
+\DoxyCodeLine{\ \ \ \ extended\_thinking:}
+\DoxyCodeLine{\ \ \ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ \ \ budget\_tokens:\ 10000}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md254}{}\doxysubsubsection{\texorpdfstring{Supported Models}{Supported Models}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md254}
+
+\begin{DoxyItemize}
+\item Claude Opus 4.\+5, 4.\+1, 4.\+0 (budget\+: 24k-\/32k tokens)
+\item Claude Sonnet 4.\+5, 4.\+0 (budget\+: 16k tokens)
+\item Claude Haiku 4.\+5 (budget\+: 10k tokens)
+\end{DoxyItemize}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md255}{}\doxysubsubsection{\texorpdfstring{How It Works}{How It Works}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md255}
+
+\begin{DoxyItemize}
+\item Claude creates internal {\ttfamily thinking} blocks before responding
+\item Thinking is transparent (you can see the reasoning)
+\item Thinking blocks include cryptographic signatures for verification
+\item Claude incorporates insights from reasoning into final response
+\end{DoxyItemize}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md256}{}\doxysubsubsection{\texorpdfstring{Example}{Example}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md256}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Extended\ thinking\ is\ automatically\ enabled\ for\ supported\ models}}
+\DoxyCodeLine{response\ =\ agent\_manager.call\_agent(\textcolor{stringliteral}{'coder'},\ \textcolor{stringliteral}{'Write\ optimized\ algorithm...'})}
+\DoxyCodeLine{\textcolor{comment}{\#\ Claude\ will\ think\ through\ the\ problem\ step-\/by-\/step\ internally}}
+\DoxyCodeLine{\textcolor{comment}{\#\ Then\ provide\ the\ optimized\ solution}}
+
+\end{DoxyCode}
+
+
+Console output\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Extended\ thinking\ enabled\ with\ budget:\ 32000\ tokens}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md257}{}\doxysubsection{\texorpdfstring{3. Token Counting}{3. Token Counting}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md257}
+Get precise token counts from Anthropic\textquotesingle{}s API before sending large messages.\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md258}{}\doxysubsubsection{\texorpdfstring{Configuration}{Configuration}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md258}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{anthropic:}
+\DoxyCodeLine{\ \ token\_counting:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ threshold\_estimated\_tokens:\ 10000\ \ \ \#\ Use\ precise\ counting\ above\ this}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md259}{}\doxysubsubsection{\texorpdfstring{How It Works}{How It Works}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md259}
+
+\begin{DoxyEnumerate}
+\item AXE estimates tokens using {\ttfamily char\+\_\+count / 4} heuristic
+\item If estimate \texorpdfstring{$>$}{>} 10,000 tokens, calls Anthropic\textquotesingle{}s {\ttfamily /v1/messages/count\+\_\+tokens} endpoint
+\item Uses precise count for optimization decisions
+\item Non-\/\+Anthropic providers continue using estimation
+\end{DoxyEnumerate}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md260}{}\doxysubsubsection{\texorpdfstring{API Usage}{API Usage}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md260}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Automatic\ -\/\ happens\ internally\ in\ agent\_manager}}
+\DoxyCodeLine{agent\_manager.call\_agent(\textcolor{stringliteral}{'coder'},\ large\_prompt)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Manual\ -\/\ for\ custom\ use\ cases}}
+\DoxyCodeLine{token\_count\ =\ agent\_manager.count\_tokens\_anthropic(}
+\DoxyCodeLine{\ \ \ \ model=\textcolor{stringliteral}{'claude-\/opus-\/4-\/5-\/20251101'},}
+\DoxyCodeLine{\ \ \ \ messages=[\{\textcolor{stringliteral}{'role'}:\ \textcolor{stringliteral}{'user'},\ \textcolor{stringliteral}{'content'}:\ \textcolor{stringliteral}{'Your\ prompt\ here'}\}],}
+\DoxyCodeLine{\ \ \ \ system=\textcolor{stringliteral}{'System\ prompt'},}
+\DoxyCodeLine{\ \ \ \ tools=[...]\ \ \textcolor{comment}{\#\ Optional}}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md261}{}\doxysubsubsection{\texorpdfstring{Benefits}{Benefits}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md261}
+
+\begin{DoxyItemize}
+\item Avoid rate limits by knowing exact token counts
+\item Make informed model routing decisions
+\item Optimize prompts to specific lengths
+\item Prevent failed requests due to token limits
+\end{DoxyItemize}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md262}{}\doxysubsection{\texorpdfstring{4. Files API (Beta)}{4. Files API (Beta)}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md262}
+Upload large files once, reference multiple times without re-\/uploading.\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md263}{}\doxysubsubsection{\texorpdfstring{Configuration}{Configuration}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md263}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{anthropic:}
+\DoxyCodeLine{\ \ files\_api:}
+\DoxyCodeLine{\ \ \ \ enabled:\ false\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Beta\ feature,\ disabled\ by\ default}
+\DoxyCodeLine{\ \ \ \ upload\_threshold\_kb:\ 50\ \ \ \ \ \ \ \ \ \#\ Auto-\/upload\ files\ >\ 50KB}
+\DoxyCodeLine{\ \ \ \ supported\_types:}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ "{}application/pdf"{}}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ "{}text/plain"{}}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ "{}image/jpeg"{}}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ "{}image/png"{}}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md264}{}\doxysubsubsection{\texorpdfstring{How It Works}{How It Works}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md264}
+
+\begin{DoxyEnumerate}
+\item Upload file\+: {\ttfamily file\+\_\+id = files\+\_\+manager.\+upload\+\_\+file(\textquotesingle{}/path/to/document.pdf\textquotesingle{})}
+\item Store {\ttfamily file\+\_\+id} in session data
+\item Reference file in messages using {\ttfamily file\+\_\+id} instead of content
+\item File persists for duration of session
+\end{DoxyEnumerate}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md265}{}\doxysubsubsection{\texorpdfstring{Usage}{Usage}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md265}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ \mbox{\hyperlink{namespacecore_1_1anthropic__features}{core.anthropic\_features}}\ \textcolor{keyword}{import}\ get\_files\_api\_manager}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Initialize\ manager}}
+\DoxyCodeLine{files\_manager\ =\ get\_files\_api\_manager(client,\ config)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Upload\ file}}
+\DoxyCodeLine{file\_info\ =\ files\_manager.upload\_file(\textcolor{stringliteral}{'/path/to/large\_document.pdf'})}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ file\_info:}
+\DoxyCodeLine{\ \ \ \ file\_id\ =\ file\_info[\textcolor{stringliteral}{'id'}]}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ Store\ file\_id\ in\ session\ for\ later\ reference}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Note}}\+: Files API implementation is a placeholder. Full support requires Anthropic SDK updates.\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md266}{}\doxysection{\texorpdfstring{Token Statistics with Cache Tracking}{Token Statistics with Cache Tracking}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md266}
+The {\ttfamily Token\+Stats} class now tracks cache performance\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{from}\ \mbox{\hyperlink{namespaceutils_1_1token__stats}{utils.token\_stats}}\ \textcolor{keyword}{import}\ TokenStats}
+\DoxyCodeLine{}
+\DoxyCodeLine{stats\ =\ TokenStats()}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Standard\ usage\ tracking}}
+\DoxyCodeLine{stats.add\_usage(\textcolor{stringliteral}{'agent1'},\ \textcolor{stringliteral}{'claude-\/opus-\/4-\/5-\/20251101'},\ 1000,\ 500)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Usage\ with\ cache\ tracking}}
+\DoxyCodeLine{stats.add\_usage(\textcolor{stringliteral}{'agent1'},\ \textcolor{stringliteral}{'claude-\/opus-\/4-\/5-\/20251101'},\ 500,\ 300,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cache\_creation\_tokens=2000,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cache\_read\_tokens=1800)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Get\ statistics}}
+\DoxyCodeLine{agent\_stats\ =\ stats.get\_agent\_stats(\textcolor{stringliteral}{'agent1'})}
+\DoxyCodeLine{print(f\textcolor{stringliteral}{"{}Cache\ hits:\ \{agent\_stats['cache']['hits']\}"{}})}
+\DoxyCodeLine{print(f\textcolor{stringliteral}{"{}Cache\ hit\ rate:\ \{agent\_stats['cache']['hit\_rate']:.1\%\}"{}})}
+\DoxyCodeLine{}
+\DoxyCodeLine{total\_stats\ =\ stats.get\_total\_stats()}
+\DoxyCodeLine{print(f\textcolor{stringliteral}{"{}Total\ cache\ savings:\ \{total\_stats['cache']['read']\}\ tokens"{}})}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md267}{}\doxysection{\texorpdfstring{Configuration Reference}{Configuration Reference}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md267}
+Complete {\ttfamily models.\+yaml} configuration\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Anthropic-\/specific\ configuration}
+\DoxyCodeLine{anthropic:}
+\DoxyCodeLine{\ \ \#\ Prompt\ caching\ -\/\ reduces\ costs\ for\ repetitive\ prompts}
+\DoxyCodeLine{\ \ prompt\_caching:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ cache\_breakpoints:\ ["{}system"{},\ "{}tools"{}]}
+\DoxyCodeLine{\ \ \ \ default\_ttl:\ "{}5m"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ "{}5m"{}\ (free\ refresh)\ or\ "{}1h"{}\ (premium)}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Files\ API\ -\/\ upload\ large\ files\ once,\ reference\ multiple\ times}
+\DoxyCodeLine{\ \ files\_api:}
+\DoxyCodeLine{\ \ \ \ enabled:\ false\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Beta\ feature,\ disabled\ by\ default}
+\DoxyCodeLine{\ \ \ \ upload\_threshold\_kb:\ 50}
+\DoxyCodeLine{\ \ \ \ supported\_types:\ ["{}application/pdf"{},\ "{}text/plain"{},\ "{}image/jpeg"{},\ "{}image/png"{}]}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Token\ counting\ -\/\ use\ precise\ API\ counts\ for\ large\ prompts}
+\DoxyCodeLine{\ \ token\_counting:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ threshold\_estimated\_tokens:\ 10000}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Per-\/model\ extended\ thinking\ configuration}
+\DoxyCodeLine{models:}
+\DoxyCodeLine{\ \ claude-\/opus-\/4-\/5-\/20251101:}
+\DoxyCodeLine{\ \ \ \ context\_tokens:\ 200000}
+\DoxyCodeLine{\ \ \ \ max\_output\_tokens:\ 64000}
+\DoxyCodeLine{\ \ \ \ input\_modes:\ [text,\ image]}
+\DoxyCodeLine{\ \ \ \ output\_modes:\ [text,\ function\_calling]}
+\DoxyCodeLine{\ \ \ \ extended\_thinking:}
+\DoxyCodeLine{\ \ \ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ \ \ budget\_tokens:\ 32000}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ claude-\/sonnet-\/4-\/5-\/20250929:}
+\DoxyCodeLine{\ \ \ \ context\_tokens:\ 200000}
+\DoxyCodeLine{\ \ \ \ max\_output\_tokens:\ 64000}
+\DoxyCodeLine{\ \ \ \ input\_modes:\ [text,\ image]}
+\DoxyCodeLine{\ \ \ \ output\_modes:\ [text,\ function\_calling]}
+\DoxyCodeLine{\ \ \ \ extended\_thinking:}
+\DoxyCodeLine{\ \ \ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ \ \ budget\_tokens:\ 16000}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ claude-\/haiku-\/4-\/5-\/20251001:}
+\DoxyCodeLine{\ \ \ \ context\_tokens:\ 200000}
+\DoxyCodeLine{\ \ \ \ max\_output\_tokens:\ 8000}
+\DoxyCodeLine{\ \ \ \ input\_modes:\ [text,\ image]}
+\DoxyCodeLine{\ \ \ \ output\_modes:\ [text,\ function\_calling]}
+\DoxyCodeLine{\ \ \ \ extended\_thinking:}
+\DoxyCodeLine{\ \ \ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ \ \ budget\_tokens:\ 10000}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md268}{}\doxysection{\texorpdfstring{Backward Compatibility}{Backward Compatibility}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md268}
+All features maintain full backward compatibility\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Non-\/\+Anthropic providers}}\+: Features are skipped automatically
+\item {\bfseries{Token callbacks}}\+: Support both standard (4 params) and enhanced (6 params with cache)
+\item {\bfseries{Existing code}}\+: No changes required to existing code
+\item {\bfseries{Configuration}}\+: All features are opt-\/in via configuration
+\end{DoxyItemize}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md269}{}\doxysection{\texorpdfstring{Performance Impact}{Performance Impact}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md269}
+Based on integration tests\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Prompt Caching}}\+: Up to 90\% token cost reduction on cached content
+\item {\bfseries{Extended Thinking}}\+: Improved quality on complex tasks (small cost increase for thinking)
+\item {\bfseries{Token Counting}}\+: Negligible overhead (free API, called only for large prompts)
+\item {\bfseries{Files API}}\+: Eliminates redundant uploads for large files
+\end{DoxyItemize}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md270}{}\doxysubsection{\texorpdfstring{Example Workflow Savings}{Example Workflow Savings}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md270}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Scenario:\ Code\ analysis\ with\ large\ codebase\ context}
+\DoxyCodeLine{}
+\DoxyCodeLine{Without\ caching:}
+\DoxyCodeLine{\ \ Call\ 1:\ 15,000\ input\ tokens\ →\ \$0.225\ cost}
+\DoxyCodeLine{\ \ Call\ 2:\ 15,000\ input\ tokens\ →\ \$0.225\ cost}
+\DoxyCodeLine{\ \ Call\ 3:\ 15,000\ input\ tokens\ →\ \$0.225\ cost}
+\DoxyCodeLine{\ \ Total:\ 45,000\ tokens\ →\ \$0.675}
+\DoxyCodeLine{}
+\DoxyCodeLine{With\ caching:}
+\DoxyCodeLine{\ \ Call\ 1:\ 15,000\ input\ tokens\ →\ \$0.225\ cost\ (cache\ creation)}
+\DoxyCodeLine{\ \ Call\ 2:\ 14,000\ cached\ +\ 1,000\ new\ →\ \$0.037\ cost\ (90\%\ savings)}
+\DoxyCodeLine{\ \ Call\ 3:\ 14,000\ cached\ +\ 1,000\ new\ →\ \$0.037\ cost\ (90\%\ savings)}
+\DoxyCodeLine{\ \ Total:\ 18,000\ billable\ tokens\ →\ \$0.299\ (56\%\ overall\ savings)}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md271}{}\doxysection{\texorpdfstring{Testing}{Testing}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md271}
+Comprehensive test coverage\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Unit tests}}\+: {\ttfamily \doxylink{test__anthropic__features_8py}{tests/test\+\_\+anthropic\+\_\+features.\+py}} (10 tests)
+\item {\bfseries{Integration tests}}\+: {\ttfamily \doxylink{test__anthropic__integration_8py}{tests/test\+\_\+anthropic\+\_\+integration.\+py}} (8 tests)
+\item {\bfseries{Backward compatibility}}\+: All existing tests pass
+\end{DoxyItemize}
+
+Run tests\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ tests/test\_anthropic\_features.py}
+\DoxyCodeLine{python\ tests/test\_anthropic\_integration.py}
+\DoxyCodeLine{python\ tests/test\_models\_yaml.py\ \ \#\ Backward\ compatibility}
+
+\end{DoxyCode}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md272}{}\doxysection{\texorpdfstring{Troubleshooting}{Troubleshooting}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md272}
+\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md273}{}\doxysubsection{\texorpdfstring{Caching not working}{Caching not working}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md273}
+
+\begin{DoxyEnumerate}
+\item Check config\+: {\ttfamily prompt\+\_\+caching.\+enabled\+: true} in {\ttfamily models.\+yaml}
+\item Verify Anthropic API key is set
+\item Ensure using streaming API (AXE does this automatically)
+\item Check cache TTL hasn\textquotesingle{}t expired (5 minutes default)
+\end{DoxyEnumerate}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md274}{}\doxysubsection{\texorpdfstring{Extended thinking not available}{Extended thinking not available}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md274}
+
+\begin{DoxyEnumerate}
+\item Verify model supports extended thinking (Claude 4.\+x series only)
+\item Check {\ttfamily extended\+\_\+thinking.\+enabled\+: true} for model in {\ttfamily models.\+yaml}
+\item Ensure sufficient {\ttfamily budget\+\_\+tokens} configured
+\end{DoxyEnumerate}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md275}{}\doxysubsection{\texorpdfstring{Token counting fails}{Token counting fails}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md275}
+
+\begin{DoxyEnumerate}
+\item Check {\ttfamily token\+\_\+counting.\+enabled\+: true}
+\item Verify Anthropic client initialized
+\item Reduce threshold if needed (default\+: 10,000 tokens)
+\end{DoxyEnumerate}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md276}{}\doxysubsection{\texorpdfstring{Files API not working}{Files API not working}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md276}
+
+\begin{DoxyEnumerate}
+\item Feature is beta -\/ {\ttfamily enabled\+: false} by default
+\item Requires Anthropic SDK updates (placeholder implementation)
+\item Check beta header\+: {\ttfamily anthropic-\/beta\+: files-\/api-\/2025-\/04-\/14}
+\end{DoxyEnumerate}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md277}{}\doxysection{\texorpdfstring{References}{References}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md277}
+
+\begin{DoxyItemize}
+\item {\bfseries{Prompt Caching}}\+: {\ttfamily /home/runner/work/\+AXE/\+AXE/claude/ocr\+\_\+out/\+Prompt caching -\/ Claude Docs.\+txt}
+\item {\bfseries{Extended Thinking}}\+: {\ttfamily /home/runner/work/\+AXE/\+AXE/claude/ocr\+\_\+out/\+Building with extended thinking -\/ Claude Docs.\+txt}
+\item {\bfseries{Token Counting}}\+: {\ttfamily /home/runner/work/\+AXE/\+AXE/claude/ocr\+\_\+out/\+Token counting -\/ Claude Docs.\+txt}
+\item {\bfseries{Files API}}\+: {\ttfamily /home/runner/work/\+AXE/\+AXE/claude/ocr\+\_\+out/\+Files API -\/ Claude Docs.\+txt}
+\end{DoxyItemize}\hypertarget{md_docs_2ANTHROPIC__FEATURES_autotoc_md278}{}\doxysection{\texorpdfstring{Support}{Support}}\label{md_docs_2ANTHROPIC__FEATURES_autotoc_md278}
+For issues or questions\+:
+\begin{DoxyEnumerate}
+\item Check configuration in {\ttfamily models.\+yaml}
+\item Review test files for usage examples
+\item Check Anthropic API status and documentation
+\item Verify API key and rate limits 
+\end{DoxyEnumerate}

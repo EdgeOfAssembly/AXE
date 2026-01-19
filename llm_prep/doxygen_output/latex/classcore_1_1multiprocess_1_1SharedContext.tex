@@ -1,0 +1,277 @@
+\doxysection{core.\+multiprocess.\+Shared\+Context Class Reference}
+\hypertarget{classcore_1_1multiprocess_1_1SharedContext}{}\label{classcore_1_1multiprocess_1_1SharedContext}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+
+
+Collaboration diagram for core.\+multiprocess.\+Shared\+Context\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classcore_1_1multiprocess_1_1SharedContext__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a8ce92a446991763c2fc5c9e58cf9524f}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a7a1d9fb1459e1506f6df6b9eaca0d3bc}{add\+\_\+message}} (self, Dict\mbox{[}str, Any\mbox{]} message)
+\item 
+List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a1ebc6522ff92802813c942880ecf7e31}{get\+\_\+recent\+\_\+messages}} (self, int limit=20)
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a7520b160813e3586b92b34daf1956081}{update\+\_\+workspace}} (self, str key, Any value)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_aea2e06f4a727d4d76088f49707078a67}{get\+\_\+workspace\+\_\+state}} (self)
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_af47789b4e616e0b8bb6de9bf76f113d7}{update\+\_\+agent\+\_\+status}} (self, str agent\+\_\+id, str status)
+\item 
+Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a8ca704e63bedf64355cd8b1124a2e92b}{get\+\_\+agent\+\_\+status}} (self, str agent\+\_\+id)
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a54bcd5f913c7059848f1f4939207a4f3}{add\+\_\+shared\+\_\+note}} (self, str key, str note)
+\item 
+Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a29b263f3b91ca5cf5314d92fea521673}{get\+\_\+shared\+\_\+notes}} (self)
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a81dcb692150ebb00fad2d3ffd06af9c4}{request\+\_\+shutdown}} (self)
+\item 
+bool \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a45312198034b2fce6b12e1dc8d63946f}{should\+\_\+shutdown}} (self)
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a32521b9e5fb36f1979d7f5ae45d1cba5}{cleanup}} (self)
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_af73801d40a44231d0340414306bb7e2f}{\+\_\+\+\_\+enter\+\_\+\+\_\+}} (self)
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_add0712b1d658b30d1ecedc78fe234c99}{\+\_\+\+\_\+exit\+\_\+\+\_\+}} (self, exc\+\_\+type, exc\+\_\+val, exc\+\_\+tb)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_af1bce439664552f8f05388f1f5f15285}{manager}} = Manager()
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a24162a3abc1f97f6a082a2bedc453a35}{conversation\+\_\+history}} = self.\+manager.\+list()
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_ad464c9756140536e38942b6c816fe340}{workspace\+\_\+state}} = self.\+manager.\+dict()
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a6e2e9ea4621f680426d28eefcf5c47bd}{agent\+\_\+status}} = self.\+manager.\+dict()
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a8781280d6627dd1b9e856353a1ac58bf}{shared\+\_\+notes}} = self.\+manager.\+dict()
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_aa762f0369febc83e886656037a22a599}{shutdown\+\_\+flag}} = self.\+manager.\+Event()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Thread-safe shared state between agents.
+
+Uses multiprocessing.Manager to provide shared data structures
+that can be accessed safely from multiple processes.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a8ce92a446991763c2fc5c9e58cf9524f}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a8ce92a446991763c2fc5c9e58cf9524f} 
+core.\+multiprocess.\+Shared\+Context.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize shared context with Manager.\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_af73801d40a44231d0340414306bb7e2f}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!\_\_enter\_\_@{\_\_enter\_\_}}
+\index{\_\_enter\_\_@{\_\_enter\_\_}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{\_\_enter\_\_()}{\_\_enter\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_af73801d40a44231d0340414306bb7e2f} 
+core.\+multiprocess.\+Shared\+Context.\+\_\+\+\_\+enter\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Context manager entry.\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1SharedContext_add0712b1d658b30d1ecedc78fe234c99}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!\_\_exit\_\_@{\_\_exit\_\_}}
+\index{\_\_exit\_\_@{\_\_exit\_\_}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{\_\_exit\_\_()}{\_\_exit\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_add0712b1d658b30d1ecedc78fe234c99} 
+core.\+multiprocess.\+Shared\+Context.\+\_\+\+\_\+exit\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{exc\+\_\+type}{, }\item[{}]{exc\+\_\+val}{, }\item[{}]{exc\+\_\+tb}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Context manager exit with cleanup.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1multiprocess_1_1SharedContext_add0712b1d658b30d1ecedc78fe234c99_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a7a1d9fb1459e1506f6df6b9eaca0d3bc}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!add\_message@{add\_message}}
+\index{add\_message@{add\_message}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{add\_message()}{add\_message()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a7a1d9fb1459e1506f6df6b9eaca0d3bc} 
+ None core.\+multiprocess.\+Shared\+Context.\+add\+\_\+message (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{message}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Add a message to shared conversation history.
+
+Args:
+    message: Message dictionary with keys like 'agent', 'content', 'timestamp'
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a54bcd5f913c7059848f1f4939207a4f3}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!add\_shared\_note@{add\_shared\_note}}
+\index{add\_shared\_note@{add\_shared\_note}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{add\_shared\_note()}{add\_shared\_note()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a54bcd5f913c7059848f1f4939207a4f3} 
+ None core.\+multiprocess.\+Shared\+Context.\+add\+\_\+shared\+\_\+note (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{key}{, }\item[{str}]{note}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Add a shared note/finding.
+
+Args:
+    key: Note identifier
+    note: Note content
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a32521b9e5fb36f1979d7f5ae45d1cba5}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a32521b9e5fb36f1979d7f5ae45d1cba5} 
+ None core.\+multiprocess.\+Shared\+Context.\+cleanup (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Clean up Manager resources.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1multiprocess_1_1SharedContext_a32521b9e5fb36f1979d7f5ae45d1cba5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a8ca704e63bedf64355cd8b1124a2e92b}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!get\_agent\_status@{get\_agent\_status}}
+\index{get\_agent\_status@{get\_agent\_status}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{get\_agent\_status()}{get\_agent\_status()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a8ca704e63bedf64355cd8b1124a2e92b} 
+ Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+multiprocess.\+Shared\+Context.\+get\+\_\+agent\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get agent status.
+
+Args:
+    agent_id: Agent identifier
+
+Returns:
+    Status dictionary or None if agent not found
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a1ebc6522ff92802813c942880ecf7e31}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!get\_recent\_messages@{get\_recent\_messages}}
+\index{get\_recent\_messages@{get\_recent\_messages}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{get\_recent\_messages()}{get\_recent\_messages()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a1ebc6522ff92802813c942880ecf7e31} 
+ List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+multiprocess.\+Shared\+Context.\+get\+\_\+recent\+\_\+messages (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int }]{limit}{ = {\ttfamily 20}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get recent messages from conversation history.
+
+Args:
+    limit: Maximum number of messages to return
+
+Returns:
+    List of recent message dictionaries
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a29b263f3b91ca5cf5314d92fea521673}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!get\_shared\_notes@{get\_shared\_notes}}
+\index{get\_shared\_notes@{get\_shared\_notes}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{get\_shared\_notes()}{get\_shared\_notes()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a29b263f3b91ca5cf5314d92fea521673} 
+ Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+multiprocess.\+Shared\+Context.\+get\+\_\+shared\+\_\+notes (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get all shared notes.
+
+Returns:
+    Dictionary of shared notes
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1SharedContext_aea2e06f4a727d4d76088f49707078a67}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!get\_workspace\_state@{get\_workspace\_state}}
+\index{get\_workspace\_state@{get\_workspace\_state}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{get\_workspace\_state()}{get\_workspace\_state()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_aea2e06f4a727d4d76088f49707078a67} 
+ Dict\mbox{[}str, Any\mbox{]} core.\+multiprocess.\+Shared\+Context.\+get\+\_\+workspace\+\_\+state (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get current workspace state.
+
+Returns:
+    Dictionary of workspace state
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a81dcb692150ebb00fad2d3ffd06af9c4}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!request\_shutdown@{request\_shutdown}}
+\index{request\_shutdown@{request\_shutdown}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{request\_shutdown()}{request\_shutdown()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a81dcb692150ebb00fad2d3ffd06af9c4} 
+ None core.\+multiprocess.\+Shared\+Context.\+request\+\_\+shutdown (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Signal all processes to shut down.\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a45312198034b2fce6b12e1dc8d63946f}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!should\_shutdown@{should\_shutdown}}
+\index{should\_shutdown@{should\_shutdown}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{should\_shutdown()}{should\_shutdown()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a45312198034b2fce6b12e1dc8d63946f} 
+ bool core.\+multiprocess.\+Shared\+Context.\+should\+\_\+shutdown (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if shutdown has been requested.\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1SharedContext_af47789b4e616e0b8bb6de9bf76f113d7}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!update\_agent\_status@{update\_agent\_status}}
+\index{update\_agent\_status@{update\_agent\_status}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{update\_agent\_status()}{update\_agent\_status()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_af47789b4e616e0b8bb6de9bf76f113d7} 
+ None core.\+multiprocess.\+Shared\+Context.\+update\+\_\+agent\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{str}]{status}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Update agent status.
+
+Args:
+    agent_id: Agent identifier
+    status: Status string ('thinking', 'responding', 'idle', 'waiting')
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a7520b160813e3586b92b34daf1956081}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!update\_workspace@{update\_workspace}}
+\index{update\_workspace@{update\_workspace}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{update\_workspace()}{update\_workspace()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a7520b160813e3586b92b34daf1956081} 
+ None core.\+multiprocess.\+Shared\+Context.\+update\+\_\+workspace (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{key}{, }\item[{Any}]{value}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Update workspace state.
+
+Args:
+    key: State key
+    value: State value
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a6e2e9ea4621f680426d28eefcf5c47bd}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!agent\_status@{agent\_status}}
+\index{agent\_status@{agent\_status}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{agent\_status}{agent\_status}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a6e2e9ea4621f680426d28eefcf5c47bd} 
+core.\+multiprocess.\+Shared\+Context.\+agent\+\_\+status = self.\+manager.\+dict()}
+
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a24162a3abc1f97f6a082a2bedc453a35}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!conversation\_history@{conversation\_history}}
+\index{conversation\_history@{conversation\_history}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{conversation\_history}{conversation\_history}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a24162a3abc1f97f6a082a2bedc453a35} 
+core.\+multiprocess.\+Shared\+Context.\+conversation\+\_\+history = self.\+manager.\+list()}
+
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_af1bce439664552f8f05388f1f5f15285}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!manager@{manager}}
+\index{manager@{manager}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{manager}{manager}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_af1bce439664552f8f05388f1f5f15285} 
+core.\+multiprocess.\+Shared\+Context.\+manager = Manager()}
+
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_a8781280d6627dd1b9e856353a1ac58bf}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!shared\_notes@{shared\_notes}}
+\index{shared\_notes@{shared\_notes}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{shared\_notes}{shared\_notes}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_a8781280d6627dd1b9e856353a1ac58bf} 
+core.\+multiprocess.\+Shared\+Context.\+shared\+\_\+notes = self.\+manager.\+dict()}
+
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_aa762f0369febc83e886656037a22a599}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!shutdown\_flag@{shutdown\_flag}}
+\index{shutdown\_flag@{shutdown\_flag}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{shutdown\_flag}{shutdown\_flag}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_aa762f0369febc83e886656037a22a599} 
+core.\+multiprocess.\+Shared\+Context.\+shutdown\+\_\+flag = self.\+manager.\+Event()}
+
+\Hypertarget{classcore_1_1multiprocess_1_1SharedContext_ad464c9756140536e38942b6c816fe340}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}!workspace\_state@{workspace\_state}}
+\index{workspace\_state@{workspace\_state}!core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
+\doxysubsubsection{\texorpdfstring{workspace\_state}{workspace\_state}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1SharedContext_ad464c9756140536e38942b6c816fe340} 
+core.\+multiprocess.\+Shared\+Context.\+workspace\+\_\+state = self.\+manager.\+dict()}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{multiprocess_8py}{multiprocess.\+py}}\end{DoxyCompactItemize}

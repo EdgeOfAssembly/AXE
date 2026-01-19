@@ -1,0 +1,172 @@
+\doxysection{test\+\_\+inline\+\_\+exec\+\_\+blocks Namespace Reference}
+\hypertarget{namespacetest__inline__exec__blocks}{}\label{namespacetest__inline__exec__blocks}\index{test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetest__inline__exec__blocks_a35db5c41685ac4211102518b51067a84}{test\+\_\+inline\+\_\+exec\+\_\+blocks\+\_\+bug}} ()
+\item 
+\mbox{\hyperlink{namespacetest__inline__exec__blocks_af27f7d86e71d90b8910a55ef3e4c7794}{test\+\_\+multiple\+\_\+inline\+\_\+blocks}} ()
+\item 
+\mbox{\hyperlink{namespacetest__inline__exec__blocks_a728e6ca79e4539c841a3c64e9d23158d}{test\+\_\+mixed\+\_\+inline\+\_\+and\+\_\+multiline}} ()
+\item 
+\mbox{\hyperlink{namespacetest__inline__exec__blocks_a46fc4d1806b1eb9a81ececc9a8611213}{test\+\_\+inline\+\_\+read\+\_\+blocks}} ()
+\item 
+\mbox{\hyperlink{namespacetest__inline__exec__blocks_a0aac5fd9548c629b8eb94f1192a7c62b}{test\+\_\+inline\+\_\+write\+\_\+blocks}} ()
+\item 
+\mbox{\hyperlink{namespacetest__inline__exec__blocks_a5acf345064235bb8847bd79a1eba5019}{test\+\_\+backticks\+\_\+in\+\_\+markdown}} ()
+\item 
+\mbox{\hyperlink{namespacetest__inline__exec__blocks_a13d13bd318e88c815d3f918b14c58b6a}{test\+\_\+heredoc\+\_\+still\+\_\+works}} ()
+\item 
+\mbox{\hyperlink{namespacetest__inline__exec__blocks_a26b9a09bdac6423cc73b55a65d174bf8}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Test suite for inline EXEC block parsing bug (Issue #22).
+
+Verifies that the ResponseProcessor correctly parses multiple inline code blocks
+on the same line as markdown text, without incorrectly matching the wrong closing
+backticks.
+
+Bug description:
+When agents write inline blocks like:
+```EXEC mkdir -p patches```
+### Next step
+```EXEC ls -la```
+
+The old regex would match from the first ```EXEC to the SECOND ``` (after ls -la),
+creating one broken command instead of two separate commands.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacetest__inline__exec__blocks_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetest__inline__exec__blocks_a26b9a09bdac6423cc73b55a65d174bf8}\index{test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}!main@{main}}
+\index{main@{main}!test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{namespacetest__inline__exec__blocks_a26b9a09bdac6423cc73b55a65d174bf8} 
+test\+\_\+inline\+\_\+exec\+\_\+blocks.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run all tests.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__inline__exec__blocks_a26b9a09bdac6423cc73b55a65d174bf8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{namespacetest__inline__exec__blocks_a26b9a09bdac6423cc73b55a65d174bf8_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__inline__exec__blocks_a5acf345064235bb8847bd79a1eba5019}\index{test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}!test\_backticks\_in\_markdown@{test\_backticks\_in\_markdown}}
+\index{test\_backticks\_in\_markdown@{test\_backticks\_in\_markdown}!test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_backticks\_in\_markdown()}{test\_backticks\_in\_markdown()}}
+{\footnotesize\ttfamily \label{namespacetest__inline__exec__blocks_a5acf345064235bb8847bd79a1eba5019} 
+test\+\_\+inline\+\_\+exec\+\_\+blocks.\+test\+\_\+backticks\+\_\+in\+\_\+markdown (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that backticks in markdown text don't interfere.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__inline__exec__blocks_a5acf345064235bb8847bd79a1eba5019_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__inline__exec__blocks_a13d13bd318e88c815d3f918b14c58b6a}\index{test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}!test\_heredoc\_still\_works@{test\_heredoc\_still\_works}}
+\index{test\_heredoc\_still\_works@{test\_heredoc\_still\_works}!test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_heredoc\_still\_works()}{test\_heredoc\_still\_works()}}
+{\footnotesize\ttfamily \label{namespacetest__inline__exec__blocks_a13d13bd318e88c815d3f918b14c58b6a} 
+test\+\_\+inline\+\_\+exec\+\_\+blocks.\+test\+\_\+heredoc\+\_\+still\+\_\+works (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Regression test: ensure heredoc support still works.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__inline__exec__blocks_a13d13bd318e88c815d3f918b14c58b6a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__inline__exec__blocks_a35db5c41685ac4211102518b51067a84}\index{test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}!test\_inline\_exec\_blocks\_bug@{test\_inline\_exec\_blocks\_bug}}
+\index{test\_inline\_exec\_blocks\_bug@{test\_inline\_exec\_blocks\_bug}!test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_inline\_exec\_blocks\_bug()}{test\_inline\_exec\_blocks\_bug()}}
+{\footnotesize\ttfamily \label{namespacetest__inline__exec__blocks_a35db5c41685ac4211102518b51067a84} 
+test\+\_\+inline\+\_\+exec\+\_\+blocks.\+test\+\_\+inline\+\_\+exec\+\_\+blocks\+\_\+bug (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test the specific bug case from the issue report.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__inline__exec__blocks_a35db5c41685ac4211102518b51067a84_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__inline__exec__blocks_a46fc4d1806b1eb9a81ececc9a8611213}\index{test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}!test\_inline\_read\_blocks@{test\_inline\_read\_blocks}}
+\index{test\_inline\_read\_blocks@{test\_inline\_read\_blocks}!test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_inline\_read\_blocks()}{test\_inline\_read\_blocks()}}
+{\footnotesize\ttfamily \label{namespacetest__inline__exec__blocks_a46fc4d1806b1eb9a81ececc9a8611213} 
+test\+\_\+inline\+\_\+exec\+\_\+blocks.\+test\+\_\+inline\+\_\+read\+\_\+blocks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test inline READ blocks.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__inline__exec__blocks_a46fc4d1806b1eb9a81ececc9a8611213_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__inline__exec__blocks_a0aac5fd9548c629b8eb94f1192a7c62b}\index{test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}!test\_inline\_write\_blocks@{test\_inline\_write\_blocks}}
+\index{test\_inline\_write\_blocks@{test\_inline\_write\_blocks}!test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_inline\_write\_blocks()}{test\_inline\_write\_blocks()}}
+{\footnotesize\ttfamily \label{namespacetest__inline__exec__blocks_a0aac5fd9548c629b8eb94f1192a7c62b} 
+test\+\_\+inline\+\_\+exec\+\_\+blocks.\+test\+\_\+inline\+\_\+write\+\_\+blocks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test inline WRITE blocks (edge case - usually multiline).\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__inline__exec__blocks_a0aac5fd9548c629b8eb94f1192a7c62b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__inline__exec__blocks_a728e6ca79e4539c841a3c64e9d23158d}\index{test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}!test\_mixed\_inline\_and\_multiline@{test\_mixed\_inline\_and\_multiline}}
+\index{test\_mixed\_inline\_and\_multiline@{test\_mixed\_inline\_and\_multiline}!test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_mixed\_inline\_and\_multiline()}{test\_mixed\_inline\_and\_multiline()}}
+{\footnotesize\ttfamily \label{namespacetest__inline__exec__blocks_a728e6ca79e4539c841a3c64e9d23158d} 
+test\+\_\+inline\+\_\+exec\+\_\+blocks.\+test\+\_\+mixed\+\_\+inline\+\_\+and\+\_\+multiline (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test mixing inline and multiline block formats.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__inline__exec__blocks_a728e6ca79e4539c841a3c64e9d23158d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespacetest__inline__exec__blocks_af27f7d86e71d90b8910a55ef3e4c7794}\index{test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}!test\_multiple\_inline\_blocks@{test\_multiple\_inline\_blocks}}
+\index{test\_multiple\_inline\_blocks@{test\_multiple\_inline\_blocks}!test\_inline\_exec\_blocks@{test\_inline\_exec\_blocks}}
+\doxysubsubsection{\texorpdfstring{test\_multiple\_inline\_blocks()}{test\_multiple\_inline\_blocks()}}
+{\footnotesize\ttfamily \label{namespacetest__inline__exec__blocks_af27f7d86e71d90b8910a55ef3e4c7794} 
+test\+\_\+inline\+\_\+exec\+\_\+blocks.\+test\+\_\+multiple\+\_\+inline\+\_\+blocks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test multiple inline blocks in sequence.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacetest__inline__exec__blocks_af27f7d86e71d90b8910a55ef3e4c7794_icgraph}
+\end{center}
+\end{figure}

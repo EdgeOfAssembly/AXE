@@ -1,0 +1,65 @@
+\doxysection{core.\+session\+\_\+preprocessor Namespace Reference}
+\hypertarget{namespacecore_1_1session__preprocessor}{}\label{namespacecore_1_1session__preprocessor}\index{core.session\_preprocessor@{core.session\_preprocessor}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor}{Session\+Preprocessor}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor}{Session\+Preprocessor}} \mbox{\hyperlink{namespacecore_1_1session__preprocessor_acfc71ac8ab539b41a717d4bbfe24a489}{create\+\_\+session\+\_\+preprocessor}} (\mbox{\hyperlink{namespacecore_1_1config}{config}}, str workspace\+\_\+path)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacecore_1_1session__preprocessor_ae1d9fde200bd8a96f985913ff0a659a7}{logger}} = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Session Preprocessor for AXE
+
+Orchestrates workspace preprocessing at the start of each AXE session.
+
+Workflow:
+1. Check if preprocessing is enabled in config
+2. If environment_probe enabled: generate .collab_env.md with system info (zero agent tokens)
+3. If minifier enabled: minify supported source files (keeping comments)
+4. If llmprep enabled: run llmprep to generate LLM context files
+5. Report statistics to user
+
+Author: EdgeOfAssembly
+License: GPLv3 / Commercial
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacecore_1_1session__preprocessor_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacecore_1_1session__preprocessor_acfc71ac8ab539b41a717d4bbfe24a489}\index{core.session\_preprocessor@{core.session\_preprocessor}!create\_session\_preprocessor@{create\_session\_preprocessor}}
+\index{create\_session\_preprocessor@{create\_session\_preprocessor}!core.session\_preprocessor@{core.session\_preprocessor}}
+\doxysubsubsection{\texorpdfstring{create\_session\_preprocessor()}{create\_session\_preprocessor()}}
+{\footnotesize\ttfamily \label{namespacecore_1_1session__preprocessor_acfc71ac8ab539b41a717d4bbfe24a489} 
+ \mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor}{Session\+Preprocessor}} core.\+session\+\_\+preprocessor.\+create\+\_\+session\+\_\+preprocessor (\begin{DoxyParamCaption}\item[{}]{config}{, }\item[{str}]{workspace\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Factory function to create a SessionPreprocessor.
+
+Args:
+    config: AXE Config object
+    workspace_path: Path to workspace directory
+    
+Returns:
+    SessionPreprocessor instance
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacecore_1_1session__preprocessor_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacecore_1_1session__preprocessor_ae1d9fde200bd8a96f985913ff0a659a7}\index{core.session\_preprocessor@{core.session\_preprocessor}!logger@{logger}}
+\index{logger@{logger}!core.session\_preprocessor@{core.session\_preprocessor}}
+\doxysubsubsection{\texorpdfstring{logger}{logger}}
+{\footnotesize\ttfamily \label{namespacecore_1_1session__preprocessor_ae1d9fde200bd8a96f985913ff0a659a7} 
+core.\+session\+\_\+preprocessor.\+logger = logging.\+get\+Logger(\+\_\+\+\_\+name\+\_\+\+\_\+)}
+

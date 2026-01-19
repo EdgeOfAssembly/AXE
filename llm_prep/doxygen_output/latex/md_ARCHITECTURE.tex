@@ -1,0 +1,307 @@
+\chapter{AXE Architecture and Extensibility Guide }
+\hypertarget{md_ARCHITECTURE}{}\label{md_ARCHITECTURE}\index{AXE Architecture and Extensibility Guide@{AXE Architecture and Extensibility Guide}}
+\label{md_ARCHITECTURE_autotoc_md159}%
+\Hypertarget{md_ARCHITECTURE_autotoc_md159}%
+
+
+This document describes the AXE architecture and provides guidance for extending the codebase with new features like local models (Ollama) and distributed AI (Python Ray).\hypertarget{md_ARCHITECTURE_autotoc_md160}{}\doxysection{\texorpdfstring{Module Structure}{Module Structure}}\label{md_ARCHITECTURE_autotoc_md160}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{AXE/}
+\DoxyCodeLine{├──\ axe.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Main\ entry\ point\ and\ session\ management}
+\DoxyCodeLine{├──\ axe.yaml\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Configuration\ file}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ core/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Core\ functionality}
+\DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ ├──\ constants.py\ \ \ \ \ \ \ \ \ \ \#\ Global\ constants\ and\ default\ config}
+\DoxyCodeLine{│\ \ \ ├──\ config.py\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Configuration\ management}
+\DoxyCodeLine{│\ \ \ ├──\ agent\_manager.py\ \ \ \ \ \ \#\ Agent\ connections\ and\ API\ calls}
+\DoxyCodeLine{│\ \ \ ├──\ tool\_runner.py\ \ \ \ \ \ \ \ \#\ Command\ execution\ with\ safety\ checks}
+\DoxyCodeLine{│\ \ \ ├──\ multiprocess.py\ \ \ \ \ \ \ \#\ Parallel\ agent\ architecture\ (future)}
+\DoxyCodeLine{│\ \ \ ├──\ session\_manager.py\ \ \ \ \#\ Session\ save/load\ persistence}
+\DoxyCodeLine{│\ \ \ └──\ resource\_monitor.py\ \ \ \#\ System\ resource\ monitoring}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ managers/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Agent\ lifecycle\ management}
+\DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ ├──\ sleep\_manager.py\ \ \ \ \ \ \#\ Mandatory\ sleep\ system}
+\DoxyCodeLine{│\ \ \ ├──\ break\_system.py\ \ \ \ \ \ \ \#\ Agent\ break\ requests}
+\DoxyCodeLine{│\ \ \ ├──\ dynamic\_spawner.py\ \ \ \ \#\ Dynamic\ agent\ spawning}
+\DoxyCodeLine{│\ \ \ └──\ emergency\_mailbox.py\ \ \#\ GPG-\/encrypted\ agent-\/to-\/human\ comms}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ database/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Persistence\ layer}
+\DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ ├──\ schema.py\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ SQL\ table\ definitions}
+\DoxyCodeLine{│\ \ \ └──\ agent\_db.py\ \ \ \ \ \ \ \ \ \ \ \#\ SQLite\ operations}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ progression/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Agent\ progression\ system}
+\DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ ├──\ xp\_system.py\ \ \ \ \ \ \ \ \ \ \#\ XP\ calculation}
+\DoxyCodeLine{│\ \ \ └──\ levels.py\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Level\ titles\ and\ milestones}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ safety/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Safety\ and\ rules}
+\DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ └──\ rules.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Session\ rules}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ utils/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Utility\ modules}
+\DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ ├──\ formatting.py\ \ \ \ \ \ \ \ \ \#\ Terminal\ colors}
+\DoxyCodeLine{│\ \ \ ├──\ token\_stats.py\ \ \ \ \ \ \ \ \#\ Token\ tracking\ and\ cost\ estimation}
+\DoxyCodeLine{│\ \ \ ├──\ rate\_limiter.py\ \ \ \ \ \ \ \#\ API\ rate\ limiting}
+\DoxyCodeLine{│\ \ \ ├──\ context\_optimizer.py\ \ \#\ Context\ window\ optimization}
+\DoxyCodeLine{│\ \ \ ├──\ prompt\_compressor.py\ \ \#\ Prompt\ compression}
+\DoxyCodeLine{│\ \ \ └──\ xml\_tool\_parser.py\ \ \ \ \#\ XML\ function\ call\ parsing}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ models/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Model\ metadata}
+\DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ └──\ metadata.py\ \ \ \ \ \ \ \ \ \ \ \#\ Model\ info\ and\ capabilities}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ tools/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Analysis\ tools}
+\DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ ├──\ llmprep.py\ \ \ \ \ \ \ \ \ \ \ \ \#\ Codebase\ context\ preparation}
+\DoxyCodeLine{│\ \ \ └──\ build\_analyzer.py\ \ \ \ \ \#\ Build\ system\ detection}
+\DoxyCodeLine{│}
+\DoxyCodeLine{└──\ workshop/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Dynamic\ analysis\ tools}
+\DoxyCodeLine{\ \ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{\ \ \ \ ├──\ chisel.py\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Symbolic\ execution\ (angr)}
+\DoxyCodeLine{\ \ \ \ ├──\ saw.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Taint\ analysis}
+\DoxyCodeLine{\ \ \ \ ├──\ plane.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Source/sink\ enumeration}
+\DoxyCodeLine{\ \ \ \ └──\ hammer.py\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Live\ instrumentation\ (frida)}
+
+\end{DoxyCode}
+\hypertarget{md_ARCHITECTURE_autotoc_md161}{}\doxysection{\texorpdfstring{Key Extension Points}{Key Extension Points}}\label{md_ARCHITECTURE_autotoc_md161}
+\hypertarget{md_ARCHITECTURE_autotoc_md162}{}\doxysubsection{\texorpdfstring{1. Adding New AI Providers}{1. Adding New AI Providers}}\label{md_ARCHITECTURE_autotoc_md162}
+{\bfseries{File\+:}} {\ttfamily \doxylink{agent__manager_8py}{core/agent\+\_\+manager.\+py}}
+
+To add a new provider (e.\+g., Ollama for local models)\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ In\ AgentManager.\_init\_clients()}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ Add\ at\ top\ of\ file:}}
+\DoxyCodeLine{\textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{import}\ ollama}
+\DoxyCodeLine{\ \ \ \ HAS\_OLLAMA\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\textcolor{keywordflow}{except}\ ImportError:}
+\DoxyCodeLine{\ \ \ \ HAS\_OLLAMA\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ In\ \_init\_clients():}}
+\DoxyCodeLine{\textcolor{keywordflow}{elif}\ name\ ==\ \textcolor{stringliteral}{'ollama'}\ \textcolor{keywordflow}{and}\ HAS\_OLLAMA:}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ Ollama\ runs\ locally,\ no\ API\ key\ needed}}
+\DoxyCodeLine{\ \ \ \ self.clients[name]\ =\ ollama.Client(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ host=prov\_config.get(\textcolor{stringliteral}{'base\_url'},\ \textcolor{stringliteral}{'http://localhost:11434'})}
+\DoxyCodeLine{\ \ \ \ )}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{\#\ In\ call\_agent():}}
+\DoxyCodeLine{\textcolor{keywordflow}{elif}\ provider\ ==\ \textcolor{stringliteral}{'ollama'}:}
+\DoxyCodeLine{\ \ \ \ resp\ =\ client.chat(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ model=model,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ messages=[}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{'role'}:\ \textcolor{stringliteral}{'system'},\ \textcolor{stringliteral}{'content'}:\ system\_prompt\},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{'role'}:\ \textcolor{stringliteral}{'user'},\ \textcolor{stringliteral}{'content'}:\ full\_prompt\}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ]}
+\DoxyCodeLine{\ \ \ \ )}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ resp[\textcolor{stringliteral}{'message'}][\textcolor{stringliteral}{'content'}]}
+
+\end{DoxyCode}
+
+
+{\bfseries{Configuration (axe.\+yaml)\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{providers:}
+\DoxyCodeLine{\ \ ollama:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ base\_url:\ http://localhost:11434}
+\DoxyCodeLine{\ \ \ \ models:}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ llama2}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ codellama}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ mistral}
+\DoxyCodeLine{}
+\DoxyCodeLine{agents:}
+\DoxyCodeLine{\ \ local:}
+\DoxyCodeLine{\ \ \ \ alias:\ [loc,\ ollama]}
+\DoxyCodeLine{\ \ \ \ provider:\ ollama}
+\DoxyCodeLine{\ \ \ \ model:\ codellama}
+\DoxyCodeLine{\ \ \ \ role:\ Local\ code\ assistant\ (no\ API\ costs)}
+\DoxyCodeLine{\ \ \ \ context\_window:\ 4096}
+\DoxyCodeLine{\ \ \ \ capabilities:\ [text]}
+
+\end{DoxyCode}
+\hypertarget{md_ARCHITECTURE_autotoc_md163}{}\doxysubsection{\texorpdfstring{2. Adding Distributed Processing (Ray)}{2. Adding Distributed Processing (Ray)}}\label{md_ARCHITECTURE_autotoc_md163}
+{\bfseries{New File\+:}} {\ttfamily core/distributed.\+py}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{Distributed\ AI\ processing\ with\ Ray.}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{Enables\ parallel\ agent\ execution\ across\ multiple\ machines.}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{import}\ ray}
+\DoxyCodeLine{\ \ \ \ HAS\_RAY\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\textcolor{keywordflow}{except}\ ImportError:}
+\DoxyCodeLine{\ \ \ \ HAS\_RAY\ =\ \textcolor{keyword}{False}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{from}\ typing\ \textcolor{keyword}{import}\ List,\ Dict,\ Any}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{@ray.remote}}
+\DoxyCodeLine{\textcolor{keyword}{class\ }DistributedAgent:}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Ray\ actor\ for\ distributed\ agent\ execution."{}"{}"{}}}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ agent\_config:\ Dict[str,\ Any]):}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ self.config\ =\ agent\_config}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Initialize\ agent-\/specific\ resources}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{def\ }process(self,\ prompt:\ str,\ context:\ str)\ -\/>\ str:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Process\ a\ prompt\ and\ return\ response."{}"{}"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Agent-\/specific\ processing}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{pass}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }DistributedCoordinator:}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Coordinates\ distributed\ agent\ execution."{}"{}"{}}}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ agents:\ List[Dict[str,\ Any]]):}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keywordflow}{not}\ HAS\_RAY:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{raise}\ ImportError(\textcolor{stringliteral}{"{}Ray\ not\ installed.\ pip\ install\ ray"{}})}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ray.init(ignore\_reinit\_error=\textcolor{keyword}{True})}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ self.actors\ =\ [}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ DistributedAgent.remote(config)\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ config\ \textcolor{keywordflow}{in}\ agents}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ]}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{def\ }parallel\_process(self,\ prompts:\ List[str])\ -\/>\ List[str]:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Process\ multiple\ prompts\ in\ parallel."{}"{}"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ futures\ =\ [}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ actor.process.remote(prompt,\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ actor,\ prompt\ \textcolor{keywordflow}{in}\ zip(self.actors,\ prompts)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ]}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ray.get(futures)}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{def\ }shutdown(self):}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Shutdown\ Ray\ cluster."{}"{}"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ray.shutdown()}
+
+\end{DoxyCode}
+\hypertarget{md_ARCHITECTURE_autotoc_md164}{}\doxysubsection{\texorpdfstring{3. Adding New Workshop Tools}{3. Adding New Workshop Tools}}\label{md_ARCHITECTURE_autotoc_md164}
+{\bfseries{File\+:}} {\ttfamily \doxylink{workshop_2____init_____8py}{workshop/\+\_\+\+\_\+init\+\_\+\+\_\+.\+py}}
+
+
+\begin{DoxyEnumerate}
+\item Create your tool in {\ttfamily workshop/my\+\_\+tool.\+py}\+:
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{MyTool\ -\/\ Description\ of\ what\ it\ does.}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{from}\ typing\ \textcolor{keyword}{import}\ Dict,\ Any,\ Optional}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }MyToolAnalyzer:}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}"{}"{}Tool\ description."{}"{}"{}}}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{def\ }\_\_init\_\_(self,\ config:\ Optional[Dict[str,\ Any]]\ =\ \textcolor{keywordtype}{None}):}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ self.config\ =\ config\ \textcolor{keywordflow}{or}\ \{\}}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{def\ }analyze(self,\ target:\ str)\ -\/>\ Dict[str,\ Any]:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ Analyze\ the\ target.}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ Args:}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ target:\ What\ to\ analyze}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ Returns:}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ Analysis\ results}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ results\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'status'}:\ \textcolor{stringliteral}{'completed'},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'findings'}:\ []}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Your\ analysis\ logic}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ results}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyEnumerate}
+\item Register in {\ttfamily \doxylink{workshop_2____init_____8py}{workshop/\+\_\+\+\_\+init\+\_\+\+\_\+.\+py}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{try}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{from}\ .my\_tool\ \textcolor{keyword}{import}\ MyToolAnalyzer}
+\DoxyCodeLine{\ \ \ \ HAS\_MY\_TOOL\ =\ \textcolor{keyword}{True}}
+\DoxyCodeLine{\textcolor{keywordflow}{except}\ ImportError:}
+\DoxyCodeLine{\ \ \ \ HAS\_MY\_TOOL\ =\ \textcolor{keyword}{False}}
+
+\end{DoxyCode}
+
+\item Add CLI handler in {\ttfamily \doxylink{axe_8py}{axe.\+py}} (Chat\+Session.\+handle\+\_\+workshop\+\_\+command)
+\end{DoxyEnumerate}\hypertarget{md_ARCHITECTURE_autotoc_md165}{}\doxysubsection{\texorpdfstring{4. Adding New Token Optimization Strategies}{4. Adding New Token Optimization Strategies}}\label{md_ARCHITECTURE_autotoc_md165}
+{\bfseries{File\+:}} {\ttfamily \doxylink{context__optimizer_8py}{utils/context\+\_\+optimizer.\+py}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{def\ }my\_optimization\_strategy(}
+\DoxyCodeLine{\ \ \ \ messages:\ List[Message],}
+\DoxyCodeLine{\ \ \ \ max\_tokens:\ int}
+\DoxyCodeLine{)\ -\/>\ List[Message]:}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ Custom\ optimization\ strategy.}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ Args:}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ messages:\ Conversation\ history}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ max\_tokens:\ Token\ budget}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ Returns:}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ Optimized\ messages}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ "{}"{}"{}}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ Your\ optimization\ logic}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ optimized\_messages}
+
+\end{DoxyCode}
+\hypertarget{md_ARCHITECTURE_autotoc_md166}{}\doxysection{\texorpdfstring{Design Principles}{Design Principles}}\label{md_ARCHITECTURE_autotoc_md166}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Provider Abstraction}}\+: All AI providers implement the same interface in {\ttfamily Agent\+Manager.\+call\+\_\+agent()}. New providers should follow this pattern.
+\item {\bfseries{Configuration-\/\+Driven}}\+: Features are enabled via {\ttfamily axe.\+yaml}. New features should support both YAML configuration and sensible defaults.
+\item {\bfseries{Graceful Degradation}}\+: Use try/except for optional dependencies. Features should degrade gracefully when dependencies are missing.
+\item {\bfseries{Safety First}}\+: All tool execution goes through {\ttfamily Tool\+Runner} with whitelist validation. New tools should integrate with this system.
+\item {\bfseries{Persistence}}\+: Agent state is stored in SQLite via {\ttfamily Agent\+Database}. New features needing persistence should add appropriate tables/columns.
+\end{DoxyEnumerate}\hypertarget{md_ARCHITECTURE_autotoc_md167}{}\doxysection{\texorpdfstring{Future Enhancements}{Future Enhancements}}\label{md_ARCHITECTURE_autotoc_md167}
+\hypertarget{md_ARCHITECTURE_autotoc_md168}{}\doxysubsection{\texorpdfstring{Ollama Integration (Local Models)}{Ollama Integration (Local Models)}}\label{md_ARCHITECTURE_autotoc_md168}
+
+\begin{DoxyItemize}
+\item Zero API cost for development
+\item Privacy-\/sensitive operations
+\item Offline capability
+\item Custom fine-\/tuned models
+\end{DoxyItemize}\hypertarget{md_ARCHITECTURE_autotoc_md169}{}\doxysubsection{\texorpdfstring{Ray Integration (Distributed AI)}{Ray Integration (Distributed AI)}}\label{md_ARCHITECTURE_autotoc_md169}
+
+\begin{DoxyItemize}
+\item Parallel agent processing
+\item Horizontal scaling
+\item Multi-\/machine clusters
+\item GPU resource sharing
+\end{DoxyItemize}\hypertarget{md_ARCHITECTURE_autotoc_md170}{}\doxysubsection{\texorpdfstring{Plugin System}{Plugin System}}\label{md_ARCHITECTURE_autotoc_md170}
+
+\begin{DoxyItemize}
+\item Dynamic tool loading
+\item Third-\/party extensions
+\item Custom provider plugins
+\end{DoxyItemize}\hypertarget{md_ARCHITECTURE_autotoc_md171}{}\doxysection{\texorpdfstring{Contributing}{Contributing}}\label{md_ARCHITECTURE_autotoc_md171}
+When extending AXE\+:
+
+
+\begin{DoxyEnumerate}
+\item Follow existing code patterns
+\item Add type hints to all new functions
+\item Write docstrings for public APIs
+\item Add tests for new functionality
+\item Update relevant documentation 
+\end{DoxyEnumerate}

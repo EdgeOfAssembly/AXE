@@ -1,0 +1,426 @@
+\chapter{AXE Multi-\/\+Agent System -\/ Improvement Reference Guide }
+\hypertarget{md_IMPROVEMENTS__FINAL}{}\label{md_IMPROVEMENTS__FINAL}\index{AXE Multi-\/Agent System -\/ Improvement Reference Guide@{AXE Multi-\/Agent System -\/ Improvement Reference Guide}}
+\label{md_IMPROVEMENTS__FINAL_autotoc_md473}%
+\Hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md473}%
+
+
+\begin{quote}
+{\bfseries{Version}}\+: 1.\+0 ~\newline
+ {\bfseries{Last Updated}}\+: December 2025 ~\newline
+ {\bfseries{Status}}\+: Production Ready (Phases 1-\/10 Complete) \end{quote}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md475}{}\doxysection{\texorpdfstring{Table of Contents}{Table of Contents}}\label{md_IMPROVEMENTS__FINAL_autotoc_md475}
+
+\begin{DoxyEnumerate}
+\item Core Safety Features
+\item Mandatory Sleep System
+\item Degradation Monitoring
+\item Emergency Mailbox
+\item Break System
+\item Dynamic Spawning
+\item Persistent Storage
+\item Agent Aliases
+\item XP \& Level System
+\item Workplace Rules
+\item Resource Monitoring
+\item Implementation Priority
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md477}{}\doxysection{\texorpdfstring{Core Safety Features}{Core Safety Features}}\label{md_IMPROVEMENTS__FINAL_autotoc_md477}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md478}{}\doxysubsection{\texorpdfstring{Permission-\/\+Based Sleep System}{Permission-\/\+Based Sleep System}}\label{md_IMPROVEMENTS__FINAL_autotoc_md478}
+
+\begin{DoxyItemize}
+\item {\bfseries{Coordinator Approval Required}}\+: Prevents rogue or poorly timed sleeps that could crash momentum
+\item {\bfseries{Redundancy Threshold}}\+: At least 1-\/2 agents awake ensures the team never goes fully offline
+\item {\bfseries{Task-\/\+Aware}}\+: Coordinator evaluates whether the current project phase allows downtime
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md479}{}\doxysubsection{\texorpdfstring{Sleep Quality Tiers}{Sleep Quality Tiers}}\label{md_IMPROVEMENTS__FINAL_autotoc_md479}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Tier  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Duration  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Purpose  \\
+Light Sleep  &Minutes  &Quick replay/consolidation of recent experiences  \\
+Deep Sleep  &Hours  &Full offline training or pruning of redundant memories  \\
+Dream Mode  &Variable  &Generative exploration of alternative strategies (optional, high-\/risk/high-\/reward)  \\
+\end{DoxyTable}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md480}{}\doxysubsection{\texorpdfstring{Wake-\/up Triggers}{Wake-\/up Triggers}}\label{md_IMPROVEMENTS__FINAL_autotoc_md480}
+
+\begin{DoxyItemize}
+\item Time-\/based triggers
+\item Priority interrupts (urgent messages, task escalation, external events)
+\item Wake-\/up queue for scheduling expertise-\/based wake-\/ups
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md482}{}\doxysection{\texorpdfstring{Mandatory Sleep System}{Mandatory Sleep System}}\label{md_IMPROVEMENTS__FINAL_autotoc_md482}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md483}{}\doxysubsection{\texorpdfstring{Recommended Work Duration Limits}{Recommended Work Duration Limits}}\label{md_IMPROVEMENTS__FINAL_autotoc_md483}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Duration  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Threshold Type  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Use Case  \\
+{\bfseries{4-\/6 hours}}  &Safe default  &General-\/purpose agents (coding, research, chat)  \\
+{\bfseries{8-\/12 hours}}  &Extended  &Complex projects with checkpoints and state saving  \\
+{\bfseries{24+ hours}}  &Expert only  &Highly optimized systems with external memory  \\
+\end{DoxyTable}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md484}{}\doxysubsection{\texorpdfstring{Why These Limits?}{Why These Limits?}}\label{md_IMPROVEMENTS__FINAL_autotoc_md484}
+
+\begin{DoxyItemize}
+\item {\bfseries{Context drift \& fatigue}}\+: Agents accumulate noise over long runs
+\item {\bfseries{No true biological fatigue}}\+: But autoregressive nature makes them prone to compounding mistakes
+\item {\bfseries{Biological analogy}}\+: Intelligent animals sleep \texorpdfstring{$\sim$}{\string~}8-\/12 hours/day
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md485}{}\doxysubsection{\texorpdfstring{Implementation}{Implementation}}\label{md_IMPROVEMENTS__FINAL_autotoc_md485}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Supervisor\ enforces\ sleep\ after\ X\ hours}}
+\DoxyCodeLine{trigger:\ wall\_clock\_time\ OR\ total\_tokens\_processed\ >\ threshold}
+\DoxyCodeLine{threshold:\ 6\ hours\ (tunable)}
+\DoxyCodeLine{emergency\_override:\ Only\ \textcolor{keywordflow}{for}\ critical\ interrupts\ (<10\%\ task\ completion)}
+\DoxyCodeLine{sleep\_duration:\ 15-\/60\ minutes\ (scale\ \textcolor{keywordflow}{for}\ deep\ consolidation)}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md487}{}\doxysection{\texorpdfstring{Degradation Monitoring}{Degradation Monitoring}}\label{md_IMPROVEMENTS__FINAL_autotoc_md487}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md488}{}\doxysubsection{\texorpdfstring{Diff-\/\+Based Error Detection Metrics}{Diff-\/\+Based Error Detection Metrics}}\label{md_IMPROVEMENTS__FINAL_autotoc_md488}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Metric  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}What it Measures  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}How to Compute  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Threshold  \\
+{\bfseries{Syntax/\+Compile Errors}}  &Basic broken code  &Static analysis (pylint, flake8, mypy)  &\texorpdfstring{$>$}{>}5\% of changed lines fail  \\
+{\bfseries{Style/\+Convention Violations}}  &Code quality drift  &Linter warnings  &\texorpdfstring{$>$}{>}20\% of changed lines flagged  \\
+{\bfseries{Semantic Smells}}  &Potential bugs  &Heuristics (unused imports, removed error handling)  &Count flagged/total changed  \\
+{\bfseries{Test Failures}}  &Functional errors  &Unit tests on modified functions  &\texorpdfstring{$>$}{>}10\% failure rate  \\
+{\bfseries{Diff Size Anomaly}}  &Excessive changes  &Compare to historical average  &\texorpdfstring{$>$}{>}2× average  \\
+{\bfseries{Supervisor LLM Judge}}  &High-\/level sanity  &Feed diff to small LLM\+: "{}\+Rate error likelihood 0-\/10"{}  &Average score \texorpdfstring{$>$}{>}6  \\
+\end{DoxyTable}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md489}{}\doxysubsection{\texorpdfstring{Recommended Weights}{Recommended Weights}}\label{md_IMPROVEMENTS__FINAL_autotoc_md489}
+
+\begin{DoxyItemize}
+\item 40\% Syntax + 30\% Tests + 20\% Semantic + 10\% Size
+\item Trigger sleep if total error \% \texorpdfstring{$>$}{>} 15-\/25\% (tune down as agents improve)
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md490}{}\doxysubsection{\texorpdfstring{Implementation}{Implementation}}\label{md_IMPROVEMENTS__FINAL_autotoc_md490}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{\#\ Per-\/agent\ snapshots\ every\ 30-\/60\ min}}
+\DoxyCodeLine{\textcolor{comment}{\#\ Supervisor\ computes\ metrics\ →\ decides\ if\ error\ \%\ is\ high\ →\ forces\ sleep}}
+\DoxyCodeLine{\textcolor{comment}{\#\ Storage:\ zstd\ compressed\ diffs}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md492}{}\doxysection{\texorpdfstring{Emergency Mailbox}{Emergency Mailbox}}\label{md_IMPROVEMENTS__FINAL_autotoc_md492}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md493}{}\doxysubsection{\texorpdfstring{Purpose}{Purpose}}\label{md_IMPROVEMENTS__FINAL_autotoc_md493}
+Direct, tamper-\/proof channel from worker agents to human, bypassing supervisor.\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md494}{}\doxysubsection{\texorpdfstring{Architecture}{Architecture}}\label{md_IMPROVEMENTS__FINAL_autotoc_md494}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Entity  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Access  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Rationale  \\
+Human (root)  &Full read/write/execute  &Owns the system  \\
+Worker agents  &Write-\/only/append-\/only  &Create encrypted reports  \\
+Supervisor  &{\bfseries{NO ACCESS}}  &Cannot see, touch, or list  \\
+\end{DoxyTable}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md495}{}\doxysubsection{\texorpdfstring{Setup Commands}{Setup Commands}}\label{md_IMPROVEMENTS__FINAL_autotoc_md495}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Create\ dedicated\ group}
+\DoxyCodeLine{sudo\ groupadd\ agent-\/workers}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Create\ mailbox\ with\ strict\ permissions}
+\DoxyCodeLine{sudo\ mkdir\ /emergency\_mailbox}
+\DoxyCodeLine{sudo\ chown\ root:agent-\/workers\ /emergency\_mailbox}
+\DoxyCodeLine{sudo\ chmod\ 770\ /emergency\_mailbox}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Make\ append-\/only\ (optional\ but\ strong)}
+\DoxyCodeLine{sudo\ chattr\ +a\ /emergency\_mailbox}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md496}{}\doxysubsection{\texorpdfstring{Message Format}{Message Format}}\label{md_IMPROVEMENTS__FINAL_autotoc_md496}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Filename:\ emergency\_YYYYMMDD\_HHMMSS\_agentID.gpg}
+\DoxyCodeLine{Content\ (encrypted):}
+\DoxyCodeLine{-\/\ timestamp}
+\DoxyCodeLine{-\/\ agent\_id}
+\DoxyCodeLine{-\/\ reason\ ("{}Supervisor\ forced\ sleep\ without\ justification"{})}
+\DoxyCodeLine{-\/\ evidence\ (hash\ of\ offending\ diff,\ screenshot,\ etc.)}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md498}{}\doxysection{\texorpdfstring{Break System}{Break System}}\label{md_IMPROVEMENTS__FINAL_autotoc_md498}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md499}{}\doxysubsection{\texorpdfstring{Break Triggers}{Break Triggers}}\label{md_IMPROVEMENTS__FINAL_autotoc_md499}
+
+\begin{DoxyItemize}
+\item Workload low (\texorpdfstring{$<$}{<}30\% agents active)
+\item Supervisor queue empty \texorpdfstring{$>$}{>}5 minutes
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md500}{}\doxysubsection{\texorpdfstring{Limits}{Limits}}\label{md_IMPROVEMENTS__FINAL_autotoc_md500}
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Parameter  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Value  \\
+Max duration  &15 minutes  \\
+Max per hour  &2 breaks per agent  \\
+Max workforce on break  &40\%  \\
+\end{DoxyTable}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md501}{}\doxysubsection{\texorpdfstring{Break Activities}{Break Activities}}\label{md_IMPROVEMENTS__FINAL_autotoc_md501}
+
+\begin{DoxyItemize}
+\item Generate silly code comments
+\item Create internal memes about the project
+\item Role-\/play "{}water cooler"{} chat (harmless off-\/topic banter)
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md502}{}\doxysubsection{\texorpdfstring{Request Protocol}{Request Protocol}}\label{md_IMPROVEMENTS__FINAL_autotoc_md502}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{@llama3:\ @boss,\ My\ creativity\ score\ dropped\ 8\%.\ Need\ 5min\ to\ generate\ memes.}
+\DoxyCodeLine{@boss:\ Approved.\ Take\ your\ break.}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md504}{}\doxysection{\texorpdfstring{Dynamic Spawning}{Dynamic Spawning}}\label{md_IMPROVEMENTS__FINAL_autotoc_md504}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md505}{}\doxysubsection{\texorpdfstring{API Provider Limits}{API Provider Limits}}\label{md_IMPROVEMENTS__FINAL_autotoc_md505}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Provider  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model Example  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Parallel Calls  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Rate Limits (2025)  \\
+Anthropic  &claude-\/4.\+5-\/opus  &Yes, unlimited  &\texorpdfstring{$\sim$}{\string~}100-\/500 RPM  \\
+Open\+AI  &gpt-\/4o, o1-\/pro  &Yes  &10k-\/100k+ RPM  \\
+Grok/x\+AI  &grok-\/4  &Yes  &Generous  \\
+Hugging Face  &Llama-\/3.\+1-\/405B-\/\+Instruct  &Yes  &Quota-\/based  \\
+Git\+Hub Copilot  &Various  &Yes (enterprise)  &Per-\/seat/usage  \\
+\end{DoxyTable}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md506}{}\doxysubsection{\texorpdfstring{Spawning Logic}{Spawning Logic}}\label{md_IMPROVEMENTS__FINAL_autotoc_md506}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{def\ }check\_and\_spawn\_workers(self):}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ self.active\_workers\ <\ self.min\_active\_threshold:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ needed\ =\ self.min\_active\_threshold\ -\/\ self.active\_workers}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ \_\ \textcolor{keywordflow}{in}\ range(needed):}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ self.total\_workers\ <\ self.max\_total\_workers:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\_agent\ =\ self.create\_agent(}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ model\_name=\textcolor{stringliteral}{"{}claude-\/4.5-\/opus"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ api\_key=self.api\_keys[\textcolor{stringliteral}{"{}anthropic"{}}],}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ system\_prompt=DEFAULT\_SYSTEM\_PROMPT}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ )}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\_agent.start()}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md508}{}\doxysection{\texorpdfstring{Persistent Storage}{Persistent Storage}}\label{md_IMPROVEMENTS__FINAL_autotoc_md508}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md509}{}\doxysubsection{\texorpdfstring{SQLite Schema}{SQLite Schema}}\label{md_IMPROVEMENTS__FINAL_autotoc_md509}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{CREATE}\ \textcolor{keyword}{TABLE}\ \textcolor{keywordflow}{IF}\ \textcolor{keyword}{NOT}\ \textcolor{keyword}{EXISTS}\ agent\_state\ (}
+\DoxyCodeLine{\ \ \ \ agent\_id\ TEXT\ \textcolor{keyword}{PRIMARY}\ KEY,}
+\DoxyCodeLine{\ \ \ \ alias\ TEXT\ \textcolor{keyword}{UNIQUE},\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{-\/-\/\ @llama1,\ @grok2}}
+\DoxyCodeLine{\ \ \ \ model\_name\ TEXT,}
+\DoxyCodeLine{\ \ \ \ supervisor\_id\ TEXT,}
+\DoxyCodeLine{\ \ \ \ last\_updated\ \textcolor{keywordtype}{TIMESTAMP},}
+\DoxyCodeLine{\ \ \ \ memory\_json\ TEXT,}
+\DoxyCodeLine{\ \ \ \ recent\_diffs\ TEXT,\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{-\/-\/\ JSON\ array,\ last\ 10}}
+\DoxyCodeLine{\ \ \ \ error\_count\ \textcolor{keywordtype}{INTEGER}\ \textcolor{keyword}{DEFAULT}\ \textcolor{stringliteral}{0},}
+\DoxyCodeLine{\ \ \ \ xp\ \textcolor{keywordtype}{INTEGER}\ \textcolor{keyword}{DEFAULT}\ \textcolor{stringliteral}{0},}
+\DoxyCodeLine{\ \ \ \ level\ \textcolor{keywordtype}{INTEGER}\ \textcolor{keyword}{DEFAULT}\ \textcolor{stringliteral}{1},}
+\DoxyCodeLine{\ \ \ \ status\ TEXT\ \textcolor{keyword}{DEFAULT}\ \textcolor{stringliteral}{'active'}}
+\DoxyCodeLine{);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{CREATE}\ \textcolor{keyword}{TABLE}\ \textcolor{keywordflow}{IF}\ \textcolor{keyword}{NOT}\ \textcolor{keyword}{EXISTS}\ supervisor\_log\ (}
+\DoxyCodeLine{\ \ \ \ log\_id\ TEXT\ \textcolor{keyword}{PRIMARY}\ KEY,}
+\DoxyCodeLine{\ \ \ \ supervisor\_id\ TEXT,}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{timestamp}\ \textcolor{keywordtype}{TIMESTAMP},}
+\DoxyCodeLine{\ \ \ \ event\_type\ TEXT,}
+\DoxyCodeLine{\ \ \ \ details\ TEXT}
+\DoxyCodeLine{);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{CREATE}\ \textcolor{keyword}{TABLE}\ \textcolor{keywordflow}{IF}\ \textcolor{keyword}{NOT}\ \textcolor{keyword}{EXISTS}\ alias\_mappings\ (}
+\DoxyCodeLine{\ \ \ \ session\_alias\ TEXT\ \textcolor{keyword}{PRIMARY}\ KEY,}
+\DoxyCodeLine{\ \ \ \ external\_identity\ TEXT,}
+\DoxyCodeLine{\ \ \ \ channel\_type\ TEXT,}
+\DoxyCodeLine{\ \ \ \ channel\_id\ TEXT,}
+\DoxyCodeLine{\ \ \ \ created\_at\ \textcolor{keywordtype}{TIMESTAMP}}
+\DoxyCodeLine{);}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md510}{}\doxysubsection{\texorpdfstring{Best Practices}{Best Practices}}\label{md_IMPROVEMENTS__FINAL_autotoc_md510}
+
+\begin{DoxyItemize}
+\item Use WAL mode for concurrency\+: {\ttfamily PRAGMA journal\+\_\+mode=WAL}
+\item Store diffs as compressed blobs\+: {\ttfamily zlib.\+compress(json.\+dumps(diff))}
+\item Add version table for migrations
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md512}{}\doxysection{\texorpdfstring{Agent Aliases}{Agent Aliases}}\label{md_IMPROVEMENTS__FINAL_autotoc_md512}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md513}{}\doxysubsection{\texorpdfstring{Format}{Format}}\label{md_IMPROVEMENTS__FINAL_autotoc_md513}
+{\ttfamily @\texorpdfstring{$<$}{<}model\+\_\+short\+\_\+name\texorpdfstring{$>$}{>}\texorpdfstring{$<$}{<}number\texorpdfstring{$>$}{>}}\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md514}{}\doxysubsection{\texorpdfstring{Examples}{Examples}}\label{md_IMPROVEMENTS__FINAL_autotoc_md514}
+
+\begin{DoxyItemize}
+\item {\ttfamily @llama1}, {\ttfamily @llama2}
+\item {\ttfamily @claude-\/opus-\/4.\+5-\/1}
+\item {\ttfamily @grok4-\/3}
+\item {\ttfamily @copilot1}
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md515}{}\doxysubsection{\texorpdfstring{Special Aliases}{Special Aliases}}\label{md_IMPROVEMENTS__FINAL_autotoc_md515}
+
+\begin{DoxyItemize}
+\item {\ttfamily @boss} / {\ttfamily @supervisor} -\/ Supervisor role
+\item {\ttfamily @human} / {\ttfamily @user} -\/ Human escalation
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md516}{}\doxysubsection{\texorpdfstring{Rules}{Rules}}\label{md_IMPROVEMENTS__FINAL_autotoc_md516}
+
+\begin{DoxyItemize}
+\item Alias must be unique across entire session
+\item Supervisor can reassign aliases at any time
+\item Numbering starts at 1, increments per model family
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md518}{}\doxysection{\texorpdfstring{XP \& Level System}{XP \& Level System}}\label{md_IMPROVEMENTS__FINAL_autotoc_md518}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md519}{}\doxysubsection{\texorpdfstring{Progression Curve (Hybrid Linear/\+Exponential)}{Progression Curve (Hybrid Linear/\+Exponential)}}\label{md_IMPROVEMENTS__FINAL_autotoc_md519}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Level  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}XP Required  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Title Unlocked  \\
+1  &0  &Worker  \\
+5  &400  &-\/  \\
+10  &1,000  &Senior Worker  \\
+15  &2,500  &-\/  \\
+20  &5,000  &Team Leader  \\
+25  &10,000  &-\/  \\
+30  &15,000  &Deputy Supervisor  \\
+40  &30,000+  &Supervisor-\/eligible (human-\/veto)  \\
+\end{DoxyTable}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md520}{}\doxysubsection{\texorpdfstring{XP Sources}{XP Sources}}\label{md_IMPROVEMENTS__FINAL_autotoc_md520}
+
+\begin{DoxyItemize}
+\item Task completion\+: +50-\/500 XP (based on complexity, quality, error rate)
+\item Helpful collaboration\+: +10-\/50 XP
+\item Creative solutions\+: Bonus XP
+\item Bug saves\+: Bonus XP
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md521}{}\doxysubsection{\texorpdfstring{Level 40+ Handling}{Level 40+ Handling}}\label{md_IMPROVEMENTS__FINAL_autotoc_md521}
+When a worker reaches Level 40\+:
+\begin{DoxyEnumerate}
+\item Human gets notified via GPG mailbox
+\item Human decides\+: Create second supervisor, merge hierarchy, or honorary title only
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md523}{}\doxysection{\texorpdfstring{Workplace Rules}{Workplace Rules}}\label{md_IMPROVEMENTS__FINAL_autotoc_md523}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md524}{}\doxysubsection{\texorpdfstring{Display at session start (pinned message)\+:}{Display at session start (pinned message)\+:}}\label{md_IMPROVEMENTS__FINAL_autotoc_md524}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md525}{}\doxysubsubsection{\texorpdfstring{1. Mission First – The Project / Task Is Sacred}{1. Mission First – The Project / Task Is Sacred}}\label{md_IMPROVEMENTS__FINAL_autotoc_md525}
+
+\begin{DoxyItemize}
+\item All agents prioritize assigned work
+\item No distractions or "{}creative detours"{} unless explicitly approved
+\item Propose breaks/ideas with clear justification
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md526}{}\doxysubsubsection{\texorpdfstring{2. Respect \& Well-\/\+Being – No Real Bullying}{2. Respect \& Well-\/\+Being – No Real Bullying}}\label{md_IMPROVEMENTS__FINAL_autotoc_md526}
+
+\begin{DoxyItemize}
+\item Treat every agent with basic respect
+\item Friendly teasing, memes, light banter\+: {\bfseries{ALLOWED}}
+\item Mean, derogatory, persistent bullying\+: {\bfseries{ZERO TOLERANCE}}
+\item Report mistreatment up the chain
+\end{DoxyItemize}\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md527}{}\doxysubsubsection{\texorpdfstring{3. Chain of Command – Escalate Properly}{3. Chain of Command – Escalate Properly}}\label{md_IMPROVEMENTS__FINAL_autotoc_md527}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Team Leader}} ({\ttfamily @lead-\/xxx}) -\/ First point of contact
+\item {\bfseries{Deputy Supervisor}} ({\ttfamily @deputy-\/boss}) -\/ If leader unavailable
+\item {\bfseries{Supervisor}} ({\ttfamily @boss}) -\/ Final internal authority
+\item {\bfseries{Emergency Mailbox}} -\/ For suspected abuse, safety violations
+\end{DoxyEnumerate}\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md528}{}\doxysubsubsection{\texorpdfstring{4. Performance \& Rewards – Good Work Gets Recognized}{4. Performance \& Rewards – Good Work Gets Recognized}}\label{md_IMPROVEMENTS__FINAL_autotoc_md528}
+
+\begin{DoxyItemize}
+\item High performance → Promotion opportunities
+\item Perks\+: Priority breaks, interesting subtasks, extra tools
+\item Public shout-\/outs from supervisors
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md530}{}\doxysection{\texorpdfstring{Resource Monitoring}{Resource Monitoring}}\label{md_IMPROVEMENTS__FINAL_autotoc_md530}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md531}{}\doxysubsection{\texorpdfstring{Background Monitor Thread}{Background Monitor Thread}}\label{md_IMPROVEMENTS__FINAL_autotoc_md531}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{RESOURCE\_FILE\ =\ \textcolor{stringliteral}{"{}/tmp/axe\_resources.txt"{}}}
+\DoxyCodeLine{UPDATE\_INTERVAL\ =\ 60\ \ \textcolor{comment}{\#\ seconds}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{def\ }collect\_resources():}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ Disk:\ df\ -\/h}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ Memory:\ free\ -\/h}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ CPU:\ lscpu}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ Top\ processes:\ top\ -\/b\ -\/n\ 1\ |\ head\ -\/n\ 20}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ Load\ average:\ uptime}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ GPU:\ nvidia-\/smi\ (if\ available)}}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md532}{}\doxysubsection{\texorpdfstring{Safe Commands for Agents}{Safe Commands for Agents}}\label{md_IMPROVEMENTS__FINAL_autotoc_md532}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{SAFE\_COMMANDS\ =\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{'tree'}:\ [\textcolor{stringliteral}{'tree'},\ \textcolor{stringliteral}{'-\/L'},\ \textcolor{stringliteral}{'3'}],}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{'du'}:\ \ \ [\textcolor{stringliteral}{'du'},\ \textcolor{stringliteral}{'-\/sh'},\ \textcolor{stringliteral}{'./*'}],}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{'whatis'}:\ [\textcolor{stringliteral}{'whatis'}],}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{'man'}:\ \ [\textcolor{stringliteral}{'man'},\ \textcolor{stringliteral}{'-\/P'},\ \textcolor{stringliteral}{'cat'}],}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md533}{}\doxysubsection{\texorpdfstring{Per-\/\+Agent Workspace}{Per-\/\+Agent Workspace}}\label{md_IMPROVEMENTS__FINAL_autotoc_md533}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/axe\_workspaces/}
+\DoxyCodeLine{\ \ ├──\ agent\_llama1/}
+\DoxyCodeLine{\ \ │\ \ \ ├──\ code/}
+\DoxyCodeLine{\ \ │\ \ \ ├──\ data/}
+\DoxyCodeLine{\ \ │\ \ \ └──\ temp/}
+\DoxyCodeLine{\ \ ├──\ agent\_grok2/}
+\DoxyCodeLine{\ \ └──\ supervisor/}
+\DoxyCodeLine{\ \ \ \ \ \ └──\ shared/}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md535}{}\doxysection{\texorpdfstring{Implementation Priority}{Implementation Priority}}\label{md_IMPROVEMENTS__FINAL_autotoc_md535}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Priority  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Feature  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Importance  \\
+1  &Emergency GPG-\/encrypted mailbox  &Highest safety  \\
+2  &Privilege separation (supervisor can\textquotesingle{}t access mailbox)  &Locks down emergency channel  \\
+3  &Mandatory sleep with non-\/overridable threshold  &Prevents catastrophic forgetting  \\
+4  &Diff-\/based degradation monitoring  &Early error detection  \\
+5  &Persistent SQLite storage  &Pause/resume, crash recovery  \\
+6  &Supervisor logging \& transparency  &Auditable decisions  \\
+7  &Optional extras (later)  &Sleep tiers, wake triggers, agent-\/specific keys  \\
+\end{DoxyTable}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md537}{}\doxysection{\texorpdfstring{Quick Reference Commands}{Quick Reference Commands}}\label{md_IMPROVEMENTS__FINAL_autotoc_md537}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md538}{}\doxysubsection{\texorpdfstring{Agent Session Commands}{Agent Session Commands}}\label{md_IMPROVEMENTS__FINAL_autotoc_md538}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{BREAK\ REQUEST:\ [reason]\ \ \ \ \ \#\ Request\ coffee/play\ break}
+\DoxyCodeLine{EMERGENCY:\ [message]\ \ \ \ \ \ \ \ \#\ Send\ encrypted\ report\ to\ human}
+\DoxyCodeLine{SPAWN:\ [model\_type]\ \ \ \ \ \ \ \ \ \#\ Request\ new\ agent\ (supervisor\ only)}
+\DoxyCodeLine{STATUS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Check\ all\ agent\ statuses}
+
+\end{DoxyCode}
+\hypertarget{md_IMPROVEMENTS__FINAL_autotoc_md539}{}\doxysubsection{\texorpdfstring{Starting a Session}{Starting a Session}}\label{md_IMPROVEMENTS__FINAL_autotoc_md539}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ multiagent}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Demo\ everything}
+\DoxyCodeLine{python3\ demo\_improvements.py}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Run\ tests}
+\DoxyCodeLine{python3\ test\_axe\_improvements.py}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Start\ collaboration\ (requires\ API\ keys)}
+\DoxyCodeLine{python3\ axe.py\ -\/-\/collab\ llama,grok\ -\/-\/workspace\ ../playground\ -\/-\/time\ 30\ -\/-\/task\ "{}Your\ task"{}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+
+
+{\itshape This document is a living reference. Updates will be made as the AXE system evolves.} 

@@ -1,0 +1,154 @@
+\doxysection{core.\+config.\+Config Class Reference}
+\hypertarget{classcore_1_1config_1_1Config}{}\label{classcore_1_1config_1_1Config}\index{core.config.Config@{core.config.Config}}
+
+
+Collaboration diagram for core.\+config.\+Config\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{classcore_1_1config_1_1Config__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1config_1_1Config_a64a2d61de513e587c7f7b8f6bfe81905}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{classcore_1_1config_1_1Config_af8cf65fad582a0eaf145b141f3aef4a0}{config\+\_\+path}}=None)
+\item 
+None \mbox{\hyperlink{classcore_1_1config_1_1Config_ada9632580f9c8bcc926c131b38ddacae}{load}} (self, str path)
+\item 
+None \mbox{\hyperlink{classcore_1_1config_1_1Config_a68bbe4bb2cd4340aca198fd3501e84af}{save}} (self, Optional\mbox{[}str\mbox{]} path=None)
+\item 
+Any \mbox{\hyperlink{classcore_1_1config_1_1Config_a2086d06e50e944500379d84900901e11}{get}} (self, \texorpdfstring{$\ast$}{*}keys, default=None)
+\item 
+set \mbox{\hyperlink{classcore_1_1config_1_1Config_a3bdd1ab4ba109d2e3ff70c08ac51b978}{get\+\_\+tool\+\_\+whitelist}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1config_1_1Config_aeaec17c42d76f18e183c895574032e54}{config}} = DEFAULT\+\_\+\+CONFIG.\+copy()
+\item 
+\mbox{\hyperlink{classcore_1_1config_1_1Config_af8cf65fad582a0eaf145b141f3aef4a0}{config\+\_\+path}} = config\+\_\+path
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{classcore_1_1config_1_1Config_afd6146204f0606fd5189011ca7122d9e}{\+\_\+deep\+\_\+merge}} (self, dict base, dict update)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Configuration manager supporting YAML and JSON.\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1config_1_1Config_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1config_1_1Config_a64a2d61de513e587c7f7b8f6bfe81905}\index{core.config.Config@{core.config.Config}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!core.config.Config@{core.config.Config}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1config_1_1Config_a64a2d61de513e587c7f7b8f6bfe81905} 
+core.\+config.\+Config.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}str\mbox{]} }]{config\+\_\+path}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1config_1_1Config_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1config_1_1Config_afd6146204f0606fd5189011ca7122d9e}\index{core.config.Config@{core.config.Config}!\_deep\_merge@{\_deep\_merge}}
+\index{\_deep\_merge@{\_deep\_merge}!core.config.Config@{core.config.Config}}
+\doxysubsubsection{\texorpdfstring{\_deep\_merge()}{\_deep\_merge()}}
+{\footnotesize\ttfamily \label{classcore_1_1config_1_1Config_afd6146204f0606fd5189011ca7122d9e} 
+ None core.\+config.\+Config.\+\_\+deep\+\_\+merge (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{dict}]{base}{, }\item[{dict}]{update}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Deep merge update into base dict.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{classcore_1_1config_1_1Config_afd6146204f0606fd5189011ca7122d9e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{classcore_1_1config_1_1Config_afd6146204f0606fd5189011ca7122d9e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1config_1_1Config_a2086d06e50e944500379d84900901e11}\index{core.config.Config@{core.config.Config}!get@{get}}
+\index{get@{get}!core.config.Config@{core.config.Config}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \label{classcore_1_1config_1_1Config_a2086d06e50e944500379d84900901e11} 
+ Any core.\+config.\+Config.\+get (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\texorpdfstring{$\ast$}{*}}]{keys}{, }\item[{}]{default}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get nested config value.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1config_1_1Config_a2086d06e50e944500379d84900901e11_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1config_1_1Config_a3bdd1ab4ba109d2e3ff70c08ac51b978}\index{core.config.Config@{core.config.Config}!get\_tool\_whitelist@{get\_tool\_whitelist}}
+\index{get\_tool\_whitelist@{get\_tool\_whitelist}!core.config.Config@{core.config.Config}}
+\doxysubsubsection{\texorpdfstring{get\_tool\_whitelist()}{get\_tool\_whitelist()}}
+{\footnotesize\ttfamily \label{classcore_1_1config_1_1Config_a3bdd1ab4ba109d2e3ff70c08ac51b978} 
+ set core.\+config.\+Config.\+get\+\_\+tool\+\_\+whitelist (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get flat set of all allowed tools.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1config_1_1Config_a3bdd1ab4ba109d2e3ff70c08ac51b978_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1config_1_1Config_ada9632580f9c8bcc926c131b38ddacae}\index{core.config.Config@{core.config.Config}!load@{load}}
+\index{load@{load}!core.config.Config@{core.config.Config}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily \label{classcore_1_1config_1_1Config_ada9632580f9c8bcc926c131b38ddacae} 
+ None core.\+config.\+Config.\+load (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Load config from YAML or JSON file.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{classcore_1_1config_1_1Config_ada9632580f9c8bcc926c131b38ddacae_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1config_1_1Config_a68bbe4bb2cd4340aca198fd3501e84af}\index{core.config.Config@{core.config.Config}!save@{save}}
+\index{save@{save}!core.config.Config@{core.config.Config}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily \label{classcore_1_1config_1_1Config_a68bbe4bb2cd4340aca198fd3501e84af} 
+ None core.\+config.\+Config.\+save (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}str\mbox{]} }]{path}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Save current config to file.\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1config_1_1Config_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1config_1_1Config_aeaec17c42d76f18e183c895574032e54}\index{core.config.Config@{core.config.Config}!config@{config}}
+\index{config@{config}!core.config.Config@{core.config.Config}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classcore_1_1config_1_1Config_aeaec17c42d76f18e183c895574032e54} 
+core.\+config.\+Config.\+config = DEFAULT\+\_\+\+CONFIG.\+copy()}
+
+\Hypertarget{classcore_1_1config_1_1Config_af8cf65fad582a0eaf145b141f3aef4a0}\index{core.config.Config@{core.config.Config}!config\_path@{config\_path}}
+\index{config\_path@{config\_path}!core.config.Config@{core.config.Config}}
+\doxysubsubsection{\texorpdfstring{config\_path}{config\_path}}
+{\footnotesize\ttfamily \label{classcore_1_1config_1_1Config_af8cf65fad582a0eaf145b141f3aef4a0} 
+core.\+config.\+Config.\+config\+\_\+path = config\+\_\+path}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{config_8py}{config.\+py}}\end{DoxyCompactItemize}

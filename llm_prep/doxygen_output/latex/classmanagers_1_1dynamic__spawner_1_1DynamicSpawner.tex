@@ -1,0 +1,158 @@
+\doxysection{managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner Class Reference}
+\hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner}{}\label{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner}\index{managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}}
+
+
+Collaboration diagram for managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ad0e96247005d73588b2c279810ced34b}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase}{Agent\+Database}} \mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a1567e4c7c8aa608b93fe62fa6ea9c24c}{db}}, \textquotesingle{}\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}\textquotesingle{} \mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a22bb8ce474cb47d7879aea8d20a09520}{config}})
+\item 
+Tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ace1486716f92dba70dfcf94d4a56ca71}{can\+\_\+spawn}} (self)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a711e5dcf634b5abbd73ff3c2d71505f8}{spawn\+\_\+agent}} (self, str model\+\_\+name, str provider, str supervisor\+\_\+id, str reason="{}"{})
+\item 
+Tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_af7a92056588f4ae68ac56c6ca7924d84}{should\+\_\+auto\+\_\+spawn}} (self, float task\+\_\+complexity=0.\+5)
+\item 
+List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ae69d65597272b6f4f660a42c2ce79796}{get\+\_\+spawn\+\_\+history}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a1567e4c7c8aa608b93fe62fa6ea9c24c}{db}} = db
+\item 
+\mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a22bb8ce474cb47d7879aea8d20a09520}{config}} = config
+\item 
+Optional\mbox{[}datetime\mbox{]} \mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a60db368470d2b84e453d76b3b1a9a86f}{last\+\_\+spawn\+\_\+time}} = None
+\item 
+list \mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ae2407ac1dca2207cf0b1f436c62412b6}{spawn\+\_\+history}} = \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Manages dynamic spawning of agents based on workload and resources.
+
+Features:
+- Spawn new agent instances on demand
+- Resource-based spawning decisions
+- Auto-scaling based on task complexity
+- Spawn cooldown to prevent rapid creation
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ad0e96247005d73588b2c279810ced34b}\index{managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ad0e96247005d73588b2c279810ced34b} 
+managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase}{Agent\+Database}}}]{db}{, }\item[{\textquotesingle{}\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}\textquotesingle{}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ace1486716f92dba70dfcf94d4a56ca71}\index{managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}!can\_spawn@{can\_spawn}}
+\index{can\_spawn@{can\_spawn}!managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}}
+\doxysubsubsection{\texorpdfstring{can\_spawn()}{can\_spawn()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ace1486716f92dba70dfcf94d4a56ca71} 
+ Tuple\mbox{[}bool, str\mbox{]} managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+can\+\_\+spawn (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if a new agent can be spawned.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ace1486716f92dba70dfcf94d4a56ca71_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ae69d65597272b6f4f660a42c2ce79796}\index{managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}!get\_spawn\_history@{get\_spawn\_history}}
+\index{get\_spawn\_history@{get\_spawn\_history}!managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}}
+\doxysubsubsection{\texorpdfstring{get\_spawn\_history()}{get\_spawn\_history()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ae69d65597272b6f4f660a42c2ce79796} 
+ List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+get\+\_\+spawn\+\_\+history (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get recent spawn history.\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_af7a92056588f4ae68ac56c6ca7924d84}\index{managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}!should\_auto\_spawn@{should\_auto\_spawn}}
+\index{should\_auto\_spawn@{should\_auto\_spawn}!managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}}
+\doxysubsubsection{\texorpdfstring{should\_auto\_spawn()}{should\_auto\_spawn()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_af7a92056588f4ae68ac56c6ca7924d84} 
+ Tuple\mbox{[}bool, str\mbox{]} managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+should\+\_\+auto\+\_\+spawn (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float }]{task\+\_\+complexity}{ = {\ttfamily 0.5}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Determine if auto-spawning is needed based on workload.
+
+Args:
+    task_complexity: 0.0-1.0 scale of task complexity
+
+Returns:
+    Tuple of (should_spawn, reason)
+\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a711e5dcf634b5abbd73ff3c2d71505f8}\index{managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}!spawn\_agent@{spawn\_agent}}
+\index{spawn\_agent@{spawn\_agent}!managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}}
+\doxysubsubsection{\texorpdfstring{spawn\_agent()}{spawn\_agent()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a711e5dcf634b5abbd73ff3c2d71505f8} 
+ Dict\mbox{[}str, Any\mbox{]} managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+spawn\+\_\+agent (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{model\+\_\+name}{, }\item[{str}]{provider}{, }\item[{str}]{supervisor\+\_\+id}{, }\item[{str }]{reason}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Spawn a new agent instance.
+
+Args:
+    model_name: The model to use for the new agent
+    provider: API provider (openai, anthropic, etc.)
+    supervisor_id: ID of the supervisor requesting spawn
+    reason: Why the agent is being spawned
+
+Returns:
+    New agent info or error
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a711e5dcf634b5abbd73ff3c2d71505f8_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a22bb8ce474cb47d7879aea8d20a09520}\index{managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}!config@{config}}
+\index{config@{config}!managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a22bb8ce474cb47d7879aea8d20a09520} 
+managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+config = config}
+
+\Hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a1567e4c7c8aa608b93fe62fa6ea9c24c}\index{managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}!db@{db}}
+\index{db@{db}!managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}}
+\doxysubsubsection{\texorpdfstring{db}{db}}
+{\footnotesize\ttfamily \label{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a1567e4c7c8aa608b93fe62fa6ea9c24c} 
+managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+db = db}
+
+\Hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a60db368470d2b84e453d76b3b1a9a86f}\index{managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}!last\_spawn\_time@{last\_spawn\_time}}
+\index{last\_spawn\_time@{last\_spawn\_time}!managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}}
+\doxysubsubsection{\texorpdfstring{last\_spawn\_time}{last\_spawn\_time}}
+{\footnotesize\ttfamily \label{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_a60db368470d2b84e453d76b3b1a9a86f} 
+Optional\mbox{[}datetime\mbox{]} managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+last\+\_\+spawn\+\_\+time = None}
+
+\Hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ae2407ac1dca2207cf0b1f436c62412b6}\index{managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}!spawn\_history@{spawn\_history}}
+\index{spawn\_history@{spawn\_history}!managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}}
+\doxysubsubsection{\texorpdfstring{spawn\_history}{spawn\_history}}
+{\footnotesize\ttfamily \label{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ae2407ac1dca2207cf0b1f436c62412b6} 
+list managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+spawn\+\_\+history = \mbox{[}$\,$\mbox{]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+managers/\mbox{\hyperlink{dynamic__spawner_8py}{dynamic\+\_\+spawner.\+py}}\end{DoxyCompactItemize}

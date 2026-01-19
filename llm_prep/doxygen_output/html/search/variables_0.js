@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['_5f_5fall_5f_5f_0',['__all__',['../namespacecore.html#a87783177027c393fcc3fd7898375ab06',1,'core.__all__'],['../namespacedatabase.html#a8ffff0c26aa66b6d8e08dfaf0b7d7fea',1,'database.__all__'],['../namespacemanagers.html#aa8edca823bddeb68fde9b42385d56d3d',1,'managers.__all__'],['../namespacemodels.html#a3f5aef28a13316a2a03821034ddd2b83',1,'models.__all__'],['../namespaceprogression.html#afcf47ee116346f9eff07d802ad6d106b',1,'progression.__all__'],['../namespacesafety.html#a1a5c5573d9bab9b0f8b56d6f7dbc5efd',1,'safety.__all__'],['../namespaceutils.html#a4a4b549412a16061bbc45aa7fa9ba238',1,'utils.__all__'],['../namespaceworkshop.html#a836d0b8a78500803b744360fa58c3724',1,'workshop.__all__']]],
+  ['_5f_5fversion_5f_5f_1',['__version__',['../namespacepdfocr.html#ad03abc393ed4348aad17dcfa3668fc3a',1,'pdfocr.__version__'],['../namespacetools.html#a0e9680da1695283666a05f3c5a181274',1,'tools.__version__'],['../namespacetools_1_1llmprep.html#a08f9c546c44378df8b1c58af2fc9b174',1,'tools.llmprep.__version__'],['../namespacetools_1_1minifier.html#a0092e4e02242c93f713c2419fe534dd6',1,'tools.minifier.__version__']]],
+  ['_5fcompression_5fwarned_2',['_compression_warned',['../classaxe_1_1ChatSession.html#a08910e7c127296a306562cfe449232b3',1,'axe::ChatSession']]],
+  ['_5fconfig_3',['_config',['../namespacemodels_1_1metadata.html#acf145ea659d5a3b2dd29a16eff11e432',1,'models::metadata']]],
+  ['_5fconn_4',['_conn',['../classcore_1_1acp__validator_1_1ACPValidator.html#acbf2dbedd13bf2a6a829b45e1bea763a',1,'core::acp_validator::ACPValidator']]],
+  ['_5fcv2_5',['_cv2',['../namespacepdfocr.html#ae10b4b3e3924e83537d24f4e96475bf8',1,'pdfocr']]],
+  ['_5fcv2_5flock_6',['_cv2_lock',['../namespacepdfocr.html#a461dc2b1e6e38b091179e252b8885ff8',1,'pdfocr']]],
+  ['_5feasyocr_5flock_7',['_easyocr_lock',['../namespacepdfocr.html#a93def8225eb409561d091202348606da',1,'pdfocr']]],
+  ['_5feasyocr_5freader_8',['_easyocr_reader',['../namespacepdfocr.html#ae681664d8e4ac2d5836e94c512847982',1,'pdfocr']]],
+  ['_5feasyocr_5freader_5flangs_9',['_easyocr_reader_langs',['../namespacepdfocr.html#a58285c26ea9bf1772627ec8cb6ae7e52',1,'pdfocr']]],
+  ['_5ferrors_10',['_errors',['../classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager.html#a8357cfd9022be1061bc1dbf5948e9276',1,'managers::shared_build_status::SharedBuildStatusManager']]],
+  ['_5fglobal_5fdb_11',['_global_db',['../namespaceaxe.html#a1231a95d9da8d332f1cb87feca5d4953',1,'axe']]],
+  ['_5fhas_5ftqdm_12',['_HAS_TQDM',['../namespacepdfocr.html#a548d4e7d3d14f2097a1992e87bae296e',1,'pdfocr']]],
+  ['_5finit_5ferror_13',['_init_error',['../classaxe_1_1SharedWorkspace.html#ad6682022c66de933b8c8a836dfb578e7',1,'axe::SharedWorkspace']]],
+  ['_5flast_5foutput_14',['_last_output',['../classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager.html#a91982ebeefc0a3070587616b498467c4',1,'managers::shared_build_status::SharedBuildStatusManager']]],
+  ['_5flast_5fstatus_15',['_last_status',['../classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager.html#abb0f27074148421ba2a2c4728967ceea',1,'managers::shared_build_status::SharedBuildStatusManager']]],
+  ['_5fmodels_5fyaml_5fpath_16',['_models_yaml_path',['../namespacemodels_1_1metadata.html#ab91dd5420de9abbf2f22a03f4f19b080',1,'models::metadata']]],
+  ['_5fnp_17',['_np',['../namespacepdfocr.html#a0f93dcf60b166aa21764a2652884be3c',1,'pdfocr']]],
+  ['_5fnumpy_5flock_18',['_numpy_lock',['../namespacepdfocr.html#a19b794722766018f8deae9f626c78696',1,'pdfocr']]],
+  ['_5fpatches_19',['_patches',['../classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager.html#adf08d7dd36e6c4b44e0cb6ff8801b3d0',1,'managers::shared_build_status::SharedBuildStatusManager']]],
+  ['_5fpytesseract_20',['_pytesseract',['../namespacepdfocr.html#aefbbbb370c7bdbae3e17a66b7c6c8e77',1,'pdfocr']]],
+  ['_5fpytesseract_5flock_21',['_pytesseract_lock',['../namespacepdfocr.html#afcdc896dc13bb8f4bb801510b2eb4af6',1,'pdfocr']]],
+  ['_5ft_22',['_T',['../namespacepdfocr.html#a7c25b0b55b00a5fd54db53d554e42b0d',1,'pdfocr']]]
+];

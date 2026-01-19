@@ -1,0 +1,231 @@
+\chapter{LLM-\/\+Ready Codebase Overview — 2026-\/01-\/13 }
+\hypertarget{md_llm__prep_2codebase__overview}{}\label{md_llm__prep_2codebase__overview}\index{LLM-\/Ready Codebase Overview — 2026-\/01-\/13@{LLM-\/Ready Codebase Overview — 2026-\/01-\/13}}
+\label{md_llm__prep_2codebase__overview_autotoc_md569}%
+\Hypertarget{md_llm__prep_2codebase__overview_autotoc_md569}%
+
+
+{\bfseries{Project\+:}} AXE\hypertarget{md_llm__prep_2codebase__overview_autotoc_md570}{}\doxysection{\texorpdfstring{Directory Structure}{Directory Structure}}\label{md_llm__prep_2codebase__overview_autotoc_md570}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{.}
+\DoxyCodeLine{├──\ claude}
+\DoxyCodeLine{│  \ ├──\ ocr\_out}
+\DoxyCodeLine{│  \ ├──\ Agent\ Skills\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Bash\ tool\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Batch\ processing\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Building\ with\ extended\ thinking\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Chain\ complex\ prompts\ for\ stronger\ performance\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Code\ execution\ tool\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Computer\ use\ tool\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Context\ editing\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Extended\ thinking\ tips\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Files\ API\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Get\ started\ with\ Agent\ Skills\ in\ the\ API\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Giving\ Claude\ a\ role\ with\ a\ system\ prompt\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ How\ to\ implement\ tool\ use\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Let\ Claude\ think\ (chain\ of\ thought\ prompting)\ to\ increase\ performance\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Long\ context\ prompting\ tips\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Memory\ tool\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Multilingual\ support\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ pdfocr.py}
+\DoxyCodeLine{│  \ ├──\ PDF\ support\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Pricing\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Programmatic\ tool\ calling\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Prompt\ caching\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Prompt\ engineering\ overview\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Skill\ authoring\ best\ practices\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Text\ editor\ tool\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Token\ counting\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Tool\ search\ tool\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Use\ XML\ tags\ to\ structure\ your\ prompts\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Using\ Agent\ Skills\ with\ the\ API\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Vision\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ ├──\ Web\ fetch\ tool\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{│  \ └──\ Web\ search\ tool\ -\/\ Claude\ Docs.pdf}
+\DoxyCodeLine{├──\ core}
+\DoxyCodeLine{│  \ ├──\ agent\_manager.py}
+\DoxyCodeLine{│  \ ├──\ config.py}
+\DoxyCodeLine{│  \ ├──\ constants.py}
+\DoxyCodeLine{│  \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│  \ ├──\ multiprocess.py}
+\DoxyCodeLine{│  \ ├──\ resource\_monitor.py}
+\DoxyCodeLine{│  \ ├──\ sandbox.py}
+\DoxyCodeLine{│  \ ├──\ session\_manager.py}
+\DoxyCodeLine{│  \ └──\ tool\_runner.py}
+\DoxyCodeLine{├──\ database}
+\DoxyCodeLine{│  \ ├──\ agent\_db.py}
+\DoxyCodeLine{│  \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│  \ └──\ schema.py}
+\DoxyCodeLine{├──\ docs}
+\DoxyCodeLine{│  \ └──\ diagrams}
+\DoxyCodeLine{│  \ \ \ \ \ ├──\ call\_graph.dot}
+\DoxyCodeLine{│  \ \ \ \ \ ├──\ class\_diagram.dot}
+\DoxyCodeLine{│  \ \ \ \ \ ├──\ module\_dependencies.dot}
+\DoxyCodeLine{│  \ \ \ \ \ └──\ README.md}
+\DoxyCodeLine{├──\ llm\_prep}
+\DoxyCodeLine{│  \ ├──\ dot\_graphs\_doxygen}
+\DoxyCodeLine{│  \ ├──\ dot\_graphs\_pyreverse}
+\DoxyCodeLine{│  \ │  \ └──\ classes.dot}
+\DoxyCodeLine{│  \ ├──\ codebase\_overview.md}
+\DoxyCodeLine{│  \ ├──\ codebase\_stats.txt}
+\DoxyCodeLine{│  \ ├──\ codebase\_structure.txt}
+\DoxyCodeLine{│  \ ├──\ codebase\_structure\_updated.txt}
+\DoxyCodeLine{│  \ ├──\ llm\_system\_prompt.md}
+\DoxyCodeLine{│  \ ├──\ project\_guidance.md}
+\DoxyCodeLine{│  \ └──\ tags}
+\DoxyCodeLine{├──\ managers}
+\DoxyCodeLine{│  \ ├──\ break\_system.py}
+\DoxyCodeLine{│  \ ├──\ dynamic\_spawner.py}
+\DoxyCodeLine{│  \ ├──\ emergency\_mailbox.py}
+\DoxyCodeLine{│  \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│  \ └──\ sleep\_manager.py}
+\DoxyCodeLine{├──\ models}
+\DoxyCodeLine{│  \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│  \ └──\ metadata.py}
+\DoxyCodeLine{├──\ progression}
+\DoxyCodeLine{│  \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│  \ ├──\ levels.py}
+\DoxyCodeLine{│  \ └──\ xp\_system.py}
+\DoxyCodeLine{├──\ safety}
+\DoxyCodeLine{│  \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│  \ └──\ rules.py}
+\DoxyCodeLine{├──\ tests}
+\DoxyCodeLine{│  \ ├──\ test\_absolute\_path\_fix.py}
+\DoxyCodeLine{│  \ ├──\ test\_analysis\_tools.py}
+\DoxyCodeLine{│  \ ├──\ test\_axe\_improvements.py}
+\DoxyCodeLine{│  \ ├──\ test\_collab\_tool\_syntax.py}
+\DoxyCodeLine{│  \ ├──\ test\_database\_location.py}
+\DoxyCodeLine{│  \ ├──\ test\_detect\_agent\_token.py}
+\DoxyCodeLine{│  \ ├──\ test\_double\_execution.py}
+\DoxyCodeLine{│  \ ├──\ test\_dynamic\_max\_tokens.py}
+\DoxyCodeLine{│  \ ├──\ test\_exec\_heredoc.py}
+\DoxyCodeLine{│  \ ├──\ test\_heredoc\_execution\_fix.py}
+\DoxyCodeLine{│  \ ├──\ test\_heredoc\_parsing.py}
+\DoxyCodeLine{│  \ ├──\ test\_inline\_exec\_blocks.py}
+\DoxyCodeLine{│  \ ├──\ test\_integration\_bug\_fix.py}
+\DoxyCodeLine{│  \ ├──\ test\_integration\_database\_fix.py}
+\DoxyCodeLine{│  \ ├──\ test\_mission\_md\_tokens.py}
+\DoxyCodeLine{│  \ ├──\ test\_models\_yaml.py}
+\DoxyCodeLine{│  \ ├──\ test\_sandbox.py}
+\DoxyCodeLine{│  \ ├──\ test\_spawned\_agents.py}
+\DoxyCodeLine{│  \ ├──\ test\_supervisor\_protections.py}
+\DoxyCodeLine{│  \ ├──\ test\_task\_completion\_detection.py}
+\DoxyCodeLine{│  \ ├──\ test\_token\_error\_handling.py}
+\DoxyCodeLine{│  \ ├──\ test\_token\_optimization.py}
+\DoxyCodeLine{│  \ ├──\ test\_tool\_runner\_edge\_cases.py}
+\DoxyCodeLine{│  \ ├──\ test\_tool\_runner.py}
+\DoxyCodeLine{│  \ ├──\ test\_workshop\_cli\_integration.py}
+\DoxyCodeLine{│  \ ├──\ test\_workshop\_integration.py}
+\DoxyCodeLine{│  \ ├──\ test\_workshop\_pr23\_validation.py}
+\DoxyCodeLine{│  \ ├──\ test\_workshop.py}
+\DoxyCodeLine{│  \ ├──\ test\_write\_blocks.py}
+\DoxyCodeLine{│  \ ├──\ test\_xml\_new\_formats.py}
+\DoxyCodeLine{│  \ └──\ test\_xml\_tool\_parser.py}
+\DoxyCodeLine{├──\ tools}
+\DoxyCodeLine{│  \ ├──\ build\_analyzer.py}
+\DoxyCodeLine{│  \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│  \ └──\ llmprep.py}
+\DoxyCodeLine{├──\ utils}
+\DoxyCodeLine{│  \ ├──\ context\_optimizer.py}
+\DoxyCodeLine{│  \ ├──\ formatting.py}
+\DoxyCodeLine{│  \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│  \ ├──\ prompt\_compressor.py}
+\DoxyCodeLine{│  \ ├──\ rate\_limiter.py}
+\DoxyCodeLine{│  \ ├──\ token\_stats.py}
+\DoxyCodeLine{│  \ └──\ xml\_tool\_parser.py}
+\DoxyCodeLine{├──\ workshop}
+\DoxyCodeLine{│  \ ├──\ chisel.py}
+\DoxyCodeLine{│  \ ├──\ hammer.py}
+\DoxyCodeLine{│  \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│  \ ├──\ plane.py}
+\DoxyCodeLine{│  \ └──\ saw.py}
+\DoxyCodeLine{├──\ ABSOLUTE\_PATH\_FIX\_SUMMARY.md}
+\DoxyCodeLine{├──\ API\_PROVIDERS.md}
+\DoxyCodeLine{├──\ ARCHITECTURE.md}
+\DoxyCodeLine{├──\ axe.py}
+\DoxyCodeLine{├──\ axe.yaml}
+\DoxyCodeLine{├──\ BEFORE\_AFTER\_COMPARISON.md}
+\DoxyCodeLine{├──\ BUG\_FIX\_SUMMARY.md}
+\DoxyCodeLine{├──\ COLLAB\_TOOL\_SYNTAX\_FIX\_SUMMARY.md}
+\DoxyCodeLine{├──\ DATABASE\_LOCATION\_FIX\_SUMMARY.md}
+\DoxyCodeLine{├──\ demo\_absolute\_path\_fix.py}
+\DoxyCodeLine{├──\ demo\_dynamic\_tokens.py}
+\DoxyCodeLine{├──\ demo\_heredoc\_fix.py}
+\DoxyCodeLine{├──\ demo\_improvements.py}
+\DoxyCodeLine{├──\ demo\_task\_completion\_fix.py}
+\DoxyCodeLine{├──\ DUPLICATE\_EXECUTION\_FIX\_SUMMARY.md}
+\DoxyCodeLine{├──\ DYNAMIC\_TOKENS\_SUMMARY.md}
+\DoxyCodeLine{├──\ FIXES\_SUMMARY.md}
+\DoxyCodeLine{├──\ HEREDOC\_EXECUTION\_FIX.md}
+\DoxyCodeLine{├──\ HEREDOC\_EXECUTION\_FIX\_SUMMARY.md}
+\DoxyCodeLine{├──\ IMPLEMENTATION\_COMPLETE.md}
+\DoxyCodeLine{├──\ IMPLEMENTATION\_SUMMARY.md}
+\DoxyCodeLine{├──\ IMPROVEMENTS\_FINAL.md}
+\DoxyCodeLine{├──\ IMPROVEMENTS\_README.md}
+\DoxyCodeLine{├──\ LICENSE}
+\DoxyCodeLine{├──\ manual\_test\_write.py}
+\DoxyCodeLine{├──\ manual\_test\_xml.py}
+\DoxyCodeLine{├──\ MISSION.md}
+\DoxyCodeLine{├──\ MODELS\_FINAL.md}
+\DoxyCodeLine{├──\ models.yaml}
+\DoxyCodeLine{├──\ MULTI\_FORMAT\_PARSER\_IMPLEMENTATION.md}
+\DoxyCodeLine{├──\ MULTI\_FORMAT\_PARSER\_QUICK\_REFERENCE.md}
+\DoxyCodeLine{├──\ PR23\_EXECUTIVE\_SUMMARY.md}
+\DoxyCodeLine{├──\ PR23\_VALIDATION\_REPORT.md}
+\DoxyCodeLine{├──\ QUICK\_REFERENCE.md}
+\DoxyCodeLine{├──\ README.md}
+\DoxyCodeLine{├──\ REFACTORING\_NOTES.md}
+\DoxyCodeLine{├──\ requirements.txt}
+\DoxyCodeLine{├──\ SANDBOX\_IMPLEMENTATION\_SUMMARY.md}
+\DoxyCodeLine{├──\ SANDBOX.md}
+\DoxyCodeLine{├──\ SECURITY\_REPORT.md}
+\DoxyCodeLine{├──\ SHELL\_OPERATOR\_SUPPORT\_SUMMARY.md}
+\DoxyCodeLine{├──\ TASK\_COMPLETION\_FIX\_SUMMARY.md}
+\DoxyCodeLine{├──\ workshop\_benchmarks.md}
+\DoxyCodeLine{├──\ workshop\_dependency\_validation.md}
+\DoxyCodeLine{├──\ workshop\_quick\_reference.md}
+\DoxyCodeLine{├──\ workshop\_security\_audit.md}
+\DoxyCodeLine{├──\ workshop\_test\_results.md}
+\DoxyCodeLine{├──\ WRITE\_BLOCKS\_GUIDE.md}
+\DoxyCodeLine{├──\ XML\_PARSER\_IMPLEMENTATION.md}
+\DoxyCodeLine{└──\ XML\_PARSER\_QUICK\_REFERENCE.md}
+\DoxyCodeLine{}
+\DoxyCodeLine{18\ directories,\ 164\ files}
+
+\end{DoxyCode}
+\hypertarget{md_llm__prep_2codebase__overview_autotoc_md571}{}\doxysection{\texorpdfstring{Code Statistics}{Code Statistics}}\label{md_llm__prep_2codebase__overview_autotoc_md571}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{github.com/AlDanial/cloc\ v\ 2.00\ \ T=0.18\ s\ (689.4\ files/s,\ 202321.1\ lines/s)}
+\DoxyCodeLine{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{Language\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ files\ \ \ \ \ \ \ \ \ \ blank\ \ \ \ \ \ \ \ comment\ \ \ \ \ \ \ \ \ \ \ code}
+\DoxyCodeLine{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{Python\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 79\ \ \ \ \ \ \ \ \ \ \ 4611\ \ \ \ \ \ \ \ \ \ \ 5230\ \ \ \ \ \ \ \ \ \ 13532}
+\DoxyCodeLine{Markdown\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 43\ \ \ \ \ \ \ \ \ \ \ 2703\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \ \ \ \ \ \ \ \ \ \ 8984}
+\DoxyCodeLine{YAML\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 2\ \ \ \ \ \ \ \ \ \ \ \ 447\ \ \ \ \ \ \ \ \ \ \ \ \ 90\ \ \ \ \ \ \ \ \ \ \ 1442}
+\DoxyCodeLine{Text\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 3\ \ \ \ \ \ \ \ \ \ \ \ \ \ 2\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0\ \ \ \ \ \ \ \ \ \ \ \ 232}
+\DoxyCodeLine{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+\DoxyCodeLine{SUM:\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 127\ \ \ \ \ \ \ \ \ \ \ 7763\ \ \ \ \ \ \ \ \ \ \ 5320\ \ \ \ \ \ \ \ \ \ 24190}
+\DoxyCodeLine{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
+
+\end{DoxyCode}
+\hypertarget{md_llm__prep_2codebase__overview_autotoc_md572}{}\doxysection{\texorpdfstring{Python Class Diagrams (pyreverse)}{Python Class Diagrams (pyreverse)}}\label{md_llm__prep_2codebase__overview_autotoc_md572}
+
+\begin{DoxyItemize}
+\item {\ttfamily classes.\+dot}
+\end{DoxyItemize}\hypertarget{md_llm__prep_2codebase__overview_autotoc_md573}{}\doxysection{\texorpdfstring{Symbol Index}{Symbol Index}}\label{md_llm__prep_2codebase__overview_autotoc_md573}
+
+\begin{DoxyItemize}
+\item {\ttfamily llm\+\_\+prep/tags} -\/ ctags file for symbol navigation
+\end{DoxyItemize}\hypertarget{md_llm__prep_2codebase__overview_autotoc_md574}{}\doxysection{\texorpdfstring{LLM Context Files}{LLM Context Files}}\label{md_llm__prep_2codebase__overview_autotoc_md574}
+
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{llm__system__prompt_8md}{llm\+\_\+system\+\_\+prompt.\+md}} -\/ System prompt for LLM sessions
+\item {\ttfamily \doxylink{project__guidance_8md}{project\+\_\+guidance.\+md}} -\/ Best practices and guidelines
+\end{DoxyItemize}\hypertarget{md_llm__prep_2codebase__overview_autotoc_md575}{}\doxysection{\texorpdfstring{How to Use}{How to Use}}\label{md_llm__prep_2codebase__overview_autotoc_md575}
+
+\begin{DoxyEnumerate}
+\item Copy this file as initial context for your LLM
+\item Paste relevant DOT graphs for architecture questions
+\item Reference specific files when asking about code 
+\end{DoxyEnumerate}

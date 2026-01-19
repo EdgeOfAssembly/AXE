@@ -1,0 +1,15 @@
+<map id="workshop.chisel.ChiselAnalyzer.analyze_binary" name="workshop.chisel.ChiselAnalyzer.analyze_binary">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,144,287,189"/>
+<area shape="rect" id="Node000002" href="$classworkshop_1_1chisel_1_1ChiselAnalyzer.html#a5d8e0664b65831068788dde5dba89e0f" title=" " alt="" coords="335,5,565,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,141,251,101,334,60,354,54,349,57,336,65,253,105,185,146"/>
+<area shape="rect" id="Node000003" href="$classworkshop_1_1chisel_1_1ChiselAnalyzer.html#af0743f86826a48c14eea6d2ffdf961c9" title=" " alt="" coords="335,75,565,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="246,141,336,122,332,125,248,146"/>
+<area shape="rect" id="Node000005" href="$classworkshop_1_1chisel_1_1ChiselAnalyzer.html#abb8d63f59e4a6e219caaddfa8cf5ad33" title=" " alt="" coords="335,144,565,189"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="286,164,322,166,317,167,287,169"/>
+<area shape="rect" id="Node000006" href="$classworkshop_1_1chisel_1_1ChiselAnalyzer.html#a6c1d01c7d9e55006508411fd8b092dc1" title=" " alt="" coords="335,213,565,258"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="247,187,337,209,332,210,247,192"/>
+<area shape="rect" id="Node000007" href="$classworkshop_1_1chisel_1_1ChiselAnalyzer.html#a2bb4b175d37b7c5f3abe66368371ac8f" title=" " alt="" coords="335,283,565,327"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="184,187,253,227,336,268,354,277,349,277,334,273,251,232,183,192"/>
+<area shape="rect" id="Node000004" href="$classworkshop_1_1chisel_1_1ChiselAnalyzer.html#a4f5c6efc6a0dd95fb7b71fb1fd7d6a4c" title=" " alt="" coords="613,75,843,119"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="565,94,600,96,595,98,566,100"/>
+</map>

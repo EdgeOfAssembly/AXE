@@ -1,0 +1,117 @@
+\doxysection{test\+\_\+token\+\_\+optimization Namespace Reference}
+\hypertarget{namespacetest__token__optimization}{}\label{namespacetest__token__optimization}\index{test\_token\_optimization@{test\_token\_optimization}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetest__token__optimization_adfce7673fd4fecb619e94b95f38e408b}{test\+\_\+context\+\_\+optimization}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__optimization_a3ea0235bbf85a04effff22dae3daf483}{test\+\_\+prompt\+\_\+compression}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__optimization_a7bef0b70cb7780fae471e2496bda7347}{test\+\_\+code\+\_\+block\+\_\+no\+\_\+truncation}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__optimization_a6c2e40a3a12b817f1a28c1312a8aada1}{test\+\_\+clean\+\_\+message\+\_\+content}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__optimization_ae517d71715ad8130dee497795b8caa7b}{test\+\_\+deduplication}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__optimization_a6b9e68465c028a7f04a43edb68b2def0}{test\+\_\+minimal\+\_\+prompt\+\_\+creation}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__optimization_a70c3793273f572a9ccc0d442f12aed4a}{test\+\_\+token\+\_\+savings\+\_\+calculation}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__optimization_a0c637f0251a63f60ccdd3e3a23701090}{test\+\_\+workshop\+\_\+instruction\+\_\+compression}} ()
+\item 
+\mbox{\hyperlink{namespacetest__token__optimization_a8f663594c48cde7175e9b5fc50d5aafa}{run\+\_\+all\+\_\+tests}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetest__token__optimization_a1be766abd1cb28562c7d14b907376975}{success}} = \mbox{\hyperlink{namespacetest__token__optimization_a8f663594c48cde7175e9b5fc50d5aafa}{run\+\_\+all\+\_\+tests}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Test suite for token-saving optimizations.
+Tests context optimization, prompt compression, and other token-saving features.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacetest__token__optimization_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetest__token__optimization_a8f663594c48cde7175e9b5fc50d5aafa}\index{test\_token\_optimization@{test\_token\_optimization}!run\_all\_tests@{run\_all\_tests}}
+\index{run\_all\_tests@{run\_all\_tests}!test\_token\_optimization@{test\_token\_optimization}}
+\doxysubsubsection{\texorpdfstring{run\_all\_tests()}{run\_all\_tests()}}
+{\footnotesize\ttfamily \label{namespacetest__token__optimization_a8f663594c48cde7175e9b5fc50d5aafa} 
+test\+\_\+token\+\_\+optimization.\+run\+\_\+all\+\_\+tests (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run all token optimization tests.\end{DoxyVerb}
+ \Hypertarget{namespacetest__token__optimization_a6c2e40a3a12b817f1a28c1312a8aada1}\index{test\_token\_optimization@{test\_token\_optimization}!test\_clean\_message\_content@{test\_clean\_message\_content}}
+\index{test\_clean\_message\_content@{test\_clean\_message\_content}!test\_token\_optimization@{test\_token\_optimization}}
+\doxysubsubsection{\texorpdfstring{test\_clean\_message\_content()}{test\_clean\_message\_content()}}
+{\footnotesize\ttfamily \label{namespacetest__token__optimization_a6c2e40a3a12b817f1a28c1312a8aada1} 
+test\+\_\+token\+\_\+optimization.\+test\+\_\+clean\+\_\+message\+\_\+content (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test message content cleaning.\end{DoxyVerb}
+ \Hypertarget{namespacetest__token__optimization_a7bef0b70cb7780fae471e2496bda7347}\index{test\_token\_optimization@{test\_token\_optimization}!test\_code\_block\_no\_truncation@{test\_code\_block\_no\_truncation}}
+\index{test\_code\_block\_no\_truncation@{test\_code\_block\_no\_truncation}!test\_token\_optimization@{test\_token\_optimization}}
+\doxysubsubsection{\texorpdfstring{test\_code\_block\_no\_truncation()}{test\_code\_block\_no\_truncation()}}
+{\footnotesize\ttfamily \label{namespacetest__token__optimization_a7bef0b70cb7780fae471e2496bda7347} 
+test\+\_\+token\+\_\+optimization.\+test\+\_\+code\+\_\+block\+\_\+no\+\_\+truncation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that code blocks are NOT truncated (truncation disabled).
+
+We never truncate code. This test verifies that the truncate_code()
+method returns content unchanged, preserving full code for agents.
+\end{DoxyVerb}
+ \Hypertarget{namespacetest__token__optimization_adfce7673fd4fecb619e94b95f38e408b}\index{test\_token\_optimization@{test\_token\_optimization}!test\_context\_optimization@{test\_context\_optimization}}
+\index{test\_context\_optimization@{test\_context\_optimization}!test\_token\_optimization@{test\_token\_optimization}}
+\doxysubsubsection{\texorpdfstring{test\_context\_optimization()}{test\_context\_optimization()}}
+{\footnotesize\ttfamily \label{namespacetest__token__optimization_adfce7673fd4fecb619e94b95f38e408b} 
+test\+\_\+token\+\_\+optimization.\+test\+\_\+context\+\_\+optimization (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test context optimization features.\end{DoxyVerb}
+ \Hypertarget{namespacetest__token__optimization_ae517d71715ad8130dee497795b8caa7b}\index{test\_token\_optimization@{test\_token\_optimization}!test\_deduplication@{test\_deduplication}}
+\index{test\_deduplication@{test\_deduplication}!test\_token\_optimization@{test\_token\_optimization}}
+\doxysubsubsection{\texorpdfstring{test\_deduplication()}{test\_deduplication()}}
+{\footnotesize\ttfamily \label{namespacetest__token__optimization_ae517d71715ad8130dee497795b8caa7b} 
+test\+\_\+token\+\_\+optimization.\+test\+\_\+deduplication (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test content deduplication.\end{DoxyVerb}
+ \Hypertarget{namespacetest__token__optimization_a6b9e68465c028a7f04a43edb68b2def0}\index{test\_token\_optimization@{test\_token\_optimization}!test\_minimal\_prompt\_creation@{test\_minimal\_prompt\_creation}}
+\index{test\_minimal\_prompt\_creation@{test\_minimal\_prompt\_creation}!test\_token\_optimization@{test\_token\_optimization}}
+\doxysubsubsection{\texorpdfstring{test\_minimal\_prompt\_creation()}{test\_minimal\_prompt\_creation()}}
+{\footnotesize\ttfamily \label{namespacetest__token__optimization_a6b9e68465c028a7f04a43edb68b2def0} 
+test\+\_\+token\+\_\+optimization.\+test\+\_\+minimal\+\_\+prompt\+\_\+creation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test minimal prompt creation.\end{DoxyVerb}
+ \Hypertarget{namespacetest__token__optimization_a3ea0235bbf85a04effff22dae3daf483}\index{test\_token\_optimization@{test\_token\_optimization}!test\_prompt\_compression@{test\_prompt\_compression}}
+\index{test\_prompt\_compression@{test\_prompt\_compression}!test\_token\_optimization@{test\_token\_optimization}}
+\doxysubsubsection{\texorpdfstring{test\_prompt\_compression()}{test\_prompt\_compression()}}
+{\footnotesize\ttfamily \label{namespacetest__token__optimization_a3ea0235bbf85a04effff22dae3daf483} 
+test\+\_\+token\+\_\+optimization.\+test\+\_\+prompt\+\_\+compression (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test prompt compression.\end{DoxyVerb}
+ \Hypertarget{namespacetest__token__optimization_a70c3793273f572a9ccc0d442f12aed4a}\index{test\_token\_optimization@{test\_token\_optimization}!test\_token\_savings\_calculation@{test\_token\_savings\_calculation}}
+\index{test\_token\_savings\_calculation@{test\_token\_savings\_calculation}!test\_token\_optimization@{test\_token\_optimization}}
+\doxysubsubsection{\texorpdfstring{test\_token\_savings\_calculation()}{test\_token\_savings\_calculation()}}
+{\footnotesize\ttfamily \label{namespacetest__token__optimization_a70c3793273f572a9ccc0d442f12aed4a} 
+test\+\_\+token\+\_\+optimization.\+test\+\_\+token\+\_\+savings\+\_\+calculation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test token savings calculation.\end{DoxyVerb}
+ \Hypertarget{namespacetest__token__optimization_a0c637f0251a63f60ccdd3e3a23701090}\index{test\_token\_optimization@{test\_token\_optimization}!test\_workshop\_instruction\_compression@{test\_workshop\_instruction\_compression}}
+\index{test\_workshop\_instruction\_compression@{test\_workshop\_instruction\_compression}!test\_token\_optimization@{test\_token\_optimization}}
+\doxysubsubsection{\texorpdfstring{test\_workshop\_instruction\_compression()}{test\_workshop\_instruction\_compression()}}
+{\footnotesize\ttfamily \label{namespacetest__token__optimization_a0c637f0251a63f60ccdd3e3a23701090} 
+test\+\_\+token\+\_\+optimization.\+test\+\_\+workshop\+\_\+instruction\+\_\+compression (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test workshop instruction compression.\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacetest__token__optimization_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacetest__token__optimization_a1be766abd1cb28562c7d14b907376975}\index{test\_token\_optimization@{test\_token\_optimization}!success@{success}}
+\index{success@{success}!test\_token\_optimization@{test\_token\_optimization}}
+\doxysubsubsection{\texorpdfstring{success}{success}}
+{\footnotesize\ttfamily \label{namespacetest__token__optimization_a1be766abd1cb28562c7d14b907376975} 
+test\+\_\+token\+\_\+optimization.\+success = \mbox{\hyperlink{namespacetest__token__optimization_a8f663594c48cde7175e9b5fc50d5aafa}{run\+\_\+all\+\_\+tests}}()}
+

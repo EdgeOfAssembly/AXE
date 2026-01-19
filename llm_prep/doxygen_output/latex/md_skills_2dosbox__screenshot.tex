@@ -1,0 +1,16 @@
+\chapter{dosbox\+\_\+screenshot }
+\hypertarget{md_skills_2dosbox__screenshot}{}\label{md_skills_2dosbox__screenshot}\index{dosbox\_screenshot@{dosbox\_screenshot}}
+Skill\+: dosbox\+\_\+screenshot Category\+: DOS-\/specific Reverse Engineering / Emulation
+
+Purpose\+: Capture VGA screenshots during interactive session (host hotkey—automated video dump hard without external tools).
+
+Workflow\+:
+\begin{DoxyEnumerate}
+\item Start interactive\+: @llama use dosbox\+\_\+emulation\+\_\+setup --interactive --preset ega-\/286 AR/\+AR.\+EXE
+\item Play/navigate to desired screen (title, mission brief, etc.)
+\item Press host hotkey Ctrl + F5 → saves screenshot0001.\+png etc. in workspace
+\item Repeat as needed, exit when done.
+\item List\+: ls \texorpdfstring{$\ast$}{*}.png
+\end{DoxyEnumerate}
+
+Note\+: For batch, run multiple sessions or manual timing. 

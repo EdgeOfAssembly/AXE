@@ -1,0 +1,161 @@
+\doxysection{managers.\+break\+\_\+system.\+Break\+System Class Reference}
+\hypertarget{classmanagers_1_1break__system_1_1BreakSystem}{}\label{classmanagers_1_1break__system_1_1BreakSystem}\index{managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}}
+
+
+Collaboration diagram for managers.\+break\+\_\+system.\+Break\+System\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{classmanagers_1_1break__system_1_1BreakSystem__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem_aeb8488b1243dc2d559a61777e4157aef}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase}{Agent\+Database}} \mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem_a22f6c0d8bdc2048e05e2ebdc5ef49995}{db}})
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem_a236e20d716b2b7fce74c1f657b4ae1c5}{request\+\_\+break}} (self, str agent\+\_\+id, str alias, str break\+\_\+type, str justification)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem_a320c4885461546fbe14f59f4ea29ed0b}{approve\+\_\+break}} (self, str request\+\_\+id, int duration\+\_\+minutes=10, str supervisor\+\_\+alias="{}@boss"{})
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem_aa30ca69328d8cbb9eb9f149937a442fd}{deny\+\_\+break}} (self, str request\+\_\+id, str reason)
+\item 
+List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem_a3000ecb85fb6440e45e0238691f16b15}{check\+\_\+break\+\_\+endings}} (self)
+\item 
+List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem_a54c3253b4082d7632563b9f6b73c1612}{get\+\_\+pending\+\_\+requests}} (self)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem_a9305861dd0d1c7043fd9d536bc8a2cae}{get\+\_\+status}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem_a22f6c0d8bdc2048e05e2ebdc5ef49995}{db}} = db
+\item 
+dict \mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem_a742fa40e98d637ef41f516c3fbe10598}{break\+\_\+queue}} = \{\}
+\item 
+list \mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem_ae6eec9c44946659de10b343f5cc91e10}{pending\+\_\+requests}} = \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Manages coffee/play breaks for agents.
+
+Rules:
+- Only when workload is low (<30% utilization)
+- Max 10-15 min per break
+- Max 2 breaks per hour
+- Never more than 40% of workforce on break
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_aeb8488b1243dc2d559a61777e4157aef}\index{managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1break__system_1_1BreakSystem_aeb8488b1243dc2d559a61777e4157aef} 
+managers.\+break\+\_\+system.\+Break\+System.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase}{Agent\+Database}}}]{db}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_a320c4885461546fbe14f59f4ea29ed0b}\index{managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}!approve\_break@{approve\_break}}
+\index{approve\_break@{approve\_break}!managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}}
+\doxysubsubsection{\texorpdfstring{approve\_break()}{approve\_break()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1break__system_1_1BreakSystem_a320c4885461546fbe14f59f4ea29ed0b} 
+ Dict\mbox{[}str, Any\mbox{]} managers.\+break\+\_\+system.\+Break\+System.\+approve\+\_\+break (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{request\+\_\+id}{, }\item[{int }]{duration\+\_\+minutes}{ = {\ttfamily 10}, }\item[{str }]{supervisor\+\_\+alias}{ = {\ttfamily "{}@boss"{}}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Approve a pending break request.\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_a3000ecb85fb6440e45e0238691f16b15}\index{managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}!check\_break\_endings@{check\_break\_endings}}
+\index{check\_break\_endings@{check\_break\_endings}!managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}}
+\doxysubsubsection{\texorpdfstring{check\_break\_endings()}{check\_break\_endings()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1break__system_1_1BreakSystem_a3000ecb85fb6440e45e0238691f16b15} 
+ List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} managers.\+break\+\_\+system.\+Break\+System.\+check\+\_\+break\+\_\+endings (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check for breaks that have ended.\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_aa30ca69328d8cbb9eb9f149937a442fd}\index{managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}!deny\_break@{deny\_break}}
+\index{deny\_break@{deny\_break}!managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}}
+\doxysubsubsection{\texorpdfstring{deny\_break()}{deny\_break()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1break__system_1_1BreakSystem_aa30ca69328d8cbb9eb9f149937a442fd} 
+ Dict\mbox{[}str, Any\mbox{]} managers.\+break\+\_\+system.\+Break\+System.\+deny\+\_\+break (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{request\+\_\+id}{, }\item[{str}]{reason}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Deny a pending break request.\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_a54c3253b4082d7632563b9f6b73c1612}\index{managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}!get\_pending\_requests@{get\_pending\_requests}}
+\index{get\_pending\_requests@{get\_pending\_requests}!managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}}
+\doxysubsubsection{\texorpdfstring{get\_pending\_requests()}{get\_pending\_requests()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1break__system_1_1BreakSystem_a54c3253b4082d7632563b9f6b73c1612} 
+ List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} managers.\+break\+\_\+system.\+Break\+System.\+get\+\_\+pending\+\_\+requests (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get all pending break requests.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1break__system_1_1BreakSystem_a54c3253b4082d7632563b9f6b73c1612_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_a9305861dd0d1c7043fd9d536bc8a2cae}\index{managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}!get\_status@{get\_status}}
+\index{get\_status@{get\_status}!managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}}
+\doxysubsubsection{\texorpdfstring{get\_status()}{get\_status()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1break__system_1_1BreakSystem_a9305861dd0d1c7043fd9d536bc8a2cae} 
+ Dict\mbox{[}str, Any\mbox{]} managers.\+break\+\_\+system.\+Break\+System.\+get\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get current break system status.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1break__system_1_1BreakSystem_a9305861dd0d1c7043fd9d536bc8a2cae_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_a236e20d716b2b7fce74c1f657b4ae1c5}\index{managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}!request\_break@{request\_break}}
+\index{request\_break@{request\_break}!managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}}
+\doxysubsubsection{\texorpdfstring{request\_break()}{request\_break()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1break__system_1_1BreakSystem_a236e20d716b2b7fce74c1f657b4ae1c5} 
+ Dict\mbox{[}str, Any\mbox{]} managers.\+break\+\_\+system.\+Break\+System.\+request\+\_\+break (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{str}]{alias}{, }\item[{str}]{break\+\_\+type}{, }\item[{str}]{justification}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Request a break for an agent.
+
+Args:
+    agent_id: Unique agent identifier
+    alias: Agent's display alias
+    break_type: 'coffee' or 'play'
+    justification: Why the agent needs a break
+
+Returns:
+    Request status and details
+\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_a742fa40e98d637ef41f516c3fbe10598}\index{managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}!break\_queue@{break\_queue}}
+\index{break\_queue@{break\_queue}!managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}}
+\doxysubsubsection{\texorpdfstring{break\_queue}{break\_queue}}
+{\footnotesize\ttfamily \label{classmanagers_1_1break__system_1_1BreakSystem_a742fa40e98d637ef41f516c3fbe10598} 
+managers.\+break\+\_\+system.\+Break\+System.\+break\+\_\+queue = \{\}}
+
+\Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_a22f6c0d8bdc2048e05e2ebdc5ef49995}\index{managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}!db@{db}}
+\index{db@{db}!managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}}
+\doxysubsubsection{\texorpdfstring{db}{db}}
+{\footnotesize\ttfamily \label{classmanagers_1_1break__system_1_1BreakSystem_a22f6c0d8bdc2048e05e2ebdc5ef49995} 
+managers.\+break\+\_\+system.\+Break\+System.\+db = db}
+
+\Hypertarget{classmanagers_1_1break__system_1_1BreakSystem_ae6eec9c44946659de10b343f5cc91e10}\index{managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}!pending\_requests@{pending\_requests}}
+\index{pending\_requests@{pending\_requests}!managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}}
+\doxysubsubsection{\texorpdfstring{pending\_requests}{pending\_requests}}
+{\footnotesize\ttfamily \label{classmanagers_1_1break__system_1_1BreakSystem_ae6eec9c44946659de10b343f5cc91e10} 
+list managers.\+break\+\_\+system.\+Break\+System.\+pending\+\_\+requests = \mbox{[}$\,$\mbox{]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+managers/\mbox{\hyperlink{break__system_8py}{break\+\_\+system.\+py}}\end{DoxyCompactItemize}

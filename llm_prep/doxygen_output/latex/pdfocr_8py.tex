@@ -1,0 +1,81 @@
+\doxysection{claude/pdfocr.py File Reference}
+\hypertarget{pdfocr_8py}{}\label{pdfocr_8py}\index{claude/pdfocr.py@{claude/pdfocr.py}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacepdfocr}{pdfocr}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Iterable\mbox{[}\mbox{\hyperlink{namespacepdfocr_a7c25b0b55b00a5fd54db53d554e42b0d}{\+\_\+T}}\mbox{]} \mbox{\hyperlink{namespacepdfocr_ad8298da323ae5f1a1630b7c8e278e1fb}{pdfocr.\+tqdm}} (Iterable\mbox{[}\mbox{\hyperlink{namespacepdfocr_a7c25b0b55b00a5fd54db53d554e42b0d}{\+\_\+T}}\mbox{]} iterable, \texorpdfstring{$\ast$}{*}Any args, \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}Any kwargs)
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_a5693f39c769fd1fcd9ec603497d3acfd}{pdfocr.\+\_\+get\+\_\+numpy}} ()
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_a7b52493a1b64d3386a4925cbaa3e82cf}{pdfocr.\+\_\+get\+\_\+pytesseract}} ()
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_aeeef62cce7a050c3d64bc38595fce6ba}{pdfocr.\+\_\+get\+\_\+easyocr\+\_\+reader}} (Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} langs=None, bool gpu=False)
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_a42dc9f3b338729bee1d8c6ab01d8666f}{pdfocr.\+\_\+get\+\_\+cv2}} ()
+\item 
+Image.\+Image \mbox{\hyperlink{namespacepdfocr_ac731da60c6eeccf59b74b31bdb947e53}{pdfocr.\+preprocess\+\_\+image\+\_\+for\+\_\+ocr}} (Image.\+Image image, bool enhance=True)
+\item 
+str \mbox{\hyperlink{namespacepdfocr_ac179521a93537a816beca0f185027d82}{pdfocr.\+ocr\+\_\+with\+\_\+tesseract}} (Image.\+Image image, str lang="{}eng"{})
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_ad27e899ac4d3719ac2771d6737ebab30}{pdfocr.\+ocr\+\_\+with\+\_\+easyocr}} (Image.\+Image image, Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} langs=None, bool gpu=False, bool return\+\_\+boxes=False)
+\item 
+List\mbox{[}Tuple\mbox{[}int, Image.\+Image\mbox{]}\mbox{]} \mbox{\hyperlink{namespacepdfocr_a0350b44b7fe5a464ec4d7eb5d96c4329}{pdfocr.\+pdf\+\_\+to\+\_\+images}} (Path pdf\+\_\+path, int dpi=300, Optional\mbox{[}List\mbox{[}int\mbox{]}\mbox{]} pages=None)
+\item 
+List\mbox{[}int\mbox{]} \mbox{\hyperlink{namespacepdfocr_a396c2e32c75389b6d5604dec60a3dd00}{pdfocr.\+parse\+\_\+page\+\_\+spec}} (str spec, int total\+\_\+pages)
+\item 
+int \mbox{\hyperlink{namespacepdfocr_abfb3d61192e485a1e34e0fe83935043d}{pdfocr.\+validate\+\_\+dpi}} (int dpi)
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_a81b1c455180a0a207040985e551a88db}{pdfocr.\+ocr\+\_\+image}} (Image.\+Image image, str engine="{}tesseract"{}, str lang="{}eng"{}, bool enhance=True, bool gpu=False, bool return\+\_\+boxes=False)
+\item 
+Optional\mbox{[}Path\mbox{]} \mbox{\hyperlink{namespacepdfocr_ac7f53dae8b4a44d22b069d65f97240c4}{pdfocr.\+ocr\+\_\+pdf}} (Path pdf\+\_\+path, Path output\+\_\+dir, str engine="{}tesseract"{}, str lang="{}eng"{}, int dpi=300, bool enhance=True, bool save\+\_\+images=False, bool force=False, bool quiet=False, Optional\mbox{[}List\mbox{[}int\mbox{]}\mbox{]} pages=None, str output\+\_\+format="{}text"{}, bool gpu=False)
+\item 
+Optional\mbox{[}Path\mbox{]} \mbox{\hyperlink{namespacepdfocr_a099154a3f8d734ab6f18654cd5e5f6e5}{pdfocr.\+ocr\+\_\+image\+\_\+file}} (Path image\+\_\+path, Path output\+\_\+dir, str engine="{}tesseract"{}, str lang="{}eng"{}, bool enhance=True, bool force=False, bool quiet=False, str output\+\_\+format="{}text"{}, bool gpu=False)
+\item 
+List\mbox{[}Path\mbox{]} \mbox{\hyperlink{namespacepdfocr_ab2a132de0991ecfc1920d46139077101}{pdfocr.\+process\+\_\+inputs}} (List\mbox{[}str\mbox{]} inputs)
+\item 
+bool \mbox{\hyperlink{namespacepdfocr_a69dd0035c18ba7bd000e635b3041e1cf}{pdfocr.\+check\+\_\+engine\+\_\+available}} (str engine)
+\item 
+None \mbox{\hyperlink{namespacepdfocr_ae40f3e496d2e1a1d103e6dfa71895128}{pdfocr.\+main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacepdfocr_a7c25b0b55b00a5fd54db53d554e42b0d}{pdfocr.\+\_\+T}} = Type\+Var("{}\+\_\+\+T"{})
+\item 
+bool \mbox{\hyperlink{namespacepdfocr_a548d4e7d3d14f2097a1992e87bae296e}{pdfocr.\+\_\+\+HAS\+\_\+\+TQDM}} = True
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_aefbbbb370c7bdbae3e17a66b7c6c8e77}{pdfocr.\+\_\+pytesseract}} = None
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_ae681664d8e4ac2d5836e94c512847982}{pdfocr.\+\_\+easyocr\+\_\+reader}} = None
+\item 
+Optional \mbox{\hyperlink{namespacepdfocr_a58285c26ea9bf1772627ec8cb6ae7e52}{pdfocr.\+\_\+easyocr\+\_\+reader\+\_\+langs}} = None
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_ae10b4b3e3924e83537d24f4e96475bf8}{pdfocr.\+\_\+cv2}} = None
+\item 
+Any \mbox{\hyperlink{namespacepdfocr_a0f93dcf60b166aa21764a2652884be3c}{pdfocr.\+\_\+np}} = None
+\item 
+\mbox{\hyperlink{namespacepdfocr_a93def8225eb409561d091202348606da}{pdfocr.\+\_\+easyocr\+\_\+lock}} = threading.\+Lock()
+\item 
+\mbox{\hyperlink{namespacepdfocr_afcdc896dc13bb8f4bb801510b2eb4af6}{pdfocr.\+\_\+pytesseract\+\_\+lock}} = threading.\+Lock()
+\item 
+\mbox{\hyperlink{namespacepdfocr_a461dc2b1e6e38b091179e252b8885ff8}{pdfocr.\+\_\+cv2\+\_\+lock}} = threading.\+Lock()
+\item 
+\mbox{\hyperlink{namespacepdfocr_a19b794722766018f8deae9f626c78696}{pdfocr.\+\_\+numpy\+\_\+lock}} = threading.\+Lock()
+\item 
+str \mbox{\hyperlink{namespacepdfocr_ad03abc393ed4348aad17dcfa3668fc3a}{pdfocr.\+\_\+\+\_\+version\+\_\+\+\_\+}} = "{}2.\+0.\+0"{}
+\item 
+str \mbox{\hyperlink{namespacepdfocr_a7d8bd8cc67fdb31b2ef7cbabd205dc11}{pdfocr.\+DEFAULT\+\_\+\+OUTPUT\+\_\+\+DIR}} = "{}ocr\+\_\+out"{}
+\item 
+dict \mbox{\hyperlink{namespacepdfocr_afcc5321bb1cdfbb051b1fcde64a6e47d}{pdfocr.\+SUPPORTED\+\_\+\+IMAGE\+\_\+\+EXTENSIONS}} = \{"{}.png"{}, "{}.jpg"{}, "{}.jpeg"{}, "{}.tiff"{}, "{}.tif"{}, "{}.bmp"{}, "{}.webp"{}\}
+\item 
+int \mbox{\hyperlink{namespacepdfocr_a8fc9bf9454c59b0c7ab824fc26b45436}{pdfocr.\+MIN\+\_\+\+DPI}} = 72
+\item 
+int \mbox{\hyperlink{namespacepdfocr_ae18145d1a5ecd1b9ee6b262d9cbc8213}{pdfocr.\+MAX\+\_\+\+DPI}} = 600
+\item 
+dict \mbox{\hyperlink{namespacepdfocr_aaf4dc3b4a82cc37c55ba4a049944d3a2}{pdfocr.\+TESSERACT\+\_\+\+TO\+\_\+\+EASYOCR\+\_\+\+LANG}}
+\end{DoxyCompactItemize}

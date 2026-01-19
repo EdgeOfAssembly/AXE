@@ -1,0 +1,19 @@
+<map id="tools.minifier.Minifier.minify_directory" name="tools.minifier.Minifier.minify_directory">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,67,209,111"/>
+<area shape="rect" id="Node000002" href="$namespacetools_1_1minifier.html#ae166d4d8a8bc0833f94cf2d7609e69b3" title=" " alt="" coords="295,36,448,81"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,75,282,68,278,70,210,80"/>
+<area shape="rect" id="Node000003" href="$classtools_1_1minifier_1_1Minifier.html#af4e76beb46588676e9f30dedfc7bba67" title=" " alt="" coords="257,104,487,132"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="209,98,244,103,238,105,210,103"/>
+<area shape="rect" id="Node000004" href="$namespacetools_1_1minifier.html#a25b99dc57972f81c283eb4f4785fbb34" title=" " alt="" coords="552,5,704,50"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="454,101,486,91,510,76,534,60,544,58,549,56,536,65,513,81,488,95,455,106"/>
+<area shape="rect" id="Node000005" href="$namespacetools_1_1minifier.html#a6518e5a9a554ade99baa729734a1bc32" title=" " alt="" coords="535,74,721,102"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="487,102,522,100,517,101,488,107"/>
+<area shape="rect" id="Node000006" href="$namespacetools_1_1minifier.html#acbce42ca8e81d30a52cf2ea48e9f1055" title=" " alt="" coords="552,125,704,170"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="487,129,540,137,534,137,487,134"/>
+<area shape="rect" id="Node000008" href="$namespacetools_1_1minifier.html#a1891c0e16ec30fddff99c105a8c937b2" title=" " alt="" coords="552,195,704,239"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="410,130,536,180,554,189,549,188,534,185,409,135"/>
+<area shape="rect" id="Node000007" href="$namespacetools_1_1minifier.html#a1630a58d0997c2a2b5a3ce016724addf" title=" " alt="" coords="784,125,957,170"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="704,145,772,147,766,148,704,150"/>
+<area shape="rect" id="Node000009" href="$namespacetools_1_1minifier.html#a90c1982b6a18089fdd441a06d159838e" title=" " alt="" coords="769,195,972,239"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="704,214,756,217,751,217,704,220"/>
+</map>

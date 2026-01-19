@@ -1,0 +1,107 @@
+\chapter{Heredoc Execution Fix Summary }
+\hypertarget{md_HEREDOC__EXECUTION__FIX}{}\label{md_HEREDOC__EXECUTION__FIX}\index{Heredoc Execution Fix Summary@{Heredoc Execution Fix Summary}}
+\label{md_HEREDOC__EXECUTION__FIX_autotoc_md387}%
+\Hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md387}%
+\hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md388}{}\doxysection{\texorpdfstring{Problem}{Problem}}\label{md_HEREDOC__EXECUTION__FIX_autotoc_md388}
+PR \#12 successfully fixed heredoc parsing for {\bfseries{VALIDATION}} (preventing false positives from heredoc content being parsed as commands), but inadvertently broke heredoc {\bfseries{EXECUTION}}.\hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md389}{}\doxysubsection{\texorpdfstring{The Issue}{The Issue}}\label{md_HEREDOC__EXECUTION__FIX_autotoc_md389}
+When an EXEC block contained a heredoc, only the first line was being executed, causing the heredoc content to be lost\+:
+
+
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ EXEC cat \texorpdfstring{$>$}{>} file.\+md \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} \textquotesingle{}EOF\textquotesingle{}
+\begin{DoxyItemize}
+\item Item 1
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item First EOF 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}
+
+This would execute only\+: {\ttfamily cat \texorpdfstring{$>$}{>} file.\+md \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} \textquotesingle{}EOF\textquotesingle{}}
+
+The heredoc content ({\ttfamily -\/ Item 1}, {\ttfamily 1. First}, {\ttfamily EOF}) was being ignored, resulting in\+:
+\begin{DoxyItemize}
+\item Shell warnings\+: {\ttfamily here-\/document at line 1 delimited by end-\/of-\/file (wanted \textquotesingle{}EOF\textquotesingle{})}
+\item Empty or incorrect file output
+\end{DoxyItemize}\hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md390}{}\doxysection{\texorpdfstring{Root Cause}{Root Cause}}\label{md_HEREDOC__EXECUTION__FIX_autotoc_md390}
+In {\ttfamily \doxylink{axe_8py}{axe.\+py}}, the {\ttfamily Response\+Processor.\+process\+\_\+response()} method parses EXEC blocks using this regex\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pattern\ =\ \textcolor{stringliteral}{r'}}
+
+\end{DoxyCode}
+ (READ\texorpdfstring{$\vert$}{|}\+EXEC\texorpdfstring{$\vert$}{|}\+WRITE)\textbackslash{}s\texorpdfstring{$\ast$}{*}(\mbox{[}\texorpdfstring{$^\wedge$}{\string^}~\newline
+\mbox{]}\texorpdfstring{$\ast$}{*})~\newline
+(.\texorpdfstring{$\ast$}{*}?)\`{}\`{}\`{}\textquotesingle{} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{This\ correctly\ splits\ the\ block\ into:}
+\DoxyCodeLine{-\/\ \`{}group(1)`:\ Block\ type\ (EXEC)}
+\DoxyCodeLine{-\/\ \`{}group(2)`:\ Args/first\ line\ (`cat\ >\ file.md\ <<\ 'EOF'`)}
+\DoxyCodeLine{-\/\ \`{}group(3)`:\ Content/remaining\ lines\ (`-\/\ Item\ 1\(\backslash\)n1.\ First\(\backslash\)nEOF`)}
+\DoxyCodeLine{}
+\DoxyCodeLine{However,\ the\ code\ at\ line\ 1478\ was:}
+
+\end{DoxyCode}
+ python command = args or content \# BUG! 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{This\ used\ only\ \`{}args`\ when\ both\ were\ present,\ losing\ the\ heredoc\ content.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Solution}
+\DoxyCodeLine{}
+\DoxyCodeLine{Changed\ the\ EXEC\ block\ handling\ to\ combine\ \`{}args`\ and\ \`{}content`\ when\ both\ are\ present:}
+
+\end{DoxyCode}
+ python if args and content\+: \hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md391}{}\doxysection{\texorpdfstring{Both present\+: combine with newline (e.\+g., "{}cat $<$$<$ EOF"{} + "{}\textbackslash{}nlines\textbackslash{}n\+EOF"{})}{Both present\+: combine with newline (e.\+g., "{}cat $<$$<$ EOF"{} + "{}\textbackslash{}nlines\textbackslash{}n\+EOF"{})}}\label{md_HEREDOC__EXECUTION__FIX_autotoc_md391}
+command = args + \textquotesingle{}~\newline
+\textquotesingle{} + content else\+: \hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md392}{}\doxysection{\texorpdfstring{Only one present\+: use whichever exists}{Only one present\+: use whichever exists}}\label{md_HEREDOC__EXECUTION__FIX_autotoc_md392}
+command = args or content \`{}\`{}\`{}\hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md393}{}\doxysubsubsection{\texorpdfstring{Why This Works}{Why This Works}}\label{md_HEREDOC__EXECUTION__FIX_autotoc_md393}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Heredocs on same line as EXEC}}\+: {\ttfamily args} contains the command start, {\ttfamily content} contains the heredoc body → combine them
+\item {\bfseries{Heredocs on content line}}\+: {\ttfamily args} is empty, {\ttfamily content} contains the full command → use content
+\item {\bfseries{Simple commands}}\+: Either {\ttfamily args} has everything (use args) or {\ttfamily content} has everything (use content)
+\item {\bfseries{Backward compatible}}\+: Doesn\textquotesingle{}t break any existing EXEC block patterns
+\end{DoxyEnumerate}\hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md394}{}\doxysubsection{\texorpdfstring{Validation}{Validation}}\label{md_HEREDOC__EXECUTION__FIX_autotoc_md394}
+The fix maintains the correct validation behavior from PR \#12\+:
+
+
+\begin{DoxyItemize}
+\item ✅ Heredoc content is still stripped during validation (via {\ttfamily \+\_\+strip\+\_\+heredoc\+\_\+content()})
+\item ✅ No false positives from markdown symbols ({\ttfamily -\/}, {\ttfamily 1.}, {\ttfamily -\/-\/-\/}) in heredoc content
+\item ✅ Shell operators in heredoc content don\textquotesingle{}t cause false command splits
+\item ✅ Operators after heredoc markers (e.\+g., {\ttfamily cat \texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<} EOF \texorpdfstring{$\vert$}{|} grep}) are correctly parsed
+\end{DoxyItemize}\hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md395}{}\doxysubsection{\texorpdfstring{Testing}{Testing}}\label{md_HEREDOC__EXECUTION__FIX_autotoc_md395}
+\hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md396}{}\doxysubsubsection{\texorpdfstring{New Tests Added}{New Tests Added}}\label{md_HEREDOC__EXECUTION__FIX_autotoc_md396}
+
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{test__exec__heredoc_8py}{test\+\_\+exec\+\_\+heredoc.\+py}}\+: Comprehensive test suite covering\+:
+\begin{DoxyItemize}
+\item Heredoc with command on EXEC line
+\item Heredoc with command on content line
+\item Multiple EXEC blocks with heredocs
+\item Regression test for simple EXEC commands
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md397}{}\doxysubsubsection{\texorpdfstring{Existing Tests}{Existing Tests}}\label{md_HEREDOC__EXECUTION__FIX_autotoc_md397}
+
+\begin{DoxyItemize}
+\item All 10 Tool\+Runner tests pass
+\item All validation demos work correctly
+\item No regressions in any existing functionality
+\end{DoxyItemize}\hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md398}{}\doxysubsection{\texorpdfstring{Impact}{Impact}}\label{md_HEREDOC__EXECUTION__FIX_autotoc_md398}
+This fix ensures that\+:
+\begin{DoxyEnumerate}
+\item {\bfseries{Validation works correctly}}\+: Heredoc content is stripped before whitelist checking
+\item {\bfseries{Execution works correctly}}\+: Original command with heredoc content is passed to shell
+\item {\bfseries{No breaking changes}}\+: All existing EXEC block patterns continue to work
+\end{DoxyEnumerate}\hypertarget{md_HEREDOC__EXECUTION__FIX_autotoc_md399}{}\doxysubsection{\texorpdfstring{Files Changed}{Files Changed}}\label{md_HEREDOC__EXECUTION__FIX_autotoc_md399}
+
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{axe_8py}{axe.\+py}}\+: Fixed {\ttfamily Response\+Processor.\+process\+\_\+response()} EXEC handling (7 lines)
+\item {\ttfamily \doxylink{test__exec__heredoc_8py}{test\+\_\+exec\+\_\+heredoc.\+py}}\+: Added comprehensive test coverage (165 lines) 
+\end{DoxyItemize}

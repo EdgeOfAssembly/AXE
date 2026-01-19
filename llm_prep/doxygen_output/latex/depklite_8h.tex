@@ -1,0 +1,76 @@
+\doxysection{tools/dos\+\_\+unpackers/depklite.h File Reference}
+\hypertarget{depklite_8h}{}\label{depklite_8h}\index{tools/dos\_unpackers/depklite.h@{tools/dos\_unpackers/depklite.h}}
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+Include dependency graph for depklite.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{depklite_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{depklite_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structGetNextByte__Data}{Get\+Next\+Byte\+\_\+\+Data}}
+\item 
+struct \mbox{\hyperlink{structGetNextBit__Data}{Get\+Next\+Bit\+\_\+\+Data}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{depklite_8h_abc34a005998258ced922ca2e5df70ad0}{depklite\+\_\+unpack}} (FILE \texorpdfstring{$\ast$}{*}fp, unsigned char \texorpdfstring{$\ast$}{*}decomp\+Buff, int buffsize, int compressed\+Data\+Offset, bool use\+Decryption)
+\item 
+int \mbox{\hyperlink{depklite_8h_a6c8292606a6eb2aa9759b31df768e40d}{print\+Bit\+Data}} (int byte\+Index, \mbox{\hyperlink{structGetNextBit__Data}{Get\+Next\+Bit\+\_\+\+Data}} data)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{depklite_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{depklite_8h_abc34a005998258ced922ca2e5df70ad0}\index{depklite.h@{depklite.h}!depklite\_unpack@{depklite\_unpack}}
+\index{depklite\_unpack@{depklite\_unpack}!depklite.h@{depklite.h}}
+\doxysubsubsection{\texorpdfstring{depklite\_unpack()}{depklite\_unpack()}}
+{\footnotesize\ttfamily \label{depklite_8h_abc34a005998258ced922ca2e5df70ad0} 
+int32\+\_\+t depklite\+\_\+unpack (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{decomp\+Buff}{, }\item[{int}]{buffsize}{, }\item[{int}]{compressed\+Data\+Offset}{, }\item[{bool}]{use\+Decryption}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{depklite_8h_abc34a005998258ced922ca2e5df70ad0_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{depklite_8h_a6c8292606a6eb2aa9759b31df768e40d}\index{depklite.h@{depklite.h}!printBitData@{printBitData}}
+\index{printBitData@{printBitData}!depklite.h@{depklite.h}}
+\doxysubsubsection{\texorpdfstring{printBitData()}{printBitData()}}
+{\footnotesize\ttfamily \label{depklite_8h_a6c8292606a6eb2aa9759b31df768e40d} 
+int print\+Bit\+Data (\begin{DoxyParamCaption}\item[{int}]{byte\+Index}{, }\item[{\mbox{\hyperlink{structGetNextBit__Data}{Get\+Next\+Bit\+\_\+\+Data}}}]{data}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{depklite_8h_a6c8292606a6eb2aa9759b31df768e40d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{depklite_8h_a6c8292606a6eb2aa9759b31df768e40d_icgraph}
+\end{center}
+\end{figure}

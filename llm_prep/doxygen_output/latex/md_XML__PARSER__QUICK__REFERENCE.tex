@@ -1,0 +1,185 @@
+\chapter{XML Function Call Support -\/ Quick Reference }
+\hypertarget{md_XML__PARSER__QUICK__REFERENCE}{}\label{md_XML__PARSER__QUICK__REFERENCE}\index{XML Function Call Support -\/ Quick Reference@{XML Function Call Support -\/ Quick Reference}}
+\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1514}%
+\Hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1514}%
+\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1515}{}\doxysection{\texorpdfstring{What\textquotesingle{}s New?}{What\textquotesingle{}s New?}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1515}
+AXE now supports {\bfseries{native XML function call format}} used by LLM agents (Claude, GPT, Llama, Grok) in addition to the existing markdown block syntax.\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1516}{}\doxysection{\texorpdfstring{Why This Matters}{Why This Matters}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1516}
+{\bfseries{Before\+:}} Agents using XML format had tool calls silently fail 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<\textcolor{keywordtype}{function\_calls}>}
+\DoxyCodeLine{<\textcolor{keywordtype}{invoke}\ \textcolor{keyword}{name}=\textcolor{stringliteral}{"{}read\_file"{}}>}
+\DoxyCodeLine{<\textcolor{keywordtype}{parameter}\ \textcolor{keyword}{name}=\textcolor{stringliteral}{"{}file\_path"{}}>\textcolor{keyword}{mission.md}</\textcolor{keywordtype}{parameter}>}
+\DoxyCodeLine{</\textcolor{keywordtype}{invoke}>}
+\DoxyCodeLine{</\textcolor{keywordtype}{function\_calls}>}
+
+\end{DoxyCode}
+ ❌ No result, agent can\textquotesingle{}t see file contents
+
+{\bfseries{After\+:}} XML calls execute properly and return results 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<\textcolor{keywordtype}{result}>}
+\DoxyCodeLine{<\textcolor{keywordtype}{function\_result}>}
+\DoxyCodeLine{<\textcolor{keywordtype}{result}>}
+\DoxyCodeLine{\#\ \textcolor{keyword}{Mission}\ \textcolor{keyword}{Document}}
+\DoxyCodeLine{\textcolor{keyword}{Your}\ \textcolor{keyword}{mission}\ \textcolor{keyword}{content}\ \textcolor{keyword}{here...}}
+\DoxyCodeLine{</\textcolor{keywordtype}{result}>}
+\DoxyCodeLine{</\textcolor{keywordtype}{function\_result}>}
+\DoxyCodeLine{</\textcolor{keywordtype}{result}>}
+
+\end{DoxyCode}
+ ✅ Agent sees actual file contents in conversation history\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1517}{}\doxysection{\texorpdfstring{Supported Formats}{Supported Formats}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1517}
+\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1518}{}\doxysubsection{\texorpdfstring{XML Format (New!)}{XML Format (New!)}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1518}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<\textcolor{keywordtype}{function\_calls}>}
+\DoxyCodeLine{<\textcolor{keywordtype}{invoke}\ \textcolor{keyword}{name}=\textcolor{stringliteral}{"{}read\_file"{}}>}
+\DoxyCodeLine{<\textcolor{keywordtype}{parameter}\ \textcolor{keyword}{name}=\textcolor{stringliteral}{"{}file\_path"{}}>\textcolor{keyword}{config.yaml}</\textcolor{keywordtype}{parameter}>}
+\DoxyCodeLine{</\textcolor{keywordtype}{invoke}>}
+\DoxyCodeLine{</\textcolor{keywordtype}{function\_calls}>}
+
+\end{DoxyCode}
+\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1519}{}\doxysubsection{\texorpdfstring{Markdown Format (Original)}{Markdown Format (Original)}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1519}
+
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ READ config.\+yaml\`{}\`{}\`{} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{**Both\ formats\ work!**\ You\ can\ even\ mix\ them\ in\ the\ same\ response.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Supported\ Operations}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ READ\ -\/\ Read\ Files}
+
+\end{DoxyCode}
+ xml $<$function\+\_\+calls$>$ $<$invoke name="{}read\+\_\+file"{}$>$ $<$parameter name="{}file\+\_\+path"{}$>$path/to/file.\+txt$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Alternative\ tool\ names:\ \`{}read`,\ \`{}cat`,\ \`{}get\_file`,\ \`{}view\_file`}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ WRITE\ -\/\ Create/Write\ Files}
+
+\end{DoxyCode}
+ xml $<$function\+\_\+calls$>$ $<$invoke name="{}write\+\_\+file"{}$>$ $<$parameter name="{}file\+\_\+path"{}$>$output.\+txt$<$/parameter$>$ $<$parameter name="{}content"{}$>$File content here$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Alternative\ tool\ names:\ \`{}write`,\ \`{}create\_file`,\ \`{}save\_file`}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ APPEND\ -\/\ Append\ to\ Files}
+
+\end{DoxyCode}
+ xml $<$function\+\_\+calls$>$ $<$invoke name="{}append\+\_\+file"{}$>$ $<$parameter name="{}file\+\_\+path"{}$>$log.\+txt$<$/parameter$>$ $<$parameter name="{}content"{}$>$New log entry$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Alternative\ tool\ names:\ \`{}append`,\ \`{}append\_to\_file`}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ EXEC\ -\/\ Run\ Commands}
+
+\end{DoxyCode}
+ xml $<$function\+\_\+calls$>$ $<$invoke name="{}shell"{}$>$ $<$parameter name="{}command"{}$>$ls -\/la$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Alternative\ tool\ names:\ \`{}bash`,\ \`{}exec`,\ \`{}run\_shell`,\ \`{}execute`,\ \`{}run\_command`}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ LIST\_DIR\ -\/\ List\ Directory}
+
+\end{DoxyCode}
+ xml $<$function\+\_\+calls$>$ $<$invoke name="{}list\+\_\+dir"{}$>$ $<$parameter name="{}path"{}$>$.$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Alternative\ tool\ names:\ \`{}list\_directory`,\ \`{}ls`,\ \`{}listdir`}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Parameter\ Names}
+\DoxyCodeLine{}
+\DoxyCodeLine{The\ parser\ accepts\ multiple\ parameter\ name\ variants:}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ **File\ path:**\ \`{}file\_path`,\ \`{}path`,\ \`{}filename`,\ \`{}file`}
+\DoxyCodeLine{-\/\ **Content:**\ \`{}content`,\ \`{}data`,\ \`{}text`,\ \`{}contents`}
+\DoxyCodeLine{-\/\ **Command:**\ \`{}command`,\ \`{}cmd`,\ \`{}shell\_command`}
+\DoxyCodeLine{-\/\ **Directory:**\ \`{}path`,\ \`{}directory`,\ \`{}dir`}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Security}
+\DoxyCodeLine{}
+\DoxyCodeLine{All\ operations\ respect\ AXE's\ security\ policies:}
+\DoxyCodeLine{}
+\DoxyCodeLine{✅\ Path\ traversal\ prevention}
+\DoxyCodeLine{✅\ Directory\ access\ control}
+\DoxyCodeLine{✅\ Tool\ whitelist\ enforcement}
+\DoxyCodeLine{✅\ Project\ boundary\ enforcement}
+\DoxyCodeLine{}
+\DoxyCodeLine{Attempts\ to\ access\ forbidden\ paths\ or\ run\ unauthorized\ commands\ will\ be\ blocked.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Results\ in\ Conversation\ History}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Key\ Feature:**\ Results\ from\ XML\ function\ calls\ are\ automatically\ added\ to\ the\ conversation\ history,\ so\ all\ agents\ in\ collaborative\ sessions\ can\ see\ the\ outputs.}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Example:**}
+\DoxyCodeLine{1.\ Agent\ A\ reads\ a\ file\ using\ XML\ format}
+\DoxyCodeLine{2.\ Result\ is\ added\ to\ conversation\ history}
+\DoxyCodeLine{3.\ Agent\ B\ can\ reference\ the\ file\ contents\ in\ their\ response}
+\DoxyCodeLine{}
+\DoxyCodeLine{This\ solves\ the\ "{}infinite\ retry\ loop"{}\ problem\ where\ agents\ kept\ trying\ to\ read\ files\ they\ couldn't\ see\ the\ results\ from.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Testing}
+\DoxyCodeLine{}
+\DoxyCodeLine{Run\ the\ test\ suites:}
+
+\end{DoxyCode}
+ bash \hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1520}{}\doxysection{\texorpdfstring{Unit tests}{Unit tests}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1520}
+python3 \doxylink{test__xml__tool__parser_8py}{test\+\_\+xml\+\_\+tool\+\_\+parser.\+py}\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1521}{}\doxysection{\texorpdfstring{Manual verification}{Manual verification}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1521}
+python3 \doxylink{manual__test__xml_8py}{manual\+\_\+test\+\_\+xml.\+py}\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1522}{}\doxysection{\texorpdfstring{Existing tests (verify no breakage)}{Existing tests (verify no breakage)}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1522}
+python3 \doxylink{test__write__blocks_8py}{test\+\_\+write\+\_\+blocks.\+py} python3 \doxylink{test__axe__improvements_8py}{test\+\_\+axe\+\_\+improvements.\+py} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\ Examples}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Example\ 1:\ Read\ and\ Process}
+
+\end{DoxyCode}
+ xml $<$function\+\_\+calls$>$ $<$invoke name="{}read\+\_\+file"{}$>$ $<$parameter name="{}file\+\_\+path"{}$>$input.\+json$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Result\ appears\ in\ conversation\ as:}
+
+\end{DoxyCode}
+ xml $<$result$>$ $<$function\+\_\+result$>$ $<$result$>$ \{"{}key"{}\+: "{}value"{}, "{}data"{}\+: \mbox{[}1, 2, 3\mbox{]}\} $<$/result$>$ $<$/function\+\_\+result$>$ $<$/result$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ Example\ 2:\ Create\ File}
+
+\end{DoxyCode}
+ xml $<$function\+\_\+calls$>$ $<$invoke name="{}write\+\_\+file"{}$>$ $<$parameter name="{}file\+\_\+path"{}$>$report.\+md$<$/parameter$>$ $<$parameter name="{}content"{}$>$\# Analysis Report
+
+Key findings\+:
+\begin{DoxyItemize}
+\item Item 1
+\item Item 2 
+\end{DoxyItemize}$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Result:}
+
+\end{DoxyCode}
+ xml $<$result$>$ $<$function\+\_\+result$>$ $<$result$>$ ✓ File written successfully (85 bytes) $<$/result$>$ $<$/function\+\_\+result$>$ $<$/result$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ Example\ 3:\ Multiple\ Operations}
+
+\end{DoxyCode}
+ xml $<$function\+\_\+calls$>$ $<$invoke name="{}read\+\_\+file"{}$>$ $<$parameter name="{}file\+\_\+path"{}$>$data.\+csv$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$
+
+$<$function\+\_\+calls$>$ $<$invoke name="{}write\+\_\+file"{}$>$ $<$parameter name="{}file\+\_\+path"{}$>$summary.\+txt$<$/parameter$>$ $<$parameter name="{}content"{}$>$Data summary goes here$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$ \`{}\`{}\`{}
+
+Both operations execute and return results in sequence.\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1523}{}\doxysubsection{\texorpdfstring{Troubleshooting}{Troubleshooting}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1523}
+\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1524}{}\doxysubsubsection{\texorpdfstring{No Results Appearing?}{No Results Appearing?}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1524}
+
+\begin{DoxyEnumerate}
+\item Check that XML syntax is correct (closing tags, proper nesting)
+\item Verify tool name is supported (see list above)
+\item Check parameter names match expected values
+\item Review security restrictions (forbidden paths, whitelist)
+\end{DoxyEnumerate}\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1525}{}\doxysubsubsection{\texorpdfstring{Path Errors?}{Path Errors?}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1525}
+
+\begin{DoxyItemize}
+\item Use relative paths from project root
+\item Absolute paths must be within project directory
+\item No {\ttfamily ../} path traversal allowed
+\end{DoxyItemize}\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1526}{}\doxysubsubsection{\texorpdfstring{Command Fails?}{Command Fails?}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1526}
+
+\begin{DoxyItemize}
+\item Check tool whitelist in {\ttfamily axe.\+yaml}
+\item Commands must be explicitly allowed
+\item Commands execute immediately after passing validation
+\end{DoxyItemize}\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1527}{}\doxysubsection{\texorpdfstring{Backward Compatibility}{Backward Compatibility}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1527}
+✅ All existing markdown block syntax still works ✅ No breaking changes to existing code ✅ Can mix XML and markdown in same response ✅ All existing tests pass\hypertarget{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1528}{}\doxysubsection{\texorpdfstring{More Information}{More Information}}\label{md_XML__PARSER__QUICK__REFERENCE_autotoc_md1528}
+See {\ttfamily \doxylink{XML__PARSER__IMPLEMENTATION_8md}{XML\+\_\+\+PARSER\+\_\+\+IMPLEMENTATION.\+md}} for detailed technical documentation. 

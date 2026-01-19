@@ -1,0 +1,180 @@
+\chapter{Bug Fix Summary -\/ Multi-\/\+Agent Collaboration Issues }
+\hypertarget{md_BUG__FIX__SUMMARY}{}\label{md_BUG__FIX__SUMMARY}\index{Bug Fix Summary -\/ Multi-\/Agent Collaboration Issues@{Bug Fix Summary -\/ Multi-\/Agent Collaboration Issues}}
+\label{md_BUG__FIX__SUMMARY_autotoc_md193}%
+\Hypertarget{md_BUG__FIX__SUMMARY_autotoc_md193}%
+\hypertarget{md_BUG__FIX__SUMMARY_autotoc_md194}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_BUG__FIX__SUMMARY_autotoc_md194}
+This PR fixes 4 critical bugs that prevented multi-\/agent collaborative sessions from working correctly. These bugs caused agents to fail at creating files, spawned agents to never receive turns, token limit errors to go unhandled, and commands to execute twice.\hypertarget{md_BUG__FIX__SUMMARY_autotoc_md195}{}\doxysection{\texorpdfstring{Bugs Fixed}{Bugs Fixed}}\label{md_BUG__FIX__SUMMARY_autotoc_md195}
+\hypertarget{md_BUG__FIX__SUMMARY_autotoc_md196}{}\doxysubsection{\texorpdfstring{Bug 1\+: XML Tag Formats Not Supported ✅}{Bug 1\+: XML Tag Formats Not Supported ✅}}\label{md_BUG__FIX__SUMMARY_autotoc_md196}
+{\bfseries{Problem}}\+: Agents used XML formats ({\ttfamily \texorpdfstring{$<$}{<}exec\texorpdfstring{$>$}{>}}, {\ttfamily \texorpdfstring{$<$}{<}read\texorpdfstring{$>$}{>}}, {\ttfamily \texorpdfstring{$<$}{<}write file="{}"{}\texorpdfstring{$>$}{>}}) that were not parsed by the system, causing all file operations to be silently ignored.
+
+{\bfseries{Root Cause}}\+: The {\ttfamily parse\+\_\+simple\+\_\+xml\+\_\+tags()} function in {\ttfamily \doxylink{xml__tool__parser_8py}{utils/xml\+\_\+tool\+\_\+parser.\+py}} only supported {\ttfamily \texorpdfstring{$<$}{<}read\+\_\+file\texorpdfstring{$>$}{>}}, {\ttfamily \texorpdfstring{$<$}{<}shell\texorpdfstring{$>$}{>}}, {\ttfamily \texorpdfstring{$<$}{<}bash\texorpdfstring{$>$}{>}}, and {\ttfamily \texorpdfstring{$<$}{<}write\+\_\+file path="{}"{}\texorpdfstring{$>$}{>}} formats. The simpler formats that agents actually used were not recognized.
+
+{\bfseries{Fix}}\+:
+\begin{DoxyItemize}
+\item Added parsing support for {\ttfamily \texorpdfstring{$<$}{<}exec\texorpdfstring{$>$}{>}command\texorpdfstring{$<$}{<}/exec\texorpdfstring{$>$}{>}}
+\item Added parsing support for {\ttfamily \texorpdfstring{$<$}{<}read\texorpdfstring{$>$}{>}path\texorpdfstring{$<$}{<}/read\texorpdfstring{$>$}{>}}
+\item Added parsing support for {\ttfamily \texorpdfstring{$<$}{<}write file="{}path"{}\texorpdfstring{$>$}{>}content\texorpdfstring{$<$}{<}/write\texorpdfstring{$>$}{>}}
+\item All three formats now properly mapped to READ, EXEC, and WRITE operations
+\end{DoxyItemize}
+
+{\bfseries{Files Modified}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{xml__tool__parser_8py}{utils/xml\+\_\+tool\+\_\+parser.\+py}} -\/ Extended {\ttfamily parse\+\_\+simple\+\_\+xml\+\_\+tags()} function
+\end{DoxyItemize}
+
+{\bfseries{Tests Added}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{test__xml__new__formats_8py}{test\+\_\+xml\+\_\+new\+\_\+formats.\+py}} -\/ Comprehensive tests for all new formats
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_BUG__FIX__SUMMARY_autotoc_md198}{}\doxysubsection{\texorpdfstring{Bug 2\+: Spawned Agents Never Get Turns ✅}{Bug 2\+: Spawned Agents Never Get Turns ✅}}\label{md_BUG__FIX__SUMMARY_autotoc_md198}
+{\bfseries{Problem}}\+: When the supervisor spawned new agents, they were added to the agent list but could never receive turns because the agent resolution system didn\textquotesingle{}t know about them.
+
+{\bfseries{Root Cause}}\+:
+\begin{DoxyItemize}
+\item Spawned agents were registered using their UUID as the key in {\ttfamily self.\+agents}, {\ttfamily self.\+agent\+\_\+ids}, and {\ttfamily self.\+agent\+\_\+aliases}
+\item But {\ttfamily Agent\+Manager.\+resolve\+\_\+agent()} only knew about static agent names from config (\textquotesingle{}claude\textquotesingle{}, \textquotesingle{}gpt\textquotesingle{}, etc.)
+\item When the main loop tried to resolve a UUID, it returned {\ttfamily None}, causing the agent to be skipped
+\end{DoxyItemize}
+
+{\bfseries{Fix}}\+:
+\begin{DoxyEnumerate}
+\item Added {\ttfamily self.\+spawned\+\_\+agents} dictionary to {\ttfamily Collaborative\+Session} to store dynamically spawned agent configurations
+\item Updated {\ttfamily \+\_\+handle\+\_\+spawn\+\_\+request()} to store full agent config including provider, model, and system prompt
+\item Updated main loop to check {\ttfamily spawned\+\_\+agents} first before calling {\ttfamily resolve\+\_\+agent()}
+\item Updated {\ttfamily \+\_\+get\+\_\+system\+\_\+prompt\+\_\+for\+\_\+collab()} to handle both static and spawned agents
+\item Added {\ttfamily \+\_\+get\+\_\+spawned\+\_\+agent\+\_\+system\+\_\+prompt()} helper to provide appropriate prompts
+\end{DoxyEnumerate}
+
+{\bfseries{Files Modified}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{axe_8py}{axe.\+py}} -\/ Multiple functions updated for spawned agent support
+\end{DoxyItemize}
+
+{\bfseries{Tests Added}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{test__spawned__agents_8py}{test\+\_\+spawned\+\_\+agents.\+py}} -\/ Tests for data structures and resolution logic
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_BUG__FIX__SUMMARY_autotoc_md200}{}\doxysubsection{\texorpdfstring{Bug 3\+: Token Limit Errors (413) Not Handled ✅}{Bug 3\+: Token Limit Errors (413) Not Handled ✅}}\label{md_BUG__FIX__SUMMARY_autotoc_md200}
+{\bfseries{Problem}}\+: When agents hit 413 token limit errors, the system just captured it as a string response without any retry logic, detection, or recovery mechanism.
+
+{\bfseries{Root Cause}}\+: The API exception handler in the main collaboration loop used a generic {\ttfamily except Exception as e} that treated all errors the same, with no special handling for token limit issues.
+
+{\bfseries{Fix}}\+:
+\begin{DoxyEnumerate}
+\item Enhanced exception handler to detect token limit errors by checking for\+:
+\begin{DoxyItemize}
+\item HTTP 413 status code
+\item \textquotesingle{}tokens\+\_\+limit\+\_\+reached\textquotesingle{} in error message
+\item \textquotesingle{}context\+\_\+length\+\_\+exceeded\textquotesingle{} in error message
+\item \textquotesingle{}maximum context length\textquotesingle{} in error message
+\end{DoxyItemize}
+\item Implemented error tracking\+:
+\begin{DoxyItemize}
+\item Increment error\+\_\+count for each agent in database
+\item Track consecutive token errors
+\end{DoxyItemize}
+\item Added automatic recovery\+:
+\begin{DoxyItemize}
+\item After 3 token errors, force agent to sleep
+\item Log all token errors with supervisor event tracking
+\item Protect supervisor from being slept (must always be available)
+\item Suggest spawning replacement agents
+\end{DoxyItemize}
+\item Improved error reporting\+:
+\begin{DoxyItemize}
+\item Clear error messages indicating token limit issues
+\item Error count displayed to help diagnose patterns
+\item Truncated error messages for display and logging
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+{\bfseries{Files Modified}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{axe_8py}{axe.\+py}} -\/ Enhanced API exception handler in main collaboration loop
+\end{DoxyItemize}
+
+{\bfseries{Tests Added}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{test__token__error__handling_8py}{test\+\_\+token\+\_\+error\+\_\+handling.\+py}} -\/ Tests for detection, tracking, and recovery
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_BUG__FIX__SUMMARY_autotoc_md202}{}\doxysubsection{\texorpdfstring{Bug 4\+: Double Execution Bug ✅}{Bug 4\+: Double Execution Bug ✅}}\label{md_BUG__FIX__SUMMARY_autotoc_md202}
+{\bfseries{Problem}}\+: Commands could be executed twice, wasting tokens and potentially causing issues like duplicate database inserts or double file writes with truncation.
+
+{\bfseries{Root Cause}}\+: Both {\ttfamily parse\+\_\+all\+\_\+tool\+\_\+formats()} in \doxylink{xml__tool__parser_8py}{xml\+\_\+tool\+\_\+parser.\+py} and {\ttfamily Response\+Processor.\+process\+\_\+response()} in \doxylink{axe_8py}{axe.\+py} were processing native \`{}\`{}\`{}\+READ/\+WRITE/\+EXEC blocks, causing duplicate execution.
+
+{\bfseries{Fix}}\+: The fix was already implemented in a previous PR\+:
+\begin{DoxyItemize}
+\item {\ttfamily parse\+\_\+axe\+\_\+native\+\_\+blocks()} call is commented out in {\ttfamily parse\+\_\+all\+\_\+tool\+\_\+formats()}
+\item Native blocks are ONLY processed by {\ttfamily Response\+Processor.\+process\+\_\+response()}
+\item This ensures each command executes exactly once
+\end{DoxyItemize}
+
+{\bfseries{Verification}}\+:
+\begin{DoxyItemize}
+\item Added comprehensive tests to verify the fix
+\item Documented the fix with clear comments in code
+\item Created integration tests to confirm single execution
+\end{DoxyItemize}
+
+{\bfseries{Files Verified}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{xml__tool__parser_8py}{utils/xml\+\_\+tool\+\_\+parser.\+py}} -\/ Verified parse\+\_\+axe\+\_\+native\+\_\+blocks() is commented out
+\item {\ttfamily \doxylink{axe_8py}{axe.\+py}} -\/ Verified Response\+Processor handles native blocks correctly
+\end{DoxyItemize}
+
+{\bfseries{Tests Added}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{test__double__execution_8py}{test\+\_\+double\+\_\+execution.\+py}} -\/ Tests to verify and document the fix
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_BUG__FIX__SUMMARY_autotoc_md204}{}\doxysection{\texorpdfstring{Test Results}{Test Results}}\label{md_BUG__FIX__SUMMARY_autotoc_md204}
+All tests pass successfully\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{✅\ test\_xml\_new\_formats.py\ -\/\ 6/6\ tests\ passed}
+\DoxyCodeLine{✅\ test\_spawned\_agents.py\ -\/\ 4/4\ tests\ passed\ \ }
+\DoxyCodeLine{✅\ test\_token\_error\_handling.py\ -\/\ 8/8\ tests\ passed}
+\DoxyCodeLine{✅\ test\_double\_execution.py\ -\/\ 7/7\ tests\ passed}
+\DoxyCodeLine{✅\ test\_xml\_tool\_parser.py\ -\/\ All\ existing\ tests\ still\ pass}
+
+\end{DoxyCode}
+\hypertarget{md_BUG__FIX__SUMMARY_autotoc_md205}{}\doxysection{\texorpdfstring{Impact}{Impact}}\label{md_BUG__FIX__SUMMARY_autotoc_md205}
+These fixes enable\+:
+\begin{DoxyEnumerate}
+\item {\bfseries{Functional File Operations}}\+: Agents can now successfully create, read, and modify files using their preferred XML syntax
+\item {\bfseries{Dynamic Team Scaling}}\+: Supervisors can spawn new agents that properly participate in collaboration
+\item {\bfseries{Resilient Operations}}\+: Token limit errors are gracefully handled without crashing the session
+\item {\bfseries{Reliable Execution}}\+: Commands execute exactly once, preventing data corruption and wasted resources
+\end{DoxyEnumerate}\hypertarget{md_BUG__FIX__SUMMARY_autotoc_md206}{}\doxysection{\texorpdfstring{Backward Compatibility}{Backward Compatibility}}\label{md_BUG__FIX__SUMMARY_autotoc_md206}
+All changes are backward compatible\+:
+\begin{DoxyItemize}
+\item Existing XML formats ({\ttfamily \texorpdfstring{$<$}{<}read\+\_\+file\texorpdfstring{$>$}{>}}, {\ttfamily \texorpdfstring{$<$}{<}shell\texorpdfstring{$>$}{>}}, {\ttfamily \texorpdfstring{$<$}{<}write\+\_\+file path="{}"{}\texorpdfstring{$>$}{>}}) continue to work
+\item Static agent configuration unchanged
+\item Non-\/token API errors handled as before
+\item Native markdown blocks ({\ttfamily READ, }EXEC, \`{}\`{}\`{}\+WRITE) work as expected
+\end{DoxyItemize}\hypertarget{md_BUG__FIX__SUMMARY_autotoc_md207}{}\doxysection{\texorpdfstring{Files Changed}{Files Changed}}\label{md_BUG__FIX__SUMMARY_autotoc_md207}
+
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{xml__tool__parser_8py}{utils/xml\+\_\+tool\+\_\+parser.\+py}} -\/ Added new XML tag format support
+\item {\ttfamily \doxylink{axe_8py}{axe.\+py}} -\/ Fixed spawned agent registration and token error handling
+\item {\ttfamily \doxylink{test__xml__new__formats_8py}{test\+\_\+xml\+\_\+new\+\_\+formats.\+py}} -\/ New test file
+\item {\ttfamily \doxylink{test__spawned__agents_8py}{test\+\_\+spawned\+\_\+agents.\+py}} -\/ New test file
+\item {\ttfamily \doxylink{test__token__error__handling_8py}{test\+\_\+token\+\_\+error\+\_\+handling.\+py}} -\/ New test file
+\item {\ttfamily \doxylink{test__double__execution_8py}{test\+\_\+double\+\_\+execution.\+py}} -\/ New test file
+\end{DoxyItemize}\hypertarget{md_BUG__FIX__SUMMARY_autotoc_md208}{}\doxysection{\texorpdfstring{Future Enhancements}{Future Enhancements}}\label{md_BUG__FIX__SUMMARY_autotoc_md208}
+Potential improvements for future PRs\+:
+\begin{DoxyEnumerate}
+\item Retry logic with exponential backoff for token errors
+\item Automatic context window reduction on token errors
+\item More sophisticated agent replacement strategies
+\item Metrics dashboard for agent error rates
+\item Context window usage monitoring 
+\end{DoxyEnumerate}

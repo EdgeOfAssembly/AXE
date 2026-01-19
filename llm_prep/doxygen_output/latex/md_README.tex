@@ -1,0 +1,1615 @@
+\chapter{AXE -\/ Agent e\+Xecution Engine }
+\hypertarget{md_README}{}\label{md_README}\index{AXE -\/ Agent eXecution Engine@{AXE -\/ Agent eXecution Engine}}
+\label{md_README_autotoc_md863}%
+\Hypertarget{md_README_autotoc_md863}%
+
+
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \_\_\_\ \ \ \_\ \ \_\_\ \_\_\_\_}
+\DoxyCodeLine{\ \ /\ \_\ |\ |\ |/\_//\ \_\_/}
+\DoxyCodeLine{\ /\ \_\_\ |\_>\ \ <\ /\ \_/\ \ }
+\DoxyCodeLine{/\_/\ |\_/\_/|\_|/\_\_\_/\ \ }
+
+\end{DoxyCode}
+
+
+{\bfseries{Terminal-\/based multiagent coding assistant for C, C++, Python, and reverse-\/engineering}}
+
+\hypertarget{md_README_autotoc_md864}{}\doxysection{\texorpdfstring{Table of Contents}{Table of Contents}}\label{md_README_autotoc_md864}
+
+\begin{DoxyItemize}
+\item Overview
+\item Features
+\item Quick Start
+\item Installation
+\item Configuration
+\item API Providers
+\item Usage Examples
+\item Chat Commands Reference
+\item Agent Reference
+\item Tool Whitelist
+\item Advanced Usage
+\item Multi-\/\+Agent Collaboration
+\item Analysis Tools
+\begin{DoxyItemize}
+\item llmprep -\/ Codebase Preparation
+\item build\+\_\+analyzer -\/ Build System Detection
+\end{DoxyItemize}
+\item Workshop -\/ Dynamic Analysis Tools
+\item Troubleshooting
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md866}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_README_autotoc_md866}
+AXE (Agent e\+Xecution Engine) is a powerful terminal-\/based multiagent system designed for\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Coding Tasks}}\+: C, C++, Python development with multiple AI assistants
+\item {\bfseries{Reverse Engineering}}\+: Analysis of DOS-\/era binaries, WAD files, executables
+\item {\bfseries{Code Review}}\+: Security auditing and code quality analysis
+\item {\bfseries{Multi-\/\+Provider Support}}\+: Use Claude, GPT, Llama, Grok, and Git\+Hub Copilot in one interface
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md867}{}\doxysubsection{\texorpdfstring{Why AXE?}{Why AXE?}}\label{md_README_autotoc_md867}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Unified Interface}}\+: Talk to multiple AI models through one terminal interface
+\item {\bfseries{Tool Integration}}\+: Execute whitelisted commands (hexdump, objdump, gdb, etc.)
+\item {\bfseries{Context-\/\+Aware}}\+: Automatically provides project context to agents
+\item {\bfseries{Safe Execution}}\+: Command whitelist and directory access control
+\item {\bfseries{Flexible Config}}\+: YAML/\+JSON configuration for easy customization
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md869}{}\doxysection{\texorpdfstring{Features}{Features}}\label{md_README_autotoc_md869}
+\hypertarget{md_README_autotoc_md870}{}\doxysubsection{\texorpdfstring{Note on Whistleblower Feature}{Note on Whistleblower Feature}}\label{md_README_autotoc_md870}
+The "{}whistleblower"{} mechanism – which allows worker agents to send GPG-\/encrypted reports or files to a local mailbox directory accessible only by other worker agents and the human user (not supervisor agents) – is currently an unfinished stub. It\textquotesingle{}s planned for enhanced privacy and secure agent-\/to-\/human communication in multi-\/agent setups, but not yet implemented or functional yet.\hypertarget{md_README_autotoc_md871}{}\doxysubsection{\texorpdfstring{Multi-\/\+Provider AI Support}{Multi-\/\+Provider AI Support}}\label{md_README_autotoc_md871}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Provider  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Models  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Status  \\
+{\bfseries{Anthropic}}  &Claude 3.\+5 Sonnet, Claude Opus  &✓ Supported  \\
+{\bfseries{Open\+AI}}  &GPT-\/4o, GPT-\/4 Turbo  &✓ Supported  \\
+{\bfseries{Hugging\+Face}}  &Llama 3.\+1 70B, Llama 4 Maverick  &✓ Supported (Free Tier)  \\
+{\bfseries{x\+AI}}  &Grok 4, Grok Code  &✓ Supported  \\
+{\bfseries{Git\+Hub}}  &GPT-\/4o via Git\+Hub Models  &✓ Supported (Free with Copilot)  \\
+\end{DoxyTable}
+\hypertarget{md_README_autotoc_md872}{}\doxysubsection{\texorpdfstring{Integrated Tools}{Integrated Tools}}\label{md_README_autotoc_md872}
+
+\begin{DoxyItemize}
+\item {\bfseries{Disassembly}}\+: ndisasm, objdump, hexdump, readelf, nm, strings
+\item {\bfseries{Debugging}}\+: gdb, lldb, strace, ltrace, valgrind
+\item {\bfseries{Building}}\+: make, cmake, gcc, g++, clang, nasm
+\item {\bfseries{Analysis}}\+: cppcheck, clang-\/format, clang-\/tidy, pylint, mypy
+\item {\bfseries{Emulation}}\+: dosbox-\/x, xvfb-\/run
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md874}{}\doxysection{\texorpdfstring{Quick Start}{Quick Start}}\label{md_README_autotoc_md874}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ 1.\ Navigate\ to\ multiagent\ directory}
+\DoxyCodeLine{cd\ multiagent}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ 2.\ Install\ dependencies}
+\DoxyCodeLine{pip\ install\ openai\ anthropic\ huggingface\_hub\ pyyaml\ gitpython}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ 3.\ Set\ up\ at\ least\ one\ API\ key}
+\DoxyCodeLine{export\ HUGGINGFACE\_API\_KEY="{}your\_key\_here"{}\ \ \#\ Free\ tier\ available}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ 4.\ Run\ interactive\ mode}
+\DoxyCodeLine{python\ axe.py}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ 5.\ Talk\ to\ an\ agent!}
+\DoxyCodeLine{\#\ axe>\ @llama\ explain\ what\ a\ WAD\ file\ format\ is}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md876}{}\doxysection{\texorpdfstring{Installation}{Installation}}\label{md_README_autotoc_md876}
+\hypertarget{md_README_autotoc_md877}{}\doxysubsection{\texorpdfstring{Prerequisites}{Prerequisites}}\label{md_README_autotoc_md877}
+
+\begin{DoxyItemize}
+\item Python 3.\+8+
+\item pip package manager
+\item Git (optional, for git features)
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md878}{}\doxysubsection{\texorpdfstring{Install Dependencies}{Install Dependencies}}\label{md_README_autotoc_md878}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Core\ dependencies}
+\DoxyCodeLine{pip\ install\ openai\ anthropic\ huggingface\_hub\ pyyaml\ gitpython}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Optional:\ readline\ for\ better\ terminal\ experience}
+\DoxyCodeLine{pip\ install\ readline\ \ \#\ Linux/macOS}
+\DoxyCodeLine{pip\ install\ pyreadline3\ \ \#\ Windows}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md879}{}\doxysubsection{\texorpdfstring{Clone and Setup}{Clone and Setup}}\label{md_README_autotoc_md879}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/EdgeOfAssembly/RetroCodeMess.git}
+\DoxyCodeLine{cd\ RetroCodeMess/multiagent}
+\DoxyCodeLine{chmod\ +x\ axe.py}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md881}{}\doxysection{\texorpdfstring{Configuration}{Configuration}}\label{md_README_autotoc_md881}
+\hypertarget{md_README_autotoc_md882}{}\doxysubsection{\texorpdfstring{API Keys Setup}{API Keys Setup}}\label{md_README_autotoc_md882}
+Set environment variables for the providers you want to use\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Add\ to\ your\ \string~/.bashrc,\ \string~/.zshrc,\ or\ shell\ config}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Anthropic\ (Claude)}
+\DoxyCodeLine{export\ ANTHROPIC\_API\_KEY='sk-\/ant-\/...'}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ OpenAI\ (GPT)}
+\DoxyCodeLine{export\ OPENAI\_API\_KEY='sk-\/proj-\/...'}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ HuggingFace\ (Llama)\ -\/\ Free\ tier\ available!}
+\DoxyCodeLine{export\ HUGGINGFACE\_API\_KEY='hf\_...'}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ xAI\ (Grok)}
+\DoxyCodeLine{export\ XAI\_API\_KEY='xai-\/...'}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ GitHub\ Models\ (uses\ GitHub\ PAT)}
+\DoxyCodeLine{export\ GITHUB\_TOKEN='github\_pat\_...'}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md883}{}\doxysubsection{\texorpdfstring{Configuration File (axe.\+yaml)}{Configuration File (axe.\+yaml)}}\label{md_README_autotoc_md883}
+Generate a sample configuration\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python\ axe.py\ -\/-\/init}
+
+\end{DoxyCode}
+
+
+This creates {\ttfamily axe.\+yaml} with default settings. Edit to customize\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{version:\ "{}1.0"{}}
+\DoxyCodeLine{project\_dir:\ "{}."{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{providers:}
+\DoxyCodeLine{\ \ anthropic:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ env\_key:\ ANTHROPIC\_API\_KEY}
+\DoxyCodeLine{\ \ \ \ models:}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ claude-\/3-\/5-\/sonnet-\/20241022}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ claude-\/3-\/opus-\/20240229}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ openai:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ env\_key:\ OPENAI\_API\_KEY}
+\DoxyCodeLine{\ \ \ \ models:}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ gpt-\/4o}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ gpt-\/4-\/turbo}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ huggingface:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ env\_key:\ HUGGINGFACE\_API\_KEY}
+\DoxyCodeLine{\ \ \ \ models:}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ meta-\/llama/Llama-\/3.1-\/70B-\/Instruct}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ meta-\/llama/Llama-\/4-\/Maverick-\/17B-\/128E-\/Instruct}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ xai:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ env\_key:\ XAI\_API\_KEY}
+\DoxyCodeLine{\ \ \ \ base\_url:\ https://api.x.ai/v1}
+\DoxyCodeLine{\ \ \ \ models:}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ grok-\/4-\/1-\/fast}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ grok-\/code-\/fast}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ github:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ env\_key:\ GITHUB\_TOKEN}
+\DoxyCodeLine{\ \ \ \ base\_url:\ https://models.github.ai/inference}
+\DoxyCodeLine{\ \ \ \ models:}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ openai/gpt-\/4o}
+\DoxyCodeLine{\ \ \ \ \ \ -\/\ claude-\/opus-\/4-\/5}
+\DoxyCodeLine{}
+\DoxyCodeLine{agents:}
+\DoxyCodeLine{\ \ gpt:}
+\DoxyCodeLine{\ \ \ \ alias:\ [g,\ openai]}
+\DoxyCodeLine{\ \ \ \ provider:\ openai}
+\DoxyCodeLine{\ \ \ \ model:\ gpt-\/4o}
+\DoxyCodeLine{\ \ \ \ role:\ General-\/purpose\ coder\ and\ architect}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ claude:}
+\DoxyCodeLine{\ \ \ \ alias:\ [c,\ anthropic]}
+\DoxyCodeLine{\ \ \ \ provider:\ anthropic}
+\DoxyCodeLine{\ \ \ \ model:\ claude-\/3-\/5-\/sonnet-\/20241022}
+\DoxyCodeLine{\ \ \ \ role:\ Code\ reviewer\ and\ security\ auditor}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ llama:}
+\DoxyCodeLine{\ \ \ \ alias:\ [l,\ hf]}
+\DoxyCodeLine{\ \ \ \ provider:\ huggingface}
+\DoxyCodeLine{\ \ \ \ model:\ meta-\/llama/Llama-\/3.1-\/70B-\/Instruct}
+\DoxyCodeLine{\ \ \ \ role:\ Open-\/source\ hacker\ and\ assembly\ expert}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ grok:}
+\DoxyCodeLine{\ \ \ \ alias:\ [x,\ xai]}
+\DoxyCodeLine{\ \ \ \ provider:\ xai}
+\DoxyCodeLine{\ \ \ \ model:\ grok-\/code-\/fast}
+\DoxyCodeLine{\ \ \ \ role:\ Creative\ problem\ solver}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ copilot:}
+\DoxyCodeLine{\ \ \ \ alias:\ [cp,\ gh]}
+\DoxyCodeLine{\ \ \ \ provider:\ github}
+\DoxyCodeLine{\ \ \ \ model:\ openai/gpt-\/4o}
+\DoxyCodeLine{\ \ \ \ role:\ GitHub-\/integrated\ assistant}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md885}{}\doxysection{\texorpdfstring{API Providers}{API Providers}}\label{md_README_autotoc_md885}
+\hypertarget{md_README_autotoc_md886}{}\doxysubsection{\texorpdfstring{Hugging\+Face (Llama) -\/ Free Tier Available!}{Hugging\+Face (Llama) -\/ Free Tier Available!}}\label{md_README_autotoc_md886}
+Hugging\+Face offers free inference for many models including Llama.
+
+{\bfseries{Latest Models\+:}} 
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Context  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Best For  \\
+{\ttfamily meta-\/llama/\+Llama-\/4-\/\+Maverick-\/17\+B-\/128\+E-\/\+Instruct}  &128K  &General, Coding, Vision  \\
+{\ttfamily meta-\/llama/\+Llama-\/3.\+1-\/405B-\/\+Instruct}  &128K  &Complex reasoning  \\
+{\ttfamily meta-\/llama/\+Llama-\/3.\+1-\/70B-\/\+Instruct}  &128K  &Balanced performance  \\
+\end{DoxyTable}
+
+
+{\bfseries{Setup\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ 1.\ Create\ HuggingFace\ account\ at\ huggingface.co}
+\DoxyCodeLine{\#\ 2.\ Generate\ API\ token\ in\ settings}
+\DoxyCodeLine{\#\ 3.\ Request\ access\ to\ Llama\ models\ (usually\ auto-\/approved)}
+\DoxyCodeLine{export\ HUGGINGFACE\_API\_KEY="{}hf\_..."{}}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md887}{}\doxysubsection{\texorpdfstring{Git\+Hub Models -\/ Free with Copilot}{Git\+Hub Models -\/ Free with Copilot}}\label{md_README_autotoc_md887}
+If you have Git\+Hub Copilot subscription, you can access models for free.
+
+{\bfseries{Available Models\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily openai/gpt-\/4o}
+\item {\ttfamily openai/gpt-\/4o-\/mini}
+\item {\ttfamily claude-\/opus-\/4-\/5}
+\item {\ttfamily gpt-\/5.\+1}
+\end{DoxyItemize}
+
+{\bfseries{Setup\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ 1.\ Create\ a\ GitHub\ Personal\ Access\ Token}
+\DoxyCodeLine{\#\ 2.\ Grant\ 'models:read'\ permission}
+\DoxyCodeLine{export\ GITHUB\_TOKEN="{}github\_pat\_..."{}}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md888}{}\doxysubsection{\texorpdfstring{x\+AI (Grok)}{x\+AI (Grok)}}\label{md_README_autotoc_md888}
+{\bfseries{Latest Models\+:}} 
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Model  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Context  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Input  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Capabilities  \\
+{\ttfamily grok-\/4-\/1-\/fast}  &2M tokens  &text  &Function calling  \\
+{\ttfamily grok-\/code-\/fast}  &256K  &text  &Specialized for coding  \\
+{\ttfamily grok-\/2-\/vision}  &32K  &image/text  &Image understanding  \\
+{\ttfamily grok-\/2-\/image}  &-\/  &text  &Image generation  \\
+\end{DoxyTable}
+\hypertarget{md_README_autotoc_md889}{}\doxysubsection{\texorpdfstring{Anthropic (Claude)}{Anthropic (Claude)}}\label{md_README_autotoc_md889}
+{\bfseries{Top Models\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily claude-\/opus-\/4-\/5} -\/ Latest and most capable
+\item {\ttfamily claude-\/3-\/5-\/sonnet-\/20241022} -\/ Best balance
+\item {\ttfamily claude-\/3-\/opus-\/20240229} -\/ Deep reasoning
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md890}{}\doxysubsection{\texorpdfstring{Open\+AI (GPT)}{Open\+AI (GPT)}}\label{md_README_autotoc_md890}
+{\bfseries{Top Models\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily gpt-\/5.\+2-\/2025-\/12-\/11} -\/ Latest
+\item {\ttfamily gpt-\/4o} -\/ Multimodal, fast
+\item {\ttfamily gpt-\/4-\/turbo} -\/ Long documents
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md892}{}\doxysection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{md_README_autotoc_md892}
+\hypertarget{md_README_autotoc_md893}{}\doxysubsection{\texorpdfstring{Interactive Mode}{Interactive Mode}}\label{md_README_autotoc_md893}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Start\ AXE}
+\DoxyCodeLine{python\ axe.py}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ You'll\ see:}
+\DoxyCodeLine{\#\ \ \ \ \_\_\_\ \ \ \_\ \ \_\_\ \_\_\_\_}
+\DoxyCodeLine{\#\ \ \ /\ \_\ |\ |\ |/\_//\ \_\_/}
+\DoxyCodeLine{\#\ \ /\ \_\_\ |\_>\ \ <\ /\ \_/\ \ }
+\DoxyCodeLine{\#\ /\_/\ |\_/\_/|\_|/\_\_\_/\ \ }
+\DoxyCodeLine{\#\ Agent\ eXecution\ Engine\ v1.0}
+\DoxyCodeLine{\#\ Type\ /help\ for\ commands,\ @agent\ to\ address\ agents}
+\DoxyCodeLine{\#}
+\DoxyCodeLine{\#\ axe>}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md894}{}\doxysubsection{\texorpdfstring{Basic Agent Conversations}{Basic Agent Conversations}}\label{md_README_autotoc_md894}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Ask\ Claude\ to\ review\ code}
+\DoxyCodeLine{axe>\ @claude\ review\ main.c\ for\ security\ issues}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Ask\ GPT\ to\ write\ a\ function}
+\DoxyCodeLine{axe>\ @gpt\ write\ a\ C\ function\ to\ parse\ WAD\ file\ headers}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Ask\ Llama\ about\ assembly}
+\DoxyCodeLine{axe>\ @llama\ explain\ x86\ calling\ conventions\ for\ DOS\ programs}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Ask\ Grok\ for\ creative\ solutions}
+\DoxyCodeLine{axe>\ @grok\ brainstorm\ ways\ to\ optimize\ this\ game\ loop}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Use\ aliases\ for\ speed}
+\DoxyCodeLine{axe>\ @c\ review\ this\ \ \ \ \#\ @c\ =\ @claude}
+\DoxyCodeLine{axe>\ @g\ write\ code\ \ \ \ \ \#\ @g\ =\ @gpt}
+\DoxyCodeLine{axe>\ @l\ disasm\ help\ \ \ \ \#\ @l\ =\ @llama}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md895}{}\doxysubsection{\texorpdfstring{Single Command Mode}{Single Command Mode}}\label{md_README_autotoc_md895}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Quick\ one-\/liner\ queries}
+\DoxyCodeLine{python\ axe.py\ -\/c\ "{}@llama\ what\ is\ the\ DOS\ interrupt\ 21h?"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Code\ review}
+\DoxyCodeLine{python\ axe.py\ -\/c\ "{}@claude\ analyze\ security\ of\ wadextract.c"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Get\ coding\ help}
+\DoxyCodeLine{python\ axe.py\ -\/c\ "{}@gpt\ write\ a\ Makefile\ for\ this\ project"{}}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md896}{}\doxysubsection{\texorpdfstring{Working with Files}{Working with Files}}\label{md_README_autotoc_md896}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ List\ code\ files\ in\ project}
+\DoxyCodeLine{axe>\ /files}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Read\ a\ specific\ file}
+\DoxyCodeLine{axe>\ /read\ wadextract.c}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Get\ project\ context}
+\DoxyCodeLine{axe>\ /context}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Then\ ask\ agent\ about\ the\ code}
+\DoxyCodeLine{axe>\ @claude\ review\ the\ wadextract.c\ file\ I\ just\ read}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md897}{}\doxysubsection{\texorpdfstring{Executing Tools}{Executing Tools}}\label{md_README_autotoc_md897}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Hexdump\ a\ binary}
+\DoxyCodeLine{axe>\ /exec\ hexdump\ -\/C\ game.exe\ |\ head\ -\/20}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Disassemble}
+\DoxyCodeLine{axe>\ /exec\ objdump\ -\/d\ program}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Run\ analysis}
+\DoxyCodeLine{axe>\ /exec\ cppcheck\ -\/-\/enable=all\ src/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Compile\ code}
+\DoxyCodeLine{axe>\ /exec\ gcc\ -\/o\ test\ main.c\ -\/lm}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md898}{}\doxysubsection{\texorpdfstring{Real-\/\+World Example\+: Reverse Engineering a WAD File}{Real-\/\+World Example\+: Reverse Engineering a WAD File}}\label{md_README_autotoc_md898}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Start\ AXE\ in\ the\ wadextract\ directory}
+\DoxyCodeLine{cd\ doom/wadextract}
+\DoxyCodeLine{python\ ../../multiagent/axe.py}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Step\ 1:\ Get\ overview}
+\DoxyCodeLine{axe>\ /files}
+\DoxyCodeLine{axe>\ /context}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Step\ 2:\ Ask\ Llama\ about\ WAD\ format}
+\DoxyCodeLine{axe>\ @llama\ explain\ the\ DOOM\ WAD\ file\ format\ structure}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Step\ 3:\ Examine\ binary}
+\DoxyCodeLine{axe>\ /exec\ hexdump\ -\/C\ DOOM.WAD\ |\ head\ -\/50}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Step\ 4:\ Ask\ Claude\ to\ review\ extractor\ code}
+\DoxyCodeLine{axe>\ /read\ wadextract.c}
+\DoxyCodeLine{axe>\ @claude\ review\ this\ WAD\ extractor\ for\ bugs\ and\ improvements}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Step\ 5:\ Ask\ GPT\ to\ optimize}
+\DoxyCodeLine{axe>\ @gpt\ suggest\ optimizations\ for\ the\ lump\ parsing\ code}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md899}{}\doxysubsection{\texorpdfstring{Example\+: Multi-\/\+Agent Code Analysis}{Example\+: Multi-\/\+Agent Code Analysis}}\label{md_README_autotoc_md899}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Have\ different\ agents\ analyze\ the\ same\ code}
+\DoxyCodeLine{axe>\ /read\ main.c}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Security\ review\ from\ Claude}
+\DoxyCodeLine{axe>\ @claude\ analyze\ main.c\ for\ buffer\ overflows\ and\ security\ issues}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Architecture\ review\ from\ GPT}
+\DoxyCodeLine{axe>\ @gpt\ review\ the\ overall\ structure\ and\ suggest\ improvements}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Low-\/level\ analysis\ from\ Llama}
+\DoxyCodeLine{axe>\ @llama\ check\ for\ DOS\ compatibility\ issues\ in\ this\ code}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md901}{}\doxysection{\texorpdfstring{Chat Commands Reference}{Chat Commands Reference}}\label{md_README_autotoc_md901}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Command  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Description  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Example  \\
+{\ttfamily @\texorpdfstring{$<$}{<}agent\texorpdfstring{$>$}{>} \texorpdfstring{$<$}{<}task\texorpdfstring{$>$}{>}}  &Send task to agent  &{\ttfamily @gpt write hello world}  \\
+{\ttfamily /agents}  &List available agents  &{\ttfamily /agents}  \\
+{\ttfamily /tools}  &List available tools  &{\ttfamily /tools}  \\
+{\ttfamily /dirs}  &Show directory permissions  &{\ttfamily /dirs}  \\
+{\ttfamily /config}  &Show current configuration  &{\ttfamily /config}  \\
+{\ttfamily /files}  &List project code files  &{\ttfamily /files}  \\
+{\ttfamily /context}  &Show project context  &{\ttfamily /context}  \\
+{\ttfamily /read \texorpdfstring{$<$}{<}file\texorpdfstring{$>$}{>}}  &Read file content  &{\ttfamily /read main.\+c}  \\
+{\ttfamily /exec \texorpdfstring{$<$}{<}cmd\texorpdfstring{$>$}{>}}  &Execute whitelisted command  &{\ttfamily /exec make build}  \\
+{\ttfamily /history}  &Show chat history  &{\ttfamily /history}  \\
+{\ttfamily /clear}  &Clear chat history  &{\ttfamily /clear}  \\
+{\ttfamily /save}  &Save current config  &{\ttfamily /save}  \\
+{\ttfamily /stats \mbox{[}agent\mbox{]}}  &Show token usage and cost estimates  &{\ttfamily /stats} or {\ttfamily /stats gpt}  \\
+{\ttfamily /tokenopt-\/stats}  &Show token optimization statistics  &{\ttfamily /tokenopt-\/stats}  \\
+{\ttfamily /session save \texorpdfstring{$<$}{<}name\texorpdfstring{$>$}{>}}  &Save current session  &{\ttfamily /session save my-\/session}  \\
+{\ttfamily /session load \texorpdfstring{$<$}{<}name\texorpdfstring{$>$}{>}}  &Load a saved session  &{\ttfamily /session load my-\/session}  \\
+{\ttfamily /session list}  &List all saved sessions  &{\ttfamily /session list}  \\
+{\ttfamily /prep \mbox{[}dir\mbox{]}}  &Generate codebase context  &{\ttfamily /prep} or {\ttfamily /prep src/}  \\
+{\ttfamily /buildinfo \texorpdfstring{$<$}{<}path\texorpdfstring{$>$}{>}}  &Analyze build system  &{\ttfamily /buildinfo .}  \\
+{\ttfamily /workshop \texorpdfstring{$<$}{<}tool\texorpdfstring{$>$}{>} \texorpdfstring{$<$}{<}args\texorpdfstring{$>$}{>}}  &Run workshop tool  &{\ttfamily /workshop chisel binary}  \\
+{\ttfamily /workshop status}  &Check workshop tool availability  &{\ttfamily /workshop status}  \\
+{\ttfamily /workshop help \mbox{[}tool\mbox{]}}  &Get detailed workshop help  &{\ttfamily /workshop help chisel}  \\
+{\ttfamily /collab \texorpdfstring{$<$}{<}agents\texorpdfstring{$>$}{>} \texorpdfstring{$<$}{<}ws\texorpdfstring{$>$}{>} \texorpdfstring{$<$}{<}time\texorpdfstring{$>$}{>} \texorpdfstring{$<$}{<}task\texorpdfstring{$>$}{>}}  &Start collaborative session  &{\ttfamily /collab llama,copilot . 30 "{}Review code"{}}  \\
+{\ttfamily /help}  &Show help  &{\ttfamily /help}  \\
+{\ttfamily /quit}  &Exit  &{\ttfamily /quit}  \\
+\end{DoxyTable}
+\hypertarget{md_README_autotoc_md902}{}\doxysubsection{\texorpdfstring{Token Usage Commands (NEW!)}{Token Usage Commands (NEW!)}}\label{md_README_autotoc_md902}
+Track token consumption and costs across your session\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ View\ overall\ token\ statistics}
+\DoxyCodeLine{axe>\ /stats}
+\DoxyCodeLine{\#\ Output:}
+\DoxyCodeLine{\#\ ╔══════════════════\ TOKEN\ USAGE\ STATS\ ══════════════════╗}
+\DoxyCodeLine{\#\ \ \ Session\ Total:\ 15,234\ tokens\ (est.\ cost:\ \$0.23)}
+\DoxyCodeLine{\#\ \ \ Per-\/agent\ breakdown:}
+\DoxyCodeLine{\#\ \ \ \ \ claude:\ \ 6,234\ tokens\ (\$0.12)\ -\/\ 12\ messages}
+\DoxyCodeLine{\#\ \ \ \ \ gpt:\ \ \ \ \ 5,890\ tokens\ (\$0.08)\ -\/\ 8\ messages}
+\DoxyCodeLine{\#\ \ \ \ \ llama:\ \ \ 3,110\ tokens\ (\$0.03)\ -\/\ 6\ messages}
+\DoxyCodeLine{\#\ ╚════════════════════════════════════════════════════════╝}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ View\ statistics\ for\ specific\ agent}
+\DoxyCodeLine{axe>\ /stats\ claude}
+
+\end{DoxyCode}
+
+
+{\bfseries{Features\+:}}
+\begin{DoxyItemize}
+\item Tracks input and output tokens separately
+\item Estimates costs based on current API pricing
+\item Shows average tokens per message
+\item Supports all configured agents
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md903}{}\doxysubsection{\texorpdfstring{Session Management (NEW!)}{Session Management (NEW!)}}\label{md_README_autotoc_md903}
+Save and resume your work sessions\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Save\ current\ session}
+\DoxyCodeLine{axe>\ /session\ save\ wadextract-\/review}
+\DoxyCodeLine{\#\ Output:\ ✓\ Session\ saved\ as:\ wadextract-\/review}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ List\ saved\ sessions}
+\DoxyCodeLine{axe>\ /session\ list}
+\DoxyCodeLine{\#\ Output:}
+\DoxyCodeLine{\#\ Saved\ Sessions:}
+\DoxyCodeLine{\#\ ═══════════════════════════════════════════════════════}
+\DoxyCodeLine{\#}
+\DoxyCodeLine{\#\ \ \ wadextract-\/review}
+\DoxyCodeLine{\#\ \ \ \ \ Saved:\ 2026-\/01-\/04T14:30:00}
+\DoxyCodeLine{\#\ \ \ \ \ Workspace:\ /home/user/projects/doom}
+\DoxyCodeLine{\#\ \ \ \ \ Agents:\ claude,\ gpt,\ llama}
+\DoxyCodeLine{\#\ \ \ \ \ Size:\ 15234\ bytes}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Load\ a\ session}
+\DoxyCodeLine{axe>\ /session\ load\ wadextract-\/review}
+\DoxyCodeLine{\#\ Output:\ ✓\ Session\ loaded:\ wadextract-\/review}
+
+\end{DoxyCode}
+
+
+{\bfseries{Features\+:}}
+\begin{DoxyItemize}
+\item Saves full conversation history
+\item Includes workspace path and agent list
+\item Stores token usage metadata
+\item Sessions persist across restarts
+\item Stored in {\ttfamily .axe\+\_\+sessions/} directory
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md904}{}\doxysubsection{\texorpdfstring{Workshop Commands (EXPANDED!)}{Workshop Commands (EXPANDED!)}}\label{md_README_autotoc_md904}
+Dynamic analysis tools for security and reverse engineering\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Check\ tool\ availability\ and\ dependencies}
+\DoxyCodeLine{axe>\ /workshop\ status}
+\DoxyCodeLine{\#\ Output:}
+\DoxyCodeLine{\#\ ╔════════════════\ WORKSHOP\ STATUS\ ════════════════╗}
+\DoxyCodeLine{\#\ \ \ ✓\ Chisel\ \ \ -\/\ Ready\ (angr\ 9.2.78\ installed)}
+\DoxyCodeLine{\#\ \ \ ✓\ Saw\ \ \ \ \ \ -\/\ Ready\ (built-\/in)}
+\DoxyCodeLine{\#\ \ \ ✓\ Plane\ \ \ \ -\/\ Ready\ (built-\/in)}
+\DoxyCodeLine{\#\ \ \ ✗\ Hammer\ \ \ -\/\ Missing\ dependencies}
+\DoxyCodeLine{\#}
+\DoxyCodeLine{\#\ \ \ To\ enable\ Hammer:}
+\DoxyCodeLine{\#\ \ \ \ \ pip\ install\ frida-\/python>=16.0.0\ psutil>=5.9.0}
+\DoxyCodeLine{\#\ ╚═════════════════════════════════════════════════════╝}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Get\ detailed\ help\ for\ a\ specific\ tool}
+\DoxyCodeLine{axe>\ /workshop\ help\ chisel}
+\DoxyCodeLine{\#\ Shows:\ purpose,\ usage\ examples,\ configuration\ options,\ dependencies}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Run\ workshop\ tools}
+\DoxyCodeLine{axe>\ /workshop\ chisel\ ./binary.elf\ main}
+\DoxyCodeLine{axe>\ /workshop\ saw\ "{}import\ os;\ os.system(input())"{}}
+\DoxyCodeLine{axe>\ /workshop\ plane\ /path/to/project}
+\DoxyCodeLine{axe>\ /workshop\ hammer\ process\_name}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ View\ analysis\ history}
+\DoxyCodeLine{axe>\ /workshop\ history\ chisel}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ View\ usage\ statistics}
+\DoxyCodeLine{axe>\ /workshop\ stats}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md905}{}\doxysubsection{\texorpdfstring{Build Analysis (EXPANDED!)}{Build Analysis (EXPANDED!)}}\label{md_README_autotoc_md905}
+Analyze build systems and get installation help\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Analyze\ build\ system}
+\DoxyCodeLine{axe>\ /buildinfo\ /path/to/project}
+\DoxyCodeLine{\#\ Detects:\ Autotools,\ CMake,\ Meson,\ etc.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Get\ installation\ commands\ for\ dependencies}
+\DoxyCodeLine{axe>\ /buildinfo\ /path/to/project\ -\/-\/install-\/help}
+\DoxyCodeLine{\#\ Output:}
+\DoxyCodeLine{\#\ ╔══════════════════════════════════════════════════════╗}
+\DoxyCodeLine{\#\ DEPENDENCY\ INSTALLATION\ HELPER}
+\DoxyCodeLine{\#\ ╚══════════════════════════════════════════════════════╝}
+\DoxyCodeLine{\#}
+\DoxyCodeLine{\#\ Detected:\ AUTOTOOLS\ project}
+\DoxyCodeLine{\#\ Dependencies:\ autoconf,\ automake,\ libssl-\/dev,\ zlib1g-\/dev}
+\DoxyCodeLine{\#}
+\DoxyCodeLine{\#\ Ubuntu/Debian\ (APT):}
+\DoxyCodeLine{\#\ \ \ sudo\ apt-\/get\ install\ autoconf\ automake\ libssl-\/dev\ zlib1g-\/dev}
+\DoxyCodeLine{\#}
+\DoxyCodeLine{\#\ macOS\ (Homebrew):}
+\DoxyCodeLine{\#\ \ \ brew\ install\ autoconf\ automake\ openssl\ zlib}
+
+\end{DoxyCode}
+
+
+{\bfseries{Supports\+:}}
+\begin{DoxyItemize}
+\item Ubuntu/\+Debian (apt)
+\item Fedora/\+RHEL/\+Cent\+OS (dnf/yum)
+\item Arch Linux (pacman)
+\item mac\+OS (Homebrew)
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md906}{}\doxysubsection{\texorpdfstring{Rate Limiting (NEW!)}{Rate Limiting (NEW!)}}\label{md_README_autotoc_md906}
+Automatic rate limiting prevents API quota burnout\+:
+
+{\bfseries{Configuration in {\ttfamily axe.\+yaml}\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{rate\_limits:}
+\DoxyCodeLine{\ \ enabled:\ true}
+\DoxyCodeLine{\ \ tokens\_per\_minute:\ 10000\ \ \#\ Global\ limit}
+\DoxyCodeLine{\ \ per\_agent:}
+\DoxyCodeLine{\ \ \ \ claude:\ 5000\ \ \ \ \ \ \#\ Per-\/agent\ limits}
+\DoxyCodeLine{\ \ \ \ gpt:\ 5000}
+\DoxyCodeLine{\ \ \ \ llama:\ unlimited\ \ \#\ Free\ tier}
+
+\end{DoxyCode}
+
+
+{\bfseries{Behavior\+:}}
+\begin{DoxyItemize}
+\item Sliding window token tracking (60-\/second window)
+\item Graceful warnings when approaching limits
+\item Shows time until limit resets
+\item Automatically applied before each API call
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Example\ rate\ limit\ warning:}
+\DoxyCodeLine{axe>\ @gpt\ analyze\ this\ large\ file}
+\DoxyCodeLine{⏱️\ \ Rate\ limit\ exceeded\ for\ gpt.\ Used\ 5,234\ of\ 5,000\ tokens/min.\ Limit\ resets\ in\ 42s.}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md907}{}\doxysubsection{\texorpdfstring{Token-\/\+Saving Optimizations (NEW!)}{Token-\/\+Saving Optimizations (NEW!)}}\label{md_README_autotoc_md907}
+Automatically reduce token usage by 40-\/65\% while maintaining response quality\+:
+
+{\bfseries{Configuration in {\ttfamily axe.\+yaml}\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{token\_optimization:}
+\DoxyCodeLine{\ \ enabled:\ true}
+\DoxyCodeLine{\ \ mode:\ balanced\ \ \#\ Options:\ minimal,\ balanced,\ aggressive}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Context\ window\ management}
+\DoxyCodeLine{\ \ context\_management:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ max\_context\_tokens:\ 100000\ \ \#\ Maximum\ tokens\ in\ conversation}
+\DoxyCodeLine{\ \ \ \ keep\_recent\_messages:\ 10\ \ \ \ \#\ Always\ keep\ last\ N\ messages}
+\DoxyCodeLine{\ \ \ \ summarize\_threshold:\ 0.7\ \ \ \ \#\ Summarize\ at\ 70\%\ of\ limit}
+\DoxyCodeLine{\ \ \ \ sliding\_window:\ true\ \ \ \ \ \ \ \ \#\ Use\ sliding\ window\ for\ long\ conversations}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Prompt\ compression}
+\DoxyCodeLine{\ \ prompt\_compression:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ compress\_system\_prompts:\ true\ \ \#\ Compress\ agent\ system\ prompts}
+\DoxyCodeLine{\ \ \ \ compression\_level:\ balanced\ \ \ \ \ \#\ Options:\ minimal,\ balanced,\ aggressive}
+\DoxyCodeLine{\ \ \ \ preserve\_critical:\ true\ \ \ \ \ \ \ \ \ \#\ Preserve\ critical\ directives}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Response\ optimization}
+\DoxyCodeLine{\ \ response\_optimization:}
+\DoxyCodeLine{\ \ \ \ enabled:\ true}
+\DoxyCodeLine{\ \ \ \ truncate\_code\_blocks:\ false\ \ \ \#\ DISABLED\ -\/\ We\ never\ truncate\ code}
+\DoxyCodeLine{\ \ \ \ max\_code\_lines:\ 0\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ No\ limit\ -\/\ full\ code\ preserved}
+\DoxyCodeLine{\ \ \ \ remove\_read\_blocks:\ true\ \ \ \ \ \ \#\ Remove\ [READ\ ...]\ blocks\ from\ context}
+\DoxyCodeLine{\ \ \ \ deduplicate\_content:\ true\ \ \ \ \ \#\ Remove\ duplicate\ messages}
+
+\end{DoxyCode}
+
+
+{\bfseries{Features\+:}}
+
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Optimization  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Benefit  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Typical Savings  \\
+{\bfseries{Context Summarization}}  &Condenses old messages while keeping recent ones  &50-\/70\%  \\
+{\bfseries{Prompt Compression}}  &Removes redundancy from system prompts  &63-\/78\%  \\
+{\bfseries{Full Code Preservation}}  &Code is NEVER truncated -\/ agents see full context  &N/A  \\
+{\bfseries{READ Block Removal}}  &Strips verbose file content markers  &30-\/50\%  \\
+{\bfseries{Message Deduplication}}  &Removes repeated questions/responses  &20-\/40\%  \\
+\end{DoxyTable}
+
+
+{\bfseries{Behavior\+:}}
+\begin{DoxyItemize}
+\item Automatically triggered when context reaches threshold (default\+: 70\%)
+\item Non-\/intrusive\+: disabled by default, enable via configuration
+\item Transparent\+: shows optimization events with savings statistics
+\item Configurable\+: three modes (minimal, balanced, aggressive)
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Example\ optimization\ in\ action:}
+\DoxyCodeLine{axe>\ @claude\ analyze\ this\ complex\ codebase}
+\DoxyCodeLine{⚡\ Optimizing\ context\ (85,234\ tokens\ -\/>\ 100,000\ limit)...}
+\DoxyCodeLine{✓\ Saved\ 52,147\ tokens\ (61.2\%)}
+\DoxyCodeLine{}
+\DoxyCodeLine{[claude]\ Processing...}
+
+\end{DoxyCode}
+
+
+{\bfseries{Optimization Modes\+:}}
+
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Mode  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Compression  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Use Case  \\
+{\ttfamily minimal}  &\texorpdfstring{$\sim$}{\string~}10\%  &Preserve all details, minor cleanup  \\
+{\ttfamily balanced}  &\texorpdfstring{$\sim$}{\string~}50\%  &Good balance of quality and savings (recommended)  \\
+{\ttfamily aggressive}  &\texorpdfstring{$\sim$}{\string~}70\%  &Maximum savings, some detail loss  \\
+\end{DoxyTable}
+
+
+{\bfseries{When to Use\+:}}
+\begin{DoxyItemize}
+\item Long conversations approaching context limits
+\item Budget-\/conscious API usage
+\item Repeated similar queries
+\item Large collaborative sessions
+\item Projects with extensive code snippets
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md908}{}\doxysubsubsection{\texorpdfstring{Live Statistics \& Monitoring}{Live Statistics \& Monitoring}}\label{md_README_autotoc_md908}
+Track optimization performance in real-\/time with {\ttfamily /tokenopt-\/stats}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{axe>\ /tokenopt-\/stats}
+\DoxyCodeLine{\#\ Output:}
+\DoxyCodeLine{\#\ ═══════════════════════════════════════════════════════════}
+\DoxyCodeLine{\#\ TOKEN\ OPTIMIZATION\ STATISTICS}
+\DoxyCodeLine{\#\ ═══════════════════════════════════════════════════════════}
+\DoxyCodeLine{\#\ }
+\DoxyCodeLine{\#\ Optimization\ Mode:\ balanced}
+\DoxyCodeLine{\#\ }
+\DoxyCodeLine{\#\ Overall\ Performance:}
+\DoxyCodeLine{\#\ \ \ Total\ tokens\ saved:\ 12,456}
+\DoxyCodeLine{\#\ \ \ Context\ optimizations:\ 3}
+\DoxyCodeLine{\#\ \ \ Prompt\ compressions:\ 8}
+\DoxyCodeLine{\#\ \ \ READ\ blocks\ removed:\ 2}
+\DoxyCodeLine{\#\ }
+\DoxyCodeLine{\#\ Last\ optimization\ saved:\ 2,341\ tokens}
+\DoxyCodeLine{\#\ }
+\DoxyCodeLine{\#\ Session\ Efficiency:}
+\DoxyCodeLine{\#\ \ \ Tokens\ used:\ 8,234}
+\DoxyCodeLine{\#\ \ \ Tokens\ saved:\ 12,456}
+\DoxyCodeLine{\#\ \ \ Optimization\ rate:\ 60.2\%}
+\DoxyCodeLine{\#\ \ \ (Without\ optimization,\ would\ have\ used\ 20,690\ tokens)}
+\DoxyCodeLine{\#\ ═══════════════════════════════════════════════════════════}
+
+\end{DoxyCode}
+
+
+{\bfseries{Monitored Operations\+:}}
+\begin{DoxyItemize}
+\item Context optimizations (sliding window, summarization)
+\item System prompt compressions
+\item READ block removals
+\item Total tokens saved across all operations
+\end{DoxyItemize}
+
+{\bfseries{Note\+:}} Code truncation has been disabled. Full code is always preserved to give agents maximum context for accurate analysis and generation.\hypertarget{md_README_autotoc_md909}{}\doxysubsubsection{\texorpdfstring{Compression Warnings}{Compression Warnings}}\label{md_README_autotoc_md909}
+When prompt compression is active, AXE provides clear warnings\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Aggressive\ mode\ warning\ (always\ shown)}
+\DoxyCodeLine{axe>\ @claude\ analyze\ this\ code}
+\DoxyCodeLine{⚠️\ \ Caution:\ Aggressive\ prompt\ compression\ active\ -\/\ system\ prompts\ are\ heavily\ compressed!}
+\DoxyCodeLine{}
+\DoxyCodeLine{[claude]\ Processing...}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Balanced\ mode\ notification\ (shown\ once\ per\ session)}
+\DoxyCodeLine{axe>\ @gpt\ write\ a\ function}
+\DoxyCodeLine{ℹ️\ \ Note:\ Prompt\ compression\ is\ active\ (balanced\ mode)}
+\DoxyCodeLine{}
+\DoxyCodeLine{[gpt]\ Processing...}
+
+\end{DoxyCode}
+
+
+This ensures you\textquotesingle{}re always aware when code/prompts are being optimized, helping you understand agent behavior.
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md911}{}\doxysection{\texorpdfstring{Agent Reference}{Agent Reference}}\label{md_README_autotoc_md911}
+\hypertarget{md_README_autotoc_md912}{}\doxysubsection{\texorpdfstring{Available Agents}{Available Agents}}\label{md_README_autotoc_md912}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Agent  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Aliases  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Provider  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Role  \\
+{\ttfamily gpt}  &{\ttfamily g}, {\ttfamily openai}  &Open\+AI  &General-\/purpose coder and architect  \\
+{\ttfamily claude}  &{\ttfamily c}, {\ttfamily anthropic}  &Anthropic  &Code reviewer and security auditor  \\
+{\ttfamily llama}  &{\ttfamily l}, {\ttfamily hf}  &Hugging\+Face  &Open-\/source hacker and assembly expert  \\
+{\ttfamily grok}  &{\ttfamily x}, {\ttfamily xai}  &x\+AI  &Creative problem solver  \\
+{\ttfamily copilot}  &{\ttfamily cp}, {\ttfamily gh}  &Git\+Hub  &Git\+Hub-\/integrated assistant  \\
+\end{DoxyTable}
+\hypertarget{md_README_autotoc_md913}{}\doxysubsection{\texorpdfstring{When to Use Each Agent}{When to Use Each Agent}}\label{md_README_autotoc_md913}
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Task  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Recommended Agent  \\
+Code review \& security  &{\ttfamily @claude}  \\
+Writing new code  &{\ttfamily @gpt}  \\
+Assembly \& DOS  &{\ttfamily @llama}  \\
+Brainstorming  &{\ttfamily @grok}  \\
+Git\+Hub workflows  &{\ttfamily @copilot}  \\
+Budget-\/conscious work  &{\ttfamily @llama} (free tier)  \\
+\end{DoxyTable}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md915}{}\doxysection{\texorpdfstring{Tool Whitelist}{Tool Whitelist}}\label{md_README_autotoc_md915}
+\hypertarget{md_README_autotoc_md916}{}\doxysubsection{\texorpdfstring{Disassembly \& Analysis}{Disassembly \& Analysis}}\label{md_README_autotoc_md916}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ndisasm,\ objdump,\ hexdump,\ readelf,\ nm,\ strings}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md917}{}\doxysubsection{\texorpdfstring{Debugging}{Debugging}}\label{md_README_autotoc_md917}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gdb,\ lldb,\ strace,\ ltrace,\ valgrind}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md918}{}\doxysubsection{\texorpdfstring{Building}{Building}}\label{md_README_autotoc_md918}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make,\ cmake,\ gcc,\ g++,\ clang,\ clang++,\ ld,\ ar,\ nasm,\ as}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md919}{}\doxysubsection{\texorpdfstring{Python}{Python}}\label{md_README_autotoc_md919}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python,\ python3,\ pip,\ pytest,\ pylint,\ mypy,\ black,\ flake8}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md920}{}\doxysubsection{\texorpdfstring{Version Control}{Version Control}}\label{md_README_autotoc_md920}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git,\ diff,\ patch}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md921}{}\doxysubsection{\texorpdfstring{Download}{Download}}\label{md_README_autotoc_md921}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{curl,\ wget,\ wget2}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md922}{}\doxysubsection{\texorpdfstring{Emulation}{Emulation}}\label{md_README_autotoc_md922}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{dosbox-\/x,\ dosbox,\ xvfb-\/run}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md923}{}\doxysubsection{\texorpdfstring{Analysis}{Analysis}}\label{md_README_autotoc_md923}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cppcheck,\ clang-\/format,\ clang-\/tidy}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md925}{}\doxysection{\texorpdfstring{Advanced Usage}{Advanced Usage}}\label{md_README_autotoc_md925}
+\hypertarget{md_README_autotoc_md926}{}\doxysubsection{\texorpdfstring{Custom Project Directory}{Custom Project Directory}}\label{md_README_autotoc_md926}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Work\ on\ a\ specific\ project}
+\DoxyCodeLine{python\ axe.py\ -\/-\/dir\ /path/to/project}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ With\ custom\ config}
+\DoxyCodeLine{python\ axe.py\ -\/-\/dir\ /path/to/project\ -\/-\/config\ my-\/axe.yaml}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md927}{}\doxysubsection{\texorpdfstring{Auto-\/\+Approve Mode (Non-\/\+Interactive)}{Auto-\/\+Approve Mode (Non-\/\+Interactive)}}\label{md_README_autotoc_md927}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Auto-\/approve\ all\ tool\ executions}
+\DoxyCodeLine{python\ axe.py\ -\/-\/auto-\/approve}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Dry-\/run\ mode\ (show\ what\ would\ be\ executed)}
+\DoxyCodeLine{python\ axe.py\ -\/-\/dry-\/run}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md928}{}\doxysubsection{\texorpdfstring{Batch Processing}{Batch Processing}}\label{md_README_autotoc_md928}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Run\ multiple\ commands}
+\DoxyCodeLine{python\ axe.py\ -\/c\ "{}@llama\ analyze\ the\ code"{}\ \&\&\ \(\backslash\)}
+\DoxyCodeLine{python\ axe.py\ -\/c\ "{}@claude\ security\ review"{}\ \&\&\ \(\backslash\)}
+\DoxyCodeLine{python\ axe.py\ -\/c\ "{}@gpt\ suggest\ improvements"{}}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md929}{}\doxysubsection{\texorpdfstring{Custom System Prompts}{Custom System Prompts}}\label{md_README_autotoc_md929}
+Edit {\ttfamily axe.\+yaml} to customize agent behavior\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{agents:}
+\DoxyCodeLine{\ \ custom\_agent:}
+\DoxyCodeLine{\ \ \ \ alias:\ [my]}
+\DoxyCodeLine{\ \ \ \ provider:\ openai}
+\DoxyCodeLine{\ \ \ \ model:\ gpt-\/4o}
+\DoxyCodeLine{\ \ \ \ role:\ My\ custom\ assistant}
+\DoxyCodeLine{\ \ \ \ system\_prompt:\ |}
+\DoxyCodeLine{\ \ \ \ \ \ You\ are\ a\ specialized\ assistant\ for\ my\ specific\ use\ case.}
+\DoxyCodeLine{\ \ \ \ \ \ Always\ format\ code\ in\ a\ specific\ way.}
+\DoxyCodeLine{\ \ \ \ \ \ Focus\ on\ X,\ Y,\ Z\ aspects.}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md931}{}\doxysection{\texorpdfstring{Multi-\/\+Agent Collaboration}{Multi-\/\+Agent Collaboration}}\label{md_README_autotoc_md931}
+\hypertarget{md_README_autotoc_md932}{}\doxysubsection{\texorpdfstring{Autonomous Collaborative Sessions (NEW!)}{Autonomous Collaborative Sessions (NEW!)}}\label{md_README_autotoc_md932}
+Start a fully autonomous session where multiple agents work together on a task without manual intervention\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Command-\/line\ mode}
+\DoxyCodeLine{python\ axe.py\ -\/-\/collab\ llama,copilot\ -\/-\/workspace\ ./playground\ -\/-\/time\ 30\ -\/-\/task\ "{}Review\ and\ improve\ wadextract.c"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Interactive\ mode}
+\DoxyCodeLine{axe>\ /collab\ llama,copilot\ ./playground\ 30\ "{}Analyze\ the\ WAD\ parser\ and\ suggest\ improvements"{}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Features\+:}}
+\begin{DoxyItemize}
+\item {\bfseries{Turn-\/based coordination}}\+: Agents take turns automatically, no manual copy-\/pasting needed
+\item {\bfseries{Shared workspace}}\+: All agents can read/write to the same directory
+\item {\bfseries{Time limits}}\+: Sessions automatically end after the specified time
+\item {\bfseries{Auto-\/backup}}\+: Files are backed up before modification
+\item {\bfseries{Conversation history}}\+: All agents see the full conversation context
+\item {\bfseries{Human intervention}}\+: Press Ctrl+C to pause and inject messages
+\end{DoxyItemize}
+
+{\bfseries{During collaborative session\+:}}
+\begin{DoxyItemize}
+\item Agents see each other\textquotesingle{}s responses and build on them
+\item Agents can say "{}\+PASS"{} to skip their turn
+\item Agents can say "{}\+TASK COMPLETE\+: summary"{} to end the session
+\item Session log is saved to {\ttfamily .collab\+\_\+log.\+md} in the workspace
+\end{DoxyItemize}
+
+{\bfseries{Example collaborative workflow\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{┌─────────────────────────────────────────────────────────────┐}
+\DoxyCodeLine{│\ BOSS:\ "{}Review\ wadextract.c\ and\ add\ error\ handling"{}\ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{├─────────────────────────────────────────────────────────────┤}
+\DoxyCodeLine{│\ LLAMA:\ "{}I'll\ analyze\ the\ code\ structure\ first..."{}\ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ *provides\ analysis*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{├─────────────────────────────────────────────────────────────┤}
+\DoxyCodeLine{│\ COPILOT:\ "{}@llama\ good\ analysis!\ I'll\ add\ error\ handling..."{}│}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ *shows\ code\ improvements*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{├─────────────────────────────────────────────────────────────┤}
+\DoxyCodeLine{│\ LLAMA:\ "{}@copilot\ looks\ good,\ but\ let\ me\ check\ edge\ cases..."{}│}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ *reviews\ copilot's\ code*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{├─────────────────────────────────────────────────────────────┤}
+\DoxyCodeLine{│\ COPILOT:\ "{}TASK\ COMPLETE:\ Added\ null\ checks\ and\ bounds..."{}\ \ │}
+\DoxyCodeLine{└─────────────────────────────────────────────────────────────┘}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md933}{}\doxysubsection{\texorpdfstring{Round-\/\+Robin Analysis}{Round-\/\+Robin Analysis}}\label{md_README_autotoc_md933}
+Ask multiple agents to analyze the same problem\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{axe>\ /read\ complex\_function.c}
+\DoxyCodeLine{axe>\ @claude\ what\ security\ issues\ do\ you\ see?}
+\DoxyCodeLine{axe>\ @gpt\ how\ would\ you\ refactor\ this?}
+\DoxyCodeLine{axe>\ @llama\ any\ assembly-\/level\ optimizations\ possible?}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md934}{}\doxysubsection{\texorpdfstring{Chain of Thought}{Chain of Thought}}\label{md_README_autotoc_md934}
+Use one agent\textquotesingle{}s output as input for another\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{axe>\ @gpt\ write\ a\ function\ to\ parse\ WAD\ headers}
+\DoxyCodeLine{\#\ Copy\ the\ output...}
+\DoxyCodeLine{axe>\ @claude\ review\ this\ function:\ [paste\ GPT's\ code]}
+\DoxyCodeLine{axe>\ @llama\ optimize\ this\ for\ DOS:\ [paste\ Claude's\ reviewed\ code]}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md935}{}\doxysubsection{\texorpdfstring{Collaborative Problem Solving}{Collaborative Problem Solving}}\label{md_README_autotoc_md935}
+For complex projects, assign different aspects to different agents\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Architecture\ planning}
+\DoxyCodeLine{axe>\ @gpt\ design\ the\ module\ structure\ for\ a\ WAD\ parser\ library}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Security\ review}
+\DoxyCodeLine{axe>\ @claude\ review\ the\ proposed\ API\ for\ security\ considerations}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Implementation\ details}
+\DoxyCodeLine{axe>\ @llama\ help\ with\ the\ low-\/level\ binary\ parsing}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Creative\ optimization}
+\DoxyCodeLine{axe>\ @grok\ suggest\ unconventional\ approaches\ to\ improve\ performance}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md937}{}\doxysection{\texorpdfstring{Analysis Tools}{Analysis Tools}}\label{md_README_autotoc_md937}
+AXE integrates powerful analysis tools to reduce token usage and improve agent effectiveness when working with codebases and build systems.\hypertarget{md_README_autotoc_md938}{}\doxysubsection{\texorpdfstring{llmprep -\/ Codebase Preparation}{llmprep -\/ Codebase Preparation}}\label{md_README_autotoc_md938}
+{\bfseries{llmprep}} generates LLM-\/friendly context for your codebase, dramatically reducing the tokens needed for agents to understand your project structure.\hypertarget{md_README_autotoc_md939}{}\doxysubsubsection{\texorpdfstring{Features}{Features}}\label{md_README_autotoc_md939}
+
+\begin{DoxyItemize}
+\item {\bfseries{Code Statistics}}\+: Line counts by language using {\ttfamily cloc}
+\item {\bfseries{Directory Structure}}\+: Visual tree representation of your project
+\item {\bfseries{Documentation}}\+: Auto-\/generated overview and guidance
+\item {\bfseries{Symbol Index}}\+: Function/class index using {\ttfamily ctags}
+\item {\bfseries{Dependency Graphs}}\+: Python class diagrams with {\ttfamily pyreverse} (optional)
+\item {\bfseries{Smart Exclusions}}\+: Automatically excludes build artifacts, dependencies, and generated files
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md940}{}\doxysubsubsection{\texorpdfstring{Usage}{Usage}}\label{md_README_autotoc_md940}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Generate\ context\ for\ current\ directory}
+\DoxyCodeLine{axe>\ /prep}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Generate\ context\ for\ specific\ directory}
+\DoxyCodeLine{axe>\ /prep\ ./src}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Specify\ output\ directory}
+\DoxyCodeLine{axe>\ /prep\ ./src\ -\/o\ ./docs/llm\_context}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Agents\ can\ use\ it\ in\ EXEC\ blocks}
+
+\end{DoxyCode}
+ EXEC python3 \doxylink{llmprep_8py}{tools/llmprep.\+py} . -\/o llm\+\_\+prep 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md941}{}\doxysubsubsection{\texorpdfstring{Generated Files}{Generated Files}}\label{md_README_autotoc_md941}
+llmprep creates a structured directory with\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{codebase__overview_8md}{codebase\+\_\+overview.\+md}} -\/ High-\/level project summary
+\item {\ttfamily codebase\+\_\+stats.\+txt} -\/ Lines of code by language
+\item {\ttfamily codebase\+\_\+structure.\+txt} -\/ Directory tree visualization
+\item {\ttfamily \doxylink{llm__system__prompt_8md}{llm\+\_\+system\+\_\+prompt.\+md}} -\/ Suggested system prompt for LLMs
+\item {\ttfamily \doxylink{project__guidance_8md}{project\+\_\+guidance.\+md}} -\/ Developer guidance and conventions
+\item {\ttfamily tags} -\/ Symbol index (if ctags available)
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md942}{}\doxysubsubsection{\texorpdfstring{Expected Benefits}{Expected Benefits}}\label{md_README_autotoc_md942}
+
+\begin{DoxyItemize}
+\item {\bfseries{40-\/60\% token reduction}} for codebase exploration tasks
+\item Agents get pre-\/indexed context instead of exploring blindly
+\item Faster onboarding for new coding tasks
+\item Consistent project context across agent sessions
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md943}{}\doxysubsubsection{\texorpdfstring{Optional Dependencies}{Optional Dependencies}}\label{md_README_autotoc_md943}
+For best results, install these tools (graceful degradation if missing)\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Ubuntu/Debian}
+\DoxyCodeLine{sudo\ apt-\/get\ install\ cloc\ tree\ doxygen\ pylint}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ macOS}
+\DoxyCodeLine{brew\ install\ cloc\ tree\ doxygen}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Python\ packages}
+\DoxyCodeLine{pip\ install\ pylint\ \ \#\ For\ pyreverse}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md944}{}\doxysubsection{\texorpdfstring{build\+\_\+analyzer -\/ Build System Detection}{build\+\_\+analyzer -\/ Build System Detection}}\label{md_README_autotoc_md944}
+{\bfseries{build\+\_\+analyzer}} automatically detects and analyzes build systems, providing instant access to compilation instructions and dependencies.\hypertarget{md_README_autotoc_md945}{}\doxysubsubsection{\texorpdfstring{Features}{Features}}\label{md_README_autotoc_md945}
+
+\begin{DoxyItemize}
+\item {\bfseries{Multi-\/\+System Support}}\+: Autotools, CMake, Meson, Make, Cargo, npm, pip
+\item {\bfseries{Version Detection}}\+: Minimum required versions for build tools
+\item {\bfseries{Dependency Analysis}}\+: Libraries and external dependencies
+\item {\bfseries{Configure Options}}\+: Available build flags and features
+\item {\bfseries{Archive Support}}\+: Works on .tar, .tar.\+gz, .tar.\+zst archives
+\item {\bfseries{JSON Output}}\+: Machine-\/readable format for programmatic use
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md946}{}\doxysubsubsection{\texorpdfstring{Usage}{Usage}}\label{md_README_autotoc_md946}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Analyze\ current\ directory}
+\DoxyCodeLine{axe>\ /buildinfo\ .}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Analyze\ specific\ directory}
+\DoxyCodeLine{axe>\ /buildinfo\ ./opensource-\/project}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Analyze\ an\ archive}
+\DoxyCodeLine{axe>\ /buildinfo\ ./downloads/package.tar.gz}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Get\ JSON\ output\ for\ parsing}
+\DoxyCodeLine{axe>\ /buildinfo\ ./src\ -\/-\/json}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Agents\ can\ use\ it\ in\ EXEC\ blocks}
+
+\end{DoxyCode}
+ EXEC python3 \doxylink{build__analyzer_8py}{tools/build\+\_\+analyzer.\+py} ./source --json 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md947}{}\doxysubsubsection{\texorpdfstring{Detected Build Systems}{Detected Build Systems}}\label{md_README_autotoc_md947}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}System  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Files Detected  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Output Includes  \\
+{\bfseries{Autotools}}  &configure.\+ac, Makefile.\+am  &autoconf/automake versions, configure options, environment variables  \\
+{\bfseries{CMake}}  &CMake\+Lists.\+txt  &cmake\+\_\+minimum\+\_\+required, dependencies, targets  \\
+{\bfseries{Meson}}  &meson.\+build  &meson version, dependencies, options  \\
+{\bfseries{Make}}  &Makefile  &targets, compiler flags, variables  \\
+{\bfseries{Cargo}}  &Cargo.\+toml  &Rust edition, dependencies, features  \\
+{\bfseries{npm}}  &package.\+json  &\doxylink{structNode}{Node} version, dependencies, scripts  \\
+{\bfseries{Python}}  &setup.\+py, pyproject.\+toml  &Python version, dependencies, entry points  \\
+\end{DoxyTable}
+\hypertarget{md_README_autotoc_md948}{}\doxysubsubsection{\texorpdfstring{Example Output}{Example Output}}\label{md_README_autotoc_md948}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ "{}build\_system"{}:\ "{}Autotools"{},}
+\DoxyCodeLine{\ \ "{}autoconf\_version"{}:\ "{}2.69"{},}
+\DoxyCodeLine{\ \ "{}automake\_version"{}:\ "{}1.15"{},}
+\DoxyCodeLine{\ \ "{}configure\_options"{}:\ [}
+\DoxyCodeLine{\ \ \ \ "{}-\/-\/enable-\/shared"{},}
+\DoxyCodeLine{\ \ \ \ "{}-\/-\/with-\/ssl"{},}
+\DoxyCodeLine{\ \ \ \ "{}-\/-\/enable-\/debug"{}}
+\DoxyCodeLine{\ \ ],}
+\DoxyCodeLine{\ \ "{}dependencies"{}:\ [}
+\DoxyCodeLine{\ \ \ \ "{}libssl-\/dev"{},}
+\DoxyCodeLine{\ \ \ \ "{}zlib1g-\/dev"{}}
+\DoxyCodeLine{\ \ ],}
+\DoxyCodeLine{\ \ "{}environment\_variables"{}:\ [}
+\DoxyCodeLine{\ \ \ \ "{}CC"{},}
+\DoxyCodeLine{\ \ \ \ "{}CFLAGS"{},}
+\DoxyCodeLine{\ \ \ \ "{}LDFLAGS"{}}
+\DoxyCodeLine{\ \ ]}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md949}{}\doxysubsubsection{\texorpdfstring{Expected Benefits}{Expected Benefits}}\label{md_README_autotoc_md949}
+
+\begin{DoxyItemize}
+\item {\bfseries{30-\/50\% token reduction}} for build/compile tasks
+\item Build instructions available instantly
+\item Agents don\textquotesingle{}t need to guess configure flags
+\item Faster build troubleshooting
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md950}{}\doxysubsubsection{\texorpdfstring{Dependencies}{Dependencies}}\label{md_README_autotoc_md950}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Python\ 3.8+\ required}
+\DoxyCodeLine{python3\ -\/-\/version}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Optional:\ For\ .tar.zst\ support}
+\DoxyCodeLine{pip\ install\ zstandard}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md951}{}\doxysubsection{\texorpdfstring{Integration with Agents}{Integration with Agents}}\label{md_README_autotoc_md951}
+Both tools are whitelisted and agents can invoke them via EXEC blocks\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{To\ understand\ this\ codebase,\ I'll\ first\ prepare\ the\ context:}
+
+\end{DoxyCode}
+ EXEC python3 \doxylink{llmprep_8py}{tools/llmprep.\+py} . -\/o llm\+\_\+prep 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Now\ let\ me\ check\ the\ build\ system:}
+
+\end{DoxyCode}
+ EXEC python3 \doxylink{build__analyzer_8py}{tools/build\+\_\+analyzer.\+py} . --json 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Based\ on\ the\ analysis,\ I\ can\ see\ this\ is\ a\ CMake\ project\ requiring...}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md952}{}\doxysubsection{\texorpdfstring{Workflow Examples}{Workflow Examples}}\label{md_README_autotoc_md952}
+\hypertarget{md_README_autotoc_md953}{}\doxysubsubsection{\texorpdfstring{1. New Codebase Exploration}{1. New Codebase Exploration}}\label{md_README_autotoc_md953}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{axe>\ /prep\ ./new-\/project}
+\DoxyCodeLine{axe>\ /buildinfo\ ./new-\/project}
+\DoxyCodeLine{axe>\ @claude\ review\ the\ generated\ llm\_prep/codebase\_overview.md\ and\ suggest\ improvements}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md954}{}\doxysubsubsection{\texorpdfstring{2. Build Issue Debugging}{2. Build Issue Debugging}}\label{md_README_autotoc_md954}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{axe>\ /buildinfo\ ./failing-\/build\ -\/-\/json}
+\DoxyCodeLine{axe>\ @gpt\ The\ build\ is\ failing.\ Here's\ the\ build\ system\ info:\ [paste\ JSON].\ What's\ wrong?}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md955}{}\doxysubsubsection{\texorpdfstring{3. Collaborative Session Pre-\/indexing}{3. Collaborative Session Pre-\/indexing}}\label{md_README_autotoc_md955}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Generate\ context\ before\ starting\ collaboration}
+\DoxyCodeLine{axe>\ /prep\ ./workspace}
+\DoxyCodeLine{axe>\ /collab\ claude,gpt\ ./workspace\ 60\ "{}Refactor\ the\ authentication\ module"{}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md957}{}\doxysection{\texorpdfstring{Workshop -\/ Dynamic Analysis Tools}{Workshop -\/ Dynamic Analysis Tools}}\label{md_README_autotoc_md957}
+AXE includes {\bfseries{Workshop}}, a comprehensive suite of reverse-\/engineering and security analysis tools designed for advanced code analysis and vulnerability detection.\hypertarget{md_README_autotoc_md958}{}\doxysubsection{\texorpdfstring{Overview}{Overview}}\label{md_README_autotoc_md958}
+The Workshop framework provides four powerful analysis tools, each named after woodworking implements\+:
+
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Tool  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Purpose  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Command  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Dependencies  \\
+{\bfseries{Chisel}}  &Symbolic execution for binary analysis  &{\ttfamily /workshop chisel \texorpdfstring{$<$}{<}binary\texorpdfstring{$>$}{>} \mbox{[}func\mbox{]}}  &angr  \\
+{\bfseries{Saw}}  &Taint analysis for Python code  &{\ttfamily /workshop saw "{}\texorpdfstring{$<$}{<}code\texorpdfstring{$>$}{>}"{}}  &(built-\/in)  \\
+{\bfseries{Plane}}  &Source/sink enumeration  &{\ttfamily /workshop plane \texorpdfstring{$<$}{<}path\texorpdfstring{$>$}{>}}  &(built-\/in)  \\
+{\bfseries{Hammer}}  &Live process instrumentation  &{\ttfamily /workshop hammer \texorpdfstring{$<$}{<}process\texorpdfstring{$>$}{>}}  &frida-\/python, psutil  \\
+\end{DoxyTable}
+\hypertarget{md_README_autotoc_md959}{}\doxysubsection{\texorpdfstring{Installation}{Installation}}\label{md_README_autotoc_md959}
+Install Workshop dependencies\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Install\ all\ dependencies}
+\DoxyCodeLine{pip\ install\ 'angr>=9.2.0'\ 'frida-\/python>=16.0.0'\ 'psutil>=5.9.0'}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Or\ install\ individually}
+\DoxyCodeLine{pip\ install\ 'angr>=9.2.0'\ \ \ \ \ \ \ \ \ \ \ \#\ For\ Chisel\ symbolic\ execution}
+\DoxyCodeLine{pip\ install\ 'frida-\/python>=16.0.0'\ \ \#\ For\ Hammer\ instrumentation}
+\DoxyCodeLine{pip\ install\ 'psutil>=5.9.0'\ \ \ \ \ \ \ \ \ \#\ For\ Hammer\ process\ monitoring}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md960}{}\doxysubsection{\texorpdfstring{Quick Examples}{Quick Examples}}\label{md_README_autotoc_md960}
+\hypertarget{md_README_autotoc_md961}{}\doxysubsubsection{\texorpdfstring{Chisel -\/ Symbolic Execution}{Chisel -\/ Symbolic Execution}}\label{md_README_autotoc_md961}
+Analyze binary execution paths and find vulnerabilities\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{axe>\ /workshop\ chisel\ ./vulnerable.exe\ main}
+\DoxyCodeLine{\#\ Outputs:\ paths\ explored,\ constraints\ found,\ potential\ vulnerabilities}
+
+\end{DoxyCode}
+
+
+{\bfseries{Use Chisel when\+:}}
+\begin{DoxyItemize}
+\item Analyzing compiled binaries for security issues
+\item Finding buffer overflows and memory corruption bugs
+\item Exploring execution paths in compiled code
+\item Analyzing obfuscated or packed executables
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md962}{}\doxysubsubsection{\texorpdfstring{Saw -\/ Taint Analysis}{Saw -\/ Taint Analysis}}\label{md_README_autotoc_md962}
+Track data flow to identify injection vulnerabilities\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{axe>\ /workshop\ saw\ "{}import\ os;\ os.system(input())"{}}
+\DoxyCodeLine{\#\ Outputs:\ taint\ sources,\ sinks,\ flows,\ and\ vulnerability\ classifications}
+
+\end{DoxyCode}
+
+
+{\bfseries{Use Saw when\+:}}
+\begin{DoxyItemize}
+\item Auditing Python code for injection vulnerabilities
+\item Tracking user input through application flow
+\item Finding SQL injection, XSS, command injection risks
+\item Validating input sanitization
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md963}{}\doxysubsubsection{\texorpdfstring{Plane -\/ Source/\+Sink Enumeration}{Plane -\/ Source/\+Sink Enumeration}}\label{md_README_autotoc_md963}
+Catalog all data entry and exit points in a codebase\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{axe>\ /workshop\ plane\ .}
+\DoxyCodeLine{\#\ Outputs:\ all\ sources\ (input,\ file\ reads,\ network)\ and\ sinks\ (exec,\ eval,\ db\ queries)}
+
+\end{DoxyCode}
+
+
+{\bfseries{Use Plane when\+:}}
+\begin{DoxyItemize}
+\item Performing comprehensive security audits
+\item Mapping attack surface of applications
+\item Planning focused security reviews
+\item Documenting data flow architecture
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md964}{}\doxysubsubsection{\texorpdfstring{Hammer -\/ Live Instrumentation}{Hammer -\/ Live Instrumentation}}\label{md_README_autotoc_md964}
+Monitor and instrument running processes in real-\/time\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{axe>\ /workshop\ hammer\ python.exe}
+\DoxyCodeLine{\#\ Starts\ live\ monitoring\ session\ (Ctrl+C\ to\ stop)}
+
+\end{DoxyCode}
+
+
+{\bfseries{Use Hammer when\+:}}
+\begin{DoxyItemize}
+\item Debugging runtime behavior
+\item Analyzing malware or suspicious processes
+\item Monitoring function calls and API usage
+\item Dynamic analysis of running applications
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md965}{}\doxysubsection{\texorpdfstring{Management Commands}{Management Commands}}\label{md_README_autotoc_md965}
+\hypertarget{md_README_autotoc_md966}{}\doxysubsubsection{\texorpdfstring{View Analysis History}{View Analysis History}}\label{md_README_autotoc_md966}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ View\ all\ analyses}
+\DoxyCodeLine{axe>\ /workshop\ history}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ View\ specific\ tool\ history}
+\DoxyCodeLine{axe>\ /workshop\ history\ chisel}
+\DoxyCodeLine{axe>\ /workshop\ history\ saw}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md967}{}\doxysubsubsection{\texorpdfstring{View Usage Statistics}{View Usage Statistics}}\label{md_README_autotoc_md967}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ View\ overall\ statistics}
+\DoxyCodeLine{axe>\ /workshop\ stats}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ View\ specific\ tool\ stats}
+\DoxyCodeLine{axe>\ /workshop\ stats\ hammer}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md968}{}\doxysubsection{\texorpdfstring{Configuration}{Configuration}}\label{md_README_autotoc_md968}
+Workshop tools can be configured in {\ttfamily axe.\+yaml}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{workshop:}
+\DoxyCodeLine{\ \ enabled:\ true}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Tool-\/specific\ configuration\ is\ passed\ to\ each\ workshop\ tool}
+\DoxyCodeLine{\ \ \#\ The\ actual\ configuration\ options\ depend\ on\ the\ tool\ implementation}
+\DoxyCodeLine{\ \ \#\ See\ workshop\ module\ documentation\ for\ supported\ options}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ chisel:}
+\DoxyCodeLine{\ \ \ \ \#\ Chisel-\/specific\ options\ (if\ supported)}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ saw:}
+\DoxyCodeLine{\ \ \ \ \#\ Saw-\/specific\ options\ (if\ supported)}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ plane:}
+\DoxyCodeLine{\ \ \ \ \#\ Plane-\/specific\ options\ (if\ supported)}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ hammer:}
+\DoxyCodeLine{\ \ \ \ \#\ Hammer-\/specific\ options\ (if\ supported)}
+
+\end{DoxyCode}
+
+
+{\bfseries{Note}}\+: The workshop tools accept configuration parameters, but the specific options available depend on each tool\textquotesingle{}s implementation. Refer to the individual tool documentation in the {\ttfamily workshop/} module for details on supported configuration keys.\hypertarget{md_README_autotoc_md969}{}\doxysubsection{\texorpdfstring{Integration with Agents}{Integration with Agents}}\label{md_README_autotoc_md969}
+Agents can leverage Workshop tools for enhanced analysis\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Ask\ Claude\ to\ use\ Workshop\ for\ security\ audit}
+\DoxyCodeLine{axe>\ @claude\ use\ /workshop\ saw\ to\ analyze\ this\ code\ for\ injection\ vulnerabilities}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Ask\ GPT\ to\ analyze\ a\ binary}
+\DoxyCodeLine{axe>\ @gpt\ analyze\ this\ binary\ with\ /workshop\ chisel\ and\ explain\ the\ findings}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Collaborative\ security\ review}
+\DoxyCodeLine{axe>\ /collab\ claude,llama\ ./project\ 60\ "{}Use\ workshop\ tools\ to\ perform\ comprehensive\ security\ audit"{}}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md970}{}\doxysubsection{\texorpdfstring{Database Integration}{Database Integration}}\label{md_README_autotoc_md970}
+All Workshop analyses are automatically\+:
+\begin{DoxyItemize}
+\item Saved to the AXE database with full results
+\item Tracked with performance metrics (duration, success/failure)
+\item Available for historical review and statistics
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md971}{}\doxysubsection{\texorpdfstring{XP Rewards}{XP Rewards}}\label{md_README_autotoc_md971}
+Workshop tool usage awards XP when agents use the tools programmatically (not when invoked directly via CLI commands by humans)\+:
+
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Tool  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Base XP  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Bonuses  \\
+{\bfseries{Chisel}}  &25 XP  &+10 per vulnerability, +20 for path exploration  \\
+{\bfseries{Saw}}  &20 XP  &+15 per taint flow, +25 per vulnerability  \\
+{\bfseries{Plane}}  &15 XP  &+1 per 5 sources/sinks enumerated  \\
+{\bfseries{Hammer}}  &30 XP  &+20 for successful instrumentation  \\
+\end{DoxyTable}
+
+
+{\bfseries{Note}}\+: XP rewards apply when agents invoke workshop tools through the programmatic API. Direct CLI usage (e.\+g., {\ttfamily /workshop saw "{}\texorpdfstring{$<$}{<}code\texorpdfstring{$>$}{>}"{}}) tracks the analysis but does not award XP since no agent is performing the work.\hypertarget{md_README_autotoc_md972}{}\doxysubsection{\texorpdfstring{Real-\/\+World Example\+: Security Audit Workflow}{Real-\/\+World Example\+: Security Audit Workflow}}\label{md_README_autotoc_md972}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Start\ AXE\ in\ your\ project}
+\DoxyCodeLine{cd\ \string~/my-\/project}
+\DoxyCodeLine{axe}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Step\ 1:\ Enumerate\ attack\ surface}
+\DoxyCodeLine{axe>\ /workshop\ plane\ .}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Step\ 2:\ Analyze\ suspicious\ code}
+\DoxyCodeLine{axe>\ /workshop\ saw\ "{}\$(cat\ suspicious\_function.py)"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Step\ 3:\ Review\ with\ agents}
+\DoxyCodeLine{axe>\ @claude\ I\ found\ taint\ flows\ with\ Saw.\ Can\ you\ review\ the\ results\ and\ suggest\ fixes?}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Step\ 4:\ Verify\ fixes}
+\DoxyCodeLine{axe>\ /workshop\ saw\ "{}\$(cat\ fixed\_function.py)"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Step\ 5:\ Check\ statistics}
+\DoxyCodeLine{axe>\ /workshop\ stats}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md973}{}\doxysubsection{\texorpdfstring{Documentation}{Documentation}}\label{md_README_autotoc_md973}
+For detailed documentation, see\+:
+\begin{DoxyItemize}
+\item {\bfseries{\doxysectlink{md_workshop__quick__reference}{workshop\+\_\+quick\+\_\+reference.md}{0}}} -\/ Complete usage guide
+\item {\bfseries{\doxysectlink{md_workshop__benchmarks}{workshop\+\_\+benchmarks.md}{0}}} -\/ Performance metrics
+\item {\bfseries{\doxysectlink{md_workshop__security__audit}{workshop\+\_\+security\+\_\+audit.md}{0}}} -\/ Security validation
+\item {\bfseries{\doxysectlink{md_workshop__test__results}{workshop\+\_\+test\+\_\+results.md}{0}}} -\/ Test coverage details
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md974}{}\doxysubsection{\texorpdfstring{Help}{Help}}\label{md_README_autotoc_md974}
+Get help anytime with\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{axe>\ /workshop\ help}
+\DoxyCodeLine{axe>\ /workshop\ \ \ \ \ \ \ \ \ \ \#\ Same\ as\ /workshop\ help}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md976}{}\doxysection{\texorpdfstring{Troubleshooting}{Troubleshooting}}\label{md_README_autotoc_md976}
+\hypertarget{md_README_autotoc_md977}{}\doxysubsection{\texorpdfstring{Common Issues}{Common Issues}}\label{md_README_autotoc_md977}
+{\bfseries{"{}\+Provider not available"{}}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Check\ if\ API\ key\ is\ set}
+\DoxyCodeLine{echo\ \$HUGGINGFACE\_API\_KEY}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Make\ sure\ the\ library\ is\ installed}
+\DoxyCodeLine{pip\ install\ huggingface\_hub}
+
+\end{DoxyCode}
+
+
+{\bfseries{"{}\+Model not found"{}}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Verify\ exact\ model\ name\ in\ config}
+\DoxyCodeLine{\#\ HuggingFace\ models\ need\ full\ path:\ meta-\/llama/Llama-\/3.1-\/70B-\/Instruct}
+
+\end{DoxyCode}
+
+
+{\bfseries{"{}\+Rate limited"{}}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Rate\ limiting\ is\ now\ automatic\ in\ AXE}
+\DoxyCodeLine{\#\ Check\ your\ rate\ limit\ configuration\ in\ axe.yaml}
+\DoxyCodeLine{\#\ Or\ switch\ to\ a\ different\ provider}
+\DoxyCodeLine{axe>\ @llama\ instead\ of\ @gpt}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ View\ current\ rate\ limit\ usage}
+\DoxyCodeLine{axe>\ /stats}
+
+\end{DoxyCode}
+
+
+{\bfseries{"{}\+Command not in whitelist"{}}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Check\ available\ tools}
+\DoxyCodeLine{axe>\ /tools}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Add\ tools\ to\ axe.yaml\ if\ needed}
+
+\end{DoxyCode}
+
+
+{\bfseries{"{}\+Workshop tool not available"{}}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Check\ tool\ status\ and\ missing\ dependencies}
+\DoxyCodeLine{axe>\ /workshop\ status}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Install\ missing\ dependencies\ as\ shown}
+\DoxyCodeLine{pip\ install\ angr\ \ \#\ For\ Chisel}
+\DoxyCodeLine{pip\ install\ frida-\/python\ psutil\ \ \#\ For\ Hammer}
+
+\end{DoxyCode}
+
+
+{\bfseries{"{}\+Session failed to load"{}}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ List\ available\ sessions}
+\DoxyCodeLine{axe>\ /session\ list}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Check\ if\ session\ file\ exists}
+\DoxyCodeLine{ls\ -\/la\ .axe\_sessions/}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Sessions\ are\ stored\ as\ JSON\ files}
+\DoxyCodeLine{cat\ .axe\_sessions/session-\/name.json}
+
+\end{DoxyCode}
+
+
+{\bfseries{"{}\+Token tracking not working"{}}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Token\ tracking\ requires\ API\ responses\ with\ usage\ data}
+\DoxyCodeLine{\#\ Some\ providers\ don't\ return\ token\ counts\ (approximated\ instead)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ View\ current\ token\ statistics}
+\DoxyCodeLine{axe>\ /stats}
+
+\end{DoxyCode}
+
+
+{\bfseries{"{}\+Rate limit too restrictive"{}}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Edit\ axe.yaml\ to\ adjust\ rate\ limits}
+\DoxyCodeLine{rate\_limits:}
+\DoxyCodeLine{\ \ enabled:\ true}
+\DoxyCodeLine{\ \ tokens\_per\_minute:\ 20000\ \ \#\ Increase\ global\ limit}
+\DoxyCodeLine{\ \ per\_agent:}
+\DoxyCodeLine{\ \ \ \ gpt:\ 10000\ \ \#\ Increase\ per-\/agent\ limit}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md978}{}\doxysubsection{\texorpdfstring{Testing API Connections}{Testing API Connections}}\label{md_README_autotoc_md978}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Test\ HuggingFace}
+\DoxyCodeLine{curl\ -\/X\ POST\ https://api-\/inference.huggingface.co/models/meta-\/llama/Llama-\/3.1-\/70B-\/Instruct\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Authorization:\ Bearer\ \$HUGGINGFACE\_API\_KEY"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/d\ '\{"{}inputs"{}:\ "{}Hello,\ how\ are\ you?"{}\}'}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Test\ GitHub\ Models}
+\DoxyCodeLine{curl\ -\/X\ POST\ "{}https://models.github.ai/inference/chat/completions"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Authorization:\ Bearer\ \$GITHUB\_TOKEN"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/H\ "{}Content-\/Type:\ application/json"{}\ \(\backslash\)}
+\DoxyCodeLine{\ \ -\/d\ '\{"{}model"{}:\ "{}openai/gpt-\/4o"{},\ "{}messages"{}:\ [\{"{}role"{}:\ "{}user"{},\ "{}content"{}:\ "{}Hi"{}\}]\}'}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md980}{}\doxysection{\texorpdfstring{Project Structure}{Project Structure}}\label{md_README_autotoc_md980}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{AXE/}
+\DoxyCodeLine{├──\ axe.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Main\ program}
+\DoxyCodeLine{├──\ axe.yaml\ \ \ \ \ \ \ \ \ \ \ \ \#\ Default\ configuration}
+\DoxyCodeLine{├──\ API\_PROVIDERS.md\ \ \ \ \#\ Detailed\ API\ documentation}
+\DoxyCodeLine{├──\ README.md\ \ \ \ \ \ \ \ \ \ \ \#\ This\ file}
+\DoxyCodeLine{└──\ llm\_prep/\ \ \ \ \ \ \ \ \ \ \ \#\ LLM\ context\ preparation\ files}
+\DoxyCodeLine{\ \ \ \ ├──\ codebase\_overview.md}
+\DoxyCodeLine{\ \ \ \ ├──\ llm\_system\_prompt.md}
+\DoxyCodeLine{\ \ \ \ └──\ project\_guidance.md}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md982}{}\doxysection{\texorpdfstring{Contributing}{Contributing}}\label{md_README_autotoc_md982}
+Contributions welcome! Please\+:
+\begin{DoxyEnumerate}
+\item Fork the repository
+\item Create a feature branch
+\item Submit a pull request
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md984}{}\doxysection{\texorpdfstring{License}{License}}\label{md_README_autotoc_md984}
+Copyright (c) 2025 Edge\+Of\+Assembly
+
+This project is dual-\/licensed\+:\hypertarget{md_README_autotoc_md985}{}\doxysubsection{\texorpdfstring{Open Source License (Default)}{Open Source License (Default)}}\label{md_README_autotoc_md985}
+This software is licensed under the {\bfseries{GNU General Public License v3.\+0 (GPLv3)}}.
+
+See the \mbox{[}LICENSE\mbox{]}(LICENSE) file for the full license text.\hypertarget{md_README_autotoc_md986}{}\doxysubsection{\texorpdfstring{Commercial License}{Commercial License}}\label{md_README_autotoc_md986}
+For commercial use or if you need a license other than GPLv3, please contact the author\+:
+
+{\bfseries{Edge\+Of\+Assembly}} ~\newline
+ Email\+: \href{mailto:haxbox2000@gmail.com}{\texttt{haxbox2000@gmail.\+com}}\hypertarget{md_README_autotoc_md987}{}\doxysection{\texorpdfstring{Author}{Author}}\label{md_README_autotoc_md987}
+\DoxyHorRuler{0}
+
+
+{\bfseries{Edge\+Of\+Assemblly}} -\/ \href{mailto:haxbox2000@gmail.com}{\texttt{haxbox2000@gmail.\+com}}
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md990}{}\doxysection{\texorpdfstring{Quick Reference Card}{Quick Reference Card}}\label{md_README_autotoc_md990}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{┌─────────────────────────────────────────────────────────────────┐}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AXE\ Quick\ Reference\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{├─────────────────────────────────────────────────────────────────┤}
+\DoxyCodeLine{│\ AGENTS\ (use\ @\ prefix)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ @gpt,\ @g\ \ \ \ \ -\/\ OpenAI\ GPT-\/4o\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ @claude,\ @c\ \ -\/\ Anthropic\ Claude\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ @llama,\ @l\ \ \ -\/\ HuggingFace\ Llama\ (FREE!)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ @grok,\ @x\ \ \ \ -\/\ xAI\ Grok\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ @copilot,\ @cp\ -\/\ GitHub\ Models\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{├─────────────────────────────────────────────────────────────────┤}
+\DoxyCodeLine{│\ COMMANDS\ (use\ /\ prefix)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /agents\ \ -\/\ List\ agents\ \ \ \ \ \ \ \ /tools\ \ \ -\/\ List\ tools\ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /files\ \ \ -\/\ List\ code\ files\ \ \ \ /context\ -\/\ Project\ summary\ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /read\ X\ \ -\/\ Read\ file\ X\ \ \ \ \ \ \ \ /exec\ X\ \ -\/\ Run\ command\ X\ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /history\ -\/\ Chat\ history\ \ \ \ \ \ \ /clear\ \ \ -\/\ Clear\ history\ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /workshop\ -\/\ Analysis\ tools\ \ \ \ /help\ \ \ \ -\/\ Show\ help\ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /quit\ \ \ \ -\/\ Exit\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{├─────────────────────────────────────────────────────────────────┤}
+\DoxyCodeLine{│\ WORKSHOP\ TOOLS\ (Dynamic\ Analysis)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /workshop\ chisel\ <binary>\ \ \ \ \ -\/\ Symbolic\ execution\ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /workshop\ saw\ "{}<code>"{}\ \ \ \ \ \ \ \ -\/\ Taint\ analysis\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /workshop\ plane\ <path>\ \ \ \ \ \ \ \ -\/\ Source/sink\ enumeration\ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /workshop\ hammer\ <process>\ \ \ \ -\/\ Live\ instrumentation\ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /workshop\ history\ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ View\ analysis\ history\ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{├─────────────────────────────────────────────────────────────────┤}
+\DoxyCodeLine{│\ COLLABORATIVE\ MODE\ (NEW!)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /collab\ agents\ workspace\ time\ "{}task"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ Example:\ /collab\ llama,copilot\ ./playground\ 30\ "{}Review\ code"{}\ │}
+\DoxyCodeLine{│\ \ \ Ctrl+C\ during\ session:\ pause/inject/stop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{├─────────────────────────────────────────────────────────────────┤}
+\DoxyCodeLine{│\ EXAMPLES\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ @llama\ explain\ WAD\ file\ format\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ @claude\ review\ main.c\ for\ security\ issues\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ @gpt\ write\ a\ function\ to\ parse\ binary\ headers\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /exec\ hexdump\ -\/C\ game.exe\ |\ head\ -\/20\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ \ \ /read\ wadextract.c\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{└─────────────────────────────────────────────────────────────────┘}
+
+\end{DoxyCode}
+ 

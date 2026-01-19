@@ -1,0 +1,249 @@
+\doxysection{core.\+anthropic\+\_\+features.\+Anthropic\+Features Class Reference}
+\hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures}{}\label{classcore_1_1anthropic__features_1_1AnthropicFeatures}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+
+
+Collaboration diagram for core.\+anthropic\+\_\+features.\+Anthropic\+Features\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classcore_1_1anthropic__features_1_1AnthropicFeatures__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_a95748ee6dc8cd0e906df32fe80e79d19}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Any \mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_a0c5d731b9c9d56a594c75914aa30379d}{client}}=None, Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_a541261bcb1340a7cacb99b57290b8c84}{config}}=None)
+\item 
+bool \mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_ae4cd2fc680f6eee97b78bf22a249bb50}{is\+\_\+prompt\+\_\+caching\+\_\+enabled}} (self)
+\item 
+bool \mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_a9f391e07bb747b23ee1f490a5ceca240}{is\+\_\+files\+\_\+api\+\_\+enabled}} (self)
+\item 
+bool \mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_a264f65c13464b92c1ee4945375adb5f9}{is\+\_\+token\+\_\+counting\+\_\+enabled}} (self)
+\item 
+List\mbox{[}str\mbox{]} \mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_a15c555c0d09d40268bf88ece1d9b2942}{get\+\_\+cache\+\_\+breakpoints}} (self)
+\item 
+str \mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_ac61f799455eea86908d322adcfc86a04}{get\+\_\+cache\+\_\+ttl}} (self)
+\item 
+List\mbox{[}Dict\mbox{]} \mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_ac5875c33c281908713873f9268e32fca}{add\+\_\+cache\+\_\+control}} (self, List\mbox{[}Dict\mbox{]} content\+\_\+blocks, List\mbox{[}str\mbox{]} breakpoints=None)
+\item 
+Optional\mbox{[}int\mbox{]} \mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_af7670c5e74191a95b3eae8d550839e1a}{count\+\_\+tokens}} (self, str model, List\mbox{[}Dict\mbox{]} messages, str system="{}"{}, List\mbox{[}Dict\mbox{]} \mbox{\hyperlink{namespacetools}{tools}}=None)
+\item 
+int \mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_a805441baae1756d437100197a4485951}{estimate\+\_\+tokens}} (self, str text)
+\item 
+bool \mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_adcacfe29b8e7accb0eaffb3fb1bb39c7}{should\+\_\+use\+\_\+precise\+\_\+counting}} (self, int estimated\+\_\+tokens)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_a0c5d731b9c9d56a594c75914aa30379d}{client}} = client
+\item 
+\mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_a541261bcb1340a7cacb99b57290b8c84}{config}} = config or \{\}
+\item 
+\mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_a3ad0f25e5f1c663b4aa2fe519777a5fa}{prompt\+\_\+caching}} = self.\+config.\+get(\textquotesingle{}prompt\+\_\+caching\textquotesingle{}, \{\})
+\item 
+\mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_a0f1c522045ca0ebe8d34603478b6d6c1}{files\+\_\+api}} = self.\+config.\+get(\textquotesingle{}files\+\_\+api\textquotesingle{}, \{\})
+\item 
+\mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_a5b5d623ef0cd89488c51f5a09757beb3}{token\+\_\+counting}} = self.\+config.\+get(\textquotesingle{}token\+\_\+counting\textquotesingle{}, \{\})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Manager for Anthropic-specific features.\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_a95748ee6dc8cd0e906df32fe80e79d19}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_a95748ee6dc8cd0e906df32fe80e79d19} 
+core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Any }]{client}{ = {\ttfamily None}, }\item[{Dict\mbox{[}str, Any\mbox{]} }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize Anthropic features manager.
+
+Args:
+    client: Anthropic API client instance
+    config: Configuration dictionary from models.yaml
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_ac5875c33c281908713873f9268e32fca}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!add\_cache\_control@{add\_cache\_control}}
+\index{add\_cache\_control@{add\_cache\_control}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{add\_cache\_control()}{add\_cache\_control()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_ac5875c33c281908713873f9268e32fca} 
+ List\mbox{[}Dict\mbox{]} core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+add\+\_\+cache\+\_\+control (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}Dict\mbox{]}}]{content\+\_\+blocks}{, }\item[{List\mbox{[}str\mbox{]} }]{breakpoints}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Add cache_control markers to content blocks based on breakpoints.
+
+Args:
+    content_blocks: List of content blocks to mark for caching
+    breakpoints: Optional list of breakpoint names (defaults to config)
+
+Returns:
+    List of content blocks with cache_control added where appropriate
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1anthropic__features_1_1AnthropicFeatures_ac5875c33c281908713873f9268e32fca_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_af7670c5e74191a95b3eae8d550839e1a}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!count\_tokens@{count\_tokens}}
+\index{count\_tokens@{count\_tokens}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{count\_tokens()}{count\_tokens()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_af7670c5e74191a95b3eae8d550839e1a} 
+ Optional\mbox{[}int\mbox{]} core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+count\+\_\+tokens (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{model}{, }\item[{List\mbox{[}Dict\mbox{]}}]{messages}{, }\item[{str }]{system}{ = {\ttfamily "{}"{}}, }\item[{List\mbox{[}Dict\mbox{]} }]{tools}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get precise token count from Anthropic API.
+
+Args:
+    model: Model name
+    messages: List of message dictionaries
+    system: System prompt string
+    tools: Optional list of tool definitions
+
+Returns:
+    Token count, or None if error/disabled
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1anthropic__features_1_1AnthropicFeatures_af7670c5e74191a95b3eae8d550839e1a_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_a805441baae1756d437100197a4485951}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!estimate\_tokens@{estimate\_tokens}}
+\index{estimate\_tokens@{estimate\_tokens}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{estimate\_tokens()}{estimate\_tokens()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_a805441baae1756d437100197a4485951} 
+ int core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+estimate\+\_\+tokens (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{text}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Estimate token count using char/4 heuristic.
+
+Args:
+    text: Text to estimate
+
+Returns:
+    Estimated token count
+\end{DoxyVerb}
+ \Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_a15c555c0d09d40268bf88ece1d9b2942}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!get\_cache\_breakpoints@{get\_cache\_breakpoints}}
+\index{get\_cache\_breakpoints@{get\_cache\_breakpoints}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{get\_cache\_breakpoints()}{get\_cache\_breakpoints()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_a15c555c0d09d40268bf88ece1d9b2942} 
+ List\mbox{[}str\mbox{]} core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+get\+\_\+cache\+\_\+breakpoints (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get configured cache breakpoints.\end{DoxyVerb}
+ \Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_ac61f799455eea86908d322adcfc86a04}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!get\_cache\_ttl@{get\_cache\_ttl}}
+\index{get\_cache\_ttl@{get\_cache\_ttl}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{get\_cache\_ttl()}{get\_cache\_ttl()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_ac61f799455eea86908d322adcfc86a04} 
+ str core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+get\+\_\+cache\+\_\+ttl (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get cache TTL setting.\end{DoxyVerb}
+ \Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_a9f391e07bb747b23ee1f490a5ceca240}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!is\_files\_api\_enabled@{is\_files\_api\_enabled}}
+\index{is\_files\_api\_enabled@{is\_files\_api\_enabled}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{is\_files\_api\_enabled()}{is\_files\_api\_enabled()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_a9f391e07bb747b23ee1f490a5ceca240} 
+ bool core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+is\+\_\+files\+\_\+api\+\_\+enabled (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if Files API is enabled.\end{DoxyVerb}
+ \Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_ae4cd2fc680f6eee97b78bf22a249bb50}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!is\_prompt\_caching\_enabled@{is\_prompt\_caching\_enabled}}
+\index{is\_prompt\_caching\_enabled@{is\_prompt\_caching\_enabled}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{is\_prompt\_caching\_enabled()}{is\_prompt\_caching\_enabled()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_ae4cd2fc680f6eee97b78bf22a249bb50} 
+ bool core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+is\+\_\+prompt\+\_\+caching\+\_\+enabled (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if prompt caching is enabled.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1anthropic__features_1_1AnthropicFeatures_ae4cd2fc680f6eee97b78bf22a249bb50_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_a264f65c13464b92c1ee4945375adb5f9}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!is\_token\_counting\_enabled@{is\_token\_counting\_enabled}}
+\index{is\_token\_counting\_enabled@{is\_token\_counting\_enabled}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{is\_token\_counting\_enabled()}{is\_token\_counting\_enabled()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_a264f65c13464b92c1ee4945375adb5f9} 
+ bool core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+is\+\_\+token\+\_\+counting\+\_\+enabled (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if token counting is enabled.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1anthropic__features_1_1AnthropicFeatures_a264f65c13464b92c1ee4945375adb5f9_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_adcacfe29b8e7accb0eaffb3fb1bb39c7}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!should\_use\_precise\_counting@{should\_use\_precise\_counting}}
+\index{should\_use\_precise\_counting@{should\_use\_precise\_counting}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{should\_use\_precise\_counting()}{should\_use\_precise\_counting()}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_adcacfe29b8e7accb0eaffb3fb1bb39c7} 
+ bool core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+should\+\_\+use\+\_\+precise\+\_\+counting (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{estimated\+\_\+tokens}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if precise token counting should be used based on threshold.
+
+Args:
+    estimated_tokens: Estimated token count
+
+Returns:
+    True if precise counting should be used
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1anthropic__features_1_1AnthropicFeatures_adcacfe29b8e7accb0eaffb3fb1bb39c7_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_a0c5d731b9c9d56a594c75914aa30379d}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!client@{client}}
+\index{client@{client}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_a0c5d731b9c9d56a594c75914aa30379d} 
+core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+client = client}
+
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_a541261bcb1340a7cacb99b57290b8c84}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!config@{config}}
+\index{config@{config}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_a541261bcb1340a7cacb99b57290b8c84} 
+core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+config = config or \{\}}
+
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_a0f1c522045ca0ebe8d34603478b6d6c1}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!files\_api@{files\_api}}
+\index{files\_api@{files\_api}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{files\_api}{files\_api}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_a0f1c522045ca0ebe8d34603478b6d6c1} 
+core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+files\+\_\+api = self.\+config.\+get(\textquotesingle{}files\+\_\+api\textquotesingle{}, \{\})}
+
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_a3ad0f25e5f1c663b4aa2fe519777a5fa}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!prompt\_caching@{prompt\_caching}}
+\index{prompt\_caching@{prompt\_caching}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{prompt\_caching}{prompt\_caching}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_a3ad0f25e5f1c663b4aa2fe519777a5fa} 
+core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+prompt\+\_\+caching = self.\+config.\+get(\textquotesingle{}prompt\+\_\+caching\textquotesingle{}, \{\})}
+
+\Hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures_a5b5d623ef0cd89488c51f5a09757beb3}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}!token\_counting@{token\_counting}}
+\index{token\_counting@{token\_counting}!core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
+\doxysubsubsection{\texorpdfstring{token\_counting}{token\_counting}}
+{\footnotesize\ttfamily \label{classcore_1_1anthropic__features_1_1AnthropicFeatures_a5b5d623ef0cd89488c51f5a09757beb3} 
+core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+token\+\_\+counting = self.\+config.\+get(\textquotesingle{}token\+\_\+counting\textquotesingle{}, \{\})}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{anthropic__features_8py}{anthropic\+\_\+features.\+py}}\end{DoxyCompactItemize}

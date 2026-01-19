@@ -1,0 +1,247 @@
+\doxysection{core.\+multiprocess.\+Agent\+Worker\+Process Class Reference}
+\hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess}{}\label{classcore_1_1multiprocess_1_1AgentWorkerProcess}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+
+
+Collaboration diagram for core.\+multiprocess.\+Agent\+Worker\+Process\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{classcore_1_1multiprocess_1_1AgentWorkerProcess__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a60a7384acef58935c3f22147dc6702fc}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a8548f8b171f5b85099f8a836f60ed7ba}{agent\+\_\+id}}, str \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a30eeb225977669759867e300e3f8857a}{agent\+\_\+name}}, Queue \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a9e9a0778b61261b93ace3b0fcb47119a}{input\+\_\+queue}}, Queue \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a1bea52b2b9a91bd7b9535d639832b025}{output\+\_\+queue}}, \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext}{Shared\+Context}} \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_af8832a6f78ec487f9faa8c09480c0f71}{shared\+\_\+context}})
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_ac3d3e058151e11aa9e6380c218590ce4}{run}} (self)
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a31934e365b16de26a030e3a9db2c4868}{handle\+\_\+command}} (self, Dict\mbox{[}str, Any\mbox{]} command)
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a8a73bda9ba7372bbaecbf6f31c55db71}{handle\+\_\+turn}} (self, Dict\mbox{[}str, Any\mbox{]} command)
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a87339d23c63fe1980e98b5de79e24fe2}{handle\+\_\+context\+\_\+update}} (self, Dict\mbox{[}str, Any\mbox{]} command)
+\item 
+None \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_acd76bd1ba490767b6cd053d02b609f64}{background\+\_\+think}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a8548f8b171f5b85099f8a836f60ed7ba}{agent\+\_\+id}} = agent\+\_\+id
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a30eeb225977669759867e300e3f8857a}{agent\+\_\+name}} = agent\+\_\+name
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a9e9a0778b61261b93ace3b0fcb47119a}{input\+\_\+queue}} = input\+\_\+queue
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a1bea52b2b9a91bd7b9535d639832b025}{output\+\_\+queue}} = output\+\_\+queue
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_af8832a6f78ec487f9faa8c09480c0f71}{shared\+\_\+context}} = shared\+\_\+context
+\item 
+bool \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_add6b5fd4d9774b3f3ac763066ad88dbd}{running}} = False
+\item 
+\mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_ae90ff7d55d7c7ea55a2e9599c3271cac}{thoughts\+\_\+queue}} = Queue()
+\item 
+str \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a5880d5c6965b16c2177a6696f311f6fe}{prepared\+\_\+response}} = None
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Individual agent background process.
+
+Each agent runs in its own process, continuously:
+1. Monitoring shared context updates
+2. Preparing potential responses
+3. Analyzing the current situation
+4. Waiting for its turn to respond
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_a60a7384acef58935c3f22147dc6702fc}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_a60a7384acef58935c3f22147dc6702fc} 
+core.\+multiprocess.\+Agent\+Worker\+Process.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{str}]{agent\+\_\+name}{, }\item[{Queue}]{input\+\_\+queue}{, }\item[{Queue}]{output\+\_\+queue}{, }\item[{\mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext}{Shared\+Context}}}]{shared\+\_\+context}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initialize agent worker process.
+
+Args:
+    agent_id: Unique agent identifier
+    agent_name: Agent name (e.g., 'claude', 'gpt')
+    input_queue: Queue for receiving commands
+    output_queue: Queue for sending responses
+    shared_context: Shared context object
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_acd76bd1ba490767b6cd053d02b609f64}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!background\_think@{background\_think}}
+\index{background\_think@{background\_think}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{background\_think()}{background\_think()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_acd76bd1ba490767b6cd053d02b609f64} 
+ None core.\+multiprocess.\+Agent\+Worker\+Process.\+background\+\_\+think (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Perform background thinking while waiting.
+
+This is called continuously when no commands are pending.
+The agent can:
+- Analyze recent messages
+- Prepare potential responses
+- Plan ahead
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1multiprocess_1_1AgentWorkerProcess_acd76bd1ba490767b6cd053d02b609f64_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_a31934e365b16de26a030e3a9db2c4868}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!handle\_command@{handle\_command}}
+\index{handle\_command@{handle\_command}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{handle\_command()}{handle\_command()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_a31934e365b16de26a030e3a9db2c4868} 
+ None core.\+multiprocess.\+Agent\+Worker\+Process.\+handle\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{command}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Handle a command from the coordinator.
+
+Args:
+    command: Command dictionary with 'type' and other fields
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1multiprocess_1_1AgentWorkerProcess_a31934e365b16de26a030e3a9db2c4868_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1multiprocess_1_1AgentWorkerProcess_a31934e365b16de26a030e3a9db2c4868_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_a87339d23c63fe1980e98b5de79e24fe2}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!handle\_context\_update@{handle\_context\_update}}
+\index{handle\_context\_update@{handle\_context\_update}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{handle\_context\_update()}{handle\_context\_update()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_a87339d23c63fe1980e98b5de79e24fe2} 
+ None core.\+multiprocess.\+Agent\+Worker\+Process.\+handle\+\_\+context\+\_\+update (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{command}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Handle context update notification.
+
+Args:
+    command: Context update command
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1multiprocess_1_1AgentWorkerProcess_a87339d23c63fe1980e98b5de79e24fe2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_a8a73bda9ba7372bbaecbf6f31c55db71}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!handle\_turn@{handle\_turn}}
+\index{handle\_turn@{handle\_turn}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{handle\_turn()}{handle\_turn()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_a8a73bda9ba7372bbaecbf6f31c55db71} 
+ None core.\+multiprocess.\+Agent\+Worker\+Process.\+handle\+\_\+turn (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{command}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Handle when it's this agent's turn to respond.
+
+Args:
+    command: Turn command with prompt and context
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1multiprocess_1_1AgentWorkerProcess_a8a73bda9ba7372bbaecbf6f31c55db71_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_ac3d3e058151e11aa9e6380c218590ce4}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!run@{run}}
+\index{run@{run}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_ac3d3e058151e11aa9e6380c218590ce4} 
+ None core.\+multiprocess.\+Agent\+Worker\+Process.\+run (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Main worker loop.
+
+Continuously monitors for:
+- Commands from coordinator (your turn, update context, shutdown)
+- Context updates to think about
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1multiprocess_1_1AgentWorkerProcess_ac3d3e058151e11aa9e6380c218590ce4_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_a8548f8b171f5b85099f8a836f60ed7ba}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!agent\_id@{agent\_id}}
+\index{agent\_id@{agent\_id}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{agent\_id}{agent\_id}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_a8548f8b171f5b85099f8a836f60ed7ba} 
+core.\+multiprocess.\+Agent\+Worker\+Process.\+agent\+\_\+id = agent\+\_\+id}
+
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_a30eeb225977669759867e300e3f8857a}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!agent\_name@{agent\_name}}
+\index{agent\_name@{agent\_name}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{agent\_name}{agent\_name}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_a30eeb225977669759867e300e3f8857a} 
+core.\+multiprocess.\+Agent\+Worker\+Process.\+agent\+\_\+name = agent\+\_\+name}
+
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_a9e9a0778b61261b93ace3b0fcb47119a}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!input\_queue@{input\_queue}}
+\index{input\_queue@{input\_queue}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{input\_queue}{input\_queue}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_a9e9a0778b61261b93ace3b0fcb47119a} 
+core.\+multiprocess.\+Agent\+Worker\+Process.\+input\+\_\+queue = input\+\_\+queue}
+
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_a1bea52b2b9a91bd7b9535d639832b025}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!output\_queue@{output\_queue}}
+\index{output\_queue@{output\_queue}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{output\_queue}{output\_queue}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_a1bea52b2b9a91bd7b9535d639832b025} 
+core.\+multiprocess.\+Agent\+Worker\+Process.\+output\+\_\+queue = output\+\_\+queue}
+
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_a5880d5c6965b16c2177a6696f311f6fe}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!prepared\_response@{prepared\_response}}
+\index{prepared\_response@{prepared\_response}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{prepared\_response}{prepared\_response}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_a5880d5c6965b16c2177a6696f311f6fe} 
+str core.\+multiprocess.\+Agent\+Worker\+Process.\+prepared\+\_\+response = None}
+
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_add6b5fd4d9774b3f3ac763066ad88dbd}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!running@{running}}
+\index{running@{running}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{running}{running}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_add6b5fd4d9774b3f3ac763066ad88dbd} 
+bool core.\+multiprocess.\+Agent\+Worker\+Process.\+running = False}
+
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_af8832a6f78ec487f9faa8c09480c0f71}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!shared\_context@{shared\_context}}
+\index{shared\_context@{shared\_context}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{shared\_context}{shared\_context}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_af8832a6f78ec487f9faa8c09480c0f71} 
+core.\+multiprocess.\+Agent\+Worker\+Process.\+shared\+\_\+context = shared\+\_\+context}
+
+\Hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess_ae90ff7d55d7c7ea55a2e9599c3271cac}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}!thoughts\_queue@{thoughts\_queue}}
+\index{thoughts\_queue@{thoughts\_queue}!core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
+\doxysubsubsection{\texorpdfstring{thoughts\_queue}{thoughts\_queue}}
+{\footnotesize\ttfamily \label{classcore_1_1multiprocess_1_1AgentWorkerProcess_ae90ff7d55d7c7ea55a2e9599c3271cac} 
+core.\+multiprocess.\+Agent\+Worker\+Process.\+thoughts\+\_\+queue = Queue()}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+core/\mbox{\hyperlink{multiprocess_8py}{multiprocess.\+py}}\end{DoxyCompactItemize}

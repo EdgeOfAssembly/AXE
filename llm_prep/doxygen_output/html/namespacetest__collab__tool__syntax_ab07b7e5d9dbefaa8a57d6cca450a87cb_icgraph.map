@@ -1,0 +1,15 @@
+<map id="test_collab_tool_syntax.create_test_session" name="test_collab_tool_syntax.create_test_session">
+<area shape="rect" id="Node000001" title=" " alt="" coords="571,112,791,157"/>
+<area shape="rect" id="Node000002" href="$namespacetest__collab__tool__syntax.html#ac2fbb67241504f81841e6625d3755251" title=" " alt="" coords="288,5,492,67"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="596,107,483,70,483,65,601,107"/>
+<area shape="rect" id="Node000003" href="$namespacetest__collab__tool__syntax.html#a35afb66b14174bae3c39efd8dd247f45" title=" " alt="" coords="5,104,210,166"/>
+<area shape="poly" id="edge8_Node000001_Node000003" title=" " alt="" coords="553,131,523,132,258,132,211,133,209,128,258,127,523,127,558,130"/>
+<area shape="rect" id="Node000004" href="$namespacetest__collab__tool__syntax.html#aa8ac70ed15a8a0db044cadadf5a82152" title=" " alt="" coords="258,142,523,186"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="553,148,524,153,523,148,558,147"/>
+<area shape="rect" id="Node000005" href="$namespacetest__collab__tool__syntax.html#a2bb87e5531f531b7fb734927ee837adf" title=" " alt="" coords="288,211,492,272"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="615,163,524,201,492,213,491,207,522,196,610,164"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="283,74,199,106,197,101,287,71"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="152,91,136,85,107,83,83,85,67,89,59,96,58,104,52,103,54,93,64,85,82,79,108,77,138,80,157,89"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="239,149,211,148,210,143,245,148"/>
+<area shape="poly" id="edge7_Node000005_Node000003" title=" " alt="" coords="272,205,257,201,178,169,179,164,259,196,277,205"/>
+</map>

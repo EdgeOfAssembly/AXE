@@ -1,0 +1,189 @@
+\chapter{AXE Multiagent -\/ Quick Reference Card }
+\hypertarget{md_QUICK__REFERENCE}{}\label{md_QUICK__REFERENCE}\index{AXE Multiagent -\/ Quick Reference Card@{AXE Multiagent -\/ Quick Reference Card}}
+\label{md_QUICK__REFERENCE_autotoc_md838}%
+\Hypertarget{md_QUICK__REFERENCE_autotoc_md838}%
+\hypertarget{md_QUICK__REFERENCE_autotoc_md839}{}\doxysection{\texorpdfstring{Session Rules (The 4 Principles)}{Session Rules (The 4 Principles)}}\label{md_QUICK__REFERENCE_autotoc_md839}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{MISSION FIRST}} -\/ Task is sacred, work comes first
+\item {\bfseries{RESPECT \& WELL-\/\+BEING}} -\/ No bullying, be cooperative
+\item {\bfseries{CHAIN OF COMMAND}} -\/ Team Leader → Deputy → @boss → Human
+\item {\bfseries{PERFORMANCE \& REWARDS}} -\/ Good work = XP + Levels + Promotions
+\end{DoxyEnumerate}\hypertarget{md_QUICK__REFERENCE_autotoc_md840}{}\doxysection{\texorpdfstring{Agent Ranks \& Levels}{Agent Ranks \& Levels}}\label{md_QUICK__REFERENCE_autotoc_md840}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Level  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}XP Required  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Title  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Perks  \\
+1-\/9  &0-\/899  &Worker  &Basic agent  \\
+10  &1,000  &Senior Worker  &Experienced contributor  \\
+20  &5,000  &Team Leader  &Can delegate subtasks  \\
+30  &15,000  &Deputy Supervisor  &Can temporarily replace @boss  \\
+40  &30,000  &Supervisor-\/\+Eligible  &Promoted by human  \\
+\end{DoxyTable}
+\hypertarget{md_QUICK__REFERENCE_autotoc_md841}{}\doxysection{\texorpdfstring{XP Awards}{XP Awards}}\label{md_QUICK__REFERENCE_autotoc_md841}
+
+\begin{DoxyItemize}
+\item {\bfseries{Turn contribution}}\+: 50 XP
+\item {\bfseries{Task completion}}\+: 200 XP (all agents)
+\item {\bfseries{Quality bonuses}}\+: Varies (future feature)
+\item {\bfseries{Peer recognition}}\+: Varies (future feature)
+\end{DoxyItemize}\hypertarget{md_QUICK__REFERENCE_autotoc_md842}{}\doxysection{\texorpdfstring{Commands}{Commands}}\label{md_QUICK__REFERENCE_autotoc_md842}
+\hypertarget{md_QUICK__REFERENCE_autotoc_md843}{}\doxysubsection{\texorpdfstring{Chat Commands}{Chat Commands}}\label{md_QUICK__REFERENCE_autotoc_md843}
+
+\begin{DoxyItemize}
+\item {\ttfamily /help} -\/ Show all commands
+\item {\ttfamily /rules} -\/ Display session rules
+\item {\ttfamily /agents} -\/ List available agents
+\item {\ttfamily /tools} -\/ List whitelisted tools
+\item {\ttfamily /dirs} -\/ Show directory access
+\item {\ttfamily /quit} -\/ Exit
+\end{DoxyItemize}\hypertarget{md_QUICK__REFERENCE_autotoc_md844}{}\doxysubsection{\texorpdfstring{Starting a Session}{Starting a Session}}\label{md_QUICK__REFERENCE_autotoc_md844}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Basic\ collaborative\ session}
+\DoxyCodeLine{python3\ axe.py\ -\/-\/collab\ llama,copilot\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/workspace\ ./playground\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/time\ 30\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/task\ "{}Review\ and\ improve\ code"{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ With\ specific\ agents}
+\DoxyCodeLine{python3\ axe.py\ -\/-\/collab\ llama,grok,claude\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/workspace\ ./myproject\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/time\ 60\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/task\ "{}Refactor\ authentication\ module"{}}
+
+\end{DoxyCode}
+\hypertarget{md_QUICK__REFERENCE_autotoc_md845}{}\doxysection{\texorpdfstring{Aliases}{Aliases}}\label{md_QUICK__REFERENCE_autotoc_md845}
+{\bfseries{Supervisor}}\+: Always {\ttfamily @boss} (first agent in session)
+
+{\bfseries{Workers}}\+: {\ttfamily @modelN} where N is sequential\+:
+\begin{DoxyItemize}
+\item {\ttfamily @llama1}, {\ttfamily @llama2}, {\ttfamily @llama3}
+\item {\ttfamily @grok1}, {\ttfamily @grok2}
+\item {\ttfamily @copilot1}, {\ttfamily @copilot2}
+\end{DoxyItemize}\hypertarget{md_QUICK__REFERENCE_autotoc_md846}{}\doxysection{\texorpdfstring{Database}{Database}}\label{md_QUICK__REFERENCE_autotoc_md846}
+{\bfseries{Location}}\+: {\ttfamily axe\+\_\+agents.\+db} in AXE installation directory (persists across workspaces)
+
+{\bfseries{Inspect}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sqlite3\ axe\_agents.db}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ View\ agents}
+\DoxyCodeLine{SELECT\ alias,\ level,\ xp,\ status\ FROM\ agent\_state;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ View\ supervisor\ log}
+\DoxyCodeLine{SELECT\ timestamp,\ event\_type,\ details\ FROM\ supervisor\_log\ }
+\DoxyCodeLine{ORDER\ BY\ timestamp\ DESC\ LIMIT\ 10;}
+
+\end{DoxyCode}
+\hypertarget{md_QUICK__REFERENCE_autotoc_md847}{}\doxysection{\texorpdfstring{Resource Monitoring}{Resource Monitoring}}\label{md_QUICK__REFERENCE_autotoc_md847}
+{\bfseries{File}}\+: {\ttfamily /tmp/axe\+\_\+resources.txt} ~\newline
+ {\bfseries{Updates}}\+: Every 60 seconds ~\newline
+ {\bfseries{Contains}}\+: Disk usage, RAM, load average
+
+{\bfseries{View}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cat\ /tmp/axe\_resources.txt}
+
+\end{DoxyCode}
+\hypertarget{md_QUICK__REFERENCE_autotoc_md848}{}\doxysection{\texorpdfstring{Testing}{Testing}}\label{md_QUICK__REFERENCE_autotoc_md848}
+\hypertarget{md_QUICK__REFERENCE_autotoc_md849}{}\doxysubsection{\texorpdfstring{Run automated tests}{Run automated tests}}\label{md_QUICK__REFERENCE_autotoc_md849}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ multiagent}
+\DoxyCodeLine{python3\ test\_axe\_improvements.py}
+
+\end{DoxyCode}
+\hypertarget{md_QUICK__REFERENCE_autotoc_md850}{}\doxysubsection{\texorpdfstring{Run interactive demo}{Run interactive demo}}\label{md_QUICK__REFERENCE_autotoc_md850}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ multiagent}
+\DoxyCodeLine{python3\ demo\_improvements.py}
+
+\end{DoxyCode}
+\hypertarget{md_QUICK__REFERENCE_autotoc_md851}{}\doxysection{\texorpdfstring{Tips for Humans}{Tips for Humans}}\label{md_QUICK__REFERENCE_autotoc_md851}
+\hypertarget{md_QUICK__REFERENCE_autotoc_md852}{}\doxysubsection{\texorpdfstring{Starting a Session}{Starting a Session}}\label{md_QUICK__REFERENCE_autotoc_md852}
+
+\begin{DoxyEnumerate}
+\item Set clear task description
+\item Choose complementary agents (e.\+g., llama for code, grok for creativity)
+\item Set realistic time limit (30-\/60 min recommended)
+\item Watch resource file if running many agents
+\end{DoxyEnumerate}\hypertarget{md_QUICK__REFERENCE_autotoc_md853}{}\doxysubsection{\texorpdfstring{During Session}{During Session}}\label{md_QUICK__REFERENCE_autotoc_md853}
+
+\begin{DoxyItemize}
+\item Press Ctrl+C to pause (can inject messages)
+\item Watch for level-\/up announcements
+\item Check {\ttfamily /tmp/axe\+\_\+resources.txt} if performance degrades
+\item Agents will PASS when done with their part
+\end{DoxyItemize}\hypertarget{md_QUICK__REFERENCE_autotoc_md854}{}\doxysubsection{\texorpdfstring{Encouraging Good Behavior}{Encouraging Good Behavior}}\label{md_QUICK__REFERENCE_autotoc_md854}
+Say things like\+:
+\begin{DoxyItemize}
+\item "{}\+Remember to cooperate and help each other"{}
+\item "{}\+Let\textquotesingle{}s see who can earn Senior Worker first!"{}
+\item "{}@boss, coordinate the team efficiently"{}
+\item "{}\+Follow the session rules -\/ mission first, respect always"{}
+\end{DoxyItemize}\hypertarget{md_QUICK__REFERENCE_autotoc_md855}{}\doxysection{\texorpdfstring{What Agents See}{What Agents See}}\label{md_QUICK__REFERENCE_autotoc_md855}
+At session start, agents see\+:
+\begin{DoxyEnumerate}
+\item Complete session rules banner
+\item Their alias and current level/\+XP
+\item Other agents in the session
+\item Supervisor designation (@boss)
+\item Workspace location
+\item Time limit
+\end{DoxyEnumerate}
+
+During work\+:
+\begin{DoxyItemize}
+\item Conversation history
+\item Other agents\textquotesingle{} contributions
+\item XP awards after each turn
+\item Level-\/up announcements
+\item Task completion bonuses
+\end{DoxyItemize}\hypertarget{md_QUICK__REFERENCE_autotoc_md856}{}\doxysection{\texorpdfstring{Common Scenarios}{Common Scenarios}}\label{md_QUICK__REFERENCE_autotoc_md856}
+\hypertarget{md_QUICK__REFERENCE_autotoc_md857}{}\doxysubsection{\texorpdfstring{"{}\+Agents not cooperating"{}}{"{}\+Agents not cooperating"{}}}\label{md_QUICK__REFERENCE_autotoc_md857}
+
+\begin{DoxyItemize}
+\item Remind them of rules\+: {\ttfamily /rules}
+\item @boss should coordinate\+: "{}@boss, please coordinate the team"{}
+\item Check if they\textquotesingle{}re using aliases in communication
+\end{DoxyItemize}\hypertarget{md_QUICK__REFERENCE_autotoc_md858}{}\doxysubsection{\texorpdfstring{"{}\+Agent stuck or confused"{}}{"{}\+Agent stuck or confused"{}}}\label{md_QUICK__REFERENCE_autotoc_md858}
+
+\begin{DoxyItemize}
+\item Pause with Ctrl+C
+\item Inject clarifying message
+\item Continue session
+\end{DoxyItemize}\hypertarget{md_QUICK__REFERENCE_autotoc_md859}{}\doxysubsection{\texorpdfstring{"{}\+Want to resume later"{}}{"{}\+Want to resume later"{}}}\label{md_QUICK__REFERENCE_autotoc_md859}
+
+\begin{DoxyItemize}
+\item Everything is in {\ttfamily axe\+\_\+agents.\+db}
+\item Next session will load agent states
+\item XP and levels persist
+\end{DoxyItemize}\hypertarget{md_QUICK__REFERENCE_autotoc_md860}{}\doxysubsection{\texorpdfstring{"{}\+System slowing down"{}}{"{}\+System slowing down"{}}}\label{md_QUICK__REFERENCE_autotoc_md860}
+
+\begin{DoxyItemize}
+\item Check {\ttfamily /tmp/axe\+\_\+resources.txt}
+\item Reduce number of agents
+\item Increase time between turns
+\end{DoxyItemize}\hypertarget{md_QUICK__REFERENCE_autotoc_md861}{}\doxysection{\texorpdfstring{Future Features (Not Yet Implemented)}{Future Features (Not Yet Implemented)}}\label{md_QUICK__REFERENCE_autotoc_md861}
+
+\begin{DoxyItemize}
+\item Mandatory sleep after 6-\/8 hours work
+\item Diff-\/based error detection
+\item GPG-\/encrypted emergency mailbox
+\item Coffee/play breaks
+\item Dynamic agent spawning
+\item Safe command whitelist (tree, du, etc.)
+\item Per-\/agent workspaces
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+
+
+{\bfseries{Quick Help}}\+: Run {\ttfamily python3 \doxylink{axe_8py}{axe.\+py} -\/-\/help} for CLI options
+
+{\bfseries{Documentation}}\+: See {\ttfamily \doxylink{IMPROVEMENTS__README_8md}{IMPROVEMENTS\+\_\+\+README.\+md}} for full details
+
+{\bfseries{Demo}}\+: Run {\ttfamily python3 \doxylink{demo__improvements_8py}{demo\+\_\+improvements.\+py}} to see all features
+
+{\bfseries{Tests}}\+: Run {\ttfamily python3 \doxylink{test__axe__improvements_8py}{test\+\_\+axe\+\_\+improvements.\+py}} to verify installation 

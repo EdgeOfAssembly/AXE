@@ -1,0 +1,15 @@
+\chapter{dosbox\+\_\+memory\+\_\+dump }
+\hypertarget{md_skills_2dosbox__memory__dump}{}\label{md_skills_2dosbox__memory__dump}\index{dosbox\_memory\_dump@{dosbox\_memory\_dump}}
+Skill\+: dosbox\+\_\+memory\+\_\+dump Category\+: DOS-\/specific Reverse Engineering / Emulation Recommended agent\+: llama
+
+Purpose\+: Clean conventional/low memory dump via DOSBox-\/X for MCB/\+PSP/\+TSR analysis. Uses interactive mode for manual debugger dump (automated not feasible).
+
+Inputs\+: Optional target.\+exe (for post-\/load dump), --full-\/1mb flag
+
+Workflow\+:
+\begin{DoxyEnumerate}
+\item @llama use dosbox\+\_\+emulation\+\_\+setup --interactive --dump-\/low-\/memory (add --full-\/1mb if needed; add target.\+exe + --brief-\/run for post-\/load)
+\item When session starts\+: press debugger hotkey → type the suggested MEMDUMPBIN command → file appears in workspace
+\item Exit DOSBox when done
+\item Verify/parse the .bin (size check, hexdump -\/C head/tail, or direct feed to dos\+\_\+memory\+\_\+arena\+\_\+analyzer) 
+\end{DoxyEnumerate}

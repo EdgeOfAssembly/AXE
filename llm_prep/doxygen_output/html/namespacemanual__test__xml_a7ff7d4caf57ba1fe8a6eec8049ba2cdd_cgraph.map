@@ -1,0 +1,12 @@
+<map id="manual_test_xml.main" name="manual_test_xml.main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,118,177,146"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="50,118,44,109,49,99,65,93,91,91,119,94,135,102,130,103,118,99,91,96,66,98,53,103,49,109,55,117"/>
+<area shape="rect" id="Node000002" href="$namespacemanual__test__xml.html#ae0ea90384d299bb571cf7589aa1d77e1" title=" " alt="" coords="225,5,432,50"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="116,115,165,88,224,60,243,54,239,57,226,65,167,93,119,119"/>
+<area shape="rect" id="Node000003" href="$namespacemanual__test__xml.html#a7422ccf070167384f145d0a9af885fcc" title=" " alt="" coords="247,75,410,119"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="176,117,234,110,229,112,178,122"/>
+<area shape="rect" id="Node000004" href="$namespacemanual__test__xml.html#aa48c53e57d6f7f7a0129733b301c01a5" title=" " alt="" coords="247,144,410,189"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="177,142,234,151,229,153,177,147"/>
+<area shape="rect" id="Node000005" href="$namespacemanual__test__xml.html#a57b3fdb3b0fda93d5bc04cd65988246d" title=" " alt="" coords="247,213,410,258"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="117,144,167,171,226,199,244,208,238,208,224,203,165,175,117,149"/>
+</map>

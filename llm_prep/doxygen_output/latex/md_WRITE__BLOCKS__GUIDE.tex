@@ -1,0 +1,407 @@
+\chapter{WRITE Block Functionality -\/ User Guide }
+\hypertarget{md_WRITE__BLOCKS__GUIDE}{}\label{md_WRITE__BLOCKS__GUIDE}\index{WRITE Block Functionality -\/ User Guide@{WRITE Block Functionality -\/ User Guide}}
+\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1477}%
+\Hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1477}%
+\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1478}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1478}
+AXE agents can now read files, execute commands, and {\bfseries{write files}} using special code blocks in their responses. This enables agents to create patches, scripts, configuration files, and any other text-\/based content directly.\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1479}{}\doxysection{\texorpdfstring{Syntax}{Syntax}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1479}
+\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1480}{}\doxysubsection{\texorpdfstring{WRITE Block Format}{WRITE Block Format}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1480}
+
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ WRITE filename.\+ext file content goes here multiple lines supported 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+
+{\bfseries{Key Points\+:}}
+\begin{DoxyItemize}
+\item The filename goes on the same line as {\ttfamily WRITE}
+\item The content starts on the next line
+\item Supports any text content including code, JSON, XML, etc.
+\item Automatically creates parent directories if needed
+\end{DoxyItemize}\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1481}{}\doxysection{\texorpdfstring{Examples}{Examples}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1481}
+\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1482}{}\doxysubsection{\texorpdfstring{1. Simple Text File}{1. Simple Text File}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1482}
+Agent response\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{I'll\ create\ a\ configuration\ file\ for\ you.}
+
+\end{DoxyCode}
+ WRITE config.\+ini \mbox{[}database\mbox{]} host = localhost port = 5432 user = admin 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Configuration\ file\ created\ successfully!}
+
+\end{DoxyCode}
+
+
+Result\+: Creates {\ttfamily config.\+ini} with the specified content\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1483}{}\doxysubsection{\texorpdfstring{2. Python Script}{2. Python Script}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1483}
+Agent response\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Here's\ the\ hello\ world\ script:}
+
+\end{DoxyCode}
+ WRITE hello.\+py \#!/usr/bin/env python3
+
+def \doxylink{depklite_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main()}\+: print("{}\+Hello, World!"{}) print("{}\+This file was created by an AI agent!"{})
+
+if {\bfseries{name}} == "{}\+\_\+\+\_\+main\+\_\+\+\_\+"{}\+: \doxylink{depklite_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main()} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Run\ it\ with:\ python3\ hello.py}
+
+\end{DoxyCode}
+
+
+Result\+: Creates executable Python script {\ttfamily hello.\+py}\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1484}{}\doxysubsection{\texorpdfstring{3. File in Subdirectory}{3. File in Subdirectory}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1484}
+Agent response\+: 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ WRITE patches/fix\+\_\+001.\+patch --- a/main.\+c +++ b/main.\+c @ -\/10,7 +10,7 @ int \doxylink{depklite_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main()} \{
+\begin{DoxyItemize}
+\item printf("{}\+Hello\textbackslash{}n"{});
+\item printf("{}\+Hello, World!\textbackslash{}n"{}); return 0; \} 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+Result\+: Creates {\ttfamily patches/} directory if it doesn\textquotesingle{}t exist, then creates {\ttfamily fix\+\_\+001.\+patch}\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1485}{}\doxysubsection{\texorpdfstring{4. Multiple Files in One Response}{4. Multiple Files in One Response}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1485}
+Agent response\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{I'll\ create\ both\ the\ script\ and\ its\ config:}
+
+\end{DoxyCode}
+ WRITE run.\+sh \#!/bin/bash python3 app.\+py --config config.\+json 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ WRITE config.\+json \{ "{}mode"{}\+: "{}production"{}, "{}port"{}\+: 8080 \} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Files\ created\ successfully!}
+
+\end{DoxyCode}
+
+
+Result\+: Creates both {\ttfamily run.\+sh} and {\ttfamily config.\+json}\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1486}{}\doxysection{\texorpdfstring{Integration with Other Blocks}{Integration with Other Blocks}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1486}
+WRITE blocks work alongside READ and EXEC blocks\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Let\ me\ analyze\ the\ code\ and\ create\ a\ fixed\ version:}
+
+\end{DoxyCode}
+ READ broken.\+c 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{I\ found\ the\ issue.\ Here's\ the\ fix:}
+
+\end{DoxyCode}
+ WRITE fixed.\+c // Fixed version \#include \texorpdfstring{$<$}{<}stdio.\+h\texorpdfstring{$>$}{>}
+
+int \doxylink{depklite_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main()} \{ printf("{}\+Fixed!\textbackslash{}n"{}); return 0; \} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Now\ let's\ compile\ it:}
+
+\end{DoxyCode}
+ EXEC gcc -\/o fixed fixed.\+c 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1487}{}\doxysection{\texorpdfstring{Security and Permissions}{Security and Permissions}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1487}
+\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1488}{}\doxysubsection{\texorpdfstring{Directory Access Control}{Directory Access Control}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1488}
+WRITE blocks respect the directory access rules in {\ttfamily axe.\+yaml}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{directories:}
+\DoxyCodeLine{\ \ \#\ Agents\ can\ read/write\ these}
+\DoxyCodeLine{\ \ allowed:}
+\DoxyCodeLine{\ \ \ \ -\/\ "{}."{}}
+\DoxyCodeLine{\ \ \ \ -\/\ ./src}
+\DoxyCodeLine{\ \ \ \ -\/\ ./patches}
+\DoxyCodeLine{\ \ \ \ -\/\ ./output}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Agents\ can\ only\ read\ these}
+\DoxyCodeLine{\ \ readonly:}
+\DoxyCodeLine{\ \ \ \ -\/\ ./vendor}
+\DoxyCodeLine{\ \ \ \ -\/\ ./reference}
+\DoxyCodeLine{\ \ }
+\DoxyCodeLine{\ \ \#\ Agents\ cannot\ access\ these}
+\DoxyCodeLine{\ \ forbidden:}
+\DoxyCodeLine{\ \ \ \ -\/\ /etc}
+\DoxyCodeLine{\ \ \ \ -\/\ /root}
+\DoxyCodeLine{\ \ \ \ -\/\ \string~/.ssh}
+
+\end{DoxyCode}
+\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1489}{}\doxysubsection{\texorpdfstring{Behavior}{Behavior}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1489}
+
+\begin{DoxyItemize}
+\item ✅ Writing to allowed directories\+: Succeeds
+\item ❌ Writing to readonly directories\+: Blocked
+\item ❌ Writing to forbidden directories\+: Blocked
+\item ❌ Writing outside project directory\+: Blocked (unless explicitly allowed)
+\end{DoxyItemize}\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1490}{}\doxysection{\texorpdfstring{Testing}{Testing}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1490}
+\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1491}{}\doxysubsection{\texorpdfstring{Unit Tests}{Unit Tests}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1491}
+Run the comprehensive test suite\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ test\_write\_blocks.py}
+
+\end{DoxyCode}
+
+
+Tests cover\+:
+\begin{DoxyItemize}
+\item Simple file creation
+\item Multiline content
+\item Subdirectory paths
+\item Multiple blocks
+\item Permission checks
+\item Edge cases
+\item File overwrite behavior
+\end{DoxyItemize}\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1492}{}\doxysubsection{\texorpdfstring{Manual Testing}{Manual Testing}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1492}
+Run the manual test script with real APIs\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Set\ your\ API\ keys}
+\DoxyCodeLine{export\ ANTHROPIC\_API\_KEY=your\_key}
+\DoxyCodeLine{export\ OPENAI\_API\_KEY=your\_key}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Run\ manual\ test}
+\DoxyCodeLine{python3\ manual\_test\_write.py}
+
+\end{DoxyCode}
+\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1493}{}\doxysubsection{\texorpdfstring{Interactive Testing}{Interactive Testing}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1493}
+Test in single-\/agent mode\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./axe.py}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{axe>\ @gpt\ create\ a\ file\ called\ test.txt\ with\ "{}Hello\ World"{}}
+
+\end{DoxyCode}
+
+
+Test in collaborative mode\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./axe.py\ -\/-\/collab\ gpt,claude\ ./workspace\ 10\ "{}Create\ a\ Python\ script\ that\ prints\ system\ info"{}}
+
+\end{DoxyCode}
+\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1494}{}\doxysection{\texorpdfstring{Implementation Details}{Implementation Details}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1494}
+\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1495}{}\doxysubsection{\texorpdfstring{Code Block Parser}{Code Block Parser}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1495}
+The {\ttfamily Response\+Processor} class uses regex to extract code blocks\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pattern\ =\ \textcolor{stringliteral}{r'}}
+
+\end{DoxyCode}
+ (READ\texorpdfstring{$\vert$}{|}\+EXEC\texorpdfstring{$\vert$}{|}\+WRITE)\textbackslash{}s\texorpdfstring{$\ast$}{*}(\mbox{[}\texorpdfstring{$^\wedge$}{\string^}~\newline
+\mbox{]}\texorpdfstring{$\ast$}{*})~\newline
+(.\texorpdfstring{$\ast$}{*}?)\`{}\`{}\`{}\textquotesingle{} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/\ Matches\ all\ three\ block\ types}
+\DoxyCodeLine{-\/\ Extracts\ arguments\ (filename\ for\ WRITE/READ,\ command\ for\ EXEC)}
+\DoxyCodeLine{-\/\ Extracts\ content\ (file\ content\ or\ command\ body)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ File\ Writing\ Logic}
+\DoxyCodeLine{}
+\DoxyCodeLine{1.\ Extract\ filename\ from\ block\ arguments}
+\DoxyCodeLine{2.\ Check\ directory\ access\ permissions}
+\DoxyCodeLine{3.\ Create\ parent\ directories\ if\ needed\ (with\ \`{}os.makedirs`)}
+\DoxyCodeLine{4.\ Write\ content\ to\ file}
+\DoxyCodeLine{5.\ Report\ success\ or\ error}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Execution\ Order}
+\DoxyCodeLine{}
+\DoxyCodeLine{Code\ blocks\ are\ executed\ in\ the\ order\ they\ appear\ in\ the\ agent's\ response:}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{input.txt\ \ \ \ \ <-\/\ Executed\ 1st}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{process.sh\ \ \ <-\/\ Executed\ 2nd}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{output.txt\ \ <-\/\ Executed\ 3rd}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\ Troubleshooting}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Agent\ doesn't\ use\ WRITE\ blocks}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Problem:**\ Agent\ writes\ file\ paths\ but\ doesn't\ use\ the\ WRITE\ block\ syntax.}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Solution:**\ Be\ explicit\ in\ your\ prompt:}
+\DoxyCodeLine{}
+\DoxyCodeLine{❌\ Bad:\ "{}Create\ a\ file\ called\ output.txt"{}}
+\DoxyCodeLine{✅\ Good:\ "{}Use\ a\ WRITE\ block\ to\ create\ a\ file\ called\ output.txt\ with\ the\ content..."{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Files\ created\ in\ wrong\ location}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Problem:**\ File\ created\ in\ unexpected\ directory.}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Solution:**\ Use\ absolute\ paths\ from\ project\ root:}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./output/data.json\ \ <-\/\ Explicit\ path\ from\ project\ root}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ Permission\ denied\ errors}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Problem:**\ Agent\ tries\ to\ write\ to\ forbidden\ directory.}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Solution:**\ Check\ \`{}axe.yaml`\ directory\ settings\ and\ ensure\ the\ target\ is\ in\ an\ allowed\ directory.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Content\ not\ written\ correctly}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Problem:**\ File\ created\ but\ content\ is\ wrong\ or\ truncated.}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Solution:**\ }
+\DoxyCodeLine{-\/\ Check\ that\ the\ closing\ \`{}\ \`{}\`{}\`{}\ \`{}\ is\ on\ its\ own\ line}
+\DoxyCodeLine{-\/\ Ensure\ no\ extra\ backticks\ in\ content\ that\ might\ close\ the\ block\ early}
+\DoxyCodeLine{-\/\ Content\ should\ start\ immediately\ after\ the\ newline\ following\ \`{}WRITE\ filename`}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Use\ Cases}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ 1.\ Patch\ Files}
+\DoxyCodeLine{}
+\DoxyCodeLine{Agents\ can\ create\ patch\ files\ for\ code\ review:}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ fix\_memory\_leak.patch}
+\DoxyCodeLine{-\/-\/-\/\ a/network.c}
+\DoxyCodeLine{+++\ b/network.c}
+\DoxyCodeLine{@@\ -\/45,6\ +45,7\ @@}
+\DoxyCodeLine{\ \ \ \ \ char\ *buffer\ =\ malloc(1024);}
+\DoxyCodeLine{\ \ \ \ \ process\_data(buffer);}
+\DoxyCodeLine{+\ \ \ \ free(buffer);\ \ //\ Fix:\ Free\ allocated\ memory}
+\DoxyCodeLine{\ \ \ \ \ return\ 0;}
+\DoxyCodeLine{\ \}}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ 2.\ Configuration\ Files}
+\DoxyCodeLine{}
+\DoxyCodeLine{Generate\ config\ files\ based\ on\ requirements:}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ .env}
+\DoxyCodeLine{DATABASE\_URL=postgresql://localhost/mydb}
+\DoxyCodeLine{API\_KEY=secret\_key\_here}
+\DoxyCodeLine{DEBUG=false}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ 3.\ Documentation}
+\DoxyCodeLine{}
+\DoxyCodeLine{Create\ or\ update\ documentation:}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ docs/api.md}
+\DoxyCodeLine{\#\ API\ Documentation}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Endpoints}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ GET\ /users}
+\DoxyCodeLine{Returns\ list\ of\ users...}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ 4.\ Test\ Files}
+\DoxyCodeLine{}
+\DoxyCodeLine{Generate\ test\ cases:}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ tests/test\_parser.py}
+\DoxyCodeLine{import\ pytest}
+\DoxyCodeLine{from\ parser\ import\ parse\_config}
+\DoxyCodeLine{}
+\DoxyCodeLine{def\ test\_parse\_valid\_config():}
+\DoxyCodeLine{\ \ \ \ result\ =\ parse\_config("{}config.ini"{})}
+\DoxyCodeLine{\ \ \ \ assert\ result["{}port"{}]\ ==\ 8080}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ 5.\ Build\ Scripts}
+\DoxyCodeLine{}
+\DoxyCodeLine{Create\ build\ or\ deployment\ scripts:}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ deploy.sh}
+\DoxyCodeLine{\#!/bin/bash}
+\DoxyCodeLine{set\ -\/e}
+\DoxyCodeLine{npm\ install}
+\DoxyCodeLine{npm\ run\ build}
+\DoxyCodeLine{rsync\ -\/av\ dist/\ server:/var/www/app/}
+
+\end{DoxyCode}
+ \`{}\`{}\`{}\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1496}{}\doxysection{\texorpdfstring{Best Practices}{Best Practices}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1496}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Be explicit in filenames\+:}} Use full paths from project root
+\item {\bfseries{Test permissions first\+:}} Ensure target directory is allowed
+\item {\bfseries{Review before executing\+:}} Check generated files before running them
+\item {\bfseries{Combine with EXEC\+:}} Write scripts then execute them to verify
+\item {\bfseries{Use version control\+:}} Commit important files before letting agents modify them
+\end{DoxyEnumerate}\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1497}{}\doxysection{\texorpdfstring{Changelog}{Changelog}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1497}
+\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1498}{}\doxysubsection{\texorpdfstring{v1.\+0 (Current)}{v1.\+0 (Current)}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1498}
+
+\begin{DoxyItemize}
+\item ✅ WRITE block implementation
+\item ✅ READ block support
+\item ✅ EXEC block integration
+\item ✅ Directory access control
+\item ✅ Comprehensive test suite
+\item ✅ Single-\/agent mode support
+\item ✅ Collaborative mode support
+\end{DoxyItemize}\hypertarget{md_WRITE__BLOCKS__GUIDE_autotoc_md1499}{}\doxysection{\texorpdfstring{Future Enhancements}{Future Enhancements}}\label{md_WRITE__BLOCKS__GUIDE_autotoc_md1499}
+Potential improvements\+:
+\begin{DoxyItemize}
+\item Binary file support (base64 encoding)
+\item Append mode ({\ttfamily APPEND} block type)
+\item File templates with variable substitution
+\item Diff generation and application
+\item Automatic backup before overwrite 
+\end{DoxyItemize}

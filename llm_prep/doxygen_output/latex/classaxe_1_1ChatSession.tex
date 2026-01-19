@@ -1,0 +1,725 @@
+\doxysection{axe.\+Chat\+Session Class Reference}
+\hypertarget{classaxe_1_1ChatSession}{}\label{classaxe_1_1ChatSession}\index{axe.ChatSession@{axe.ChatSession}}
+
+
+Collaboration diagram for axe.\+Chat\+Session\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_ab4fb7a9b76ad0732cfbefc0220702895}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}} \mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}}, str \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}})
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a5a74e53da64988a363d8ebb226f8305a}{print\+\_\+banner}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a5193da01e07e92935883879a4b787cba}{print\+\_\+help}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_aecfb5d28c9d242bb1d3bbe5d972f5fe5}{list\+\_\+agents}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_ab97f8be62dd60678d92c6f18b3e13d50}{list\+\_\+tools}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a75658491705b9ea427ddcd85a0795212}{list\+\_\+dirs}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_ad1395c2247996d061ec1a9cc47621bdf}{handle\+\_\+workshop\+\_\+command}} (self, str args)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a049b421bf07ed70e7e7f3aa6b33a6dda}{run\+\_\+chisel}} (self, str args)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a6888eced2d3409274af2f4ebe408deaf}{run\+\_\+saw}} (self, str args)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_aeb6da562695cee9b0d73d41956d5e013}{run\+\_\+plane}} (self, str args)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_ac4738e0d479152844444fe8c647e3934}{run\+\_\+hammer}} (self, str args)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a84bbc5a4a51e722511c2fb80672ec6c2}{show\+\_\+workshop\+\_\+help}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a5e97c8f1a8d0df56f1c861ac553378ff}{show\+\_\+workshop\+\_\+status}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a29a1bebc11983c09ab80e80476390355}{show\+\_\+workshop\+\_\+tool\+\_\+help}} (self, str tool\+\_\+name)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a5ae75ad1fa38a10487d6b6e5e4db8710}{show\+\_\+workshop\+\_\+history}} (self, str args)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a49ed0956e4c1d34d14ff8eabe273389a}{show\+\_\+workshop\+\_\+stats}} (self, str args)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_aeff43e85c446ddd0b886d1203875452f}{handle\+\_\+llmprep\+\_\+command}} (self, str args)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_aec06b2aeb52d5c5cbac6bd9ef969e09d}{handle\+\_\+buildinfo\+\_\+command}} (self, str args)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a9d70e5bb01dfd6c8bcef6a86448e5698}{handle\+\_\+stats\+\_\+command}} (self, str args)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_aac98b18a00b50925abec74f75573cffa}{handle\+\_\+tokenopt\+\_\+stats\+\_\+command}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a0ab519e1dc9929cad872bce563497494}{handle\+\_\+session\+\_\+command}} (self, str args)
+\item 
+bool \mbox{\hyperlink{classaxe_1_1ChatSession_aaa359a2981c69ef0b93b8b48e259e007}{process\+\_\+command}} (self, str cmd)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a92ba45e5dec2d5bbe7430d2d1302729a}{process\+\_\+agent\+\_\+message}} (self, str message)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_ad6c7e2f347e93cde6d7cf162d49b23ef}{optimize\+\_\+context\+\_\+if\+\_\+needed}} (self, str agent\+\_\+name)
+\item 
+str \mbox{\hyperlink{classaxe_1_1ChatSession_a292849d40a6711c7b6d7452667c55458}{get\+\_\+optimized\+\_\+system\+\_\+prompt}} (self, str agent\+\_\+name)
+\item 
+str \mbox{\hyperlink{classaxe_1_1ChatSession_a95c74626ca3762895152631775b71736}{clean\+\_\+message\+\_\+for\+\_\+context}} (self, str content)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a68cb42802ab49b009bbfc87e9d7e8f78}{run}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}} \mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}} = config
+\item 
+str \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}} = os.\+path.\+abspath(project\+\_\+dir)
+\item 
+\mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager}{Agent\+Manager}} \mbox{\hyperlink{classaxe_1_1ChatSession_ae5266ac3557ae29c4bc51d1117c47918}{agent\+\_\+mgr}} = \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager}{Agent\+Manager}}(\mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}})
+\item 
+\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}} \mbox{\hyperlink{classaxe_1_1ChatSession_ada9c58fcd370144e71643c60a9b70360}{tool\+\_\+runner}} = \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}(\mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}}, \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}})
+\item 
+\mbox{\hyperlink{classaxe_1_1ProjectContext}{Project\+Context}} \mbox{\hyperlink{classaxe_1_1ChatSession_aeefa72dedf5afd42122ec1ac41208815}{project\+\_\+ctx}} = \mbox{\hyperlink{classaxe_1_1ProjectContext}{Project\+Context}}(\mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}}, \mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}})
+\item 
+\mbox{\hyperlink{classaxe_1_1ResponseProcessor}{Response\+Processor}} \mbox{\hyperlink{classaxe_1_1ChatSession_a45dd34c3c16130a70cace5af2a1c8412}{response\+\_\+processor}} = \mbox{\hyperlink{classaxe_1_1ResponseProcessor}{Response\+Processor}}(\mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}}, \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}}, self.\+tool\+\_\+runner)
+\item 
+list \mbox{\hyperlink{classaxe_1_1ChatSession_abe7718b076bcaaa0f057a58131aff07c}{history}} = \mbox{[}$\,$\mbox{]}
+\item 
+str \mbox{\hyperlink{classaxe_1_1ChatSession_a0bd8b7af6e34e360f98efda8f134c5bb}{default\+\_\+agent}} = \textquotesingle{}claude\textquotesingle{}
+\item 
+Token\+Stats \mbox{\hyperlink{classaxe_1_1ChatSession_aceeef8e6e89daa9d8a9202c1b3cf0720}{token\+\_\+stats}} = Token\+Stats()
+\item 
+Rate\+Limiter \mbox{\hyperlink{classaxe_1_1ChatSession_ac151373f7c4e819d5129b622f89b7fd4}{rate\+\_\+limiter}} = Rate\+Limiter(rate\+\_\+limit\+\_\+config)
+\item 
+Session\+Manager \mbox{\hyperlink{classaxe_1_1ChatSession_a48fadadc1d6551d9b634e74e15f4de89}{session\+\_\+manager}} = Session\+Manager()
+\item 
+bool \mbox{\hyperlink{classaxe_1_1ChatSession_abf6fe0f3cfc926617d849400596ea880}{optimization\+\_\+enabled}} = optimization\+\_\+config.\+get(\textquotesingle{}enabled\textquotesingle{}, False)
+\item 
+dict \mbox{\hyperlink{classaxe_1_1ChatSession_a0b81116bbf6c3b237556197bb899e648}{optimization\+\_\+stats}}
+\item 
+Context\+Optimizer \mbox{\hyperlink{classaxe_1_1ChatSession_a304ba782a26597f58a989965f789accd}{context\+\_\+optimizer}} = Context\+Optimizer()
+\item 
+Prompt\+Compressor \mbox{\hyperlink{classaxe_1_1ChatSession_a196d31a1ab87afb95dfda1749cc492e2}{prompt\+\_\+compressor}} = Prompt\+Compressor()
+\item 
+str \mbox{\hyperlink{classaxe_1_1ChatSession_a84ae57dd39076e4db237230e60ed4ba7}{optimization\+\_\+mode}} = optimization\+\_\+config.\+get(\textquotesingle{}mode\textquotesingle{}, \textquotesingle{}balanced\textquotesingle{})
+\item 
+Optional\mbox{[}Any\mbox{]} \mbox{\hyperlink{classaxe_1_1ChatSession_ab713c3e02e473997fe97a9139e51db9c}{workshop\+\_\+chisel}} = None
+\item 
+Optional\mbox{[}Any\mbox{]} \mbox{\hyperlink{classaxe_1_1ChatSession_aa98aefe04645dda38181af04710efdd8}{workshop\+\_\+saw}} = None
+\item 
+Optional\mbox{[}Any\mbox{]} \mbox{\hyperlink{classaxe_1_1ChatSession_a5c0c42c3ebdb65655c16d6d386a78efb}{workshop\+\_\+plane}} = None
+\item 
+Optional\mbox{[}Any\mbox{]} \mbox{\hyperlink{classaxe_1_1ChatSession_a207e7b732b2e2cd1b4330303a71772e1}{workshop\+\_\+hammer}} = None
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classaxe_1_1ChatSession_a08910e7c127296a306562cfe449232b3}{\+\_\+compression\+\_\+warned}} = True
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Interactive chat session manager.\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classaxe_1_1ChatSession_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classaxe_1_1ChatSession_ab4fb7a9b76ad0732cfbefc0220702895}\index{axe.ChatSession@{axe.ChatSession}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_ab4fb7a9b76ad0732cfbefc0220702895} 
+ None axe.\+Chat\+Session.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}}]{config}{, }\item[{str}]{project\+\_\+dir}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classaxe_1_1ChatSession_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classaxe_1_1ChatSession_a95c74626ca3762895152631775b71736}\index{axe.ChatSession@{axe.ChatSession}!clean\_message\_for\_context@{clean\_message\_for\_context}}
+\index{clean\_message\_for\_context@{clean\_message\_for\_context}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{clean\_message\_for\_context()}{clean\_message\_for\_context()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a95c74626ca3762895152631775b71736} 
+ str axe.\+Chat\+Session.\+clean\+\_\+message\+\_\+for\+\_\+context (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{content}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Clean message content for inclusion in context.
+
+Args:
+    content: Original message content
+
+Returns:
+    Cleaned content
+\end{DoxyVerb}
+ \Hypertarget{classaxe_1_1ChatSession_a292849d40a6711c7b6d7452667c55458}\index{axe.ChatSession@{axe.ChatSession}!get\_optimized\_system\_prompt@{get\_optimized\_system\_prompt}}
+\index{get\_optimized\_system\_prompt@{get\_optimized\_system\_prompt}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{get\_optimized\_system\_prompt()}{get\_optimized\_system\_prompt()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a292849d40a6711c7b6d7452667c55458} 
+ str axe.\+Chat\+Session.\+get\+\_\+optimized\+\_\+system\+\_\+prompt (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get optimized system prompt for an agent.
+
+Args:
+    agent_name: Name of the agent
+
+Returns:
+    Optimized system prompt
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a292849d40a6711c7b6d7452667c55458_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_aec06b2aeb52d5c5cbac6bd9ef969e09d}\index{axe.ChatSession@{axe.ChatSession}!handle\_buildinfo\_command@{handle\_buildinfo\_command}}
+\index{handle\_buildinfo\_command@{handle\_buildinfo\_command}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{handle\_buildinfo\_command()}{handle\_buildinfo\_command()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_aec06b2aeb52d5c5cbac6bd9ef969e09d} 
+ None axe.\+Chat\+Session.\+handle\+\_\+buildinfo\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Handle /buildinfo command to analyze build systems.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_aec06b2aeb52d5c5cbac6bd9ef969e09d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_aeff43e85c446ddd0b886d1203875452f}\index{axe.ChatSession@{axe.ChatSession}!handle\_llmprep\_command@{handle\_llmprep\_command}}
+\index{handle\_llmprep\_command@{handle\_llmprep\_command}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{handle\_llmprep\_command()}{handle\_llmprep\_command()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_aeff43e85c446ddd0b886d1203875452f} 
+ None axe.\+Chat\+Session.\+handle\+\_\+llmprep\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Handle /prep or /llmprep command to generate LLM-friendly codebase context.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_aeff43e85c446ddd0b886d1203875452f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a0ab519e1dc9929cad872bce563497494}\index{axe.ChatSession@{axe.ChatSession}!handle\_session\_command@{handle\_session\_command}}
+\index{handle\_session\_command@{handle\_session\_command}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{handle\_session\_command()}{handle\_session\_command()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a0ab519e1dc9929cad872bce563497494} 
+ None axe.\+Chat\+Session.\+handle\+\_\+session\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Handle /session command for save/load/list operations.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a0ab519e1dc9929cad872bce563497494_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a9d70e5bb01dfd6c8bcef6a86448e5698}\index{axe.ChatSession@{axe.ChatSession}!handle\_stats\_command@{handle\_stats\_command}}
+\index{handle\_stats\_command@{handle\_stats\_command}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{handle\_stats\_command()}{handle\_stats\_command()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a9d70e5bb01dfd6c8bcef6a86448e5698} 
+ None axe.\+Chat\+Session.\+handle\+\_\+stats\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Handle /stats command to show token usage statistics.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a9d70e5bb01dfd6c8bcef6a86448e5698_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_aac98b18a00b50925abec74f75573cffa}\index{axe.ChatSession@{axe.ChatSession}!handle\_tokenopt\_stats\_command@{handle\_tokenopt\_stats\_command}}
+\index{handle\_tokenopt\_stats\_command@{handle\_tokenopt\_stats\_command}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{handle\_tokenopt\_stats\_command()}{handle\_tokenopt\_stats\_command()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_aac98b18a00b50925abec74f75573cffa} 
+ None axe.\+Chat\+Session.\+handle\+\_\+tokenopt\+\_\+stats\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Handle /tokenopt-stats command to show token optimization statistics.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_aac98b18a00b50925abec74f75573cffa_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_ad1395c2247996d061ec1a9cc47621bdf}\index{axe.ChatSession@{axe.ChatSession}!handle\_workshop\_command@{handle\_workshop\_command}}
+\index{handle\_workshop\_command@{handle\_workshop\_command}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{handle\_workshop\_command()}{handle\_workshop\_command()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_ad1395c2247996d061ec1a9cc47621bdf} 
+ None axe.\+Chat\+Session.\+handle\+\_\+workshop\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Handle workshop tool commands.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_ad1395c2247996d061ec1a9cc47621bdf_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_ad1395c2247996d061ec1a9cc47621bdf_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_aecfb5d28c9d242bb1d3bbe5d972f5fe5}\index{axe.ChatSession@{axe.ChatSession}!list\_agents@{list\_agents}}
+\index{list\_agents@{list\_agents}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{list\_agents()}{list\_agents()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_aecfb5d28c9d242bb1d3bbe5d972f5fe5} 
+ None axe.\+Chat\+Session.\+list\+\_\+agents (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}List available agents with enhanced metadata.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{classaxe_1_1ChatSession_aecfb5d28c9d242bb1d3bbe5d972f5fe5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_aecfb5d28c9d242bb1d3bbe5d972f5fe5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a75658491705b9ea427ddcd85a0795212}\index{axe.ChatSession@{axe.ChatSession}!list\_dirs@{list\_dirs}}
+\index{list\_dirs@{list\_dirs}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{list\_dirs()}{list\_dirs()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a75658491705b9ea427ddcd85a0795212} 
+ None axe.\+Chat\+Session.\+list\+\_\+dirs (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Show directory permissions.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a75658491705b9ea427ddcd85a0795212_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_ab97f8be62dd60678d92c6f18b3e13d50}\index{axe.ChatSession@{axe.ChatSession}!list\_tools@{list\_tools}}
+\index{list\_tools@{list\_tools}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{list\_tools()}{list\_tools()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_ab97f8be62dd60678d92c6f18b3e13d50} 
+ None axe.\+Chat\+Session.\+list\+\_\+tools (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}List available tools by category.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_ab97f8be62dd60678d92c6f18b3e13d50_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_ad6c7e2f347e93cde6d7cf162d49b23ef}\index{axe.ChatSession@{axe.ChatSession}!optimize\_context\_if\_needed@{optimize\_context\_if\_needed}}
+\index{optimize\_context\_if\_needed@{optimize\_context\_if\_needed}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{optimize\_context\_if\_needed()}{optimize\_context\_if\_needed()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_ad6c7e2f347e93cde6d7cf162d49b23ef} 
+ None axe.\+Chat\+Session.\+optimize\+\_\+context\+\_\+if\+\_\+needed (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Apply context optimization if enabled and needed.
+
+Args:
+    agent_name: Name of the agent for context limits
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_ad6c7e2f347e93cde6d7cf162d49b23ef_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a5a74e53da64988a363d8ebb226f8305a}\index{axe.ChatSession@{axe.ChatSession}!print\_banner@{print\_banner}}
+\index{print\_banner@{print\_banner}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{print\_banner()}{print\_banner()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a5a74e53da64988a363d8ebb226f8305a} 
+ None axe.\+Chat\+Session.\+print\+\_\+banner (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Print welcome banner.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a5a74e53da64988a363d8ebb226f8305a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a5193da01e07e92935883879a4b787cba}\index{axe.ChatSession@{axe.ChatSession}!print\_help@{print\_help}}
+\index{print\_help@{print\_help}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{print\_help()}{print\_help()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a5193da01e07e92935883879a4b787cba} 
+ None axe.\+Chat\+Session.\+print\+\_\+help (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Print help message.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a5193da01e07e92935883879a4b787cba_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a92ba45e5dec2d5bbe7430d2d1302729a}\index{axe.ChatSession@{axe.ChatSession}!process\_agent\_message@{process\_agent\_message}}
+\index{process\_agent\_message@{process\_agent\_message}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{process\_agent\_message()}{process\_agent\_message()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a92ba45e5dec2d5bbe7430d2d1302729a} 
+ None axe.\+Chat\+Session.\+process\+\_\+agent\+\_\+message (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{message}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Process an @agent message.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a92ba45e5dec2d5bbe7430d2d1302729a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a92ba45e5dec2d5bbe7430d2d1302729a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_aaa359a2981c69ef0b93b8b48e259e007}\index{axe.ChatSession@{axe.ChatSession}!process\_command@{process\_command}}
+\index{process\_command@{process\_command}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{process\_command()}{process\_command()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_aaa359a2981c69ef0b93b8b48e259e007} 
+ bool axe.\+Chat\+Session.\+process\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{cmd}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Process a slash command. Returns False to exit.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_aaa359a2981c69ef0b93b8b48e259e007_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_aaa359a2981c69ef0b93b8b48e259e007_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a68cb42802ab49b009bbfc87e9d7e8f78}\index{axe.ChatSession@{axe.ChatSession}!run@{run}}
+\index{run@{run}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a68cb42802ab49b009bbfc87e9d7e8f78} 
+ None axe.\+Chat\+Session.\+run (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run interactive chat session.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a68cb42802ab49b009bbfc87e9d7e8f78_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a68cb42802ab49b009bbfc87e9d7e8f78_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a049b421bf07ed70e7e7f3aa6b33a6dda}\index{axe.ChatSession@{axe.ChatSession}!run\_chisel@{run\_chisel}}
+\index{run\_chisel@{run\_chisel}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{run\_chisel()}{run\_chisel()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a049b421bf07ed70e7e7f3aa6b33a6dda} 
+ None axe.\+Chat\+Session.\+run\+\_\+chisel (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run Chisel symbolic execution tool.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a049b421bf07ed70e7e7f3aa6b33a6dda_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_ac4738e0d479152844444fe8c647e3934}\index{axe.ChatSession@{axe.ChatSession}!run\_hammer@{run\_hammer}}
+\index{run\_hammer@{run\_hammer}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{run\_hammer()}{run\_hammer()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_ac4738e0d479152844444fe8c647e3934} 
+ None axe.\+Chat\+Session.\+run\+\_\+hammer (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run Hammer live instrumentation tool.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_ac4738e0d479152844444fe8c647e3934_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_aeb6da562695cee9b0d73d41956d5e013}\index{axe.ChatSession@{axe.ChatSession}!run\_plane@{run\_plane}}
+\index{run\_plane@{run\_plane}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{run\_plane()}{run\_plane()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_aeb6da562695cee9b0d73d41956d5e013} 
+ None axe.\+Chat\+Session.\+run\+\_\+plane (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run Plane source/sink enumeration tool.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_aeb6da562695cee9b0d73d41956d5e013_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a6888eced2d3409274af2f4ebe408deaf}\index{axe.ChatSession@{axe.ChatSession}!run\_saw@{run\_saw}}
+\index{run\_saw@{run\_saw}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{run\_saw()}{run\_saw()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a6888eced2d3409274af2f4ebe408deaf} 
+ None axe.\+Chat\+Session.\+run\+\_\+saw (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run Saw taint analysis tool.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a6888eced2d3409274af2f4ebe408deaf_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a84bbc5a4a51e722511c2fb80672ec6c2}\index{axe.ChatSession@{axe.ChatSession}!show\_workshop\_help@{show\_workshop\_help}}
+\index{show\_workshop\_help@{show\_workshop\_help}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{show\_workshop\_help()}{show\_workshop\_help()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a84bbc5a4a51e722511c2fb80672ec6c2} 
+ None axe.\+Chat\+Session.\+show\+\_\+workshop\+\_\+help (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Display workshop tools help.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a84bbc5a4a51e722511c2fb80672ec6c2_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a5ae75ad1fa38a10487d6b6e5e4db8710}\index{axe.ChatSession@{axe.ChatSession}!show\_workshop\_history@{show\_workshop\_history}}
+\index{show\_workshop\_history@{show\_workshop\_history}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{show\_workshop\_history()}{show\_workshop\_history()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a5ae75ad1fa38a10487d6b6e5e4db8710} 
+ None axe.\+Chat\+Session.\+show\+\_\+workshop\+\_\+history (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Display workshop analysis history.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a5ae75ad1fa38a10487d6b6e5e4db8710_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a49ed0956e4c1d34d14ff8eabe273389a}\index{axe.ChatSession@{axe.ChatSession}!show\_workshop\_stats@{show\_workshop\_stats}}
+\index{show\_workshop\_stats@{show\_workshop\_stats}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{show\_workshop\_stats()}{show\_workshop\_stats()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a49ed0956e4c1d34d14ff8eabe273389a} 
+ None axe.\+Chat\+Session.\+show\+\_\+workshop\+\_\+stats (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Display workshop usage statistics.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a49ed0956e4c1d34d14ff8eabe273389a_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a5e97c8f1a8d0df56f1c861ac553378ff}\index{axe.ChatSession@{axe.ChatSession}!show\_workshop\_status@{show\_workshop\_status}}
+\index{show\_workshop\_status@{show\_workshop\_status}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{show\_workshop\_status()}{show\_workshop\_status()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a5e97c8f1a8d0df56f1c861ac553378ff} 
+ None axe.\+Chat\+Session.\+show\+\_\+workshop\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Display workshop tools availability status.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a5e97c8f1a8d0df56f1c861ac553378ff_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a29a1bebc11983c09ab80e80476390355}\index{axe.ChatSession@{axe.ChatSession}!show\_workshop\_tool\_help@{show\_workshop\_tool\_help}}
+\index{show\_workshop\_tool\_help@{show\_workshop\_tool\_help}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{show\_workshop\_tool\_help()}{show\_workshop\_tool\_help()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a29a1bebc11983c09ab80e80476390355} 
+ None axe.\+Chat\+Session.\+show\+\_\+workshop\+\_\+tool\+\_\+help (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{tool\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Display detailed help for a specific workshop tool.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a29a1bebc11983c09ab80e80476390355_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classaxe_1_1ChatSession_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classaxe_1_1ChatSession_a08910e7c127296a306562cfe449232b3}\index{axe.ChatSession@{axe.ChatSession}!\_compression\_warned@{\_compression\_warned}}
+\index{\_compression\_warned@{\_compression\_warned}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{\_compression\_warned}{\_compression\_warned}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a08910e7c127296a306562cfe449232b3} 
+bool axe.\+Chat\+Session.\+\_\+compression\+\_\+warned = True\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classaxe_1_1ChatSession_ae5266ac3557ae29c4bc51d1117c47918}\index{axe.ChatSession@{axe.ChatSession}!agent\_mgr@{agent\_mgr}}
+\index{agent\_mgr@{agent\_mgr}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{agent\_mgr}{agent\_mgr}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_ae5266ac3557ae29c4bc51d1117c47918} 
+\mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager}{Agent\+Manager}} axe.\+Chat\+Session.\+agent\+\_\+mgr = \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager}{Agent\+Manager}}(\mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}})}
+
+\Hypertarget{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}\index{axe.ChatSession@{axe.ChatSession}!config@{config}}
+\index{config@{config}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b} 
+\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}} axe.\+Chat\+Session.\+config = config}
+
+\Hypertarget{classaxe_1_1ChatSession_a304ba782a26597f58a989965f789accd}\index{axe.ChatSession@{axe.ChatSession}!context\_optimizer@{context\_optimizer}}
+\index{context\_optimizer@{context\_optimizer}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{context\_optimizer}{context\_optimizer}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a304ba782a26597f58a989965f789accd} 
+Context\+Optimizer axe.\+Chat\+Session.\+context\+\_\+optimizer = Context\+Optimizer()}
+
+\Hypertarget{classaxe_1_1ChatSession_a0bd8b7af6e34e360f98efda8f134c5bb}\index{axe.ChatSession@{axe.ChatSession}!default\_agent@{default\_agent}}
+\index{default\_agent@{default\_agent}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{default\_agent}{default\_agent}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a0bd8b7af6e34e360f98efda8f134c5bb} 
+str axe.\+Chat\+Session.\+default\+\_\+agent = \textquotesingle{}claude\textquotesingle{}}
+
+\Hypertarget{classaxe_1_1ChatSession_abe7718b076bcaaa0f057a58131aff07c}\index{axe.ChatSession@{axe.ChatSession}!history@{history}}
+\index{history@{history}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{history}{history}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_abe7718b076bcaaa0f057a58131aff07c} 
+list axe.\+Chat\+Session.\+history = \mbox{[}$\,$\mbox{]}}
+
+\Hypertarget{classaxe_1_1ChatSession_abf6fe0f3cfc926617d849400596ea880}\index{axe.ChatSession@{axe.ChatSession}!optimization\_enabled@{optimization\_enabled}}
+\index{optimization\_enabled@{optimization\_enabled}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{optimization\_enabled}{optimization\_enabled}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_abf6fe0f3cfc926617d849400596ea880} 
+bool axe.\+Chat\+Session.\+optimization\+\_\+enabled = optimization\+\_\+config.\+get(\textquotesingle{}enabled\textquotesingle{}, False)}
+
+\Hypertarget{classaxe_1_1ChatSession_a84ae57dd39076e4db237230e60ed4ba7}\index{axe.ChatSession@{axe.ChatSession}!optimization\_mode@{optimization\_mode}}
+\index{optimization\_mode@{optimization\_mode}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{optimization\_mode}{optimization\_mode}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a84ae57dd39076e4db237230e60ed4ba7} 
+str axe.\+Chat\+Session.\+optimization\+\_\+mode = optimization\+\_\+config.\+get(\textquotesingle{}mode\textquotesingle{}, \textquotesingle{}balanced\textquotesingle{})}
+
+\Hypertarget{classaxe_1_1ChatSession_a0b81116bbf6c3b237556197bb899e648}\index{axe.ChatSession@{axe.ChatSession}!optimization\_stats@{optimization\_stats}}
+\index{optimization\_stats@{optimization\_stats}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{optimization\_stats}{optimization\_stats}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a0b81116bbf6c3b237556197bb899e648} 
+dict axe.\+Chat\+Session.\+optimization\+\_\+stats}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'context\_optimizations'}:\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'total\_tokens\_saved'}:\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'prompt\_compressions'}:\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'code\_truncations'}:\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'read\_blocks\_removed'}:\ 0,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{'last\_optimization\_savings'}:\ 0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+\Hypertarget{classaxe_1_1ChatSession_aeefa72dedf5afd42122ec1ac41208815}\index{axe.ChatSession@{axe.ChatSession}!project\_ctx@{project\_ctx}}
+\index{project\_ctx@{project\_ctx}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{project\_ctx}{project\_ctx}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_aeefa72dedf5afd42122ec1ac41208815} 
+\mbox{\hyperlink{classaxe_1_1ProjectContext}{Project\+Context}} axe.\+Chat\+Session.\+project\+\_\+ctx = \mbox{\hyperlink{classaxe_1_1ProjectContext}{Project\+Context}}(\mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}}, \mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}})}
+
+\Hypertarget{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}\index{axe.ChatSession@{axe.ChatSession}!project\_dir@{project\_dir}}
+\index{project\_dir@{project\_dir}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{project\_dir}{project\_dir}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08} 
+str axe.\+Chat\+Session.\+project\+\_\+dir = os.\+path.\+abspath(project\+\_\+dir)}
+
+\Hypertarget{classaxe_1_1ChatSession_a196d31a1ab87afb95dfda1749cc492e2}\index{axe.ChatSession@{axe.ChatSession}!prompt\_compressor@{prompt\_compressor}}
+\index{prompt\_compressor@{prompt\_compressor}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{prompt\_compressor}{prompt\_compressor}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a196d31a1ab87afb95dfda1749cc492e2} 
+Prompt\+Compressor axe.\+Chat\+Session.\+prompt\+\_\+compressor = Prompt\+Compressor()}
+
+\Hypertarget{classaxe_1_1ChatSession_ac151373f7c4e819d5129b622f89b7fd4}\index{axe.ChatSession@{axe.ChatSession}!rate\_limiter@{rate\_limiter}}
+\index{rate\_limiter@{rate\_limiter}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{rate\_limiter}{rate\_limiter}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_ac151373f7c4e819d5129b622f89b7fd4} 
+Rate\+Limiter axe.\+Chat\+Session.\+rate\+\_\+limiter = Rate\+Limiter(rate\+\_\+limit\+\_\+config)}
+
+\Hypertarget{classaxe_1_1ChatSession_a45dd34c3c16130a70cace5af2a1c8412}\index{axe.ChatSession@{axe.ChatSession}!response\_processor@{response\_processor}}
+\index{response\_processor@{response\_processor}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{response\_processor}{response\_processor}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a45dd34c3c16130a70cace5af2a1c8412} 
+\mbox{\hyperlink{classaxe_1_1ResponseProcessor}{Response\+Processor}} axe.\+Chat\+Session.\+response\+\_\+processor = \mbox{\hyperlink{classaxe_1_1ResponseProcessor}{Response\+Processor}}(\mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}}, \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}}, self.\+tool\+\_\+runner)}
+
+\Hypertarget{classaxe_1_1ChatSession_a48fadadc1d6551d9b634e74e15f4de89}\index{axe.ChatSession@{axe.ChatSession}!session\_manager@{session\_manager}}
+\index{session\_manager@{session\_manager}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{session\_manager}{session\_manager}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a48fadadc1d6551d9b634e74e15f4de89} 
+Session\+Manager axe.\+Chat\+Session.\+session\+\_\+manager = Session\+Manager()}
+
+\Hypertarget{classaxe_1_1ChatSession_aceeef8e6e89daa9d8a9202c1b3cf0720}\index{axe.ChatSession@{axe.ChatSession}!token\_stats@{token\_stats}}
+\index{token\_stats@{token\_stats}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{token\_stats}{token\_stats}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_aceeef8e6e89daa9d8a9202c1b3cf0720} 
+Token\+Stats axe.\+Chat\+Session.\+token\+\_\+stats = Token\+Stats()}
+
+\Hypertarget{classaxe_1_1ChatSession_ada9c58fcd370144e71643c60a9b70360}\index{axe.ChatSession@{axe.ChatSession}!tool\_runner@{tool\_runner}}
+\index{tool\_runner@{tool\_runner}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{tool\_runner}{tool\_runner}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_ada9c58fcd370144e71643c60a9b70360} 
+\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}} axe.\+Chat\+Session.\+tool\+\_\+runner = \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}(\mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}}, \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}})}
+
+\Hypertarget{classaxe_1_1ChatSession_ab713c3e02e473997fe97a9139e51db9c}\index{axe.ChatSession@{axe.ChatSession}!workshop\_chisel@{workshop\_chisel}}
+\index{workshop\_chisel@{workshop\_chisel}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{workshop\_chisel}{workshop\_chisel}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_ab713c3e02e473997fe97a9139e51db9c} 
+Optional\mbox{[}Any\mbox{]} axe.\+Chat\+Session.\+workshop\+\_\+chisel = None}
+
+\Hypertarget{classaxe_1_1ChatSession_a207e7b732b2e2cd1b4330303a71772e1}\index{axe.ChatSession@{axe.ChatSession}!workshop\_hammer@{workshop\_hammer}}
+\index{workshop\_hammer@{workshop\_hammer}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{workshop\_hammer}{workshop\_hammer}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a207e7b732b2e2cd1b4330303a71772e1} 
+Optional\mbox{[}Any\mbox{]} axe.\+Chat\+Session.\+workshop\+\_\+hammer = None}
+
+\Hypertarget{classaxe_1_1ChatSession_a5c0c42c3ebdb65655c16d6d386a78efb}\index{axe.ChatSession@{axe.ChatSession}!workshop\_plane@{workshop\_plane}}
+\index{workshop\_plane@{workshop\_plane}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{workshop\_plane}{workshop\_plane}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a5c0c42c3ebdb65655c16d6d386a78efb} 
+Optional\mbox{[}Any\mbox{]} axe.\+Chat\+Session.\+workshop\+\_\+plane = None}
+
+\Hypertarget{classaxe_1_1ChatSession_aa98aefe04645dda38181af04710efdd8}\index{axe.ChatSession@{axe.ChatSession}!workshop\_saw@{workshop\_saw}}
+\index{workshop\_saw@{workshop\_saw}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{workshop\_saw}{workshop\_saw}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_aa98aefe04645dda38181af04710efdd8} 
+Optional\mbox{[}Any\mbox{]} axe.\+Chat\+Session.\+workshop\+\_\+saw = None}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{axe_8py}{axe.\+py}}\end{DoxyCompactItemize}

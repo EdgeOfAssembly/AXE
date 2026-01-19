@@ -1,0 +1,119 @@
+\doxysection{utils.\+token\+\_\+stats Namespace Reference}
+\hypertarget{namespaceutils_1_1token__stats}{}\label{namespaceutils_1_1token__stats}\index{utils.token\_stats@{utils.token\_stats}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classutils_1_1token__stats_1_1TokenStats}{Token\+Stats}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Tuple\mbox{[}float, float\mbox{]} \mbox{\hyperlink{namespaceutils_1_1token__stats_a1e7eb57a760361efe5d08c347d5b8a39}{get\+\_\+model\+\_\+pricing}} (str model\+\_\+name)
+\item 
+float \mbox{\hyperlink{namespaceutils_1_1token__stats_a54a42760c488a25025c244562ac9500b}{estimate\+\_\+cost}} (str model\+\_\+name, int input\+\_\+tokens, int output\+\_\+tokens)
+\item 
+str \mbox{\hyperlink{namespaceutils_1_1token__stats_af749d8ae6c60119851a792d66884337b}{format\+\_\+cost}} (float cost)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{namespaceutils_1_1token__stats_ac094f6b11238f327b545979822d8510b}{MODEL\+\_\+\+PRICING}}
+\item 
+tuple \mbox{\hyperlink{namespaceutils_1_1token__stats_ad9cd4b37fa8705a258c457824ba60a77}{DEFAULT\+\_\+\+PRICING}} = (5.\+00, 15.\+00)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Token usage statistics and cost estimation for AXE.
+Pricing data for different AI model providers.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespaceutils_1_1token__stats_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceutils_1_1token__stats_a54a42760c488a25025c244562ac9500b}\index{utils.token\_stats@{utils.token\_stats}!estimate\_cost@{estimate\_cost}}
+\index{estimate\_cost@{estimate\_cost}!utils.token\_stats@{utils.token\_stats}}
+\doxysubsubsection{\texorpdfstring{estimate\_cost()}{estimate\_cost()}}
+{\footnotesize\ttfamily \label{namespaceutils_1_1token__stats_a54a42760c488a25025c244562ac9500b} 
+ float utils.\+token\+\_\+stats.\+estimate\+\_\+cost (\begin{DoxyParamCaption}\item[{str}]{model\+\_\+name}{, }\item[{int}]{input\+\_\+tokens}{, }\item[{int}]{output\+\_\+tokens}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Estimate cost for token usage.
+
+Args:
+    model_name: Name of the model
+    input_tokens: Number of input tokens
+    output_tokens: Number of output tokens
+
+Returns:
+    Estimated cost in USD
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceutils_1_1token__stats_a54a42760c488a25025c244562ac9500b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceutils_1_1token__stats_a54a42760c488a25025c244562ac9500b_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceutils_1_1token__stats_af749d8ae6c60119851a792d66884337b}\index{utils.token\_stats@{utils.token\_stats}!format\_cost@{format\_cost}}
+\index{format\_cost@{format\_cost}!utils.token\_stats@{utils.token\_stats}}
+\doxysubsubsection{\texorpdfstring{format\_cost()}{format\_cost()}}
+{\footnotesize\ttfamily \label{namespaceutils_1_1token__stats_af749d8ae6c60119851a792d66884337b} 
+ str utils.\+token\+\_\+stats.\+format\+\_\+cost (\begin{DoxyParamCaption}\item[{float}]{cost}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Format cost for display.
+
+Args:
+    cost: Cost in USD
+
+Returns:
+    Formatted string (e.g., "$0.23" or "$2.45")
+\end{DoxyVerb}
+ \Hypertarget{namespaceutils_1_1token__stats_a1e7eb57a760361efe5d08c347d5b8a39}\index{utils.token\_stats@{utils.token\_stats}!get\_model\_pricing@{get\_model\_pricing}}
+\index{get\_model\_pricing@{get\_model\_pricing}!utils.token\_stats@{utils.token\_stats}}
+\doxysubsubsection{\texorpdfstring{get\_model\_pricing()}{get\_model\_pricing()}}
+{\footnotesize\ttfamily \label{namespaceutils_1_1token__stats_a1e7eb57a760361efe5d08c347d5b8a39} 
+ Tuple\mbox{[}float, float\mbox{]} utils.\+token\+\_\+stats.\+get\+\_\+model\+\_\+pricing (\begin{DoxyParamCaption}\item[{str}]{model\+\_\+name}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get pricing for a model.
+
+Args:
+    model_name: Name of the model
+
+Returns:
+    Tuple of (input_price_per_1m, output_price_per_1m) in USD
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceutils_1_1token__stats_a1e7eb57a760361efe5d08c347d5b8a39_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{namespaceutils_1_1token__stats_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceutils_1_1token__stats_ad9cd4b37fa8705a258c457824ba60a77}\index{utils.token\_stats@{utils.token\_stats}!DEFAULT\_PRICING@{DEFAULT\_PRICING}}
+\index{DEFAULT\_PRICING@{DEFAULT\_PRICING}!utils.token\_stats@{utils.token\_stats}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_PRICING}{DEFAULT\_PRICING}}
+{\footnotesize\ttfamily \label{namespaceutils_1_1token__stats_ad9cd4b37fa8705a258c457824ba60a77} 
+tuple utils.\+token\+\_\+stats.\+DEFAULT\+\_\+\+PRICING = (5.\+00, 15.\+00)}
+
+\Hypertarget{namespaceutils_1_1token__stats_ac094f6b11238f327b545979822d8510b}\index{utils.token\_stats@{utils.token\_stats}!MODEL\_PRICING@{MODEL\_PRICING}}
+\index{MODEL\_PRICING@{MODEL\_PRICING}!utils.token\_stats@{utils.token\_stats}}
+\doxysubsubsection{\texorpdfstring{MODEL\_PRICING}{MODEL\_PRICING}}
+{\footnotesize\ttfamily \label{namespaceutils_1_1token__stats_ac094f6b11238f327b545979822d8510b} 
+dict utils.\+token\+\_\+stats.\+MODEL\+\_\+\+PRICING}
+

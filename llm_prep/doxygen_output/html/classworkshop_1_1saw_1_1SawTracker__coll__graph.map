@@ -1,0 +1,7 @@
+<map id="workshop.saw.SawTracker" name="workshop.saw.SawTracker">
+<area shape="rect" id="Node000001" title=" " alt="" coords="98,151,291,357"/>
+<area shape="rect" id="Node000002" href="$classworkshop_1_1saw_1_1TaintSource.html" title=" " alt="" coords="5,5,187,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,75,142,135,137,136,112,80"/>
+<area shape="rect" id="Node000003" href="$classworkshop_1_1saw_1_1TaintSink.html" title=" " alt="" coords="211,5,376,78"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="279,75,252,137,248,134,276,80"/>
+</map>

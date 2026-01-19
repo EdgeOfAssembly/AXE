@@ -1,0 +1,313 @@
+\doxysection{tools/dos\+\_\+unpackers/depklite.c File Reference}
+\hypertarget{depklite_8c}{}\label{depklite_8c}\index{tools/dos\_unpackers/depklite.c@{tools/dos\_unpackers/depklite.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$locale.\+h$>$}\newline
+{\ttfamily \#include $<$getopt.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include "{}depklite.\+h"{}}\newline
+Include dependency graph for depklite.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{depklite_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structNode}{Node}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{depklite_8c_a369266c24eacffb87046522897a570d5}{\+\_\+\+GNU\+\_\+\+SOURCE}}~/\texorpdfstring{$\ast$}{*} for asprintf(), raw strings \texorpdfstring{$\ast$}{*}/
+\item 
+\#define \mbox{\hyperlink{depklite_8c_ac4a28a04791632db292a186754d93622}{ST}}(l,  r)
+\item 
+\#define \mbox{\hyperlink{depklite_8c_a427e5dc1b398ef7ffd4bf1c1dd740617}{LF}}(v)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct Node \mbox{\hyperlink{depklite_8c_a3b09f37e675bcd48a01bf22155996872}{Node}}
+\item 
+typedef \mbox{\hyperlink{structNode}{Node}} \mbox{\hyperlink{depklite_8c_ad98e9dc2ce8ddf0c8769a7e50f25261c}{Bit\+Tree}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{depklite_8c_ab46784744f0c75c40a5591adc24f2dea}{verbose}} (char \texorpdfstring{$\ast$}{*}fmt,...)
+\item 
+static void \mbox{\hyperlink{depklite_8c_a3c08aac8e60f001e2c48fc3daf43bfb5}{Debug\+\_\+check}} (bool expression, const char \texorpdfstring{$\ast$}{*}msg)
+\item 
+static uint8\+\_\+t \mbox{\hyperlink{depklite_8c_a84e1ca261f7810f3e6573b6775637387}{get\+Next\+Byte}} (\mbox{\hyperlink{structGetNextByte__Data}{Get\+Next\+Byte\+\_\+\+Data}} \texorpdfstring{$\ast$}{*}data)
+\item 
+static bool \mbox{\hyperlink{depklite_8c_aefe53ad5b9e8e179f9df773d0f15063e}{get\+Next\+Bit}} (\mbox{\hyperlink{structGetNextBit__Data}{Get\+Next\+Bit\+\_\+\+Data}} \texorpdfstring{$\ast$}{*}data)
+\item 
+static const int \mbox{\hyperlink{depklite_8c_a1a918d28cd72b0a8e04d0b697f8e0742}{Bit\+Tree\+\_\+get}} (const \mbox{\hyperlink{depklite_8c_ad98e9dc2ce8ddf0c8769a7e50f25261c}{Bit\+Tree}} \texorpdfstring{$\ast$}{*}bt, \mbox{\hyperlink{structGetNextBit__Data}{Get\+Next\+Bit\+\_\+\+Data}} \texorpdfstring{$\ast$}{*}get\+Next\+Bit\+Dat\+Ptr)
+\item 
+int32\+\_\+t \mbox{\hyperlink{depklite_8c_abc34a005998258ced922ca2e5df70ad0}{depklite\+\_\+unpack}} (FILE \texorpdfstring{$\ast$}{*}fp, unsigned char \texorpdfstring{$\ast$}{*}decomp\+Buff, int buffsize, int compressed\+Data\+Offset, bool use\+Decryption)
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{depklite_8c_a746cee407a9dac3b866f8da6600581c5}{itob}} (uint16\+\_\+t i)
+\item 
+int \mbox{\hyperlink{depklite_8c_a6c8292606a6eb2aa9759b31df768e40d}{print\+Bit\+Data}} (int byte\+Index, \mbox{\hyperlink{structGetNextBit__Data}{Get\+Next\+Bit\+\_\+\+Data}} data)
+\item 
+long \mbox{\hyperlink{depklite_8c_a0ba3adf2d91169675b5f216a301d9da4}{estimate\+Length}} (FILE \texorpdfstring{$\ast$}{*}fp)
+\item 
+void \mbox{\hyperlink{depklite_8c_a2ef30c42cbc289d899a8be5d2d8f77d0}{usage}} ()
+\item 
+int \mbox{\hyperlink{depklite_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{depklite_8c_ac710816f73e3cefff5011aab1bc9a796}{vflag}} =false
+\item 
+static const \mbox{\hyperlink{structNode}{Node}} \mbox{\hyperlink{depklite_8c_a7d31bc962170c70724f77bc2fecb5d85}{bit\+Tree1}} \mbox{[}$\,$\mbox{]}
+\item 
+static const \mbox{\hyperlink{structNode}{Node}} \mbox{\hyperlink{depklite_8c_ab4a11370c4c4d675400ca218d0835d24}{bit\+Tree2}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{depklite_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{depklite_8c_a369266c24eacffb87046522897a570d5}\index{depklite.c@{depklite.c}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
+\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{\_GNU\_SOURCE}{\_GNU\_SOURCE}}
+{\footnotesize\ttfamily \label{depklite_8c_a369266c24eacffb87046522897a570d5} 
+\#define \+\_\+\+GNU\+\_\+\+SOURCE~/\texorpdfstring{$\ast$}{*} for asprintf(), raw strings \texorpdfstring{$\ast$}{*}/}
+
+\Hypertarget{depklite_8c_a427e5dc1b398ef7ffd4bf1c1dd740617}\index{depklite.c@{depklite.c}!LF@{LF}}
+\index{LF@{LF}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{LF}{LF}}
+{\footnotesize\ttfamily \label{depklite_8c_a427e5dc1b398ef7ffd4bf1c1dd740617} 
+\#define LF(\begin{DoxyParamCaption}\item[{}]{v}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{\ 0,\ 0,\ v\ \}}
+
+\end{DoxyCode}
+\Hypertarget{depklite_8c_ac4a28a04791632db292a186754d93622}\index{depklite.c@{depklite.c}!ST@{ST}}
+\index{ST@{ST}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{ST}{ST}}
+{\footnotesize\ttfamily \label{depklite_8c_ac4a28a04791632db292a186754d93622} 
+\#define ST(\begin{DoxyParamCaption}\item[{}]{l}{, }\item[{}]{r}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{\ l,\ r,\ -\/1\ \}}
+
+\end{DoxyCode}
+
+
+\label{doc-typedef-members}
+\Hypertarget{depklite_8c_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{depklite_8c_ad98e9dc2ce8ddf0c8769a7e50f25261c}\index{depklite.c@{depklite.c}!BitTree@{BitTree}}
+\index{BitTree@{BitTree}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{BitTree}{BitTree}}
+{\footnotesize\ttfamily \label{depklite_8c_ad98e9dc2ce8ddf0c8769a7e50f25261c} 
+typedef \mbox{\hyperlink{structNode}{Node}} \mbox{\hyperlink{depklite_8c_ad98e9dc2ce8ddf0c8769a7e50f25261c}{Bit\+Tree}}}
+
+\Hypertarget{depklite_8c_a3b09f37e675bcd48a01bf22155996872}\index{depklite.c@{depklite.c}!Node@{Node}}
+\index{Node@{Node}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{Node}{Node}}
+{\footnotesize\ttfamily \label{depklite_8c_a3b09f37e675bcd48a01bf22155996872} 
+typedef struct Node Node}
+
+
+
+\label{doc-func-members}
+\Hypertarget{depklite_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{depklite_8c_a1a918d28cd72b0a8e04d0b697f8e0742}\index{depklite.c@{depklite.c}!BitTree\_get@{BitTree\_get}}
+\index{BitTree\_get@{BitTree\_get}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{BitTree\_get()}{BitTree\_get()}}
+{\footnotesize\ttfamily \label{depklite_8c_a1a918d28cd72b0a8e04d0b697f8e0742} 
+const int Bit\+Tree\+\_\+get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{depklite_8c_ad98e9dc2ce8ddf0c8769a7e50f25261c}{Bit\+Tree}} \texorpdfstring{$\ast$}{*}}]{bt}{, }\item[{\mbox{\hyperlink{structGetNextBit__Data}{Get\+Next\+Bit\+\_\+\+Data}} \texorpdfstring{$\ast$}{*}}]{get\+Next\+Bit\+Dat\+Ptr}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{depklite_8c_a1a918d28cd72b0a8e04d0b697f8e0742_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=283pt]{depklite_8c_a1a918d28cd72b0a8e04d0b697f8e0742_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{depklite_8c_a3c08aac8e60f001e2c48fc3daf43bfb5}\index{depklite.c@{depklite.c}!Debug\_check@{Debug\_check}}
+\index{Debug\_check@{Debug\_check}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{Debug\_check()}{Debug\_check()}}
+{\footnotesize\ttfamily \label{depklite_8c_a3c08aac8e60f001e2c48fc3daf43bfb5} 
+void Debug\+\_\+check (\begin{DoxyParamCaption}\item[{bool}]{expression}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{msg}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{depklite_8c_a3c08aac8e60f001e2c48fc3daf43bfb5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{depklite_8c_abc34a005998258ced922ca2e5df70ad0}\index{depklite.c@{depklite.c}!depklite\_unpack@{depklite\_unpack}}
+\index{depklite\_unpack@{depklite\_unpack}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{depklite\_unpack()}{depklite\_unpack()}}
+{\footnotesize\ttfamily \label{depklite_8c_abc34a005998258ced922ca2e5df70ad0} 
+int32\+\_\+t depklite\+\_\+unpack (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{decomp\+Buff}{, }\item[{int}]{buffsize}{, }\item[{int}]{compressed\+Data\+Offset}{, }\item[{bool}]{use\+Decryption}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{depklite_8c_abc34a005998258ced922ca2e5df70ad0_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{depklite_8c_a0ba3adf2d91169675b5f216a301d9da4}\index{depklite.c@{depklite.c}!estimateLength@{estimateLength}}
+\index{estimateLength@{estimateLength}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{estimateLength()}{estimateLength()}}
+{\footnotesize\ttfamily \label{depklite_8c_a0ba3adf2d91169675b5f216a301d9da4} 
+long estimate\+Length (\begin{DoxyParamCaption}\item[{FILE \texorpdfstring{$\ast$}{*}}]{fp}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{depklite_8c_a0ba3adf2d91169675b5f216a301d9da4_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{depklite_8c_aefe53ad5b9e8e179f9df773d0f15063e}\index{depklite.c@{depklite.c}!getNextBit@{getNextBit}}
+\index{getNextBit@{getNextBit}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{getNextBit()}{getNextBit()}}
+{\footnotesize\ttfamily \label{depklite_8c_aefe53ad5b9e8e179f9df773d0f15063e} 
+bool get\+Next\+Bit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGetNextBit__Data}{Get\+Next\+Bit\+\_\+\+Data}} \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{depklite_8c_aefe53ad5b9e8e179f9df773d0f15063e_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{depklite_8c_aefe53ad5b9e8e179f9df773d0f15063e_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{depklite_8c_a84e1ca261f7810f3e6573b6775637387}\index{depklite.c@{depklite.c}!getNextByte@{getNextByte}}
+\index{getNextByte@{getNextByte}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{getNextByte()}{getNextByte()}}
+{\footnotesize\ttfamily \label{depklite_8c_a84e1ca261f7810f3e6573b6775637387} 
+uint8\+\_\+t get\+Next\+Byte (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGetNextByte__Data}{Get\+Next\+Byte\+\_\+\+Data}} \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{depklite_8c_a84e1ca261f7810f3e6573b6775637387_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{depklite_8c_a746cee407a9dac3b866f8da6600581c5}\index{depklite.c@{depklite.c}!itob@{itob}}
+\index{itob@{itob}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{itob()}{itob()}}
+{\footnotesize\ttfamily \label{depklite_8c_a746cee407a9dac3b866f8da6600581c5} 
+char \texorpdfstring{$\ast$}{*} itob (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{i}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{depklite_8c_a746cee407a9dac3b866f8da6600581c5_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{depklite_8c_a3c04138a5bfe5d72780bb7e82a18e627}\index{depklite.c@{depklite.c}!main@{main}}
+\index{main@{main}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{depklite_8c_a3c04138a5bfe5d72780bb7e82a18e627} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{}\end{DoxyParamCaption})}
+
+\Hypertarget{depklite_8c_a6c8292606a6eb2aa9759b31df768e40d}\index{depklite.c@{depklite.c}!printBitData@{printBitData}}
+\index{printBitData@{printBitData}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{printBitData()}{printBitData()}}
+{\footnotesize\ttfamily \label{depklite_8c_a6c8292606a6eb2aa9759b31df768e40d} 
+int print\+Bit\+Data (\begin{DoxyParamCaption}\item[{int}]{byte\+Index}{, }\item[{\mbox{\hyperlink{structGetNextBit__Data}{Get\+Next\+Bit\+\_\+\+Data}}}]{data}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{depklite_8c_a6c8292606a6eb2aa9759b31df768e40d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{depklite_8c_a6c8292606a6eb2aa9759b31df768e40d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{depklite_8c_a2ef30c42cbc289d899a8be5d2d8f77d0}\index{depklite.c@{depklite.c}!usage@{usage}}
+\index{usage@{usage}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{usage()}{usage()}}
+{\footnotesize\ttfamily \label{depklite_8c_a2ef30c42cbc289d899a8be5d2d8f77d0} 
+void usage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{depklite_8c_ab46784744f0c75c40a5591adc24f2dea}\index{depklite.c@{depklite.c}!verbose@{verbose}}
+\index{verbose@{verbose}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{verbose()}{verbose()}}
+{\footnotesize\ttfamily \label{depklite_8c_ab46784744f0c75c40a5591adc24f2dea} 
+void verbose (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{fmt}{, }\item[{}]{...}{}\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=267pt]{depklite_8c_ab46784744f0c75c40a5591adc24f2dea_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-var-members}
+\Hypertarget{depklite_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{depklite_8c_a7d31bc962170c70724f77bc2fecb5d85}\index{depklite.c@{depklite.c}!bitTree1@{bitTree1}}
+\index{bitTree1@{bitTree1}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{bitTree1}{bitTree1}}
+{\footnotesize\ttfamily \label{depklite_8c_a7d31bc962170c70724f77bc2fecb5d85} 
+const \mbox{\hyperlink{structNode}{Node}} bit\+Tree1\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{depklite_8c_ab4a11370c4c4d675400ca218d0835d24}\index{depklite.c@{depklite.c}!bitTree2@{bitTree2}}
+\index{bitTree2@{bitTree2}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{bitTree2}{bitTree2}}
+{\footnotesize\ttfamily \label{depklite_8c_ab4a11370c4c4d675400ca218d0835d24} 
+const \mbox{\hyperlink{structNode}{Node}} bit\+Tree2\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{depklite_8c_ac710816f73e3cefff5011aab1bc9a796}\index{depklite.c@{depklite.c}!vflag@{vflag}}
+\index{vflag@{vflag}!depklite.c@{depklite.c}}
+\doxysubsubsection{\texorpdfstring{vflag}{vflag}}
+{\footnotesize\ttfamily \label{depklite_8c_ac710816f73e3cefff5011aab1bc9a796} 
+bool vflag =false}
+

@@ -1,0 +1,21 @@
+digraph "test_collab_tool_syntax.create_test_session"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="test_collab_tool_syntax.create\l_test_session",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge9_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="test_collab_tool_syntax.test\l_collab_prompt_has_clear\l_examples",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__collab__tool__syntax.html#ac2fbb67241504f81841e6625d3755251",tooltip=" "];
+  Node2 -> Node3 [id="edge10_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="test_collab_tool_syntax.test\l_multiple_agents_get_tool\l_instructions",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__collab__tool__syntax.html#a35afb66b14174bae3c39efd8dd247f45",tooltip=" "];
+  Node3 -> Node3 [id="edge11_Node000003_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node4 [id="edge12_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="test_collab_tool_syntax.test\l_collab_prompt_includes_tool_syntax",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__collab__tool__syntax.html#aa8ac70ed15a8a0db044cadadf5a82152",tooltip=" "];
+  Node4 -> Node3 [id="edge13_Node000004_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node5 [id="edge14_Node000001_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="test_collab_tool_syntax.test\l_collab_prompt_preserves\l_existing_features",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__collab__tool__syntax.html#a2bb87e5531f531b7fb734927ee837adf",tooltip=" "];
+  Node5 -> Node3 [id="edge15_Node000005_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node3 [id="edge16_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+}

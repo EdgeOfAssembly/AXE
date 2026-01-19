@@ -1,0 +1,109 @@
+\doxysection{managers.\+sleep\+\_\+manager.\+Sleep\+Manager Class Reference}
+\hypertarget{classmanagers_1_1sleep__manager_1_1SleepManager}{}\label{classmanagers_1_1sleep__manager_1_1SleepManager}\index{managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}}
+
+
+Collaboration diagram for managers.\+sleep\+\_\+manager.\+Sleep\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classmanagers_1_1sleep__manager_1_1SleepManager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmanagers_1_1sleep__manager_1_1SleepManager_a2533e39913e3fa08b8ac23fe15e13b7a}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase}{Agent\+Database}} \mbox{\hyperlink{classmanagers_1_1sleep__manager_1_1SleepManager_aca9748a80c7d47722575c65b2552a0e1}{db}})
+\item 
+List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classmanagers_1_1sleep__manager_1_1SleepManager_af1e4c64f5a1ca33e89440e2e3ede2563}{check\+\_\+all\+\_\+agents}} (self)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classmanagers_1_1sleep__manager_1_1SleepManager_a2380705e53ed4a517c711eef10d7490c}{force\+\_\+sleep}} (self, str agent\+\_\+id, str reason, Optional\mbox{[}str\mbox{]} supervisor\+\_\+id=None)
+\item 
+List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classmanagers_1_1sleep__manager_1_1SleepManager_ad1cf0aa665eac1590ea2031e87afcfc8}{check\+\_\+and\+\_\+wake\+\_\+agents}} (self)
+\item 
+Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classmanagers_1_1sleep__manager_1_1SleepManager_afc04cbf751f7f9481d5bc48326558b99}{get\+\_\+status\+\_\+summary}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmanagers_1_1sleep__manager_1_1SleepManager_aca9748a80c7d47722575c65b2552a0e1}{db}} = db
+\item 
+dict \mbox{\hyperlink{classmanagers_1_1sleep__manager_1_1SleepManager_a887ce8e727553ddecc8d03d0294ae96c}{sleep\+\_\+queue}} = \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Manages mandatory sleep system for agents.
+
+Features:
+- Track continuous work time (6-8 hour limit)
+- Force sleep when degradation detected
+- Graceful handover before sleep
+- Resume from last state after rest
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classmanagers_1_1sleep__manager_1_1SleepManager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmanagers_1_1sleep__manager_1_1SleepManager_a2533e39913e3fa08b8ac23fe15e13b7a}\index{managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1sleep__manager_1_1SleepManager_a2533e39913e3fa08b8ac23fe15e13b7a} 
+managers.\+sleep\+\_\+manager.\+Sleep\+Manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase}{Agent\+Database}}}]{db}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classmanagers_1_1sleep__manager_1_1SleepManager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmanagers_1_1sleep__manager_1_1SleepManager_af1e4c64f5a1ca33e89440e2e3ede2563}\index{managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}!check\_all\_agents@{check\_all\_agents}}
+\index{check\_all\_agents@{check\_all\_agents}!managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}}
+\doxysubsubsection{\texorpdfstring{check\_all\_agents()}{check\_all\_agents()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1sleep__manager_1_1SleepManager_af1e4c64f5a1ca33e89440e2e3ede2563} 
+ List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} managers.\+sleep\+\_\+manager.\+Sleep\+Manager.\+check\+\_\+all\+\_\+agents (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check all active agents for mandatory sleep requirements.\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1sleep__manager_1_1SleepManager_ad1cf0aa665eac1590ea2031e87afcfc8}\index{managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}!check\_and\_wake\_agents@{check\_and\_wake\_agents}}
+\index{check\_and\_wake\_agents@{check\_and\_wake\_agents}!managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}}
+\doxysubsubsection{\texorpdfstring{check\_and\_wake\_agents()}{check\_and\_wake\_agents()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1sleep__manager_1_1SleepManager_ad1cf0aa665eac1590ea2031e87afcfc8} 
+ List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} managers.\+sleep\+\_\+manager.\+Sleep\+Manager.\+check\+\_\+and\+\_\+wake\+\_\+agents (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check for agents ready to wake up.\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1sleep__manager_1_1SleepManager_a2380705e53ed4a517c711eef10d7490c}\index{managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}!force\_sleep@{force\_sleep}}
+\index{force\_sleep@{force\_sleep}!managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}}
+\doxysubsubsection{\texorpdfstring{force\_sleep()}{force\_sleep()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1sleep__manager_1_1SleepManager_a2380705e53ed4a517c711eef10d7490c} 
+ Dict\mbox{[}str, Any\mbox{]} managers.\+sleep\+\_\+manager.\+Sleep\+Manager.\+force\+\_\+sleep (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{str}]{reason}{, }\item[{Optional\mbox{[}str\mbox{]} }]{supervisor\+\_\+id}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Force an agent to sleep.\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1sleep__manager_1_1SleepManager_afc04cbf751f7f9481d5bc48326558b99}\index{managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}!get\_status\_summary@{get\_status\_summary}}
+\index{get\_status\_summary@{get\_status\_summary}!managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}}
+\doxysubsubsection{\texorpdfstring{get\_status\_summary()}{get\_status\_summary()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1sleep__manager_1_1SleepManager_afc04cbf751f7f9481d5bc48326558b99} 
+ Dict\mbox{[}str, Any\mbox{]} managers.\+sleep\+\_\+manager.\+Sleep\+Manager.\+get\+\_\+status\+\_\+summary (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get a summary of all agent sleep statuses.\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classmanagers_1_1sleep__manager_1_1SleepManager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmanagers_1_1sleep__manager_1_1SleepManager_aca9748a80c7d47722575c65b2552a0e1}\index{managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}!db@{db}}
+\index{db@{db}!managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}}
+\doxysubsubsection{\texorpdfstring{db}{db}}
+{\footnotesize\ttfamily \label{classmanagers_1_1sleep__manager_1_1SleepManager_aca9748a80c7d47722575c65b2552a0e1} 
+managers.\+sleep\+\_\+manager.\+Sleep\+Manager.\+db = db}
+
+\Hypertarget{classmanagers_1_1sleep__manager_1_1SleepManager_a887ce8e727553ddecc8d03d0294ae96c}\index{managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}!sleep\_queue@{sleep\_queue}}
+\index{sleep\_queue@{sleep\_queue}!managers.sleep\_manager.SleepManager@{managers.sleep\_manager.SleepManager}}
+\doxysubsubsection{\texorpdfstring{sleep\_queue}{sleep\_queue}}
+{\footnotesize\ttfamily \label{classmanagers_1_1sleep__manager_1_1SleepManager_a887ce8e727553ddecc8d03d0294ae96c} 
+managers.\+sleep\+\_\+manager.\+Sleep\+Manager.\+sleep\+\_\+queue = \{\}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+managers/\mbox{\hyperlink{sleep__manager_8py}{sleep\+\_\+manager.\+py}}\end{DoxyCompactItemize}

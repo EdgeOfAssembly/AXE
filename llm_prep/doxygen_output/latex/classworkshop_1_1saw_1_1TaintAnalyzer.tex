@@ -1,0 +1,213 @@
+\doxysection{workshop.\+saw.\+Taint\+Analyzer Class Reference}
+\hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer}{}\label{classworkshop_1_1saw_1_1TaintAnalyzer}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+
+
+Inheritance diagram for workshop.\+saw.\+Taint\+Analyzer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classworkshop_1_1saw_1_1TaintAnalyzer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for workshop.\+saw.\+Taint\+Analyzer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classworkshop_1_1saw_1_1TaintAnalyzer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a7a84d6cbea2ebaf0cc6ee225be698811}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSource}{Taint\+Source}}\mbox{]} \mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a4d0d18fe88ec0e423c1e3089d725b207}{sources}}, List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSink}{Taint\+Sink}}\mbox{]} \mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a8109de5f74beaf51049db22049957ab3}{sinks}})
+\item 
+\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a5c28b8c11ae8d515895a15bf742320d4}{visit\+\_\+\+Call}} (self, node)
+\item 
+\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a82e632e124fa2892f991ffa8cccd9805}{visit\+\_\+\+Assign}} (self, node)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a4d0d18fe88ec0e423c1e3089d725b207}{sources}} = sources
+\item 
+\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a8109de5f74beaf51049db22049957ab3}{sinks}} = sinks
+\item 
+list \mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a1ff35f99787627bbea479e4586b44c08}{sources\+\_\+found}} = \mbox{[}$\,$\mbox{]}
+\item 
+list \mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_ab13b9ee160fa297a9414302e264d1b57}{sinks\+\_\+found}} = \mbox{[}$\,$\mbox{]}
+\item 
+list \mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a5b573949b59c0d32b77989a80a251666}{flows}} = \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a234d9403c304f5297906bc964812e47a}{taint\+\_\+vars}} = set()
+\item 
+dict \mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a05a84206ddebb81e4cb53aa1ba0315a3}{var\+\_\+taint\+\_\+map}} = \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a3cd13e2d2cd36cfd16c8781eb8fe44f3}{\+\_\+get\+\_\+func\+\_\+name}} (self, node)
+\item 
+bool \mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a018909a0b2cb4d0175cbb8f7566c45bb}{\+\_\+is\+\_\+expr\+\_\+tainted}} (self, expr)
+\item 
+Optional\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSource}{Taint\+Source}}\mbox{]} \mbox{\hyperlink{classworkshop_1_1saw_1_1TaintAnalyzer_a9342169b911115a76ab6b5f9c422401f}{\+\_\+get\+\_\+expr\+\_\+taint}} (self, expr)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}AST visitor for taint analysis.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_a7a84d6cbea2ebaf0cc6ee225be698811}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_a7a84d6cbea2ebaf0cc6ee225be698811} 
+workshop.\+saw.\+Taint\+Analyzer.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSource}{Taint\+Source}}\mbox{]}}]{sources}{, }\item[{List\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSink}{Taint\+Sink}}\mbox{]}}]{sinks}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_a9342169b911115a76ab6b5f9c422401f}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!\_get\_expr\_taint@{\_get\_expr\_taint}}
+\index{\_get\_expr\_taint@{\_get\_expr\_taint}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{\_get\_expr\_taint()}{\_get\_expr\_taint()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_a9342169b911115a76ab6b5f9c422401f} 
+ Optional\mbox{[}\mbox{\hyperlink{classworkshop_1_1saw_1_1TaintSource}{Taint\+Source}}\mbox{]} workshop.\+saw.\+Taint\+Analyzer.\+\_\+get\+\_\+expr\+\_\+taint (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{expr}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Get taint source for an expression.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1saw_1_1TaintAnalyzer_a9342169b911115a76ab6b5f9c422401f_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_a3cd13e2d2cd36cfd16c8781eb8fe44f3}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!\_get\_func\_name@{\_get\_func\_name}}
+\index{\_get\_func\_name@{\_get\_func\_name}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{\_get\_func\_name()}{\_get\_func\_name()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_a3cd13e2d2cd36cfd16c8781eb8fe44f3} 
+ str workshop.\+saw.\+Taint\+Analyzer.\+\_\+get\+\_\+func\+\_\+name (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Get function name from AST node.\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1saw_1_1TaintAnalyzer_a3cd13e2d2cd36cfd16c8781eb8fe44f3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_a018909a0b2cb4d0175cbb8f7566c45bb}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!\_is\_expr\_tainted@{\_is\_expr\_tainted}}
+\index{\_is\_expr\_tainted@{\_is\_expr\_tainted}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{\_is\_expr\_tainted()}{\_is\_expr\_tainted()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_a018909a0b2cb4d0175cbb8f7566c45bb} 
+ bool workshop.\+saw.\+Taint\+Analyzer.\+\_\+is\+\_\+expr\+\_\+tainted (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{expr}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Check if an expression is tainted.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1saw_1_1TaintAnalyzer_a018909a0b2cb4d0175cbb8f7566c45bb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1saw_1_1TaintAnalyzer_a018909a0b2cb4d0175cbb8f7566c45bb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_a82e632e124fa2892f991ffa8cccd9805}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!visit\_Assign@{visit\_Assign}}
+\index{visit\_Assign@{visit\_Assign}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{visit\_Assign()}{visit\_Assign()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_a82e632e124fa2892f991ffa8cccd9805} 
+workshop.\+saw.\+Taint\+Analyzer.\+visit\+\_\+\+Assign (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{node}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Track taint propagation through assignments.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1saw_1_1TaintAnalyzer_a82e632e124fa2892f991ffa8cccd9805_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_a5c28b8c11ae8d515895a15bf742320d4}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!visit\_Call@{visit\_Call}}
+\index{visit\_Call@{visit\_Call}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{visit\_Call()}{visit\_Call()}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_a5c28b8c11ae8d515895a15bf742320d4} 
+workshop.\+saw.\+Taint\+Analyzer.\+visit\+\_\+\+Call (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{node}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Visit function calls to check for sources and sinks.\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classworkshop_1_1saw_1_1TaintAnalyzer_a5c28b8c11ae8d515895a15bf742320d4_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_a5b573949b59c0d32b77989a80a251666}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!flows@{flows}}
+\index{flows@{flows}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{flows}{flows}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_a5b573949b59c0d32b77989a80a251666} 
+list workshop.\+saw.\+Taint\+Analyzer.\+flows = \mbox{[}$\,$\mbox{]}}
+
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_a8109de5f74beaf51049db22049957ab3}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!sinks@{sinks}}
+\index{sinks@{sinks}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{sinks}{sinks}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_a8109de5f74beaf51049db22049957ab3} 
+workshop.\+saw.\+Taint\+Analyzer.\+sinks = sinks}
+
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_ab13b9ee160fa297a9414302e264d1b57}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!sinks\_found@{sinks\_found}}
+\index{sinks\_found@{sinks\_found}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{sinks\_found}{sinks\_found}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_ab13b9ee160fa297a9414302e264d1b57} 
+list workshop.\+saw.\+Taint\+Analyzer.\+sinks\+\_\+found = \mbox{[}$\,$\mbox{]}}
+
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_a4d0d18fe88ec0e423c1e3089d725b207}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!sources@{sources}}
+\index{sources@{sources}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{sources}{sources}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_a4d0d18fe88ec0e423c1e3089d725b207} 
+workshop.\+saw.\+Taint\+Analyzer.\+sources = sources}
+
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_a1ff35f99787627bbea479e4586b44c08}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!sources\_found@{sources\_found}}
+\index{sources\_found@{sources\_found}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{sources\_found}{sources\_found}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_a1ff35f99787627bbea479e4586b44c08} 
+list workshop.\+saw.\+Taint\+Analyzer.\+sources\+\_\+found = \mbox{[}$\,$\mbox{]}}
+
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_a234d9403c304f5297906bc964812e47a}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!taint\_vars@{taint\_vars}}
+\index{taint\_vars@{taint\_vars}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{taint\_vars}{taint\_vars}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_a234d9403c304f5297906bc964812e47a} 
+workshop.\+saw.\+Taint\+Analyzer.\+taint\+\_\+vars = set()}
+
+\Hypertarget{classworkshop_1_1saw_1_1TaintAnalyzer_a05a84206ddebb81e4cb53aa1ba0315a3}\index{workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}!var\_taint\_map@{var\_taint\_map}}
+\index{var\_taint\_map@{var\_taint\_map}!workshop.saw.TaintAnalyzer@{workshop.saw.TaintAnalyzer}}
+\doxysubsubsection{\texorpdfstring{var\_taint\_map}{var\_taint\_map}}
+{\footnotesize\ttfamily \label{classworkshop_1_1saw_1_1TaintAnalyzer_a05a84206ddebb81e4cb53aa1ba0315a3} 
+dict workshop.\+saw.\+Taint\+Analyzer.\+var\+\_\+taint\+\_\+map = \{\}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+workshop/\mbox{\hyperlink{saw_8py}{saw.\+py}}\end{DoxyCompactItemize}

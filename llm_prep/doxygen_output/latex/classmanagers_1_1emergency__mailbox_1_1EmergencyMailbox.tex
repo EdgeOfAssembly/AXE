@@ -1,0 +1,169 @@
+\doxysection{managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox Class Reference}
+\hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox}{}\label{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox}\index{managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}}
+
+
+Collaboration diagram for managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a0356f285152e959fe365c19850d91602}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str \mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_ad33d97bbdfc62100f19def99dd0b1ee8}{mailbox\+\_\+dir}}=EMERGENCY\+\_\+\+MAILBOX\+\_\+\+DIR)
+\item 
+bool \mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a26cf6bc93649192da2e86ab5e09a0397}{set\+\_\+human\+\_\+public\+\_\+key}} (self, str public\+\_\+key)
+\item 
+Tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a76c0e1e766d743d598da43887eace654}{send\+\_\+report}} (self, str agent\+\_\+alias, str report\+\_\+type, str subject, str details)
+\item 
+List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a1f5018e6298cabf57fa9749c40600d3d}{list\+\_\+reports}} (self)
+\item 
+Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a905de9ac7dc4b4dc7b12de3f2774262a}{decrypt\+\_\+report}} (self, str filename, Optional\mbox{[}str\mbox{]} private\+\_\+key=None)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_ad33d97bbdfc62100f19def99dd0b1ee8}{mailbox\+\_\+dir}} = mailbox\+\_\+dir
+\item 
+\mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_aec5c8f4028dd088d92069e04b65fbb44}{public\+\_\+key\+\_\+file}} = os.\+path.\+join(\mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_ad33d97bbdfc62100f19def99dd0b1ee8}{mailbox\+\_\+dir}}, "{}human\+\_\+public.\+key"{})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a87ba7e2d55286da76c1ff69c2bb479d6}{\+\_\+init\+\_\+mailbox}} (self)
+\item 
+str \mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a134e2a33e103c17ab2173674ab113145}{\+\_\+encrypt\+\_\+message}} (self, str message)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}GPG-encrypted emergency communication channel for workers to report issues
+directly to humans, bypassing the supervisor.
+
+Workers can write encrypted reports about supervisor abuse, safety violations,
+or other critical issues that the supervisor cannot read.
+\end{DoxyVerb}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a0356f285152e959fe365c19850d91602}\index{managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a0356f285152e959fe365c19850d91602} 
+managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str }]{mailbox\+\_\+dir}{ = {\ttfamily EMERGENCY\+\_\+MAILBOX\+\_\+DIR}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a134e2a33e103c17ab2173674ab113145}\index{managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}!\_encrypt\_message@{\_encrypt\_message}}
+\index{\_encrypt\_message@{\_encrypt\_message}!managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}}
+\doxysubsubsection{\texorpdfstring{\_encrypt\_message()}{\_encrypt\_message()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a134e2a33e103c17ab2173674ab113145} 
+ str managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+\_\+encrypt\+\_\+message (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Encrypt a message using simple base64 encoding as a fallback.
+
+⚠️ WARNING: This is a DEMONSTRATION ONLY encryption.
+NOT SECURE for production use. For real security, implement
+proper GPG encryption with the human's public key:
+    gpg --encrypt --armor --recipient <human_key_id>
+\end{DoxyVerb}
+ Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a134e2a33e103c17ab2173674ab113145_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a87ba7e2d55286da76c1ff69c2bb479d6}\index{managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}!\_init\_mailbox@{\_init\_mailbox}}
+\index{\_init\_mailbox@{\_init\_mailbox}!managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}}
+\doxysubsubsection{\texorpdfstring{\_init\_mailbox()}{\_init\_mailbox()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a87ba7e2d55286da76c1ff69c2bb479d6} 
+ None managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+\_\+init\+\_\+mailbox (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Initialize the mailbox directory with secure permissions.\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a905de9ac7dc4b4dc7b12de3f2774262a}\index{managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}!decrypt\_report@{decrypt\_report}}
+\index{decrypt\_report@{decrypt\_report}!managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}}
+\doxysubsubsection{\texorpdfstring{decrypt\_report()}{decrypt\_report()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a905de9ac7dc4b4dc7b12de3f2774262a} 
+ Optional\mbox{[}str\mbox{]} managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+decrypt\+\_\+report (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filename}{, }\item[{Optional\mbox{[}str\mbox{]} }]{private\+\_\+key}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Decrypt a report (for human use only).
+
+Note: In production, this would use GPG with the human's private key.
+The current implementation returns a placeholder message since
+proper GPG decryption requires external tools and the private key.
+
+Args:
+    filename: Name of the report file to decrypt
+    private_key: Optional private key for GPG decryption (not yet implemented)
+\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a1f5018e6298cabf57fa9749c40600d3d}\index{managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}!list\_reports@{list\_reports}}
+\index{list\_reports@{list\_reports}!managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}}
+\doxysubsubsection{\texorpdfstring{list\_reports()}{list\_reports()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a1f5018e6298cabf57fa9749c40600d3d} 
+ List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+list\+\_\+reports (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}List all unread reports in the mailbox (for human viewing).\end{DoxyVerb}
+ \Hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a76c0e1e766d743d598da43887eace654}\index{managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}!send\_report@{send\_report}}
+\index{send\_report@{send\_report}!managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}}
+\doxysubsubsection{\texorpdfstring{send\_report()}{send\_report()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a76c0e1e766d743d598da43887eace654} 
+ Tuple\mbox{[}bool, str\mbox{]} managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+send\+\_\+report (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+alias}{, }\item[{str}]{report\+\_\+type}{, }\item[{str}]{subject}{, }\item[{str}]{details}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Send an encrypted report to the emergency mailbox.
+
+Args:
+    agent_alias: The alias of the reporting agent (@llama1, etc.)
+    report_type: Type of report (supervisor_abuse, safety_violation, etc.)
+    subject: Brief subject line
+    details: Full details of the report
+
+Returns:
+    Tuple of (success, message/filename)
+\end{DoxyVerb}
+ Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a76c0e1e766d743d598da43887eace654_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a26cf6bc93649192da2e86ab5e09a0397}\index{managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}!set\_human\_public\_key@{set\_human\_public\_key}}
+\index{set\_human\_public\_key@{set\_human\_public\_key}!managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}}
+\doxysubsubsection{\texorpdfstring{set\_human\_public\_key()}{set\_human\_public\_key()}}
+{\footnotesize\ttfamily \label{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a26cf6bc93649192da2e86ab5e09a0397} 
+ bool managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+set\+\_\+human\+\_\+public\+\_\+key (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{public\+\_\+key}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Set the human's public key for encryption.\end{DoxyVerb}
+ 
+
+\label{doc-variable-members}
+\Hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_ad33d97bbdfc62100f19def99dd0b1ee8}\index{managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}!mailbox\_dir@{mailbox\_dir}}
+\index{mailbox\_dir@{mailbox\_dir}!managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}}
+\doxysubsubsection{\texorpdfstring{mailbox\_dir}{mailbox\_dir}}
+{\footnotesize\ttfamily \label{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_ad33d97bbdfc62100f19def99dd0b1ee8} 
+managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+mailbox\+\_\+dir = mailbox\+\_\+dir}
+
+\Hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_aec5c8f4028dd088d92069e04b65fbb44}\index{managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}!public\_key\_file@{public\_key\_file}}
+\index{public\_key\_file@{public\_key\_file}!managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}}
+\doxysubsubsection{\texorpdfstring{public\_key\_file}{public\_key\_file}}
+{\footnotesize\ttfamily \label{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_aec5c8f4028dd088d92069e04b65fbb44} 
+managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+public\+\_\+key\+\_\+file = os.\+path.\+join(\mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_ad33d97bbdfc62100f19def99dd0b1ee8}{mailbox\+\_\+dir}}, "{}human\+\_\+public.\+key"{})}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+managers/\mbox{\hyperlink{emergency__mailbox_8py}{emergency\+\_\+mailbox.\+py}}\end{DoxyCompactItemize}

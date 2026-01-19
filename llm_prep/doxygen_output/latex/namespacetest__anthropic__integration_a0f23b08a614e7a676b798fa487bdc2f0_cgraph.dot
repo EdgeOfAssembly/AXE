@@ -1,0 +1,24 @@
+digraph "test_anthropic_integration.test_complete_workflow_simulation"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="test_anthropic_integration.test\l_complete_workflow_simulation",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge9_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="test_anthropic_integration.test\l_agent_manager_anthropic_initialization",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__anthropic__integration.html#a4f47dbe5fdc7a971217926475ae38867",tooltip=" "];
+  Node1 -> Node3 [id="edge10_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="test_anthropic_integration.test\l_cache_control_structure",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__anthropic__integration.html#aa47b57fd1e94e74501a3c092d9ae8305",tooltip=" "];
+  Node1 -> Node1 [id="edge11_Node000001_Node000001",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node4 [id="edge12_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="test_anthropic_integration.test\l_extended_thinking_configuration",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__anthropic__integration.html#a2c8b5e5073e055ab7894b5661d68a41c",tooltip=" "];
+  Node1 -> Node5 [id="edge13_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="test_anthropic_integration.test\l_files_api_configuration",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__anthropic__integration.html#a4264b9b5a52cd6cc33525879cc6e5def",tooltip=" "];
+  Node1 -> Node6 [id="edge14_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="test_anthropic_integration.test\l_prompt_caching_configuration",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__anthropic__integration.html#afda01d90142522037da3377ead1906b1",tooltip=" "];
+  Node1 -> Node7 [id="edge15_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="test_anthropic_integration.test\l_token_callback_compatibility",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__anthropic__integration.html#a516ff6fd06ddcc43cadee4644f9fc09e",tooltip=" "];
+  Node1 -> Node8 [id="edge16_Node000001_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="test_anthropic_integration.test\l_token_counting_configuration",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacetest__anthropic__integration.html#ab7a6d91e04bae89f3b4363ab084ba4b3",tooltip=" "];
+}

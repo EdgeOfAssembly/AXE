@@ -1,0 +1,183 @@
+\chapter{Multi-\/\+Format Tool Call Parser -\/ Quick Reference }
+\hypertarget{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE}{}\label{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE}\index{Multi-\/Format Tool Call Parser -\/ Quick Reference@{Multi-\/Format Tool Call Parser -\/ Quick Reference}}
+\label{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE_autotoc_md686}%
+\Hypertarget{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE_autotoc_md686}%
+\hypertarget{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE_autotoc_md687}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE_autotoc_md687}
+AXE now supports {\bfseries{ALL common LLM tool-\/calling formats}}. Use whatever syntax feels natural!\hypertarget{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE_autotoc_md688}{}\doxysection{\texorpdfstring{Supported Formats}{Supported Formats}}\label{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE_autotoc_md688}
+\hypertarget{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE_autotoc_md689}{}\doxysubsection{\texorpdfstring{1. Bash XML Tags (Claude\textquotesingle{}s Favorite)}{1. Bash XML Tags (Claude\textquotesingle{}s Favorite)}}\label{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE_autotoc_md689}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<bash>cat\ /tmp/file.txt</bash>}
+\DoxyCodeLine{<bash>ls\ -\/la</bash>}
+\DoxyCodeLine{<bash>echo\ "{}hello"{}</bash>}
+
+\end{DoxyCode}
+\hypertarget{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE_autotoc_md690}{}\doxysubsection{\texorpdfstring{2. Shell Code Blocks}{2. Shell Code Blocks}}\label{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE_autotoc_md690}
+
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ bash ls -\/la /tmp cat file.\+txt pwd 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+
+
+Also supports\+:
+\begin{DoxyItemize}
+\item {\ttfamily  \`{}\`{}}shell\textbackslash{}ncommand~\newline
+{\ttfamily  \`{}}
+\item {\ttfamily \`{} }sh\textbackslash{}ncommand~\newline
+{\ttfamily  \`{}}
+\item {\ttfamily \`{} }bash command\`{}\`{}{\ttfamily  } (inline, no newline)
+\end{DoxyItemize}\hypertarget{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE_autotoc_md691}{}\doxysubsection{\texorpdfstring{3. AXE Native Blocks}{3. AXE Native Blocks}}\label{md_MULTI__FORMAT__PARSER__QUICK__REFERENCE_autotoc_md691}
+{\bfseries{Read a file\+:}} 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ READ /path/to/file.txt\`{}\`{}\`{} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{**Write\ to\ a\ file:**}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ /path/to/output.txt}
+\DoxyCodeLine{This\ is\ the\ content}
+\DoxyCodeLine{That\ goes\ in\ the\ file}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{**Execute\ a\ command:**}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ls\ -\/la\ /tmp}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ 4.\ Simple\ XML\ Tags}
+\DoxyCodeLine{}
+\DoxyCodeLine{**Read:**}
+
+\end{DoxyCode}
+ $<$read\+\_\+file$>$/path/to/file.txt$<$/read\+\_\+file$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{**Execute:**}
+
+\end{DoxyCode}
+ $<$shell$>$ls -\/la$<$/shell$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{**Write:**}
+
+\end{DoxyCode}
+ $<$write\+\_\+file path="{}/tmp/output.\+txt"{}$>$Content here$<$/write\+\_\+file$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ 5.\ XML\ Function\ Calls\ (Original\ Format)}
+
+\end{DoxyCode}
+ $<$function\+\_\+calls$>$ $<$invoke name="{}read\+\_\+file"{}$>$ $<$parameter name="{}file\+\_\+path"{}$>$/tmp/file.txt$<$/parameter$>$ $<$/invoke$>$ $<$/function\+\_\+calls$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\ Features}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ **Smart\ Deduplication**:\ Identical\ commands\ only\ run\ once}
+\DoxyCodeLine{-\/\ **Comment\ Filtering**:\ Lines\ starting\ with\ \`{}\#`\ are\ ignored\ in\ shell\ blocks}
+\DoxyCodeLine{-\/\ **Multi-\/line\ Support**:\ Each\ line\ in\ a\ shell\ block\ executes\ separately}
+\DoxyCodeLine{-\/\ **Empty\ Commands\ Ignored**:\ Whitespace-\/only\ commands\ are\ skipped}
+\DoxyCodeLine{-\/\ **Mixed\ Formats**:\ Use\ different\ formats\ in\ the\ same\ response!}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Examples}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ Example\ 1:\ Reading\ a\ File\ (Multiple\ Ways)}
+\DoxyCodeLine{}
+\DoxyCodeLine{All\ of\ these\ work:}
+
+\end{DoxyCode}
+ $<$bash$>$cat /tmp/mission.md$<$/bash$>$ 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cat\ /tmp/mission.md}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/tmp/mission.md}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+
+\end{DoxyCode}
+ $<$read\+\_\+file$>$/tmp/mission.md$<$/read\+\_\+file$>$ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ Example\ 2:\ Creating\ a\ File}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ /tmp/report.txt}
+\DoxyCodeLine{\#\ Project\ Status\ Report}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ Task\ 1:\ Complete}
+\DoxyCodeLine{-\/\ Task\ 2:\ In\ Progress}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\#\ Example\ 3:\ Mixed\ Operations}
+
+\end{DoxyCode}
+ Let me complete this task\+:
+
+First, read the config\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{config.yaml}
+
+\end{DoxyCode}
+
+
+Then check the files\+: $<$bash$>$ls -\/la$<$/bash$>$
+
+Finally, create output\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ output.txt}
+\DoxyCodeLine{Processing\ complete!}
+
+\end{DoxyCode}
+
+
+All done! 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\ Tips}
+\DoxyCodeLine{}
+\DoxyCodeLine{1.\ **Use\ what\ feels\ natural**:\ Don't\ worry\ about\ format\ -\/\ AXE\ understands\ them\ all}
+\DoxyCodeLine{2.\ **Combine\ formats**:\ Mix\ and\ match\ in\ the\ same\ response}
+\DoxyCodeLine{3.\ **Multi-\/line\ commands**:\ Put\ each\ command\ on\ its\ own\ line\ in\ code\ blocks}
+\DoxyCodeLine{4.\ **Comments\ are\ OK**:\ Use\ \`{}\#`\ for\ comments\ in\ shell\ blocks}
+\DoxyCodeLine{5.\ **Paths\ with\ spaces**:\ They\ work\ fine\ in\ all\ formats}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Error\ Handling}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ Invalid\ paths\ are\ rejected\ with\ clear\ error\ messages}
+\DoxyCodeLine{-\/\ Path\ traversal\ attempts\ (e.g.,\ \`{}../../etc/passwd`)\ are\ blocked}
+\DoxyCodeLine{-\/\ Empty\ commands\ are\ silently\ ignored}
+\DoxyCodeLine{-\/\ Results\ appear\ in\ the\ conversation\ history}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Testing}
+\DoxyCodeLine{}
+\DoxyCodeLine{Run\ comprehensive\ tests:}
+
+\end{DoxyCode}
+ bash python3 \doxylink{test__xml__tool__parser_8py}{test\+\_\+xml\+\_\+tool\+\_\+parser.\+py} \`{}\`{}\`{}
+
+All 30+ tests should pass! ✅ 

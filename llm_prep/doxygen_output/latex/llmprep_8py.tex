@@ -1,0 +1,47 @@
+\doxysection{tools/llmprep.py File Reference}
+\hypertarget{llmprep_8py}{}\label{llmprep_8py}\index{tools/llmprep.py@{tools/llmprep.py}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacetools}{tools}}
+\item 
+namespace \mbox{\hyperlink{namespacetools_1_1llmprep}{tools.\+llmprep}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_afaf3dd9e542148d869654fe84b5a2c1b}{tools.\+llmprep.\+run\+\_\+command}} (List\mbox{[}str\mbox{]} cmd, Optional\mbox{[}Path\mbox{]} stdout\+\_\+file=None, bool check=False, bool quiet=False)
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_a3f552e87da06945cef10f68ce045c2fc}{tools.\+llmprep.\+check\+\_\+tool}} (str name)
+\item 
+Dict\mbox{[}str, int\mbox{]} \mbox{\hyperlink{namespacetools_1_1llmprep_a980ccd4bf3e21443fbfed35710f895c3}{tools.\+llmprep.\+parse\+\_\+cloc\+\_\+output}} (Path stats\+\_\+file)
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_a20b859872059debb1575e62e5e08c610}{tools.\+llmprep.\+generate\+\_\+tree}} (Path project\+\_\+dir, Path \mbox{\hyperlink{unpack_8c_a4d59733effad59b54bbd4e5d6016c538}{output\+\_\+file}}, int depth, str excludes, bool \mbox{\hyperlink{depklite_8c_ab46784744f0c75c40a5591adc24f2dea}{verbose}})
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_a2c49d26631d8d1206df8393dad232cdf}{tools.\+llmprep.\+generate\+\_\+cloc}} (Path project\+\_\+dir, Path \mbox{\hyperlink{unpack_8c_a4d59733effad59b54bbd4e5d6016c538}{output\+\_\+file}}, bool \mbox{\hyperlink{depklite_8c_ab46784744f0c75c40a5591adc24f2dea}{verbose}})
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_aea869e372d5ebe1bd4bb60ff65eef5b7}{tools.\+llmprep.\+run\+\_\+doxygen}} (Path project\+\_\+dir, Path prep\+\_\+dir, bool \mbox{\hyperlink{depklite_8c_ab46784744f0c75c40a5591adc24f2dea}{verbose}})
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_aa319b2f21e97e10a16d320311f94ec68}{tools.\+llmprep.\+run\+\_\+pyreverse}} (Path project\+\_\+dir, Path prep\+\_\+dir, bool \mbox{\hyperlink{depklite_8c_ab46784744f0c75c40a5591adc24f2dea}{verbose}})
+\item 
+bool \mbox{\hyperlink{namespacetools_1_1llmprep_a014831525cb97488090bd375260dbbc0}{tools.\+llmprep.\+run\+\_\+ctags}} (Path project\+\_\+dir, Path prep\+\_\+dir, bool \mbox{\hyperlink{depklite_8c_ab46784744f0c75c40a5591adc24f2dea}{verbose}})
+\item 
+str \mbox{\hyperlink{namespacetools_1_1llmprep_a929070bf51c742d3c582757de10f50f5}{tools.\+llmprep.\+generate\+\_\+system\+\_\+prompt}} (str project\+\_\+name, List\mbox{[}str\mbox{]} languages)
+\item 
+str \mbox{\hyperlink{namespacetools_1_1llmprep_af6c0514c69d00c17a6679713530e0e7d}{tools.\+llmprep.\+generate\+\_\+guidance}} (str project\+\_\+name, List\mbox{[}str\mbox{]} languages)
+\item 
+None \mbox{\hyperlink{namespacetools_1_1llmprep_adc453a8004d55d963611856fb9fae055}{tools.\+llmprep.\+generate\+\_\+overview}} (Path prep\+\_\+dir, str project\+\_\+name, Dict\mbox{[}str, int\mbox{]} lang\+\_\+lines, bool has\+\_\+doxygen, bool has\+\_\+pyreverse, bool has\+\_\+ctags)
+\item 
+int \mbox{\hyperlink{namespacetools_1_1llmprep_abcd0488f00dd4447d9894ca8428fc09f}{tools.\+llmprep.\+main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacetools_1_1llmprep_a08f9c546c44378df8b1c58af2fc9b174}{tools.\+llmprep.\+\_\+\+\_\+version\+\_\+\+\_\+}} = "{}1.\+0.\+0"{}
+\item 
+dict \mbox{\hyperlink{namespacetools_1_1llmprep_a9f9e95e5872ad010cbf89dbe46c6dd7d}{tools.\+llmprep.\+C\+\_\+\+LANGUAGES}} = \{"{}C"{}, "{}C++"{}, "{}C/C++ Header"{}, "{}Objective-\/C"{}, "{}CUDA"{}, "{}Assembly"{}\}
+\item 
+dict \mbox{\hyperlink{namespacetools_1_1llmprep_a3028fbceb80ceef587c4022d9965612f}{tools.\+llmprep.\+PYTHON\+\_\+\+LANGUAGES}} = \{"{}Python"{}\}
+\item 
+str \mbox{\hyperlink{namespacetools_1_1llmprep_a2b14d66c188b02714889d474c519e9a7}{tools.\+llmprep.\+DEFAULT\+\_\+\+EXCLUDES}} = "{}\+\_\+\+\_\+pycache\+\_\+\+\_\+\texorpdfstring{$\vert$}{|}build\texorpdfstring{$\vert$}{|}dist\texorpdfstring{$\vert$}{|}node\+\_\+modules\texorpdfstring{$\vert$}{|}.git\texorpdfstring{$\vert$}{|}\texorpdfstring{$\ast$}{*}.o\texorpdfstring{$\vert$}{|}\texorpdfstring{$\ast$}{*}.so\texorpdfstring{$\vert$}{|}\texorpdfstring{$\ast$}{*}.a\texorpdfstring{$\vert$}{|}\texorpdfstring{$\ast$}{*}.pyc\texorpdfstring{$\vert$}{|}.venv\texorpdfstring{$\vert$}{|}venv\texorpdfstring{$\vert$}{|}env"{}
+\end{DoxyCompactItemize}

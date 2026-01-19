@@ -1,0 +1,116 @@
+\doxysection{test\+\_\+tool\+\_\+runner\+\_\+edge\+\_\+cases Namespace Reference}
+\hypertarget{namespacetest__tool__runner__edge__cases}{}\label{namespacetest__tool__runner__edge__cases}\index{test\_tool\_runner\_edge\_cases@{test\_tool\_runner\_edge\_cases}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetest__tool__runner__edge__cases_aa91efdc107b2616d9fa10aecbf09b7ce}{test\+\_\+subshells}} ()
+\item 
+\mbox{\hyperlink{namespacetest__tool__runner__edge__cases_a2df2c1649be2bf4d774f49fbdfab9844}{test\+\_\+redirects\+\_\+without\+\_\+spaces}} ()
+\item 
+\mbox{\hyperlink{namespacetest__tool__runner__edge__cases_aed6edb3e287297c48498238dfd15a67e}{test\+\_\+complex\+\_\+edge\+\_\+cases}} ()
+\item 
+\mbox{\hyperlink{namespacetest__tool__runner__edge__cases_af1cd6f4a63deedec235af416510d1278}{run\+\_\+all\+\_\+tests}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetest__tool__runner__edge__cases_af6d11a9a88d020cf5a92b3fca483aa4a}{success}} = \mbox{\hyperlink{namespacetest__tool__runner__edge__cases_af1cd6f4a63deedec235af416510d1278}{run\+\_\+all\+\_\+tests}}()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Additional edge case tests for ToolRunner shell features support.
+
+This test suite covers edge cases that were discovered during comprehensive
+testing and fixed to ensure robust shell command parsing.
+
+Edge Cases Tested:
+==================
+
+1. SUBSHELLS WITH PARENTHESES
+   Problem: Parentheses were being attached to command names, causing validation failures
+   Examples:
+   - (ls) was parsed as ["(ls)"] instead of ["ls"]
+   - (ls | grep) was parsed as ["(ls", "grep"] instead of ["ls", "grep"]
+   Fix: Strip all leading/trailing parentheses from tokens
+
+2. REDIRECTS WITHOUT SPACES
+   Problem: Redirect operators attached to commands weren't being separated
+   Examples:
+   - grep<input was parsed as ["grep<input"] instead of ["grep"]
+   - cat<in>out was failing validation
+   Fix: Detect and split on redirect operators within tokens
+
+3. NESTED SUBSHELLS
+   Problem: Multiple levels of parentheses caused parsing issues
+   Examples:
+   - ((ls)) was failing validation
+   - (((ls | grep))) wasn't extracting commands correctly
+   Fix: Strip all parentheses recursively
+
+4. HERE-STRINGS
+   Problem: Here-strings (<<<) were not recognized
+   Example:
+   - grep<<<'text' was failing
+   Fix: Added here-string detection to _needs_shell()
+
+All tests verify that:
+- Valid commands are correctly allowed
+- Command names are properly extracted
+- Security checks still work (non-whitelisted commands blocked)
+- Complex combinations of edge cases work together
+
+Test Coverage:
+- 16 individual test cases across 3 test suites
+- All security features maintained
+- Integration with existing ToolRunner functionality verified
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacetest__tool__runner__edge__cases_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetest__tool__runner__edge__cases_af1cd6f4a63deedec235af416510d1278}\index{test\_tool\_runner\_edge\_cases@{test\_tool\_runner\_edge\_cases}!run\_all\_tests@{run\_all\_tests}}
+\index{run\_all\_tests@{run\_all\_tests}!test\_tool\_runner\_edge\_cases@{test\_tool\_runner\_edge\_cases}}
+\doxysubsubsection{\texorpdfstring{run\_all\_tests()}{run\_all\_tests()}}
+{\footnotesize\ttfamily \label{namespacetest__tool__runner__edge__cases_af1cd6f4a63deedec235af416510d1278} 
+test\+\_\+tool\+\_\+runner\+\_\+edge\+\_\+cases.\+run\+\_\+all\+\_\+tests (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Run all edge case test suites.\end{DoxyVerb}
+ \Hypertarget{namespacetest__tool__runner__edge__cases_aed6edb3e287297c48498238dfd15a67e}\index{test\_tool\_runner\_edge\_cases@{test\_tool\_runner\_edge\_cases}!test\_complex\_edge\_cases@{test\_complex\_edge\_cases}}
+\index{test\_complex\_edge\_cases@{test\_complex\_edge\_cases}!test\_tool\_runner\_edge\_cases@{test\_tool\_runner\_edge\_cases}}
+\doxysubsubsection{\texorpdfstring{test\_complex\_edge\_cases()}{test\_complex\_edge\_cases()}}
+{\footnotesize\ttfamily \label{namespacetest__tool__runner__edge__cases_aed6edb3e287297c48498238dfd15a67e} 
+test\+\_\+tool\+\_\+runner\+\_\+edge\+\_\+cases.\+test\+\_\+complex\+\_\+edge\+\_\+cases (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test complex combinations of edge cases.
+
+These tests verify that multiple edge cases can work together correctly,
+such as subshells with redirects without spaces, or nested subshells with pipes.
+This ensures the parser is robust and handles real-world complex commands.
+\end{DoxyVerb}
+ \Hypertarget{namespacetest__tool__runner__edge__cases_a2df2c1649be2bf4d774f49fbdfab9844}\index{test\_tool\_runner\_edge\_cases@{test\_tool\_runner\_edge\_cases}!test\_redirects\_without\_spaces@{test\_redirects\_without\_spaces}}
+\index{test\_redirects\_without\_spaces@{test\_redirects\_without\_spaces}!test\_tool\_runner\_edge\_cases@{test\_tool\_runner\_edge\_cases}}
+\doxysubsubsection{\texorpdfstring{test\_redirects\_without\_spaces()}{test\_redirects\_without\_spaces()}}
+{\footnotesize\ttfamily \label{namespacetest__tool__runner__edge__cases_a2df2c1649be2bf4d774f49fbdfab9844} 
+test\+\_\+tool\+\_\+runner\+\_\+edge\+\_\+cases.\+test\+\_\+redirects\+\_\+without\+\_\+spaces (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that redirects without spaces work correctly.\end{DoxyVerb}
+ \Hypertarget{namespacetest__tool__runner__edge__cases_aa91efdc107b2616d9fa10aecbf09b7ce}\index{test\_tool\_runner\_edge\_cases@{test\_tool\_runner\_edge\_cases}!test\_subshells@{test\_subshells}}
+\index{test\_subshells@{test\_subshells}!test\_tool\_runner\_edge\_cases@{test\_tool\_runner\_edge\_cases}}
+\doxysubsubsection{\texorpdfstring{test\_subshells()}{test\_subshells()}}
+{\footnotesize\ttfamily \label{namespacetest__tool__runner__edge__cases_aa91efdc107b2616d9fa10aecbf09b7ce} 
+test\+\_\+tool\+\_\+runner\+\_\+edge\+\_\+cases.\+test\+\_\+subshells (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test that subshells with parentheses work correctly.\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacetest__tool__runner__edge__cases_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacetest__tool__runner__edge__cases_af6d11a9a88d020cf5a92b3fca483aa4a}\index{test\_tool\_runner\_edge\_cases@{test\_tool\_runner\_edge\_cases}!success@{success}}
+\index{success@{success}!test\_tool\_runner\_edge\_cases@{test\_tool\_runner\_edge\_cases}}
+\doxysubsubsection{\texorpdfstring{success}{success}}
+{\footnotesize\ttfamily \label{namespacetest__tool__runner__edge__cases_af6d11a9a88d020cf5a92b3fca483aa4a} 
+test\+\_\+tool\+\_\+runner\+\_\+edge\+\_\+cases.\+success = \mbox{\hyperlink{namespacetest__tool__runner__edge__cases_af1cd6f4a63deedec235af416510d1278}{run\+\_\+all\+\_\+tests}}()}
+
