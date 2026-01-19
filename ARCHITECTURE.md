@@ -2,68 +2,233 @@
 
 This document describes the AXE architecture and provides guidance for extending the codebase with new features like local models (Ollama) and distributed AI (Python Ray).
 
+## System Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              AXE System Architecture                        │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+                                  ┌──────────┐
+                                  │  User    │
+                                  │Terminal  │
+                                  └────┬─────┘
+                                       │
+                       ┌───────────────▼────────────────┐
+                       │         axe.py                 │
+                       │   (Main Entry Point)           │
+                       │   - Session management         │
+                       │   - Command loop               │
+                       │   - Agent coordination         │
+                       └───────────────┬────────────────┘
+                                       │
+        ┌──────────────────────────────┼──────────────────────────────┐
+        │                              │                              │
+┌───────▼────────┐          ┌──────────▼──────────┐       ┌──────────▼─────────┐
+│   Configuration│          │   Core Modules      │       │  Agent Managers    │
+│   ────────────│          │   ──────────────    │       │  ──────────────    │
+│ • axe.yaml    │          │ • agent_manager.py  │       │ • break_system.py  │
+│ • models.yaml │          │ • tool_runner.py    │       │ • dynamic_spawner  │
+│ • skills/     │◄─────────┤ • skills_manager.py │       │ • emergency_mailbox│
+│   manifest    │          │ • sandbox.py        │       └────────────────────┘
+└───────────────┘          │ • session_manager   │
+                           │ • multiprocess.py   │
+                           └──────────┬──────────┘
+                                      │
+                    ┌─────────────────┼─────────────────┐
+                    │                 │                 │
+        ┌───────────▼───────┐  ┌──────▼──────┐  ┌──────▼──────────┐
+        │   AI Providers    │  │ Tool Parser │  │  Skills System  │
+        │   ────────────    │  │ ────────────│  │  ────────────   │
+        │ • Anthropic       │  │ • XML calls │  │ • manifest.json │
+        │   (Claude)        │  │ • Bash tags │  │ • *.md skills   │
+        │ • OpenAI (GPT)    │  │ • Code blks │  │ • Auto-inject   │
+        │ • xAI (Grok)      │  │ • READ/WRITE│  │ • Domain expert │
+        │ • HuggingFace     │  │ • EXEC      │  │   patterns      │
+        │ • GitHub Copilot  │  └─────────────┘  └─────────────────┘
+        └───────────────────┘
+                │
+        ┌───────▼────────┐
+        │  Response      │
+        │  Processing    │
+        │  ────────────  │
+        │ • Parse output │
+        │ • Execute tools│
+        │ • Update conv  │
+        └────────┬───────┘
+                 │
+    ┌────────────┼────────────┐
+    │            │            │
+┌───▼────┐  ┌────▼────┐  ┌───▼──────┐
+│Database│  │Workshop │  │Security  │
+│────────│  │─────────│  │─────────-│
+│• SQLite│  │• Chisel │  │• Sandbox │
+│• Agent │  │• Hammer │  │• Whitelist│
+│  state │  │• Saw    │  │• Path    │
+│• XP/lvl│  │• Plane  │  │  checks  │
+└────────┘  └─────────┘  └──────────┘
+```
+
 ## Module Structure
 
 ```
 AXE/
-├── axe.py                    # Main entry point and session management
-├── axe.yaml                  # Configuration file
+├── axe.py                        # Main entry point and session management
+├── axe.yaml                      # Configuration file
+├── models.yaml                   # Model metadata and capabilities
 │
-├── core/                     # Core functionality
+├── core/                         # Core functionality
 │   ├── __init__.py
-│   ├── constants.py          # Global constants and default config
-│   ├── config.py             # Configuration management
-│   ├── agent_manager.py      # Agent connections and API calls
-│   ├── tool_runner.py        # Command execution with safety checks
-│   ├── multiprocess.py       # Parallel agent architecture (future)
-│   ├── session_manager.py    # Session save/load persistence
-│   └── resource_monitor.py   # System resource monitoring
+│   ├── constants.py              # Global constants and default config
+│   ├── config.py                 # Configuration management
+│   ├── agent_manager.py          # Agent connections and API calls
+│   ├── tool_runner.py            # Command execution with safety checks
+│   ├── multiprocess.py           # Multi-agent collaboration
+│   ├── session_manager.py        # Session save/load persistence
+│   ├── session_preprocessor.py   # Input preprocessing pipeline
+│   ├── skills_manager.py         # Agent skills loading & injection
+│   ├── sandbox.py                # Bubblewrap sandboxed execution
+│   ├── resource_monitor.py       # System resource monitoring
+│   ├── acp_validator.py          # Agent Communication Protocol validation
+│   ├── anthropic_features.py     # Anthropic-specific features
+│   ├── github_agent.py           # GitHub Copilot integration
+│   └── environment_probe.py      # Environment detection & setup
 │
-├── managers/                 # Agent lifecycle management
+├── managers/                     # Agent lifecycle management
 │   ├── __init__.py
-│   ├── sleep_manager.py      # Mandatory sleep system
-│   ├── break_system.py       # Agent break requests
-│   ├── dynamic_spawner.py    # Dynamic agent spawning
-│   └── emergency_mailbox.py  # GPG-encrypted agent-to-human comms
+│   ├── break_system.py           # Agent break requests
+│   ├── dynamic_spawner.py        # Dynamic agent spawning
+│   └── emergency_mailbox.py      # GPG-encrypted agent-to-human comms
 │
-├── database/                 # Persistence layer
+├── database/                     # Persistence layer
 │   ├── __init__.py
-│   ├── schema.py             # SQL table definitions
-│   └── agent_db.py           # SQLite operations
+│   ├── schema.py                 # SQL table definitions
+│   └── agent_db.py               # SQLite operations
 │
-├── progression/              # Agent progression system
+├── progression/                  # Agent progression system
 │   ├── __init__.py
-│   ├── xp_system.py          # XP calculation
-│   └── levels.py             # Level titles and milestones
+│   ├── xp_system.py              # XP calculation
+│   └── levels.py                 # Level titles and milestones
 │
-├── safety/                   # Safety and rules
+├── safety/                       # Safety and rules
 │   ├── __init__.py
-│   └── rules.py              # Session rules
+│   └── rules.py                  # Session rules
 │
-├── utils/                    # Utility modules
+├── utils/                        # Utility modules
 │   ├── __init__.py
-│   ├── formatting.py         # Terminal colors
-│   ├── token_stats.py        # Token tracking and cost estimation
-│   ├── rate_limiter.py       # API rate limiting
-│   ├── context_optimizer.py  # Context window optimization
-│   ├── prompt_compressor.py  # Prompt compression
-│   └── xml_tool_parser.py    # XML function call parsing
+│   ├── formatting.py             # Terminal colors and formatting
+│   ├── token_stats.py            # Token tracking and cost estimation
+│   ├── rate_limiter.py           # API rate limiting
+│   ├── context_optimizer.py      # Context window optimization
+│   ├── prompt_compressor.py      # Prompt compression
+│   └── xml_tool_parser.py        # Multi-format tool call parsing
 │
-├── models/                   # Model metadata
+├── models/                       # Model metadata
 │   ├── __init__.py
-│   └── metadata.py           # Model info and capabilities
+│   └── metadata.py               # Model info and capabilities
 │
-├── tools/                    # Analysis tools
+├── tools/                        # Analysis tools
 │   ├── __init__.py
-│   ├── llmprep.py            # Codebase context preparation
-│   └── build_analyzer.py     # Build system detection
+│   ├── llmprep.py                # Codebase context preparation
+│   └── build_analyzer.py         # Build system detection
 │
-└── workshop/                 # Dynamic analysis tools
-    ├── __init__.py
-    ├── chisel.py             # Symbolic execution (angr)
-    ├── saw.py                # Taint analysis
-    ├── plane.py              # Source/sink enumeration
-    └── hammer.py             # Live instrumentation (frida)
+├── workshop/                     # Dynamic analysis tools
+│   ├── __init__.py
+│   ├── chisel.py                 # Symbolic execution (angr)
+│   ├── saw.py                    # Taint analysis
+│   ├── plane.py                  # Source/sink enumeration
+│   └── hammer.py                 # Live instrumentation (frida)
+│
+├── skills/                       # Agent skills system
+│   ├── manifest.json             # Skill registry and metadata
+│   ├── build.md                  # Silent build guidelines
+│   ├── claude_build.md           # Security-focused builds
+│   ├── reverse_engineering_expert.md
+│   ├── cpp_refactoring_expert.md
+│   ├── ida_pro_analysis_patterns.md
+│   ├── c_modernization_expert.md
+│   ├── cpp_modernization_expert.md
+│   ├── python_agent_expert.md
+│   └── x86_assembly_expert.md
+│
+└── docs/                         # Documentation
+    ├── README.md                 # Documentation hub
+    ├── api-providers.md          # API provider details
+    ├── security.md               # Security report
+    ├── features/                 # Feature documentation
+    │   ├── sandbox.md
+    │   ├── write-blocks.md
+    │   ├── parsers.md
+    │   └── README.md
+    ├── references/               # Quick references
+    │   ├── quick-reference.md
+    │   └── README.md
+    ├── workshop/                 # Workshop tool docs
+    │   ├── quick-reference.md
+    │   ├── benchmarks.md
+    │   ├── security-audit.md
+    │   ├── dependency-validation.md
+    │   ├── test-results.md
+    │   └── README.md
+    └── archive/                  # Historical documentation
+        ├── implementation-summaries/
+        ├── pr-reports/
+        └── README.md
+```
+
+## Data Flow
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                         Request Flow                                │
+└─────────────────────────────────────────────────────────────────────┘
+
+User Input
+    │
+    ▼
+┌─────────────────┐
+│ Session         │
+│ Preprocessor    │──► Token detection
+│                 │──► Skill injection
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Agent Manager   │──► Select provider (Anthropic/OpenAI/xAI/etc)
+│                 │──► Load model config
+│                 │──► Add system prompt
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ AI Provider API │──► Send request
+│                 │──► Stream response
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Tool Parser     │──► Parse XML/Bash/Code blocks
+│                 │──► Extract tool calls
+│                 │──► Deduplicate commands
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Tool Runner     │──► Validate against whitelist
+│                 │──► Check path security
+│                 │──► Execute (sandboxed if enabled)
+│                 │──► Capture output
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Conversation    │──► Append to history
+│ History         │──► Format results
+│                 │──► Update context
+└────────┬────────┘
+         │
+         ▼
+    Display to User
 ```
 
 ## Key Extension Points

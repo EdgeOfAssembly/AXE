@@ -2469,7 +2469,7 @@ Tool Status:
 Dependencies:
   pip install angr frida-python psutil
 
-For detailed documentation, see: workshop_quick_reference.md
+For detailed documentation, see: docs/workshop/quick-reference.md
 """
         print(help_text)
     

@@ -1357,10 +1357,10 @@ axe> /workshop stats
 ### Documentation
 
 For detailed documentation, see:
-- **[workshop_quick_reference.md](workshop_quick_reference.md)** - Complete usage guide
-- **[workshop_benchmarks.md](workshop_benchmarks.md)** - Performance metrics
-- **[workshop_security_audit.md](workshop_security_audit.md)** - Security validation
-- **[workshop_test_results.md](workshop_test_results.md)** - Test coverage details
+- **[docs/workshop/quick-reference.md](docs/workshop/quick-reference.md)** - Complete usage guide
+- **[docs/workshop/benchmarks.md](docs/workshop/benchmarks.md)** - Performance metrics
+- **[docs/workshop/security-audit.md](docs/workshop/security-audit.md)** - Security validation
+- **[docs/workshop/test-results.md](docs/workshop/test-results.md)** - Test coverage details
 
 ### Help
 
@@ -1474,11 +1474,15 @@ curl -X POST "https://models.github.ai/inference/chat/completions" \
 
 ```
 AXE/
-├── axe.py              # Main program
-├── axe.yaml            # Default configuration
-├── API_PROVIDERS.md    # Detailed API documentation
-├── README.md           # This file
-└── llm_prep/           # LLM context preparation files
+├── axe.py                      # Main program
+├── axe.yaml                    # Default configuration
+├── README.md                   # This file
+├── docs/                       # Documentation hub
+│   ├── api-providers.md        # Detailed API documentation
+│   ├── features/               # Feature guides
+│   ├── references/             # Quick references
+│   └── workshop/               # Workshop tools
+└── llm_prep/                   # LLM context preparation files
     ├── codebase_overview.md
     ├── llm_system_prompt.md
     └── project_guidance.md

@@ -190,8 +190,9 @@ See `skills/build.md` for comprehensive build system guidelines.
 ## Additional Resources
 
 - **Architecture**: See `ARCHITECTURE.md` for system design
-- **API Providers**: See `API_PROVIDERS.md` for LLM provider details
-- **Workshop Tools**: See `workshop_quick_reference.md` for Chisel, Hammer, Saw, Plane
+- **API Providers**: See `docs/api-providers.md` for LLM provider details
+- **Workshop Tools**: See `docs/workshop/quick-reference.md` for Chisel, Hammer, Saw, Plane
+- **Quick Reference**: See `docs/references/quick-reference.md` for commands and patterns
 
 ## Contact & Support
 
