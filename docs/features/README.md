@@ -36,6 +36,25 @@ Understanding AXE's flexible tool call parser:
 - Mixed format support
 - Examples and best practices
 
+### [anthropic-features.md](anthropic-features.md)
+**Anthropic Claude Integration**
+
+Anthropic-specific features and capabilities:
+- Claude API integration
+- Extended thinking support
+- Prompt caching
+- Agent skills
+- Best practices
+
+### [github-agent-integration.md](github-agent-integration.md)
+**GitHub Copilot Integration**
+
+GitHub-specific features:
+- GitHub Copilot API integration
+- Agent configuration
+- Usage patterns
+- Tips and tricks
+
 ## Coming Soon
 
 Future feature documentation will cover:

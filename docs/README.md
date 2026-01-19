@@ -24,6 +24,8 @@ Welcome to the AXE documentation! This directory contains comprehensive guides, 
 - **[features/sandbox.md](features/sandbox.md)** - Bubblewrap sandboxed command execution
 - **[features/write-blocks.md](features/write-blocks.md)** - File manipulation and code blocks
 - **[features/parsers.md](features/parsers.md)** - Multi-format tool call parsing (XML, Bash, Markdown)
+- **[features/anthropic-features.md](features/anthropic-features.md)** - Anthropic Claude integration
+- **[features/github-agent-integration.md](features/github-agent-integration.md)** - GitHub Copilot integration
 - **[features/README.md](features/README.md)** - Complete features overview
 
 ### References

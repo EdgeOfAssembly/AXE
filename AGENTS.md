@@ -198,7 +198,7 @@ See `skills/build.md` for comprehensive build system guidelines.
 
 - **GitHub Issues**: https://github.com/EdgeOfAssembly/AXE/issues
 - **Documentation**: See `docs/` directory
-- **Quick Reference**: See `QUICK_REFERENCE.md`
+- **Quick Reference**: See `docs/references/quick-reference.md`
 
 ---
 
