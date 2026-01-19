@@ -216,11 +216,11 @@ os.system(user_input)  # sink
 
     def test_12_workshop_documentation_present(self):
         """Test that workshop documentation files are present."""
-        self.assertTrue(Path('workshop_quick_reference.md').exists())
-        self.assertTrue(Path('workshop_benchmarks.md').exists())
-        self.assertTrue(Path('workshop_security_audit.md').exists())
-        self.assertTrue(Path('workshop_dependency_validation.md').exists())
-        self.assertTrue(Path('workshop_test_results.md').exists())
+        self.assertTrue(Path('docs/workshop/quick-reference.md').exists())
+        self.assertTrue(Path('docs/workshop/benchmarks.md').exists())
+        self.assertTrue(Path('docs/workshop/security-audit.md').exists())
+        self.assertTrue(Path('docs/workshop/dependency-validation.md').exists())
+        self.assertTrue(Path('docs/workshop/test-results.md').exists())
 
     def test_13_no_hardcoded_secrets(self):
         """Test that no API keys or secrets are hardcoded in workshop files."""

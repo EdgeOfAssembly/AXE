@@ -40,7 +40,7 @@ class TestWorkshopCLIIntegration(unittest.TestCase):
         self.assertIn('hammer', output)
         self.assertIn('Symbolic execution', output)
         self.assertIn('Taint analysis', output)
-        self.assertIn('workshop_quick_reference.md', output)
+        self.assertIn('docs/workshop/quick-reference.md', output)
 
     def test_workshop_no_args_shows_help(self):
         """Test /workshop with no args shows help."""
