@@ -102,18 +102,29 @@ class AgentManager:
             # Get skills configuration from models.yaml (loaded via config)
             # The config object loads from axe.yaml by default, but we need models.yaml
             import yaml
-            models_yaml_path = os.path.join(os.path.dirname(self.config.config_path), 'models.yaml')
             
-            if not os.path.exists(models_yaml_path):
-                # Try alternate path
+            # Determine models.yaml path - handle None config_path gracefully
+            if self.config.config_path:
+                models_yaml_path = os.path.join(os.path.dirname(self.config.config_path), 'models.yaml')
+            else:
+                # Config was loaded from default location, try current directory
                 models_yaml_path = 'models.yaml'
             
-            with open(models_yaml_path, 'r') as f:
-                models_config = yaml.safe_load(f)
+            if not os.path.exists(models_yaml_path):
+                # Try alternate path in current directory
+                models_yaml_path = 'models.yaml'
             
-            # Get skills configuration
-            anthropic_config = models_config.get('anthropic', {})
-            skills_config = anthropic_config.get('agent_skills', {})
+            if not os.path.exists(models_yaml_path):
+                # models.yaml not found, use defaults
+                print(c("Note: models.yaml not found, using default skills configuration", Colors.DIM))
+                skills_config = {'enabled': True}
+            else:
+                with open(models_yaml_path, 'r') as f:
+                    models_config = yaml.safe_load(f)
+                
+                # Get skills configuration
+                anthropic_config = models_config.get('anthropic', {})
+                skills_config = anthropic_config.get('agent_skills', {})
             
             # Check if skills are enabled (default to True if not specified)
             if skills_config.get('enabled', True):
