@@ -30,6 +30,60 @@ from core.agent_manager import AgentManager
 
 # Global variable to track Ollama server process
 ollama_process = None
+ollama_model_pulled = None
+
+
+def pull_small_model():
+    """Pull a small model for testing. Returns model name if successful."""
+    global ollama_model_pulled
+    
+    # Try models in order of size (smallest first)
+    models_to_try = [
+        ('qwen2:0.5b', '~352MB'),
+        ('tinyllama', '~637MB'),
+        ('llama3.2:1b', '~1.3GB'),
+    ]
+    
+    print("  → Checking for available test models...")
+    
+    # First check if any model is already pulled
+    try:
+        result = subprocess.run(['ollama', 'list'], 
+                              capture_output=True, text=True, timeout=5)
+        if result.returncode == 0:
+            for model_name, _ in models_to_try:
+                if model_name in result.stdout:
+                    print(f"  ✓ Found existing model: {model_name}")
+                    ollama_model_pulled = model_name
+                    return model_name
+    except:
+        pass
+    
+    # If no model found, try to pull the smallest one
+    for model_name, size in models_to_try:
+        print(f"  → Attempting to pull {model_name} ({size})...")
+        try:
+            # Set a timeout for pulling - skip if takes too long (CI constraints)
+            result = subprocess.run(
+                ['ollama', 'pull', model_name],
+                capture_output=True, text=True, 
+                timeout=120  # 2 minute timeout
+            )
+            if result.returncode == 0:
+                print(f"  ✓ Successfully pulled {model_name}")
+                ollama_model_pulled = model_name
+                return model_name
+            else:
+                print(f"  ⚠ Failed to pull {model_name}: {result.stderr[:100]}")
+        except subprocess.TimeoutExpired:
+            print(f"  ⚠ Timeout pulling {model_name} (taking too long for CI)")
+            continue
+        except Exception as e:
+            print(f"  ⚠ Error pulling {model_name}: {e}")
+            continue
+    
+    print("  ℹ No test model available - skipping inference tests")
+    return None
 
 
 def start_ollama_server():
@@ -219,6 +273,70 @@ def test_edge_cases():
     print()
 
 
+def test_ollama_inference():
+    """Test actual inference with Ollama model."""
+    print("Testing Ollama inference with real model...")
+    
+    global ollama_model_pulled
+    
+    if not ollama_model_pulled:
+        print("  ℹ No model available - skipping inference test")
+        print()
+        return
+    
+    # Ensure no Ollama API key is set
+    if 'OLLAMA_API_KEY' in os.environ:
+        del os.environ['OLLAMA_API_KEY']
+    
+    # Create config and manager
+    config = Config()
+    manager = AgentManager(config)
+    
+    # Check if Ollama client was initialized
+    if 'ollama' not in manager.clients:
+        print("  ✗ Ollama client not initialized")
+        print()
+        return
+    
+    print(f"  → Testing inference with model: {ollama_model_pulled}")
+    
+    # Create a test agent configuration for the pulled model
+    test_agent = {
+        'provider': 'ollama',
+        'model': ollama_model_pulled,
+        'system_prompt': 'You are a helpful assistant. Be concise.',
+        'name': 'test_ollama'
+    }
+    
+    # Temporarily add to config
+    agents = config.get('agents', default={})
+    agents['test_ollama'] = test_agent
+    
+    try:
+        # Test with a simple prompt
+        response = manager.call_agent(
+            'test_ollama',
+            'Say "Hello" and nothing else.',
+            context=''
+        )
+        
+        if response and not response.startswith('API error') and not response.startswith('Unknown agent'):
+            print(f"  ✓ Inference successful!")
+            print(f"  ✓ Response: {response[:100]}{'...' if len(response) > 100 else ''}")
+        else:
+            print(f"  ✗ Inference failed: {response[:200]}")
+    
+    except Exception as e:
+        print(f"  ✗ Inference error: {e}")
+    
+    finally:
+        # Clean up test agent
+        if 'test_ollama' in agents:
+            del agents['test_ollama']
+    
+    print()
+
+
 if __name__ == '__main__':
     print("=" * 60)
     print("OLLAMA AUTHENTICATION TEST")
@@ -228,11 +346,16 @@ if __name__ == '__main__':
     # Start Ollama server
     server_started = start_ollama_server()
     
+    # Try to pull a small model for testing
+    if server_started:
+        pull_small_model()
+    
     try:
         test_ollama_initialization_without_api_key()
         test_requires_auth_field()
         test_providers_requiring_auth_still_work()
         test_edge_cases()
+        test_ollama_inference()  # NEW: Test actual inference
         
         print("=" * 60)
         print("All tests completed!")
