@@ -190,10 +190,22 @@ models:
     input_modes: [text, image, audio]
     output_modes: [text, function_calling]
   
+  gpt-4-turbo:  # Legacy GPT-4 Turbo (still supported)
+    context_tokens: 128000
+    max_output_tokens: 4000
+    input_modes: [text, image]
+    output_modes: [text, function_calling]
+  
   o3:  # Top reasoning model - great for math/science/coding
     context_tokens: 200000
     max_output_tokens: 100000
     input_modes: [text, image]
+    output_modes: [text, function_calling]
+  
+  o3-mini:  # Smaller reasoning model
+    context_tokens: 200000
+    max_output_tokens: 100000
+    input_modes: [text]
     output_modes: [text, function_calling]
   
   o4-mini:  # Fast reasoning - strong value for complex tasks
@@ -496,6 +508,12 @@ models:
     input_modes: [text]
     output_modes: [text]
   
+  meta-llama/llama-3.1-70b-instruct:  # Lowercase variant
+    context_tokens: 128000
+    max_output_tokens: 4000
+    input_modes: [text]
+    output_modes: [text]
+  
   meta-llama/Llama-3.1-8B-Instruct:
     context_tokens: 128000
     max_output_tokens: 4000
@@ -550,13 +568,31 @@ models:
     input_modes: [text, image]
     output_modes: [text]
   
+  qwen/qwen3-vl-235b-a22b-thinking-25700:  # Lowercase variant
+    context_tokens: 128000
+    max_output_tokens: 4000
+    input_modes: [text, image]
+    output_modes: [text]
+  
   Qwen/Qwen3-Coder-480B-A35B-Instruct:
     context_tokens: 128000
     max_output_tokens: 4000
     input_modes: [text]
     output_modes: [text]
   
+  qwen/qwen3-coder-480b-a35b-instruct:  # Lowercase variant
+    context_tokens: 128000
+    max_output_tokens: 4000
+    input_modes: [text]
+    output_modes: [text]
+  
   Qwen/Qwen3-VL-235B-A22B-Thinking:
+    context_tokens: 128000
+    max_output_tokens: 4000
+    input_modes: [text, image]
+    output_modes: [text]
+  
+  qwen/qwen3-vl-235b-a22b-thinking:  # Lowercase variant
     context_tokens: 128000
     max_output_tokens: 4000
     input_modes: [text, image]
@@ -582,3 +618,50 @@ models:
     max_output_tokens: 4000
     input_modes: [text]
     output_modes: [text, function_calling]
+  
+  deepseek-ai/deepseek-v3.2:  # Lowercase variant
+    context_tokens: 128000
+    max_output_tokens: 4000
+    input_modes: [text]
+    output_modes: [text, function_calling]
+
+  # ==============================================================================
+  # Ollama models (local LLM server)
+  # These are default models commonly used with Ollama
+  # Context tokens limited by local hardware (adjust as needed)
+  # ==============================================================================
+  llama3.1:70b:
+    context_tokens: 128000
+    max_output_tokens: 4000
+    input_modes: [text]
+    output_modes: [text]
+  
+  llama3.1:8b:
+    context_tokens: 128000
+    max_output_tokens: 4000
+    input_modes: [text]
+    output_modes: [text]
+  
+  codellama:34b:
+    context_tokens: 16000
+    max_output_tokens: 4000
+    input_modes: [text]
+    output_modes: [text]
+  
+  deepseek-coder:33b:
+    context_tokens: 16000
+    max_output_tokens: 4000
+    input_modes: [text]
+    output_modes: [text]
+  
+  mistral:7b:
+    context_tokens: 8000
+    max_output_tokens: 4000
+    input_modes: [text]
+    output_modes: [text]
+  
+  mixtral:8x7b:
+    context_tokens: 32000
+    max_output_tokens: 4000
+    input_modes: [text]
+    output_modes: [text]
