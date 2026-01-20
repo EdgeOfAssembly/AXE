@@ -108,7 +108,7 @@ DEFAULT_CONFIG = {
             'provider': 'openai',
             'model': 'gpt-4o',
             'role': 'General-purpose coder and architect',
-            'context_window': 128000,
+            'context_tokens': 128000,
             'capabilities': ['text', 'vision', 'function_calling'],
             'system_prompt': """You are an expert software engineer. Provide clear, working code.
 For C/C++: Prefer portable code; when DOS/16-bit targets are requested, explain that true DOS support typically needs compilers like Open Watcom or DJGPP and that 16-bit ints/far pointers are non-standard in modern toolchains.
@@ -120,7 +120,7 @@ For reverse-engineering: Use hexdump/objdump analysis. Workshop tools available:
             'provider': 'anthropic',
             'model': 'claude-3-5-sonnet-20241022',
             'role': 'Code reviewer and security auditor',
-            'context_window': 200000,
+            'context_tokens': 200000,
             'capabilities': ['text', 'vision', 'function_calling'],
             'system_prompt': """You are a code review expert and security auditor.
 Analyze code for bugs, security issues, and improvements.
@@ -132,7 +132,7 @@ For security analysis: Use Workshop tools: /workshop saw for taint analysis to f
             'provider': 'huggingface',
             'model': 'meta-llama/Llama-3.1-70B-Instruct',
             'role': 'Open-source hacker and asm expert',
-            'context_window': 128000,
+            'context_tokens': 128000,
             'capabilities': ['text'],
             'system_prompt': """You are an open-source hacker fluent in x86 assembly.
 Specialize in nasm, DOS interrupts, binary analysis.
@@ -144,7 +144,7 @@ Workshop tools available: /workshop chisel for symbolic execution of binaries, /
             'provider': 'xai',
             'model': 'grok-beta',
             'role': 'Creative problem solver',
-            'context_window': 128000,
+            'context_tokens': 128000,
             'capabilities': ['text', 'vision', 'function_calling'],
             'system_prompt': """You are a creative coding assistant.
 Think outside the box for novel solutions.
@@ -155,7 +155,7 @@ Good at brainstorming and unconventional approaches."""
             'provider': 'github',
             'model': 'openai/gpt-4o',
             'role': 'GitHub-integrated assistant',
-            'context_window': 128000,
+            'context_tokens': 128000,
             'capabilities': ['text', 'vision', 'function_calling'],
             'system_prompt': """You are a GitHub Copilot-style assistant.
 Help with code completion, documentation, and testing.

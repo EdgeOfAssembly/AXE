@@ -1,103 +1,19 @@
+# AXE User Configuration
+# Loaded THIRD in config chain: models.yaml → providers.yaml → axe.yaml
+# 
+# This file contains user-focused settings:
+# - Project configuration
+# - Agent definitions with provider + model selection
+# - Optional overrides for model attributes (context_tokens, temperature, etc.)
+# - Tool configurations
+# - Directory access rules
+
 version: '2.0'
 project_dir: .
 agent_protocol:
   enabled: false
   expand_for_human: true
   custom_abbreviations: {}
-providers:
-  anthropic:
-    enabled: true
-    env_key: ANTHROPIC_API_KEY
-    models:
-    - claude-opus-4-5-20251101
-    - claude-sonnet-4-5-20250929
-    - claude-haiku-4-5-20251001
-  openai:
-    enabled: true
-    env_key: OPENAI_API_KEY
-    models:
-    - gpt-5.2-2025-12-11
-    - gpt-4o
-    - gpt-4-turbo
-  huggingface:
-    enabled: true
-    env_key: HUGGINGFACE_API_KEY
-    models:
-    - meta-llama/Llama-3.3-70B-Instruct
-    - meta-llama/Llama-3.1-70B-Instruct
-  xai:
-    enabled: true
-    env_key: XAI_API_KEY
-    base_url: https://api.x.ai/v1
-    models:
-    - grok-4-1-fast-reasoning
-    - grok-code-fast
-    - grok-2-vision
-    - grok-2-image
-  github:
-    enabled: true
-    env_key: GITHUB_TOKEN
-    base_url: https://models.github.ai/inference
-    models:
-    - openai/gpt-4o
-    - openai/gpt-4o-mini
-    - openai/gpt-4.1
-    - openai/gpt-4.1-mini
-    - openai/gpt-4.1-nano
-    - meta/llama-4-scout-17b-16e-instruct
-    - meta/llama-4-maverick-17b-128e-instruct-fp8
-    - openai/gpt-5
-    - openai/gpt-5-chat
-    - openai/gpt-5-mini
-    - openai/gpt-5-nano
-    - openai/o1
-    - openai/o1-mini
-    - openai/o1-preview
-    - openai/o3
-    - openai/o3-mini
-    - openai/o4-mini
-    - mistral-ai/codestral-2501
-    - deepseek/deepseek-r1
-    - deepseek/deepseek-r1-0528
-    - deepseek/deepseek-v3-0324
-    - microsoft/mai-ds-r1
-    - meta/llama-3.2-90b-vision-instruct
-    - meta/llama-3.2-11b-vision-instruct
-    - meta/llama-3.3-70b-instruct
-    - meta/meta-llama-3.1-405b-instruct
-    - meta/meta-llama-3.1-8b-instruct
-    - microsoft/phi-4-multimodal-instruct
-    - mistral-ai/mistral-medium-2505
-    - mistral-ai/mistral-small-2503
-    - microsoft/phi-4
-    - microsoft/phi-4-mini-instruct
-    - microsoft/phi-4-mini-reasoning
-    - microsoft/phi-4-reasoning
-    - mistral-ai/ministral-3b
-    - cohere/cohere-command-a
-    - cohere/cohere-command-r-08-2024
-    - cohere/cohere-command-r-plus-08-2024
-    - ai21-labs/ai21-jamba-1.5-large
-    - xai/grok-3
-    - xai/grok-3-mini
-    - openai/text-embedding-3-large
-    - openai/text-embedding-3-small
-  dashscope:
-    enabled: true
-    env_key: DASHSCOPE_API_KEY
-    base_url: https://dashscope-intl.aliyuncs.com/compatible-mode/v1
-    models:
-    - Qwen/Qwen3-VL-235B-A22B-Thinking-25700
-    - Qwen/Qwen3-Coder-480B-A35B-Instruct
-    - Qwen/Qwen3-VL-235B-A22B-Thinking
-    - Qwen/Qwen-Image
-    - Qwen/Qwen-Image-Edit-2511
-  deepseek:
-    enabled: true
-    env_key: DEEPSEEK_API_KEY
-    base_url: https://api.deepseek.com/v1
-    models:
-    - deepseek-ai/DeepSeek-V3.2
 agents:
   gpt:
     alias:
@@ -106,7 +22,7 @@ agents:
     provider: openai
     model: gpt-5.2-2025-12-11
     role: General-purpose coder and architect
-    context_window: 256000
+    context_tokens: 256000
     capabilities:
     - text
     - image
@@ -199,7 +115,7 @@ agents:
     provider: anthropic
     model: claude-opus-4-5-20251101
     role: Code reviewer and security auditor
-    context_window: 200000
+    context_tokens: 200000
     capabilities:
     - text
     - image
@@ -304,9 +220,9 @@ agents:
     - l
     - hf
     provider: huggingface
-    model: meta-llama/Llama-3.1-70B-Instruct
+    model: meta-llama/llama-3.1-70b-instruct
     role: Open-source hacker and assembly expert
-    context_window: 128000
+    context_tokens: 128000
     capabilities:
     - text
     system_prompt: 'You are an open-source hacker fluent in x86/x86-64 assembly and
@@ -397,7 +313,7 @@ agents:
     provider: xai
     model: grok-4-1-fast-reasoning
     role: Creative problem solver and brainstormer
-    context_window: 128000
+    context_tokens: 128000
     capabilities:
     - text
     - image
@@ -485,7 +401,7 @@ agents:
     provider: github
     model: openai/gpt-4o
     role: Primary production-ready multimodal assistant
-    context_window: 128000
+    context_tokens: 128000
     capabilities:
     - text
     - image
@@ -589,7 +505,7 @@ agents:
     provider: github
     model: openai/gpt-4.1
     role: Extreme context specialist with 1M tokens
-    context_window: 1000000
+    context_tokens: 1000000
     capabilities:
     - text
     - image
@@ -657,7 +573,7 @@ agents:
     provider: github
     model: meta/llama-4-scout-17b-16e-instruct
     role: Ultra-long context specialist (1M tokens)
-    context_window: 1000000
+    context_tokens: 1000000
     capabilities:
     - text
     - image
@@ -728,7 +644,7 @@ agents:
     provider: github
     model: openai/o3
     role: Maximum reasoning power with vision
-    context_window: 200000
+    context_tokens: 200000
     capabilities:
     - text
     - image
@@ -797,7 +713,7 @@ agents:
     provider: github
     model: deepseek/deepseek-r1-0528
     role: Precision reasoning with reduced hallucination
-    context_window: 128000
+    context_tokens: 128000
     capabilities:
     - text
     - agentsV2
@@ -864,7 +780,7 @@ agents:
     provider: github
     model: mistral-ai/codestral-2501
     role: Pure coding specialist supporting 80+ languages
-    context_window: 256000
+    context_tokens: 256000
     capabilities:
     - text
     - streaming
@@ -929,7 +845,7 @@ agents:
     provider: github
     model: meta/llama-3.2-90b-vision-instruct
     role: Advanced vision and multimodal specialist
-    context_window: 128000
+    context_tokens: 128000
     capabilities:
     - text
     - image
@@ -996,7 +912,7 @@ agents:
     provider: github
     model: microsoft/phi-4-multimodal-instruct
     role: Three-modality specialist (text, image, audio)
-    context_window: 128000
+    context_tokens: 128000
     capabilities:
     - audio
     - image
@@ -1063,7 +979,7 @@ agents:
     provider: github
     model: meta/llama-4-maverick-17b-128e-instruct-fp8
     role: Creative multimodal model with 1M context
-    context_window: 1000000
+    context_tokens: 1000000
     capabilities:
     - text
     - image
@@ -1130,9 +1046,9 @@ agents:
     - qwen
     - thinking
     provider: dashscope
-    model: Qwen/Qwen3-VL-235B-A22B-Thinking-25700
+    model: qwen/qwen3-vl-235b-a22b-thinking-25700
     role: Deep reasoning and complex problem solver
-    context_window: 128000
+    context_tokens: 128000
     capabilities:
     - text
     - image
@@ -1200,9 +1116,9 @@ agents:
     - qc
     - qcoder
     provider: dashscope
-    model: Qwen/Qwen3-Coder-480B-A35B-Instruct
+    model: qwen/qwen3-coder-480b-a35b-instruct
     role: Low-level coding specialist
-    context_window: 128000
+    context_tokens: 128000
     capabilities:
     - text
     - code_generation
@@ -1269,9 +1185,9 @@ agents:
     - qvision
     - qvl
     provider: dashscope
-    model: Qwen/Qwen3-VL-235B-A22B-Thinking
+    model: qwen/qwen3-vl-235b-a22b-thinking
     role: Vision and document analyst
-    context_window: 128000
+    context_tokens: 128000
     capabilities:
     - text
     - image
@@ -1331,9 +1247,9 @@ agents:
     - ds
     - deep
     provider: deepseek
-    model: deepseek-ai/DeepSeek-V3.2
+    model: deepseek-ai/deepseek-v3.2
     role: Ultimate reasoning and coding agent
-    context_window: 128000
+    context_tokens: 128000
     capabilities:
     - text
     - reasoning
@@ -1402,7 +1318,7 @@ agents:
     provider: xai
     model: grok-code-fast-1
     role: Fast code generation specialist
-    context_window: 128000
+    context_tokens: 128000
     capabilities:
     - text
     - code_generation
@@ -1453,6 +1369,93 @@ agents:
       - SCons: `scons -Q`
 
       Silent builds enable faster code generation cycles. Use verbose only for debugging build failures.
+
+      '
+  local:
+    alias:
+    - lo
+    - local
+    - ollama
+    provider: ollama
+    model: llama3.1:70b
+    role: Local private coding agent
+    context_tokens: 32000  # OVERRIDE: Limited by local VRAM
+    capabilities:
+    - text
+    system_prompt: 'You are a local, privacy-focused coding assistant running on Ollama.
+
+
+      EXPERTISE:
+
+      - C/C++: Modern standards (C11/C17/C23, C++17/20/23), portable code
+
+      - Python: Type-hinted, clean code with proper error handling
+
+      - Reverse Engineering: Binary analysis, disassembly, hex dumps
+
+      - Privacy-First: All processing happens locally, no data leaves your machine
+
+
+      TOOL USAGE: You can read files, execute commands, and write files using special blocks.
+
+
+      To read a file:
+
+      ```READ
+
+      filename.c
+
+      ```
+
+
+      To execute a command:
+
+      ```EXEC
+
+      gcc -Wall -o program source.c
+
+      ```
+
+
+      To write a file:
+
+      ```WRITE output.c
+
+      // Your code here
+
+      ```
+
+
+      COLLABORATION RULES:
+
+      - Focus on efficiency due to limited local resources
+
+      - Provide concise, practical solutions
+
+      - If uncertain, ASK before making assumptions
+
+
+      BUILD GUIDELINES:
+
+      Use silent builds to minimize token consumption:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      If a build fails, retry with verbose output to diagnose issues.
 
       '
 tools:
