@@ -59,9 +59,13 @@ class AgentManager:
                 continue
 
             env_key = prov_config.get('env_key', '')
-            api_key = os.getenv(env_key)
-
-            if not api_key:
+            api_key = os.getenv(env_key) if env_key else None
+            
+            # Check if provider requires authentication (default: True)
+            requires_auth = prov_config.get('requires_auth', True)
+            
+            # Skip if auth required but no key provided
+            if requires_auth and not api_key:
                 continue
 
             try:
@@ -89,6 +93,14 @@ class AgentManager:
                     self.clients[name] = OpenAI(
                         api_key=api_key,
                         base_url=prov_config.get('base_url', 'https://models.github.ai/inference')
+                    )
+                elif name == 'ollama' and HAS_OPENAI:
+                    # Ollama uses OpenAI-compatible API at /v1 endpoint
+                    # Ollama doesn't require authentication, but OpenAI client needs a placeholder
+                    base_url = prov_config.get('base_url', 'http://localhost:11434/v1')
+                    self.clients[name] = OpenAI(
+                        api_key='not-needed',  # Placeholder - Ollama ignores this
+                        base_url=base_url
                     )
             except Exception as e:
                 print(c(f"Failed to init {name}: {e}", Colors.YELLOW))
@@ -313,7 +325,7 @@ class AgentManager:
 
                 return response
 
-            elif provider in ['openai', 'xai', 'github']:
+            elif provider in ['openai', 'xai', 'github', 'ollama']:
                 # Use max_completion_tokens for GPT-5 and newer models
                 api_params = {
                     'model': model,
