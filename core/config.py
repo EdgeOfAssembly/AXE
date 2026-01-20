@@ -11,7 +11,7 @@ Includes validation to ensure consistency across all config files.
 
 import os
 import json
-from typing import Optional, Any, Dict, List
+from typing import Optional, Any, Dict
 
 # Try to import yaml
 try:

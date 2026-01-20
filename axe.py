@@ -1082,7 +1082,12 @@ class CollaborativeSession:
         context_tokens = agent_config.get('context_tokens', 'unknown') if agent_config else 'unknown'
         capabilities = agent_config.get('capabilities', []) if agent_config else []
         capabilities_str = ', '.join(capabilities) if capabilities else 'text'
-        model_info = f"\nYour Model: {agent_config.get('model', 'unknown')} | Context: {context_tokens:,} tokens | Capabilities: {capabilities_str}" if agent_config else ""
+        # Format context_tokens for display
+        if isinstance(context_tokens, int):
+            context_display = f"{context_tokens:,} tokens"
+        else:
+            context_display = "unknown tokens"
+        model_info = f"\nYour Model: {agent_config.get('model', 'unknown')} | Context: {context_display} | Capabilities: {capabilities_str}" if agent_config else ""
         
         # Get list of workspace files with error handling
         try:
@@ -1101,9 +1106,14 @@ class CollaborativeSession:
             else:
                 a_config = self.agent_mgr.resolve_agent(a)
             if a_config:
-                a_ctx = a_config.get('context_tokens', '?')
+                a_ctx = a_config.get('context_tokens', 0)
                 a_caps = ', '.join(a_config.get('capabilities', ['text']))
-                other_info_list.append(f"{a_alias} ({a_ctx:,} ctx, {a_caps})")
+                # Format context for display
+                if isinstance(a_ctx, int) and a_ctx > 0:
+                    ctx_display = f"{a_ctx:,} ctx"
+                else:
+                    ctx_display = "? ctx"
+                other_info_list.append(f"{a_alias} ({ctx_display}, {a_caps})")
             else:
                 other_info_list.append(a_alias)
         
@@ -1216,8 +1226,7 @@ Follow the session rules to keep work productive and enjoyable for all agents.""
             state = self.db.load_agent_state(agent_id) if agent_id else None
             agent_config = self.agent_mgr.resolve_agent(agent_name)
             
-            # Get context tokens and capabilities
-            ctx_tokens = agent_config.get('context_tokens', 0) if agent_config else 0
+            # Get capabilities
             capabilities = agent_config.get('capabilities', ['text']) if agent_config else ['text']
             cap_str = '/'.join(capabilities[:2]) if len(capabilities) > 2 else '/'.join(capabilities)
             

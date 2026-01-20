@@ -502,25 +502,19 @@ models:
   # ==============================================================================
   # Meta LLaMA models (HuggingFace direct API)
   # ==============================================================================
-  meta-llama/Llama-3.1-70B-Instruct:
+  meta-llama/llama-3.1-70b-instruct:
     context_tokens: 128000
     max_output_tokens: 4000
     input_modes: [text]
     output_modes: [text]
   
-  meta-llama/llama-3.1-70b-instruct:  # Lowercase variant
+  meta-llama/llama-3.1-8b-instruct:
     context_tokens: 128000
     max_output_tokens: 4000
     input_modes: [text]
     output_modes: [text]
   
-  meta-llama/Llama-3.1-8B-Instruct:
-    context_tokens: 128000
-    max_output_tokens: 4000
-    input_modes: [text]
-    output_modes: [text]
-  
-  meta-llama/Llama-3.3-70B-Instruct:
+  meta-llama/llama-3.3-70b-instruct:
     context_tokens: 128000
     max_output_tokens: 4000
     input_modes: [text]
@@ -562,49 +556,31 @@ models:
   # ==============================================================================
   # Dashscope/Qwen models
   # ==============================================================================
-  Qwen/Qwen3-VL-235B-A22B-Thinking-25700:
+  qwen/qwen3-vl-235b-a22b-thinking-25700:
     context_tokens: 128000
     max_output_tokens: 4000
     input_modes: [text, image]
     output_modes: [text]
   
-  qwen/qwen3-vl-235b-a22b-thinking-25700:  # Lowercase variant
-    context_tokens: 128000
-    max_output_tokens: 4000
-    input_modes: [text, image]
-    output_modes: [text]
-  
-  Qwen/Qwen3-Coder-480B-A35B-Instruct:
+  qwen/qwen3-coder-480b-a35b-instruct:
     context_tokens: 128000
     max_output_tokens: 4000
     input_modes: [text]
     output_modes: [text]
   
-  qwen/qwen3-coder-480b-a35b-instruct:  # Lowercase variant
-    context_tokens: 128000
-    max_output_tokens: 4000
-    input_modes: [text]
-    output_modes: [text]
-  
-  Qwen/Qwen3-VL-235B-A22B-Thinking:
+  qwen/qwen3-vl-235b-a22b-thinking:
     context_tokens: 128000
     max_output_tokens: 4000
     input_modes: [text, image]
     output_modes: [text]
   
-  qwen/qwen3-vl-235b-a22b-thinking:  # Lowercase variant
-    context_tokens: 128000
-    max_output_tokens: 4000
-    input_modes: [text, image]
-    output_modes: [text]
-  
-  Qwen/Qwen-Image:
+  qwen/qwen-image:
     context_tokens: 4000
     max_output_tokens: 1  # Generates images
     input_modes: [text]
     output_modes: [image]
   
-  Qwen/Qwen-Image-Edit-2511:
+  qwen/qwen-image-edit-2511:
     context_tokens: 4000
     max_output_tokens: 1  # Edits images
     input_modes: [text, image]
@@ -613,13 +589,7 @@ models:
   # ==============================================================================
   # DeepSeek models (direct API)
   # ==============================================================================
-  deepseek-ai/DeepSeek-V3.2:
-    context_tokens: 128000
-    max_output_tokens: 4000
-    input_modes: [text]
-    output_modes: [text, function_calling]
-  
-  deepseek-ai/deepseek-v3.2:  # Lowercase variant
+  deepseek-ai/deepseek-v3.2:
     context_tokens: 128000
     max_output_tokens: 4000
     input_modes: [text]

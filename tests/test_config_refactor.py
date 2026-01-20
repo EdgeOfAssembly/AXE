@@ -13,9 +13,7 @@ Tests:
 import os
 import sys
 import tempfile
-import shutil
 import yaml
-from pathlib import Path
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -117,7 +115,7 @@ def test_provider_validation():
         original_dir = os.getcwd()
         try:
             os.chdir(tmpdir)
-            config = Config()
+            Config()
             # Validation runs internally and prints errors
             print(c("✓ Validation detected invalid provider model (check output above)", Colors.GREEN))
         finally:
@@ -187,7 +185,7 @@ def test_agent_validation():
         original_dir = os.getcwd()
         try:
             os.chdir(tmpdir)
-            config = Config()
+            Config()
             print(c("✓ Validation detected invalid agent configs (check output above)", Colors.GREEN))
         finally:
             os.chdir(original_dir)

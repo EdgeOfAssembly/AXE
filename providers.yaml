@@ -62,10 +62,9 @@ providers:
     env_key: HUGGINGFACE_API_KEY
     base_url: null  # Uses default HuggingFace endpoint
     models:
-      - meta-llama/Llama-3.3-70B-Instruct
-      - meta-llama/Llama-3.1-70B-Instruct
-      - meta-llama/llama-3.1-70b-instruct  # Lowercase variant
-      - meta-llama/Llama-3.1-8B-Instruct
+      - meta-llama/llama-3.3-70b-instruct
+      - meta-llama/llama-3.1-70b-instruct
+      - meta-llama/llama-3.1-8b-instruct
 
   # ===========================================================================
   # GitHub Models API
@@ -139,14 +138,11 @@ providers:
     env_key: DASHSCOPE_API_KEY
     base_url: https://dashscope-intl.aliyuncs.com/compatible-mode/v1
     models:
-      - Qwen/Qwen3-VL-235B-A22B-Thinking-25700
-      - qwen/qwen3-vl-235b-a22b-thinking-25700  # Lowercase variant
-      - Qwen/Qwen3-Coder-480B-A35B-Instruct
-      - qwen/qwen3-coder-480b-a35b-instruct  # Lowercase variant
-      - Qwen/Qwen3-VL-235B-A22B-Thinking
-      - qwen/qwen3-vl-235b-a22b-thinking  # Lowercase variant
-      - Qwen/Qwen-Image
-      - Qwen/Qwen-Image-Edit-2511
+      - qwen/qwen3-vl-235b-a22b-thinking-25700
+      - qwen/qwen3-coder-480b-a35b-instruct
+      - qwen/qwen3-vl-235b-a22b-thinking
+      - qwen/qwen-image
+      - qwen/qwen-image-edit-2511
 
   # ===========================================================================
   # DeepSeek API (direct)
@@ -156,8 +152,7 @@ providers:
     env_key: DEEPSEEK_API_KEY
     base_url: https://api.deepseek.com/v1
     models:
-      - deepseek-ai/DeepSeek-V3.2
-      - deepseek-ai/deepseek-v3.2  # Lowercase variant
+      - deepseek-ai/deepseek-v3.2
 
   # ===========================================================================
   # Ollama (Local LLM Server)
