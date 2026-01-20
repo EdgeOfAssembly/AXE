@@ -3,8 +3,9 @@
 Test for Ollama provider initialization without authentication.
 Verifies that providers with requires_auth: false can initialize without API keys.
 
-NOTE: This test starts an Ollama server but does NOT pull any models.
-      To test with actual inference, pull a model first:
+NOTE: This test starts an Ollama server and may attempt to pull a small model
+      if none is already available. To test with actual inference explicitly,
+      you can also pull a model yourself first:
       
       Small models (good for CI/testing with limited resources):
       - ollama pull qwen2:0.5b       # Tiny (~352MB) - fastest for CI
@@ -56,7 +57,9 @@ def pull_small_model():
                     print(f"  ✓ Found existing model: {model_name}")
                     ollama_model_pulled = model_name
                     return model_name
-    except:
+    except Exception:
+        # Intentionally ignore errors listing models (e.g., ollama not installed);
+        # we will fall back to attempting to pull models directly.
         pass
     
     # If no model found, try to pull the smallest one
@@ -96,7 +99,8 @@ def start_ollama_server():
         if response.status_code == 200:
             print("  ℹ Ollama server already running")
             return True
-    except:
+    except (requests.RequestException, ConnectionError):
+        # If we cannot reach the server, assume it is not running and proceed to start it.
         pass
     
     # Check if Ollama is installed
@@ -128,7 +132,7 @@ def start_ollama_server():
                 if response.status_code == 200:
                     print("  ✓ Ollama server started successfully")
                     return True
-            except:
+            except (requests.RequestException, ConnectionError):
                 continue
         
         print("  ⚠ Ollama server did not start in time")
@@ -157,7 +161,8 @@ def stop_ollama_server():
             try:
                 # Force kill if graceful shutdown failed
                 os.killpg(os.getpgid(ollama_process.pid), signal.SIGKILL)
-            except:
+            except Exception:
+                # Ignore any errors during best-effort cleanup in tests
                 pass
         finally:
             ollama_process = None
@@ -228,13 +233,14 @@ def test_providers_requiring_auth_still_work():
         
         for provider in auth_required_providers:
             if provider in manager.clients:
-                print(f"  ⚠ WARNING: {provider} initialized without API key (should require auth)")
+                print(f"  ✗ FAILURE: {provider} initialized without API key (should require auth)")
+                assert False, f"{provider} should not initialize without API key"
             else:
                 print(f"  ✓ {provider} correctly skipped (no API key)")
         
         # Ollama should still be initialized
-        if 'ollama' in manager.clients:
-            print("  ✓ Ollama initialized without API key (as expected)")
+        assert 'ollama' in manager.clients, "Ollama should be initialized without API key"
+        print("  ✓ Ollama initialized without API key (as expected)")
         
     finally:
         # Restore original values
@@ -248,27 +254,38 @@ def test_edge_cases():
     """Test edge cases for Ollama authentication."""
     print("Testing edge cases for Ollama authentication...")
     
-    # Test Case 1: Empty string API key
-    os.environ['OLLAMA_API_KEY'] = ""
-    config = Config()
-    manager = AgentManager(config)
-    if 'ollama' in manager.clients:
+    # Preserve original environment variable to restore after tests
+    original_ollama_api_key = os.environ.get('OLLAMA_API_KEY')
+    
+    try:
+        # Test Case 1: Empty string API key
+        os.environ['OLLAMA_API_KEY'] = ""
+        config = Config()
+        manager = AgentManager(config)
+        assert 'ollama' in manager.clients, "Ollama should initialize with empty API key"
         print("  ✓ Empty API key: Ollama initialized")
-    
-    # Test Case 2: Fake/placeholder API key
-    os.environ['OLLAMA_API_KEY'] = "fake_key_123"
-    config = Config()
-    manager = AgentManager(config)
-    if 'ollama' in manager.clients:
+        
+        # Test Case 2: Fake/placeholder API key
+        os.environ['OLLAMA_API_KEY'] = "fake_key_123"
+        config = Config()
+        manager = AgentManager(config)
+        assert 'ollama' in manager.clients, "Ollama should initialize with fake API key"
         print("  ✓ Fake API key: Ollama initialized")
-    
-    # Test Case 3: No API key environment variable
-    if 'OLLAMA_API_KEY' in os.environ:
-        del os.environ['OLLAMA_API_KEY']
-    config = Config()
-    manager = AgentManager(config)
-    if 'ollama' in manager.clients:
+        
+        # Test Case 3: No API key environment variable
+        if 'OLLAMA_API_KEY' in os.environ:
+            del os.environ['OLLAMA_API_KEY']
+        config = Config()
+        manager = AgentManager(config)
+        assert 'ollama' in manager.clients, "Ollama should initialize with no API key"
         print("  ✓ No API key: Ollama initialized")
+    
+    finally:
+        # Restore original environment variable state
+        if original_ollama_api_key is not None:
+            os.environ['OLLAMA_API_KEY'] = original_ollama_api_key
+        elif 'OLLAMA_API_KEY' in os.environ:
+            del os.environ['OLLAMA_API_KEY']
     
     print()
 
@@ -280,7 +297,8 @@ def test_ollama_inference():
     global ollama_model_pulled
     
     if not ollama_model_pulled:
-        print("  ℹ No model available - skipping inference test")
+        print("  ⊘ SKIPPED: No model available - skipping inference test")
+        print("     (This is optional; the test will attempt to pull a model if needed)")
         print()
         return
     
@@ -294,7 +312,7 @@ def test_ollama_inference():
     
     # Check if Ollama client was initialized
     if 'ollama' not in manager.clients:
-        print("  ✗ Ollama client not initialized")
+        print("  ⊘ SKIPPED: Ollama client not initialized")
         print()
         return
     

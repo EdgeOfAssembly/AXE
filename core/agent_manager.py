@@ -99,7 +99,7 @@ class AgentManager:
                     # Ollama doesn't require authentication, but OpenAI client needs a placeholder
                     base_url = prov_config.get('base_url', 'http://localhost:11434/v1')
                     self.clients[name] = OpenAI(
-                        api_key='ollama',  # Placeholder - Ollama ignores this
+                        api_key='not-needed',  # Placeholder - Ollama ignores this
                         base_url=base_url
                     )
             except Exception as e:

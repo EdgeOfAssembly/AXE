@@ -600,21 +600,21 @@ models:
   # These are default models commonly used with Ollama
   # Context tokens limited by local hardware (adjust as needed)
   # ==============================================================================
-  # Small models for testing/CI
+  # Small models for testing/CI (sorted by size)
   qwen2:0.5b:  # Tiny model (~352MB) - best for CI/testing with limited resources
     context_tokens: 32000
     max_output_tokens: 2000
     input_modes: [text]
     output_modes: [text]
   
-  llama3.2:1b:  # Very small model (~1.3GB) - good for quick tests
-    context_tokens: 128000
+  tinyllama:  # Small model (~637MB) - fast and lightweight
+    context_tokens: 2048
     max_output_tokens: 2000
     input_modes: [text]
     output_modes: [text]
   
-  tinyllama:  # Small model (~637MB) - fast and lightweight
-    context_tokens: 2048
+  llama3.2:1b:  # Very small model (~1.3GB) - good for quick tests
+    context_tokens: 128000
     max_output_tokens: 2000
     input_modes: [text]
     output_modes: [text]

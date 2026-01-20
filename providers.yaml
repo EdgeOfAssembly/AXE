@@ -162,12 +162,12 @@ providers:
     enabled: true  # Enabled by default for local/private LLM usage
     requires_auth: false  # Ollama doesn't require authentication
     env_key: null  # No API key needed
-    base_url: http://localhost:11434/v1
+    base_url: http://localhost:11434/v1  # NOTE: HTTP is intentional for localhost-only Ollama; do not use HTTP for remote servers—use HTTPS instead.
     models:
       # Small models for testing/CI (sorted by size)
       - qwen2:0.5b       # Tiny model (~352MB) - fastest for CI
-      - llama3.2:1b      # Very small (~1.3GB)
       - tinyllama        # Small (~637MB)
+      - llama3.2:1b      # Very small (~1.3GB)
       - phi              # Small (~1.6GB)
       - llama3.2:3b      # Small test model (~2GB)
       # Production models
