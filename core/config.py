@@ -20,6 +20,13 @@ try:
 except ImportError:
     HAS_YAML = False
 
+# Try to import requests for ollama detection
+try:
+    import requests
+    HAS_REQUESTS = True
+except ImportError:
+    HAS_REQUESTS = False
+
 from .constants import DEFAULT_CONFIG
 from utils.formatting import Colors, c
 
@@ -67,6 +74,9 @@ class Config:
                 provider_summary += f", {len(disabled_providers)} disabled ({', '.join(disabled_providers)})"
             print(c(f"  ✓ providers.yaml ({provider_summary})", Colors.GREEN))
             
+            # Check ollama status if it's in providers
+            self._check_ollama_status()
+            
             # Validate providers against models
             self._validate_providers()
         else:
@@ -110,6 +120,44 @@ class Config:
         except Exception as e:
             print(c(f"  ✗ Error loading {path}: {e}", Colors.RED))
             return {}
+
+    def _check_ollama_status(self) -> None:
+        """Check ollama server status and display appropriate message."""
+        if 'ollama' not in self.providers_config:
+            return
+        
+        ollama_config = self.providers_config['ollama']
+        is_enabled = ollama_config.get('enabled', False)
+        base_url = ollama_config.get('base_url', 'http://localhost:11434')
+        
+        # Extract base URL without /v1 suffix for API calls
+        api_base = base_url.rstrip('/v1').rstrip('/')
+        
+        if not is_enabled:
+            # Ollama is disabled - warn user
+            print(c("  ⚠ Ollama disabled - local models not available. Enable in providers.yaml to use local LLMs", Colors.YELLOW))
+            return
+        
+        # Ollama is enabled - check if it's running
+        if not HAS_REQUESTS:
+            print(c("  ⚠ Ollama enabled but requests library not available - cannot check status", Colors.YELLOW))
+            return
+        
+        try:
+            # Try to get ollama version
+            response = requests.get(f"{api_base}/api/version", timeout=2)
+            if response.status_code == 200:
+                version_data = response.json()
+                version = version_data.get('version', 'unknown')
+                print(c(f"  ✓ Ollama running (version {version}) - local models available", Colors.GREEN))
+            else:
+                print(c(f"  ⚠ Ollama enabled but server responded with error (status {response.status_code})", Colors.YELLOW))
+        except requests.exceptions.ConnectionError:
+            print(c("  ⚠ Ollama enabled but server not running at {api_base} - local models unavailable", Colors.YELLOW).format(api_base=api_base))
+        except requests.exceptions.Timeout:
+            print(c("  ⚠ Ollama enabled but server timeout at {api_base} - may not be running", Colors.YELLOW).format(api_base=api_base))
+        except Exception as e:
+            print(c(f"  ⚠ Ollama enabled but connection check failed: {e}", Colors.YELLOW))
 
     def load(self, path: str) -> None:
         """Load axe.yaml config file."""

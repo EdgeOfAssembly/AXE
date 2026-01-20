@@ -156,11 +156,10 @@ providers:
 
   # ===========================================================================
   # Ollama (Local LLM Server)
-  # Disabled by default - enable when you have Ollama running locally
-  # Installation: https://ollama.ai/
+  # Enabled by default - install from https://ollama.ai/
   # ===========================================================================
   ollama:
-    enabled: false  # Enable when Ollama is installed and running
+    enabled: true  # Enabled by default for local/private LLM usage
     env_key: OLLAMA_API_KEY  # Placeholder - Ollama doesn't require auth by default
     base_url: http://localhost:11434/v1
     models:

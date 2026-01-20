@@ -310,7 +310,7 @@ def test_agent_overrides():
 
 
 def test_ollama_provider_exists():
-    """Test that ollama provider is defined and disabled by default"""
+    """Test that ollama provider is defined and enabled by default"""
     print(c("\n=== Test: Ollama Provider ===", Colors.CYAN))
     
     config = Config()
@@ -318,9 +318,9 @@ def test_ollama_provider_exists():
     # Check ollama exists in providers
     assert 'ollama' in config.providers_config, "Ollama provider not found"
     
-    # Check it's disabled by default
-    assert config.providers_config['ollama'].get('enabled') == False, "Ollama should be disabled by default"
-    print(c("✓ Ollama provider exists and is disabled by default", Colors.GREEN))
+    # Check it's enabled by default (changed from disabled)
+    assert config.providers_config['ollama'].get('enabled') == True, "Ollama should be enabled by default"
+    print(c("✓ Ollama provider exists and is enabled by default", Colors.GREEN))
     
     # Check it has models defined
     ollama_models = config.providers_config['ollama'].get('models', [])
