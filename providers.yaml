@@ -160,9 +160,11 @@ providers:
   # ===========================================================================
   ollama:
     enabled: true  # Enabled by default for local/private LLM usage
-    env_key: OLLAMA_API_KEY  # Placeholder - Ollama doesn't require auth by default
+    requires_auth: false  # Ollama doesn't require authentication
+    env_key: null  # No API key needed
     base_url: http://localhost:11434/v1
     models:
+      - llama3.2:3b      # Small test model (~2GB)
       - llama3.1:70b
       - llama3.1:8b
       - codellama:34b

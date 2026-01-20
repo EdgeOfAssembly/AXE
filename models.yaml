@@ -600,6 +600,12 @@ models:
   # These are default models commonly used with Ollama
   # Context tokens limited by local hardware (adjust as needed)
   # ==============================================================================
+  llama3.2:3b:  # Small test model (~2GB) - good for CI/testing
+    context_tokens: 128000
+    max_output_tokens: 4000
+    input_modes: [text]
+    output_modes: [text]
+  
   llama3.1:70b:
     context_tokens: 128000
     max_output_tokens: 4000
