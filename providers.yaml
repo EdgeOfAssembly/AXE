@@ -164,7 +164,13 @@ providers:
     env_key: null  # No API key needed
     base_url: http://localhost:11434/v1
     models:
+      # Small models for testing/CI (sorted by size)
+      - qwen2:0.5b       # Tiny model (~352MB) - fastest for CI
+      - llama3.2:1b      # Very small (~1.3GB)
+      - tinyllama        # Small (~637MB)
+      - phi              # Small (~1.6GB)
       - llama3.2:3b      # Small test model (~2GB)
+      # Production models
       - llama3.1:70b
       - llama3.1:8b
       - codellama:34b

@@ -2,6 +2,18 @@
 """
 Test for Ollama provider initialization without authentication.
 Verifies that providers with requires_auth: false can initialize without API keys.
+
+NOTE: This test starts an Ollama server but does NOT pull any models.
+      To test with actual inference, pull a model first:
+      
+      Small models (good for CI/testing with limited resources):
+      - ollama pull qwen2:0.5b       # Tiny (~352MB) - fastest for CI
+      - ollama pull tinyllama        # Small (~637MB)
+      - ollama pull llama3.2:1b      # Very small (~1.3GB)
+      - ollama pull phi              # Small (~1.6GB)
+      - ollama pull llama3.2:3b      # Small (~2GB) - good balance
+      
+      If llama3.2:3b is too large, use qwen2:0.5b or tinyllama instead.
 """
 
 import sys
