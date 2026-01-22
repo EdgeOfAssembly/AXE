@@ -78,6 +78,16 @@ The "whistleblower" mechanism – which allows worker agents to send GPG-encrypt
 - **Analysis**: cppcheck, clang-format, clang-tidy, pylint, mypy
 - **Emulation**: dosbox-x, xvfb-run
 
+### Agent Collaboration Features
+
+- **Global Workspace**: Broadcast-based communication (Baars' Global Workspace Theory)
+- **Conflict Resolution**: Automatic detection and arbitration of agent disagreements (Minsky's Society of Mind)
+- **XP & Progression**: Agents level up through successful work and conflict resolution
+- **Hierarchical Arbitration**: Higher-level agents resolve conflicts between lower-level agents
+- **Workshop Tools**: Symbolic execution, taint analysis, and live instrumentation
+
+See [Conflict Resolution Documentation](docs/conflict_resolution_examples.md) for examples.
+
 ---
 
 ## Quick Start
@@ -954,6 +964,39 @@ axe> @llama help with the low-level binary parsing
 # Creative optimization
 axe> @grok suggest unconventional approaches to improve performance
 ```
+
+### Conflict Resolution Protocol (NEW!)
+
+AXE implements **Marvin Minsky's Society of Mind** concepts for handling agent disagreements:
+
+**Automatic Conflict Detection:**
+- System detects contradictions (e.g., "safe" vs "unsafe", "correct" vs "incorrect")
+- Conflicts are flagged when agents disagree on the same code/function
+- Broadcasts tracked in a Global Workspace (Baars' theory)
+
+**Hierarchical Arbitration:**
+```bash
+# Example: Two agents disagree on security
+@claude: "Function is safe"
+@gpt: "Function has SQL injection vulnerability"
+
+# System detects conflict, creates arbitration
+# Higher-level agent (e.g., @grok at level 25) resolves:
+@grok: [[ARBITRATE:arb_123:GPT is correct - SQL injection confirmed:gpt_broadcast_id]]
+
+# XP awards automatically distributed:
+# - Winner (GPT): +15 XP
+# - Good-faith participant (Claude): +5 XP  
+# - Arbitrator (Grok): +20 XP
+```
+
+**Key Features:**
+- **Level-Based Authority**: Higher-level agents can arbitrate conflicts of lower-level agents
+- **Auto-Escalation**: Conflicts escalate if not resolved within 5 turns
+- **Subsidiarity Principle**: Lowest qualifying level handles each conflict
+- **XP Progression**: Successful conflict resolution contributes to agent leveling
+
+See [Conflict Resolution Examples](docs/conflict_resolution_examples.md) for detailed scenarios.
 
 ---
 
