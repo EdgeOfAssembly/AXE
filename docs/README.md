@@ -27,6 +27,7 @@ Welcome to the AXE documentation! This directory contains comprehensive guides, 
 - **[features/anthropic-features.md](features/anthropic-features.md)** - Anthropic Claude integration
 - **[features/github-agent-integration.md](features/github-agent-integration.md)** - GitHub Copilot integration
 - **[features/README.md](features/README.md)** - Complete features overview
+- **[xp_voting.md](xp_voting.md)** - Peer XP voting system (Minsky's Society of Mind)
 
 ### References
 > Quick references and cheat sheets
@@ -86,6 +87,9 @@ New to AXE? Start here:
 
 **Find command syntax**
 → Reference [references/quick-reference.md](references/quick-reference.md)
+
+**Set up peer voting between agents**
+→ See [xp_voting.md](xp_voting.md) for Minsky's Society of Mind implementation
 
 **Review security measures**
 → See [security.md](security.md) for audit results
