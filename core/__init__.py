@@ -9,6 +9,7 @@ from .tool_runner import ToolRunner
 from .sandbox import SandboxManager
 from .resource_monitor import start_resource_monitor, collect_resources
 from .skills_manager import SkillsManager, Skill, create_skills_manager
+from .subsumption_layer import SubsumptionController, SubsumptionLayer, LAYER_METADATA
 from .constants import (
     DEFAULT_CONFIG,
     CHARS_PER_TOKEN,
@@ -44,6 +45,10 @@ from .constants import (
     AGENT_TOKEN_SPAWN,
     AGENT_TOKEN_STATUS,
     AGENT_TOKEN_GITHUB_READY,
+    AGENT_TOKEN_SUPPRESS,
+    AGENT_TOKEN_RELEASE,
+    SUPPRESSION_DEFAULT_TURNS,
+    SUPPRESSION_MAX_TURNS,
     READ_BLOCK_PATTERN,
 )
 
@@ -60,6 +65,10 @@ __all__ = [
     'SkillsManager',
     'Skill',
     'create_skills_manager',
+    # Subsumption Architecture
+    'SubsumptionController',
+    'SubsumptionLayer',
+    'LAYER_METADATA',
     # Tool Runner
     'ToolRunner',
     # Sandbox
@@ -102,5 +111,9 @@ __all__ = [
     'AGENT_TOKEN_SPAWN',
     'AGENT_TOKEN_STATUS',
     'AGENT_TOKEN_GITHUB_READY',
+    'AGENT_TOKEN_SUPPRESS',
+    'AGENT_TOKEN_RELEASE',
+    'SUPPRESSION_DEFAULT_TURNS',
+    'SUPPRESSION_MAX_TURNS',
     'READ_BLOCK_PATTERN',
 ]
