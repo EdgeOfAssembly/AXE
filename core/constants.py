@@ -56,6 +56,12 @@ AGENT_TOKEN_EMERGENCY = "[[AGENT_EMERGENCY:"  # Followed by message, ends with ]
 AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"  # Followed by model, role, ends with ]]
 AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
 AGENT_TOKEN_GITHUB_READY = "[[GITHUB_READY:"  # Agent signals ready to push to GitHub
+AGENT_TOKEN_SUPPRESS = "[[SUPPRESS:"  # Format: [[SUPPRESS:@target:reason]]
+AGENT_TOKEN_RELEASE = "[[RELEASE:"    # Format: [[RELEASE:@target]]
+
+# Subsumption Architecture constants (Brooks 1986)
+SUPPRESSION_DEFAULT_TURNS = 3
+SUPPRESSION_MAX_TURNS = 10
 
 # Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives
 # Matches: [READ ...] (case-insensitive) followed by content until:
