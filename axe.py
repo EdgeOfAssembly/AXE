@@ -1230,7 +1230,7 @@ Follow the session rules to keep work productive and enjoyable for all agents.""
             capabilities = agent_config.get('capabilities', ['text']) if agent_config else ['text']
             cap_str = '/'.join(capabilities[:2]) if len(capabilities) > 2 else '/'.join(capabilities)
             
-            # Get context tokens from agent config
+            # Get context tokens from agent config (default to 0 for numeric formatting)
             context_tokens = agent_config.get('context_tokens', 0) if agent_config else 0
             
             if state:
