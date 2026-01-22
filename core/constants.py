@@ -56,6 +56,22 @@ AGENT_TOKEN_EMERGENCY = "[[AGENT_EMERGENCY:"  # Followed by message, ends with ]
 AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"  # Followed by model, role, ends with ]]
 AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
 AGENT_TOKEN_GITHUB_READY = "[[GITHUB_READY:"  # Agent signals ready to push to GitHub
+AGENT_TOKEN_CONFLICT = "[[CONFLICT:"    # Format: [[CONFLICT:broadcast_id1,broadcast_id2:reason]]
+AGENT_TOKEN_ARBITRATE = "[[ARBITRATE:"  # Format: [[ARBITRATE:arb_id:resolution:winner_id]]
+
+# Arbitration constants (Minsky's conflict resolution)
+ARBITRATION_DEADLINE_TURNS = 5      # Turns before escalation
+ARBITRATION_AUTO_ESCALATE = True    # Auto-escalate on deadline
+ARBITRATION_MIN_LEVEL_BUMP = 10     # Level increase on escalation
+
+# Contradiction keywords for detection
+CONTRADICTION_PAIRS = [
+    ('safe', 'unsafe'), ('secure', 'vulnerable'), ('secure', 'insecure'),
+    ('correct', 'incorrect'), ('valid', 'invalid'),
+    ('approve', 'reject'), ('yes', 'no'),
+    ('no issues', 'found issues'), ('clean', 'buggy'),
+    ('recommended', 'not recommended'), ('should', 'should not'),
+]
 
 # Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives
 # Matches: [READ ...] (case-insensitive) followed by content until:
