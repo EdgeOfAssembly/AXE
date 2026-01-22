@@ -16,6 +16,8 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional
 from filelock import FileLock  # For thread-safe file access
 
+from .constants import GLOBAL_WORKSPACE_MAX_BROADCASTS
+
 
 class GlobalWorkspace:
     """
@@ -132,10 +134,9 @@ class GlobalWorkspace:
         data = self._read_workspace()
         data['broadcasts'].append(entry)
         
-        # Keep last 200 broadcasts (configurable)
-        max_broadcasts = 200
-        if len(data['broadcasts']) > max_broadcasts:
-            data['broadcasts'] = data['broadcasts'][-max_broadcasts:]
+        # Keep last N broadcasts (from constants)
+        if len(data['broadcasts']) > GLOBAL_WORKSPACE_MAX_BROADCASTS:
+            data['broadcasts'] = data['broadcasts'][-GLOBAL_WORKSPACE_MAX_BROADCASTS:]
         
         # Update metadata
         data['metadata']['total_broadcasts'] = data['metadata'].get('total_broadcasts', 0) + 1
