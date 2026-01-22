@@ -14,6 +14,11 @@ COLLAB_CONTENT_LIMIT = 100000   # Max chars per message in history (increased fr
 COLLAB_PASS_MULTIPLIER = 2      # Times agents can pass before session ends
 COLLAB_SHARED_NOTES_LIMIT = 100000  # Max chars of shared notes to show (increased from 10000)
 
+# Global Workspace constants (Baars' Global Workspace Theory)
+GLOBAL_WORKSPACE_FILE = "GLOBAL_WORKSPACE.json"
+GLOBAL_WORKSPACE_MAX_BROADCASTS = 200
+GLOBAL_WORKSPACE_PROMPT_ENTRIES = 10
+
 # Resource monitoring constants
 RESOURCE_UPDATE_INTERVAL = 60   # Seconds between resource snapshots
 RESOURCE_FILE = "/tmp/axe_resources.txt"
@@ -56,6 +61,7 @@ AGENT_TOKEN_EMERGENCY = "[[AGENT_EMERGENCY:"  # Followed by message, ends with ]
 AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"  # Followed by model, role, ends with ]]
 AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
 AGENT_TOKEN_GITHUB_READY = "[[GITHUB_READY:"  # Agent signals ready to push to GitHub
+AGENT_TOKEN_BROADCAST = "[[BROADCAST:"  # Format: [[BROADCAST:CATEGORY:message]]
 
 # Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives
 # Matches: [READ ...] (case-insensitive) followed by content until:

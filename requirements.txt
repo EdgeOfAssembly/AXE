@@ -8,3 +8,4 @@ angr
 frida
 psutil
 zstandard
+filelock

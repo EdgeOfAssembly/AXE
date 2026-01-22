@@ -9,6 +9,7 @@ from .tool_runner import ToolRunner
 from .sandbox import SandboxManager
 from .resource_monitor import start_resource_monitor, collect_resources
 from .skills_manager import SkillsManager, Skill, create_skills_manager
+from .global_workspace import GlobalWorkspace
 from .constants import (
     DEFAULT_CONFIG,
     CHARS_PER_TOKEN,
@@ -16,6 +17,9 @@ from .constants import (
     COLLAB_CONTENT_LIMIT,
     COLLAB_PASS_MULTIPLIER,
     COLLAB_SHARED_NOTES_LIMIT,
+    GLOBAL_WORKSPACE_FILE,
+    GLOBAL_WORKSPACE_MAX_BROADCASTS,
+    GLOBAL_WORKSPACE_PROMPT_ENTRIES,
     RESOURCE_UPDATE_INTERVAL,
     RESOURCE_FILE,
     MAX_WORK_HOURS,
@@ -44,6 +48,7 @@ from .constants import (
     AGENT_TOKEN_SPAWN,
     AGENT_TOKEN_STATUS,
     AGENT_TOKEN_GITHUB_READY,
+    AGENT_TOKEN_BROADCAST,
     READ_BLOCK_PATTERN,
 )
 
@@ -60,6 +65,8 @@ __all__ = [
     'SkillsManager',
     'Skill',
     'create_skills_manager',
+    # Global Workspace
+    'GlobalWorkspace',
     # Tool Runner
     'ToolRunner',
     # Sandbox
@@ -74,6 +81,9 @@ __all__ = [
     'COLLAB_CONTENT_LIMIT',
     'COLLAB_PASS_MULTIPLIER',
     'COLLAB_SHARED_NOTES_LIMIT',
+    'GLOBAL_WORKSPACE_FILE',
+    'GLOBAL_WORKSPACE_MAX_BROADCASTS',
+    'GLOBAL_WORKSPACE_PROMPT_ENTRIES',
     'RESOURCE_UPDATE_INTERVAL',
     'RESOURCE_FILE',
     'MAX_WORK_HOURS',
@@ -102,5 +112,6 @@ __all__ = [
     'AGENT_TOKEN_SPAWN',
     'AGENT_TOKEN_STATUS',
     'AGENT_TOKEN_GITHUB_READY',
+    'AGENT_TOKEN_BROADCAST',
     'READ_BLOCK_PATTERN',
 ]
