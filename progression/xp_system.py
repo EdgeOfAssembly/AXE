@@ -47,6 +47,12 @@ XP_AWARDS = {
     'code_review': 10,
     'bug_fix': 25,
     
+    # Conflict resolution and arbitration (Minsky's cross-exclusion)
+    'arbitration_win': 15,          # Winning side of arbitration
+    'conflict_resolution': 5,        # Good-faith participation in conflict
+    'arbitration_conducted': 20,     # Successfully arbitrated a conflict
+    'conflict_detected': 10,         # Detecting a valid conflict
+    
     # Default awards
     'message_processed': 1,
     'command_executed': 5,
