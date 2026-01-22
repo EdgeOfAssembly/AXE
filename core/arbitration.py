@@ -359,9 +359,36 @@ class ArbitrationProtocol:
     
     def _persist_arbitration(self, arbitration: Dict[str, Any]) -> None:
         """Persist arbitration to database."""
-        # This would use the database connection to store arbitrations
-        # For now, we keep it in memory
-        pass
+        if not self.db:
+            return
+        
+        try:
+            import sqlite3
+            with sqlite3.connect(self.db.db_path) as conn:
+                conn.execute("""
+                    INSERT OR REPLACE INTO arbitrations
+                    (arbitration_id, conflict_broadcasts_json, created_by, created_at,
+                     created_turn, deadline_turn, required_level, status, escalation_count,
+                     resolution_json, resolved_at, resolved_turn)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    arbitration['id'],
+                    json.dumps([b['id'] for b in arbitration['conflict_broadcasts']]),
+                    arbitration['created_by'],
+                    arbitration['created_at'],
+                    arbitration['created_turn'],
+                    arbitration['deadline_turn'],
+                    arbitration['required_level'],
+                    arbitration['status'],
+                    arbitration['escalation_count'],
+                    json.dumps(arbitration.get('resolution')) if arbitration.get('resolution') else None,
+                    arbitration.get('resolved_at'),
+                    arbitration.get('resolved_turn')
+                ))
+                conn.commit()
+        except Exception as e:
+            # Log but don't fail on persistence errors
+            print(f"Warning: Failed to persist arbitration: {e}")
     
     def _award_xp_to_agents(self, xp_awards: Dict[str, int]) -> None:
         """

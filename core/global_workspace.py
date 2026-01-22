@@ -287,12 +287,53 @@ class GlobalWorkspace:
     
     def _persist_broadcast(self, broadcast: Dict[str, Any]) -> None:
         """Persist broadcast to database."""
-        # This would use the database connection to store broadcasts
-        # For now, we keep it in memory
-        pass
+        if not self.db:
+            return
+        
+        try:
+            import sqlite3
+            with sqlite3.connect(self.db.db_path) as conn:
+                conn.execute("""
+                    INSERT INTO broadcasts 
+                    (broadcast_id, agent_alias, agent_level, category, content, metadata_json, timestamp)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    broadcast['id'],
+                    broadcast['agent_alias'],
+                    broadcast['agent_level'],
+                    broadcast['category'],
+                    broadcast['content'],
+                    json.dumps(broadcast.get('metadata', {})),
+                    broadcast['timestamp']
+                ))
+                conn.commit()
+        except Exception as e:
+            # Log but don't fail on persistence errors
+            print(f"Warning: Failed to persist broadcast: {e}")
     
     def _persist_conflict(self, conflict: Dict[str, Any]) -> None:
         """Persist conflict to database."""
-        # This would use the database connection to store conflicts
-        # For now, we keep it in memory
-        pass
+        if not self.db:
+            return
+        
+        try:
+            import sqlite3
+            with sqlite3.connect(self.db.db_path) as conn:
+                broadcast_ids = [b['id'] for b in conflict.get('broadcasts', [])]
+                conn.execute("""
+                    INSERT INTO conflicts
+                    (conflict_id, conflict_type, broadcast_ids_json, flagged_by, reason, detected_at, status)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    conflict['id'],
+                    conflict['type'],
+                    json.dumps(broadcast_ids),
+                    conflict.get('flagged_by', 'SYSTEM'),
+                    conflict['reason'],
+                    conflict.get('flagged_at') or conflict.get('detected_at'),
+                    conflict.get('status', 'pending_arbitration')
+                ))
+                conn.commit()
+        except Exception as e:
+            # Log but don't fail on persistence errors
+            print(f"Warning: Failed to persist conflict: {e}")

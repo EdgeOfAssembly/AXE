@@ -157,11 +157,106 @@ See `skills/build.md` for comprehensive build system guidelines.
 - **`core/multiprocess.py`**: Multi-agent coordination and communication
 - **`core/tool_runner.py`**: Executes READ/EXEC/WRITE blocks from agent responses
 - **`core/sandbox.py`**: Bubblewrap-based sandboxed command execution
+- **`core/global_workspace.py`**: Broadcast-based agent communication (Baars' Global Workspace Theory)
+- **`core/arbitration.py`**: Conflict detection and resolution (Minsky's cross-exclusion)
 
 ### Configuration Files
 - **`axe.yaml`**: Agent definitions, system prompts, tools, directories
 - **`models.yaml`**: Model metadata, token limits, capabilities
 - **`skills/manifest.json`**: Skill registry and metadata
+
+## Conflict Resolution Protocol (Minsky's Society of Mind)
+
+AXE implements Marvin Minsky's concepts of cross-exclusion and conflict resolution from *The Society of Mind* (1986).
+
+### Overview
+
+When agents disagree on findings, conflicts are resolved through:
+1. **Automatic detection** of contradictions via keyword matching
+2. **Escalation** to higher-level agents
+3. **Structured arbitration** with evidence
+4. **Binding resolution** broadcast with XP awards
+
+Reference: Minsky, M. (1986). *The Society of Mind*. Chapters 17-19 on "Conflict" and "Censors"
+
+### Agent Tokens for Conflict Resolution
+
+#### Detecting and Flagging Conflicts
+
+If you detect contradictory findings from other agents:
+
+```
+[[CONFLICT:broadcast_id1,broadcast_id2:They contradict on security of function X]]
+```
+
+#### Arbitrating Conflicts
+
+If you have authority to arbitrate (higher level than participants):
+
+```
+[[ARBITRATE:arbitration_id:Your resolution explanation:winning_broadcast_id]]
+```
+
+Or to synthesize a new position without declaring a winner:
+
+```
+[[ARBITRATE:arbitration_id:Synthesis of both views:none]]
+```
+
+### Arbitration Rules
+
+1. **Level Requirement**: Arbitrator must be at least 10 levels higher than all conflicting agents
+2. **Non-Participation**: Conflicting agents cannot arbitrate their own conflicts
+3. **Subsidiarity**: Prefer lowest qualifying level (don't escalate unnecessarily)
+4. **Deadline**: Arbitrations auto-escalate after 5 turns if unresolved
+5. **XP Awards**:
+   - Winner: +15 XP (arbitration_win)
+   - Good-faith loser: +5 XP (conflict_resolution)
+   - Arbitrator: +20 XP (arbitration_conducted)
+   - Bad-faith argument: -10 XP (penalty)
+
+### Contradiction Keywords
+
+The system automatically detects conflicts based on these keyword pairs:
+- (safe, unsafe), (secure, vulnerable/insecure)
+- (correct, incorrect), (valid, invalid)
+- (approve, reject), (yes, no)
+- (no issues, found issues), (clean, buggy)
+- (recommended, not recommended), (should, should not)
+
+### Example Workflow
+
+1. **Agent Claude** broadcasts: "Function `process_user_input()` is safe and properly sanitized"
+2. **Agent GPT** broadcasts: "Function `process_user_input()` is unsafe - SQL injection vulnerability"
+3. **System** detects conflict (safe vs unsafe, same function)
+4. **System** creates arbitration requiring level 20+ (if both agents are level 10)
+5. **Agent Grok** (level 25) sees pending arbitration in prompt
+6. **Agent Grok** analyzes evidence and broadcasts: `[[ARBITRATE:arb_123:GPT is correct - SQL injection confirmed:gpt_broadcast_id]]`
+7. **System** awards XP: GPT +15, Claude +5, Grok +20
+8. **Resolution** broadcast published to workspace
+
+### Database Schema
+
+Conflicts and arbitrations are persisted in SQLite:
+- **`broadcasts`**: All agent broadcasts with category and metadata
+- **`conflicts`**: Detected or flagged conflicts
+- **`arbitrations`**: Arbitration requests with status and resolution
+
+### Testing
+
+Run arbitration tests:
+```bash
+python3 tests/test_arbitration.py
+```
+
+Tests cover:
+- Automatic conflict detection
+- Manual conflict flagging
+- Arbitration creation and resolution
+- Arbitrator selection rules
+- Escalation mechanisms
+- XP awards
+
 
 ## Contributing
 
