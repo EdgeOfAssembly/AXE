@@ -6,10 +6,8 @@ Tests workspace initialization, broadcasting, acknowledgments, filtering, and pr
 
 import sys
 import os
-import json
 import tempfile
-import shutil
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from core.global_workspace import GlobalWorkspace
@@ -306,7 +304,7 @@ def test_pending_acks_retrieval():
         
         # Create broadcasts requiring ack
         result1 = workspace.broadcast("@gpt1", 25, "DIRECTIVE", "Task 1", requires_ack=True)
-        result2 = workspace.broadcast("@claude1", 25, "DIRECTIVE", "Task 2", requires_ack=True)
+        workspace.broadcast("@claude1", 25, "DIRECTIVE", "Task 2", requires_ack=True)
         workspace.broadcast("@llama1", 10, "STATUS", "No ack", requires_ack=False)
         
         # Check pending for @llama1 (should have 2)

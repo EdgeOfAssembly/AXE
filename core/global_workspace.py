@@ -10,13 +10,12 @@ Reference: Baars, B.J. (1988). A Cognitive Theory of Consciousness.
 """
 
 import json
-import os
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 from filelock import FileLock  # For thread-safe file access
 
-from .constants import GLOBAL_WORKSPACE_MAX_BROADCASTS
+from .constants import GLOBAL_WORKSPACE_MAX_BROADCASTS, GLOBAL_WORKSPACE_FILE
 
 
 class GlobalWorkspace:
@@ -51,8 +50,8 @@ class GlobalWorkspace:
             session_dir: Directory for the collaborative session
         """
         self.session_dir = Path(session_dir)
-        self.workspace_file = self.session_dir / "GLOBAL_WORKSPACE.json"
-        self.lock_file = self.session_dir / "GLOBAL_WORKSPACE.lock"
+        self.workspace_file = self.session_dir / GLOBAL_WORKSPACE_FILE
+        self.lock_file = self.session_dir / f"{GLOBAL_WORKSPACE_FILE}.lock"
         self._init_workspace()
     
     def _init_workspace(self) -> None:
@@ -130,20 +129,25 @@ class GlobalWorkspace:
             'tags': tags or []
         }
         
-        # Read, update, write
-        data = self._read_workspace()
-        data['broadcasts'].append(entry)
-        
-        # Keep last N broadcasts (from constants)
-        if len(data['broadcasts']) > GLOBAL_WORKSPACE_MAX_BROADCASTS:
-            data['broadcasts'] = data['broadcasts'][-GLOBAL_WORKSPACE_MAX_BROADCASTS:]
-        
-        # Update metadata
-        data['metadata']['total_broadcasts'] = data['metadata'].get('total_broadcasts', 0) + 1
-        if category not in data['metadata'].get('categories_used', []):
-            data['metadata'].setdefault('categories_used', []).append(category)
-        
-        self._write_workspace(data)
+        # Perform the full read-modify-write under a single file lock for thread safety
+        with FileLock(str(self.lock_file)):
+            if self.workspace_file.exists():
+                data = json.loads(self.workspace_file.read_text())
+            else:
+                data = {'broadcasts': [], 'metadata': {}}
+            
+            data['broadcasts'].append(entry)
+            
+            # Keep last N broadcasts (from constants)
+            if len(data['broadcasts']) > GLOBAL_WORKSPACE_MAX_BROADCASTS:
+                data['broadcasts'] = data['broadcasts'][-GLOBAL_WORKSPACE_MAX_BROADCASTS:]
+            
+            # Update metadata
+            data['metadata']['total_broadcasts'] = data['metadata'].get('total_broadcasts', 0) + 1
+            if category not in data['metadata'].get('categories_used', []):
+                data['metadata'].setdefault('categories_used', []).append(category)
+            
+            self.workspace_file.write_text(json.dumps(data, indent=2))
         
         return {'success': True, 'broadcast_id': broadcast_id, 'entry': entry}
     
@@ -160,30 +164,38 @@ class GlobalWorkspace:
         Returns:
             Dict with success status
         """
-        data = self._read_workspace()
-        
-        for broadcast in data['broadcasts']:
-            if broadcast['id'] == broadcast_id:
-                if not broadcast['requires_ack']:
-                    return {'success': False, 'reason': 'Broadcast does not require acknowledgment'}
-                
-                # Check if already acknowledged by this agent
-                ack_agents = [a['agent'] for a in broadcast['acks']]
-                if agent_alias in ack_agents:
-                    return {'success': False, 'reason': 'Already acknowledged'}
-                
-                # Add acknowledgment
-                ack_entry = {
-                    'agent': agent_alias,
-                    'timestamp': datetime.now(timezone.utc).isoformat(),
-                    'comment': comment
-                }
-                broadcast['acks'].append(ack_entry)
-                
-                self._write_workspace(data)
-                return {'success': True, 'broadcast_id': broadcast_id}
-        
-        return {'success': False, 'reason': 'Broadcast not found'}
+        # Perform the full read-modify-write under a single file lock for thread safety
+        with FileLock(str(self.lock_file)):
+            if self.workspace_file.exists():
+                data = json.loads(self.workspace_file.read_text())
+            else:
+                data = {'broadcasts': [], 'metadata': {}}
+            
+            for broadcast in data.get('broadcasts', []):
+                if broadcast.get('id') == broadcast_id:
+                    if not broadcast.get('requires_ack'):
+                        return {
+                            'success': False,
+                            'reason': 'Broadcast does not require acknowledgment'
+                        }
+                    
+                    # Check if already acknowledged by this agent
+                    ack_agents = [a.get('agent') for a in broadcast.get('acks', [])]
+                    if agent_alias in ack_agents:
+                        return {'success': False, 'reason': 'Already acknowledged'}
+                    
+                    # Add acknowledgment
+                    ack_entry = {
+                        'agent': agent_alias,
+                        'timestamp': datetime.now(timezone.utc).isoformat(),
+                        'comment': comment
+                    }
+                    broadcast.setdefault('acks', []).append(ack_entry)
+                    
+                    self.workspace_file.write_text(json.dumps(data, indent=2))
+                    return {'success': True, 'broadcast_id': broadcast_id}
+            
+            return {'success': False, 'reason': 'Broadcast not found'}
     
     def get_broadcasts(self, 
                        since: Optional[str] = None,
@@ -209,7 +221,34 @@ class GlobalWorkspace:
         
         # Apply filters
         if since:
-            broadcasts = [b for b in broadcasts if b['timestamp'] > since]
+            # Parse the provided 'since' timestamp as an aware datetime
+            try:
+                since_str = since
+                if since_str.endswith("Z"):
+                    since_str = since_str.replace("Z", "+00:00")
+                since_dt = datetime.fromisoformat(since_str)
+            except (TypeError, ValueError):
+                # If 'since' is not a valid ISO-8601 timestamp, skip time-based filtering
+                since_dt = None
+            
+            if since_dt is not None:
+                filtered_broadcasts: List[Dict[str, Any]] = []
+                for b in broadcasts:
+                    ts_str = b.get("timestamp")
+                    if not ts_str:
+                        continue
+                    try:
+                        ts_norm = ts_str
+                        if isinstance(ts_norm, str) and ts_norm.endswith("Z"):
+                            ts_norm = ts_norm.replace("Z", "+00:00")
+                        ts_dt = datetime.fromisoformat(ts_norm)
+                    except (TypeError, ValueError):
+                        # Skip broadcasts with unparsable timestamps for the 'since' filter
+                        continue
+                    if ts_dt > since_dt:
+                        filtered_broadcasts.append(b)
+                broadcasts = filtered_broadcasts
+        
         if category:
             broadcasts = [b for b in broadcasts if b['category'] == category]
         if agent:
@@ -264,9 +303,24 @@ class GlobalWorkspace:
         directives = self.get_broadcasts(category='DIRECTIVE')
         
         if active_only:
-            # Filter to last hour
-            cutoff = datetime.now(timezone.utc).isoformat()[:-13]  # Rough hour cutoff
-            directives = [d for d in directives if d['timestamp'][:13] >= cutoff[:13]]
+            # Filter to last hour using proper datetime arithmetic
+            cutoff_time = datetime.now(timezone.utc) - timedelta(hours=1)
+            filtered_directives: List[Dict[str, Any]] = []
+            for d in directives:
+                ts_str = d.get('timestamp')
+                if not ts_str:
+                    continue
+                try:
+                    ts_norm = ts_str
+                    if isinstance(ts_norm, str) and ts_norm.endswith("Z"):
+                        ts_norm = ts_norm.replace("Z", "+00:00")
+                    ts_dt = datetime.fromisoformat(ts_norm)
+                    if ts_dt >= cutoff_time:
+                        filtered_directives.append(d)
+                except (TypeError, ValueError):
+                    # Skip directives with unparsable timestamps
+                    continue
+            directives = filtered_directives
         
         return directives
     

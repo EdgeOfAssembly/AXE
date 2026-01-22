@@ -54,7 +54,7 @@ Successfully implemented **Bernard Baars' Global Workspace Theory (1988)** for A
 - ✅ Broadcasts can require acknowledgment from other agents
 - ✅ Track acknowledgments per broadcast
 - ✅ Prevent duplicate acknowledgments
-- ✅ Self-acknowledgment prevention
+- ✅ Agents can acknowledge broadcasts (including their own)
 
 ### Filtering & Querying
 - ✅ Filter by category

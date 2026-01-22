@@ -141,7 +141,7 @@ needs_ack = workspace.get_broadcasts(requires_ack_only=True)
 
 ### `get_pending_acks(agent_alias)`
 
-Get broadcasts requiring acknowledgment from a specific agent.
+Get broadcasts that require acknowledgment by a specific agent.
 
 **Parameters:**
 - `agent_alias` (str): The agent to check
