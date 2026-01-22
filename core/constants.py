@@ -230,3 +230,7 @@ Focus on practical, working solutions."""
                         '.asm', '.s', '.inc',
                         '.exe', '.com', '.wad', '.bin']
 }
+
+# Level-to-Privilege constants (Simon's hierarchies)
+PRIVILEGE_PROMPT_SECTION = True  # Include privileges in prompts
+PRIVILEGE_VALIDATION = True      # Validate commands against level

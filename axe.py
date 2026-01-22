@@ -94,6 +94,8 @@ from core.agent_manager import AgentManager
 from core.tool_runner import ToolRunner
 from core.resource_monitor import start_resource_monitor
 from core.session_preprocessor import SessionPreprocessor
+from core.privilege_mapping import format_privileges_for_prompt
+from core.constants import PRIVILEGE_PROMPT_SECTION
 
 # Import from managers module (refactored)
 from managers.sleep_manager import SleepManager
@@ -1120,7 +1122,8 @@ class CollaborativeSession:
         is_supervisor = (alias == "@boss")
         supervisor_note = "\n⚠️ You are the SUPERVISOR (@boss). You coordinate and oversee the team." if is_supervisor else ""
         
-        return f"""You are {alias} (real name: {agent_name}), participating in a COLLABORATIVE CODING SESSION.{level_info}{model_info}{supervisor_note}
+        # Build base prompt
+        base_prompt = f"""You are {alias} (real name: {agent_name}), participating in a COLLABORATIVE CODING SESSION.{level_info}{model_info}{supervisor_note}
 
 Other agents in this session: {', '.join(other_info_list)}
 
@@ -1143,7 +1146,14 @@ SPECIAL COMMANDS (use these exact tokens):
 - Request break: {AGENT_TOKEN_BREAK_REQUEST} coffee, need rest ]]
 - Emergency: {AGENT_TOKEN_EMERGENCY} urgent message ]]
 - Check status: {AGENT_TOKEN_STATUS}
+"""
 
+        # Add privilege section if enabled
+        privilege_section = ""
+        if PRIVILEGE_PROMPT_SECTION and state:
+            privilege_section = "\n\n" + format_privileges_for_prompt(level, alias) + "\n"
+        
+        return base_prompt + privilege_section + """
 FILE AND COMMAND OPERATIONS (CRITICAL - READ CAREFULLY):
 To actually create/modify files or run commands, you MUST use these exact code block syntaxes.
 Simply DESCRIBING what you did ("I created file.txt") does NOTHING - you must use the blocks below:
