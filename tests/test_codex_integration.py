@@ -11,7 +11,7 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from models.metadata import get_model_info, uses_responses_api
+from models.metadata import uses_responses_api
 from core.agent_manager import AgentManager
 from core.config import Config
 
