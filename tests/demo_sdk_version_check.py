@@ -127,7 +127,7 @@ if __name__ == '__main__':
     print()
     success = demo_sdk_version_error()
     print()
-    success = demo_sdk_version_success() and success
+    success &= demo_sdk_version_success()
     
     if success:
         print()

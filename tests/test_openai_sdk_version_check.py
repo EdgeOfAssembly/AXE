@@ -29,7 +29,7 @@ def test_responses_api_sdk_version_check():
     
     # Try to make a call - should return error message
     result = manager.call_agent(
-        agent_name='gpt_codex',  # Use the actual codex agent from config
+        agent_name='gpt_codex',
         prompt='Test prompt',
         context='',
         token_callback=None
@@ -69,7 +69,7 @@ def test_responses_api_with_valid_sdk():
     
     # Try to make a call - should work without errors
     result = manager.call_agent(
-        agent_name='gpt_codex',  # Use the actual codex agent from config
+        agent_name='gpt_codex',
         prompt='Test prompt',
         context='',
         token_callback=None
@@ -119,7 +119,7 @@ def test_regular_chat_completion_unaffected():
     
     # Try to make a call with a regular GPT agent - should work fine
     result = manager.call_agent(
-        agent_name='gpt',  # Use the actual gpt agent from config
+        agent_name='gpt',
         prompt='Test prompt',
         context='',
         token_callback=None
