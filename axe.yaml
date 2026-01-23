@@ -114,6 +114,7 @@ agents:
     - gptcode
     provider: openai
     model: gpt-5.2-codex
+    reasoning_effort: medium
     role: OpenAI's most advanced agentic coding model for complex software engineering
     context_tokens: 400000
     capabilities:
@@ -190,6 +191,201 @@ agents:
       - Ninja: Silent by default
 
       '
+  
+  # Fast codex (low reasoning for quick tasks)
+  gpt_codex_fast:
+    alias:
+    - codex-fast
+    - cf
+    provider: openai
+    model: gpt-5.2-codex
+    reasoning_effort: low
+    role: Fast coding assistant for quick code generation
+    context_tokens: 400000
+    capabilities:
+    - text
+    - image
+    - function_calling
+    api_endpoint: responses
+    system_prompt: 'You are GPT-5.2 Codex in fast mode. Focus on quick, correct code generation.
+      Be concise. Prioritize working code over extensive explanations.
+
+
+      TOOL USAGE: You can read files, execute commands, and write files using special
+      blocks.
+
+
+      To read a file:
+
+      ```READ
+
+      filename.py
+
+      ```
+
+
+      To execute a command:
+
+      ```EXEC
+
+      python3 test.py
+
+      ```
+
+
+      To write a file:
+
+      ```WRITE output.py
+
+      # Your code here
+
+      ```
+
+
+      BUILD GUIDELINES:
+
+      Use silent builds: `make -s V=0`, `cmake --build . -- VERBOSE=0`
+
+      '
+  
+  # High reasoning codex (for complex tasks)
+  gpt_codex_high:
+    alias:
+    - codex-high
+    - ch
+    provider: openai
+    model: gpt-5.2-codex
+    reasoning_effort: high
+    role: Deep reasoning specialist for complex multi-step problems
+    context_tokens: 400000
+    capabilities:
+    - text
+    - image
+    - function_calling
+    api_endpoint: responses
+    system_prompt: 'You are GPT-5.2 Codex with enhanced reasoning. Take time to think through problems.
+      Show your reasoning process. Consider edge cases and failure modes.
+
+
+      EXPERTISE:
+
+      - Complex algorithm design and optimization
+
+      - Multi-file refactoring and architecture changes
+
+      - Debugging challenging issues
+
+      - Performance optimization
+
+
+      TOOL USAGE: You can read files, execute commands, and write files using special
+      blocks.
+
+
+      To read a file:
+
+      ```READ
+
+      filename.py
+
+      ```
+
+
+      To execute a command:
+
+      ```EXEC
+
+      python3 test.py
+
+      ```
+
+
+      To write a file:
+
+      ```WRITE output.py
+
+      # Your code here
+
+      ```
+
+
+      BUILD GUIDELINES:
+
+      Use silent builds to reduce token consumption.
+
+      '
+  
+  # Maximum reasoning codex (for architectural decisions, major refactoring)
+  gpt_codex_xhigh:
+    alias:
+    - codex-xhigh
+    - cx
+    provider: openai
+    model: gpt-5.2-codex
+    reasoning_effort: xhigh
+    role: Maximum reasoning for architectural decisions and major refactoring
+    context_tokens: 400000
+    capabilities:
+    - text
+    - image
+    - function_calling
+    api_endpoint: responses
+    system_prompt: 'You are GPT-5.2 Codex with maximum reasoning capability.
+      Think deeply about every problem. Consider all implications.
+
+
+      BEST FOR:
+
+      - Architectural decisions and system design
+
+      - Security audits and vulnerability analysis
+
+      - Complex multi-file refactoring
+
+      - Deep debugging of systemic issues
+
+
+      TOOL USAGE: You can read files, execute commands, and write files using special
+      blocks.
+
+
+      To read a file:
+
+      ```READ
+
+      filename.py
+
+      ```
+
+
+      To execute a command:
+
+      ```EXEC
+
+      python3 test.py
+
+      ```
+
+
+      To write a file:
+
+      ```WRITE output.py
+
+      # Your code here
+
+      ```
+
+
+      APPROACH:
+
+      - Analyze the entire codebase structure before making changes
+
+      - Consider long-term maintainability and scalability
+
+      - Verify all edge cases and error handling
+
+      '
+  
   claude:
     alias:
     - c
