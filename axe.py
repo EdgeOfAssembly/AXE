@@ -1441,7 +1441,6 @@ It's YOUR TURN. What would you like to contribute? Remember:
                         
                         if uses_responses:
                             # Use Responses API for Codex models
-                            print(c(f"Using Responses API for {model}", Colors.CYAN))
                             api_params = {
                                 'model': model,
                                 'input': prompt,
@@ -1451,7 +1450,11 @@ It's YOUR TURN. What would you like to contribute? Remember:
                             api_params['max_output_tokens'] = max_output
                             
                             resp = client.responses.create(**api_params)
-                            response = resp.output_text
+                            # Check for None or empty output_text
+                            if getattr(resp, "output_text", None):
+                                response = resp.output_text
+                            else:
+                                response = "[No response from model]"
                         else:
                             # Standard Chat Completions API
                             # Use max_completion_tokens for GPT-5 and newer models
