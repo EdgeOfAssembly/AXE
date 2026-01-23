@@ -173,6 +173,8 @@ models:
     input_modes: [text, image]
     output_modes: [text, function_calling]
     api_type: responses  # Flag to indicate this model uses Responses API
+    supports_reasoning_effort: true  # Flag indicating reasoning effort is supported
+    default_reasoning_effort: medium  # Default level if not overridden
   
   gpt-4.1:  # Strong non-reasoning model, huge context for docs/code
     context_tokens: 1000000

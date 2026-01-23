@@ -7,7 +7,7 @@ This module loads model metadata from models.yaml at the project root.
 
 import os
 import yaml
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 # Load model metadata from models.yaml
 _models_yaml_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'models.yaml')
@@ -186,3 +186,47 @@ def uses_responses_api(model: str) -> bool:
     """
     model_info = get_model_info(model)
     return model_info.get('api_type') == 'responses'
+
+
+def supports_reasoning_effort(model: str) -> bool:
+    """
+    Check if a model supports reasoning effort parameter.
+    
+    Args:
+        model: Name of the model to check
+    
+    Returns:
+        True if model supports reasoning effort, False otherwise
+    """
+    model_info = get_model_info(model)
+    return model_info.get('supports_reasoning_effort', False)
+
+
+def get_default_reasoning_effort(model: str) -> Optional[str]:
+    """
+    Get the default reasoning effort level for a model.
+    
+    Args:
+        model: Name of the model
+    
+    Returns:
+        Default reasoning effort level, or None if not specified
+    """
+    model_info = get_model_info(model)
+    return model_info.get('default_reasoning_effort', None)
+
+
+VALID_REASONING_EFFORTS = {'none', 'low', 'medium', 'high', 'xhigh'}
+
+
+def validate_reasoning_effort(effort: str) -> bool:
+    """
+    Validate that reasoning effort is a valid value.
+    
+    Args:
+        effort: Reasoning effort level to validate
+    
+    Returns:
+        True if effort is valid, False otherwise
+    """
+    return effort in VALID_REASONING_EFFORTS

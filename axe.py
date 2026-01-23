@@ -68,7 +68,8 @@ from safety.rules import SESSION_RULES
 from progression.xp_system import calculate_xp_for_level
 from progression.levels import get_title_for_level, LEVEL_SUPERVISOR_ELIGIBLE
 from database.agent_db import AgentDatabase, get_database_path
-from models.metadata import format_token_count, get_max_output_tokens, uses_responses_api
+from models.metadata import (format_token_count, get_max_output_tokens, uses_responses_api, 
+                             supports_reasoning_effort, get_default_reasoning_effort, validate_reasoning_effort)
 
 # Import from core module (refactored)
 from core.constants import (
@@ -1448,6 +1449,15 @@ It's YOUR TURN. What would you like to contribute? Remember:
                             if system_prompt:
                                 api_params['instructions'] = system_prompt
                             api_params['max_output_tokens'] = max_output
+                            
+                            # Add reasoning effort if supported
+                            if supports_reasoning_effort(model):
+                                reasoning_effort = agent_config.get('reasoning_effort') or get_default_reasoning_effort(model)
+                                if reasoning_effort:
+                                    if validate_reasoning_effort(reasoning_effort):
+                                        api_params['reasoning'] = {'effort': reasoning_effort}
+                                    else:
+                                        print(c(f"Warning: Invalid reasoning effort '{reasoning_effort}', ignoring", Colors.YELLOW))
                             
                             resp = client.responses.create(**api_params)
                             # Check for None or empty output_text

@@ -11,7 +11,8 @@ from .config import Config
 from models.metadata import (
     get_model_info, uses_max_completion_tokens, get_max_output_tokens,
     supports_extended_thinking, get_extended_thinking_budget, 
-    is_anthropic_model, get_anthropic_config, uses_responses_api
+    is_anthropic_model, get_anthropic_config, uses_responses_api,
+    supports_reasoning_effort, get_default_reasoning_effort, validate_reasoning_effort
 )
 from utils.formatting import Colors, c
 
@@ -344,6 +345,17 @@ class AgentManager:
                     
                     # Add max_output_tokens parameter
                     api_params['max_output_tokens'] = max_output
+                    
+                    # Add reasoning effort if supported
+                    if supports_reasoning_effort(model):
+                        # Priority: agent config > model default > None (omit parameter)
+                        reasoning_effort = agent.get('reasoning_effort') or get_default_reasoning_effort(model)
+                        if reasoning_effort:
+                            if validate_reasoning_effort(reasoning_effort):
+                                api_params['reasoning'] = {'effort': reasoning_effort}
+                                print(c(f"Reasoning effort: {reasoning_effort}", Colors.CYAN))
+                            else:
+                                print(c(f"Warning: Invalid reasoning effort '{reasoning_effort}', ignoring", Colors.YELLOW))
                     
                     resp = client.responses.create(**api_params)
                     
