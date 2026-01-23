@@ -172,3 +172,17 @@ def get_anthropic_config() -> Dict:
         Dictionary with Anthropic configuration
     """
     return _config.get('anthropic', {})
+
+
+def uses_responses_api(model: str) -> bool:
+    """
+    Check if a model requires the Responses API instead of Chat Completions.
+    
+    Args:
+        model: Name of the model to check
+    
+    Returns:
+        True if model uses Responses API, False otherwise
+    """
+    model_info = get_model_info(model)
+    return model_info.get('api_type') == 'responses'

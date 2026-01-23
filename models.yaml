@@ -49,6 +49,7 @@ use_max_completion_tokens:
   - gpt-5-0806
   - gpt-5.2-2025-12-11
   - gpt-5.2
+  - gpt-5.2-codex
   - gpt-5-chat
   - gpt-5-mini
   - gpt-5-nano
@@ -165,6 +166,13 @@ models:
     max_output_tokens: 128000
     input_modes: [text, image, audio]
     output_modes: [text, function_calling]
+  
+  gpt-5.2-codex:  # Specialized coding model - uses Responses API, not chat completions
+    context_tokens: 192000
+    max_output_tokens: 16000
+    input_modes: [text]
+    output_modes: [text, function_calling]
+    api_type: responses  # Flag to indicate this model uses Responses API
   
   gpt-4.1:  # Strong non-reasoning model, huge context for docs/code
     context_tokens: 1000000
