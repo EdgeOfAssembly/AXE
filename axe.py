@@ -1230,6 +1230,9 @@ Follow the session rules to keep work productive and enjoyable for all agents.""
             capabilities = agent_config.get('capabilities', ['text']) if agent_config else ['text']
             cap_str = '/'.join(capabilities[:2]) if len(capabilities) > 2 else '/'.join(capabilities)
             
+            # Get context tokens from agent config (default to 0 for numeric formatting)
+            context_tokens = agent_config.get('context_tokens', 0) if agent_config else 0
+            
             if state:
                 level = state['level']
                 xp = state['xp']
@@ -1237,7 +1240,7 @@ Follow the session rules to keep work productive and enjoyable for all agents.""
                 role_indicator = " [SUPERVISOR]" if alias == "@boss" else ""
                 
                 print(c(f"  {alias:20} Level {level:2} ({xp:6} XP)  {title}{role_indicator}", Colors.GREEN))
-                print(c(f"                       Context: {ctx_window:,} tokens | Capabilities: {cap_str}", Colors.DIM))
+                print(c(f"                       Context: {context_tokens:,} tokens | Capabilities: {cap_str}", Colors.DIM))
             else:
                 print(c(f"  {alias:20} [New Agent]", Colors.GREEN))
         
