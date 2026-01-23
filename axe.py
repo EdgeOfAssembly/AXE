@@ -68,7 +68,7 @@ from safety.rules import SESSION_RULES
 from progression.xp_system import calculate_xp_for_level
 from progression.levels import get_title_for_level, LEVEL_SUPERVISOR_ELIGIBLE
 from database.agent_db import AgentDatabase, get_database_path
-from models.metadata import format_token_count, get_max_output_tokens
+from models.metadata import format_token_count, get_max_output_tokens, uses_responses_api
 
 # Import from core module (refactored)
 from core.constants import (
@@ -1436,25 +1436,46 @@ It's YOUR TURN. What would you like to contribute? Remember:
                         if not response:
                             response = "[No response from model]"
                     elif provider in ['openai', 'xai', 'github']:
-                        # Use max_completion_tokens for GPT-5 and newer models
-                        api_params = {
-                            'model': model,
-                            'messages': [
-                                {'role': 'system', 'content': system_prompt},
-                                {'role': 'user', 'content': prompt}
-                            ]
-                        }
-                        if self.agent_mgr._uses_max_completion_tokens(model):
-                            api_params['max_completion_tokens'] = max_output
-                        else:
-                            api_params['max_tokens'] = max_output
+                        # Check if this model uses Responses API instead of Chat Completions
+                        uses_responses = uses_responses_api(model) or agent_config.get('api_endpoint') == 'responses'
                         
-                        resp = client.chat.completions.create(**api_params)
-                        # Check for None content
-                        if resp.choices and len(resp.choices) > 0 and resp.choices[0].message.content:
-                            response = resp.choices[0].message.content
+                        if uses_responses:
+                            # Use Responses API for Codex models
+                            api_params = {
+                                'model': model,
+                                'input': prompt,
+                            }
+                            if system_prompt:
+                                api_params['instructions'] = system_prompt
+                            api_params['max_output_tokens'] = max_output
+                            
+                            resp = client.responses.create(**api_params)
+                            # Check for None or empty output_text
+                            if getattr(resp, "output_text", None):
+                                response = resp.output_text
+                            else:
+                                response = "[No response from model]"
                         else:
-                            response = "[No response from model]"
+                            # Standard Chat Completions API
+                            # Use max_completion_tokens for GPT-5 and newer models
+                            api_params = {
+                                'model': model,
+                                'messages': [
+                                    {'role': 'system', 'content': system_prompt},
+                                    {'role': 'user', 'content': prompt}
+                                ]
+                            }
+                            if self.agent_mgr._uses_max_completion_tokens(model):
+                                api_params['max_completion_tokens'] = max_output
+                            else:
+                                api_params['max_tokens'] = max_output
+                            
+                            resp = client.chat.completions.create(**api_params)
+                            # Check for None content
+                            if resp.choices and len(resp.choices) > 0 and resp.choices[0].message.content:
+                                response = resp.choices[0].message.content
+                            else:
+                                response = "[No response from model]"
                     elif provider == 'huggingface':
                         resp = client.chat_completion(
                             model=model,
