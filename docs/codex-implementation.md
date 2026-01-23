@@ -25,9 +25,9 @@ Added model with special `api_type` flag:
 
 ```yaml
 gpt-5.2-codex:
-  context_tokens: 192000
-  max_output_tokens: 16000
-  input_modes: [text]
+  context_tokens: 400000
+  max_output_tokens: 128000
+  input_modes: [text, image]
   output_modes: [text, function_calling]
   api_type: responses  # Flag indicating Responses API
 ```
@@ -56,8 +56,8 @@ gpt_codex:
     - gptcode
   provider: openai
   model: gpt-5.2-codex
-  role: Specialized coding model for agentic tasks
-  context_tokens: 192000
+  role: OpenAI's most advanced agentic coding model
+  context_tokens: 400000
   api_endpoint: responses  # Override to use Responses API
   system_prompt: |
     You are GPT-5.2 Codex...

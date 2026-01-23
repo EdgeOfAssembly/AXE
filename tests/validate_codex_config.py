@@ -23,10 +23,11 @@ def validate_codex_configuration():
     model_info = get_model_info('gpt-5.2-codex')
     
     checks = [
-        (model_info['context_tokens'] == 192000, "Context tokens: 192,000"),
-        (model_info['max_output_tokens'] == 16000, "Max output tokens: 16,000"),
+        (model_info['context_tokens'] == 400000, "Context tokens: 400,000"),
+        (model_info['max_output_tokens'] == 128000, "Max output tokens: 128,000"),
         (model_info.get('api_type') == 'responses', "API type: responses"),
         ('text' in model_info['input_modes'], "Input mode: text"),
+        ('image' in model_info['input_modes'], "Input mode: image"),
         ('function_calling' in model_info['output_modes'], "Output mode: function_calling"),
         (uses_responses_api('gpt-5.2-codex'), "Uses Responses API: True"),
         (uses_max_completion_tokens('gpt-5.2-codex'), "Uses max_completion_tokens: True"),
@@ -62,7 +63,7 @@ def validate_codex_configuration():
         ('codex' in codex_agent.get('alias', []), "Alias includes: codex"),
         ('gptcode' in codex_agent.get('alias', []), "Alias includes: gptcode"),
         (codex_agent.get('api_endpoint') == 'responses', "API endpoint: responses"),
-        (codex_agent['context_tokens'] == 192000, "Context tokens: 192,000"),
+        (codex_agent['context_tokens'] == 400000, "Context tokens: 400,000"),
     ]
     
     all_passed = True

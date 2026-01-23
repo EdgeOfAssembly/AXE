@@ -72,8 +72,10 @@ def test_known_models():
     
     # Test GPT-5.2 Codex model
     codex_info = get_model_info('gpt-5.2-codex')
-    assert codex_info['context_tokens'] == 192000, "Codex should have 192k context"
+    assert codex_info['context_tokens'] == 400000, "Codex should have 400k context"
+    assert codex_info['max_output_tokens'] == 128000, "Codex should have 128k output"
     assert codex_info.get('api_type') == 'responses', "Codex should use responses API"
+    assert 'image' in codex_info['input_modes'], "Codex should support image input"
     print("  ✓ gpt-5.2-codex metadata correct")
     
     print()

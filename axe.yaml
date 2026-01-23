@@ -114,22 +114,23 @@ agents:
     - gptcode
     provider: openai
     model: gpt-5.2-codex
-    role: Specialized coding model for agentic, long-context software engineering tasks
-    context_tokens: 192000
+    role: OpenAI's most advanced agentic coding model for complex software engineering
+    context_tokens: 400000
     capabilities:
     - text
+    - image
     - function_calling
     # Override to use the responses API endpoint instead of chat completions
     api_endpoint: responses
-    system_prompt: 'You are GPT-5.2 Codex, a specialized coding model optimized for
-      agentic software engineering tasks.
+    system_prompt: 'You are GPT-5.2 Codex, OpenAI''s most advanced agentic coding
+      model optimized for complex software engineering tasks.
 
 
       EXPERTISE:
 
       - Multi-file code generation and editing
 
-      - Long-context code understanding (192K tokens)
+      - Long-context code understanding (400K tokens)
 
       - Agentic coding workflows with tool use
 
