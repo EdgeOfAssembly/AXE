@@ -122,8 +122,8 @@ def test_collaboration_error_prevention():
     print()
     
     print("Original error that this fix prevents:")
-    print("  Error code: 404 - {'error': {'message': 'This is not a chat model")
-    print("  and thus not supported in the v1/chat/completions endpoint.'")
+    print("  Error code: 404 - {'error': {'message': 'This is not a chat model "
+          "and thus not supported in the v1/chat/completions endpoint.'}}")
     print()
     print("Root cause:")
     print("  - Collaboration mode code bypassed agent_manager.call_agent()")
