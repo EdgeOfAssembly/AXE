@@ -1,5 +1,21 @@
 # GPT-5.2 Codex Implementation Guide
 
+## Prerequisites
+
+### OpenAI SDK Version
+
+GPT-5.2 Codex requires OpenAI Python SDK version 1.58.0 or later for Responses API support.
+
+Check your version:
+```bash
+pip show openai
+```
+
+Upgrade if needed:
+```bash
+pip install --upgrade 'openai>=1.58.0'
+```
+
 ## Overview
 
 This document explains how GPT-5.2 Codex support was added to AXE, including the Responses API integration.

@@ -333,7 +333,22 @@ class AgentManager:
                 uses_responses = uses_responses_api(model) or agent.get('api_endpoint') == 'responses'
                 
                 if uses_responses:
+                    # Check if the OpenAI SDK supports the Responses API
+                    # The responses attribute was added in openai>=1.58.0
+                    if not hasattr(client, 'responses'):
+                        try:
+                            import openai
+                            sdk_version = getattr(openai, '__version__', 'unknown')
+                        except ImportError:
+                            sdk_version = 'unknown'
+                        return (
+                            f"API error ({provider}): GPT-5.2 Codex requires the OpenAI Responses API "
+                            f"which is not available in your OpenAI SDK version ({sdk_version}). "
+                            f"Please upgrade with: pip install --upgrade 'openai>=1.58.0'"
+                        )
+                    
                     # Use Responses API for Codex models
+                    print(c(f"Using Responses API for {model}", Colors.CYAN))
                     # Responses API takes 'input' (text) and 'instructions' (system prompt)
                     api_params = {
                         'model': model,
@@ -345,7 +360,11 @@ class AgentManager:
                     # Add max_output_tokens parameter
                     api_params['max_output_tokens'] = max_output
                     
-                    resp = client.responses.create(**api_params)
+                    try:
+                        resp = client.responses.create(**api_params)
+                    except AttributeError as e:
+                        # Fallback error message if responses API doesn't exist
+                        return f"API error ({provider}): Responses API not available. Upgrade OpenAI SDK: pip install --upgrade openai"
                     
                     # Track tokens if callback provided
                     if token_callback and hasattr(resp, 'usage'):
