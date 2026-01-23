@@ -11,7 +11,7 @@ from .config import Config
 from models.metadata import (
     get_model_info, uses_max_completion_tokens, get_max_output_tokens,
     supports_extended_thinking, get_extended_thinking_budget, 
-    is_anthropic_model, get_anthropic_config
+    is_anthropic_model, get_anthropic_config, uses_responses_api
 )
 from utils.formatting import Colors, c
 
@@ -326,28 +326,59 @@ class AgentManager:
                 return response
 
             elif provider in ['openai', 'xai', 'github', 'ollama']:
-                # Use max_completion_tokens for GPT-5 and newer models
-                api_params = {
-                    'model': model,
-                    'messages': [
-                        {'role': 'system', 'content': system_prompt},
-                        {'role': 'user', 'content': full_prompt}
-                    ]
-                }
-                if self._uses_max_completion_tokens(model):
-                    api_params['max_completion_tokens'] = max_output
+                # Check if this model uses Responses API instead of Chat Completions
+                # This can be determined by either:
+                # 1. api_type field in model metadata (models.yaml)
+                # 2. api_endpoint field in agent config (axe.yaml)
+                uses_responses = uses_responses_api(model) or agent.get('api_endpoint') == 'responses'
+                
+                if uses_responses:
+                    # Use Responses API for Codex models
+                    # Responses API takes 'input' (text) and 'instructions' (system prompt)
+                    api_params = {
+                        'model': model,
+                        'input': full_prompt,
+                    }
+                    if system_prompt:
+                        api_params['instructions'] = system_prompt
+                    
+                    # Add max_output_tokens parameter
+                    api_params['max_output_tokens'] = max_output
+                    
+                    resp = client.responses.create(**api_params)
+                    
+                    # Track tokens if callback provided
+                    if token_callback and hasattr(resp, 'usage'):
+                        input_tokens = getattr(resp.usage, 'input_tokens', 0)
+                        output_tokens = getattr(resp.usage, 'output_tokens', 0)
+                        token_callback(agent_name, model, input_tokens, output_tokens)
+                    
+                    # Return the output text from responses API
+                    return resp.output_text
                 else:
-                    api_params['max_tokens'] = max_output
+                    # Standard Chat Completions API
+                    # Use max_completion_tokens for GPT-5 and newer models
+                    api_params = {
+                        'model': model,
+                        'messages': [
+                            {'role': 'system', 'content': system_prompt},
+                            {'role': 'user', 'content': full_prompt}
+                        ]
+                    }
+                    if self._uses_max_completion_tokens(model):
+                        api_params['max_completion_tokens'] = max_output
+                    else:
+                        api_params['max_tokens'] = max_output
 
-                resp = client.chat.completions.create(**api_params)
+                    resp = client.chat.completions.create(**api_params)
 
-                # Track tokens if callback provided
-                if token_callback and hasattr(resp, 'usage'):
-                    input_tokens = getattr(resp.usage, 'prompt_tokens', 0)
-                    output_tokens = getattr(resp.usage, 'completion_tokens', 0)
-                    token_callback(agent_name, model, input_tokens, output_tokens)
+                    # Track tokens if callback provided
+                    if token_callback and hasattr(resp, 'usage'):
+                        input_tokens = getattr(resp.usage, 'prompt_tokens', 0)
+                        output_tokens = getattr(resp.usage, 'completion_tokens', 0)
+                        token_callback(agent_name, model, input_tokens, output_tokens)
 
-                return resp.choices[0].message.content
+                    return resp.choices[0].message.content
 
             elif provider == 'huggingface':
                 resp = client.chat_completion(

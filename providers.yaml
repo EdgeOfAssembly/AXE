@@ -31,6 +31,7 @@ providers:
       - gpt-5.2-2025-12-11
       - gpt-5.2
       - gpt-5.2-pro
+      - gpt-5.2-codex
       - gpt-4.1
       - gpt-4.1-mini
       - gpt-4o

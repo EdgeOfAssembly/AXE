@@ -14,6 +14,7 @@ from models.metadata import (
     USE_MAX_COMPLETION_TOKENS,
     get_model_info, 
     uses_max_completion_tokens,
+    uses_responses_api,
     format_token_count,
     format_input_modes,
     format_output_modes
@@ -69,6 +70,14 @@ def test_known_models():
     assert grok_info['context_tokens'] == 2000000, "Grok 4.1 should have 2M context"
     print("  ✓ grok-4-1-fast-reasoning metadata correct")
     
+    # Test GPT-5.2 Codex model
+    codex_info = get_model_info('gpt-5.2-codex')
+    assert codex_info['context_tokens'] == 400000, "Codex should have 400k context"
+    assert codex_info['max_output_tokens'] == 128000, "Codex should have 128k output"
+    assert codex_info.get('api_type') == 'responses', "Codex should use responses API"
+    assert 'image' in codex_info['input_modes'], "Codex should support image input"
+    print("  ✓ gpt-5.2-codex metadata correct")
+    
     print()
 
 
@@ -91,6 +100,7 @@ def test_uses_max_completion_tokens():
     # Models that should use max_completion_tokens
     assert uses_max_completion_tokens('gpt-5'), "gpt-5 should use max_completion_tokens"
     assert uses_max_completion_tokens('gpt-5.2'), "gpt-5.2 should use max_completion_tokens"
+    assert uses_max_completion_tokens('gpt-5.2-codex'), "gpt-5.2-codex should use max_completion_tokens"
     assert uses_max_completion_tokens('o1'), "o1 should use max_completion_tokens"
     assert uses_max_completion_tokens('o3-mini'), "o3-mini should use max_completion_tokens"
     assert uses_max_completion_tokens('openai/gpt-5'), "openai/gpt-5 should use max_completion_tokens"
@@ -103,6 +113,12 @@ def test_uses_max_completion_tokens():
     assert not uses_max_completion_tokens('claude-opus-4-5-20251101'), "Claude should NOT use max_completion_tokens"
     assert not uses_max_completion_tokens('grok-4-1-fast-reasoning'), "Grok should NOT use max_completion_tokens"
     print("  ✓ Models NOT requiring max_completion_tokens correctly identified")
+    
+    # Test uses_responses_api function
+    assert uses_responses_api('gpt-5.2-codex') == True, "gpt-5.2-codex should use responses API"
+    assert uses_responses_api('gpt-5.2') == False, "gpt-5.2 should NOT use responses API"
+    assert uses_responses_api('claude-opus-4-5-20251101') == False, "Claude should NOT use responses API"
+    print("  ✓ uses_responses_api correctly identified")
     print()
 
 
