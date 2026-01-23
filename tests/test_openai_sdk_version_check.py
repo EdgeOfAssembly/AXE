@@ -8,9 +8,16 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from unittest.mock import Mock, MagicMock
+from unittest.mock import MagicMock, PropertyMock
 from core.agent_manager import AgentManager
 from core.config import Config
+
+
+def create_mock_client_without_responses():
+    """Helper to create a mock OpenAI client without responses API."""
+    mock_client = MagicMock(spec_set=['chat'])  # Only has 'chat', not 'responses'
+    mock_client.chat = MagicMock()
+    return mock_client
 
 
 def test_responses_api_sdk_version_check():
@@ -21,16 +28,7 @@ def test_responses_api_sdk_version_check():
     manager = AgentManager(config)
     
     # Create a mock OpenAI client without 'responses' attribute
-    # Use spec to control what attributes exist
-    mock_client = MagicMock()
-    # Delete responses if it exists
-    try:
-        del mock_client.responses
-    except AttributeError:
-        pass
-    
-    # Make hasattr return False for 'responses'
-    type(mock_client).responses = property(lambda self: (_ for _ in ()).throw(AttributeError))
+    mock_client = create_mock_client_without_responses()
     
     # Replace the actual client with our mock
     manager.clients['openai'] = mock_client
@@ -107,16 +105,7 @@ def test_regular_chat_completion_unaffected():
     manager = AgentManager(config)
     
     # Create a mock OpenAI client without 'responses' attribute
-    mock_client = MagicMock()
-    
-    # Delete responses to simulate older SDK
-    try:
-        del mock_client.responses
-    except AttributeError:
-        pass
-    
-    # Make hasattr return False for 'responses'
-    type(mock_client).responses = property(lambda self: (_ for _ in ()).throw(AttributeError))
+    mock_client = create_mock_client_without_responses()
     
     # Set up chat.completions mock
     mock_response = MagicMock()

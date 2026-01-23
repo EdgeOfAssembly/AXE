@@ -360,11 +360,7 @@ class AgentManager:
                     # Add max_output_tokens parameter
                     api_params['max_output_tokens'] = max_output
                     
-                    try:
-                        resp = client.responses.create(**api_params)
-                    except AttributeError as e:
-                        # Fallback error message if responses API doesn't exist
-                        return f"API error ({provider}): Responses API not available. Upgrade OpenAI SDK: pip install --upgrade openai"
+                    resp = client.responses.create(**api_params)
                     
                     # Track tokens if callback provided
                     if token_callback and hasattr(resp, 'usage'):

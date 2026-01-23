@@ -12,6 +12,13 @@ from core.agent_manager import AgentManager
 from core.config import Config
 
 
+def create_mock_client_without_responses():
+    """Helper to create a mock OpenAI client without responses API."""
+    mock_client = MagicMock(spec_set=['chat'])  # Only has 'chat', not 'responses'
+    mock_client.chat = MagicMock()
+    return mock_client
+
+
 def demo_sdk_version_error():
     """Demonstrate the error message when SDK is too old."""
     print("=" * 70)
@@ -29,12 +36,7 @@ def demo_sdk_version_error():
     manager = AgentManager(config)
     
     # Simulate old SDK without responses API
-    mock_client = MagicMock()
-    try:
-        del mock_client.responses
-    except AttributeError:
-        pass
-    type(mock_client).responses = property(lambda self: (_ for _ in ()).throw(AttributeError))
+    mock_client = create_mock_client_without_responses()
     
     manager.clients['openai'] = mock_client
     
