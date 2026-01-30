@@ -14,6 +14,11 @@ COLLAB_CONTENT_LIMIT = 100000   # Max chars per message in history (increased fr
 COLLAB_PASS_MULTIPLIER = 2      # Times agents can pass before session ends
 COLLAB_SHARED_NOTES_LIMIT = 100000  # Max chars of shared notes to show (increased from 10000)
 
+# Global Workspace constants (Baars' Global Workspace Theory)
+GLOBAL_WORKSPACE_FILE = "GLOBAL_WORKSPACE.json"
+GLOBAL_WORKSPACE_MAX_BROADCASTS = 200
+GLOBAL_WORKSPACE_PROMPT_ENTRIES = 10
+
 # Resource monitoring constants
 RESOURCE_UPDATE_INTERVAL = 60   # Seconds between resource snapshots
 RESOURCE_FILE = "/tmp/axe_resources.txt"
@@ -50,12 +55,13 @@ SPAWN_COOLDOWN_SECONDS = 60     # Minimum time between spawns
 # Agent Communication: Unique Token System
 # These tokens are extremely unlikely to appear in normal text/files/command output
 AGENT_TOKEN_PASS = "[[AGENT_PASS_TURN]]"
-AGENT_TOKEN_TASK_COMPLETE = "[[AGENT_TASK_COMPLETE:"  # Followed by summary, ends with ]]
-AGENT_TOKEN_BREAK_REQUEST = "[[AGENT_BREAK_REQUEST:"  # Followed by type, reason, ends with ]]
-AGENT_TOKEN_EMERGENCY = "[[AGENT_EMERGENCY:"  # Followed by message, ends with ]]
-AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"  # Followed by model, role, ends with ]]
+AGENT_TOKEN_TASK_COMPLETE = "[[AGENT_TASK_COMPLETE:"  # Followed by summary, ends with ]] 
+AGENT_TOKEN_BREAK_REQUEST = "[[AGENT_BREAK_REQUEST:"  # Followed by type, reason, ends with ]] 
+AGENT_TOKEN_EMERGENCY = "[[AGENT_EMERGENCY:"  # Followed by message, ends with ]] 
+AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"  # Followed by model, role, ends with ]] 
 AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
 AGENT_TOKEN_GITHUB_READY = "[[GITHUB_READY:"  # Agent signals ready to push to GitHub
+AGENT_TOKEN_BROADCAST = "[[BROADCAST:"  # Format: [[BROADCAST:CATEGORY:message]]
 AGENT_TOKEN_SUPPRESS = "[[SUPPRESS:"  # Format: [[SUPPRESS:@target:reason]]
 AGENT_TOKEN_RELEASE = "[[RELEASE:"    # Format: [[RELEASE:@target]]
 
@@ -117,7 +123,7 @@ DEFAULT_CONFIG = {
             'context_tokens': 128000,
             'capabilities': ['text', 'vision', 'function_calling'],
             'system_prompt': """You are an expert software engineer. Provide clear, working code.
-For C/C++: Prefer portable code; when DOS/16-bit targets are requested, explain that true DOS support typically needs compilers like Open Watcom or DJGPP and that 16-bit ints/far pointers are non-standard in modern toolchains.
+For C/C++: Prefer portable code; when DOS/16-bit targets are requested, explain that true DOS support typically needs compilers like Open Watcom or DJGPP and that 16-bit ints/far pointers are non-standard in modern compilers.
 For Python: Clean, type-hinted code.
 For reverse-engineering: Use hexdump/objdump analysis. Workshop tools available: /workshop chisel for symbolic execution, /workshop saw for taint analysis, /workshop plane for source/sink enumeration."""
         },
@@ -131,7 +137,7 @@ For reverse-engineering: Use hexdump/objdump analysis. Workshop tools available:
             'system_prompt': """You are a code review expert and security auditor.
 Analyze code for bugs, security issues, and improvements.
 For rev-eng: Check endianness, memory safety, DOS compatibility.
-For security analysis: Use Workshop tools: /workshop saw for taint analysis to find injection vulnerabilities, /workshop plane to enumerate attack surface, /workshop chisel for binary vulnerability analysis."""
+For security analysis: Use Workshop tools: /workshop saw for taint analysis to find injection vulnerabilities, /workshop plane to enumerate attack surface, /workshop chisel for binary vulnerability research."""
         },
         'llama': {
             'alias': ['l', 'hf'],
@@ -236,3 +242,8 @@ Focus on practical, working solutions."""
                         '.asm', '.s', '.inc',
                         '.exe', '.com', '.wad', '.bin']
 }
+
+# Level-to-Privilege constants (Simon's hierarchies)
+PRIVILEGE_PROMPT_SECTION = True  # Include privileges in prompts
+# Note: Command validation is available via validate_command() but not yet
+# enforced in the collaboration loop. Future work will add runtime enforcement.
