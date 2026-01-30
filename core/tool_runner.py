@@ -201,17 +201,6 @@ class ToolRunner:
 
         return False
 
-    def _check_forbidden_paths(self, cmd: str) -> Tuple[bool, str]:
-        """Check if command accesses forbidden paths (blacklist)."""
-        forbidden = self.config.get('directories', 'blacklist', default=[])
-
-        for path in forbidden:
-            expanded_path = os.path.expanduser(path)
-            if expanded_path in cmd or path in cmd:
-                return False, f"Command accesses forbidden path: {path}"
-
-        return True, ""
-
     def is_tool_allowed(self, cmd: str) -> Tuple[bool, str]:
         """
         Check if a command (including pipelines) is allowed.
