@@ -2,9 +2,7 @@
 Token usage statistics and cost estimation for AXE.
 Pricing data for different AI model providers.
 """
-
 from typing import Dict, Tuple, Optional
-
 # Pricing per 1M tokens (input, output)
 # Prices as of January 2026
 MODEL_PRICING = {
@@ -14,13 +12,11 @@ MODEL_PRICING = {
     'claude-3-5-sonnet-20241022': (3.00, 15.00), # Claude 3.5 Sonnet
     'claude-3-opus-20240229': (15.00, 75.00),    # Claude 3 Opus
     'claude-3-5-sonnet-20240620': (3.00, 15.00), # Claude 3.5 Sonnet
-    
     # OpenAI models (per 1M tokens)
     'gpt-5.2-2025-12-11': (5.00, 15.00),         # GPT-5.2
     'gpt-4o': (2.50, 10.00),                      # GPT-4o
     'gpt-4-turbo': (10.00, 30.00),                # GPT-4 Turbo
     'gpt-3.5-turbo': (0.50, 1.50),                # GPT-3.5 Turbo
-    
     # xAI Grok models (per 1M tokens)
     # NOTE: These values are estimates based on initial pricing announcements.
     #       Verify against actual xAI pricing at https://x.ai/api before relying
@@ -30,19 +26,15 @@ MODEL_PRICING = {
     'grok-2': (5.00, 10.00),                      # Grok 2
     'grok-2-vision': (5.00, 10.00),               # Grok 2 Vision
     'grok-beta': (5.00, 10.00),                   # Grok Beta
-    
     # HuggingFace models (free inference API)
     'meta-llama/Llama-3.3-70B-Instruct': (0.00, 0.00),
     'meta-llama/Llama-3.1-70B-Instruct': (0.00, 0.00),
     'meta-llama/Llama-3.1-8B-Instruct': (0.00, 0.00),
-    
     # GitHub Copilot models (included with Copilot subscription)
     'openai/gpt-4o': (0.00, 0.00),  # Free with GitHub Copilot
     'openai/gpt-4o-mini': (0.00, 0.00),  # Free with GitHub Copilot
-    
     # DeepSeek models (per 1M tokens)
     'deepseek-ai/DeepSeek-V3.2': (0.27, 1.10),  # Very competitive pricing
-    
     # Qwen/Dashscope models (per 1M tokens)
     # NOTE: These values are placeholder estimates only and are not official Dashscope pricing.
     #       Please verify current pricing against the official Qwen/Dashscope documentation
@@ -52,52 +44,37 @@ MODEL_PRICING = {
     'Qwen/Qwen3-Coder-480B-A35B-Instruct': (2.00, 6.00),
     'Qwen/Qwen3-VL-235B-A22B-Thinking': (2.00, 6.00),
 }
-
 # Default pricing for unknown models (per 1M tokens)
 DEFAULT_PRICING = (5.00, 15.00)
-
-
 def get_model_pricing(model_name: str) -> Tuple[float, float]:
     """
     Get pricing for a model.
-    
     Args:
         model_name: Name of the model
-    
     Returns:
         Tuple of (input_price_per_1m, output_price_per_1m) in USD
     """
     return MODEL_PRICING.get(model_name, DEFAULT_PRICING)
-
-
 def estimate_cost(model_name: str, input_tokens: int, output_tokens: int) -> float:
     """
     Estimate cost for token usage.
-    
     Args:
         model_name: Name of the model
         input_tokens: Number of input tokens
         output_tokens: Number of output tokens
-    
     Returns:
         Estimated cost in USD
     """
     input_price, output_price = get_model_pricing(model_name)
-    
     # Calculate cost (prices are per 1M tokens)
     input_cost = (input_tokens / 1_000_000) * input_price
     output_cost = (output_tokens / 1_000_000) * output_price
-    
     return input_cost + output_cost
-
-
 def format_cost(cost: float) -> str:
     """
     Format cost for display.
-    
     Args:
         cost: Cost in USD
-    
     Returns:
         Formatted string (e.g., "$0.23" or "$2.45")
     """
@@ -107,21 +84,16 @@ def format_cost(cost: float) -> str:
         return f"${cost:.2f}"
     else:
         return f"${cost:.2f}"
-
-
 class TokenStats:
     """Track and calculate token usage statistics."""
-    
     def __init__(self):
         """Initialize token statistics tracker."""
         self.agent_stats = {}  # {agent_name: {'input': N, 'output': N, 'messages': N, 'model': str}}
         self.cache_stats = {}  # {agent_name: {'creation': N, 'read': N, 'hits': N}}
-    
     def add_usage(self, agent_name: str, model: str, input_tokens: int, output_tokens: int,
                   cache_creation_tokens: int = 0, cache_read_tokens: int = 0) -> None:
         """
         Record token usage for an agent.
-        
         Args:
             agent_name: Name of the agent
             model: Model name used
@@ -129,8 +101,7 @@ class TokenStats:
             output_tokens: Number of output tokens
             cache_creation_tokens: Tokens used to create cache (default: 0)
             cache_read_tokens: Tokens read from cache (default: 0)
-            
-        Note: 
+        Note:
             This method is backward compatible. Existing code that calls
             add_usage() with 4 arguments will continue to work. The new
             cache parameters are optional keyword arguments.
@@ -142,12 +113,10 @@ class TokenStats:
                 'messages': 0,
                 'model': model
             }
-        
         self.agent_stats[agent_name]['input'] += input_tokens
         self.agent_stats[agent_name]['output'] += output_tokens
         self.agent_stats[agent_name]['messages'] += 1
         self.agent_stats[agent_name]['model'] = model  # Update to latest model used
-        
         # Track cache statistics
         # Note: 'hits' represents the number of API calls that successfully
         # used cached content (cache_read_tokens > 0), not the total number
@@ -159,20 +128,16 @@ class TokenStats:
                     'read': 0,
                     'hits': 0
                 }
-            
             self.cache_stats[agent_name]['creation'] += cache_creation_tokens
             self.cache_stats[agent_name]['read'] += cache_read_tokens
             # Increment hit counter only if cache was read (not created)
             if cache_read_tokens > 0:
                 self.cache_stats[agent_name]['hits'] += 1
-    
     def get_agent_stats(self, agent_name: str) -> Optional[Dict]:
         """
         Get statistics for a specific agent.
-        
         Args:
             agent_name: Name of the agent
-        
         Returns:
             Dictionary with stats, or None if agent not found
         """
@@ -181,29 +146,24 @@ class TokenStats:
             stats = stats.copy()
             stats['cache'] = self.cache_stats[agent_name]
         return stats
-    
     def get_total_stats(self) -> Dict:
         """
         Get total statistics across all agents.
-        
         Returns:
             Dictionary with total input, output, messages, cost, and cache stats
         """
         total_input = sum(stats['input'] for stats in self.agent_stats.values())
         total_output = sum(stats['output'] for stats in self.agent_stats.values())
         total_messages = sum(stats['messages'] for stats in self.agent_stats.values())
-        
         # Calculate total cost
         total_cost = 0.0
         for agent_name, stats in self.agent_stats.items():
             cost = estimate_cost(stats['model'], stats['input'], stats['output'])
             total_cost += cost
-        
         # Calculate total cache stats
         total_cache_creation = sum(stats['creation'] for stats in self.cache_stats.values())
         total_cache_read = sum(stats['read'] for stats in self.cache_stats.values())
         total_cache_hits = sum(stats['hits'] for stats in self.cache_stats.values())
-        
         result = {
             'input': total_input,
             'output': total_output,
@@ -211,7 +171,6 @@ class TokenStats:
             'messages': total_messages,
             'cost': total_cost
         }
-        
         if total_cache_creation > 0 or total_cache_read > 0:
             result['cache'] = {
                 'creation': total_cache_creation,
@@ -219,13 +178,10 @@ class TokenStats:
                 'hits': total_cache_hits,
                 'hit_rate': total_cache_hits / total_messages if total_messages > 0 else 0.0
             }
-        
         return result
-    
     def get_all_stats(self) -> Dict:
         """
         Get statistics for all agents.
-        
         Returns:
             Dictionary mapping agent_name to stats with cost and cache info
         """
@@ -237,7 +193,6 @@ class TokenStats:
                 'total': stats['input'] + stats['output'],
                 'cost': cost
             }
-            
             # Add cache stats if available
             if agent_name in self.cache_stats:
                 agent_result['cache'] = self.cache_stats[agent_name]
@@ -245,6 +200,5 @@ class TokenStats:
                 agent_result['cache']['hit_rate'] = (
                     cache_stats['hits'] / stats['messages'] if stats['messages'] > 0 else 0.0
                 )
-            
             result[agent_name] = agent_result
         return result

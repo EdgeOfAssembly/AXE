@@ -3,33 +3,26 @@
 Demonstration of Global Workspace usage in AXE collaborative sessions.
 This shows how agents would interact with the global workspace.
 """
-
 import sys
 import os
 import tempfile
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-
 from core.global_workspace import GlobalWorkspace
-
-
 def demo_basic_usage():
     """Demonstrate basic broadcast and acknowledgment workflow."""
     print("=" * 70)
     print("GLOBAL WORKSPACE DEMONSTRATION")
     print("=" * 70)
     print()
-    
     # Create a workspace in a temporary directory
     with tempfile.TemporaryDirectory() as tmpdir:
         workspace = GlobalWorkspace(tmpdir)
         print(f"✓ Workspace initialized in: {tmpdir}")
         print()
-        
         # Scenario: Multi-agent security audit collaboration
         print("SCENARIO: Multi-agent security audit collaboration")
         print("-" * 70)
         print()
-        
         # Agent 1 (GPT) finds a security issue
         print("[@gpt1] Broadcasting security finding...")
         result1 = workspace.broadcast(
@@ -42,7 +35,6 @@ def demo_basic_usage():
         )
         print(f"  → Broadcast ID: {result1['broadcast_id']}")
         print()
-        
         # Agent 2 (Claude) finds a bug
         print("[@claude1] Broadcasting bug discovery...")
         result2 = workspace.broadcast(
@@ -55,7 +47,6 @@ def demo_basic_usage():
         )
         print(f"  → Broadcast ID: {result2['broadcast_id']}")
         print()
-        
         # Agent 3 (Llama) - Team Leader issues a directive
         print("[@llama1] Team Leader broadcasting directive...")
         result3 = workspace.broadcast(
@@ -68,7 +59,6 @@ def demo_basic_usage():
         print(f"  → Broadcast ID: {result3['broadcast_id']}")
         print(f"  → Requires acknowledgment: {result3['entry']['requires_ack']}")
         print()
-        
         # Show workspace summary
         print("WORKSPACE SUMMARY:")
         print("-" * 70)
@@ -77,7 +67,6 @@ def demo_basic_usage():
         print(f"By category: {summary['by_category']}")
         print(f"Pending acknowledgments: {summary['pending_acks']}")
         print()
-        
         # Agent 4 (Grok) joins and checks pending acks
         print("[@grok1] Checking for pending acknowledgments...")
         pending = workspace.get_pending_acks("@grok1")
@@ -85,14 +74,12 @@ def demo_basic_usage():
         for p in pending:
             print(f"     - [{p['category']}] from {p['agent']}: {p['message'][:50]}...")
         print()
-        
         # Format broadcasts for agent prompt
         print("[@grok1] Viewing global workspace (formatted for prompt):")
         print("-" * 70)
         formatted = workspace.format_for_prompt("@grok1", max_entries=5)
         print(formatted)
         print()
-        
         # Grok acknowledges the directive
         print("[@grok1] Acknowledging directive...")
         ack_result = workspace.acknowledge(
@@ -102,7 +89,6 @@ def demo_basic_usage():
         )
         print(f"  → Acknowledgment: {ack_result['success']}")
         print()
-        
         # GPT also acknowledges
         print("[@gpt1] Acknowledging directive...")
         workspace.acknowledge(
@@ -111,7 +97,6 @@ def demo_basic_usage():
             "Copy that. Focusing on parser security."
         )
         print()
-        
         # Show updated workspace
         print("UPDATED WORKSPACE SUMMARY:")
         print("-" * 70)
@@ -119,7 +104,6 @@ def demo_basic_usage():
         print(f"Total broadcasts: {summary['total_broadcasts']}")
         print(f"Pending acknowledgments: {summary['pending_acks']}")
         print()
-        
         # Show recent SECURITY broadcasts
         print("FILTERING: Security broadcasts only")
         print("-" * 70)
@@ -131,7 +115,6 @@ def demo_basic_usage():
             if s.get('tags'):
                 print(f"    Tags: {', '.join(s['tags'])}")
         print()
-        
         # Show directives
         print("FILTERING: Active directives")
         print("-" * 70)
@@ -142,12 +125,9 @@ def demo_basic_usage():
             for ack in d['acks']:
                 print(f"      → {ack['agent']}: {ack.get('comment', 'No comment')}")
         print()
-        
         print("=" * 70)
         print("DEMONSTRATION COMPLETE")
         print("=" * 70)
-
-
 def demo_permission_check():
     """Demonstrate level-gated DIRECTIVE permissions."""
     print()
@@ -155,10 +135,8 @@ def demo_permission_check():
     print("PERMISSION CHECK DEMONSTRATION")
     print("=" * 70)
     print()
-    
     with tempfile.TemporaryDirectory() as tmpdir:
         workspace = GlobalWorkspace(tmpdir)
-        
         print("Attempting DIRECTIVE broadcast with insufficient level...")
         result = workspace.broadcast(
             agent_alias="@junior_agent",
@@ -170,7 +148,6 @@ def demo_permission_check():
         if not result['success']:
             print(f"  → Reason: {result['reason']}")
         print()
-        
         print("Attempting DIRECTIVE broadcast with sufficient level...")
         result = workspace.broadcast(
             agent_alias="@team_leader",
@@ -182,8 +159,6 @@ def demo_permission_check():
         if result['success']:
             print(f"  → Broadcast ID: {result['broadcast_id']}")
         print()
-
-
 if __name__ == '__main__':
     demo_basic_usage()
     demo_permission_check()

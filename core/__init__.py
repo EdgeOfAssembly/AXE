@@ -1,7 +1,6 @@
 """
 Core module for AXE - multiprocessing, configuration, and coordination.
 """
-
 from .multiprocess import AgentWorkerProcess, MultiAgentCoordinator, SharedContext
 from .config import Config
 from .agent_manager import AgentManager
@@ -64,7 +63,6 @@ from .constants import (
     CONTRADICTION_PAIRS,
     READ_BLOCK_PATTERN,
 )
-
 __all__ = [
     # Multiprocessing
     'AgentWorkerProcess',

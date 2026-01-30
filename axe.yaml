@@ -1,7 +1,7 @@
 version: '2.0'
 project_dir: .
 agent_protocol:
-  enabled: false
+  enabled: true
   expand_for_human: true
   custom_abbreviations: {}
 agents:
@@ -1799,7 +1799,7 @@ directories:
   #   - ~/.ssh         # SSH keys
   #   - ~/.gnupg       # GPG keys
 sandbox:
-  enabled: false
+  enabled: true
   runtime: bubblewrap
   workspaces:
   - path: .
@@ -1926,7 +1926,7 @@ rate_limits:
     qwen_vision: 5000
     deepseek: 5000
 token_optimization:
-  enabled: false
+  enabled: true
   mode: minimal
   context_management:
     enabled: true
@@ -1973,7 +1973,7 @@ preprocessing:
     custom_probes: {}
     disabled_probes: []
   minifier:
-    enabled: false
+    enabled: true
     keep_comments: true
     exclude_dirs:
     - tests
@@ -1996,14 +1996,14 @@ preprocessing:
     output_mode: in_place
     output_dir: .minified
   llmprep:
-    enabled: false
+    enabled: true
     output_dir: llm_prep
     depth: 4
     skip_doxygen: false
     skip_pyreverse: false
     skip_ctags: false
 github_integration:
-  enabled: false
+  enabled: true
   require_review: true
   branch_prefix: agent/
   ssh_key_path: null

@@ -1,7 +1,6 @@
 """
 SQLite database schema definitions for AXE agent system.
 """
-
 AGENT_STATE_TABLE = """
 CREATE TABLE IF NOT EXISTS agent_state (
     agent_id TEXT PRIMARY KEY,
@@ -21,13 +20,11 @@ CREATE TABLE IF NOT EXISTS agent_state (
     context_summary TEXT
 )
 """
-
 # Migration statements for updating existing agent_state tables
 AGENT_STATE_MIGRATIONS = [
     "ALTER TABLE agent_state ADD COLUMN tokens_used INTEGER DEFAULT 0",
     "ALTER TABLE agent_state ADD COLUMN context_summary TEXT",
 ]
-
 SUPERVISOR_LOG_TABLE = """
 CREATE TABLE IF NOT EXISTS supervisor_log (
     log_id TEXT PRIMARY KEY,
@@ -37,7 +34,6 @@ CREATE TABLE IF NOT EXISTS supervisor_log (
     details TEXT
 )
 """
-
 ALIAS_MAPPINGS_TABLE = """
 CREATE TABLE IF NOT EXISTS alias_mappings (
     session_alias TEXT PRIMARY KEY,
@@ -47,10 +43,8 @@ CREATE TABLE IF NOT EXISTS alias_mappings (
     created_at TIMESTAMP
 )
 """
-
 # WAL mode pragma for better concurrency
 WAL_MODE_PRAGMA = "PRAGMA journal_mode=WAL"
-
 WORKSHOP_ANALYSIS_TABLE = """
 CREATE TABLE IF NOT EXISTS workshop_analysis (
     analysis_id TEXT PRIMARY KEY,
@@ -64,13 +58,11 @@ CREATE TABLE IF NOT EXISTS workshop_analysis (
     error_message TEXT        -- error details if failed
 )
 """
-
 WORKSHOP_ANALYSIS_INDEXES = [
     "CREATE INDEX IF NOT EXISTS idx_workshop_tool ON workshop_analysis(tool_name)",
     "CREATE INDEX IF NOT EXISTS idx_workshop_agent ON workshop_analysis(agent_id)",
     "CREATE INDEX IF NOT EXISTS idx_workshop_timestamp ON workshop_analysis(timestamp)",
 ]
-
 # Global Workspace: Broadcast tracking (Baars' Global Workspace Theory)
 BROADCAST_TABLE = """
 CREATE TABLE IF NOT EXISTS broadcasts (
@@ -83,13 +75,11 @@ CREATE TABLE IF NOT EXISTS broadcasts (
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 """
-
 BROADCAST_INDEXES = [
     "CREATE INDEX IF NOT EXISTS idx_broadcast_agent ON broadcasts(agent_alias)",
     "CREATE INDEX IF NOT EXISTS idx_broadcast_category ON broadcasts(category)",
     "CREATE INDEX IF NOT EXISTS idx_broadcast_timestamp ON broadcasts(timestamp)",
 ]
-
 # Arbitration Protocol: Conflict resolution (Minsky's cross-exclusion)
 ARBITRATION_TABLE = """
 CREATE TABLE IF NOT EXISTS arbitrations (
@@ -107,13 +97,11 @@ CREATE TABLE IF NOT EXISTS arbitrations (
     resolved_turn INTEGER
 )
 """
-
 ARBITRATION_INDEXES = [
     "CREATE INDEX IF NOT EXISTS idx_arbitration_status ON arbitrations(status)",
     "CREATE INDEX IF NOT EXISTS idx_arbitration_level ON arbitrations(required_level)",
     "CREATE INDEX IF NOT EXISTS idx_arbitration_deadline ON arbitrations(deadline_turn)",
 ]
-
 # Conflict tracking
 CONFLICT_TABLE = """
 CREATE TABLE IF NOT EXISTS conflicts (
@@ -127,7 +115,6 @@ CREATE TABLE IF NOT EXISTS conflicts (
     arbitration_id TEXT                      -- Link to arbitration if created
 )
 """
-
 CONFLICT_INDEXES = [
     "CREATE INDEX IF NOT EXISTS idx_conflict_status ON conflicts(status)",
     "CREATE INDEX IF NOT EXISTS idx_conflict_type ON conflicts(conflict_type)",
