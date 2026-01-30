@@ -32,6 +32,10 @@ from typing import List, Optional, Tuple, Dict, Any
 import time
 import shutil
 import re
+import socket
+import signal
+from io import StringIO
+import select
 
 # readline import enables command history in terminal (side effect import)
 # Try gnureadline first (more feature-complete on some platforms), then readline
@@ -2221,6 +2225,88 @@ Focus on practical, well-tested solutions."""
         print(c("   Check for any files created/modified by the agents.", Colors.DIM))
 
 
+# ========== Socket Server for Agent Communication ==========
+
+# Socket and PID file paths
+RUNTIME_DIR = f"/run/user/{os.getuid()}"
+SOCKET_PATH = f"{RUNTIME_DIR}/axe.sock"
+PID_PATH = f"{RUNTIME_DIR}/axe.pid"
+
+
+def cleanup_files():
+    """Remove socket and PID files."""
+    for path in [SOCKET_PATH, PID_PATH]:
+        try:
+            if os.path.exists(path):
+                os.unlink(path)
+        except OSError:
+            pass
+
+
+def setup_signal_handlers():
+    """Register signal handlers for clean shutdown."""
+    def signal_handler(signum, frame):
+        cleanup_files()
+        sys.exit(0)
+    
+    signal.signal(signal.SIGTERM, signal_handler)
+    signal.signal(signal.SIGINT, signal_handler)  # Ctrl+C
+    signal.signal(signal.SIGHUP, signal_handler)
+    
+    # Also register atexit as backup for normal exit
+    atexit.register(cleanup_files)
+
+
+def write_pid_file():
+    """Write PID file for agent discovery."""
+    with open(PID_PATH, 'w') as f:
+        f.write(str(os.getpid()))
+
+
+def check_and_cleanup_stale_files():
+    """Check for stale socket/pid files from crashed sessions."""
+    if os.path.exists(PID_PATH):
+        try:
+            with open(PID_PATH) as f:
+                old_pid = int(f.read().strip())
+            
+            # Check if process is still alive
+            os.kill(old_pid, 0)  # Raises ProcessLookupError if dead
+            
+            # Process is alive - another instance running
+            raise RuntimeError(
+                f"Another AXE instance is already running (PID {old_pid}).\n"
+                f"If this is incorrect, remove {PID_PATH} and {SOCKET_PATH}"
+            )
+        except ProcessLookupError:
+            # Process dead - stale files from crash
+            print(c("Warning: Cleaning up stale files from previous crashed session", Colors.YELLOW))
+            cleanup_files()
+        except ValueError:
+            # Invalid PID in file
+            print(c("Warning: Invalid PID file, cleaning up", Colors.YELLOW))
+            cleanup_files()
+    
+    # Also clean stale socket without pid file
+    if os.path.exists(SOCKET_PATH):
+        print(c("Warning: Removing orphaned socket file", Colors.YELLOW))
+        os.unlink(SOCKET_PATH)
+
+
+def start_socket_server():
+    """Start Unix socket server for agent communication."""
+    # Remove stale socket if exists
+    if os.path.exists(SOCKET_PATH):
+        os.unlink(SOCKET_PATH)
+    
+    sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    sock.bind(SOCKET_PATH)
+    sock.listen(1)
+    sock.setblocking(False)  # Non-blocking for integration with REPL
+    
+    return sock
+
+
 class ChatSession:
     """Interactive chat session manager."""
     
@@ -3580,12 +3666,63 @@ Dependencies:
         
         return cleaned
     
+    def handle_socket_command(self, conn: socket.socket, command: str) -> None:
+        """Process command from socket, return output with ANSI colors."""
+        # Capture all stdout/stderr during command execution
+        old_stdout = sys.stdout
+        old_stderr = sys.stderr
+        captured = StringIO()
+        sys.stdout = captured
+        sys.stderr = captured
+        
+        try:
+            # Echo command like terminal would
+            print(f"> {command}")
+            
+            # Process the command based on type
+            if command.startswith('/'):
+                self.process_command(command)
+            else:
+                self.process_agent_message(command)
+                
+        except Exception as e:
+            print(c(f"Error processing command: {e}", Colors.RED))
+        finally:
+            sys.stdout = old_stdout
+            sys.stderr = old_stderr
+        
+        # Send captured output back to socket
+        output = captured.getvalue()
+        try:
+            conn.sendall(output.encode('utf-8'))
+        except (BrokenPipeError, OSError):
+            pass  # Client disconnected
+    
     def run(self) -> None:
-        """Run interactive chat session."""
+        """Run interactive chat session with socket server."""
         self.print_banner()
+        
+        # Setup socket server for agent communication
+        check_and_cleanup_stale_files()
+        setup_signal_handlers()
+        write_pid_file()
+        sock = start_socket_server()
         
         try:
             while True:
+                # Check for socket connections (non-blocking)
+                ready, _, _ = select.select([sock], [], [], 0)
+                if ready:
+                    try:
+                        conn, _ = sock.accept()
+                        data = conn.recv(4096).decode('utf-8').rstrip('\n')
+                        if data:
+                            self.handle_socket_command(conn, data)
+                        conn.close()
+                    except Exception as e:
+                        print(c(f"Socket error: {e}", Colors.RED))
+                
+                # Normal REPL input handling
                 prompt: str
                 try:
                     prompt = input(c("axe> ", Colors.GREEN + Colors.BOLD))
@@ -3605,6 +3742,9 @@ Dependencies:
                     
         except KeyboardInterrupt:
             print(c("\nInterrupted", Colors.YELLOW))
+        finally:
+            cleanup_files()
+            sock.close()
         
         print(c("Goodbye!", Colors.CYAN))
 
