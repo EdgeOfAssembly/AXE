@@ -17,6 +17,7 @@
 
 - [Overview](#overview)
 - [Features](#features)
+  - [Cognitive Architecture](#cognitive-architecture-multi-agent-coordination)
 - [Quick Start](#quick-start)
 - [Installation](#installation)
 - [Configuration](#configuration)
@@ -77,6 +78,47 @@ The "whistleblower" mechanism – which allows worker agents to send GPG-encrypt
 - **Building**: make, cmake, gcc, g++, clang, nasm
 - **Analysis**: cppcheck, clang-format, clang-tidy, pylint, mypy
 - **Emulation**: dosbox-x, xvfb-run
+
+### Cognitive Architecture (Multi-Agent Coordination)
+
+AXE implements advanced cognitive architecture patterns for sophisticated multi-agent collaboration:
+
+#### 🧠 Global Workspace Theory (Baars, 1988)
+**Reference**: Baars, B.J. (1988). *A Cognitive Theory of Consciousness*
+
+- **Broadcast System**: Agents share findings via a global workspace
+- **Selective Attention**: Important information is amplified across all agents
+- **Integration**: Enables coordination without central control
+
+#### 🎖️ Privilege Mapping (Level-Based Permissions)
+**Status**: Fully integrated into agent system
+
+- **Hierarchical Levels**: Workers (1-9), Team Leaders (10-19), Deputies (20-29), Supervisors (30+)
+- **Experience Points**: Agents earn XP through contributions, level up to gain privileges
+- **Dynamic Permissions**: Higher-level agents unlock advanced capabilities
+
+#### 🤖 Subsumption Architecture (Brooks, 1986)
+**Reference**: Brooks, R.A. (1986). *A Robust Layered Control System for a Mobile Robot*. MIT AI Lab
+
+- **Layer-Based Execution**: Worker → Tactical → Strategic → Executive layers
+- **Suppression Mechanics**: Higher layers can suppress lower layers
+- **Reactive Hierarchy**: Enables emergent intelligent behavior
+
+#### 🗳️ XP Voting System (Minsky, 1986)
+**Reference**: Minsky, M. (1986). *The Society of Mind*. Simon & Schuster
+
+- **Peer Reputation**: Agents vote XP for/against each other
+- **Level-Based Limits**: Vote power scales with agent level (Workers ±10/-5, Supervisors ±25/-15)
+- **Anti-Abuse**: Self-vote prevention, 3 votes/session cap
+
+#### ⚖️ Conflict Detection & Arbitration (Minsky, 1986)
+**Reference**: Minsky, M. (1986). *The Society of Mind*. Simon & Schuster
+
+- **Automatic Detection**: 11 contradiction keyword pairs (safe/unsafe, correct/incorrect)
+- **Hierarchical Resolution**: Arbitrators must be ≥ max(conflicting agents) + 10 levels
+- **XP Distribution**: Winner +15 XP, Loser +5 XP, Arbitrator +20 XP
+
+**Usage**: All features integrated into `axe.py --collab` sessions. See [COGNITIVE_ARCHITECTURE_GUIDE.md](COGNITIVE_ARCHITECTURE_GUIDE.md) for details.
 
 ---
 
