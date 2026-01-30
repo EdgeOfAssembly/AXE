@@ -1,33 +1,25 @@
 #!/usr/bin/env python3
 """
 Verification: Cognitive Architecture Integrated into AXE Runtime
-
 This script verifies that the cognitive architecture features are actually
 integrated into axe.py, not just in standalone demos.
 """
-
 import sys
 import os
 from pathlib import Path
-
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent))
-
 def check_axe_integration():
     """Verify integration in axe.py"""
     print("=" * 70)
     print("VERIFICATION: Cognitive Architecture in AXE Runtime")
     print("=" * 70)
     print()
-    
     axe_file = Path(__file__).parent / 'axe.py'
-    
     if not axe_file.exists():
         print("❌ axe.py not found")
         return False
-    
     content = axe_file.read_text()
-    
     checks = [
         ("GlobalWorkspace import", "from core import GlobalWorkspace, SubsumptionController, ArbitrationProtocol"),
         ("GlobalWorkspace initialization", "self.global_workspace = GlobalWorkspace(workspace_dir)"),
@@ -45,9 +37,7 @@ def check_axe_integration():
         ("Vote application", "self.db.apply_xp_votes(pending_votes)"),
         ("Cognitive tokens in prompt", "COGNITIVE ARCHITECTURE TOKENS"),
     ]
-    
     print("Checking axe.py for integration points:\n")
-    
     all_passed = True
     for name, pattern in checks:
         if pattern in content:
@@ -55,9 +45,7 @@ def check_axe_integration():
         else:
             print(f"  ❌ {name} - NOT FOUND")
             all_passed = False
-    
     print()
-    
     if all_passed:
         print("=" * 70)
         print("✅ VERIFIED: All cognitive architecture features are integrated!")
@@ -76,17 +64,14 @@ def check_axe_integration():
         print("❌ VERIFICATION FAILED: Some features not integrated")
         print("=" * 70)
         return False
-
 def check_core_modules():
     """Verify core modules exist"""
     print("\nChecking core modules:\n")
-    
     modules = [
         'core/subsumption_layer.py',
         'core/arbitration.py',
         'core/global_workspace.py',
     ]
-    
     all_exist = True
     for module in modules:
         path = Path(__file__).parent / module
@@ -95,27 +80,20 @@ def check_core_modules():
         else:
             print(f"  ❌ {module} - NOT FOUND")
             all_exist = False
-    
     return all_exist
-
 def check_database_schema():
     """Verify database schema includes cognitive architecture tables"""
     print("\nChecking database schema:\n")
-    
     schema_file = Path(__file__).parent / 'database' / 'schema.py'
-    
     if not schema_file.exists():
         print("  ❌ database/schema.py not found")
         return False
-    
     content = schema_file.read_text()
-    
     tables = [
         ('BROADCAST_TABLE', 'broadcasts'),
         ('ARBITRATION_TABLE', 'arbitrations'),
         ('CONFLICT_TABLE', 'conflicts'),
     ]
-    
     all_found = True
     for table_name, table_desc in tables:
         if table_name in content:
@@ -123,27 +101,20 @@ def check_database_schema():
         else:
             print(f"  ❌ {table_desc} table - NOT FOUND")
             all_found = False
-    
     return all_found
-
 def main():
     """Run all verification checks"""
     results = []
-    
     results.append(("AXE Integration", check_axe_integration()))
     results.append(("Core Modules", check_core_modules()))
     results.append(("Database Schema", check_database_schema()))
-    
     print("\n" + "=" * 70)
     print("FINAL RESULTS")
     print("=" * 70)
-    
     for name, passed in results:
         status = "✅ PASS" if passed else "❌ FAIL"
         print(f"{status}: {name}")
-    
     all_passed = all(passed for _, passed in results)
-    
     if all_passed:
         print("\n🎉 All verification checks passed!")
         print("\nThe cognitive architecture features are fully integrated into")
@@ -153,6 +124,5 @@ def main():
     else:
         print("\n⚠️  Some verification checks failed.")
         return 1
-
 if __name__ == '__main__':
     sys.exit(main())

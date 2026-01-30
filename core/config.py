@@ -1,58 +1,45 @@
 """
 Configuration manager for AXE.
-
 Implements three-file architecture:
   1. models.yaml - Static model metadata (loaded first)
   2. providers.yaml - Provider infrastructure (loaded second)
   3. axe.yaml - User configuration (loaded third)
-
 Includes validation to ensure consistency across all config files.
 """
-
 import os
 import json
 from typing import Optional, Any, Dict
-
 # Try to import yaml
 try:
     import yaml
     HAS_YAML = True
 except ImportError:
     HAS_YAML = False
-
 # Try to import requests for ollama detection
 try:
     import requests
     HAS_REQUESTS = True
 except ImportError:
     HAS_REQUESTS = False
-
 from .constants import DEFAULT_CONFIG
 from utils.formatting import Colors, c
-
-
 class Config:
     """Configuration manager with three-file architecture and validation."""
-
     def __init__(self, config_path: Optional[str] = None):
         self.config = DEFAULT_CONFIG.copy()
         self.config_path = config_path
         self.models_config = {}
         self.providers_config = {}
-        
         # Determine base directory for config files
         if config_path and os.path.exists(config_path):
             self.base_dir = os.path.dirname(os.path.abspath(config_path))
         else:
             self.base_dir = os.getcwd()
-        
         # Load configuration in strict order
         self._load_all_configs(config_path)
-
     def _load_all_configs(self, axe_config_path: Optional[str] = None) -> None:
         """Load all three config files in order with validation."""
         print(c("Loading configuration...", Colors.CYAN))
-        
         # 1. Load models.yaml first (static reference data)
         models_path = os.path.join(self.base_dir, 'models.yaml')
         if os.path.exists(models_path):
@@ -61,7 +48,6 @@ class Config:
             print(c(f"  ✓ models.yaml ({model_count} models loaded)", Colors.GREEN))
         else:
             print(c(f"  ⚠ models.yaml not found, using defaults", Colors.YELLOW))
-        
         # 2. Load providers.yaml second (provider infrastructure)
         providers_path = os.path.join(self.base_dir, 'providers.yaml')
         if os.path.exists(providers_path):
@@ -73,16 +59,13 @@ class Config:
             if disabled_providers:
                 provider_summary += f", {len(disabled_providers)} disabled ({', '.join(disabled_providers)})"
             print(c(f"  ✓ providers.yaml ({provider_summary})", Colors.GREEN))
-            
             # Check ollama status if it's in providers
             self._check_ollama_status()
-            
             # Validate providers against models
             self._validate_providers()
         else:
             # Backward compatibility: try to load from axe.yaml
             print(c(f"  ⚠ providers.yaml not found, checking axe.yaml for legacy providers...", Colors.YELLOW))
-        
         # 3. Load axe.yaml last (user config)
         if axe_config_path and os.path.exists(axe_config_path):
             self.load(axe_config_path)
@@ -93,22 +76,17 @@ class Config:
                 if os.path.exists(full_path):
                     self.load(full_path)
                     break
-        
         # If providers weren't loaded from providers.yaml, check axe.yaml (backward compat)
         if not self.providers_config and 'providers' in self.config:
             print(c("  ⚠ Using legacy providers from axe.yaml (consider migrating to providers.yaml)", Colors.YELLOW))
             self.providers_config = self.config.get('providers', {})
-        
         # Merge providers into main config for backward compatibility
         if self.providers_config:
             self.config['providers'] = self.providers_config
-        
         # Validate agents against providers and models
         if 'agents' in self.config:
             self._validate_agents()
-        
         print(c("Configuration validated successfully.", Colors.GREEN))
-
     def _load_yaml_file(self, path: str) -> Dict:
         """Load a YAML or JSON file and return its contents."""
         try:
@@ -120,29 +98,23 @@ class Config:
         except Exception as e:
             print(c(f"  ✗ Error loading {path}: {e}", Colors.RED))
             return {}
-
     def _check_ollama_status(self) -> None:
         """Check ollama server status and display appropriate message."""
         if 'ollama' not in self.providers_config:
             return
-        
         ollama_config = self.providers_config['ollama']
         is_enabled = ollama_config.get('enabled', False)
         base_url = ollama_config.get('base_url', 'http://localhost:11434')
-        
         # Extract base URL without /v1 suffix for API calls
         api_base = base_url.rstrip('/v1').rstrip('/')
-        
         if not is_enabled:
             # Ollama is disabled - warn user
             print(c("  ⚠ Ollama disabled - local models not available. Enable in providers.yaml to use local LLMs", Colors.YELLOW))
             return
-        
         # Ollama is enabled - check if it's running
         if not HAS_REQUESTS:
             print(c("  ⚠ Ollama enabled but requests library not available - cannot check status", Colors.YELLOW))
             return
-        
         try:
             # Try to get ollama version
             response = requests.get(f"{api_base}/api/version", timeout=2)
@@ -158,7 +130,6 @@ class Config:
             print(c("  ⚠ Ollama enabled but server timeout at {api_base} - may not be running", Colors.YELLOW).format(api_base=api_base))
         except Exception as e:
             print(c(f"  ⚠ Ollama enabled but connection check failed: {e}", Colors.YELLOW))
-
     def load(self, path: str) -> None:
         """Load axe.yaml config file."""
         try:
@@ -172,7 +143,6 @@ class Config:
                 print(c(f"  ✓ axe.yaml ({agent_count} agents configured)", Colors.GREEN))
         except Exception as e:
             print(c(f"  ✗ Error loading axe.yaml: {e}", Colors.RED))
-
     def save(self, path: Optional[str] = None) -> None:
         """Save current config to file."""
         path = path or self.config_path or 'axe.yaml'
@@ -185,19 +155,15 @@ class Config:
             print(c(f"Config saved: {path}", Colors.GREEN))
         except Exception as e:
             print(c(f"Config save error: {e}", Colors.RED))
-
     def _validate_providers(self) -> None:
         """Validate that all models in providers exist in models.yaml."""
         if not self.models_config:
             return  # Skip validation if models.yaml wasn't loaded
-        
         models_list = self.models_config.get('models', {})
         errors = []
-        
         for provider_name, provider_config in self.providers_config.items():
             if not isinstance(provider_config, dict):
                 continue
-            
             provider_models = provider_config.get('models', [])
             for model_id in provider_models:
                 if model_id not in models_list:
@@ -205,23 +171,19 @@ class Config:
                         f"Provider '{provider_name}' lists model '{model_id}' "
                         f"but it's not defined in models.yaml"
                     )
-        
         if errors:
             print(c("\n✗ Validation Errors in providers.yaml:", Colors.RED))
             for error in errors:
                 print(c(f"  • {error}", Colors.RED))
             print(c("  Fix: Add missing models to models.yaml or remove from providers.yaml\n", Colors.YELLOW))
-
     def _validate_agents(self) -> None:
         """Validate that agent configurations are valid."""
         agents = self.config.get('agents', {})
         models_list = self.models_config.get('models', {})
         errors = []
-        
         for agent_name, agent_config in agents.items():
             if not isinstance(agent_config, dict):
                 continue
-            
             # Validate provider is defined and enabled
             provider = agent_config.get('provider')
             if provider:
@@ -245,14 +207,12 @@ class Config:
                                 f"Agent '{agent_name}' uses model '{model}' "
                                 f"but it's not in provider '{provider}' model list"
                             )
-                        
                         # Validate model exists in models.yaml (if loaded)
                         if models_list and model not in models_list:
                             errors.append(
                                 f"Agent '{agent_name}' uses model '{model}' "
                                 f"but it's not defined in models.yaml"
                             )
-                        
                         # Check for uppercase in model IDs (should be lowercase)
                         # Exception: GitHub Models use prefixes by design
                         if provider != 'github' and model != model.lower():
@@ -261,14 +221,11 @@ class Config:
                                 f"Agent '{agent_name}' uses model '{model}' "
                                 f"but model IDs must be lowercase. Did you mean '{suggestion}'?"
                             )
-        
         if errors:
             print(c("\n✗ Validation Errors in agent configuration:", Colors.RED))
             for error in errors:
                 print(c(f"  • {error}", Colors.RED))
             print(c("  Fix: Update agent definitions in axe.yaml to match providers.yaml and models.yaml\n", Colors.YELLOW))
-
-
     def _deep_merge(self, base: dict, update: dict) -> None:
         """Deep merge update into base dict."""
         for key, value in update.items():
@@ -276,7 +233,6 @@ class Config:
                 self._deep_merge(base[key], value)
             else:
                 base[key] = value
-
     def get(self, *keys, default=None) -> Any:
         """Get nested config value."""
         value = self.config
@@ -286,7 +242,6 @@ class Config:
             else:
                 return default
         return value
-
     def get_tool_blacklist(self) -> set:
         """Get flat set of all blacklisted tools."""
         tools_config = self.config.get('tools', {})

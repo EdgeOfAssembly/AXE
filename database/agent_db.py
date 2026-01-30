@@ -2,7 +2,6 @@
 Database operations for agent state persistence.
 Thread-safe SQLite operations with WAL mode.
 """
-
 import os
 import sqlite3
 import json
@@ -10,7 +9,6 @@ import uuid
 import hashlib
 from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, List, Tuple, Any
-
 # Import from local modules
 from .schema import (
     AGENT_STATE_TABLE,
@@ -27,14 +25,10 @@ from .schema import (
     CONFLICT_TABLE,
     CONFLICT_INDEXES,
 )
-
-
 def get_database_path() -> str:
     """Get the path to the AXE database file.
-    
     Always uses the AXE installation directory, NOT the workspace.
     This ensures agent XP, levels, and history persist across sessions.
-    
     Returns:
         Absolute path to axe_agents.db in the AXE installation directory
     """
@@ -44,14 +38,10 @@ def get_database_path() -> str:
     # Go up one level to the AXE installation root
     axe_dir = os.path.dirname(database_dir)
     return os.path.join(axe_dir, "axe_agents.db")
-
-
 class AgentDatabase:
     """SQLite database manager for agent state, memory, and progression."""
-    
     def __init__(self, db_path: Optional[str] = None):
         """Initialize database connection.
-        
         Args:
             db_path: Optional path override. If None, uses AXE installation directory.
         """
@@ -59,15 +49,12 @@ class AgentDatabase:
             db_path = get_database_path()
         self.db_path = db_path
         self._init_db()
-    
     def _init_db(self) -> None:
         """Initialize database schema with migrations."""
         with sqlite3.connect(self.db_path) as conn:
             # Enable WAL mode for better concurrency
             conn.execute(WAL_MODE_PRAGMA)
-            
             c = conn.cursor()
-            
             # Create tables
             c.execute(AGENT_STATE_TABLE)
             c.execute(SUPERVISOR_LOG_TABLE)
@@ -76,36 +63,27 @@ class AgentDatabase:
             c.execute(BROADCAST_TABLE)
             c.execute(ARBITRATION_TABLE)
             c.execute(CONFLICT_TABLE)
-            
             # Create indexes for workshop analysis
             for index_sql in WORKSHOP_ANALYSIS_INDEXES:
                 c.execute(index_sql)
-            
             # Create indexes for broadcasts
             for index_sql in BROADCAST_INDEXES:
                 c.execute(index_sql)
-            
             # Create indexes for arbitrations
             for index_sql in ARBITRATION_INDEXES:
                 c.execute(index_sql)
-            
             # Create indexes for conflicts
             for index_sql in CONFLICT_INDEXES:
                 c.execute(index_sql)
-            
             # Apply migrations for existing databases
             self._apply_migrations(conn)
-            
             conn.commit()
-    
     def _apply_migrations(self, conn: sqlite3.Connection) -> None:
         """Apply schema migrations to existing tables."""
         c = conn.cursor()
-        
         # Check which columns exist in agent_state
         c.execute("PRAGMA table_info(agent_state)")
         existing_columns = {row[1] for row in c.fetchall()}
-        
         # Apply migrations for missing columns
         for migration in AGENT_STATE_MIGRATIONS:
             # Extract column name from ALTER TABLE statement
@@ -117,17 +95,16 @@ class AgentDatabase:
                     except sqlite3.OperationalError:
                         # Column might already exist, skip
                         pass
-    
     def save_agent_state(self, agent_id: str, alias: str, model_name: str,
-                        memory_dict: Dict[str, Any], diffs: List[str], 
+                        memory_dict: Dict[str, Any], diffs: List[str],
                         error_count: int, xp: int, level: int,
                         supervisor_id: str = None) -> None:
         """Save agent state to database."""
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute('''
-                INSERT OR REPLACE INTO agent_state 
-                (agent_id, alias, model_name, supervisor_id, last_updated, 
+                INSERT OR REPLACE INTO agent_state
+                (agent_id, alias, model_name, supervisor_id, last_updated,
                  memory_json, recent_diffs, error_count, xp, level, status)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
@@ -144,18 +121,16 @@ class AgentDatabase:
                 'active'
             ))
             conn.commit()
-    
     def load_agent_state(self, agent_id: str) -> Optional[Dict[str, Any]]:
         """Load agent state from database."""
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute('''
-                SELECT alias, model_name, memory_json, recent_diffs, 
+                SELECT alias, model_name, memory_json, recent_diffs,
                        error_count, xp, level, status
                 FROM agent_state WHERE agent_id = ?
             ''', (agent_id,))
             row = c.fetchone()
-            
             if row:
                 return {
                     'alias': row[0],
@@ -168,22 +143,18 @@ class AgentDatabase:
                     'status': row[7]
                 }
         return None
-    
     def get_next_agent_number(self, model_name: str) -> int:
         """Get the next available number for an agent alias."""
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             # Extract number from aliases like @llama1, @llama2, etc.
             c.execute('''
-                SELECT alias FROM agent_state 
+                SELECT alias FROM agent_state
                 WHERE alias LIKE ?
             ''', (f'@{model_name}%',))
-            
             aliases = [row[0] for row in c.fetchall()]
-            
             if not aliases:
                 return 1
-            
             # Extract numbers and find max
             numbers = []
             for alias in aliases:
@@ -194,9 +165,7 @@ class AgentDatabase:
                         numbers.append(int(num_str))
                 except ValueError:
                     continue
-            
             return max(numbers) + 1 if numbers else 1
-    
     def award_xp(self, agent_id: str, xp_amount: int, reason: str = "") -> Dict[str, Any]:
         """
         Award XP to an agent and handle level-ups.
@@ -205,18 +174,14 @@ class AgentDatabase:
         # Import here to avoid circular dependency
         from progression.xp_system import calculate_xp_for_level
         from progression.levels import get_title_for_level, LEVEL_SUPERVISOR_ELIGIBLE
-        
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute('SELECT xp, level, alias FROM agent_state WHERE agent_id = ?', (agent_id,))
             row = c.fetchone()
-            
             if not row:
                 return {'leveled_up': False, 'message': 'Agent not found'}
-            
             old_xp, old_level, alias = row
             new_xp = old_xp + xp_amount
-            
             # Calculate new level
             new_level = old_level
             while new_level < LEVEL_SUPERVISOR_ELIGIBLE:
@@ -225,14 +190,12 @@ class AgentDatabase:
                     new_level += 1
                 else:
                     break
-            
             # Update database
             c.execute('''
                 UPDATE agent_state SET xp = ?, level = ?, last_updated = ?
                 WHERE agent_id = ?
             ''', (new_xp, new_level, datetime.now(timezone.utc), agent_id))
             conn.commit()
-            
             result = {
                 'leveled_up': new_level > old_level,
                 'old_level': old_level,
@@ -241,13 +204,10 @@ class AgentDatabase:
                 'alias': alias,
                 'reason': reason
             }
-            
             if result['leveled_up']:
                 result['new_title'] = get_title_for_level(new_level)
-            
             return result
-    
-    def log_supervisor_event(self, supervisor_id: str, event_type: str, 
+    def log_supervisor_event(self, supervisor_id: str, event_type: str,
                             details: Dict[str, Any]) -> None:
         """Log a supervisor decision or event."""
         log_id = str(uuid.uuid4())
@@ -258,16 +218,13 @@ class AgentDatabase:
                 VALUES (?, ?, ?, ?, ?)
             ''', (log_id, supervisor_id, datetime.now(timezone.utc), event_type, json.dumps(details)))
             conn.commit()
-    
     def alias_exists(self, alias: str) -> bool:
         """Check if an alias already exists."""
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute('SELECT COUNT(*) FROM agent_state WHERE alias = ?', (alias,))
             return c.fetchone()[0] > 0
-    
     # ========== Phase 6: Mandatory Sleep System ==========
-    
     def start_work_tracking(self, agent_id: str) -> None:
         """Start tracking work time for an agent."""
         with sqlite3.connect(self.db_path) as conn:
@@ -277,14 +234,12 @@ class AgentDatabase:
                 WHERE agent_id = ?
             ''', (datetime.now(timezone.utc), agent_id))
             conn.commit()
-    
     def get_work_duration_minutes(self, agent_id: str) -> int:
         """Get how many minutes the agent has been working continuously."""
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute('SELECT work_start_time FROM agent_state WHERE agent_id = ?', (agent_id,))
             row = c.fetchone()
-            
             if row and row[0]:
                 try:
                     start_time = datetime.fromisoformat(row[0])
@@ -293,7 +248,6 @@ class AgentDatabase:
                 except (ValueError, TypeError):
                     return 0
         return 0
-    
     def put_agent_to_sleep(self, agent_id: str, reason: str, duration_minutes: int = 30) -> Dict[str, Any]:
         """
         Put an agent to sleep and record the event.
@@ -301,27 +255,22 @@ class AgentDatabase:
         """
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
-            
             # Get current work duration before sleeping
             work_duration = self.get_work_duration_minutes(agent_id)
-            
             # Update agent status
             sleep_until = datetime.now(timezone.utc) + timedelta(minutes=duration_minutes)
             c.execute('''
-                UPDATE agent_state 
-                SET status = 'sleeping', 
+                UPDATE agent_state
+                SET status = 'sleeping',
                     work_start_time = NULL,
                     total_work_minutes = total_work_minutes + ?
                 WHERE agent_id = ?
             ''', (work_duration, agent_id))
-            
             # Get agent alias for logging
             c.execute('SELECT alias FROM agent_state WHERE agent_id = ?', (agent_id,))
             alias_row = c.fetchone()
             alias = alias_row[0] if alias_row else agent_id
-            
             conn.commit()
-            
             return {
                 'agent_id': agent_id,
                 'alias': alias,
@@ -330,41 +279,35 @@ class AgentDatabase:
                 'sleep_duration_minutes': duration_minutes,
                 'sleep_until': sleep_until.isoformat()
             }
-    
     def wake_agent(self, agent_id: str) -> Dict[str, Any]:
         """Wake an agent from sleep."""
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute('''
-                UPDATE agent_state 
+                UPDATE agent_state
                 SET status = 'active', work_start_time = ?
                 WHERE agent_id = ?
             ''', (datetime.now(timezone.utc), agent_id))
-            
             # Get agent alias
             c.execute('SELECT alias FROM agent_state WHERE agent_id = ?', (agent_id,))
             alias_row = c.fetchone()
             alias = alias_row[0] if alias_row else agent_id
-            
             conn.commit()
-            
             return {
                 'agent_id': agent_id,
                 'alias': alias,
                 'status': 'active',
                 'woke_at': datetime.now(timezone.utc).isoformat()
             }
-    
     def get_sleeping_agents(self) -> List[Dict[str, Any]]:
         """Get list of all sleeping agents."""
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute('''
-                SELECT agent_id, alias, model_name, total_work_minutes 
+                SELECT agent_id, alias, model_name, total_work_minutes
                 FROM agent_state WHERE status = 'sleeping'
             ''')
             rows = c.fetchall()
-            
             return [
                 {
                     'agent_id': row[0],
@@ -374,7 +317,6 @@ class AgentDatabase:
                 }
                 for row in rows
             ]
-    
     def get_active_agents(self) -> List[Dict[str, Any]]:
         """Get list of all active agents."""
         with sqlite3.connect(self.db_path) as conn:
@@ -384,7 +326,6 @@ class AgentDatabase:
                 FROM agent_state WHERE status = 'active'
             ''')
             rows = c.fetchall()
-            
             return [
                 {
                     'agent_id': row[0],
@@ -396,8 +337,7 @@ class AgentDatabase:
                 }
                 for row in rows
             ]
-    
-    def check_mandatory_sleep(self, agent_id: str, max_work_hours: int = 6, 
+    def check_mandatory_sleep(self, agent_id: str, max_work_hours: int = 6,
                              warning_hours: int = 5) -> Tuple[bool, str]:
         """
         Check if agent needs mandatory sleep due to work time limit.
@@ -405,17 +345,13 @@ class AgentDatabase:
         """
         work_minutes = self.get_work_duration_minutes(agent_id)
         work_hours = work_minutes / 60
-        
         if work_hours >= max_work_hours:
             return True, f"Work time limit reached ({work_hours:.1f} hours)"
         elif work_hours >= warning_hours:
             remaining = max_work_hours - work_hours
             return False, f"Warning: {remaining:.1f} hours until mandatory sleep"
-        
         return False, ""
-    
     # ========== Phase 7: Degradation Monitoring ==========
-    
     def record_diff(self, agent_id: str, diff_content: str, error_count: int = 0,
                    diff_history_limit: int = 20) -> None:
         """
@@ -424,19 +360,15 @@ class AgentDatabase:
         """
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
-            
             # Get existing diffs
             c.execute('SELECT recent_diffs, error_count FROM agent_state WHERE agent_id = ?', (agent_id,))
             row = c.fetchone()
-            
             if row:
                 try:
                     diffs = json.loads(row[0]) if row[0] else []
                 except json.JSONDecodeError:
                     diffs = []
-                
                 current_errors = row[1] or 0
-                
                 # Add new diff with timestamp and error info
                 diff_record = {
                     'timestamp': datetime.now(timezone.utc).isoformat(),
@@ -445,25 +377,21 @@ class AgentDatabase:
                     'size': len(diff_content)
                 }
                 diffs.append(diff_record)
-                
                 # Keep only the last N diffs
                 diffs = diffs[-diff_history_limit:]
-                
                 # Update database
                 c.execute('''
-                    UPDATE agent_state 
+                    UPDATE agent_state
                     SET recent_diffs = ?, error_count = ?, last_updated = ?
                     WHERE agent_id = ?
                 ''', (json.dumps(diffs), current_errors + error_count, datetime.now(timezone.utc), agent_id))
                 conn.commit()
-    
     def get_error_rate(self, agent_id: str) -> float:
         """Calculate error rate from recent diffs."""
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute('SELECT recent_diffs FROM agent_state WHERE agent_id = ?', (agent_id,))
             row = c.fetchone()
-            
             if row and row[0]:
                 try:
                     diffs = json.loads(row[0])
@@ -474,65 +402,51 @@ class AgentDatabase:
                     # If the stored JSON is malformed or not the expected structure,
                     # treat it as having no recent diffs and fall back to 0.0 below.
                     pass
-        
         return 0.0
-    
     def check_degradation(self, agent_id: str, error_threshold: int = 20) -> Tuple[bool, str]:
         """
         Check if agent shows signs of degradation.
         Note: ERROR_THRESHOLD_PERCENT is a parameter to avoid circular import.
         """
         error_rate = self.get_error_rate(agent_id)
-        
         if error_rate >= error_threshold:
             return True, f"Error rate {error_rate:.1f}% exceeds threshold ({error_threshold}%)"
-        
         return False, f"Error rate: {error_rate:.1f}%"
-    
     # ========== Phase 9: Break System ==========
-    
     def record_break(self, agent_id: str, break_type: str, duration_minutes: int) -> None:
         """Record a break taken by an agent."""
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
-            
             # Get or initialize break history
             c.execute('SELECT memory_json FROM agent_state WHERE agent_id = ?', (agent_id,))
             row = c.fetchone()
-            
             if row:
                 try:
                     memory = json.loads(row[0]) if row[0] else {}
                 except json.JSONDecodeError:
                     memory = {}
-                
                 # Initialize or update break history
                 if 'breaks' not in memory:
                     memory['breaks'] = []
-                
                 memory['breaks'].append({
                     'type': break_type,
                     'timestamp': datetime.now(timezone.utc).isoformat(),
                     'duration_minutes': duration_minutes
                 })
-                
                 # Keep only last 24 hours of breaks
                 cutoff = (datetime.now(timezone.utc) - timedelta(hours=24)).isoformat()
                 memory['breaks'] = [b for b in memory['breaks'] if b['timestamp'] > cutoff]
-                
                 c.execute('''
                     UPDATE agent_state SET memory_json = ?, last_updated = ?
                     WHERE agent_id = ?
                 ''', (json.dumps(memory), datetime.now(timezone.utc), agent_id))
                 conn.commit()
-    
     def get_breaks_in_last_hour(self, agent_id: str) -> int:
         """Get number of breaks taken in the last hour."""
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute('SELECT memory_json FROM agent_state WHERE agent_id = ?', (agent_id,))
             row = c.fetchone()
-            
             if row and row[0]:
                 try:
                     memory = json.loads(row[0])
@@ -541,9 +455,7 @@ class AgentDatabase:
                     return len([b for b in breaks if b['timestamp'] > cutoff])
                 except (json.JSONDecodeError, TypeError):
                     pass
-        
         return 0
-    
     def can_take_break(self, agent_id: str, total_agents: int, agents_on_break: int,
                       max_breaks_per_hour: int = 2, max_workforce_on_break: float = 0.4) -> Tuple[bool, str]:
         """
@@ -554,21 +466,16 @@ class AgentDatabase:
         breaks_this_hour = self.get_breaks_in_last_hour(agent_id)
         if breaks_this_hour >= max_breaks_per_hour:
             return False, f"Maximum breaks per hour ({max_breaks_per_hour}) reached"
-        
         # Check maximum workforce percentage on break
         if total_agents > 0:
             workforce_on_break = agents_on_break / total_agents
             if workforce_on_break >= max_workforce_on_break:
                 return False, f"Too many agents on break ({agents_on_break}/{total_agents})"
-        
         return True, "Break approved"
-    
     # ========== Phase 8: Token Tracking ==========
-    
     def update_token_usage(self, agent_id: str, tokens_used: int) -> None:
         """
         Update token usage for an agent.
-        
         Args:
             agent_id: Unique identifier for the agent
             tokens_used: Total tokens used by the agent
@@ -580,14 +487,11 @@ class AgentDatabase:
                 WHERE agent_id = ?
             ''', (tokens_used, datetime.now(timezone.utc), agent_id))
             conn.commit()
-    
     def get_token_usage(self, agent_id: str) -> int:
         """
         Get token usage for an agent.
-        
         Args:
             agent_id: Unique identifier for the agent
-        
         Returns:
             Total tokens used, or 0 if agent not found
         """
@@ -596,11 +500,9 @@ class AgentDatabase:
             c.execute('SELECT tokens_used FROM agent_state WHERE agent_id = ?', (agent_id,))
             row = c.fetchone()
             return row[0] if row and row[0] else 0
-    
     def save_context_summary(self, agent_id: str, summary: str) -> None:
         """
         Save a compressed context summary for an agent.
-        
         Args:
             agent_id: Unique identifier for the agent
             summary: Compressed context summary text
@@ -612,14 +514,11 @@ class AgentDatabase:
                 WHERE agent_id = ?
             ''', (summary, datetime.now(timezone.utc), agent_id))
             conn.commit()
-    
     def get_context_summary(self, agent_id: str) -> Optional[str]:
         """
         Get context summary for an agent.
-        
         Args:
             agent_id: Unique identifier for the agent
-        
         Returns:
             Context summary text, or None if not found
         """
@@ -628,27 +527,23 @@ class AgentDatabase:
             c.execute('SELECT context_summary FROM agent_state WHERE agent_id = ?', (agent_id,))
             row = c.fetchone()
             return row[0] if row else None
-    
     # ========== Phase 7: Persistence Lifecycle Hooks ==========
-    
     def restore_all_agents(self) -> List[Dict[str, Any]]:
         """
         Restore all agents from database on startup.
-        
         Returns:
             List of agent state dictionaries
         """
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute('''
-                SELECT agent_id, alias, model_name, memory_json, xp, level, 
+                SELECT agent_id, alias, model_name, memory_json, xp, level,
                        status, tokens_used, context_summary
                 FROM agent_state
                 WHERE status IN ('active', 'sleeping')
                 ORDER BY xp DESC
             ''')
             rows = c.fetchall()
-            
             agents = []
             for row in rows:
                 agent = {
@@ -663,14 +558,11 @@ class AgentDatabase:
                     'context_summary': row[8]
                 }
                 agents.append(agent)
-            
             return agents
-    
-    def sync_conversation(self, agent_id: str, message_snippet: str, 
+    def sync_conversation(self, agent_id: str, message_snippet: str,
                          message_type: str = 'message') -> None:
         """
         Store conversation snippet in agent memory for context continuity.
-        
         Args:
             agent_id: Unique identifier for the agent
             message_snippet: Short snippet of conversation to store
@@ -680,41 +572,33 @@ class AgentDatabase:
             c = conn.cursor()
             c.execute('SELECT memory_json FROM agent_state WHERE agent_id = ?', (agent_id,))
             row = c.fetchone()
-            
             if row:
                 try:
                     memory = json.loads(row[0]) if row[0] else {}
                 except json.JSONDecodeError:
                     memory = {}
-                
                 # Initialize conversation history if not present
                 if 'conversation_history' not in memory:
                     memory['conversation_history'] = []
-                
                 # Add new message snippet
                 memory['conversation_history'].append({
                     'timestamp': datetime.now(timezone.utc).isoformat(),
                     'type': message_type,
                     'content': message_snippet[:500]  # Limit snippet size
                 })
-                
                 # Keep only last 50 messages
                 memory['conversation_history'] = memory['conversation_history'][-50:]
-                
                 c.execute('''
                     UPDATE agent_state SET memory_json = ?, last_updated = ?
                     WHERE agent_id = ?
                 ''', (json.dumps(memory), datetime.now(timezone.utc), agent_id))
                 conn.commit()
-    
     def get_agent_context_history(self, agent_id: str, limit: int = 20) -> List[Dict[str, Any]]:
         """
         Get recent conversation history for an agent.
-        
         Args:
             agent_id: Unique identifier for the agent
             limit: Maximum number of messages to return
-        
         Returns:
             List of conversation history entries
         """
@@ -722,7 +606,6 @@ class AgentDatabase:
             c = conn.cursor()
             c.execute('SELECT memory_json FROM agent_state WHERE agent_id = ?', (agent_id,))
             row = c.fetchone()
-            
             if row and row[0]:
                 try:
                     memory = json.loads(row[0])
@@ -730,17 +613,13 @@ class AgentDatabase:
                     return history[-limit:] if history else []
                 except (json.JSONDecodeError, TypeError):
                     return []
-        
         return []
-    
     # ========== Workshop Analysis Persistence ==========
-    
     def save_workshop_analysis(self, tool_name: str, target: str, agent_id: Optional[str],
                               results: Dict[str, Any], duration: Optional[float] = None,
                               error_message: Optional[str] = None) -> str:
         """
         Save workshop analysis results to database.
-        
         Args:
             tool_name: Name of the workshop tool ('chisel', 'saw', 'plane', 'hammer')
             target: Analysis target (file path, code, process name, etc.)
@@ -748,64 +627,52 @@ class AgentDatabase:
             results: Analysis results dictionary
             duration: Analysis duration in seconds
             error_message: Error message if analysis failed
-            
         Returns:
             Analysis ID for the saved record
         """
         analysis_id = str(uuid.uuid4())
         status = 'failed' if error_message else 'completed'
-        
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute('''
-                INSERT INTO workshop_analysis 
-                (analysis_id, tool_name, target, agent_id, results_json, status, 
+                INSERT INTO workshop_analysis
+                (analysis_id, tool_name, target, agent_id, results_json, status,
                  duration_seconds, error_message, timestamp)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (analysis_id, tool_name, target, agent_id, json.dumps(results), 
+            ''', (analysis_id, tool_name, target, agent_id, json.dumps(results),
                   status, duration, error_message, datetime.now(timezone.utc)))
             conn.commit()
-        
         return analysis_id
-    
     def get_workshop_analyses(self, agent_id: Optional[str] = None, tool_name: Optional[str] = None,
                              limit: int = 50) -> List[Dict[str, Any]]:
         """
         Retrieve workshop analysis results.
-        
         Args:
             agent_id: Filter by agent ID
             tool_name: Filter by tool name
             limit: Maximum number of results to return
-            
         Returns:
             List of analysis records
         """
         base_query = "SELECT * FROM workshop_analysis"
         conditions: List[str] = []
         params: List[Any] = []
-        
         if agent_id:
             conditions.append("agent_id = ?")
             params.append(agent_id)
-            
         if tool_name:
             conditions.append("tool_name = ?")
             params.append(tool_name)
-        
         if conditions:
             query = base_query + " WHERE " + " AND ".join(conditions)
         else:
             query = base_query
-        
         query += " ORDER BY timestamp DESC LIMIT ?"
         params.append(limit)
-        
         with sqlite3.connect(self.db_path) as conn:
             conn.row_factory = sqlite3.Row
             c = conn.cursor()
             c.execute(query, params)
-            
             results = []
             for row in c.fetchall():
                 result = dict(row)
@@ -819,21 +686,17 @@ class AgentDatabase:
                 else:
                     result['results'] = {}
                 results.append(result)
-            
             return results
-    
     def get_workshop_stats(self, agent_id: Optional[str] = None) -> Dict[str, Any]:
         """
         Get workshop usage statistics.
-        
         Args:
             agent_id: Filter by agent ID
-            
         Returns:
             Statistics dictionary
         """
         query = """
-            SELECT 
+            SELECT
                 tool_name,
                 COUNT(*) as total_analyses,
                 AVG(duration_seconds) as avg_duration,
@@ -842,17 +705,13 @@ class AgentDatabase:
             FROM workshop_analysis
         """
         params = []
-        
         if agent_id:
             query += " WHERE agent_id = ?"
             params.append(agent_id)
-            
         query += " GROUP BY tool_name"
-        
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute(query, params)
-            
             stats = {}
             for row in c.fetchall():
                 tool_name = row[0]
@@ -862,36 +721,28 @@ class AgentDatabase:
                     'successful': row[3],
                     'failed': row[4]
                 }
-            
             return stats
-    
     def apply_xp_votes(self, votes: List[Dict]) -> List[Dict[str, Any]]:
         """
         Apply pending XP votes from GlobalWorkspace.
-        
         Processes peer votes and applies XP awards, handling level-ups
         and returning results for each vote applied.
-        
         Args:
             votes: List of vote dictionaries from GlobalWorkspace
-        
         Returns:
             List of results including any level-ups triggered
         """
         results = []
-        
         for vote in votes:
             # Get target agent by alias
             target_alias = vote['target']
             # Remove @ prefix if present for database lookup
             if target_alias.startswith('@'):
                 target_alias = target_alias[1:]
-            
             with sqlite3.connect(self.db_path) as conn:
                 c = conn.cursor()
                 c.execute('SELECT agent_id FROM agent_state WHERE alias = ?', (target_alias,))
                 row = c.fetchone()
-                
                 if not row:
                     results.append({
                         'vote_id': vote['id'],
@@ -900,37 +751,28 @@ class AgentDatabase:
                         'target': vote['target']
                     })
                     continue
-                
                 target_agent_id = row[0]
-            
             # Apply XP using existing award_xp method
             xp_delta = vote['xp_delta']
             reason = f"Peer vote from {vote['voter']}: {vote['reason']}"
-            
             result = self.award_xp(target_agent_id, xp_delta, reason)
             result['vote_id'] = vote['id']
             result['voter'] = vote['voter']
             result['target'] = vote['target']
             result['success'] = True
-            
             results.append(result)
-        
         return results
-    
     def get_agent_by_alias(self, alias: str) -> Optional[Dict[str, Any]]:
         """
         Get agent information by alias.
-        
         Args:
             alias: Agent alias (with or without @ prefix)
-        
         Returns:
             Agent info dict or None if not found
         """
         # Remove @ prefix if present
         if alias.startswith('@'):
             alias = alias[1:]
-        
         with sqlite3.connect(self.db_path) as conn:
             c = conn.cursor()
             c.execute('''
@@ -938,7 +780,6 @@ class AgentDatabase:
                 FROM agent_state WHERE alias = ?
             ''', (alias,))
             row = c.fetchone()
-            
             if row:
                 return {
                     'agent_id': row[0],
@@ -948,5 +789,4 @@ class AgentDatabase:
                     'level': row[4],
                     'status': row[5]
                 }
-            
             return None

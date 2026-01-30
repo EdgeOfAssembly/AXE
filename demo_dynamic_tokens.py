@@ -3,20 +3,15 @@
 Demonstration of dynamic max_output_tokens implementation.
 Shows how different models now use their actual token limits.
 """
-
 import sys
 import os
 sys.path.insert(0, os.path.dirname(__file__))
-
 from models.metadata import get_max_output_tokens
-
-
 def main():
     print("=" * 70)
     print("DYNAMIC MAX_OUTPUT_TOKENS DEMONSTRATION")
     print("=" * 70)
     print()
-    
     # Show examples of different model limits
     examples = [
         ("claude-opus-4-5-20251101", "Claude Opus 4.5 (flagship)"),
@@ -30,16 +25,12 @@ def main():
         ("grok-4-1-fast-reasoning", "xAI Grok 4.1 (2M context!)"),
         ("unknown-model-xyz", "Unknown Model (fallback)"),
     ]
-    
     print("Model Token Limits (max_output_tokens):")
     print("-" * 70)
-    
     for model_id, display_name in examples:
         max_tokens = get_max_output_tokens(model_id)
-        
         # Format with commas for readability
         formatted = f"{max_tokens:,}"
-        
         # Show old vs new behavior
         old_value = "32,000"
         if max_tokens == 4000:
@@ -50,9 +41,7 @@ def main():
             status = f"✓ Utilizing full capacity ({old_value} → {formatted})"
         else:
             status = f"= Same as before"
-        
         print(f"{display_name:40s} {formatted:>12s}  {status}")
-    
     print()
     print("=" * 70)
     print("KEY BENEFITS:")
@@ -72,7 +61,5 @@ def main():
     print("   - Unknown models default to 4,000 tokens (safe, widely supported)")
     print()
     print("=" * 70)
-
-
 if __name__ == '__main__':
     main()
