@@ -47,25 +47,27 @@ class ToolRunner:
     # Redirect operators for I/O redirection
     REDIRECT_OPERATORS = {'>', '>>', '<', '2>', '2>>', '&>', '2>&1'}
 
-    def __init__(self, config: 'Config', project_dir: str):
+    def __init__(self, config: 'Config', project_dir: str, workspace_paths: Optional[List[str]] = None):
         """
         Initialize the ToolRunner.
 
         Args:
             config: Configuration object containing tool blacklist and forbidden paths
             project_dir: Base directory for command execution
+            workspace_paths: Optional list of workspace paths for sandbox binding
         """
         self.config = config
         self.project_dir = os.path.abspath(project_dir)
         self.exec_log = os.path.join(project_dir, 'axe_exec.log')
         self.dry_run = False
+        self.workspace_paths = workspace_paths or [project_dir]
         
         # Initialize sandbox manager if enabled
         self.sandbox_manager = None
         if config.get('sandbox', 'enabled', default=False):
             try:
                 from .sandbox import SandboxManager
-                self.sandbox_manager = SandboxManager(config, project_dir)
+                self.sandbox_manager = SandboxManager(config, project_dir, workspace_paths)
                 if not self.sandbox_manager.is_available():
                     print(c("Warning: bubblewrap not available, falling back to unrestricted mode", Colors.YELLOW))
                     self.sandbox_manager = None

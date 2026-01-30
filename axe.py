@@ -949,12 +949,16 @@ class CollaborativeSession:
     
     def __init__(self, config: Config, agents: List[str], workspace_dir: str, 
                  time_limit_minutes: int = 30, db_path: Optional[str] = None,
-                 github_enabled: bool = False):
+                 github_enabled: bool = False, workspace_paths: Optional[List[str]] = None):
         self.config = config
         self.agent_mgr = AgentManager(config)
         self.workspace = SharedWorkspace(workspace_dir)
         self.project_ctx = ProjectContext(workspace_dir, config)
-        self.tool_runner = ToolRunner(config, workspace_dir)
+        
+        # Use workspace_paths if provided, otherwise default to workspace_dir
+        self.workspace_paths = workspace_paths if workspace_paths else [workspace_dir]
+        self.tool_runner = ToolRunner(config, workspace_dir, self.workspace_paths)
+        
         # Pass workspace to ResponseProcessor for build output recording
         self.response_processor = ResponseProcessor(config, workspace_dir, self.tool_runner, self.workspace)
         self.db = AgentDatabase(db_path)
@@ -2362,11 +2366,15 @@ def start_socket_server():
 class ChatSession:
     """Interactive chat session manager."""
     
-    def __init__(self, config: Config, project_dir: str) -> None:
+    def __init__(self, config: Config, project_dir: str, workspace_paths: Optional[List[str]] = None) -> None:
         self.config: Config = config
         self.project_dir: str = os.path.abspath(project_dir)
         self.agent_mgr: AgentManager = AgentManager(config)
-        self.tool_runner: ToolRunner = ToolRunner(config, project_dir)
+        
+        # Track workspace paths for sandbox binding
+        self.workspace_paths: List[str] = workspace_paths if workspace_paths else [project_dir]
+        self.tool_runner: ToolRunner = ToolRunner(config, project_dir, self.workspace_paths)
+        
         self.project_ctx: ProjectContext = ProjectContext(project_dir, config)
         self.response_processor: ResponseProcessor = ResponseProcessor(config, project_dir, self.tool_runner)
         self.history: list[dict[str, Any]] = []
@@ -2493,6 +2501,14 @@ Analysis Tools:
   /buildinfo <path> [--json]          - Detect build system (Autotools, CMake, Meson, etc.)
                                         Supports directories and .tar/.tar.gz/.tar.zst archives
 
+Workspace Management:
+  /workspace                          - Show current workspace(s)
+  /workspace <path>                   - Set workspace directory
+  /workspace <path1>,<path2>          - Set multiple workspaces (comma-separated)
+  /workspace +<path>                  - Add workspace to list
+  /workspace -<path>                  - Remove workspace from list
+  /workspace clear                    - Clear all workspaces (use project dir only)
+
 Workshop Tools:
   /workshop chisel <binary> [func]    - Symbolic execution
   /workshop saw "<code>"              - Taint analysis
@@ -2504,9 +2520,11 @@ Workshop Tools:
   /workshop stats [tool]              - View usage statistics
 
 Collaborative Mode:
-  /collab <agents> <workspace> <time> <task>
+  /collab <agents> <workspace(s)> <time> <task>
                     Start collaborative session with multiple agents
+                    Workspace(s) can be comma-separated for multiple
                     Example: /collab llama,copilot ./playground 30 "Review and improve wadextract.c"
+                    Example: /collab llama,copilot /tmp/a,/tmp/b 30 "Cross-project analysis"
   
   During collaboration:
     Ctrl+C          Pause session (options: continue, stop, inject message)
@@ -2525,8 +2543,11 @@ Examples:
   @gpt write a parser for DOS WAD files in C
   @llama disassemble the interrupt handler at 0x1000
   /exec hexdump -C game.exe | head -20
+  /workspace /tmp/playground
+  /workspace +/tmp/projectX
   /workshop saw "import os; os.system(input())"
   /collab llama,copilot ./playground 30 "Analyze and document wadextract.c"
+  /collab grok,copilot /tmp/a,/tmp/b 60 "Do cross-project code review"
         """
         print(c(help_text, Colors.CYAN))
     
@@ -2580,6 +2601,87 @@ Examples:
         forbidden: list[str] = dirs.get('forbidden', [])
         print(f"  {c('Forbidden:', Colors.RED)} {', '.join(forbidden)}")
         print()
+    
+    def handle_workspace_command(self, args: str) -> None:
+        """Handle /workspace command for managing workspace directories."""
+        args = args.strip()
+        
+        if not args:
+            # Show current workspaces
+            if len(self.workspace_paths) > 0:
+                print(c("Current workspaces:", Colors.BOLD))
+                for i, ws in enumerate(self.workspace_paths, 1):
+                    print(f"  {i}. {ws}")
+            else:
+                print(c("No workspaces configured (using AXE directory)", Colors.YELLOW))
+            return
+        
+        if args == 'clear':
+            # Clear all workspaces (fall back to project dir)
+            self.workspace_paths = [self.project_dir]
+            # Reinitialize tool_runner with updated workspace paths
+            self.tool_runner = ToolRunner(self.config, self.project_dir, self.workspace_paths)
+            print(c("Workspaces cleared (using project directory only)", Colors.GREEN))
+            return
+        
+        if args.startswith('+'):
+            # Add workspace
+            new_ws = args[1:].strip()
+            if not os.path.isabs(new_ws):
+                new_ws = os.path.abspath(os.path.join(self.project_dir, new_ws))
+            else:
+                new_ws = os.path.abspath(new_ws)
+            
+            if os.path.isdir(new_ws):
+                if new_ws not in self.workspace_paths:
+                    self.workspace_paths.append(new_ws)
+                    # Reinitialize tool_runner with updated workspace paths
+                    self.tool_runner = ToolRunner(self.config, self.project_dir, self.workspace_paths)
+                    print(c(f"Added workspace: {new_ws}", Colors.GREEN))
+                else:
+                    print(c(f"Workspace already in list: {new_ws}", Colors.YELLOW))
+            else:
+                print(c(f"Error: Directory does not exist: {new_ws}", Colors.RED))
+            return
+        
+        if args.startswith('-'):
+            # Remove workspace
+            rm_ws = args[1:].strip()
+            if not os.path.isabs(rm_ws):
+                rm_ws = os.path.abspath(os.path.join(self.project_dir, rm_ws))
+            else:
+                rm_ws = os.path.abspath(rm_ws)
+            
+            if rm_ws in self.workspace_paths:
+                self.workspace_paths.remove(rm_ws)
+                # Reinitialize tool_runner with updated workspace paths
+                self.tool_runner = ToolRunner(self.config, self.project_dir, self.workspace_paths)
+                print(c(f"Removed workspace: {rm_ws}", Colors.GREEN))
+            else:
+                print(c(f"Workspace not in list: {rm_ws}", Colors.YELLOW))
+            return
+        
+        # Set workspace(s) - comma-separated
+        new_workspaces = []
+        for ws in args.split(','):
+            ws = ws.strip()
+            if not os.path.isabs(ws):
+                abs_ws = os.path.abspath(os.path.join(self.project_dir, ws))
+            else:
+                abs_ws = os.path.abspath(ws)
+            
+            if os.path.isdir(abs_ws):
+                new_workspaces.append(abs_ws)
+            else:
+                print(c(f"Warning: Directory does not exist: {abs_ws}", Colors.YELLOW))
+        
+        if new_workspaces:
+            self.workspace_paths = new_workspaces
+            # Reinitialize tool_runner with updated workspace paths
+            self.tool_runner = ToolRunner(self.config, self.project_dir, self.workspace_paths)
+            print(c(f"Workspaces set to: {', '.join(self.workspace_paths)}", Colors.GREEN))
+        else:
+            print(c("Error: No valid workspace directories provided", Colors.RED))
     
     def handle_workshop_command(self, args: str) -> None:
         """Handle workshop tool commands."""
@@ -3397,26 +3499,38 @@ Dependencies:
         
         elif command == '/collab':
             if not args:
-                print(c("Usage: /collab <agents> <workspace> <time_minutes> <task>", Colors.YELLOW))
+                print(c("Usage: /collab <agents> <workspace(s)> <time_minutes> <task>", Colors.YELLOW))
                 print(c("Example: /collab llama,copilot ./playground 30 Review wadextract.c", Colors.DIM))
+                print(c("Note: workspace can be comma-separated for multiple: /tmp/a,/tmp/b", Colors.DIM))
                 return True
             
             # Parse arguments: agents workspace time task
             collab_parts: list[str] = args.split(maxsplit=3)
             if len(collab_parts) < 4:
-                print(c("Usage: /collab <agents> <workspace> <time_minutes> <task>", Colors.YELLOW))
+                print(c("Usage: /collab <agents> <workspace(s)> <time_minutes> <task>", Colors.YELLOW))
                 print(c("  agents: comma-separated list (e.g., llama,copilot)", Colors.DIM))
-                print(c("  workspace: directory path (e.g., ./playground)", Colors.DIM))
+                print(c("  workspace(s): directory path(s) (e.g., ./playground or /tmp/a,/tmp/b)", Colors.DIM))
                 print(c("  time_minutes: session time limit (e.g., 30)", Colors.DIM))
                 print(c("  task: description in quotes (e.g., \"Review the code\")", Colors.DIM))
                 return True
             
             agents_str: str
-            workspace: str
+            workspace_str: str
             time_str: str
             task: str
-            agents_str, workspace, time_str, task = collab_parts
+            agents_str, workspace_str, time_str, task = collab_parts
             agents: list[str] = [a.strip() for a in agents_str.split(',')]
+            
+            # Parse workspace(s) - support comma-separated list
+            workspace_paths: list[str] = []
+            for ws in workspace_str.split(','):
+                ws = ws.strip()
+                if not os.path.isabs(ws):
+                    ws = os.path.join(self.project_dir, ws)
+                workspace_paths.append(ws)
+            
+            # Use first workspace as primary
+            workspace = workspace_paths[0]
             
             time_limit: int
             try:
@@ -3425,18 +3539,16 @@ Dependencies:
                 print(c(f"Invalid time limit: {time_str}. Must be a number (minutes).", Colors.RED))
                 return True
             
-            # Resolve workspace path
-            if not os.path.isabs(workspace):
-                workspace = os.path.join(self.project_dir, workspace)
-            
-            if not os.path.exists(workspace):
-                print(c(f"Workspace directory not found: {workspace}", Colors.RED))
-                print(c("Creating it...", Colors.YELLOW))
-                try:
-                    os.makedirs(workspace, exist_ok=True)
-                except Exception as e:
-                    print(c(f"Failed to create workspace: {e}", Colors.RED))
-                    return True
+            # Create workspaces if they don't exist
+            for ws in workspace_paths:
+                if not os.path.exists(ws):
+                    print(c(f"Workspace directory not found: {ws}", Colors.RED))
+                    print(c("Creating it...", Colors.YELLOW))
+                    try:
+                        os.makedirs(ws, exist_ok=True)
+                    except Exception as e:
+                        print(c(f"Failed to create workspace: {e}", Colors.RED))
+                        return True
             
             # Remove quotes from task if present
             task = task.strip('"\'')
@@ -3446,6 +3558,7 @@ Dependencies:
                     config=self.config,
                     agents=agents,
                     workspace_dir=workspace,
+                    workspace_paths=workspace_paths,
                     time_limit_minutes=time_limit
                 )
                 collab.start_session(task)
@@ -3453,6 +3566,9 @@ Dependencies:
                 print(c(f"Cannot start collaboration: {e}", Colors.RED))
             except Exception as e:
                 print(c(f"Collaboration error: {e}", Colors.RED))
+        
+        elif command == '/workspace':
+            self.handle_workspace_command(args)
         
         elif command == '/workshop':
             self.handle_workshop_command(args)
@@ -3896,7 +4012,7 @@ Collaborative Mode:
     parser.add_argument('--collab',
                         help='Start collaborative session with comma-separated agents (e.g., llama,copilot)')
     parser.add_argument('--workspace',
-                        help='Workspace directory for collaborative session')
+                        help='Workspace directory(s) - comma-separated for multiple (e.g., /tmp/a,/tmp/b)')
     parser.add_argument('--time', type=int, default=30,
                         help='Time limit in minutes for collaborative session (default: 30)')
     parser.add_argument('--task',
@@ -3949,18 +4065,27 @@ Collaborative Mode:
             return
         
         agents = [a.strip() for a in args.collab.split(',')]
-        workspace = args.workspace if args.workspace else args.dir
         
-        # Ensure workspace is not None (args.dir defaults to '.')
-        if workspace is None:
-            workspace = '.'
+        # Parse workspace(s) - support comma-separated list
+        workspace_paths = []
+        if args.workspace:
+            for ws in args.workspace.split(','):
+                ws = ws.strip()
+                if not os.path.isabs(ws):
+                    ws = os.path.abspath(ws)
+                workspace_paths.append(ws)
+        else:
+            # Default to project dir
+            workspace_paths = [os.path.abspath(args.dir)]
         
-        if not os.path.isabs(workspace):
-            workspace = os.path.abspath(workspace)
+        # Use first workspace as primary workspace for preprocessing
+        workspace = workspace_paths[0]
         
-        if not os.path.exists(workspace):
-            print(c(f"Creating workspace: {workspace}", Colors.YELLOW))
-            os.makedirs(workspace, exist_ok=True)
+        # Create workspaces if they don't exist
+        for ws in workspace_paths:
+            if not os.path.exists(ws):
+                print(c(f"Creating workspace: {ws}", Colors.YELLOW))
+                os.makedirs(ws, exist_ok=True)
         
         # Run preprocessing if enabled (environment_probe, minifier and/or llmprep)
         preprocessor = SessionPreprocessor(config, workspace)
@@ -4012,6 +4137,7 @@ Collaborative Mode:
                 config=config,
                 agents=agents,
                 workspace_dir=workspace,
+                workspace_paths=workspace_paths,
                 time_limit_minutes=args.time,
                 github_enabled=args.enable_github
             )

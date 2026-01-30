@@ -78,13 +78,14 @@ class SandboxManager:
     - Support multiple concurrent workspaces (future)
     """
     
-    def __init__(self, config: 'Config', workspace_path: str):
+    def __init__(self, config: 'Config', workspace_path: str, workspace_paths: Optional[List[str]] = None):
         """
         Initialize sandbox manager.
         
         Args:
             config: Configuration object containing sandbox settings
-            workspace_path: Path to workspace directory (project root)
+            workspace_path: Path to workspace directory (project root, for backward compatibility)
+            workspace_paths: Optional list of workspace paths to bind (overrides config)
         """
         self.config = config
         self.workspace_path = os.path.abspath(workspace_path)
@@ -97,7 +98,24 @@ class SandboxManager:
         self.namespaces = self.sandbox_config.get('namespaces', {})
         self.options = self.sandbox_config.get('options', {})
         self.host_binds = self.sandbox_config.get('host_binds', {})
-        self.workspaces = self.sandbox_config.get('workspaces', [])
+        
+        # Handle workspace paths
+        if workspace_paths:
+            # Use provided workspace paths (from CLI or /collab command)
+            self.workspace_paths = [os.path.abspath(wp) for wp in workspace_paths]
+        else:
+            # Fall back to config or default workspace_path
+            config_workspaces = self.sandbox_config.get('workspaces', [])
+            if config_workspaces:
+                self.workspace_paths = []
+                for ws_config in config_workspaces:
+                    ws_path = ws_config.get('path', '.')
+                    if not os.path.isabs(ws_path):
+                        ws_path = os.path.join(self.workspace_path, ws_path)
+                    self.workspace_paths.append(os.path.abspath(ws_path))
+            else:
+                # Default: use the workspace_path parameter
+                self.workspace_paths = [self.workspace_path]
     
     def is_available(self) -> bool:
         """
@@ -177,21 +195,15 @@ class SandboxManager:
         if self.options.get('new_session', True):
             cmd.append('--new-session')
         
-        # Bind workspace (writable)
-        # The first workspace is the primary one
-        if self.workspaces:
-            workspace_config = self.workspaces[0]
-            workspace_path = workspace_config.get('path', '.')
-            if not os.path.isabs(workspace_path):
-                workspace_path = os.path.join(self.workspace_path, workspace_path)
-            workspace_path = os.path.abspath(workspace_path)
-            
-            if workspace_config.get('writable', True):
-                # Bind workspace to itself inside sandbox (writable)
+        # Bind all workspace paths (writable)
+        for workspace_path in self.workspace_paths:
+            if os.path.exists(workspace_path):
+                # Bind workspace to itself inside sandbox with write access
                 cmd.extend(['--bind', workspace_path, workspace_path])
-        else:
-            # Default: bind workspace directory as writable
-            cmd.extend(['--bind', self.workspace_path, self.workspace_path])
+            else:
+                # Note: Don't fail here, just skip non-existent workspaces
+                # They may be created by the agent during execution
+                pass
         
         # Bind host directories (read-only by default)
         readonly_binds = self.host_binds.get('readonly', [])
