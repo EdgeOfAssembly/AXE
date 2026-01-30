@@ -2,7 +2,7 @@
 Tool Runner for AXE.
 
 Manages tool execution with safety checks including:
-- Whitelist-based command validation
+- Blacklist-based command validation (default-allow model)
 - Forbidden path checking
 - Support for shell operators (pipes, redirects, logical operators)
 - Heredoc content parsing
@@ -26,14 +26,14 @@ class ToolRunner:
     Manages tool execution with safety checks.
 
     This class provides secure command execution with:
-    - Whitelist-based command validation
+    - Blacklist-based command validation (default-allow model)
     - Forbidden path checking
     - Support for shell operators (pipes, redirects, logical operators)
     - Heredoc content parsing
     - Automatic detection of shell vs direct execution
 
     Key Features:
-    - Validates commands against a whitelist before execution
+    - Validates commands against a blacklist before execution
     - Handles complex shell syntax (pipes, redirects, subshells, heredocs)
     - Prevents access to forbidden directories
     - Logs all command execution attempts
@@ -52,7 +52,7 @@ class ToolRunner:
         Initialize the ToolRunner.
 
         Args:
-            config: Configuration object containing tool whitelist and forbidden paths
+            config: Configuration object containing tool blacklist and forbidden paths
             project_dir: Base directory for command execution
         """
         self.config = config
@@ -67,14 +67,14 @@ class ToolRunner:
                 from .sandbox import SandboxManager
                 self.sandbox_manager = SandboxManager(config, project_dir)
                 if not self.sandbox_manager.is_available():
-                    print(c("Warning: bubblewrap not available, falling back to whitelist mode", Colors.YELLOW))
+                    print(c("Warning: bubblewrap not available, falling back to unrestricted mode", Colors.YELLOW))
                     self.sandbox_manager = None
             except ImportError as e:
                 print(c(f"Warning: Failed to import sandbox module: {e}", Colors.YELLOW))
                 self.sandbox_manager = None
         
-        # Legacy whitelist mode (used when sandbox is disabled or unavailable)
-        self.whitelist = config.get_tool_whitelist()
+        # Tool blacklist (default-allow model)
+        self.blacklist = config.get_tool_blacklist()
 
     def _strip_heredoc_content(self, cmd: str) -> str:
         """
@@ -202,8 +202,8 @@ class ToolRunner:
         return False
 
     def _check_forbidden_paths(self, cmd: str) -> Tuple[bool, str]:
-        """Check if command accesses forbidden paths."""
-        forbidden = self.config.get('directories', 'forbidden', default=[])
+        """Check if command accesses forbidden paths (blacklist)."""
+        forbidden = self.config.get('directories', 'blacklist', default=[])
 
         for path in forbidden:
             expanded_path = os.path.expanduser(path)
@@ -216,7 +216,7 @@ class ToolRunner:
         """
         Check if a command (including pipelines) is allowed.
 
-        This method validates commands against the whitelist and security rules.
+        This method validates commands against the blacklist and security rules.
         It uses _extract_commands_from_shell() which internally strips heredoc
         content for validation purposes only. The input `cmd` parameter is never
         modified and should be passed unchanged to run() for execution.
@@ -230,7 +230,7 @@ class ToolRunner:
         if not cmd or not cmd.strip():
             return False, "Empty command"
         
-        # Sandbox mode: check blacklist only
+        # Sandbox mode: check blacklist
         if self.sandbox_manager:
             try:
                 commands = self._extract_commands_from_shell(cmd)
@@ -248,13 +248,7 @@ class ToolRunner:
             
             return True, "OK (sandbox mode)"
         
-        # Legacy whitelist mode
-        if '*' in self.whitelist:
-            return True, "OK (wildcard allowed)"
-
-        # Extract all command names from the shell string
-        # NOTE: This uses _strip_heredoc_content() internally for parsing only
-        # The original `cmd` remains unchanged and should be used for execution
+        # Non-sandbox mode: check blacklist only (default-allow)
         try:
             commands = self._extract_commands_from_shell(cmd)
         except Exception as e:
@@ -263,16 +257,16 @@ class ToolRunner:
         if not commands:
             return False, "No commands found in input"
 
-        # Check each command against whitelist
+        # Check each command against blacklist
         for command in commands:
             # Get base command name (handle paths like /usr/bin/grep)
             base_cmd = os.path.basename(command)
 
-            if base_cmd not in self.whitelist:
-                return False, f"Tool '{base_cmd}' not in whitelist"
+            if base_cmd in self.blacklist:
+                return False, f"Tool '{base_cmd}' is blacklisted"
 
         # Check for forbidden paths in the entire command
-        forbidden = self.config.get('directories', 'forbidden', default=[])
+        forbidden = self.config.get('directories', 'blacklist', default=[])
 
         # Resolve forbidden directories to real absolute paths
         resolved_forbidden = []
