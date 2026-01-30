@@ -2227,8 +2227,33 @@ Focus on practical, well-tested solutions."""
 
 # ========== Socket Server for Agent Communication ==========
 
-# Socket and PID file paths
-RUNTIME_DIR = f"/run/user/{os.getuid()}"
+# Determine runtime directory (with fallback for systems without /run/user)
+def _get_runtime_dir():
+    """Get runtime directory with fallback options."""
+    uid = os.getuid()
+    
+    # Try standard XDG_RUNTIME_DIR first
+    xdg_runtime = os.environ.get('XDG_RUNTIME_DIR')
+    if xdg_runtime and os.path.isdir(xdg_runtime):
+        return xdg_runtime
+    
+    # Try /run/user/<uid>
+    run_user_dir = f"/run/user/{uid}"
+    if os.path.isdir(run_user_dir):
+        return run_user_dir
+    
+    # Fallback to /tmp/axe-<uid>
+    fallback_dir = f"/tmp/axe-{uid}"
+    if not os.path.exists(fallback_dir):
+        try:
+            os.makedirs(fallback_dir, mode=0o700, exist_ok=True)
+        except OSError as e:
+            # If we can't create the directory, use /tmp directly
+            print(c(f"Warning: Could not create {fallback_dir}: {e}", Colors.YELLOW))
+            return "/tmp"
+    return fallback_dir
+
+RUNTIME_DIR = _get_runtime_dir()
 SOCKET_PATH = f"{RUNTIME_DIR}/axe.sock"
 PID_PATH = f"{RUNTIME_DIR}/axe.pid"
 
@@ -2243,24 +2268,39 @@ def cleanup_files():
             pass
 
 
+# Track if signal handlers have been set up to avoid duplicate registration
+_signal_handlers_registered = False
+
+
 def setup_signal_handlers():
     """Register signal handlers for clean shutdown."""
+    global _signal_handlers_registered
+    
+    if _signal_handlers_registered:
+        return
+    
     def signal_handler(signum, frame):
         cleanup_files()
         sys.exit(0)
     
+    # Register SIGTERM and SIGHUP, but NOT SIGINT
+    # SIGINT is handled by KeyboardInterrupt in the REPL
     signal.signal(signal.SIGTERM, signal_handler)
-    signal.signal(signal.SIGINT, signal_handler)  # Ctrl+C
     signal.signal(signal.SIGHUP, signal_handler)
     
     # Also register atexit as backup for normal exit
     atexit.register(cleanup_files)
+    
+    _signal_handlers_registered = True
 
 
 def write_pid_file():
     """Write PID file for agent discovery."""
-    with open(PID_PATH, 'w') as f:
-        f.write(str(os.getpid()))
+    try:
+        with open(PID_PATH, 'w') as f:
+            f.write(str(os.getpid()))
+    except (OSError, PermissionError) as e:
+        print(c(f"Warning: Could not write PID file {PID_PATH}: {e}", Colors.YELLOW))
 
 
 def check_and_cleanup_stale_files():
@@ -2271,17 +2311,24 @@ def check_and_cleanup_stale_files():
                 old_pid = int(f.read().strip())
             
             # Check if process is still alive
-            os.kill(old_pid, 0)  # Raises ProcessLookupError if dead
-            
-            # Process is alive - another instance running
-            raise RuntimeError(
-                f"Another AXE instance is already running (PID {old_pid}).\n"
-                f"If this is incorrect, remove {PID_PATH} and {SOCKET_PATH}"
-            )
-        except ProcessLookupError:
-            # Process dead - stale files from crash
-            print(c("Warning: Cleaning up stale files from previous crashed session", Colors.YELLOW))
-            cleanup_files()
+            try:
+                os.kill(old_pid, 0)  # Raises ProcessLookupError if dead
+                
+                # Process is alive - another instance running
+                raise RuntimeError(
+                    f"Another AXE instance is already running (PID {old_pid}).\n"
+                    f"If this is incorrect, remove {PID_PATH} and {SOCKET_PATH}"
+                )
+            except ProcessLookupError:
+                # Process dead - stale files from crash
+                print(c("Warning: Cleaning up stale files from previous crashed session", Colors.YELLOW))
+                cleanup_files()
+            except PermissionError:
+                # Can't check process (owned by another user) - assume running
+                raise RuntimeError(
+                    f"Another AXE instance may be running (PID {old_pid}, permission denied to check).\n"
+                    f"If this is incorrect, remove {PID_PATH} and {SOCKET_PATH}"
+                )
         except ValueError:
             # Invalid PID in file
             print(c("Warning: Invalid PID file, cleaning up", Colors.YELLOW))
@@ -2295,16 +2342,21 @@ def check_and_cleanup_stale_files():
 
 def start_socket_server():
     """Start Unix socket server for agent communication."""
-    # Remove stale socket if exists
-    if os.path.exists(SOCKET_PATH):
-        os.unlink(SOCKET_PATH)
-    
-    sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    sock.bind(SOCKET_PATH)
-    sock.listen(1)
-    sock.setblocking(False)  # Non-blocking for integration with REPL
-    
-    return sock
+    try:
+        # Remove stale socket if exists
+        if os.path.exists(SOCKET_PATH):
+            os.unlink(SOCKET_PATH)
+        
+        sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        sock.bind(SOCKET_PATH)
+        sock.listen(1)
+        sock.setblocking(False)  # Non-blocking for integration with REPL
+        
+        return sock
+    except (OSError, PermissionError) as e:
+        print(c(f"Warning: Could not create socket server at {SOCKET_PATH}: {e}", Colors.YELLOW))
+        print(c("Socket interface will be unavailable", Colors.YELLOW))
+        return None
 
 
 class ChatSession:
@@ -3712,17 +3764,19 @@ Dependencies:
             while True:
                 # Check for socket connections before showing prompt (non-blocking)
                 # This allows processing socket commands between user inputs
-                ready, _, _ = select.select([sock], [], [], 0.1)
-                if ready:
-                    try:
-                        conn, _ = sock.accept()
-                        data = conn.recv(4096).decode('utf-8').rstrip('\n')
-                        if data:
-                            self.handle_socket_command(conn, data)
-                        conn.close()
-                        continue  # Check for more socket connections before prompting
-                    except Exception as e:
-                        print(c(f"Socket error: {e}", Colors.RED))
+                # Only check if socket was successfully created
+                if sock:
+                    ready, _, _ = select.select([sock], [], [], 0.01)  # 10ms timeout
+                    if ready:
+                        try:
+                            conn, _ = sock.accept()
+                            data = conn.recv(4096).decode('utf-8').rstrip('\n')
+                            if data and data.strip():  # Validate non-empty command
+                                self.handle_socket_command(conn, data)
+                            conn.close()
+                            continue  # Check for more socket connections before prompting
+                        except Exception as e:
+                            print(c(f"Socket error: {e}", Colors.RED))
                 
                 # Normal REPL input handling
                 prompt: str
@@ -3746,7 +3800,8 @@ Dependencies:
             print(c("\nInterrupted", Colors.YELLOW))
         finally:
             cleanup_files()
-            sock.close()
+            if sock:
+                sock.close()
         
         print(c("Goodbye!", Colors.CYAN))
 
