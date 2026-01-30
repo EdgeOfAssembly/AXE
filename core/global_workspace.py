@@ -17,7 +17,7 @@ import json
 import uuid
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Tuple
 from filelock import FileLock  # For thread-safe file access
 
 from .constants import GLOBAL_WORKSPACE_MAX_BROADCASTS, GLOBAL_WORKSPACE_FILE
@@ -81,6 +81,7 @@ class GlobalWorkspace:
                 'broadcasts': [],
                 'xp_votes': [],
                 'vote_limits': {},
+                'conflicts': [],
                 'metadata': {
                     'total_broadcasts': 0,
                     'categories_used': []
@@ -647,3 +648,161 @@ class GlobalWorkspace:
             
             data['vote_limits'] = {}
             self.workspace_file.write_text(json.dumps(data, indent=2))
+    
+    # ============================================================================
+    # Conflict Detection & Resolution (Minsky's Society of Mind)
+    # ============================================================================
+    
+    def detect_conflicts(self, window_broadcasts: int = 20) -> List[Dict[str, Any]]:
+        """
+        Detect conflicting broadcasts in recent history.
+        
+        Conflict signals:
+        - Same category, different agents, contradictory keywords
+        - Explicit CONFLICT category broadcasts
+        - Opposing recommendations on same file/function
+        
+        Args:
+            window_broadcasts: Number of recent broadcasts to analyze
+            
+        Returns:
+            List of conflict pairs with details
+        """
+        from .constants import CONTRADICTION_PAIRS
+        
+        recent = self.get_broadcasts(limit=window_broadcasts)
+        conflicts = []
+        
+        # Check for explicit CONFLICT broadcasts
+        conflict_broadcasts = [b for b in recent if b['category'] == 'CONFLICT']
+        for cb in conflict_broadcasts:
+            conflicts.append({
+                'type': 'explicit',
+                'broadcast': cb,
+                'reason': cb.get('message', 'Explicit conflict flagged')
+            })
+        
+        # Check for contradictory broadcasts
+        for i, b1 in enumerate(recent):
+            for b2 in recent[i+1:]:
+                # Skip if same agent (agents can change their minds)
+                if b1['agent'] == b2['agent']:
+                    continue
+                    
+                # Check if they're about the same topic
+                if not self._same_topic(b1, b2):
+                    continue
+                
+                # Check for contradictions
+                is_contradictory, reason = self._are_contradictory(b1, b2)
+                if is_contradictory:
+                    conflict_id = f"conflict_{uuid.uuid4().hex[:8]}"
+                    conflict = {
+                        'id': conflict_id,
+                        'type': 'detected',
+                        'broadcast1': b1,
+                        'broadcast2': b2,
+                        'reason': reason,
+                        'detected_at': datetime.now(timezone.utc).isoformat()
+                    }
+                    conflicts.append(conflict)
+        
+        return conflicts
+    
+    def _are_contradictory(self, broadcast1: Dict, broadcast2: Dict) -> Tuple[bool, str]:
+        """
+        Check if two broadcasts contradict each other.
+        
+        Contradiction patterns:
+        - (safe, unsafe), (secure, vulnerable)
+        - (correct, incorrect), (valid, invalid)
+        - (approve, reject), (yes, no)
+        - (no issues, found issues)
+        
+        Args:
+            broadcast1: First broadcast
+            broadcast2: Second broadcast
+            
+        Returns:
+            Tuple of (is_contradictory, reason)
+        """
+        from .constants import CONTRADICTION_PAIRS
+        
+        content1 = broadcast1['message'].lower()
+        content2 = broadcast2['message'].lower()
+        
+        for word1, word2 in CONTRADICTION_PAIRS:
+            if word1 in content1 and word2 in content2:
+                return True, f"Contradiction: '{word1}' vs '{word2}'"
+            if word2 in content1 and word1 in content2:
+                return True, f"Contradiction: '{word2}' vs '{word1}'"
+        
+        return False, ""
+    
+    def _same_topic(self, broadcast1: Dict, broadcast2: Dict) -> bool:
+        """
+        Check if two broadcasts are about the same topic.
+        
+        Args:
+            broadcast1: First broadcast
+            broadcast2: Second broadcast
+            
+        Returns:
+            True if they're about the same topic
+        """
+        # Check if same category
+        if broadcast1['category'] != broadcast2['category']:
+            return False
+        
+        # Check if related to same file
+        if broadcast1.get('related_file') and broadcast2.get('related_file'):
+            if broadcast1['related_file'] == broadcast2['related_file']:
+                return True
+        
+        # Check if tags overlap
+        tags1 = set(broadcast1.get('tags', []))
+        tags2 = set(broadcast2.get('tags', []))
+        if tags1 and tags2 and len(tags1 & tags2) > 0:
+            return True
+        
+        return False
+    
+    def flag_conflict(self, broadcast_ids: List[str], 
+                     reason: str, 
+                     flagged_by: str) -> Dict[str, Any]:
+        """
+        Manually flag broadcasts as conflicting.
+        
+        Args:
+            broadcast_ids: List of conflicting broadcast IDs
+            reason: Reason for the conflict
+            flagged_by: Agent alias who flagged the conflict
+            
+        Returns:
+            Conflict record
+        """
+        conflict_id = f"conflict_{uuid.uuid4().hex[:8]}"
+        conflict = {
+            'id': conflict_id,
+            'type': 'flagged',
+            'broadcast_ids': broadcast_ids,
+            'reason': reason,
+            'flagged_by': flagged_by,
+            'flagged_at': datetime.now(timezone.utc).isoformat(),
+            'status': 'pending'
+        }
+        
+        # Store in workspace
+        with FileLock(str(self.lock_file)):
+            if self.workspace_file.exists():
+                data = json.loads(self.workspace_file.read_text())
+            else:
+                data = {'broadcasts': [], 'xp_votes': [], 'vote_limits': {}, 'conflicts': [], 'metadata': {}}
+            
+            if 'conflicts' not in data:
+                data['conflicts'] = []
+            data['conflicts'].append(conflict)
+            
+            self.workspace_file.write_text(json.dumps(data, indent=2))
+        
+        return conflict

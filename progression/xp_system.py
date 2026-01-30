@@ -51,8 +51,12 @@ XP_AWARDS = {
     'peer_endorsement': 10,             # Endorsed by another agent
     'peer_strong_endorsement': 20,      # Strong endorsement from Team Leader+
     'peer_penalty': -5,                 # Penalized (limited to prevent abuse)
-    'conflict_resolution': 15,          # Successfully resolved a conflict
-    'arbitration_win': 25,              # Won an arbitration decision
+    
+    # Conflict resolution and arbitration (Minsky's cross-exclusion)
+    'conflict_resolution': 15,          # Successfully resolved a conflict (PR #55 value)
+    'arbitration_win': 25,              # Won an arbitration decision (PR #55 value)
+    'arbitration_conducted': 20,        # Successfully arbitrated a conflict (PR #56)
+    'conflict_detected': 10,            # Detecting a valid conflict (PR #56)
     
     # Default awards
     'message_processed': 1,

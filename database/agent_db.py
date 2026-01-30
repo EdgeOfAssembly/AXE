@@ -19,7 +19,13 @@ from .schema import (
     ALIAS_MAPPINGS_TABLE,
     WAL_MODE_PRAGMA,
     WORKSHOP_ANALYSIS_TABLE,
-    WORKSHOP_ANALYSIS_INDEXES
+    WORKSHOP_ANALYSIS_INDEXES,
+    BROADCAST_TABLE,
+    BROADCAST_INDEXES,
+    ARBITRATION_TABLE,
+    ARBITRATION_INDEXES,
+    CONFLICT_TABLE,
+    CONFLICT_INDEXES,
 )
 
 
@@ -67,9 +73,24 @@ class AgentDatabase:
             c.execute(SUPERVISOR_LOG_TABLE)
             c.execute(ALIAS_MAPPINGS_TABLE)
             c.execute(WORKSHOP_ANALYSIS_TABLE)
+            c.execute(BROADCAST_TABLE)
+            c.execute(ARBITRATION_TABLE)
+            c.execute(CONFLICT_TABLE)
             
             # Create indexes for workshop analysis
             for index_sql in WORKSHOP_ANALYSIS_INDEXES:
+                c.execute(index_sql)
+            
+            # Create indexes for broadcasts
+            for index_sql in BROADCAST_INDEXES:
+                c.execute(index_sql)
+            
+            # Create indexes for arbitrations
+            for index_sql in ARBITRATION_INDEXES:
+                c.execute(index_sql)
+            
+            # Create indexes for conflicts
+            for index_sql in CONFLICT_INDEXES:
                 c.execute(index_sql)
             
             # Apply migrations for existing databases

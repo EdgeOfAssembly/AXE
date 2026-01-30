@@ -11,6 +11,7 @@ from .resource_monitor import start_resource_monitor, collect_resources
 from .skills_manager import SkillsManager, Skill, create_skills_manager
 from .global_workspace import GlobalWorkspace
 from .subsumption_layer import SubsumptionController, SubsumptionLayer, LAYER_METADATA
+from .arbitration import ArbitrationProtocol
 from .constants import (
     DEFAULT_CONFIG,
     CHARS_PER_TOKEN,
@@ -53,8 +54,14 @@ from .constants import (
     AGENT_TOKEN_SUPPRESS,
     AGENT_TOKEN_RELEASE,
     AGENT_TOKEN_XP_VOTE,
+    AGENT_TOKEN_CONFLICT,
+    AGENT_TOKEN_ARBITRATE,
     SUPPRESSION_DEFAULT_TURNS,
     SUPPRESSION_MAX_TURNS,
+    ARBITRATION_DEADLINE_TURNS,
+    ARBITRATION_AUTO_ESCALATE,
+    ARBITRATION_MIN_LEVEL_BUMP,
+    CONTRADICTION_PAIRS,
     READ_BLOCK_PATTERN,
 )
 
@@ -77,6 +84,8 @@ __all__ = [
     'SubsumptionController',
     'SubsumptionLayer',
     'LAYER_METADATA',
+    # Arbitration Protocol
+    'ArbitrationProtocol',
     # Tool Runner
     'ToolRunner',
     # Sandbox
@@ -126,7 +135,13 @@ __all__ = [
     'AGENT_TOKEN_SUPPRESS',
     'AGENT_TOKEN_RELEASE',
     'AGENT_TOKEN_XP_VOTE',
+    'AGENT_TOKEN_CONFLICT',
+    'AGENT_TOKEN_ARBITRATE',
     'SUPPRESSION_DEFAULT_TURNS',
     'SUPPRESSION_MAX_TURNS',
+    'ARBITRATION_DEADLINE_TURNS',
+    'ARBITRATION_AUTO_ESCALATE',
+    'ARBITRATION_MIN_LEVEL_BUMP',
+    'CONTRADICTION_PAIRS',
     'READ_BLOCK_PATTERN',
 ]
