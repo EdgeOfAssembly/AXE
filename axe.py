@@ -88,6 +88,12 @@ from core.constants import (
     AGENT_TOKEN_SPAWN,
     AGENT_TOKEN_STATUS,
     AGENT_TOKEN_GITHUB_READY,
+    AGENT_TOKEN_BROADCAST,
+    AGENT_TOKEN_SUPPRESS,
+    AGENT_TOKEN_RELEASE,
+    AGENT_TOKEN_XP_VOTE,
+    AGENT_TOKEN_CONFLICT,
+    AGENT_TOKEN_ARBITRATE,
     READ_BLOCK_PATTERN,
 )
 from core.config import Config
@@ -97,6 +103,9 @@ from core.resource_monitor import start_resource_monitor
 from core.session_preprocessor import SessionPreprocessor
 from core.privilege_mapping import format_privileges_for_prompt
 from core.constants import PRIVILEGE_PROMPT_SECTION
+
+# Import cognitive architecture components
+from core import GlobalWorkspace, SubsumptionController, ArbitrationProtocol
 
 # Import from managers module (refactored)
 from managers.sleep_manager import SleepManager
@@ -952,6 +961,11 @@ class CollaborativeSession:
         self.emergency_mailbox = EmergencyMailbox()
         self.spawner = DynamicSpawner(self.db, config)
         
+        # Initialize Cognitive Architecture (Brooks, Minsky)
+        self.global_workspace = GlobalWorkspace(workspace_dir)
+        self.subsumption_controller = SubsumptionController()
+        self.arbitration_protocol = ArbitrationProtocol(self.global_workspace)
+        
         # NEW: GitHub agent integration (completely optional)
         self.github_enabled = github_enabled
         self.github_agent = None
@@ -1147,6 +1161,14 @@ SPECIAL COMMANDS (use these exact tokens):
 - Request break: {AGENT_TOKEN_BREAK_REQUEST} coffee, need rest ]]
 - Emergency: {AGENT_TOKEN_EMERGENCY} urgent message ]]
 - Check status: {AGENT_TOKEN_STATUS}
+
+COGNITIVE ARCHITECTURE TOKENS (Subsumption, Voting, Arbitration):
+- Broadcast finding: {AGENT_TOKEN_BROADCAST} CATEGORY: your message here ]]
+- Vote for peer: {AGENT_TOKEN_XP_VOTE} @target:+15:reason ]] (vote ±XP for another agent)
+- Suppress agent: {AGENT_TOKEN_SUPPRESS} @target:reason ]] (higher level only)
+- Release agent: {AGENT_TOKEN_RELEASE} @target ]]
+- Flag conflict: {AGENT_TOKEN_CONFLICT} broadcast_id1,broadcast_id2:reason ]]
+- Arbitrate: {AGENT_TOKEN_ARBITRATE} arb_id:resolution:winner_id ]] (qualified level only)
 """
 
         # Add privilege section if enabled
@@ -1660,6 +1682,9 @@ It's YOUR TURN. What would you like to contribute? Remember:
                     if github_ready:
                         self._handle_github_review_pause(push_info)
                 
+                # NEW: Handle Cognitive Architecture tokens
+                self._handle_cognitive_tokens(current_agent, processed_response)
+                
                 if is_pass:
                     consecutive_passes += 1
                     print(c(f"  ({alias} passed, {consecutive_passes}/{max_passes})", Colors.DIM))
@@ -1898,6 +1923,105 @@ Focus on practical, well-tested solutions."""
         except (EOFError, KeyboardInterrupt):
             pass
     
+    def _handle_cognitive_tokens(self, agent_name: str, response: str) -> None:
+        """Handle cognitive architecture tokens in agent response."""
+        agent_id = self.agent_ids.get(agent_name)
+        alias = self.agent_aliases.get(agent_name, agent_name)
+        
+        if not agent_id:
+            return
+        
+        state = self.db.load_agent_state(agent_id)
+        if not state:
+            return
+        
+        agent_level = state['level']
+        
+        # Handle BROADCAST token
+        found, content = detect_agent_token(response, AGENT_TOKEN_BROADCAST)
+        if found and content:
+            # Parse: CATEGORY:message
+            parts = content.split(':', 1)
+            if len(parts) == 2:
+                category, message = parts
+                bc_id = self.global_workspace.broadcast(
+                    alias, agent_level, category.strip(), message.strip()
+                )
+                print(c(f"  📢 {alias} broadcast: {category.strip()}", Colors.CYAN))
+        
+        # Handle XP_VOTE token
+        found, content = detect_agent_token(response, AGENT_TOKEN_XP_VOTE)
+        if found and content:
+            # Parse: @target:±XP:reason
+            parts = content.split(':', 2)
+            if len(parts) == 3:
+                target, xp_str, reason = parts
+                try:
+                    xp_delta = int(xp_str.strip())
+                    result = self.global_workspace.vote_xp(
+                        alias, agent_level, target.strip(), xp_delta, reason.strip()
+                    )
+                    if result['success']:
+                        print(c(f"  🗳️  {alias} voted {xp_delta:+d} XP for {target.strip()}", Colors.GREEN))
+                    else:
+                        print(c(f"  ⚠️  Vote failed: {result.get('error', 'Unknown error')}", Colors.YELLOW))
+                except ValueError:
+                    print(c(f"  ⚠️  Invalid XP value in vote: {xp_str}", Colors.YELLOW))
+        
+        # Handle SUPPRESS token
+        found, content = detect_agent_token(response, AGENT_TOKEN_SUPPRESS)
+        if found and content:
+            # Parse: @target:reason
+            parts = content.split(':', 1)
+            if len(parts) == 2:
+                target, reason = parts
+                success, msg = self.subsumption_controller.suppress_agent(
+                    alias, agent_level, target.strip(), 0, reason.strip()  # Level 0 = lookup from DB
+                )
+                if success:
+                    print(c(f"  🔒 {alias} suppressed {target.strip()}", Colors.YELLOW))
+                else:
+                    print(c(f"  ⚠️  Suppression failed: {msg}", Colors.YELLOW))
+        
+        # Handle RELEASE token  
+        found, content = detect_agent_token(response, AGENT_TOKEN_RELEASE)
+        if found and content:
+            target = content.strip()
+            success, msg = self.subsumption_controller.release_agent(alias, target)
+            if success:
+                print(c(f"  🔓 {alias} released {target}", Colors.GREEN))
+            else:
+                print(c(f"  ⚠️  Release failed: {msg}", Colors.YELLOW))
+        
+        # Handle CONFLICT token
+        found, content = detect_agent_token(response, AGENT_TOKEN_CONFLICT)
+        if found and content:
+            # Parse: broadcast_id1,broadcast_id2:reason
+            parts = content.split(':', 1)
+            if len(parts) == 2:
+                bc_ids, reason = parts
+                ids = [bid.strip() for bid in bc_ids.split(',')]
+                conflict = self.global_workspace.flag_conflict(ids, reason.strip(), alias)
+                print(c(f"  ⚠️  {alias} flagged conflict: {conflict['id']}", Colors.RED))
+        
+        # Handle ARBITRATE token
+        found, content = detect_agent_token(response, AGENT_TOKEN_ARBITRATE)
+        if found and content:
+            # Parse: arb_id:resolution:winner_id
+            parts = content.split(':', 2)
+            if len(parts) == 3:
+                arb_id, resolution, winner_id = parts
+                try:
+                    result = self.arbitration_protocol.submit_resolution(
+                        arb_id.strip(), alias, agent_level, resolution.strip(), winner_id.strip()
+                    )
+                    if result.get('success'):
+                        print(c(f"  ⚖️  {alias} arbitrated: {resolution.strip()}", Colors.CYAN))
+                    else:
+                        print(c(f"  ⚠️  Arbitration failed: {result.get('error', 'Unknown')}", Colors.YELLOW))
+                except Exception as e:
+                    print(c(f"  ⚠️  Arbitration error: {e}", Colors.YELLOW))
+    
     def _show_emergency_mailbox(self) -> None:
         """Show emergency mailbox contents for human review."""
         reports = self.emergency_mailbox.list_reports()
@@ -2080,6 +2204,18 @@ Focus on practical, well-tested solutions."""
             print(c(f"\n📝 Conversation log saved to: {log_file}", Colors.GREEN))
         except Exception as e:
             print(c(f"Failed to save log: {e}", Colors.RED))
+        
+        # Apply any pending XP votes from the session
+        pending_votes = self.global_workspace.get_pending_votes()
+        if pending_votes:
+            print(c(f"\n🗳️  Applying {len(pending_votes)} pending XP vote(s)...", Colors.CYAN))
+            results = self.db.apply_xp_votes(pending_votes)
+            for result in results:
+                if result['success']:
+                    self.global_workspace.mark_vote_applied(result['vote_id'])
+                    print(c(f"  ✓ {result['voter']} → {result['target']}", Colors.GREEN))
+                    if result.get('leveled_up'):
+                        print(c(f"    🎉 {result['target']} LEVELED UP! {result['old_level']} → {result['new_level']}", Colors.GREEN))
         
         print(c(f"\n📁 Workspace: {self.workspace.workspace_dir}", Colors.CYAN))
         print(c("   Check for any files created/modified by the agents.", Colors.DIM))

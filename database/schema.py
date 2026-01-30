@@ -70,3 +70,66 @@ WORKSHOP_ANALYSIS_INDEXES = [
     "CREATE INDEX IF NOT EXISTS idx_workshop_agent ON workshop_analysis(agent_id)",
     "CREATE INDEX IF NOT EXISTS idx_workshop_timestamp ON workshop_analysis(timestamp)",
 ]
+
+# Global Workspace: Broadcast tracking (Baars' Global Workspace Theory)
+BROADCAST_TABLE = """
+CREATE TABLE IF NOT EXISTS broadcasts (
+    broadcast_id TEXT PRIMARY KEY,
+    agent_alias TEXT NOT NULL,
+    agent_level INTEGER NOT NULL,
+    category TEXT NOT NULL,        -- 'SECURITY', 'CODE_QUALITY', 'CONFLICT', etc.
+    content TEXT NOT NULL,
+    metadata_json TEXT,             -- JSON metadata (files, functions, etc.)
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+"""
+
+BROADCAST_INDEXES = [
+    "CREATE INDEX IF NOT EXISTS idx_broadcast_agent ON broadcasts(agent_alias)",
+    "CREATE INDEX IF NOT EXISTS idx_broadcast_category ON broadcasts(category)",
+    "CREATE INDEX IF NOT EXISTS idx_broadcast_timestamp ON broadcasts(timestamp)",
+]
+
+# Arbitration Protocol: Conflict resolution (Minsky's cross-exclusion)
+ARBITRATION_TABLE = """
+CREATE TABLE IF NOT EXISTS arbitrations (
+    arbitration_id TEXT PRIMARY KEY,
+    conflict_broadcasts_json TEXT NOT NULL,  -- JSON array of conflicting broadcast IDs
+    created_by TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_turn INTEGER DEFAULT 0,
+    deadline_turn INTEGER NOT NULL,
+    required_level INTEGER NOT NULL,
+    status TEXT DEFAULT 'pending',           -- 'pending', 'resolved', 'escalated'
+    escalation_count INTEGER DEFAULT 0,
+    resolution_json TEXT,                    -- JSON resolution details when resolved
+    resolved_at TIMESTAMP,
+    resolved_turn INTEGER
+)
+"""
+
+ARBITRATION_INDEXES = [
+    "CREATE INDEX IF NOT EXISTS idx_arbitration_status ON arbitrations(status)",
+    "CREATE INDEX IF NOT EXISTS idx_arbitration_level ON arbitrations(required_level)",
+    "CREATE INDEX IF NOT EXISTS idx_arbitration_deadline ON arbitrations(deadline_turn)",
+]
+
+# Conflict tracking
+CONFLICT_TABLE = """
+CREATE TABLE IF NOT EXISTS conflicts (
+    conflict_id TEXT PRIMARY KEY,
+    conflict_type TEXT NOT NULL,             -- 'detected', 'manual', 'explicit'
+    broadcast_ids_json TEXT NOT NULL,        -- JSON array of conflicting broadcast IDs
+    flagged_by TEXT,
+    reason TEXT NOT NULL,
+    detected_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status TEXT DEFAULT 'pending_arbitration',  -- 'pending_arbitration', 'resolved', 'dismissed'
+    arbitration_id TEXT                      -- Link to arbitration if created
+)
+"""
+
+CONFLICT_INDEXES = [
+    "CREATE INDEX IF NOT EXISTS idx_conflict_status ON conflicts(status)",
+    "CREATE INDEX IF NOT EXISTS idx_conflict_type ON conflicts(conflict_type)",
+    "CREATE INDEX IF NOT EXISTS idx_conflict_arbitration ON conflicts(arbitration_id)",
+]

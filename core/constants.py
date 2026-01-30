@@ -62,6 +62,29 @@ AGENT_TOKEN_SPAWN = "[[AGENT_SPAWN:"  # Followed by model, role, ends with ]]
 AGENT_TOKEN_STATUS = "[[AGENT_STATUS]]"
 AGENT_TOKEN_GITHUB_READY = "[[GITHUB_READY:"  # Agent signals ready to push to GitHub
 AGENT_TOKEN_BROADCAST = "[[BROADCAST:"  # Format: [[BROADCAST:CATEGORY:message]]
+AGENT_TOKEN_SUPPRESS = "[[SUPPRESS:"  # Format: [[SUPPRESS:@target:reason]]
+AGENT_TOKEN_RELEASE = "[[RELEASE:"    # Format: [[RELEASE:@target]]
+AGENT_TOKEN_XP_VOTE = "[[XP_VOTE:"    # Format: [[XP_VOTE:@target:±XP:reason]]
+AGENT_TOKEN_CONFLICT = "[[CONFLICT:"    # Format: [[CONFLICT:broadcast_id1,broadcast_id2:reason]]
+AGENT_TOKEN_ARBITRATE = "[[ARBITRATE:"  # Format: [[ARBITRATE:arb_id:resolution:winner_id]]
+
+# Subsumption Architecture constants (Brooks 1986)
+SUPPRESSION_DEFAULT_TURNS = 3
+SUPPRESSION_MAX_TURNS = 10
+
+# Arbitration constants (Minsky's conflict resolution)
+ARBITRATION_DEADLINE_TURNS = 5      # Turns before escalation
+ARBITRATION_AUTO_ESCALATE = True    # Auto-escalate on deadline
+ARBITRATION_MIN_LEVEL_BUMP = 10     # Level increase on escalation
+
+# Contradiction keywords for detection
+CONTRADICTION_PAIRS = [
+    ('safe', 'unsafe'), ('secure', 'vulnerable'), ('secure', 'insecure'),
+    ('correct', 'incorrect'), ('valid', 'invalid'),
+    ('approve', 'reject'), ('yes', 'no'),
+    ('no issues', 'found issues'), ('clean', 'buggy'),
+    ('recommended', 'not recommended'), ('should', 'should not'),
+]
 
 # Regex pattern for removing [READ filename] blocks while avoiding [[ token false positives
 # Matches: [READ ...] (case-insensitive) followed by content until:

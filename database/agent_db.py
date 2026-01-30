@@ -19,7 +19,13 @@ from .schema import (
     ALIAS_MAPPINGS_TABLE,
     WAL_MODE_PRAGMA,
     WORKSHOP_ANALYSIS_TABLE,
-    WORKSHOP_ANALYSIS_INDEXES
+    WORKSHOP_ANALYSIS_INDEXES,
+    BROADCAST_TABLE,
+    BROADCAST_INDEXES,
+    ARBITRATION_TABLE,
+    ARBITRATION_INDEXES,
+    CONFLICT_TABLE,
+    CONFLICT_INDEXES,
 )
 
 
@@ -67,9 +73,24 @@ class AgentDatabase:
             c.execute(SUPERVISOR_LOG_TABLE)
             c.execute(ALIAS_MAPPINGS_TABLE)
             c.execute(WORKSHOP_ANALYSIS_TABLE)
+            c.execute(BROADCAST_TABLE)
+            c.execute(ARBITRATION_TABLE)
+            c.execute(CONFLICT_TABLE)
             
             # Create indexes for workshop analysis
             for index_sql in WORKSHOP_ANALYSIS_INDEXES:
+                c.execute(index_sql)
+            
+            # Create indexes for broadcasts
+            for index_sql in BROADCAST_INDEXES:
+                c.execute(index_sql)
+            
+            # Create indexes for arbitrations
+            for index_sql in ARBITRATION_INDEXES:
+                c.execute(index_sql)
+            
+            # Create indexes for conflicts
+            for index_sql in CONFLICT_INDEXES:
                 c.execute(index_sql)
             
             # Apply migrations for existing databases
@@ -843,3 +864,89 @@ class AgentDatabase:
                 }
             
             return stats
+    
+    def apply_xp_votes(self, votes: List[Dict]) -> List[Dict[str, Any]]:
+        """
+        Apply pending XP votes from GlobalWorkspace.
+        
+        Processes peer votes and applies XP awards, handling level-ups
+        and returning results for each vote applied.
+        
+        Args:
+            votes: List of vote dictionaries from GlobalWorkspace
+        
+        Returns:
+            List of results including any level-ups triggered
+        """
+        results = []
+        
+        for vote in votes:
+            # Get target agent by alias
+            target_alias = vote['target']
+            # Remove @ prefix if present for database lookup
+            if target_alias.startswith('@'):
+                target_alias = target_alias[1:]
+            
+            with sqlite3.connect(self.db_path) as conn:
+                c = conn.cursor()
+                c.execute('SELECT agent_id FROM agent_state WHERE alias = ?', (target_alias,))
+                row = c.fetchone()
+                
+                if not row:
+                    results.append({
+                        'vote_id': vote['id'],
+                        'success': False,
+                        'error': f"Target agent '{target_alias}' not found",
+                        'target': vote['target']
+                    })
+                    continue
+                
+                target_agent_id = row[0]
+            
+            # Apply XP using existing award_xp method
+            xp_delta = vote['xp_delta']
+            reason = f"Peer vote from {vote['voter']}: {vote['reason']}"
+            
+            result = self.award_xp(target_agent_id, xp_delta, reason)
+            result['vote_id'] = vote['id']
+            result['voter'] = vote['voter']
+            result['target'] = vote['target']
+            result['success'] = True
+            
+            results.append(result)
+        
+        return results
+    
+    def get_agent_by_alias(self, alias: str) -> Optional[Dict[str, Any]]:
+        """
+        Get agent information by alias.
+        
+        Args:
+            alias: Agent alias (with or without @ prefix)
+        
+        Returns:
+            Agent info dict or None if not found
+        """
+        # Remove @ prefix if present
+        if alias.startswith('@'):
+            alias = alias[1:]
+        
+        with sqlite3.connect(self.db_path) as conn:
+            c = conn.cursor()
+            c.execute('''
+                SELECT agent_id, alias, model_name, xp, level, status
+                FROM agent_state WHERE alias = ?
+            ''', (alias,))
+            row = c.fetchone()
+            
+            if row:
+                return {
+                    'agent_id': row[0],
+                    'alias': row[1],
+                    'model': row[2],
+                    'xp': row[3],
+                    'level': row[4],
+                    'status': row[5]
+                }
+            
+            return None
