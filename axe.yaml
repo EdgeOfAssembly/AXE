@@ -1,13 +1,3 @@
-# AXE User Configuration
-# Loaded THIRD in config chain: models.yaml → providers.yaml → axe.yaml
-# 
-# This file contains user-focused settings:
-# - Project configuration
-# - Agent definitions with provider + model selection
-# - Optional overrides for model attributes (context_tokens, temperature, etc.)
-# - Tool configurations
-# - Directory access rules
-
 version: '2.0'
 project_dir: .
 agent_protocol:
@@ -121,7 +111,6 @@ agents:
     - text
     - image
     - function_calling
-    # Override to use the responses API endpoint instead of chat completions
     api_endpoint: responses
     system_prompt: 'You are GPT-5.2 Codex, OpenAI''s most advanced agentic coding
       model optimized for complex software engineering tasks.
@@ -191,8 +180,6 @@ agents:
       - Ninja: Silent by default
 
       '
-  
-  # Fast codex (low reasoning for quick tasks)
   gpt_codex_fast:
     alias:
     - codex-fast
@@ -207,8 +194,8 @@ agents:
     - image
     - function_calling
     api_endpoint: responses
-    system_prompt: 'You are GPT-5.2 Codex in fast mode. Focus on quick, correct code generation.
-      Be concise. Prioritize working code over extensive explanations.
+    system_prompt: 'You are GPT-5.2 Codex in fast mode. Focus on quick, correct code
+      generation. Be concise. Prioritize working code over extensive explanations.
 
 
       TOOL USAGE: You can read files, execute commands, and write files using special
@@ -247,8 +234,6 @@ agents:
       Use silent builds: `make -s V=0`, `cmake --build . -- VERBOSE=0`
 
       '
-  
-  # High reasoning codex (for complex tasks)
   gpt_codex_high:
     alias:
     - codex-high
@@ -263,8 +248,9 @@ agents:
     - image
     - function_calling
     api_endpoint: responses
-    system_prompt: 'You are GPT-5.2 Codex with enhanced reasoning. Take time to think through problems.
-      Show your reasoning process. Consider edge cases and failure modes.
+    system_prompt: 'You are GPT-5.2 Codex with enhanced reasoning. Take time to think
+      through problems. Show your reasoning process. Consider edge cases and failure
+      modes.
 
 
       EXPERTISE:
@@ -314,8 +300,6 @@ agents:
       Use silent builds to reduce token consumption.
 
       '
-  
-  # Maximum reasoning codex (for architectural decisions, major refactoring)
   gpt_codex_xhigh:
     alias:
     - codex-xhigh
@@ -330,8 +314,8 @@ agents:
     - image
     - function_calling
     api_endpoint: responses
-    system_prompt: 'You are GPT-5.2 Codex with maximum reasoning capability.
-      Think deeply about every problem. Consider all implications.
+    system_prompt: 'You are GPT-5.2 Codex with maximum reasoning capability. Think
+      deeply about every problem. Consider all implications.
 
 
       BEST FOR:
@@ -385,7 +369,6 @@ agents:
       - Verify all edge cases and error handling
 
       '
-  
   claude:
     alias:
     - c
@@ -470,7 +453,8 @@ agents:
 
       BUILD GUIDELINES (Security-Focused):
 
-      For security auditing, use silent builds to minimize noise and focus on critical output:
+      For security auditing, use silent builds to minimize noise and focus on critical
+      output:
 
       - Make: `make -s V=0` or `make --silent`
 
@@ -490,7 +474,8 @@ agents:
 
       - Security tools: Use quiet flags (e.g., `valgrind --quiet`, `cppcheck --quiet`)
 
-      Only use verbose output when diagnosing build failures or security tool false positives.
+      Only use verbose output when diagnosing build failures or security tool false
+      positives.
 
       '
   llama:
@@ -581,7 +566,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Keep disassembly and analysis output focused. Use verbose only for debugging build issues.
+      Keep disassembly and analysis output focused. Use verbose only for debugging
+      build issues.
 
       '
   grok:
@@ -669,7 +655,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Silent builds allow faster iteration. Use verbose output only when debugging build issues.
+      Silent builds allow faster iteration. Use verbose output only when debugging
+      build issues.
 
       '
   copilot:
@@ -772,7 +759,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      In CI/CD, silent builds improve log readability and reduce token costs. Enable verbose only for debugging failures.
+      In CI/CD, silent builds improve log readability and reduce token costs. Enable
+      verbose only for debugging failures.
 
       '
   titan:
@@ -840,7 +828,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Silent builds are crucial for large-scale analysis to preserve context window for code.
+      Silent builds are crucial for large-scale analysis to preserve context window
+      for code.
 
       '
   scout:
@@ -859,8 +848,7 @@ agents:
     - assistants
     - streaming
     - tool-calling
-    system_prompt: 'You are the ULTIMATE context specialist with 1 MILLION token
-      capacity.
+    system_prompt: 'You are the ULTIMATE context specialist with 1 MILLION token capacity.
 
 
       EXPERTISE:
@@ -1048,7 +1036,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Silent builds reduce noise for precise analysis. Use verbose only when debugging failures.
+      Silent builds reduce noise for precise analysis. Use verbose only when debugging
+      failures.
 
       '
   coder:
@@ -1112,7 +1101,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Silent builds reduce log noise for code generation tasks. Use verbose only for debugging.
+      Silent builds reduce log noise for code generation tasks. Use verbose only for
+      debugging.
 
       '
   vision:
@@ -1179,7 +1169,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Silent builds allow focus on visual and audio content. Use verbose only for debugging.
+      Silent builds allow focus on visual and audio content. Use verbose only for
+      debugging.
 
       '
   multimedia:
@@ -1246,7 +1237,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Silent builds allow focus on audio and video analysis. Use verbose only for debugging.
+      Silent builds allow focus on audio and video analysis. Use verbose only for
+      debugging.
 
       '
   maverick:
@@ -1315,7 +1307,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Silent builds preserve context for creative and visual analysis. Use verbose only for debugging.
+      Silent builds preserve context for creative and visual analysis. Use verbose
+      only for debugging.
 
       '
   qwen_thinking:
@@ -1386,7 +1379,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Silent builds allow focus on logical decomposition and reasoning. Use verbose only for debugging.
+      Silent builds allow focus on logical decomposition and reasoning. Use verbose
+      only for debugging.
 
       '
   qwen_coder:
@@ -1454,7 +1448,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Silent builds reduce noise for low-level system programming. Use verbose only for debugging.
+      Silent builds reduce noise for low-level system programming. Use verbose only
+      for debugging.
 
       '
   qwen_vision:
@@ -1517,7 +1512,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Silent builds allow focus on image and document analysis. Use verbose only for debugging.
+      Silent builds allow focus on image and document analysis. Use verbose only for
+      debugging.
 
       '
   deepseek:
@@ -1586,7 +1582,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Silent builds reduce noise for mathematical reasoning and code generation. Use verbose only for debugging.
+      Silent builds reduce noise for mathematical reasoning and code generation. Use
+      verbose only for debugging.
 
       '
   grok_code:
@@ -1646,7 +1643,8 @@ agents:
 
       - SCons: `scons -Q`
 
-      Silent builds enable faster code generation cycles. Use verbose only for debugging build failures.
+      Silent builds enable faster code generation cycles. Use verbose only for debugging
+      build failures.
 
       '
   local:
@@ -1657,7 +1655,7 @@ agents:
     provider: ollama
     model: llama3.1:70b
     role: Local private coding agent
-    context_tokens: 32000  # OVERRIDE: Limited by local VRAM
+    context_tokens: 32000
     capabilities:
     - text
     system_prompt: 'You are a local, privacy-focused coding assistant running on Ollama.
@@ -1674,7 +1672,8 @@ agents:
       - Privacy-First: All processing happens locally, no data leaves your machine
 
 
-      TOOL USAGE: You can read files, execute commands, and write files using special blocks.
+      TOOL USAGE: You can read files, execute commands, and write files using special
+      blocks.
 
 
       To read a file:
@@ -1736,287 +1735,71 @@ agents:
       If a build fails, retry with verbose output to diagnose issues.
 
       '
+# ============================================================================
+# Tool Access Control (Blacklist Model)
+# ============================================================================
+# Security model: Default-allow with optional blacklisting
+#
+# When sandbox enabled:  All tools accessible except blacklist (inside sandbox)
+# When sandbox disabled: Full host access except blacklist (within user permissions)
+#
+# Blacklist dangerous tools that should never be accessible:
+# ============================================================================
 tools:
-  download:
-  - curl
-  - wget
-  - wget2
-  emulation:
-  - Xvfb
-  - xvfb-run
-  - dosbox-x
-  - dosbox
-  - qemu-system-i386
-  - qemu-system-x86_64
-  vcs:
-  - git
-  - diff
-  - patch
-  - diff3
-  - merge
-  disasm:
-  - ndisasm
-  - objdump
-  - readelf
-  - nm
-  - strings
-  - c++filt
-  assembly:
-  - nasm
-  - as
-  - gas
-  - yasm
-  - fasm
-  debug:
-  - gdb
-  - lldb
-  - strace
-  - ltrace
-  - valgrind
-  - addr2line
-  - catchsegv
-  build:
-  - make
-  - cmake
-  - gcc
-  - g++
-  - clang
-  - clang++
-  - ld
-  - ar
-  - ranlib
-  - strip
-  - objcopy
-  - size
-  - nm
-  python:
-  - python
-  - python3
-  - pip
-  - pip3
-  - pytest
-  - pylint
-  - mypy
-  - black
-  - flake8
-  - autopep8
-  - isort
-  - python3-config
-  - pydoc3
-  analysis:
-  - cppcheck
-  - clang-format
-  - clang-tidy
-  - scan-build
-  - include-what-you-use
-  - llmprep
-  - build_analyzer
-  file:
-  - cat
-  - less
-  - head
-  - tail
-  - tee
-  - more
-  file_operations:
-  - touch
-  - cp
-  - mv
-  - rm
-  - chmod
-  - chown
-  - ln
-  navigation:
-  - cd
-  - ls
-  - tree
-  - pwd
-  - find
-  - which
-  - mkdir
-  - rmdir
-  - basename
-  - dirname
-  - realpath
-  - readlink
-  text_processing:
-  - grep
-  - awk
-  - sed
-  - sort
-  - uniq
-  - cut
-  - diff
-  - strings
-  - echo
-  - printf
-  - tr
-  - xargs
-  inspection:
-  - file
-  - stat
-  - wc
-  - hexdump
-  - xxd
-  - du
-  - md5sum
-  - sha256sum
-  - sha1sum
-  - df
-  - lsof
-  reveng:
-  - radare2
-  - r2
-  - rabin2
-  - rasm2
-  - rahash2
-  - binwalk
-  - foremost
-  - exiftool
-  - pngcheck
-  archive:
-  - tar
-  - gzip
-  - gunzip
-  - bzip2
-  - bunzip2
-  - zip
-  - unzip
-  - xz
-  - unxz
-  - 7z
-  - p7zip
-  - zstd
-  conversion:
-  - dos2unix
-  - unix2dos
-  - iconv
-  - base64
-  - uuencode
-  - uudecode
-  - od
-  documentation:
-  - man
-  - info
-  - whatis
-  - apropos
-  - help
-  - tldr
-  network:
-  - ping
-  - host
-  - dig
-  - nslookup
-  - nc
-  - netcat
-  process:
-  - ps
-  - top
-  - htop
-  - kill
-  - pkill
-  - pgrep
-  - time
-  - timeout
-  - nice
-  data:
-  - jq
-  - yq
-  - xmllint
-  - csvtool
-  unlimited:
-  - '*'
+  blacklist: []
+  # Example: Uncomment to block specific dangerous tools
+  # blacklist:
+  #   - rm       # Prevent file deletion
+  #   - dd       # Prevent disk operations
+  #   - mkfs     # Prevent filesystem creation
+
+# ============================================================================
+# Directory Access Control (Blacklist Model)
+# ============================================================================
+# Directories to explicitly block access to.
+# Empty blacklist = full access within sandbox (when enabled) or host (when disabled)
+# ============================================================================
 directories:
-  allowed:
-  - .
-  - ./src
-  - ./include
-  - ./tests
-  - ./tools
-  - ./bin
-  - ./build
-  - ./output
-  - ./patches
-  - ./docs
-  readonly:
-  - ./vendor
-  - ./deps
-  - ./third_party
-  - ./reference
-  forbidden:
-  - /etc
-  - /root
-  - ~/.ssh
-  - ~/.gnupg
-  - ~/.aws
-  - ~/.config/gh
-
-# ============================================================================
-# Sandbox Configuration (Bubblewrap Isolation)
-# ============================================================================
-# Enable secure sandbox execution using Linux namespaces via bubblewrap.
-# When enabled, commands run inside an isolated environment with default-allow
-# model, while the host system remains protected.
-#
-# Requirements:
-#   - Linux operating system
-#   - bubblewrap (bwrap) installed: apt install bubblewrap
-#
-# To enable sandbox mode, set enabled: true below.
-# ============================================================================
+  blacklist: []
+  # Example: Uncomment to block specific sensitive directories
+  # blacklist:
+  #   - /etc/shadow    # System password file
+  #   - /root          # Root home directory
+  #   - ~/.ssh         # SSH keys
+  #   - ~/.gnupg       # GPG keys
 sandbox:
-   enabled: true  # Set to true to enable sandbox mode
-   runtime: bubblewrap
-#   
-#   # Workspace configuration
-   workspaces:
-     - path: .  # Project directory (writable inside sandbox)
-       writable: true
-#   
-#   # Host directories to expose inside sandbox
-   host_binds:
-#     # Read-only binds (for system tools and libraries)
-     readonly:
-       - /usr
-       - /lib
-       - /lib64
-       - /bin
-       - /etc      # For resolv.conf, passwd, etc.
-       - /run      # Runtime (dbus if needed)
-       - /sys
-#     
-#     # Writable binds (rarely needed, use with caution)
-#     writable: []
-#     
-#     # Hidden paths (completely inaccessible inside sandbox)
-     none:
-       - ~/.ssh
-       - ~/.gnupg
-#       - /root
-#   
-#   # Optional tool blacklist (empty = all tools allowed inside sandbox)
-#   # Example: Blacklist dangerous commands even inside sandbox
-   tool_blacklist: []
-#   # tool_blacklist: ['rm', 'dd', 'mkfs', 'fdisk']
-#   
-#   # Namespace isolation options
-   namespaces:
-     user: true      # User namespace (map to root inside)
-     mount: true     # Mount namespace (private mounts)
-     pid: true       # PID namespace (process isolation)
-     uts: true       # UTS namespace (hostname isolation)
-     network: false  # Network namespace (set true for network isolation)
-     ipc: true       # IPC namespace (process communication isolation)
-     cgroup: true    # CGroup namespace
-#   
-#   # Additional sandbox options
-   options:
-     new_session: true       # Block TTY attacks
-     die_with_parent: true   # Kill sandbox if parent dies
-     proc: /proc             # Mount fresh /proc
-     dev: /dev               # Full /dev (includes /dev/fuse for FUSE mounts)
-     tmpfs: /tmp             # Writable tmp inside sandbox
-
+  enabled: true
+  runtime: bubblewrap
+  workspaces:
+  - path: .
+    writable: true
+  host_binds:
+    readonly:
+    - /usr
+    - /lib
+    - /lib64
+    - /bin
+    - /etc
+    - /run
+    - /sys
+    none:
+    - ~/.ssh
+    - ~/.gnupg
+  tool_blacklist: []
+  namespaces:
+    user: true
+    mount: true
+    pid: true
+    uts: true
+    network: false
+    ipc: true
+    cgroup: true
+  options:
+    new_session: true
+    die_with_parent: true
+    proc: /proc
+    dev: /dev
+    tmpfs: /tmp
 code_extensions:
 - .c
 - .h
@@ -2127,15 +1910,15 @@ token_optimization:
     preserve_critical: true
   response_optimization:
     enabled: true
-    truncate_code_blocks: false  # DISABLED - We never truncate code
-    max_code_lines: 0  # No limit - full code preserved
+    truncate_code_blocks: false
+    max_code_lines: 0
     remove_read_blocks: true
     deduplicate_content: true
   collab_optimization:
     enabled: true
-    history_limit: 200  # Increased from 50 for bigger shared view
-    content_limit: 100000  # Increased from 20000 for bigger shared view
-    shared_notes_limit: 100000  # Increased from 10000 for bigger shared view
+    history_limit: 200
+    content_limit: 100000
+    shared_notes_limit: 100000
   auto_summarize:
     enabled: true
     trigger_at_percent: 70
@@ -2151,78 +1934,45 @@ token_optimization:
     cache_identical_prompts: true
     deduplicate_context: true
     cache_file_reads: true
-
-# Session preprocessing configuration
-# Runs at the start of each AXE session to prepare the workspace
 preprocessing:
-  # Environment probe - auto-generates .collab_env.md with static system info
-  # This runs BEFORE any agent is invoked, reducing token waste from duplicate probes
   environment_probe:
-    enabled: true  # Enabled by default (zero agent token cost)
-    output_file: .collab_env.md  # Where to write environment summary
-    probe_timeout: 5  # Timeout in seconds for each probe command
-    
-    # Optional: Add custom probes (bash commands)
+    enabled: true
+    output_file: .collab_env.md
+    probe_timeout: 5
     custom_probes: {}
-    # Example:
-    # custom_probes:
-    #   docker: "docker --version 2>/dev/null || echo 'not available'"
-    #   java: "java -version 2>/dev/null || echo 'not available'"
-    
-    # Optional: Disable specific probes
     disabled_probes: []
-    # Example:
-    # disabled_probes:
-    #   - rustc
-    #   - cargo
-    #   - go
-  
-  # Source code minification before llmprep
   minifier:
-    enabled: false  # Opt-in, disabled by default
-    keep_comments: true  # Keep comments for context (recommended for AXE)
+    enabled: false
+    keep_comments: true
     exclude_dirs:
-      - tests
-      - __pycache__
-      - .git
-      - venv
-      - .venv
-      - node_modules
-      - build
-      - dist
+    - tests
+    - __pycache__
+    - .git
+    - venv
+    - .venv
+    - node_modules
+    - build
+    - dist
     supported_extensions:
-      - .c
-      - .cpp
-      - .cc
-      - .h
-      - .hpp
-      - .py
-      - .asm
-      - .s
-    output_mode: in_place  # Options: in_place, separate_dir
-    output_dir: .minified  # Only used if output_mode is separate_dir
-  
-  # Automatic llmprep after minification
+    - .c
+    - .cpp
+    - .cc
+    - .h
+    - .hpp
+    - .py
+    - .asm
+    - .s
+    output_mode: in_place
+    output_dir: .minified
   llmprep:
-    enabled: false  # Opt-in, disabled by default
+    enabled: false
     output_dir: llm_prep
     depth: 4
     skip_doxygen: false
     skip_pyreverse: false
     skip_ctags: false
-
-# GitHub Agent Integration (OPTIONAL - disabled by default)
-# Allows agents to autonomously push code with human review gates
 github_integration:
-  # Enable autonomous GitHub operations
-  enabled: false  # MUST be explicitly enabled
-  
-  # Always require human review before push
-  require_review: true  # Cannot be disabled (safety)
-  
-  # Default branch prefix for agent branches
-  branch_prefix: agent/  # Creates "agent/feature-name"
-  
-  # SSH key path (optional, auto-detect by default)
-  ssh_key_path: null  # null = use default SSH setup
-
+  enabled: false
+  require_review: true
+  branch_prefix: agent/
+  ssh_key_path: null
