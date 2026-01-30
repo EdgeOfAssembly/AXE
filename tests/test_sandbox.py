@@ -186,10 +186,10 @@ def test_tool_blacklist_check():
         return True
 
 
-def test_fallback_to_whitelist():
-    """Test that whitelist mode is used when sandbox unavailable."""
+def test_fallback_to_unrestricted():
+    """Test that unrestricted mode is used when sandbox unavailable."""
     print("\n" + "=" * 70)
-    print("TEST: Fallback to Whitelist Mode")
+    print("TEST: Fallback to Unrestricted Mode")
     print("=" * 70)
     
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -199,22 +199,22 @@ def test_fallback_to_whitelist():
         
         runner = ToolRunner(config, tmpdir)
         
-        # Should use whitelist mode
+        # Should use blacklist mode (no sandbox manager)
         print(f"\nSandbox manager: {runner.sandbox_manager}")
         assert runner.sandbox_manager is None, "Sandbox should be None when disabled"
         print("  ✓ Sandbox disabled correctly")
         
-        # Whitelist should be populated
-        print(f"Whitelist size: {len(runner.whitelist)}")
-        assert len(runner.whitelist) > 0, "Whitelist should be populated"
-        print("  ✓ Whitelist mode active")
+        # Blacklist should be empty by default
+        print(f"Blacklist size: {len(runner.blacklist)}")
+        assert len(runner.blacklist) == 0, "Default blacklist should be empty"
+        print("  ✓ Unrestricted mode active (blacklist model)")
         
-        # Test command validation in whitelist mode
+        # Test command validation in blacklist mode - all commands allowed
         allowed, reason = runner.is_tool_allowed("ls -la")
         print(f"ls allowed: {allowed} ({reason})")
-        assert allowed, "ls should be allowed in whitelist mode"
+        assert allowed, "ls should be allowed in blacklist mode"
         
-        print("\n✅ Fallback to whitelist mode test passed!")
+        print("\n✅ Fallback to unrestricted mode test passed!")
         return True
 
 
@@ -281,9 +281,9 @@ def test_namespace_options():
 
 
 def test_backward_compatibility():
-    """Test that legacy whitelist mode still works."""
+    """Test that blacklist mode works correctly."""
     print("\n" + "=" * 70)
-    print("TEST: Backward Compatibility (Whitelist Mode)")
+    print("TEST: Backward Compatibility (Blacklist Mode)")
     print("=" * 70)
     
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -291,39 +291,26 @@ def test_backward_compatibility():
         # Explicitly disable sandbox
         config.config['sandbox']['enabled'] = False
         
-        # Remove wildcard to test actual whitelist behavior
-        if 'unlimited' in config.config['tools']:
-            del config.config['tools']['unlimited']
-        
         runner = ToolRunner(config, tmpdir)
         
-        # Test whitelist validation
+        # Test blacklist validation - all commands allowed with empty blacklist
         allowed, reason = runner.is_tool_allowed("ls")
         print(f"\nls allowed: {allowed} ({reason})")
-        assert allowed, "ls should be allowed in whitelist mode"
+        assert allowed, "ls should be allowed in blacklist mode"
         
-        allowed, reason = runner.is_tool_allowed("evil_command_not_in_whitelist")
+        allowed, reason = runner.is_tool_allowed("evil_command_not_blacklisted")
         print(f"evil_command allowed: {allowed} ({reason})")
-        assert not allowed, "Unknown command should be blocked in whitelist mode"
-        assert "whitelist" in reason.lower(), "Reason should mention whitelist"
+        # With empty blacklist, all commands are allowed
+        assert allowed, "Command should be allowed with empty blacklist"
         
-        print("  ✓ Whitelist validation works")
-        
-        # Test with wildcard
-        config.config['tools']['unlimited'] = ['*']
-        runner2 = ToolRunner(config, tmpdir)
-        allowed, reason = runner2.is_tool_allowed("anything")
-        print(f"anything with wildcard: {allowed} ({reason})")
-        assert allowed, "Wildcard should allow all commands"
-        
-        print("  ✓ Wildcard mode works")
+        print("  ✓ Blacklist validation works")
         
         print("\n✅ Backward compatibility test passed!")
         return True
 
 
 def test_sandbox_mode_validation():
-    """Test validation in sandbox mode (blacklist instead of whitelist)."""
+    """Test validation in sandbox mode (blacklist model)."""
     print("\n" + "=" * 70)
     print("TEST: Sandbox Mode Validation")
     print("=" * 70)
@@ -351,10 +338,10 @@ def test_sandbox_mode_validation():
             assert not allowed, "rm should be blacklisted"
             assert "blacklisted" in reason.lower(), "Reason should mention blacklist"
             
-            # Test that arbitrary commands are allowed (not in whitelist requirement)
+            # Test that arbitrary commands are allowed (blacklist model)
             allowed, reason = runner.is_tool_allowed("some_random_tool")
             print(f"some_random_tool allowed: {allowed} ({reason})")
-            assert allowed, "Arbitrary tools should be allowed in sandbox mode"
+            assert allowed, "Arbitrary tools should be allowed with blacklist model"
             
             print("  ✓ Sandbox mode validation works correctly")
         else:
@@ -503,7 +490,7 @@ def run_all_tests():
         test_sandbox_availability_check,
         test_bwrap_command_generation,
         test_tool_blacklist_check,
-        test_fallback_to_whitelist,
+        test_fallback_to_unrestricted,
         test_host_bind_readonly,
         test_namespace_options,
         test_backward_compatibility,
