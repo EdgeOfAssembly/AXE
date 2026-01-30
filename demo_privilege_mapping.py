@@ -6,7 +6,7 @@ Implements Simon's nearly-decomposable hierarchies (1969).
 
 import sys
 import os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from core.privilege_mapping import (
     format_privileges_for_prompt,

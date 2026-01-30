@@ -11,7 +11,7 @@ Each level has explicit:
 Reference: Simon, H.A. (1969). The Sciences of the Artificial. MIT Press.
 """
 
-from typing import Dict, List, Any, Tuple, Optional
+from typing import Dict, Any, Tuple, Optional
 from progression.levels import (
     LEVEL_SENIOR_WORKER, LEVEL_TEAM_LEADER, 
     LEVEL_DEPUTY_SUPERVISOR, LEVEL_SUPERVISOR_ELIGIBLE
@@ -50,7 +50,7 @@ PRIVILEGE_MAPPING = {
     
     'senior_worker': {
         'level_range': (10, 19),
-        'title': 'Senior Worker / Team Leader',
+        'title': 'Senior Worker',
         'responsibilities': [
             'Guide junior workers',
             'Review peer contributions',
@@ -59,8 +59,8 @@ PRIVILEGE_MAPPING = {
         ],
         'authorities': [
             'All Worker authorities PLUS:',
-            'Broadcast DIRECTIVE to workers',
-            'Suppress Worker-level agents',
+            'Broadcast DIRECTIVE to workers (planned)',
+            'Suppress Worker-level agents (planned)',
             'Vote XP (+15 max)',
             'Priority turn initiative',
         ],
@@ -70,15 +70,15 @@ PRIVILEGE_MAPPING = {
             'Cannot override Deputy decisions',
         ],
         'commands': [
-            '[[SUPPRESS:@worker:reason]] (3 turns)',
-            '[[DIRECTIVE:instruction]]',
+            '[[SUPPRESS:@worker:reason]] (planned - 3 turns)',
+            '[[DIRECTIVE:instruction]] (planned)',
             '[[XP_VOTE:+15:@agent:reason]]',
         ],
     },
     
     'deputy': {
         'level_range': (20, 29),
-        'title': 'Team Leader / Deputy Supervisor',
+        'title': 'Team Leader',
         'responsibilities': [
             'Coordinate multiple sub-teams',
             'Resolve conflicts between workers',
@@ -87,9 +87,9 @@ PRIVILEGE_MAPPING = {
         ],
         'authorities': [
             'All Senior authorities PLUS:',
-            'Suppress Senior-level agents',
-            'Arbitrate Worker/Senior conflicts',
-            'Spawn sub-sessions',
+            'Suppress Senior-level agents (planned)',
+            'Arbitrate Worker/Senior conflicts (planned)',
+            'Spawn sub-sessions (planned)',
             'Vote XP (+20 max, -10 penalty)',
         ],
         'restrictions': [
@@ -98,16 +98,16 @@ PRIVILEGE_MAPPING = {
             'TASK COMPLETE requires Supervisor approval',
         ],
         'commands': [
-            '[[SUPPRESS:@senior:reason]]',
-            '[[ARBITRATE:arb_id:resolution:winner]]',
-            '[[SPAWN:model:role:reason]]',
+            '[[SUPPRESS:@senior:reason]] (planned)',
+            '[[ARBITRATE:arb_id:resolution:winner]] (planned)',
+            '[[SPAWN:model:role:reason]] (planned)',
             '[[XP_VOTE:+20:@agent:reason]]',
         ],
     },
     
     'supervisor': {
         'level_range': (30, 50),
-        'title': 'Deputy Supervisor / Supervisor-Eligible',
+        'title': 'Deputy Supervisor',
         'responsibilities': [
             'Overall session success',
             'Final quality control',
@@ -116,9 +116,9 @@ PRIVILEGE_MAPPING = {
         ],
         'authorities': [
             'All Deputy authorities PLUS:',
-            'Suppress any agent',
+            'Suppress any agent (planned)',
             'Declare TASK COMPLETE',
-            'Final arbitration authority',
+            'Final arbitration authority (planned)',
             'Emergency human escalation',
             'Vote XP (+25 max, -15 penalty)',
         ],
@@ -128,7 +128,7 @@ PRIVILEGE_MAPPING = {
             'Must respect human overrides',
         ],
         'commands': [
-            '[[SUPPRESS:@any:reason]]',
+            '[[SUPPRESS:@any:reason]] (planned)',
             '[[AGENT_TASK_COMPLETE:summary]]',
             '[[AGENT_EMERGENCY:message]]',
             '[[XP_VOTE:+25:@agent:reason]]',
@@ -147,6 +147,28 @@ def get_privileges_for_level(level: int) -> Dict[str, Any]:
         return PRIVILEGE_MAPPING['senior_worker']
     else:  # 1-9
         return PRIVILEGE_MAPPING['worker']
+
+
+def _get_all_inherited_commands(level: int) -> list:
+    """Get all commands available to an agent including inherited commands from lower tiers."""
+    all_commands = []
+    
+    # Always include worker commands
+    all_commands.extend(PRIVILEGE_MAPPING['worker']['commands'])
+    
+    # Add senior worker commands if level >= 10
+    if level >= LEVEL_SENIOR_WORKER:
+        all_commands.extend(PRIVILEGE_MAPPING['senior_worker']['commands'])
+    
+    # Add deputy commands if level >= 20
+    if level >= LEVEL_TEAM_LEADER:
+        all_commands.extend(PRIVILEGE_MAPPING['deputy']['commands'])
+    
+    # Add supervisor commands if level >= 30
+    if level >= LEVEL_DEPUTY_SUPERVISOR:
+        all_commands.extend(PRIVILEGE_MAPPING['supervisor']['commands'])
+    
+    return all_commands
 
 
 def format_privileges_for_prompt(level: int, agent_alias: str) -> str:
@@ -220,12 +242,13 @@ def get_promotion_preview(next_level: int) -> str:
 def validate_command(level: int, command: str) -> Tuple[bool, str]:
     """
     Validate if an agent can use a command at their level.
+    Includes inherited commands from lower tiers.
     
     Returns:
         (is_valid, reason)
     """
-    priv = get_privileges_for_level(level)
-    allowed_commands = priv['commands']
+    # Get all commands available to this level (including inherited)
+    allowed_commands = _get_all_inherited_commands(level)
     
     # Extract command type from token
     if ':' in command:
@@ -234,7 +257,12 @@ def validate_command(level: int, command: str) -> Tuple[bool, str]:
         command_type = command
     
     for allowed in allowed_commands:
-        if allowed.startswith(command_type) or command_type in allowed:
+        # Check if command matches (ignoring "(planned)" suffix)
+        allowed_base = allowed.split(' (planned')[0]
+        if allowed_base.startswith(command_type) or command_type in allowed_base:
+            # Check if command is marked as planned
+            if '(planned' in allowed:
+                return False, f"Command not yet implemented (planned for future). Your level: {level}"
             return True, "Authorized"
     
     return False, f"Command requires higher level. Your level: {level}"

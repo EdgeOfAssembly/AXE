@@ -233,4 +233,5 @@ Focus on practical, working solutions."""
 
 # Level-to-Privilege constants (Simon's hierarchies)
 PRIVILEGE_PROMPT_SECTION = True  # Include privileges in prompts
-PRIVILEGE_VALIDATION = True      # Validate commands against level
+# Note: Command validation is available via validate_command() but not yet
+# enforced in the collaboration loop. Future work will add runtime enforcement.

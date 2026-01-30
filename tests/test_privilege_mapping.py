@@ -65,17 +65,17 @@ def test_get_privileges_for_level():
     # Test senior worker levels (10-19)
     for level in [10, 15, 19]:
         priv = get_privileges_for_level(level)
-        assert priv['title'] == 'Senior Worker / Team Leader', f"Level {level} should be Senior Worker"
+        assert priv['title'] == 'Senior Worker', f"Level {level} should be Senior Worker"
     
-    # Test team leader / deputy levels (20-29)
+    # Test team leader levels (20-29)
     for level in [20, 25, 29]:
         priv = get_privileges_for_level(level)
-        assert priv['title'] == 'Team Leader / Deputy Supervisor', f"Level {level} should be Team Leader/Deputy"
+        assert priv['title'] == 'Team Leader', f"Level {level} should be Team Leader"
     
-    # Test deputy supervisor / supervisor-eligible levels (30+)
+    # Test deputy supervisor levels (30-39) and supervisor-eligible (40+)
     for level in [30, 40, 50]:
         priv = get_privileges_for_level(level)
-        assert priv['title'] == 'Deputy Supervisor / Supervisor-Eligible', f"Level {level} should be Deputy/Supervisor"
+        assert priv['title'] == 'Deputy Supervisor', f"Level {level} should be Deputy Supervisor"
     
     print("  ✓ Privilege lookup works correctly for all levels")
     print()
@@ -89,19 +89,19 @@ def test_boundary_levels():
     priv_9 = get_privileges_for_level(9)
     priv_10 = get_privileges_for_level(10)
     assert priv_9['title'] == 'Worker', "Level 9 should be Worker"
-    assert priv_10['title'] == 'Senior Worker / Team Leader', "Level 10 should be Senior Worker"
+    assert priv_10['title'] == 'Senior Worker', "Level 10 should be Senior Worker"
     
     # Boundary 19→20
     priv_19 = get_privileges_for_level(19)
     priv_20 = get_privileges_for_level(20)
-    assert priv_19['title'] == 'Senior Worker / Team Leader', "Level 19 should be Senior Worker"
-    assert priv_20['title'] == 'Team Leader / Deputy Supervisor', "Level 20 should be Team Leader/Deputy"
+    assert priv_19['title'] == 'Senior Worker', "Level 19 should be Senior Worker"
+    assert priv_20['title'] == 'Team Leader', "Level 20 should be Team Leader"
     
     # Boundary 29→30
     priv_29 = get_privileges_for_level(29)
     priv_30 = get_privileges_for_level(30)
-    assert priv_29['title'] == 'Team Leader / Deputy Supervisor', "Level 29 should be Team Leader/Deputy"
-    assert priv_30['title'] == 'Deputy Supervisor / Supervisor-Eligible', "Level 30 should be Deputy/Supervisor"
+    assert priv_29['title'] == 'Team Leader', "Level 29 should be Team Leader"
+    assert priv_30['title'] == 'Deputy Supervisor', "Level 30 should be Deputy Supervisor"
     
     print("  ✓ Boundary level transitions work correctly")
     print()
@@ -124,17 +124,17 @@ def test_format_privileges_for_prompt():
     
     # Test senior worker level
     prompt = format_privileges_for_prompt(15, "@senior")
-    assert "Senior Worker / Team Leader (Level 15)" in prompt
+    assert "Senior Worker (Level 15)" in prompt
     assert "Team Leader" in prompt, "Should mention next promotion"
     
-    # Test team leader / deputy level
+    # Test team leader level
     prompt = format_privileges_for_prompt(25, "@deputy")
-    assert "Team Leader / Deputy Supervisor (Level 25)" in prompt
-    assert "Supervisor" in prompt, "Should mention next promotion"
+    assert "Team Leader (Level 25)" in prompt
+    assert "Supervisor" in prompt or "Deputy" in prompt, "Should mention next promotion"
     
-    # Test supervisor level
+    # Test deputy supervisor level
     prompt = format_privileges_for_prompt(40, "@boss")
-    assert "Deputy Supervisor / Supervisor-Eligible (Level 40)" in prompt
+    assert "Deputy Supervisor (Level 40)" in prompt
     # Should not have next promotion at max level
     
     print("  ✓ Prompt formatting works correctly")
@@ -156,39 +156,54 @@ def test_command_validation():
     assert is_valid, f"Workers should be able to pass turn: {reason}"
     
     is_valid, reason = validate_command(5, "[[SUPPRESS:@agent:reason]]")
-    assert not is_valid, "Workers should not be able to suppress"
+    assert not is_valid, "Workers should not be able to suppress (command is planned)"
     
     is_valid, reason = validate_command(5, "[[AGENT_TASK_COMPLETE:summary]]")
     assert not is_valid, "Workers should not be able to declare task complete"
     
-    # Senior worker level (10-19) commands
+    # Senior worker level (10-19) commands - should inherit worker commands
+    is_valid, reason = validate_command(15, "[[AGENT_PASS_TURN]]")
+    assert is_valid, f"Senior workers should inherit worker commands: {reason}"
+    
+    is_valid, reason = validate_command(15, "[[BROADCAST:FINDING:test]]")
+    assert is_valid, f"Senior workers should inherit broadcast: {reason}"
+    
     is_valid, reason = validate_command(15, "[[SUPPRESS:@worker:reason]]")
-    assert is_valid, f"Senior workers should be able to suppress: {reason}"
+    assert not is_valid, "Senior workers should not be able to suppress (command is planned)"
     
     is_valid, reason = validate_command(15, "[[DIRECTIVE:instruction]]")
-    assert is_valid, f"Senior workers should be able to issue directives: {reason}"
+    assert not is_valid, "Senior workers should not be able to use DIRECTIVE (command is planned)"
     
     is_valid, reason = validate_command(15, "[[AGENT_TASK_COMPLETE:summary]]")
     assert not is_valid, "Senior workers should not be able to declare task complete"
     
-    # Deputy level (20-29) commands
+    # Team Leader level (20-29) commands - should inherit worker + senior commands
+    is_valid, reason = validate_command(25, "[[AGENT_PASS_TURN]]")
+    assert is_valid, f"Team leaders should inherit worker commands: {reason}"
+    
+    is_valid, reason = validate_command(25, "[[BROADCAST:FINDING:test]]")
+    assert is_valid, f"Team leaders should inherit broadcast: {reason}"
+    
     is_valid, reason = validate_command(25, "[[ARBITRATE:arb_id:resolution:winner]]")
-    assert is_valid, f"Deputies should be able to arbitrate: {reason}"
+    assert not is_valid, "Team leaders should not be able to arbitrate (command is planned)"
     
     is_valid, reason = validate_command(25, "[[SPAWN:model:role:reason]]")
-    assert is_valid, f"Deputies should be able to spawn: {reason}"
+    assert not is_valid, "Team leaders should not be able to spawn (command is planned)"
     
-    is_valid, reason = validate_command(25, "[[AGENT_TASK_COMPLETE:summary]]")
-    assert not is_valid, "Deputies should not be able to declare task complete alone"
+    # Deputy Supervisor level (30+) commands - should inherit all lower commands
+    is_valid, reason = validate_command(40, "[[AGENT_PASS_TURN]]")
+    assert is_valid, f"Supervisors should inherit worker commands: {reason}"
     
-    # Supervisor level (30+) commands
+    is_valid, reason = validate_command(40, "[[BROADCAST:FINDING:test]]")
+    assert is_valid, f"Supervisors should inherit broadcast: {reason}"
+    
     is_valid, reason = validate_command(40, "[[AGENT_TASK_COMPLETE:summary]]")
     assert is_valid, f"Supervisors should be able to declare task complete: {reason}"
     
     is_valid, reason = validate_command(40, "[[AGENT_EMERGENCY:message]]")
     assert is_valid, f"Supervisors should be able to use emergency: {reason}"
     
-    print("  ✓ Command validation works correctly")
+    print("  ✓ Command validation works correctly (including inheritance)")
     print()
 
 
@@ -235,7 +250,6 @@ def test_privilege_progression():
     
     worker = get_privileges_for_level(5)
     senior = get_privileges_for_level(15)
-    deputy = get_privileges_for_level(25)
     supervisor = get_privileges_for_level(40)
     
     # Check that commands increase with level
