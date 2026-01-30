@@ -3450,8 +3450,26 @@ Collaborative Mode:
         except Exception as e:
             print(c(f"Collaboration error: {e}", Colors.RED))
         return
-    # Create session
-    session = ChatSession(config, args.dir)
+    # Parse workspace(s) for interactive mode - support comma-separated list
+    workspace_paths = []
+    if args.workspace:
+        for ws in args.workspace.split(','):
+            ws = ws.strip()
+            if not os.path.isabs(ws):
+                ws = os.path.abspath(os.path.join(args.dir, ws))
+            else:
+                ws = os.path.abspath(ws)
+            workspace_paths.append(ws)
+        # Create workspaces if they don't exist
+        for ws in workspace_paths:
+            if not os.path.exists(ws):
+                print(c(f"Creating workspace: {ws}", Colors.YELLOW))
+                try:
+                    os.makedirs(ws, exist_ok=True)
+                except Exception as e:
+                    print(c(f"Failed to create workspace: {e}", Colors.RED))
+    # Create session with workspace paths
+    session = ChatSession(config, args.dir, workspace_paths=workspace_paths if workspace_paths else None)
     # Run preprocessing if enabled (environment_probe, minifier and/or llmprep)
     preprocessor = SessionPreprocessor(config, args.dir)
     if preprocessor.is_enabled():

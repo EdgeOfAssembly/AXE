@@ -9503,6 +9503,7 @@
 ├── INTEGRATION_COMPLETE.md
 ├── LICENSE
 ├── MISSION.md
+├── NAMESPACE_DETECTION.md
 ├── OLLAMA_BATCH_TEST_RESULTS.md
 ├── OLLAMA_TEST_RESULTS.md
 ├── PROOF_OLLAMA_DEMO.md
@@ -9541,7 +9542,7 @@
 ├── test_suid_workaround.py
 └── verify_integration.py
 
-35 directories, 9500 files
+35 directories, 9501 files
 ```
 
 ## Code Statistics
