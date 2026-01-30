@@ -236,3 +236,8 @@ Focus on practical, working solutions."""
                         '.asm', '.s', '.inc',
                         '.exe', '.com', '.wad', '.bin']
 }
+
+# Level-to-Privilege constants (Simon's hierarchies)
+PRIVILEGE_PROMPT_SECTION = True  # Include privileges in prompts
+# Note: Command validation is available via validate_command() but not yet
+# enforced in the collaboration loop. Future work will add runtime enforcement.
