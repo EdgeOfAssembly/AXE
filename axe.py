@@ -3710,8 +3710,9 @@ Dependencies:
         
         try:
             while True:
-                # Check for socket connections (non-blocking)
-                ready, _, _ = select.select([sock], [], [], 0)
+                # Check for socket connections before showing prompt (non-blocking)
+                # This allows processing socket commands between user inputs
+                ready, _, _ = select.select([sock], [], [], 0.1)
                 if ready:
                     try:
                         conn, _ = sock.accept()
@@ -3719,6 +3720,7 @@ Dependencies:
                         if data:
                             self.handle_socket_command(conn, data)
                         conn.close()
+                        continue  # Check for more socket connections before prompting
                     except Exception as e:
                         print(c(f"Socket error: {e}", Colors.RED))
                 
