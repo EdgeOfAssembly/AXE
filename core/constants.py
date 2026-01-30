@@ -64,6 +64,7 @@ AGENT_TOKEN_GITHUB_READY = "[[GITHUB_READY:"  # Agent signals ready to push to G
 AGENT_TOKEN_BROADCAST = "[[BROADCAST:"  # Format: [[BROADCAST:CATEGORY:message]]
 AGENT_TOKEN_SUPPRESS = "[[SUPPRESS:"  # Format: [[SUPPRESS:@target:reason]]
 AGENT_TOKEN_RELEASE = "[[RELEASE:"    # Format: [[RELEASE:@target]]
+AGENT_TOKEN_XP_VOTE = "[[XP_VOTE:"    # Format: [[XP_VOTE:@target:±XP:reason]]
 
 # Subsumption Architecture constants (Brooks 1986)
 SUPPRESSION_DEFAULT_TURNS = 3

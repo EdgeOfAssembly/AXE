@@ -47,6 +47,13 @@ XP_AWARDS = {
     'code_review': 10,
     'bug_fix': 25,
     
+    # Peer voting (Minsky's Society of Mind)
+    'peer_endorsement': 10,             # Endorsed by another agent
+    'peer_strong_endorsement': 20,      # Strong endorsement from Team Leader+
+    'peer_penalty': -5,                 # Penalized (limited to prevent abuse)
+    'conflict_resolution': 15,          # Successfully resolved a conflict
+    'arbitration_win': 25,              # Won an arbitration decision
+    
     # Default awards
     'message_processed': 1,
     'command_executed': 5,
