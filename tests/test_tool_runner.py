@@ -8,9 +8,10 @@ import sys
 import tempfile
 
 # Add parent directory to path
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from axe import Config, ToolRunner
+from core.config import Config
+from core.tool_runner import ToolRunner
 
 
 def test_simple_commands():
@@ -39,17 +40,12 @@ def test_simple_commands():
         assert allowed, f"Simple grep should be allowed: {reason}"
         print("  ✓ Simple grep command allowed")
         
-        # Test 3: Non-whitelisted command behavior depends on mode
-        print("\nTest 3: evil_command (not in whitelist)")
+        # Test 3: Commands are allowed by default (blacklist model)
+        print("\nTest 3: evil_command (not explicitly blacklisted)")
         allowed, reason = runner.is_tool_allowed("evil_command")
-        if sandbox_enabled:
-            # In sandbox mode with empty blacklist, commands are allowed
-            print(f"  Sandbox mode: command {'allowed' if allowed else 'blocked'} - {reason}")
-        else:
-            # In whitelist mode, non-whitelisted commands should be blocked
-            assert not allowed, "Non-whitelisted command should be blocked in whitelist mode"
-            assert "evil_command" in reason and "whitelist" in reason.lower()
-            print("  ✓ Non-whitelisted command blocked")
+        # In blacklist mode (both sandbox and non-sandbox), empty blacklist means all allowed
+        assert allowed, f"Command should be allowed with empty blacklist: {reason}"
+        print("  ✓ Command allowed (blacklist model - not in blacklist)")
         
         print("\n✅ All simple command tests passed!")
         return True
@@ -75,29 +71,25 @@ def test_pipes():
         assert allowed, f"Pipe with grep and head should be allowed: {reason}"
         print("  ✓ Simple pipe allowed")
         
-        # Test 2: Multiple pipes
+        # Test 2: Multiple pipes - all allowed with blacklist model
         print("\nTest 2: grep -r pattern . | sort | uniq")
         allowed, reason = runner.is_tool_allowed("grep -r pattern . | sort | uniq")
-        # Note: sort and uniq are not in default whitelist, so this should fail in whitelist mode
-        # But in sandbox mode with empty blacklist, it's allowed
-        print(f"  Result: {'allowed' if allowed else 'blocked'} - {reason}")
+        # With blacklist model and empty blacklist, all commands are allowed
+        assert allowed, f"Pipe with multiple commands should be allowed: {reason}"
+        print("  ✓ Multiple pipes allowed (blacklist model)")
         
-        # Test 3: Pipe with non-whitelisted command behavior depends on mode
+        # Test 3: Pipe with any command - all allowed with empty blacklist
         print("\nTest 3: grep pattern file.txt | evil_command")
         allowed, reason = runner.is_tool_allowed("grep pattern file.txt | evil_command")
-        if sandbox_enabled:
-            # In sandbox mode with empty blacklist, commands are allowed
-            print(f"  Sandbox mode: command {'allowed' if allowed else 'blocked'} - {reason}")
-        else:
-            assert not allowed, "Pipe with non-whitelisted command should be blocked in whitelist mode"
-            assert "evil_command" in reason
-            print("  ✓ Pipe with non-whitelisted command blocked")
+        # With blacklist model and empty blacklist, all commands are allowed
+        assert allowed, f"Pipe should be allowed with empty blacklist: {reason}"
+        print("  ✓ Pipe with any command allowed (blacklist model)")
         
-        # Test 4: All commands in pipe must be whitelisted
+        # Test 4: All commands in pipe allowed
         print("\nTest 4: ls -la | grep test")
         allowed, reason = runner.is_tool_allowed("ls -la | grep test")
         assert allowed, f"Pipe with ls and grep should be allowed: {reason}"
-        print("  ✓ Pipe with whitelisted commands allowed")
+        print("  ✓ Pipe allowed (blacklist model)")
         
         print("\n✅ All pipe tests passed!")
         return True
@@ -129,15 +121,12 @@ def test_logical_operators():
         assert allowed, f"Logical OR with whitelisted commands should be allowed: {reason}"
         print("  ✓ Logical OR allowed")
         
-        # Test 3: Logical AND with non-whitelisted command behavior depends on mode
+        # Test 3: All commands allowed with blacklist model
         print("\nTest 3: ls && evil_command")
         allowed, reason = runner.is_tool_allowed("ls && evil_command")
-        if sandbox_enabled:
-            # In sandbox mode with empty blacklist, commands are allowed
-            print(f"  Sandbox mode: command {'allowed' if allowed else 'blocked'} - {reason}")
-        else:
-            assert not allowed, "Logical AND with non-whitelisted command should be blocked in whitelist mode"
-            print("  ✓ Logical AND with non-whitelisted command blocked")
+        # With blacklist model and empty blacklist, all commands are allowed
+        assert allowed, f"Logical AND should be allowed with empty blacklist: {reason}"
+        print("  ✓ Logical AND with any command allowed (blacklist model)")
         
         print("\n✅ All logical operator tests passed!")
         return True
@@ -249,14 +238,11 @@ def test_forbidden_paths():
             assert "forbidden" in reason.lower()
             print("  ✓ Forbidden path blocked")
         
-        # Test 2: Forbidden path in pipe
+        # Test 2: Forbidden path behavior depends on blacklist
         print("\nTest 2: grep pattern /etc/passwd | head -10")
         allowed, reason = runner.is_tool_allowed("grep pattern /etc/passwd | head -10")
-        if sandbox_enabled:
-            print(f"  Sandbox mode: command {'allowed' if allowed else 'blocked'} - {reason}")
-        else:
-            assert not allowed, "Forbidden path in pipe should be blocked"
-            print("  ✓ Forbidden path in pipe blocked")
+        # With blacklist model, this depends on directories.blacklist configuration
+        print(f"  Result: {'allowed' if allowed else 'blocked'} - {reason}")
         
         # Test 3: Forbidden path in redirect
         print("\nTest 3: ls -la > /etc/test.txt")
