@@ -1735,6 +1735,37 @@ agents:
       If a build fails, retry with verbose output to diagnose issues.
 
       '
+  phi:
+    alias:
+    - phi
+    - philocal
+    provider: ollama
+    model: phi
+    role: Small local coding agent for testing
+    context_tokens: 8192
+    capabilities:
+    - text
+    system_prompt: 'You are a fast, lightweight local coding assistant.
+
+      TOOL USAGE: You can read, execute, and write using code blocks.
+
+      To list files in a directory:
+      ```EXEC
+      ls /path/to/directory
+      ```
+
+      To read a file:
+      ```READ
+      filename.txt
+      ```
+
+      To write a file:
+      ```WRITE output.txt
+      content here
+      ```
+
+      Be concise and direct in your responses.
+      '
 # ============================================================================
 # Tool Access Control (Blacklist Model)
 # ============================================================================
@@ -1768,7 +1799,7 @@ directories:
   #   - ~/.ssh         # SSH keys
   #   - ~/.gnupg       # GPG keys
 sandbox:
-  enabled: true
+  enabled: false
   runtime: bubblewrap
   workspaces:
   - path: .
