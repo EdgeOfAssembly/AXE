@@ -192,24 +192,18 @@ Focus on practical, working solutions."""
         }
     },
 
-    # Tool whitelist with categories
+    # Tool access control (blacklist model)
+    # When sandbox is enabled: All tools allowed except those in blacklist
+    # When sandbox is disabled: All tools allowed except those in blacklist (full host access)
     'tools': {
-        'download': ['curl', 'wget', 'wget2'],
-        'emulation': ['xvfb-run', 'dosbox-x', 'dosbox'],
-        'vcs': ['git', 'diff', 'patch'],
-        'disasm': ['ndisasm', 'objdump', 'hexdump', 'readelf', 'nm', 'strings'],
-        'assembly': ['nasm', 'as', 'gas'],
-        'debug': ['gdb', 'lldb', 'strace', 'ltrace', 'valgrind'],
-        'build': ['make', 'cmake', 'gcc', 'g++', 'clang', 'clang++', 'ld'],
-        'python': ['python', 'python3', 'pip', 'pytest', 'pylint', 'mypy'],
-        'analysis': ['cppcheck', 'clang-format', 'clang-tidy']
+        'blacklist': []  # Tools explicitly forbidden (empty = all tools allowed)
     },
 
-    # Directory access control
+    # Directory access control (blacklist model)
+    # When sandbox is enabled: Full access inside sandbox except blacklist
+    # When sandbox is disabled: Full host access within user permissions except blacklist
     'directories': {
-        'allowed': ['.', './src', './include', './tests', './tools'],
-        'readonly': ['./vendor', './deps'],
-        'forbidden': ['/etc', '/root', '~/.ssh']
+        'blacklist': []  # Directories explicitly forbidden (empty = full access within sandbox/host)
     },
 
     # Sandbox configuration (bubblewrap isolation)

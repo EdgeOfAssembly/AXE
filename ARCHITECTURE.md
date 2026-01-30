@@ -63,7 +63,7 @@ This document describes the AXE architecture and provides guidance for extending
 │Database│  │Workshop │  │Security  │
 │────────│  │─────────│  │─────────-│
 │• SQLite│  │• Chisel │  │• Sandbox │
-│• Agent │  │• Hammer │  │• Whitelist│
+│• Agent │  │• Hammer │  │• Blacklist│
 │  state │  │• Saw    │  │• Path    │
 │• XP/lvl│  │• Plane  │  │  checks  │
 └────────┘  └─────────┘  └──────────┘
@@ -214,7 +214,7 @@ User Input
          │
          ▼
 ┌─────────────────┐
-│ Tool Runner     │──► Validate against whitelist
+│ Tool Runner     │──► Validate against blacklist
 │                 │──► Check path security
 │                 │──► Execute (sandboxed if enabled)
 │                 │──► Capture output
@@ -428,7 +428,7 @@ def my_optimization_strategy(
 
 3. **Graceful Degradation**: Use try/except for optional dependencies. Features should degrade gracefully when dependencies are missing.
 
-4. **Safety First**: All tool execution goes through `ToolRunner` with whitelist validation. New tools should integrate with this system.
+4. **Safety First**: All tool execution goes through `ToolRunner` with blacklist validation and optional sandbox isolation. New tools should integrate with this system.
 
 5. **Persistence**: Agent state is stored in SQLite via `AgentDatabase`. New features needing persistence should add appropriate tables/columns.
 

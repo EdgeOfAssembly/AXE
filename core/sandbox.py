@@ -15,6 +15,58 @@ if TYPE_CHECKING:
     from .config import Config
 
 
+def check_user_namespace_support() -> Tuple[bool, str]:
+    """
+    Check if user namespaces are supported in the current environment.
+    
+    Uses multiple methods for robust detection:
+    1. Check /proc/sys/kernel/unprivileged_userns_clone (Debian/Ubuntu)
+    2. Check /proc/sys/user/max_user_namespaces (most Linux)
+    3. Try to actually create a user namespace (definitive test)
+    
+    Returns:
+        Tuple of (supported: bool, message: str)
+    """
+    # Method 1: Check unprivileged_userns_clone (Debian/Ubuntu specific)
+    try:
+        with open('/proc/sys/kernel/unprivileged_userns_clone', 'r') as f:
+            if f.read().strip() == '0':
+                return False, "User namespaces disabled (unprivileged_userns_clone=0)"
+    except (FileNotFoundError, PermissionError):
+        pass  # File doesn't exist or can't read, try other methods
+    
+    # Method 2: Check max_user_namespaces
+    try:
+        with open('/proc/sys/user/max_user_namespaces', 'r') as f:
+            max_ns = int(f.read().strip())
+            if max_ns == 0:
+                return False, "User namespaces disabled (max_user_namespaces=0)"
+    except (FileNotFoundError, PermissionError, ValueError):
+        pass  # File doesn't exist or can't read, try other methods
+    
+    # Method 3: Actually try to create a user namespace (definitive test)
+    # This is the most reliable way - try to run 'unshare -U true'
+    try:
+        result = subprocess.run(
+            ['unshare', '-U', 'true'],
+            capture_output=True,
+            text=True,
+            timeout=2
+        )
+        if result.returncode == 0:
+            return True, "User namespaces supported (unshare test passed)"
+        else:
+            error_msg = result.stderr.strip() if result.stderr else "Unknown error"
+            return False, f"User namespaces not available: {error_msg}"
+    except FileNotFoundError:
+        # unshare not available, check if we're in a container/restricted env
+        return False, "Cannot test user namespaces (unshare command not found)"
+    except subprocess.TimeoutExpired:
+        return False, "User namespace test timed out"
+    except Exception as e:
+        return False, f"User namespace test failed: {e}"
+
+
 class SandboxManager:
     """
     Manages bubblewrap sandbox lifecycle and command execution.

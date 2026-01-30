@@ -287,9 +287,16 @@ class Config:
                 return default
         return value
 
-    def get_tool_whitelist(self) -> set:
-        """Get flat set of all allowed tools."""
-        tools = set()
-        for category_tools in self.config.get('tools', {}).values():
-            tools.update(category_tools)
-        return tools
+    def get_tool_blacklist(self) -> set:
+        """Get flat set of all blacklisted tools."""
+        tools_config = self.config.get('tools', {})
+        # Support both new structure (blacklist key) and legacy structure (categories)
+        if isinstance(tools_config, dict):
+            if 'blacklist' in tools_config:
+                # New blacklist model
+                return set(tools_config['blacklist'])
+            else:
+                # Legacy whitelist model - return empty set (allow all)
+                # This provides backward compatibility during migration
+                return set()
+        return set()

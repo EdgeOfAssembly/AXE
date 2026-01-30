@@ -3730,6 +3730,16 @@ Collaborative Mode:
     # Load config
     config = Config(args.config)
     
+    # Check user namespace support if sandbox is enabled
+    if config.get('sandbox', 'enabled', default=False):
+        from core.sandbox import check_user_namespace_support
+        ns_supported, ns_message = check_user_namespace_support()
+        if not ns_supported:
+            print(c(f"⚠️  WARNING: {ns_message}", Colors.YELLOW))
+            print(c("   Agents will NOT have root capabilities inside sandbox.", Colors.YELLOW))
+            print(c("   Sandbox isolation will still work, but with reduced privileges.", Colors.DIM))
+            print()
+    
     # Override project dir
     if args.dir:
         config.config['project_dir'] = args.dir

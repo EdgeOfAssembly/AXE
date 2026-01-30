@@ -255,7 +255,7 @@ Benefits:
 
 ## Troubleshooting
 
-### "bubblewrap not available, falling back to whitelist mode"
+### "bubblewrap not available, falling back to unrestricted mode"
 
 **Cause**: bubblewrap not installed  
 **Fix**: Install bubblewrap package (see Requirements section)
@@ -265,7 +265,7 @@ Benefits:
 **Cause**: Permission issue or invalid configuration  
 **Fix**: Check that workspace path exists and is accessible
 
-### Commands work in whitelist mode but not sandbox mode
+### Commands work in unrestricted mode but not sandbox mode
 
 **Cause**: Tool might be blacklisted or path not bound  
 **Fix**: 

@@ -25,7 +25,7 @@
 - [Usage Examples](#usage-examples)
 - [Chat Commands Reference](#chat-commands-reference)
 - [Agent Reference](#agent-reference)
-- [Tool Whitelist](#tool-whitelist)
+- [Security Model](#security-model)
 - [Advanced Usage](#advanced-usage)
 - [Multi-Agent Collaboration](#multi-agent-collaboration)
 - [Analysis Tools](#analysis-tools)
@@ -48,9 +48,9 @@ AXE (Agent eXecution Engine) is a powerful terminal-based multiagent system desi
 ### Why AXE?
 
 1. **Unified Interface**: Talk to multiple AI models through one terminal interface
-2. **Tool Integration**: Execute whitelisted commands (hexdump, objdump, gdb, etc.)
+2. **Tool Integration**: Execute commands with optional blacklist-based security
 3. **Context-Aware**: Automatically provides project context to agents
-4. **Safe Execution**: Command whitelist and directory access control
+4. **Sandbox Execution**: Optional bubblewrap-based isolation for secure command execution
 5. **Flexible Config**: YAML/JSON configuration for easy customization
 
 ---
@@ -487,7 +487,7 @@ axe> @llama check for DOS compatibility issues in this code
 | `/files` | List project code files | `/files` |
 | `/context` | Show project context | `/context` |
 | `/read <file>` | Read file content | `/read main.c` |
-| `/exec <cmd>` | Execute whitelisted command | `/exec make build` |
+| `/exec <cmd>` | Execute command (subject to blacklist) | `/exec make build` |
 | `/history` | Show chat history | `/history` |
 | `/clear` | Clear chat history | `/clear` |
 | `/save` | Save current config | `/save` |
@@ -817,47 +817,61 @@ This ensures you're always aware when code/prompts are being optimized, helping 
 
 ---
 
-## Tool Whitelist
+## Security Model
 
-### Disassembly & Analysis
-```
-ndisasm, objdump, hexdump, readelf, nm, strings
-```
+AXE uses a **blacklist-based security model** with optional sandbox isolation:
 
-### Debugging
-```
-gdb, lldb, strace, ltrace, valgrind
-```
+### Default Behavior (No Sandbox)
+- **All tools allowed** except those in `tools.blacklist` (empty by default)
+- **All directories accessible** except those in `directories.blacklist` (empty by default)
+- Runs with permissions of the user invoking AXE
 
-### Building
-```
-make, cmake, gcc, g++, clang, clang++, ld, ar, nasm, as
-```
-
-### Python
-```
-python, python3, pip, pytest, pylint, mypy, black, flake8
+### With Sandbox (Recommended)
+Enable sandbox in `axe.yaml`:
+```yaml
+sandbox:
+  enabled: true
 ```
 
-### Version Control
-```
-git, diff, patch
+When sandbox is enabled:
+- Commands run inside isolated bubblewrap container
+- Agent appears as root inside sandbox (UID 0 in user namespace)
+- PID namespace isolation (limited process visibility)
+- Full tool access unless explicitly blacklisted
+- Workspace directory is writable, host system is read-only
+
+### Security Configuration
+
+**Tool Blacklist** (Optional):
+```yaml
+tools:
+  blacklist: []  # Empty = all tools allowed
+  # Example: Block dangerous operations
+  # blacklist: ['rm', 'dd', 'mkfs', 'fdisk']
 ```
 
-### Download
-```
-curl, wget, wget2
-```
-
-### Emulation
-```
-dosbox-x, dosbox, xvfb-run
+**Directory Blacklist** (Optional):
+```yaml
+directories:
+  blacklist: []  # Empty = full access
+  # Example: Block sensitive paths
+  # blacklist: ['/etc/shadow', '~/.ssh', '~/.gnupg']
 ```
 
-### Analysis
+**Sandbox Tool Blacklist** (Most Restrictive):
+```yaml
+sandbox:
+  tool_blacklist: []  # Tools forbidden even inside sandbox
 ```
-cppcheck, clang-format, clang-tidy
-```
+
+### Security Comparison
+
+| Sandbox State | Tool Access | Directory Access | Isolation |
+|---------------|-------------|------------------|-----------|
+| **Enabled** | All except blacklist | All except blacklist (inside sandbox) | Full namespace isolation, appears as root |
+| **Disabled** | All except blacklist | All except blacklist (host access) | None - runs as invoking user |
+
+**Note**: The blacklist model is more permissive than the legacy whitelist approach. For maximum security, always enable sandbox mode.
 
 ---
 
@@ -1156,7 +1170,7 @@ pip install zstandard
 
 ### Integration with Agents
 
-Both tools are whitelisted and agents can invoke them via EXEC blocks:
+Both tools are available to agents via EXEC blocks:
 
 ```markdown
 To understand this codebase, I'll first prepare the context:
@@ -1445,12 +1459,11 @@ axe> @llama instead of @gpt
 axe> /stats
 ```
 
-**"Command not in whitelist"**
+**"Command is blacklisted"**
 ```bash
-# Check available tools
-axe> /tools
-
-# Add tools to axe.yaml if needed
+# Tool is explicitly forbidden in axe.yaml
+# Check tools.blacklist or sandbox.tool_blacklist
+# Remove from blacklist or use alternative tool
 ```
 
 **"Workshop tool not available"**
