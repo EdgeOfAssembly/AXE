@@ -155,20 +155,20 @@ Interactive mode for single-agent use with human in the loop:
 @<agent> <task>   Send task to agent (e.g., @gpt analyze this code)
 /agents           List available agents and their status
 /rules            Display session rules
-/tools            List available tools by category
-/dirs             Show directory access permissions
+/tools            Show tool access configuration (blacklist/legacy categories)
+/dirs             Show directory blacklist and access policy
 /config           Show current configuration
 /files            List project code files
 /context          Show project context summary
 /read <file>      Read file content
-/exec <cmd>       Execute a whitelisted command
+/exec <cmd>       Execute a command subject to sandbox/blacklist restrictions
 /history          Show chat history
 /clear            Clear chat history
 /save             Save current config
 /stats [agent]    Show token usage statistics and cost estimates
 /tokenopt-stats   Show token optimization statistics (live reporting)
 /help             Show this help
-/quit             Exit
+/quit, /exit, /q  Exit
 ```
 
 #### Session Management
@@ -180,8 +180,8 @@ Interactive mode for single-agent use with human in the loop:
 
 #### Analysis Tools
 ```
-/prep [dir] [-o output_dir]         Generate codebase overview, stats, structure
-/llmprep [dir] [-o output_dir]      Alias for /prep
+/prep <dir> [-o output_dir]         Generate codebase overview, stats, structure
+/llmprep <dir> [-o output_dir]      Alias for /prep
 /buildinfo <path> [--json]          Detect build system (Autotools, CMake, Meson, etc.)
                                     Supports directories and .tar/.tar.gz/.tar.zst archives
 ```
