@@ -150,21 +150,98 @@ Interactive mode for single-agent use with human in the loop:
 
 ### Commands
 
+#### Basic Commands
 ```
-/clear          Clear conversation history
-/collab         Start collaboration session
-/config         Show/modify configuration
-/help           Show available commands
-/history        Show conversation history
-/model          Switch model (e.g., /model claude-opus-4-5-20251101)
-/quit           Exit AXE
-/save           Save conversation
-/status         Show system status
-/workspace      Manage workspaces
+@<agent> <task>   Send task to agent (e.g., @gpt analyze this code)
+/agents           List available agents and their status
+/rules            Display session rules
+/tools            Show tool access configuration (blacklist/legacy categories)
+/dirs             Show directory blacklist and access policy
+/config           Show current configuration
+/files            List project code files
+/context          Show project context summary
+/read <file>      Read file content
+/exec <cmd>       Execute a command subject to sandbox/blacklist restrictions
+/history          Show chat history
+/clear            Clear chat history
+/save             Save current config
+/stats [agent]    Show token usage statistics and cost estimates
+/tokenopt-stats   Show token optimization statistics (live reporting)
+/help             Show this help
+/quit, /exit, /q  Exit
+```
 
-@agent          Direct message to agent
-                Example: @claude analyze this code
-                Example: @gpt,llama review together
+#### Session Management
+```
+/session save <name>   Save current session
+/session load <name>   Load a saved session
+/session list          List all saved sessions
+```
+
+#### Analysis Tools
+```
+/prep <dir> [-o output_dir]         Generate codebase overview, stats, structure
+/llmprep <dir> [-o output_dir]      Alias for /prep
+/buildinfo <path> [--json]          Detect build system (Autotools, CMake, Meson, etc.)
+                                    Supports directories and .tar/.tar.gz/.tar.zst archives
+```
+
+#### Workspace Management
+```
+/workspace                          Show current workspace(s)
+/workspace <path>                   Set workspace directory
+/workspace <path1>,<path2>          Set multiple workspaces (comma-separated)
+/workspace +<path>                  Add workspace to list
+/workspace -<path>                  Remove workspace from list
+/workspace clear                    Clear all workspaces (use project dir only)
+```
+
+#### Workshop Tools
+```
+/workshop chisel <binary> [func]    Symbolic execution
+/workshop saw "<code>"              Taint analysis
+/workshop plane <path>              Source/sink enumeration
+/workshop hammer <process>          Live instrumentation
+/workshop status                    Check tool availability and dependencies
+/workshop help [tool]               Get detailed help for a specific tool
+/workshop history [tool]            View analysis history
+/workshop stats [tool]              View usage statistics
+```
+
+#### Collaborative Mode
+```
+/collab <agents> <workspace(s)> <time> <task>
+                  Start collaborative session with multiple agents
+                  Workspace(s) can be comma-separated for multiple
+                  Example: /collab llama,copilot ./playground 30 "Review and improve wadextract.c"
+                  Example: /collab llama,copilot /tmp/a,/tmp/b 30 "Cross-project analysis"
+
+During collaboration:
+  Ctrl+C          Pause session (options: continue, stop, inject message)
+  Agents say "PASS" to skip their turn
+  Agents say "TASK COMPLETE: summary" when done
+```
+
+#### Agent Aliases
+```
+@g, @gpt         OpenAI GPT
+@c, @claude      Anthropic Claude
+@l, @llama       HuggingFace Llama
+@x, @grok        xAI Grok
+@cp, @copilot    GitHub Copilot
+```
+
+#### Examples
+```
+@claude review this function for security issues
+@gpt write a parser for DOS WAD files in C
+@llama disassemble the interrupt handler at 0x1000
+/exec hexdump -C game.exe | head -20
+/workspace /tmp/playground
+/workspace +/tmp/projectX
+/workshop saw "import os; os.system(input())"
+/collab llama,copilot ./playground 30 "Analyze and document wadextract.c"
+/collab grok,copilot /tmp/a,/tmp/b 60 "Do cross-project code review"
 ```
 
 ---
