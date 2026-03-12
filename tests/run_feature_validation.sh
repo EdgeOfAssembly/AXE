@@ -47,7 +47,22 @@ if [ "$SKIP_SETUP" = false ]; then
     log "Checking Ollama installation..."
     if ! command -v ollama &>/dev/null; then
         log "Installing Ollama..."
-        curl -fsSL https://ollama.com/install.sh | sh
+        # Download installer to a temp file rather than piping directly to sh,
+        # so it is auditable.  Set OLLAMA_INSTALL_SHA256 to verify the checksum.
+        tmp_install_sh="$(mktemp)"
+        curl -fsSL https://ollama.com/install.sh -o "$tmp_install_sh"
+        if [ -n "${OLLAMA_INSTALL_SHA256:-}" ]; then
+            log "Verifying Ollama installer checksum..."
+            actual_sha256="$(sha256sum "$tmp_install_sh" | awk '{print $1}')"
+            if [ "$actual_sha256" != "$OLLAMA_INSTALL_SHA256" ]; then
+                fail "Ollama installer checksum mismatch (expected $OLLAMA_INSTALL_SHA256, got $actual_sha256)"
+                rm -f "$tmp_install_sh"
+                exit 1
+            fi
+            ok "Ollama installer checksum verified"
+        fi
+        sh "$tmp_install_sh"
+        rm -f "$tmp_install_sh"
     else
         ok "Ollama already installed ($(ollama --version 2>&1 | head -1))"
     fi
@@ -72,23 +87,26 @@ if [ "$SKIP_SETUP" = false ]; then
         ok "Ollama server already running"
     fi
 
-    # Pull three small test models
+    # Pull three small test models — check for the exact tag to avoid false positives
+    # (e.g. having qwen2.5:7b installed must not skip pulling qwen2.5:1.5b).
     MODELS=("qwen2.5-coder:1.5b" "qwen2.5:1.5b" "tinyllama:latest")
     for model in "${MODELS[@]}"; do
-        short="${model%%:*}"
-        if ollama list 2>/dev/null | grep -qF "$short"; then
+        if ollama list 2>/dev/null | awk 'NR>1{print $1}' | grep -qxF "$model"; then
             ok "$model already available"
         else
             log "Pulling $model ..."
-            ollama pull "$model" 2>&1 | tail -3
+            ollama pull "$model"
             ok "$model pulled"
         fi
     done
 
-    # Python deps
-    log "Installing Python requirements..."
-    pip install -q -r "$REPO_ROOT/requirements.txt" 2>&1 | tail -3 || true
-    pip install -q openai filelock 2>&1 | tail -3 || true
+    # Python deps — fail fast if requirements cannot be installed; log to file for audit.
+    PIP_LOG="${PIP_LOG:-/tmp/feature_validation_pip.log}"
+    log "Installing Python requirements (full log → $PIP_LOG)..."
+    pip install -q -r "$REPO_ROOT/requirements.txt" >>"$PIP_LOG" 2>&1
+    tail -3 "$PIP_LOG"
+    pip install -q openai filelock >>"$PIP_LOG" 2>&1
+    tail -3 "$PIP_LOG"
 fi
 
 # ---------------------------------------------------------------------------

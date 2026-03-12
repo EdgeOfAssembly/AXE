@@ -555,10 +555,12 @@ fi
 
 # Emit a shell snippet that callers can eval/source to extend PATH.
 # Usage (from CI or other scripts):
-#   eval "$(bash scripts/setup_env.sh --skip-models --skip-re-tools 2>/dev/null | grep ^export)" 
+#   eval "$(bash scripts/setup_env.sh --skip-models --skip-re-tools 2>/dev/null | grep ^export)"
 # Or simply run:  export PATH="/tmp/bin:$PATH"
 if [[ ":$PATH:" != *":/tmp/bin:"* ]]; then
-    log "Add /tmp/bin to PATH: export PATH=\"/tmp/bin:\$PATH\""
+    # Print an exportable snippet to stdout so callers can eval/source it.
+    echo "export PATH=\"$TMPBIN:\$PATH\""
+    log "Add /tmp/bin to PATH (caller shell): eval \"\$(... | grep ^export)\""
 fi
 export PATH="$TMPBIN:$PATH"
 ok "/tmp/bin added to PATH (current shell)"

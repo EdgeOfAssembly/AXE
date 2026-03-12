@@ -53,7 +53,12 @@ jobs:
 
       - name: Install Ollama
         run: |
-          curl -fsSL https://ollama.com/install.sh | sh
+          # Download installer to a temp file rather than piping directly to sh,
+          # so the script is auditable and the download is not executed blindly.
+          INSTALL_SCRIPT="$(mktemp)"
+          curl -fsSL https://ollama.com/install.sh -o "$INSTALL_SCRIPT"
+          sh "$INSTALL_SCRIPT"
+          rm -f "$INSTALL_SCRIPT"
           # Confirm server is up (systemd starts it automatically)
           for i in $(seq 1 30); do
             if curl -sf http://localhost:11434/ >/dev/null 2>&1; then
@@ -67,20 +72,21 @@ jobs:
 
       - name: Pull small coding models (supervisor + 2 workers)
         run: |
-          # Pull three small CPU-friendly models in sequence
+          # Pull three small CPU-friendly models in sequence.
+          # Use explicit tags throughout so the exact version is unambiguous.
           # qwen2.5-coder:1.5b  — Supervisor  (~986 MB)
           # qwen2.5:1.5b        — Worker A    (~986 MB)
           # tinyllama:latest    — Worker B    (~637 MB)
           ollama pull qwen2.5-coder:1.5b
           ollama pull qwen2.5:1.5b
-          ollama pull tinyllama
+          ollama pull tinyllama:latest
           ollama list
 
       - name: Smoke-test each model
         run: |
           ollama run qwen2.5-coder:1.5b "Reply with the single word: READY"
           ollama run qwen2.5:1.5b       "Reply with the single word: READY"
-          ollama run tinyllama          "Reply with the single word: READY"
+          ollama run tinyllama:latest   "Reply with the single word: READY"
         timeout-minutes: 5
 
       - name: Install keypress tool
@@ -118,8 +124,10 @@ jobs:
         run: python3 tests/test_skills_manager.py
 
       - name: Run socket interface tests
-        run: python3 tests/test_socket_interface.py || true
+        continue-on-error: true
+        run: python3 tests/test_socket_interface.py
 
       - name: Run workshop tests
-        run: python3 tests/test_workshop.py || true
+        continue-on-error: true
+        run: python3 tests/test_workshop.py
 

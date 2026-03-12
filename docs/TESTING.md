@@ -12,7 +12,7 @@ use, and how to run every layer of the test suite.
 bash scripts/setup_env.sh
 
 # 2. Activate the Python venv created by setup_env.sh (optional but recommended)
-source venv/bin/activate   # or your venv location
+source .venv/bin/activate   # or your venv location
 
 # 3. Run the main test suite
 python3 tests/test_end_to_end.py
@@ -71,16 +71,24 @@ AXE uses local Ollama models for offline testing.  Three models are pulled by
 All three run on CPU-only hardware (no GPU required).
 
 ```bash
-# Install latest Ollama
-curl -fsSL https://ollama.com/install.sh | sh
+# Recommended: run scripts/setup_env.sh, which installs Ollama using a
+# downloaded installer and supports optional checksum verification.
+bash scripts/setup_env.sh
 
-# Start the server
+# If you need to install manually (safer than piping directly to sh):
+INSTALL_SCRIPT="$(mktemp)"
+curl -fsSL https://ollama.com/install.sh -o "$INSTALL_SCRIPT"
+# Optional: verify checksum before running — set OLLAMA_INSTALL_SHA256.
+sh "$INSTALL_SCRIPT"
+rm -f "$INSTALL_SCRIPT"
+
+# Start the server (if not started by the installer)
 ollama serve &
 
 # Pull models
 ollama pull qwen2.5-coder:1.5b
 ollama pull qwen2.5:1.5b
-ollama pull tinyllama
+ollama pull tinyllama:latest
 ```
 
 Tests that require Ollama are automatically **skipped** when the server is not
