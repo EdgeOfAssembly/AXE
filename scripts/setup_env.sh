@@ -526,6 +526,44 @@ else
 fi
 
 # ---------------------------------------------------------------------------
+# Populate /tmp/bin — place dosbox-staging, dumpexe, and keypress.py here
+# so they are on PATH regardless of where the repo is checked out.
+# ---------------------------------------------------------------------------
+TMPBIN="/tmp/bin"
+mkdir -p "$TMPBIN"
+
+# dosbox-staging binary
+if [ -x "$REPO_ROOT/tools/dosbox-staging/build/dosbox" ]; then
+    ln -sf "$REPO_ROOT/tools/dosbox-staging/build/dosbox" "$TMPBIN/dosbox" && \
+        ok "/tmp/bin/dosbox -> $REPO_ROOT/tools/dosbox-staging/build/dosbox"
+fi
+
+# dumpexe binary
+if [ -x "$REPO_ROOT/tools/dumpexe/dumpexe" ]; then
+    ln -sf "$REPO_ROOT/tools/dumpexe/dumpexe" "$TMPBIN/dumpexe" && \
+        ok "/tmp/bin/dumpexe -> $REPO_ROOT/tools/dumpexe/dumpexe"
+fi
+
+# keypress.py
+if [ -f "$REPO_ROOT/tools/keypress/keypress.py" ]; then
+    ln -sf "$REPO_ROOT/tools/keypress/keypress.py" "$TMPBIN/keypress.py" && \
+        ok "/tmp/bin/keypress.py -> $REPO_ROOT/tools/keypress/keypress.py"
+elif [ -f "$REPO_ROOT/tools/keypress.py" ]; then
+    ln -sf "$REPO_ROOT/tools/keypress.py" "$TMPBIN/keypress.py" && \
+        ok "/tmp/bin/keypress.py -> $REPO_ROOT/tools/keypress.py"
+fi
+
+# Emit a shell snippet that callers can eval/source to extend PATH.
+# Usage (from CI or other scripts):
+#   eval "$(bash scripts/setup_env.sh --skip-models --skip-re-tools 2>/dev/null | grep ^export)" 
+# Or simply run:  export PATH="/tmp/bin:$PATH"
+if [[ ":$PATH:" != *":/tmp/bin:"* ]]; then
+    log "Add /tmp/bin to PATH: export PATH=\"/tmp/bin:\$PATH\""
+fi
+export PATH="$TMPBIN:$PATH"
+ok "/tmp/bin added to PATH (current shell)"
+
+# ---------------------------------------------------------------------------
 # Done
 # ---------------------------------------------------------------------------
 echo ""

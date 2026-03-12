@@ -242,6 +242,16 @@ class Config:
             else:
                 return default
         return value
+    def get_agent_config(self, agent_name: str) -> Optional[Dict]:
+        """Return the config dict for the named agent, or None if not found."""
+        agents = self.config.get('agents', {})
+        if isinstance(agents, dict):
+            return agents.get(agent_name)
+        # Support list-of-dicts format
+        for agent in agents:
+            if isinstance(agent, dict) and agent.get('name') == agent_name:
+                return agent
+        return None
     def get_tool_blacklist(self) -> set:
         """Get flat set of all blacklisted tools."""
         tools_config = self.config.get('tools', {})

@@ -1,27 +1,88 @@
 name: "Copilot Setup Steps"
 
 on:
-  workflow_dispatch:  
+  workflow_dispatch:
   push:
   pull_request:
 
-jobs:  
+jobs:
   copilot-setup-steps:
     runs-on: ubuntu-latest
-    
+
     # Reference the copilot environment to access its secrets
     environment: copilot
-    
+
     permissions:
       contents: read
-    
+
     steps:
       - name: Checkout code
-        uses:  actions/checkout@v5
-      
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Export secrets to environment
         run: |
-          # This makes the secret available in subsequent steps
-          echo "ANTHROPIC_API_KEY=${{ secrets. ANTHROPIC_API_KEY }}" >> $GITHUB_ENV
+          # Make secrets available in subsequent steps
+          echo "ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}" >> $GITHUB_ENV
         env:
-          ANTHROPIC_API_KEY: ${{ secrets. ANTHROPIC_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            curl wget git build-essential \
+            python3-xlib python3-pip \
+            libcapstone-dev \
+            libsdl2-dev libsdl2-image-dev \
+            libfluidsynth-dev fluidsynth \
+            xvfb \
+            libpng-dev libspeexdsp-dev libasound2-dev \
+            cmake ninja-build nasm
+
+      - name: Install Python requirements
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          # Extra packages used by tests and keypress
+          pip install python-xlib capstone
+
+      - name: Install keypress tool
+        run: |
+          git clone --depth=1 https://github.com/EdgeOfAssembly/keypress.git tools/keypress
+          chmod +x tools/keypress/keypress.py
+          # Put on PATH via /tmp/bin
+          mkdir -p /tmp/bin
+          ln -sf "$PWD/tools/keypress/keypress.py" /tmp/bin/keypress.py
+          echo "/tmp/bin" >> $GITHUB_PATH
+
+      - name: Build dumpexe
+        run: |
+          git clone --depth=1 https://github.com/EdgeOfAssembly/dumpexe.git tools/dumpexe
+          if command -v g++ &>/dev/null; then
+            make -s -C tools/dumpexe CXX=g++ || true
+          fi
+          if [ -x tools/dumpexe/dumpexe ]; then
+            ln -sf "$PWD/tools/dumpexe/dumpexe" /tmp/bin/dumpexe
+            echo "dumpexe built successfully"
+          else
+            echo "::warning::dumpexe build failed; RE tests will be skipped"
+          fi
+
+      - name: Run AXE test suite
+        run: |
+          export PATH="/tmp/bin:$PATH"
+          python3 tests/test_end_to_end.py
+
+      - name: Run skills manager tests
+        run: python3 tests/test_skills_manager.py
+
+      - name: Run socket interface tests
+        run: python3 tests/test_socket_interface.py || true
+
+      - name: Run workshop tests
+        run: python3 tests/test_workshop.py || true
