@@ -1,0 +1,14 @@
+--- a/src/libs/zmbv/zmbv.h
++++ b/src/libs/zmbv/zmbv.h
+@@ -12,7 +12,9 @@
+ #include <vector>
+ 
+ #include "dosbox_config.h"
+ 
+-#if defined(C_SYSTEM_ZLIB_NG)
++// #cmakedefine01 generates "#define C_SYSTEM_ZLIB_NG 0" when disabled.
++// Using defined() on that would always be true, so check the value directly.
++#if C_SYSTEM_ZLIB_NG
+ #include <zlib-ng.h>
+ #define deflateInit2 zng_deflateInit2
+ #define deflateReset zng_deflateReset

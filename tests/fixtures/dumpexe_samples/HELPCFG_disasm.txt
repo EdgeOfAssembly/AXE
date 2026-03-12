@@ -1,0 +1,159 @@
+Display of File /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/4dos595/HELPCFG.EXE
+
+DOS File Size                                     02D2Ch  ( 11564. )
+Load Image Size                                   02CCCh  ( 11468. )
+Relocation Table entry count                      0001h  (     1. )
+Relocation Table address                          0054h  (    84. )
+Header Size                                       0060h  (    96. )
+Minimum Extra Memory                              056Bh  (  1387. )
+Maximum Memory Requirement                        FFFFh  ( 65535. paragraphs = 1048560 bytes, all available )
+File load checksum                                0000h  (     0. )
+Overlay Number                                    0000h  (     0. )
+Entry Point File Offset                           00060h  (    96. )
+Entry Point Image Offset                          00000h  (     0. )
+
+Initial Stack Segment  (SS:SP)			  02D3:0200
+Program Entry Point    (CS:IP)			  FFF0:0100
+
+=== Disassembly (from entry point to EOF) ===
+File Offset  Raw Bytes            Instruction
+-----------  -------------------  -----------
+00000060h  50                      push ax
+00000061h  b8 30 08                mov ax, 0x830
+00000064h  ba aa 02                mov dx, 0x2aa
+00000067h  05 00 00                add ax, 0
+0000006ah  3b 06 02 00             cmp ax, word ptr [2]
+0000006eh  72 32                   jb 0x42
+00000070h  b4 09                   mov ah, 9
+00000072h  ba 1c 01                mov dx, 0x11c
+00000075h  cd 21                   int 0x21                ; INT 21h - DOS 1+ - WRITE STRING TO STANDARD OUTPUT
+00000077h  b8 01 4c                mov ax, 0x4c01
+0000007ah  cd 21                   int 0x21                ; INT 21h - DOS 2+ - "EXIT" - TERMINATE WITH RETURN CODE
+0000007ch  4e                      dec si
+0000007dh  6f                      outsw dx, word ptr [si]
+0000007eh  74 20                   je 0x40
+00000080h  65 6e                   outsb dx, byte ptr gs:[si]
+00000082h  6f                      outsw dx, word ptr [si]
+00000083h  75 67                   jne 0x8c
+00000085h  68 20 6d                push 0x6d20
+00000088h  65 6d                   insw word ptr es:[di], dx
+0000008ah  6f                      outsw dx, word ptr [si]
+0000008bh  72 79                   jb 0xa6
+0000008dh  24 20                   and al, 0x20
+0000008fh  20 20                   and byte ptr [bx + si], ah
+00000091h  20 20                   and byte ptr [bx + si], ah
+00000093h  20 20                   and byte ptr [bx + si], ah
+00000095h  20 20                   and byte ptr [bx + si], ah
+00000097h  20 20                   and byte ptr [bx + si], ah
+00000099h  20 ea                   and dl, ch
+0000009bh  c0 ed 23                shr ch, 0x23
+0000009eh  f1                      int1
+0000009fh  f3 a5                   rep movsw word ptr es:[di], word ptr [si]
+000000a1h  c3                      ret
+000000a2h  59                      pop cx
+000000a3h  2d 20 00                sub ax, 0x20
+000000a6h  8e d0                   mov ss, ax
+000000a8h  51                      push cx
+000000a9h  2d 1a 00                sub ax, 0x1a
+000000ach  50                      push ax
+000000adh  80 3e 41 01 c3          cmp byte ptr [0x141], 0xc3
+000000b2h  75 e6                   jne 0x3a
+000000b4h  52                      push dx
+000000b5h  b8 d9 00                mov ax, 0xd9
+000000b8h  be 26 03                mov si, 0x326
+000000bbh  56                      push si
+000000bch  56                      push si
+000000bdh  52                      push dx
+000000beh  50                      push ax
+000000bfh  90                      nop
+000000c0h  5e                      pop si
+000000c1h  59                      pop cx
+000000c2h  5f                      pop di
+000000c3h  5b                      pop bx
+000000c4h  8a c0                   mov al, al
+000000c6h  4e                      dec si
+000000c7h  74 0f                   je 0x78
+000000c9h  8b 05                   mov ax, word ptr [di]
+000000cbh  4f                      dec di
+000000cch  4f                      dec di
+000000cdh  90                      nop
+000000ceh  91                      xchg ax, cx
+000000cfh  33 c1                   xor ax, cx
+000000d1h  89 07                   mov word ptr [bx], ax
+000000d3h  4b                      dec bx
+000000d4h  4b                      dec bx
+000000d5h  90                      nop
+000000d6h  eb ec                   jmp 0x64
+000000d8h  df ec                   fucomip st(4)
+000000dah  85 eb                   test bx, bp
+000000dch  83 15 85                adc word ptr [di], -0x7b
+000000dfh  9e                      sahf
+000000e0h  84 27                   test byte ptr [bx], ah
+000000e2h  4a                      dec dx
+000000e3h  27                      daa
+000000e4h  79 d8                   jns 0x5e
+000000e6h  2e 66 a2 67 5e          mov byte ptr cs:[0x5e67], al
+000000ebh  94                      xchg ax, sp
+000000ech  fb                      sti
+000000edh  5e                      pop si
+000000eeh  06                      push es
+000000efh  d2 dd                   rcr ch, cl
+000000f1h  81 5e 42 6d d2          sbb word ptr [bp + 0x42], 0xd26d
+000000f6h  6e                      outsb dx, byte ptr [si]
+000000f7h  08 e2                   or dl, ah
+000000f9h  c5 69 07                lds bp, ptr [bx + di + 7]
+000000fch  e9 e3 e6                jmp 0xe782
+000000ffh  52                      push dx
+00000100h  e2 d9                   loop 0x7b
+00000102h  10 0a                   adc byte ptr [bp + si], cl
+00000104h  f6 81 38 50 d1          test byte ptr [bx + di + 0x5038], 0xd1
+00000109h  1e                      push ds
+0000010ah  9f                      lahf
+0000010bh  95                      xchg ax, bp
+0000010ch  61                      popaw
+0000010dh  be 89 95                mov si, 0x9589
+00000110h  51                      push cx
+00000111h  1b 94 95 4f             sbb dx, word ptr [si + 0x4f95]
+00000115h  66 ea 9a 64 47 63 41 dc ljmp 0xdc41:0x6347649a
+0000011dh  41                      inc cx
+0000011eh  dd 72 2b                fnsave dword ptr [bp + si + 0x2b]
+00000121h  df be 65 ae             fistp qword ptr [bp - 0x519b]
+00000125h  65 45                   inc bp
+00000127h  4b                      dec bx
+00000128h  e8 de 5a                call 0x5ba9
+0000012bh  ce                      into
+0000012ch  b1 f6                   mov cl, 0xf6
+0000012eh  1c 63                   sbb al, 0x63
+00000130h  ae                      scasb al, byte ptr es:[di]
+00000131h  73 45                   jae 0x118
+00000133h  4a                      dec dx
+00000134h  e8 df 5a                call 0x5bb6
+00000137h  cf                      iret
+00000138h  b1 f1                   mov cl, 0xf1
+0000013ah  1c 64                   sbb al, 0x64
+0000013ch  ae                      scasb al, byte ptr es:[di]
+0000013dh  74 45                   je 0x124
+0000013fh  14 e8                   adc al, 0xe8
+00000141h  81 5a 91 b1 f0          sbb word ptr [bp + si - 0x6f], 0xf0b1
+00000146h  1c 65                   sbb al, 0x65
+00000148h  ae                      scasb al, byte ptr es:[di]
+00000149h  75 45                   jne 0x130
+0000014bh  17                      pop ss
+0000014ch  e8 82 5a                call 0x5b71
+0000014fh  92                      xchg ax, dx
+00000150h  28 99 84 ab             sub byte ptr [bx + di - 0x547c], bl
+00000154h  46                      inc si
+00000155h  01 97 ec dd             add word ptr [bx - 0x2214], dx
+00000159h  98                      cwde
+0000015ah  2c eb                   sub al, 0xeb
+0000015ch  d9 d8                   fstpnce st(0), st(0)
+0000015eh  10 eb                   adc bl, ch
+00000160h  cb                      retf
+00000161h  3a 26 70 52             cmp ah, byte ptr [0x5270]
+00000165h  b2 83                   mov dl, 0x83
+00000167h  61                      popaw
+00000168h  52                      push dx
+00000169h  8c 18                   mov word ptr [bx + si], ds
+0000016bh  f8                      clc
+0000016ch  d9 29                   fldcw word ptr [bx + di]
+0000016eh  0a ac d1 d8             or ch, byte ptr [si - 0x272f]

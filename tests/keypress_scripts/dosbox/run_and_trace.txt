@@ -1,0 +1,48 @@
+# dosbox/run_and_trace.txt
+# ---------------------------------------------------------------------------
+# Generic dosbox session script: runs an EXE, waits for it to finish, then
+# quits dosbox so the binary opcode dump (opcodes.bin) is flushed to disk.
+#
+# For non-interactive EXEs (programs that exit on their own) use the
+# plain dosbox -c "EXE" --exit approach instead — no keypress needed.
+# This script is for programs that show a menu, a prompt, or a splash
+# screen and need at least one keypress to advance or exit.
+#
+# Usage:
+#   DISPLAY=:99 python3 tools/keypress/keypress.py \
+#       -c "SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
+#           tools/dosbox-staging/build/dosbox \
+#           --noprimaryconf \
+#           --conf tools/dosbox-staging/dosbox-staging.conf \
+#           --working-dir /tmp/dosbox_trace \
+#           -c 'MOUNT C <path_to_dos_dir>' \
+#           -c 'C:' \
+#           -c '<PROGRAM.EXE>'" \
+#       -w dosbox \
+#       --emulator-mode \
+#       dosbox/run_and_trace.txt
+#
+# The binary opcode dump is written to:
+#   /tmp/dosbox_trace/opcodes.bin
+# The text trace (INT calls, file I/O) is written to:
+#   /tmp/dosbox_trace/game_trace.log
+# ---------------------------------------------------------------------------
+
+# Wait for dosbox to fully boot (video init, memory setup, etc.)
+<wait:4>
+
+# Press Enter to dismiss any "press a key to continue" splash screens
+<Return>
+<wait:1>
+
+# Send Escape to dismiss menus / configuration screens
+<Esc>
+<wait:1>
+
+# Press Enter once more for any confirmation prompts
+<Return>
+<wait:1>
+
+# Quit dosbox — flushes the binary opcode dump to opcodes.bin
+<Ctrl+F9>
+<wait:1>

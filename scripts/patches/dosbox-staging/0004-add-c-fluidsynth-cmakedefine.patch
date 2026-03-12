@@ -1,0 +1,18 @@
+--- a/src/dosbox_config.h.in.cmake
++++ b/src/dosbox_config.h.in.cmake
+@@ -76,6 +76,9 @@
+ #cmakedefine01 C_MT32EMU
+ 
++// Define to 1 to enable FluidSynth MIDI support
++#cmakedefine01 C_FLUIDSYNTH
++
+ // Define to 1 to enable Opus audio codec support
+ #cmakedefine01 C_OPUS
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -317,1 +317,4 @@
+-option(OPT_FLUIDSYNTH "Enable FluidSynth MIDI support" ON)
++option(OPT_FLUIDSYNTH "Enable FluidSynth MIDI support" ON)
++if (OPT_FLUIDSYNTH)
++  set(C_FLUIDSYNTH ON)
++endif()

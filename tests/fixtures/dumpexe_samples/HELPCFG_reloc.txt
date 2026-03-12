@@ -1,0 +1,30 @@
+Display of File /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/4dos595/HELPCFG.EXE
+
+DOS File Size                                     02D2Ch  ( 11564. )
+Load Image Size                                   02CCCh  ( 11468. )
+Relocation Table entry count                      0001h  (     1. )
+Relocation Table address                          0054h  (    84. )
+Header Size                                       0060h  (    96. )
+Minimum Extra Memory                              056Bh  (  1387. )
+Maximum Memory Requirement                        FFFFh  ( 65535. paragraphs = 1048560 bytes, all available )
+File load checksum                                0000h  (     0. )
+Overlay Number                                    0000h  (     0. )
+Entry Point File Offset                           00060h  (    96. )
+Entry Point Image Offset                          00000h  (     0. )
+
+Initial Stack Segment  (SS:SP)			  02D3:0200
+Program Entry Point    (CS:IP)			  FFF0:0100
+
+Padding:
+0000001c  32 11 50 4b 4c 49 54 45  20 43 6f 70 72 2e 20 31  |2.PKLITE Copr. 1|
+0000002c  39 39 30 2d 31 39 39 35  20 50 4b 57 41 52 45 20  |990-1995 PKWARE |
+0000003c  49 6e 63 2e 20 41 6c 6c  20 52 69 67 68 74 73 20  |Inc. All Rights |
+0000004c  52 65 73 65 72 76 65 64                           |Reserved        |
+
+=== Relocation Table (1 entries) ===
+Entry  Segment:Offset  File Location (Hex)  Linear Offset
+-----  --------------  -------------------  -------------
+00000  0000:0008        00000068h          000008h
+
+Padding:
+00000058  00 00 00 00 00 00 00 00                           |........        |

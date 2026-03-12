@@ -1,0 +1,64 @@
+# keypress script: axe_re_analysis.txt
+# ---------------------------------------------------------------------------
+# Tests AXE reverse-engineering workflow in interactive mode.
+#
+# Prerequisites (all installed by scripts/setup_env.sh):
+#   - dumpexe built at tools/dumpexe/dumpexe
+#   - HaxBox BBS fixtures linked at tests/fixtures/dos_binaries/
+#   - Ollama running with at least one model pulled (optional but recommended)
+#
+# NOTE: dumpexe -d (disassembly) is ONLY used on MZ EXE and SYS files here.
+# COM file disassembly is known to produce incomplete output (early truncation)
+# so COM files are only analysed via the default summary and -x hexdump.
+#
+# What this script does:
+#   1. Runs dumpexe (default summary) on HELPCFG.EXE — small packed MZ EXE
+#   2. Runs dumpexe -d on HELPCFG.EXE and feeds disassembly to Ollama agent
+#   3. Runs dumpexe on HIMEM.SYS to show device driver header decode
+#   4. Runs dumpexe -r on 4HELP.EXE to show its 718-entry relocation table
+#   5. Shows dumpexe --simulate on HELPCFG.EXE (DOS load state)
+#   6. Asks Ollama to interpret INT 21h calls visible in the disassembly
+#   7. Exits cleanly
+#
+# Usage (via test_interactive_keypress.py):
+#   keypress.py "xterm -e python3 axe.py" axe_re_analysis.txt -w xterm -d 4
+# ---------------------------------------------------------------------------
+
+# Wait for AXE banner
+<wait:5>
+
+# Step 1: MZ EXE default summary (header decode)
+/exec tools/dumpexe/dumpexe tests/fixtures/dos_binaries/4dos595/HELPCFG.EXE
+<wait:3>
+
+# Step 2: MZ EXE disassembly with INT annotations
+/exec tools/dumpexe/dumpexe -d tests/fixtures/dos_binaries/4dos595/HELPCFG.EXE
+<wait:3>
+
+# Step 3: Ask Ollama to explain what the EXEC output showed
+@ollama The previous EXEC output is from dumpexe, a 16-bit DOS EXE analyser. It shows: (a) an MZ header with fields like "DOS File Size", "Relocation Table entry count", "Initial Stack Segment SS:SP", and "Program Entry Point CS:IP"; (b) a disassembly listing where each line shows a file offset, raw bytes, and x86-16 mnemonic. Lines ending with "; INT 21h - ..." are annotated DOS service calls. In two sentences: what does "INT 21h AH=09h" do, and why does HELPCFG.EXE check available memory before calling it?
+<wait:25>
+
+# Step 4: SYS device driver header
+/exec tools/dumpexe/dumpexe tests/fixtures/dos_binaries/HIMEM.SYS
+<wait:3>
+
+# Step 5: Ask agent about SYS output
+@ollama The previous EXEC output is the dumpexe header decode for HIMEM.SYS — a DOS device driver. It shows fields: "Next Driver Pointer FFFFFFFFh (last in chain)", "Device Type: Character device", "Strategy Entry Point (offset)", "Interrupt Entry Point (offset)", and "Device Name: XMSXXXX0". In one sentence, what is the purpose of HIMEM.SYS and what does the device name XMSXXXX0 indicate?
+<wait:20>
+
+# Step 6: Relocation table for a larger EXE
+/exec tools/dumpexe/dumpexe -r tests/fixtures/dos_binaries/4dos595/4HELP.EXE
+<wait:3>
+
+# Step 7: Simulate DOS load
+/exec tools/dumpexe/dumpexe --simulate tests/fixtures/dos_binaries/4dos595/HELPCFG.EXE
+<wait:3>
+
+# Step 8: Check workshop availability
+/workshop status
+<wait:2>
+
+# Done
+/quit
+<wait:1>

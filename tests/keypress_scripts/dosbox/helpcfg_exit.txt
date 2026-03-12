@@ -1,0 +1,43 @@
+# dosbox/helpcfg_exit.txt
+# ---------------------------------------------------------------------------
+# Drives HELPCFG.EXE (4DOS help configurator) to exit cleanly.
+# HELPCFG.EXE is packed with PKLITE and starts an interactive menu — it
+# needs keyboard input before dosbox-staging can quit.
+#
+# Usage (requires Xvfb because keypress.py is X11-based):
+#   DISPLAY=:99 python3 tools/keypress/keypress.py \
+#       -c "SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy \
+#           tools/dosbox-staging/build/dosbox \
+#           --noprimaryconf \
+#           --conf tools/dosbox-staging/dosbox-staging.conf \
+#           --working-dir /tmp/dosbox_helpcfg \
+#           -c 'MOUNT C tests/fixtures/dos_binaries/4dos595' \
+#           -c 'C:' \
+#           -c 'HELPCFG.EXE'" \
+#       -w dosbox \
+#       --emulator-mode \
+#       dosbox/helpcfg_exit.txt
+#
+# What HELPCFG.EXE shows: a full-screen help configuration menu.
+# Pressing Escape (or 'Q') dismisses it without saving.
+# ---------------------------------------------------------------------------
+
+# Wait for dosbox to boot and HELPCFG.EXE to draw its menu
+<wait:4>
+
+# Dismiss the help configurator with Escape (no changes, just exit)
+<Esc>
+<wait:1>
+
+# Confirm exit if a "Save changes? Y/N" prompt appears
+<nowait>
+n
+<wait:1>
+
+# Try Enter in case it needs confirmation
+<Return>
+<wait:1>
+
+# Quit dosbox itself via Ctrl+F9 (dosbox-staging default quit key)
+<Ctrl+F9>
+<wait:1>

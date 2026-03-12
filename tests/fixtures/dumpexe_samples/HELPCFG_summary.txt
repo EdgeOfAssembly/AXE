@@ -1,0 +1,22 @@
+Display of File /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/4dos595/HELPCFG.EXE
+
+DOS File Size                                     02D2Ch  ( 11564. )
+Load Image Size                                   02CCCh  ( 11468. )
+Relocation Table entry count                      0001h  (     1. )
+Relocation Table address                          0054h  (    84. )
+Header Size                                       0060h  (    96. )
+Minimum Extra Memory                              056Bh  (  1387. )
+Maximum Memory Requirement                        FFFFh  ( 65535. paragraphs = 1048560 bytes, all available )
+File load checksum                                0000h  (     0. )
+Overlay Number                                    0000h  (     0. )
+Entry Point File Offset                           00060h  (    96. )
+Entry Point Image Offset                          00000h  (     0. )
+
+Initial Stack Segment  (SS:SP)			  02D3:0200
+Program Entry Point    (CS:IP)			  FFF0:0100
+
+Code at Entry Point (first 64 bytes):
+00000060  50 b8 30 08 ba aa 02 05  00 00 3b 06 02 00 72 32  |P.0.......;...r2|
+00000070  b4 09 ba 1c 01 cd 21 b8  01 4c cd 21 4e 6f 74 20  |......!..L.!Not |
+00000080  65 6e 6f 75 67 68 20 6d  65 6d 6f 72 79 24 20 20  |enough memory$  |
+00000090  20 20 20 20 20 20 20 20  20 20 ea c0 ed 23 f1 f3  |          ...#..|

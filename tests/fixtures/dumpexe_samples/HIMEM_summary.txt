@@ -1,0 +1,11 @@
+
+=== DOS Device Driver Header ===
+
+Next Driver Pointer                               FFFFFFFFh  (last in chain)
+Attributes                                        A000h  ( 40960. )
+Device Type                                       Character device
+  Output until busy                               supported (DOS 3.0+)
+Strategy Entry Point (offset)                     004Ch  (    76. )
+Interrupt Entry Point (offset)                    0D3Fh  (  3391. )
+Device Name                                       XMSXXXX0
+File Size                                         29136 bytes

@@ -1,0 +1,16 @@
+Display of File /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/4dos595/KSTACK.COM
+
+File Format                                       .COM (flat binary, 16-bit MS-DOS)
+File Size                                         0022Bh  (   555. )
+Load Model                                        No PSP in file (code starts at file offset 0000h)
+Entry Point File Offset                           0000h  (     0. )
+
+Program Entry Point (CS:IP)                       1000:0100
+Initial Stack (SS:SP)                             1000:FFFE
+DS = ES = SS = CS                                 1000h
+
+Code at Entry Point (first 64 bytes):
+00000000  e9 1a 01 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+00000010  00 00 00 00 00 fb 2e 80  3e 13 01 00 74 07 50 80  |........>...t.P.|
+00000020  e4 ee 58 74 05 2e ff 2e  03 01 56 1e 0e 1f fc 2e  |..Xt......V.....|
+00000030  88 26 14 01 2e 8b 36 0d  01 2e 83 3e 0f 01 00 74  |.&....6....>...t|

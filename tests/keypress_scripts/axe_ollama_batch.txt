@@ -1,0 +1,26 @@
+# keypress script: axe_ollama_batch.txt
+# ---------------------------------------------------------------------------
+# Tests AXE interactive mode with a local Ollama model (tinyllama or
+# qwen2.5-coder:1.5b).  Sends a simple coding task and waits for a response.
+#
+# IMPORTANT: This script requires Ollama to be running with at least one
+# model pulled.  See scripts/setup_env.sh for model installation.
+#
+# Usage (via test_interactive_keypress.py):
+#   keypress.py "xterm -e python3 axe.py" axe_ollama_batch.txt -w xterm -d 4
+# ---------------------------------------------------------------------------
+
+# Wait for AXE to start
+<wait:5>
+
+# Ask the local ollama agent a simple C question
+@ollama In one sentence, what does the hello_world.c program in tests/fixtures do?
+<wait:20>
+
+# Check token usage
+/stats ollama
+<wait:2>
+
+# Quit
+/quit
+<wait:1>

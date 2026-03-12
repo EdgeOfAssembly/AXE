@@ -1,0 +1,15 @@
+
+=== DOS Device Driver Header ===
+
+Next Driver Pointer                               FFFFFFFFh  (last in chain)
+Attributes                                        C053h  ( 49235. )
+Device Type                                       Character device
+  IOCTL                                           supported
+  Generic IOCTL                                   supported (DOS 3.2+)
+  Special (INT 29 fast console)                   yes
+  Standard output                                 yes
+  Standard input                                  yes
+Strategy Entry Point (offset)                     00C1h  (   193. )
+Interrupt Entry Point (offset)                    00CCh  (   204. )
+Device Name                                       CON
+File Size                                         9065 bytes
