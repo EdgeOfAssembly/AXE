@@ -142,19 +142,32 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# 4. Install Python requirements for AXE
+# 4. Install Python requirements for AXE (in a dedicated virtual environment)
 # ---------------------------------------------------------------------------
+# Use a venv to avoid modifying the system Python and to stay compatible with
+# distros that enforce PEP 668 (externally-managed environments).
+VENV_DIR="${REPO_ROOT}/.venv"
+VENV_PY="${VENV_DIR}/bin/python3"
+VENV_PIP="${VENV_DIR}/bin/pip"
+
+if [ ! -x "$VENV_PY" ]; then
+    log "Creating Python virtual environment at $VENV_DIR..."
+    python3 -m venv "$VENV_DIR"
+    ok "Virtual environment created."
+fi
+
 log "Installing Python requirements for AXE..."
+"$VENV_PIP" install --upgrade pip -q
 if [ -f "$REPO_ROOT/requirements.txt" ]; then
-    pip3 install --upgrade pip -q
-    pip3 install -r "$REPO_ROOT/requirements.txt" -q
-    ok "Python requirements installed."
+    "$VENV_PIP" install -r "$REPO_ROOT/requirements.txt" -q
+    ok "Python requirements installed into $VENV_DIR."
 else
     warn "requirements.txt not found at $REPO_ROOT/requirements.txt"
 fi
 
-# Also install python-xlib for keypress (pip fallback if not installed via pkg manager)
-pip3 install python-xlib -q 2>/dev/null || true
+# python-xlib for keypress (X11 keyboard automation)
+"$VENV_PIP" install python-xlib -q 2>/dev/null || true
+ok "Hint: activate the venv with:  source $VENV_DIR/bin/activate"
 
 # ---------------------------------------------------------------------------
 # 5. Install latest Ollama
@@ -170,6 +183,21 @@ LATEST_OLLAMA=$(curl -s --max-time 15 \
 
 log "Latest Ollama release: $LATEST_OLLAMA"
 
+# Download the installer to a temp file rather than piping directly to sh.
+# This allows optional checksum verification and makes the install auditable.
+_install_ollama() {
+    local installer="${TMPDIR:-/tmp}/ollama-install-$$.sh"
+    log "Downloading Ollama installer..."
+    curl -fsSLo "$installer" "https://ollama.ai/install.sh"
+    # Optional: set OLLAMA_INSTALL_SHA256 in the environment for pinned installs.
+    if [ -n "${OLLAMA_INSTALL_SHA256:-}" ]; then
+        log "Verifying Ollama installer checksum..."
+        echo "${OLLAMA_INSTALL_SHA256}  $installer" | sha256sum -c -
+    fi
+    sh "$installer"
+    rm -f "$installer"
+}
+
 # Check if already installed and up to date
 if command -v ollama &>/dev/null; then
     INSTALLED_VER=$(ollama --version 2>&1 | grep -oP '[\d]+\.[\d]+\.[\d]+' | head -1 || echo "0.0.0")
@@ -178,12 +206,12 @@ if command -v ollama &>/dev/null; then
         ok "Ollama $INSTALLED_VER already installed and up to date."
     else
         log "Updating Ollama from $INSTALLED_VER to $REQUIRED_VER..."
-        curl -fsSL https://ollama.ai/install.sh | sh
+        _install_ollama
         ok "Ollama updated to $(ollama --version 2>&1 | head -1)."
     fi
 else
     log "Ollama not found; installing..."
-    curl -fsSL https://ollama.ai/install.sh | sh
+    _install_ollama
     ok "Ollama installed: $(ollama --version 2>&1 | head -1)."
 fi
 
@@ -381,11 +409,38 @@ if [ "$SKIP_RE_TOOLS" = false ]; then
     if [ -d "$DOSBOX_DIR/.git" ] && [ ! -f "$DOSBOX_BIN" ]; then
         log "Building dosbox-staging (cmake + make, OPT_OPUS=OFF)..."
 
-        # Build-time dependencies
-        sudo apt-get install -y --no-install-recommends \
-            libsdl2-dev libsdl2-image-dev libpng-dev \
-            libspeexdsp-dev libasound2-dev libfluidsynth-dev fluidsynth \
-            libasio-dev build-essential 2>/dev/null | grep -E "^(Setting up|E:)" || true
+        # Build-time dependencies — gated by package manager
+        case "${PKG_MGR:-}" in
+            apt)
+                sudo apt-get install -y --no-install-recommends \
+                    libsdl2-dev libsdl2-image-dev libpng-dev \
+                    libspeexdsp-dev libasound2-dev libfluidsynth-dev fluidsynth \
+                    libasio-dev build-essential 2>/dev/null | grep -E "^(Setting up|E:)" || true
+                ;;
+            dnf)
+                sudo dnf install -y \
+                    SDL2-devel SDL2_image-devel libpng-devel \
+                    speexdsp-devel alsa-lib-devel fluidsynth-devel \
+                    asio-devel @development-tools || true
+                ;;
+            pacman)
+                sudo pacman -S --noconfirm --needed \
+                    sdl2 sdl2_image libpng \
+                    speexdsp alsa-lib fluidsynth \
+                    asio base-devel || true
+                ;;
+            brew)
+                brew install \
+                    sdl2 sdl2_image libpng \
+                    speexdsp fluidsynth \
+                    asio cmake make || true
+                ;;
+            *)
+                warn "Unknown package manager '${PKG_MGR:-unset}'. Please install build deps manually:"
+                warn "  SDL2-dev, SDL2_image-dev, libpng-dev, speexdsp-dev, libasound2-dev,"
+                warn "  fluidsynth-dev, libasio-dev, build-essential (or distro equivalents)."
+                ;;
+        esac
 
         # iir1 (not in apt — build from source, takes ~30s)
         if ! pkg-config --exists iir 2>/dev/null; then
@@ -423,6 +478,23 @@ Libs: -L${libdir} -lz
 Cflags: -I${includedir}
 EOF'
             sudo ldconfig
+        fi
+
+        # Apply tracked patches (stored in scripts/patches/dosbox-staging/) to fix
+        # upstream CMake issues with optional dependency guarding.
+        # Patches are idempotent: git apply skips already-applied hunks.
+        PATCHES_DIR="$REPO_ROOT/scripts/patches/dosbox-staging"
+        if [ -d "$PATCHES_DIR" ]; then
+            log "Applying dosbox-staging patches from $PATCHES_DIR..."
+            (
+                cd "$DOSBOX_DIR"
+                for p in "$PATCHES_DIR"/*.patch; do
+                    [ -f "$p" ] || continue
+                    git apply --whitespace=fix "$p" 2>/dev/null && \
+                        log "  Applied: $(basename "$p")" || \
+                        log "  Skipped (already applied?): $(basename "$p")"
+                done
+            )
         fi
 
         # Configure and build dosbox-staging

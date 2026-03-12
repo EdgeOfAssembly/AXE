@@ -1,0 +1,32 @@
+--- a/dosbox-staging.conf
++++ b/dosbox-staging.conf
+@@ -1,21 +1,21 @@
+ [debugtrace]
+ enabled = true
+ logfile = game_trace.log
+-trace_instructions = true
++# trace_instructions is OFF to keep the text log small.
++# The binary opcode dump (opcodes.bin) is used instead for post-run disassembly.
++trace_instructions = false
+ trace_interrupts = true
+ trace_file_io = true
+ trace_video_modes = true
+ auto_trace_on_exec = true
+ trace_on_interactive_exec_only = true
+ exclude_interrupts = 08,1C
+ file_read_hex_dump_bytes = 64
+ instruction_sample_rate = 1
+-max_log_size_mb = 0
++max_log_size_mb = 50
+ binary_opcode_dump = true
+ binary_opcode_file = opcodes.bin
++binary_opcode_dump_game_only = true
+-;deduplicate_interrupts = true
+-;dedup_interrupt_window_ms = 50
+-;deduplicate_instructions = true
+-;dedup_instruction_max_consecutive = 3
+-binary_opcode_dump_game_only = true
++deduplicate_interrupts = true
++dedup_interrupt_window_ms = 50
++deduplicate_instructions = true
++dedup_instruction_max_consecutive = 3

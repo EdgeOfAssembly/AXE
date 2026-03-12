@@ -10,6 +10,9 @@ venv/
 minified/
 .collab_env.md
 
+# Python virtual environment (created by scripts/setup_env.sh)
+.venv/
+
 # Build artifacts and cloned tool repos (provisioned by scripts/setup_env.sh)
 opcodes.bin
 opcodes.bin.bitmap

@@ -1,0 +1,40 @@
+--- a/src/dosbox.cpp
++++ b/src/dosbox.cpp
+@@ -1059,7 +1059,9 @@
+ #if C_MT32EMU
+ 	MT32_AddConfigSection(control);
+ #endif
+-	FSYNTH_AddConfigSection(control);
++#if C_FLUIDSYNTH
++	FSYNTH_AddConfigSection(control);
++#endif
+--- a/src/midi/midi.cpp
++++ b/src/midi/midi.cpp
+@@ -85,8 +85,10 @@
+ 	// namespace prefix required to avoid ambiguity with FluidSynth namespace
+-	if (name == MidiDeviceName::FluidSynth) {
+-		return std::make_unique<MidiDeviceFluidSynth>();
+-	}
++#if C_FLUIDSYNTH
++	if (name == MidiDeviceName::FluidSynth) {
++		return std::make_unique<MidiDeviceFluidSynth>();
++	}
++#endif
+@@ -688,9 +690,11 @@
+ 	write_device_name(MidiDeviceName::SoundCanvas);
+ 	SOUNDCANVAS_ListDevices(...);
+ 
+-	write_device_name(MidiDeviceName::FluidSynth);
+-	FSYNTH_ListDevices(...);
++#if C_FLUIDSYNTH
++	write_device_name(MidiDeviceName::FluidSynth);
++	FSYNTH_ListDevices(...);
++#endif
+@@ -829,3 +833,5 @@
+ 	str_prop->SetValues({MidiDevicePortPref,
+ 	                     MidiDeviceName::Mt32,
+-	                     MidiDeviceName::FluidSynth,
++#if C_FLUIDSYNTH
++	                     MidiDeviceName::FluidSynth,
++#endif
+ 	                     "none"});

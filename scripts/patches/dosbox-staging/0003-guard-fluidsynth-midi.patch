@@ -1,0 +1,24 @@
+--- a/src/midi/CMakeLists.txt
++++ b/src/midi/CMakeLists.txt
+@@ -1,14 +1,16 @@
+ target_sources(libdosboxcommon PRIVATE
+   alsa.cpp
+   coreaudio.cpp
+   coremidi.cpp
+-  fluidsynth.cpp
+   midi.cpp
+   mt32.cpp
+   mt32_lasynth_model.cpp
+   soundcanvas.cpp
+   win32.cpp
+ )
+ 
++if (OPT_FLUIDSYNTH)
++  target_sources(libdosboxcommon PRIVATE fluidsynth.cpp)
++endif()
++
+ target_link_libraries(libdosboxcommon PRIVATE
+   $<IF:$<BOOL:${C_MT32EMU}>,MT32Emu::mt32emu,>
+-  FluidSynth::libfluidsynth
++  $<$<BOOL:${OPT_FLUIDSYNTH}>:FluidSynth::libfluidsynth>
+ )

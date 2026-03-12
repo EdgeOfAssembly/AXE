@@ -144,35 +144,15 @@ Use `-c "PROG.EXE" --exit`. Program must exit on its own.
 Use `tests/keypress_scripts/dosbox/run_and_trace.txt` via `keypress.py`.
 HELPCFG.EXE is a known interactive program; use `dosbox/helpcfg_exit.txt`.
 
-#### dosbox-staging build notes (for next PR run)
+#### dosbox-staging build patches (versioned under `scripts/patches/dosbox-staging/`)
 
-The build required several patches to `CMakeLists.txt` and source files
-because the upstream CMake build does not properly guard optional dependencies.
-All patches are committed in `tools/dosbox-staging/` (excluded from git via
-`.gitignore`; re-apply from `scripts/setup_env.sh` which runs cmake+make).
+The upstream CMake build does not properly guard optional dependencies behind
+their `OPT_*` flags. Six patch files are stored under
+`scripts/patches/dosbox-staging/` (fully tracked in git) and applied
+automatically by `scripts/setup_env.sh` via `git apply` before building.
 
-Patches applied:
-1. **`CMakeLists.txt`** — guarded `find_package(OpenGL)`, `find_package(MT32Emu)`,
-   `find_package(FluidSynth)` inside their respective `if(OPT_*)` blocks.
-   Added `option(OPT_FLUIDSYNTH ...)` declaration.
-2. **`src/gui/CMakeLists.txt`** — changed hardwired `OpenGL::GL` link to
-   `$<$<BOOL:${C_OPENGL}>:OpenGL::GL>` generator expression.
-3. **`src/midi/CMakeLists.txt`** — guarded `FluidSynth::libfluidsynth` link
-   inside `if(OPT_FLUIDSYNTH)`.
-4. **`src/libs/zmbv/zmbv.h`** — changed `#if defined(C_SYSTEM_ZLIB_NG)` to
-   `#if C_SYSTEM_ZLIB_NG` (cmake `#cmakedefine01` generates `#define X 0`
-   which satisfies `defined()` even when disabled).
-5. **`src/midi/midi.cpp`** + **`src/dosbox.cpp`** — guarded `FSYNTH_*`
-   calls/references inside `#if C_FLUIDSYNTH`.
-6. **`src/dosbox_config.h.in.cmake`** — added `#cmakedefine01 C_FLUIDSYNTH`.
-
-Build command (after `scripts/setup_env.sh`):
-```bash
-cmake -S tools/dosbox-staging -B tools/dosbox-staging/build -G "Unix Makefiles" \
-    -DOPT_OPUS=OFF -DOPT_OPENGL=OFF -DOPT_MT32EMU=OFF -DOPT_TESTS=OFF \
-    -DCMAKE_BUILD_TYPE=Release
-make -C tools/dosbox-staging/build -j$(nproc)
-```
+See [`scripts/patches/dosbox-staging/README.md`](../../scripts/patches/dosbox-staging/README.md)
+for the full patch list and a manual re-apply command.
 
 ---
 
