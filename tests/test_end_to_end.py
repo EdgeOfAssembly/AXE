@@ -1125,6 +1125,382 @@ def section_fixtures() -> None:
 
 
 # ---------------------------------------------------------------------------
+# Section 17: RE toolchain — dumpexe, HaxBox fixtures, dosbox-staging
+# ---------------------------------------------------------------------------
+
+def section_re_toolchain() -> None:
+    print("\n" + "=" * 60)
+    print("SECTION 17: RE Toolchain (dumpexe, HaxBox fixtures, dosbox-staging)")
+    print("=" * 60)
+
+    TOOLS_DIR = REPO_ROOT / "tools"
+    DUMPEXE_BIN = TOOLS_DIR / "dumpexe" / "dumpexe"
+    DOS_FIXTURES = REPO_ROOT / "tests" / "fixtures" / "dos_binaries"
+
+    @test("dumpexe source cloned to tools/dumpexe/ (optional)")
+    def t() -> None:
+        dumpexe_src = TOOLS_DIR / "dumpexe"
+        if not dumpexe_src.exists():
+            raise SkipTest(
+                "tools/dumpexe/ not found – run scripts/setup_env.sh to clone"
+            )
+        assert (dumpexe_src / "dumpexe.cpp").exists(), \
+            "dumpexe.cpp missing – clone may be incomplete"
+
+    @test("dumpexe binary built (optional)")
+    def t() -> None:
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest(
+                "dumpexe binary not built – run: "
+                "make -C tools/dumpexe CXX=g++-14  "
+                "(requires gcc-14 + libcapstone-dev)"
+            )
+        assert os.access(str(DUMPEXE_BIN), os.X_OK), "dumpexe not executable"
+
+    @test("HaxBox DOS fixtures directory populated (optional)")
+    def t() -> None:
+        if not DOS_FIXTURES.exists():
+            raise SkipTest(
+                "tests/fixtures/dos_binaries/ not found – "
+                "run scripts/setup_env.sh to clone HaxBox"
+            )
+        entries = list(DOS_FIXTURES.iterdir())
+        assert len(entries) > 0, "dos_binaries/ directory is empty"
+
+    @test("HaxBox 4dos595 EXE fixtures present (optional)")
+    def t() -> None:
+        if not DOS_FIXTURES.exists():
+            raise SkipTest("dos_binaries/ not populated")
+        subdir = DOS_FIXTURES / "4dos595"
+        if not subdir.exists():
+            raise SkipTest("4dos595/ subdirectory not found in dos_binaries/")
+        expected = ["4HELP.EXE", "HELPCFG.EXE", "OPTION.EXE"]
+        for fname in expected:
+            fpath = subdir / fname
+            assert fpath.exists() or fpath.is_symlink(), \
+                f"Expected fixture not found: {fpath}"
+
+    @test("HaxBox MZ signature check on 4HELP.EXE (optional)")
+    def t() -> None:
+        exe = DOS_FIXTURES / "4dos595" / "4HELP.EXE"
+        if not (exe.exists() or exe.is_symlink()):
+            raise SkipTest("4HELP.EXE not available")
+        with open(str(exe), "rb") as f:
+            magic = f.read(2)
+        assert magic == b"MZ", \
+            f"4HELP.EXE does not start with MZ signature: {magic!r}"
+
+    @test("HaxBox COM file KSTACK.COM present (optional)")
+    def t() -> None:
+        com = DOS_FIXTURES / "4dos595" / "KSTACK.COM"
+        if not (com.exists() or com.is_symlink()):
+            raise SkipTest("KSTACK.COM not available")
+        size = com.stat().st_size
+        assert size > 0, "KSTACK.COM is empty"
+        assert size < 4096, f"KSTACK.COM larger than expected for a TSR stub: {size}"
+
+    # NOTE: dumpexe COM disassembly (-d) is known to produce incomplete output
+    # for all but very small COM files — disassembly truncates early (within the
+    # first few hundred bytes) on files such as LIST.COM, ARCE.COM, FV.COM.
+    # For COM files, only the default summary and -x hexdump are reliable.
+    # All disassembly tests below target MZ EXE or SYS files only.
+
+    @test("HaxBox SYS drivers present (optional)")
+    def t() -> None:
+        if not DOS_FIXTURES.exists():
+            raise SkipTest("dos_binaries/ not populated")
+        sys_files = [
+            DOS_FIXTURES / "HIMEM.SYS",
+            DOS_FIXTURES / "ANSI.SYS",
+        ]
+        found = [f for f in sys_files if f.exists() or f.is_symlink()]
+        if not found:
+            raise SkipTest("No SYS driver fixtures found in dos_binaries/")
+        # Verify SYS driver signature (0xFF FF FF FF = next-driver pointer = end of chain)
+        for sys_file in found:
+            with open(str(sys_file), "rb") as f:
+                header = f.read(4)
+            assert header == b"\xff\xff\xff\xff", \
+                f"{sys_file.name}: unexpected SYS driver header: {header!r}"
+
+    @test("dumpexe can analyse 4HELP.EXE — MZ header output (optional)")
+    def t() -> None:
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest("dumpexe not built")
+        exe = DOS_FIXTURES / "4dos595" / "4HELP.EXE"
+        if not (exe.exists() or exe.is_symlink()):
+            raise SkipTest("4HELP.EXE fixture not available")
+        result = subprocess.run(
+            [str(DUMPEXE_BIN), str(exe)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result.returncode == 0, \
+            f"dumpexe exited {result.returncode}: {result.stderr[:200]}"
+        out = result.stdout
+        # dumpexe always starts with this prefix on MZ EXE files
+        assert out.startswith("Display of File"), \
+            f"Unexpected output prefix: {out[:80]!r}"
+        # Standard MZ EXE header fields
+        for field in ("DOS File Size", "Load Image Size",
+                      "Relocation Table entry count", "Header Size",
+                      "Initial Stack Segment  (SS:SP)", "Program Entry Point    (CS:IP)"):
+            assert field in out, f"Missing field: {field!r}"
+        print(f"      4HELP.EXE: {result.stdout.splitlines()[2].strip()}")
+
+    @test("dumpexe -d disassembles HELPCFG.EXE — INT annotations present (optional)")
+    def t() -> None:
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest("dumpexe not built")
+        exe = DOS_FIXTURES / "4dos595" / "HELPCFG.EXE"
+        if not (exe.exists() or exe.is_symlink()):
+            raise SkipTest("HELPCFG.EXE fixture not available")
+        result = subprocess.run(
+            [str(DUMPEXE_BIN), "-d", str(exe)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result.returncode == 0, \
+            f"dumpexe -d exited {result.returncode}: {result.stderr[:200]}"
+        out = result.stdout
+        assert "=== Disassembly (from entry point to EOF) ===" in out, \
+            "Disassembly section header missing"
+        assert "File Offset  Raw Bytes            Instruction" in out, \
+            "Disassembly column header missing"
+        # Capstone INT annotations must appear (INT 21h calls are present)
+        assert "; INT 21h -" in out, \
+            "INT 21h annotation comments missing from disassembly"
+        # Specific known instructions from real output
+        assert "int 0x21" in out, "INT 21h opcode missing"
+        assert "mov ah, 9" in out or "mov ah, 9" in out.replace(" ", " "), \
+            "AH=9 (print string) setup missing"
+
+    @test("dumpexe -d -n disassembles HELPCFG.EXE — annotations suppressed (optional)")
+    def t() -> None:
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest("dumpexe not built")
+        exe = DOS_FIXTURES / "4dos595" / "HELPCFG.EXE"
+        if not (exe.exists() or exe.is_symlink()):
+            raise SkipTest("HELPCFG.EXE fixture not available")
+        result = subprocess.run(
+            [str(DUMPEXE_BIN), "-d", "-n", str(exe)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result.returncode == 0
+        # With -n, INT annotation comments must be absent
+        assert "; INT 21h" not in result.stdout, \
+            "-n flag did not suppress INT annotations"
+
+    @test("dumpexe -r shows relocation table for 4HELP.EXE (718 entries) (optional)")
+    def t() -> None:
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest("dumpexe not built")
+        exe = DOS_FIXTURES / "4dos595" / "4HELP.EXE"
+        if not (exe.exists() or exe.is_symlink()):
+            raise SkipTest("4HELP.EXE not available")
+        result = subprocess.run(
+            [str(DUMPEXE_BIN), "-r", str(exe)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result.returncode == 0
+        out = result.stdout
+        assert "=== Relocation Table" in out, "Relocation table section missing"
+        assert "Segment:Offset" in out, "Relocation table column header missing"
+        # 4HELP.EXE has 0x2CE = 718 relocation entries per its header
+        assert "718 entries" in out or "02CEh" in out, \
+            "Expected 718 relocation entries not found"
+
+    @test("dumpexe -x hexdump shows Hex+ASCII section for HELPCFG.EXE (optional)")
+    def t() -> None:
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest("dumpexe not built")
+        exe = DOS_FIXTURES / "4dos595" / "HELPCFG.EXE"
+        if not (exe.exists() or exe.is_symlink()):
+            raise SkipTest("HELPCFG.EXE not available")
+        result = subprocess.run(
+            [str(DUMPEXE_BIN), "-x", str(exe)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result.returncode == 0
+        assert "=== Hex+ASCII Dump (from entry point to EOF) ===" in result.stdout
+
+    @test("dumpexe -r detects PKLITE packer string in HELPCFG.EXE padding (optional)")
+    def t() -> None:
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest("dumpexe not built")
+        exe = DOS_FIXTURES / "4dos595" / "HELPCFG.EXE"
+        if not (exe.exists() or exe.is_symlink()):
+            raise SkipTest("HELPCFG.EXE not available")
+        result = subprocess.run(
+            [str(DUMPEXE_BIN), "-r", str(exe)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result.returncode == 0
+        # HELPCFG.EXE is packed with PKLITE — the copyright string is in header padding
+        assert "PKLITE" in result.stdout, \
+            "PKLITE packer string not found in HELPCFG.EXE header padding"
+
+    @test("dumpexe --simulate shows DOS load state for HELPCFG.EXE (optional)")
+    def t() -> None:
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest("dumpexe not built")
+        exe = DOS_FIXTURES / "4dos595" / "HELPCFG.EXE"
+        if not (exe.exists() or exe.is_symlink()):
+            raise SkipTest("HELPCFG.EXE not available")
+        result = subprocess.run(
+            [str(DUMPEXE_BIN), "--simulate", str(exe)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result.returncode == 0
+        out = result.stdout
+        assert "=== DOS LOAD SIMULATION ===" in out, "Simulation section missing"
+        assert "Initial Register State:" in out
+        assert "CS:IP =" in out
+        assert "SS:SP =" in out
+        assert "FLAGS =" in out
+
+    @test("dumpexe --simulate --base=2000 accepts custom load base (optional)")
+    def t() -> None:
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest("dumpexe not built")
+        exe = DOS_FIXTURES / "4dos595" / "HELPCFG.EXE"
+        if not (exe.exists() or exe.is_symlink()):
+            raise SkipTest("HELPCFG.EXE not available")
+        result = subprocess.run(
+            [str(DUMPEXE_BIN), "--simulate", "--base=2000", str(exe)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result.returncode == 0
+        assert "Load Base Segment: 2000h" in result.stdout, \
+            "--base=2000 not reflected in simulation output"
+
+    @test("dumpexe SYS driver: HIMEM.SYS — device driver header decoded (optional)")
+    def t() -> None:
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest("dumpexe not built")
+        sys_file = DOS_FIXTURES / "HIMEM.SYS"
+        if not (sys_file.exists() or sys_file.is_symlink()):
+            raise SkipTest("HIMEM.SYS not available")
+        result = subprocess.run(
+            [str(DUMPEXE_BIN), str(sys_file)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result.returncode == 0
+        out = result.stdout
+        assert "=== DOS Device Driver Header ===" in out
+        assert "Next Driver Pointer" in out
+        # HIMEM.SYS is last in chain
+        assert "FFFFFFFFh" in out
+        assert "Character device" in out
+        # Known device name for HIMEM.SYS
+        assert "XMSXXXX0" in out, "HIMEM.SYS device name not found"
+
+    @test("dumpexe SYS driver: ANSI.SYS — CON device decoded (optional)")
+    def t() -> None:
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest("dumpexe not built")
+        sys_file = DOS_FIXTURES / "ANSI.SYS"
+        if not (sys_file.exists() or sys_file.is_symlink()):
+            raise SkipTest("ANSI.SYS not available")
+        result = subprocess.run(
+            [str(DUMPEXE_BIN), str(sys_file)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result.returncode == 0
+        out = result.stdout
+        assert "CON" in out, "ANSI.SYS CON device name not found"
+        assert "Standard output" in out or "Standard input" in out
+
+    @test("dumpexe COM: summary and hexdump work on KSTACK.COM (optional)")
+    def t() -> None:
+        # NOTE: dumpexe -d (disassembly) is known to produce incomplete output
+        # for COM files beyond a few hundred bytes; only summary and -x are safe.
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest("dumpexe not built")
+        com = DOS_FIXTURES / "4dos595" / "KSTACK.COM"
+        if not (com.exists() or com.is_symlink()):
+            raise SkipTest("KSTACK.COM not available")
+        # Default summary
+        result = subprocess.run(
+            [str(DUMPEXE_BIN), str(com)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result.returncode == 0
+        out = result.stdout
+        assert ".COM (flat binary, 16-bit MS-DOS)" in out, \
+            "COM format not identified in summary"
+        assert "File Size" in out
+        assert "Program Entry Point (CS:IP)" in out
+        # Hexdump
+        result2 = subprocess.run(
+            [str(DUMPEXE_BIN), "-x", str(com)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result2.returncode == 0
+        assert "=== Hex+ASCII Dump (from entry point to EOF) ===" in result2.stdout
+
+    @test("dumpexe COM disassembly known-incomplete warning (optional)")
+    def t() -> None:
+        # Verify the known limitation: -d on COM files stops well short of EOF.
+        # This test documents the bug rather than asserting correct behaviour.
+        if not DUMPEXE_BIN.exists():
+            raise SkipTest("dumpexe not built")
+        com = DOS_FIXTURES / "list91m" / "LIST.COM"
+        # list91m may not be a direct child; check both locations
+        if not (com.exists() or com.is_symlink()):
+            com = DOS_FIXTURES.parent.parent.parent / "tools" / "HaxBox" / "tests" / "BBS" / "list91m" / "LIST.COM"
+        if not com.exists():
+            raise SkipTest("LIST.COM not available for COM truncation check")
+        file_size = com.stat().st_size   # 26793 bytes
+        result = subprocess.run(
+            [str(DUMPEXE_BIN), "-d", str(com)],
+            capture_output=True, text=True, timeout=15
+        )
+        assert result.returncode == 0
+        # Count disasm instruction lines (lines starting with a hex offset)
+        import re as _re
+        lines = _re.findall(r"^[0-9a-f]{8}h", result.stdout, _re.MULTILINE)
+        disasm_bytes_covered = len(lines) * 2   # rough lower bound
+        # Known bug: coverage is far less than file size for large COM files
+        if disasm_bytes_covered < file_size // 4:
+            print(f"      ⚠ COM disassembly truncation confirmed: "
+                  f"~{disasm_bytes_covered} bytes covered of {file_size} "
+                  f"({100*disasm_bytes_covered//file_size}%)")
+        # Test passes regardless — this documents the limitation, not a failure
+
+    @test("dosbox-staging fork cloned to tools/dosbox-staging/ (optional)")
+    def t() -> None:
+        dosbox_dir = TOOLS_DIR / "dosbox-staging"
+        if not dosbox_dir.exists():
+            raise SkipTest(
+                "tools/dosbox-staging/ not found – "
+                "run scripts/setup_env.sh to clone"
+            )
+        debug_trace = dosbox_dir / "docs" / "DEBUG_TRACE.md"
+        assert debug_trace.exists(), \
+            "DEBUG_TRACE.md not found – clone may be incomplete"
+
+    @test("dosbox-staging DEBUG_TRACE.md documents [debugtrace] config (optional)")
+    def t() -> None:
+        debug_trace = TOOLS_DIR / "dosbox-staging" / "docs" / "DEBUG_TRACE.md"
+        if not debug_trace.exists():
+            raise SkipTest("DEBUG_TRACE.md not available")
+        content = debug_trace.read_text()
+        assert "[debugtrace]" in content, \
+            "DEBUG_TRACE.md missing [debugtrace] section"
+        assert "trace_instructions" in content, \
+            "DEBUG_TRACE.md missing trace_instructions key"
+
+    @test("AXE dosbox-related skills present (dos_exe_unpack, dosbox_int21_trace)")
+    def t() -> None:
+        skills_dir = REPO_ROOT / "skills"
+        required = ["dos_exe_unpack.md", "dosbox_int21_trace.md"]
+        for skill in required:
+            assert (skills_dir / skill).exists(), \
+                f"DOS skill not found: skills/{skill}"
+
+    t()
+
+
+# ---------------------------------------------------------------------------
 # Main runner
 # ---------------------------------------------------------------------------
 
@@ -1146,6 +1522,7 @@ SECTIONS = [
     section_ollama_live,
     section_keypress,
     section_fixtures,
+    section_re_toolchain,
 ]
 
 

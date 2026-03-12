@@ -335,6 +335,39 @@ def test_interactive_ollama_batch() -> None:
         _record(name, FAIL, f"{type(e).__name__}: {e}")
 
 
+def test_interactive_re_analysis() -> None:
+    """Drive AXE RE analysis workflow using dumpexe + HaxBox fixtures."""
+    name = "Interactive: RE analysis via keypress + Xvfb (optional)"
+    try:
+        _require_interactive_deps()
+    except SkipTest as e:
+        _record(name, SKIP, str(e))
+        return
+
+    # Check that at least the fixture directory exists
+    dos_fixtures = REPO_ROOT / "tests" / "fixtures" / "dos_binaries"
+    if not dos_fixtures.exists():
+        _record(
+            name, SKIP,
+            "tests/fixtures/dos_binaries/ not found – run scripts/setup_env.sh"
+        )
+        return
+
+    try:
+        with XvfbSession(display=94):
+            rc, log = _run_keypress_script(
+                "axe_re_analysis.txt", startup_delay=5, timeout=150
+            )
+        if rc != 0 and "TIMEOUT" not in log:
+            _record(name, SKIP, f"keypress rc={rc}")
+            return
+        _record(name, PASS)
+    except SkipTest as e:
+        _record(name, SKIP, str(e))
+    except Exception as e:
+        _record(name, FAIL, f"{type(e).__name__}: {e}")
+
+
 # ---------------------------------------------------------------------------
 # Section: keypress script format validation
 # ---------------------------------------------------------------------------

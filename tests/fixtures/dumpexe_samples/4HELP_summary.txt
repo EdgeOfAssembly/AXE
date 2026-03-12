@@ -1,0 +1,22 @@
+Display of File /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/4dos595/4HELP.EXE
+
+DOS File Size                                     0E860h  ( 59488. )
+Load Image Size                                   0DD00h  ( 56576. )
+Relocation Table entry count                      02CEh  (   718. )
+Relocation Table address                          001Ch  (    28. )
+Header Size                                       0B60h  (  2912. )
+Minimum Extra Memory                              1123h  (  4387. )
+Maximum Memory Requirement                        A9230h  (692784. )
+File load checksum                                0000h  (     0. )
+Overlay Number                                    0000h  (     0. )
+Entry Point File Offset                           01499h  (  5273. )
+Entry Point Image Offset                          00939h  (  2361. )
+
+Initial Stack Segment  (SS:SP)			  13F3:3000
+Program Entry Point    (CS:IP)			  0000:0939
+
+Code at Entry Point (first 64 bytes):
+00001499  9a 00 00 61 0c 9a 2d 06  ef 0a 9a 82 12 b7 09 9a  |...a..-.........|
+000014a9  6a 0a 6c 08 9a 06 03 ff  07 9a ae 1c f2 05 9a ce  |j.l.............|
+000014b9  09 53 05 9a 56 48 ca 00  55 89 e5 81 ec 02 02 c6  |.S..VH..U.......|
+000014c9  06 ac 64 00 c6 06 f8 04  00 c6 06 f9 04 00 c6 06  |..d.............|

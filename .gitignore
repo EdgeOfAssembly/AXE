@@ -9,3 +9,12 @@ venv/
 .minified/
 minified/
 .collab_env.md
+
+# Build artifacts and cloned tool repos (provisioned by scripts/setup_env.sh)
+opcodes.bin
+opcodes.bin.bitmap
+game_trace.log
+tools/dosbox-staging/
+tools/HaxBox/
+tools/dumpexe/
+tools/keypress/
