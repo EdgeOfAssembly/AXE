@@ -21,3 +21,12 @@ tools/dosbox-staging/
 tools/HaxBox/
 tools/dumpexe/
 tools/keypress/
+
+# AXE runtime artefacts (generated during sessions, not part of source)
+.axe_sessions/
+.collab_build_status.md
+.collab_changes.md
+.collab_log.md
+.collab_shared.md
+GLOBAL_WORKSPACE.json
+llm_prep/
