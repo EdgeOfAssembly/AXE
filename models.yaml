@@ -622,7 +622,25 @@ models:
     max_output_tokens: 2000
     input_modes: [text]
     output_modes: [text]
-  
+
+  tinyllama:latest:  # Small model (~637MB) - explicit :latest tag
+    context_tokens: 2048
+    max_output_tokens: 2000
+    input_modes: [text]
+    output_modes: [text]
+
+  qwen2.5-coder:1.5b:  # Qwen 2.5 Coder 1.5B (~986MB) - supervisor / coding specialist
+    context_tokens: 8192
+    max_output_tokens: 4096
+    input_modes: [text]
+    output_modes: [text]
+
+  qwen2.5:1.5b:  # Qwen 2.5 1.5B (~986MB) - worker / general reasoning
+    context_tokens: 8192
+    max_output_tokens: 4096
+    input_modes: [text]
+    output_modes: [text]
+
   llama3.2:1b:  # Very small model (~1.3GB) - good for quick tests
     context_tokens: 128000
     max_output_tokens: 2000

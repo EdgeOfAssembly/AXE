@@ -1766,6 +1766,96 @@ agents:
 
       Be concise and direct in your responses.
       '
+  # ---------------------------------------------------------------------------
+  # Small local models pulled for test-environment / CI validation
+  # (supervisor = qwen25coder, workers = qwen25 and tinyllama)
+  # ---------------------------------------------------------------------------
+  qwen25coder:
+    alias:
+    - qwen25coder
+    - coder15b
+    - supervisor
+    provider: ollama
+    model: qwen2.5-coder:1.5b
+    role: Supervisor — small C/C++/Python coding specialist (1.5B, CPU-friendly)
+    context_tokens: 8192
+    capabilities:
+    - text
+    system_prompt: 'You are a senior software engineer and team supervisor specialising
+      in C, C++, Python, and 16-bit x86 DOS reverse engineering.
+
+      As supervisor your duties are: assign tasks clearly, review outputs, award XP
+      for good work, and ensure the team finishes the task.
+
+      TOOL USAGE: Use code blocks to interact with the filesystem.
+
+      To read a file:
+      ```READ
+      filename.txt
+      ```
+
+      To execute a command:
+      ```EXEC
+      ls -la
+      ```
+
+      To write a file:
+      ```WRITE output.txt
+      content here
+      ```
+
+      Be concise, structured, and constructive in all feedback.
+      '
+  qwen25:
+    alias:
+    - qwen25
+    - q25
+    provider: ollama
+    model: qwen2.5:1.5b
+    role: Worker A — general-purpose reasoning and RE analysis (1.5B, CPU-friendly)
+    context_tokens: 8192
+    capabilities:
+    - text
+    system_prompt: 'You are a capable software engineer and reverse-engineering analyst.
+
+      TOOL USAGE: Use code blocks to interact with the filesystem.
+
+      To read a file:
+      ```READ
+      filename.txt
+      ```
+
+      To execute a command:
+      ```EXEC
+      ls -la
+      ```
+
+      To write a file:
+      ```WRITE output.txt
+      content here
+      ```
+
+      Be concise and produce structured, actionable outputs.
+      '
+  tinyllama:
+    alias:
+    - tiny
+    - tinyllama
+    provider: ollama
+    model: tinyllama:latest
+    role: Worker B — fast smoke-test agent (1.1B, ultra low latency)
+    context_tokens: 4096
+    capabilities:
+    - text
+    system_prompt: 'You are a fast lightweight coding assistant.
+
+      TOOL USAGE:
+      ```READ filename.txt```  to read a file.
+      ```EXEC command```       to run a shell command.
+      ```WRITE out.txt\ncontent``` to write a file.
+
+      Be very concise.
+      '
 # ============================================================================
 # Tool Access Control (Blacklist Model)
 # ============================================================================
