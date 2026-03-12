@@ -48,8 +48,40 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
-          # Extra packages used by tests and keypress
-          pip install python-xlib capstone
+          # Extra packages used by tests, keypress, and Ollama OpenAI-compat client
+          pip install python-xlib capstone openai
+
+      - name: Install Ollama
+        run: |
+          curl -fsSL https://ollama.com/install.sh | sh
+          # Confirm server is up (systemd starts it automatically)
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:11434/ >/dev/null 2>&1; then
+              echo "✓ Ollama server is up (attempt $i)"
+              break
+            fi
+            echo "  waiting for Ollama… ($i/30)"
+            sleep 2
+          done
+          ollama --version
+
+      - name: Pull small coding models (supervisor + 2 workers)
+        run: |
+          # Pull three small CPU-friendly models in sequence
+          # qwen2.5-coder:1.5b  — Supervisor  (~986 MB)
+          # qwen2.5:1.5b        — Worker A    (~986 MB)
+          # tinyllama:latest    — Worker B    (~637 MB)
+          ollama pull qwen2.5-coder:1.5b
+          ollama pull qwen2.5:1.5b
+          ollama pull tinyllama
+          ollama list
+
+      - name: Smoke-test each model
+        run: |
+          ollama run qwen2.5-coder:1.5b "Reply with the single word: READY"
+          ollama run qwen2.5:1.5b       "Reply with the single word: READY"
+          ollama run tinyllama          "Reply with the single word: READY"
+        timeout-minutes: 5
 
       - name: Install keypress tool
         run: |
@@ -73,10 +105,14 @@ jobs:
             echo "::warning::dumpexe build failed; RE tests will be skipped"
           fi
 
-      - name: Run AXE test suite
+      - name: Run structural test suite
         run: |
           export PATH="/tmp/bin:$PATH"
           python3 tests/test_end_to_end.py
+
+      - name: Run live feature matrix (Ollama required)
+        run: python3 tests/test_live_feature_matrix.py
+        timeout-minutes: 30
 
       - name: Run skills manager tests
         run: python3 tests/test_skills_manager.py
@@ -86,3 +122,4 @@ jobs:
 
       - name: Run workshop tests
         run: python3 tests/test_workshop.py || true
+

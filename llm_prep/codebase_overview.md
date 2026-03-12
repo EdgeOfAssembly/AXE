@@ -161,6 +161,7 @@
 │   ├── GLOBAL_WORKSPACE_SUMMARY.md
 │   ├── INTEGRATION_COMPLETE.md
 │   ├── INTERACTIVE_TEST_RESULTS.md
+│   ├── LIVE_TEST_RESULTS.md
 │   ├── NAMESPACE_DETECTION.md
 │   ├── OLLAMA_BATCH_TEST_RESULTS.md
 │   ├── OLLAMA_TEST_RESULTS.md
@@ -168,6 +169,7 @@
 │   ├── README.md
 │   ├── REFACTOR_SUMMARY.md
 │   ├── SOCKET_IMPLEMENTATION_SUMMARY.md
+│   ├── SRI_AGENT_DISCUSSION.md
 │   ├── SRI_FUTURE_WORK.md
 │   ├── TESTING.md
 │   ├── WORKSPACE_FIX.md
@@ -9490,6 +9492,7 @@
 │   ├── demo_task_completion_fix.py
 │   ├── manual_test_write.py
 │   ├── manual_test_xml.py
+│   ├── run_feature_validation.sh
 │   ├── test_absolute_path_fix.py
 │   ├── test_acp_benchmark.py
 │   ├── test_analysis_tools.py
@@ -9523,6 +9526,7 @@
 │   ├── test_integration_database_fix.py
 │   ├── test_interactive_keypress.py
 │   ├── test_large_code_files.py
+│   ├── test_live_feature_matrix.py
 │   ├── test_live_sandbox_agent.py
 │   ├── test_minifier.py
 │   ├── test_mission_md_tokens.py
@@ -9600,6 +9604,7 @@
 ├── AGENTS.md
 ├── ARCHITECTURE.md
 ├── Doxyfile
+├── GLOBAL_WORKSPACE.json
 ├── LICENSE
 ├── MISSION.md
 ├── README.md
@@ -9612,7 +9617,7 @@
 ├── providers.yaml
 └── requirements.txt
 
-42 directories, 9564 files
+42 directories, 9569 files
 ```
 
 ## Code Statistics

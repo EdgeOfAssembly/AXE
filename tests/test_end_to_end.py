@@ -1025,19 +1025,21 @@ def section_ollama_live() -> None:
         model = first_available_ollama_model()
         if model is None:
             raise SkipTest("No Ollama models available")
+        # Map the pulled model to its configured AXE agent name
+        model_to_agent = {
+            "qwen2.5-coder:1.5b": "qwen25coder",
+            "qwen2.5:1.5b":       "qwen25",
+            "tinyllama:latest":   "tinyllama",
+        }
+        agent_name = model_to_agent.get(model)
+        if agent_name is None:
+            raise SkipTest(f"No configured AXE agent for model {model!r}")
         cfg = Config()
         mgr = AgentManager(cfg)
-        # Build a minimal agent config pointing at the local model
-        agent_cfg = {
-            "provider": "ollama",
-            "model": model,
-            "system_prompt": "You are a test agent.",
-            "context_tokens": 4096,
-        }
         response = mgr.call_agent(
-            agent_name="test_ollama",
-            agent_config=agent_cfg,
-            messages=[{"role": "user", "content": "Reply with the single word: PONG"}],
+            agent_name=agent_name,
+            prompt="Reply with the single word: PONG",
+            system_prompt_override="You are a test agent. Reply concisely.",
         )
         assert response is not None and len(response) > 0, \
             f"Empty response from Ollama: {response!r}"
