@@ -1,4 +1,4 @@
-# LLM-Ready Codebase Overview — 2026-01-30
+# LLM-Ready Codebase Overview — 2026-03-12
 
 **Project:** AXE
 
@@ -155,7 +155,22 @@
 │   │   ├── quick-reference.md
 │   │   ├── security-audit.md
 │   │   └── test-results.md
+│   ├── AXE_IMPROVEMENT_SUGGESTIONS.md
+│   ├── COGNITIVE_ARCHITECTURE_GUIDE.md
+│   ├── CONSOLIDATION_SUMMARY.md
+│   ├── GLOBAL_WORKSPACE_SUMMARY.md
+│   ├── INTEGRATION_COMPLETE.md
+│   ├── INTERACTIVE_TEST_RESULTS.md
+│   ├── NAMESPACE_DETECTION.md
+│   ├── OLLAMA_BATCH_TEST_RESULTS.md
+│   ├── OLLAMA_TEST_RESULTS.md
+│   ├── PROOF_OLLAMA_DEMO.md
 │   ├── README.md
+│   ├── REFACTOR_SUMMARY.md
+│   ├── SOCKET_IMPLEMENTATION_SUMMARY.md
+│   ├── SRI_FUTURE_WORK.md
+│   ├── TESTING.md
+│   ├── WORKSPACE_FIX.md
 │   ├── api-providers.md
 │   ├── codex-implementation.md
 │   ├── conflict_resolution_examples.md
@@ -9363,7 +9378,17 @@
 │   ├── __init__.py
 │   └── rules.py
 ├── scripts
-│   └── benchmark_acp.py
+│   ├── patches
+│   │   └── dosbox-staging
+│   │       ├── 0001-guard-opengl-link.patch
+│   │       ├── 0002-fix-zlib-ng-cmakedefine01.patch
+│   │       ├── 0003-guard-fluidsynth-midi.patch
+│   │       ├── 0004-add-c-fluidsynth-cmakedefine.patch
+│   │       ├── 0005-guard-fluidsynth-source.patch
+│   │       ├── 0006-debugtrace-conf-trace-off-dedup-on.patch
+│   │       └── README.md
+│   ├── benchmark_acp.py
+│   └── setup_env.sh
 ├── skills
 │   ├── boot_flow_reconstruction.md
 │   ├── build.md
@@ -9395,7 +9420,76 @@
 │   ├── trace_execution_path.md
 │   └── x86_assembly_expert.md
 ├── tests
+│   ├── fixtures
+│   │   ├── dos_binaries
+│   │   │   ├── 2m30 -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/2m30
+│   │   │   ├── 4dos595 -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/4dos595
+│   │   │   ├── 4dos595.zip -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/4dos595.zip
+│   │   │   ├── 6xopt072 -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/6xopt072
+│   │   │   ├── ANSI.SYS -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/ANSI.SYS
+│   │   │   ├── CHKSTATE.SYS -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/CHKSTATE.SYS
+│   │   │   ├── CONFIG.SYS -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/CONFIG.SYS
+│   │   │   ├── COUNTRY.SYS -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/COUNTRY.SYS
+│   │   │   ├── DISPLAY.SYS -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/DISPLAY.SYS
+│   │   │   ├── DRIVER.SYS -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/DRIVER.SYS
+│   │   │   ├── DRVSPACE.SYS -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/DRVSPACE.SYS
+│   │   │   ├── HIMEM.SYS -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/HIMEM.SYS
+│   │   │   ├── KEYBOARD.SYS -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/KEYBOARD.SYS
+│   │   │   ├── KEYBRD2.SYS -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/KEYBRD2.SYS
+│   │   │   ├── RAMDRIVE.SYS -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/RAMDRIVE.SYS
+│   │   │   ├── TDH386.SYS -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/TDH386.SYS
+│   │   │   ├── barbaria.lzh -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/barbaria.lzh
+│   │   │   ├── baroque.arj -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/baroque.arj
+│   │   │   ├── gifexe44 -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/gifexe44
+│   │   │   ├── list91m -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/list91m
+│   │   │   ├── qview231 -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/qview231
+│   │   │   └── rkive14 -> /home/runner/work/AXE/AXE/tools/HaxBox/tests/BBS/rkive14
+│   │   ├── dumpexe_samples
+│   │   │   ├── 4HELP_reloc.txt
+│   │   │   ├── 4HELP_summary.txt
+│   │   │   ├── ANSI_hexdump.txt
+│   │   │   ├── ANSI_summary.txt
+│   │   │   ├── HELPCFG_all.txt
+│   │   │   ├── HELPCFG_disasm.txt
+│   │   │   ├── HELPCFG_disasm_noanno.txt
+│   │   │   ├── HELPCFG_hexdump.txt
+│   │   │   ├── HELPCFG_reloc.txt
+│   │   │   ├── HELPCFG_reloc_simulate.txt
+│   │   │   ├── HELPCFG_simulate.txt
+│   │   │   ├── HELPCFG_summary.txt
+│   │   │   ├── HIMEM_hexdump.txt
+│   │   │   ├── HIMEM_summary.txt
+│   │   │   ├── KSTACK_hexdump.txt
+│   │   │   └── KSTACK_summary.txt
+│   │   ├── README.md
+│   │   ├── dos_sample.asm
+│   │   ├── hello_world.c
+│   │   └── hello_world.py
+│   ├── keypress_scripts
+│   │   ├── dosbox
+│   │   │   ├── helpcfg_exit.txt
+│   │   │   └── run_and_trace.txt
+│   │   ├── axe_help.txt
+│   │   ├── axe_ollama_batch.txt
+│   │   ├── axe_re_analysis.txt
+│   │   ├── axe_session_commands.txt
+│   │   └── axe_workshop.txt
 │   ├── MISSION.md
+│   ├── demo_absolute_path_fix.py
+│   ├── demo_conflict_resolution.py
+│   ├── demo_consolidated_cognitive_architecture.py
+│   ├── demo_dynamic_tokens.py
+│   ├── demo_global_workspace.py
+│   ├── demo_heredoc_fix.py
+│   ├── demo_improvements.py
+│   ├── demo_live_ollama.py
+│   ├── demo_minifier.py
+│   ├── demo_privilege_mapping.py
+│   ├── demo_skills_system.py
+│   ├── demo_subsumption.py
+│   ├── demo_task_completion_fix.py
+│   ├── manual_test_write.py
+│   ├── manual_test_xml.py
 │   ├── test_absolute_path_fix.py
 │   ├── test_acp_benchmark.py
 │   ├── test_analysis_tools.py
@@ -9403,6 +9497,8 @@
 │   ├── test_anthropic_integration.py
 │   ├── test_arbitration.py
 │   ├── test_axe_improvements.py
+│   ├── test_axe_ollama.py
+│   ├── test_blacklist_model.py
 │   ├── test_codex_agent.py
 │   ├── test_codex_integration.py
 │   ├── test_collab_codex.py
@@ -9415,6 +9511,7 @@
 │   ├── test_double_execution.py
 │   ├── test_dynamic_max_tokens.py
 │   ├── test_efficiency_analysis.py
+│   ├── test_end_to_end.py
 │   ├── test_environment_probe.py
 │   ├── test_exec_heredoc.py
 │   ├── test_github_agent.py
@@ -9424,14 +9521,18 @@
 │   ├── test_inline_exec_blocks.py
 │   ├── test_integration_bug_fix.py
 │   ├── test_integration_database_fix.py
+│   ├── test_interactive_keypress.py
 │   ├── test_large_code_files.py
+│   ├── test_live_sandbox_agent.py
 │   ├── test_minifier.py
 │   ├── test_mission_md_tokens.py
 │   ├── test_models_yaml.py
 │   ├── test_ollama_auth.py
+│   ├── test_ollama_integration.py
 │   ├── test_privilege_mapping.py
 │   ├── test_reasoning_effort.py
 │   ├── test_sandbox.py
+│   ├── test_sandbox_ollama.py
 │   ├── test_session_preprocessor.py
 │   ├── test_shared_build_status.py
 │   ├── test_silent_builds.py
@@ -9440,6 +9541,7 @@
 │   ├── test_socket_interface.py
 │   ├── test_spawned_agents.py
 │   ├── test_subsumption.py
+│   ├── test_suid_workaround.py
 │   ├── test_supervisor_protections.py
 │   ├── test_task_completion_detection.py
 │   ├── test_token_error_handling.py
@@ -9456,7 +9558,8 @@
 │   ├── test_xml_tool_parser.py
 │   ├── test_xp_voting.py
 │   ├── validate_codex_config.py
-│   └── validate_collab_codex_fix.py
+│   ├── validate_collab_codex_fix.py
+│   └── verify_integration.py
 ├── tools
 │   ├── dos_unpackers
 │   │   ├── Makefile
@@ -9496,53 +9599,20 @@
 │   └── saw.py
 ├── AGENTS.md
 ├── ARCHITECTURE.md
-├── COGNITIVE_ARCHITECTURE_GUIDE.md
-├── CONSOLIDATION_SUMMARY.md
 ├── Doxyfile
-├── GLOBAL_WORKSPACE_SUMMARY.md
-├── INTEGRATION_COMPLETE.md
 ├── LICENSE
 ├── MISSION.md
-├── NAMESPACE_DETECTION.md
-├── OLLAMA_BATCH_TEST_RESULTS.md
-├── OLLAMA_TEST_RESULTS.md
-├── PROOF_OLLAMA_DEMO.md
 ├── README.md
-├── REFACTOR_SUMMARY.md
-├── SOCKET_IMPLEMENTATION_SUMMARY.md
-├── WORKSPACE_FIX.md
+├── TODO.md
 ├── axe.py
 ├── axe.yaml
 ├── axe_agents.db
-├── axe_exec.log
 ├── axe_socket_client.py
-├── demo_absolute_path_fix.py
-├── demo_conflict_resolution.py
-├── demo_consolidated_cognitive_architecture.py
-├── demo_dynamic_tokens.py
-├── demo_global_workspace.py
-├── demo_heredoc_fix.py
-├── demo_improvements.py
-├── demo_live_ollama.py
-├── demo_minifier.py
-├── demo_privilege_mapping.py
-├── demo_skills_system.py
-├── demo_subsumption.py
-├── demo_task_completion_fix.py
-├── manual_test_write.py
-├── manual_test_xml.py
 ├── models.yaml
 ├── providers.yaml
-├── requirements.txt
-├── test_axe_ollama.py
-├── test_blacklist_model.py
-├── test_live_sandbox_agent.py
-├── test_ollama_integration.py
-├── test_sandbox_ollama.py
-├── test_suid_workaround.py
-└── verify_integration.py
+└── requirements.txt
 
-35 directories, 9501 files
+42 directories, 9564 files
 ```
 
 ## Code Statistics
