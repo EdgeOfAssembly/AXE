@@ -1,0 +1,33 @@
+# keypress script: axe_workshop.txt
+# ---------------------------------------------------------------------------
+# Tests AXE Workshop commands: /workshop status, /workshop help, /workshop saw.
+#
+# Usage (via test_interactive_keypress.py):
+#   keypress.py "xterm -e python3 axe.py" axe_workshop.txt -w xterm -d 4
+# ---------------------------------------------------------------------------
+
+# Wait for AXE to start
+<wait:5>
+
+# Check workshop tool availability
+/workshop status
+<wait:3>
+
+# Get general workshop help
+/workshop help
+<wait:2>
+
+# Run a simple Saw taint analysis on a benign expression
+/workshop saw "x = input(); print(x)"
+<wait:5>
+
+# Check history and stats for Saw
+/workshop history saw
+<wait:2>
+
+/workshop stats
+<wait:2>
+
+# Quit
+/quit
+<wait:1>

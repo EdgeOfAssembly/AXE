@@ -1,0 +1,45 @@
+# keypress script: axe_help.txt
+# ---------------------------------------------------------------------------
+# Tests AXE interactive mode: launch axe.py in an xterm, exercise /help,
+# /agents, /tools, /dirs, /config, /context, and graceful exit.
+#
+# Usage (via test_interactive_keypress.py):
+#   keypress.py "xterm -e python3 axe.py" axe_help.txt -w xterm -d 4
+#
+# Format notes (EdgeOfAssembly/keypress script format):
+#   - Plain text lines are typed and followed by <Return> automatically.
+#   - <wait:N> waits N seconds without pressing Enter.
+#   - <nowait> suppresses the automatic Enter after the previous line.
+#   - # lines are comments.
+# ---------------------------------------------------------------------------
+
+# Give AXE time to start and display its banner
+<wait:5>
+
+# Show the help text
+/help
+<wait:2>
+
+# List available agents
+/agents
+<wait:2>
+
+# Show tool access configuration
+/tools
+<wait:2>
+
+# Show directory access policy
+/dirs
+<wait:2>
+
+# Show current configuration summary
+/config
+<wait:2>
+
+# Show project context summary
+/context
+<wait:2>
+
+# Quit gracefully
+/quit
+<wait:1>

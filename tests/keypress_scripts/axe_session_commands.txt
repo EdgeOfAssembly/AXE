@@ -1,0 +1,47 @@
+# keypress script: axe_session_commands.txt
+# ---------------------------------------------------------------------------
+# Tests AXE interactive mode: session management (/session save/load/list),
+# workspace management, /stats, /history, /clear, and /read on a fixture.
+#
+# Usage (via test_interactive_keypress.py):
+#   keypress.py "xterm -e python3 axe.py" axe_session_commands.txt -w xterm -d 4
+# ---------------------------------------------------------------------------
+
+# Wait for AXE to start
+<wait:5>
+
+# List saved sessions (may be empty)
+/session list
+<wait:2>
+
+# Save a session with a known name
+/session save axe_kp_test
+<wait:2>
+
+# Confirm it appears in the list
+/session list
+<wait:2>
+
+# Read the hello_world fixture
+/read tests/fixtures/hello_world.c
+<wait:2>
+
+# Show token/cost statistics
+/stats
+<wait:2>
+
+# Show chat history
+/history
+<wait:2>
+
+# Clear chat history
+/clear
+<wait:1>
+
+# Show workspace
+/workspace
+<wait:2>
+
+# Exit
+/quit
+<wait:1>
