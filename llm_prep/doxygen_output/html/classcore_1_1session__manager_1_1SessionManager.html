@@ -130,7 +130,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Initialize session manager.
-
 Args:
     sessions_dir: Directory to store session files (default: .axe_sessions)
 </pre> 
@@ -156,10 +155,8 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Delete a saved session.
-
 Args:
     session_name: Name of the session to delete
-
 Returns:
     True if deleted successfully, False otherwise
 </pre> 
@@ -180,7 +177,6 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">List all available saved sessions.
-
 Returns:
     List of dictionaries with session info:
         - name: Session name
@@ -210,10 +206,8 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Load a session from a JSON file.
-
 Args:
     session_name: Name of the session to load
-
 Returns:
     Dictionary with session data, or None if not found/error
 </pre> 
@@ -243,7 +237,6 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Save a session to a JSON file.
-
 Args:
     session_name: Name of the session
     session_data: Dictionary containing:
@@ -252,7 +245,6 @@ Args:
         - agents: List of active agent names
         - metadata: Additional metadata (tokens_used, duration, etc.)
         - file_ids: Optional dict of file IDs from Files API (Anthropic)
-
 Returns:
     True if saved successfully, False otherwise
 </pre> 

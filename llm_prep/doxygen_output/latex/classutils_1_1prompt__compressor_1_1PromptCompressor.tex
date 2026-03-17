@@ -2,8 +2,7 @@
 \hypertarget{classutils_1_1prompt__compressor_1_1PromptCompressor}{}\label{classutils_1_1prompt__compressor_1_1PromptCompressor}\index{utils.prompt\_compressor.PromptCompressor@{utils.prompt\_compressor.PromptCompressor}}
 
 
-Collaboration diagram for utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor\+:
-\nopagebreak
+Collaboration diagram for utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -52,7 +51,6 @@ str \mbox{\hyperlink{classutils_1_1prompt__compressor_1_1PromptCompressor_a412cd
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Compresses system prompts to reduce token usage.
-
 Features:
 - Remove verbose explanations
 - Condense examples
@@ -83,23 +81,19 @@ utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+\_\+\+\_\+init\+\_\+\+\_\+
  str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+\_\+aggressive\+\_\+compression (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Aggressive compression - maximum reduction while preserving meaning.
-
 Args:
     prompt: Original prompt
-
 Returns:
     Aggressively compressed prompt
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classutils_1_1prompt__compressor_1_1PromptCompressor_a3dcdabd9e980fc632396b2047db32f23_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -113,23 +107,19 @@ Here is the caller graph for this function\+:
  str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+\_\+balanced\+\_\+compression (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Balanced compression - remove redundancy and some examples.
-
 Args:
     prompt: Original prompt
-
 Returns:
     Balanced compressed prompt
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classutils_1_1prompt__compressor_1_1PromptCompressor_a33e854a082c8a8ef6c18cd8bd78469c0_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -143,16 +133,13 @@ Here is the caller graph for this function\+:
  str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+\_\+condense\+\_\+examples (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{text}{, }\item[{int }]{keep}{ = {\ttfamily 2}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Reduce number of examples in text.
-
 Args:
     text: Text with examples
     keep: Number of examples to keep
-
 Returns:
     Text with condensed examples
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -166,15 +153,12 @@ Returns:
  str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+\_\+condense\+\_\+lists (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{text}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Convert bullet lists to comma-separated format where appropriate.
-
 Args:
     text: Text with bullet lists
-
 Returns:
     Text with condensed lists
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -188,15 +172,12 @@ Returns:
  str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+\_\+minimal\+\_\+compression (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Minimal compression - only remove obvious redundancy.
-
 Args:
     prompt: Original prompt
-
 Returns:
     Minimally compressed prompt
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -210,16 +191,13 @@ Returns:
  str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+compress (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{, }\item[{str }]{level}{ = {\ttfamily \textquotesingle{}balanced\textquotesingle{}}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Compress a system prompt.
-
 Args:
     prompt: Original system prompt
     level: Compression level ('minimal', 'balanced', 'aggressive')
-
 Returns:
     Compressed prompt
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -233,10 +211,8 @@ Returns:
  str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+compress\+\_\+workshop\+\_\+instructions (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Compress workshop tool instructions in prompts.
-
 Args:
     prompt: Prompt with workshop instructions
-
 Returns:
     Compressed prompt
 \end{DoxyVerb}
@@ -247,11 +223,9 @@ Returns:
  str utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+create\+\_\+minimal\+\_\+prompt (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{role}{, }\item[{bool }]{critical\+\_\+only}{ = {\ttfamily False}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Create a minimal prompt for an agent role.
-
 Args:
     role: Agent role description
     critical_only: If True, only include critical directives
-
 Returns:
     Minimal prompt
 \end{DoxyVerb}
@@ -262,10 +236,8 @@ Returns:
  List\mbox{[}str\mbox{]} utils.\+prompt\+\_\+compressor.\+Prompt\+Compressor.\+extract\+\_\+critical\+\_\+directives (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{prompt}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Extract critical directives from a prompt.
-
 Args:
     prompt: System prompt
-
 Returns:
     List of critical directives
 \end{DoxyVerb}

@@ -2,8 +2,7 @@
 \hypertarget{classcore_1_1anthropic__features_1_1AnthropicFeatures}{}\label{classcore_1_1anthropic__features_1_1AnthropicFeatures}\index{core.anthropic\_features.AnthropicFeatures@{core.anthropic\_features.AnthropicFeatures}}
 
 
-Collaboration diagram for core.\+anthropic\+\_\+features.\+Anthropic\+Features\+:
-\nopagebreak
+Collaboration diagram for core.\+anthropic\+\_\+features.\+Anthropic\+Features\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -62,7 +61,6 @@ bool \mbox{\hyperlink{classcore_1_1anthropic__features_1_1AnthropicFeatures_adca
 core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Any }]{client}{ = {\ttfamily None}, }\item[{Dict\mbox{[}str, Any\mbox{]} }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Initialize Anthropic features manager.
-
 Args:
     client: Anthropic API client instance
     config: Configuration dictionary from models.yaml
@@ -79,16 +77,13 @@ Args:
  List\mbox{[}Dict\mbox{]} core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+add\+\_\+cache\+\_\+control (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}Dict\mbox{]}}]{content\+\_\+blocks}{, }\item[{List\mbox{[}str\mbox{]} }]{breakpoints}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Add cache_control markers to content blocks based on breakpoints.
-
 Args:
     content_blocks: List of content blocks to mark for caching
     breakpoints: Optional list of breakpoint names (defaults to config)
-
 Returns:
     List of content blocks with cache_control added where appropriate
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -102,18 +97,15 @@ Returns:
  Optional\mbox{[}int\mbox{]} core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+count\+\_\+tokens (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{model}{, }\item[{List\mbox{[}Dict\mbox{]}}]{messages}{, }\item[{str }]{system}{ = {\ttfamily "{}"{}}, }\item[{List\mbox{[}Dict\mbox{]} }]{tools}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get precise token count from Anthropic API.
-
 Args:
     model: Model name
     messages: List of message dictionaries
     system: System prompt string
     tools: Optional list of tool definitions
-
 Returns:
     Token count, or None if error/disabled
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -127,10 +119,8 @@ Returns:
  int core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+estimate\+\_\+tokens (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{text}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Estimate token count using char/4 heuristic.
-
 Args:
     text: Text to estimate
-
 Returns:
     Estimated token count
 \end{DoxyVerb}
@@ -162,8 +152,7 @@ Returns:
  bool core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+is\+\_\+prompt\+\_\+caching\+\_\+enabled (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if prompt caching is enabled.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -177,8 +166,7 @@ Returns:
  bool core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+is\+\_\+token\+\_\+counting\+\_\+enabled (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if token counting is enabled.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -192,15 +180,12 @@ Returns:
  bool core.\+anthropic\+\_\+features.\+Anthropic\+Features.\+should\+\_\+use\+\_\+precise\+\_\+counting (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{estimated\+\_\+tokens}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if precise token counting should be used based on threshold.
-
 Args:
     estimated_tokens: Estimated token count
-
 Returns:
     True if precise counting should be used
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

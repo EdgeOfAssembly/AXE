@@ -171,6 +171,7 @@ providers:
       - tinyllama:latest    # Small (~637MB) - explicit tag
       - qwen2.5-coder:1.5b  # Qwen 2.5 Coder 1.5B (~986MB) - supervisor
       - qwen2.5:1.5b        # Qwen 2.5 1.5B (~986MB) - worker
+      - qwen3-coder:480b-cloud
       - llama3.2:1b         # Very small (~1.3GB)
       - phi                 # Small (~1.6GB)
       - llama3.2:3b         # Small test model (~2GB)
@@ -181,3 +182,4 @@ providers:
       - deepseek-coder:33b
       - mistral:7b
       - mixtral:8x7b
+

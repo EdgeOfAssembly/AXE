@@ -6,7 +6,9 @@ digraph "core.config.Config._deep_merge"
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="RL";
   Node1 [id="Node000001",label="core.config.Config.\l_deep_merge",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
-  Node1 -> Node1 [id="edge3_Node000001_Node000001",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node1 -> Node2 [id="edge4_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node1 [id="edge4_Node000001_Node000001",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node2 [id="edge5_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node2 [id="Node000002",label="core.config.Config.load",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classcore_1_1config_1_1Config.html#ada9632580f9c8bcc926c131b38ddacae",tooltip=" "];
+  Node2 -> Node3 [id="edge6_Node000002_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="core.config.Config.\l_load_all_configs",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classcore_1_1config_1_1Config.html#ac5be92e39bb246739876929137a505ba",tooltip=" "];
 }

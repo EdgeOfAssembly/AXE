@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['📚_20documentation_2010_2010_0',['📚 Documentation (10/10)',['../md_PR23__EXECUTIVE__SUMMARY.html#autotoc_md705',1,'']]]
+  ['🎮_20gamification_20for_20agents_0',['🎮 Gamification for Agents',['../md_README.html#autotoc_md1996',1,'']]],
+  ['🎮_20xp_20level_20title_20progression_1',['🎮 XP/Level/Title Progression',['../md_TODO.html#autotoc_md2243',1,'']]]
 ];

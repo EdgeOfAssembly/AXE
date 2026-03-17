@@ -130,12 +130,10 @@ Reduces token usage through intelligent truncation, summarization, and compressi
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Create sliding windows over messages for processing in chunks.
-
 Args:
     messages: List of messages
     window_size: Size of each window
     overlap: Number of messages to overlap between windows
-
 Returns:
     List of message windows
 </pre> 
@@ -160,11 +158,9 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Calculate token savings statistics.
-
 Args:
     original_tokens: Original token count
     optimized_tokens: Optimized token count
-
 Returns:
     Dictionary with savings statistics
 </pre> 

@@ -26,6 +26,18 @@ tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{namespaceaxe_a6219e4e9c2c63cebb9
 \item 
 tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{namespaceaxe_a557557e18d17b8fa824f16fd344efdcf}{check\+\_\+agent\+\_\+command}} (str response, str token)
 \item 
+\mbox{\hyperlink{namespaceaxe_a342b484f69eed994ed53775ba88381e9}{\+\_\+get\+\_\+runtime\+\_\+dir}} ()
+\item 
+\mbox{\hyperlink{namespaceaxe_aa4d4827c0d50e186178d0a7979a90518}{cleanup\+\_\+files}} ()
+\item 
+\mbox{\hyperlink{namespaceaxe_a14509a8d71e87e88d24635d02a3003e4}{setup\+\_\+signal\+\_\+handlers}} ()
+\item 
+\mbox{\hyperlink{namespaceaxe_ac354b89eb8144ab0d2c051b1db481072}{write\+\_\+pid\+\_\+file}} ()
+\item 
+\mbox{\hyperlink{namespaceaxe_ac7ff7a61a4ef3811318eee6acb6b03bb}{check\+\_\+and\+\_\+cleanup\+\_\+stale\+\_\+files}} ()
+\item 
+\mbox{\hyperlink{namespaceaxe_a505834997ce1be947bd236d296248c64}{start\+\_\+socket\+\_\+server}} ()
+\item 
 None \mbox{\hyperlink{namespaceaxe_abb23f0d8329e501eb234daeb5a11ac9a}{generate\+\_\+sample\+\_\+config}} (str path=\textquotesingle{}axe.\+yaml\textquotesingle{})
 \item 
 None \mbox{\hyperlink{namespaceaxe_ae18887cd1aba7d83578d18397fe0cd63}{restore\+\_\+agents\+\_\+on\+\_\+startup}} (Optional\mbox{[}str\mbox{]} db\+\_\+path=None)
@@ -47,6 +59,14 @@ bool \mbox{\hyperlink{namespaceaxe_a83300a7c32303a1eacfcc6d392c5929b}{HAS\+\_\+\
 \item 
 bool \mbox{\hyperlink{namespaceaxe_a443d6ea5ad17499a058f5018e9704123}{HAS\+\_\+\+CHISEL}} = False
 \item 
+\mbox{\hyperlink{namespaceaxe_ab6bc706814d98a1b9f6dddbd2cf23a3c}{RUNTIME\+\_\+\+DIR}} = \mbox{\hyperlink{namespaceaxe_a342b484f69eed994ed53775ba88381e9}{\+\_\+get\+\_\+runtime\+\_\+dir}}()
+\item 
+str \mbox{\hyperlink{namespaceaxe_acf05acd8822ee7ad6f85484659869e3e}{SOCKET\+\_\+\+PATH}} = f"{}\{\mbox{\hyperlink{namespaceaxe_ab6bc706814d98a1b9f6dddbd2cf23a3c}{RUNTIME\+\_\+\+DIR}}\}/axe.\+sock"{}
+\item 
+str \mbox{\hyperlink{namespaceaxe_a83374285e8a4c32d21cffb40e12736ae}{PID\+\_\+\+PATH}} = f"{}\{\mbox{\hyperlink{namespaceaxe_ab6bc706814d98a1b9f6dddbd2cf23a3c}{RUNTIME\+\_\+\+DIR}}\}/axe.\+pid"{}
+\item 
+bool \mbox{\hyperlink{namespaceaxe_a721486014f65841a3d10ee28b36093ae}{\+\_\+signal\+\_\+handlers\+\_\+registered}} = False
+\item 
 \mbox{\hyperlink{namespaceaxe_a1231a95d9da8d332f1cb87feca5d4953}{\+\_\+global\+\_\+db}} = None
 \end{DoxyCompactItemize}
 
@@ -54,12 +74,10 @@ bool \mbox{\hyperlink{namespaceaxe_a443d6ea5ad17499a058f5018e9704123}{HAS\+\_\+\
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}AXE - Agent eXecution Engine
 A terminal-based multiagent coding assistant for C, C++, Python, and reverse-engineering.
-
 Usage:
     axe.py                      # Interactive chat mode
     axe.py -c "task"            # Single command mode
     axe.py --config config.yaml # Custom config file
-    
 Chat commands:
     @agent task          - Send task to specific agent (e.g., @gpt analyze this)
     /agents              - List available agents
@@ -76,27 +94,31 @@ Chat commands:
 \label{doc-func-members}
 \Hypertarget{namespaceaxe_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{namespaceaxe_a557557e18d17b8fa824f16fd344efdcf}\index{axe@{axe}!check\_agent\_command@{check\_agent\_command}}
+\Hypertarget{namespaceaxe_a342b484f69eed994ed53775ba88381e9}\index{axe@{axe}!\_get\_runtime\_dir@{\_get\_runtime\_dir}}
+\index{\_get\_runtime\_dir@{\_get\_runtime\_dir}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{\_get\_runtime\_dir()}{\_get\_runtime\_dir()}}
+{\footnotesize\ttfamily \label{namespaceaxe_a342b484f69eed994ed53775ba88381e9} 
+axe.\+\_\+get\+\_\+runtime\+\_\+dir (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Get runtime directory with fallback options.\end{DoxyVerb}
+ \Hypertarget{namespaceaxe_a557557e18d17b8fa824f16fd344efdcf}\index{axe@{axe}!check\_agent\_command@{check\_agent\_command}}
 \index{check\_agent\_command@{check\_agent\_command}!axe@{axe}}
 \doxysubsubsection{\texorpdfstring{check\_agent\_command()}{check\_agent\_command()}}
 {\footnotesize\ttfamily \label{namespaceaxe_a557557e18d17b8fa824f16fd344efdcf} 
  tuple\mbox{[}bool, str\mbox{]} axe.\+check\+\_\+agent\+\_\+command (\begin{DoxyParamCaption}\item[{str}]{response}{, }\item[{str}]{token}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check for agent commands that include content (BREAK REQUEST, EMERGENCY, SPAWN).
-
 Returns:
     Tuple of (found: bool, content: str)
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespaceaxe_a557557e18d17b8fa824f16fd344efdcf_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -110,16 +132,14 @@ Here is the caller graph for this function\+:
  bool axe.\+check\+\_\+agent\+\_\+pass (\begin{DoxyParamCaption}\item[{str}]{response}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if agent is passing their turn using unique token.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespaceaxe_a24106f38d1e2278a094b572012ed4760_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -133,24 +153,56 @@ Here is the caller graph for this function\+:
  tuple\mbox{[}bool, str\mbox{]} axe.\+check\+\_\+agent\+\_\+task\+\_\+complete (\begin{DoxyParamCaption}\item[{str}]{response}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if agent is declaring task complete using unique token.
-
 Returns:
     Tuple of (is_complete: bool, summary: str)
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespaceaxe_a6219e4e9c2c63cebb97122848b591a70_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespaceaxe_a6219e4e9c2c63cebb97122848b591a70_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceaxe_ac7ff7a61a4ef3811318eee6acb6b03bb}\index{axe@{axe}!check\_and\_cleanup\_stale\_files@{check\_and\_cleanup\_stale\_files}}
+\index{check\_and\_cleanup\_stale\_files@{check\_and\_cleanup\_stale\_files}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{check\_and\_cleanup\_stale\_files()}{check\_and\_cleanup\_stale\_files()}}
+{\footnotesize\ttfamily \label{namespaceaxe_ac7ff7a61a4ef3811318eee6acb6b03bb} 
+axe.\+check\+\_\+and\+\_\+cleanup\+\_\+stale\+\_\+files (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check for stale socket/pid files from crashed sessions.\end{DoxyVerb}
+ Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{namespaceaxe_ac7ff7a61a4ef3811318eee6acb6b03bb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_ac7ff7a61a4ef3811318eee6acb6b03bb_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceaxe_aa4d4827c0d50e186178d0a7979a90518}\index{axe@{axe}!cleanup\_files@{cleanup\_files}}
+\index{cleanup\_files@{cleanup\_files}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{cleanup\_files()}{cleanup\_files()}}
+{\footnotesize\ttfamily \label{namespaceaxe_aa4d4827c0d50e186178d0a7979a90518} 
+axe.\+cleanup\+\_\+files (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Remove socket and PID files.\end{DoxyVerb}
+ Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_aa4d4827c0d50e186178d0a7979a90518_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{namespaceaxe_a5387f652eb28eecb3bec22654aa3e40d}\index{axe@{axe}!detect\_agent\_token@{detect\_agent\_token}}
@@ -160,18 +212,15 @@ Here is the caller graph for this function\+:
  tuple\mbox{[}bool, str\mbox{]} axe.\+detect\+\_\+agent\+\_\+token (\begin{DoxyParamCaption}\item[{str}]{response}{, }\item[{str}]{token}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Detect unique agent communication tokens in response.
-
 Args:
     response: The agent's response text
     token: The token to search for (e.g., AGENT_TOKEN_PASS)
-
 Returns:
     Tuple of (found: bool, content: str)
     - found: Whether the token was detected
     - content: Extracted content after the token (empty for simple tokens)
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -185,8 +234,7 @@ Returns:
  None axe.\+generate\+\_\+sample\+\_\+config (\begin{DoxyParamCaption}\item[{str }]{path}{ = {\ttfamily \textquotesingle{}axe.yaml\textquotesingle{}}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Generate a sample configuration file.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -200,21 +248,18 @@ Returns:
  bool axe.\+is\+\_\+genuine\+\_\+task\+\_\+completion (\begin{DoxyParamCaption}\item[{str}]{response}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if agent is genuinely declaring task complete.
-
 Returns False for:
 - "TASK COMPLETE" inside <result> blocks (file content)
 - "TASK COMPLETE" inside quoted text
 - "TASK COMPLETE" in warnings/instructions
 - "TASK COMPLETE" inside [READ ...] blocks
-
 Returns True only for genuine declarations like:
 - "TASK COMPLETE: Here's what we accomplished..."
 - "✅ TASK COMPLETE"
 - "I declare TASK COMPLETE"
 - "THE TASK IS COMPLETE"
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -225,19 +270,17 @@ Returns True only for genuine declarations like:
 \index{main@{main}!axe@{axe}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily \label{namespaceaxe_ac2811818e423281b1abace5155de35d2} 
- None axe.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+ None axe.\+main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Main entry point.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=298pt]{namespaceaxe_ac2811818e423281b1abace5155de35d2_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -251,22 +294,54 @@ Here is the caller graph for this function\+:
  None axe.\+restore\+\_\+agents\+\_\+on\+\_\+startup (\begin{DoxyParamCaption}\item[{Optional\mbox{[}str\mbox{]} }]{db\+\_\+path}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Display agents from database on startup (informational only).
-
 Note: This function displays agent information from previous sessions
 but does not automatically recreate them in the current session.
 Agents must be explicitly spawned via collaborative sessions or
 other mechanisms. This is informational to show what agents
 existed in previous sessions.
-
 Args:
     db_path: Optional path to SQLite database. If None, uses AXE installation directory.
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=286pt]{namespaceaxe_ae18887cd1aba7d83578d18397fe0cd63_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceaxe_a14509a8d71e87e88d24635d02a3003e4}\index{axe@{axe}!setup\_signal\_handlers@{setup\_signal\_handlers}}
+\index{setup\_signal\_handlers@{setup\_signal\_handlers}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{setup\_signal\_handlers()}{setup\_signal\_handlers()}}
+{\footnotesize\ttfamily \label{namespaceaxe_a14509a8d71e87e88d24635d02a3003e4} 
+axe.\+setup\+\_\+signal\+\_\+handlers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Register signal handlers for clean shutdown.\end{DoxyVerb}
+ Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_a14509a8d71e87e88d24635d02a3003e4_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_a14509a8d71e87e88d24635d02a3003e4_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{namespaceaxe_a505834997ce1be947bd236d296248c64}\index{axe@{axe}!start\_socket\_server@{start\_socket\_server}}
+\index{start\_socket\_server@{start\_socket\_server}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{start\_socket\_server()}{start\_socket\_server()}}
+{\footnotesize\ttfamily \label{namespaceaxe_a505834997ce1be947bd236d296248c64} 
+axe.\+start\+\_\+socket\+\_\+server (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Start Unix socket server for agent communication.\end{DoxyVerb}
+ Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_a505834997ce1be947bd236d296248c64_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{namespaceaxe_ae792b8af7b454e5f2e685ef5aa9c5207}\index{axe@{axe}!sync\_agents\_on\_shutdown@{sync\_agents\_on\_shutdown}}
@@ -278,7 +353,21 @@ Args:
 \begin{DoxyVerb}Sync agent state to database on shutdown.
 This is called automatically via atexit.
 \end{DoxyVerb}
- 
+ \Hypertarget{namespaceaxe_ac354b89eb8144ab0d2c051b1db481072}\index{axe@{axe}!write\_pid\_file@{write\_pid\_file}}
+\index{write\_pid\_file@{write\_pid\_file}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{write\_pid\_file()}{write\_pid\_file()}}
+{\footnotesize\ttfamily \label{namespaceaxe_ac354b89eb8144ab0d2c051b1db481072} 
+axe.\+write\+\_\+pid\+\_\+file (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Write PID file for agent discovery.\end{DoxyVerb}
+ Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespaceaxe_ac354b89eb8144ab0d2c051b1db481072_icgraph}
+\end{center}
+\end{figure}
+
 
 \label{doc-var-members}
 \Hypertarget{namespaceaxe_doc-var-members}
@@ -288,6 +377,12 @@ This is called automatically via atexit.
 \doxysubsubsection{\texorpdfstring{\_global\_db}{\_global\_db}}
 {\footnotesize\ttfamily \label{namespaceaxe_a1231a95d9da8d332f1cb87feca5d4953} 
 axe.\+\_\+global\+\_\+db = None\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{namespaceaxe_a721486014f65841a3d10ee28b36093ae}\index{axe@{axe}!\_signal\_handlers\_registered@{\_signal\_handlers\_registered}}
+\index{\_signal\_handlers\_registered@{\_signal\_handlers\_registered}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{\_signal\_handlers\_registered}{\_signal\_handlers\_registered}}
+{\footnotesize\ttfamily \label{namespaceaxe_a721486014f65841a3d10ee28b36093ae} 
+bool axe.\+\_\+signal\+\_\+handlers\+\_\+registered = False\hspace{0.3cm}{\ttfamily [protected]}}
 
 \Hypertarget{namespaceaxe_a443d6ea5ad17499a058f5018e9704123}\index{axe@{axe}!HAS\_CHISEL@{HAS\_CHISEL}}
 \index{HAS\_CHISEL@{HAS\_CHISEL}!axe@{axe}}
@@ -318,4 +413,22 @@ bool axe.\+HAS\+\_\+\+WORKSHOP = True}
 \doxysubsubsection{\texorpdfstring{HAS\_YAML}{HAS\_YAML}}
 {\footnotesize\ttfamily \label{namespaceaxe_af421429727240fc6e6c4f590ddbc4f83} 
 bool axe.\+HAS\+\_\+\+YAML = True}
+
+\Hypertarget{namespaceaxe_a83374285e8a4c32d21cffb40e12736ae}\index{axe@{axe}!PID\_PATH@{PID\_PATH}}
+\index{PID\_PATH@{PID\_PATH}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{PID\_PATH}{PID\_PATH}}
+{\footnotesize\ttfamily \label{namespaceaxe_a83374285e8a4c32d21cffb40e12736ae} 
+str axe.\+PID\+\_\+\+PATH = f"{}\{\mbox{\hyperlink{namespaceaxe_ab6bc706814d98a1b9f6dddbd2cf23a3c}{RUNTIME\+\_\+\+DIR}}\}/axe.\+pid"{}}
+
+\Hypertarget{namespaceaxe_ab6bc706814d98a1b9f6dddbd2cf23a3c}\index{axe@{axe}!RUNTIME\_DIR@{RUNTIME\_DIR}}
+\index{RUNTIME\_DIR@{RUNTIME\_DIR}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{RUNTIME\_DIR}{RUNTIME\_DIR}}
+{\footnotesize\ttfamily \label{namespaceaxe_ab6bc706814d98a1b9f6dddbd2cf23a3c} 
+axe.\+RUNTIME\+\_\+\+DIR = \mbox{\hyperlink{namespaceaxe_a342b484f69eed994ed53775ba88381e9}{\+\_\+get\+\_\+runtime\+\_\+dir}}()}
+
+\Hypertarget{namespaceaxe_acf05acd8822ee7ad6f85484659869e3e}\index{axe@{axe}!SOCKET\_PATH@{SOCKET\_PATH}}
+\index{SOCKET\_PATH@{SOCKET\_PATH}!axe@{axe}}
+\doxysubsubsection{\texorpdfstring{SOCKET\_PATH}{SOCKET\_PATH}}
+{\footnotesize\ttfamily \label{namespaceaxe_acf05acd8822ee7ad6f85484659869e3e} 
+str axe.\+SOCKET\+\_\+\+PATH = f"{}\{\mbox{\hyperlink{namespaceaxe_ab6bc706814d98a1b9f6dddbd2cf23a3c}{RUNTIME\+\_\+\+DIR}}\}/axe.\+sock"{}}
 

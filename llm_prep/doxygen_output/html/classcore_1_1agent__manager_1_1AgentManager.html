@@ -265,14 +265,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Call an agent with a prompt.
-
 Args:
     agent_name: Name of the agent to call
     prompt: User prompt
     context: Optional context to include
     token_callback: Optional callback function(agent_name, model, input_tokens, output_tokens)
     system_prompt_override: Optional override for system prompt (for optimization)
-
 Returns:
     Agent response text
 </pre> <div class="dynheader">
@@ -317,13 +315,11 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get precise token count from Anthropic API.
-
 Args:
     model: Model name
     messages: List of message dictionaries
     system: System prompt string
     tools: Optional list of tool definitions
-
 Returns:
     Token count, or None if unavailable
 </pre> 

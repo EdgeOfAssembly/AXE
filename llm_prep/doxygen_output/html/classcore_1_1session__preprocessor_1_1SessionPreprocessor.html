@@ -117,7 +117,6 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Orchestrates workspace preprocessing at the start of each AXE session.
-
 Handles environment probing, minification, and llmprep execution based on configuration.
 </pre> </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a23a54867c7933504de45d301676ae946" name="a23a54867c7933504de45d301676ae946"></a>
@@ -144,7 +143,6 @@ Handles environment probing, minification, and llmprep execution based on config
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Initialize the session preprocessor.
-
 Args:
     config: AXE Config object
     workspace_path: Path to the workspace directory
@@ -167,7 +165,6 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Check if any preprocessing is enabled.
-
 Returns:
     True if environment_probe, minifier, or llmprep is enabled
 </pre> 
@@ -188,7 +185,6 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Run all enabled preprocessing steps.
-
 Returns:
     Dictionary with results:
     {
@@ -219,7 +215,6 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Run environment probe to generate .collab_env.md
-
 Returns:
     Dictionary with keys:
     - success: True if probe succeeded
@@ -248,7 +243,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Run llmprep to generate context files.
-
 Returns:
     Dictionary with keys:
     - success: True if llmprep succeeded
@@ -277,7 +271,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Run minification on workspace.
-
 Returns:
     Dictionary with keys:
     - files_processed: Number of files minified

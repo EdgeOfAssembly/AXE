@@ -30,11 +30,9 @@ Reduces system prompt overhead while preserving essential instructions.
  Dict\mbox{[}str, Any\mbox{]} utils.\+prompt\+\_\+compressor.\+calculate\+\_\+compression\+\_\+ratio (\begin{DoxyParamCaption}\item[{str}]{original}{, }\item[{str}]{compressed}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Calculate compression statistics.
-
 Args:
     original: Original prompt
     compressed: Compressed prompt
-
 Returns:
     Dictionary with compression statistics
 \end{DoxyVerb}
@@ -45,10 +43,8 @@ Returns:
  Dict utils.\+prompt\+\_\+compressor.\+compress\+\_\+system\+\_\+prompts (\begin{DoxyParamCaption}\item[{Dict}]{config}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Compress all system prompts in a configuration.
-
 Args:
     config: AXE configuration dictionary
-
 Returns:
     Configuration with compressed prompts
 \end{DoxyVerb}

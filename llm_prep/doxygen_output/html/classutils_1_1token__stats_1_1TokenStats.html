@@ -174,7 +174,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Record token usage for an agent.
-
 Args:
     agent_name: Name of the agent
     model: Model name used
@@ -182,8 +181,7 @@ Args:
     output_tokens: Number of output tokens
     cache_creation_tokens: Tokens used to create cache (default: 0)
     cache_read_tokens: Tokens read from cache (default: 0)
-    
-Note: 
+Note:
     This method is backward compatible. Existing code that calls
     add_usage() with 4 arguments will continue to work. The new
     cache parameters are optional keyword arguments.
@@ -209,10 +207,8 @@ Note:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get statistics for a specific agent.
-
 Args:
     agent_name: Name of the agent
-
 Returns:
     Dictionary with stats, or None if agent not found
 </pre> 
@@ -233,7 +229,6 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get statistics for all agents.
-
 Returns:
     Dictionary mapping agent_name to stats with cost and cache info
 </pre> <div class="dynheader">
@@ -259,7 +254,6 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get total statistics across all agents.
-
 Returns:
     Dictionary with total input, output, messages, cost, and cache stats
 </pre> <div class="dynheader">

@@ -2,8 +2,7 @@
 \hypertarget{classutils_1_1token__stats_1_1TokenStats}{}\label{classutils_1_1token__stats_1_1TokenStats}\index{utils.token\_stats.TokenStats@{utils.token\_stats.TokenStats}}
 
 
-Collaboration diagram for utils.\+token\+\_\+stats.\+Token\+Stats\+:
-\nopagebreak
+Collaboration diagram for utils.\+token\+\_\+stats.\+Token\+Stats\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -58,7 +57,6 @@ utils.\+token\+\_\+stats.\+Token\+Stats.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{Dox
  None utils.\+token\+\_\+stats.\+Token\+Stats.\+add\+\_\+usage (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{str}]{model}{, }\item[{int}]{input\+\_\+tokens}{, }\item[{int}]{output\+\_\+tokens}{, }\item[{int }]{cache\+\_\+creation\+\_\+tokens}{ = {\ttfamily 0}, }\item[{int }]{cache\+\_\+read\+\_\+tokens}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Record token usage for an agent.
-
 Args:
     agent_name: Name of the agent
     model: Model name used
@@ -66,8 +64,7 @@ Args:
     output_tokens: Number of output tokens
     cache_creation_tokens: Tokens used to create cache (default: 0)
     cache_read_tokens: Tokens read from cache (default: 0)
-    
-Note: 
+Note:
     This method is backward compatible. Existing code that calls
     add_usage() with 4 arguments will continue to work. The new
     cache parameters are optional keyword arguments.
@@ -79,10 +76,8 @@ Note:
  Optional\mbox{[}Dict\mbox{]} utils.\+token\+\_\+stats.\+Token\+Stats.\+get\+\_\+agent\+\_\+stats (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get statistics for a specific agent.
-
 Args:
     agent_name: Name of the agent
-
 Returns:
     Dictionary with stats, or None if agent not found
 \end{DoxyVerb}
@@ -93,12 +88,10 @@ Returns:
  Dict utils.\+token\+\_\+stats.\+Token\+Stats.\+get\+\_\+all\+\_\+stats (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get statistics for all agents.
-
 Returns:
     Dictionary mapping agent_name to stats with cost and cache info
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -112,12 +105,10 @@ Returns:
  Dict utils.\+token\+\_\+stats.\+Token\+Stats.\+get\+\_\+total\+\_\+stats (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get total statistics across all agents.
-
 Returns:
     Dictionary with total input, output, messages, cost, and cache stats
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

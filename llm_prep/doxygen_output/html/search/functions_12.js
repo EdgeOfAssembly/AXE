@@ -7,5 +7,6 @@ var searchData=
   ['update_5fworkspace_4',['update_workspace',['../classcore_1_1multiprocess_1_1SharedContext.html#a7520b160813e3586b92b34daf1956081',1,'core::multiprocess::SharedContext']]],
   ['upload_5ffile_5',['upload_file',['../classcore_1_1anthropic__features_1_1FilesAPIManager.html#a382ed85a0a1e80116c9e9b66e8f32aa7',1,'core::anthropic_features::FilesAPIManager']]],
   ['usage_6',['usage',['../depklite_8c.html#a2ef30c42cbc289d899a8be5d2d8f77d0',1,'depklite.c']]],
-  ['uses_5fmax_5fcompletion_5ftokens_7',['uses_max_completion_tokens',['../namespacemodels_1_1metadata.html#a6f87fca809c78c14ab877d4526d80e1f',1,'models::metadata']]]
+  ['uses_5fmax_5fcompletion_5ftokens_7',['uses_max_completion_tokens',['../namespacemodels_1_1metadata.html#a6f87fca809c78c14ab877d4526d80e1f',1,'models::metadata']]],
+  ['uses_5fresponses_5fapi_8',['uses_responses_api',['../namespacemodels_1_1metadata.html#a5a351bccd34073b47d17034b9ec266a2',1,'models::metadata']]]
 ];

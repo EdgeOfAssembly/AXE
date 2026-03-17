@@ -2,8 +2,7 @@
 \hypertarget{classcore_1_1tool__runner_1_1ToolRunner}{}\label{classcore_1_1tool__runner_1_1ToolRunner}\index{core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}}
 
 
-Collaboration diagram for core.\+tool\+\_\+runner.\+Tool\+Runner\+:
-\nopagebreak
+Collaboration diagram for core.\+tool\+\_\+runner.\+Tool\+Runner\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -13,7 +12,7 @@ Collaboration diagram for core.\+tool\+\_\+runner.\+Tool\+Runner\+:
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_a1feff1c6dada3074ef97d0403d9594d2}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \textquotesingle{}\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}\textquotesingle{} \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_a1caef8fd06dfff12f5518378f55a0092}{config}}, str \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_ab07fe84a004be883ff46e9f908b5cccf}{project\+\_\+dir}})
+\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_a852d0544a9b6d77897169ce85333608a}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \textquotesingle{}\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}\textquotesingle{} \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_a1caef8fd06dfff12f5518378f55a0092}{config}}, str \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_ab07fe84a004be883ff46e9f908b5cccf}{project\+\_\+dir}}, Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_a634cb5f701f178fd8542f76c1c6c7e7b}{workspace\+\_\+paths}}=None)
 \item 
 Tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_abd254d33291077274c09bef339b4c6c2}{is\+\_\+tool\+\_\+allowed}} (self, str cmd)
 \item 
@@ -30,9 +29,11 @@ Tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{classcore_1_1tool__runner_1_1Too
 \item 
 bool \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_ad3384bfdda9144aa83ff3d63f3d3a1c6}{dry\+\_\+run}} = False
 \item 
+\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_a634cb5f701f178fd8542f76c1c6c7e7b}{workspace\+\_\+paths}} = workspace\+\_\+paths or \mbox{[}\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_ab07fe84a004be883ff46e9f908b5cccf}{project\+\_\+dir}}\mbox{]}
+\item 
 \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_a76001204db69508339a9abd26e8241a9}{sandbox\+\_\+manager}} = None
 \item 
-\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_a1b615cb6d59b617e5117aa769efa7766}{whitelist}} = config.\+get\+\_\+tool\+\_\+whitelist()
+\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_ac172290159510f6f2c00b763b2ed7276}{blacklist}} = config.\+get\+\_\+tool\+\_\+blacklist()
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -50,24 +51,20 @@ List\mbox{[}str\mbox{]} \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner
 \item 
 bool \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_ad1d19d5231b3bbd01a8a7ced79073df3}{\+\_\+needs\+\_\+shell}} (self, str cmd)
 \item 
-Tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_aab86dfe3375105fe8c342e758a2e4524}{\+\_\+check\+\_\+forbidden\+\_\+paths}} (self, str cmd)
-\item 
 None \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_a0481e2c62df293053b7576cff131107a}{\+\_\+log\+\_\+execution}} (self, str cmd, bool success, str output)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Manages tool execution with safety checks.
-
 This class provides secure command execution with:
-- Whitelist-based command validation
+- Blacklist-based command validation (default-allow model)
 - Forbidden path checking
 - Support for shell operators (pipes, redirects, logical operators)
 - Heredoc content parsing
 - Automatic detection of shell vs direct execution
-
 Key Features:
-- Validates commands against a whitelist before execution
+- Validates commands against a blacklist before execution
 - Handles complex shell syntax (pipes, redirects, subshells, heredocs)
 - Prevents access to forbidden directories
 - Logs all command execution attempts
@@ -79,31 +76,24 @@ Key Features:
 \label{doc-constructors}
 \Hypertarget{classcore_1_1tool__runner_1_1ToolRunner_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classcore_1_1tool__runner_1_1ToolRunner_a1feff1c6dada3074ef97d0403d9594d2}\index{core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}!\_\_init\_\_@{\_\_init\_\_}}
+\Hypertarget{classcore_1_1tool__runner_1_1ToolRunner_a852d0544a9b6d77897169ce85333608a}\index{core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}!\_\_init\_\_@{\_\_init\_\_}}
 \index{\_\_init\_\_@{\_\_init\_\_}!core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}}
 \doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
-{\footnotesize\ttfamily \label{classcore_1_1tool__runner_1_1ToolRunner_a1feff1c6dada3074ef97d0403d9594d2} 
-core.\+tool\+\_\+runner.\+Tool\+Runner.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\textquotesingle{}\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}\textquotesingle{}}]{config}{, }\item[{str}]{project\+\_\+dir}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classcore_1_1tool__runner_1_1ToolRunner_a852d0544a9b6d77897169ce85333608a} 
+core.\+tool\+\_\+runner.\+Tool\+Runner.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\textquotesingle{}\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}\textquotesingle{}}]{config}{, }\item[{str}]{project\+\_\+dir}{, }\item[{Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} }]{workspace\+\_\+paths}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Initialize the ToolRunner.
-
 Args:
-    config: Configuration object containing tool whitelist and forbidden paths
+    config: Configuration object containing tool blacklist and forbidden paths
     project_dir: Base directory for command execution
+    workspace_paths: Optional list of workspace paths for sandbox binding
 \end{DoxyVerb}
  
 
 \label{doc-func-members}
 \Hypertarget{classcore_1_1tool__runner_1_1ToolRunner_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classcore_1_1tool__runner_1_1ToolRunner_aab86dfe3375105fe8c342e758a2e4524}\index{core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}!\_check\_forbidden\_paths@{\_check\_forbidden\_paths}}
-\index{\_check\_forbidden\_paths@{\_check\_forbidden\_paths}!core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}}
-\doxysubsubsection{\texorpdfstring{\_check\_forbidden\_paths()}{\_check\_forbidden\_paths()}}
-{\footnotesize\ttfamily \label{classcore_1_1tool__runner_1_1ToolRunner_aab86dfe3375105fe8c342e758a2e4524} 
- Tuple\mbox{[}bool, str\mbox{]} core.\+tool\+\_\+runner.\+Tool\+Runner.\+\_\+check\+\_\+forbidden\+\_\+paths (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{cmd}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
-
-\begin{DoxyVerb}Check if command accesses forbidden paths.\end{DoxyVerb}
- \Hypertarget{classcore_1_1tool__runner_1_1ToolRunner_a7bb2cd101f8135bdd39f5ac59f936d32}\index{core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}!\_extract\_commands\_from\_shell@{\_extract\_commands\_from\_shell}}
+\Hypertarget{classcore_1_1tool__runner_1_1ToolRunner_a7bb2cd101f8135bdd39f5ac59f936d32}\index{core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}!\_extract\_commands\_from\_shell@{\_extract\_commands\_from\_shell}}
 \index{\_extract\_commands\_from\_shell@{\_extract\_commands\_from\_shell}!core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}}
 \doxysubsubsection{\texorpdfstring{\_extract\_commands\_from\_shell()}{\_extract\_commands\_from\_shell()}}
 {\footnotesize\ttfamily \label{classcore_1_1tool__runner_1_1ToolRunner_a7bb2cd101f8135bdd39f5ac59f936d32} 
@@ -112,16 +102,14 @@ Args:
 \begin{DoxyVerb}Extract actual command names from a shell command string.
 Handles pipes, logical operators, redirects, heredocs, subshells, etc.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcore_1_1tool__runner_1_1ToolRunner_a7bb2cd101f8135bdd39f5ac59f936d32_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -135,8 +123,7 @@ Here is the caller graph for this function\+:
  None core.\+tool\+\_\+runner.\+Tool\+Runner.\+\_\+log\+\_\+execution (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{cmd}{, }\item[{bool}]{success}{, }\item[{str}]{output}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Log command execution to file.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -150,16 +137,14 @@ Here is the caller graph for this function\+:
  bool core.\+tool\+\_\+runner.\+Tool\+Runner.\+\_\+needs\+\_\+shell (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{cmd}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Check if a command requires shell execution.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcore_1_1tool__runner_1_1ToolRunner_ad1d19d5231b3bbd01a8a7ced79073df3_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -173,12 +158,10 @@ Here is the caller graph for this function\+:
  str core.\+tool\+\_\+runner.\+Tool\+Runner.\+\_\+strip\+\_\+heredoc\+\_\+content (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{cmd}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Remove heredoc content from command string to prevent content from being parsed as commands.
-
 ⚠️  CRITICAL: This function is for VALIDATION ONLY!
 The returned string should ONLY be used for command name extraction and operator parsing.
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -192,28 +175,23 @@ The returned string should ONLY be used for command name extraction and operator
  Tuple\mbox{[}bool, str\mbox{]} core.\+tool\+\_\+runner.\+Tool\+Runner.\+is\+\_\+tool\+\_\+allowed (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{cmd}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if a command (including pipelines) is allowed.
-
-This method validates commands against the whitelist and security rules.
+This method validates commands against the blacklist and security rules.
 It uses _extract_commands_from_shell() which internally strips heredoc
 content for validation purposes only. The input `cmd` parameter is never
 modified and should be passed unchanged to run() for execution.
-
 Args:
     cmd: The complete shell command string to validate
-
 Returns:
     Tuple of (allowed: bool, reason: str)
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcore_1_1tool__runner_1_1ToolRunner_abd254d33291077274c09bef339b4c6c2_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -227,25 +205,21 @@ Here is the caller graph for this function\+:
  Tuple\mbox{[}bool, str\mbox{]} core.\+tool\+\_\+runner.\+Tool\+Runner.\+run (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{cmd}{, }\item[{Optional\mbox{[}bool\mbox{]} }]{dry\+\_\+run}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Run a command after validation.
-
 Args:
     cmd: Command to execute
     dry_run: Optional per-call override for dry-run behavior.
         If None, falls back to the instance's dry_run setting.
-
 Returns:
     Tuple of (success, output)
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcore_1_1tool__runner_1_1ToolRunner_a7ef82b7c749ef204c6518f5ff4b1fc27_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -257,6 +231,12 @@ Here is the caller graph for this function\+:
 \label{doc-variable-members}
 \Hypertarget{classcore_1_1tool__runner_1_1ToolRunner_doc-variable-members}
 \doxysubsection{Member Data Documentation}
+\Hypertarget{classcore_1_1tool__runner_1_1ToolRunner_ac172290159510f6f2c00b763b2ed7276}\index{core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}!blacklist@{blacklist}}
+\index{blacklist@{blacklist}!core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}}
+\doxysubsubsection{\texorpdfstring{blacklist}{blacklist}}
+{\footnotesize\ttfamily \label{classcore_1_1tool__runner_1_1ToolRunner_ac172290159510f6f2c00b763b2ed7276} 
+core.\+tool\+\_\+runner.\+Tool\+Runner.\+blacklist = config.\+get\+\_\+tool\+\_\+blacklist()}
+
 \Hypertarget{classcore_1_1tool__runner_1_1ToolRunner_a1caef8fd06dfff12f5518378f55a0092}\index{core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}!config@{config}}
 \index{config@{config}!core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}}
 \doxysubsubsection{\texorpdfstring{config}{config}}
@@ -299,11 +279,11 @@ core.\+tool\+\_\+runner.\+Tool\+Runner.\+sandbox\+\_\+manager = None}
 {\footnotesize\ttfamily \label{classcore_1_1tool__runner_1_1ToolRunner_aec243535472a70a7d7642f52af641dc2} 
 dict core.\+tool\+\_\+runner.\+Tool\+Runner.\+SHELL\+\_\+\+OPERATORS = \{\textquotesingle{}\texorpdfstring{$\vert$}{|}\textquotesingle{}, \textquotesingle{}\&\&\textquotesingle{}, \textquotesingle{}\texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|}\textquotesingle{}, \textquotesingle{};\textquotesingle{}\}\hspace{0.3cm}{\ttfamily [static]}}
 
-\Hypertarget{classcore_1_1tool__runner_1_1ToolRunner_a1b615cb6d59b617e5117aa769efa7766}\index{core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}!whitelist@{whitelist}}
-\index{whitelist@{whitelist}!core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}}
-\doxysubsubsection{\texorpdfstring{whitelist}{whitelist}}
-{\footnotesize\ttfamily \label{classcore_1_1tool__runner_1_1ToolRunner_a1b615cb6d59b617e5117aa769efa7766} 
-core.\+tool\+\_\+runner.\+Tool\+Runner.\+whitelist = config.\+get\+\_\+tool\+\_\+whitelist()}
+\Hypertarget{classcore_1_1tool__runner_1_1ToolRunner_a634cb5f701f178fd8542f76c1c6c7e7b}\index{core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}!workspace\_paths@{workspace\_paths}}
+\index{workspace\_paths@{workspace\_paths}!core.tool\_runner.ToolRunner@{core.tool\_runner.ToolRunner}}
+\doxysubsubsection{\texorpdfstring{workspace\_paths}{workspace\_paths}}
+{\footnotesize\ttfamily \label{classcore_1_1tool__runner_1_1ToolRunner_a634cb5f701f178fd8542f76c1c6c7e7b} 
+core.\+tool\+\_\+runner.\+Tool\+Runner.\+workspace\+\_\+paths = workspace\+\_\+paths or \mbox{[}\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner_ab07fe84a004be883ff46e9f908b5cccf}{project\+\_\+dir}}\mbox{]}}
 
 
 

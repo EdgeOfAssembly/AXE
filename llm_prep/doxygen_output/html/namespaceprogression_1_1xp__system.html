@@ -126,11 +126,9 @@ Implements hybrid linear/exponential progression curve.
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Calculate XP award for a specific activity.
-
 Args:
     activity: Activity name (key from XP_AWARDS)
     quality_multiplier: Multiplier for analysis quality (0.5 to 2.0)
-    
 Returns:
     XP points to award
 </pre> 
@@ -172,11 +170,9 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Calculate XP bonus based on workshop analysis results.
-
 Args:
     results: Analysis results dictionary
     tool_name: Name of the workshop tool
-    
 Returns:
     Bonus XP points
 </pre> 
@@ -200,23 +196,24 @@ Returns:
 <div class="line"><span class="lineno">    4</span>    <span class="stringliteral">&#39;workshop_saw&#39;</span>: 20,         <span class="comment"># Taint analysis</span></div>
 <div class="line"><span class="lineno">    5</span>    <span class="stringliteral">&#39;workshop_plane&#39;</span>: 15,       <span class="comment"># Source/sink enumeration</span></div>
 <div class="line"><span class="lineno">    6</span>    <span class="stringliteral">&#39;workshop_hammer&#39;</span>: 30,      <span class="comment"># Live instrumentation</span></div>
-<div class="line"><span class="lineno">    7</span>    </div>
-<div class="line"><span class="lineno">    8</span>    <span class="comment"># Analysis quality bonuses</span></div>
-<div class="line"><span class="lineno">    9</span>    <span class="stringliteral">&#39;workshop_vulnerability_found&#39;</span>: 50,  <span class="comment"># Finding a real vulnerability</span></div>
-<div class="line"><span class="lineno">   10</span>    <span class="stringliteral">&#39;workshop_clean_analysis&#39;</span>: 10,       <span class="comment"># Successful analysis with no errors</span></div>
-<div class="line"><span class="lineno">   11</span>    </div>
-<div class="line"><span class="lineno">   12</span>    <span class="comment"># Multi-agent collaboration</span></div>
-<div class="line"><span class="lineno">   13</span>    <span class="stringliteral">&#39;agent_collaboration&#39;</span>: 15,</div>
-<div class="line"><span class="lineno">   14</span>    <span class="stringliteral">&#39;task_completion&#39;</span>: 20,</div>
-<div class="line"><span class="lineno">   15</span>    </div>
-<div class="line"><span class="lineno">   16</span>    <span class="comment"># Code quality</span></div>
-<div class="line"><span class="lineno">   17</span>    <span class="stringliteral">&#39;code_review&#39;</span>: 10,</div>
-<div class="line"><span class="lineno">   18</span>    <span class="stringliteral">&#39;bug_fix&#39;</span>: 25,</div>
-<div class="line"><span class="lineno">   19</span>    </div>
-<div class="line"><span class="lineno">   20</span>    <span class="comment"># Default awards</span></div>
-<div class="line"><span class="lineno">   21</span>    <span class="stringliteral">&#39;message_processed&#39;</span>: 1,</div>
-<div class="line"><span class="lineno">   22</span>    <span class="stringliteral">&#39;command_executed&#39;</span>: 5,</div>
-<div class="line"><span class="lineno">   23</span>}</div>
+<div class="line"><span class="lineno">    7</span>    <span class="comment"># Analysis quality bonuses</span></div>
+<div class="line"><span class="lineno">    8</span>    <span class="stringliteral">&#39;workshop_vulnerability_found&#39;</span>: 50,  <span class="comment"># Finding a real vulnerability</span></div>
+<div class="line"><span class="lineno">    9</span>    <span class="stringliteral">&#39;workshop_clean_analysis&#39;</span>: 10,       <span class="comment"># Successful analysis with no errors</span></div>
+<div class="line"><span class="lineno">   10</span>    <span class="comment"># Multi-agent collaboration</span></div>
+<div class="line"><span class="lineno">   11</span>    <span class="stringliteral">&#39;agent_collaboration&#39;</span>: 15,</div>
+<div class="line"><span class="lineno">   12</span>    <span class="stringliteral">&#39;task_completion&#39;</span>: 20,</div>
+<div class="line"><span class="lineno">   13</span>    <span class="comment"># Code quality</span></div>
+<div class="line"><span class="lineno">   14</span>    <span class="stringliteral">&#39;code_review&#39;</span>: 10,</div>
+<div class="line"><span class="lineno">   15</span>    <span class="stringliteral">&#39;bug_fix&#39;</span>: 25,</div>
+<div class="line"><span class="lineno">   16</span>    <span class="comment"># Peer voting (Minsky&#39;s Society of Mind)    &#39;peer_endorsement&#39;: 10,             # Endorsed by another agent    &#39;peer_strong_endorsement&#39;: 20,      # Strong endorsement from Team Leader+    &#39;peer_penalty&#39;: -5,                 # Penalized (limited to prevent abuse)    # Conflict resolution and arbitration (Minsky&#39;s cross-exclusion)</span></div>
+<div class="line"><span class="lineno">   17</span>    <span class="stringliteral">&#39;conflict_resolution&#39;</span>: 15,          <span class="comment"># Successfully resolved a conflict (PR #55 value)</span></div>
+<div class="line"><span class="lineno">   18</span>    <span class="stringliteral">&#39;arbitration_win&#39;</span>: 25,              <span class="comment"># Won an arbitration decision (PR #55 value)</span></div>
+<div class="line"><span class="lineno">   19</span>    <span class="stringliteral">&#39;arbitration_conducted&#39;</span>: 20,        <span class="comment"># Successfully arbitrated a conflict (PR #56)</span></div>
+<div class="line"><span class="lineno">   20</span>    <span class="stringliteral">&#39;conflict_detected&#39;</span>: 10,            <span class="comment"># Detecting a valid conflict (PR #56)</span></div>
+<div class="line"><span class="lineno">   21</span>    <span class="comment"># Default awards</span></div>
+<div class="line"><span class="lineno">   22</span>    <span class="stringliteral">&#39;message_processed&#39;</span>: 1,</div>
+<div class="line"><span class="lineno">   23</span>    <span class="stringliteral">&#39;command_executed&#39;</span>: 5,</div>
+<div class="line"><span class="lineno">   24</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

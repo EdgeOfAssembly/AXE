@@ -99,12 +99,30 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a2d2980b83d73e9f41173647b539ea173" id="r_a2d2980b83d73e9f41173647b539ea173"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d2980b83d73e9f41173647b539ea173">HAS_YAML</a> = True</td></tr>
+<tr class="memitem:aa86217e62545b736314b65342200faf6" id="r_aa86217e62545b736314b65342200faf6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa86217e62545b736314b65342200faf6">HAS_REQUESTS</a> = True</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Configuration manager for AXE.
-
-Supports YAML and JSON configuration files with deep merging.
+Implements three-file architecture:
+  1. models.yaml - Static model metadata (loaded first)
+  2. providers.yaml - Provider infrastructure (loaded second)
+  3. axe.yaml - User configuration (loaded third)
+Includes validation to ensure consistency across all config files.
 </pre> </div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="aa86217e62545b736314b65342200faf6" name="aa86217e62545b736314b65342200faf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa86217e62545b736314b65342200faf6">&#9670;&#160;</a></span>HAS_REQUESTS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool core.config.HAS_REQUESTS = True</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2d2980b83d73e9f41173647b539ea173" name="a2d2980b83d73e9f41173647b539ea173"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2d2980b83d73e9f41173647b539ea173">&#9670;&#160;</a></span>HAS_YAML</h2>
 

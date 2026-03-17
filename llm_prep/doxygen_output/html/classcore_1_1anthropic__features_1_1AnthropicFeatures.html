@@ -144,7 +144,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Initialize Anthropic features manager.
-
 Args:
     client: Anthropic API client instance
     config: Configuration dictionary from models.yaml
@@ -176,11 +175,9 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Add cache_control markers to content blocks based on breakpoints.
-
 Args:
     content_blocks: List of content blocks to mark for caching
     breakpoints: Optional list of breakpoint names (defaults to config)
-
 Returns:
     List of content blocks with cache_control added where appropriate
 </pre> <div class="dynheader">
@@ -225,13 +222,11 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get precise token count from Anthropic API.
-
 Args:
     model: Model name
     messages: List of message dictionaries
     system: System prompt string
     tools: Optional list of tool definitions
-
 Returns:
     Token count, or None if error/disabled
 </pre> <div class="dynheader">
@@ -261,10 +256,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Estimate token count using char/4 heuristic.
-
 Args:
     text: Text to estimate
-
 Returns:
     Estimated token count
 </pre> 
@@ -384,10 +377,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Check if precise token counting should be used based on threshold.
-
 Args:
     estimated_tokens: Estimated token count
-
 Returns:
     True if precise counting should be used
 </pre> <div class="dynheader">

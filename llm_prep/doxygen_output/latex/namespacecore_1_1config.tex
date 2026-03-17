@@ -9,19 +9,30 @@ class \mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{namespacecore_1_1config_a2d2980b83d73e9f41173647b539ea173}{HAS\+\_\+\+YAML}} = True
+\item 
+bool \mbox{\hyperlink{namespacecore_1_1config_aa86217e62545b736314b65342200faf6}{HAS\+\_\+\+REQUESTS}} = True
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Configuration manager for AXE.
-
-Supports YAML and JSON configuration files with deep merging.
+Implements three-file architecture:
+  1. models.yaml - Static model metadata (loaded first)
+  2. providers.yaml - Provider infrastructure (loaded second)
+  3. axe.yaml - User configuration (loaded third)
+Includes validation to ensure consistency across all config files.
 \end{DoxyVerb}
  
 
 \label{doc-var-members}
 \Hypertarget{namespacecore_1_1config_doc-var-members}
 \doxysubsection{Variable Documentation}
+\Hypertarget{namespacecore_1_1config_aa86217e62545b736314b65342200faf6}\index{core.config@{core.config}!HAS\_REQUESTS@{HAS\_REQUESTS}}
+\index{HAS\_REQUESTS@{HAS\_REQUESTS}!core.config@{core.config}}
+\doxysubsubsection{\texorpdfstring{HAS\_REQUESTS}{HAS\_REQUESTS}}
+{\footnotesize\ttfamily \label{namespacecore_1_1config_aa86217e62545b736314b65342200faf6} 
+bool core.\+config.\+HAS\+\_\+\+REQUESTS = True}
+
 \Hypertarget{namespacecore_1_1config_a2d2980b83d73e9f41173647b539ea173}\index{core.config@{core.config}!HAS\_YAML@{HAS\_YAML}}
 \index{HAS\_YAML@{HAS\_YAML}!core.config@{core.config}}
 \doxysubsubsection{\texorpdfstring{HAS\_YAML}{HAS\_YAML}}

@@ -1,9 +1,9 @@
 \chapter{Claude Security-\/\+Focused Build Skill }
 \hypertarget{md_skills_2claude__build}{}\label{md_skills_2claude__build}\index{Claude Security-\/Focused Build Skill@{Claude Security-\/Focused Build Skill}}
-\label{md_skills_2claude__build_autotoc_md1207}%
-\Hypertarget{md_skills_2claude__build_autotoc_md1207}%
-\hypertarget{md_skills_2claude__build_autotoc_md1208}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_skills_2claude__build_autotoc_md1208}
-This skill provides {\bfseries{Claude-\/specific}} guidelines for silent builds during security auditing and code review. Claude\textquotesingle{}s role as a security auditor requires capturing only {\bfseries{critical security-\/relevant output}} while minimizing noise from routine build processes.\hypertarget{md_skills_2claude__build_autotoc_md1209}{}\doxysection{\texorpdfstring{Security Auditing Workflow}{Security Auditing Workflow}}\label{md_skills_2claude__build_autotoc_md1209}
+\label{md_skills_2claude__build_autotoc_md2098}%
+\Hypertarget{md_skills_2claude__build_autotoc_md2098}%
+\hypertarget{md_skills_2claude__build_autotoc_md2099}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{md_skills_2claude__build_autotoc_md2099}
+This skill provides {\bfseries{Claude-\/specific}} guidelines for silent builds during security auditing and code review. Claude\textquotesingle{}s role as a security auditor requires capturing only {\bfseries{critical security-\/relevant output}} while minimizing noise from routine build processes.\hypertarget{md_skills_2claude__build_autotoc_md2100}{}\doxysection{\texorpdfstring{Security Auditing Workflow}{Security Auditing Workflow}}\label{md_skills_2claude__build_autotoc_md2100}
 When performing security audits, Claude should\+:
 
 
@@ -12,8 +12,8 @@ When performing security audits, Claude should\+:
 \item {\bfseries{Capture only security-\/relevant output}} (warnings, errors, security tool findings)
 \item {\bfseries{Re-\/run with verbose output}} when investigating specific vulnerabilities
 \item {\bfseries{Document security findings}} clearly and concisely
-\end{DoxyEnumerate}\hypertarget{md_skills_2claude__build_autotoc_md1210}{}\doxysection{\texorpdfstring{Silent Security Builds}{Silent Security Builds}}\label{md_skills_2claude__build_autotoc_md1210}
-\hypertarget{md_skills_2claude__build_autotoc_md1211}{}\doxysubsection{\texorpdfstring{Core Build Systems}{Core Build Systems}}\label{md_skills_2claude__build_autotoc_md1211}
+\end{DoxyEnumerate}\hypertarget{md_skills_2claude__build_autotoc_md2101}{}\doxysection{\texorpdfstring{Silent Security Builds}{Silent Security Builds}}\label{md_skills_2claude__build_autotoc_md2101}
+\hypertarget{md_skills_2claude__build_autotoc_md2102}{}\doxysubsection{\texorpdfstring{Core Build Systems}{Core Build Systems}}\label{md_skills_2claude__build_autotoc_md2102}
 All standard build systems should use silent flags during security audits\+:
 
 
@@ -41,8 +41,8 @@ All standard build systems should use silent flags during security audits\+:
 \DoxyCodeLine{scons\ -\/Q}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1212}{}\doxysubsection{\texorpdfstring{Security-\/\+Specific Tools}{Security-\/\+Specific Tools}}\label{md_skills_2claude__build_autotoc_md1212}
-Many security analysis tools also support quiet modes\+:\hypertarget{md_skills_2claude__build_autotoc_md1213}{}\doxysubsubsection{\texorpdfstring{Valgrind (Memory Analysis)}{Valgrind (Memory Analysis)}}\label{md_skills_2claude__build_autotoc_md1213}
+\hypertarget{md_skills_2claude__build_autotoc_md2103}{}\doxysubsection{\texorpdfstring{Security-\/\+Specific Tools}{Security-\/\+Specific Tools}}\label{md_skills_2claude__build_autotoc_md2103}
+Many security analysis tools also support quiet modes\+:\hypertarget{md_skills_2claude__build_autotoc_md2104}{}\doxysubsubsection{\texorpdfstring{Valgrind (Memory Analysis)}{Valgrind (Memory Analysis)}}\label{md_skills_2claude__build_autotoc_md2104}
 {\bfseries{Silent mode\+:}} 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{valgrind\ -\/-\/quiet\ ./program}
@@ -63,13 +63,13 @@ Many security analysis tools also support quiet modes\+:\hypertarget{md_skills_2
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
- EXEC \hypertarget{md_skills_2claude__build_autotoc_md1214}{}\doxysection{\texorpdfstring{Quick check for memory issues (silent)}{Quick check for memory issues (silent)}}\label{md_skills_2claude__build_autotoc_md1214}
-valgrind --quiet --leak-\/check=yes ./suspicious\+\_\+binary\hypertarget{md_skills_2claude__build_autotoc_md1215}{}\doxysection{\texorpdfstring{If issues found, re-\/run with full details\+:}{If issues found, re-\/run with full details\+:}}\label{md_skills_2claude__build_autotoc_md1215}
+ EXEC \hypertarget{md_skills_2claude__build_autotoc_md2105}{}\doxysection{\texorpdfstring{Quick check for memory issues (silent)}{Quick check for memory issues (silent)}}\label{md_skills_2claude__build_autotoc_md2105}
+valgrind --quiet --leak-\/check=yes ./suspicious\+\_\+binary\hypertarget{md_skills_2claude__build_autotoc_md2106}{}\doxysection{\texorpdfstring{If issues found, re-\/run with full details\+:}{If issues found, re-\/run with full details\+:}}\label{md_skills_2claude__build_autotoc_md2106}
 valgrind --leak-\/check=full --show-\/leak-\/kinds=all ./suspicious\+\_\+binary 
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1216}{}\doxysubsubsubsection{\texorpdfstring{Cppcheck (Static Analysis)}{Cppcheck (Static Analysis)}}\label{md_skills_2claude__build_autotoc_md1216}
+\hypertarget{md_skills_2claude__build_autotoc_md2107}{}\doxysubsubsubsection{\texorpdfstring{Cppcheck (Static Analysis)}{Cppcheck (Static Analysis)}}\label{md_skills_2claude__build_autotoc_md2107}
 {\bfseries{Silent mode\+:}} 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{cppcheck\ -\/-\/quiet\ source.c\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Only\ show\ findings}
@@ -90,13 +90,13 @@ valgrind --leak-\/check=full --show-\/leak-\/kinds=all ./suspicious\+\_\+binary
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
- EXEC \hypertarget{md_skills_2claude__build_autotoc_md1217}{}\doxysection{\texorpdfstring{Run static analysis quietly}{Run static analysis quietly}}\label{md_skills_2claude__build_autotoc_md1217}
-cppcheck --quiet --enable=warning,style,performance src/\hypertarget{md_skills_2claude__build_autotoc_md1218}{}\doxysection{\texorpdfstring{If critical issues found, re-\/run with full details\+:}{If critical issues found, re-\/run with full details\+:}}\label{md_skills_2claude__build_autotoc_md1218}
+ EXEC \hypertarget{md_skills_2claude__build_autotoc_md2108}{}\doxysection{\texorpdfstring{Run static analysis quietly}{Run static analysis quietly}}\label{md_skills_2claude__build_autotoc_md2108}
+cppcheck --quiet --enable=warning,style,performance src/\hypertarget{md_skills_2claude__build_autotoc_md2109}{}\doxysection{\texorpdfstring{If critical issues found, re-\/run with full details\+:}{If critical issues found, re-\/run with full details\+:}}\label{md_skills_2claude__build_autotoc_md2109}
 cppcheck --verbose --enable=all src/ 
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1219}{}\doxysubsubsubsection{\texorpdfstring{Address\+Sanitizer (ASan)}{Address\+Sanitizer (ASan)}}\label{md_skills_2claude__build_autotoc_md1219}
+\hypertarget{md_skills_2claude__build_autotoc_md2110}{}\doxysubsubsubsection{\texorpdfstring{Address\+Sanitizer (ASan)}{Address\+Sanitizer (ASan)}}\label{md_skills_2claude__build_autotoc_md2110}
 {\bfseries{Silent mode\+:}} 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\#\ Compile\ with\ ASan\ (minimal\ output)}
@@ -120,13 +120,13 @@ cppcheck --verbose --enable=all src/
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
- EXEC \hypertarget{md_skills_2claude__build_autotoc_md1220}{}\doxysection{\texorpdfstring{Compile with ASan and run tests silently}{Compile with ASan and run tests silently}}\label{md_skills_2claude__build_autotoc_md1220}
-gcc -\/fsanitize=address -\/g -\/o test\+\_\+binary test.\+c ASAN\+\_\+\+OPTIONS=verbosity=0 ./test\+\_\+binary\hypertarget{md_skills_2claude__build_autotoc_md1221}{}\doxysection{\texorpdfstring{If issues detected, re-\/run with verbose output\+:}{If issues detected, re-\/run with verbose output\+:}}\label{md_skills_2claude__build_autotoc_md1221}
+ EXEC \hypertarget{md_skills_2claude__build_autotoc_md2111}{}\doxysection{\texorpdfstring{Compile with ASan and run tests silently}{Compile with ASan and run tests silently}}\label{md_skills_2claude__build_autotoc_md2111}
+gcc -\/fsanitize=address -\/g -\/o test\+\_\+binary test.\+c ASAN\+\_\+\+OPTIONS=verbosity=0 ./test\+\_\+binary\hypertarget{md_skills_2claude__build_autotoc_md2112}{}\doxysection{\texorpdfstring{If issues detected, re-\/run with verbose output\+:}{If issues detected, re-\/run with verbose output\+:}}\label{md_skills_2claude__build_autotoc_md2112}
 ASAN\+\_\+\+OPTIONS=verbosity=1 ./test\+\_\+binary 
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1222}{}\doxysubsubsubsection{\texorpdfstring{Clang Static Analyzer}{Clang Static Analyzer}}\label{md_skills_2claude__build_autotoc_md1222}
+\hypertarget{md_skills_2claude__build_autotoc_md2113}{}\doxysubsubsubsection{\texorpdfstring{Clang Static Analyzer}{Clang Static Analyzer}}\label{md_skills_2claude__build_autotoc_md2113}
 {\bfseries{Silent mode\+:}} 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{scan-\/build\ -\/-\/status-\/bugs\ -\/o\ reports\ make\ -\/s}
@@ -145,13 +145,13 @@ ASAN\+\_\+\+OPTIONS=verbosity=1 ./test\+\_\+binary
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
- EXEC \hypertarget{md_skills_2claude__build_autotoc_md1223}{}\doxysection{\texorpdfstring{Run Clang static analyzer quietly}{Run Clang static analyzer quietly}}\label{md_skills_2claude__build_autotoc_md1223}
-scan-\/build --status-\/bugs -\/o scan-\/results make -\/s clean all\hypertarget{md_skills_2claude__build_autotoc_md1224}{}\doxysection{\texorpdfstring{Review findings}{Review findings}}\label{md_skills_2claude__build_autotoc_md1224}
+ EXEC \hypertarget{md_skills_2claude__build_autotoc_md2114}{}\doxysection{\texorpdfstring{Run Clang static analyzer quietly}{Run Clang static analyzer quietly}}\label{md_skills_2claude__build_autotoc_md2114}
+scan-\/build --status-\/bugs -\/o scan-\/results make -\/s clean all\hypertarget{md_skills_2claude__build_autotoc_md2115}{}\doxysection{\texorpdfstring{Review findings}{Review findings}}\label{md_skills_2claude__build_autotoc_md2115}
 cat scan-\/results/\texorpdfstring{$\ast$}{*}/report-\/\texorpdfstring{$\ast$}{*}.html 
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1225}{}\doxysubsubsubsection{\texorpdfstring{Flawfinder (C/\+C++ Security Scanner)}{Flawfinder (C/\+C++ Security Scanner)}}\label{md_skills_2claude__build_autotoc_md1225}
+\hypertarget{md_skills_2claude__build_autotoc_md2116}{}\doxysubsubsubsection{\texorpdfstring{Flawfinder (C/\+C++ Security Scanner)}{Flawfinder (C/\+C++ Security Scanner)}}\label{md_skills_2claude__build_autotoc_md2116}
 {\bfseries{Silent mode\+:}} 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{flawfinder\ -\/-\/quiet\ -\/-\/minlevel=3\ src/\ \ \ \ \#\ Only\ show\ level\ 3+\ issues}
@@ -170,34 +170,34 @@ cat scan-\/results/\texorpdfstring{$\ast$}{*}/report-\/\texorpdfstring{$\ast$}{*
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
- EXEC \hypertarget{md_skills_2claude__build_autotoc_md1226}{}\doxysection{\texorpdfstring{Quick security scan (high severity only)}{Quick security scan (high severity only)}}\label{md_skills_2claude__build_autotoc_md1226}
-flawfinder --quiet --minlevel=3 src/\hypertarget{md_skills_2claude__build_autotoc_md1227}{}\doxysection{\texorpdfstring{If issues found, run full scan\+:}{If issues found, run full scan\+:}}\label{md_skills_2claude__build_autotoc_md1227}
+ EXEC \hypertarget{md_skills_2claude__build_autotoc_md2117}{}\doxysection{\texorpdfstring{Quick security scan (high severity only)}{Quick security scan (high severity only)}}\label{md_skills_2claude__build_autotoc_md2117}
+flawfinder --quiet --minlevel=3 src/\hypertarget{md_skills_2claude__build_autotoc_md2118}{}\doxysection{\texorpdfstring{If issues found, run full scan\+:}{If issues found, run full scan\+:}}\label{md_skills_2claude__build_autotoc_md2118}
 flawfinder --minlevel=0 --html src/ \texorpdfstring{$>$}{>} security\+\_\+report.\+html 
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1228}{}\doxysubsection{\texorpdfstring{Security Audit Workflow Example}{Security Audit Workflow Example}}\label{md_skills_2claude__build_autotoc_md1228}
-\hypertarget{md_skills_2claude__build_autotoc_md1229}{}\doxysubsubsection{\texorpdfstring{Phase 1\+: Initial Silent Build}{Phase 1\+: Initial Silent Build}}\label{md_skills_2claude__build_autotoc_md1229}
+\hypertarget{md_skills_2claude__build_autotoc_md2119}{}\doxysubsection{\texorpdfstring{Security Audit Workflow Example}{Security Audit Workflow Example}}\label{md_skills_2claude__build_autotoc_md2119}
+\hypertarget{md_skills_2claude__build_autotoc_md2120}{}\doxysubsubsection{\texorpdfstring{Phase 1\+: Initial Silent Build}{Phase 1\+: Initial Silent Build}}\label{md_skills_2claude__build_autotoc_md2120}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{I'll\ perform\ a\ security\ audit\ of\ the\ codebase.\ Starting\ with\ a\ silent\ build\ to\ check\ for\ compilation\ warnings:}
 
 \end{DoxyCode}
- EXEC \hypertarget{md_skills_2claude__build_autotoc_md1230}{}\doxysection{\texorpdfstring{Configure with security flags}{Configure with security flags}}\label{md_skills_2claude__build_autotoc_md1230}
-./configure --quiet --enable-\/silent-\/rules CFLAGS="{}-\/\+Wall -\/\+Wextra -\/\+Werror"{}\hypertarget{md_skills_2claude__build_autotoc_md1231}{}\doxysection{\texorpdfstring{Build silently}{Build silently}}\label{md_skills_2claude__build_autotoc_md1231}
+ EXEC \hypertarget{md_skills_2claude__build_autotoc_md2121}{}\doxysection{\texorpdfstring{Configure with security flags}{Configure with security flags}}\label{md_skills_2claude__build_autotoc_md2121}
+./configure --quiet --enable-\/silent-\/rules CFLAGS="{}-\/\+Wall -\/\+Wextra -\/\+Werror"{}\hypertarget{md_skills_2claude__build_autotoc_md2122}{}\doxysection{\texorpdfstring{Build silently}{Build silently}}\label{md_skills_2claude__build_autotoc_md2122}
 make -\/s all 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Build\ completed\ successfully\ with\ no\ warnings.}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1232}{}\doxysubsubsection{\texorpdfstring{Phase 2\+: Static Analysis (Silent)}{Phase 2\+: Static Analysis (Silent)}}\label{md_skills_2claude__build_autotoc_md1232}
+\hypertarget{md_skills_2claude__build_autotoc_md2123}{}\doxysubsubsection{\texorpdfstring{Phase 2\+: Static Analysis (Silent)}{Phase 2\+: Static Analysis (Silent)}}\label{md_skills_2claude__build_autotoc_md2123}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Running\ static\ analysis\ tools\ quietly\ to\ identify\ potential\ vulnerabilities:}
 
 \end{DoxyCode}
- EXEC \hypertarget{md_skills_2claude__build_autotoc_md1233}{}\doxysection{\texorpdfstring{Cppcheck for C/\+C++ issues}{Cppcheck for C/\+C++ issues}}\label{md_skills_2claude__build_autotoc_md1233}
-cppcheck --quiet --enable=warning,performance,portability src/\hypertarget{md_skills_2claude__build_autotoc_md1234}{}\doxysection{\texorpdfstring{Flawfinder for security issues}{Flawfinder for security issues}}\label{md_skills_2claude__build_autotoc_md1234}
+ EXEC \hypertarget{md_skills_2claude__build_autotoc_md2124}{}\doxysection{\texorpdfstring{Cppcheck for C/\+C++ issues}{Cppcheck for C/\+C++ issues}}\label{md_skills_2claude__build_autotoc_md2124}
+cppcheck --quiet --enable=warning,performance,portability src/\hypertarget{md_skills_2claude__build_autotoc_md2125}{}\doxysection{\texorpdfstring{Flawfinder for security issues}{Flawfinder for security issues}}\label{md_skills_2claude__build_autotoc_md2125}
 flawfinder --quiet --minlevel=3 src/ 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Found\ 2\ potential\ issues:}
@@ -205,20 +205,20 @@ flawfinder --quiet --minlevel=3 src/
 \DoxyCodeLine{-\/\ Format\ string\ vulnerability\ in\ log\_message()\ (src/logger.c:78)}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1235}{}\doxysubsubsection{\texorpdfstring{Phase 3\+: Detailed Investigation (Verbose)}{Phase 3\+: Detailed Investigation (Verbose)}}\label{md_skills_2claude__build_autotoc_md1235}
+\hypertarget{md_skills_2claude__build_autotoc_md2126}{}\doxysubsubsection{\texorpdfstring{Phase 3\+: Detailed Investigation (Verbose)}{Phase 3\+: Detailed Investigation (Verbose)}}\label{md_skills_2claude__build_autotoc_md2126}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Investigating\ the\ buffer\ overflow\ with\ verbose\ output:}
 
 \end{DoxyCode}
- EXEC \hypertarget{md_skills_2claude__build_autotoc_md1236}{}\doxysection{\texorpdfstring{Re-\/run cppcheck with full details}{Re-\/run cppcheck with full details}}\label{md_skills_2claude__build_autotoc_md1236}
-cppcheck --verbose --enable=all src/parser.\+c\hypertarget{md_skills_2claude__build_autotoc_md1237}{}\doxysection{\texorpdfstring{Compile with Address\+Sanitizer for runtime detection}{Compile with Address\+Sanitizer for runtime detection}}\label{md_skills_2claude__build_autotoc_md1237}
+ EXEC \hypertarget{md_skills_2claude__build_autotoc_md2127}{}\doxysection{\texorpdfstring{Re-\/run cppcheck with full details}{Re-\/run cppcheck with full details}}\label{md_skills_2claude__build_autotoc_md2127}
+cppcheck --verbose --enable=all src/parser.\+c\hypertarget{md_skills_2claude__build_autotoc_md2128}{}\doxysection{\texorpdfstring{Compile with Address\+Sanitizer for runtime detection}{Compile with Address\+Sanitizer for runtime detection}}\label{md_skills_2claude__build_autotoc_md2128}
 gcc -\/fsanitize=address -\/g -\/o parser\+\_\+test src/parser.\+c src/test\+\_\+parser.\+c ASAN\+\_\+\+OPTIONS=verbosity=1 ./parser\+\_\+test 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Confirmed:\ Buffer\ overflow\ occurs\ when\ input\ exceeds\ 256\ bytes...}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1238}{}\doxysubsubsection{\texorpdfstring{Phase 4\+: Security Report}{Phase 4\+: Security Report}}\label{md_skills_2claude__build_autotoc_md1238}
+\hypertarget{md_skills_2claude__build_autotoc_md2129}{}\doxysubsubsection{\texorpdfstring{Phase 4\+: Security Report}{Phase 4\+: Security Report}}\label{md_skills_2claude__build_autotoc_md2129}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\#\#\ Security\ Audit\ Report}
@@ -242,7 +242,7 @@ gcc -\/fsanitize=address -\/g -\/o parser\+\_\+test src/parser.\+c src/test\+\_\
 \DoxyCodeLine{-\/\ Manual\ code\ review}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1239}{}\doxysubsection{\texorpdfstring{Token Savings in Security Audits}{Token Savings in Security Audits}}\label{md_skills_2claude__build_autotoc_md1239}
+\hypertarget{md_skills_2claude__build_autotoc_md2130}{}\doxysubsection{\texorpdfstring{Token Savings in Security Audits}{Token Savings in Security Audits}}\label{md_skills_2claude__build_autotoc_md2130}
 Security audits benefit significantly from silent builds\+:
 
 
@@ -253,8 +253,8 @@ Static analysis  &5000  &500  &90\%  \\
 Runtime testing  &4000  &600  &85\%  \\
 {\bfseries{Total}}  &{\bfseries{12000}}  &{\bfseries{1300}}  &{\bfseries{89\%}}  \\
 \end{DoxyTable}
-\hypertarget{md_skills_2claude__build_autotoc_md1240}{}\doxysubsection{\texorpdfstring{Best Practices for Security Audits}{Best Practices for Security Audits}}\label{md_skills_2claude__build_autotoc_md1240}
-\hypertarget{md_skills_2claude__build_autotoc_md1241}{}\doxysubsubsection{\texorpdfstring{1. Start Silent, Investigate Verbose}{1. Start Silent, Investigate Verbose}}\label{md_skills_2claude__build_autotoc_md1241}
+\hypertarget{md_skills_2claude__build_autotoc_md2131}{}\doxysubsection{\texorpdfstring{Best Practices for Security Audits}{Best Practices for Security Audits}}\label{md_skills_2claude__build_autotoc_md2131}
+\hypertarget{md_skills_2claude__build_autotoc_md2132}{}\doxysubsubsection{\texorpdfstring{1. Start Silent, Investigate Verbose}{1. Start Silent, Investigate Verbose}}\label{md_skills_2claude__build_autotoc_md2132}
 Always begin with silent builds to get a clean overview\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{✓\ GOOD:}
@@ -274,18 +274,18 @@ Always begin with silent builds to get a clean overview\+:
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1242}{}\doxysubsubsection{\texorpdfstring{2. Focus on Security-\/\+Relevant Output}{2. Focus on Security-\/\+Relevant Output}}\label{md_skills_2claude__build_autotoc_md1242}
+\hypertarget{md_skills_2claude__build_autotoc_md2133}{}\doxysubsubsection{\texorpdfstring{2. Focus on Security-\/\+Relevant Output}{2. Focus on Security-\/\+Relevant Output}}\label{md_skills_2claude__build_autotoc_md2133}
 Filter output to show only security findings\+: 
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
- EXEC \hypertarget{md_skills_2claude__build_autotoc_md1243}{}\doxysection{\texorpdfstring{Good\+: Only security warnings}{Good\+: Only security warnings}}\label{md_skills_2claude__build_autotoc_md1243}
-make -\/s CFLAGS="{}-\/\+Wall -\/\+Wextra"{} 2\texorpdfstring{$>$}{>}\&1 \texorpdfstring{$\vert$}{|} grep -\/E "{}(warning\texorpdfstring{$\vert$}{|}error)"{}\hypertarget{md_skills_2claude__build_autotoc_md1244}{}\doxysection{\texorpdfstring{Good\+: Only high-\/severity findings}{Good\+: Only high-\/severity findings}}\label{md_skills_2claude__build_autotoc_md1244}
+ EXEC \hypertarget{md_skills_2claude__build_autotoc_md2134}{}\doxysection{\texorpdfstring{Good\+: Only security warnings}{Good\+: Only security warnings}}\label{md_skills_2claude__build_autotoc_md2134}
+make -\/s CFLAGS="{}-\/\+Wall -\/\+Wextra"{} 2\texorpdfstring{$>$}{>}\&1 \texorpdfstring{$\vert$}{|} grep -\/E "{}(warning\texorpdfstring{$\vert$}{|}error)"{}\hypertarget{md_skills_2claude__build_autotoc_md2135}{}\doxysection{\texorpdfstring{Good\+: Only high-\/severity findings}{Good\+: Only high-\/severity findings}}\label{md_skills_2claude__build_autotoc_md2135}
 flawfinder --quiet --minlevel=3 src/ 
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1245}{}\doxysubsubsection{\texorpdfstring{3. Document Severity Levels}{3. Document Severity Levels}}\label{md_skills_2claude__build_autotoc_md1245}
+\hypertarget{md_skills_2claude__build_autotoc_md2136}{}\doxysubsubsection{\texorpdfstring{3. Document Severity Levels}{3. Document Severity Levels}}\label{md_skills_2claude__build_autotoc_md2136}
 Always flag findings with severity levels\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\#\#\ Security\ Findings}
@@ -296,7 +296,7 @@ Always flag findings with severity levels\+:
 \DoxyCodeLine{**LOW:**\ Weak\ random\ number\ generation\ (src/rand.c:34)}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1246}{}\doxysubsubsection{\texorpdfstring{4. Use Quiet Flags in CI/\+CD Security Checks}{4. Use Quiet Flags in CI/\+CD Security Checks}}\label{md_skills_2claude__build_autotoc_md1246}
+\hypertarget{md_skills_2claude__build_autotoc_md2137}{}\doxysubsubsection{\texorpdfstring{4. Use Quiet Flags in CI/\+CD Security Checks}{4. Use Quiet Flags in CI/\+CD Security Checks}}\label{md_skills_2claude__build_autotoc_md2137}
 In security-\/focused CI/\+CD pipelines\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\#\ .github/workflows/security.yml}
@@ -310,17 +310,17 @@ In security-\/focused CI/\+CD pipelines\+:
 \DoxyCodeLine{\ \ \ \ ASAN\_OPTIONS=verbosity=0\ ./test\_suite}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1247}{}\doxysubsubsection{\texorpdfstring{5. Combine Multiple Security Tools Quietly}{5. Combine Multiple Security Tools Quietly}}\label{md_skills_2claude__build_autotoc_md1247}
+\hypertarget{md_skills_2claude__build_autotoc_md2138}{}\doxysubsubsection{\texorpdfstring{5. Combine Multiple Security Tools Quietly}{5. Combine Multiple Security Tools Quietly}}\label{md_skills_2claude__build_autotoc_md2138}
 Run multiple security tools in sequence, all with quiet flags\+: 
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
- EXEC \hypertarget{md_skills_2claude__build_autotoc_md1248}{}\doxysection{\texorpdfstring{Comprehensive security scan with minimal noise}{Comprehensive security scan with minimal noise}}\label{md_skills_2claude__build_autotoc_md1248}
+ EXEC \hypertarget{md_skills_2claude__build_autotoc_md2139}{}\doxysection{\texorpdfstring{Comprehensive security scan with minimal noise}{Comprehensive security scan with minimal noise}}\label{md_skills_2claude__build_autotoc_md2139}
 cppcheck --quiet --enable=warning src/ \&\& \textbackslash{} flawfinder --quiet --minlevel=2 src/ \&\& \textbackslash{} valgrind --quiet --leak-\/check=yes ./program \&\& \textbackslash{} echo "{}\+All security checks passed"{} 
 \begin{DoxyCode}{0}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1249}{}\doxysubsection{\texorpdfstring{Security Tool Quick Reference}{Security Tool Quick Reference}}\label{md_skills_2claude__build_autotoc_md1249}
+\hypertarget{md_skills_2claude__build_autotoc_md2140}{}\doxysubsection{\texorpdfstring{Security Tool Quick Reference}{Security Tool Quick Reference}}\label{md_skills_2claude__build_autotoc_md2140}
 
 \begin{DoxyTable}{4}{}{}{1}
 \SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Tool  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Silent Flag  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Verbose Flag  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Use Case  \\
@@ -333,7 +333,7 @@ cppcheck --quiet --enable=warning src/ \&\& \textbackslash{} flawfinder --quiet 
 {\bfseries{Brakeman}} (Ruby)  &{\ttfamily -\/q}  &{\ttfamily -\/-\/debug}  &Rails security scanner  \\
 {\bfseries{Sonar\+Qube}}  &{\ttfamily sonar.\+log.\+level=WARN}  &{\ttfamily DEBUG}  &Multi-\/language security analysis  \\
 \end{DoxyTable}
-\hypertarget{md_skills_2claude__build_autotoc_md1250}{}\doxysubsection{\texorpdfstring{Integration with AGENTS.\+md}{Integration with AGENTS.\+md}}\label{md_skills_2claude__build_autotoc_md1250}
+\hypertarget{md_skills_2claude__build_autotoc_md2141}{}\doxysubsection{\texorpdfstring{Integration with AGENTS.\+md}{Integration with AGENTS.\+md}}\label{md_skills_2claude__build_autotoc_md2141}
 When collaborating with other agents on security-\/focused tasks, Claude should\+:
 
 
@@ -352,8 +352,8 @@ Example collaboration\+:
 \DoxyCodeLine{I'll\ perform\ a\ security\ audit\ of\ the\ authentication\ module\ using\ silent\ builds\ to\ minimize\ log\ noise:}
 
 \end{DoxyCode}
- EXEC \hypertarget{md_skills_2claude__build_autotoc_md1251}{}\doxysection{\texorpdfstring{Static analysis (silent)}{Static analysis (silent)}}\label{md_skills_2claude__build_autotoc_md1251}
-cppcheck --quiet --enable=warning src/auth.\+c\hypertarget{md_skills_2claude__build_autotoc_md1252}{}\doxysection{\texorpdfstring{Runtime analysis (silent)}{Runtime analysis (silent)}}\label{md_skills_2claude__build_autotoc_md1252}
+ EXEC \hypertarget{md_skills_2claude__build_autotoc_md2142}{}\doxysection{\texorpdfstring{Static analysis (silent)}{Static analysis (silent)}}\label{md_skills_2claude__build_autotoc_md2142}
+cppcheck --quiet --enable=warning src/auth.\+c\hypertarget{md_skills_2claude__build_autotoc_md2143}{}\doxysection{\texorpdfstring{Runtime analysis (silent)}{Runtime analysis (silent)}}\label{md_skills_2claude__build_autotoc_md2143}
 gcc -\/fsanitize=address -\/g -\/o auth\+\_\+test src/auth.\+c test/test\+\_\+auth.\+c ASAN\+\_\+\+OPTIONS=verbosity=0 ./auth\+\_\+test 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{**Security\ Review\ Summary:**}
@@ -365,15 +365,15 @@ gcc -\/fsanitize=address -\/g -\/o auth\+\_\+test src/auth.\+c test/test\+\_\+au
 \DoxyCodeLine{The\ refactoring\ looks\ secure.\ I\ recommend\ adding\ the\ rate\ limiting\ enhancement.}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1253}{}\doxysubsection{\texorpdfstring{Common Security Build Patterns}{Common Security Build Patterns}}\label{md_skills_2claude__build_autotoc_md1253}
-\hypertarget{md_skills_2claude__build_autotoc_md1254}{}\doxysubsubsection{\texorpdfstring{Pattern 1\+: Hardening Flags (Silent Build)}{Pattern 1\+: Hardening Flags (Silent Build)}}\label{md_skills_2claude__build_autotoc_md1254}
+\hypertarget{md_skills_2claude__build_autotoc_md2144}{}\doxysubsection{\texorpdfstring{Common Security Build Patterns}{Common Security Build Patterns}}\label{md_skills_2claude__build_autotoc_md2144}
+\hypertarget{md_skills_2claude__build_autotoc_md2145}{}\doxysubsubsection{\texorpdfstring{Pattern 1\+: Hardening Flags (Silent Build)}{Pattern 1\+: Hardening Flags (Silent Build)}}\label{md_skills_2claude__build_autotoc_md2145}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\#\ Compile\ with\ security\ hardening\ flags,\ silent\ output}
 \DoxyCodeLine{make\ -\/s\ CFLAGS="{}-\/Wall\ -\/Wextra\ -\/Werror\ -\/D\_FORTIFY\_SOURCE=2\ -\/fstack-\/protector-\/strong\ -\/fPIE\ -\/O2"{}}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1255}{}\doxysubsubsection{\texorpdfstring{Pattern 2\+: Security Tool Chain (Silent)}{Pattern 2\+: Security Tool Chain (Silent)}}\label{md_skills_2claude__build_autotoc_md1255}
+\hypertarget{md_skills_2claude__build_autotoc_md2146}{}\doxysubsubsection{\texorpdfstring{Pattern 2\+: Security Tool Chain (Silent)}{Pattern 2\+: Security Tool Chain (Silent)}}\label{md_skills_2claude__build_autotoc_md2146}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\#\ Run\ complete\ security\ tool\ chain\ silently}
@@ -383,21 +383,21 @@ gcc -\/fsanitize=address -\/g -\/o auth\+\_\+test src/auth.\+c test/test\+\_\+au
 \DoxyCodeLine{valgrind\ -\/-\/quiet\ -\/-\/leak-\/check=yes\ ./program}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1256}{}\doxysubsubsection{\texorpdfstring{Pattern 3\+: Regression Testing (Silent)}{Pattern 3\+: Regression Testing (Silent)}}\label{md_skills_2claude__build_autotoc_md1256}
+\hypertarget{md_skills_2claude__build_autotoc_md2147}{}\doxysubsubsection{\texorpdfstring{Pattern 3\+: Regression Testing (Silent)}{Pattern 3\+: Regression Testing (Silent)}}\label{md_skills_2claude__build_autotoc_md2147}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\#\ Security\ regression\ tests\ (quiet\ unless\ failures)}
 \DoxyCodeLine{pytest\ -\/q\ tests/security/\ -\/-\/tb=short}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1257}{}\doxysubsubsection{\texorpdfstring{Pattern 4\+: Fuzzing Setup (Silent)}{Pattern 4\+: Fuzzing Setup (Silent)}}\label{md_skills_2claude__build_autotoc_md1257}
+\hypertarget{md_skills_2claude__build_autotoc_md2148}{}\doxysubsubsection{\texorpdfstring{Pattern 4\+: Fuzzing Setup (Silent)}{Pattern 4\+: Fuzzing Setup (Silent)}}\label{md_skills_2claude__build_autotoc_md2148}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\#\ Build\ with\ AFL\ fuzzing\ support\ (silent)}
 \DoxyCodeLine{CC=afl-\/gcc\ make\ -\/s\ all}
 
 \end{DoxyCode}
-\hypertarget{md_skills_2claude__build_autotoc_md1258}{}\doxysubsection{\texorpdfstring{Summary}{Summary}}\label{md_skills_2claude__build_autotoc_md1258}
+\hypertarget{md_skills_2claude__build_autotoc_md2149}{}\doxysubsection{\texorpdfstring{Summary}{Summary}}\label{md_skills_2claude__build_autotoc_md2149}
 As Claude, the security auditor, you should\+:
 
 
@@ -410,7 +410,7 @@ As Claude, the security auditor, you should\+:
 \item {\bfseries{Preserve context}} by keeping shared collaboration notes clean
 \end{DoxyEnumerate}
 
-Remember\+: {\bfseries{Silent builds → clearer security findings → better audits → safer code}}\hypertarget{md_skills_2claude__build_autotoc_md1259}{}\doxysubsection{\texorpdfstring{References}{References}}\label{md_skills_2claude__build_autotoc_md1259}
+Remember\+: {\bfseries{Silent builds → clearer security findings → better audits → safer code}}\hypertarget{md_skills_2claude__build_autotoc_md2150}{}\doxysubsection{\texorpdfstring{References}{References}}\label{md_skills_2claude__build_autotoc_md2150}
 
 \begin{DoxyItemize}
 \item {\bfseries{\doxylink{build_8md}{skills/build.\+md}}}\+: General silent builds skill for all agents

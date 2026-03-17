@@ -2,8 +2,7 @@
 \hypertarget{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager}{}\label{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager}\index{managers.shared\_build\_status.SharedBuildStatusManager@{managers.shared\_build\_status.SharedBuildStatusManager}}
 
 
-Collaboration diagram for managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager\+:
-\nopagebreak
+Collaboration diagram for managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -83,7 +82,6 @@ str \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatus
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Manages shared build status file for multi-agent collaboration.
-
 Creates and maintains `.collab_build_status.md` in the workspace.
 \end{DoxyVerb}
  
@@ -98,7 +96,6 @@ Creates and maintains `.collab_build_status.md` in the workspace.
 managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{workspace\+\_\+dir}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Initialize the shared build status manager.
-
 Args:
     workspace_dir: Path to the workspace directory
 \end{DoxyVerb}
@@ -114,8 +111,7 @@ Args:
  None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+init\+\_\+files (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Initialize the shared status and changes files.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -129,8 +125,7 @@ Args:
  None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+parse\+\_\+gcc\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{output}{, }\item[{str}]{tool}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Parse GCC/Clang output for errors and warnings.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -144,16 +139,14 @@ Args:
  None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+parse\+\_\+make\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{output}{, }\item[{str}]{tool}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Parse Make output for errors.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager_a6ec648f1f2e9b1d4b1ecebe88a30767b_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -167,8 +160,7 @@ Here is the caller graph for this function\+:
  None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+parse\+\_\+python\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{output}{, }\item[{str}]{tool}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Parse Python/pytest output for errors.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -182,8 +174,7 @@ Here is the caller graph for this function\+:
  None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+write\+\_\+changes\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Write the changes/diff file.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -197,8 +188,7 @@ Here is the caller graph for this function\+:
  None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+\_\+write\+\_\+status\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Write the build status file.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -212,15 +202,13 @@ Here is the caller graph for this function\+:
  None managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+add\+\_\+diff\+\_\+patch (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{file}{, }\item[{str}]{author}{, }\item[{str}]{diff\+\_\+content}{, }\item[{str}]{description}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Add a diff patch to the shared changes file.
-
 Args:
     file: File that was changed
     author: Agent alias that made the change
     diff_content: Unified diff content
     description: Brief description of the change
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -234,16 +222,13 @@ Args:
  bool managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+claim\+\_\+error\+\_\+fix (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{error\+\_\+index}{, }\item[{str}]{agent\+\_\+alias}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Claim an error for fixing by an agent.
-
 Args:
     error_index: Index of the error in the errors list
     agent_alias: Alias of the agent claiming the fix
-
 Returns:
     True if successfully claimed, False otherwise
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -257,12 +242,10 @@ Returns:
  str managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+generate\+\_\+diff (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{original\+\_\+content}{, }\item[{str}]{modified\+\_\+content}{, }\item[{str}]{filename}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Generate a unified diff between two versions of content.
-
 Args:
     original_content: Original file content
     modified_content: Modified file content
     filename: Name of the file for the diff header
-
 Returns:
     Unified diff string
 \end{DoxyVerb}
@@ -273,10 +256,8 @@ Returns:
  List\mbox{[}\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1DiffPatch}{Diff\+Patch}}\mbox{]} managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+get\+\_\+recent\+\_\+patches (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int }]{limit}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get recent diff patches.
-
 Args:
     limit: Maximum number of patches to return
-
 Returns:
     List of recent DiffPatch objects
 \end{DoxyVerb}
@@ -287,12 +268,10 @@ Returns:
  str managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+get\+\_\+status\+\_\+summary (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get a brief summary of build status for agents.
-
 Returns:
     Summary string for inclusion in agent prompts
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -306,12 +285,10 @@ Returns:
  List\mbox{[}\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1BuildError}{Build\+Error}}\mbox{]} managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+get\+\_\+unclaimed\+\_\+errors (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get list of errors/warnings not yet claimed by any agent.
-
 Returns:
     List of unclaimed BuildError objects
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -325,15 +302,12 @@ Returns:
  bool managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+mark\+\_\+error\+\_\+fixed (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{error\+\_\+index}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Mark an error as fixed.
-
 Args:
     error_index: Index of the error in the errors list
-
 Returns:
     True if successfully marked, False otherwise
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -361,17 +335,14 @@ Returns:
  \mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1BuildStatus}{Build\+Status}} managers.\+shared\+\_\+build\+\_\+status.\+Shared\+Build\+Status\+Manager.\+record\+\_\+build\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{tool}{, }\item[{str}]{output}{, }\item[{int}]{exit\+\_\+code}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Record build output and extract errors/warnings.
-
 Args:
     tool: Build tool name ('gcc', 'make', 'python', etc.)
     output: Full output from the build command
     exit_code: Exit code from the build command
-
 Returns:
     BuildStatus indicating success/failure
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

@@ -99,6 +99,9 @@ Variables</h2></td></tr>
 <tr class="memitem:afdbaa3429498fd1c4fdc5344d4dc492b" id="r_afdbaa3429498fd1c4fdc5344d4dc492b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afdbaa3429498fd1c4fdc5344d4dc492b">COLLAB_CONTENT_LIMIT</a> = 100000</td></tr>
 <tr class="memitem:a5d46787326f16b58d42f1d27d301634e" id="r_a5d46787326f16b58d42f1d27d301634e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d46787326f16b58d42f1d27d301634e">COLLAB_PASS_MULTIPLIER</a> = 2</td></tr>
 <tr class="memitem:a89a18c1ebcf45b45dda256fd20b3dd96" id="r_a89a18c1ebcf45b45dda256fd20b3dd96"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89a18c1ebcf45b45dda256fd20b3dd96">COLLAB_SHARED_NOTES_LIMIT</a> = 100000</td></tr>
+<tr class="memitem:ad76af5fb9478708ddc3ff2842b0fd5ed" id="r_ad76af5fb9478708ddc3ff2842b0fd5ed"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad76af5fb9478708ddc3ff2842b0fd5ed">GLOBAL_WORKSPACE_FILE</a> = &quot;GLOBAL_WORKSPACE.json&quot;</td></tr>
+<tr class="memitem:a279fbe8556ca66079eff5b798ffba767" id="r_a279fbe8556ca66079eff5b798ffba767"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a279fbe8556ca66079eff5b798ffba767">GLOBAL_WORKSPACE_MAX_BROADCASTS</a> = 200</td></tr>
+<tr class="memitem:af30d227f2322d055b4040f2819c772ba" id="r_af30d227f2322d055b4040f2819c772ba"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af30d227f2322d055b4040f2819c772ba">GLOBAL_WORKSPACE_PROMPT_ENTRIES</a> = 10</td></tr>
 <tr class="memitem:ae56ab43b20655ffe4031f3c84c4be220" id="r_ae56ab43b20655ffe4031f3c84c4be220"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae56ab43b20655ffe4031f3c84c4be220">RESOURCE_UPDATE_INTERVAL</a> = 60</td></tr>
 <tr class="memitem:a556f1e7af23f55d82777485dddb4ca92" id="r_a556f1e7af23f55d82777485dddb4ca92"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a556f1e7af23f55d82777485dddb4ca92">RESOURCE_FILE</a> = &quot;/tmp/axe_resources.txt&quot;</td></tr>
 <tr class="memitem:a1eb2c634a25b74e97abcf7867d8fbe1a" id="r_a1eb2c634a25b74e97abcf7867d8fbe1a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1eb2c634a25b74e97abcf7867d8fbe1a">MAX_WORK_HOURS</a> = 6</td></tr>
@@ -127,14 +130,40 @@ Variables</h2></td></tr>
 <tr class="memitem:a1c38858bf4fac9bbb8766cdbebb55911" id="r_a1c38858bf4fac9bbb8766cdbebb55911"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c38858bf4fac9bbb8766cdbebb55911">AGENT_TOKEN_SPAWN</a> = &quot;[[AGENT_SPAWN:&quot;</td></tr>
 <tr class="memitem:ad6a4a88a8da17b21ca78e98a88e32395" id="r_ad6a4a88a8da17b21ca78e98a88e32395"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6a4a88a8da17b21ca78e98a88e32395">AGENT_TOKEN_STATUS</a> = &quot;[[AGENT_STATUS]]&quot;</td></tr>
 <tr class="memitem:af2d3f8f391c2c51fb60376b2cffa67cb" id="r_af2d3f8f391c2c51fb60376b2cffa67cb"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2d3f8f391c2c51fb60376b2cffa67cb">AGENT_TOKEN_GITHUB_READY</a> = &quot;[[GITHUB_READY:&quot;</td></tr>
+<tr class="memitem:a57b8010d7b14ad9c0846461421512a85" id="r_a57b8010d7b14ad9c0846461421512a85"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57b8010d7b14ad9c0846461421512a85">AGENT_TOKEN_BROADCAST</a> = &quot;[[BROADCAST:&quot;</td></tr>
+<tr class="memitem:ac058abb361182f0e65ed562e91d184ef" id="r_ac058abb361182f0e65ed562e91d184ef"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac058abb361182f0e65ed562e91d184ef">AGENT_TOKEN_SUPPRESS</a> = &quot;[[SUPPRESS:&quot;</td></tr>
+<tr class="memitem:aff6e8d6f708edb456fad8863ee7afc8d" id="r_aff6e8d6f708edb456fad8863ee7afc8d"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff6e8d6f708edb456fad8863ee7afc8d">AGENT_TOKEN_RELEASE</a> = &quot;[[RELEASE:&quot;</td></tr>
+<tr class="memitem:a9884b333f419807df0909c995e833e59" id="r_a9884b333f419807df0909c995e833e59"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9884b333f419807df0909c995e833e59">AGENT_TOKEN_XP_VOTE</a> = &quot;[[XP_VOTE:&quot;</td></tr>
+<tr class="memitem:a51a516196fb97b06cbd672a5e406a364" id="r_a51a516196fb97b06cbd672a5e406a364"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51a516196fb97b06cbd672a5e406a364">AGENT_TOKEN_CONFLICT</a> = &quot;[[CONFLICT:&quot;</td></tr>
+<tr class="memitem:ada22dea46b7e1b1b4f7d2a4a9a3edd96" id="r_ada22dea46b7e1b1b4f7d2a4a9a3edd96"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada22dea46b7e1b1b4f7d2a4a9a3edd96">AGENT_TOKEN_ARBITRATE</a> = &quot;[[ARBITRATE:&quot;</td></tr>
+<tr class="memitem:af242f50af1326cc32c5293c15e84cd14" id="r_af242f50af1326cc32c5293c15e84cd14"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af242f50af1326cc32c5293c15e84cd14">SUPPRESSION_DEFAULT_TURNS</a> = 3</td></tr>
+<tr class="memitem:a7ef3a1c2657f0fe198ef84eeec8b131b" id="r_a7ef3a1c2657f0fe198ef84eeec8b131b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ef3a1c2657f0fe198ef84eeec8b131b">SUPPRESSION_MAX_TURNS</a> = 10</td></tr>
+<tr class="memitem:a2540991a54dbd35e9f1376986f4ce215" id="r_a2540991a54dbd35e9f1376986f4ce215"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2540991a54dbd35e9f1376986f4ce215">ARBITRATION_DEADLINE_TURNS</a> = 5</td></tr>
+<tr class="memitem:a38ddc3cc24a6949b27a96dcdda7c7738" id="r_a38ddc3cc24a6949b27a96dcdda7c7738"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38ddc3cc24a6949b27a96dcdda7c7738">ARBITRATION_AUTO_ESCALATE</a> = True</td></tr>
+<tr class="memitem:ac1786b8d442987bb67d45376ce235dd0" id="r_ac1786b8d442987bb67d45376ce235dd0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac1786b8d442987bb67d45376ce235dd0">ARBITRATION_MIN_LEVEL_BUMP</a> = 10</td></tr>
+<tr class="memitem:aac6aa4cb39c11332a17c35dd5b3f8287" id="r_aac6aa4cb39c11332a17c35dd5b3f8287"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac6aa4cb39c11332a17c35dd5b3f8287">CONTRADICTION_PAIRS</a></td></tr>
 <tr class="memitem:aa398284bd0b71b9811324181105d35c2" id="r_aa398284bd0b71b9811324181105d35c2"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa398284bd0b71b9811324181105d35c2">READ_BLOCK_PATTERN</a> = r'\&zwj;[READ[^\&zwj;]]*\&zwj;].*?(?=\n\n|\n\[(?!\&zwj;[)[A-Z]|\Z)'</td></tr>
 <tr class="memitem:a3419102028a8dce1cd8524584dfb6e6f" id="r_a3419102028a8dce1cd8524584dfb6e6f"><td class="memItemLeft" align="right" valign="top">dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3419102028a8dce1cd8524584dfb6e6f">DEFAULT_CONFIG</a></td></tr>
+<tr class="memitem:abc06d73cc307643ae2786436b4dd0d91" id="r_abc06d73cc307643ae2786436b4dd0d91"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc06d73cc307643ae2786436b4dd0d91">PRIVILEGE_PROMPT_SECTION</a> = True</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">AXE Constants Module
-
 Central location for all configuration constants used throughout AXE.
 </pre> </div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="ada22dea46b7e1b1b4f7d2a4a9a3edd96" name="ada22dea46b7e1b1b4f7d2a4a9a3edd96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada22dea46b7e1b1b4f7d2a4a9a3edd96">&#9670;&#160;</a></span>AGENT_TOKEN_ARBITRATE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str core.constants.AGENT_TOKEN_ARBITRATE = &quot;[[ARBITRATE:&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae77a3f2ff99cb86ef3e6edb025668d5e" name="ae77a3f2ff99cb86ef3e6edb025668d5e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae77a3f2ff99cb86ef3e6edb025668d5e">&#9670;&#160;</a></span>AGENT_TOKEN_BREAK_REQUEST</h2>
 
@@ -143,6 +172,34 @@ Central location for all configuration constants used throughout AXE.
       <table class="memname">
         <tr>
           <td class="memname">str core.constants.AGENT_TOKEN_BREAK_REQUEST = &quot;[[AGENT_BREAK_REQUEST:&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57b8010d7b14ad9c0846461421512a85" name="a57b8010d7b14ad9c0846461421512a85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57b8010d7b14ad9c0846461421512a85">&#9670;&#160;</a></span>AGENT_TOKEN_BROADCAST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str core.constants.AGENT_TOKEN_BROADCAST = &quot;[[BROADCAST:&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51a516196fb97b06cbd672a5e406a364" name="a51a516196fb97b06cbd672a5e406a364"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51a516196fb97b06cbd672a5e406a364">&#9670;&#160;</a></span>AGENT_TOKEN_CONFLICT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str core.constants.AGENT_TOKEN_CONFLICT = &quot;[[CONFLICT:&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -191,6 +248,20 @@ Central location for all configuration constants used throughout AXE.
 
 </div>
 </div>
+<a id="aff6e8d6f708edb456fad8863ee7afc8d" name="aff6e8d6f708edb456fad8863ee7afc8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff6e8d6f708edb456fad8863ee7afc8d">&#9670;&#160;</a></span>AGENT_TOKEN_RELEASE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str core.constants.AGENT_TOKEN_RELEASE = &quot;[[RELEASE:&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a1c38858bf4fac9bbb8766cdbebb55911" name="a1c38858bf4fac9bbb8766cdbebb55911"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1c38858bf4fac9bbb8766cdbebb55911">&#9670;&#160;</a></span>AGENT_TOKEN_SPAWN</h2>
 
@@ -219,6 +290,20 @@ Central location for all configuration constants used throughout AXE.
 
 </div>
 </div>
+<a id="ac058abb361182f0e65ed562e91d184ef" name="ac058abb361182f0e65ed562e91d184ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac058abb361182f0e65ed562e91d184ef">&#9670;&#160;</a></span>AGENT_TOKEN_SUPPRESS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str core.constants.AGENT_TOKEN_SUPPRESS = &quot;[[SUPPRESS:&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8dfdca2464b7ef53a688c534323208f5" name="a8dfdca2464b7ef53a688c534323208f5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8dfdca2464b7ef53a688c534323208f5">&#9670;&#160;</a></span>AGENT_TOKEN_TASK_COMPLETE</h2>
 
@@ -227,6 +312,62 @@ Central location for all configuration constants used throughout AXE.
       <table class="memname">
         <tr>
           <td class="memname">str core.constants.AGENT_TOKEN_TASK_COMPLETE = &quot;[[AGENT_TASK_COMPLETE:&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9884b333f419807df0909c995e833e59" name="a9884b333f419807df0909c995e833e59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9884b333f419807df0909c995e833e59">&#9670;&#160;</a></span>AGENT_TOKEN_XP_VOTE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str core.constants.AGENT_TOKEN_XP_VOTE = &quot;[[XP_VOTE:&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a38ddc3cc24a6949b27a96dcdda7c7738" name="a38ddc3cc24a6949b27a96dcdda7c7738"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38ddc3cc24a6949b27a96dcdda7c7738">&#9670;&#160;</a></span>ARBITRATION_AUTO_ESCALATE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool core.constants.ARBITRATION_AUTO_ESCALATE = True</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2540991a54dbd35e9f1376986f4ce215" name="a2540991a54dbd35e9f1376986f4ce215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2540991a54dbd35e9f1376986f4ce215">&#9670;&#160;</a></span>ARBITRATION_DEADLINE_TURNS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int core.constants.ARBITRATION_DEADLINE_TURNS = 5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac1786b8d442987bb67d45376ce235dd0" name="ac1786b8d442987bb67d45376ce235dd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1786b8d442987bb67d45376ce235dd0">&#9670;&#160;</a></span>ARBITRATION_MIN_LEVEL_BUMP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int core.constants.ARBITRATION_MIN_LEVEL_BUMP = 10</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -303,6 +444,27 @@ Central location for all configuration constants used throughout AXE.
 
 </div>
 </div>
+<a id="aac6aa4cb39c11332a17c35dd5b3f8287" name="aac6aa4cb39c11332a17c35dd5b3f8287"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac6aa4cb39c11332a17c35dd5b3f8287">&#9670;&#160;</a></span>CONTRADICTION_PAIRS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">list core.constants.CONTRADICTION_PAIRS</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  [</div>
+<div class="line"><span class="lineno">    2</span>    (<span class="stringliteral">&#39;safe&#39;</span>, <span class="stringliteral">&#39;unsafe&#39;</span>), (<span class="stringliteral">&#39;secure&#39;</span>, <span class="stringliteral">&#39;vulnerable&#39;</span>), (<span class="stringliteral">&#39;secure&#39;</span>, <span class="stringliteral">&#39;insecure&#39;</span>),</div>
+<div class="line"><span class="lineno">    3</span>    (<span class="stringliteral">&#39;correct&#39;</span>, <span class="stringliteral">&#39;incorrect&#39;</span>), (<span class="stringliteral">&#39;valid&#39;</span>, <span class="stringliteral">&#39;invalid&#39;</span>),</div>
+<div class="line"><span class="lineno">    4</span>    (<span class="stringliteral">&#39;approve&#39;</span>, <span class="stringliteral">&#39;reject&#39;</span>), (<span class="stringliteral">&#39;yes&#39;</span>, <span class="stringliteral">&#39;no&#39;</span>),</div>
+<div class="line"><span class="lineno">    5</span>    (<span class="stringliteral">&#39;no issues&#39;</span>, <span class="stringliteral">&#39;found issues&#39;</span>), (<span class="stringliteral">&#39;clean&#39;</span>, <span class="stringliteral">&#39;buggy&#39;</span>),</div>
+<div class="line"><span class="lineno">    6</span>    (<span class="stringliteral">&#39;recommended&#39;</span>, <span class="stringliteral">&#39;not recommended&#39;</span>), (<span class="stringliteral">&#39;should&#39;</span>, <span class="stringliteral">&#39;should not&#39;</span>),</div>
+<div class="line"><span class="lineno">    7</span>]</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="a3419102028a8dce1cd8524584dfb6e6f" name="a3419102028a8dce1cd8524584dfb6e6f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3419102028a8dce1cd8524584dfb6e6f">&#9670;&#160;</a></span>DEFAULT_CONFIG</h2>
 
@@ -367,6 +529,48 @@ Central location for all configuration constants used throughout AXE.
       <table class="memname">
         <tr>
           <td class="memname">int core.constants.ERROR_THRESHOLD_PERCENT = 20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad76af5fb9478708ddc3ff2842b0fd5ed" name="ad76af5fb9478708ddc3ff2842b0fd5ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad76af5fb9478708ddc3ff2842b0fd5ed">&#9670;&#160;</a></span>GLOBAL_WORKSPACE_FILE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str core.constants.GLOBAL_WORKSPACE_FILE = &quot;GLOBAL_WORKSPACE.json&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a279fbe8556ca66079eff5b798ffba767" name="a279fbe8556ca66079eff5b798ffba767"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a279fbe8556ca66079eff5b798ffba767">&#9670;&#160;</a></span>GLOBAL_WORKSPACE_MAX_BROADCASTS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int core.constants.GLOBAL_WORKSPACE_MAX_BROADCASTS = 200</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af30d227f2322d055b4040f2819c772ba" name="af30d227f2322d055b4040f2819c772ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af30d227f2322d055b4040f2819c772ba">&#9670;&#160;</a></span>GLOBAL_WORKSPACE_PROMPT_ENTRIES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int core.constants.GLOBAL_WORKSPACE_PROMPT_ENTRIES = 10</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -499,6 +703,20 @@ Central location for all configuration constants used throughout AXE.
 
 </div>
 </div>
+<a id="abc06d73cc307643ae2786436b4dd0d91" name="abc06d73cc307643ae2786436b4dd0d91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc06d73cc307643ae2786436b4dd0d91">&#9670;&#160;</a></span>PRIVILEGE_PROMPT_SECTION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool core.constants.PRIVILEGE_PROMPT_SECTION = True</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa398284bd0b71b9811324181105d35c2" name="aa398284bd0b71b9811324181105d35c2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa398284bd0b71b9811324181105d35c2">&#9670;&#160;</a></span>READ_BLOCK_PATTERN</h2>
 
@@ -605,6 +823,34 @@ Central location for all configuration constants used throughout AXE.
       <table class="memname">
         <tr>
           <td class="memname">int core.constants.SPAWN_COOLDOWN_SECONDS = 60</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af242f50af1326cc32c5293c15e84cd14" name="af242f50af1326cc32c5293c15e84cd14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af242f50af1326cc32c5293c15e84cd14">&#9670;&#160;</a></span>SUPPRESSION_DEFAULT_TURNS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int core.constants.SUPPRESSION_DEFAULT_TURNS = 3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7ef3a1c2657f0fe198ef84eeec8b131b" name="a7ef3a1c2657f0fe198ef84eeec8b131b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ef3a1c2657f0fe198ef84eeec8b131b">&#9670;&#160;</a></span>SUPPRESSION_MAX_TURNS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int core.constants.SUPPRESSION_MAX_TURNS = 10</td>
         </tr>
       </table>
 </div><div class="memdoc">

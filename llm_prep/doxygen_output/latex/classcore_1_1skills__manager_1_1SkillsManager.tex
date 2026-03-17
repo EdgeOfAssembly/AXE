@@ -2,8 +2,7 @@
 \hypertarget{classcore_1_1skills__manager_1_1SkillsManager}{}\label{classcore_1_1skills__manager_1_1SkillsManager}\index{core.skills\_manager.SkillsManager@{core.skills\_manager.SkillsManager}}
 
 
-Collaboration diagram for core.\+skills\+\_\+manager.\+Skills\+Manager\+:
-\nopagebreak
+Collaboration diagram for core.\+skills\+\_\+manager.\+Skills\+Manager\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -13,7 +12,7 @@ Collaboration diagram for core.\+skills\+\_\+manager.\+Skills\+Manager\+:
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager_afdb0a70fbc0c2d763e43379108b09825}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, str \mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager_abf4800ce668ca32b729e05979ab802a8}{skills\+\_\+dir}}="{}skills"{}, Optional\mbox{[}Dict\mbox{]} \mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager_abbbd7a62e4c9e3f8289e20d721306b79}{config}}=None)
+\mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager_ad6daa70fbea93ba108dbca8c64ba86dd}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager_abf4800ce668ca32b729e05979ab802a8}{skills\+\_\+dir}}=None, Optional\mbox{[}Dict\mbox{]} \mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager_abbbd7a62e4c9e3f8289e20d721306b79}{config}}=None)
 \item 
 Optional\mbox{[}\mbox{\hyperlink{classcore_1_1skills__manager_1_1Skill}{Skill}}\mbox{]} \mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager_abd6d4fd1eafbfd1475a67a3c811c8f26}{get\+\_\+skill}} (self, str name)
 \item 
@@ -56,16 +55,16 @@ None \mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager_a8109fd2d1ce
 \label{doc-constructors}
 \Hypertarget{classcore_1_1skills__manager_1_1SkillsManager_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classcore_1_1skills__manager_1_1SkillsManager_afdb0a70fbc0c2d763e43379108b09825}\index{core.skills\_manager.SkillsManager@{core.skills\_manager.SkillsManager}!\_\_init\_\_@{\_\_init\_\_}}
+\Hypertarget{classcore_1_1skills__manager_1_1SkillsManager_ad6daa70fbea93ba108dbca8c64ba86dd}\index{core.skills\_manager.SkillsManager@{core.skills\_manager.SkillsManager}!\_\_init\_\_@{\_\_init\_\_}}
 \index{\_\_init\_\_@{\_\_init\_\_}!core.skills\_manager.SkillsManager@{core.skills\_manager.SkillsManager}}
 \doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
-{\footnotesize\ttfamily \label{classcore_1_1skills__manager_1_1SkillsManager_afdb0a70fbc0c2d763e43379108b09825} 
-core.\+skills\+\_\+manager.\+Skills\+Manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str }]{skills\+\_\+dir}{ = {\ttfamily "{}skills"{}}, }\item[{Optional\mbox{[}Dict\mbox{]} }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classcore_1_1skills__manager_1_1SkillsManager_ad6daa70fbea93ba108dbca8c64ba86dd} 
+core.\+skills\+\_\+manager.\+Skills\+Manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}str\mbox{]} }]{skills\+\_\+dir}{ = {\ttfamily None}, }\item[{Optional\mbox{[}Dict\mbox{]} }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Initialize the Skills Manager.
-
 Args:
-    skills_dir: Path to skills directory (relative or absolute)
+    skills_dir: Path to skills directory (relative or absolute).
+               Defaults to "skills" in current directory if None or empty.
     config: Optional configuration dictionary for skills
 \end{DoxyVerb}
  
@@ -94,7 +93,6 @@ Args:
  Dict\mbox{[}str, List\mbox{[}str\mbox{]}\mbox{]} core.\+skills\+\_\+manager.\+Skills\+Manager.\+get\+\_\+activation\+\_\+keywords (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get all activation keywords mapped to skill names.
-
 Returns:
     Dictionary mapping skill names to their keywords
 \end{DoxyVerb}
@@ -112,15 +110,12 @@ Returns:
  Optional\mbox{[}\mbox{\hyperlink{classcore_1_1skills__manager_1_1Skill}{Skill}}\mbox{]} core.\+skills\+\_\+manager.\+Skills\+Manager.\+get\+\_\+skill (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{name}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get skill by name.
-
 Args:
     name: Skill name (without .md extension)
-    
 Returns:
     Skill object or None if not found
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -134,15 +129,12 @@ Returns:
  Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+skills\+\_\+manager.\+Skills\+Manager.\+get\+\_\+skill\+\_\+metadata\+\_\+only (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{name}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get skill metadata without full content (for token efficiency).
-
 Args:
     name: Skill name
-    
 Returns:
     Dictionary with metadata or None if not found
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -156,16 +148,13 @@ Returns:
  List\mbox{[}\mbox{\hyperlink{classcore_1_1skills__manager_1_1Skill}{Skill}}\mbox{]} core.\+skills\+\_\+manager.\+Skills\+Manager.\+get\+\_\+skills\+\_\+by\+\_\+names (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}str\mbox{]}}]{names}{, }\item[{Optional\mbox{[}str\mbox{]} }]{provider}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get skills by explicit names.
-
 Args:
     names: List of skill names to retrieve
     provider: Optional provider name to filter by
-    
 Returns:
     List of Skill objects (skips non-existent skills)
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -179,11 +168,9 @@ Returns:
  List\mbox{[}\mbox{\hyperlink{classcore_1_1skills__manager_1_1Skill}{Skill}}\mbox{]} core.\+skills\+\_\+manager.\+Skills\+Manager.\+get\+\_\+skills\+\_\+for\+\_\+task (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{task\+\_\+description}{, }\item[{Optional\mbox{[}str\mbox{]} }]{provider}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get relevant skills based on task keywords and provider.
-
 Args:
     task_description: Description of the task (e.g., user prompt)
     provider: Optional provider name to filter by (e.g., 'anthropic', 'openai')
-    
 Returns:
     List of matching Skill objects
 \end{DoxyVerb}
@@ -194,11 +181,9 @@ Returns:
  str core.\+skills\+\_\+manager.\+Skills\+Manager.\+inject\+\_\+skills\+\_\+to\+\_\+prompt (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{system\+\_\+prompt}{, }\item[{List\mbox{[}\mbox{\hyperlink{classcore_1_1skills__manager_1_1Skill}{Skill}}\mbox{]}}]{skills}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Inject skill content into system prompt efficiently.
-
 Args:
     system_prompt: Original system prompt
     skills: List of skills to inject
-    
 Returns:
     Enhanced system prompt with skills injected
 \end{DoxyVerb}

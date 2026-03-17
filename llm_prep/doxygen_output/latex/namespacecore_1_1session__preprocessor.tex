@@ -19,16 +19,13 @@ class \mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Session Preprocessor for AXE
-
 Orchestrates workspace preprocessing at the start of each AXE session.
-
 Workflow:
 1. Check if preprocessing is enabled in config
 2. If environment_probe enabled: generate .collab_env.md with system info (zero agent tokens)
 3. If minifier enabled: minify supported source files (keeping comments)
 4. If llmprep enabled: run llmprep to generate LLM context files
 5. Report statistics to user
-
 Author: EdgeOfAssembly
 License: GPLv3 / Commercial
 \end{DoxyVerb}
@@ -44,11 +41,9 @@ License: GPLv3 / Commercial
  \mbox{\hyperlink{classcore_1_1session__preprocessor_1_1SessionPreprocessor}{Session\+Preprocessor}} core.\+session\+\_\+preprocessor.\+create\+\_\+session\+\_\+preprocessor (\begin{DoxyParamCaption}\item[{}]{config}{, }\item[{str}]{workspace\+\_\+path}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Factory function to create a SessionPreprocessor.
-
 Args:
     config: AXE Config object
     workspace_path: Path to workspace directory
-    
 Returns:
     SessionPreprocessor instance
 \end{DoxyVerb}

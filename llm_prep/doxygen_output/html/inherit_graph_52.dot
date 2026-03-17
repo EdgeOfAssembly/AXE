@@ -5,5 +5,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="LR";
-  Node0 [id="Node000000",label="workshop.plane.PlaneEnumerator",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classworkshop_1_1plane_1_1PlaneEnumerator.html",tooltip=" "];
+  Node0 [id="Node000000",label="utils.context_optimizer.\lMessage",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classutils_1_1context__optimizer_1_1Message.html",tooltip=" "];
 }

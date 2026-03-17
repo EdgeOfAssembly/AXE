@@ -45,10 +45,8 @@ dict \mbox{\hyperlink{namespacetools_1_1minifier_a943a0d78498a28ad2ffc352915df9f
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Source Code Minifier for AXE
-
 Minifies C, C++, Python, and Assembly source code to reduce token usage
 when feeding code to LLMs while preserving compilability.
-
 Features:
 - Remove comments and docstrings (configurable)
 - Strip whitespace and blank lines
@@ -56,7 +54,6 @@ Features:
 - Support recursive directory processing
 - Language detection via guesslang or file extension
 - Exclude common directories (tests, __pycache__, .git, venv, etc.)
-
 Author: EdgeOfAssembly
 License: GPLv3 / Commercial
 \end{DoxyVerb}
@@ -72,17 +69,14 @@ License: GPLv3 / Commercial
  List\mbox{[}Tuple\mbox{[}str, str\mbox{]}\mbox{]} tools.\+minifier.\+collect\+\_\+files (\begin{DoxyParamCaption}\item[{List\mbox{[}str\mbox{]}}]{inputs}{, }\item[{bool }]{recursive}{ = {\ttfamily False}, }\item[{Optional\mbox{[}Set\mbox{[}str\mbox{]}\mbox{]} }]{exclude\+\_\+dirs}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Collect all supported source files from input paths.
-
 Args:
     inputs: List of file or directory paths
     recursive: If True, recurse into subdirectories
     exclude_dirs: Set of directory names to exclude
-    
 Returns:
     List of tuples (full_path, relative_path)
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -96,17 +90,13 @@ Returns:
  str tools.\+minifier.\+comment\+\_\+remover\+\_\+c\+\_\+cpp (\begin{DoxyParamCaption}\item[{str}]{text}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Remove C/C++ comments from source code.
-
 Preserves strings and character literals.
-
 Args:
     text: Source code text
-    
 Returns:
     Text with comments removed
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -120,18 +110,14 @@ Returns:
  Optional\mbox{[}str\mbox{]} tools.\+minifier.\+detect\+\_\+language (\begin{DoxyParamCaption}\item[{str}]{file\+\_\+path}{, }\item[{str}]{content}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Detect the programming language of a file.
-
 Uses guesslang if available, otherwise falls back to extension-based detection.
-
 Args:
     file_path: Path to the file
     content: File content
-    
 Returns:
     Language identifier ('c_cpp', 'python', 'asm') or None if unsupported
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -142,19 +128,17 @@ Returns:
 \index{main@{main}!tools.minifier@{tools.minifier}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily \label{namespacetools_1_1minifier_abfc117aec684ce9f71f3bc2b62816ff2} 
-tools.\+minifier.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+tools.\+minifier.\+main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Command-line interface for minifier.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=339pt]{namespacetools_1_1minifier_abfc117aec684ce9f71f3bc2b62816ff2_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -168,16 +152,13 @@ Here is the caller graph for this function\+:
  str tools.\+minifier.\+minify\+\_\+asm (\begin{DoxyParamCaption}\item[{str}]{code}{, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily False}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Minify Assembly source code.
-
 Args:
     code: Assembly source code
     keep_comments: If True, preserve comments
-    
 Returns:
     Minified assembly code
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -191,24 +172,20 @@ Returns:
  str tools.\+minifier.\+minify\+\_\+c\+\_\+cpp (\begin{DoxyParamCaption}\item[{str}]{code}{, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily False}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Minify C/C++ source code.
-
 Args:
     code: Source code to minify
     keep_comments: If True, preserve comments
-    
 Returns:
     Minified code
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacetools_1_1minifier_acbce42ca8e81d30a52cf2ea48e9f1055_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -222,13 +199,11 @@ Here is the caller graph for this function\+:
  Dict\mbox{[}str, str\mbox{]} tools.\+minifier.\+minify\+\_\+directory (\begin{DoxyParamCaption}\item[{str}]{dir\+\_\+path}{, }\item[{bool }]{recursive}{ = {\ttfamily True}, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily True}, }\item[{Optional\mbox{[}Set\mbox{[}str\mbox{]}\mbox{]} }]{exclude\+\_\+dirs}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Convenience function to minify a directory.
-
 Args:
     dir_path: Path to directory
     recursive: If True, recurse into subdirectories
     keep_comments: If True, preserve comments
     exclude_dirs: Set of directory names to exclude
-    
 Returns:
     Dictionary mapping file paths to minified content
 \end{DoxyVerb}
@@ -239,11 +214,9 @@ Returns:
  str tools.\+minifier.\+minify\+\_\+file (\begin{DoxyParamCaption}\item[{str}]{file\+\_\+path}{, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily True}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Convenience function to minify a single file.
-
 Args:
     file_path: Path to file
     keep_comments: If True, preserve comments
-    
 Returns:
     Minified source code
 \end{DoxyVerb}
@@ -254,26 +227,21 @@ Returns:
  str tools.\+minifier.\+minify\+\_\+python (\begin{DoxyParamCaption}\item[{str}]{code}{, }\item[{bool }]{keep\+\_\+comments}{ = {\ttfamily False}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Minify Python source code.
-
 IMPORTANT: Preserves indentation to maintain Python syntax correctness.
-
 Args:
     code: Source code to minify
     keep_comments: If True, preserve comments
-    
 Returns:
     Minified code with proper indentation
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacetools_1_1minifier_a1891c0e16ec30fddff99c105a8c937b2_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -287,17 +255,13 @@ Here is the caller graph for this function\+:
  str tools.\+minifier.\+remove\+\_\+comments\+\_\+and\+\_\+docstrings (\begin{DoxyParamCaption}\item[{str}]{source}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Remove Python comments and docstrings from source code.
-
 Preserves regular strings and code structure.
-
 Args:
     source: Python source code
-    
 Returns:
     Code with comments and docstrings removed
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

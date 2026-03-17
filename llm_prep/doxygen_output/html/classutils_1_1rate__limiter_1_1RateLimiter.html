@@ -135,7 +135,6 @@ Prevents API quota burnout by limiting tokens per minute per agent.
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Initialize rate limiter with configuration.
-
 Args:
     config: Dictionary with rate limit configuration:
         - enabled: Whether rate limiting is enabled
@@ -169,7 +168,6 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Record token usage for an agent.
-
 Args:
     agent_name: Name of the agent
     token_count: Number of tokens used
@@ -200,11 +198,9 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Check if adding tokens would exceed rate limit.
-
 Args:
     agent_name: Name of the agent
     tokens_to_add: Number of tokens to add
-
 Returns:
     Tuple of (allowed: bool, message: Optional[str])
     - If allowed, message is None
@@ -227,7 +223,6 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get current usage for all tracked agents.
-
 Returns:
     Dictionary mapping agent_name to (current_usage, limit)
 </pre> <div class="dynheader">
@@ -257,10 +252,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get current token usage for an agent in the last minute.
-
 Args:
     agent_name: Name of the agent
-
 Returns:
     Tuple of (current_usage, limit)
 </pre> <div class="dynheader">

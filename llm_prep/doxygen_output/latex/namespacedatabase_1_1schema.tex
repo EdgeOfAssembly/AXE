@@ -16,6 +16,18 @@ str \mbox{\hyperlink{namespacedatabase_1_1schema_ade29f7d5fc90b289fb302bcdaac49e
 str \mbox{\hyperlink{namespacedatabase_1_1schema_a0a12c5c310213a884f6272fe501d77ad}{WORKSHOP\+\_\+\+ANALYSIS\+\_\+\+TABLE}}
 \item 
 list \mbox{\hyperlink{namespacedatabase_1_1schema_a0eb7fa418deaa7c73fcced8423c08c33}{WORKSHOP\+\_\+\+ANALYSIS\+\_\+\+INDEXES}}
+\item 
+str \mbox{\hyperlink{namespacedatabase_1_1schema_a22ae54e3c7cb234bff838293340f14a5}{BROADCAST\+\_\+\+TABLE}}
+\item 
+list \mbox{\hyperlink{namespacedatabase_1_1schema_a3dd97b2c018f7fcf593c379aba2e7558}{BROADCAST\+\_\+\+INDEXES}}
+\item 
+str \mbox{\hyperlink{namespacedatabase_1_1schema_a090bd841aa65d6be3821ee802ffebcb4}{ARBITRATION\+\_\+\+TABLE}}
+\item 
+list \mbox{\hyperlink{namespacedatabase_1_1schema_a4ba91d1d84406362f8791d8193a3c8ef}{ARBITRATION\+\_\+\+INDEXES}}
+\item 
+str \mbox{\hyperlink{namespacedatabase_1_1schema_ab008e1ab3a92b468a24506965f75fde4}{CONFLICT\+\_\+\+TABLE}}
+\item 
+list \mbox{\hyperlink{namespacedatabase_1_1schema_ac032c6e96702f8eb61a6011206174766}{CONFLICT\+\_\+\+INDEXES}}
 \end{DoxyCompactItemize}
 
 
@@ -87,6 +99,120 @@ str database.\+schema.\+ALIAS\+\_\+\+MAPPINGS\+\_\+\+TABLE}
 \DoxyCodeLine{00007\ \textcolor{stringliteral}{\ \ \ \ created\_at\ TIMESTAMP}}
 \DoxyCodeLine{00008\ \textcolor{stringliteral}{)}}
 \DoxyCodeLine{00009\ \textcolor{stringliteral}{"{}"{}"{}}}
+
+\end{DoxyCode}
+\Hypertarget{namespacedatabase_1_1schema_a4ba91d1d84406362f8791d8193a3c8ef}\index{database.schema@{database.schema}!ARBITRATION\_INDEXES@{ARBITRATION\_INDEXES}}
+\index{ARBITRATION\_INDEXES@{ARBITRATION\_INDEXES}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{ARBITRATION\_INDEXES}{ARBITRATION\_INDEXES}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_a4ba91d1d84406362f8791d8193a3c8ef} 
+list database.\+schema.\+ARBITRATION\+\_\+\+INDEXES}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}CREATE\ INDEX\ IF\ NOT\ EXISTS\ idx\_arbitration\_status\ ON\ arbitrations(status)"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}CREATE\ INDEX\ IF\ NOT\ EXISTS\ idx\_arbitration\_level\ ON\ arbitrations(required\_level)"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}CREATE\ INDEX\ IF\ NOT\ EXISTS\ idx\_arbitration\_deadline\ ON\ arbitrations(deadline\_turn)"{}},}
+\DoxyCodeLine{00005\ ]}
+
+\end{DoxyCode}
+\Hypertarget{namespacedatabase_1_1schema_a090bd841aa65d6be3821ee802ffebcb4}\index{database.schema@{database.schema}!ARBITRATION\_TABLE@{ARBITRATION\_TABLE}}
+\index{ARBITRATION\_TABLE@{ARBITRATION\_TABLE}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{ARBITRATION\_TABLE}{ARBITRATION\_TABLE}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_a090bd841aa65d6be3821ee802ffebcb4} 
+str database.\+schema.\+ARBITRATION\+\_\+\+TABLE}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00002\ \textcolor{stringliteral}{CREATE\ TABLE\ IF\ NOT\ EXISTS\ arbitrations\ (}}
+\DoxyCodeLine{00003\ \textcolor{stringliteral}{\ \ \ \ arbitration\_id\ TEXT\ PRIMARY\ KEY,}}
+\DoxyCodeLine{00004\ \textcolor{stringliteral}{\ \ \ \ conflict\_broadcasts\_json\ TEXT\ NOT\ NULL,\ \ -\/-\/\ JSON\ array\ of\ conflicting\ broadcast\ IDs}}
+\DoxyCodeLine{00005\ \textcolor{stringliteral}{\ \ \ \ created\_by\ TEXT\ NOT\ NULL,}}
+\DoxyCodeLine{00006\ \textcolor{stringliteral}{\ \ \ \ created\_at\ TIMESTAMP\ DEFAULT\ CURRENT\_TIMESTAMP,}}
+\DoxyCodeLine{00007\ \textcolor{stringliteral}{\ \ \ \ created\_turn\ INTEGER\ DEFAULT\ 0,}}
+\DoxyCodeLine{00008\ \textcolor{stringliteral}{\ \ \ \ deadline\_turn\ INTEGER\ NOT\ NULL,}}
+\DoxyCodeLine{00009\ \textcolor{stringliteral}{\ \ \ \ required\_level\ INTEGER\ NOT\ NULL,}}
+\DoxyCodeLine{00010\ \textcolor{stringliteral}{\ \ \ \ status\ TEXT\ DEFAULT\ 'pending',\ \ \ \ \ \ \ \ \ \ \ -\/-\/\ 'pending',\ 'resolved',\ 'escalated'}}
+\DoxyCodeLine{00011\ \textcolor{stringliteral}{\ \ \ \ escalation\_count\ INTEGER\ DEFAULT\ 0,}}
+\DoxyCodeLine{00012\ \textcolor{stringliteral}{\ \ \ \ resolution\_json\ TEXT,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/\ JSON\ resolution\ details\ when\ resolved}}
+\DoxyCodeLine{00013\ \textcolor{stringliteral}{\ \ \ \ resolved\_at\ TIMESTAMP,}}
+\DoxyCodeLine{00014\ \textcolor{stringliteral}{\ \ \ \ resolved\_turn\ INTEGER}}
+\DoxyCodeLine{00015\ \textcolor{stringliteral}{)}}
+\DoxyCodeLine{00016\ \textcolor{stringliteral}{"{}"{}"{}}}
+
+\end{DoxyCode}
+\Hypertarget{namespacedatabase_1_1schema_a3dd97b2c018f7fcf593c379aba2e7558}\index{database.schema@{database.schema}!BROADCAST\_INDEXES@{BROADCAST\_INDEXES}}
+\index{BROADCAST\_INDEXES@{BROADCAST\_INDEXES}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{BROADCAST\_INDEXES}{BROADCAST\_INDEXES}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_a3dd97b2c018f7fcf593c379aba2e7558} 
+list database.\+schema.\+BROADCAST\+\_\+\+INDEXES}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}CREATE\ INDEX\ IF\ NOT\ EXISTS\ idx\_broadcast\_agent\ ON\ broadcasts(agent\_alias)"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}CREATE\ INDEX\ IF\ NOT\ EXISTS\ idx\_broadcast\_category\ ON\ broadcasts(category)"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}CREATE\ INDEX\ IF\ NOT\ EXISTS\ idx\_broadcast\_timestamp\ ON\ broadcasts(timestamp)"{}},}
+\DoxyCodeLine{00005\ ]}
+
+\end{DoxyCode}
+\Hypertarget{namespacedatabase_1_1schema_a22ae54e3c7cb234bff838293340f14a5}\index{database.schema@{database.schema}!BROADCAST\_TABLE@{BROADCAST\_TABLE}}
+\index{BROADCAST\_TABLE@{BROADCAST\_TABLE}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{BROADCAST\_TABLE}{BROADCAST\_TABLE}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_a22ae54e3c7cb234bff838293340f14a5} 
+str database.\+schema.\+BROADCAST\+\_\+\+TABLE}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00002\ \textcolor{stringliteral}{CREATE\ TABLE\ IF\ NOT\ EXISTS\ broadcasts\ (}}
+\DoxyCodeLine{00003\ \textcolor{stringliteral}{\ \ \ \ broadcast\_id\ TEXT\ PRIMARY\ KEY,}}
+\DoxyCodeLine{00004\ \textcolor{stringliteral}{\ \ \ \ agent\_alias\ TEXT\ NOT\ NULL,}}
+\DoxyCodeLine{00005\ \textcolor{stringliteral}{\ \ \ \ agent\_level\ INTEGER\ NOT\ NULL,}}
+\DoxyCodeLine{00006\ \textcolor{stringliteral}{\ \ \ \ category\ TEXT\ NOT\ NULL,\ \ \ \ \ \ \ \ -\/-\/\ 'SECURITY',\ 'CODE\_QUALITY',\ 'CONFLICT',\ etc.}}
+\DoxyCodeLine{00007\ \textcolor{stringliteral}{\ \ \ \ content\ TEXT\ NOT\ NULL,}}
+\DoxyCodeLine{00008\ \textcolor{stringliteral}{\ \ \ \ metadata\_json\ TEXT,\ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/\ JSON\ metadata\ (files,\ functions,\ etc.)}}
+\DoxyCodeLine{00009\ \textcolor{stringliteral}{\ \ \ \ timestamp\ TIMESTAMP\ DEFAULT\ CURRENT\_TIMESTAMP}}
+\DoxyCodeLine{00010\ \textcolor{stringliteral}{)}}
+\DoxyCodeLine{00011\ \textcolor{stringliteral}{"{}"{}"{}}}
+
+\end{DoxyCode}
+\Hypertarget{namespacedatabase_1_1schema_ac032c6e96702f8eb61a6011206174766}\index{database.schema@{database.schema}!CONFLICT\_INDEXES@{CONFLICT\_INDEXES}}
+\index{CONFLICT\_INDEXES@{CONFLICT\_INDEXES}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{CONFLICT\_INDEXES}{CONFLICT\_INDEXES}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_ac032c6e96702f8eb61a6011206174766} 
+list database.\+schema.\+CONFLICT\+\_\+\+INDEXES}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ \textcolor{stringliteral}{"{}CREATE\ INDEX\ IF\ NOT\ EXISTS\ idx\_conflict\_status\ ON\ conflicts(status)"{}},}
+\DoxyCodeLine{00003\ \ \ \ \ \textcolor{stringliteral}{"{}CREATE\ INDEX\ IF\ NOT\ EXISTS\ idx\_conflict\_type\ ON\ conflicts(conflict\_type)"{}},}
+\DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{"{}CREATE\ INDEX\ IF\ NOT\ EXISTS\ idx\_conflict\_arbitration\ ON\ conflicts(arbitration\_id)"{}},}
+\DoxyCodeLine{00005\ ]}
+
+\end{DoxyCode}
+\Hypertarget{namespacedatabase_1_1schema_ab008e1ab3a92b468a24506965f75fde4}\index{database.schema@{database.schema}!CONFLICT\_TABLE@{CONFLICT\_TABLE}}
+\index{CONFLICT\_TABLE@{CONFLICT\_TABLE}!database.schema@{database.schema}}
+\doxysubsubsection{\texorpdfstring{CONFLICT\_TABLE}{CONFLICT\_TABLE}}
+{\footnotesize\ttfamily \label{namespacedatabase_1_1schema_ab008e1ab3a92b468a24506965f75fde4} 
+str database.\+schema.\+CONFLICT\+\_\+\+TABLE}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \textcolor{stringliteral}{"{}"{}"{}}}
+\DoxyCodeLine{00002\ \textcolor{stringliteral}{CREATE\ TABLE\ IF\ NOT\ EXISTS\ conflicts\ (}}
+\DoxyCodeLine{00003\ \textcolor{stringliteral}{\ \ \ \ conflict\_id\ TEXT\ PRIMARY\ KEY,}}
+\DoxyCodeLine{00004\ \textcolor{stringliteral}{\ \ \ \ conflict\_type\ TEXT\ NOT\ NULL,\ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/\ 'detected',\ 'manual',\ 'explicit'}}
+\DoxyCodeLine{00005\ \textcolor{stringliteral}{\ \ \ \ broadcast\_ids\_json\ TEXT\ NOT\ NULL,\ \ \ \ \ \ \ \ -\/-\/\ JSON\ array\ of\ conflicting\ broadcast\ IDs}}
+\DoxyCodeLine{00006\ \textcolor{stringliteral}{\ \ \ \ flagged\_by\ TEXT,}}
+\DoxyCodeLine{00007\ \textcolor{stringliteral}{\ \ \ \ reason\ TEXT\ NOT\ NULL,}}
+\DoxyCodeLine{00008\ \textcolor{stringliteral}{\ \ \ \ detected\_at\ TIMESTAMP\ DEFAULT\ CURRENT\_TIMESTAMP,}}
+\DoxyCodeLine{00009\ \textcolor{stringliteral}{\ \ \ \ status\ TEXT\ DEFAULT\ 'pending\_arbitration',\ \ -\/-\/\ 'pending\_arbitration',\ 'resolved',\ 'dismissed'}}
+\DoxyCodeLine{00010\ \textcolor{stringliteral}{\ \ \ \ arbitration\_id\ TEXT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/\ Link\ to\ arbitration\ if\ created}}
+\DoxyCodeLine{00011\ \textcolor{stringliteral}{)}}
+\DoxyCodeLine{00012\ \textcolor{stringliteral}{"{}"{}"{}}}
 
 \end{DoxyCode}
 \Hypertarget{namespacedatabase_1_1schema_aff82f87b6ec8392d58cb0db832d5f1b3}\index{database.schema@{database.schema}!SUPERVISOR\_LOG\_TABLE@{SUPERVISOR\_LOG\_TABLE}}

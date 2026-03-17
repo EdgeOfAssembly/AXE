@@ -5,7 +5,7 @@ var test__sandbox_8py =
     [ "test_sandbox.test_bwrap_command_generation", "namespacetest__sandbox.html#acb11bfcb1c49d6e71118777590152f0a", null ],
     [ "test_sandbox.test_edge_case_heredoc", "namespacetest__sandbox.html#a54cc78ac629e5713fed671662c9c36c1", null ],
     [ "test_sandbox.test_edge_case_pipes", "namespacetest__sandbox.html#ad147178ea0fcb593c3cb13f024675f58", null ],
-    [ "test_sandbox.test_fallback_to_whitelist", "namespacetest__sandbox.html#a5e120db0d2213a54e5c5bc24653538d9", null ],
+    [ "test_sandbox.test_fallback_to_unrestricted", "namespacetest__sandbox.html#a15c4bd8d5ad5527b9644e6f3d951e6dc", null ],
     [ "test_sandbox.test_host_bind_readonly", "namespacetest__sandbox.html#a60ab77b0b886603973eb05b94c6baff8", null ],
     [ "test_sandbox.test_integration_command_execution", "namespacetest__sandbox.html#aad2cda135655b18931f7671070620b39", null ],
     [ "test_sandbox.test_namespace_options", "namespacetest__sandbox.html#a81f5b3b74bcab80a1863e60a95990325", null ],

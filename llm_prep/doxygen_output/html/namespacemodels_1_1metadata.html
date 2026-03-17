@@ -105,6 +105,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ad02c6726cf2ee370a30c9dd7f6e11386" id="r_ad02c6726cf2ee370a30c9dd7f6e11386"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad02c6726cf2ee370a30c9dd7f6e11386">get_extended_thinking_budget</a> (str model_name)</td></tr>
 <tr class="memitem:a2c5be0de038b417bd4c9c156fca253b1" id="r_a2c5be0de038b417bd4c9c156fca253b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c5be0de038b417bd4c9c156fca253b1">is_anthropic_model</a> (str model_name)</td></tr>
 <tr class="memitem:a357094a54eb97a4e66bb8867f735f872" id="r_a357094a54eb97a4e66bb8867f735f872"><td class="memItemLeft" align="right" valign="top">Dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a357094a54eb97a4e66bb8867f735f872">get_anthropic_config</a> ()</td></tr>
+<tr class="memitem:a5a351bccd34073b47d17034b9ec266a2" id="r_a5a351bccd34073b47d17034b9ec266a2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5a351bccd34073b47d17034b9ec266a2">uses_responses_api</a> (str model)</td></tr>
+<tr class="memitem:a897a86d82e180794f7424f91b467594d" id="r_a897a86d82e180794f7424f91b467594d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a897a86d82e180794f7424f91b467594d">supports_reasoning_effort</a> (str model)</td></tr>
+<tr class="memitem:a53f3ba5d280444cb069fd0e1c59a0a67" id="r_a53f3ba5d280444cb069fd0e1c59a0a67"><td class="memItemLeft" align="right" valign="top">Optional[str]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53f3ba5d280444cb069fd0e1c59a0a67">get_default_reasoning_effort</a> (str model)</td></tr>
+<tr class="memitem:a444f301466304bfc7a8c55216ea0e655" id="r_a444f301466304bfc7a8c55216ea0e655"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a444f301466304bfc7a8c55216ea0e655">validate_reasoning_effort</a> (str effort)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -113,11 +117,11 @@ Variables</h2></td></tr>
 <tr class="memitem:a9ff02032d18dc45aeb46e750edad4f71" id="r_a9ff02032d18dc45aeb46e750edad4f71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ff02032d18dc45aeb46e750edad4f71">MODEL_METADATA</a> = _config.get('<a class="el" href="namespacemodels.html">models</a>', {})</td></tr>
 <tr class="memitem:a353840d4c08eb121d31aa051d119dba1" id="r_a353840d4c08eb121d31aa051d119dba1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a353840d4c08eb121d31aa051d119dba1">DEFAULT_METADATA</a></td></tr>
 <tr class="memitem:a7640cbfe4367f4161e97e813a8803fe6" id="r_a7640cbfe4367f4161e97e813a8803fe6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7640cbfe4367f4161e97e813a8803fe6">USE_MAX_COMPLETION_TOKENS</a> = set(_config.get('use_max_completion_tokens', []))</td></tr>
+<tr class="memitem:aa6a1a2138c8dfb2ef7edd0c4f9da70e0" id="r_aa6a1a2138c8dfb2ef7edd0c4f9da70e0"><td class="memItemLeft" align="right" valign="top">dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6a1a2138c8dfb2ef7edd0c4f9da70e0">VALID_REASONING_EFFORTS</a> = {'none', 'low', 'medium', 'high', 'xhigh'}</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">Model metadata for AXE - specifications for different LLM models. 
-Includes context window size, max output tokens, and supported modes. 
-
+<div class="textblock"><pre class="fragment">Model metadata for AXE - specifications for different LLM models.
+Includes context window size, max output tokens, and supported modes.
 This module loads model metadata from models.yaml at the project root.
 </pre> </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a5a7932024f8760351863db28e01e8bbd" name="a5a7932024f8760351863db28e01e8bbd"></a>
@@ -159,11 +163,9 @@ This module loads model metadata from models.yaml at the project root.
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Format input modes for display. 
-
+<pre class="fragment">Format input modes for display.
 Args:
     modes: List of input modes (e.g., ['text', 'image'])
-
 Returns:
     Formatted string (e.g., "text, image")
 </pre> 
@@ -184,10 +186,8 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Format output modes for display.
-
 Args:
     modes: List of output modes (e.g., ['text', 'function_calling'])
-
 Returns:
     Formatted string (e.g., "text, function_calling")
 </pre> 
@@ -208,10 +208,8 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Format token count for display (e.g., 200000 -&gt; "200,000").
-
 Args:
     tokens: Number of tokens
-
 Returns:
     Formatted string with commas
 </pre> 
@@ -232,10 +230,36 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get Anthropic-specific configuration from models.yaml.
-
 Returns:
     Dictionary with Anthropic configuration
 </pre> 
+</div>
+</div>
+<a id="a53f3ba5d280444cb069fd0e1c59a0a67" name="a53f3ba5d280444cb069fd0e1c59a0a67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53f3ba5d280444cb069fd0e1c59a0a67">&#9670;&#160;</a></span>get_default_reasoning_effort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> Optional[str] models.metadata.get_default_reasoning_effort </td>
+          <td>(</td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>model</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Get the default reasoning effort level for a model.
+Args:
+    model: Name of the model
+Returns:
+    Default reasoning effort level, or None if not specified
+</pre> <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacemodels_1_1metadata_a53f3ba5d280444cb069fd0e1c59a0a67_cgraph.svg" width="408" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
 </div>
 </div>
 <a id="ad02c6726cf2ee370a30c9dd7f6e11386" name="ad02c6726cf2ee370a30c9dd7f6e11386"></a>
@@ -253,10 +277,8 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get the extended thinking token budget for a model.
-
 Args:
     model_name: Name of the model
-
 Returns:
     Token budget for extended thinking, or 0 if not supported
 </pre> <div class="dynheader">
@@ -286,11 +308,9 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get the max output tokens for a model.
-
 Args:
     model_name: Name of the model
     default: Default value if model not found (safe default: 4000)
-
 Returns:
     Max output tokens for the model
 </pre> <div class="dynheader">
@@ -316,16 +336,14 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get metadata for a specific model.
-
 Args:
     model_name: Name of the model (e.g., 'claude-3-opus-20240229')
-
 Returns:
     Dictionary with model metadata, or default metadata if model not found
 </pre> <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacemodels_1_1metadata_af1deaacdde9b07ed1e1839b504b05c03_icgraph.svg" width="422" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacemodels_1_1metadata_af1deaacdde9b07ed1e1839b504b05c03_icgraph.svg" width="422" height="403"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -345,10 +363,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Check if a model is an Anthropic Claude model.
-
 Args:
     model_name: Name of the model
-
 Returns:
     True if model is from Anthropic
 </pre> 
@@ -369,16 +385,41 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Check if a model supports extended thinking.
-
 Args:
     model_name: Name of the model
-
 Returns:
     True if model supports extended thinking
 </pre> <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacemodels_1_1metadata_a28d1646da3a97c054cd49e96f17c69df_cgraph.svg" width="416" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a897a86d82e180794f7424f91b467594d" name="a897a86d82e180794f7424f91b467594d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a897a86d82e180794f7424f91b467594d">&#9670;&#160;</a></span>supports_reasoning_effort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> bool models.metadata.supports_reasoning_effort </td>
+          <td>(</td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>model</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Check if a model supports reasoning effort parameter.
+Args:
+    model: Name of the model to check
+Returns:
+    True if model supports reasoning effort, False otherwise
+</pre> <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacemodels_1_1metadata_a897a86d82e180794f7424f91b467594d_cgraph.svg" width="416" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -398,15 +439,61 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Check if a model requires max_completion_tokens parameter.
-
 Uses prefix matching to support model families (e.g., "gpt-5" matches "gpt-5.2").
 This is intentional to cover versioned models within the same family.
-
 Args:
     model_name: Name of the model to check
-
 Returns:
     True if model requires max_completion_tokens, False otherwise
+</pre> 
+</div>
+</div>
+<a id="a5a351bccd34073b47d17034b9ec266a2" name="a5a351bccd34073b47d17034b9ec266a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a351bccd34073b47d17034b9ec266a2">&#9670;&#160;</a></span>uses_responses_api()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> bool models.metadata.uses_responses_api </td>
+          <td>(</td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>model</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Check if a model requires the Responses API instead of Chat Completions.
+Args:
+    model: Name of the model to check
+Returns:
+    True if model uses Responses API, False otherwise
+</pre> <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespacemodels_1_1metadata_a5a351bccd34073b47d17034b9ec266a2_cgraph.svg" width="391" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a444f301466304bfc7a8c55216ea0e655" name="a444f301466304bfc7a8c55216ea0e655"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a444f301466304bfc7a8c55216ea0e655">&#9670;&#160;</a></span>validate_reasoning_effort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> bool models.metadata.validate_reasoning_effort </td>
+          <td>(</td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>effort</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Validate that reasoning effort is a valid value.
+Args:
+    effort: Reasoning effort level to validate
+Returns:
+    True if effort is valid, False otherwise
 </pre> 
 </div>
 </div>
@@ -497,6 +584,20 @@ Returns:
       <table class="memname">
         <tr>
           <td class="memname">models.metadata.USE_MAX_COMPLETION_TOKENS = set(_config.get('use_max_completion_tokens', []))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa6a1a2138c8dfb2ef7edd0c4f9da70e0" name="aa6a1a2138c8dfb2ef7edd0c4f9da70e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6a1a2138c8dfb2ef7edd0c4f9da70e0">&#9670;&#160;</a></span>VALID_REASONING_EFFORTS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">dict models.metadata.VALID_REASONING_EFFORTS = {'none', 'low', 'medium', 'high', 'xhigh'}</td>
         </tr>
       </table>
 </div><div class="memdoc">

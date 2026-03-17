@@ -1,7 +1,8 @@
 var classcore_1_1sandbox_1_1SandboxManager =
 [
-    [ "__init__", "classcore_1_1sandbox_1_1SandboxManager.html#a4d61e3883dbd99cda85da5e1df39f0e1", null ],
+    [ "__init__", "classcore_1_1sandbox_1_1SandboxManager.html#a497a3d5a490b78d222355f2435357b6b", null ],
     [ "build_bwrap_command", "classcore_1_1sandbox_1_1SandboxManager.html#ac935b8aa94fa41939daa96a1866d21aa", null ],
+    [ "check_capability", "classcore_1_1sandbox_1_1SandboxManager.html#a11837b6ba86746dc0c5400111b54d26f", null ],
     [ "is_available", "classcore_1_1sandbox_1_1SandboxManager.html#ae0139e54ec4099aafd66e88ad6a2306f", null ],
     [ "is_tool_blacklisted", "classcore_1_1sandbox_1_1SandboxManager.html#a2d7dce26ef10f64fb3e7b1c38ded9ae2", null ],
     [ "run", "classcore_1_1sandbox_1_1SandboxManager.html#ae2afdf199a31e056780d21e8442d9ddf", null ],
@@ -14,5 +15,5 @@ var classcore_1_1sandbox_1_1SandboxManager =
     [ "sandbox_config", "classcore_1_1sandbox_1_1SandboxManager.html#adb6f12475447e54e65f567841afe62d9", null ],
     [ "tool_blacklist", "classcore_1_1sandbox_1_1SandboxManager.html#ac8d824a4030c235919e3c9cfc1996ceb", null ],
     [ "workspace_path", "classcore_1_1sandbox_1_1SandboxManager.html#a32d7021e7aa5de07790f562adf36bc21", null ],
-    [ "workspaces", "classcore_1_1sandbox_1_1SandboxManager.html#a045bdc7fe32f7186e1ab5017d305ef30", null ]
+    [ "workspace_paths", "classcore_1_1sandbox_1_1SandboxManager.html#a7dcc540075f1209fa43637a11b2d2c3b", null ]
 ];

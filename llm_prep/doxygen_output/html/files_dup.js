@@ -18,13 +18,5 @@ var files_dup =
     [ "utils", "dir_cbdb8362360e11eafe2fa3bc74cf0ffd.html", "dir_cbdb8362360e11eafe2fa3bc74cf0ffd" ],
     [ "workshop", "dir_4518f61c1ff038ae4f8b070466403198.html", "dir_4518f61c1ff038ae4f8b070466403198" ],
     [ "axe.py", "axe_8py.html", "axe_8py" ],
-    [ "demo_absolute_path_fix.py", "demo__absolute__path__fix_8py.html", "demo__absolute__path__fix_8py" ],
-    [ "demo_dynamic_tokens.py", "demo__dynamic__tokens_8py.html", "demo__dynamic__tokens_8py" ],
-    [ "demo_heredoc_fix.py", "demo__heredoc__fix_8py.html", "demo__heredoc__fix_8py" ],
-    [ "demo_improvements.py", "demo__improvements_8py.html", "demo__improvements_8py" ],
-    [ "demo_minifier.py", "demo__minifier_8py.html", "demo__minifier_8py" ],
-    [ "demo_skills_system.py", "demo__skills__system_8py.html", "demo__skills__system_8py" ],
-    [ "demo_task_completion_fix.py", "demo__task__completion__fix_8py.html", "demo__task__completion__fix_8py" ],
-    [ "manual_test_write.py", "manual__test__write_8py.html", "manual__test__write_8py" ],
-    [ "manual_test_xml.py", "manual__test__xml_8py.html", "manual__test__xml_8py" ]
+    [ "axe_socket_client.py", "axe__socket__client_8py.html", "axe__socket__client_8py" ]
 ];

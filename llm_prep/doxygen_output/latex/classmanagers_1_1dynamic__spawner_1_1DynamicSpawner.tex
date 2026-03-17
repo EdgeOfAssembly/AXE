@@ -2,8 +2,7 @@
 \hypertarget{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner}{}\label{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner}\index{managers.dynamic\_spawner.DynamicSpawner@{managers.dynamic\_spawner.DynamicSpawner}}
 
 
-Collaboration diagram for managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner\+:
-\nopagebreak
+Collaboration diagram for managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -38,7 +37,6 @@ list \mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner_ae2407
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Manages dynamic spawning of agents based on workload and resources.
-
 Features:
 - Spawn new agent instances on demand
 - Resource-based spawning decisions
@@ -68,8 +66,7 @@ managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+\_\+\+\_\+init\+\_\+\+\_\+ 
  Tuple\mbox{[}bool, str\mbox{]} managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+can\+\_\+spawn (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if a new agent can be spawned.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -90,10 +87,8 @@ managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+\_\+\+\_\+init\+\_\+\+\_\+ 
  Tuple\mbox{[}bool, str\mbox{]} managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+should\+\_\+auto\+\_\+spawn (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{float }]{task\+\_\+complexity}{ = {\ttfamily 0.5}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Determine if auto-spawning is needed based on workload.
-
 Args:
     task_complexity: 0.0-1.0 scale of task complexity
-
 Returns:
     Tuple of (should_spawn, reason)
 \end{DoxyVerb}
@@ -104,18 +99,15 @@ Returns:
  Dict\mbox{[}str, Any\mbox{]} managers.\+dynamic\+\_\+spawner.\+Dynamic\+Spawner.\+spawn\+\_\+agent (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{model\+\_\+name}{, }\item[{str}]{provider}{, }\item[{str}]{supervisor\+\_\+id}{, }\item[{str }]{reason}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Spawn a new agent instance.
-
 Args:
     model_name: The model to use for the new agent
     provider: API provider (openai, anthropic, etc.)
     supervisor_id: ID of the supervisor requesting spawn
     reason: Why the agent is being spawned
-
 Returns:
     New agent info or error
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

@@ -20,13 +20,11 @@ Tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{namespacemanagers_1_1shared__bui
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Shared Build Status System for AXE Multi-Agent Collaboration.
-
 Provides a file-based system where all agents can:
 1. See current build status (gcc, make, python output)
 2. Track errors and warnings from build tools
 3. Volunteer to fix issues when idle
 4. Share diff patches instead of full code
-
 This reduces token usage by:
 - Using unified diffs instead of full file contents
 - Centralizing build output so agents don't repeat commands
@@ -44,12 +42,10 @@ This reduces token usage by:
  Tuple\mbox{[}bool, str\mbox{]} managers.\+shared\+\_\+build\+\_\+status.\+run\+\_\+build\+\_\+command (\begin{DoxyParamCaption}\item[{str}]{command}{, }\item[{str}]{workspace\+\_\+dir}{, }\item[{\mbox{\hyperlink{classmanagers_1_1shared__build__status_1_1SharedBuildStatusManager}{Shared\+Build\+Status\+Manager}}}]{build\+\_\+manager}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Run a build command and record its output to the shared status.
-
 Args:
     command: Build command to run
     workspace_dir: Directory to run command in
     build_manager: SharedBuildStatusManager instance
-
 Returns:
     Tuple of (success, output)
 \end{DoxyVerb}

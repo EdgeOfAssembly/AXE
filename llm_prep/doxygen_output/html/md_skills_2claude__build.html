@@ -91,11 +91,11 @@ $(function(){initNavTree('md_skills_2claude__build.html','',''); });
   <div class="headertitle"><div class="title">Claude Security-Focused Build Skill </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md1207"></a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1208"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2098"></a></p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2099"></a>
 Overview</h1>
 <p>This skill provides <b>Claude-specific</b> guidelines for silent builds during security auditing and code review. Claude's role as a security auditor requires capturing only <b>critical security-relevant output</b> while minimizing noise from routine build processes.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1209"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2100"></a>
 Security Auditing Workflow</h1>
 <p>When performing security audits, Claude should:</p>
 <ol type="1">
@@ -104,9 +104,9 @@ Security Auditing Workflow</h1>
 <li><b>Re-run with verbose output</b> when investigating specific vulnerabilities</li>
 <li><b>Document security findings</b> clearly and concisely</li>
 </ol>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1210"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2101"></a>
 Silent Security Builds</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md1211"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2102"></a>
 Core Build Systems</h2>
 <p>All standard build systems should use silent flags during security audits:</p>
 <div class="fragment"><div class="line"># Make</div>
@@ -130,34 +130,34 @@ Core Build Systems</h2>
 <div class="line"> </div>
 <div class="line"># SCons</div>
 <div class="line">scons -Q</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md1212"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md2103"></a>
 Security-Specific Tools</h2>
 <p>Many security analysis tools also support quiet modes:</p>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md1213"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md2104"></a>
 Valgrind (Memory Analysis)</h3>
 <p><b>Silent mode:</b> </p><div class="fragment"><div class="line">valgrind --quiet ./program</div>
 <div class="line">valgrind -q ./program              # Short form</div>
 </div><!-- fragment --><p><b>When to use verbose:</b> </p><div class="fragment"><div class="line">valgrind --leak-check=full ./program    # Detailed memory leak analysis</div>
 <div class="line">valgrind -v ./program                   # Verbose mode for debugging</div>
 </div><!-- fragment --><p><b>Usage in security audit:</b> </p><div class="fragment"></div><!-- fragment --><p> EXEC </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1214"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2105"></a>
 Quick check for memory issues (silent)</h1>
 <p>valgrind &ndash;quiet &ndash;leak-check=yes ./suspicious_binary</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1215"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2106"></a>
 If issues found, re-run with full details:</h1>
-<p>valgrind &ndash;leak-check=full &ndash;show-leak-kinds=all ./suspicious_binary </p><div class="fragment"></div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="autotoc_md1216"></a>
+<p>valgrind &ndash;leak-check=full &ndash;show-leak-kinds=all ./suspicious_binary </p><div class="fragment"></div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="autotoc_md2107"></a>
 Cppcheck (Static Analysis)</h4>
 <p><b>Silent mode:</b> </p><div class="fragment"><div class="line">cppcheck --quiet source.c              # Only show findings</div>
 <div class="line">cppcheck -q --enable=warning source.c  # Warnings only</div>
 </div><!-- fragment --><p><b>When to use verbose:</b> </p><div class="fragment"><div class="line">cppcheck --verbose --enable=all source.c    # Full analysis with explanations</div>
 <div class="line">cppcheck -v source.c                        # Verbose mode</div>
 </div><!-- fragment --><p><b>Usage in security audit:</b> </p><div class="fragment"></div><!-- fragment --><p> EXEC </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1217"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2108"></a>
 Run static analysis quietly</h1>
 <p>cppcheck &ndash;quiet &ndash;enable=warning,style,performance src/</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1218"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2109"></a>
 If critical issues found, re-run with full details:</h1>
-<p>cppcheck &ndash;verbose &ndash;enable=all src/ </p><div class="fragment"></div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="autotoc_md1219"></a>
+<p>cppcheck &ndash;verbose &ndash;enable=all src/ </p><div class="fragment"></div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="autotoc_md2110"></a>
 AddressSanitizer (ASan)</h4>
 <p><b>Silent mode:</b> </p><div class="fragment"><div class="line"># Compile with ASan (minimal output)</div>
 <div class="line">gcc -fsanitize=address -g -o program source.c 2&gt;&amp;1 | grep -E &quot;(error|warning)&quot;</div>
@@ -167,66 +167,66 @@ AddressSanitizer (ASan)</h4>
 </div><!-- fragment --><p><b>When to use verbose:</b> </p><div class="fragment"><div class="line"># Detailed ASan output for investigation</div>
 <div class="line">ASAN_OPTIONS=verbosity=1 ./program</div>
 </div><!-- fragment --><p><b>Usage in security audit:</b> </p><div class="fragment"></div><!-- fragment --><p> EXEC </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1220"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2111"></a>
 Compile with ASan and run tests silently</h1>
 <p>gcc -fsanitize=address -g -o test_binary test.c ASAN_OPTIONS=verbosity=0 ./test_binary</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1221"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2112"></a>
 If issues detected, re-run with verbose output:</h1>
-<p>ASAN_OPTIONS=verbosity=1 ./test_binary </p><div class="fragment"></div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="autotoc_md1222"></a>
+<p>ASAN_OPTIONS=verbosity=1 ./test_binary </p><div class="fragment"></div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="autotoc_md2113"></a>
 Clang Static Analyzer</h4>
 <p><b>Silent mode:</b> </p><div class="fragment"><div class="line">scan-build --status-bugs -o reports make -s</div>
 </div><!-- fragment --><p><b>When to use verbose:</b> </p><div class="fragment"><div class="line">scan-build -v --status-bugs -o reports make    # Verbose analysis</div>
 </div><!-- fragment --><p><b>Usage in security audit:</b> </p><div class="fragment"></div><!-- fragment --><p> EXEC </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1223"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2114"></a>
 Run Clang static analyzer quietly</h1>
 <p>scan-build &ndash;status-bugs -o scan-results make -s clean all</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1224"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2115"></a>
 Review findings</h1>
-<p>cat scan-results/*/report-*.html </p><div class="fragment"></div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="autotoc_md1225"></a>
+<p>cat scan-results/*/report-*.html </p><div class="fragment"></div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="autotoc_md2116"></a>
 Flawfinder (C/C++ Security Scanner)</h4>
 <p><b>Silent mode:</b> </p><div class="fragment"><div class="line">flawfinder --quiet --minlevel=3 src/    # Only show level 3+ issues</div>
 </div><!-- fragment --><p><b>When to use verbose:</b> </p><div class="fragment"><div class="line">flawfinder --minlevel=0 src/            # Show all findings</div>
 </div><!-- fragment --><p><b>Usage in security audit:</b> </p><div class="fragment"></div><!-- fragment --><p> EXEC </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1226"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2117"></a>
 Quick security scan (high severity only)</h1>
 <p>flawfinder &ndash;quiet &ndash;minlevel=3 src/</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1227"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2118"></a>
 If issues found, run full scan:</h1>
-<p>flawfinder &ndash;minlevel=0 &ndash;html src/ &gt; security_report.html </p><div class="fragment"></div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md1228"></a>
+<p>flawfinder &ndash;minlevel=0 &ndash;html src/ &gt; security_report.html </p><div class="fragment"></div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md2119"></a>
 Security Audit Workflow Example</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md1229"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md2120"></a>
 Phase 1: Initial Silent Build</h3>
 <div class="fragment"><div class="line">I&#39;ll perform a security audit of the codebase. Starting with a silent build to check for compilation warnings:</div>
 </div><!-- fragment --><p> EXEC </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1230"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2121"></a>
 Configure with security flags</h1>
 <p>./configure &ndash;quiet &ndash;enable-silent-rules CFLAGS="-Wall -Wextra -Werror"</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1231"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2122"></a>
 Build silently</h1>
 <p>make -s all </p><div class="fragment"><div class="line">Build completed successfully with no warnings.</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md1232"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md2123"></a>
 Phase 2: Static Analysis (Silent)</h3>
 <div class="fragment"><div class="line">Running static analysis tools quietly to identify potential vulnerabilities:</div>
 </div><!-- fragment --><p> EXEC </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1233"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2124"></a>
 Cppcheck for C/C++ issues</h1>
 <p>cppcheck &ndash;quiet &ndash;enable=warning,performance,portability src/</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1234"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2125"></a>
 Flawfinder for security issues</h1>
 <p>flawfinder &ndash;quiet &ndash;minlevel=3 src/ </p><div class="fragment"><div class="line">Found 2 potential issues:</div>
 <div class="line">- Buffer overflow in parse_input() (src/parser.c:45)</div>
 <div class="line">- Format string vulnerability in log_message() (src/logger.c:78)</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md1235"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md2126"></a>
 Phase 3: Detailed Investigation (Verbose)</h3>
 <div class="fragment"><div class="line">Investigating the buffer overflow with verbose output:</div>
 </div><!-- fragment --><p> EXEC </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1236"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2127"></a>
 Re-run cppcheck with full details</h1>
 <p>cppcheck &ndash;verbose &ndash;enable=all src/parser.c</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1237"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2128"></a>
 Compile with AddressSanitizer for runtime detection</h1>
 <p>gcc -fsanitize=address -g -o parser_test src/parser.c src/test_parser.c ASAN_OPTIONS=verbosity=1 ./parser_test </p><div class="fragment"><div class="line">Confirmed: Buffer overflow occurs when input exceeds 256 bytes...</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md1238"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md2129"></a>
 Phase 4: Security Report</h3>
 <div class="fragment"><div class="line">## Security Audit Report</div>
 <div class="line"> </div>
@@ -247,7 +247,7 @@ Phase 4: Security Report</h3>
 <div class="line">- Cppcheck static analysis</div>
 <div class="line">- AddressSanitizer runtime detection</div>
 <div class="line">- Manual code review</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md1239"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md2130"></a>
 Token Savings in Security Audits</h2>
 <p>Security audits benefit significantly from silent builds:</p>
 <table class="markdownTable">
@@ -262,22 +262,22 @@ Token Savings in Security Audits</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>12000</b>  </td><td class="markdownTableBodyNone"><b>1300</b>  </td><td class="markdownTableBodyNone"><b>89%</b>  </td></tr>
 </table>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md1240"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2131"></a>
 Best Practices for Security Audits</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md1241"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md2132"></a>
 1. Start Silent, Investigate Verbose</h3>
 <p>Always begin with silent builds to get a clean overview: </p><div class="fragment"><div class="line">✓ GOOD:</div>
 </div><!-- fragment --><p> EXEC cppcheck &ndash;quiet &ndash;enable=warning src/ </p><div class="fragment"><div class="line">Then drill down with verbose output when issues are found:</div>
 </div><!-- fragment --><p> EXEC cppcheck &ndash;verbose &ndash;enable=all src/vulnerable_file.c </p><div class="fragment"><div class="line">✗ BAD:</div>
-</div><!-- fragment --><p> EXEC cppcheck &ndash;verbose &ndash;enable=all src/ # Too much noise from the start </p><div class="fragment"></div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md1242"></a>
+</div><!-- fragment --><p> EXEC cppcheck &ndash;verbose &ndash;enable=all src/ # Too much noise from the start </p><div class="fragment"></div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md2133"></a>
 2. Focus on Security-Relevant Output</h3>
 <p>Filter output to show only security findings: </p><div class="fragment"></div><!-- fragment --><p> EXEC </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1243"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2134"></a>
 Good: Only security warnings</h1>
 <p>make -s CFLAGS="-Wall -Wextra" 2&gt;&amp;1 | grep -E "(warning|error)"</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1244"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2135"></a>
 Good: Only high-severity findings</h1>
-<p>flawfinder &ndash;quiet &ndash;minlevel=3 src/ </p><div class="fragment"></div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md1245"></a>
+<p>flawfinder &ndash;quiet &ndash;minlevel=3 src/ </p><div class="fragment"></div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md2136"></a>
 3. Document Severity Levels</h3>
 <p>Always flag findings with severity levels: </p><div class="fragment"><div class="line">## Security Findings</div>
 <div class="line"> </div>
@@ -285,7 +285,7 @@ Good: Only high-severity findings</h1>
 <div class="line">**HIGH:** SQL injection in query builder (src/db.c:456)</div>
 <div class="line">**MEDIUM:** Potential race condition in thread pool (src/pool.c:789)</div>
 <div class="line">**LOW:** Weak random number generation (src/rand.c:34)</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md1246"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md2137"></a>
 4. Use Quiet Flags in CI/CD Security Checks</h3>
 <p>In security-focused CI/CD pipelines: </p><div class="fragment"><div class="line"># .github/workflows/security.yml</div>
 <div class="line">- name: Static Analysis</div>
@@ -296,12 +296,12 @@ Good: Only high-severity findings</h1>
 <div class="line">  run: |</div>
 <div class="line">    make -s sanitize</div>
 <div class="line">    ASAN_OPTIONS=verbosity=0 ./test_suite</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md1247"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md2138"></a>
 5. Combine Multiple Security Tools Quietly</h3>
 <p>Run multiple security tools in sequence, all with quiet flags: </p><div class="fragment"></div><!-- fragment --><p> EXEC </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1248"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2139"></a>
 Comprehensive security scan with minimal noise</h1>
-<p>cppcheck &ndash;quiet &ndash;enable=warning src/ &amp;&amp; \ flawfinder &ndash;quiet &ndash;minlevel=2 src/ &amp;&amp; \ valgrind &ndash;quiet &ndash;leak-check=yes ./program &amp;&amp; \ echo "All security checks passed" </p><div class="fragment"></div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md1249"></a>
+<p>cppcheck &ndash;quiet &ndash;enable=warning src/ &amp;&amp; \ flawfinder &ndash;quiet &ndash;minlevel=2 src/ &amp;&amp; \ valgrind &ndash;quiet &ndash;leak-check=yes ./program &amp;&amp; \ echo "All security checks passed" </p><div class="fragment"></div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md2140"></a>
 Security Tool Quick Reference</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -323,7 +323,7 @@ Security Tool Quick Reference</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>SonarQube</b>  </td><td class="markdownTableBodyNone"><span class="tt">sonar.log.level=WARN</span>  </td><td class="markdownTableBodyNone"><span class="tt">DEBUG</span>  </td><td class="markdownTableBodyNone">Multi-language security analysis  </td></tr>
 </table>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md1250"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2141"></a>
 Integration with AGENTS.md</h2>
 <p>When collaborating with other agents on security-focused tasks, Claude should:</p>
 <ol type="1">
@@ -337,10 +337,10 @@ Integration with AGENTS.md</h2>
 <div class="line">@claude:</div>
 <div class="line">I&#39;ll perform a security audit of the authentication module using silent builds to minimize log noise:</div>
 </div><!-- fragment --><p> EXEC </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1251"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2142"></a>
 Static analysis (silent)</h1>
 <p>cppcheck &ndash;quiet &ndash;enable=warning src/auth.c</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1252"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2143"></a>
 Runtime analysis (silent)</h1>
 <p>gcc -fsanitize=address -g -o auth_test src/auth.c test/test_auth.c ASAN_OPTIONS=verbosity=0 ./auth_test </p><div class="fragment"><div class="line">**Security Review Summary:**</div>
 <div class="line">- ✓ No buffer overflows detected</div>
@@ -349,28 +349,28 @@ Runtime analysis (silent)</h1>
 <div class="line">- ⚠️  MEDIUM: Consider adding rate limiting to prevent brute force attacks</div>
 <div class="line"> </div>
 <div class="line">The refactoring looks secure. I recommend adding the rate limiting enhancement.</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md1253"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md2144"></a>
 Common Security Build Patterns</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md1254"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md2145"></a>
 Pattern 1: Hardening Flags (Silent Build)</h3>
 <div class="fragment"><div class="line"># Compile with security hardening flags, silent output</div>
 <div class="line">make -s CFLAGS=&quot;-Wall -Wextra -Werror -D_FORTIFY_SOURCE=2 -fstack-protector-strong -fPIE -O2&quot;</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md1255"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md2146"></a>
 Pattern 2: Security Tool Chain (Silent)</h3>
 <div class="fragment"><div class="line"># Run complete security tool chain silently</div>
 <div class="line">cppcheck --quiet --enable=all src/ &amp;&amp; \</div>
 <div class="line">flawfinder --quiet --minlevel=2 src/ &amp;&amp; \</div>
 <div class="line">make -s clean all &amp;&amp; \</div>
 <div class="line">valgrind --quiet --leak-check=yes ./program</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md1256"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md2147"></a>
 Pattern 3: Regression Testing (Silent)</h3>
 <div class="fragment"><div class="line"># Security regression tests (quiet unless failures)</div>
 <div class="line">pytest -q tests/security/ --tb=short</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md1257"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md2148"></a>
 Pattern 4: Fuzzing Setup (Silent)</h3>
 <div class="fragment"><div class="line"># Build with AFL fuzzing support (silent)</div>
 <div class="line">CC=afl-gcc make -s all</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md1258"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md2149"></a>
 Summary</h2>
 <p>As Claude, the security auditor, you should:</p>
 <ol type="1">
@@ -382,7 +382,7 @@ Summary</h2>
 <li><b>Preserve context</b> by keeping shared collaboration notes clean</li>
 </ol>
 <p>Remember: <b>Silent builds → clearer security findings → better audits → safer code</b></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md1259"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2150"></a>
 References</h2>
 <ul>
 <li><b><a class="el" href="build_8md.html">skills/build.md</a></b>: General silent builds skill for all agents</li>

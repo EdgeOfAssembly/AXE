@@ -119,7 +119,6 @@ Protected Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Manages autonomous GitHub operations with human review gates.
-
 Safety:
 - Disabled by default
 - All operations require human approval
@@ -150,7 +149,6 @@ Safety:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Initialize GitHub agent.
-
 Args:
     workspace_dir: Path to git repository
     enabled: If False, all methods return immediately (no-op)
@@ -181,7 +179,6 @@ Args:
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Verify SSH key and remote configured.
-
 Returns:
     True if SSH appears configured
 </pre> 
@@ -210,7 +207,6 @@ Returns:
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Check if workspace is a git repo.
-
 Returns:
     True if git repository detected
 </pre> 
@@ -243,10 +239,8 @@ Returns:
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Get git diff for review.
-
 Args:
     files: List of files to get diff for
-
 Returns:
     Git diff output
 </pre> <div class="dynheader">
@@ -280,7 +274,6 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Get recent test output if available.
-
 Returns:
     Test results or None
 </pre> <div class="dynheader">
@@ -320,12 +313,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Agent requests to push changes. Returns None if disabled.
-
 Args:
     branch: Target branch name
     commit_msg: Commit message
     files: List of files changed
-
 Returns:
     Dict with review info, or None if feature disabled
 </pre> <div class="dynheader">
@@ -365,12 +356,10 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Execute push after human approval.
-
 Args:
     branch: Target branch name
     commit_msg: Commit message
     files: List of files to commit
-
 Returns:
     Dict with success status and details
 </pre> 

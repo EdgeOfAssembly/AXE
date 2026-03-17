@@ -2,8 +2,7 @@
 \hypertarget{classcore_1_1sandbox_1_1SandboxManager}{}\label{classcore_1_1sandbox_1_1SandboxManager}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
 
 
-Collaboration diagram for core.\+sandbox.\+Sandbox\+Manager\+:
-\nopagebreak
+Collaboration diagram for core.\+sandbox.\+Sandbox\+Manager\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -13,9 +12,11 @@ Collaboration diagram for core.\+sandbox.\+Sandbox\+Manager\+:
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a4d61e3883dbd99cda85da5e1df39f0e1}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \textquotesingle{}\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}\textquotesingle{} \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a2cc125123a6108cb7dd25f656de3df40}{config}}, str \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a32d7021e7aa5de07790f562adf36bc21}{workspace\+\_\+path}})
+\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a497a3d5a490b78d222355f2435357b6b}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \textquotesingle{}\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}\textquotesingle{} \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a2cc125123a6108cb7dd25f656de3df40}{config}}, str \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a32d7021e7aa5de07790f562adf36bc21}{workspace\+\_\+path}}, Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a7dcc540075f1209fa43637a11b2d2c3b}{workspace\+\_\+paths}}=None)
 \item 
 bool \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_ae0139e54ec4099aafd66e88ad6a2306f}{is\+\_\+available}} (self)
+\item 
+Tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a11837b6ba86746dc0c5400111b54d26f}{check\+\_\+capability}} (self)
 \item 
 List\mbox{[}str\mbox{]} \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_ac935b8aa94fa41939daa96a1866d21aa}{build\+\_\+bwrap\+\_\+command}} (self)
 \item 
@@ -44,37 +45,25 @@ bool \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a2d7dce26ef10f64fb3
 \item 
 \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_ac66e73d6799767d77e17aedf76d1a61b}{host\+\_\+binds}} = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}host\+\_\+binds\textquotesingle{}, \{\})
 \item 
-\mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a045bdc7fe32f7186e1ab5017d305ef30}{workspaces}} = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}workspaces\textquotesingle{}, \mbox{[}$\,$\mbox{]})
+list \mbox{\hyperlink{classcore_1_1sandbox_1_1SandboxManager_a7dcc540075f1209fa43637a11b2d2c3b}{workspace\+\_\+paths}} = \mbox{[}os.\+path.\+abspath(wp) for wp in workspace\+\_\+paths\mbox{]}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Manages bubblewrap sandbox lifecycle and command execution.
-
-Key responsibilities:
-- Build bwrap command line from config
-- Execute commands inside sandbox
-- Handle sandbox lifecycle (setup/teardown)
-- Support multiple concurrent workspaces (future)
 \end{DoxyVerb}
  
 
 \label{doc-constructors}
 \Hypertarget{classcore_1_1sandbox_1_1SandboxManager_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a4d61e3883dbd99cda85da5e1df39f0e1}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!\_\_init\_\_@{\_\_init\_\_}}
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a497a3d5a490b78d222355f2435357b6b}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!\_\_init\_\_@{\_\_init\_\_}}
 \index{\_\_init\_\_@{\_\_init\_\_}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
 \doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
-{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a4d61e3883dbd99cda85da5e1df39f0e1} 
-core.\+sandbox.\+Sandbox\+Manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\textquotesingle{}\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}\textquotesingle{}}]{config}{, }\item[{str}]{workspace\+\_\+path}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a497a3d5a490b78d222355f2435357b6b} 
+core.\+sandbox.\+Sandbox\+Manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\textquotesingle{}\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}\textquotesingle{}}]{config}{, }\item[{str}]{workspace\+\_\+path}{, }\item[{Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} }]{workspace\+\_\+paths}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}Initialize sandbox manager.
 
-Args:
-    config: Configuration object containing sandbox settings
-    workspace_path: Path to workspace directory (project root)
-\end{DoxyVerb}
- 
 
 \label{doc-func-members}
 \Hypertarget{classcore_1_1sandbox_1_1SandboxManager_doc-func-members}
@@ -86,16 +75,26 @@ Args:
  List\mbox{[}str\mbox{]} core.\+sandbox.\+Sandbox\+Manager.\+build\+\_\+bwrap\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Build the bwrap command line from configuration.
-
-Returns:
-    List of command arguments for bwrap
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcore_1_1sandbox_1_1SandboxManager_ac935b8aa94fa41939daa96a1866d21aa_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a11837b6ba86746dc0c5400111b54d26f}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!check\_capability@{check\_capability}}
+\index{check\_capability@{check\_capability}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{check\_capability()}{check\_capability()}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a11837b6ba86746dc0c5400111b54d26f} 
+ Tuple\mbox{[}bool, str\mbox{]} core.\+sandbox.\+Sandbox\+Manager.\+check\+\_\+capability (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Test if bubblewrap can run a trivial command with our mounts.\end{DoxyVerb}
+ Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcore_1_1sandbox_1_1SandboxManager_a11837b6ba86746dc0c5400111b54d26f_cgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classcore_1_1sandbox_1_1SandboxManager_ae0139e54ec4099aafd66e88ad6a2306f}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!is\_available@{is\_available}}
@@ -104,13 +103,8 @@ Returns:
 {\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_ae0139e54ec4099aafd66e88ad6a2306f} 
  bool core.\+sandbox.\+Sandbox\+Manager.\+is\+\_\+available (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}Check if bubblewrap is installed and usable.
-
-Returns:
-    True if bwrap is available, False otherwise
-\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+\begin{DoxyVerb}Check if bubblewrap is installed and usable.\end{DoxyVerb}
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -123,31 +117,15 @@ Returns:
 {\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a2d7dce26ef10f64fb3e7b1c38ded9ae2} 
  bool core.\+sandbox.\+Sandbox\+Manager.\+is\+\_\+tool\+\_\+blacklisted (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{tool}{}\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}Check if tool is in the blacklist.
-
-Args:
-    tool: Tool name to check (base command name)
-
-Returns:
-    True if tool is blacklisted, False otherwise
-\end{DoxyVerb}
- \Hypertarget{classcore_1_1sandbox_1_1SandboxManager_ae2afdf199a31e056780d21e8442d9ddf}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!run@{run}}
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_ae2afdf199a31e056780d21e8442d9ddf}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!run@{run}}
 \index{run@{run}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
 \doxysubsubsection{\texorpdfstring{run()}{run()}}
 {\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_ae2afdf199a31e056780d21e8442d9ddf} 
  Tuple\mbox{[}bool, str\mbox{]} core.\+sandbox.\+Sandbox\+Manager.\+run (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{cmd}{, }\item[{int }]{timeout}{ = {\ttfamily 300}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Execute command inside sandbox.
-
-Args:
-    cmd: Shell command to execute
-    timeout: Maximum execution time in seconds (default: 300)
-
-Returns:
-    Tuple of (success: bool, output: str)
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -213,11 +191,11 @@ core.\+sandbox.\+Sandbox\+Manager.\+tool\+\_\+blacklist = set(self.\+sandbox\+\_
 {\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a32d7021e7aa5de07790f562adf36bc21} 
 core.\+sandbox.\+Sandbox\+Manager.\+workspace\+\_\+path = os.\+path.\+abspath(workspace\+\_\+path)}
 
-\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a045bdc7fe32f7186e1ab5017d305ef30}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!workspaces@{workspaces}}
-\index{workspaces@{workspaces}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
-\doxysubsubsection{\texorpdfstring{workspaces}{workspaces}}
-{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a045bdc7fe32f7186e1ab5017d305ef30} 
-core.\+sandbox.\+Sandbox\+Manager.\+workspaces = self.\+sandbox\+\_\+config.\+get(\textquotesingle{}workspaces\textquotesingle{}, \mbox{[}$\,$\mbox{]})}
+\Hypertarget{classcore_1_1sandbox_1_1SandboxManager_a7dcc540075f1209fa43637a11b2d2c3b}\index{core.sandbox.SandboxManager@{core.sandbox.SandboxManager}!workspace\_paths@{workspace\_paths}}
+\index{workspace\_paths@{workspace\_paths}!core.sandbox.SandboxManager@{core.sandbox.SandboxManager}}
+\doxysubsubsection{\texorpdfstring{workspace\_paths}{workspace\_paths}}
+{\footnotesize\ttfamily \label{classcore_1_1sandbox_1_1SandboxManager_a7dcc540075f1209fa43637a11b2d2c3b} 
+list core.\+sandbox.\+Sandbox\+Manager.\+workspace\+\_\+paths = \mbox{[}os.\+path.\+abspath(wp) for wp in workspace\+\_\+paths\mbox{]}}
 
 
 

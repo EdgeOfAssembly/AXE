@@ -1,8 +1,11 @@
 <map id="axe.ChatSession.list_dirs" name="axe.ChatSession.list_dirs">
-<area shape="rect" id="Node000001" title=" " alt="" coords="437,14,620,42"/>
-<area shape="rect" id="Node000002" href="$classaxe_1_1ChatSession.html#aaa359a2981c69ef0b93b8b48e259e007" title=" " alt="" coords="207,5,389,50"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="419,28,389,30,389,25,424,28"/>
-<area shape="rect" id="Node000003" href="$classaxe_1_1ChatSession.html#a68cb42802ab49b009bbfc87e9d7e8f78" title=" " alt="" coords="5,14,159,42"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="188,37,159,39,159,34,194,37"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="174,16,209,18,203,19,174,21"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="661,86,845,114"/>
+<area shape="rect" id="Node000002" href="$classaxe_1_1ChatSession.html#aaa359a2981c69ef0b93b8b48e259e007" title=" " alt="" coords="431,77,613,122"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="643,100,614,102,614,97,648,100"/>
+<area shape="rect" id="Node000003" href="$classaxe_1_1ChatSession.html#a00f4c50861d88ce623a2c2db3ba0bd0b" title=" " alt="" coords="207,5,383,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="432,72,367,53,368,48,437,72"/>
+<area shape="rect" id="Node000004" href="$classaxe_1_1ChatSession.html#a68cb42802ab49b009bbfc87e9d7e8f78" title=" " alt="" coords="5,86,159,114"/>
+<area shape="poly" id="edge5_Node000002_Node000004" title=" " alt="" coords="416,110,159,109,159,104,416,105"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="215,55,126,88,125,83,210,56"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="174,90,431,90,430,95,174,95"/>
 </map>

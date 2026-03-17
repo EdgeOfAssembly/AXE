@@ -128,7 +128,6 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Shared workspace for multi-agent collaboration.
-
 Provides shared files for agent coordination:
 - .collab_shared.md: General notes and communication
 - .collab_build_status.md: Build output, errors, warnings
@@ -271,11 +270,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Claim an error for fixing by an agent.
-
 Args:
     error_index: Index of the error to claim
     agent_alias: Alias of the agent claiming the fix
-
 Returns:
     True if successfully claimed
 </pre> <div class="dynheader">
@@ -306,7 +303,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get a summary of build status for agents to see.
-
 Returns a formatted string with:
 - Current build status (success/failed/warning)
 - List of unclaimed errors/warnings agents can fix
@@ -350,10 +346,8 @@ Returns a formatted string with:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Mark an error as fixed.
-
 Args:
     error_index: Index of the error to mark as fixed
-
 Returns:
     True if successfully marked
 </pre> <div class="dynheader">
@@ -446,7 +440,6 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Record build output from a command execution.
-
 Args:
     tool: Build tool name (gcc, make, python, etc.)
     output: Full output from the command

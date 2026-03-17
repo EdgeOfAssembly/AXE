@@ -118,7 +118,6 @@ Protected Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">GPG-encrypted emergency communication channel for workers to report issues
 directly to humans, bypassing the supervisor.
-
 Workers can write encrypted reports about supervisor abuse, safety violations,
 or other critical issues that the supervisor cannot read.
 </pre> </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -171,7 +170,6 @@ or other critical issues that the supervisor cannot read.
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Encrypt a message using simple base64 encoding as a fallback.
-
 ⚠️ WARNING: This is a DEMONSTRATION ONLY encryption.
 NOT SECURE for production use. For real security, implement
 proper GPG encryption with the human's public key:
@@ -233,11 +231,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Decrypt a report (for human use only).
-
 Note: In production, this would use GPG with the human's private key.
 The current implementation returns a placeholder message since
 proper GPG decryption requires external tools and the private key.
-
 Args:
     filename: Name of the report file to decrypt
     private_key: Optional private key for GPG decryption (not yet implemented)
@@ -295,13 +291,11 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Send an encrypted report to the emergency mailbox.
-
 Args:
     agent_alias: The alias of the reporting agent (@llama1, etc.)
     report_type: Type of report (supervisor_abuse, safety_violation, etc.)
     subject: Brief subject line
     details: Full details of the report
-
 Returns:
     Tuple of (success, message/filename)
 </pre> <div class="dynheader">

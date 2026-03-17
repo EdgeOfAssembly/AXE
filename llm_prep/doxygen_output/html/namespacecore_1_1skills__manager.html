@@ -99,16 +99,15 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a16622a9ecf2e28d1b13cb7661100a210" id="r_a16622a9ecf2e28d1b13cb7661100a210"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcore_1_1skills__manager_1_1SkillsManager.html">SkillsManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a16622a9ecf2e28d1b13cb7661100a210">create_skills_manager</a> (str skills_dir=&quot;skills&quot;, Optional[Dict] <a class="el" href="namespacecore_1_1config.html">config</a>=None)</td></tr>
+<tr class="memitem:a26101b590a7760f629f985fcffafc459" id="r_a26101b590a7760f629f985fcffafc459"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcore_1_1skills__manager_1_1SkillsManager.html">SkillsManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26101b590a7760f629f985fcffafc459">create_skills_manager</a> (Optional[str] skills_dir=None, Optional[Dict] <a class="el" href="namespacecore_1_1config.html">config</a>=None)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Skills Manager for AXE.
-
 Manages agent skills - loading, discovery, and injection into prompts.
 Supports keyword-based activation and provider-specific filtering.
 </pre> </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a16622a9ecf2e28d1b13cb7661100a210" name="a16622a9ecf2e28d1b13cb7661100a210"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16622a9ecf2e28d1b13cb7661100a210">&#9670;&#160;</a></span>create_skills_manager()</h2>
+<a id="a26101b590a7760f629f985fcffafc459" name="a26101b590a7760f629f985fcffafc459"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26101b590a7760f629f985fcffafc459">&#9670;&#160;</a></span>create_skills_manager()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -116,7 +115,7 @@ Supports keyword-based activation and provider-specific filtering.
         <tr>
           <td class="memname"> <a class="el" href="classcore_1_1skills__manager_1_1SkillsManager.html">SkillsManager</a> core.skills_manager.create_skills_manager </td>
           <td>(</td>
-          <td class="paramtype">str </td>          <td class="paramname"><span class="paramname"><em>skills_dir</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;skills&quot;</span>, </td>
+          <td class="paramtype">Optional[str] </td>          <td class="paramname"><span class="paramname"><em>skills_dir</em></span><span class="paramdefsep"> = </span><span class="paramdefval">None</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -126,11 +125,9 @@ Supports keyword-based activation and provider-specific filtering.
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Factory function to create a SkillsManager instance.
-
 Args:
-    skills_dir: Path to skills directory
+    skills_dir: Path to skills directory. Defaults to "skills" if None or empty.
     config: Optional configuration dictionary
-    
 Returns:
     Initialized SkillsManager instance
 </pre> 

@@ -94,13 +94,14 @@ $(function(){initNavTree('classcore_1_1sandbox_1_1SandboxManager.html','','class
 <div class="dynheader">
 Collaboration diagram for core.sandbox.SandboxManager:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classcore_1_1sandbox_1_1SandboxManager__coll__graph.svg" width="226" height="374"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classcore_1_1sandbox_1_1SandboxManager__coll__graph.svg" width="226" height="396"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4d61e3883dbd99cda85da5e1df39f0e1" id="r_a4d61e3883dbd99cda85da5e1df39f0e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d61e3883dbd99cda85da5e1df39f0e1">__init__</a> (self, '<a class="el" href="classcore_1_1config_1_1Config.html">Config</a>' <a class="el" href="#a2cc125123a6108cb7dd25f656de3df40">config</a>, str <a class="el" href="#a32d7021e7aa5de07790f562adf36bc21">workspace_path</a>)</td></tr>
+<tr class="memitem:a497a3d5a490b78d222355f2435357b6b" id="r_a497a3d5a490b78d222355f2435357b6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a497a3d5a490b78d222355f2435357b6b">__init__</a> (self, '<a class="el" href="classcore_1_1config_1_1Config.html">Config</a>' <a class="el" href="#a2cc125123a6108cb7dd25f656de3df40">config</a>, str <a class="el" href="#a32d7021e7aa5de07790f562adf36bc21">workspace_path</a>, Optional[List[str]] <a class="el" href="#a7dcc540075f1209fa43637a11b2d2c3b">workspace_paths</a>=None)</td></tr>
 <tr class="memitem:ae0139e54ec4099aafd66e88ad6a2306f" id="r_ae0139e54ec4099aafd66e88ad6a2306f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0139e54ec4099aafd66e88ad6a2306f">is_available</a> (self)</td></tr>
+<tr class="memitem:a11837b6ba86746dc0c5400111b54d26f" id="r_a11837b6ba86746dc0c5400111b54d26f"><td class="memItemLeft" align="right" valign="top">Tuple[bool, str]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11837b6ba86746dc0c5400111b54d26f">check_capability</a> (self)</td></tr>
 <tr class="memitem:ac935b8aa94fa41939daa96a1866d21aa" id="r_ac935b8aa94fa41939daa96a1866d21aa"><td class="memItemLeft" align="right" valign="top">List[str]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac935b8aa94fa41939daa96a1866d21aa">build_bwrap_command</a> (self)</td></tr>
 <tr class="memitem:ae2afdf199a31e056780d21e8442d9ddf" id="r_ae2afdf199a31e056780d21e8442d9ddf"><td class="memItemLeft" align="right" valign="top">Tuple[bool, str]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2afdf199a31e056780d21e8442d9ddf">run</a> (self, str cmd, int timeout=300)</td></tr>
 <tr class="memitem:a2d7dce26ef10f64fb3e7b1c38ded9ae2" id="r_a2d7dce26ef10f64fb3e7b1c38ded9ae2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d7dce26ef10f64fb3e7b1c38ded9ae2">is_tool_blacklisted</a> (self, str tool)</td></tr>
@@ -116,19 +117,13 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a8db40d2ec58d885009d8be2e6465d195" id="r_a8db40d2ec58d885009d8be2e6465d195"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8db40d2ec58d885009d8be2e6465d195">namespaces</a> = self.sandbox_config.get('namespaces', {})</td></tr>
 <tr class="memitem:a8674b97d5133424de82c95d13815b1e2" id="r_a8674b97d5133424de82c95d13815b1e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8674b97d5133424de82c95d13815b1e2">options</a> = self.sandbox_config.get('options', {})</td></tr>
 <tr class="memitem:ac66e73d6799767d77e17aedf76d1a61b" id="r_ac66e73d6799767d77e17aedf76d1a61b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac66e73d6799767d77e17aedf76d1a61b">host_binds</a> = self.sandbox_config.get('host_binds', {})</td></tr>
-<tr class="memitem:a045bdc7fe32f7186e1ab5017d305ef30" id="r_a045bdc7fe32f7186e1ab5017d305ef30"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a045bdc7fe32f7186e1ab5017d305ef30">workspaces</a> = self.sandbox_config.get('workspaces', [])</td></tr>
+<tr class="memitem:a7dcc540075f1209fa43637a11b2d2c3b" id="r_a7dcc540075f1209fa43637a11b2d2c3b"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7dcc540075f1209fa43637a11b2d2c3b">workspace_paths</a> = [os.path.abspath(wp) for wp in workspace_paths]</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Manages bubblewrap sandbox lifecycle and command execution.
-
-Key responsibilities:
-- Build bwrap command line from config
-- Execute commands inside sandbox
-- Handle sandbox lifecycle (setup/teardown)
-- Support multiple concurrent workspaces (future)
 </pre> </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a4d61e3883dbd99cda85da5e1df39f0e1" name="a4d61e3883dbd99cda85da5e1df39f0e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d61e3883dbd99cda85da5e1df39f0e1">&#9670;&#160;</a></span>__init__()</h2>
+<a id="a497a3d5a490b78d222355f2435357b6b" name="a497a3d5a490b78d222355f2435357b6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a497a3d5a490b78d222355f2435357b6b">&#9670;&#160;</a></span>__init__()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -146,16 +141,16 @@ Key responsibilities:
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>workspace_path</em></span>&#160;)</td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>workspace_path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Optional[List[str]] </td>          <td class="paramname"><span class="paramname"><em>workspace_paths</em></span><span class="paramdefsep"> = </span><span class="paramdefval">None</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Initialize sandbox manager.
 
-Args:
-    config: Configuration object containing sandbox settings
-    workspace_path: Path to workspace directory (project root)
-</pre> 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
@@ -174,13 +169,32 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Build the bwrap command line from configuration.
-
-Returns:
-    List of command arguments for bwrap
 </pre> <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classcore_1_1sandbox_1_1SandboxManager_ac935b8aa94fa41939daa96a1866d21aa_icgraph.svg" width="568" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a11837b6ba86746dc0c5400111b54d26f" name="a11837b6ba86746dc0c5400111b54d26f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11837b6ba86746dc0c5400111b54d26f">&#9670;&#160;</a></span>check_capability()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> Tuple[bool, str] core.sandbox.SandboxManager.check_capability </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Test if bubblewrap can run a trivial command with our mounts.</pre> <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classcore_1_1sandbox_1_1SandboxManager_a11837b6ba86746dc0c5400111b54d26f_cgraph.svg" width="564" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -199,14 +213,10 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Check if bubblewrap is installed and usable.
-
-Returns:
-    True if bwrap is available, False otherwise
-</pre> <div class="dynheader">
+<pre class="fragment">Check if bubblewrap is installed and usable.</pre> <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classcore_1_1sandbox_1_1SandboxManager_ae0139e54ec4099aafd66e88ad6a2306f_icgraph.svg" width="548" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classcore_1_1sandbox_1_1SandboxManager_ae0139e54ec4099aafd66e88ad6a2306f_icgraph.svg" width="564" height="107"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -229,14 +239,7 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Check if tool is in the blacklist.
 
-Args:
-    tool: Tool name to check (base command name)
-
-Returns:
-    True if tool is blacklisted, False otherwise
-</pre> 
 </div>
 </div>
 <a id="ae2afdf199a31e056780d21e8442d9ddf" name="ae2afdf199a31e056780d21e8442d9ddf"></a>
@@ -263,13 +266,6 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Execute command inside sandbox.
-
-Args:
-    cmd: Shell command to execute
-    timeout: Maximum execution time in seconds (default: 300)
-
-Returns:
-    Tuple of (success: bool, output: str)
 </pre> <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -405,14 +401,14 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="a045bdc7fe32f7186e1ab5017d305ef30" name="a045bdc7fe32f7186e1ab5017d305ef30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a045bdc7fe32f7186e1ab5017d305ef30">&#9670;&#160;</a></span>workspaces</h2>
+<a id="a7dcc540075f1209fa43637a11b2d2c3b" name="a7dcc540075f1209fa43637a11b2d2c3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dcc540075f1209fa43637a11b2d2c3b">&#9670;&#160;</a></span>workspace_paths</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">core.sandbox.SandboxManager.workspaces = self.sandbox_config.get('workspaces', [])</td>
+          <td class="memname">list core.sandbox.SandboxManager.workspace_paths = [os.path.abspath(wp) for wp in workspace_paths]</td>
         </tr>
       </table>
 </div><div class="memdoc">

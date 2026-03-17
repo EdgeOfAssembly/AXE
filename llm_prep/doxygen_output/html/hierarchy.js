@@ -5,6 +5,7 @@ var hierarchy =
     [ "core.agent_manager.AgentManager", "classcore_1_1agent__manager_1_1AgentManager.html", null ],
     [ "core.multiprocess.AgentWorkerProcess", "classcore_1_1multiprocess_1_1AgentWorkerProcess.html", null ],
     [ "core.anthropic_features.AnthropicFeatures", "classcore_1_1anthropic__features_1_1AnthropicFeatures.html", null ],
+    [ "core.arbitration.ArbitrationProtocol", "classcore_1_1arbitration_1_1ArbitrationProtocol.html", null ],
     [ "bitstream", "structbitstream.html", null ],
     [ "managers.break_system.BreakSystem", "classmanagers_1_1break__system_1_1BreakSystem.html", null ],
     [ "managers.shared_build_status.BuildError", "classmanagers_1_1shared__build__status_1_1BuildError.html", null ],
@@ -18,18 +19,29 @@ var hierarchy =
     [ "dos_header", "structdos__header.html", null ],
     [ "managers.dynamic_spawner.DynamicSpawner", "classmanagers_1_1dynamic__spawner_1_1DynamicSpawner.html", null ],
     [ "managers.emergency_mailbox.EmergencyMailbox", "classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox.html", null ],
+    [ "Entry", "structEntry.html", null ],
+    [ "hello_world.Entry", "classhello__world_1_1Entry.html", null ],
     [ "Enum", null, [
       [ "managers.shared_build_status.BuildStatus", "classmanagers_1_1shared__build__status_1_1BuildStatus.html", null ]
     ] ],
     [ "workshop.plane.EnumeratedSink", "classworkshop_1_1plane_1_1EnumeratedSink.html", null ],
     [ "workshop.plane.EnumeratedSource", "classworkshop_1_1plane_1_1EnumeratedSource.html", null ],
     [ "core.environment_probe.EnvironmentProbe", "classcore_1_1environment__probe_1_1EnvironmentProbe.html", null ],
+    [ "Exception", null, [
+      [ "test_end_to_end.SkipTest", "classtest__end__to__end_1_1SkipTest.html", null ],
+      [ "test_interactive_keypress.SkipTest", "classtest__interactive__keypress_1_1SkipTest.html", null ],
+      [ "test_live_feature_matrix.SkipTest", "classtest__live__feature__matrix_1_1SkipTest.html", null ]
+    ] ],
     [ "exepack_header", "structexepack__header.html", null ],
     [ "core.anthropic_features.FilesAPIManager", "classcore_1_1anthropic__features_1_1FilesAPIManager.html", null ],
     [ "GetNextBit_Data", "structGetNextBit__Data.html", null ],
     [ "GetNextByte_Data", "structGetNextByte__Data.html", null ],
     [ "core.github_agent.GitHubAgent", "classcore_1_1github__agent_1_1GitHubAgent.html", null ],
+    [ "core.global_workspace.GlobalWorkspace", "classcore_1_1global__workspace_1_1GlobalWorkspace.html", null ],
     [ "workshop.hammer.HammerInstrumentor", "classworkshop_1_1hammer_1_1HammerInstrumentor.html", null ],
+    [ "IntEnum", null, [
+      [ "core.subsumption_layer.SubsumptionLayer", "classcore_1_1subsumption__layer_1_1SubsumptionLayer.html", null ]
+    ] ],
     [ "memstream", "structmemstream.html", null ],
     [ "utils.context_optimizer.Message", "classutils_1_1context__optimizer_1_1Message.html", null ],
     [ "tools.minifier.Minifier", "classtools_1_1minifier_1_1Minifier.html", null ],
@@ -54,6 +66,8 @@ var hierarchy =
     [ "core.skills_manager.Skill", "classcore_1_1skills__manager_1_1Skill.html", null ],
     [ "core.skills_manager.SkillsManager", "classcore_1_1skills__manager_1_1SkillsManager.html", null ],
     [ "managers.sleep_manager.SleepManager", "classmanagers_1_1sleep__manager_1_1SleepManager.html", null ],
+    [ "core.subsumption_layer.SubsumptionController", "classcore_1_1subsumption__layer_1_1SubsumptionController.html", null ],
+    [ "core.subsumption_layer.Suppression", "classcore_1_1subsumption__layer_1_1Suppression.html", null ],
     [ "workshop.saw.TaintFlow", "classworkshop_1_1saw_1_1TaintFlow.html", null ],
     [ "workshop.saw.TaintSink", "classworkshop_1_1saw_1_1TaintSink.html", null ],
     [ "workshop.saw.TaintSource", "classworkshop_1_1saw_1_1TaintSource.html", null ],
@@ -84,5 +98,6 @@ var hierarchy =
     [ "test_large_code_files.TestLargeCodeFiles", "classtest__large__code__files_1_1TestLargeCodeFiles.html", null ],
     [ "test_shared_build_status.TestSharedBuildStatus", "classtest__shared__build__status_1_1TestSharedBuildStatus.html", null ],
     [ "utils.token_stats.TokenStats", "classutils_1_1token__stats_1_1TokenStats.html", null ],
-    [ "core.tool_runner.ToolRunner", "classcore_1_1tool__runner_1_1ToolRunner.html", null ]
+    [ "core.tool_runner.ToolRunner", "classcore_1_1tool__runner_1_1ToolRunner.html", null ],
+    [ "test_interactive_keypress.XvfbSession", "classtest__interactive__keypress_1_1XvfbSession.html", null ]
 ];

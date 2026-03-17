@@ -41,13 +41,11 @@ list \mbox{\hyperlink{namespaceworkshop_a836d0b8a78500803b744360fa58c3724}{\+\_\
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Workshop Module - Dynamic Analysis Tools for AXE
-
 This module provides woodworking-themed dynamic analysis tools:
 - Chisel: Symbolic execution for precise path analysis
 - Saw: Taint analysis for data flow tracking
 - Plane: Source/sink enumeration for entry/exit point cataloging
 - Hammer: Live instrumentation for runtime monitoring
-
 All tools integrate with AXE's safety and execution frameworks.
 \end{DoxyVerb}
  
@@ -62,7 +60,6 @@ All tools integrate with AXE's safety and execution frameworks.
 workshop.\+\_\+missing\+\_\+tool\+\_\+factory (\begin{DoxyParamCaption}\item[{str}]{tool\+\_\+name}{, }\item[{str}]{module\+\_\+name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Create a stub class for an unavailable analysis tool.
-
 The stub raises an ImportError as soon as it is instantiated,
 providing a clear and informative error message instead of
 failing later with an AttributeError on `None`.

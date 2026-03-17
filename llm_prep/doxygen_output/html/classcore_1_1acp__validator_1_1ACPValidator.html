@@ -141,9 +141,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Initialize the ACP Validator.
-
 Args:
-    db_path: Path to IT abbreviations database. 
+    db_path: Path to IT abbreviations database.
             Defaults to data/it_abbreviations.db relative to project root.
 </pre> 
 </div>
@@ -278,10 +277,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Check if abbreviation conflicts with any IT standard.
-
 Args:
     abbrev: Abbreviation to check (case-insensitive)
-    
 Returns:
     True if abbreviation conflicts with a standard term, False otherwise
 </pre> <div class="dynheader">
@@ -312,7 +309,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get all standard abbreviations from the database.
-
 Returns:
     Dictionary mapping abbreviations to their full forms
 </pre> <div class="dynheader">
@@ -342,10 +338,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get the standard meaning of an abbreviation if it exists.
-
 Args:
     abbrev: Abbreviation to lookup
-    
 Returns:
     Full form of the abbreviation, or None if not found
 </pre> <div class="dynheader">
@@ -380,10 +374,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Validate custom abbreviations against standard IT terms.
-
 Args:
     custom: Dictionary mapping custom abbreviations to their meanings
-    
 Returns:
     List of conflicting abbreviations (those that conflict with standards)
 </pre> <div class="dynheader">

@@ -1,6 +1,6 @@
 var classcore_1_1skills__manager_1_1SkillsManager =
 [
-    [ "__init__", "classcore_1_1skills__manager_1_1SkillsManager.html#afdb0a70fbc0c2d763e43379108b09825", null ],
+    [ "__init__", "classcore_1_1skills__manager_1_1SkillsManager.html#ad6daa70fbea93ba108dbca8c64ba86dd", null ],
     [ "_discover_skills", "classcore_1_1skills__manager_1_1SkillsManager.html#a8109fd2d1ce4efa2a67e6f897c7357df", null ],
     [ "_load_manifest", "classcore_1_1skills__manager_1_1SkillsManager.html#ae97b4a3d71d3020b7bc906e5afe8e947", null ],
     [ "get_activation_keywords", "classcore_1_1skills__manager_1_1SkillsManager.html#a8d0d24099952e46769a06e1915849078", null ],

@@ -11,11 +11,14 @@ var searchData=
   ['removable_5fpatterns_8',['removable_patterns',['../classutils_1_1prompt__compressor_1_1PromptCompressor.html#a88e636ed02e2dad413de539c17d86f38',1,'utils::prompt_compressor::PromptCompressor']]],
   ['repo_9',['repo',['../classaxe_1_1ProjectContext.html#a9d60a321bf562eb779ec787c1f4f3427',1,'axe::ProjectContext']]],
   ['repo_5fdetected_10',['repo_detected',['../classcore_1_1github__agent_1_1GitHubAgent.html#a24c13d7b7fe472776820c1c9a9b2a1f3',1,'core::github_agent::GitHubAgent']]],
-  ['resource_5ffile_11',['RESOURCE_FILE',['../namespacecore_1_1constants.html#a556f1e7af23f55d82777485dddb4ca92',1,'core::constants']]],
-  ['resource_5fupdate_5finterval_12',['RESOURCE_UPDATE_INTERVAL',['../namespacecore_1_1constants.html#ae56ab43b20655ffe4031f3c84c4be220',1,'core::constants']]],
-  ['response_5fprocessor_13',['response_processor',['../classaxe_1_1CollaborativeSession.html#a8a690e944cb108907b08c387df13c03b',1,'axe.CollaborativeSession.response_processor'],['../classaxe_1_1ChatSession.html#a45dd34c3c16130a70cace5af2a1c8412',1,'axe.ChatSession.response_processor']]],
-  ['right_14',['right',['../structNode.html#a50915045f9c008476a01ae253d87cd8e',1,'Node']]],
-  ['running_15',['RUNNING',['../classmanagers_1_1shared__build__status_1_1BuildStatus.html#ab895b51842a4954d1e51be75f09d9701',1,'managers::shared_build_status::BuildStatus']]],
-  ['running_16',['running',['../classcore_1_1multiprocess_1_1AgentWorkerProcess.html#add6b5fd4d9774b3f3ac763066ad88dbd',1,'core::multiprocess::AgentWorkerProcess']]],
-  ['runtime_17',['runtime',['../classcore_1_1sandbox_1_1SandboxManager.html#a4339efb482cddbc1fd59a04acfd50353',1,'core::sandbox::SandboxManager']]]
+  ['repo_5froot_11',['REPO_ROOT',['../namespacetest__end__to__end.html#acce7db8f5a45ac9648b5bebc19fa5977',1,'test_end_to_end.REPO_ROOT'],['../namespacetest__interactive__keypress.html#a72c364666c42426841b34ba15ae938d0',1,'test_interactive_keypress.REPO_ROOT'],['../namespacetest__live__feature__matrix.html#a3346bd1fce6c2b11ea1e797410cfcedd',1,'test_live_feature_matrix.REPO_ROOT']]],
+  ['resolved_5farbitrations_12',['resolved_arbitrations',['../classcore_1_1arbitration_1_1ArbitrationProtocol.html#ac7b2b04d18a49df60fc4701c79f39d9d',1,'core::arbitration::ArbitrationProtocol']]],
+  ['resource_5ffile_13',['RESOURCE_FILE',['../namespacecore_1_1constants.html#a556f1e7af23f55d82777485dddb4ca92',1,'core::constants']]],
+  ['resource_5fupdate_5finterval_14',['RESOURCE_UPDATE_INTERVAL',['../namespacecore_1_1constants.html#ae56ab43b20655ffe4031f3c84c4be220',1,'core::constants']]],
+  ['response_5fprocessor_15',['response_processor',['../classaxe_1_1CollaborativeSession.html#a8a690e944cb108907b08c387df13c03b',1,'axe.CollaborativeSession.response_processor'],['../classaxe_1_1ChatSession.html#a45dd34c3c16130a70cace5af2a1c8412',1,'axe.ChatSession.response_processor']]],
+  ['right_16',['right',['../structNode.html#a50915045f9c008476a01ae253d87cd8e',1,'Node']]],
+  ['running_17',['RUNNING',['../classmanagers_1_1shared__build__status_1_1BuildStatus.html#ab895b51842a4954d1e51be75f09d9701',1,'managers::shared_build_status::BuildStatus']]],
+  ['running_18',['running',['../classcore_1_1multiprocess_1_1AgentWorkerProcess.html#add6b5fd4d9774b3f3ac763066ad88dbd',1,'core::multiprocess::AgentWorkerProcess']]],
+  ['runtime_19',['runtime',['../classcore_1_1sandbox_1_1SandboxManager.html#a4339efb482cddbc1fd59a04acfd50353',1,'core::sandbox::SandboxManager']]],
+  ['runtime_5fdir_20',['RUNTIME_DIR',['../namespaceaxe.html#ab6bc706814d98a1b9f6dddbd2cf23a3c',1,'axe']]]
 ];

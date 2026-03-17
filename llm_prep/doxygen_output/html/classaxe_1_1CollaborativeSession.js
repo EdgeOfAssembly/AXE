@@ -1,6 +1,6 @@
 var classaxe_1_1CollaborativeSession =
 [
-    [ "__init__", "classaxe_1_1CollaborativeSession.html#a277e28479a3ce663c28e28a79b0fa179", null ],
+    [ "__init__", "classaxe_1_1CollaborativeSession.html#ada8c1f888d706c6a1f654b52a4aa31f1", null ],
     [ "_approve_and_push", "classaxe_1_1CollaborativeSession.html#a909e359216e70f696e6a51f60a24be7d", null ],
     [ "_create_pr_with_gh_cli", "classaxe_1_1CollaborativeSession.html#ad553b84eeef4e00b661e60f07e20ea1f", null ],
     [ "_end_session", "classaxe_1_1CollaborativeSession.html#ab9b4446c5f6869de5d98eb51d3ab44ef", null ],
@@ -11,6 +11,7 @@ var classaxe_1_1CollaborativeSession =
     [ "_get_system_prompt_for_collab", "classaxe_1_1CollaborativeSession.html#ae5b0476285af0c83e3e1910c1a60e5f6", null ],
     [ "_github_review_prompt", "classaxe_1_1CollaborativeSession.html#ad62f87765c49218f37f833f403a9d5e2", null ],
     [ "_handle_break_request", "classaxe_1_1CollaborativeSession.html#a64377593b620e4449351bb066f04456d", null ],
+    [ "_handle_cognitive_tokens", "classaxe_1_1CollaborativeSession.html#a2163cb254c21db6f140ee3fbde93af7d", null ],
     [ "_handle_emergency_message", "classaxe_1_1CollaborativeSession.html#adfdeaf4031f6e214d05e21a96d24755a", null ],
     [ "_handle_github_review_pause", "classaxe_1_1CollaborativeSession.html#afb29c1f9e386b7501a35b18e4d4a57cd", null ],
     [ "_handle_spawn_request", "classaxe_1_1CollaborativeSession.html#af1293714188297ae8b5cbb4bbba7af67", null ],
@@ -26,6 +27,7 @@ var classaxe_1_1CollaborativeSession =
     [ "agent_ids", "classaxe_1_1CollaborativeSession.html#ac380ead9bbca25a5579dbd99a5f1f1f7", null ],
     [ "agent_mgr", "classaxe_1_1CollaborativeSession.html#ab931398b863c755ac1cfda96f01cc320", null ],
     [ "agents", "classaxe_1_1CollaborativeSession.html#a92644ec2213903477715a66705bd4eed", null ],
+    [ "arbitration_protocol", "classaxe_1_1CollaborativeSession.html#adf8413278328fb3a9fee7daf3da8a83f", null ],
     [ "break_system", "classaxe_1_1CollaborativeSession.html#aa0e3798df96749e8f367dbde2ac247a9", null ],
     [ "config", "classaxe_1_1CollaborativeSession.html#a044fb092f7807173de807153052e65af", null ],
     [ "conversation_history", "classaxe_1_1CollaborativeSession.html#a0dff1afb87c9108881f0530c97662dff", null ],
@@ -34,6 +36,7 @@ var classaxe_1_1CollaborativeSession =
     [ "emergency_mailbox", "classaxe_1_1CollaborativeSession.html#a0dd9ab753e3e615c9ac6599ddd0b7858", null ],
     [ "github_agent", "classaxe_1_1CollaborativeSession.html#a06d058aeee98971d05504bb5594bb76c", null ],
     [ "github_enabled", "classaxe_1_1CollaborativeSession.html#a3ef7cbcd10fe137c9769822e72b5c87a", null ],
+    [ "global_workspace", "classaxe_1_1CollaborativeSession.html#a32b9a6bd054994dec051152f13ad2ce5", null ],
     [ "is_running", "classaxe_1_1CollaborativeSession.html#a17613664271470a880ce760a7a8ae835", null ],
     [ "project_ctx", "classaxe_1_1CollaborativeSession.html#a826fb2877e32b1367361367002147ced", null ],
     [ "response_processor", "classaxe_1_1CollaborativeSession.html#a8a690e944cb108907b08c387df13c03b", null ],
@@ -41,10 +44,12 @@ var classaxe_1_1CollaborativeSession =
     [ "spawned_agents", "classaxe_1_1CollaborativeSession.html#aa713788aea1d3dcc73ddff3ce1f8753c", null ],
     [ "spawner", "classaxe_1_1CollaborativeSession.html#ac5ccd2b2265cf373d3614156806d728f", null ],
     [ "start_time", "classaxe_1_1CollaborativeSession.html#aa9f65ac73b173d9d13cdf9cfab4e588b", null ],
+    [ "subsumption_controller", "classaxe_1_1CollaborativeSession.html#ac2f714f4f985c81bc7a0a90129189cde", null ],
     [ "supervisor_alias", "classaxe_1_1CollaborativeSession.html#a7d5eede8e6f645dc2f0201f04bf0c8a5", null ],
     [ "supervisor_name", "classaxe_1_1CollaborativeSession.html#a4e87ab5b3d7717d0f5f3c9d8f68ccff6", null ],
     [ "task_description", "classaxe_1_1CollaborativeSession.html#a3d74603f0d884ab93bf04c4b67fd7923", null ],
     [ "time_limit", "classaxe_1_1CollaborativeSession.html#a3cad46df51b64ebab691d5d053dfe6eb", null ],
     [ "tool_runner", "classaxe_1_1CollaborativeSession.html#a01d559caead539214a65cd29bd02c301", null ],
-    [ "workspace", "classaxe_1_1CollaborativeSession.html#ab7c3f130204869b9cd3fda1695d663db", null ]
+    [ "workspace", "classaxe_1_1CollaborativeSession.html#ab7c3f130204869b9cd3fda1695d663db", null ],
+    [ "workspace_paths", "classaxe_1_1CollaborativeSession.html#a408cf07fc99d6b4c56803bafc5730cb6", null ]
 ];

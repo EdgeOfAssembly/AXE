@@ -4,10 +4,16 @@ var searchData=
   ['database_3a_3aagent_5fdb_1',['agent_db',['../namespacedatabase_1_1agent__db.html',1,'database']]],
   ['database_3a_3aschema_2',['schema',['../namespacedatabase_1_1schema.html',1,'database']]],
   ['demo_5fabsolute_5fpath_5ffix_3',['demo_absolute_path_fix',['../namespacedemo__absolute__path__fix.html',1,'']]],
-  ['demo_5fdynamic_5ftokens_4',['demo_dynamic_tokens',['../namespacedemo__dynamic__tokens.html',1,'']]],
-  ['demo_5fheredoc_5ffix_5',['demo_heredoc_fix',['../namespacedemo__heredoc__fix.html',1,'']]],
-  ['demo_5fimprovements_6',['demo_improvements',['../namespacedemo__improvements.html',1,'']]],
-  ['demo_5fminifier_7',['demo_minifier',['../namespacedemo__minifier.html',1,'']]],
-  ['demo_5fskills_5fsystem_8',['demo_skills_system',['../namespacedemo__skills__system.html',1,'']]],
-  ['demo_5ftask_5fcompletion_5ffix_9',['demo_task_completion_fix',['../namespacedemo__task__completion__fix.html',1,'']]]
+  ['demo_5fconflict_5fresolution_4',['demo_conflict_resolution',['../namespacedemo__conflict__resolution.html',1,'']]],
+  ['demo_5fconsolidated_5fcognitive_5farchitecture_5',['demo_consolidated_cognitive_architecture',['../namespacedemo__consolidated__cognitive__architecture.html',1,'']]],
+  ['demo_5fdynamic_5ftokens_6',['demo_dynamic_tokens',['../namespacedemo__dynamic__tokens.html',1,'']]],
+  ['demo_5fglobal_5fworkspace_7',['demo_global_workspace',['../namespacedemo__global__workspace.html',1,'']]],
+  ['demo_5fheredoc_5ffix_8',['demo_heredoc_fix',['../namespacedemo__heredoc__fix.html',1,'']]],
+  ['demo_5fimprovements_9',['demo_improvements',['../namespacedemo__improvements.html',1,'']]],
+  ['demo_5flive_5follama_10',['demo_live_ollama',['../namespacedemo__live__ollama.html',1,'']]],
+  ['demo_5fminifier_11',['demo_minifier',['../namespacedemo__minifier.html',1,'']]],
+  ['demo_5fprivilege_5fmapping_12',['demo_privilege_mapping',['../namespacedemo__privilege__mapping.html',1,'']]],
+  ['demo_5fskills_5fsystem_13',['demo_skills_system',['../namespacedemo__skills__system.html',1,'']]],
+  ['demo_5fsubsumption_14',['demo_subsumption',['../namespacedemo__subsumption.html',1,'']]],
+  ['demo_5ftask_5fcompletion_5ffix_15',['demo_task_completion_fix',['../namespacedemo__task__completion__fix.html',1,'']]]
 ];

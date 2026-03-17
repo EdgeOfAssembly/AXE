@@ -23,18 +23,18 @@
 <text xml:space="preserve" text-anchor="start" x="4" y="-410" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
 <text xml:space="preserve" text-anchor="start" x="16.25" y="-410" font-family="Helvetica,sans-Serif" font-size="10.00">project_ctx</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-393.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-393.25" font-family="Helvetica,sans-Serif" font-size="10.00">tool_runner</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-393.25" font-family="Helvetica,sans-Serif" font-size="10.00">workspace_paths</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-376.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-376.5" font-family="Helvetica,sans-Serif" font-size="10.00">response_processor</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-376.5" font-family="Helvetica,sans-Serif" font-size="10.00">tool_runner</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-359.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-359.75" font-family="Helvetica,sans-Serif" font-size="10.00">db</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-359.75" font-family="Helvetica,sans-Serif" font-size="10.00">response_processor</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-343" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-343" font-family="Helvetica,sans-Serif" font-size="10.00">sleep_manager</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-343" font-family="Helvetica,sans-Serif" font-size="10.00">db</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-326.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-326.25" font-family="Helvetica,sans-Serif" font-size="10.00">break_system</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-326.25" font-family="Helvetica,sans-Serif" font-size="10.00">sleep_manager</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-309.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-309.5" font-family="Helvetica,sans-Serif" font-size="10.00">emergency_mailbox</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-292.75" font-family="Helvetica,sans-Serif" font-size="10.00">and 15 more...</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-309.5" font-family="Helvetica,sans-Serif" font-size="10.00">break_system</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-292.75" font-family="Helvetica,sans-Serif" font-size="10.00">and 19 more...</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-276" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
 <text xml:space="preserve" text-anchor="start" x="16.25" y="-276" font-family="Helvetica,sans-Serif" font-size="10.00">__init__()</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-259.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
@@ -65,7 +65,7 @@
 <text xml:space="preserve" text-anchor="start" x="16.25" y="-40.75" font-family="Helvetica,sans-Serif" font-size="10.00">_system_prompt()</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
 <text xml:space="preserve" text-anchor="start" x="16.25" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">_print_status()</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-7.25" font-family="Helvetica,sans-Serif" font-size="10.00">and 9 more...</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-7.25" font-family="Helvetica,sans-Serif" font-size="10.00">and 10 more...</text>
 <polygon fill="#666666" stroke="#666666" points="0,-471.75 0,-471.75 175.5,-471.75 175.5,-471.75 0,-471.75"/>
 <polygon fill="#666666" stroke="#666666" points="0,-287.5 0,-287.5 14.25,-287.5 14.25,-287.5 0,-287.5"/>
 <polygon fill="#666666" stroke="#666666" points="14.25,-287.5 14.25,-287.5 175.5,-287.5 175.5,-287.5 14.25,-287.5"/>

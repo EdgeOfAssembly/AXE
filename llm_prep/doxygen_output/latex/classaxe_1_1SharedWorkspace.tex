@@ -2,8 +2,7 @@
 \hypertarget{classaxe_1_1SharedWorkspace}{}\label{classaxe_1_1SharedWorkspace}\index{axe.SharedWorkspace@{axe.SharedWorkspace}}
 
 
-Collaboration diagram for axe.\+Shared\+Workspace\+:
-\nopagebreak
+Collaboration diagram for axe.\+Shared\+Workspace\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -60,7 +59,6 @@ str \mbox{\hyperlink{classaxe_1_1SharedWorkspace_ad6682022c66de933b8c8a836dfb578
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Shared workspace for multi-agent collaboration.
-
 Provides shared files for agent coordination:
 - .collab_shared.md: General notes and communication
 - .collab_build_status.md: Build output, errors, warnings
@@ -89,8 +87,7 @@ axe.\+Shared\+Workspace.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\i
  bool axe.\+Shared\+Workspace.\+\_\+is\+\_\+path\+\_\+safe (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filepath}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Check if filepath is within the workspace directory (prevent path traversal).\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -111,16 +108,14 @@ axe.\+Shared\+Workspace.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\i
  str axe.\+Shared\+Workspace.\+backup\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filepath}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Create a backup of a file before modification.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1SharedWorkspace_ab5e70300394328ef57e127c7dd59cace_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -134,24 +129,20 @@ Here is the caller graph for this function\+:
  bool axe.\+Shared\+Workspace.\+claim\+\_\+error\+\_\+fix (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{error\+\_\+index}{, }\item[{str}]{agent\+\_\+alias}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Claim an error for fixing by an agent.
-
 Args:
     error_index: Index of the error to claim
     agent_alias: Alias of the agent claiming the fix
-
 Returns:
     True if successfully claimed
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=233pt]{classaxe_1_1SharedWorkspace_aa80b49ba9c0eb5e692d3898310dfb55e_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -165,7 +156,6 @@ Here is the caller graph for this function\+:
  str axe.\+Shared\+Workspace.\+get\+\_\+build\+\_\+status\+\_\+summary (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get a summary of build status for agents to see.
-
 Returns a formatted string with:
 - Current build status (success/failed/warning)
 - List of unclaimed errors/warnings agents can fix
@@ -185,23 +175,19 @@ Returns a formatted string with:
  bool axe.\+Shared\+Workspace.\+mark\+\_\+error\+\_\+fixed (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{error\+\_\+index}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Mark an error as fixed.
-
 Args:
     error_index: Index of the error to mark as fixed
-
 Returns:
     True if successfully marked
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=232pt]{classaxe_1_1SharedWorkspace_a958844453419f8d9064d52a166875152_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -215,8 +201,7 @@ Here is the caller graph for this function\+:
  str axe.\+Shared\+Workspace.\+read\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filename}{, }\item[{int }]{max\+\_\+bytes}{ = {\ttfamily 8192}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Read a file from workspace.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -237,22 +222,19 @@ Here is the caller graph for this function\+:
  None axe.\+Shared\+Workspace.\+record\+\_\+build\+\_\+output (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{tool}{, }\item[{str}]{output}{, }\item[{int}]{exit\+\_\+code}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Record build output from a command execution.
-
 Args:
     tool: Build tool name (gcc, make, python, etc.)
     output: Full output from the command
     exit_code: Exit code from the command
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=237pt]{classaxe_1_1SharedWorkspace_a70f689883ed3ece23e4304410c51ee54_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -266,8 +248,7 @@ Here is the caller graph for this function\+:
  bool axe.\+Shared\+Workspace.\+write\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filename}{, }\item[{str}]{content}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Write content to a file in workspace.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

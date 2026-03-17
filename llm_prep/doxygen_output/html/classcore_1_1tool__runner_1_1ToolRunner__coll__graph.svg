@@ -23,33 +23,33 @@
 <text xml:space="preserve" text-anchor="start" x="4" y="-221" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
 <text xml:space="preserve" text-anchor="start" x="16.25" y="-221" font-family="Helvetica,sans-Serif" font-size="10.00">dry_run</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-204.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-204.25" font-family="Helvetica,sans-Serif" font-size="10.00">sandbox_manager</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-204.25" font-family="Helvetica,sans-Serif" font-size="10.00">workspace_paths</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-187.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-187.5" font-family="Helvetica,sans-Serif" font-size="10.00">whitelist</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-187.5" font-family="Helvetica,sans-Serif" font-size="10.00">sandbox_manager</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-170.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-170.75" font-family="Helvetica,sans-Serif" font-size="10.00">SHELL_OPERATORS</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-170.75" font-family="Helvetica,sans-Serif" font-size="10.00">blacklist</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00">REDIRECT_OPERATORS</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00">SHELL_OPERATORS</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-137.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-137.25" font-family="Helvetica,sans-Serif" font-size="10.00">__init__()</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-137.25" font-family="Helvetica,sans-Serif" font-size="10.00">REDIRECT_OPERATORS</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-120.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-120.5" font-family="Helvetica,sans-Serif" font-size="10.00">is_tool_allowed()</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-120.5" font-family="Helvetica,sans-Serif" font-size="10.00">__init__()</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-103.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-103.75" font-family="Helvetica,sans-Serif" font-size="10.00">run()</text>
-<text xml:space="preserve" text-anchor="start" x="4" y="-87" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-87" font-family="Helvetica,sans-Serif" font-size="10.00">_strip_heredoc_content()</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-103.75" font-family="Helvetica,sans-Serif" font-size="10.00">is_tool_allowed()</text>
+<text xml:space="preserve" text-anchor="start" x="4" y="-87" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-87" font-family="Helvetica,sans-Serif" font-size="10.00">run()</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-70.25" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-70.25" font-family="Helvetica,sans-Serif" font-size="10.00">_extract_commands_from</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-57.5" font-family="Helvetica,sans-Serif" font-size="10.00">_shell()</text>
-<text xml:space="preserve" text-anchor="start" x="4" y="-40.75" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-40.75" font-family="Helvetica,sans-Serif" font-size="10.00">_needs_shell()</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-70.25" font-family="Helvetica,sans-Serif" font-size="10.00">_strip_heredoc_content()</text>
+<text xml:space="preserve" text-anchor="start" x="4" y="-53.5" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-53.5" font-family="Helvetica,sans-Serif" font-size="10.00">_extract_commands_from</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-40.75" font-family="Helvetica,sans-Serif" font-size="10.00">_shell()</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
-<text xml:space="preserve" text-anchor="start" x="16.25" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">_check_forbidden_paths()</text>
+<text xml:space="preserve" text-anchor="start" x="16.25" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">_needs_shell()</text>
 <text xml:space="preserve" text-anchor="start" x="4" y="-7.25" font-family="Helvetica,sans-Serif" font-size="10.00">#</text>
 <text xml:space="preserve" text-anchor="start" x="16.25" y="-7.25" font-family="Helvetica,sans-Serif" font-size="10.00">_log_execution()</text>
 <polygon fill="#666666" stroke="#666666" points="0,-282.75 0,-282.75 147.75,-282.75 147.75,-282.75 0,-282.75"/>
-<polygon fill="#666666" stroke="#666666" points="0,-148.75 0,-148.75 14.25,-148.75 14.25,-148.75 0,-148.75"/>
-<polygon fill="#666666" stroke="#666666" points="14.25,-148.75 14.25,-148.75 147.75,-148.75 147.75,-148.75 14.25,-148.75"/>
+<polygon fill="#666666" stroke="#666666" points="0,-132 0,-132 14.25,-132 14.25,-132 0,-132"/>
+<polygon fill="#666666" stroke="#666666" points="14.25,-132 14.25,-132 147.75,-132 147.75,-132 14.25,-132"/>
 <polygon fill="none" stroke="#666666" points="0,0 0,-301.5 147.75,-301.5 147.75,0 0,0"/>
 </a>
 </g>

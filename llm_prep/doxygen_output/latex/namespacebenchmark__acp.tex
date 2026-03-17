@@ -28,7 +28,6 @@ dict \mbox{\hyperlink{namespacebenchmark__acp_a5001408d35bc1fea7887cef4c9c6caf2}
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Benchmark script for ACP (Agent Communication Protocol) token savings.
-
 Analyzes verbose vs compact message formats and calculates token savings percentage.
 Uses real corpus files from agent collaboration sessions to provide realistic metrics.
 \end{DoxyVerb}
@@ -44,23 +43,19 @@ Uses real corpus files from agent collaboration sessions to provide realistic me
  Tuple\mbox{[}int, int\mbox{]} benchmark\+\_\+acp.\+analyze\+\_\+corpus\+\_\+file (\begin{DoxyParamCaption}\item[{str}]{filepath}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Analyze a real corpus file and estimate token savings.
-
 Args:
     filepath: Path to corpus file (e.g., .collab_log.md)
-    
 Returns:
     Tuple of (estimated_verbose_tokens, estimated_compact_tokens)
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacebenchmark__acp_aa43f698f5f9ae95cf20fa9d98224edbc_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -74,20 +69,17 @@ Here is the caller graph for this function\+:
  Tuple\mbox{[}int, int\mbox{]} benchmark\+\_\+acp.\+benchmark\+\_\+message\+\_\+formats (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Benchmark realistic agent communication scenarios.
-
 Returns:
     Tuple of (verbose_tokens, compact_tokens)
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacebenchmark__acp_aeda14e93f5d44e64563223f33d6aa911_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -101,19 +93,16 @@ Here is the caller graph for this function\+:
  str benchmark\+\_\+acp.\+create\+\_\+compact\+\_\+message (\begin{DoxyParamCaption}\item[{str}]{agent\+\_\+abbrev}{, }\item[{str}]{action\+\_\+abbrev}{, }\item[{str}]{target}{, }\item[{str}]{details}{, }\item[{str }]{next\+\_\+action\+\_\+abbrev}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Create compact ACP format message.
-
 Args:
     agent_abbrev: Agent abbreviation (e.g., "C")
     action_abbrev: Action abbreviation (e.g., "ANA")
     target: Target location
     details: Issue details (using standard abbreviations)
     next_action_abbrev: Next action abbreviation
-    
 Returns:
     Compact format message
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -127,19 +116,16 @@ Returns:
  str benchmark\+\_\+acp.\+create\+\_\+verbose\+\_\+message (\begin{DoxyParamCaption}\item[{str}]{agent}{, }\item[{str}]{action}{, }\item[{str}]{target}{, }\item[{str}]{details}{, }\item[{str }]{next\+\_\+action}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Create verbose format message.
-
 Args:
     agent: Full agent name (e.g., "Claude")
     action: Full action name (e.g., "Analyze")
     target: Target location (file:line or address)
     details: Issue details
     next_action: Next action to take
-    
 Returns:
     Verbose format message
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -154,15 +140,12 @@ Returns:
 
 \begin{DoxyVerb}Rough token estimation (1 token ≈ 4 characters).
 This is a simplified estimation for benchmarking purposes.
-
 Args:
     text: Text to estimate tokens for
-    
 Returns:
     Estimated token count
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -173,19 +156,17 @@ Returns:
 \index{main@{main}!benchmark\_acp@{benchmark\_acp}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily \label{namespacebenchmark__acp_addc5f8554094cc37a9d0932816b175d5} 
-benchmark\+\_\+acp.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+benchmark\+\_\+acp.\+main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Main entry point.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacebenchmark__acp_addc5f8554094cc37a9d0932816b175d5_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -199,23 +180,19 @@ Here is the caller graph for this function\+:
  Dict\mbox{[}str, any\mbox{]} benchmark\+\_\+acp.\+run\+\_\+benchmark (\begin{DoxyParamCaption}\item[{Optional\mbox{[}str\mbox{]} }]{corpus\+\_\+file}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Run the complete ACP benchmark.
-
 Args:
     corpus_file: Optional path to real corpus file
-    
 Returns:
     Dictionary with benchmark results
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacebenchmark__acp_ab2ae429afc267d7dbde7698eec1e5087_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

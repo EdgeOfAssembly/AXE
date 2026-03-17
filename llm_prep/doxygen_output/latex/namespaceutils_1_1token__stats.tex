@@ -39,25 +39,21 @@ Pricing data for different AI model providers.
  float utils.\+token\+\_\+stats.\+estimate\+\_\+cost (\begin{DoxyParamCaption}\item[{str}]{model\+\_\+name}{, }\item[{int}]{input\+\_\+tokens}{, }\item[{int}]{output\+\_\+tokens}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Estimate cost for token usage.
-
 Args:
     model_name: Name of the model
     input_tokens: Number of input tokens
     output_tokens: Number of output tokens
-
 Returns:
     Estimated cost in USD
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespaceutils_1_1token__stats_a54a42760c488a25025c244562ac9500b_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -71,10 +67,8 @@ Here is the caller graph for this function\+:
  str utils.\+token\+\_\+stats.\+format\+\_\+cost (\begin{DoxyParamCaption}\item[{float}]{cost}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Format cost for display.
-
 Args:
     cost: Cost in USD
-
 Returns:
     Formatted string (e.g., "$0.23" or "$2.45")
 \end{DoxyVerb}
@@ -85,15 +79,12 @@ Returns:
  Tuple\mbox{[}float, float\mbox{]} utils.\+token\+\_\+stats.\+get\+\_\+model\+\_\+pricing (\begin{DoxyParamCaption}\item[{str}]{model\+\_\+name}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get pricing for a model.
-
 Args:
     model_name: Name of the model
-
 Returns:
     Tuple of (input_price_per_1m, output_price_per_1m) in USD
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

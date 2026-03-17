@@ -2,8 +2,7 @@
 \hypertarget{classaxe_1_1ChatSession}{}\label{classaxe_1_1ChatSession}\index{axe.ChatSession@{axe.ChatSession}}
 
 
-Collaboration diagram for axe.\+Chat\+Session\+:
-\nopagebreak
+Collaboration diagram for axe.\+Chat\+Session\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -13,7 +12,7 @@ Collaboration diagram for axe.\+Chat\+Session\+:
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-None \mbox{\hyperlink{classaxe_1_1ChatSession_ab4fb7a9b76ad0732cfbefc0220702895}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}} \mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}}, str \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}})
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a82f99cca258d0e022692d25ae4b2b6b8}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}} \mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}}, str \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}}, Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} \mbox{\hyperlink{classaxe_1_1ChatSession_aff57373288084cb31bab94722475f53e}{workspace\+\_\+paths}}=None)
 \item 
 None \mbox{\hyperlink{classaxe_1_1ChatSession_a5a74e53da64988a363d8ebb226f8305a}{print\+\_\+banner}} (self)
 \item 
@@ -24,6 +23,8 @@ None \mbox{\hyperlink{classaxe_1_1ChatSession_aecfb5d28c9d242bb1d3bbe5d972f5fe5}
 None \mbox{\hyperlink{classaxe_1_1ChatSession_ab97f8be62dd60678d92c6f18b3e13d50}{list\+\_\+tools}} (self)
 \item 
 None \mbox{\hyperlink{classaxe_1_1ChatSession_a75658491705b9ea427ddcd85a0795212}{list\+\_\+dirs}} (self)
+\item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_af8a5ffbca2c51f990f4dcd13075331fa}{handle\+\_\+workspace\+\_\+command}} (self, str args)
 \item 
 None \mbox{\hyperlink{classaxe_1_1ChatSession_ad1395c2247996d061ec1a9cc47621bdf}{handle\+\_\+workshop\+\_\+command}} (self, str args)
 \item 
@@ -65,6 +66,8 @@ str \mbox{\hyperlink{classaxe_1_1ChatSession_a292849d40a6711c7b6d7452667c55458}{
 \item 
 str \mbox{\hyperlink{classaxe_1_1ChatSession_a95c74626ca3762895152631775b71736}{clean\+\_\+message\+\_\+for\+\_\+context}} (self, str content)
 \item 
+None \mbox{\hyperlink{classaxe_1_1ChatSession_a00f4c50861d88ce623a2c2db3ba0bd0b}{handle\+\_\+socket\+\_\+command}} (self, socket.\+socket conn, str command)
+\item 
 None \mbox{\hyperlink{classaxe_1_1ChatSession_a68cb42802ab49b009bbfc87e9d7e8f78}{run}} (self)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
@@ -76,7 +79,9 @@ str \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{
 \item 
 \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager}{Agent\+Manager}} \mbox{\hyperlink{classaxe_1_1ChatSession_ae5266ac3557ae29c4bc51d1117c47918}{agent\+\_\+mgr}} = \mbox{\hyperlink{classcore_1_1agent__manager_1_1AgentManager}{Agent\+Manager}}(\mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}})
 \item 
-\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}} \mbox{\hyperlink{classaxe_1_1ChatSession_ada9c58fcd370144e71643c60a9b70360}{tool\+\_\+runner}} = \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}(\mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}}, \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}})
+List\mbox{[}str\mbox{]} \mbox{\hyperlink{classaxe_1_1ChatSession_aff57373288084cb31bab94722475f53e}{workspace\+\_\+paths}} = workspace\+\_\+paths if workspace\+\_\+paths else \mbox{[}\mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}}\mbox{]}
+\item 
+\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}} \mbox{\hyperlink{classaxe_1_1ChatSession_ada9c58fcd370144e71643c60a9b70360}{tool\+\_\+runner}} = \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}(\mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}}, \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}}, self.\+workspace\+\_\+paths)
 \item 
 \mbox{\hyperlink{classaxe_1_1ProjectContext}{Project\+Context}} \mbox{\hyperlink{classaxe_1_1ChatSession_aeefa72dedf5afd42122ec1ac41208815}{project\+\_\+ctx}} = \mbox{\hyperlink{classaxe_1_1ProjectContext}{Project\+Context}}(\mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}}, \mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}})
 \item 
@@ -124,11 +129,11 @@ bool \mbox{\hyperlink{classaxe_1_1ChatSession_a08910e7c127296a306562cfe449232b3}
 \label{doc-constructors}
 \Hypertarget{classaxe_1_1ChatSession_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classaxe_1_1ChatSession_ab4fb7a9b76ad0732cfbefc0220702895}\index{axe.ChatSession@{axe.ChatSession}!\_\_init\_\_@{\_\_init\_\_}}
+\Hypertarget{classaxe_1_1ChatSession_a82f99cca258d0e022692d25ae4b2b6b8}\index{axe.ChatSession@{axe.ChatSession}!\_\_init\_\_@{\_\_init\_\_}}
 \index{\_\_init\_\_@{\_\_init\_\_}!axe.ChatSession@{axe.ChatSession}}
 \doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
-{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_ab4fb7a9b76ad0732cfbefc0220702895} 
- None axe.\+Chat\+Session.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}}]{config}{, }\item[{str}]{project\+\_\+dir}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a82f99cca258d0e022692d25ae4b2b6b8} 
+ None axe.\+Chat\+Session.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}}]{config}{, }\item[{str}]{project\+\_\+dir}{, }\item[{Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} }]{workspace\+\_\+paths}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 
 
@@ -142,10 +147,8 @@ bool \mbox{\hyperlink{classaxe_1_1ChatSession_a08910e7c127296a306562cfe449232b3}
  str axe.\+Chat\+Session.\+clean\+\_\+message\+\_\+for\+\_\+context (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{content}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Clean message content for inclusion in context.
-
 Args:
     content: Original message content
-
 Returns:
     Cleaned content
 \end{DoxyVerb}
@@ -156,15 +159,12 @@ Returns:
  str axe.\+Chat\+Session.\+get\+\_\+optimized\+\_\+system\+\_\+prompt (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get optimized system prompt for an agent.
-
 Args:
     agent_name: Name of the agent
-
 Returns:
     Optimized system prompt
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -178,8 +178,7 @@ Returns:
  None axe.\+Chat\+Session.\+handle\+\_\+buildinfo\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Handle /buildinfo command to analyze build systems.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -193,8 +192,7 @@ Returns:
  None axe.\+Chat\+Session.\+handle\+\_\+llmprep\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Handle /prep or /llmprep command to generate LLM-friendly codebase context.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -208,12 +206,32 @@ Returns:
  None axe.\+Chat\+Session.\+handle\+\_\+session\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Handle /session command for save/load/list operations.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1ChatSession_a0ab519e1dc9929cad872bce563497494_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_a00f4c50861d88ce623a2c2db3ba0bd0b}\index{axe.ChatSession@{axe.ChatSession}!handle\_socket\_command@{handle\_socket\_command}}
+\index{handle\_socket\_command@{handle\_socket\_command}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{handle\_socket\_command()}{handle\_socket\_command()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a00f4c50861d88ce623a2c2db3ba0bd0b} 
+ None axe.\+Chat\+Session.\+handle\+\_\+socket\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{socket.\+socket}]{conn}{, }\item[{str}]{command}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Process command from socket, return output with ANSI colors.\end{DoxyVerb}
+ Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a00f4c50861d88ce623a2c2db3ba0bd0b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_a00f4c50861d88ce623a2c2db3ba0bd0b_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classaxe_1_1ChatSession_a9d70e5bb01dfd6c8bcef6a86448e5698}\index{axe.ChatSession@{axe.ChatSession}!handle\_stats\_command@{handle\_stats\_command}}
@@ -223,8 +241,7 @@ Returns:
  None axe.\+Chat\+Session.\+handle\+\_\+stats\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Handle /stats command to show token usage statistics.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -238,8 +255,7 @@ Returns:
  None axe.\+Chat\+Session.\+handle\+\_\+tokenopt\+\_\+stats\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Handle /tokenopt-stats command to show token optimization statistics.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -253,20 +269,32 @@ Returns:
  None axe.\+Chat\+Session.\+handle\+\_\+workshop\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Handle workshop tool commands.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1ChatSession_ad1395c2247996d061ec1a9cc47621bdf_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1ChatSession_ad1395c2247996d061ec1a9cc47621bdf_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1ChatSession_af8a5ffbca2c51f990f4dcd13075331fa}\index{axe.ChatSession@{axe.ChatSession}!handle\_workspace\_command@{handle\_workspace\_command}}
+\index{handle\_workspace\_command@{handle\_workspace\_command}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{handle\_workspace\_command()}{handle\_workspace\_command()}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_af8a5ffbca2c51f990f4dcd13075331fa} 
+ None axe.\+Chat\+Session.\+handle\+\_\+workspace\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Handle /workspace command for managing workspace directories.\end{DoxyVerb}
+ Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1ChatSession_af8a5ffbca2c51f990f4dcd13075331fa_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classaxe_1_1ChatSession_aecfb5d28c9d242bb1d3bbe5d972f5fe5}\index{axe.ChatSession@{axe.ChatSession}!list\_agents@{list\_agents}}
@@ -276,16 +304,14 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+list\+\_\+agents (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}List available agents with enhanced metadata.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=194pt]{classaxe_1_1ChatSession_aecfb5d28c9d242bb1d3bbe5d972f5fe5_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -299,8 +325,7 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+list\+\_\+dirs (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Show directory permissions.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -314,8 +339,7 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+list\+\_\+tools (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}List available tools by category.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -329,12 +353,10 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+optimize\+\_\+context\+\_\+if\+\_\+needed (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Apply context optimization if enabled and needed.
-
 Args:
     agent_name: Name of the agent for context limits
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -348,8 +370,7 @@ Args:
  None axe.\+Chat\+Session.\+print\+\_\+banner (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Print welcome banner.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -363,8 +384,7 @@ Args:
  None axe.\+Chat\+Session.\+print\+\_\+help (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Print help message.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -378,16 +398,14 @@ Args:
  None axe.\+Chat\+Session.\+process\+\_\+agent\+\_\+message (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{message}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Process an @agent message.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1ChatSession_a92ba45e5dec2d5bbe7430d2d1302729a_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -401,16 +419,14 @@ Here is the caller graph for this function\+:
  bool axe.\+Chat\+Session.\+process\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{cmd}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Process a slash command. Returns False to exit.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1ChatSession_aaa359a2981c69ef0b93b8b48e259e007_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -423,17 +439,15 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{classaxe_1_1ChatSession_a68cb42802ab49b009bbfc87e9d7e8f78} 
  None axe.\+Chat\+Session.\+run (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}Run interactive chat session.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+\begin{DoxyVerb}Run interactive chat session with socket server.\end{DoxyVerb}
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1ChatSession_a68cb42802ab49b009bbfc87e9d7e8f78_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -447,8 +461,7 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+run\+\_\+chisel (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Run Chisel symbolic execution tool.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -462,8 +475,7 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+run\+\_\+hammer (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Run Hammer live instrumentation tool.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -477,8 +489,7 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+run\+\_\+plane (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Run Plane source/sink enumeration tool.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -492,8 +503,7 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+run\+\_\+saw (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Run Saw taint analysis tool.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -507,8 +517,7 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+show\+\_\+workshop\+\_\+help (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Display workshop tools help.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -522,8 +531,7 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+show\+\_\+workshop\+\_\+history (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Display workshop analysis history.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -537,8 +545,7 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+show\+\_\+workshop\+\_\+stats (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{args}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Display workshop usage statistics.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -552,8 +559,7 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+show\+\_\+workshop\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Display workshop tools availability status.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -567,8 +573,7 @@ Here is the caller graph for this function\+:
  None axe.\+Chat\+Session.\+show\+\_\+workshop\+\_\+tool\+\_\+help (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{tool\+\_\+name}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Display detailed help for a specific workshop tool.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -692,7 +697,7 @@ Token\+Stats axe.\+Chat\+Session.\+token\+\_\+stats = Token\+Stats()}
 \index{tool\_runner@{tool\_runner}!axe.ChatSession@{axe.ChatSession}}
 \doxysubsubsection{\texorpdfstring{tool\_runner}{tool\_runner}}
 {\footnotesize\ttfamily \label{classaxe_1_1ChatSession_ada9c58fcd370144e71643c60a9b70360} 
-\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}} axe.\+Chat\+Session.\+tool\+\_\+runner = \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}(\mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}}, \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}})}
+\mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}} axe.\+Chat\+Session.\+tool\+\_\+runner = \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}(\mbox{\hyperlink{classaxe_1_1ChatSession_a78e987e9350263be3b8bbfac9c30372b}{config}}, \mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}}, self.\+workspace\+\_\+paths)}
 
 \Hypertarget{classaxe_1_1ChatSession_ab713c3e02e473997fe97a9139e51db9c}\index{axe.ChatSession@{axe.ChatSession}!workshop\_chisel@{workshop\_chisel}}
 \index{workshop\_chisel@{workshop\_chisel}!axe.ChatSession@{axe.ChatSession}}
@@ -717,6 +722,12 @@ Optional\mbox{[}Any\mbox{]} axe.\+Chat\+Session.\+workshop\+\_\+plane = None}
 \doxysubsubsection{\texorpdfstring{workshop\_saw}{workshop\_saw}}
 {\footnotesize\ttfamily \label{classaxe_1_1ChatSession_aa98aefe04645dda38181af04710efdd8} 
 Optional\mbox{[}Any\mbox{]} axe.\+Chat\+Session.\+workshop\+\_\+saw = None}
+
+\Hypertarget{classaxe_1_1ChatSession_aff57373288084cb31bab94722475f53e}\index{axe.ChatSession@{axe.ChatSession}!workspace\_paths@{workspace\_paths}}
+\index{workspace\_paths@{workspace\_paths}!axe.ChatSession@{axe.ChatSession}}
+\doxysubsubsection{\texorpdfstring{workspace\_paths}{workspace\_paths}}
+{\footnotesize\ttfamily \label{classaxe_1_1ChatSession_aff57373288084cb31bab94722475f53e} 
+axe.\+Chat\+Session.\+workspace\+\_\+paths = workspace\+\_\+paths if workspace\+\_\+paths else \mbox{[}\mbox{\hyperlink{classaxe_1_1ChatSession_ada7d33bbf303ebc5508f23840e739f08}{project\+\_\+dir}}\mbox{]}}
 
 
 

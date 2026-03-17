@@ -1,14 +1,16 @@
 var classaxe_1_1ChatSession =
 [
-    [ "__init__", "classaxe_1_1ChatSession.html#ab4fb7a9b76ad0732cfbefc0220702895", null ],
+    [ "__init__", "classaxe_1_1ChatSession.html#a82f99cca258d0e022692d25ae4b2b6b8", null ],
     [ "clean_message_for_context", "classaxe_1_1ChatSession.html#a95c74626ca3762895152631775b71736", null ],
     [ "get_optimized_system_prompt", "classaxe_1_1ChatSession.html#a292849d40a6711c7b6d7452667c55458", null ],
     [ "handle_buildinfo_command", "classaxe_1_1ChatSession.html#aec06b2aeb52d5c5cbac6bd9ef969e09d", null ],
     [ "handle_llmprep_command", "classaxe_1_1ChatSession.html#aeff43e85c446ddd0b886d1203875452f", null ],
     [ "handle_session_command", "classaxe_1_1ChatSession.html#a0ab519e1dc9929cad872bce563497494", null ],
+    [ "handle_socket_command", "classaxe_1_1ChatSession.html#a00f4c50861d88ce623a2c2db3ba0bd0b", null ],
     [ "handle_stats_command", "classaxe_1_1ChatSession.html#a9d70e5bb01dfd6c8bcef6a86448e5698", null ],
     [ "handle_tokenopt_stats_command", "classaxe_1_1ChatSession.html#aac98b18a00b50925abec74f75573cffa", null ],
     [ "handle_workshop_command", "classaxe_1_1ChatSession.html#ad1395c2247996d061ec1a9cc47621bdf", null ],
+    [ "handle_workspace_command", "classaxe_1_1ChatSession.html#af8a5ffbca2c51f990f4dcd13075331fa", null ],
     [ "list_agents", "classaxe_1_1ChatSession.html#aecfb5d28c9d242bb1d3bbe5d972f5fe5", null ],
     [ "list_dirs", "classaxe_1_1ChatSession.html#a75658491705b9ea427ddcd85a0795212", null ],
     [ "list_tools", "classaxe_1_1ChatSession.html#ab97f8be62dd60678d92c6f18b3e13d50", null ],
@@ -47,5 +49,6 @@ var classaxe_1_1ChatSession =
     [ "workshop_chisel", "classaxe_1_1ChatSession.html#ab713c3e02e473997fe97a9139e51db9c", null ],
     [ "workshop_hammer", "classaxe_1_1ChatSession.html#a207e7b732b2e2cd1b4330303a71772e1", null ],
     [ "workshop_plane", "classaxe_1_1ChatSession.html#a5c0c42c3ebdb65655c16d6d386a78efb", null ],
-    [ "workshop_saw", "classaxe_1_1ChatSession.html#aa98aefe04645dda38181af04710efdd8", null ]
+    [ "workshop_saw", "classaxe_1_1ChatSession.html#aa98aefe04645dda38181af04710efdd8", null ],
+    [ "workspace_paths", "classaxe_1_1ChatSession.html#aff57373288084cb31bab94722475f53e", null ]
 ];

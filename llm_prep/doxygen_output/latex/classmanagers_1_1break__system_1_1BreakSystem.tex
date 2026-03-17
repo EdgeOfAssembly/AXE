@@ -2,8 +2,7 @@
 \hypertarget{classmanagers_1_1break__system_1_1BreakSystem}{}\label{classmanagers_1_1break__system_1_1BreakSystem}\index{managers.break\_system.BreakSystem@{managers.break\_system.BreakSystem}}
 
 
-Collaboration diagram for managers.\+break\+\_\+system.\+Break\+System\+:
-\nopagebreak
+Collaboration diagram for managers.\+break\+\_\+system.\+Break\+System\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -40,7 +39,6 @@ list \mbox{\hyperlink{classmanagers_1_1break__system_1_1BreakSystem_ae6eec9c4494
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Manages coffee/play breaks for agents.
-
 Rules:
 - Only when workload is low (<30% utilization)
 - Max 10-15 min per break
@@ -91,8 +89,7 @@ managers.\+break\+\_\+system.\+Break\+System.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begi
  List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} managers.\+break\+\_\+system.\+Break\+System.\+get\+\_\+pending\+\_\+requests (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get all pending break requests.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -106,8 +103,7 @@ managers.\+break\+\_\+system.\+Break\+System.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begi
  Dict\mbox{[}str, Any\mbox{]} managers.\+break\+\_\+system.\+Break\+System.\+get\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get current break system status.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -121,13 +117,11 @@ managers.\+break\+\_\+system.\+Break\+System.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begi
  Dict\mbox{[}str, Any\mbox{]} managers.\+break\+\_\+system.\+Break\+System.\+request\+\_\+break (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{str}]{alias}{, }\item[{str}]{break\+\_\+type}{, }\item[{str}]{justification}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Request a break for an agent.
-
 Args:
     agent_id: Unique agent identifier
     alias: Agent's display alias
     break_type: 'coffee' or 'play'
     justification: Why the agent needs a break
-
 Returns:
     Request status and details
 \end{DoxyVerb}

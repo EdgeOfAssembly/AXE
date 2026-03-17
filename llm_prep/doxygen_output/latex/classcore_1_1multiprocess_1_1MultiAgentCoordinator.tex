@@ -2,8 +2,7 @@
 \hypertarget{classcore_1_1multiprocess_1_1MultiAgentCoordinator}{}\label{classcore_1_1multiprocess_1_1MultiAgentCoordinator}\index{core.multiprocess.MultiAgentCoordinator@{core.multiprocess.MultiAgentCoordinator}}
 
 
-Collaboration diagram for core.\+multiprocess.\+Multi\+Agent\+Coordinator\+:
-\nopagebreak
+Collaboration diagram for core.\+multiprocess.\+Multi\+Agent\+Coordinator\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -44,7 +43,6 @@ dict \mbox{\hyperlink{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a59f868
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Orchestrates all agent processes.
-
 Responsibilities:
 - Spawn worker processes for each agent
 - Broadcast context updates to all agents
@@ -64,7 +62,6 @@ Responsibilities:
 core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}Dict\mbox{[}str, str\mbox{]}\mbox{]}}]{agent\+\_\+configs}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Initialize coordinator.
-
 Args:
     agent_configs: List of agent configuration dicts with 'agent_id' and 'name'
 \end{DoxyVerb}
@@ -80,7 +77,6 @@ Args:
  None core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+broadcast\+\_\+context\+\_\+update (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{update\+\_\+type}{, }\item[{Any }]{data}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Broadcast a context update to all agents.
-
 Args:
     update_type: Type of update
     data: Optional update data
@@ -92,20 +88,17 @@ Args:
  Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+get\+\_\+agent\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get status of all agents.
-
 Returns:
     Dictionary mapping agent_id to status info
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=239pt]{classcore_1_1multiprocess_1_1MultiAgentCoordinator_a3c35e80866e317fc554302ff3689b392_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -126,12 +119,10 @@ Here is the caller graph for this function\+:
  Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+multiprocess.\+Multi\+Agent\+Coordinator.\+signal\+\_\+turn (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{str}]{prompt}{, }\item[{str }]{context}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Signal an agent that it's their turn to respond.
-
 Args:
     agent_id: Agent to signal
     prompt: The prompt/question
     context: Additional context
-
 Returns:
     Agent's response dictionary or None if timeout
 \end{DoxyVerb}

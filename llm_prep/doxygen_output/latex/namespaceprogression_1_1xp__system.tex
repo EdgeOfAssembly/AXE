@@ -34,11 +34,9 @@ Implements hybrid linear/exponential progression curve.
  int progression.\+xp\+\_\+system.\+award\+\_\+xp\+\_\+for\+\_\+activity (\begin{DoxyParamCaption}\item[{str}]{activity}{, }\item[{float }]{quality\+\_\+multiplier}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Calculate XP award for a specific activity.
-
 Args:
     activity: Activity name (key from XP_AWARDS)
     quality_multiplier: Multiplier for analysis quality (0.5 to 2.0)
-    
 Returns:
     XP points to award
 \end{DoxyVerb}
@@ -56,11 +54,9 @@ Returns:
  int progression.\+xp\+\_\+system.\+get\+\_\+workshop\+\_\+xp\+\_\+bonus (\begin{DoxyParamCaption}\item[{dict}]{results}{, }\item[{str}]{tool\+\_\+name}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Calculate XP bonus based on workshop analysis results.
-
 Args:
     results: Analysis results dictionary
     tool_name: Name of the workshop tool
-    
 Returns:
     Bonus XP points
 \end{DoxyVerb}
@@ -83,23 +79,24 @@ dict progression.\+xp\+\_\+system.\+XP\+\_\+\+AWARDS}
 \DoxyCodeLine{00004\ \ \ \ \ \textcolor{stringliteral}{'workshop\_saw'}:\ 20,\ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Taint\ analysis}}
 \DoxyCodeLine{00005\ \ \ \ \ \textcolor{stringliteral}{'workshop\_plane'}:\ 15,\ \ \ \ \ \ \ \textcolor{comment}{\#\ Source/sink\ enumeration}}
 \DoxyCodeLine{00006\ \ \ \ \ \textcolor{stringliteral}{'workshop\_hammer'}:\ 30,\ \ \ \ \ \ \textcolor{comment}{\#\ Live\ instrumentation}}
-\DoxyCodeLine{00007\ \ \ \ \ }
-\DoxyCodeLine{00008\ \ \ \ \ \textcolor{comment}{\#\ Analysis\ quality\ bonuses}}
-\DoxyCodeLine{00009\ \ \ \ \ \textcolor{stringliteral}{'workshop\_vulnerability\_found'}:\ 50,\ \ \textcolor{comment}{\#\ Finding\ a\ real\ vulnerability}}
-\DoxyCodeLine{00010\ \ \ \ \ \textcolor{stringliteral}{'workshop\_clean\_analysis'}:\ 10,\ \ \ \ \ \ \ \textcolor{comment}{\#\ Successful\ analysis\ with\ no\ errors}}
-\DoxyCodeLine{00011\ \ \ \ \ }
-\DoxyCodeLine{00012\ \ \ \ \ \textcolor{comment}{\#\ Multi-\/agent\ collaboration}}
-\DoxyCodeLine{00013\ \ \ \ \ \textcolor{stringliteral}{'agent\_collaboration'}:\ 15,}
-\DoxyCodeLine{00014\ \ \ \ \ \textcolor{stringliteral}{'task\_completion'}:\ 20,}
-\DoxyCodeLine{00015\ \ \ \ \ }
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{\#\ Code\ quality}}
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{stringliteral}{'code\_review'}:\ 10,}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{stringliteral}{'bug\_fix'}:\ 25,}
-\DoxyCodeLine{00019\ \ \ \ \ }
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{\#\ Default\ awards}}
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{stringliteral}{'message\_processed'}:\ 1,}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{stringliteral}{'command\_executed'}:\ 5,}
-\DoxyCodeLine{00023\ \}}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{comment}{\#\ Analysis\ quality\ bonuses}}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{stringliteral}{'workshop\_vulnerability\_found'}:\ 50,\ \ \textcolor{comment}{\#\ Finding\ a\ real\ vulnerability}}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{stringliteral}{'workshop\_clean\_analysis'}:\ 10,\ \ \ \ \ \ \ \textcolor{comment}{\#\ Successful\ analysis\ with\ no\ errors}}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{comment}{\#\ Multi-\/agent\ collaboration}}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{stringliteral}{'agent\_collaboration'}:\ 15,}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{stringliteral}{'task\_completion'}:\ 20,}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{comment}{\#\ Code\ quality}}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{stringliteral}{'code\_review'}:\ 10,}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{stringliteral}{'bug\_fix'}:\ 25,}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{\#\ Peer\ voting\ (Minsky's\ Society\ of\ Mind)\ \ \ \ 'peer\_endorsement':\ 10,\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Endorsed\ by\ another\ agent\ \ \ \ 'peer\_strong\_endorsement':\ 20,\ \ \ \ \ \ \#\ Strong\ endorsement\ from\ Team\ Leader+\ \ \ \ 'peer\_penalty':\ -\/5,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Penalized\ (limited\ to\ prevent\ abuse)\ \ \ \ \#\ Conflict\ resolution\ and\ arbitration\ (Minsky's\ cross-\/exclusion)}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{stringliteral}{'conflict\_resolution'}:\ 15,\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Successfully\ resolved\ a\ conflict\ (PR\ \#55\ value)}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{stringliteral}{'arbitration\_win'}:\ 25,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Won\ an\ arbitration\ decision\ (PR\ \#55\ value)}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{stringliteral}{'arbitration\_conducted'}:\ 20,\ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Successfully\ arbitrated\ a\ conflict\ (PR\ \#56)}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{stringliteral}{'conflict\_detected'}:\ 10,\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{\#\ Detecting\ a\ valid\ conflict\ (PR\ \#56)}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{\#\ Default\ awards}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{stringliteral}{'message\_processed'}:\ 1,}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{stringliteral}{'command\_executed'}:\ 5,}
+\DoxyCodeLine{00024\ \}}
 
 \end{DoxyCode}
 \Hypertarget{namespaceprogression_1_1xp__system_a7367a4e7f7849104c274564f22f3b7af}\index{progression.xp\_system@{progression.xp\_system}!XP\_PER\_LEVEL\_LINEAR@{XP\_PER\_LEVEL\_LINEAR}}

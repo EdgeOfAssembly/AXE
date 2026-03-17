@@ -2,8 +2,7 @@
 \hypertarget{classaxe_1_1CollaborativeSession}{}\label{classaxe_1_1CollaborativeSession}\index{axe.CollaborativeSession@{axe.CollaborativeSession}}
 
 
-Collaboration diagram for axe.\+Collaborative\+Session\+:
-\nopagebreak
+Collaboration diagram for axe.\+Collaborative\+Session\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -13,7 +12,7 @@ Collaboration diagram for axe.\+Collaborative\+Session\+:
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a277e28479a3ce663c28e28a79b0fa179}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}} \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}}, List\mbox{[}str\mbox{]} \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a92644ec2213903477715a66705bd4eed}{agents}}, str workspace\+\_\+dir, int time\+\_\+limit\+\_\+minutes=30, Optional\mbox{[}str\mbox{]} db\+\_\+path=None, bool \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a3ef7cbcd10fe137c9769822e72b5c87a}{github\+\_\+enabled}}=False)
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_ada8c1f888d706c6a1f654b52a4aa31f1}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}} \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}}, List\mbox{[}str\mbox{]} \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a92644ec2213903477715a66705bd4eed}{agents}}, str workspace\+\_\+dir, int time\+\_\+limit\+\_\+minutes=30, Optional\mbox{[}str\mbox{]} db\+\_\+path=None, bool \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a3ef7cbcd10fe137c9769822e72b5c87a}{github\+\_\+enabled}}=False, Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a408cf07fc99d6b4c56803bafc5730cb6}{workspace\+\_\+paths}}=None)
 \item 
 None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a501edaa48b72d90cc3af128953133578}{print\+\_\+banner}} (self)
 \item 
@@ -30,7 +29,9 @@ None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_af4ab55de0d7b895c6002cd69
 \item 
 \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a826fb2877e32b1367361367002147ced}{project\+\_\+ctx}} = \mbox{\hyperlink{classaxe_1_1ProjectContext}{Project\+Context}}(workspace\+\_\+dir, \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}})
 \item 
-\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a01d559caead539214a65cd29bd02c301}{tool\+\_\+runner}} = \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}(\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}}, workspace\+\_\+dir)
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a408cf07fc99d6b4c56803bafc5730cb6}{workspace\+\_\+paths}} = workspace\+\_\+paths if workspace\+\_\+paths else \mbox{[}workspace\+\_\+dir\mbox{]}
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a01d559caead539214a65cd29bd02c301}{tool\+\_\+runner}} = \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}(\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}}, workspace\+\_\+dir, self.\+workspace\+\_\+paths)
 \item 
 \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a8a690e944cb108907b08c387df13c03b}{response\+\_\+processor}} = \mbox{\hyperlink{classaxe_1_1ResponseProcessor}{Response\+Processor}}(\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}}, workspace\+\_\+dir, self.\+tool\+\_\+runner, self.\+workspace)
 \item 
@@ -43,6 +44,12 @@ None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_af4ab55de0d7b895c6002cd69
 \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a0dd9ab753e3e615c9ac6599ddd0b7858}{emergency\+\_\+mailbox}} = \mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox}{Emergency\+Mailbox}}()
 \item 
 \mbox{\hyperlink{classaxe_1_1CollaborativeSession_ac5ccd2b2265cf373d3614156806d728f}{spawner}} = \mbox{\hyperlink{classmanagers_1_1dynamic__spawner_1_1DynamicSpawner}{Dynamic\+Spawner}}(self.\+db, \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}})
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a32b9a6bd054994dec051152f13ad2ce5}{global\+\_\+workspace}} = \mbox{\hyperlink{classcore_1_1global__workspace_1_1GlobalWorkspace}{Global\+Workspace}}(workspace\+\_\+dir)
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_ac2f714f4f985c81bc7a0a90129189cde}{subsumption\+\_\+controller}} = \mbox{\hyperlink{classcore_1_1subsumption__layer_1_1SubsumptionController}{Subsumption\+Controller}}()
+\item 
+\mbox{\hyperlink{classaxe_1_1CollaborativeSession_adf8413278328fb3a9fee7daf3da8a83f}{arbitration\+\_\+protocol}} = \mbox{\hyperlink{classcore_1_1arbitration_1_1ArbitrationProtocol}{Arbitration\+Protocol}}(self.\+global\+\_\+workspace)
 \item 
 bool \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a3ef7cbcd10fe137c9769822e72b5c87a}{github\+\_\+enabled}} = github\+\_\+enabled
 \item 
@@ -97,6 +104,8 @@ None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_af7d2acc6e00abc418359198d
 \item 
 None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a041ba9ec847ef00ec022b44ad2c5fd88}{\+\_\+show\+\_\+break\+\_\+requests}} (self)
 \item 
+None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a2163cb254c21db6f140ee3fbde93af7d}{\+\_\+handle\+\_\+cognitive\+\_\+tokens}} (self, str agent\+\_\+name, str response)
+\item 
 None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_a3e34c26c0de8010ad5878ed3886ee1c9}{\+\_\+show\+\_\+emergency\+\_\+mailbox}} (self)
 \item 
 None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_afb29c1f9e386b7501a35b18e4d4a57cd}{\+\_\+handle\+\_\+github\+\_\+review\+\_\+pause}} (self, str push\+\_\+info)
@@ -117,7 +126,6 @@ None \mbox{\hyperlink{classaxe_1_1CollaborativeSession_ab9b4446c5f6869de5d98eb51
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Multi-agent collaborative session where models communicate and cooperate.
-
 Features:
 - Turn-based coordination (models take turns to avoid talking over each other)
 - Shared workspace for code and notes
@@ -134,11 +142,11 @@ Features:
 \label{doc-constructors}
 \Hypertarget{classaxe_1_1CollaborativeSession_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classaxe_1_1CollaborativeSession_a277e28479a3ce663c28e28a79b0fa179}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_\_init\_\_@{\_\_init\_\_}}
+\Hypertarget{classaxe_1_1CollaborativeSession_ada8c1f888d706c6a1f654b52a4aa31f1}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_\_init\_\_@{\_\_init\_\_}}
 \index{\_\_init\_\_@{\_\_init\_\_}!axe.CollaborativeSession@{axe.CollaborativeSession}}
 \doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
-{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a277e28479a3ce663c28e28a79b0fa179} 
-axe.\+Collaborative\+Session.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}}]{config}{, }\item[{List\mbox{[}str\mbox{]}}]{agents}{, }\item[{str}]{workspace\+\_\+dir}{, }\item[{int }]{time\+\_\+limit\+\_\+minutes}{ = {\ttfamily 30}, }\item[{Optional\mbox{[}str\mbox{]} }]{db\+\_\+path}{ = {\ttfamily None}, }\item[{bool }]{github\+\_\+enabled}{ = {\ttfamily False}}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ada8c1f888d706c6a1f654b52a4aa31f1} 
+axe.\+Collaborative\+Session.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{\mbox{\hyperlink{classcore_1_1config_1_1Config}{Config}}}]{config}{, }\item[{List\mbox{[}str\mbox{]}}]{agents}{, }\item[{str}]{workspace\+\_\+dir}{, }\item[{int }]{time\+\_\+limit\+\_\+minutes}{ = {\ttfamily 30}, }\item[{Optional\mbox{[}str\mbox{]} }]{db\+\_\+path}{ = {\ttfamily None}, }\item[{bool }]{github\+\_\+enabled}{ = {\ttfamily False}, }\item[{Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} }]{workspace\+\_\+paths}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 
 
@@ -152,16 +160,14 @@ axe.\+Collaborative\+Session.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCapti
  None axe.\+Collaborative\+Session.\+\_\+approve\+\_\+and\+\_\+push (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict}]{review\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Execute approved push.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a909e359216e70f696e6a51f60a24be7d_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -175,8 +181,7 @@ Here is the caller graph for this function\+:
  Optional\mbox{[}str\mbox{]} axe.\+Collaborative\+Session.\+\_\+create\+\_\+pr\+\_\+with\+\_\+gh\+\_\+cli (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{branch}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Create PR using gh CLI.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -190,16 +195,14 @@ Here is the caller graph for this function\+:
  None axe.\+Collaborative\+Session.\+\_\+end\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Clean up and summarize the session.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_ab9b4446c5f6869de5d98eb51d3ab44ef_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -213,8 +216,7 @@ Here is the caller graph for this function\+:
  str axe.\+Collaborative\+Session.\+\_\+format\+\_\+conversation\+\_\+for\+\_\+agent (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Format conversation history for an agent to read.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -235,8 +237,7 @@ Here is the caller graph for this function\+:
  List\mbox{[}str\mbox{]} axe.\+Collaborative\+Session.\+\_\+get\+\_\+changed\+\_\+files (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Get list of changed files in workspace.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -250,8 +251,7 @@ Here is the caller graph for this function\+:
  str axe.\+Collaborative\+Session.\+\_\+get\+\_\+spawned\+\_\+agent\+\_\+system\+\_\+prompt (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{model\+\_\+type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Get appropriate system prompt for a spawned agent based on model type.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -265,8 +265,7 @@ Here is the caller graph for this function\+:
  str axe.\+Collaborative\+Session.\+\_\+get\+\_\+system\+\_\+prompt\+\_\+for\+\_\+collab (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Generate collaborative system prompt for an agent.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -280,16 +279,14 @@ Here is the caller graph for this function\+:
  None axe.\+Collaborative\+Session.\+\_\+github\+\_\+review\+\_\+prompt (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict}]{review\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Handle human review prompts.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_ad62f87765c49218f37f833f403a9d5e2_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -303,12 +300,32 @@ Here is the caller graph for this function\+:
  None axe.\+Collaborative\+Session.\+\_\+handle\+\_\+break\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{str}]{response}{, }\item[{str }]{content}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Handle a break request from an agent.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a64377593b620e4449351bb066f04456d_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classaxe_1_1CollaborativeSession_a2163cb254c21db6f140ee3fbde93af7d}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_handle\_cognitive\_tokens@{\_handle\_cognitive\_tokens}}
+\index{\_handle\_cognitive\_tokens@{\_handle\_cognitive\_tokens}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{\_handle\_cognitive\_tokens()}{\_handle\_cognitive\_tokens()}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a2163cb254c21db6f140ee3fbde93af7d} 
+ None axe.\+Collaborative\+Session.\+\_\+handle\+\_\+cognitive\+\_\+tokens (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{str}]{response}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Handle cognitive architecture tokens in agent response.\end{DoxyVerb}
+ Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a2163cb254c21db6f140ee3fbde93af7d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a2163cb254c21db6f140ee3fbde93af7d_icgraph}
 \end{center}
 \end{figure}
 \Hypertarget{classaxe_1_1CollaborativeSession_adfdeaf4031f6e214d05e21a96d24755a}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!\_handle\_emergency\_message@{\_handle\_emergency\_message}}
@@ -318,8 +335,7 @@ Here is the caller graph for this function\+:
  None axe.\+Collaborative\+Session.\+\_\+handle\+\_\+emergency\+\_\+message (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{str}]{response}{, }\item[{str }]{content}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Handle an emergency message from an agent.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -335,16 +351,14 @@ Here is the caller graph for this function\+:
 \begin{DoxyVerb}Pause session for human to review GitHub push request.
 Reuses existing Ctrl+C pause mechanism.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_afb29c1f9e386b7501a35b18e4d4a57cd_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -358,16 +372,14 @@ Here is the caller graph for this function\+:
  None axe.\+Collaborative\+Session.\+\_\+handle\+\_\+spawn\+\_\+request (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+name}{, }\item[{str}]{response}{, }\item[{str }]{content}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Handle a spawn request from the supervisor.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_af1293714188297ae8b5cbb4bbba7af67_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -381,8 +393,7 @@ Here is the caller graph for this function\+:
  None axe.\+Collaborative\+Session.\+\_\+print\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Print current status of all agents and systems.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -396,8 +407,7 @@ Here is the caller graph for this function\+:
  None axe.\+Collaborative\+Session.\+\_\+reject\+\_\+and\+\_\+continue (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict}]{review\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Reject and send feedback to agents.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -411,16 +421,14 @@ Here is the caller graph for this function\+:
  None axe.\+Collaborative\+Session.\+\_\+run\+\_\+collaboration\+\_\+loop (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Main loop for agent collaboration.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classaxe_1_1CollaborativeSession_a2c0fb59b4465a4f8514630602fa942f8_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -434,8 +442,7 @@ Here is the caller graph for this function\+:
  None axe.\+Collaborative\+Session.\+\_\+show\+\_\+break\+\_\+requests (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Show pending break requests for human review.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -449,8 +456,7 @@ Here is the caller graph for this function\+:
  None axe.\+Collaborative\+Session.\+\_\+show\+\_\+emergency\+\_\+mailbox (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Show emergency mailbox contents for human review.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -464,8 +470,7 @@ Here is the caller graph for this function\+:
  int axe.\+Collaborative\+Session.\+\_\+time\+\_\+remaining (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Get remaining time in seconds.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -479,8 +484,7 @@ Here is the caller graph for this function\+:
  None axe.\+Collaborative\+Session.\+print\+\_\+banner (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Print collaborative session banner with rules and agent info.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -494,8 +498,7 @@ Here is the caller graph for this function\+:
  None axe.\+Collaborative\+Session.\+start\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{task}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Start a collaborative session with a task.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -530,6 +533,12 @@ axe.\+Collaborative\+Session.\+agent\+\_\+mgr = \mbox{\hyperlink{classcore_1_1ag
 \doxysubsubsection{\texorpdfstring{agents}{agents}}
 {\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a92644ec2213903477715a66705bd4eed} 
 axe.\+Collaborative\+Session.\+agents = \mbox{[}$\,$\mbox{]}}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_adf8413278328fb3a9fee7daf3da8a83f}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!arbitration\_protocol@{arbitration\_protocol}}
+\index{arbitration\_protocol@{arbitration\_protocol}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{arbitration\_protocol}{arbitration\_protocol}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_adf8413278328fb3a9fee7daf3da8a83f} 
+axe.\+Collaborative\+Session.\+arbitration\+\_\+protocol = \mbox{\hyperlink{classcore_1_1arbitration_1_1ArbitrationProtocol}{Arbitration\+Protocol}}(self.\+global\+\_\+workspace)}
 
 \Hypertarget{classaxe_1_1CollaborativeSession_aa0e3798df96749e8f367dbde2ac247a9}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!break\_system@{break\_system}}
 \index{break\_system@{break\_system}!axe.CollaborativeSession@{axe.CollaborativeSession}}
@@ -579,6 +588,12 @@ axe.\+Collaborative\+Session.\+github\+\_\+agent = None}
 {\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a3ef7cbcd10fe137c9769822e72b5c87a} 
 bool axe.\+Collaborative\+Session.\+github\+\_\+enabled = github\+\_\+enabled}
 
+\Hypertarget{classaxe_1_1CollaborativeSession_a32b9a6bd054994dec051152f13ad2ce5}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!global\_workspace@{global\_workspace}}
+\index{global\_workspace@{global\_workspace}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{global\_workspace}{global\_workspace}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a32b9a6bd054994dec051152f13ad2ce5} 
+axe.\+Collaborative\+Session.\+global\+\_\+workspace = \mbox{\hyperlink{classcore_1_1global__workspace_1_1GlobalWorkspace}{Global\+Workspace}}(workspace\+\_\+dir)}
+
 \Hypertarget{classaxe_1_1CollaborativeSession_a17613664271470a880ce760a7a8ae835}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!is\_running@{is\_running}}
 \index{is\_running@{is\_running}!axe.CollaborativeSession@{axe.CollaborativeSession}}
 \doxysubsubsection{\texorpdfstring{is\_running}{is\_running}}
@@ -621,6 +636,12 @@ axe.\+Collaborative\+Session.\+spawner = \mbox{\hyperlink{classmanagers_1_1dynam
 {\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_aa9f65ac73b173d9d13cdf9cfab4e588b} 
 Optional\mbox{[}datetime\mbox{]} axe.\+Collaborative\+Session.\+start\+\_\+time = None}
 
+\Hypertarget{classaxe_1_1CollaborativeSession_ac2f714f4f985c81bc7a0a90129189cde}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!subsumption\_controller@{subsumption\_controller}}
+\index{subsumption\_controller@{subsumption\_controller}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{subsumption\_controller}{subsumption\_controller}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ac2f714f4f985c81bc7a0a90129189cde} 
+axe.\+Collaborative\+Session.\+subsumption\+\_\+controller = \mbox{\hyperlink{classcore_1_1subsumption__layer_1_1SubsumptionController}{Subsumption\+Controller}}()}
+
 \Hypertarget{classaxe_1_1CollaborativeSession_a7d5eede8e6f645dc2f0201f04bf0c8a5}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!supervisor\_alias@{supervisor\_alias}}
 \index{supervisor\_alias@{supervisor\_alias}!axe.CollaborativeSession@{axe.CollaborativeSession}}
 \doxysubsubsection{\texorpdfstring{supervisor\_alias}{supervisor\_alias}}
@@ -649,13 +670,19 @@ int axe.\+Collaborative\+Session.\+time\+\_\+limit = time\+\_\+limit\+\_\+minute
 \index{tool\_runner@{tool\_runner}!axe.CollaborativeSession@{axe.CollaborativeSession}}
 \doxysubsubsection{\texorpdfstring{tool\_runner}{tool\_runner}}
 {\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a01d559caead539214a65cd29bd02c301} 
-axe.\+Collaborative\+Session.\+tool\+\_\+runner = \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}(\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}}, workspace\+\_\+dir)}
+axe.\+Collaborative\+Session.\+tool\+\_\+runner = \mbox{\hyperlink{classcore_1_1tool__runner_1_1ToolRunner}{Tool\+Runner}}(\mbox{\hyperlink{classaxe_1_1CollaborativeSession_a044fb092f7807173de807153052e65af}{config}}, workspace\+\_\+dir, self.\+workspace\+\_\+paths)}
 
 \Hypertarget{classaxe_1_1CollaborativeSession_ab7c3f130204869b9cd3fda1695d663db}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!workspace@{workspace}}
 \index{workspace@{workspace}!axe.CollaborativeSession@{axe.CollaborativeSession}}
 \doxysubsubsection{\texorpdfstring{workspace}{workspace}}
 {\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_ab7c3f130204869b9cd3fda1695d663db} 
 axe.\+Collaborative\+Session.\+workspace = \mbox{\hyperlink{classaxe_1_1SharedWorkspace}{Shared\+Workspace}}(workspace\+\_\+dir)}
+
+\Hypertarget{classaxe_1_1CollaborativeSession_a408cf07fc99d6b4c56803bafc5730cb6}\index{axe.CollaborativeSession@{axe.CollaborativeSession}!workspace\_paths@{workspace\_paths}}
+\index{workspace\_paths@{workspace\_paths}!axe.CollaborativeSession@{axe.CollaborativeSession}}
+\doxysubsubsection{\texorpdfstring{workspace\_paths}{workspace\_paths}}
+{\footnotesize\ttfamily \label{classaxe_1_1CollaborativeSession_a408cf07fc99d6b4c56803bafc5730cb6} 
+axe.\+Collaborative\+Session.\+workspace\+\_\+paths = workspace\+\_\+paths if workspace\+\_\+paths else \mbox{[}workspace\+\_\+dir\mbox{]}}
 
 
 

@@ -106,16 +106,13 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Session Preprocessor for AXE
-
 Orchestrates workspace preprocessing at the start of each AXE session.
-
 Workflow:
 1. Check if preprocessing is enabled in config
 2. If environment_probe enabled: generate .collab_env.md with system info (zero agent tokens)
 3. If minifier enabled: minify supported source files (keeping comments)
 4. If llmprep enabled: run llmprep to generate LLM context files
 5. Report statistics to user
-
 Author: EdgeOfAssembly
 License: GPLv3 / Commercial
 </pre> </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
@@ -138,11 +135,9 @@ License: GPLv3 / Commercial
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Factory function to create a SessionPreprocessor.
-
 Args:
     config: AXE Config object
     workspace_path: Path to workspace directory
-    
 Returns:
     SessionPreprocessor instance
 </pre> 

@@ -99,7 +99,7 @@ Collaboration diagram for axe.CollaborativeSession:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a277e28479a3ce663c28e28a79b0fa179" id="r_a277e28479a3ce663c28e28a79b0fa179"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a277e28479a3ce663c28e28a79b0fa179">__init__</a> (self, <a class="el" href="classcore_1_1config_1_1Config.html">Config</a> <a class="el" href="#a044fb092f7807173de807153052e65af">config</a>, List[str] <a class="el" href="#a92644ec2213903477715a66705bd4eed">agents</a>, str workspace_dir, int time_limit_minutes=30, Optional[str] db_path=None, bool <a class="el" href="#a3ef7cbcd10fe137c9769822e72b5c87a">github_enabled</a>=False)</td></tr>
+<tr class="memitem:ada8c1f888d706c6a1f654b52a4aa31f1" id="r_ada8c1f888d706c6a1f654b52a4aa31f1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada8c1f888d706c6a1f654b52a4aa31f1">__init__</a> (self, <a class="el" href="classcore_1_1config_1_1Config.html">Config</a> <a class="el" href="#a044fb092f7807173de807153052e65af">config</a>, List[str] <a class="el" href="#a92644ec2213903477715a66705bd4eed">agents</a>, str workspace_dir, int time_limit_minutes=30, Optional[str] db_path=None, bool <a class="el" href="#a3ef7cbcd10fe137c9769822e72b5c87a">github_enabled</a>=False, Optional[List[str]] <a class="el" href="#a408cf07fc99d6b4c56803bafc5730cb6">workspace_paths</a>=None)</td></tr>
 <tr class="memitem:a501edaa48b72d90cc3af128953133578" id="r_a501edaa48b72d90cc3af128953133578"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a501edaa48b72d90cc3af128953133578">print_banner</a> (self)</td></tr>
 <tr class="memitem:af4ab55de0d7b895c6002cd691b36a9be" id="r_af4ab55de0d7b895c6002cd691b36a9be"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af4ab55de0d7b895c6002cd691b36a9be">start_session</a> (self, str task)</td></tr>
 </table><table class="memberdecls">
@@ -109,13 +109,17 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ab931398b863c755ac1cfda96f01cc320" id="r_ab931398b863c755ac1cfda96f01cc320"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab931398b863c755ac1cfda96f01cc320">agent_mgr</a> = <a class="el" href="classcore_1_1agent__manager_1_1AgentManager.html">AgentManager</a>(<a class="el" href="#a044fb092f7807173de807153052e65af">config</a>)</td></tr>
 <tr class="memitem:ab7c3f130204869b9cd3fda1695d663db" id="r_ab7c3f130204869b9cd3fda1695d663db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7c3f130204869b9cd3fda1695d663db">workspace</a> = <a class="el" href="classaxe_1_1SharedWorkspace.html">SharedWorkspace</a>(workspace_dir)</td></tr>
 <tr class="memitem:a826fb2877e32b1367361367002147ced" id="r_a826fb2877e32b1367361367002147ced"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a826fb2877e32b1367361367002147ced">project_ctx</a> = <a class="el" href="classaxe_1_1ProjectContext.html">ProjectContext</a>(workspace_dir, <a class="el" href="#a044fb092f7807173de807153052e65af">config</a>)</td></tr>
-<tr class="memitem:a01d559caead539214a65cd29bd02c301" id="r_a01d559caead539214a65cd29bd02c301"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01d559caead539214a65cd29bd02c301">tool_runner</a> = <a class="el" href="classcore_1_1tool__runner_1_1ToolRunner.html">ToolRunner</a>(<a class="el" href="#a044fb092f7807173de807153052e65af">config</a>, workspace_dir)</td></tr>
+<tr class="memitem:a408cf07fc99d6b4c56803bafc5730cb6" id="r_a408cf07fc99d6b4c56803bafc5730cb6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a408cf07fc99d6b4c56803bafc5730cb6">workspace_paths</a> = workspace_paths if workspace_paths else [workspace_dir]</td></tr>
+<tr class="memitem:a01d559caead539214a65cd29bd02c301" id="r_a01d559caead539214a65cd29bd02c301"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01d559caead539214a65cd29bd02c301">tool_runner</a> = <a class="el" href="classcore_1_1tool__runner_1_1ToolRunner.html">ToolRunner</a>(<a class="el" href="#a044fb092f7807173de807153052e65af">config</a>, workspace_dir, self.workspace_paths)</td></tr>
 <tr class="memitem:a8a690e944cb108907b08c387df13c03b" id="r_a8a690e944cb108907b08c387df13c03b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a690e944cb108907b08c387df13c03b">response_processor</a> = <a class="el" href="classaxe_1_1ResponseProcessor.html">ResponseProcessor</a>(<a class="el" href="#a044fb092f7807173de807153052e65af">config</a>, workspace_dir, self.tool_runner, self.workspace)</td></tr>
 <tr class="memitem:a9cc136ec23ba1cef9c8804ad6c74d49c" id="r_a9cc136ec23ba1cef9c8804ad6c74d49c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9cc136ec23ba1cef9c8804ad6c74d49c">db</a> = <a class="el" href="classdatabase_1_1agent__db_1_1AgentDatabase.html">AgentDatabase</a>(db_path)</td></tr>
 <tr class="memitem:a531b3b74f19c30d5b9f679c7edc37fae" id="r_a531b3b74f19c30d5b9f679c7edc37fae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a531b3b74f19c30d5b9f679c7edc37fae">sleep_manager</a> = <a class="el" href="classmanagers_1_1sleep__manager_1_1SleepManager.html">SleepManager</a>(self.db)</td></tr>
 <tr class="memitem:aa0e3798df96749e8f367dbde2ac247a9" id="r_aa0e3798df96749e8f367dbde2ac247a9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0e3798df96749e8f367dbde2ac247a9">break_system</a> = <a class="el" href="classmanagers_1_1break__system_1_1BreakSystem.html">BreakSystem</a>(self.db)</td></tr>
 <tr class="memitem:a0dd9ab753e3e615c9ac6599ddd0b7858" id="r_a0dd9ab753e3e615c9ac6599ddd0b7858"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0dd9ab753e3e615c9ac6599ddd0b7858">emergency_mailbox</a> = <a class="el" href="classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox.html">EmergencyMailbox</a>()</td></tr>
 <tr class="memitem:ac5ccd2b2265cf373d3614156806d728f" id="r_ac5ccd2b2265cf373d3614156806d728f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5ccd2b2265cf373d3614156806d728f">spawner</a> = <a class="el" href="classmanagers_1_1dynamic__spawner_1_1DynamicSpawner.html">DynamicSpawner</a>(self.db, <a class="el" href="#a044fb092f7807173de807153052e65af">config</a>)</td></tr>
+<tr class="memitem:a32b9a6bd054994dec051152f13ad2ce5" id="r_a32b9a6bd054994dec051152f13ad2ce5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32b9a6bd054994dec051152f13ad2ce5">global_workspace</a> = <a class="el" href="classcore_1_1global__workspace_1_1GlobalWorkspace.html">GlobalWorkspace</a>(workspace_dir)</td></tr>
+<tr class="memitem:ac2f714f4f985c81bc7a0a90129189cde" id="r_ac2f714f4f985c81bc7a0a90129189cde"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac2f714f4f985c81bc7a0a90129189cde">subsumption_controller</a> = <a class="el" href="classcore_1_1subsumption__layer_1_1SubsumptionController.html">SubsumptionController</a>()</td></tr>
+<tr class="memitem:adf8413278328fb3a9fee7daf3da8a83f" id="r_adf8413278328fb3a9fee7daf3da8a83f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf8413278328fb3a9fee7daf3da8a83f">arbitration_protocol</a> = <a class="el" href="classcore_1_1arbitration_1_1ArbitrationProtocol.html">ArbitrationProtocol</a>(self.global_workspace)</td></tr>
 <tr class="memitem:a3ef7cbcd10fe137c9769822e72b5c87a" id="r_a3ef7cbcd10fe137c9769822e72b5c87a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ef7cbcd10fe137c9769822e72b5c87a">github_enabled</a> = github_enabled</td></tr>
 <tr class="memitem:a06d058aeee98971d05504bb5594bb76c" id="r_a06d058aeee98971d05504bb5594bb76c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06d058aeee98971d05504bb5594bb76c">github_agent</a> = None</td></tr>
 <tr class="memitem:a92644ec2213903477715a66705bd4eed" id="r_a92644ec2213903477715a66705bd4eed"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92644ec2213903477715a66705bd4eed">agents</a> = []</td></tr>
@@ -144,6 +148,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a38db2f20ab1aba56ecbe35c99c7ccfd2" id="r_a38db2f20ab1aba56ecbe35c99c7ccfd2"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38db2f20ab1aba56ecbe35c99c7ccfd2">_get_spawned_agent_system_prompt</a> (self, str model_type)</td></tr>
 <tr class="memitem:af7d2acc6e00abc418359198dfe4b019a" id="r_af7d2acc6e00abc418359198dfe4b019a"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7d2acc6e00abc418359198dfe4b019a">_print_status</a> (self)</td></tr>
 <tr class="memitem:a041ba9ec847ef00ec022b44ad2c5fd88" id="r_a041ba9ec847ef00ec022b44ad2c5fd88"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a041ba9ec847ef00ec022b44ad2c5fd88">_show_break_requests</a> (self)</td></tr>
+<tr class="memitem:a2163cb254c21db6f140ee3fbde93af7d" id="r_a2163cb254c21db6f140ee3fbde93af7d"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2163cb254c21db6f140ee3fbde93af7d">_handle_cognitive_tokens</a> (self, str agent_name, str response)</td></tr>
 <tr class="memitem:a3e34c26c0de8010ad5878ed3886ee1c9" id="r_a3e34c26c0de8010ad5878ed3886ee1c9"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e34c26c0de8010ad5878ed3886ee1c9">_show_emergency_mailbox</a> (self)</td></tr>
 <tr class="memitem:afb29c1f9e386b7501a35b18e4d4a57cd" id="r_afb29c1f9e386b7501a35b18e4d4a57cd"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb29c1f9e386b7501a35b18e4d4a57cd">_handle_github_review_pause</a> (self, str push_info)</td></tr>
 <tr class="memitem:ad62f87765c49218f37f833f403a9d5e2" id="r_ad62f87765c49218f37f833f403a9d5e2"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad62f87765c49218f37f833f403a9d5e2">_github_review_prompt</a> (self, Dict review_data)</td></tr>
@@ -155,7 +160,6 @@ Protected Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Multi-agent collaborative session where models communicate and cooperate.
-
 Features:
 - Turn-based coordination (models take turns to avoid talking over each other)
 - Shared workspace for code and notes
@@ -167,8 +171,8 @@ Features:
 - Phase 9: Break system
 - Phase 10: Dynamic spawning
 </pre> </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a277e28479a3ce663c28e28a79b0fa179" name="a277e28479a3ce663c28e28a79b0fa179"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a277e28479a3ce663c28e28a79b0fa179">&#9670;&#160;</a></span>__init__()</h2>
+<a id="ada8c1f888d706c6a1f654b52a4aa31f1" name="ada8c1f888d706c6a1f654b52a4aa31f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada8c1f888d706c6a1f654b52a4aa31f1">&#9670;&#160;</a></span>__init__()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,7 +210,12 @@ Features:
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool </td>          <td class="paramname"><span class="paramname"><em>github_enabled</em></span><span class="paramdefsep"> = </span><span class="paramdefval">False</span>&#160;)</td>
+          <td class="paramtype">bool </td>          <td class="paramname"><span class="paramname"><em>github_enabled</em></span><span class="paramdefsep"> = </span><span class="paramdefval">False</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Optional[List[str]] </td>          <td class="paramname"><span class="paramname"><em>workspace_paths</em></span><span class="paramdefsep"> = </span><span class="paramdefval">None</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -566,6 +575,50 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a2163cb254c21db6f140ee3fbde93af7d" name="a2163cb254c21db6f140ee3fbde93af7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2163cb254c21db6f140ee3fbde93af7d">&#9670;&#160;</a></span>_handle_cognitive_tokens()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"> None axe.CollaborativeSession._handle_cognitive_tokens </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>agent_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>response</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<pre class="fragment">Handle cognitive architecture tokens in agent response.</pre> <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classaxe_1_1CollaborativeSession_a2163cb254c21db6f140ee3fbde93af7d_cgraph.svg" width="424" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classaxe_1_1CollaborativeSession_a2163cb254c21db6f140ee3fbde93af7d_icgraph.svg" width="706" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a id="adfdeaf4031f6e214d05e21a96d24755a" name="adfdeaf4031f6e214d05e21a96d24755a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adfdeaf4031f6e214d05e21a96d24755a">&#9670;&#160;</a></span>_handle_emergency_message()</h2>
 
@@ -789,7 +842,7 @@ Here is the caller graph for this function:</div>
 <pre class="fragment">Main loop for agent collaboration.</pre> <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classaxe_1_1CollaborativeSession_a2c0fb59b4465a4f8514630602fa942f8_cgraph.svg" width="1271" height="952"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classaxe_1_1CollaborativeSession_a2c0fb59b4465a4f8514630602fa942f8_cgraph.svg" width="1271" height="1023"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -906,7 +959,7 @@ Here is the caller graph for this function:</div>
 <pre class="fragment">Print collaborative session banner with rules and agent info.</pre> <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classaxe_1_1CollaborativeSession_a501edaa48b72d90cc3af128953133578_icgraph.svg" width="728" height="116"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classaxe_1_1CollaborativeSession_a501edaa48b72d90cc3af128953133578_icgraph.svg" width="952" height="116"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -932,7 +985,7 @@ Here is the caller graph for this function:</div>
 <pre class="fragment">Start a collaborative session with a task.</pre> <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classaxe_1_1CollaborativeSession_af4ab55de0d7b895c6002cd691b36a9be_cgraph.svg" width="1568" height="952"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classaxe_1_1CollaborativeSession_af4ab55de0d7b895c6002cd691b36a9be_cgraph.svg" width="1568" height="1023"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -988,6 +1041,20 @@ Here is the call graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">axe.CollaborativeSession.agents = []</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adf8413278328fb3a9fee7daf3da8a83f" name="adf8413278328fb3a9fee7daf3da8a83f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf8413278328fb3a9fee7daf3da8a83f">&#9670;&#160;</a></span>arbitration_protocol</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">axe.CollaborativeSession.arbitration_protocol = <a class="el" href="classcore_1_1arbitration_1_1ArbitrationProtocol.html">ArbitrationProtocol</a>(self.global_workspace)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1106,6 +1173,20 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="a32b9a6bd054994dec051152f13ad2ce5" name="a32b9a6bd054994dec051152f13ad2ce5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32b9a6bd054994dec051152f13ad2ce5">&#9670;&#160;</a></span>global_workspace</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">axe.CollaborativeSession.global_workspace = <a class="el" href="classcore_1_1global__workspace_1_1GlobalWorkspace.html">GlobalWorkspace</a>(workspace_dir)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a17613664271470a880ce760a7a8ae835" name="a17613664271470a880ce760a7a8ae835"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a17613664271470a880ce760a7a8ae835">&#9670;&#160;</a></span>is_running</h2>
 
@@ -1204,6 +1285,20 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="ac2f714f4f985c81bc7a0a90129189cde" name="ac2f714f4f985c81bc7a0a90129189cde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2f714f4f985c81bc7a0a90129189cde">&#9670;&#160;</a></span>subsumption_controller</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">axe.CollaborativeSession.subsumption_controller = <a class="el" href="classcore_1_1subsumption__layer_1_1SubsumptionController.html">SubsumptionController</a>()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7d5eede8e6f645dc2f0201f04bf0c8a5" name="a7d5eede8e6f645dc2f0201f04bf0c8a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7d5eede8e6f645dc2f0201f04bf0c8a5">&#9670;&#160;</a></span>supervisor_alias</h2>
 
@@ -1267,7 +1362,7 @@ Here is the call graph for this function:</div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">axe.CollaborativeSession.tool_runner = <a class="el" href="classcore_1_1tool__runner_1_1ToolRunner.html">ToolRunner</a>(<a class="el" href="#a044fb092f7807173de807153052e65af">config</a>, workspace_dir)</td>
+          <td class="memname">axe.CollaborativeSession.tool_runner = <a class="el" href="classcore_1_1tool__runner_1_1ToolRunner.html">ToolRunner</a>(<a class="el" href="#a044fb092f7807173de807153052e65af">config</a>, workspace_dir, self.workspace_paths)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1282,6 +1377,20 @@ Here is the call graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">axe.CollaborativeSession.workspace = <a class="el" href="classaxe_1_1SharedWorkspace.html">SharedWorkspace</a>(workspace_dir)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a408cf07fc99d6b4c56803bafc5730cb6" name="a408cf07fc99d6b4c56803bafc5730cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a408cf07fc99d6b4c56803bafc5730cb6">&#9670;&#160;</a></span>workspace_paths</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">axe.CollaborativeSession.workspace_paths = workspace_paths if workspace_paths else [workspace_dir]</td>
         </tr>
       </table>
 </div><div class="memdoc">

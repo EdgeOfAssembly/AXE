@@ -13,7 +13,7 @@
 \item 
 \mbox{\hyperlink{namespacetest__sandbox_a86d166b51a4129c270b311c395d16004}{test\+\_\+tool\+\_\+blacklist\+\_\+check}} ()
 \item 
-\mbox{\hyperlink{namespacetest__sandbox_a5e120db0d2213a54e5c5bc24653538d9}{test\+\_\+fallback\+\_\+to\+\_\+whitelist}} ()
+\mbox{\hyperlink{namespacetest__sandbox_a15c4bd8d5ad5527b9644e6f3d951e6dc}{test\+\_\+fallback\+\_\+to\+\_\+unrestricted}} ()
 \item 
 \mbox{\hyperlink{namespacetest__sandbox_a60ab77b0b886603973eb05b94c6baff8}{test\+\_\+host\+\_\+bind\+\_\+readonly}} ()
 \item 
@@ -61,7 +61,7 @@ test\+\_\+sandbox.\+run\+\_\+all\+\_\+tests (\begin{DoxyParamCaption}{}{}\end{Do
 {\footnotesize\ttfamily \label{namespacetest__sandbox_a1c8019bdb125a333ca56c4287adc0c54} 
 test\+\_\+sandbox.\+test\+\_\+backward\+\_\+compatibility (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}Test that legacy whitelist mode still works.\end{DoxyVerb}
+\begin{DoxyVerb}Test that blacklist mode works correctly.\end{DoxyVerb}
  \Hypertarget{namespacetest__sandbox_acb11bfcb1c49d6e71118777590152f0a}\index{test\_sandbox@{test\_sandbox}!test\_bwrap\_command\_generation@{test\_bwrap\_command\_generation}}
 \index{test\_bwrap\_command\_generation@{test\_bwrap\_command\_generation}!test\_sandbox@{test\_sandbox}}
 \doxysubsubsection{\texorpdfstring{test\_bwrap\_command\_generation()}{test\_bwrap\_command\_generation()}}
@@ -83,13 +83,13 @@ test\+\_\+sandbox.\+test\+\_\+edge\+\_\+case\+\_\+heredoc (\begin{DoxyParamCapti
 test\+\_\+sandbox.\+test\+\_\+edge\+\_\+case\+\_\+pipes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Test that pipes work in sandbox mode.\end{DoxyVerb}
- \Hypertarget{namespacetest__sandbox_a5e120db0d2213a54e5c5bc24653538d9}\index{test\_sandbox@{test\_sandbox}!test\_fallback\_to\_whitelist@{test\_fallback\_to\_whitelist}}
-\index{test\_fallback\_to\_whitelist@{test\_fallback\_to\_whitelist}!test\_sandbox@{test\_sandbox}}
-\doxysubsubsection{\texorpdfstring{test\_fallback\_to\_whitelist()}{test\_fallback\_to\_whitelist()}}
-{\footnotesize\ttfamily \label{namespacetest__sandbox_a5e120db0d2213a54e5c5bc24653538d9} 
-test\+\_\+sandbox.\+test\+\_\+fallback\+\_\+to\+\_\+whitelist (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+ \Hypertarget{namespacetest__sandbox_a15c4bd8d5ad5527b9644e6f3d951e6dc}\index{test\_sandbox@{test\_sandbox}!test\_fallback\_to\_unrestricted@{test\_fallback\_to\_unrestricted}}
+\index{test\_fallback\_to\_unrestricted@{test\_fallback\_to\_unrestricted}!test\_sandbox@{test\_sandbox}}
+\doxysubsubsection{\texorpdfstring{test\_fallback\_to\_unrestricted()}{test\_fallback\_to\_unrestricted()}}
+{\footnotesize\ttfamily \label{namespacetest__sandbox_a15c4bd8d5ad5527b9644e6f3d951e6dc} 
+test\+\_\+sandbox.\+test\+\_\+fallback\+\_\+to\+\_\+unrestricted (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}Test that whitelist mode is used when sandbox unavailable.\end{DoxyVerb}
+\begin{DoxyVerb}Test that unrestricted mode is used when sandbox unavailable.\end{DoxyVerb}
  \Hypertarget{namespacetest__sandbox_a60ab77b0b886603973eb05b94c6baff8}\index{test\_sandbox@{test\_sandbox}!test\_host\_bind\_readonly@{test\_host\_bind\_readonly}}
 \index{test\_host\_bind\_readonly@{test\_host\_bind\_readonly}!test\_sandbox@{test\_sandbox}}
 \doxysubsubsection{\texorpdfstring{test\_host\_bind\_readonly()}{test\_host\_bind\_readonly()}}
@@ -138,7 +138,7 @@ test\+\_\+sandbox.\+test\+\_\+sandbox\+\_\+manager\+\_\+initialization (\begin{D
 {\footnotesize\ttfamily \label{namespacetest__sandbox_aedb1e1e34d14f1b0d3318436683119ef} 
 test\+\_\+sandbox.\+test\+\_\+sandbox\+\_\+mode\+\_\+validation (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}Test validation in sandbox mode (blacklist instead of whitelist).\end{DoxyVerb}
+\begin{DoxyVerb}Test validation in sandbox mode (blacklist model).\end{DoxyVerb}
  \Hypertarget{namespacetest__sandbox_a86d166b51a4129c270b311c395d16004}\index{test\_sandbox@{test\_sandbox}!test\_tool\_blacklist\_check@{test\_tool\_blacklist\_check}}
 \index{test\_tool\_blacklist\_check@{test\_tool\_blacklist\_check}!test\_sandbox@{test\_sandbox}}
 \doxysubsubsection{\texorpdfstring{test\_tool\_blacklist\_check()}{test\_tool\_blacklist\_check()}}

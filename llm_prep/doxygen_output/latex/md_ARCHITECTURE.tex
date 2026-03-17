@@ -1,75 +1,240 @@
 \chapter{AXE Architecture and Extensibility Guide }
 \hypertarget{md_ARCHITECTURE}{}\label{md_ARCHITECTURE}\index{AXE Architecture and Extensibility Guide@{AXE Architecture and Extensibility Guide}}
-\label{md_ARCHITECTURE_autotoc_md159}%
-\Hypertarget{md_ARCHITECTURE_autotoc_md159}%
+\label{md_ARCHITECTURE_autotoc_md47}%
+\Hypertarget{md_ARCHITECTURE_autotoc_md47}%
 
 
-This document describes the AXE architecture and provides guidance for extending the codebase with new features like local models (Ollama) and distributed AI (Python Ray).\hypertarget{md_ARCHITECTURE_autotoc_md160}{}\doxysection{\texorpdfstring{Module Structure}{Module Structure}}\label{md_ARCHITECTURE_autotoc_md160}
+This document describes the AXE architecture and provides guidance for extending the codebase with new features like local models (Ollama) and distributed AI (Python Ray).\hypertarget{md_ARCHITECTURE_autotoc_md48}{}\doxysection{\texorpdfstring{System Overview}{System Overview}}\label{md_ARCHITECTURE_autotoc_md48}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{┌─────────────────────────────────────────────────────────────────────────────┐}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ AXE\ System\ Architecture\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{└─────────────────────────────────────────────────────────────────────────────┘}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ┌──────────┐}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ User\ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │Terminal\ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ └────┬─────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ┌───────────────▼────────────────┐}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ axe.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ \ (Main\ Entry\ Point)\ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ \ -\/\ Session\ management\ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ \ -\/\ Command\ loop\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ \ -\/\ Agent\ coordination\ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ └───────────────┬────────────────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ┌──────────────────────────────┼──────────────────────────────┐}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{┌───────▼────────┐\ \ \ \ \ \ \ \ \ \ ┌──────────▼──────────┐\ \ \ \ \ \ \ ┌──────────▼─────────┐}
+\DoxyCodeLine{│\ \ \ Configuration│\ \ \ \ \ \ \ \ \ \ │\ \ \ Core\ Modules\ \ \ \ \ \ │\ \ \ \ \ \ \ │\ \ Agent\ Managers\ \ \ \ │}
+\DoxyCodeLine{│\ \ \ ────────────│\ \ \ \ \ \ \ \ \ \ │\ \ \ ──────────────\ \ \ \ │\ \ \ \ \ \ \ │\ \ ──────────────\ \ \ \ │}
+\DoxyCodeLine{│\ •\ axe.yaml\ \ \ \ │\ \ \ \ \ \ \ \ \ \ │\ •\ agent\_manager.py\ \ │\ \ \ \ \ \ \ │\ •\ break\_system.py\ \ │}
+\DoxyCodeLine{│\ •\ models.yaml\ │\ \ \ \ \ \ \ \ \ \ │\ •\ tool\_runner.py\ \ \ \ │\ \ \ \ \ \ \ │\ •\ dynamic\_spawner\ \ │}
+\DoxyCodeLine{│\ •\ skills/\ \ \ \ \ │◄─────────┤\ •\ skills\_manager.py\ │\ \ \ \ \ \ \ │\ •\ emergency\_mailbox│}
+\DoxyCodeLine{│\ \ \ manifest\ \ \ \ │\ \ \ \ \ \ \ \ \ \ │\ •\ sandbox.py\ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ └────────────────────┘}
+\DoxyCodeLine{└───────────────┘\ \ \ \ \ \ \ \ \ \ │\ •\ session\_manager\ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ •\ multiprocess.py\ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ └──────────┬──────────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ┌─────────────────┼─────────────────┐}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ┌───────────▼───────┐\ \ ┌──────▼──────┐\ \ ┌──────▼──────────┐}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ \ \ AI\ Providers\ \ \ \ │\ \ │\ Tool\ Parser\ │\ \ │\ \ Skills\ System\ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ \ \ ────────────\ \ \ \ │\ \ │\ ────────────│\ \ │\ \ ────────────\ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ •\ Anthropic\ \ \ \ \ \ \ │\ \ │\ •\ XML\ calls\ │\ \ │\ •\ manifest.json\ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ \ \ (Claude)\ \ \ \ \ \ \ \ │\ \ │\ •\ Bash\ tags\ │\ \ │\ •\ *.md\ skills\ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ •\ OpenAI\ (GPT)\ \ \ \ │\ \ │\ •\ Code\ blks\ │\ \ │\ •\ Auto-\/inject\ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ •\ xAI\ (Grok)\ \ \ \ \ \ │\ \ │\ •\ READ/WRITE│\ \ │\ •\ Domain\ expert\ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ •\ HuggingFace\ \ \ \ \ │\ \ │\ •\ EXEC\ \ \ \ \ \ │\ \ │\ \ \ patterns\ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ •\ GitHub\ Copilot\ \ │\ \ └─────────────┘\ \ └─────────────────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ └───────────────────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ┌───────▼────────┐}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ \ Response\ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ \ Processing\ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ \ ────────────\ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ •\ Parse\ output\ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ •\ Execute\ tools│}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ │\ •\ Update\ conv\ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ └────────┬───────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ ┌────────────┼────────────┐}
+\DoxyCodeLine{\ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{┌───▼────┐\ \ ┌────▼────┐\ \ ┌───▼──────┐}
+\DoxyCodeLine{│Database│\ \ │Workshop\ │\ \ │Security\ \ │}
+\DoxyCodeLine{│────────│\ \ │─────────│\ \ │─────────-\/│}
+\DoxyCodeLine{│•\ SQLite│\ \ │•\ Chisel\ │\ \ │•\ Sandbox\ │}
+\DoxyCodeLine{│•\ Agent\ │\ \ │•\ Hammer\ │\ \ │•\ Blacklist│}
+\DoxyCodeLine{│\ \ state\ │\ \ │•\ Saw\ \ \ \ │\ \ │•\ Path\ \ \ \ │}
+\DoxyCodeLine{│•\ XP/lvl│\ \ │•\ Plane\ \ │\ \ │\ \ checks\ \ │}
+\DoxyCodeLine{└────────┘\ \ └─────────┘\ \ └──────────┘}
+
+\end{DoxyCode}
+\hypertarget{md_ARCHITECTURE_autotoc_md49}{}\doxysection{\texorpdfstring{Module Structure}{Module Structure}}\label{md_ARCHITECTURE_autotoc_md49}
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{AXE/}
-\DoxyCodeLine{├──\ axe.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Main\ entry\ point\ and\ session\ management}
-\DoxyCodeLine{├──\ axe.yaml\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Configuration\ file}
+\DoxyCodeLine{├──\ axe.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Main\ entry\ point\ and\ session\ management}
+\DoxyCodeLine{├──\ axe.yaml\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Configuration\ file}
+\DoxyCodeLine{├──\ models.yaml\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Model\ metadata\ and\ capabilities}
 \DoxyCodeLine{│}
-\DoxyCodeLine{├──\ core/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Core\ functionality}
+\DoxyCodeLine{├──\ core/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Core\ functionality}
 \DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
-\DoxyCodeLine{│\ \ \ ├──\ constants.py\ \ \ \ \ \ \ \ \ \ \#\ Global\ constants\ and\ default\ config}
-\DoxyCodeLine{│\ \ \ ├──\ config.py\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Configuration\ management}
-\DoxyCodeLine{│\ \ \ ├──\ agent\_manager.py\ \ \ \ \ \ \#\ Agent\ connections\ and\ API\ calls}
-\DoxyCodeLine{│\ \ \ ├──\ tool\_runner.py\ \ \ \ \ \ \ \ \#\ Command\ execution\ with\ safety\ checks}
-\DoxyCodeLine{│\ \ \ ├──\ multiprocess.py\ \ \ \ \ \ \ \#\ Parallel\ agent\ architecture\ (future)}
-\DoxyCodeLine{│\ \ \ ├──\ session\_manager.py\ \ \ \ \#\ Session\ save/load\ persistence}
-\DoxyCodeLine{│\ \ \ └──\ resource\_monitor.py\ \ \ \#\ System\ resource\ monitoring}
+\DoxyCodeLine{│\ \ \ ├──\ constants.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Global\ constants\ and\ default\ config}
+\DoxyCodeLine{│\ \ \ ├──\ config.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Configuration\ management}
+\DoxyCodeLine{│\ \ \ ├──\ agent\_manager.py\ \ \ \ \ \ \ \ \ \ \#\ Agent\ connections\ and\ API\ calls}
+\DoxyCodeLine{│\ \ \ ├──\ tool\_runner.py\ \ \ \ \ \ \ \ \ \ \ \ \#\ Command\ execution\ with\ safety\ checks}
+\DoxyCodeLine{│\ \ \ ├──\ multiprocess.py\ \ \ \ \ \ \ \ \ \ \ \#\ Multi-\/agent\ collaboration}
+\DoxyCodeLine{│\ \ \ ├──\ session\_manager.py\ \ \ \ \ \ \ \ \#\ Session\ save/load\ persistence}
+\DoxyCodeLine{│\ \ \ ├──\ session\_preprocessor.py\ \ \ \#\ Input\ preprocessing\ pipeline}
+\DoxyCodeLine{│\ \ \ ├──\ skills\_manager.py\ \ \ \ \ \ \ \ \ \#\ Agent\ skills\ loading\ \&\ injection}
+\DoxyCodeLine{│\ \ \ ├──\ sandbox.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Bubblewrap\ sandboxed\ execution}
+\DoxyCodeLine{│\ \ \ ├──\ resource\_monitor.py\ \ \ \ \ \ \ \#\ System\ resource\ monitoring}
+\DoxyCodeLine{│\ \ \ ├──\ acp\_validator.py\ \ \ \ \ \ \ \ \ \ \#\ Agent\ Communication\ Protocol\ validation}
+\DoxyCodeLine{│\ \ \ ├──\ anthropic\_features.py\ \ \ \ \ \#\ Anthropic-\/specific\ features}
+\DoxyCodeLine{│\ \ \ ├──\ github\_agent.py\ \ \ \ \ \ \ \ \ \ \ \#\ GitHub\ Copilot\ integration}
+\DoxyCodeLine{│\ \ \ └──\ environment\_probe.py\ \ \ \ \ \ \#\ Environment\ detection\ \&\ setup}
 \DoxyCodeLine{│}
-\DoxyCodeLine{├──\ managers/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Agent\ lifecycle\ management}
+\DoxyCodeLine{├──\ managers/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Agent\ lifecycle\ management}
 \DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
-\DoxyCodeLine{│\ \ \ ├──\ sleep\_manager.py\ \ \ \ \ \ \#\ Mandatory\ sleep\ system}
-\DoxyCodeLine{│\ \ \ ├──\ break\_system.py\ \ \ \ \ \ \ \#\ Agent\ break\ requests}
-\DoxyCodeLine{│\ \ \ ├──\ dynamic\_spawner.py\ \ \ \ \#\ Dynamic\ agent\ spawning}
-\DoxyCodeLine{│\ \ \ └──\ emergency\_mailbox.py\ \ \#\ GPG-\/encrypted\ agent-\/to-\/human\ comms}
+\DoxyCodeLine{│\ \ \ ├──\ break\_system.py\ \ \ \ \ \ \ \ \ \ \ \#\ Agent\ break\ requests}
+\DoxyCodeLine{│\ \ \ ├──\ dynamic\_spawner.py\ \ \ \ \ \ \ \ \#\ Dynamic\ agent\ spawning}
+\DoxyCodeLine{│\ \ \ └──\ emergency\_mailbox.py\ \ \ \ \ \ \#\ GPG-\/encrypted\ agent-\/to-\/human\ comms}
 \DoxyCodeLine{│}
-\DoxyCodeLine{├──\ database/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Persistence\ layer}
+\DoxyCodeLine{├──\ database/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Persistence\ layer}
 \DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
-\DoxyCodeLine{│\ \ \ ├──\ schema.py\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ SQL\ table\ definitions}
-\DoxyCodeLine{│\ \ \ └──\ agent\_db.py\ \ \ \ \ \ \ \ \ \ \ \#\ SQLite\ operations}
+\DoxyCodeLine{│\ \ \ ├──\ schema.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ SQL\ table\ definitions}
+\DoxyCodeLine{│\ \ \ └──\ agent\_db.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ SQLite\ operations}
 \DoxyCodeLine{│}
-\DoxyCodeLine{├──\ progression/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Agent\ progression\ system}
+\DoxyCodeLine{├──\ progression/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Agent\ progression\ system}
 \DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
-\DoxyCodeLine{│\ \ \ ├──\ xp\_system.py\ \ \ \ \ \ \ \ \ \ \#\ XP\ calculation}
-\DoxyCodeLine{│\ \ \ └──\ levels.py\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Level\ titles\ and\ milestones}
+\DoxyCodeLine{│\ \ \ ├──\ xp\_system.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ XP\ calculation}
+\DoxyCodeLine{│\ \ \ └──\ levels.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Level\ titles\ and\ milestones}
 \DoxyCodeLine{│}
-\DoxyCodeLine{├──\ safety/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Safety\ and\ rules}
+\DoxyCodeLine{├──\ safety/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Safety\ and\ rules}
 \DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
-\DoxyCodeLine{│\ \ \ └──\ rules.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Session\ rules}
+\DoxyCodeLine{│\ \ \ └──\ rules.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Session\ rules}
 \DoxyCodeLine{│}
-\DoxyCodeLine{├──\ utils/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Utility\ modules}
+\DoxyCodeLine{├──\ utils/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Utility\ modules}
 \DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
-\DoxyCodeLine{│\ \ \ ├──\ formatting.py\ \ \ \ \ \ \ \ \ \#\ Terminal\ colors}
-\DoxyCodeLine{│\ \ \ ├──\ token\_stats.py\ \ \ \ \ \ \ \ \#\ Token\ tracking\ and\ cost\ estimation}
-\DoxyCodeLine{│\ \ \ ├──\ rate\_limiter.py\ \ \ \ \ \ \ \#\ API\ rate\ limiting}
-\DoxyCodeLine{│\ \ \ ├──\ context\_optimizer.py\ \ \#\ Context\ window\ optimization}
-\DoxyCodeLine{│\ \ \ ├──\ prompt\_compressor.py\ \ \#\ Prompt\ compression}
-\DoxyCodeLine{│\ \ \ └──\ xml\_tool\_parser.py\ \ \ \ \#\ XML\ function\ call\ parsing}
+\DoxyCodeLine{│\ \ \ ├──\ formatting.py\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Terminal\ colors\ and\ formatting}
+\DoxyCodeLine{│\ \ \ ├──\ token\_stats.py\ \ \ \ \ \ \ \ \ \ \ \ \#\ Token\ tracking\ and\ cost\ estimation}
+\DoxyCodeLine{│\ \ \ ├──\ rate\_limiter.py\ \ \ \ \ \ \ \ \ \ \ \#\ API\ rate\ limiting}
+\DoxyCodeLine{│\ \ \ ├──\ context\_optimizer.py\ \ \ \ \ \ \#\ Context\ window\ optimization}
+\DoxyCodeLine{│\ \ \ ├──\ prompt\_compressor.py\ \ \ \ \ \ \#\ Prompt\ compression}
+\DoxyCodeLine{│\ \ \ └──\ xml\_tool\_parser.py\ \ \ \ \ \ \ \ \#\ Multi-\/format\ tool\ call\ parsing}
 \DoxyCodeLine{│}
-\DoxyCodeLine{├──\ models/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Model\ metadata}
+\DoxyCodeLine{├──\ models/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Model\ metadata}
 \DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
-\DoxyCodeLine{│\ \ \ └──\ metadata.py\ \ \ \ \ \ \ \ \ \ \ \#\ Model\ info\ and\ capabilities}
+\DoxyCodeLine{│\ \ \ └──\ metadata.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Model\ info\ and\ capabilities}
 \DoxyCodeLine{│}
-\DoxyCodeLine{├──\ tools/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Analysis\ tools}
+\DoxyCodeLine{├──\ tools/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Analysis\ tools}
 \DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
-\DoxyCodeLine{│\ \ \ ├──\ llmprep.py\ \ \ \ \ \ \ \ \ \ \ \ \#\ Codebase\ context\ preparation}
-\DoxyCodeLine{│\ \ \ └──\ build\_analyzer.py\ \ \ \ \ \#\ Build\ system\ detection}
+\DoxyCodeLine{│\ \ \ ├──\ llmprep.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Codebase\ context\ preparation}
+\DoxyCodeLine{│\ \ \ └──\ build\_analyzer.py\ \ \ \ \ \ \ \ \ \#\ Build\ system\ detection}
 \DoxyCodeLine{│}
-\DoxyCodeLine{└──\ workshop/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Dynamic\ analysis\ tools}
-\DoxyCodeLine{\ \ \ \ ├──\ \_\_init\_\_.py}
-\DoxyCodeLine{\ \ \ \ ├──\ chisel.py\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Symbolic\ execution\ (angr)}
-\DoxyCodeLine{\ \ \ \ ├──\ saw.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Taint\ analysis}
-\DoxyCodeLine{\ \ \ \ ├──\ plane.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Source/sink\ enumeration}
-\DoxyCodeLine{\ \ \ \ └──\ hammer.py\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Live\ instrumentation\ (frida)}
+\DoxyCodeLine{├──\ workshop/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Dynamic\ analysis\ tools}
+\DoxyCodeLine{│\ \ \ ├──\ \_\_init\_\_.py}
+\DoxyCodeLine{│\ \ \ ├──\ chisel.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Symbolic\ execution\ (angr)}
+\DoxyCodeLine{│\ \ \ ├──\ saw.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Taint\ analysis}
+\DoxyCodeLine{│\ \ \ ├──\ plane.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Source/sink\ enumeration}
+\DoxyCodeLine{│\ \ \ └──\ hammer.py\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Live\ instrumentation\ (frida)}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ skills/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Agent\ skills\ system}
+\DoxyCodeLine{│\ \ \ ├──\ manifest.json\ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Skill\ registry\ and\ metadata}
+\DoxyCodeLine{│\ \ \ ├──\ build.md\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Silent\ build\ guidelines}
+\DoxyCodeLine{│\ \ \ ├──\ claude\_build.md\ \ \ \ \ \ \ \ \ \ \ \#\ Security-\/focused\ builds}
+\DoxyCodeLine{│\ \ \ ├──\ reverse\_engineering\_expert.md}
+\DoxyCodeLine{│\ \ \ ├──\ cpp\_refactoring\_expert.md}
+\DoxyCodeLine{│\ \ \ ├──\ ida\_pro\_analysis\_patterns.md}
+\DoxyCodeLine{│\ \ \ ├──\ c\_modernization\_expert.md}
+\DoxyCodeLine{│\ \ \ ├──\ cpp\_modernization\_expert.md}
+\DoxyCodeLine{│\ \ \ ├──\ python\_agent\_expert.md}
+\DoxyCodeLine{│\ \ \ └──\ x86\_assembly\_expert.md}
+\DoxyCodeLine{│}
+\DoxyCodeLine{└──\ docs/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Documentation}
+\DoxyCodeLine{\ \ \ \ ├──\ README.md\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Documentation\ hub}
+\DoxyCodeLine{\ \ \ \ ├──\ api-\/providers.md\ \ \ \ \ \ \ \ \ \ \#\ API\ provider\ details}
+\DoxyCodeLine{\ \ \ \ ├──\ security.md\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Security\ report}
+\DoxyCodeLine{\ \ \ \ ├──\ features/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Feature\ documentation}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ sandbox.md}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ write-\/blocks.md}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ parsers.md}
+\DoxyCodeLine{\ \ \ \ │\ \ \ └──\ README.md}
+\DoxyCodeLine{\ \ \ \ ├──\ references/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Quick\ references}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ quick-\/reference.md}
+\DoxyCodeLine{\ \ \ \ │\ \ \ └──\ README.md}
+\DoxyCodeLine{\ \ \ \ ├──\ workshop/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Workshop\ tool\ docs}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ quick-\/reference.md}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ benchmarks.md}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ security-\/audit.md}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ dependency-\/validation.md}
+\DoxyCodeLine{\ \ \ \ │\ \ \ ├──\ test-\/results.md}
+\DoxyCodeLine{\ \ \ \ │\ \ \ └──\ README.md}
+\DoxyCodeLine{\ \ \ \ └──\ archive/\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#\ Historical\ documentation}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ├──\ implementation-\/summaries/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ├──\ pr-\/reports/}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ └──\ README.md}
 
 \end{DoxyCode}
-\hypertarget{md_ARCHITECTURE_autotoc_md161}{}\doxysection{\texorpdfstring{Key Extension Points}{Key Extension Points}}\label{md_ARCHITECTURE_autotoc_md161}
-\hypertarget{md_ARCHITECTURE_autotoc_md162}{}\doxysubsection{\texorpdfstring{1. Adding New AI Providers}{1. Adding New AI Providers}}\label{md_ARCHITECTURE_autotoc_md162}
+\hypertarget{md_ARCHITECTURE_autotoc_md50}{}\doxysection{\texorpdfstring{Data Flow}{Data Flow}}\label{md_ARCHITECTURE_autotoc_md50}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{┌─────────────────────────────────────────────────────────────────────┐}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Request\ Flow\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{└─────────────────────────────────────────────────────────────────────┘}
+\DoxyCodeLine{}
+\DoxyCodeLine{User\ Input}
+\DoxyCodeLine{\ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ ▼}
+\DoxyCodeLine{┌─────────────────┐}
+\DoxyCodeLine{│\ Session\ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{│\ Preprocessor\ \ \ \ │──►\ Token\ detection}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │──►\ Skill\ injection}
+\DoxyCodeLine{└────────┬────────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{┌─────────────────┐}
+\DoxyCodeLine{│\ Agent\ Manager\ \ \ │──►\ Select\ provider\ (Anthropic/OpenAI/xAI/etc)}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │──►\ Load\ model\ config}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │──►\ Add\ system\ prompt}
+\DoxyCodeLine{└────────┬────────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{┌─────────────────┐}
+\DoxyCodeLine{│\ AI\ Provider\ API\ │──►\ Send\ request}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │──►\ Stream\ response}
+\DoxyCodeLine{└────────┬────────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{┌─────────────────┐}
+\DoxyCodeLine{│\ Tool\ Parser\ \ \ \ \ │──►\ Parse\ XML/Bash/Code\ blocks}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │──►\ Extract\ tool\ calls}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │──►\ Deduplicate\ commands}
+\DoxyCodeLine{└────────┬────────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{┌─────────────────┐}
+\DoxyCodeLine{│\ Tool\ Runner\ \ \ \ \ │──►\ Validate\ against\ blacklist}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │──►\ Check\ path\ security}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │──►\ Execute\ (sandboxed\ if\ enabled)}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │──►\ Capture\ output}
+\DoxyCodeLine{└────────┬────────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{┌─────────────────┐}
+\DoxyCodeLine{│\ Conversation\ \ \ \ │──►\ Append\ to\ history}
+\DoxyCodeLine{│\ History\ \ \ \ \ \ \ \ \ │──►\ Format\ results}
+\DoxyCodeLine{│\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │──►\ Update\ context}
+\DoxyCodeLine{└────────┬────────┘}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{\ \ \ \ Display\ to\ User}
+
+\end{DoxyCode}
+\hypertarget{md_ARCHITECTURE_autotoc_md51}{}\doxysection{\texorpdfstring{Key Extension Points}{Key Extension Points}}\label{md_ARCHITECTURE_autotoc_md51}
+\hypertarget{md_ARCHITECTURE_autotoc_md52}{}\doxysubsection{\texorpdfstring{1. Adding New AI Providers}{1. Adding New AI Providers}}\label{md_ARCHITECTURE_autotoc_md52}
 {\bfseries{File\+:}} {\ttfamily \doxylink{agent__manager_8py}{core/agent\+\_\+manager.\+py}}
 
 To add a new provider (e.\+g., Ollama for local models)\+:
@@ -127,7 +292,7 @@ To add a new provider (e.\+g., Ollama for local models)\+:
 \DoxyCodeLine{\ \ \ \ capabilities:\ [text]}
 
 \end{DoxyCode}
-\hypertarget{md_ARCHITECTURE_autotoc_md163}{}\doxysubsection{\texorpdfstring{2. Adding Distributed Processing (Ray)}{2. Adding Distributed Processing (Ray)}}\label{md_ARCHITECTURE_autotoc_md163}
+\hypertarget{md_ARCHITECTURE_autotoc_md53}{}\doxysubsection{\texorpdfstring{2. Adding Distributed Processing (Ray)}{2. Adding Distributed Processing (Ray)}}\label{md_ARCHITECTURE_autotoc_md53}
 {\bfseries{New File\+:}} {\ttfamily core/distributed.\+py}
 
 
@@ -187,7 +352,7 @@ To add a new provider (e.\+g., Ollama for local models)\+:
 \DoxyCodeLine{\ \ \ \ \ \ \ \ ray.shutdown()}
 
 \end{DoxyCode}
-\hypertarget{md_ARCHITECTURE_autotoc_md164}{}\doxysubsection{\texorpdfstring{3. Adding New Workshop Tools}{3. Adding New Workshop Tools}}\label{md_ARCHITECTURE_autotoc_md164}
+\hypertarget{md_ARCHITECTURE_autotoc_md54}{}\doxysubsection{\texorpdfstring{3. Adding New Workshop Tools}{3. Adding New Workshop Tools}}\label{md_ARCHITECTURE_autotoc_md54}
 {\bfseries{File\+:}} {\ttfamily \doxylink{workshop_2____init_____8py}{workshop/\+\_\+\+\_\+init\+\_\+\+\_\+.\+py}}
 
 
@@ -242,7 +407,7 @@ To add a new provider (e.\+g., Ollama for local models)\+:
 \end{DoxyCode}
 
 \item Add CLI handler in {\ttfamily \doxylink{axe_8py}{axe.\+py}} (Chat\+Session.\+handle\+\_\+workshop\+\_\+command)
-\end{DoxyEnumerate}\hypertarget{md_ARCHITECTURE_autotoc_md165}{}\doxysubsection{\texorpdfstring{4. Adding New Token Optimization Strategies}{4. Adding New Token Optimization Strategies}}\label{md_ARCHITECTURE_autotoc_md165}
+\end{DoxyEnumerate}\hypertarget{md_ARCHITECTURE_autotoc_md55}{}\doxysubsection{\texorpdfstring{4. Adding New Token Optimization Strategies}{4. Adding New Token Optimization Strategies}}\label{md_ARCHITECTURE_autotoc_md55}
 {\bfseries{File\+:}} {\ttfamily \doxylink{context__optimizer_8py}{utils/context\+\_\+optimizer.\+py}}
 
 
@@ -265,36 +430,36 @@ To add a new provider (e.\+g., Ollama for local models)\+:
 \DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ optimized\_messages}
 
 \end{DoxyCode}
-\hypertarget{md_ARCHITECTURE_autotoc_md166}{}\doxysection{\texorpdfstring{Design Principles}{Design Principles}}\label{md_ARCHITECTURE_autotoc_md166}
+\hypertarget{md_ARCHITECTURE_autotoc_md56}{}\doxysection{\texorpdfstring{Design Principles}{Design Principles}}\label{md_ARCHITECTURE_autotoc_md56}
 
 \begin{DoxyEnumerate}
 \item {\bfseries{Provider Abstraction}}\+: All AI providers implement the same interface in {\ttfamily Agent\+Manager.\+call\+\_\+agent()}. New providers should follow this pattern.
 \item {\bfseries{Configuration-\/\+Driven}}\+: Features are enabled via {\ttfamily axe.\+yaml}. New features should support both YAML configuration and sensible defaults.
 \item {\bfseries{Graceful Degradation}}\+: Use try/except for optional dependencies. Features should degrade gracefully when dependencies are missing.
-\item {\bfseries{Safety First}}\+: All tool execution goes through {\ttfamily Tool\+Runner} with whitelist validation. New tools should integrate with this system.
+\item {\bfseries{Safety First}}\+: All tool execution goes through {\ttfamily Tool\+Runner} with blacklist validation and optional sandbox isolation. New tools should integrate with this system.
 \item {\bfseries{Persistence}}\+: Agent state is stored in SQLite via {\ttfamily Agent\+Database}. New features needing persistence should add appropriate tables/columns.
-\end{DoxyEnumerate}\hypertarget{md_ARCHITECTURE_autotoc_md167}{}\doxysection{\texorpdfstring{Future Enhancements}{Future Enhancements}}\label{md_ARCHITECTURE_autotoc_md167}
-\hypertarget{md_ARCHITECTURE_autotoc_md168}{}\doxysubsection{\texorpdfstring{Ollama Integration (Local Models)}{Ollama Integration (Local Models)}}\label{md_ARCHITECTURE_autotoc_md168}
+\end{DoxyEnumerate}\hypertarget{md_ARCHITECTURE_autotoc_md57}{}\doxysection{\texorpdfstring{Future Enhancements}{Future Enhancements}}\label{md_ARCHITECTURE_autotoc_md57}
+\hypertarget{md_ARCHITECTURE_autotoc_md58}{}\doxysubsection{\texorpdfstring{Ollama Integration (Local Models)}{Ollama Integration (Local Models)}}\label{md_ARCHITECTURE_autotoc_md58}
 
 \begin{DoxyItemize}
 \item Zero API cost for development
 \item Privacy-\/sensitive operations
 \item Offline capability
 \item Custom fine-\/tuned models
-\end{DoxyItemize}\hypertarget{md_ARCHITECTURE_autotoc_md169}{}\doxysubsection{\texorpdfstring{Ray Integration (Distributed AI)}{Ray Integration (Distributed AI)}}\label{md_ARCHITECTURE_autotoc_md169}
+\end{DoxyItemize}\hypertarget{md_ARCHITECTURE_autotoc_md59}{}\doxysubsection{\texorpdfstring{Ray Integration (Distributed AI)}{Ray Integration (Distributed AI)}}\label{md_ARCHITECTURE_autotoc_md59}
 
 \begin{DoxyItemize}
 \item Parallel agent processing
 \item Horizontal scaling
 \item Multi-\/machine clusters
 \item GPU resource sharing
-\end{DoxyItemize}\hypertarget{md_ARCHITECTURE_autotoc_md170}{}\doxysubsection{\texorpdfstring{Plugin System}{Plugin System}}\label{md_ARCHITECTURE_autotoc_md170}
+\end{DoxyItemize}\hypertarget{md_ARCHITECTURE_autotoc_md60}{}\doxysubsection{\texorpdfstring{Plugin System}{Plugin System}}\label{md_ARCHITECTURE_autotoc_md60}
 
 \begin{DoxyItemize}
 \item Dynamic tool loading
 \item Third-\/party extensions
 \item Custom provider plugins
-\end{DoxyItemize}\hypertarget{md_ARCHITECTURE_autotoc_md171}{}\doxysection{\texorpdfstring{Contributing}{Contributing}}\label{md_ARCHITECTURE_autotoc_md171}
+\end{DoxyItemize}\hypertarget{md_ARCHITECTURE_autotoc_md61}{}\doxysection{\texorpdfstring{Contributing}{Contributing}}\label{md_ARCHITECTURE_autotoc_md61}
 When extending AXE\+:
 
 

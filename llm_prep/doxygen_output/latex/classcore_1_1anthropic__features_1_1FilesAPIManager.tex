@@ -2,8 +2,7 @@
 \hypertarget{classcore_1_1anthropic__features_1_1FilesAPIManager}{}\label{classcore_1_1anthropic__features_1_1FilesAPIManager}\index{core.anthropic\_features.FilesAPIManager@{core.anthropic\_features.FilesAPIManager}}
 
 
-Collaboration diagram for core.\+anthropic\+\_\+features.\+Files\+APIManager\+:
-\nopagebreak
+Collaboration diagram for core.\+anthropic\+\_\+features.\+Files\+APIManager\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -52,7 +51,6 @@ str \mbox{\hyperlink{classcore_1_1anthropic__features_1_1FilesAPIManager_ac2db3a
 core.\+anthropic\+\_\+features.\+Files\+APIManager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Any }]{client}{ = {\ttfamily None}, }\item[{Dict\mbox{[}str, Any\mbox{]} }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Initialize Files API manager.
-
 Args:
     client: Anthropic API client instance
     config: Configuration dictionary
@@ -69,18 +67,14 @@ Args:
  bool core.\+anthropic\+\_\+features.\+Files\+APIManager.\+delete\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{file\+\_\+id}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Delete a file from Anthropic.
-
 Args:
     file_id: File ID to delete
-
 Returns:
     True if successful
-
 Raises:
     NotImplementedError: Files API not yet available in SDK
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -94,8 +88,7 @@ Raises:
  int core.\+anthropic\+\_\+features.\+Files\+APIManager.\+get\+\_\+upload\+\_\+threshold\+\_\+kb (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get file upload threshold in KB.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -109,8 +102,7 @@ Raises:
  bool core.\+anthropic\+\_\+features.\+Files\+APIManager.\+is\+\_\+enabled (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if Files API is enabled.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -124,15 +116,12 @@ Raises:
  List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+anthropic\+\_\+features.\+Files\+APIManager.\+list\+\_\+files (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}List all uploaded files.
-
 Returns:
     List of file metadata dicts
-
 Raises:
     NotImplementedError: Files API not yet available in SDK
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -146,15 +135,12 @@ Raises:
  bool core.\+anthropic\+\_\+features.\+Files\+APIManager.\+should\+\_\+upload\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int}]{file\+\_\+size\+\_\+bytes}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if a file should be uploaded based on size threshold.
-
 Args:
     file_size_bytes: File size in bytes
-
 Returns:
     True if file should be uploaded
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -168,20 +154,16 @@ Returns:
  Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+anthropic\+\_\+features.\+Files\+APIManager.\+upload\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{file\+\_\+path}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Upload a file to Anthropic.
-
 Args:
     file_path: Path to file to upload
-
 Returns:
     File metadata dict with 'id', 'filename', etc., or None if failed
-
 Note:
     This feature requires Anthropic SDK Files API support which is
     not yet available in the current SDK version. This is a placeholder
     implementation that will be activated when the SDK is updated.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

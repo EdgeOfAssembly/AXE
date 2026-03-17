@@ -119,7 +119,6 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Individual agent background process.
-
 Each agent runs in its own process, continuously:
 1. Monitoring shared context updates
 2. Preparing potential responses
@@ -165,7 +164,6 @@ Each agent runs in its own process, continuously:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Initialize agent worker process.
-
 Args:
     agent_id: Unique agent identifier
     agent_name: Agent name (e.g., 'claude', 'gpt')
@@ -191,7 +189,6 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Perform background thinking while waiting.
-
 This is called continuously when no commands are pending.
 The agent can:
 - Analyze recent messages
@@ -224,7 +221,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Handle a command from the coordinator.
-
 Args:
     command: Command dictionary with 'type' and other fields
 </pre> <div class="dynheader">
@@ -259,7 +255,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Handle context update notification.
-
 Args:
     command: Context update command
 </pre> <div class="dynheader">
@@ -289,7 +284,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Handle when it's this agent's turn to respond.
-
 Args:
     command: Turn command with prompt and context
 </pre> <div class="dynheader">
@@ -315,7 +309,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Main worker loop.
-
 Continuously monitors for:
 - Commands from coordinator (your turn, update context, shutdown)
 - Context updates to think about

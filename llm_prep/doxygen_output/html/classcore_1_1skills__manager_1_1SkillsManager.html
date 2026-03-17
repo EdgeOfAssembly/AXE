@@ -99,7 +99,7 @@ Collaboration diagram for core.skills_manager.SkillsManager:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afdb0a70fbc0c2d763e43379108b09825" id="r_afdb0a70fbc0c2d763e43379108b09825"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afdb0a70fbc0c2d763e43379108b09825">__init__</a> (self, str <a class="el" href="#abf4800ce668ca32b729e05979ab802a8">skills_dir</a>=&quot;skills&quot;, Optional[Dict] <a class="el" href="#abbbd7a62e4c9e3f8289e20d721306b79">config</a>=None)</td></tr>
+<tr class="memitem:ad6daa70fbea93ba108dbca8c64ba86dd" id="r_ad6daa70fbea93ba108dbca8c64ba86dd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6daa70fbea93ba108dbca8c64ba86dd">__init__</a> (self, Optional[str] <a class="el" href="#abf4800ce668ca32b729e05979ab802a8">skills_dir</a>=None, Optional[Dict] <a class="el" href="#abbbd7a62e4c9e3f8289e20d721306b79">config</a>=None)</td></tr>
 <tr class="memitem:abd6d4fd1eafbfd1475a67a3c811c8f26" id="r_abd6d4fd1eafbfd1475a67a3c811c8f26"><td class="memItemLeft" align="right" valign="top">Optional[<a class="el" href="classcore_1_1skills__manager_1_1Skill.html">Skill</a>]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd6d4fd1eafbfd1475a67a3c811c8f26">get_skill</a> (self, str name)</td></tr>
 <tr class="memitem:aac43d1d1ed56c28efbbcb948a66a5713" id="r_aac43d1d1ed56c28efbbcb948a66a5713"><td class="memItemLeft" align="right" valign="top">List[<a class="el" href="classcore_1_1skills__manager_1_1Skill.html">Skill</a>]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac43d1d1ed56c28efbbcb948a66a5713">get_all_skills</a> (self)</td></tr>
 <tr class="memitem:a270edfa9654941b16987653245ff7a10" id="r_a270edfa9654941b16987653245ff7a10"><td class="memItemLeft" align="right" valign="top">List[<a class="el" href="classcore_1_1skills__manager_1_1Skill.html">Skill</a>]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a270edfa9654941b16987653245ff7a10">get_skills_for_task</a> (self, str task_description, Optional[str] provider=None)</td></tr>
@@ -122,8 +122,8 @@ Protected Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Manager for Agent Skills system.</pre> </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="afdb0a70fbc0c2d763e43379108b09825" name="afdb0a70fbc0c2d763e43379108b09825"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afdb0a70fbc0c2d763e43379108b09825">&#9670;&#160;</a></span>__init__()</h2>
+<a id="ad6daa70fbea93ba108dbca8c64ba86dd" name="ad6daa70fbea93ba108dbca8c64ba86dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6daa70fbea93ba108dbca8c64ba86dd">&#9670;&#160;</a></span>__init__()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -136,7 +136,7 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">str </td>          <td class="paramname"><span class="paramname"><em>skills_dir</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;skills&quot;</span>, </td>
+          <td class="paramtype">Optional[str] </td>          <td class="paramname"><span class="paramname"><em>skills_dir</em></span><span class="paramdefsep"> = </span><span class="paramdefval">None</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -146,9 +146,9 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Initialize the Skills Manager.
-
 Args:
-    skills_dir: Path to skills directory (relative or absolute)
+    skills_dir: Path to skills directory (relative or absolute).
+               Defaults to "skills" in current directory if None or empty.
     config: Optional configuration dictionary for skills
 </pre> 
 </div>
@@ -219,7 +219,6 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get all activation keywords mapped to skill names.
-
 Returns:
     Dictionary mapping skill names to their keywords
 </pre> 
@@ -261,10 +260,8 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get skill by name.
-
 Args:
     name: Skill name (without .md extension)
-    
 Returns:
     Skill object or None if not found
 </pre> <div class="dynheader">
@@ -294,10 +291,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get skill metadata without full content (for token efficiency).
-
 Args:
     name: Skill name
-    
 Returns:
     Dictionary with metadata or None if not found
 </pre> <div class="dynheader">
@@ -332,11 +327,9 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get skills by explicit names.
-
 Args:
     names: List of skill names to retrieve
     provider: Optional provider name to filter by
-    
 Returns:
     List of Skill objects (skips non-existent skills)
 </pre> <div class="dynheader">
@@ -371,11 +364,9 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get relevant skills based on task keywords and provider.
-
 Args:
     task_description: Description of the task (e.g., user prompt)
     provider: Optional provider name to filter by (e.g., 'anthropic', 'openai')
-    
 Returns:
     List of matching Skill objects
 </pre> 
@@ -405,11 +396,9 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Inject skill content into system prompt efficiently.
-
 Args:
     system_prompt: Original system prompt
     skills: List of skills to inject
-    
 Returns:
     Enhanced system prompt with skills injected
 </pre> 

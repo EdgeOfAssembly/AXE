@@ -115,7 +115,6 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Manages coffee/play breaks for agents.
-
 Rules:
 - Only when workload is low (&lt;30% utilization)
 - Max 10-15 min per break
@@ -296,13 +295,11 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Request a break for an agent.
-
 Args:
     agent_id: Unique agent identifier
     alias: Agent's display alias
     break_type: 'coffee' or 'play'
     justification: Why the agent needs a break
-
 Returns:
     Request status and details
 </pre> 

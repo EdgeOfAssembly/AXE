@@ -122,7 +122,6 @@ Protected Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Optimizes conversation context to reduce token usage.
-
 Features:
 - Sliding window context management
 - Intelligent message truncation
@@ -148,7 +147,6 @@ Features:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Initialize the context optimizer.
-
 Args:
     token_counter: Function to count tokens (defaults to char/4 approximation)
 </pre> 
@@ -182,14 +180,11 @@ Args:
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Remove verbose or redundant content from messages.
-
 NOTE: Code truncation has been removed. We never truncate code.
 Instead, agents use the shared diff-patch system to track changes
 efficiently without losing code context.
-
 Args:
     content: Original message content
-
 Returns:
     Cleaned content
 </pre> <div class="dynheader">
@@ -227,10 +222,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Create a fingerprint for content deduplication.
-
 Args:
     content: Message content
-
 Returns:
     Fingerprint string
 </pre> <div class="dynheader">
@@ -297,10 +290,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Reduce number of examples in text.
-
 Args:
     text: Text with examples
-
 Returns:
     Text with fewer examples
 </pre> <div class="dynheader">
@@ -338,10 +329,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Remove redundant phrases and repetition.
-
 Args:
     text: Text to process
-
 Returns:
     Text with reduced redundancy
 </pre> <div class="dynheader">
@@ -379,10 +368,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Create a summary of older messages.
-
 Args:
     messages: Messages to summarize
-
 Returns:
     Summary text
 </pre> <div class="dynheader">
@@ -430,11 +417,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Aggressively truncate messages to fit budget.
-
 Args:
     messages: Messages to truncate
     max_tokens: Maximum token budget
-
 Returns:
     Truncated messages within budget
 </pre> <div class="dynheader">
@@ -464,13 +449,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Public method to clean message content.
-
 Args:
     content: Original message content
-
 Returns:
     Cleaned content
-
 Raises:
     ValueError: If content is None
 </pre> <div class="dynheader">
@@ -500,10 +482,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Compress a prompt by removing redundancy and verbosity.
-
 Args:
     prompt: Original prompt
-
 Returns:
     Compressed prompt
 </pre> <div class="dynheader">
@@ -533,10 +513,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Remove duplicate or near-duplicate messages.
-
 Args:
     messages: List of messages
-
 Returns:
     Deduplicated messages
 </pre> <div class="dynheader">
@@ -581,19 +559,16 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Optimize a conversation history to fit within token budget.
-
 Strategy:
 1. Keep system message (first)
 2. Keep last N messages (keep_recent)
 3. Summarize older messages if enabled
 4. Truncate if still over budget
-
 Args:
     messages: List of conversation messages
     max_tokens: Maximum token budget
     keep_recent: Number of recent messages to always keep
     summarize_old: Whether to summarize old messages
-
 Returns:
     Optimized list of messages within token budget
 </pre> <div class="dynheader">
@@ -628,19 +603,15 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">DEPRECATED: Code truncation has been removed.
-
 This method now returns content unchanged. We never truncate code.
-Instead, agents should use the shared diff-patch system 
+Instead, agents should use the shared diff-patch system
 (.collab_changes.md) to track changes efficiently.
-
 Args:
     content: Content with code blocks
     max_lines: DEPRECATED - This parameter is ignored. Kept for
         backward compatibility but has no effect.
-
 Returns:
     Content unchanged (no truncation applied)
-
 Raises:
     ValueError: If content is None
 </pre> 

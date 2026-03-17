@@ -2,8 +2,7 @@
 \hypertarget{classdatabase_1_1agent__db_1_1AgentDatabase}{}\label{classdatabase_1_1agent__db_1_1AgentDatabase}\index{database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}}
 
 
-Collaboration diagram for database.\+agent\+\_\+db.\+Agent\+Database\+:
-\nopagebreak
+Collaboration diagram for database.\+agent\+\_\+db.\+Agent\+Database\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -72,6 +71,10 @@ str \mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase_a98bc86be6a6bd8
 List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase_a9149a09cdebacc92369a2be5ba310ecb}{get\+\_\+workshop\+\_\+analyses}} (self, Optional\mbox{[}str\mbox{]} agent\+\_\+id=None, Optional\mbox{[}str\mbox{]} tool\+\_\+name=None, int limit=50)
 \item 
 Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase_ae72543484131cc4ae43df894ba6c7f8a}{get\+\_\+workshop\+\_\+stats}} (self, Optional\mbox{[}str\mbox{]} agent\+\_\+id=None)
+\item 
+List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase_ac5f316cb29585483d713b3c2065edeb1}{apply\+\_\+xp\+\_\+votes}} (self, List\mbox{[}Dict\mbox{]} votes)
+\item 
+Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} \mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase_ae4143907edb66ab2261d2bf24fb46250}{get\+\_\+agent\+\_\+by\+\_\+alias}} (self, str alias)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -101,12 +104,10 @@ None \mbox{\hyperlink{classdatabase_1_1agent__db_1_1AgentDatabase_ab6aae89ca7180
 database.\+agent\+\_\+db.\+Agent\+Database.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}str\mbox{]} }]{db\+\_\+path}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Initialize database connection.
-
 Args:
     db_path: Optional path override. If None, uses AXE installation directory.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -125,8 +126,7 @@ Args:
  None database.\+agent\+\_\+db.\+Agent\+Database.\+\_\+apply\+\_\+migrations (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{sqlite3.\+Connection}]{conn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Apply schema migrations to existing tables.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -140,8 +140,7 @@ Args:
  None database.\+agent\+\_\+db.\+Agent\+Database.\+\_\+init\+\_\+db (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Initialize database schema with migrations.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -155,7 +154,28 @@ Args:
  bool database.\+agent\+\_\+db.\+Agent\+Database.\+alias\+\_\+exists (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{alias}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if an alias already exists.\end{DoxyVerb}
- \Hypertarget{classdatabase_1_1agent__db_1_1AgentDatabase_a296bb2622baac11158a1d47114fc1507}\index{database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}!award\_xp@{award\_xp}}
+ \Hypertarget{classdatabase_1_1agent__db_1_1AgentDatabase_ac5f316cb29585483d713b3c2065edeb1}\index{database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}!apply\_xp\_votes@{apply\_xp\_votes}}
+\index{apply\_xp\_votes@{apply\_xp\_votes}!database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}}
+\doxysubsubsection{\texorpdfstring{apply\_xp\_votes()}{apply\_xp\_votes()}}
+{\footnotesize\ttfamily \label{classdatabase_1_1agent__db_1_1AgentDatabase_ac5f316cb29585483d713b3c2065edeb1} 
+ List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} database.\+agent\+\_\+db.\+Agent\+Database.\+apply\+\_\+xp\+\_\+votes (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}Dict\mbox{]}}]{votes}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Apply pending XP votes from GlobalWorkspace.
+Processes peer votes and applies XP awards, handling level-ups
+and returning results for each vote applied.
+Args:
+    votes: List of vote dictionaries from GlobalWorkspace
+Returns:
+    List of results including any level-ups triggered
+\end{DoxyVerb}
+ Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classdatabase_1_1agent__db_1_1AgentDatabase_ac5f316cb29585483d713b3c2065edeb1_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classdatabase_1_1agent__db_1_1AgentDatabase_a296bb2622baac11158a1d47114fc1507}\index{database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}!award\_xp@{award\_xp}}
 \index{award\_xp@{award\_xp}!database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}}
 \doxysubsubsection{\texorpdfstring{award\_xp()}{award\_xp()}}
 {\footnotesize\ttfamily \label{classdatabase_1_1agent__db_1_1AgentDatabase_a296bb2622baac11158a1d47114fc1507} 
@@ -164,7 +184,14 @@ Args:
 \begin{DoxyVerb}Award XP to an agent and handle level-ups.
 Note: This method imports from progression module to avoid circular imports.
 \end{DoxyVerb}
- \Hypertarget{classdatabase_1_1agent__db_1_1AgentDatabase_aa5870bd6431bcb5ad3cfdf1b5103c680}\index{database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}!can\_take\_break@{can\_take\_break}}
+ Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classdatabase_1_1agent__db_1_1AgentDatabase_a296bb2622baac11158a1d47114fc1507_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classdatabase_1_1agent__db_1_1AgentDatabase_aa5870bd6431bcb5ad3cfdf1b5103c680}\index{database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}!can\_take\_break@{can\_take\_break}}
 \index{can\_take\_break@{can\_take\_break}!database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}}
 \doxysubsubsection{\texorpdfstring{can\_take\_break()}{can\_take\_break()}}
 {\footnotesize\ttfamily \label{classdatabase_1_1agent__db_1_1AgentDatabase_aa5870bd6431bcb5ad3cfdf1b5103c680} 
@@ -173,8 +200,7 @@ Note: This method imports from progression module to avoid circular imports.
 \begin{DoxyVerb}Check if an agent can take a break.
 Note: Constants are parameters to avoid circular import.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -190,8 +216,7 @@ Note: Constants are parameters to avoid circular import.
 \begin{DoxyVerb}Check if agent shows signs of degradation.
 Note: ERROR_THRESHOLD_PERCENT is a parameter to avoid circular import.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -207,8 +232,7 @@ Note: ERROR_THRESHOLD_PERCENT is a parameter to avoid circular import.
 \begin{DoxyVerb}Check if agent needs mandatory sleep due to work time limit.
 Note: Constants are parameters to avoid circular import.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -222,6 +246,18 @@ Note: Constants are parameters to avoid circular import.
  List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} database.\+agent\+\_\+db.\+Agent\+Database.\+get\+\_\+active\+\_\+agents (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get list of all active agents.\end{DoxyVerb}
+ \Hypertarget{classdatabase_1_1agent__db_1_1AgentDatabase_ae4143907edb66ab2261d2bf24fb46250}\index{database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}!get\_agent\_by\_alias@{get\_agent\_by\_alias}}
+\index{get\_agent\_by\_alias@{get\_agent\_by\_alias}!database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}}
+\doxysubsubsection{\texorpdfstring{get\_agent\_by\_alias()}{get\_agent\_by\_alias()}}
+{\footnotesize\ttfamily \label{classdatabase_1_1agent__db_1_1AgentDatabase_ae4143907edb66ab2261d2bf24fb46250} 
+ Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} database.\+agent\+\_\+db.\+Agent\+Database.\+get\+\_\+agent\+\_\+by\+\_\+alias (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{alias}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get agent information by alias.
+Args:
+    alias: Agent alias (with or without @ prefix)
+Returns:
+    Agent info dict or None if not found
+\end{DoxyVerb}
  \Hypertarget{classdatabase_1_1agent__db_1_1AgentDatabase_a36b060fb37c92088392f5491098e8c2f}\index{database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}!get\_agent\_context\_history@{get\_agent\_context\_history}}
 \index{get\_agent\_context\_history@{get\_agent\_context\_history}!database.agent\_db.AgentDatabase@{database.agent\_db.AgentDatabase}}
 \doxysubsubsection{\texorpdfstring{get\_agent\_context\_history()}{get\_agent\_context\_history()}}
@@ -229,11 +265,9 @@ Note: Constants are parameters to avoid circular import.
  List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} database.\+agent\+\_\+db.\+Agent\+Database.\+get\+\_\+agent\+\_\+context\+\_\+history (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{int }]{limit}{ = {\ttfamily 20}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get recent conversation history for an agent.
-
 Args:
     agent_id: Unique identifier for the agent
     limit: Maximum number of messages to return
-
 Returns:
     List of conversation history entries
 \end{DoxyVerb}
@@ -244,8 +278,7 @@ Returns:
  int database.\+agent\+\_\+db.\+Agent\+Database.\+get\+\_\+breaks\+\_\+in\+\_\+last\+\_\+hour (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get number of breaks taken in the last hour.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -259,10 +292,8 @@ Returns:
  Optional\mbox{[}str\mbox{]} database.\+agent\+\_\+db.\+Agent\+Database.\+get\+\_\+context\+\_\+summary (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get context summary for an agent.
-
 Args:
     agent_id: Unique identifier for the agent
-
 Returns:
     Context summary text, or None if not found
 \end{DoxyVerb}
@@ -273,8 +304,7 @@ Returns:
  float database.\+agent\+\_\+db.\+Agent\+Database.\+get\+\_\+error\+\_\+rate (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Calculate error rate from recent diffs.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -302,10 +332,8 @@ Returns:
  int database.\+agent\+\_\+db.\+Agent\+Database.\+get\+\_\+token\+\_\+usage (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get token usage for an agent.
-
 Args:
     agent_id: Unique identifier for the agent
-
 Returns:
     Total tokens used, or 0 if agent not found
 \end{DoxyVerb}
@@ -316,8 +344,7 @@ Returns:
  int database.\+agent\+\_\+db.\+Agent\+Database.\+get\+\_\+work\+\_\+duration\+\_\+minutes (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get how many minutes the agent has been working continuously.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -331,12 +358,10 @@ Returns:
  List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} database.\+agent\+\_\+db.\+Agent\+Database.\+get\+\_\+workshop\+\_\+analyses (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}str\mbox{]} }]{agent\+\_\+id}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{tool\+\_\+name}{ = {\ttfamily None}, }\item[{int }]{limit}{ = {\ttfamily 50}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Retrieve workshop analysis results.
-
 Args:
     agent_id: Filter by agent ID
     tool_name: Filter by tool name
     limit: Maximum number of results to return
-    
 Returns:
     List of analysis records
 \end{DoxyVerb}
@@ -347,10 +372,8 @@ Returns:
  Dict\mbox{[}str, Any\mbox{]} database.\+agent\+\_\+db.\+Agent\+Database.\+get\+\_\+workshop\+\_\+stats (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}str\mbox{]} }]{agent\+\_\+id}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get workshop usage statistics.
-
 Args:
     agent_id: Filter by agent ID
-    
 Returns:
     Statistics dictionary
 \end{DoxyVerb}
@@ -377,8 +400,7 @@ Returns:
 \begin{DoxyVerb}Put an agent to sleep and record the event.
 Note: MIN_SLEEP_MINUTES is hardcoded here as 30 to avoid circular import.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -408,7 +430,6 @@ Note: DIFF_HISTORY_LIMIT is a parameter to avoid circular import.
  List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} database.\+agent\+\_\+db.\+Agent\+Database.\+restore\+\_\+all\+\_\+agents (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Restore all agents from database on startup.
-
 Returns:
     List of agent state dictionaries
 \end{DoxyVerb}
@@ -426,7 +447,6 @@ Returns:
  None database.\+agent\+\_\+db.\+Agent\+Database.\+save\+\_\+context\+\_\+summary (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{str}]{summary}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Save a compressed context summary for an agent.
-
 Args:
     agent_id: Unique identifier for the agent
     summary: Compressed context summary text
@@ -438,7 +458,6 @@ Args:
  str database.\+agent\+\_\+db.\+Agent\+Database.\+save\+\_\+workshop\+\_\+analysis (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{tool\+\_\+name}{, }\item[{str}]{target}{, }\item[{Optional\mbox{[}str\mbox{]}}]{agent\+\_\+id}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{results}{, }\item[{Optional\mbox{[}float\mbox{]} }]{duration}{ = {\ttfamily None}, }\item[{Optional\mbox{[}str\mbox{]} }]{error\+\_\+message}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Save workshop analysis results to database.
-
 Args:
     tool_name: Name of the workshop tool ('chisel', 'saw', 'plane', 'hammer')
     target: Analysis target (file path, code, process name, etc.)
@@ -446,7 +465,6 @@ Args:
     results: Analysis results dictionary
     duration: Analysis duration in seconds
     error_message: Error message if analysis failed
-    
 Returns:
     Analysis ID for the saved record
 \end{DoxyVerb}
@@ -464,7 +482,6 @@ Returns:
  None database.\+agent\+\_\+db.\+Agent\+Database.\+sync\+\_\+conversation (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{str}]{message\+\_\+snippet}{, }\item[{str }]{message\+\_\+type}{ = {\ttfamily \textquotesingle{}message\textquotesingle{}}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Store conversation snippet in agent memory for context continuity.
-
 Args:
     agent_id: Unique identifier for the agent
     message_snippet: Short snippet of conversation to store
@@ -477,7 +494,6 @@ Args:
  None database.\+agent\+\_\+db.\+Agent\+Database.\+update\+\_\+token\+\_\+usage (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{int}]{tokens\+\_\+used}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Update token usage for an agent.
-
 Args:
     agent_id: Unique identifier for the agent
     tokens_used: Total tokens used by the agent

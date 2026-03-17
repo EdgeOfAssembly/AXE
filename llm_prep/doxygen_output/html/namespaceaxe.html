@@ -107,6 +107,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a24106f38d1e2278a094b572012ed4760" id="r_a24106f38d1e2278a094b572012ed4760"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a24106f38d1e2278a094b572012ed4760">check_agent_pass</a> (str response)</td></tr>
 <tr class="memitem:a6219e4e9c2c63cebb97122848b591a70" id="r_a6219e4e9c2c63cebb97122848b591a70"><td class="memItemLeft" align="right" valign="top">tuple[bool, str]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6219e4e9c2c63cebb97122848b591a70">check_agent_task_complete</a> (str response)</td></tr>
 <tr class="memitem:a557557e18d17b8fa824f16fd344efdcf" id="r_a557557e18d17b8fa824f16fd344efdcf"><td class="memItemLeft" align="right" valign="top">tuple[bool, str]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a557557e18d17b8fa824f16fd344efdcf">check_agent_command</a> (str response, str token)</td></tr>
+<tr class="memitem:a342b484f69eed994ed53775ba88381e9" id="r_a342b484f69eed994ed53775ba88381e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a342b484f69eed994ed53775ba88381e9">_get_runtime_dir</a> ()</td></tr>
+<tr class="memitem:aa4d4827c0d50e186178d0a7979a90518" id="r_aa4d4827c0d50e186178d0a7979a90518"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4d4827c0d50e186178d0a7979a90518">cleanup_files</a> ()</td></tr>
+<tr class="memitem:a14509a8d71e87e88d24635d02a3003e4" id="r_a14509a8d71e87e88d24635d02a3003e4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14509a8d71e87e88d24635d02a3003e4">setup_signal_handlers</a> ()</td></tr>
+<tr class="memitem:ac354b89eb8144ab0d2c051b1db481072" id="r_ac354b89eb8144ab0d2c051b1db481072"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac354b89eb8144ab0d2c051b1db481072">write_pid_file</a> ()</td></tr>
+<tr class="memitem:ac7ff7a61a4ef3811318eee6acb6b03bb" id="r_ac7ff7a61a4ef3811318eee6acb6b03bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7ff7a61a4ef3811318eee6acb6b03bb">check_and_cleanup_stale_files</a> ()</td></tr>
+<tr class="memitem:a505834997ce1be947bd236d296248c64" id="r_a505834997ce1be947bd236d296248c64"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a505834997ce1be947bd236d296248c64">start_socket_server</a> ()</td></tr>
 <tr class="memitem:abb23f0d8329e501eb234daeb5a11ac9a" id="r_abb23f0d8329e501eb234daeb5a11ac9a"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb23f0d8329e501eb234daeb5a11ac9a">generate_sample_config</a> (str path='axe.yaml')</td></tr>
 <tr class="memitem:ae18887cd1aba7d83578d18397fe0cd63" id="r_ae18887cd1aba7d83578d18397fe0cd63"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae18887cd1aba7d83578d18397fe0cd63">restore_agents_on_startup</a> (Optional[str] db_path=None)</td></tr>
 <tr class="memitem:ae792b8af7b454e5f2e685ef5aa9c5207" id="r_ae792b8af7b454e5f2e685ef5aa9c5207"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae792b8af7b454e5f2e685ef5aa9c5207">sync_agents_on_shutdown</a> ()</td></tr>
@@ -119,17 +125,19 @@ Variables</h2></td></tr>
 <tr class="memitem:acec3e08a64234809ed190c12d64ad726" id="r_acec3e08a64234809ed190c12d64ad726"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acec3e08a64234809ed190c12d64ad726">HAS_GIT</a> = True</td></tr>
 <tr class="memitem:a83300a7c32303a1eacfcc6d392c5929b" id="r_a83300a7c32303a1eacfcc6d392c5929b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83300a7c32303a1eacfcc6d392c5929b">HAS_WORKSHOP</a> = True</td></tr>
 <tr class="memitem:a443d6ea5ad17499a058f5018e9704123" id="r_a443d6ea5ad17499a058f5018e9704123"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a443d6ea5ad17499a058f5018e9704123">HAS_CHISEL</a> = False</td></tr>
+<tr class="memitem:ab6bc706814d98a1b9f6dddbd2cf23a3c" id="r_ab6bc706814d98a1b9f6dddbd2cf23a3c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6bc706814d98a1b9f6dddbd2cf23a3c">RUNTIME_DIR</a> = <a class="el" href="#a342b484f69eed994ed53775ba88381e9">_get_runtime_dir</a>()</td></tr>
+<tr class="memitem:acf05acd8822ee7ad6f85484659869e3e" id="r_acf05acd8822ee7ad6f85484659869e3e"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf05acd8822ee7ad6f85484659869e3e">SOCKET_PATH</a> = f&quot;{<a class="el" href="#ab6bc706814d98a1b9f6dddbd2cf23a3c">RUNTIME_DIR</a>}/axe.sock&quot;</td></tr>
+<tr class="memitem:a83374285e8a4c32d21cffb40e12736ae" id="r_a83374285e8a4c32d21cffb40e12736ae"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83374285e8a4c32d21cffb40e12736ae">PID_PATH</a> = f&quot;{<a class="el" href="#ab6bc706814d98a1b9f6dddbd2cf23a3c">RUNTIME_DIR</a>}/axe.pid&quot;</td></tr>
+<tr class="memitem:a721486014f65841a3d10ee28b36093ae" id="r_a721486014f65841a3d10ee28b36093ae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a721486014f65841a3d10ee28b36093ae">_signal_handlers_registered</a> = False</td></tr>
 <tr class="memitem:a1231a95d9da8d332f1cb87feca5d4953" id="r_a1231a95d9da8d332f1cb87feca5d4953"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1231a95d9da8d332f1cb87feca5d4953">_global_db</a> = None</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">AXE - Agent eXecution Engine
 A terminal-based multiagent coding assistant for C, C++, Python, and reverse-engineering.
-
 Usage:
     axe.py                      # Interactive chat mode
     axe.py -c "task"            # Single command mode
     axe.py --config config.yaml # Custom config file
-    
 Chat commands:
     @agent task          - Send task to specific agent (e.g., @gpt analyze this)
     /agents              - List available agents
@@ -141,6 +149,31 @@ Chat commands:
     /help                - Show help
     /quit                - Exit
 </pre> </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a342b484f69eed994ed53775ba88381e9" name="a342b484f69eed994ed53775ba88381e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a342b484f69eed994ed53775ba88381e9">&#9670;&#160;</a></span>_get_runtime_dir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">axe._get_runtime_dir </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<pre class="fragment">Get runtime directory with fallback options.</pre> 
+</div>
+</div>
 <a id="a557557e18d17b8fa824f16fd344efdcf" name="a557557e18d17b8fa824f16fd344efdcf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a557557e18d17b8fa824f16fd344efdcf">&#9670;&#160;</a></span>check_agent_command()</h2>
 
@@ -160,7 +193,6 @@ Chat commands:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Check for agent commands that include content (BREAK REQUEST, EMERGENCY, SPAWN).
-
 Returns:
     Tuple of (found: bool, content: str)
 </pre> <div class="dynheader">
@@ -218,7 +250,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Check if agent is declaring task complete using unique token.
-
 Returns:
     Tuple of (is_complete: bool, summary: str)
 </pre> <div class="dynheader">
@@ -230,6 +261,55 @@ Here is the call graph for this function:</div>
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespaceaxe_a6219e4e9c2c63cebb97122848b591a70_icgraph.svg" width="682" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ac7ff7a61a4ef3811318eee6acb6b03bb" name="ac7ff7a61a4ef3811318eee6acb6b03bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7ff7a61a4ef3811318eee6acb6b03bb">&#9670;&#160;</a></span>check_and_cleanup_stale_files()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">axe.check_and_cleanup_stale_files </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Check for stale socket/pid files from crashed sessions.</pre> <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespaceaxe_ac7ff7a61a4ef3811318eee6acb6b03bb_cgraph.svg" width="368" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespaceaxe_ac7ff7a61a4ef3811318eee6acb6b03bb_icgraph.svg" width="879" height="186"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aa4d4827c0d50e186178d0a7979a90518" name="aa4d4827c0d50e186178d0a7979a90518"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4d4827c0d50e186178d0a7979a90518">&#9670;&#160;</a></span>cleanup_files()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">axe.cleanup_files </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Remove socket and PID files.</pre> <div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespaceaxe_aa4d4827c0d50e186178d0a7979a90518_icgraph.svg" width="1078" height="256"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -253,11 +333,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Detect unique agent communication tokens in response.
-
 Args:
     response: The agent's response text
     token: The token to search for (e.g., AGENT_TOKEN_PASS)
-
 Returns:
     Tuple of (found: bool, content: str)
     - found: Whether the token was detected
@@ -265,7 +343,7 @@ Returns:
 </pre> <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespaceaxe_a5387f652eb28eecb3bec22654aa3e40d_icgraph.svg" width="943" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespaceaxe_a5387f652eb28eecb3bec22654aa3e40d_icgraph.svg" width="943" height="279"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -307,13 +385,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Check if agent is genuinely declaring task complete.
-
 Returns False for:
 - "TASK COMPLETE" inside &lt;result&gt; blocks (file content)
 - "TASK COMPLETE" inside quoted text
 - "TASK COMPLETE" in warnings/instructions
 - "TASK COMPLETE" inside [READ ...] blocks
-
 Returns True only for genuine declarations like:
 - "TASK COMPLETE: Here's what we accomplished..."
 - "✅ TASK COMPLETE"
@@ -336,7 +412,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname"> None axe.main </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -369,19 +445,66 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Display agents from database on startup (informational only).
-
 Note: This function displays agent information from previous sessions
 but does not automatically recreate them in the current session.
 Agents must be explicitly spawned via collaborative sessions or
 other mechanisms. This is informational to show what agents
 existed in previous sessions.
-
 Args:
     db_path: Optional path to SQLite database. If None, uses AXE installation directory.
 </pre> <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespaceaxe_ae18887cd1aba7d83578d18397fe0cd63_icgraph.svg" width="286" height="71"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a14509a8d71e87e88d24635d02a3003e4" name="a14509a8d71e87e88d24635d02a3003e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14509a8d71e87e88d24635d02a3003e4">&#9670;&#160;</a></span>setup_signal_handlers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">axe.setup_signal_handlers </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Register signal handlers for clean shutdown.</pre> <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespaceaxe_a14509a8d71e87e88d24635d02a3003e4_cgraph.svg" width="386" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespaceaxe_a14509a8d71e87e88d24635d02a3003e4_icgraph.svg" width="860" height="87"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a505834997ce1be947bd236d296248c64" name="a505834997ce1be947bd236d296248c64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a505834997ce1be947bd236d296248c64">&#9670;&#160;</a></span>start_socket_server()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">axe.start_socket_server </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Start Unix socket server for agent communication.</pre> <div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespaceaxe_a505834997ce1be947bd236d296248c64_icgraph.svg" width="879" height="186"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -405,6 +528,28 @@ This is called automatically via atexit.
 </pre> 
 </div>
 </div>
+<a id="ac354b89eb8144ab0d2c051b1db481072" name="ac354b89eb8144ab0d2c051b1db481072"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac354b89eb8144ab0d2c051b1db481072">&#9670;&#160;</a></span>write_pid_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">axe.write_pid_file </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Write PID file for agent discovery.</pre> <div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="namespaceaxe_ac354b89eb8144ab0d2c051b1db481072_icgraph.svg" width="839" height="186"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="a1231a95d9da8d332f1cb87feca5d4953" name="a1231a95d9da8d332f1cb87feca5d4953"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1231a95d9da8d332f1cb87feca5d4953">&#9670;&#160;</a></span>_global_db</h2>
@@ -417,6 +562,28 @@ This is called automatically via atexit.
       <table class="memname">
         <tr>
           <td class="memname">axe._global_db = None</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a721486014f65841a3d10ee28b36093ae" name="a721486014f65841a3d10ee28b36093ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a721486014f65841a3d10ee28b36093ae">&#9670;&#160;</a></span>_signal_handlers_registered</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool axe._signal_handlers_registered = False</td>
         </tr>
       </table>
   </td>
@@ -492,6 +659,48 @@ This is called automatically via atexit.
       <table class="memname">
         <tr>
           <td class="memname">bool axe.HAS_YAML = True</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a83374285e8a4c32d21cffb40e12736ae" name="a83374285e8a4c32d21cffb40e12736ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83374285e8a4c32d21cffb40e12736ae">&#9670;&#160;</a></span>PID_PATH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str axe.PID_PATH = f&quot;{<a class="el" href="#ab6bc706814d98a1b9f6dddbd2cf23a3c">RUNTIME_DIR</a>}/axe.pid&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab6bc706814d98a1b9f6dddbd2cf23a3c" name="ab6bc706814d98a1b9f6dddbd2cf23a3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6bc706814d98a1b9f6dddbd2cf23a3c">&#9670;&#160;</a></span>RUNTIME_DIR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">axe.RUNTIME_DIR = <a class="el" href="#a342b484f69eed994ed53775ba88381e9">_get_runtime_dir</a>()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf05acd8822ee7ad6f85484659869e3e" name="acf05acd8822ee7ad6f85484659869e3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf05acd8822ee7ad6f85484659869e3e">&#9670;&#160;</a></span>SOCKET_PATH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str axe.SOCKET_PATH = f&quot;{<a class="el" href="#ab6bc706814d98a1b9f6dddbd2cf23a3c">RUNTIME_DIR</a>}/axe.sock&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">

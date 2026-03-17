@@ -114,7 +114,6 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Manages dynamic spawning of agents based on workload and resources.
-
 Features:
 - Spawn new agent instances on demand
 - Resource-based spawning decisions
@@ -206,10 +205,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Determine if auto-spawning is needed based on workload.
-
 Args:
     task_complexity: 0.0-1.0 scale of task complexity
-
 Returns:
     Tuple of (should_spawn, reason)
 </pre> 
@@ -249,13 +246,11 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Spawn a new agent instance.
-
 Args:
     model_name: The model to use for the new agent
     provider: API provider (openai, anthropic, etc.)
     supervisor_id: ID of the supervisor requesting spawn
     reason: Why the agent is being spawned
-
 Returns:
     New agent info or error
 </pre> <div class="dynheader">

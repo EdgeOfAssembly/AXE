@@ -125,7 +125,6 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Thread-safe shared state between agents.
-
 Uses multiprocessing.Manager to provide shared data structures
 that can be accessed safely from multiple processes.
 </pre> </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -219,7 +218,6 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Add a message to shared conversation history.
-
 Args:
     message: Message dictionary with keys like 'agent', 'content', 'timestamp'
 </pre> 
@@ -249,7 +247,6 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Add a shared note/finding.
-
 Args:
     key: Note identifier
     note: Note content
@@ -297,10 +294,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get agent status.
-
 Args:
     agent_id: Agent identifier
-
 Returns:
     Status dictionary or None if agent not found
 </pre> 
@@ -325,10 +320,8 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get recent messages from conversation history.
-
 Args:
     limit: Maximum number of messages to return
-
 Returns:
     List of recent message dictionaries
 </pre> 
@@ -349,7 +342,6 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get all shared notes.
-
 Returns:
     Dictionary of shared notes
 </pre> 
@@ -370,7 +362,6 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get current workspace state.
-
 Returns:
     Dictionary of workspace state
 </pre> 
@@ -434,7 +425,6 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Update agent status.
-
 Args:
     agent_id: Agent identifier
     status: Status string ('thinking', 'responding', 'idle', 'waiting')
@@ -465,7 +455,6 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Update workspace state.
-
 Args:
     key: State key
     value: State value

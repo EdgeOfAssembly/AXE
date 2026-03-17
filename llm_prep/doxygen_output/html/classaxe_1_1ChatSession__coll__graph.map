@@ -1,13 +1,13 @@
 <map id="axe.ChatSession" name="axe.ChatSession">
-<area shape="rect" id="Node000001" title=" " alt="" coords="385,480,608,1111"/>
-<area shape="rect" id="Node000002" href="$classcore_1_1config_1_1Config.html" title=" " alt="" coords="5,103,158,310"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="120,306,145,358,172,406,219,476,271,544,376,667,371,668,267,547,215,479,168,409,141,360,120,312"/>
-<area shape="rect" id="Node000003" href="$classcore_1_1agent__manager_1_1AgentManager.html" title=" " alt="" coords="182,42,373,371"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="339,368,382,479,376,479,338,374"/>
-<area shape="rect" id="Node000004" href="$classcore_1_1tool__runner_1_1ToolRunner.html" title=" " alt="" coords="398,5,595,407"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="497,405,499,464,494,463,496,410"/>
-<area shape="rect" id="Node000005" href="$classaxe_1_1ProjectContext.html" title=" " alt="" coords="620,103,803,310"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="676,307,616,475,611,472,673,311"/>
-<area shape="rect" id="Node000006" href="$classaxe_1_1ResponseProcessor.html" title=" " alt="" coords="826,47,1006,365"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="843,363,817,409,721,542,621,662,617,659,717,539,813,406,839,367"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="410,486,640,1027"/>
+<area shape="rect" id="Node000002" href="$classcore_1_1config_1_1Config.html" title=" " alt="" coords="5,5,186,413"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,392,201,411,247,472,298,531,401,639,396,640,294,535,243,475,196,414,186,397"/>
+<area shape="rect" id="Node000003" href="$classcore_1_1agent__manager_1_1AgentManager.html" title=" " alt="" coords="211,44,402,374"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="373,371,413,470,408,470,372,376"/>
+<area shape="rect" id="Node000004" href="$classcore_1_1tool__runner_1_1ToolRunner.html" title=" " alt="" coords="427,8,624,410"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="526,407,528,470,523,468,524,412"/>
+<area shape="rect" id="Node000005" href="$classaxe_1_1ProjectContext.html" title=" " alt="" coords="648,106,831,312"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="701,310,640,471,635,469,698,314"/>
+<area shape="rect" id="Node000006" href="$classaxe_1_1ResponseProcessor.html" title=" " alt="" coords="855,50,1035,368"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="874,366,846,414,801,474,752,533,654,638,650,634,748,529,797,471,842,411,870,370"/>
 </map>

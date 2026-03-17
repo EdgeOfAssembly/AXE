@@ -105,24 +105,24 @@ Files</h2></td></tr>
 <tr class="memitem:unpack_2Ec" id="r_unpack_2Ec"><td class="memItemLeft" align="right" valign="top"><span class="icondoc"><div class="doc-icon"></div></span>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="unpack_8c.html">unpack.c</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1339"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2253"></a>
 DOS EXE Unpackers</h1>
 <p>Collection of simple tools for unpacking common DOS executable packers (LZEXE, EXEPACK, PKLITE). These are useful for reverse engineering old MS-DOS games and tools before disassembly/analysis.</p>
 <p>These are integrated as source code so the repo stays self-contained.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md1340"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2254"></a>
 Build Instructions</h2>
 <p>You need gcc (standard on most Linux distros).</p>
 <div class="fragment"><div class="line">cd tools/dos_unpackers</div>
 <div class="line">make          # builds unlzexe, unexepack, depklite</div>
 </div><!-- fragment --><p>Binaries will appear in this directory. Add it to your PATH or call them with relative paths from AXE agents/scripts.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md1341"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2255"></a>
 Usage Examples</h2>
 <ul>
 <li>./unlzexe packed.exe → creates unpacked version (usually with -unlzexe suffix)</li>
 <li>./unexepack packed.exe → creates "unpacked" by default</li>
 <li>./depklite packed.exe → creates packed.exe.dep (extracted data)</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md1342"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2256"></a>
 Attributions &amp; Credits</h2>
 <p>These tools are ports/adaptations of classic unpackers. Big thanks to the original authors and maintainers:</p>
 <ul>

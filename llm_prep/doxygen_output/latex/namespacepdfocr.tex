@@ -78,7 +78,6 @@ dict \mbox{\hyperlink{namespacepdfocr_aaf4dc3b4a82cc37c55ba4a049944d3a2}{TESSERA
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}pdfocr - OCR tool for extracting text from PDFs and images.
-
 Features:
 - Extract text from scanned PDFs and images using OCR
 - Support multiple OCR engines: tesseract (fast, default), easyocr (higher accuracy)
@@ -88,12 +87,9 @@ Features:
 - Output to configurable directory
 - JSON output format with bounding boxes
 - Searchable PDF output
-
 Author: EdgeOfAssembly
 Date: 2025-12-19
-
 License: GPLv3 / Commercial dual-license
-
 Dependencies:
 - pytesseract (default engine): pip install pytesseract
   Also requires tesseract binary: apt install tesseract-ocr (Ubuntu)
@@ -115,12 +111,10 @@ Dependencies:
  Any pdfocr.\+\_\+get\+\_\+cv2 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Lazy import OpenCV (thread-safe).
-
 Returns:
     The cv2 (OpenCV) module if available, otherwise None.
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -134,18 +128,14 @@ Returns:
  Any pdfocr.\+\_\+get\+\_\+easyocr\+\_\+reader (\begin{DoxyParamCaption}\item[{Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} }]{langs}{ = {\ttfamily None}, }\item[{bool }]{gpu}{ = {\ttfamily False}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Lazy import and initialize easyocr reader (thread-safe).
-
 Note: Creates a new reader if languages differ from the cached one.
-
 Args:
     langs: List of language codes (default: ['en']).
     gpu: Whether to use GPU acceleration (default: False).
-
 Returns:
     EasyOCR Reader instance, or None if not available.
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -159,12 +149,10 @@ Returns:
  Any pdfocr.\+\_\+get\+\_\+numpy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Lazy import numpy (thread-safe).
-
 Returns:
     The numpy module if available, otherwise None.
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -178,12 +166,10 @@ Returns:
  Any pdfocr.\+\_\+get\+\_\+pytesseract (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Lazy import pytesseract (thread-safe).
-
 Returns:
     The pytesseract module if available, otherwise None.
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -197,8 +183,7 @@ Returns:
  bool pdfocr.\+check\+\_\+engine\+\_\+available (\begin{DoxyParamCaption}\item[{str}]{engine}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if OCR engine is available.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -209,19 +194,17 @@ Returns:
 \index{main@{main}!pdfocr@{pdfocr}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily \label{namespacepdfocr_ae40f3e496d2e1a1d103e6dfa71895128} 
- None pdfocr.\+main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+ None pdfocr.\+main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Main entry point for pdfocr.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacepdfocr_ae40f3e496d2e1a1d103e6dfa71895128_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -235,7 +218,6 @@ Here is the caller graph for this function\+:
  Any pdfocr.\+ocr\+\_\+image (\begin{DoxyParamCaption}\item[{Image.\+Image}]{image}{, }\item[{str }]{engine}{ = {\ttfamily "{}tesseract"{}}, }\item[{str }]{lang}{ = {\ttfamily "{}eng"{}}, }\item[{bool }]{enhance}{ = {\ttfamily True}, }\item[{bool }]{gpu}{ = {\ttfamily False}, }\item[{bool }]{return\+\_\+boxes}{ = {\ttfamily False}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}OCR a single image.
-
 Args:
     image: PIL Image to OCR.
     engine: OCR engine ('tesseract' or 'easyocr').
@@ -243,20 +225,17 @@ Args:
     enhance: Apply preprocessing.
     gpu: Use GPU acceleration for EasyOCR.
     return_boxes: Return structured data with bounding boxes (EasyOCR only).
-
 Returns:
     Extracted text (str), or list of dicts with boxes if return_boxes=True.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacepdfocr_a81b1c455180a0a207040985e551a88db_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -270,7 +249,6 @@ Here is the caller graph for this function\+:
  Optional\mbox{[}Path\mbox{]} pdfocr.\+ocr\+\_\+image\+\_\+file (\begin{DoxyParamCaption}\item[{Path}]{image\+\_\+path}{, }\item[{Path}]{output\+\_\+dir}{, }\item[{str }]{engine}{ = {\ttfamily "{}tesseract"{}}, }\item[{str }]{lang}{ = {\ttfamily "{}eng"{}}, }\item[{bool }]{enhance}{ = {\ttfamily True}, }\item[{bool }]{force}{ = {\ttfamily False}, }\item[{bool }]{quiet}{ = {\ttfamily False}, }\item[{str }]{output\+\_\+format}{ = {\ttfamily "{}text"{}}, }\item[{bool }]{gpu}{ = {\ttfamily False}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}OCR an image file and save the extracted text.
-
 Args:
     image_path: Path to image file.
     output_dir: Output directory.
@@ -281,20 +259,17 @@ Args:
     quiet: Suppress output.
     output_format: Output format ('text' or 'json').
     gpu: Use GPU acceleration for EasyOCR.
-
 Returns:
     Path to output text file, or None if failed.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacepdfocr_a099154a3f8d734ab6f18654cd5e5f6e5_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -308,7 +283,6 @@ Here is the caller graph for this function\+:
  Optional\mbox{[}Path\mbox{]} pdfocr.\+ocr\+\_\+pdf (\begin{DoxyParamCaption}\item[{Path}]{pdf\+\_\+path}{, }\item[{Path}]{output\+\_\+dir}{, }\item[{str }]{engine}{ = {\ttfamily "{}tesseract"{}}, }\item[{str }]{lang}{ = {\ttfamily "{}eng"{}}, }\item[{int }]{dpi}{ = {\ttfamily 300}, }\item[{bool }]{enhance}{ = {\ttfamily True}, }\item[{bool }]{save\+\_\+images}{ = {\ttfamily False}, }\item[{bool }]{force}{ = {\ttfamily False}, }\item[{bool }]{quiet}{ = {\ttfamily False}, }\item[{Optional\mbox{[}List\mbox{[}int\mbox{]}\mbox{]} }]{pages}{ = {\ttfamily None}, }\item[{str }]{output\+\_\+format}{ = {\ttfamily "{}text"{}}, }\item[{bool }]{gpu}{ = {\ttfamily False}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}OCR a PDF file and save the extracted text.
-
 Args:
     pdf_path: Path to PDF file.
     output_dir: Output directory.
@@ -322,20 +296,17 @@ Args:
     pages: Optional list of 1-indexed page numbers to OCR.
     output_format: Output format ('text' or 'json').
     gpu: Use GPU acceleration for EasyOCR.
-
 Returns:
     Path to output text file, or None if failed.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacepdfocr_ac7f53dae8b4a44d22b069d65f97240c4_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -349,26 +320,22 @@ Here is the caller graph for this function\+:
  Any pdfocr.\+ocr\+\_\+with\+\_\+easyocr (\begin{DoxyParamCaption}\item[{Image.\+Image}]{image}{, }\item[{Optional\mbox{[}List\mbox{[}str\mbox{]}\mbox{]} }]{langs}{ = {\ttfamily None}, }\item[{bool }]{gpu}{ = {\ttfamily False}, }\item[{bool }]{return\+\_\+boxes}{ = {\ttfamily False}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Perform OCR using EasyOCR.
-
 Args:
     image: PIL Image to OCR.
     langs: List of language codes (default: ['en']).
     gpu: Whether to use GPU acceleration.
     return_boxes: If True, return list of dicts with text and bounding boxes.
-
 Returns:
     Extracted text (str), or list of dicts with boxes if return_boxes=True.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacepdfocr_ad27e899ac4d3719ac2771d6737ebab30_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -382,24 +349,20 @@ Here is the caller graph for this function\+:
  str pdfocr.\+ocr\+\_\+with\+\_\+tesseract (\begin{DoxyParamCaption}\item[{Image.\+Image}]{image}{, }\item[{str }]{lang}{ = {\ttfamily "{}eng"{}}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Perform OCR using Tesseract.
-
 Args:
     image: PIL Image to OCR.
     lang: Tesseract language code (default: 'eng').
-
 Returns:
     Extracted text.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{namespacepdfocr_ac179521a93537a816beca0f185027d82_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -413,26 +376,21 @@ Here is the caller graph for this function\+:
  List\mbox{[}int\mbox{]} pdfocr.\+parse\+\_\+page\+\_\+spec (\begin{DoxyParamCaption}\item[{str}]{spec}{, }\item[{int}]{total\+\_\+pages}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Parse page specification string into list of page numbers.
-
 Supports formats like:
 - "1,7,67" - individual pages
 - "1-10" - page range
 - "56-" - from page 56 to end
 - "-10" - from page 1 to 10
 - "1-5,10,20-25" - combined
-
 Args:
     spec: Page specification string.
     total_pages: Total number of pages in the PDF.
-
 Returns:
     List of 1-indexed page numbers.
-
 Raises:
     ValueError: If specification is invalid.
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -446,18 +404,15 @@ Raises:
  List\mbox{[}Tuple\mbox{[}int, Image.\+Image\mbox{]}\mbox{]} pdfocr.\+pdf\+\_\+to\+\_\+images (\begin{DoxyParamCaption}\item[{Path}]{pdf\+\_\+path}{, }\item[{int }]{dpi}{ = {\ttfamily 300}, }\item[{Optional\mbox{[}List\mbox{[}int\mbox{]}\mbox{]} }]{pages}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Convert PDF pages to PIL Images.
-
 Args:
     pdf_path: Path to PDF file.
     dpi: DPI for rendering (default 300).
     pages: Optional list of 1-indexed page numbers to convert.
            If None, converts all pages.
-
 Returns:
     List of (page_number, PIL Image) tuples.
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -471,27 +426,22 @@ Returns:
  Image.\+Image pdfocr.\+preprocess\+\_\+image\+\_\+for\+\_\+ocr (\begin{DoxyParamCaption}\item[{Image.\+Image}]{image}{, }\item[{bool }]{enhance}{ = {\ttfamily True}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Preprocess image to improve OCR accuracy.
-
 Applies CLAHE (Contrast Limited Adaptive Histogram Equalization)
 and optional denoising.
-
 Args:
     image: PIL Image to preprocess.
     enhance: Whether to apply enhancement (default True).
-
 Returns:
     Preprocessed PIL Image.
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=347pt]{namespacepdfocr_ac731da60c6eeccf59b74b31bdb947e53_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -505,15 +455,12 @@ Here is the caller graph for this function\+:
  List\mbox{[}Path\mbox{]} pdfocr.\+process\+\_\+inputs (\begin{DoxyParamCaption}\item[{List\mbox{[}str\mbox{]}}]{inputs}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Process input arguments - can be files or directories.
-
 Args:
     inputs: List of input paths.
-
 Returns:
     List of file paths to process.
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -527,8 +474,7 @@ Returns:
  Iterable\mbox{[}\mbox{\hyperlink{namespacepdfocr_a7c25b0b55b00a5fd54db53d554e42b0d}{\+\_\+T}}\mbox{]} pdfocr.\+tqdm (\begin{DoxyParamCaption}\item[{Iterable\mbox{[}\mbox{\hyperlink{namespacepdfocr_a7c25b0b55b00a5fd54db53d554e42b0d}{\+\_\+T}}\mbox{]}}]{iterable}{, }\item[{\texorpdfstring{$\ast$}{*}Any}]{args}{, }\item[{\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}Any     }]{kwargs}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Fallback tqdm that passes through the iterable unchanged.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -542,18 +488,14 @@ Returns:
  int pdfocr.\+validate\+\_\+dpi (\begin{DoxyParamCaption}\item[{int}]{dpi}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Validate DPI value and return a valid value.
-
 Args:
     dpi: DPI value to validate.
-
 Returns:
     Valid DPI value (clamped to MIN_DPI-MAX_DPI range).
-
 Raises:
     ValueError: If DPI is invalid (zero or negative).
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

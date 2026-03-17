@@ -129,6 +129,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a98bc86be6a6bd848a59eda78f03ce831" id="r_a98bc86be6a6bd848a59eda78f03ce831"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a98bc86be6a6bd848a59eda78f03ce831">save_workshop_analysis</a> (self, str tool_name, str target, Optional[str] agent_id, Dict[str, Any] results, Optional[float] duration=None, Optional[str] error_message=None)</td></tr>
 <tr class="memitem:a9149a09cdebacc92369a2be5ba310ecb" id="r_a9149a09cdebacc92369a2be5ba310ecb"><td class="memItemLeft" align="right" valign="top">List[Dict[str, Any]]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9149a09cdebacc92369a2be5ba310ecb">get_workshop_analyses</a> (self, Optional[str] agent_id=None, Optional[str] tool_name=None, int limit=50)</td></tr>
 <tr class="memitem:ae72543484131cc4ae43df894ba6c7f8a" id="r_ae72543484131cc4ae43df894ba6c7f8a"><td class="memItemLeft" align="right" valign="top">Dict[str, Any]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae72543484131cc4ae43df894ba6c7f8a">get_workshop_stats</a> (self, Optional[str] agent_id=None)</td></tr>
+<tr class="memitem:ac5f316cb29585483d713b3c2065edeb1" id="r_ac5f316cb29585483d713b3c2065edeb1"><td class="memItemLeft" align="right" valign="top">List[Dict[str, Any]]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5f316cb29585483d713b3c2065edeb1">apply_xp_votes</a> (self, List[Dict] votes)</td></tr>
+<tr class="memitem:ae4143907edb66ab2261d2bf24fb46250" id="r_ae4143907edb66ab2261d2bf24fb46250"><td class="memItemLeft" align="right" valign="top">Optional[Dict[str, Any]]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4143907edb66ab2261d2bf24fb46250">get_agent_by_alias</a> (self, str alias)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -160,7 +162,6 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Initialize database connection.
-
 Args:
     db_path: Optional path override. If None, uses AXE installation directory.
 </pre> <div class="dynheader">
@@ -257,6 +258,39 @@ Here is the call graph for this function:</div>
 <pre class="fragment">Check if an alias already exists.</pre> 
 </div>
 </div>
+<a id="ac5f316cb29585483d713b3c2065edeb1" name="ac5f316cb29585483d713b3c2065edeb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5f316cb29585483d713b3c2065edeb1">&#9670;&#160;</a></span>apply_xp_votes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> List[Dict[str, Any]] database.agent_db.AgentDatabase.apply_xp_votes </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">List[Dict]</td>          <td class="paramname"><span class="paramname"><em>votes</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Apply pending XP votes from GlobalWorkspace.
+Processes peer votes and applies XP awards, handling level-ups
+and returning results for each vote applied.
+Args:
+    votes: List of vote dictionaries from GlobalWorkspace
+Returns:
+    List of results including any level-ups triggered
+</pre> <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classdatabase_1_1agent__db_1_1AgentDatabase_ac5f316cb29585483d713b3c2065edeb1_cgraph.svg" width="664" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
 <a id="a296bb2622baac11158a1d47114fc1507" name="a296bb2622baac11158a1d47114fc1507"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a296bb2622baac11158a1d47114fc1507">&#9670;&#160;</a></span>award_xp()</h2>
 
@@ -287,7 +321,12 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 <pre class="fragment">Award XP to an agent and handle level-ups.
 Note: This method imports from progression module to avoid circular imports.
-</pre> 
+</pre> <div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classdatabase_1_1agent__db_1_1AgentDatabase_a296bb2622baac11158a1d47114fc1507_icgraph.svg" width="664" height="56"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
 </div>
 </div>
 <a id="aa5870bd6431bcb5ad3cfdf1b5103c680" name="aa5870bd6431bcb5ad3cfdf1b5103c680"></a>
@@ -426,6 +465,32 @@ Here is the call graph for this function:</div>
 <pre class="fragment">Get list of all active agents.</pre> 
 </div>
 </div>
+<a id="ae4143907edb66ab2261d2bf24fb46250" name="ae4143907edb66ab2261d2bf24fb46250"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4143907edb66ab2261d2bf24fb46250">&#9670;&#160;</a></span>get_agent_by_alias()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> Optional[Dict[str, Any]] database.agent_db.AgentDatabase.get_agent_by_alias </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>self</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>alias</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Get agent information by alias.
+Args:
+    alias: Agent alias (with or without @ prefix)
+Returns:
+    Agent info dict or None if not found
+</pre> 
+</div>
+</div>
 <a id="a36b060fb37c92088392f5491098e8c2f" name="a36b060fb37c92088392f5491098e8c2f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a36b060fb37c92088392f5491098e8c2f">&#9670;&#160;</a></span>get_agent_context_history()</h2>
 
@@ -450,11 +515,9 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get recent conversation history for an agent.
-
 Args:
     agent_id: Unique identifier for the agent
     limit: Maximum number of messages to return
-
 Returns:
     List of conversation history entries
 </pre> 
@@ -505,10 +568,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get context summary for an agent.
-
 Args:
     agent_id: Unique identifier for the agent
-
 Returns:
     Context summary text, or None if not found
 </pre> 
@@ -597,10 +658,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get token usage for an agent.
-
 Args:
     agent_id: Unique identifier for the agent
-
 Returns:
     Total tokens used, or 0 if agent not found
 </pre> 
@@ -661,12 +720,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Retrieve workshop analysis results.
-
 Args:
     agent_id: Filter by agent ID
     tool_name: Filter by tool name
     limit: Maximum number of results to return
-    
 Returns:
     List of analysis records
 </pre> 
@@ -691,10 +748,8 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get workshop usage statistics.
-
 Args:
     agent_id: Filter by agent ID
-    
 Returns:
     Statistics dictionary
 </pre> 
@@ -874,7 +929,6 @@ Note: DIFF_HISTORY_LIMIT is a parameter to avoid circular import.
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Restore all agents from database on startup.
-
 Returns:
     List of agent state dictionaries
 </pre> 
@@ -965,7 +1019,6 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Save a compressed context summary for an agent.
-
 Args:
     agent_id: Unique identifier for the agent
     summary: Compressed context summary text
@@ -1016,7 +1069,6 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Save workshop analysis results to database.
-
 Args:
     tool_name: Name of the workshop tool ('chisel', 'saw', 'plane', 'hammer')
     target: Analysis target (file path, code, process name, etc.)
@@ -1024,7 +1076,6 @@ Args:
     results: Analysis results dictionary
     duration: Analysis duration in seconds
     error_message: Error message if analysis failed
-    
 Returns:
     Analysis ID for the saved record
 </pre> 
@@ -1080,7 +1131,6 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Store conversation snippet in agent memory for context continuity.
-
 Args:
     agent_id: Unique identifier for the agent
     message_snippet: Short snippet of conversation to store
@@ -1112,7 +1162,6 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Update token usage for an agent.
-
 Args:
     agent_id: Unique identifier for the agent
     tokens_used: Total tokens used by the agent

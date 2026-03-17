@@ -2,8 +2,7 @@
 \hypertarget{classcore_1_1session__preprocessor_1_1SessionPreprocessor}{}\label{classcore_1_1session__preprocessor_1_1SessionPreprocessor}\index{core.session\_preprocessor.SessionPreprocessor@{core.session\_preprocessor.SessionPreprocessor}}
 
 
-Collaboration diagram for core.\+session\+\_\+preprocessor.\+Session\+Preprocessor\+:
-\nopagebreak
+Collaboration diagram for core.\+session\+\_\+preprocessor.\+Session\+Preprocessor\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -44,7 +43,6 @@ Dict\mbox{[}str, Any\mbox{]} \mbox{\hyperlink{classcore_1_1session__preprocessor
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Orchestrates workspace preprocessing at the start of each AXE session.
-
 Handles environment probing, minification, and llmprep execution based on configuration.
 \end{DoxyVerb}
  
@@ -59,7 +57,6 @@ Handles environment probing, minification, and llmprep execution based on config
 core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{config}{, }\item[{str}]{workspace\+\_\+path}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Initialize the session preprocessor.
-
 Args:
     config: AXE Config object
     workspace_path: Path to the workspace directory
@@ -76,7 +73,6 @@ Args:
  bool core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+is\+\_\+enabled (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if any preprocessing is enabled.
-
 Returns:
     True if environment_probe, minifier, or llmprep is enabled
 \end{DoxyVerb}
@@ -87,7 +83,6 @@ Returns:
  Dict\mbox{[}str, Any\mbox{]} core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+run (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Run all enabled preprocessing steps.
-
 Returns:
     Dictionary with results:
     {
@@ -96,8 +91,7 @@ Returns:
         'llmprep': {'success': bool, 'output_dir': str, 'enabled': bool}
     }
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -111,15 +105,13 @@ Returns:
  Dict\mbox{[}str, Any\mbox{]} core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+run\+\_\+environment\+\_\+probe (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Run environment probe to generate .collab_env.md
-
 Returns:
     Dictionary with keys:
     - success: True if probe succeeded
     - output_file: Path to output file
     - error: Error message if failed (optional)
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -133,15 +125,13 @@ Returns:
  Dict\mbox{[}str, Any\mbox{]} core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+run\+\_\+llmprep (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Run llmprep to generate context files.
-
 Returns:
     Dictionary with keys:
     - success: True if llmprep succeeded
     - output_dir: Path to output directory
     - error: Error message if failed (optional)
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -155,15 +145,13 @@ Returns:
  Dict\mbox{[}str, int\mbox{]} core.\+session\+\_\+preprocessor.\+Session\+Preprocessor.\+run\+\_\+minifier (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Run minification on workspace.
-
 Returns:
     Dictionary with keys:
     - files_processed: Number of files minified
     - bytes_saved: Bytes saved by minification
     - success: True if minification succeeded
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

@@ -2,8 +2,7 @@
 \hypertarget{classcore_1_1multiprocess_1_1SharedContext}{}\label{classcore_1_1multiprocess_1_1SharedContext}\index{core.multiprocess.SharedContext@{core.multiprocess.SharedContext}}
 
 
-Collaboration diagram for core.\+multiprocess.\+Shared\+Context\+:
-\nopagebreak
+Collaboration diagram for core.\+multiprocess.\+Shared\+Context\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -60,7 +59,6 @@ None \mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext_a32521b9e5fb36f
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Thread-safe shared state between agents.
-
 Uses multiprocessing.Manager to provide shared data structures
 that can be accessed safely from multiple processes.
 \end{DoxyVerb}
@@ -95,8 +93,7 @@ core.\+multiprocess.\+Shared\+Context.\+\_\+\+\_\+enter\+\_\+\+\_\+ (\begin{Doxy
 core.\+multiprocess.\+Shared\+Context.\+\_\+\+\_\+exit\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{exc\+\_\+type}{, }\item[{}]{exc\+\_\+val}{, }\item[{}]{exc\+\_\+tb}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Context manager exit with cleanup.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -110,7 +107,6 @@ core.\+multiprocess.\+Shared\+Context.\+\_\+\+\_\+exit\+\_\+\+\_\+ (\begin{DoxyP
  None core.\+multiprocess.\+Shared\+Context.\+add\+\_\+message (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{message}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Add a message to shared conversation history.
-
 Args:
     message: Message dictionary with keys like 'agent', 'content', 'timestamp'
 \end{DoxyVerb}
@@ -121,7 +117,6 @@ Args:
  None core.\+multiprocess.\+Shared\+Context.\+add\+\_\+shared\+\_\+note (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{key}{, }\item[{str}]{note}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Add a shared note/finding.
-
 Args:
     key: Note identifier
     note: Note content
@@ -133,8 +128,7 @@ Args:
  None core.\+multiprocess.\+Shared\+Context.\+cleanup (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Clean up Manager resources.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -148,10 +142,8 @@ Args:
  Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+multiprocess.\+Shared\+Context.\+get\+\_\+agent\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get agent status.
-
 Args:
     agent_id: Agent identifier
-
 Returns:
     Status dictionary or None if agent not found
 \end{DoxyVerb}
@@ -162,10 +154,8 @@ Returns:
  List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+multiprocess.\+Shared\+Context.\+get\+\_\+recent\+\_\+messages (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{int }]{limit}{ = {\ttfamily 20}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get recent messages from conversation history.
-
 Args:
     limit: Maximum number of messages to return
-
 Returns:
     List of recent message dictionaries
 \end{DoxyVerb}
@@ -176,7 +166,6 @@ Returns:
  Dict\mbox{[}str, Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+multiprocess.\+Shared\+Context.\+get\+\_\+shared\+\_\+notes (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get all shared notes.
-
 Returns:
     Dictionary of shared notes
 \end{DoxyVerb}
@@ -187,7 +176,6 @@ Returns:
  Dict\mbox{[}str, Any\mbox{]} core.\+multiprocess.\+Shared\+Context.\+get\+\_\+workspace\+\_\+state (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get current workspace state.
-
 Returns:
     Dictionary of workspace state
 \end{DoxyVerb}
@@ -212,7 +200,6 @@ Returns:
  None core.\+multiprocess.\+Shared\+Context.\+update\+\_\+agent\+\_\+status (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{str}]{status}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Update agent status.
-
 Args:
     agent_id: Agent identifier
     status: Status string ('thinking', 'responding', 'idle', 'waiting')
@@ -224,7 +211,6 @@ Args:
  None core.\+multiprocess.\+Shared\+Context.\+update\+\_\+workspace (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{key}{, }\item[{Any}]{value}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Update workspace state.
-
 Args:
     key: State key
     value: State value

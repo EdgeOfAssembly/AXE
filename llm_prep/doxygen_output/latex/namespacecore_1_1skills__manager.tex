@@ -10,13 +10,12 @@ class \mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager}{Skills\+Ma
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager}{Skills\+Manager}} \mbox{\hyperlink{namespacecore_1_1skills__manager_a16622a9ecf2e28d1b13cb7661100a210}{create\+\_\+skills\+\_\+manager}} (str skills\+\_\+dir="{}skills"{}, Optional\mbox{[}Dict\mbox{]} \mbox{\hyperlink{namespacecore_1_1config}{config}}=None)
+\mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager}{Skills\+Manager}} \mbox{\hyperlink{namespacecore_1_1skills__manager_a26101b590a7760f629f985fcffafc459}{create\+\_\+skills\+\_\+manager}} (Optional\mbox{[}str\mbox{]} skills\+\_\+dir=None, Optional\mbox{[}Dict\mbox{]} \mbox{\hyperlink{namespacecore_1_1config}{config}}=None)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Skills Manager for AXE.
-
 Manages agent skills - loading, discovery, and injection into prompts.
 Supports keyword-based activation and provider-specific filtering.
 \end{DoxyVerb}
@@ -25,18 +24,16 @@ Supports keyword-based activation and provider-specific filtering.
 \label{doc-func-members}
 \Hypertarget{namespacecore_1_1skills__manager_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{namespacecore_1_1skills__manager_a16622a9ecf2e28d1b13cb7661100a210}\index{core.skills\_manager@{core.skills\_manager}!create\_skills\_manager@{create\_skills\_manager}}
+\Hypertarget{namespacecore_1_1skills__manager_a26101b590a7760f629f985fcffafc459}\index{core.skills\_manager@{core.skills\_manager}!create\_skills\_manager@{create\_skills\_manager}}
 \index{create\_skills\_manager@{create\_skills\_manager}!core.skills\_manager@{core.skills\_manager}}
 \doxysubsubsection{\texorpdfstring{create\_skills\_manager()}{create\_skills\_manager()}}
-{\footnotesize\ttfamily \label{namespacecore_1_1skills__manager_a16622a9ecf2e28d1b13cb7661100a210} 
- \mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager}{Skills\+Manager}} core.\+skills\+\_\+manager.\+create\+\_\+skills\+\_\+manager (\begin{DoxyParamCaption}\item[{str }]{skills\+\_\+dir}{ = {\ttfamily "{}skills"{}}, }\item[{Optional\mbox{[}Dict\mbox{]} }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{namespacecore_1_1skills__manager_a26101b590a7760f629f985fcffafc459} 
+ \mbox{\hyperlink{classcore_1_1skills__manager_1_1SkillsManager}{Skills\+Manager}} core.\+skills\+\_\+manager.\+create\+\_\+skills\+\_\+manager (\begin{DoxyParamCaption}\item[{Optional\mbox{[}str\mbox{]} }]{skills\+\_\+dir}{ = {\ttfamily None}, }\item[{Optional\mbox{[}Dict\mbox{]} }]{config}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Factory function to create a SkillsManager instance.
-
 Args:
-    skills_dir: Path to skills directory
+    skills_dir: Path to skills directory. Defaults to "skills" if None or empty.
     config: Optional configuration dictionary
-    
 Returns:
     Initialized SkillsManager instance
 \end{DoxyVerb}

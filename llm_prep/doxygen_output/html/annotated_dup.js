@@ -18,6 +18,9 @@ var annotated_dup =
         [ "AnthropicFeatures", "classcore_1_1anthropic__features_1_1AnthropicFeatures.html", "classcore_1_1anthropic__features_1_1AnthropicFeatures" ],
         [ "FilesAPIManager", "classcore_1_1anthropic__features_1_1FilesAPIManager.html", "classcore_1_1anthropic__features_1_1FilesAPIManager" ]
       ] ],
+      [ "arbitration", "namespacecore_1_1arbitration.html", [
+        [ "ArbitrationProtocol", "classcore_1_1arbitration_1_1ArbitrationProtocol.html", "classcore_1_1arbitration_1_1ArbitrationProtocol" ]
+      ] ],
       [ "config", "namespacecore_1_1config.html", [
         [ "Config", "classcore_1_1config_1_1Config.html", "classcore_1_1config_1_1Config" ]
       ] ],
@@ -26,6 +29,9 @@ var annotated_dup =
       ] ],
       [ "github_agent", "namespacecore_1_1github__agent.html", [
         [ "GitHubAgent", "classcore_1_1github__agent_1_1GitHubAgent.html", "classcore_1_1github__agent_1_1GitHubAgent" ]
+      ] ],
+      [ "global_workspace", "namespacecore_1_1global__workspace.html", [
+        [ "GlobalWorkspace", "classcore_1_1global__workspace_1_1GlobalWorkspace.html", "classcore_1_1global__workspace_1_1GlobalWorkspace" ]
       ] ],
       [ "multiprocess", "namespacecore_1_1multiprocess.html", [
         [ "SharedContext", "classcore_1_1multiprocess_1_1SharedContext.html", "classcore_1_1multiprocess_1_1SharedContext" ],
@@ -45,6 +51,11 @@ var annotated_dup =
         [ "Skill", "classcore_1_1skills__manager_1_1Skill.html", "classcore_1_1skills__manager_1_1Skill" ],
         [ "SkillsManager", "classcore_1_1skills__manager_1_1SkillsManager.html", "classcore_1_1skills__manager_1_1SkillsManager" ]
       ] ],
+      [ "subsumption_layer", "namespacecore_1_1subsumption__layer.html", [
+        [ "SubsumptionLayer", "classcore_1_1subsumption__layer_1_1SubsumptionLayer.html", "classcore_1_1subsumption__layer_1_1SubsumptionLayer" ],
+        [ "Suppression", "classcore_1_1subsumption__layer_1_1Suppression.html", "classcore_1_1subsumption__layer_1_1Suppression" ],
+        [ "SubsumptionController", "classcore_1_1subsumption__layer_1_1SubsumptionController.html", "classcore_1_1subsumption__layer_1_1SubsumptionController" ]
+      ] ],
       [ "tool_runner", "namespacecore_1_1tool__runner.html", [
         [ "ToolRunner", "classcore_1_1tool__runner_1_1ToolRunner.html", "classcore_1_1tool__runner_1_1ToolRunner" ]
       ] ]
@@ -53,6 +64,9 @@ var annotated_dup =
       [ "agent_db", "namespacedatabase_1_1agent__db.html", [
         [ "AgentDatabase", "classdatabase_1_1agent__db_1_1AgentDatabase.html", "classdatabase_1_1agent__db_1_1AgentDatabase" ]
       ] ]
+    ] ],
+    [ "hello_world", "namespacehello__world.html", [
+      [ "Entry", "classhello__world_1_1Entry.html", null ]
     ] ],
     [ "managers", "namespacemanagers.html", [
       [ "break_system", "namespacemanagers_1_1break__system.html", [
@@ -80,8 +94,18 @@ var annotated_dup =
       [ "TestAXECommandIntegration", "classtest__analysis__tools_1_1TestAXECommandIntegration.html", "classtest__analysis__tools_1_1TestAXECommandIntegration" ],
       [ "TestExecBlockSupport", "classtest__analysis__tools_1_1TestExecBlockSupport.html", "classtest__analysis__tools_1_1TestExecBlockSupport" ]
     ] ],
+    [ "test_end_to_end", "namespacetest__end__to__end.html", [
+      [ "SkipTest", "classtest__end__to__end_1_1SkipTest.html", null ]
+    ] ],
+    [ "test_interactive_keypress", "namespacetest__interactive__keypress.html", [
+      [ "SkipTest", "classtest__interactive__keypress_1_1SkipTest.html", null ],
+      [ "XvfbSession", "classtest__interactive__keypress_1_1XvfbSession.html", "classtest__interactive__keypress_1_1XvfbSession" ]
+    ] ],
     [ "test_large_code_files", "namespacetest__large__code__files.html", [
       [ "TestLargeCodeFiles", "classtest__large__code__files_1_1TestLargeCodeFiles.html", "classtest__large__code__files_1_1TestLargeCodeFiles" ]
+    ] ],
+    [ "test_live_feature_matrix", "namespacetest__live__feature__matrix.html", [
+      [ "SkipTest", "classtest__live__feature__matrix_1_1SkipTest.html", null ]
     ] ],
     [ "test_minifier", "namespacetest__minifier.html", [
       [ "TestCCppMinification", "classtest__minifier_1_1TestCCppMinification.html", "classtest__minifier_1_1TestCCppMinification" ],
@@ -123,7 +147,7 @@ var annotated_dup =
     ] ],
     [ "utils", "namespaceutils.html", [
       [ "context_optimizer", "namespaceutils_1_1context__optimizer.html", [
-        [ "Message", "classutils_1_1context__optimizer_1_1Message.html", "classutils_1_1context__optimizer_1_1Message" ],
+        [ "Message", "classutils_1_1context__optimizer_1_1Message.html", null ],
         [ "ContextOptimizer", "classutils_1_1context__optimizer_1_1ContextOptimizer.html", "classutils_1_1context__optimizer_1_1ContextOptimizer" ]
       ] ],
       [ "formatting", "namespaceutils_1_1formatting.html", [
@@ -162,6 +186,7 @@ var annotated_dup =
     ] ],
     [ "bitstream", "structbitstream.html", "structbitstream" ],
     [ "dos_header", "structdos__header.html", "structdos__header" ],
+    [ "Entry", "structEntry.html", "structEntry" ],
     [ "exepack_header", "structexepack__header.html", "structexepack__header" ],
     [ "GetNextBit_Data", "structGetNextBit__Data.html", "structGetNextBit__Data" ],
     [ "GetNextByte_Data", "structGetNextByte__Data.html", "structGetNextByte__Data" ],

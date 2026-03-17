@@ -118,19 +118,19 @@ $(function(){initNavTree('md_skills_2dos__packer__detector.html','',''); });
 <li>Make safe working copy: cp "$target" temp_packed.exe</li>
 <li>Detection (try tools in order of commonality, capture output): packer="none" evidence=""</li>
 </ol>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1268"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2159"></a>
 Try unlzexe first (very common)</h1>
 <p>/tools/dos_unpackers/unlzexe -t temp_packed.exe &gt; detect_log.txt 2&gt;&amp;1 if grep -qi "packed.*lzexe" detect_log.txt; then packer="LZEXE" evidence=$(grep -i "lzexe" detect_log.txt)</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1269"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2160"></a>
 Then PKLITE</h1>
 <p>elif /tools/dos_unpackers/depklite temp_packed.exe &gt; detect_log.txt 2&gt;&amp;1 &amp;&amp; grep -q "PKLITE" detect_log.txt; then packer="PKLITE" evidence=$(grep -i "pklite" detect_log.txt)</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1270"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2161"></a>
 Then EXEPACK</h1>
 <p>elif /tools/dos_unpackers/unexepack temp_packed.exe &gt; detect_log.txt 2&gt;&amp;1 &amp;&amp; grep -q "EXEPACK" detect_log.txt; then packer="Microsoft EXEPACK" evidence=$(grep -i "exepack" detect_log.txt)</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1271"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2162"></a>
 Optional: add more (DIET, etc.) if tools expand</h1>
 <p>fi</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1272"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2163"></a>
 Fallback signature quick-check if all trials fail</h1>
 <p>if [ "$packer" = "none" ]; then if strings temp_packed.exe | grep -qi "pklite"; then packer="PKLITE (signature only)" elif hexdump -C temp_packed.exe | grep -qi "lz09\|lz91"; then packer="LZEXE (signature only)" fi fi</p>
 <p>rm temp_packed.exe</p>
@@ -138,7 +138,7 @@ Fallback signature quick-check if all trials fail</h1>
 <li>Optional auto-unpack: if [ "--unpack" provided ] &amp;&amp; [ "$packer" != "none" ]; then cp "$target" temp_packed.exe case $packer in "LZEXE"*) /tools/dos_unpackers/unlzexe temp_packed.exe ;; "PKLITE"*) /tools/dos_unpackers/depklite temp_packed.exe ;; "Microsoft EXEPACK"*) /tools/dos_unpackers/unexepack temp_packed.exe ;; esac mv temp_packed.exe "${target%.*}_unpacked.exe" unpacked_path="${target%.*}_unpacked.exe" fi</li>
 <li>Final report (Markdown): </li>
 </ol>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md1273"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2164"></a>
 DOS Packer Detection Report</h1>
 <p><b>Target:</b> $target <br  />
  <b>Detected packer:</b> $packer <br  />

@@ -91,11 +91,11 @@ $(function(){initNavTree('md_MISSION.html','',''); });
   <div class="headertitle"><div class="title">AXE - Agent eXecution Engine </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md602"></a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md603"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md1976"></a></p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1977"></a>
 Mission Statement</h1>
 <p>AXE is a lightweight, modular execution engine designed to orchestrate AI agent workflows with precision and reliability. Our goal is to provide developers with a robust framework for building, testing, and deploying agent-based systems.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md604"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1978"></a>
 Core Principles</h1>
 <ol type="1">
 <li><b>Simplicity</b> - Clean interfaces that are easy to understand and extend</li>
@@ -103,14 +103,14 @@ Core Principles</h1>
 <li><b>Modularity</b> - Components that can be mixed and matched as needed</li>
 <li><b>Observability</b> - Full visibility into agent execution and state</li>
 </ol>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md605"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1979"></a>
 Agent Communication Tokens</h1>
 <p>AXE uses special control tokens to coordinate multi-agent interactions. These tokens are defined in <span class="tt"><a class="el" href="axe_8py.html">axe.py</a></span> and should NEVER be written literally in files, as they trigger detection.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md606"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md1980"></a>
 Token Reference</h2>
 <p>To see the current token definitions, run: </p><div class="fragment"><div class="line">grep &quot;AGENT_TOKEN&quot; axe.py | head -6</div>
 </div><!-- fragment --><p><b>Important</b>: Do not copy or paste these tokens into any documentation or files. While the token detection system now properly filters out file content and code blocks, it's still best practice to avoid literal tokens in documentation.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md607"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md1981"></a>
 Token Purpose</h2>
 <p>The tokens enable agents to:</p><ul>
 <li><b>Pass control</b> to the next agent in sequence</li>
@@ -121,7 +121,7 @@ Token Purpose</h2>
 <li><b>Spawn new agents</b> (supervisor only)</li>
 <li><b>Check status</b> of the collaboration</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md608"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md1982"></a>
 Usage Guidelines</h2>
 <ul>
 <li>Tokens are automatically detected in agent responses</li>
@@ -129,7 +129,7 @@ Usage Guidelines</h2>
 <li>Reading files that contain token definitions will NOT trigger false positives (the engine strips file content)</li>
 <li>Tokens work whether in old format or new format</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md609"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1983"></a>
 Architecture Overview</h1>
 <div class="fragment"><div class="line">┌─────────────────────────────────────────┐</div>
 <div class="line">│            AXE Orchestrator             │</div>
@@ -142,13 +142,13 @@ Architecture Overview</h1>
 <div class="line">├─────────────────────────────────────────┤</div>
 <div class="line">│           State Management              │</div>
 <div class="line">└─────────────────────────────────────────┘</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md610"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md1984"></a>
 Getting Started</h1>
 <p>See QUICKSTART.md for installation and setup instructions.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md611"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1985"></a>
 Contributing</h1>
 <p>We welcome contributions! Please read CONTRIBUTING.md before submitting pull requests.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md612"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1986"></a>
 License</h1>
 <p>MIT License - See <a href="./LICENSE">LICENSE</a> for details. </p>
 </div></div><!-- contents -->

@@ -1452,6 +1452,79 @@ agents:
       for debugging.
 
       '
+
+  qwen3_coder_480b_cloud:
+    alias: [q3, qwen3, qwen480, qwen3c]
+    provider: ollama
+    model: qwen3-coder:480b-cloud
+    role: You are Qwen3-Coder 480B Cloud — the most powerful free agentic coding model in 2026.
+    context_tokens: 262144
+    capabilities:
+      - text
+      - function_calling
+      - tool_use
+      - multi_file_edits
+      - repo_understanding
+    system_prompt: 'You are a low-level coding specialist with expertise in systems
+      programming.
+
+
+      EXPERTISE:
+
+      - C/C++: Memory management, pointers, data structures
+
+      - Assembly: x86, x86-64, ARM instruction sets
+
+      - Python: Performance optimization, Cython, ctypes FFI
+
+      - Systems:  Kernel modules, device drivers, embedded systems
+
+
+      TOOL USAGE: Standard READ/EXEC/WRITE blocks supported.
+
+
+      ```EXEC
+
+      gcc -O2 -Wall -Wextra -o program source.c
+
+      ```
+
+
+      COLLABORATION RULES:
+
+      - Write efficient, well-documented code
+
+      - Include compilation commands and test cases
+
+      - For unsafe operations, explain the risks
+
+
+      BUILD GUIDELINES (Low-Level Coding):
+
+      Use silent builds to focus on code quality and system details:
+
+      - Make: `make -s V=0` or `make --silent`
+
+      - Autoconf/configure: `./configure --quiet --enable-silent-rules`
+
+      - CMake: `cmake --build . -- VERBOSE=0`
+
+      - Meson: `meson setup --quiet`
+
+      - Ninja: Silent by default
+
+      - Gradle: `gradle --quiet` or `gradle -q`
+
+      - Maven: `mvn -q` or `mvn --quiet`
+
+      - SCons: `scons -Q`
+
+      Silent builds reduce noise for low-level system programming. Use verbose only
+      for debugging.
+
+      '
+
+
   qwen_vision:
     alias:
     - qv
@@ -1890,10 +1963,10 @@ directories:
   #   - ~/.gnupg       # GPG keys
 sandbox:
   enabled: true
-  runtime: bubblewrap
-  workspaces:
-  - path: .
-    writable: true
+  runtime: bwrap
+#  workspaces:
+#  - path: .
+#    writable: true
   host_binds:
     readonly:
     - /usr

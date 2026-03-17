@@ -32,12 +32,10 @@ Reduces token usage through intelligent truncation, summarization, and compressi
  List\mbox{[}List\mbox{[}Dict\mbox{]}\mbox{]} utils.\+context\+\_\+optimizer.\+create\+\_\+sliding\+\_\+window (\begin{DoxyParamCaption}\item[{List\mbox{[}Dict\mbox{]}}]{messages}{, }\item[{int}]{window\+\_\+size}{, }\item[{int }]{overlap}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Create sliding windows over messages for processing in chunks.
-
 Args:
     messages: List of messages
     window_size: Size of each window
     overlap: Number of messages to overlap between windows
-
 Returns:
     List of message windows
 \end{DoxyVerb}
@@ -48,11 +46,9 @@ Returns:
  Dict\mbox{[}str, Any\mbox{]} utils.\+context\+\_\+optimizer.\+estimate\+\_\+token\+\_\+savings (\begin{DoxyParamCaption}\item[{int}]{original\+\_\+tokens}{, }\item[{int}]{optimized\+\_\+tokens}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Calculate token savings statistics.
-
 Args:
     original_tokens: Original token count
     optimized_tokens: Optimized token count
-
 Returns:
     Dictionary with savings statistics
 \end{DoxyVerb}

@@ -119,10 +119,8 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Source Code Minifier for AXE
-
 Minifies C, C++, Python, and Assembly source code to reduce token usage
 when feeding code to LLMs while preserving compilability.
-
 Features:
 - Remove comments and docstrings (configurable)
 - Strip whitespace and blank lines
@@ -130,7 +128,6 @@ Features:
 - Support recursive directory processing
 - Language detection via guesslang or file extension
 - Exclude common directories (tests, __pycache__, .git, venv, etc.)
-
 Author: EdgeOfAssembly
 License: GPLv3 / Commercial
 </pre> </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
@@ -158,12 +155,10 @@ License: GPLv3 / Commercial
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Collect all supported source files from input paths.
-
 Args:
     inputs: List of file or directory paths
     recursive: If True, recurse into subdirectories
     exclude_dirs: Set of directory names to exclude
-    
 Returns:
     List of tuples (full_path, relative_path)
 </pre> <div class="dynheader">
@@ -189,12 +184,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Remove C/C++ comments from source code.
-
 Preserves strings and character literals.
-
 Args:
     text: Source code text
-    
 Returns:
     Text with comments removed
 </pre> <div class="dynheader">
@@ -224,13 +216,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Detect the programming language of a file.
-
 Uses guesslang if available, otherwise falls back to extension-based detection.
-
 Args:
     file_path: Path to the file
     content: File content
-    
 Returns:
     Language identifier ('c_cpp', 'python', 'asm') or None if unsupported
 </pre> <div class="dynheader">
@@ -250,7 +239,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">tools.minifier.main </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -287,11 +276,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Minify Assembly source code.
-
 Args:
     code: Assembly source code
     keep_comments: If True, preserve comments
-    
 Returns:
     Minified assembly code
 </pre> <div class="dynheader">
@@ -321,11 +308,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Minify C/C++ source code.
-
 Args:
     code: Source code to minify
     keep_comments: If True, preserve comments
-    
 Returns:
     Minified code
 </pre> <div class="dynheader">
@@ -370,13 +355,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Convenience function to minify a directory.
-
 Args:
     dir_path: Path to directory
     recursive: If True, recurse into subdirectories
     keep_comments: If True, preserve comments
     exclude_dirs: Set of directory names to exclude
-    
 Returns:
     Dictionary mapping file paths to minified content
 </pre> 
@@ -401,11 +384,9 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Convenience function to minify a single file.
-
 Args:
     file_path: Path to file
     keep_comments: If True, preserve comments
-    
 Returns:
     Minified source code
 </pre> 
@@ -430,13 +411,10 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Minify Python source code.
-
 IMPORTANT: Preserves indentation to maintain Python syntax correctness.
-
 Args:
     code: Source code to minify
     keep_comments: If True, preserve comments
-    
 Returns:
     Minified code with proper indentation
 </pre> <div class="dynheader">
@@ -467,12 +445,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Remove Python comments and docstrings from source code.
-
 Preserves regular strings and code structure.
-
 Args:
     source: Python source code
-    
 Returns:
     Code with comments and docstrings removed
 </pre> <div class="dynheader">

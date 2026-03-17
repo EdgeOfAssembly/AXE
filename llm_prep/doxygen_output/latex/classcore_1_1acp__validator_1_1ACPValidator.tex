@@ -2,8 +2,7 @@
 \hypertarget{classcore_1_1acp__validator_1_1ACPValidator}{}\label{classcore_1_1acp__validator_1_1ACPValidator}\index{core.acp\_validator.ACPValidator@{core.acp\_validator.ACPValidator}}
 
 
-Collaboration diagram for core.\+acp\+\_\+validator.\+ACPValidator\+:
-\nopagebreak
+Collaboration diagram for core.\+acp\+\_\+validator.\+ACPValidator\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -60,9 +59,8 @@ Optional\mbox{[}sqlite3.\+Connection\mbox{]} \mbox{\hyperlink{classcore_1_1acp__
 core.\+acp\+\_\+validator.\+ACPValidator.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Optional\mbox{[}str\mbox{]} }]{db\+\_\+path}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Initialize the ACP Validator.
-
 Args:
-    db_path: Path to IT abbreviations database. 
+    db_path: Path to IT abbreviations database.
             Defaults to data/it_abbreviations.db relative to project root.
 \end{DoxyVerb}
  
@@ -84,8 +82,7 @@ core.\+acp\+\_\+validator.\+ACPValidator.\+\_\+\+\_\+enter\+\_\+\+\_\+ (\begin{D
 core.\+acp\+\_\+validator.\+ACPValidator.\+\_\+\+\_\+exit\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{}]{exc\+\_\+type}{, }\item[{}]{exc\+\_\+val}{, }\item[{}]{exc\+\_\+tb}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Context manager exit - close connection.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -99,8 +96,7 @@ core.\+acp\+\_\+validator.\+ACPValidator.\+\_\+\+\_\+exit\+\_\+\+\_\+ (\begin{Do
  sqlite3.\+Connection core.\+acp\+\_\+validator.\+ACPValidator.\+\_\+get\+\_\+connection (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Lazy load database connection.\end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -114,16 +110,14 @@ core.\+acp\+\_\+validator.\+ACPValidator.\+\_\+\+\_\+exit\+\_\+\+\_\+ (\begin{Do
 core.\+acp\+\_\+validator.\+ACPValidator.\+close (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Close the database connection.\end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=279pt]{classcore_1_1acp__validator_1_1ACPValidator_ad3086273f5a53c8cd4bd89705cd5ef8b_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -137,23 +131,19 @@ Here is the caller graph for this function\+:
  bool core.\+acp\+\_\+validator.\+ACPValidator.\+conflicts\+\_\+with\+\_\+standard (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{abbrev}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Check if abbreviation conflicts with any IT standard.
-
 Args:
     abbrev: Abbreviation to check (case-insensitive)
-    
 Returns:
     True if abbreviation conflicts with a standard term, False otherwise
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcore_1_1acp__validator_1_1ACPValidator_a4cba6fd9f33d0fc17e50901afaf9c848_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -167,12 +157,10 @@ Here is the caller graph for this function\+:
  Dict\mbox{[}str, str\mbox{]} core.\+acp\+\_\+validator.\+ACPValidator.\+get\+\_\+all\+\_\+standard\+\_\+abbreviations (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get all standard abbreviations from the database.
-
 Returns:
     Dictionary mapping abbreviations to their full forms
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -186,23 +174,19 @@ Returns:
  Optional\mbox{[}str\mbox{]} core.\+acp\+\_\+validator.\+ACPValidator.\+get\+\_\+standard\+\_\+meaning (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{abbrev}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Get the standard meaning of an abbreviation if it exists.
-
 Args:
     abbrev: Abbreviation to lookup
-    
 Returns:
     Full form of the abbreviation, or None if not found
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcore_1_1acp__validator_1_1ACPValidator_aa00c64b4245c4cc8fd7cbd5dedd343b2_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -216,15 +200,12 @@ Here is the caller graph for this function\+:
  List\mbox{[}str\mbox{]} core.\+acp\+\_\+validator.\+ACPValidator.\+validate\+\_\+custom\+\_\+abbreviations (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict\mbox{[}str, str\mbox{]}}]{custom}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Validate custom abbreviations against standard IT terms.
-
 Args:
     custom: Dictionary mapping custom abbreviations to their meanings
-    
 Returns:
     List of conflicting abbreviations (those that conflict with standards)
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

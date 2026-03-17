@@ -115,17 +115,14 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">XML Function Call Parser for AXE
-
 Parses native XML function call format used by LLM agents (Claude, GPT, Llama, Grok)
 and converts them to AXE's internal tool execution format.
-
 Example XML format:
     &lt;function_calls&gt;
     &lt;invoke name="read_file"&gt;
     &lt;parameter name="file_path"&gt;/tmp/playground/MISSION.md&lt;/parameter&gt;
     &lt;/invoke&gt;
     &lt;/function_calls&gt;
-
 Maps to AXE tools: READ, WRITE, APPEND, EXEC
 </pre> </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="af0031b06895650625c760d44404c838b" name="af0031b06895650625c760d44404c838b"></a>
@@ -153,10 +150,8 @@ Maps to AXE tools: READ, WRITE, APPEND, EXEC
 <pre class="fragment">Check if content contains a heredoc marker.
 Detects: &lt;&lt; EOF, &lt;&lt;- EOF, &lt;&lt;'EOF', &lt;&lt;"EOF", &lt;&lt;&lt; (here-string)
 Supports delimiters with word chars, hyphens, and underscores (e.g., END-OF-FILE, DATA_BLOCK)
-
 Args:
     content: Shell code block content
-    
 Returns:
     True if heredoc is detected, False otherwise
 </pre> <div class="dynheader">
@@ -190,22 +185,17 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Split shell code into individual commands while preserving heredocs.
-
 Heredocs (&lt;&lt;, &lt;&lt;-, &lt;&lt;&lt;) are kept as part of their command instead of
 being split across lines.
-
 Supports heredoc formats:
 - &lt;&lt; DELIMITER or &lt;&lt;- DELIMITER (with word or hyphenated delimiters)
 - &lt;&lt; 'DELIMITER' or &lt;&lt; "DELIMITER" (quoted delimiters)
 - &lt;&lt;&lt; "string" or &lt;&lt;&lt; $var (here-strings)
-
 Limitations:
 - Delimiter must be composed of word characters, hyphens, or underscores
 - Does not handle heredocs embedded in subshells or command substitutions
-
 Args:
     cmd: Shell code block content
-
 Returns:
     List of individual commands
 </pre> <div class="dynheader">
@@ -231,10 +221,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Remove all tool-calling syntax from response for cleaner display.
-
 Args:
     response: Agent response with tool syntax
-
 Returns:
     Cleaned response with tool calls replaced
 </pre> 
@@ -255,10 +243,8 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Remove duplicate tool calls.
-
 Args:
     calls: List of parsed calls
-
 Returns:
     Deduplicated list of calls
 </pre> <div class="dynheader">
@@ -293,12 +279,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Execute a parsed function call using AXE's tools.
-
 Args:
     call: Parsed function call dict with 'tool', 'params', 'raw_name'
     workspace: Workspace directory path
     response_processor: ResponseProcessor instance with _handle_read, _handle_write, etc.
-
 Returns:
     Result string from tool execution
 </pre> <div class="dynheader">
@@ -333,12 +317,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Format execution result in XML format that agents expect.
-
 Args:
     tool: Tool name (READ, WRITE, EXEC, APPEND)
     params: Parameters used for the call
     result: Execution result string
-
 Returns:
     XML-formatted result string
 </pre> <div class="dynheader">
@@ -364,10 +346,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Normalize tool name to AXE's internal format.
-
 Args:
     name: Original tool name from XML
-
 Returns:
     Normalized tool name (READ, WRITE, APPEND, EXEC) or None if unknown
 </pre> <div class="dynheader">
@@ -394,10 +374,8 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 <pre class="fragment">Parse ALL known LLM tool-calling formats from agent response.
 Returns unified list of tool calls.
-
 Args:
     response: Agent response text that may contain various tool call formats
-
 Returns:
     List of parsed calls from all formats, deduplicated
 </pre> <div class="dynheader">
@@ -428,20 +406,16 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Parse AXE native ```READ, ```WRITE, ```EXEC blocks.
-
 NOTE: This function is currently NOT called by parse_all_tool_formats()
 to prevent duplicate command execution. These blocks are now handled
 EXCLUSIVELY by axe.py's ResponseProcessor.process_response() which
 provides more robust handling including heredoc support.
-
 This function is kept here for:
 - Backward compatibility if needed
 - Potential future use cases
 - Testing individual block parsing
-
 Args:
     response: Agent response text
-
 Returns:
     List of parsed calls in standard format
 </pre> 
@@ -462,10 +436,8 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Parse &lt;bash&gt;command&lt;/bash&gt; format.
-
 Args:
     response: Agent response text
-
 Returns:
     List of parsed calls in standard format
 </pre> <div class="dynheader">
@@ -492,10 +464,8 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 <pre class="fragment">Parse ```bash, ```shell, ```sh code blocks.
 Properly handles heredocs by preserving them as single commands.
-
 Args:
     response: Agent response text
-
 Returns:
     List of parsed calls in standard format
 </pre> <div class="dynheader">
@@ -526,10 +496,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Parse simple XML tags like &lt;read_file&gt;, &lt;shell&gt;, &lt;bash&gt;, &lt;exec&gt;, &lt;read&gt;, &lt;write&gt;.
-
 Args:
     response: Agent response text
-
 Returns:
     List of parsed calls in standard format
 </pre> <div class="dynheader">
@@ -555,12 +523,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Parse XML function calls from agent response.
-
 Looks for &lt;function_calls&gt; blocks and extracts tool calls with parameters.
-
 Args:
     response: Agent response text that may contain XML function calls
-
 Returns:
     List of parsed function calls, each as a dict with:
     {
@@ -605,14 +570,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Main entry point for processing agent responses with ALL tool call formats.
-
 Parses all known tool call formats, executes them, and returns formatted results.
-
 Args:
     response: Agent response that may contain various tool call formats
     workspace: Workspace directory path
     response_processor: ResponseProcessor instance for tool execution
-
 Returns:
     Tuple of (original_response, list_of_xml_results)
 </pre> <div class="dynheader">
@@ -635,7 +597,36 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Initial value:</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  {</div>
+<div class="line"><span class="lineno">    2</span>    <span class="comment"># Read operations</span></div>
+<div class="line"><span class="lineno">    3</span>    <span class="stringliteral">&#39;read_file&#39;</span>: <span class="stringliteral">&#39;READ&#39;</span>,</div>
+<div class="line"><span class="lineno">    4</span>    <span class="stringliteral">&#39;read&#39;</span>: <span class="stringliteral">&#39;READ&#39;</span>,</div>
+<div class="line"><span class="lineno">    5</span>    <span class="stringliteral">&#39;cat&#39;</span>: <span class="stringliteral">&#39;READ&#39;</span>,</div>
+<div class="line"><span class="lineno">    6</span>    <span class="stringliteral">&#39;get_file&#39;</span>: <span class="stringliteral">&#39;READ&#39;</span>,</div>
+<div class="line"><span class="lineno">    7</span>    <span class="stringliteral">&#39;view_file&#39;</span>: <span class="stringliteral">&#39;READ&#39;</span>,</div>
+<div class="line"><span class="lineno">    8</span>    <span class="comment"># Write operations</span></div>
+<div class="line"><span class="lineno">    9</span>    <span class="stringliteral">&#39;write_file&#39;</span>: <span class="stringliteral">&#39;WRITE&#39;</span>,</div>
+<div class="line"><span class="lineno">   10</span>    <span class="stringliteral">&#39;write&#39;</span>: <span class="stringliteral">&#39;WRITE&#39;</span>,</div>
+<div class="line"><span class="lineno">   11</span>    <span class="stringliteral">&#39;create_file&#39;</span>: <span class="stringliteral">&#39;WRITE&#39;</span>,</div>
+<div class="line"><span class="lineno">   12</span>    <span class="stringliteral">&#39;save_file&#39;</span>: <span class="stringliteral">&#39;WRITE&#39;</span>,</div>
+<div class="line"><span class="lineno">   13</span>    <span class="comment"># Append operations</span></div>
+<div class="line"><span class="lineno">   14</span>    <span class="stringliteral">&#39;append_file&#39;</span>: <span class="stringliteral">&#39;APPEND&#39;</span>,</div>
+<div class="line"><span class="lineno">   15</span>    <span class="stringliteral">&#39;append_to_file&#39;</span>: <span class="stringliteral">&#39;APPEND&#39;</span>,</div>
+<div class="line"><span class="lineno">   16</span>    <span class="stringliteral">&#39;append&#39;</span>: <span class="stringliteral">&#39;APPEND&#39;</span>,</div>
+<div class="line"><span class="lineno">   17</span>    <span class="comment"># List directory operations</span></div>
+<div class="line"><span class="lineno">   18</span>    <span class="stringliteral">&#39;list_dir&#39;</span>: <span class="stringliteral">&#39;EXEC&#39;</span>,</div>
+<div class="line"><span class="lineno">   19</span>    <span class="stringliteral">&#39;list_directory&#39;</span>: <span class="stringliteral">&#39;EXEC&#39;</span>,</div>
+<div class="line"><span class="lineno">   20</span>    <span class="stringliteral">&#39;ls&#39;</span>: <span class="stringliteral">&#39;EXEC&#39;</span>,</div>
+<div class="line"><span class="lineno">   21</span>    <span class="stringliteral">&#39;listdir&#39;</span>: <span class="stringliteral">&#39;EXEC&#39;</span>,</div>
+<div class="line"><span class="lineno">   22</span>    <span class="comment"># Shell/exec operations</span></div>
+<div class="line"><span class="lineno">   23</span>    <span class="stringliteral">&#39;shell&#39;</span>: <span class="stringliteral">&#39;EXEC&#39;</span>,</div>
+<div class="line"><span class="lineno">   24</span>    <span class="stringliteral">&#39;run_shell&#39;</span>: <span class="stringliteral">&#39;EXEC&#39;</span>,</div>
+<div class="line"><span class="lineno">   25</span>    <span class="stringliteral">&#39;exec&#39;</span>: <span class="stringliteral">&#39;EXEC&#39;</span>,</div>
+<div class="line"><span class="lineno">   26</span>    <span class="stringliteral">&#39;bash&#39;</span>: <span class="stringliteral">&#39;EXEC&#39;</span>,</div>
+<div class="line"><span class="lineno">   27</span>    <span class="stringliteral">&#39;execute&#39;</span>: <span class="stringliteral">&#39;EXEC&#39;</span>,</div>
+<div class="line"><span class="lineno">   28</span>    <span class="stringliteral">&#39;run_command&#39;</span>: <span class="stringliteral">&#39;EXEC&#39;</span>,</div>
+<div class="line"><span class="lineno">   29</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

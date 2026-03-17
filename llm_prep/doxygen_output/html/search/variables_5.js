@@ -17,11 +17,11 @@ var searchData=
   ['emergency_5fmailbox_14',['emergency_mailbox',['../classaxe_1_1CollaborativeSession.html#a0dd9ab753e3e615c9ac6599ddd0b7858',1,'axe::CollaborativeSession']]],
   ['emergency_5fmailbox_5fdir_15',['EMERGENCY_MAILBOX_DIR',['../namespacecore_1_1constants.html#a168da638d87daba5752732b52d9913e4',1,'core::constants']]],
   ['enabled_16',['enabled',['../classcore_1_1github__agent_1_1GitHubAgent.html#a168eb32e18fb2b942f219e047f178a5f',1,'core.github_agent.GitHubAgent.enabled'],['../classcore_1_1sandbox_1_1SandboxManager.html#a40c23ba39bac5884be01fc4b0a12d470',1,'core.sandbox.SandboxManager.enabled'],['../classutils_1_1rate__limiter_1_1RateLimiter.html#aef7fb7add502ec52347a9ec8f20b696c',1,'utils.rate_limiter.RateLimiter.enabled']]],
-  ['end_17',['END',['../classutils_1_1formatting_1_1Colors.html#af740df9b972fe9d4b9e14b1176484339',1,'utils::formatting::Colors']]],
-  ['environment_5fprobe_5fconfig_18',['environment_probe_config',['../classcore_1_1session__preprocessor_1_1SessionPreprocessor.html#a176dab18fe842a0a09b8cb17c196ce96',1,'core::session_preprocessor::SessionPreprocessor']]],
-  ['error_5fthreshold_5fpercent_19',['ERROR_THRESHOLD_PERCENT',['../namespacecore_1_1constants.html#aa4776b3cf6771f5921023c231d1fae6d',1,'core::constants']]],
-  ['exclude_5fdirs_20',['exclude_dirs',['../classtools_1_1minifier_1_1Minifier.html#a2a7936ca1c128718218998425616af4e',1,'tools::minifier::Minifier']]],
-  ['exec_5flog_21',['exec_log',['../classcore_1_1tool__runner_1_1ToolRunner.html#acdd4a8cc75397bd8031234b497ff0091',1,'core::tool_runner::ToolRunner']]],
+  ['environment_5fprobe_5fconfig_17',['environment_probe_config',['../classcore_1_1session__preprocessor_1_1SessionPreprocessor.html#a176dab18fe842a0a09b8cb17c196ce96',1,'core::session_preprocessor::SessionPreprocessor']]],
+  ['error_5fthreshold_5fpercent_18',['ERROR_THRESHOLD_PERCENT',['../namespacecore_1_1constants.html#aa4776b3cf6771f5921023c231d1fae6d',1,'core::constants']]],
+  ['exclude_5fdirs_19',['exclude_dirs',['../classtools_1_1minifier_1_1Minifier.html#a2a7936ca1c128718218998425616af4e',1,'tools::minifier::Minifier']]],
+  ['exec_5flog_20',['exec_log',['../classcore_1_1tool__runner_1_1ToolRunner.html#acdd4a8cc75397bd8031234b497ff0091',1,'core::tool_runner::ToolRunner']]],
+  ['executive_21',['EXECUTIVE',['../classcore_1_1subsumption__layer_1_1SubsumptionLayer.html#ab6cae0e3db775cb3d283ff26a861ae76',1,'core::subsumption_layer::SubsumptionLayer']]],
   ['exepack_5fsize_22',['exepack_size',['../structexepack__header.html#a49e4cbeb3d505d9c0938e7b8ecdbe267',1,'exepack_header']]],
   ['extensions_23',['extensions',['../classaxe_1_1ProjectContext.html#ac5c5832f33934d640b6b337a8c42e697',1,'axe::ProjectContext']]]
 ];

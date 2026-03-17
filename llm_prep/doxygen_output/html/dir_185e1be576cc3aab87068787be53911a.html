@@ -97,26 +97,26 @@ Directory dependency graph for diagrams:</div>
 <div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="dir_185e1be576cc3aab87068787be53911a_dep.svg" width="136" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md279"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1114"></a>
 AXE Architecture Diagrams</h1>
 <p>This directory contains architecture diagrams for the AXE codebase in GraphViz DOT format.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md280"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1115"></a>
 Files</h1>
 <ul>
 <li><span class="tt">class_diagram.dot</span> - UML class diagram showing main classes and their relationships</li>
 <li><span class="tt">module_dependencies.dot</span> - Module dependency graph showing how packages depend on each other</li>
 <li><span class="tt">call_graph.dot</span> - Call flow diagram showing execution paths through the system</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md281"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1116"></a>
 Viewing Diagrams</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md282"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md1117"></a>
 Online (No installation required)</h2>
 <ol type="1">
 <li>Copy the contents of a <span class="tt">.dot</span> file</li>
 <li>Visit <a href="https://dreampuf.github.io/GraphvizOnline/">GraphViz Online</a></li>
 <li>Paste the DOT content to see the rendered diagram</li>
 </ol>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md283"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md1118"></a>
 Command Line (Requires GraphViz)</h2>
 <div class="fragment"><div class="line"># Install GraphViz</div>
 <div class="line"># Ubuntu/Debian</div>
@@ -132,12 +132,12 @@ Command Line (Requires GraphViz)</h2>
 <div class="line"> </div>
 <div class="line"># Generate SVG (better quality)</div>
 <div class="line">dot -Tsvg class_diagram.dot -o class_diagram.svg</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md284"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md1119"></a>
 VS Code</h2>
 <p>Install the "Graphviz (dot) language support for Visual Studio Code" extension to preview DOT files.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md285"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1120"></a>
 Diagram Descriptions</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md286"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md1121"></a>
 Class Diagram</h2>
 <p>Shows the main classes organized by package:</p>
 <ul>
@@ -182,7 +182,7 @@ Class Diagram</h2>
 </ul>
 </li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md287"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md1122"></a>
 Module Dependencies</h2>
 <p>Shows how the main packages depend on each other:</p>
 <ul>
@@ -192,11 +192,11 @@ Module Dependencies</h2>
 <li><span class="tt"><a class="el" href="namespacedatabase.html">database</a></span> depends on <span class="tt"><a class="el" href="namespaceprogression.html">progression</a></span></li>
 <li><span class="tt"><a class="el" href="namespaceworkshop.html">workshop</a></span> depends on <span class="tt"><a class="el" href="namespaceutils.html">utils</a></span></li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md288"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md1123"></a>
 Call Graph</h2>
 <p>Shows the execution flow:</p>
 <ol type="1">
-<li><b>Entry</b>: <span class="tt"><a class="el" href="depklite_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">main()</a></span> parses arguments and loads config</li>
+<li><b><a class="el" href="structEntry.html">Entry</a></b>: <span class="tt"><a class="el" href="hello__world_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a></span> parses arguments and loads config</li>
 <li><b>Mode Selection</b>:<ul>
 <li>Interactive mode → <span class="tt">ChatSession.run()</span></li>
 <li>Collaborative mode → <span class="tt">CollaborativeSession.start_session()</span></li>
@@ -207,7 +207,7 @@ Call Graph</h2>
 <li><b>Tool Execution</b>: READ/EXEC/WRITE blocks are executed via <span class="tt">ToolRunner</span></li>
 <li><b>Persistence</b>: Agent state is saved to database</li>
 </ol>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md289"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1124"></a>
 Updating Diagrams</h1>
 <p>When the codebase structure changes, update these diagrams to reflect:</p>
 <ol type="1">

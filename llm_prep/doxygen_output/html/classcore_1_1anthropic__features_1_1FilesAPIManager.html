@@ -139,7 +139,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Initialize Files API manager.
-
 Args:
     client: Anthropic API client instance
     config: Configuration dictionary
@@ -166,13 +165,10 @@ Args:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Delete a file from Anthropic.
-
 Args:
     file_id: File ID to delete
-
 Returns:
     True if successful
-
 Raises:
     NotImplementedError: Files API not yet available in SDK
 </pre> <div class="dynheader">
@@ -242,10 +238,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">List all uploaded files.
-
 Returns:
     List of file metadata dicts
-
 Raises:
     NotImplementedError: Files API not yet available in SDK
 </pre> <div class="dynheader">
@@ -275,10 +269,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Check if a file should be uploaded based on size threshold.
-
 Args:
     file_size_bytes: File size in bytes
-
 Returns:
     True if file should be uploaded
 </pre> <div class="dynheader">
@@ -308,13 +300,10 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Upload a file to Anthropic.
-
 Args:
     file_path: Path to file to upload
-
 Returns:
     File metadata dict with 'id', 'filename', etc., or None if failed
-
 Note:
     This feature requires Anthropic SDK Files API support which is
     not yet available in the current SDK version. This is a placeholder

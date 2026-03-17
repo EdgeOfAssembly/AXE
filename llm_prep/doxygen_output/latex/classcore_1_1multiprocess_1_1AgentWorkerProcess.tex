@@ -2,8 +2,7 @@
 \hypertarget{classcore_1_1multiprocess_1_1AgentWorkerProcess}{}\label{classcore_1_1multiprocess_1_1AgentWorkerProcess}\index{core.multiprocess.AgentWorkerProcess@{core.multiprocess.AgentWorkerProcess}}
 
 
-Collaboration diagram for core.\+multiprocess.\+Agent\+Worker\+Process\+:
-\nopagebreak
+Collaboration diagram for core.\+multiprocess.\+Agent\+Worker\+Process\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -48,7 +47,6 @@ str \mbox{\hyperlink{classcore_1_1multiprocess_1_1AgentWorkerProcess_a5880d5c696
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Individual agent background process.
-
 Each agent runs in its own process, continuously:
 1. Monitoring shared context updates
 2. Preparing potential responses
@@ -67,7 +65,6 @@ Each agent runs in its own process, continuously:
 core.\+multiprocess.\+Agent\+Worker\+Process.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+id}{, }\item[{str}]{agent\+\_\+name}{, }\item[{Queue}]{input\+\_\+queue}{, }\item[{Queue}]{output\+\_\+queue}{, }\item[{\mbox{\hyperlink{classcore_1_1multiprocess_1_1SharedContext}{Shared\+Context}}}]{shared\+\_\+context}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Initialize agent worker process.
-
 Args:
     agent_id: Unique agent identifier
     agent_name: Agent name (e.g., 'claude', 'gpt')
@@ -87,15 +84,13 @@ Args:
  None core.\+multiprocess.\+Agent\+Worker\+Process.\+background\+\_\+think (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Perform background thinking while waiting.
-
 This is called continuously when no commands are pending.
 The agent can:
 - Analyze recent messages
 - Prepare potential responses
 - Plan ahead
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -109,20 +104,17 @@ The agent can:
  None core.\+multiprocess.\+Agent\+Worker\+Process.\+handle\+\_\+command (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{command}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Handle a command from the coordinator.
-
 Args:
     command: Command dictionary with 'type' and other fields
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{classcore_1_1multiprocess_1_1AgentWorkerProcess_a31934e365b16de26a030e3a9db2c4868_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -136,12 +128,10 @@ Here is the caller graph for this function\+:
  None core.\+multiprocess.\+Agent\+Worker\+Process.\+handle\+\_\+context\+\_\+update (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{command}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Handle context update notification.
-
 Args:
     command: Context update command
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -155,12 +145,10 @@ Args:
  None core.\+multiprocess.\+Agent\+Worker\+Process.\+handle\+\_\+turn (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{command}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Handle when it's this agent's turn to respond.
-
 Args:
     command: Turn command with prompt and context
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -174,13 +162,11 @@ Args:
  None core.\+multiprocess.\+Agent\+Worker\+Process.\+run (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Main worker loop.
-
 Continuously monitors for:
 - Commands from coordinator (your turn, update context, shutdown)
 - Context updates to think about
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

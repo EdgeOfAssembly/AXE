@@ -101,6 +101,12 @@ Variables</h2></td></tr>
 <tr class="memitem:ade29f7d5fc90b289fb302bcdaac49e2a" id="r_ade29f7d5fc90b289fb302bcdaac49e2a"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade29f7d5fc90b289fb302bcdaac49e2a">WAL_MODE_PRAGMA</a> = &quot;PRAGMA journal_mode=WAL&quot;</td></tr>
 <tr class="memitem:a0a12c5c310213a884f6272fe501d77ad" id="r_a0a12c5c310213a884f6272fe501d77ad"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a12c5c310213a884f6272fe501d77ad">WORKSHOP_ANALYSIS_TABLE</a></td></tr>
 <tr class="memitem:a0eb7fa418deaa7c73fcced8423c08c33" id="r_a0eb7fa418deaa7c73fcced8423c08c33"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0eb7fa418deaa7c73fcced8423c08c33">WORKSHOP_ANALYSIS_INDEXES</a></td></tr>
+<tr class="memitem:a22ae54e3c7cb234bff838293340f14a5" id="r_a22ae54e3c7cb234bff838293340f14a5"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a22ae54e3c7cb234bff838293340f14a5">BROADCAST_TABLE</a></td></tr>
+<tr class="memitem:a3dd97b2c018f7fcf593c379aba2e7558" id="r_a3dd97b2c018f7fcf593c379aba2e7558"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3dd97b2c018f7fcf593c379aba2e7558">BROADCAST_INDEXES</a></td></tr>
+<tr class="memitem:a090bd841aa65d6be3821ee802ffebcb4" id="r_a090bd841aa65d6be3821ee802ffebcb4"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a090bd841aa65d6be3821ee802ffebcb4">ARBITRATION_TABLE</a></td></tr>
+<tr class="memitem:a4ba91d1d84406362f8791d8193a3c8ef" id="r_a4ba91d1d84406362f8791d8193a3c8ef"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ba91d1d84406362f8791d8193a3c8ef">ARBITRATION_INDEXES</a></td></tr>
+<tr class="memitem:ab008e1ab3a92b468a24506965f75fde4" id="r_ab008e1ab3a92b468a24506965f75fde4"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab008e1ab3a92b468a24506965f75fde4">CONFLICT_TABLE</a></td></tr>
+<tr class="memitem:ac032c6e96702f8eb61a6011206174766" id="r_ac032c6e96702f8eb61a6011206174766"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac032c6e96702f8eb61a6011206174766">CONFLICT_INDEXES</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">SQLite database schema definitions for AXE agent system.
@@ -176,6 +182,144 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">    7</span><span class="stringliteral">    created_at TIMESTAMP</span></div>
 <div class="line"><span class="lineno">    8</span><span class="stringliteral">)</span></div>
 <div class="line"><span class="lineno">    9</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4ba91d1d84406362f8791d8193a3c8ef" name="a4ba91d1d84406362f8791d8193a3c8ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ba91d1d84406362f8791d8193a3c8ef">&#9670;&#160;</a></span>ARBITRATION_INDEXES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">list database.schema.ARBITRATION_INDEXES</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  [</div>
+<div class="line"><span class="lineno">    2</span>    <span class="stringliteral">&quot;CREATE INDEX IF NOT EXISTS idx_arbitration_status ON arbitrations(status)&quot;</span>,</div>
+<div class="line"><span class="lineno">    3</span>    <span class="stringliteral">&quot;CREATE INDEX IF NOT EXISTS idx_arbitration_level ON arbitrations(required_level)&quot;</span>,</div>
+<div class="line"><span class="lineno">    4</span>    <span class="stringliteral">&quot;CREATE INDEX IF NOT EXISTS idx_arbitration_deadline ON arbitrations(deadline_turn)&quot;</span>,</div>
+<div class="line"><span class="lineno">    5</span>]</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a090bd841aa65d6be3821ee802ffebcb4" name="a090bd841aa65d6be3821ee802ffebcb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a090bd841aa65d6be3821ee802ffebcb4">&#9670;&#160;</a></span>ARBITRATION_TABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str database.schema.ARBITRATION_TABLE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">    2</span><span class="stringliteral">CREATE TABLE IF NOT EXISTS arbitrations (</span></div>
+<div class="line"><span class="lineno">    3</span><span class="stringliteral">    arbitration_id TEXT PRIMARY KEY,</span></div>
+<div class="line"><span class="lineno">    4</span><span class="stringliteral">    conflict_broadcasts_json TEXT NOT NULL,  -- JSON array of conflicting broadcast IDs</span></div>
+<div class="line"><span class="lineno">    5</span><span class="stringliteral">    created_by TEXT NOT NULL,</span></div>
+<div class="line"><span class="lineno">    6</span><span class="stringliteral">    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,</span></div>
+<div class="line"><span class="lineno">    7</span><span class="stringliteral">    created_turn INTEGER DEFAULT 0,</span></div>
+<div class="line"><span class="lineno">    8</span><span class="stringliteral">    deadline_turn INTEGER NOT NULL,</span></div>
+<div class="line"><span class="lineno">    9</span><span class="stringliteral">    required_level INTEGER NOT NULL,</span></div>
+<div class="line"><span class="lineno">   10</span><span class="stringliteral">    status TEXT DEFAULT &#39;pending&#39;,           -- &#39;pending&#39;, &#39;resolved&#39;, &#39;escalated&#39;</span></div>
+<div class="line"><span class="lineno">   11</span><span class="stringliteral">    escalation_count INTEGER DEFAULT 0,</span></div>
+<div class="line"><span class="lineno">   12</span><span class="stringliteral">    resolution_json TEXT,                    -- JSON resolution details when resolved</span></div>
+<div class="line"><span class="lineno">   13</span><span class="stringliteral">    resolved_at TIMESTAMP,</span></div>
+<div class="line"><span class="lineno">   14</span><span class="stringliteral">    resolved_turn INTEGER</span></div>
+<div class="line"><span class="lineno">   15</span><span class="stringliteral">)</span></div>
+<div class="line"><span class="lineno">   16</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3dd97b2c018f7fcf593c379aba2e7558" name="a3dd97b2c018f7fcf593c379aba2e7558"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dd97b2c018f7fcf593c379aba2e7558">&#9670;&#160;</a></span>BROADCAST_INDEXES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">list database.schema.BROADCAST_INDEXES</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  [</div>
+<div class="line"><span class="lineno">    2</span>    <span class="stringliteral">&quot;CREATE INDEX IF NOT EXISTS idx_broadcast_agent ON broadcasts(agent_alias)&quot;</span>,</div>
+<div class="line"><span class="lineno">    3</span>    <span class="stringliteral">&quot;CREATE INDEX IF NOT EXISTS idx_broadcast_category ON broadcasts(category)&quot;</span>,</div>
+<div class="line"><span class="lineno">    4</span>    <span class="stringliteral">&quot;CREATE INDEX IF NOT EXISTS idx_broadcast_timestamp ON broadcasts(timestamp)&quot;</span>,</div>
+<div class="line"><span class="lineno">    5</span>]</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a22ae54e3c7cb234bff838293340f14a5" name="a22ae54e3c7cb234bff838293340f14a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22ae54e3c7cb234bff838293340f14a5">&#9670;&#160;</a></span>BROADCAST_TABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str database.schema.BROADCAST_TABLE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">    2</span><span class="stringliteral">CREATE TABLE IF NOT EXISTS broadcasts (</span></div>
+<div class="line"><span class="lineno">    3</span><span class="stringliteral">    broadcast_id TEXT PRIMARY KEY,</span></div>
+<div class="line"><span class="lineno">    4</span><span class="stringliteral">    agent_alias TEXT NOT NULL,</span></div>
+<div class="line"><span class="lineno">    5</span><span class="stringliteral">    agent_level INTEGER NOT NULL,</span></div>
+<div class="line"><span class="lineno">    6</span><span class="stringliteral">    category TEXT NOT NULL,        -- &#39;SECURITY&#39;, &#39;CODE_QUALITY&#39;, &#39;CONFLICT&#39;, etc.</span></div>
+<div class="line"><span class="lineno">    7</span><span class="stringliteral">    content TEXT NOT NULL,</span></div>
+<div class="line"><span class="lineno">    8</span><span class="stringliteral">    metadata_json TEXT,             -- JSON metadata (files, functions, etc.)</span></div>
+<div class="line"><span class="lineno">    9</span><span class="stringliteral">    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span></div>
+<div class="line"><span class="lineno">   10</span><span class="stringliteral">)</span></div>
+<div class="line"><span class="lineno">   11</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ac032c6e96702f8eb61a6011206174766" name="ac032c6e96702f8eb61a6011206174766"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac032c6e96702f8eb61a6011206174766">&#9670;&#160;</a></span>CONFLICT_INDEXES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">list database.schema.CONFLICT_INDEXES</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  [</div>
+<div class="line"><span class="lineno">    2</span>    <span class="stringliteral">&quot;CREATE INDEX IF NOT EXISTS idx_conflict_status ON conflicts(status)&quot;</span>,</div>
+<div class="line"><span class="lineno">    3</span>    <span class="stringliteral">&quot;CREATE INDEX IF NOT EXISTS idx_conflict_type ON conflicts(conflict_type)&quot;</span>,</div>
+<div class="line"><span class="lineno">    4</span>    <span class="stringliteral">&quot;CREATE INDEX IF NOT EXISTS idx_conflict_arbitration ON conflicts(arbitration_id)&quot;</span>,</div>
+<div class="line"><span class="lineno">    5</span>]</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ab008e1ab3a92b468a24506965f75fde4" name="ab008e1ab3a92b468a24506965f75fde4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab008e1ab3a92b468a24506965f75fde4">&#9670;&#160;</a></span>CONFLICT_TABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str database.schema.CONFLICT_TABLE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">    2</span><span class="stringliteral">CREATE TABLE IF NOT EXISTS conflicts (</span></div>
+<div class="line"><span class="lineno">    3</span><span class="stringliteral">    conflict_id TEXT PRIMARY KEY,</span></div>
+<div class="line"><span class="lineno">    4</span><span class="stringliteral">    conflict_type TEXT NOT NULL,             -- &#39;detected&#39;, &#39;manual&#39;, &#39;explicit&#39;</span></div>
+<div class="line"><span class="lineno">    5</span><span class="stringliteral">    broadcast_ids_json TEXT NOT NULL,        -- JSON array of conflicting broadcast IDs</span></div>
+<div class="line"><span class="lineno">    6</span><span class="stringliteral">    flagged_by TEXT,</span></div>
+<div class="line"><span class="lineno">    7</span><span class="stringliteral">    reason TEXT NOT NULL,</span></div>
+<div class="line"><span class="lineno">    8</span><span class="stringliteral">    detected_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,</span></div>
+<div class="line"><span class="lineno">    9</span><span class="stringliteral">    status TEXT DEFAULT &#39;pending_arbitration&#39;,  -- &#39;pending_arbitration&#39;, &#39;resolved&#39;, &#39;dismissed&#39;</span></div>
+<div class="line"><span class="lineno">   10</span><span class="stringliteral">    arbitration_id TEXT                      -- Link to arbitration if created</span></div>
+<div class="line"><span class="lineno">   11</span><span class="stringliteral">)</span></div>
+<div class="line"><span class="lineno">   12</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
 </div><!-- fragment -->
 </div>
 </div>

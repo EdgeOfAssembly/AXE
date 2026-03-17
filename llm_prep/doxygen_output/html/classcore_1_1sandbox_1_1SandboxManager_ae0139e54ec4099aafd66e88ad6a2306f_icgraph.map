@@ -1,5 +1,7 @@
 <map id="core.sandbox.SandboxManager.is_available" name="core.sandbox.SandboxManager.is_available">
-<area shape="rect" id="Node000001" title=" " alt="" coords="303,5,542,50"/>
-<area shape="rect" id="Node000002" href="$classcore_1_1sandbox_1_1SandboxManager.html#ae2afdf199a31e056780d21e8442d9ddf" title=" " alt="" coords="5,14,255,42"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="285,28,255,30,255,25,290,28"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="320,36,559,81"/>
+<area shape="rect" id="Node000002" href="$classcore_1_1sandbox_1_1SandboxManager.html#a11837b6ba86746dc0c5400111b54d26f" title=" " alt="" coords="5,5,272,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="302,45,272,44,272,39,307,44"/>
+<area shape="rect" id="Node000003" href="$classcore_1_1sandbox_1_1SandboxManager.html#ae2afdf199a31e056780d21e8442d9ddf" title=" " alt="" coords="14,74,263,102"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="301,72,264,78,263,73,307,71"/>
 </map>

@@ -109,7 +109,6 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Benchmark script for ACP (Agent Communication Protocol) token savings.
-
 Analyzes verbose vs compact message formats and calculates token savings percentage.
 Uses real corpus files from agent collaboration sessions to provide realistic metrics.
 </pre> </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
@@ -128,10 +127,8 @@ Uses real corpus files from agent collaboration sessions to provide realistic me
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Analyze a real corpus file and estimate token savings.
-
 Args:
     filepath: Path to corpus file (e.g., .collab_log.md)
-    
 Returns:
     Tuple of (estimated_verbose_tokens, estimated_compact_tokens)
 </pre> <div class="dynheader">
@@ -162,7 +159,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Benchmark realistic agent communication scenarios.
-
 Returns:
     Tuple of (verbose_tokens, compact_tokens)
 </pre> <div class="dynheader">
@@ -212,14 +208,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Create compact ACP format message.
-
 Args:
     agent_abbrev: Agent abbreviation (e.g., "C")
     action_abbrev: Action abbreviation (e.g., "ANA")
     target: Target location
     details: Issue details (using standard abbreviations)
     next_action_abbrev: Next action abbreviation
-    
 Returns:
     Compact format message
 </pre> <div class="dynheader">
@@ -264,14 +258,12 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Create verbose format message.
-
 Args:
     agent: Full agent name (e.g., "Claude")
     action: Full action name (e.g., "Analyze")
     target: Target location (file:line or address)
     details: Issue details
     next_action: Next action to take
-    
 Returns:
     Verbose format message
 </pre> <div class="dynheader">
@@ -298,10 +290,8 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 <pre class="fragment">Rough token estimation (1 token ≈ 4 characters).
 This is a simplified estimation for benchmarking purposes.
-
 Args:
     text: Text to estimate tokens for
-    
 Returns:
     Estimated token count
 </pre> <div class="dynheader">
@@ -321,7 +311,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">benchmark_acp.main </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -354,10 +344,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Run the complete ACP benchmark.
-
 Args:
     corpus_file: Optional path to real corpus file
-    
 Returns:
     Dictionary with benchmark results
 </pre> <div class="dynheader">

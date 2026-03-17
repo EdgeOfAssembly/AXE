@@ -8,8 +8,7 @@
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
-Include dependency graph for unpack.\+c\+:
-\nopagebreak
+Include dependency graph for unpack.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -119,7 +118,7 @@ char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{unpack_8c_a4d59733effad59b54bbd
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\ \ \ \ perror(\mbox{\hyperlink{unpack_8c_abe87b341f562fd1cf40b7672e4d759da}{XSTR}}(\_\_FUNCTION\_\_)\ \textcolor{stringliteral}{"{}\ -\/\ "{}}\ fname\ \textcolor{stringliteral}{"{}()\ "{}});}
+\DoxyCodeLine{perror(\mbox{\hyperlink{unpack_8c_abe87b341f562fd1cf40b7672e4d759da}{XSTR}}(\_\_FUNCTION\_\_)\ \textcolor{stringliteral}{"{}\ -\/\ "{}}\ fname\ \textcolor{stringliteral}{"{}()\ "{}});}
 
 \end{DoxyCode}
 \Hypertarget{unpack_8c_a18d295a837ac71add5578860b55e5502}\index{unpack.c@{unpack.c}!STR@{STR}}
@@ -141,8 +140,8 @@ char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{unpack_8c_a4d59733effad59b54bbd
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\ \ \ \ fprintf\ (stderr,\ \textcolor{stringliteral}{"{}\%s\ -\/\ "{}}\ Format\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\ \_\_FUNCTION\_\_,\ \#\#\_\_VA\_ARGS\_\_);\ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{fprintf\ (stderr,\ \textcolor{stringliteral}{"{}\%s\ -\/\ "{}}\ Format\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}},\ \_\_FUNCTION\_\_,\ \#\#\_\_VA\_ARGS\_\_);\ \(\backslash\)}
+\DoxyCodeLine{exit(EXIT\_FAILURE);}
 
 \end{DoxyCode}
 \Hypertarget{unpack_8c_a5257c397934b207e5c9b1912bd39c643}\index{unpack.c@{unpack.c}!XPERROR@{XPERROR}}
@@ -153,8 +152,8 @@ char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{unpack_8c_a4d59733effad59b54bbd
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\ \ \ \ perror(\mbox{\hyperlink{unpack_8c_abe87b341f562fd1cf40b7672e4d759da}{XSTR}}(\_\_FUNCTION\_\_)\ \textcolor{stringliteral}{"{}\ -\/\ "{}}\ fname\ \textcolor{stringliteral}{"{}()\ "{}});\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
-\DoxyCodeLine{\ \ \ \ exit(EXIT\_FAILURE);}
+\DoxyCodeLine{perror(\mbox{\hyperlink{unpack_8c_abe87b341f562fd1cf40b7672e4d759da}{XSTR}}(\_\_FUNCTION\_\_)\ \textcolor{stringliteral}{"{}\ -\/\ "{}}\ fname\ \textcolor{stringliteral}{"{}()\ "{}});\ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{exit(EXIT\_FAILURE);}
 
 \end{DoxyCode}
 \Hypertarget{unpack_8c_abe87b341f562fd1cf40b7672e4d759da}\index{unpack.c@{unpack.c}!XSTR@{XSTR}}
@@ -179,16 +178,14 @@ char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{unpack_8c_a4d59733effad59b54bbd
 {\footnotesize\ttfamily \label{unpack_8c_a69d5dabed1fb8c2f4a1e18b77b53e5e7} 
 void craftexec (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{dh}{, }\item[{struct \mbox{\hyperlink{structexepack__header}{exepack\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{eh}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{unpacked\+\_\+data}{, }\item[{unsigned int}]{unpacked\+\_\+data\+\_\+size}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{reloc}{, }\item[{unsigned int}]{reloc\+\_\+size}{}\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=276pt]{unpack_8c_a69d5dabed1fb8c2f4a1e18b77b53e5e7_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -201,16 +198,14 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_ae7b3092ac9489d8d18f03866a3bc6c5b} 
 unsigned char \texorpdfstring{$\ast$}{*} create\+\_\+reloc\+\_\+table (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{, }\item[{struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{dh}{, }\item[{struct \mbox{\hyperlink{structexepack__header}{exepack\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{eh}{, }\item[{unsigned int \texorpdfstring{$\ast$}{*}}]{reloc\+\_\+table\+\_\+size}{}\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=314pt]{unpack_8c_ae7b3092ac9489d8d18f03866a3bc6c5b_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -229,8 +224,7 @@ void hexdump (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{d
 {\footnotesize\ttfamily \label{unpack_8c_a0ddf1224851353fc92bfbff6f499fa97} 
 int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -243,8 +237,7 @@ Here is the call graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_ab166129a9f12c6e49a637c9f1f97c223} 
 void \texorpdfstring{$\ast$}{*} memmem (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{l}{, }\item[{size\+\_\+t}]{l\+\_\+len}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{s}{, }\item[{size\+\_\+t}]{s\+\_\+len}{}\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -257,8 +250,7 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_a0dfa67fb32ccf515fe1d0bcbad6baaad} 
 int mscanread (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{, }\item[{unsigned int}]{count}{}\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -271,8 +263,7 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_ace86dc31fa6f3fbad700399aff95d798} 
 void msclose (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{}\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -285,8 +276,7 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_a60ebdc495a048f2a3952b84afc1c83a4} 
 unsigned int msgetavailable (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{}\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -299,8 +289,7 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_a0491863eefc3a0bff4f05873a06be10b} 
 void msopen (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{filename}{, }\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{}\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -313,8 +302,7 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_ab566dc664a4e4d4f3ba1426886b6fa87} 
 unsigned int msread (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{unsigned int}]{count}{}\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -327,8 +315,7 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_aef3edf80d855356b2674782f3a083f68} 
 void msseek (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{, }\item[{unsigned int}]{offset}{}\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -341,8 +328,7 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_a4f32bb963042b237f521b9041e51b657} 
 void print\+\_\+dos\+\_\+header (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{dh}{}\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -355,8 +341,7 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_aeea3f163bc06617cab408be25494545f} 
 void print\+\_\+exepack\+\_\+header (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structexepack__header}{exepack\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{eh}{}\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -369,8 +354,7 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_acf701ccde86ffd36a6237db2dda542b0} 
 void reverse (\begin{DoxyParamCaption}\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{s}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -383,16 +367,14 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_aab7c23393b181e27f2f911fe1af86bf9} 
 int test\+\_\+dos\+\_\+header (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{}\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=267pt]{unpack_8c_aab7c23393b181e27f2f911fe1af86bf9_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -405,16 +387,14 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_a885224d332365560cd88c8b3d1b3eb07} 
 void unpack (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmemstream}{memstream}} \texorpdfstring{$\ast$}{*}}]{ms}{}\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
+Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{unpack_8c_a885224d332365560cd88c8b3d1b3eb07_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -427,8 +407,7 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_ab948b8e984a81faa144a40843c3d66fd} 
 void unpack\+\_\+data (\begin{DoxyParamCaption}\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{unpacked\+\_\+data}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{buf}{, }\item[{unsigned int \texorpdfstring{$\ast$}{*}}]{unpacked\+\_\+data\+\_\+size}{, }\item[{unsigned int}]{packed\+\_\+data\+\_\+len}{}\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -441,8 +420,7 @@ Here is the caller graph for this function\+:
 {\footnotesize\ttfamily \label{unpack_8c_ae34b7b1297a5c90355c0211bfcdf0f9e} 
 void writeexe (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdos__header}{dos\+\_\+header}} \texorpdfstring{$\ast$}{*}}]{dh}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{unpacked\+\_\+data}{, }\item[{unsigned int}]{unpacked\+\_\+data\+\_\+size}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{reloc}{, }\item[{size\+\_\+t}]{reloc\+\_\+size}{, }\item[{size\+\_\+t}]{padding}{}\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

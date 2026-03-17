@@ -2,8 +2,7 @@
 \hypertarget{classcore_1_1session__manager_1_1SessionManager}{}\label{classcore_1_1session__manager_1_1SessionManager}\index{core.session\_manager.SessionManager@{core.session\_manager.SessionManager}}
 
 
-Collaboration diagram for core.\+session\+\_\+manager.\+Session\+Manager\+:
-\nopagebreak
+Collaboration diagram for core.\+session\+\_\+manager.\+Session\+Manager\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -44,7 +43,6 @@ bool \mbox{\hyperlink{classcore_1_1session__manager_1_1SessionManager_a2dcc64e57
 core.\+session\+\_\+manager.\+Session\+Manager.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str }]{sessions\+\_\+dir}{ = {\ttfamily "{}.axe\+\_\+sessions"{}}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Initialize session manager.
-
 Args:
     sessions_dir: Directory to store session files (default: .axe_sessions)
 \end{DoxyVerb}
@@ -60,10 +58,8 @@ Args:
  bool core.\+session\+\_\+manager.\+Session\+Manager.\+delete\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{session\+\_\+name}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Delete a saved session.
-
 Args:
     session_name: Name of the session to delete
-
 Returns:
     True if deleted successfully, False otherwise
 \end{DoxyVerb}
@@ -74,7 +70,6 @@ Returns:
  List\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+session\+\_\+manager.\+Session\+Manager.\+list\+\_\+sessions (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}List all available saved sessions.
-
 Returns:
     List of dictionaries with session info:
         - name: Session name
@@ -90,10 +85,8 @@ Returns:
  Optional\mbox{[}Dict\mbox{[}str, Any\mbox{]}\mbox{]} core.\+session\+\_\+manager.\+Session\+Manager.\+load\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{session\+\_\+name}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Load a session from a JSON file.
-
 Args:
     session_name: Name of the session to load
-
 Returns:
     Dictionary with session data, or None if not found/error
 \end{DoxyVerb}
@@ -104,7 +97,6 @@ Returns:
  bool core.\+session\+\_\+manager.\+Session\+Manager.\+save\+\_\+session (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{session\+\_\+name}{, }\item[{Dict\mbox{[}str, Any\mbox{]}}]{session\+\_\+data}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Save a session to a JSON file.
-
 Args:
     session_name: Name of the session
     session_data: Dictionary containing:
@@ -113,7 +105,6 @@ Args:
         - agents: List of active agent names
         - metadata: Additional metadata (tokens_used, duration, etc.)
         - file_ids: Optional dict of file IDs from Files API (Anthropic)
-
 Returns:
     True if saved successfully, False otherwise
 \end{DoxyVerb}

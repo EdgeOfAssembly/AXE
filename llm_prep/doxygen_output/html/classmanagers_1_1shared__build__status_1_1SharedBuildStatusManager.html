@@ -141,7 +141,6 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Manages shared build status file for multi-agent collaboration.
-
 Creates and maintains `.collab_build_status.md` in the workspace.
 </pre> </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a478fdd72d0f202f0d6b470de747e0c59" name="a478fdd72d0f202f0d6b470de747e0c59"></a>
@@ -163,7 +162,6 @@ Creates and maintains `.collab_build_status.md` in the workspace.
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Initialize the shared build status manager.
-
 Args:
     workspace_dir: Path to the workspace directory
 </pre> 
@@ -416,7 +414,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Add a diff patch to the shared changes file.
-
 Args:
     file: File that was changed
     author: Agent alias that made the change
@@ -454,11 +451,9 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Claim an error for fixing by an agent.
-
 Args:
     error_index: Index of the error in the errors list
     agent_alias: Alias of the agent claiming the fix
-
 Returns:
     True if successfully claimed, False otherwise
 </pre> <div class="dynheader">
@@ -498,12 +493,10 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Generate a unified diff between two versions of content.
-
 Args:
     original_content: Original file content
     modified_content: Modified file content
     filename: Name of the file for the diff header
-
 Returns:
     Unified diff string
 </pre> 
@@ -528,10 +521,8 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get recent diff patches.
-
 Args:
     limit: Maximum number of patches to return
-
 Returns:
     List of recent DiffPatch objects
 </pre> 
@@ -552,7 +543,6 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get a brief summary of build status for agents.
-
 Returns:
     Summary string for inclusion in agent prompts
 </pre> <div class="dynheader">
@@ -578,7 +568,6 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Get list of errors/warnings not yet claimed by any agent.
-
 Returns:
     List of unclaimed BuildError objects
 </pre> <div class="dynheader">
@@ -608,10 +597,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Mark an error as fixed.
-
 Args:
     error_index: Index of the error in the errors list
-
 Returns:
     True if successfully marked, False otherwise
 </pre> <div class="dynheader">
@@ -685,12 +672,10 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Record build output and extract errors/warnings.
-
 Args:
     tool: Build tool name ('gcc', 'make', 'python', etc.)
     output: Full output from the build command
     exit_code: Exit code from the build command
-
 Returns:
     BuildStatus indicating success/failure
 </pre> <div class="dynheader">

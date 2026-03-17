@@ -134,7 +134,6 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">pdfocr - OCR tool for extracting text from PDFs and images.
-
 Features:
 - Extract text from scanned PDFs and images using OCR
 - Support multiple OCR engines: tesseract (fast, default), easyocr (higher accuracy)
@@ -144,12 +143,9 @@ Features:
 - Output to configurable directory
 - JSON output format with bounding boxes
 - Searchable PDF output
-
 Author: EdgeOfAssembly
 Date: 2025-12-19
-
 License: GPLv3 / Commercial dual-license
-
 Dependencies:
 - pytesseract (default engine): pip install pytesseract
   Also requires tesseract binary: apt install tesseract-ocr (Ubuntu)
@@ -182,7 +178,6 @@ Dependencies:
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Lazy import OpenCV (thread-safe).
-
 Returns:
     The cv2 (OpenCV) module if available, otherwise None.
 </pre> <div class="dynheader">
@@ -220,13 +215,10 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Lazy import and initialize easyocr reader (thread-safe).
-
 Note: Creates a new reader if languages differ from the cached one.
-
 Args:
     langs: List of language codes (default: ['en']).
     gpu: Whether to use GPU acceleration (default: False).
-
 Returns:
     EasyOCR Reader instance, or None if not available.
 </pre> <div class="dynheader">
@@ -260,7 +252,6 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Lazy import numpy (thread-safe).
-
 Returns:
     The numpy module if available, otherwise None.
 </pre> <div class="dynheader">
@@ -294,7 +285,6 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Lazy import pytesseract (thread-safe).
-
 Returns:
     The pytesseract module if available, otherwise None.
 </pre> <div class="dynheader">
@@ -336,7 +326,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname"> None pdfocr.main </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -393,7 +383,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">OCR a single image.
-
 Args:
     image: PIL Image to OCR.
     engine: OCR engine ('tesseract' or 'easyocr').
@@ -401,7 +390,6 @@ Args:
     enhance: Apply preprocessing.
     gpu: Use GPU acceleration for EasyOCR.
     return_boxes: Return structured data with bounding boxes (EasyOCR only).
-
 Returns:
     Extracted text (str), or list of dicts with boxes if return_boxes=True.
 </pre> <div class="dynheader">
@@ -471,7 +459,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">OCR an image file and save the extracted text.
-
 Args:
     image_path: Path to image file.
     output_dir: Output directory.
@@ -482,7 +469,6 @@ Args:
     quiet: Suppress output.
     output_format: Output format ('text' or 'json').
     gpu: Use GPU acceleration for EasyOCR.
-
 Returns:
     Path to output text file, or None if failed.
 </pre> <div class="dynheader">
@@ -567,7 +553,6 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">OCR a PDF file and save the extracted text.
-
 Args:
     pdf_path: Path to PDF file.
     output_dir: Output directory.
@@ -581,7 +566,6 @@ Args:
     pages: Optional list of 1-indexed page numbers to OCR.
     output_format: Output format ('text' or 'json').
     gpu: Use GPU acceleration for EasyOCR.
-
 Returns:
     Path to output text file, or None if failed.
 </pre> <div class="dynheader">
@@ -626,13 +610,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Perform OCR using EasyOCR.
-
 Args:
     image: PIL Image to OCR.
     langs: List of language codes (default: ['en']).
     gpu: Whether to use GPU acceleration.
     return_boxes: If True, return list of dicts with text and bounding boxes.
-
 Returns:
     Extracted text (str), or list of dicts with boxes if return_boxes=True.
 </pre> <div class="dynheader">
@@ -667,11 +649,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Perform OCR using Tesseract.
-
 Args:
     image: PIL Image to OCR.
     lang: Tesseract language code (default: 'eng').
-
 Returns:
     Extracted text.
 </pre> <div class="dynheader">
@@ -706,21 +686,17 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Parse page specification string into list of page numbers.
-
 Supports formats like:
 - "1,7,67" - individual pages
 - "1-10" - page range
 - "56-" - from page 56 to end
 - "-10" - from page 1 to 10
 - "1-5,10,20-25" - combined
-
 Args:
     spec: Page specification string.
     total_pages: Total number of pages in the PDF.
-
 Returns:
     List of 1-indexed page numbers.
-
 Raises:
     ValueError: If specification is invalid.
 </pre> <div class="dynheader">
@@ -755,13 +731,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Convert PDF pages to PIL Images.
-
 Args:
     pdf_path: Path to PDF file.
     dpi: DPI for rendering (default 300).
     pages: Optional list of 1-indexed page numbers to convert.
            If None, converts all pages.
-
 Returns:
     List of (page_number, PIL Image) tuples.
 </pre> <div class="dynheader">
@@ -791,14 +765,11 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Preprocess image to improve OCR accuracy.
-
 Applies CLAHE (Contrast Limited Adaptive Histogram Equalization)
 and optional denoising.
-
 Args:
     image: PIL Image to preprocess.
     enhance: Whether to apply enhancement (default True).
-
 Returns:
     Preprocessed PIL Image.
 </pre> <div class="dynheader">
@@ -829,10 +800,8 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Process input arguments - can be files or directories.
-
 Args:
     inputs: List of input paths.
-
 Returns:
     List of file paths to process.
 </pre> <div class="dynheader">
@@ -890,13 +859,10 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Validate DPI value and return a valid value.
-
 Args:
     dpi: DPI value to validate.
-
 Returns:
     Valid DPI value (clamped to MIN_DPI-MAX_DPI range).
-
 Raises:
     ValueError: If DPI is invalid (zero or negative).
 </pre> <div class="dynheader">

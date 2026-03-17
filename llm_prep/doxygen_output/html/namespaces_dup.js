@@ -6,6 +6,10 @@ var namespaces_dup =
       [ "main", "namespaceanthropic__features__demo.html#ac05c4f79a07d8920ba4b8ec4b462a6d0", null ]
     ] ],
     [ "axe", "namespaceaxe.html", "namespaceaxe" ],
+    [ "axe_socket_client", "namespaceaxe__socket__client.html", [
+      [ "main", "namespaceaxe__socket__client.html#ab4d50324cd8768a217cb23a01fd1abce", null ],
+      [ "send_command", "namespaceaxe__socket__client.html#afb99718d0b0be85f8a2b38cf3e2fc219", null ]
+    ] ],
     [ "benchmark_acp", "namespacebenchmark__acp.html", [
       [ "analyze_corpus_file", "namespacebenchmark__acp.html#aa43f698f5f9ae95cf20fa9d98224edbc", null ],
       [ "benchmark_message_formats", "namespacebenchmark__acp.html#aeda14e93f5d44e64563223f33d6aa911", null ],
@@ -31,8 +35,26 @@ var namespaces_dup =
       [ "print_test", "namespacedemo__absolute__path__fix.html#aec105d2bd0206a76dea21836fcc49bd4", null ],
       [ "success", "namespacedemo__absolute__path__fix.html#a3eccee7e2e4205f1fe84accdefc762aa", null ]
     ] ],
+    [ "demo_conflict_resolution", "namespacedemo__conflict__resolution.html", [
+      [ "demo_conflict_resolution", "namespacedemo__conflict__resolution.html#abc40a7ae82794983a22ffe3342c76f39", null ],
+      [ "print_header", "namespacedemo__conflict__resolution.html#a1e4e6ade51671bd3f513860134a2fd92", null ],
+      [ "print_section", "namespacedemo__conflict__resolution.html#a8c5c7d8a14df90155e80b54019978f55", null ]
+    ] ],
+    [ "demo_consolidated_cognitive_architecture", "namespacedemo__consolidated__cognitive__architecture.html", [
+      [ "main", "namespacedemo__consolidated__cognitive__architecture.html#aaa03c64788d5f85d16dc94131d4068c8", null ],
+      [ "test_conflict_detection", "namespacedemo__consolidated__cognitive__architecture.html#ad3a1e646543c8464aab3fe65c788fcad", null ],
+      [ "test_database_integration", "namespacedemo__consolidated__cognitive__architecture.html#aec1dc67d57cefb1dd363f1d075248f3f", null ],
+      [ "test_subsumption", "namespacedemo__consolidated__cognitive__architecture.html#ac5271dd8bb0f481407012bbdd0036085", null ],
+      [ "test_tokens", "namespacedemo__consolidated__cognitive__architecture.html#a91cac774ae9756e4b78fe41f924f8a16", null ],
+      [ "test_xp_awards", "namespacedemo__consolidated__cognitive__architecture.html#afa3cd34c8a9c064ab861d44ccd9bbf87", null ],
+      [ "test_xp_voting", "namespacedemo__consolidated__cognitive__architecture.html#a1975c20157ebd93d00980e602901c884", null ]
+    ] ],
     [ "demo_dynamic_tokens", "namespacedemo__dynamic__tokens.html", [
       [ "main", "namespacedemo__dynamic__tokens.html#a3d5ef89047a3e00095104ee726bed6df", null ]
+    ] ],
+    [ "demo_global_workspace", "namespacedemo__global__workspace.html", [
+      [ "demo_basic_usage", "namespacedemo__global__workspace.html#a74d39ad81e598bcd6a9fd61e0000f034", null ],
+      [ "demo_permission_check", "namespacedemo__global__workspace.html#a0b25e683832b392bc9198c4bdf1dce5f", null ]
     ] ],
     [ "demo_heredoc_fix", "namespacedemo__heredoc__fix.html", [
       [ "demo_before_and_after", "namespacedemo__heredoc__fix.html#ab608838bbf3efe5aeaa8c2efd5b80eb6", null ]
@@ -52,12 +74,21 @@ var namespaces_dup =
       [ "print_section", "namespacedemo__improvements.html#a521dcdcc5d0e6470eea2d4463d92d160", null ],
       [ "c", "namespacedemo__improvements.html#a2e93ffac888adacbf514c08871a1f4a3", null ]
     ] ],
+    [ "demo_live_ollama", "namespacedemo__live__ollama.html", [
+      [ "print_banner", "namespacedemo__live__ollama.html#ac9d55305d9946c35aca69b08affae64c", null ],
+      [ "print_log", "namespacedemo__live__ollama.html#a2f363302ef586e85ecba81fba234701c", null ],
+      [ "test_agent_interaction_with_ollama", "namespacedemo__live__ollama.html#a856ba9e4a46257931050cb474a7de956", null ],
+      [ "success", "namespacedemo__live__ollama.html#a4f68eead2086025a1b79f90daa5c85f8", null ]
+    ] ],
     [ "demo_minifier", "namespacedemo__minifier.html", [
       [ "demo_configuration", "namespacedemo__minifier.html#a92ad425e02ff235b3ba82c3494006d45", null ],
       [ "demo_session_preprocessing", "namespacedemo__minifier.html#aa0a2c0a7e89ad6d45baa05620b1dcae3", null ],
       [ "demo_standalone_minifier", "namespacedemo__minifier.html#a7ee1603133e69bf421a3fe23455d6c89", null ],
       [ "demo_workspace_minification", "namespacedemo__minifier.html#a9ada130677be44ad1ae9895f760cd48f", null ],
       [ "main", "namespacedemo__minifier.html#a9a876c9be28d0db5047c327492d93c64", null ]
+    ] ],
+    [ "demo_privilege_mapping", "namespacedemo__privilege__mapping.html", [
+      [ "main", "namespacedemo__privilege__mapping.html#a75e53a9b5cb10b216a61c827301c911e", null ]
     ] ],
     [ "demo_skills_system", "namespacedemo__skills__system.html", [
       [ "demo_agent_integration", "namespacedemo__skills__system.html#ac30c9359dc876acbe3265479356b036e", null ],
@@ -68,9 +99,19 @@ var namespaces_dup =
       [ "demo_skill_discovery", "namespacedemo__skills__system.html#ad54dcb724d73881461267caf96325936", null ],
       [ "main", "namespacedemo__skills__system.html#a6247f1ba0cda69e80d0ca06edfcf0bec", null ]
     ] ],
+    [ "demo_subsumption", "namespacedemo__subsumption.html", [
+      [ "demo_execution_order", "namespacedemo__subsumption.html#a2e35e06daf1dae6987d6afbb8cafde56", null ],
+      [ "demo_layer_assignment", "namespacedemo__subsumption.html#a9957e10ce3a60d03b73d21fb8fb8a66d", null ],
+      [ "demo_prompt_formatting", "namespacedemo__subsumption.html#a2d27a4e107f8bf8eb81fec45514ca34e", null ],
+      [ "demo_suppression", "namespacedemo__subsumption.html#a031dd50259ea80fffed13127c9511baf", null ],
+      [ "demo_suppression_lifecycle", "namespacedemo__subsumption.html#a302f4b054748fc1ece47ddd96d9bad2b", null ],
+      [ "main", "namespacedemo__subsumption.html#a60fc47c28348c97209344d57e6b5c7c6", null ],
+      [ "print_section", "namespacedemo__subsumption.html#a6014c96166c3fcb074a9957362793181", null ]
+    ] ],
     [ "demo_task_completion_fix", "namespacedemo__task__completion__fix.html", [
       [ "demonstrate_fix", "namespacedemo__task__completion__fix.html#a0f1e8e40e77951dbf6d276e7f0252368", null ]
     ] ],
+    [ "hello_world", "namespacehello__world.html", "namespacehello__world" ],
     [ "managers", "namespacemanagers.html", "namespacemanagers" ],
     [ "manual_test_write", "namespacemanual__test__write.html", [
       [ "main", "namespacemanual__test__write.html#a5ce2643d29ab0fbe178d828257665f03", null ],
@@ -157,6 +198,22 @@ var namespaces_dup =
       [ "test_token_callback_compatibility", "namespacetest__anthropic__integration.html#a516ff6fd06ddcc43cadee4644f9fc09e", null ],
       [ "test_token_counting_configuration", "namespacetest__anthropic__integration.html#ab7a6d91e04bae89f3b4363ab084ba4b3", null ]
     ] ],
+    [ "test_arbitration", "namespacetest__arbitration.html", [
+      [ "run_all_tests", "namespacetest__arbitration.html#a457cd5da7174a07d9653fdf74cfa403a", null ],
+      [ "test_arbitration_creation", "namespacetest__arbitration.html#a0c5f951acfeb7aed71f250583ae0787f", null ],
+      [ "test_arbitrator_selection", "namespacetest__arbitration.html#a34175116d0ccf1dee1f3da66f59a8509", null ],
+      [ "test_broadcast_creation", "namespacetest__arbitration.html#a0acb97df434bca5208db7380f15875d5", null ],
+      [ "test_contradiction_detection", "namespacetest__arbitration.html#ad1e77a27d842af7caee693a781f2c529", null ],
+      [ "test_contradiction_pairs", "namespacetest__arbitration.html#a6d20ac13c0ff978329ff9ead51b3591b", null ],
+      [ "test_deadline_auto_escalation", "namespacetest__arbitration.html#a28e092574c62ad8e7ba1958591754ad7", null ],
+      [ "test_escalation", "namespacetest__arbitration.html#a40d4f15dc08376537f10d1ebaaba501d", null ],
+      [ "test_format_for_prompt", "namespacetest__arbitration.html#a5024298ac061673cbac6291bf0fb2e7f", null ],
+      [ "test_get_pending_arbitrations_filter", "namespacetest__arbitration.html#ab970490befdf66be5ea55813e5f1f6dd", null ],
+      [ "test_insufficient_level_resolution", "namespacetest__arbitration.html#a18a89b5f8bdd379bb2f4e982e44c1aff", null ],
+      [ "test_manual_conflict_flagging", "namespacetest__arbitration.html#adc0b805f26264dc3b3e5afa5a4130dd5", null ],
+      [ "test_no_qualified_arbitrator", "namespacetest__arbitration.html#acefa565fafd0d9be7f26a877c2a60836", null ],
+      [ "test_resolution_submission", "namespacetest__arbitration.html#a3d5e96ac0534bbbe188640f52c1a3b3d", null ]
+    ] ],
     [ "test_axe_improvements", "namespacetest__axe__improvements.html", [
       [ "main", "namespacetest__axe__improvements.html#adc680a3d596f09419e4c9ff9632299d9", null ],
       [ "test_break_system", "namespacetest__axe__improvements.html#a656c5badeb442b2e292d56ea3043bf09", null ],
@@ -169,12 +226,60 @@ var namespaces_dup =
       [ "test_titles", "namespacetest__axe__improvements.html#ac6c1221ad325e710578fc18a4f852243", null ],
       [ "test_xp_calculation", "namespacetest__axe__improvements.html#adcafdef14f40f33da557ce0824b4ac0f", null ]
     ] ],
+    [ "test_axe_ollama", "namespacetest__axe__ollama.html", [
+      [ "test_axe_with_ollama", "namespacetest__axe__ollama.html#a9dcc1071d68b8e9d5b29907ebea69cb6", null ],
+      [ "success", "namespacetest__axe__ollama.html#aef57afc9b51795f0399c06d69f044c4f", null ]
+    ] ],
+    [ "test_blacklist_model", "namespacetest__blacklist__model.html", [
+      [ "test_blacklist_model", "namespacetest__blacklist__model.html#af3ab9e99a904d3c0529ca7e4a3727a18", null ],
+      [ "success", "namespacetest__blacklist__model.html#a0d55debcb5bedbf8f768bda9b4804c34", null ]
+    ] ],
+    [ "test_codex_agent", "namespacetest__codex__agent.html", [
+      [ "test_codex_agent_config", "namespacetest__codex__agent.html#a9b21e43995fc1dd23bfb6d491b327d08", null ],
+      [ "test_codex_model_metadata", "namespacetest__codex__agent.html#abbbd3e307637b0b44b7c49f45e7939f9", null ],
+      [ "test_codex_uses_responses_api", "namespacetest__codex__agent.html#ae53d78d50f884310baa8631979cd992d", null ],
+      [ "test_existing_agents_unchanged", "namespacetest__codex__agent.html#a46c4abd151344076ac666e0b9acaf205", null ]
+    ] ],
+    [ "test_codex_integration", "namespacetest__codex__integration.html", [
+      [ "test_api_endpoint_selection", "namespacetest__codex__integration.html#aa81f9544ee05558da4fc72188f4c11e5", null ],
+      [ "test_backwards_compatibility", "namespacetest__codex__integration.html#a41b64377a083b3f29c87e00183d4bcce", null ],
+      [ "success", "namespacetest__codex__integration.html#a515985dd4b62e9a18ff8831e2dc38cb2", null ]
+    ] ],
+    [ "test_collab_codex", "namespacetest__collab__codex.html", [
+      [ "test_collaboration_api_params", "namespacetest__collab__codex.html#a21a653aed33d86aa8fc9dee645803635", null ],
+      [ "test_collaboration_codex_detection", "namespacetest__collab__codex.html#ac9e8f2a5a8717dcd1c3ebb28ffa0aead", null ],
+      [ "test_collaboration_error_prevention", "namespacetest__collab__codex.html#a559d84a082d107cfabef3b96fdccde2f", null ],
+      [ "success", "namespacetest__collab__codex.html#a1cf3c94ab54cfae88a0c3049f202c81a", null ]
+    ] ],
+    [ "test_collab_integration", "namespacetest__collab__integration.html", [
+      [ "test_collab_session_starts_successfully", "namespacetest__collab__integration.html#af0523f30e4ab4746876e42b7d9fa184c", null ],
+      [ "success", "namespacetest__collab__integration.html#a02aa13f18742ac1c48ce65900ea4609d", null ]
+    ] ],
+    [ "test_collab_print_banner", "namespacetest__collab__print__banner.html", [
+      [ "create_test_session", "namespacetest__collab__print__banner.html#a1286ef3346cc1a6d5aa1dc5c2e42d750", null ],
+      [ "test_print_banner_displays_context_tokens", "namespacetest__collab__print__banner.html#a572cd52cb59cdaabc895d3c4c2beaee8", null ],
+      [ "test_print_banner_handles_missing_context_tokens", "namespacetest__collab__print__banner.html#a849cb7e4469ce8a42824d73bc4697510", null ],
+      [ "test_print_banner_no_ctx_window_error", "namespacetest__collab__print__banner.html#a5ec4685cfd9622a7e090b124aec8a89b", null ],
+      [ "test_print_banner_with_multiple_agents", "namespacetest__collab__print__banner.html#a66bf3285cbe41821a9854d9e26cb6124", null ]
+    ] ],
     [ "test_collab_tool_syntax", "namespacetest__collab__tool__syntax.html", [
       [ "create_test_session", "namespacetest__collab__tool__syntax.html#ab07b7e5d9dbefaa8a57d6cca450a87cb", null ],
       [ "test_collab_prompt_has_clear_examples", "namespacetest__collab__tool__syntax.html#ac2fbb67241504f81841e6625d3755251", null ],
       [ "test_collab_prompt_includes_tool_syntax", "namespacetest__collab__tool__syntax.html#aa8ac70ed15a8a0db044cadadf5a82152", null ],
       [ "test_collab_prompt_preserves_existing_features", "namespacetest__collab__tool__syntax.html#a2bb87e5531f531b7fb734927ee837adf", null ],
       [ "test_multiple_agents_get_tool_instructions", "namespacetest__collab__tool__syntax.html#a35afb66b14174bae3c39efd8dd247f45", null ]
+    ] ],
+    [ "test_config_refactor", "namespacetest__config__refactor.html", [
+      [ "run_all_tests", "namespacetest__config__refactor.html#a58a4a09c1184b551bbb0960248e34efa", null ],
+      [ "test_agent_overrides", "namespacetest__config__refactor.html#a91c60632d4e5367d75be26e196b16502", null ],
+      [ "test_agent_validation", "namespacetest__config__refactor.html#a370ce69392c079f2ade75b909d4666fc", null ],
+      [ "test_backward_compatibility", "namespacetest__config__refactor.html#a3f7a7ef02525db741a3099ae4b226b6e", null ],
+      [ "test_context_tokens_standardization", "namespacetest__config__refactor.html#a5279058606ec857b2b16293296816bc1", null ],
+      [ "test_loading_order", "namespacetest__config__refactor.html#a6cfe144e6dc835a18178dfeb47db9714", null ],
+      [ "test_local_agent_exists", "namespacetest__config__refactor.html#af9e3114ae49eeccba48e9b0d394fe0b6", null ],
+      [ "test_ollama_provider_exists", "namespacetest__config__refactor.html#a11008ba41d6d155f539e8318836d54ce", null ],
+      [ "test_provider_validation", "namespacetest__config__refactor.html#a930ad3d677c2491fdb61f9d335171ee6", null ],
+      [ "success", "namespacetest__config__refactor.html#ada3b8faa50dd279e0c4cd9986603bd71", null ]
     ] ],
     [ "test_database_location", "namespacetest__database__location.html", [
       [ "main", "namespacetest__database__location.html#a3d827865d668ddfdca679f108708a9f3", null ],
@@ -228,6 +333,7 @@ var namespaces_dup =
       [ "estimate_token_count", "namespacetest__efficiency__analysis.html#a6fca3b5bf54437dbd2d9986142f1931c", null ],
       [ "main", "namespacetest__efficiency__analysis.html#ab619fc553293802b7d261330b561e10b", null ]
     ] ],
+    [ "test_end_to_end", "namespacetest__end__to__end.html", "namespacetest__end__to__end" ],
     [ "test_environment_probe", "namespacetest__environment__probe.html", [
       [ "run_all_tests", "namespacetest__environment__probe.html#a018eab69b2c4a1f9d2adcdd95f1dcd29", null ],
       [ "test_custom_probes", "namespacetest__environment__probe.html#a0d3d0b7887bb4c41e093e7fd47cf91ad", null ],
@@ -255,6 +361,27 @@ var namespaces_dup =
       [ "test_github_agent_disabled_by_default", "namespacetest__github__agent.html#aeb32aaa53f55876aaedef2ee469f0e16", null ],
       [ "test_github_agent_no_git_repo", "namespacetest__github__agent.html#a1f69e934a4e7472868f80314deabf4ed", null ],
       [ "test_github_agent_no_op_when_disabled", "namespacetest__github__agent.html#ab138dcb8f05e71cd26e362b7a047286d", null ]
+    ] ],
+    [ "test_global_workspace", "namespacetest__global__workspace.html", [
+      [ "run_all_tests", "namespacetest__global__workspace.html#a7e08af3f26379dbab484dc8e3b47a7b3", null ],
+      [ "test_acknowledgment_flow", "namespacetest__global__workspace.html#a4ce4204c04ef452bd706c73c8b058885", null ],
+      [ "test_broadcast_invalid_category", "namespacetest__global__workspace.html#a1fb90db300f3930fcc904c1358acd802", null ],
+      [ "test_broadcast_limit", "namespacetest__global__workspace.html#acc044d4e9514fde8bbdbdab744b75817", null ],
+      [ "test_broadcast_valid_category", "namespacetest__global__workspace.html#aa20b12c47c16755a8495174e09ff29bb", null ],
+      [ "test_broadcast_with_optional_fields", "namespacetest__global__workspace.html#a90fd74f21237d5fc067f5afe2fb4fc2b", null ],
+      [ "test_directive_permission_check", "namespacetest__global__workspace.html#ae3504e9516bf7e8d95e1aa2cf5439bf8", null ],
+      [ "test_filtering_by_agent", "namespacetest__global__workspace.html#aed501d86005fd342de766c719c95fcc5", null ],
+      [ "test_filtering_by_category", "namespacetest__global__workspace.html#a9b3f5ae09224d70164339d618de21ae2", null ],
+      [ "test_filtering_by_time", "namespacetest__global__workspace.html#a6a4b2260e07d9cb3e534543a79858af3", null ],
+      [ "test_filtering_requires_ack", "namespacetest__global__workspace.html#a9f5f578e3d462ce3a86f5d55a85cc4bf", null ],
+      [ "test_get_conflicts", "namespacetest__global__workspace.html#a80d9153249204bddf2f75eab19c581e2", null ],
+      [ "test_get_directives", "namespacetest__global__workspace.html#a2599ef959a5236a9af3beb0e14157296", null ],
+      [ "test_pending_acks_retrieval", "namespacetest__global__workspace.html#ab74364fa20081a24478eae3b99f56b7e", null ],
+      [ "test_prompt_formatting", "namespacetest__global__workspace.html#aed234b504b97dd6cb26cdda3db3e8e96", null ],
+      [ "test_summary_generation", "namespacetest__global__workspace.html#ac8a6d40b8393324c07a8a57df46b2f0d", null ],
+      [ "test_thread_safety", "namespacetest__global__workspace.html#ac369000076c5f2317005bd155891b8a7", null ],
+      [ "test_workspace_initialization", "namespacetest__global__workspace.html#aedb15f19503524bb08c29b8f577c83c2", null ],
+      [ "success", "namespacetest__global__workspace.html#a4121f0d8138eeae490b2958646c8ee7e", null ]
     ] ],
     [ "test_heredoc_execution_fix", "namespacetest__heredoc__execution__fix.html", [
       [ "run_all_tests", "namespacetest__heredoc__execution__fix.html#af526d01fef44b862858529a3cb1a425f", null ],
@@ -308,7 +435,13 @@ var namespaces_dup =
       [ "main", "namespacetest__integration__database__fix.html#a8f88ac4584a4ca11b728db9d4d654e0f", null ],
       [ "simulate_problem_scenario", "namespacetest__integration__database__fix.html#a007ae765bb0c72a53ca7e7ab8a40a4ee", null ]
     ] ],
+    [ "test_interactive_keypress", "namespacetest__interactive__keypress.html", "namespacetest__interactive__keypress" ],
     [ "test_large_code_files", "namespacetest__large__code__files.html", "namespacetest__large__code__files" ],
+    [ "test_live_feature_matrix", "namespacetest__live__feature__matrix.html", "namespacetest__live__feature__matrix" ],
+    [ "test_live_sandbox_agent", "namespacetest__live__sandbox__agent.html", [
+      [ "test_live_sandbox_agent", "namespacetest__live__sandbox__agent.html#aed058c8c4de3588d515e7d7d9601cff4", null ],
+      [ "success", "namespacetest__live__sandbox__agent.html#a7af32bb005e4d9911ed436cf0c09b6ea", null ]
+    ] ],
     [ "test_minifier", "namespacetest__minifier.html", "namespacetest__minifier" ],
     [ "test_mission_md_tokens", "namespacetest__mission__md__tokens.html", [
       [ "run_all_tests", "namespacetest__mission__md__tokens.html#a1a168d9573b7800b3073aad4e9e54548", null ],
@@ -325,13 +458,67 @@ var namespaces_dup =
       [ "test_uses_max_completion_tokens", "namespacetest__models__yaml.html#a1ba37a9fac15549945c06fb43994bb6f", null ],
       [ "test_yaml_loading", "namespacetest__models__yaml.html#a95c06a738f1ec6c24d7cd1eccd4e7f10", null ]
     ] ],
+    [ "test_ollama_auth", "namespacetest__ollama__auth.html", [
+      [ "pull_small_model", "namespacetest__ollama__auth.html#aa784f9c2eef81e016b2df894585009c8", null ],
+      [ "start_ollama_server", "namespacetest__ollama__auth.html#aa32ed5450438511c2129ab6e678204f5", null ],
+      [ "stop_ollama_server", "namespacetest__ollama__auth.html#ad7a7b8310c5d3415712cca32026df9ca", null ],
+      [ "test_edge_cases", "namespacetest__ollama__auth.html#a9578cbec675c0f4ae1e945e6a92f7ab6", null ],
+      [ "test_ollama_inference", "namespacetest__ollama__auth.html#a97d7a8b21a81d6ea46b2bc3eda5db100", null ],
+      [ "test_ollama_initialization_without_api_key", "namespacetest__ollama__auth.html#a20d8652fec4a3b6b2b775ea24a69dc5b", null ],
+      [ "test_providers_requiring_auth_still_work", "namespacetest__ollama__auth.html#acd906259eabc6875a6c352e98e3e94b6", null ],
+      [ "test_requires_auth_field", "namespacetest__ollama__auth.html#a6f1e0b8d58149529255a62cbb39d6c1d", null ],
+      [ "ollama_model_pulled", "namespacetest__ollama__auth.html#aae5e23d48e03b9f27d0efeb6a0b6316f", null ],
+      [ "ollama_process", "namespacetest__ollama__auth.html#a770d4168382942cf765124ab83e0b19b", null ],
+      [ "server_started", "namespacetest__ollama__auth.html#a747f96a82aec5df5e0de56ec278eff21", null ]
+    ] ],
+    [ "test_ollama_integration", "namespacetest__ollama__integration.html", [
+      [ "main", "namespacetest__ollama__integration.html#a2dbdb4320d77291e34cb160dd10635c8", null ],
+      [ "test_conflict_detection", "namespacetest__ollama__integration.html#a3932afb7907bdb84ecc958f680a7cc12", null ],
+      [ "test_full_integration", "namespacetest__ollama__integration.html#a57abe602c94731e6905ab08273012839", null ],
+      [ "test_ollama_available", "namespacetest__ollama__integration.html#afb5e2ee627197633761f6aab1bc2d335", null ],
+      [ "test_subsumption_with_database", "namespacetest__ollama__integration.html#a11bf4db31a362407cd4e015ed0739052", null ],
+      [ "test_xp_voting_integration", "namespacetest__ollama__integration.html#af767a16c82478ddfaeb67ea054d42cff", null ],
+      [ "success", "namespacetest__ollama__integration.html#a237f1c60f906cb7f15ae114acefd2b01", null ]
+    ] ],
+    [ "test_privilege_mapping", "namespacetest__privilege__mapping.html", [
+      [ "run_all_tests", "namespacetest__privilege__mapping.html#a1ba5959fafa190b2ca118d2f37df852a", null ],
+      [ "test_boundary_levels", "namespacetest__privilege__mapping.html#accec6d38dbe67835c0038d505e3184f6", null ],
+      [ "test_command_token_format", "namespacetest__privilege__mapping.html#adbadee706a508b6466e8f4b751c7bb29", null ],
+      [ "test_command_validation", "namespacetest__privilege__mapping.html#a3cf3939f97003ac79f5db48f1fa1e47c", null ],
+      [ "test_format_privileges_for_prompt", "namespacetest__privilege__mapping.html#abef30e66ccd7b9261efcad485bfc4fa1", null ],
+      [ "test_get_privileges_for_level", "namespacetest__privilege__mapping.html#ac1d9040365181ce4afa2892488180c8d", null ],
+      [ "test_privilege_hierarchy_consistency", "namespacetest__privilege__mapping.html#a8b8cc4a86d0d89e4d2689511b78b63a5", null ],
+      [ "test_privilege_mapping_structure", "namespacetest__privilege__mapping.html#ac91cba24e293b6b0f96775011bc43984", null ],
+      [ "test_privilege_progression", "namespacetest__privilege__mapping.html#a0f60150a772eced8f0b4a3e46a204de5", null ],
+      [ "test_promotion_info", "namespacetest__privilege__mapping.html#ac22b41a6abc3c7d17c53a3b270868ea1", null ]
+    ] ],
+    [ "test_reasoning_effort", "namespacetest__reasoning__effort.html", [
+      [ "run_all_tests", "namespacetest__reasoning__effort.html#a39b022f330dd37567bc2f56ff92d0315", null ],
+      [ "test_agent_config_can_override_model_default", "namespacetest__reasoning__effort.html#a3382abcafc547b58782d61681f2b7673", null ],
+      [ "test_api_params_omit_reasoning_for_unsupported_models", "namespacetest__reasoning__effort.html#a9bf7f2f29956f0312a855b65e4d6fdc4", null ],
+      [ "test_api_params_omit_reasoning_when_none", "namespacetest__reasoning__effort.html#aead6afba2c8ef7ef2a07c3fb8ce8063a", null ],
+      [ "test_api_params_structure_for_responses_api", "namespacetest__reasoning__effort.html#ad08fa2dc485f6f62bcfede088f06b6b1", null ],
+      [ "test_codex_model_has_correct_metadata", "namespacetest__reasoning__effort.html#a5fe4c0652d33187c68e983d3f5db1412", null ],
+      [ "test_expected_aliases_are_short_and_memorable", "namespacetest__reasoning__effort.html#aeccd0509e5b2c2f896a099ab1a6b3188", null ],
+      [ "test_get_default_reasoning_effort_returns_medium_for_codex", "namespacetest__reasoning__effort.html#a27f0252e4d924a6ad250c838a39f081e", null ],
+      [ "test_get_default_reasoning_effort_returns_none_for_non_codex", "namespacetest__reasoning__effort.html#a6f551e16ee2185ba91a0e1619ad04fc2", null ],
+      [ "test_model_default_used_when_no_agent_override", "namespacetest__reasoning__effort.html#af6b114e9c91b1e41d8d60a9fd3ff1afd", null ],
+      [ "test_reasoning_effort_validation_in_api_flow", "namespacetest__reasoning__effort.html#aae252212317dc236f38ff3c5bee79f4c", null ],
+      [ "test_supports_reasoning_effort_returns_false_for_non_codex", "namespacetest__reasoning__effort.html#af4fded1e78583e745dafbf49387952a4", null ],
+      [ "test_supports_reasoning_effort_returns_true_for_codex", "namespacetest__reasoning__effort.html#ab0d925d741afd82ca4bb53bbe263accf", null ],
+      [ "test_valid_reasoning_efforts_constant", "namespacetest__reasoning__effort.html#ab78037c9a7d24ded248e042222ffcc57", null ],
+      [ "test_validate_reasoning_effort_accepts_valid_values", "namespacetest__reasoning__effort.html#aa1c0afc46db1a3db7a03ce57ed07c7ee", null ],
+      [ "test_validate_reasoning_effort_rejects_invalid_values", "namespacetest__reasoning__effort.html#a6955aa5694335f65d1016f9144af25ee", null ],
+      [ "test_variant_agent_effort_levels", "namespacetest__reasoning__effort.html#a3afbee4b7f36ee6ff0a5651b0b10c872", null ],
+      [ "success", "namespacetest__reasoning__effort.html#aa3e8f1a9c3b1049f65c628cbb81351f3", null ]
+    ] ],
     [ "test_sandbox", "namespacetest__sandbox.html", [
       [ "run_all_tests", "namespacetest__sandbox.html#a23073558d18c30a2b29dbae0f06833eb", null ],
       [ "test_backward_compatibility", "namespacetest__sandbox.html#a1c8019bdb125a333ca56c4287adc0c54", null ],
       [ "test_bwrap_command_generation", "namespacetest__sandbox.html#acb11bfcb1c49d6e71118777590152f0a", null ],
       [ "test_edge_case_heredoc", "namespacetest__sandbox.html#a54cc78ac629e5713fed671662c9c36c1", null ],
       [ "test_edge_case_pipes", "namespacetest__sandbox.html#ad147178ea0fcb593c3cb13f024675f58", null ],
-      [ "test_fallback_to_whitelist", "namespacetest__sandbox.html#a5e120db0d2213a54e5c5bc24653538d9", null ],
+      [ "test_fallback_to_unrestricted", "namespacetest__sandbox.html#a15c4bd8d5ad5527b9644e6f3d951e6dc", null ],
       [ "test_host_bind_readonly", "namespacetest__sandbox.html#a60ab77b0b886603973eb05b94c6baff8", null ],
       [ "test_integration_command_execution", "namespacetest__sandbox.html#aad2cda135655b18931f7671070620b39", null ],
       [ "test_namespace_options", "namespacetest__sandbox.html#a81f5b3b74bcab80a1863e60a95990325", null ],
@@ -341,6 +528,10 @@ var namespaces_dup =
       [ "test_sandbox_mode_validation", "namespacetest__sandbox.html#aedb1e1e34d14f1b0d3318436683119ef", null ],
       [ "test_tool_blacklist_check", "namespacetest__sandbox.html#a86d166b51a4129c270b311c395d16004", null ],
       [ "success", "namespacetest__sandbox.html#a63ccc1a6bfcb8b2704031ce410a64656", null ]
+    ] ],
+    [ "test_sandbox_ollama", "namespacetest__sandbox__ollama.html", [
+      [ "test_sandbox_with_ollama", "namespacetest__sandbox__ollama.html#a171189f1d645178cd37ce3ef838267cb", null ],
+      [ "success", "namespacetest__sandbox__ollama.html#a56b68ee22073b282321b46f0df6955b6", null ]
     ] ],
     [ "test_session_preprocessor", "namespacetest__session__preprocessor.html", "namespacetest__session__preprocessor" ],
     [ "test_shared_build_status", "namespacetest__shared__build__status.html", "namespacetest__shared__build__status" ],
@@ -359,31 +550,76 @@ var namespaces_dup =
     ] ],
     [ "test_skills_manager", "namespacetest__skills__manager.html", [
       [ "run_all_tests", "namespacetest__skills__manager.html#a68659b2daa6eff9774f9602f61ea9b7b", null ],
+      [ "test_absolute_path_skills_dir", "namespacetest__skills__manager.html#a7a146fa7c3620be1275446a2677e7bf5", null ],
       [ "test_agents_md_exists", "namespacetest__skills__manager.html#a40422333f3eb2a94f787cd56b1045158", null ],
       [ "test_agents_md_required_sections", "namespacetest__skills__manager.html#ae7e526e524e9ca72fc9705903ab93ca3", null ],
       [ "test_all_skill_files_exist", "namespacetest__skills__manager.html#a298ae66d106237b30935b01ca560381c", null ],
+      [ "test_config_with_none_skills_config", "namespacetest__skills__manager.html#a48b2aee39f3d672b4ed5449b18938711", null ],
       [ "test_create_skills_manager_factory", "namespacetest__skills__manager.html#a32c432bd8a8cf3361349f8206e26f425", null ],
       [ "test_default_skills_per_agent", "namespacetest__skills__manager.html#ace43b2d352f716d48e0a40758e0ef02d", null ],
+      [ "test_duplicate_skill_names", "namespacetest__skills__manager.html#af2e21472755a1e6f3c0718eb180d87af", null ],
+      [ "test_empty_skill_file", "namespacetest__skills__manager.html#a15f4c3d0ed8ca8084efef7ada58472d1", null ],
       [ "test_empty_skills_dir", "namespacetest__skills__manager.html#ae0411d14a6a613cef252ecda764a0590", null ],
+      [ "test_empty_string_skills_dir", "namespacetest__skills__manager.html#a790daafd128a9244f194ab578ceaba6a", null ],
       [ "test_keyword_matching", "namespacetest__skills__manager.html#a66809d2e5ae59b629bd4a6561544cb35", null ],
       [ "test_malformed_manifest", "namespacetest__skills__manager.html#a663bbfbcf40faf39f23058ce3d5d1727", null ],
       [ "test_manifest_loading", "namespacetest__skills__manager.html#aaee7d74995fe0750100245ba590e9e61", null ],
+      [ "test_missing_manifest_json", "namespacetest__skills__manager.html#a04cb8211e6fe5186b782a6fa41a417e1", null ],
       [ "test_multiple_skills", "namespacetest__skills__manager.html#aa0f79a4d11afee7cf7f124072509e44c", null ],
+      [ "test_no_skills_match_keywords", "namespacetest__skills__manager.html#af1ec8dfadf683b777000c6403d188147", null ],
+      [ "test_no_skills_match_provider", "namespacetest__skills__manager.html#a3d1a6c81a26010fb390d50be412a3f64", null ],
+      [ "test_none_skills_dir", "namespacetest__skills__manager.html#a4ab7972d20ef422d863e35ed329be843", null ],
+      [ "test_nonexistent_skills_directory", "namespacetest__skills__manager.html#ad0050faf27b6cf32590dd32cf52645ed", null ],
       [ "test_prompt_injection", "namespacetest__skills__manager.html#a69ff6e7884bf20bd3a31f5811c89d0a0", null ],
       [ "test_provider_filtering", "namespacetest__skills__manager.html#af646f63246579ef15faf833c9c564401", null ],
+      [ "test_relative_path_skills_dir", "namespacetest__skills__manager.html#a757d68eb78e56af224d33db9cc5fbb84", null ],
       [ "test_skill_content_loading", "namespacetest__skills__manager.html#a950a3f069f87b99131e6f9f2b41b751e", null ],
       [ "test_skill_content_not_empty", "namespacetest__skills__manager.html#a290f350f19c2e476150be9b126a9c522", null ],
       [ "test_skill_discovery", "namespacetest__skills__manager.html#a2d841d1abd82159568a2f1b6032d5646", null ],
       [ "test_skill_file_format", "namespacetest__skills__manager.html#a46036dcbf4333cd9ce11e41854fee8a6", null ],
+      [ "test_skill_file_missing_referenced_in_manifest", "namespacetest__skills__manager.html#a6ccefd87934811dc249af928f04cb783", null ],
       [ "test_skill_not_found", "namespacetest__skills__manager.html#a145d7d40e16eb6963f81b53de2ed3816", null ],
       [ "test_skills_config_in_yaml", "namespacetest__skills__manager.html#ae3511f78feb1683ccd2af910ae4a2cab", null ],
+      [ "test_skills_with_empty_keywords", "namespacetest__skills__manager.html#a1955e9d41697b0fc11dd9b1608c221b6", null ],
+      [ "test_skills_with_empty_providers", "namespacetest__skills__manager.html#a67157d6938f864795810b5187c113242", null ],
       [ "test_token_efficiency", "namespacetest__skills__manager.html#a3918438a938bfb7610783fa8db659f67", null ]
+    ] ],
+    [ "test_socket_integration", "namespacetest__socket__integration.html", [
+      [ "run_all_tests", "namespacetest__socket__integration.html#a8423be4a381ee133aca3748271657082", null ],
+      [ "test_batch_mode_no_socket", "namespacetest__socket__integration.html#abd71ec1bcd33222586fb9d1623bc8456", null ],
+      [ "test_mock_socket_server", "namespacetest__socket__integration.html#a0d7ab74833b62f2dd952ca85b9acdeee", null ],
+      [ "success", "namespacetest__socket__integration.html#a8acb28cb7699125cd07454a5eae46387", null ]
+    ] ],
+    [ "test_socket_interface", "namespacetest__socket__interface.html", [
+      [ "run_all_tests", "namespacetest__socket__interface.html#a13455111d8d1a50b93f638d21fb3de97", null ],
+      [ "test_cleanup_files", "namespacetest__socket__interface.html#a3fafd3dc3d3b1ea6bd9dd99c4666a7a7", null ],
+      [ "test_pid_file_operations", "namespacetest__socket__interface.html#a9fe562c67de8c10729e1f2aebc4b7523", null ],
+      [ "test_socket_communication", "namespacetest__socket__interface.html#a9b9d77da7767bfaf7c9db6c47e8e280a", null ],
+      [ "test_socket_path_construction", "namespacetest__socket__interface.html#a29c0dbcc7f669914f82c9a2fa7cf0903", null ],
+      [ "test_socket_server_creation", "namespacetest__socket__interface.html#af96078916bb76bb32c010429d651f0b0", null ],
+      [ "test_stale_file_detection", "namespacetest__socket__interface.html#ab275fea72c537bbbc1d3c71633cec40a", null ],
+      [ "success", "namespacetest__socket__interface.html#a987d340bca5b3533cf32f57b900f33de", null ]
     ] ],
     [ "test_spawned_agents", "namespacetest__spawned__agents.html", [
       [ "test_agent_key_consistency", "namespacetest__spawned__agents.html#a30b576e2227c48ed67a58316f914924e", null ],
       [ "test_spawned_agent_data_structures", "namespacetest__spawned__agents.html#a42baa5e9890bb99de3e31df8c15ce71e", null ],
       [ "test_spawned_agent_system_prompt", "namespacetest__spawned__agents.html#a6d52b1e0882e22cd7294a7cac6d27ad2", null ],
       [ "test_spawned_vs_static_agent_resolution", "namespacetest__spawned__agents.html#aadcd222919d82e631e3a65554e47157d", null ]
+    ] ],
+    [ "test_subsumption", "namespacetest__subsumption.html", [
+      [ "run_all_tests", "namespacetest__subsumption.html#ac3427c1ee396a5fe0531ef03e61cea0d", null ],
+      [ "test_execution_order", "namespacetest__subsumption.html#a6ebf6428b8745627ae0e3033eb5163aa", null ],
+      [ "test_failed_suppression", "namespacetest__subsumption.html#add3d7c6cd2ad8e156fd0c735622fda02", null ],
+      [ "test_layer_assignment", "namespacetest__subsumption.html#aa3f15a9dc9953d924988716142a52b9c", null ],
+      [ "test_layer_metadata", "namespacetest__subsumption.html#a81c56e5f44df9daa1656e729c249fc76", null ],
+      [ "test_manual_release", "namespacetest__subsumption.html#a24936c19c59632671e797d5db9cd017a", null ],
+      [ "test_max_turns_enforcement", "namespacetest__subsumption.html#a2c3180ca4181bd30dbab85c5bb86be86", null ],
+      [ "test_prompt_formatting", "namespacetest__subsumption.html#a5cd75fe5e1b17e37ab3d5f48b6608b40", null ],
+      [ "test_suppression_lifecycle", "namespacetest__subsumption.html#a384f87bfbe9c335ef08f102ee73464de", null ],
+      [ "test_suppression_permission_checks", "namespacetest__subsumption.html#aa682c12cbc7ead66909c82c2710f2761", null ]
+    ] ],
+    [ "test_suid_workaround", "namespacetest__suid__workaround.html", [
+      [ "test_suid_shell_workaround", "namespacetest__suid__workaround.html#a529de3a2db28aa8bfcd805bfd676833a", null ]
     ] ],
     [ "test_supervisor_protections", "namespacetest__supervisor__protections.html", [
       [ "run_all_tests", "namespacetest__supervisor__protections.html#a4b1c43d32f0d74500c7d65b42e41991e", null ],
@@ -460,6 +696,16 @@ var namespaces_dup =
     [ "test_workshop_cli_integration", "namespacetest__workshop__cli__integration.html", "namespacetest__workshop__cli__integration" ],
     [ "test_workshop_integration", "namespacetest__workshop__integration.html", "namespacetest__workshop__integration" ],
     [ "test_workshop_pr23_validation", "namespacetest__workshop__pr23__validation.html", "namespacetest__workshop__pr23__validation" ],
+    [ "test_workspace_paths", "namespacetest__workspace__paths.html", [
+      [ "run_all_tests", "namespacetest__workspace__paths.html#af31c99efcdaebb345b17ebdf1dc0b17f", null ],
+      [ "test_absolute_path_conversion", "namespacetest__workspace__paths.html#aa04234467907d6849d57630f8628c35f", null ],
+      [ "test_nonexistent_workspace_handling", "namespacetest__workspace__paths.html#adbe0f0f2dfecd48b8f957bccfa37b4de", null ],
+      [ "test_sandbox_manager_fallback_to_default", "namespacetest__workspace__paths.html#a09e50e401fe838f580fe20b3ba36c135", null ],
+      [ "test_sandbox_manager_multiple_workspaces", "namespacetest__workspace__paths.html#a8d587690ee0ab05e063b9eecf5cc45a1", null ],
+      [ "test_sandbox_manager_single_workspace", "namespacetest__workspace__paths.html#af0c39f242f1d47b05450113f11eab06e", null ],
+      [ "test_tool_runner_with_workspaces", "namespacetest__workspace__paths.html#aed6a7aedb5d98e5e45747b05f613b4b7", null ],
+      [ "success", "namespacetest__workspace__paths.html#a09745b231eee72cc8f584706881abb30", null ]
+    ] ],
     [ "test_write_blocks", "namespacetest__write__blocks.html", [
       [ "_run_live_agent_write_test", "namespacetest__write__blocks.html#a62ca47969e7ca35ac9678021312a59c3", null ],
       [ "main", "namespacetest__write__blocks.html#a93b7d0da40c150aa9f5a7cdfa321aa15", null ],
@@ -522,7 +768,37 @@ var namespaces_dup =
       [ "test_simple_xml_write", "namespacetest__xml__tool__parser.html#a0eef09b23f55b17ca084f3e6fe8e67b9", null ],
       [ "test_tool_name_normalization", "namespacetest__xml__tool__parser.html#a58d2f9651f470dcfd808649b60907735", null ]
     ] ],
+    [ "test_xp_voting", "namespacetest__xp__voting.html", [
+      [ "run_all_tests", "namespacetest__xp__voting.html#a825675371d629ad1d26af6c5293e633b", null ],
+      [ "test_broadcast_system", "namespacetest__xp__voting.html#a94665a1e7c7aa47069b3c7a70b64d723", null ],
+      [ "test_level_up_from_votes", "namespacetest__xp__voting.html#ab6eaca7b76ee82f880acda931f305679", null ],
+      [ "test_negative_votes", "namespacetest__xp__voting.html#ac3aaa54acbff2521a2a9eed3a84c2516", null ],
+      [ "test_self_vote_prevention", "namespacetest__xp__voting.html#a00f7277252d2b2c518d27f7f6a0eaf9d", null ],
+      [ "test_session_vote_limits", "namespacetest__xp__voting.html#a8305c2d37fea982798409f3452540036", null ],
+      [ "test_vote_application_to_database", "namespacetest__xp__voting.html#af6470b081954911f7822714bdc6b0161", null ],
+      [ "test_vote_history", "namespacetest__xp__voting.html#a95ab8bd6f15ed9af94b9d0094b7a8c5c", null ],
+      [ "test_vote_limits_by_level", "namespacetest__xp__voting.html#a3f0ee801f3dd6db791c782909bd3adcc", null ],
+      [ "test_workspace_persistence", "namespacetest__xp__voting.html#abec34b9e47860fe5002abb43626f6869", null ],
+      [ "test_xp_awards_exist", "namespacetest__xp__voting.html#a6aee724708a4b2fe0f951839ace82caa", null ]
+    ] ],
     [ "tools", "namespacetools.html", "namespacetools" ],
     [ "utils", "namespaceutils.html", "namespaceutils" ],
-    [ "workshop", "namespaceworkshop.html", "namespaceworkshop" ]
+    [ "validate_codex_config", "namespacevalidate__codex__config.html", [
+      [ "validate_codex_configuration", "namespacevalidate__codex__config.html#afbc1163d2096de4c5e1f9bfc22399994", null ],
+      [ "success", "namespacevalidate__codex__config.html#a5077d658491569e882c7bc9265a250a1", null ]
+    ] ],
+    [ "validate_collab_codex_fix", "namespacevalidate__collab__codex__fix.html", [
+      [ "print_section", "namespacevalidate__collab__codex__fix.html#a477c4ea7efed4dcfe4d7a4699706d29b", null ],
+      [ "validate_fix", "namespacevalidate__collab__codex__fix.html#a6f0a23a4dae59ee1d141cc2ef988efc0", null ]
+    ] ],
+    [ "verify_integration", "namespaceverify__integration.html", [
+      [ "check_axe_integration", "namespaceverify__integration.html#a403a2a95d8fd544cc4af5b4a65d0483c", null ],
+      [ "check_core_modules", "namespaceverify__integration.html#ab5ea72c174138c51322e8500646188f6", null ],
+      [ "check_database_schema", "namespaceverify__integration.html#ac6d20946e3b9fe3e904ac94bde482acf", null ],
+      [ "main", "namespaceverify__integration.html#a98b683e8764d1fd8128a5b17567d64ff", null ]
+    ] ],
+    [ "workshop", "namespaceworkshop.html", "namespaceworkshop" ],
+    [ "xp_voting_demo", "namespacexp__voting__demo.html", [
+      [ "main", "namespacexp__voting__demo.html#a28a7e10b5c10574b5f83a082995df5b6", null ]
+    ] ]
 ];

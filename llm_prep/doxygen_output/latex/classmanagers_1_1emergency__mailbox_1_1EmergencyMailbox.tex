@@ -2,8 +2,7 @@
 \hypertarget{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox}{}\label{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox}\index{managers.emergency\_mailbox.EmergencyMailbox@{managers.emergency\_mailbox.EmergencyMailbox}}
 
 
-Collaboration diagram for managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox\+:
-\nopagebreak
+Collaboration diagram for managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -42,7 +41,6 @@ str \mbox{\hyperlink{classmanagers_1_1emergency__mailbox_1_1EmergencyMailbox_a13
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}GPG-encrypted emergency communication channel for workers to report issues
 directly to humans, bypassing the supervisor.
-
 Workers can write encrypted reports about supervisor abuse, safety violations,
 or other critical issues that the supervisor cannot read.
 \end{DoxyVerb}
@@ -69,14 +67,12 @@ managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+\_\+\+\_\+init\+\_\+\+\
  str managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+\_\+encrypt\+\_\+message (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Encrypt a message using simple base64 encoding as a fallback.
-
 ⚠️ WARNING: This is a DEMONSTRATION ONLY encryption.
 NOT SECURE for production use. For real security, implement
 proper GPG encryption with the human's public key:
     gpg --encrypt --armor --recipient <human_key_id>
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -97,11 +93,9 @@ proper GPG encryption with the human's public key:
  Optional\mbox{[}str\mbox{]} managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+decrypt\+\_\+report (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{filename}{, }\item[{Optional\mbox{[}str\mbox{]} }]{private\+\_\+key}{ = {\ttfamily None}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Decrypt a report (for human use only).
-
 Note: In production, this would use GPG with the human's private key.
 The current implementation returns a placeholder message since
 proper GPG decryption requires external tools and the private key.
-
 Args:
     filename: Name of the report file to decrypt
     private_key: Optional private key for GPG decryption (not yet implemented)
@@ -120,18 +114,15 @@ Args:
  Tuple\mbox{[}bool, str\mbox{]} managers.\+emergency\+\_\+mailbox.\+Emergency\+Mailbox.\+send\+\_\+report (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{agent\+\_\+alias}{, }\item[{str}]{report\+\_\+type}{, }\item[{str}]{subject}{, }\item[{str}]{details}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Send an encrypted report to the emergency mailbox.
-
 Args:
     agent_alias: The alias of the reporting agent (@llama1, etc.)
     report_type: Type of report (supervisor_abuse, safety_violation, etc.)
     subject: Brief subject line
     details: Full details of the report
-
 Returns:
     Tuple of (success, message/filename)
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

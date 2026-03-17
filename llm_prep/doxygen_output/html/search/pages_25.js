@@ -1,10 +1,14 @@
 var searchData=
 [
-  ['yaml_0',['yaml',['../md_DYNAMIC__TOKENS__SUMMARY.html#autotoc_md340',1,'2. &lt;span class=&quot;tt&quot;&gt;models.yaml&lt;/span&gt;'],['../md_BEFORE__AFTER__COMPARISON.html#autotoc_md179',1,'After (axe.yaml)'],['../md_BEFORE__AFTER__COMPARISON.html#autotoc_md178',1,'Before (axe.yaml)'],['../md_README.html#autotoc_md883',1,'Configuration File (axe.yaml)'],['../md_MINIFIER__IMPLEMENTATION__SUMMARY.html#autotoc_md590',1,'Enable in axe.yaml'],['../md_skills_2build.html#autotoc_md1178',1,'Integration with axe.yaml']]],
-  ['yaml_20build_20guidelines_20for_20all_20agents_1',['1. Updated axe.yaml - BUILD GUIDELINES for All Agents',['../md_SILENT__BUILDS__IMPLEMENTATION.html#autotoc_md1142',1,'']]],
-  ['yaml_20config_20✅_20low_2',['3. &lt;b&gt;YAML Config&lt;/b&gt; ✅ Low',['../md_SECURITY__REPORT.html#autotoc_md1103',1,'']]],
-  ['yaml_20updates_3',['yaml Updates',['../md_SKILLS__SYSTEM__IMPLEMENTATION__SUMMARY.html#autotoc_md1300',1,'&lt;span class=&quot;tt&quot;&gt;axe.yaml&lt;/span&gt; Updates'],['../md_SKILLS__SYSTEM__IMPLEMENTATION__SUMMARY.html#autotoc_md1299',1,'&lt;span class=&quot;tt&quot;&gt;models.yaml&lt;/span&gt; Updates']]],
-  ['yaml_20validation_4',['YAML Validation',['../md_SILENT__BUILDS__IMPLEMENTATION.html#autotoc_md1151',1,'']]],
-  ['yet_20implemented_5',['Future Features (Not Yet Implemented)',['../md_QUICK__REFERENCE.html#autotoc_md861',1,'']]],
-  ['your_20choices_6',['3. Document Your Choices',['../md_skills_2build.html#autotoc_md1183',1,'']]]
+  ['yaml_0',['yaml',['../md_docs_2codex-implementation.html#autotoc_md1011',1,'1. Model Metadata (&lt;span class=&quot;tt&quot;&gt;models.yaml&lt;/span&gt;)'],['../md_docs_2archive_2implementation-summaries_2DYNAMIC__TOKENS__SUMMARY.html#autotoc_md277',1,'2. &lt;span class=&quot;tt&quot;&gt;models.yaml&lt;/span&gt;'],['../md_docs_2codex-implementation.html#autotoc_md1012',1,'2. Provider Configuration (&lt;span class=&quot;tt&quot;&gt;providers.yaml&lt;/span&gt;)'],['../md_docs_2codex-implementation.html#autotoc_md1013',1,'3. Agent Configuration (&lt;span class=&quot;tt&quot;&gt;axe.yaml&lt;/span&gt;)'],['../md_docs_2archive_2implementation-summaries_2BEFORE__AFTER__COMPARISON.html#autotoc_md181',1,'After (axe.yaml)'],['../md_docs_2archive_2implementation-summaries_2BEFORE__AFTER__COMPARISON.html#autotoc_md180',1,'Before (axe.yaml)'],['../md_docs_2archive_2implementation-summaries_2MINIFIER__IMPLEMENTATION__SUMMARY.html#autotoc_md519',1,'Enable in axe.yaml'],['../md_skills_2build.html#autotoc_md2069',1,'Integration with axe.yaml'],['../md_docs_2features_2configuration.html#autotoc_md1179',1,'Missing providers.yaml']]],
+  ['yaml_20build_20guidelines_20for_20all_20agents_1',['1. Updated axe.yaml - BUILD GUIDELINES for All Agents',['../md_docs_2archive_2implementation-summaries_2SILENT__BUILDS__IMPLEMENTATION.html#autotoc_md718',1,'']]],
+  ['yaml_20config_20✅_20low_2',['3. &lt;b&gt;YAML Config&lt;/b&gt; ✅ Low',['../md_docs_2security.html#autotoc_md1604',1,'']]],
+  ['yaml_20provider_20infrastructure_3',['2. providers.yaml (Provider Infrastructure)',['../md_docs_2features_2configuration.html#autotoc_md1165',1,'']]],
+  ['yaml_20static_20model_20reference_20data_4',['1. models.yaml (Static Model Reference Data)',['../md_docs_2features_2configuration.html#autotoc_md1164',1,'']]],
+  ['yaml_20updates_5',['yaml Updates',['../md_docs_2archive_2implementation-summaries_2SKILLS__SYSTEM__IMPLEMENTATION__SUMMARY.html#autotoc_md750',1,'&lt;span class=&quot;tt&quot;&gt;axe.yaml&lt;/span&gt; Updates'],['../md_docs_2archive_2implementation-summaries_2SKILLS__SYSTEM__IMPLEMENTATION__SUMMARY.html#autotoc_md749',1,'&lt;span class=&quot;tt&quot;&gt;models.yaml&lt;/span&gt; Updates']]],
+  ['yaml_20user_20configuration_6',['3. axe.yaml (User Configuration)',['../md_docs_2features_2configuration.html#autotoc_md1166',1,'']]],
+  ['yaml_20validation_7',['YAML Validation',['../md_docs_2archive_2implementation-summaries_2SILENT__BUILDS__IMPLEMENTATION.html#autotoc_md727',1,'']]],
+  ['yet_20implemented_8',['Future Features (Not Yet Implemented)',['../md_docs_2references_2quick-reference.html#autotoc_md1586',1,'']]],
+  ['you_20need_9',['🔍 Finding What You Need',['../dir_49e56c817e5e54854c35e136979f97ca.html#autotoc_md1531',1,'']]],
+  ['your_20choices_10',['3. Document Your Choices',['../md_skills_2build.html#autotoc_md2074',1,'']]]
 ];

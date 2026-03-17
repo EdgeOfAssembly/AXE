@@ -6,10 +6,16 @@ digraph "models.metadata.get_model_info"
   node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
   rankdir="RL";
   Node1 [id="Node000001",label="models.metadata.get\l_model_info",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
-  Node1 -> Node2 [id="edge4_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node2 [id="Node000002",label="models.metadata.get\l_extended_thinking_budget",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacemodels_1_1metadata.html#ad02c6726cf2ee370a30c9dd7f6e11386",tooltip=" "];
-  Node1 -> Node3 [id="edge5_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node3 [id="Node000003",label="models.metadata.get\l_max_output_tokens",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacemodels_1_1metadata.html#a74979497137366bcbefb76bfc2bcb555",tooltip=" "];
-  Node1 -> Node4 [id="edge6_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node4 [id="Node000004",label="models.metadata.supports\l_extended_thinking",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacemodels_1_1metadata.html#a28d1646da3a97c054cd49e96f17c69df",tooltip=" "];
+  Node1 -> Node2 [id="edge7_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="models.metadata.get\l_default_reasoning_effort",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacemodels_1_1metadata.html#a53f3ba5d280444cb069fd0e1c59a0a67",tooltip=" "];
+  Node1 -> Node3 [id="edge8_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="models.metadata.get\l_extended_thinking_budget",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacemodels_1_1metadata.html#ad02c6726cf2ee370a30c9dd7f6e11386",tooltip=" "];
+  Node1 -> Node4 [id="edge9_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="models.metadata.get\l_max_output_tokens",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacemodels_1_1metadata.html#a74979497137366bcbefb76bfc2bcb555",tooltip=" "];
+  Node1 -> Node5 [id="edge10_Node000001_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="models.metadata.supports\l_extended_thinking",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacemodels_1_1metadata.html#a28d1646da3a97c054cd49e96f17c69df",tooltip=" "];
+  Node1 -> Node6 [id="edge11_Node000001_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="models.metadata.supports\l_reasoning_effort",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacemodels_1_1metadata.html#a897a86d82e180794f7424f91b467594d",tooltip=" "];
+  Node1 -> Node7 [id="edge12_Node000001_Node000007",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="models.metadata.uses\l_responses_api",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$namespacemodels_1_1metadata.html#a5a351bccd34073b47d17034b9ec266a2",tooltip=" "];
 }

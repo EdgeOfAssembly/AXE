@@ -2,8 +2,7 @@
 \hypertarget{classcore_1_1github__agent_1_1GitHubAgent}{}\label{classcore_1_1github__agent_1_1GitHubAgent}\index{core.github\_agent.GitHubAgent@{core.github\_agent.GitHubAgent}}
 
 
-Collaboration diagram for core.\+github\+\_\+agent.\+Git\+Hub\+Agent\+:
-\nopagebreak
+Collaboration diagram for core.\+github\+\_\+agent.\+Git\+Hub\+Agent\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -45,7 +44,6 @@ Optional\mbox{[}str\mbox{]} \mbox{\hyperlink{classcore_1_1github__agent_1_1GitHu
 
 \doxysubsection{Detailed Description}
 \begin{DoxyVerb}Manages autonomous GitHub operations with human review gates.
-
 Safety:
 - Disabled by default
 - All operations require human approval
@@ -64,7 +62,6 @@ Safety:
 core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{workspace\+\_\+dir}{, }\item[{bool }]{enabled}{ = {\ttfamily False}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Initialize GitHub agent.
-
 Args:
     workspace_dir: Path to git repository
     enabled: If False, all methods return immediately (no-op)
@@ -81,7 +78,6 @@ Args:
  bool core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+\_\+check\+\_\+ssh\+\_\+setup (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Verify SSH key and remote configured.
-
 Returns:
     True if SSH appears configured
 \end{DoxyVerb}
@@ -92,7 +88,6 @@ Returns:
  bool core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+\_\+detect\+\_\+git\+\_\+repo (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Check if workspace is a git repo.
-
 Returns:
     True if git repository detected
 \end{DoxyVerb}
@@ -103,15 +98,12 @@ Returns:
  str core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+\_\+get\+\_\+diff (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{List\mbox{[}str\mbox{]}}]{files}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Get git diff for review.
-
 Args:
     files: List of files to get diff for
-
 Returns:
     Git diff output
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -125,12 +117,10 @@ Returns:
  Optional\mbox{[}str\mbox{]} core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+\_\+get\+\_\+test\+\_\+results (\begin{DoxyParamCaption}\item[{}]{self}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 \begin{DoxyVerb}Get recent test output if available.
-
 Returns:
     Test results or None
 \end{DoxyVerb}
- Here is the caller graph for this function\+:
-\nopagebreak
+ Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -144,17 +134,14 @@ Returns:
  Optional\mbox{[}Dict\mbox{]} core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+agent\+\_\+request\+\_\+push (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{branch}{, }\item[{str}]{commit\+\_\+msg}{, }\item[{List\mbox{[}str\mbox{]}}]{files}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Agent requests to push changes. Returns None if disabled.
-
 Args:
     branch: Target branch name
     commit_msg: Commit message
     files: List of files changed
-
 Returns:
     Dict with review info, or None if feature disabled
 \end{DoxyVerb}
- Here is the call graph for this function\+:
-\nopagebreak
+ Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -168,12 +155,10 @@ Returns:
  Dict core.\+github\+\_\+agent.\+Git\+Hub\+Agent.\+execute\+\_\+push (\begin{DoxyParamCaption}\item[{}]{self}{, }\item[{str}]{branch}{, }\item[{str}]{commit\+\_\+msg}{, }\item[{List\mbox{[}str\mbox{]}}]{files}{}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Execute push after human approval.
-
 Args:
     branch: Target branch name
     commit_msg: Commit message
     files: List of files to commit
-
 Returns:
     Dict with success status and details
 \end{DoxyVerb}

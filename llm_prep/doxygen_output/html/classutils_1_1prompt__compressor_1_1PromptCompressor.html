@@ -124,7 +124,6 @@ Protected Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">Compresses system prompts to reduce token usage.
-
 Features:
 - Remove verbose explanations
 - Condense examples
@@ -176,10 +175,8 @@ Features:
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Aggressive compression - maximum reduction while preserving meaning.
-
 Args:
     prompt: Original prompt
-
 Returns:
     Aggressively compressed prompt
 </pre> <div class="dynheader">
@@ -222,10 +219,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Balanced compression - remove redundancy and some examples.
-
 Args:
     prompt: Original prompt
-
 Returns:
     Balanced compressed prompt
 </pre> <div class="dynheader">
@@ -273,11 +268,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Reduce number of examples in text.
-
 Args:
     text: Text with examples
     keep: Number of examples to keep
-
 Returns:
     Text with condensed examples
 </pre> <div class="dynheader">
@@ -315,10 +308,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Convert bullet lists to comma-separated format where appropriate.
-
 Args:
     text: Text with bullet lists
-
 Returns:
     Text with condensed lists
 </pre> <div class="dynheader">
@@ -356,10 +347,8 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <pre class="fragment">Minimal compression - only remove obvious redundancy.
-
 Args:
     prompt: Original prompt
-
 Returns:
     Minimally compressed prompt
 </pre> <div class="dynheader">
@@ -394,11 +383,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Compress a system prompt.
-
 Args:
     prompt: Original system prompt
     level: Compression level ('minimal', 'balanced', 'aggressive')
-
 Returns:
     Compressed prompt
 </pre> <div class="dynheader">
@@ -428,10 +415,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Compress workshop tool instructions in prompts.
-
 Args:
     prompt: Prompt with workshop instructions
-
 Returns:
     Compressed prompt
 </pre> 
@@ -461,11 +446,9 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Create a minimal prompt for an agent role.
-
 Args:
     role: Agent role description
     critical_only: If True, only include critical directives
-
 Returns:
     Minimal prompt
 </pre> 
@@ -490,10 +473,8 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Extract critical directives from a prompt.
-
 Args:
     prompt: System prompt
-
 Returns:
     List of critical directives
 </pre> 

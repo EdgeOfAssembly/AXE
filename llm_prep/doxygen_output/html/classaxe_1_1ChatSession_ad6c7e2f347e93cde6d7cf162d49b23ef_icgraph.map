@@ -1,10 +1,14 @@
 <map id="axe.ChatSession.optimize_context_if_needed" name="axe.ChatSession.optimize_context_if_needed">
-<area shape="rect" id="Node000001" title=" " alt="" coords="667,5,857,50"/>
-<area shape="rect" id="Node000002" href="$classaxe_1_1ChatSession.html#a92ba45e5dec2d5bbe7430d2d1302729a" title=" " alt="" coords="437,5,619,50"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="649,28,620,30,620,25,655,28"/>
-<area shape="rect" id="Node000003" href="$classaxe_1_1ChatSession.html#a68cb42802ab49b009bbfc87e9d7e8f78" title=" " alt="" coords="236,14,389,42"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="419,28,389,30,389,25,424,28"/>
-<area shape="rect" id="Node000004" href="$classaxe_1_1ChatSession.html#aaa359a2981c69ef0b93b8b48e259e007" title=" " alt="" coords="5,5,188,50"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="217,37,188,39,188,34,223,36"/>
-<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="203,16,238,19,233,19,204,21"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="892,27,1081,71"/>
+<area shape="rect" id="Node000002" href="$classaxe_1_1ChatSession.html#a92ba45e5dec2d5bbe7430d2d1302729a" title=" " alt="" coords="661,27,844,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="874,49,844,52,844,46,879,49"/>
+<area shape="rect" id="Node000003" href="$classaxe_1_1ChatSession.html#a00f4c50861d88ce623a2c2db3ba0bd0b" title=" " alt="" coords="437,56,613,101"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="649,63,614,70,613,64,643,63"/>
+<area shape="rect" id="Node000004" href="$classaxe_1_1ChatSession.html#a68cb42802ab49b009bbfc87e9d7e8f78" title=" " alt="" coords="236,14,389,42"/>
+<area shape="poly" id="edge7_Node000002_Node000004" title=" " alt="" coords="644,45,389,34,389,29,649,43"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="419,54,373,45,374,39,425,54"/>
+<area shape="rect" id="Node000005" href="$classaxe_1_1ChatSession.html#aaa359a2981c69ef0b93b8b48e259e007" title=" " alt="" coords="5,5,188,50"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="217,37,189,39,188,34,223,36"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="203,45,236,50,439,71,434,74,235,56,203,51"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="203,16,238,18,233,20,204,21"/>
 </map>
