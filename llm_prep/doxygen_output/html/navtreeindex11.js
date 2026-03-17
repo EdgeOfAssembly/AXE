@@ -1,7 +1,5 @@
 var NAVTREEINDEX11 =
 {
-"md_docs_2archive_2implementation-summaries_2HEREDOC__EXECUTION__FIX__SUMMARY.html#autotoc_md345":[15,3,3],
-"md_docs_2archive_2implementation-summaries_2HEREDOC__EXECUTION__FIX__SUMMARY.html#autotoc_md346":[15,4],
 "md_docs_2archive_2implementation-summaries_2HEREDOC__EXECUTION__FIX__SUMMARY.html#autotoc_md347":[15,5],
 "md_docs_2archive_2implementation-summaries_2HEREDOC__EXECUTION__FIX__SUMMARY.html#autotoc_md348":[15,6],
 "md_docs_2archive_2implementation-summaries_2HEREDOC__EXECUTION__FIX__SUMMARY.html#autotoc_md349":[15,6,0],
@@ -249,5 +247,7 @@ var NAVTREEINDEX11 =
 "md_docs_2archive_2implementation-summaries_2REFACTORING__NOTES.html#autotoc_md627":[24,5],
 "md_docs_2archive_2implementation-summaries_2REFACTORING__NOTES.html#autotoc_md628":[24,5,0],
 "md_docs_2archive_2implementation-summaries_2REFACTORING__NOTES.html#autotoc_md629":[24,5,1],
-"md_docs_2archive_2implementation-summaries_2REFACTORING__NOTES.html#autotoc_md630":[24,5,2]
+"md_docs_2archive_2implementation-summaries_2REFACTORING__NOTES.html#autotoc_md630":[24,5,2],
+"md_docs_2archive_2implementation-summaries_2REFACTORING__NOTES.html#autotoc_md631":[24,6],
+"md_docs_2archive_2implementation-summaries_2REFACTORING__NOTES.html#autotoc_md632":[24,7]
 };

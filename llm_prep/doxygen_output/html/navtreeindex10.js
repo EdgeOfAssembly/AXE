@@ -1,7 +1,5 @@
 var NAVTREEINDEX10 =
 {
-"md_docs_2api-providers.html#autotoc_md106":[4,5,5],
-"md_docs_2api-providers.html#autotoc_md107":[4,5,6],
 "md_docs_2api-providers.html#autotoc_md109":[4,6],
 "md_docs_2api-providers.html#autotoc_md110":[4,6,0],
 "md_docs_2api-providers.html#autotoc_md111":[4,6,1],
@@ -249,5 +247,7 @@ var NAVTREEINDEX10 =
 "md_docs_2archive_2implementation-summaries_2HEREDOC__EXECUTION__FIX__SUMMARY.html#autotoc_md341":[15,3],
 "md_docs_2archive_2implementation-summaries_2HEREDOC__EXECUTION__FIX__SUMMARY.html#autotoc_md342":[15,3,0],
 "md_docs_2archive_2implementation-summaries_2HEREDOC__EXECUTION__FIX__SUMMARY.html#autotoc_md343":[15,3,1],
-"md_docs_2archive_2implementation-summaries_2HEREDOC__EXECUTION__FIX__SUMMARY.html#autotoc_md344":[15,3,2]
+"md_docs_2archive_2implementation-summaries_2HEREDOC__EXECUTION__FIX__SUMMARY.html#autotoc_md344":[15,3,2],
+"md_docs_2archive_2implementation-summaries_2HEREDOC__EXECUTION__FIX__SUMMARY.html#autotoc_md345":[15,3,3],
+"md_docs_2archive_2implementation-summaries_2HEREDOC__EXECUTION__FIX__SUMMARY.html#autotoc_md346":[15,4]
 };

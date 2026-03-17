@@ -1,7 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"classworkshop_1_1plane_1_1PlaneEnumerator.html#a4125a49902702454ead11e0a67ae425a":[108,0,101,2,2,10],
-"classworkshop_1_1plane_1_1PlaneEnumerator.html#a4125a49902702454ead11e0a67ae425a":[109,0,19,2,2,10],
 "classworkshop_1_1plane_1_1PlaneEnumerator.html#a5b59f8b59266e8e020af58011ba17320":[108,0,101,2,2,6],
 "classworkshop_1_1plane_1_1PlaneEnumerator.html#a5b59f8b59266e8e020af58011ba17320":[109,0,19,2,2,6],
 "classworkshop_1_1plane_1_1PlaneEnumerator.html#a62a7d0840f49705c496a1b0ef25391ef":[108,0,101,2,2,8],
@@ -249,5 +247,7 @@ var NAVTREEINDEX7 =
 "functions_y.html":[109,3,0,22],
 "github__agent_8py.html":[110,0,1,8],
 "global__workspace_8py.html":[110,0,1,9],
-"globals.html":[110,1,0]
+"globals.html":[110,1,0],
+"globals_defs.html":[110,1,4],
+"globals_func.html":[110,1,1]
 };

@@ -13,10 +13,10 @@ Tuple\mbox{[}bool, str\mbox{]} \mbox{\hyperlink{namespacecore_1_1sandbox_a9f1af6
 
 
 \doxysubsection{Detailed Description}
-\begin{DoxyVerb}Bubblewrap Sandbox Manager for AXE.
-Provides secure, isolated execution environments using Linux namespaces
-via bubblewrap (bwrap). Implements default-allow model inside sandbox
-with optional tool blacklisting.
+\begin{DoxyVerb}Bubblewrap Sandbox Manager for AXE (FINAL FIXED VERSION)
+- Correct workspace binding + --chdir
+- Works with --workspace /tmp/keypress (and multiple workspaces)
+- Matches the manual command that succeeded
 \end{DoxyVerb}
  
 
@@ -29,7 +29,5 @@ with optional tool blacklisting.
 {\footnotesize\ttfamily \label{namespacecore_1_1sandbox_a9f1af62a15120d9730bbff7eeb09230f} 
  Tuple\mbox{[}bool, str\mbox{]} core.\+sandbox.\+check\+\_\+user\+\_\+namespace\+\_\+support (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}Check if user namespaces are supported in the current environment.
-Uses multiple methods for robust detection.
-\end{DoxyVerb}
+\begin{DoxyVerb}Basic user namespace check (kept from your original).\end{DoxyVerb}
  

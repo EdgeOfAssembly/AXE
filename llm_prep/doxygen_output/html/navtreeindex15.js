@@ -1,7 +1,5 @@
 var NAVTREEINDEX15 =
 {
-"md_docs_2workshop_2quick-reference.html#autotoc_md1821":[68,5],
-"md_docs_2workshop_2quick-reference.html#autotoc_md1822":[68,5,0],
 "md_docs_2workshop_2quick-reference.html#autotoc_md1823":[68,6],
 "md_docs_2workshop_2quick-reference.html#autotoc_md1824":[68,7],
 "md_docs_2workshop_2quick-reference.html#autotoc_md1825":[68,8],
@@ -249,5 +247,7 @@ var NAVTREEINDEX15 =
 "metadata_8py.html":[110,0,8,1],
 "minifier_8py.html":[110,0,14,4],
 "models_2____init_____8py.html":[110,0,8,0],
-"multiprocess_8py.html":[110,0,1,10]
+"multiprocess_8py.html":[110,0,1,10],
+"namespaceanthropic__features__demo.html":[108,0,0],
+"namespaceanthropic__features__demo.html#a92085a1d8fb488ebc175f97bfdf9f610":[108,0,0,1]
 };

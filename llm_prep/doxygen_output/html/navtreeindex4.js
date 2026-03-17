@@ -1,7 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"classmanagers_1_1shared__build__status_1_1BuildStatus.html":[108,0,21,3,0],
-"classmanagers_1_1shared__build__status_1_1BuildStatus.html":[109,0,4,3,0],
 "classmanagers_1_1shared__build__status_1_1BuildStatus.html#a2d79f9b6ead7014f915af266e70ff37d":[108,0,21,3,0,2],
 "classmanagers_1_1shared__build__status_1_1BuildStatus.html#a2d79f9b6ead7014f915af266e70ff37d":[109,0,4,3,0,2],
 "classmanagers_1_1shared__build__status_1_1BuildStatus.html#a2fba2526e184b3b9503b84b0ee35a074":[108,0,21,3,0,0],
@@ -249,5 +247,7 @@ var NAVTREEINDEX4 =
 "classtest__minifier_1_1TestEdgeCases.html#a6a27a88eb88f2ab4dae6311bd4792541":[108,0,63,6,5],
 "classtest__minifier_1_1TestEdgeCases.html#a6a27a88eb88f2ab4dae6311bd4792541":[109,0,10,6,5],
 "classtest__minifier_1_1TestEdgeCases.html#aacf74ca1b5f6722bffef5aefbce4fa3d":[108,0,63,6,0],
-"classtest__minifier_1_1TestEdgeCases.html#aacf74ca1b5f6722bffef5aefbce4fa3d":[109,0,10,6,0]
+"classtest__minifier_1_1TestEdgeCases.html#aacf74ca1b5f6722bffef5aefbce4fa3d":[109,0,10,6,0],
+"classtest__minifier_1_1TestEdgeCases.html#aaff308e835196d76e8a1a5bc6b653c59":[108,0,63,6,6],
+"classtest__minifier_1_1TestEdgeCases.html#aaff308e835196d76e8a1a5bc6b653c59":[109,0,10,6,6]
 };

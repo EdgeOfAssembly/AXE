@@ -1,7 +1,5 @@
 var NAVTREEINDEX16 =
 {
-"namespaceanthropic__features__demo.html":[108,0,0],
-"namespaceanthropic__features__demo.html#a92085a1d8fb488ebc175f97bfdf9f610":[108,0,0,1],
 "namespaceanthropic__features__demo.html#ab2e39b6a9072090bfe008755bdfaf535":[108,0,0,0],
 "namespaceanthropic__features__demo.html#ac05c4f79a07d8920ba4b8ec4b462a6d0":[108,0,0,2],
 "namespaceaxe.html":[108,0,1],
@@ -249,5 +247,7 @@ var NAVTREEINDEX16 =
 "namespacemanual__test__write.html#a5ce2643d29ab0fbe178d828257665f03":[108,0,22,0],
 "namespacemanual__test__xml.html":[108,0,23],
 "namespacemanual__test__xml.html#a57b3fdb3b0fda93d5bc04cd65988246d":[108,0,23,4],
-"namespacemanual__test__xml.html#a7422ccf070167384f145d0a9af885fcc":[108,0,23,2]
+"namespacemanual__test__xml.html#a7422ccf070167384f145d0a9af885fcc":[108,0,23,2],
+"namespacemanual__test__xml.html#a7ff7d4caf57ba1fe8a6eec8049ba2cdd":[108,0,23,0],
+"namespacemanual__test__xml.html#aa48c53e57d6f7f7a0129733b301c01a5":[108,0,23,3]
 };

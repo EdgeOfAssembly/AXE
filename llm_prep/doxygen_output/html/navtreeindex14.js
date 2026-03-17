@@ -1,7 +1,5 @@
 var NAVTREEINDEX14 =
 {
-"md_docs_2features_2write-blocks.html#autotoc_md1293":[44,5,2],
-"md_docs_2features_2write-blocks.html#autotoc_md1294":[44,6],
 "md_docs_2features_2write-blocks.html#autotoc_md1295":[44,6,0],
 "md_docs_2features_2write-blocks.html#autotoc_md1296":[44,7],
 "md_docs_2features_2write-blocks.html#autotoc_md1297":[44,8],
@@ -249,5 +247,7 @@ var NAVTREEINDEX14 =
 "md_docs_2workshop_2quick-reference.html#autotoc_md1817":[68,2,0],
 "md_docs_2workshop_2quick-reference.html#autotoc_md1818":[68,2,1],
 "md_docs_2workshop_2quick-reference.html#autotoc_md1819":[68,3],
-"md_docs_2workshop_2quick-reference.html#autotoc_md1820":[68,4]
+"md_docs_2workshop_2quick-reference.html#autotoc_md1820":[68,4],
+"md_docs_2workshop_2quick-reference.html#autotoc_md1821":[68,5],
+"md_docs_2workshop_2quick-reference.html#autotoc_md1822":[68,5,0]
 };

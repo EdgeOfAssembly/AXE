@@ -1,7 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"globals_defs.html":[110,1,4],
-"globals_func.html":[110,1,1],
 "globals_type.html":[110,1,3],
 "globals_vars.html":[110,1,2],
 "hammer_8py.html":[110,0,16,2],
@@ -249,5 +247,7 @@ var NAVTREEINDEX8 =
 "md_docs_2CONSOLIDATION__SUMMARY.html#autotoc_md1101":[38,5],
 "md_docs_2CONSOLIDATION__SUMMARY.html#autotoc_md1102":[38,5,0],
 "md_docs_2CONSOLIDATION__SUMMARY.html#autotoc_md1103":[38,5,1],
-"md_docs_2CONSOLIDATION__SUMMARY.html#autotoc_md1104":[38,6]
+"md_docs_2CONSOLIDATION__SUMMARY.html#autotoc_md1104":[38,6],
+"md_docs_2CONSOLIDATION__SUMMARY.html#autotoc_md1105":[38,6,0],
+"md_docs_2CONSOLIDATION__SUMMARY.html#autotoc_md1106":[38,6,1]
 };

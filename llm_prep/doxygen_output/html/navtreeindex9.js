@@ -1,7 +1,5 @@
 var NAVTREEINDEX9 =
 {
-"md_docs_2CONSOLIDATION__SUMMARY.html#autotoc_md1105":[38,6,0],
-"md_docs_2CONSOLIDATION__SUMMARY.html#autotoc_md1106":[38,6,1],
 "md_docs_2CONSOLIDATION__SUMMARY.html#autotoc_md1107":[38,7],
 "md_docs_2CONSOLIDATION__SUMMARY.html#autotoc_md1108":[38,8],
 "md_docs_2CONSOLIDATION__SUMMARY.html#autotoc_md1109":[38,8,0],
@@ -249,5 +247,7 @@ var NAVTREEINDEX9 =
 "md_docs_2api-providers.html#autotoc_md102":[4,5,1],
 "md_docs_2api-providers.html#autotoc_md103":[4,5,2],
 "md_docs_2api-providers.html#autotoc_md104":[4,5,3],
-"md_docs_2api-providers.html#autotoc_md105":[4,5,4]
+"md_docs_2api-providers.html#autotoc_md105":[4,5,4],
+"md_docs_2api-providers.html#autotoc_md106":[4,5,5],
+"md_docs_2api-providers.html#autotoc_md107":[4,5,6]
 };

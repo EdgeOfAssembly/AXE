@@ -2,7 +2,6 @@ var classcore_1_1sandbox_1_1SandboxManager =
 [
     [ "__init__", "classcore_1_1sandbox_1_1SandboxManager.html#a497a3d5a490b78d222355f2435357b6b", null ],
     [ "build_bwrap_command", "classcore_1_1sandbox_1_1SandboxManager.html#ac935b8aa94fa41939daa96a1866d21aa", null ],
-    [ "check_capability", "classcore_1_1sandbox_1_1SandboxManager.html#a11837b6ba86746dc0c5400111b54d26f", null ],
     [ "is_available", "classcore_1_1sandbox_1_1SandboxManager.html#ae0139e54ec4099aafd66e88ad6a2306f", null ],
     [ "is_tool_blacklisted", "classcore_1_1sandbox_1_1SandboxManager.html#a2d7dce26ef10f64fb3e7b1c38ded9ae2", null ],
     [ "run", "classcore_1_1sandbox_1_1SandboxManager.html#ae2afdf199a31e056780d21e8442d9ddf", null ],

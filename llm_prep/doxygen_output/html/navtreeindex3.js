@@ -1,7 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"classcore_1_1skills__manager_1_1SkillsManager.html":[109,0,1,12,1],
-"classcore_1_1skills__manager_1_1SkillsManager.html#a0d184599c4e6802b6d021de80b8983ab":[108,0,4,15,1,6],
 "classcore_1_1skills__manager_1_1SkillsManager.html#a0d184599c4e6802b6d021de80b8983ab":[109,0,1,12,1,6],
 "classcore_1_1skills__manager_1_1SkillsManager.html#a2173e7aed8615ebd15767803aeda17f8":[108,0,4,15,1,9],
 "classcore_1_1skills__manager_1_1SkillsManager.html#a2173e7aed8615ebd15767803aeda17f8":[109,0,1,12,1,9],
@@ -249,5 +247,7 @@ var NAVTREEINDEX3 =
 "classmanagers_1_1shared__build__status_1_1BuildError.html#a5a8ed7de4c8ab5a1404fabde65106fcc":[108,0,21,3,1,0],
 "classmanagers_1_1shared__build__status_1_1BuildError.html#a5a8ed7de4c8ab5a1404fabde65106fcc":[109,0,4,3,1,0],
 "classmanagers_1_1shared__build__status_1_1BuildError.html#abb86dcc69bd6635d2178fd313c37a1d1":[108,0,21,3,1,1],
-"classmanagers_1_1shared__build__status_1_1BuildError.html#abb86dcc69bd6635d2178fd313c37a1d1":[109,0,4,3,1,1]
+"classmanagers_1_1shared__build__status_1_1BuildError.html#abb86dcc69bd6635d2178fd313c37a1d1":[109,0,4,3,1,1],
+"classmanagers_1_1shared__build__status_1_1BuildStatus.html":[108,0,21,3,0],
+"classmanagers_1_1shared__build__status_1_1BuildStatus.html":[109,0,4,3,0]
 };
